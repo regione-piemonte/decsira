@@ -9,17 +9,20 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 const {Provider} = require('react-redux');
+
+const {Router, Route, hashHistory} = require('react-router');
+
 const Sira = require('./containers/Sira');
-const Debug = require('../MapStore2/web/client/components/development/Debug');
+const Home = require('./containers/Home');
 
 const store = require('./stores/store');
 
-var {loadMapConfig} = require('../MapStore2/web/client/actions/config');
-var {changeBrowserProperties} = require('../MapStore2/web/client/actions/browser');
-var {loadLocale} = require('../MapStore2/web/client/actions/locale');
+const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
+const {changeBrowserProperties} = require('../MapStore2/web/client/actions/browser');
+const {loadLocale} = require('../MapStore2/web/client/actions/locale');
 
-var ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
-var LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
+const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
+const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
 store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
 
@@ -35,10 +38,10 @@ ConfigUtils
 
 ReactDOM.render(
     <Provider store={store}>
-        <div>
-            <Sira/>
-            <Debug/>
-        </div>
+        <Router history={hashHistory}>
+            <Route path="/" component={Home}/>
+            <Route path="/map/:profile" component={Sira}/>
+        </Router>
     </Provider>
     , document.getElementById("container")
 );

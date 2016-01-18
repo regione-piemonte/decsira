@@ -7,14 +7,21 @@
  */
 const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils');
 const {combineReducers} = require('redux');
+const {syncHistory, routeReducer} = require('redux-simple-router');
+const {hashHistory} = require('react-router');
+const reduxRouterMiddleware = syncHistory(hashHistory);
 
 const rootReducer = combineReducers({
     browser: require('../../MapStore2/web/client/reducers/browser'),
     config: require('../../MapStore2/web/client/reducers/config'),
     locale: require('../../MapStore2/web/client/reducers/locale'),
-    map: require('../../MapStore2/web/client/reducers/map')
+    map: require('../../MapStore2/web/client/reducers/map'),
+    routing: routeReducer
 });
 
-const store = DebugUtils.createDebugStore(rootReducer, {});
+const store = DebugUtils.createDebugStore(rootReducer, {}, [reduxRouterMiddleware]);
+
+// Required for replaying actions from devtools to work
+reduxRouterMiddleware.listenForReplays(store);
 
 module.exports = store;
