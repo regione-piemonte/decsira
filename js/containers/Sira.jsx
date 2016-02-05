@@ -11,6 +11,7 @@ const Localized = require('../../MapStore2/web/client/components/I18N/Localized'
 const {connect} = require('react-redux');
 
 const SiraMap = require('../components/SiraMap');
+const SiraQueryPanel = require('../components/SiraQueryPanel');
 
 const {Link} = require('react-router');
 
@@ -23,6 +24,7 @@ const Sira = (props) => (
             <div className="links"><Link to="/">Home</Link></div>
             <div className="info">Profile: {props.params.profile}</div>
             <SiraMap/>
+            <SiraQueryPanel/>
             <Debug/>
         </div>
     </Localized>

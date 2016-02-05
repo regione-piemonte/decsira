@@ -37,6 +37,9 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.css$/, loader: 'style!css'},
+            { test: /\.less$/, loader: "style!css!less-loader" },
+            { test: /\.woff(2)?(\?v=[0-9].[0-9].[0-9])?$/, loader: "url-loader?mimetype=application/font-woff" },
+            { test: /\.(ttf|eot|svg)(\?v=[0-9].[0-9].[0-9])?$/, loader: "file-loader?name=[name].[ext]" },
             { test: /\.(png|jpg|gif)$/, loader: 'url-loader?name=[path][name].[ext]&limit=8192'}, // inline base64 URLs for <=8k images, direct URLs for the rest
             {
                 test: /\.jsx?$/,
@@ -79,6 +82,10 @@ module.exports = {
         }, {
             path: new RegExp("/mapstore/proxy(.*)"),
             rewrite: rewriteUrl("/http_proxy/proxy$1"),
+            host: "localhost",
+            target: "http://localhost:8080"
+        }, {
+            path: new RegExp("/sira/services/queryformconfig(.*)"),
             host: "localhost",
             target: "http://localhost:8080"
         }]

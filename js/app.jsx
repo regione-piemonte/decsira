@@ -24,6 +24,8 @@ const {loadLocale} = require('../MapStore2/web/client/actions/locale');
 const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
+const {loadQueryFormConfig} = require('./actions/queryform');
+
 store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
 
 ConfigUtils
@@ -34,6 +36,9 @@ ConfigUtils
 
         let locale = LocaleUtils.getUserLocale();
         store.dispatch(loadLocale('../MapStore2/web/client/translations', locale));
+
+        // load the queryform configuration
+        store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));
     });
 
 ReactDOM.render(
