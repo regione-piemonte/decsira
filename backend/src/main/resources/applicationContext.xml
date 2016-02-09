@@ -6,7 +6,12 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+    <bean id="jsonAttributeParser"
+        class="it.geosolutions.csi.sira.backend.queryform.model.parser.JsonAttributeParser" />
+
     <bean id="propertiesFormConfigProvider"
-        class="it.geosolutions.csi.sira.backend.queryform.model.PropertiesFileQueryFormConfigProvider" />
+        class="it.geosolutions.csi.sira.backend.queryform.model.PropertiesFileQueryFormConfigProvider">
+        <property name="attributeParser" ref="jsonAttributeParser" />
+    </bean>
 
 </beans>
