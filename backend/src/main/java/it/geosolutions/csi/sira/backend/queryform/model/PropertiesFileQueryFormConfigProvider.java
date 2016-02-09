@@ -1,5 +1,7 @@
 package it.geosolutions.csi.sira.backend.queryform.model;
 
+import it.geosolutions.csi.sira.backend.queryform.model.parser.AttributeParser;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 /**
@@ -61,6 +64,8 @@ public class PropertiesFileQueryFormConfigProvider implements QueryFormConfigPro
 
     private static final Logger logger = LoggerFactory
             .getLogger(PropertiesFileQueryFormConfigProvider.class);
+
+    AttributeParser attributeParser;
 
     @Override
     public QueryFormConfig getConfiguration(String featureTypeName) {
@@ -129,6 +134,8 @@ public class PropertiesFileQueryFormConfigProvider implements QueryFormConfigPro
         if (fieldType != null) {
             try {
                 field = fieldType.getFieldClass().newInstance();
+                // "manually" inject attribute parser
+                field.setAttributeParser(attributeParser);
             } catch (InstantiationException | IllegalAccessException e) {
                 logger.error("Failed to instantiate field of type: " + fieldType.getFieldClass(), e);
             }
@@ -207,6 +214,22 @@ public class PropertiesFileQueryFormConfigProvider implements QueryFormConfigPro
 
     private String getConfigFileName(String featureTypeName) {
         return featureTypeName + ".properties";
+    }
+
+    /**
+     * 
+     * @return the attribute parser implementation in use
+     */
+    public AttributeParser getAttributeParser() {
+        return attributeParser;
+    }
+
+    /**
+     * 
+     * @param attributeParser the attribute parser implementation to use
+     */
+    public void setAttributeParser(AttributeParser attributeParser) {
+        this.attributeParser = attributeParser;
     }
 
 }

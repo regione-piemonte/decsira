@@ -1,5 +1,11 @@
 package it.geosolutions.csi.sira.backend.queryform.model;
 
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import it.geosolutions.csi.sira.backend.queryform.model.parser.AttributeParser;
+
 /**
  * Base class for query form field types.
  * 
@@ -10,12 +16,31 @@ public abstract class QueryFormField {
 
     protected String id;
     protected QueryFormFieldType type;
+    protected AttributeParser attributeParser;
 
     QueryFormField(QueryFormFieldType type) {
         if (type == null) {
             throw new IllegalArgumentException("field type must be provided");
         }
         this.type = type;
+    }
+
+    /**
+     * 
+     * @return the attribute parser currently in use
+     */
+    @XmlTransient
+    @JsonIgnore
+    public AttributeParser getAttributeParser() {
+        return attributeParser;
+    }
+
+    /**
+     * 
+     * @param attributeParser the attribute parser instance that will be used to parse attribute values
+     */
+    public void setAttributeParser(AttributeParser attributeParser) {
+        this.attributeParser = attributeParser;
     }
 
     /**
