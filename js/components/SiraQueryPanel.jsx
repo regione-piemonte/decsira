@@ -85,7 +85,7 @@ const SiraQueryPanel = React.createClass({
                     <div style={{height: panelHeight + "px", width: panelWidth + 60 + "px", maxHeight: panelMaxHeight + "px"}}>
                         <Panel id="querypanel">
                             <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()}>
-                                <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", "overflow-x": "hidden", "overflow-y": "auto"}}>
+                                <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
                                 <QueryBuilder
                                     filterFields={this.props.filterFields}
                                     attributes={this.props.attributes}
