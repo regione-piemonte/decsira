@@ -15,22 +15,29 @@ const {Panel, Glyphicon, Modal} = require('react-bootstrap');
 const Draggable = require('react-draggable');
 
 const {bindActionCreators} = require('redux');
+
 const {
+    // QueryBuilder action functions
+    addGroupField,
     addFilterField,
     removeFilterField,
     updateFilterField,
-    updateExceptionField
+    updateExceptionField,
+    updateLogicCombo,
+    removeGroupField
 } = require('../../MapStore2/web/client/actions/queryform');
 
 const {
+    // SiraQueryPanel action functions
     expandFilterPanel
 } = require('../actions/queryform');
-
 
 const SiraQueryPanel = React.createClass({
     propTypes: {
         attributes: React.PropTypes.array,
         filterFields: React.PropTypes.array,
+        groupLevels: React.PropTypes.number,
+        groupFields: React.PropTypes.array,
         width: React.PropTypes.number,
         height: React.PropTypes.number,
         maxHeight: React.PropTypes.number,
@@ -45,10 +52,13 @@ const SiraQueryPanel = React.createClass({
             React.PropTypes.element
         ]),
         featureTypeName: React.PropTypes.string,
-        actions: React.PropTypes.object
+        siraActions: React.PropTypes.object,
+        queryFormActions: React.PropTypes.object
     },
     getDefaultProps() {
         return {
+            groupLevels: 1,
+            groupFields: [],
             attributes: [],
             filterFields: [],
             width: 750,
@@ -59,19 +69,30 @@ const SiraQueryPanel = React.createClass({
             loadingQueryFormConfigError: null,
             header: "Filtri",
             featureTypeName: null,
-            actions: []
+            siraActions: {
+                onExpandFilterPanel: () => {}
+            },
+            queryFormActions: {
+                onAddGroupField: () => {},
+                onAddFilterField: () => {},
+                onRemoveFilterField: () => {},
+                onUpdateFilterField: () => {},
+                onUpdateExceptionField: () => {},
+                onUpdateLogicCombo: () => {},
+                onRemoveGroupField: () => {}
+            }
         };
     },
     renderHeader() {
         return this.props.filterPanelExpanded ? (
             <span>
                 <span>{this.props.header} - {this.props.featureTypeName}</span>
-                <button onClick={this.props.actions.onExpandFilterPanel.bind(null, false)} className="close"><Glyphicon glyph="glyphicon glyphicon-collapse-down"/></button>
+                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close"><Glyphicon glyph="glyphicon glyphicon-collapse-down"/></button>
             </span>
         ) : (
             <span>
                 <span>{this.props.header} - {this.props.featureTypeName}</span>
-                <button onClick={this.props.actions.onExpandFilterPanel.bind(null, true)} className="close"><Glyphicon glyph="glyphicon glyphicon-expand"/></button>
+                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close"><Glyphicon glyph="glyphicon glyphicon-expand"/></button>
             </span>
         );
     },
@@ -81,25 +102,24 @@ const SiraQueryPanel = React.createClass({
         const panelMaxHeight = this.props.maxHeight;
 
         return (
-                <Draggable start={{x: 450, y: 100}}>
-                    <div style={{height: panelHeight + "px", width: panelWidth + 60 + "px", maxHeight: panelMaxHeight + "px"}}>
-                        <Panel id="querypanel">
-                            <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()}>
-                                <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
+            <Draggable start={{x: 450, y: 100}}>
+                <div style={{height: panelHeight + "px", width: panelWidth + 60 + "px", maxHeight: panelMaxHeight + "px"}}>
+                    <Panel id="querypanel">
+                        <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()}>
+                            <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
                                 <QueryBuilder
+                                    removeButtonIcon={this.props.removeButtonIcon}
+                                    groupLevels={this.props.groupLevels}
+                                    groupFields={this.props.groupFields}
                                     filterFields={this.props.filterFields}
                                     attributes={this.props.attributes}
-                                    removeButtonIcon={this.props.removeButtonIcon}
-                                    onAddFilterField={this.props.actions.onAddFilterField}
-                                    onRemoveFilterField={this.props.actions.onRemoveFilterField}
-                                    onUpdateFilterField={this.props.actions.onUpdateFilterField}
-                                    onUpdateExceptionField={this.props.actions.onUpdateExceptionField}/>
-                                </div>
-                            </Panel>
+                                    actions={this.props.queryFormActions}/>
+                            </div>
                         </Panel>
-                    </div>
-                </Draggable>
-            );
+                    </Panel>
+                </div>
+            </Draggable>
+        );
     },
     renderLoadConfigException() {
         let exception;
@@ -140,20 +160,31 @@ const SiraQueryPanel = React.createClass({
 
 module.exports = connect((state) => {
     return {
-        filterFields: state.queryform.filterFields,
-        attributes: state.queryformconfig.attributes,
+        // SiraQueryPanel prop
         filterPanelExpanded: state.queryformconfig.filterPanelExpanded,
         loadingQueryFormConfigError: state.queryformconfig.loadingQueryFormConfigError,
-        featureTypeName: state.queryformconfig.featureTypeName
+        featureTypeName: state.queryformconfig.featureTypeName,
+        // QueryBuilder props
+        groupLevels: state.queryform.groupLevels,
+        groupFields: state.queryform.groupFields,
+        filterFields: state.queryform.filterFields,
+        attributes: state.queryformconfig.attributes
     };
 }, dispatch => {
     return {
-        actions: bindActionCreators({
+        siraActions: bindActionCreators({
+            // SiraQueryPanel actions
+            onExpandFilterPanel: expandFilterPanel
+        }, dispatch),
+        queryFormActions: bindActionCreators({
+            // QueryBuilder actions
+            onAddGroupField: addGroupField,
             onAddFilterField: addFilterField,
             onRemoveFilterField: removeFilterField,
             onUpdateFilterField: updateFilterField,
             onUpdateExceptionField: updateExceptionField,
-            onExpandFilterPanel: expandFilterPanel
+            onUpdateLogicCombo: updateLogicCombo,
+            onRemoveGroupField: removeGroupField
         }, dispatch)
     };
 })(SiraQueryPanel);
