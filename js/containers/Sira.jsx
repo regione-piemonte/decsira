@@ -12,7 +12,7 @@ const {connect} = require('react-redux');
 
 const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
-
+const Card = require('../components/template/Card');
 const {Link} = require('react-router');
 
 const Sira = (props) => (
@@ -21,10 +21,12 @@ const Sira = (props) => (
             <span className={props.error && 'error' || !props.loading && 'hidden' || ''}>
                 {props.error && ("Error: " + props.error) || (props.loading && "Loading...")}
             </span>
+
             <div className="links"><Link to="/">Home</Link></div>
             <div className="info">Profile: {props.params.profile}</div>
             <SiraMap/>
             <SiraQueryPanel/>
+            <Card model={{id: 10}}/>
             <Debug/>
         </div>
     </Localized>
