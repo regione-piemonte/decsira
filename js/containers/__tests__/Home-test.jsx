@@ -34,12 +34,12 @@ describe('Home test suite', () => {
         // check header
         let headerElems = homeNode.getElementsByClassName('header');
         expect(headerElems.length).toBe(1);
-        expect(headerElems[0].innerHTML).toBe("HomePage");
+        expect(headerElems[0].firstChild.innerHTML).toBe("Sistema della conoscenza dell'Ambiente");
 
         // check links
         let anchorElems = homeNode.getElementsByTagName('a');
         expect(anchorElems.length).toBe(2);
-        expect(anchorElems[0].innerHTML).toBe('Profilo A');
-        expect(anchorElems[1].innerHTML).toBe('Profilo B');
+        expect(anchorElems[0].firstChild.firstChild.innerHTML).toBe('AUA');
+        expect(anchorElems[1].firstChild.firstChild.innerHTML).toBe('AUA');
     });
 });
