@@ -1,6 +1,8 @@
 package it.geosolutions.csi.sira.backend.queryform.model;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,11 +34,27 @@ public class ListField extends QueryFormField {
 
     public static final String EXTRA_ATTR_VALUES = "values";
 
+    public static final String EXTRA_ATTR_VALUE_SERVICE = "valueService";
+
+    public static final String EXTRA_ATTR_ID_FIELD = "idField";
+
+    public static final String EXTRA_ATTR_LABEL_FIELD = "labelField";
+
+    public static final String DEFAULT_ID_FIELD = "id";
+
+    public static final String DEFAULT_LABEL_FIELD = "label";
+
     private static final Logger logger = LoggerFactory.getLogger(ListField.class);
 
     private DependsOn dependsOn;
 
     private List<Object> values;
+
+    private URL valueService;
+
+    private String idField;
+
+    private String labelField;
 
     ListField() {
         super(QueryFormFieldType.list);
@@ -61,6 +79,7 @@ public class ListField extends QueryFormField {
     /**
      * @return a copy of the internal values list
      */
+    @JsonSerialize(include = Inclusion.NON_EMPTY)
     public List<Object> getValues() {
         if (CollectionUtils.isEmpty(values)) {
             return Collections.emptyList();
@@ -85,6 +104,57 @@ public class ListField extends QueryFormField {
     }
 
     /**
+     * 
+     * @return URL of the service from which values can be retrieved
+     */
+    @JsonSerialize(include = Inclusion.NON_NULL)
+    public URL getValueService() {
+        return valueService;
+    }
+
+    /**
+     * 
+     * @param valueService the URL of the service from which values can be retrieved
+     */
+    public void setValueService(URL valueService) {
+        this.valueService = valueService;
+    }
+
+    /**
+     * 
+     * @return the name of the ID field
+     */
+    @JsonSerialize(include = Inclusion.NON_NULL)
+    public String getIdField() {
+        return idField;
+    }
+
+    public void setIdField(String idField) {
+        if (!StringUtils.hasText(idField)) {
+            this.idField = DEFAULT_ID_FIELD;
+        } else {
+            this.idField = idField;
+        }
+    }
+
+    /**
+     * 
+     * @return the name of the field to be used as textual description
+     */
+    @JsonSerialize(include = Inclusion.NON_NULL)
+    public String getLabelField() {
+        return labelField;
+    }
+
+    public void setLabelField(String labelField) {
+        if (!StringUtils.hasText(labelField)) {
+            this.labelField = DEFAULT_LABEL_FIELD;
+        } else {
+            this.labelField = labelField;
+        }
+    }
+
+    /**
      * <p>
      * The <code>dependson</code> attribute can be set by passing either a {@link DependsOn} instance, or a {@link String}, which is assumed to be a
      * JSON-encoded object.
@@ -102,6 +172,16 @@ public class ListField extends QueryFormField {
             parseDependsOnAttribute(value);
         } else if (EXTRA_ATTR_VALUES.equals(name)) {
             parseValuesAttribute(value);
+        } else if (EXTRA_ATTR_VALUE_SERVICE.equals(name)) {
+            parseValueServiceAttribute(value);
+        } else if (EXTRA_ATTR_ID_FIELD.equals(name)) {
+            if (value != null && value instanceof String) {
+                setIdField(value.toString());
+            }
+        } else if (EXTRA_ATTR_LABEL_FIELD.equals(name)) {
+            if (value != null && value instanceof String) {
+                setLabelField(value.toString());
+            }
         } else {
             logger.debug("unknown attribute specified : '" + name + "'");
         }
@@ -176,6 +256,26 @@ public class ListField extends QueryFormField {
             values.add(value);
         } catch (IOException e) {
             logger.error("Could not parse value: " + text, e);
+        }
+    }
+
+    void parseValueServiceAttribute(Object value) {
+        if (value == null) {
+            this.valueService = null;
+            return;
+        }
+
+        if (value instanceof String && StringUtils.hasText(value.toString())) {
+            // try to parse into URL
+            try {
+                this.valueService = new URL(value.toString());
+            } catch (MalformedURLException e) {
+                throw new IllegalArgumentException("Invalid URL provided for " + EXTRA_ATTR_VALUE_SERVICE, e);
+            }
+        } else if (value instanceof URL) {
+            this.valueService = (URL)value;
+        } else {
+            logger.debug("Unsupported value provided for attribute " + EXTRA_ATTR_VALUE_SERVICE + ", skipping");
         }
     }
 
