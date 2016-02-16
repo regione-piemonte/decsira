@@ -102,23 +102,27 @@ const SiraQueryPanel = React.createClass({
         const panelMaxHeight = this.props.maxHeight;
 
         return (
-            <Draggable start={{x: 450, y: 100}}>
-                <div style={{height: panelHeight + "px", width: panelWidth + 60 + "px", maxHeight: panelMaxHeight + "px"}}>
-                    <Panel id="querypanel">
-                        <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()}>
-                            <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
-                                <QueryBuilder
-                                    removeButtonIcon={this.props.removeButtonIcon}
-                                    groupLevels={this.props.groupLevels}
-                                    groupFields={this.props.groupFields}
-                                    filterFields={this.props.filterFields}
-                                    attributes={this.props.attributes}
-                                    actions={this.props.queryFormActions}/>
-                            </div>
-                        </Panel>
+            <div style={{
+                    "position": "absolute",
+                    "top": "100px",
+                    "left": "450px",
+                    "height": panelHeight + "px",
+                    "width": panelWidth + 60 + "px",
+                    "maxHeight": panelMaxHeight + "px"}}>
+                <Panel id="querypanel">
+                    <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()}>
+                        <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
+                            <QueryBuilder
+                                removeButtonIcon={this.props.removeButtonIcon}
+                                groupLevels={this.props.groupLevels}
+                                groupFields={this.props.groupFields}
+                                filterFields={this.props.filterFields}
+                                attributes={this.props.attributes}
+                                actions={this.props.queryFormActions}/>
+                        </div>
                     </Panel>
-                </div>
-            </Draggable>
+                </Panel>
+            </div>
         );
     },
     renderLoadConfigException() {
