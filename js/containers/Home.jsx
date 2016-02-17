@@ -46,17 +46,16 @@ const Home = (props) => (
                 <div className="header-5">
                     <div className="box-left">
                         <Link to="/map/A">
-                            <p><span style={{"color": "rgb(66, 66, 66)", "font-size": "24px", "font-weight": "bold"}}>AUA</span></p>
-                            <p><span style={{"color": "#808080", "font-size": "16px"}}>PROFILO A</span></p>
+                            <p><span style={{"color": "rgb(66, 66, 66)", "fontSize": "24px", "fontWeight": "bold"}}>AUA</span></p>
+                            <p><span style={{"color": "#808080", "fontSize": "16px"}}>PROFILO A</span></p>
                         </Link>
                     </div>
                     <div className="box-right">
                         <Link to="/map/B">
-                            <p><span style={{"color": "rgb(66, 66, 66)", "font-size": "24px", "font-weight": "bold"}}>AUA</span></p>
-                            <p><span style={{"color": "#808080", "font-size": "16px"}}>PROFILO B</span></p>
+                            <p><span style={{"color": "rgb(66, 66, 66)", "fontSize": "24px", "fontWeight": "bold"}}>AUA</span></p>
+                            <p><span style={{"color": "#808080", "fontSize": "16px"}}>PROFILO B</span></p>
                         </Link>
                     </div>
-                    <img className="header-5-bg" src="/assets/img/u0.png"></img>
                 </div>
                 <div className="main-home"></div>
             </div>
