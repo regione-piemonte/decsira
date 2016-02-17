@@ -10,7 +10,9 @@ import java.util.Arrays;
  */
 public enum QueryFormFieldType {
 
-    list(ListField.class, new String[] { ListField.EXTRA_ATTR_DEPENDSON, ListField.EXTRA_ATTR_VALUES }),
+    list(ListField.class, new String[] { ListField.EXTRA_ATTR_DEPENDSON,
+            ListField.EXTRA_ATTR_VALUES, ListField.EXTRA_ATTR_VALUE_SERVICE,
+            ListField.EXTRA_ATTR_ID_FIELD, ListField.EXTRA_ATTR_LABEL_FIELD }),
     date(DateField.class, new String[] {});
 
     private Class<?> fieldClass;
