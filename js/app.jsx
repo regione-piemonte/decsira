@@ -42,7 +42,7 @@ ConfigUtils
         store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));
 
         // load the card template
-        store.dispatch(loadCardTemplate("/assets/", "cardTemplate.config"));
+        store.dispatch(loadCardTemplate("assets/", "cardTemplate.config"));
     });
 
 ReactDOM.render(
