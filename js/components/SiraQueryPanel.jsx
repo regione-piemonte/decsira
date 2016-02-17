@@ -23,7 +23,8 @@ const {
     updateFilterField,
     updateExceptionField,
     updateLogicCombo,
-    removeGroupField
+    removeGroupField,
+    changeCascadingValue
 } = require('../../MapStore2/web/client/actions/queryform');
 
 const {
@@ -78,7 +79,8 @@ const SiraQueryPanel = React.createClass({
                 onUpdateFilterField: () => {},
                 onUpdateExceptionField: () => {},
                 onUpdateLogicCombo: () => {},
-                onRemoveGroupField: () => {}
+                onRemoveGroupField: () => {},
+                onChangeCascadingValue: () => {}
             }
         };
     },
@@ -187,7 +189,8 @@ module.exports = connect((state) => {
             onUpdateFilterField: updateFilterField,
             onUpdateExceptionField: updateExceptionField,
             onUpdateLogicCombo: updateLogicCombo,
-            onRemoveGroupField: removeGroupField
+            onRemoveGroupField: removeGroupField,
+            onChangeCascadingValue: changeCascadingValue
         }, dispatch)
     };
 })(SiraQueryPanel);
