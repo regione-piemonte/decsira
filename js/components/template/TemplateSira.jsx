@@ -11,9 +11,7 @@ const Template = require('../../../MapStore2/web/client/components/template/jsx/
 // Template needs to import all component used in string definition.
 // The referene should be available in eval scope. Needs to disable eslint
 /*eslint-disable */
-const React = require('react');
-const {Panel} = require('react-bootstrap');
-const DetailTitle= require("./DetailTitle");
+const {React,...T}= require("./index");
 /*eslint-enable */
 
 module.exports = class TemplateSira extends Template {

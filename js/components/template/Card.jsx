@@ -25,7 +25,7 @@ const Card = React.createClass({
                 loadingCardTemplateError: React.PropTypes.oneOfType([
                         React.PropTypes.string,
                         React.PropTypes.object]),
-                show: React.PropTypes.boll
+                show: React.PropTypes.bool
         }),
         model: React.PropTypes.object
     },
