@@ -15,7 +15,7 @@ const {React,...T}= require("./index");
 /*eslint-enable */
 
 module.exports = class TemplateSira extends Template {
-    renderCard() {
+    renderContent() {
         /*eslint-disable */
         let model = this.props.model;
         return (this.comp === '"use strict";') ? null : eval(this.comp);
