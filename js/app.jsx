@@ -25,6 +25,7 @@ const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
 const {loadQueryFormConfig} = require('./actions/queryform');
+const {loadCardTemplate} = require('./actions/card');
 
 store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
 
@@ -39,6 +40,9 @@ ConfigUtils
 
         // load the queryform configuration
         store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));
+
+        // load the card template
+        store.dispatch(loadCardTemplate("/assets/", "cardTemplate.config"));
     });
 
 ReactDOM.render(

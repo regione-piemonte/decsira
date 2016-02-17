@@ -18,7 +18,8 @@ const rootReducer = combineReducers({
     map: require('../../MapStore2/web/client/reducers/map'),
     queryform: require('../../MapStore2/web/client/reducers/queryform'),
     queryformconfig: require('../reducers/queryform'),
-    routing: routeReducer
+    routing: routeReducer,
+    cardtemplate: require('../reducers/card')
 });
 
 const store = DebugUtils.createDebugStore(rootReducer, {}, [reduxRouterMiddleware]);
