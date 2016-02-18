@@ -9,9 +9,10 @@
 const React = require('react');
 const {isObject} = require('lodash');
 const {connect} = require('react-redux');
-// include application component
+const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
 const {Modal} = require('react-bootstrap');
+const {configureCardError} = require("../../actions/card");
 
 const Draggable = require('react-draggable');
 require("./card.css");
@@ -27,7 +28,8 @@ const Card = React.createClass({
                         React.PropTypes.object]),
                 show: React.PropTypes.bool
         }),
-        model: React.PropTypes.object
+        model: React.PropTypes.object,
+        configureCardError: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -36,7 +38,8 @@ const Card = React.createClass({
                 loadingCardTemplateError: null,
                 show: false
             },
-            model: {}
+            model: {},
+            configureCardError: () => {}
         };
     },
      renderLoadTemplateException() {
@@ -46,7 +49,8 @@ const Card = React.createClass({
         }
 
         return (
-            <Modal show={ (exception) ? true : false} bsSize="small">
+            <Modal show={ (exception) ? true : false} bsSize="small"
+            onHide={this.props.configureCardError.bind(null, null)} >
                 <Modal.Header closeButton>
                     <Modal.Title>Data Exception</Modal.Title>
                 </Modal.Header>
@@ -74,7 +78,9 @@ const Card = React.createClass({
 });
 module.exports = connect((state) => {
     return {
-        card: state.cardtemplate || {}
+            card: state.cardtemplate || {}
     };
+}, dispatch => {
+    return bindActionCreators({configureCardError: configureCardError}, dispatch);
 })(Card);
 

@@ -1,7 +1,10 @@
 /*eslint-disable */
 const{Panel} = require('react-bootstrap');
 const React = require('react');
-const DetailTitle = require("./DetailTitle")
+const DetailTitle = require("./DetailTitle");
+const Section = require("./Section");
+const SectionGroup = require("./SectionGroup");
+const LabeledField = require("./LabeledField");
 
 const renderSira = function(comp, model) {
         return eval(comp);
