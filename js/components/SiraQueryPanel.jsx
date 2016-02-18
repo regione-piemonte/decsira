@@ -15,6 +15,9 @@ const {Panel, Glyphicon, Modal} = require('react-bootstrap');
 
 const {bindActionCreators} = require('redux');
 
+const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
+const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+
 const {
     // QueryBuilder action functions
     addGroupField,
@@ -55,6 +58,9 @@ const SiraQueryPanel = React.createClass({
         siraActions: React.PropTypes.object,
         queryFormActions: React.PropTypes.object
     },
+    contextTypes: {
+        messages: React.PropTypes.object
+    },
     getDefaultProps() {
         return {
             groupLevels: 1,
@@ -67,7 +73,7 @@ const SiraQueryPanel = React.createClass({
             removeButtonIcon: "glyphicon glyphicon-trash",
             filterPanelExpanded: true,
             loadingQueryFormConfigError: null,
-            header: "Filtri",
+            header: "queryform.form.form_title",
             featureTypeName: null,
             siraActions: {
                 onExpandFilterPanel: () => {}
@@ -85,15 +91,21 @@ const SiraQueryPanel = React.createClass({
         };
     },
     renderHeader() {
+        const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
+
         return this.props.filterPanelExpanded ? (
             <span>
-                <span>{this.props.header} - {this.props.featureTypeName}</span>
-                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close"><Glyphicon glyph="glyphicon glyphicon-collapse-down"/></button>
+                <span>{header} - {this.props.featureTypeName}</span>
+                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
+                    <Glyphicon glyph="glyphicon glyphicon-collapse-down"/>
+                </button>
             </span>
         ) : (
             <span>
-                <span>{this.props.header} - {this.props.featureTypeName}</span>
-                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close"><Glyphicon glyph="glyphicon glyphicon-expand"/></button>
+                <span>{header} - {this.props.featureTypeName}</span>
+                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
+                    <Glyphicon glyph="glyphicon glyphicon-expand"/>
+                </button>
             </span>
         );
     },
@@ -129,7 +141,9 @@ const SiraQueryPanel = React.createClass({
     renderLoadConfigException() {
         let exception;
         if (isObject(this.props.loadingQueryFormConfigError)) {
-            exception = this.props.loadingQueryFormConfigError.status + ": " + this.props.loadingQueryFormConfigError.data;
+            exception = this.props.loadingQueryFormConfigError.status +
+                "(" + this.props.loadingQueryFormConfigError.statusText + ")" +
+                ": " + this.props.loadingQueryFormConfigError.data;
         } else {
             exception = this.props.loadingQueryFormConfigError;
         }
@@ -137,7 +151,7 @@ const SiraQueryPanel = React.createClass({
         return (
             <Modal show={this.props.loadingQueryFormConfigError ? true : false} bsSize="small">
                 <Modal.Header closeButton>
-                    <Modal.Title>Data Exception</Modal.Title>
+                    <Modal.Title><I18N.Message msgId={"queryform.config.load_config_exception"}/></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mapstore-error">{exception}</div>
