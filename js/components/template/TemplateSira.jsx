@@ -5,21 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+const React = require('react');
 // include application component
 const Template = require('../../../MapStore2/web/client/components/template/jsx/Template');
 // Template needs to import all component used in string definition.
 // The referene should be available in eval scope. Needs to disable eslint
-/*eslint-disable */
-const {React,...T}= require("./index");
-/*eslint-enable */
+const renderSira = require("./index");
 
-module.exports = class TemplateSira extends Template {
-    renderContent() {
-        /*eslint-disable */
-        let model = this.props.model;
-        return (this.comp === '"use strict";') ? null : eval(this.comp);
-        /*eslint-enable */
+const TemplateSira = React.createClass({
+    render() {
+        return (<Template {...this.props} renderContent={renderSira}/>);
     }
-};
+});
+module.exports = TemplateSira;
+
 
