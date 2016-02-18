@@ -10,6 +10,7 @@ const axios = require('../../MapStore2/web/client/libs/ajax');
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const CARD_TEMPLATE_TOOGLE = 'CARD_TEMPLATE_TOOGLE';
+const SELECT_SECTION = 'SELECT_SECTION';
 
 function toggleCard(state) {
     return {
@@ -32,6 +33,13 @@ function configureCardError(e) {
     };
 }
 
+function selectSection(section) {
+    return {
+        type: SELECT_SECTION,
+        section: section
+    };
+}
+
 function loadCardTemplate(configUrl, configName) {
     return (dispatch) => {
         return axios.get(configUrl + configName).then((response) => {
@@ -50,6 +58,10 @@ module.exports = {
     CARD_TEMPLATE_LOADED,
     CARD_TEMPLATE_LOAD_ERROR,
     CARD_TEMPLATE_TOOGLE,
+    SELECT_SECTION,
     loadCardTemplate,
-    toggleCard
+    toggleCard,
+    configureCardError,
+    selectSection
+
 };

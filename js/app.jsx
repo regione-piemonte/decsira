@@ -36,7 +36,7 @@ ConfigUtils
         store.dispatch(loadMapConfig(configUrl, legacy));
 
         let locale = LocaleUtils.getUserLocale();
-        store.dispatch(loadLocale('../MapStore2/web/client/translations', locale));
+        store.dispatch(loadLocale('MapStore2/web/client/translations', locale));
 
         // load the queryform configuration
         store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));

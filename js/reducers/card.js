@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_TOOGLE} = require('../actions/card');
+const {CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_TOOGLE, SELECT_SECTION} = require('../actions/card');
 const assign = require('object-assign');
 
 function cardtemplate(state = {show: true}, action) {
@@ -24,6 +24,11 @@ function cardtemplate(state = {show: true}, action) {
         case CARD_TEMPLATE_TOOGLE: {
             return assign({}, state, {
                 show: action.show
+            });
+        }
+        case SELECT_SECTION: {
+            return assign({}, state, {
+                activeSection: action.section
             });
         }
         default:

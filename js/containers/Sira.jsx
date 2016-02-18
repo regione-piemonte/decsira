@@ -26,7 +26,7 @@ const Sira = (props) => (
             <div className="info">Profile: {props.params.profile}</div>
             <SiraMap/>
             <SiraQueryPanel/>
-            <Card model={{id: 10}}/>
+            <Card model={{id: 10, codicesira: "12345", comune: "Torino", provincia: "Torino", tipo: "Provvedimento"}}/>
             <Debug/>
         </div>
     </Localized>
