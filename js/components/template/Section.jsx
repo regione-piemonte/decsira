@@ -5,6 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 const React = require('react');
 const {Panel, Glyphicon} = require('react-bootstrap');
 const {bindActionCreators} = require('redux');
@@ -40,14 +41,17 @@ const Section = React.createClass({
         );
     },
     render() {
-        return (<Panel collapsible header={this.renderHeader()} expanded={this.isActive()} >
-                 {this.props.children}
-                </Panel>);
+        return (
+            <Panel collapsible header={this.renderHeader()} expanded={this.isActive()}>
+                {this.props.children}
+            </Panel>
+        );
     },
     isActive() {
         return (this.props.activeSections.hasOwnProperty(this.props.eventKey) && this.props.activeSections[this.props.eventKey]);
     }
 });
+
 module.exports = connect((state) => {
     return {
             activeSections: state.cardtemplate.activeSections || {}
@@ -55,4 +59,3 @@ module.exports = connect((state) => {
 }, dispatch => {
     return bindActionCreators({selectSection: selectSection}, dispatch);
 })(Section);
-

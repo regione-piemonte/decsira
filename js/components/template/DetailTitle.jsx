@@ -33,7 +33,7 @@ const DetailTitle = React.createClass({
                         <h4>{this.props.title}<br/><small>{this.props.subtitle + this.props.id}</small></h4>
                     </Col>
                     <Col xs={1} sm={1} md={1} lg={1}>
-                        <button onClick={() => this.props.toggleCard(false)} className="close"><span>×</span></button>
+                        <button onClick={() => this.props.toggleCard(false)} className="close card-close"><span>×</span></button>
                     </Col>
                 </Row>
             </Grid>
@@ -45,4 +45,3 @@ module.exports = connect(null, dispatch => {
     return bindActionCreators({toggleCard: toggleCard}, dispatch);
 
 })(DetailTitle);
-

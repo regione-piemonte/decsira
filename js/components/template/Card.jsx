@@ -66,10 +66,10 @@ const Card = React.createClass({
         return (this.props.card.loadingCardTemplateError) ? (
                 this.renderLoadTemplateException()
             ) : (
-            <Draggable>
-            <div className="scheda-sira">
-                <TemplateSira template={this.props.card.template} model={this.props.model}/>
-            </div>
+            <Draggable start={{x: 10, y: 83}}>
+                <div className="scheda-sira">
+                    <TemplateSira template={this.props.card.template} model={this.props.model}/>
+                </div>
             </Draggable>);
     },
     render() {
@@ -83,4 +83,3 @@ module.exports = connect((state) => {
 }, dispatch => {
     return bindActionCreators({configureCardError: configureCardError}, dispatch);
 })(Card);
-
