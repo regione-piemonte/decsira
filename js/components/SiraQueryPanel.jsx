@@ -27,7 +27,9 @@ const {
     updateExceptionField,
     updateLogicCombo,
     removeGroupField,
-    changeCascadingValue
+    changeCascadingValue,
+    expandAttributeFilterPanel,
+    expandSpatialFilterPanel
 } = require('../../MapStore2/web/client/actions/queryform');
 
 const {
@@ -37,10 +39,7 @@ const {
 
 const SiraQueryPanel = React.createClass({
     propTypes: {
-        attributes: React.PropTypes.array,
-        filterFields: React.PropTypes.array,
-        groupLevels: React.PropTypes.number,
-        groupFields: React.PropTypes.array,
+        // Sira Query Panel props
         width: React.PropTypes.number,
         height: React.PropTypes.number,
         maxHeight: React.PropTypes.number,
@@ -50,12 +49,17 @@ const SiraQueryPanel = React.createClass({
             React.PropTypes.string,
             React.PropTypes.object
         ]),
-        header: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.element
-        ]),
+        header: React.PropTypes.string,
+        datasetHeader: React.PropTypes.string,
         featureTypeName: React.PropTypes.string,
         siraActions: React.PropTypes.object,
+        // QueryBuilder props
+        attributes: React.PropTypes.array,
+        filterFields: React.PropTypes.array,
+        groupLevels: React.PropTypes.number,
+        groupFields: React.PropTypes.array,
+        attributePanelExpanded: React.PropTypes.bool,
+        spatialPanelExpanded: React.PropTypes.bool,
         queryFormActions: React.PropTypes.object
     },
     contextTypes: {
@@ -63,30 +67,41 @@ const SiraQueryPanel = React.createClass({
     },
     getDefaultProps() {
         return {
-            groupLevels: 1,
-            groupFields: [],
-            attributes: [],
-            filterFields: [],
-            width: 750,
-            height: 550,
-            maxHeight: 550,
+            // Sira Query Panel default props
+            width: 850,
+            height: 700,
+            maxHeight: 700,
             removeButtonIcon: "glyphicon glyphicon-trash",
             filterPanelExpanded: true,
             loadingQueryFormConfigError: null,
-            header: "queryform.form.form_title",
+            header: "queryform.form.header",
+            datasetHeader: "queryform.form.dataset_header",
             featureTypeName: null,
             siraActions: {
                 onExpandFilterPanel: () => {}
             },
+            // QueryBuilder default props
+            groupLevels: 1,
+            groupFields: [],
+            attributes: [],
+            filterFields: [],
+            attributePanelExpanded: true,
+            spatialPanelExpanded: true,
             queryFormActions: {
-                onAddGroupField: () => {},
-                onAddFilterField: () => {},
-                onRemoveFilterField: () => {},
-                onUpdateFilterField: () => {},
-                onUpdateExceptionField: () => {},
-                onUpdateLogicCombo: () => {},
-                onRemoveGroupField: () => {},
-                onChangeCascadingValue: () => {}
+                attributeFilterActions: {
+                    onAddGroupField: () => {},
+                    onAddFilterField: () => {},
+                    onRemoveFilterField: () => {},
+                    onUpdateFilterField: () => {},
+                    onUpdateExceptionField: () => {},
+                    onUpdateLogicCombo: () => {},
+                    onRemoveGroupField: () => {},
+                    onChangeCascadingValue: () => {},
+                    onExpandAttributeFilterPanel: () => {}
+                },
+                spatialFilterActions: {
+                    onExpandSpatialFilterPanel: () => {}
+                }
             }
         };
     },
@@ -95,18 +110,27 @@ const SiraQueryPanel = React.createClass({
 
         return this.props.filterPanelExpanded ? (
             <span>
-                <span>{header} - {this.props.featureTypeName}</span>
+                <span>{header}</span>
                 <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
-                    <Glyphicon glyph="glyphicon glyphicon-collapse-down"/>
+                    <Glyphicon glyph="glyphicon glyphicon-collapse-down collapsible"/>
                 </button>
             </span>
         ) : (
             <span>
-                <span>{header} - {this.props.featureTypeName}</span>
+                <span>{header}</span>
                 <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
-                    <Glyphicon glyph="glyphicon glyphicon-expand"/>
+                    <Glyphicon glyph="glyphicon glyphicon-expand collapsible"/>
                 </button>
             </span>
+        );
+    },
+    renderDatasetHeader() {
+        const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
+        return (
+            <div className="dhContainer">
+                <h4>{datasetHeader}</h4>
+                <h4 className="ftheader">{this.props.featureTypeName}</h4>
+            </div>
         );
     },
     renderQueryPanel() {
@@ -117,21 +141,26 @@ const SiraQueryPanel = React.createClass({
         return (
             <div style={{
                     "position": "absolute",
-                    "top": "100px",
-                    "left": "450px",
+                    "top": "50px",
+                    "left": "670px",
                     "height": panelHeight + "px",
                     "width": panelWidth + 60 + "px",
                     "maxHeight": panelMaxHeight + "px"}}>
                 <Panel id="querypanel">
-                    <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()}>
+                    <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
                         <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
+                            {this.renderDatasetHeader()}
                             <QueryBuilder
                                 removeButtonIcon={this.props.removeButtonIcon}
                                 groupLevels={this.props.groupLevels}
                                 groupFields={this.props.groupFields}
                                 filterFields={this.props.filterFields}
                                 attributes={this.props.attributes}
-                                actions={this.props.queryFormActions}/>
+                                actions={this.props.queryFormActions}
+                                attributePanelExpanded={this.props.attributePanelExpanded}
+                                spatialPanelExpanded={this.props.spatialPanelExpanded}
+                                attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
+                                spatialFilterActions={this.props.queryFormActions.spatialFilterActions}/>
                         </div>
                     </Panel>
                 </Panel>
@@ -187,7 +216,9 @@ module.exports = connect((state) => {
         groupLevels: state.queryform.groupLevels,
         groupFields: state.queryform.groupFields,
         filterFields: state.queryform.filterFields,
-        attributes: state.queryformconfig.attributes
+        attributes: state.queryformconfig.attributes,
+        attributePanelExpanded: state.queryform.attributePanelExpanded,
+        spatialPanelExpanded: state.queryform.spatialPanelExpanded
     };
 }, dispatch => {
     return {
@@ -195,16 +226,22 @@ module.exports = connect((state) => {
             // SiraQueryPanel actions
             onExpandFilterPanel: expandFilterPanel
         }, dispatch),
-        queryFormActions: bindActionCreators({
+        queryFormActions: {
             // QueryBuilder actions
-            onAddGroupField: addGroupField,
-            onAddFilterField: addFilterField,
-            onRemoveFilterField: removeFilterField,
-            onUpdateFilterField: updateFilterField,
-            onUpdateExceptionField: updateExceptionField,
-            onUpdateLogicCombo: updateLogicCombo,
-            onRemoveGroupField: removeGroupField,
-            onChangeCascadingValue: changeCascadingValue
-        }, dispatch)
+            attributeFilterActions: bindActionCreators({
+                onAddGroupField: addGroupField,
+                onAddFilterField: addFilterField,
+                onRemoveFilterField: removeFilterField,
+                onUpdateFilterField: updateFilterField,
+                onUpdateExceptionField: updateExceptionField,
+                onUpdateLogicCombo: updateLogicCombo,
+                onRemoveGroupField: removeGroupField,
+                onChangeCascadingValue: changeCascadingValue,
+                onExpandAttributeFilterPanel: expandAttributeFilterPanel
+            }, dispatch),
+            spatialFilterActions: bindActionCreators({
+                onExpandSpatialFilterPanel: expandSpatialFilterPanel
+            }, dispatch)
+        }
     };
 })(SiraQueryPanel);
