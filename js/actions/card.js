@@ -33,10 +33,11 @@ function configureCardError(e) {
     };
 }
 
-function selectSection(section) {
+function selectSection(section, active) {
     return {
         type: SELECT_SECTION,
-        section: section
+        section: section,
+        active: active
     };
 }
 

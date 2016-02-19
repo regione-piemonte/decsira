@@ -27,8 +27,10 @@ function cardtemplate(state = {show: true}, action) {
             });
         }
         case SELECT_SECTION: {
+            const newSections = assign({}, state.activeSections);
+            newSections[action.section] = action.active;
             return assign({}, state, {
-                activeSection: action.section
+                activeSections: newSections
             });
         }
         default:

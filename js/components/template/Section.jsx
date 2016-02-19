@@ -14,34 +14,43 @@ const {selectSection} = require('../../actions/card');
 const Section = React.createClass({
     propTypes: {
         eventKey: React.PropTypes.string,
-        activeSection: React.PropTypes.string,
+        activeSections: React.PropTypes.object,
         selectSection: React.PropTypes.func,
-        header: React.PropTypes.string
+        header: React.PropTypes.string,
+        expanded: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
-            activeSection: '',
+            activeSections: {},
             selectSection: () => {}
         };
     },
+    componentDidMount() {
+        if (this.props.expanded && !this.isActive()) {
+            this.props.selectSection(this.props.eventKey, true);
+        }
+    },
     renderHeader() {
-        let isActive = (this.props.activeSection === this.props.eventKey);
+        let isActive = this.isActive();
         return (
             <span>
                 <span>{this.props.header}</span>
-                <button onClick={this.props.selectSection.bind(null, (isActive) ? '' : this.props.eventKey)} className="close"><Glyphicon glyph={(isActive) ? "glyphicon glyphicon-collapse-down" : "glyphicon glyphicon-expand"}/></button>
+                <button onClick={this.props.selectSection.bind(null, this.props.eventKey, (isActive) ? false : true )} className="close"><Glyphicon glyph={(isActive) ? "glyphicon glyphicon-collapse-down" : "glyphicon glyphicon-expand"}/></button>
             </span>
         );
     },
     render() {
-        return (<Panel collapsible header={this.renderHeader()} expanded={this.props.activeSection === this.props.eventKey} >
+        return (<Panel collapsible header={this.renderHeader()} expanded={this.isActive()} >
                  {this.props.children}
                 </Panel>);
+    },
+    isActive() {
+        return (this.props.activeSections.hasOwnProperty(this.props.eventKey) && this.props.activeSections[this.props.eventKey]);
     }
 });
 module.exports = connect((state) => {
     return {
-            activeSection: state.cardtemplate.activeSection || ''
+            activeSections: state.cardtemplate.activeSections || {}
     };
 }, dispatch => {
     return bindActionCreators({selectSection: selectSection}, dispatch);
