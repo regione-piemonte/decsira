@@ -29,13 +29,22 @@ const {
     removeGroupField,
     changeCascadingValue,
     expandAttributeFilterPanel,
-    expandSpatialFilterPanel
+    expandSpatialFilterPanel,
+    selectSpatialMethod,
+    selectSpatialOperation,
+    removeSpatialSelection,
+    showSpatialSelectionDetails
 } = require('../../MapStore2/web/client/actions/queryform');
 
 const {
     // SiraQueryPanel action functions
     expandFilterPanel
 } = require('../actions/queryform');
+
+const {
+    changeDrawingStatus,
+    endDrawing
+} = require('../../MapStore2/web/client/actions/draw');
 
 const SiraQueryPanel = React.createClass({
     propTypes: {
@@ -58,6 +67,8 @@ const SiraQueryPanel = React.createClass({
         filterFields: React.PropTypes.array,
         groupLevels: React.PropTypes.number,
         groupFields: React.PropTypes.array,
+        spatialField: React.PropTypes.object,
+        showDetailsPanel: React.PropTypes.bool,
         attributePanelExpanded: React.PropTypes.bool,
         spatialPanelExpanded: React.PropTypes.bool,
         queryFormActions: React.PropTypes.object
@@ -69,8 +80,8 @@ const SiraQueryPanel = React.createClass({
         return {
             // Sira Query Panel default props
             width: 850,
-            height: 700,
-            maxHeight: 700,
+            height: 750,
+            maxHeight: 750,
             removeButtonIcon: "glyphicon glyphicon-trash",
             filterPanelExpanded: true,
             loadingQueryFormConfigError: null,
@@ -85,8 +96,10 @@ const SiraQueryPanel = React.createClass({
             groupFields: [],
             attributes: [],
             filterFields: [],
+            spatialField: {},
             attributePanelExpanded: true,
             spatialPanelExpanded: true,
+            showDetailsPanel: false,
             queryFormActions: {
                 attributeFilterActions: {
                     onAddGroupField: () => {},
@@ -100,7 +113,13 @@ const SiraQueryPanel = React.createClass({
                     onExpandAttributeFilterPanel: () => {}
                 },
                 spatialFilterActions: {
-                    onExpandSpatialFilterPanel: () => {}
+                    onExpandSpatialFilterPanel: () => {},
+                    onSelectSpatiaslMethod: () => {},
+                    onSelectSpatialOperation: () => {},
+                    onChangeDrawingStatus: () => {},
+                    onRemoveSpatialSelection: () => {},
+                    onShowSpatialSelectionDetails: () => {},
+                    onEndDrawing: () => {}
                 }
             }
         };
@@ -139,30 +158,32 @@ const SiraQueryPanel = React.createClass({
         const panelMaxHeight = this.props.maxHeight;
 
         return (
-            <div style={{
+            <div
+                id="querypanel"
+                style={{
                     "position": "absolute",
                     "top": "50px",
                     "left": "670px",
                     "height": panelHeight + "px",
-                    "width": panelWidth + 60 + "px",
+                    "width": panelWidth + 35 + "px",
                     "maxHeight": panelMaxHeight + "px"}}>
-                <Panel id="querypanel">
-                    <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
-                        <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
-                            {this.renderDatasetHeader()}
-                            <QueryBuilder
-                                removeButtonIcon={this.props.removeButtonIcon}
-                                groupLevels={this.props.groupLevels}
-                                groupFields={this.props.groupFields}
-                                filterFields={this.props.filterFields}
-                                attributes={this.props.attributes}
-                                actions={this.props.queryFormActions}
-                                attributePanelExpanded={this.props.attributePanelExpanded}
-                                spatialPanelExpanded={this.props.spatialPanelExpanded}
-                                attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
-                                spatialFilterActions={this.props.queryFormActions.spatialFilterActions}/>
-                        </div>
-                    </Panel>
+                <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
+                    <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
+                        {this.renderDatasetHeader()}
+                        <QueryBuilder
+                            removeButtonIcon={this.props.removeButtonIcon}
+                            groupLevels={this.props.groupLevels}
+                            groupFields={this.props.groupFields}
+                            filterFields={this.props.filterFields}
+                            spatialField={this.props.spatialField}
+                            attributes={this.props.attributes}
+                            showDetailsPanel={this.props.showDetailsPanel}
+                            actions={this.props.queryFormActions}
+                            attributePanelExpanded={this.props.attributePanelExpanded}
+                            spatialPanelExpanded={this.props.spatialPanelExpanded}
+                            attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
+                            spatialFilterActions={this.props.queryFormActions.spatialFilterActions}/>
+                    </div>
                 </Panel>
             </div>
         );
@@ -217,6 +238,8 @@ module.exports = connect((state) => {
         groupFields: state.queryform.groupFields,
         filterFields: state.queryform.filterFields,
         attributes: state.queryformconfig.attributes,
+        spatialField: state.queryform.spatialField,
+        showDetailsPanel: state.queryform.showDetailsPanel,
         attributePanelExpanded: state.queryform.attributePanelExpanded,
         spatialPanelExpanded: state.queryform.spatialPanelExpanded
     };
@@ -240,7 +263,13 @@ module.exports = connect((state) => {
                 onExpandAttributeFilterPanel: expandAttributeFilterPanel
             }, dispatch),
             spatialFilterActions: bindActionCreators({
-                onExpandSpatialFilterPanel: expandSpatialFilterPanel
+                onExpandSpatialFilterPanel: expandSpatialFilterPanel,
+                onSelectSpatialMethod: selectSpatialMethod,
+                onSelectSpatialOperation: selectSpatialOperation,
+                onChangeDrawingStatus: changeDrawingStatus,
+                onRemoveSpatialSelection: removeSpatialSelection,
+                onShowSpatialSelectionDetails: showSpatialSelectionDetails,
+                onEndDrawing: endDrawing
             }, dispatch)
         }
     };
