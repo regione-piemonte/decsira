@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
     config: require('../../MapStore2/web/client/reducers/config'),
     locale: require('../../MapStore2/web/client/reducers/locale'),
     map: require('../../MapStore2/web/client/reducers/map'),
+    draw: require('../../MapStore2/web/client/reducers/draw'),
     queryform: require('../../MapStore2/web/client/reducers/queryform'),
     queryformconfig: require('../reducers/queryform'),
     routing: routeReducer,

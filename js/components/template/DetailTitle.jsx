@@ -37,7 +37,7 @@ const DetailTitle = React.createClass({
                     </Col>
                 </Row>
             </Grid>
-            );
+        );
     }
 });
 
