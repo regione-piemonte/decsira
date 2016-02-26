@@ -63,6 +63,7 @@ const SiraQueryPanel = React.createClass({
         featureTypeName: React.PropTypes.string,
         siraActions: React.PropTypes.object,
         // QueryBuilder props
+        useMapProjection: React.PropTypes.bool,
         attributes: React.PropTypes.array,
         filterFields: React.PropTypes.array,
         groupLevels: React.PropTypes.number,
@@ -92,9 +93,10 @@ const SiraQueryPanel = React.createClass({
                 onExpandFilterPanel: () => {}
             },
             // QueryBuilder default props
+            useMapProjection: true,
+            attributes: [],
             groupLevels: 1,
             groupFields: [],
-            attributes: [],
             filterFields: [],
             spatialField: {},
             attributePanelExpanded: true,
@@ -171,6 +173,7 @@ const SiraQueryPanel = React.createClass({
                     <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
                         {this.renderDatasetHeader()}
                         <QueryBuilder
+                            useMapProjection={this.props.useMapProjection}
                             removeButtonIcon={this.props.removeButtonIcon}
                             groupLevels={this.props.groupLevels}
                             groupFields={this.props.groupFields}
@@ -241,7 +244,8 @@ module.exports = connect((state) => {
         spatialField: state.queryform.spatialField,
         showDetailsPanel: state.queryform.showDetailsPanel,
         attributePanelExpanded: state.queryform.attributePanelExpanded,
-        spatialPanelExpanded: state.queryform.spatialPanelExpanded
+        spatialPanelExpanded: state.queryform.spatialPanelExpanded,
+        useMapProjection: state.queryform.useMapProjection
     };
 }, dispatch => {
     return {
