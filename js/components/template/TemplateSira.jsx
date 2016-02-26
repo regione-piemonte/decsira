@@ -7,7 +7,7 @@
  */
 const React = require('react');
 // include application component
-const Template = require('../../../MapStore2/web/client/components/template/jsx/Template');
+const Template = require('../../../MapStore2/web/client/components/data/template/jsx/Template');
 // Template needs to import all component used in string definition.
 // The referene should be available in eval scope. Needs to disable eslint
 const renderSira = require("./index");
@@ -18,5 +18,3 @@ const TemplateSira = React.createClass({
     }
 });
 module.exports = TemplateSira;
-
-

@@ -10,7 +10,7 @@ const {connect} = require('react-redux');
 const {isObject} = require('lodash');
 
 // include application component
-const QueryBuilder = require('../../MapStore2/web/client/components/QueryForm/QueryBuilder');
+const QueryBuilder = require('../../MapStore2/web/client/components/data/query/QueryBuilder');
 const {Panel, Glyphicon, Modal} = require('react-bootstrap');
 
 const {bindActionCreators} = require('redux');

@@ -14,7 +14,7 @@ const Localized = require('../../MapStore2/web/client/components/I18N/Localized'
 const {Link} = require('react-router');
 
 const {Glyphicon} = require('react-bootstrap');
-const SearchBar = require('../../MapStore2/web/client/components/Search/SearchBar');
+const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
 const Home = (props) => (
     <Localized messages={props.messages} locale={props.locale}>
