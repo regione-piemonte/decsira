@@ -6,15 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {QUERYFORM_CONFIG_LOADED, EXPAND_FILTER_PANEL, QUERYFORM_CONFIG_LOAD_ERROR} = require('../actions/queryform');
+const {
+    QUERYFORM_CONFIG_LOADED,
+    EXPAND_FILTER_PANEL,
+    QUERYFORM_CONFIG_LOAD_ERROR} = require('../actions/queryform');
+
 const assign = require('object-assign');
 
 function queryformconfig(state = {filterPanelExpanded: true, attributes: [], loadingQueryFormConfigError: null}, action) {
     switch (action.type) {
         case QUERYFORM_CONFIG_LOADED: {
             return assign({}, state, {
-                attributes: action.config.fields,
-                featureTypeName: action.config.featureTypeName
+                attributes: [...state.attributes, action.field],
+                featureTypeName: action.ftName
             });
         }
         case EXPAND_FILTER_PANEL: {

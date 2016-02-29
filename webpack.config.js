@@ -88,6 +88,10 @@ module.exports = {
             path: new RegExp("/sira/services/queryformconfig(.*)"),
             host: "localhost",
             target: "http://localhost:8080"
+        }, {
+            path: new RegExp("/geoserver/ows(.*)"),
+            host: "localhost",
+            target: "http://sira.csi.geo-solutions.it"
         }]
     },
 
