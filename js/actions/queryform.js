@@ -93,5 +93,6 @@ module.exports = {
     loadQueryFormConfig,
     configureQueryForm,
     expandFilterPanel,
-    configureQueryFormError
+    configureQueryFormError,
+    getAttributeValues
 };

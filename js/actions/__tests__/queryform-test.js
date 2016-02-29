@@ -8,11 +8,12 @@
 
 const expect = require('expect');
 const {
-    // QUERYFORM_CONFIG_LOADED,
+    QUERYFORM_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
     loadQueryFormConfig,
-    expandFilterPanel
+    expandFilterPanel,
+    getAttributeValues
 } = require('../queryform');
 
 describe('Test correctness of the queryform actions', () => {
@@ -21,7 +22,7 @@ describe('Test correctness of the queryform actions', () => {
         loadQueryFormConfig('base/js/test-resources/testQueryFormConfig.json', '')((e) => {
             try {
                 expect(e).toExist();
-                expect(e.type).toBe(undefined);
+                expect(e).withArgs('ftName', 'field');
                 done();
             } catch(ex) {
                 done(ex);
@@ -29,8 +30,52 @@ describe('Test correctness of the queryform actions', () => {
         });
     });
 
-    it('loads an broken configuration file', (done) => {
+    it('loads an existing configuration file 2', (done) => {
+        const field = {
+            id: "Provincia",
+            type: "list",
+            valueService: "base/js/test-resources/testQueryFormFieldConfig.json",
+            idField: "sigla",
+            labelField: "toponimo"
+        };
+
+        const ftName = "aua";
+
+        getAttributeValues(ftName, field)((e) => {
+            try {
+                expect(e).toExist();
+                expect(e.type).toBe(QUERYFORM_CONFIG_LOADED);
+                done();
+            } catch(ex) {
+                done(ex);
+            }
+        });
+    });
+
+    it('loads an broken configuration file 1', (done) => {
         loadQueryFormConfig('base/js/test-resources/testQueryFormConfig.broken.json')((e) => {
+            try {
+                expect(e).toExist();
+                expect(e.type).toBe(QUERYFORM_CONFIG_LOAD_ERROR);
+                done();
+            } catch(ex) {
+                done(ex);
+            }
+        });
+    });
+
+    it('loads an broken configuration file 2', (done) => {
+        const field = {
+            id: "Provincia",
+            type: "list",
+            valueService: "base/js/test-resources/testQueryFormFieldConfig.broken.json",
+            idField: "sigla",
+            labelField: "toponimo"
+        };
+
+        const ftName = "aua";
+
+        getAttributeValues(ftName, field)((e) => {
             try {
                 expect(e).toExist();
                 expect(e.type).toBe(QUERYFORM_CONFIG_LOAD_ERROR);
