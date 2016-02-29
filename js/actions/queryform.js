@@ -11,11 +11,14 @@ const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 
+const assign = require('object-assign');
 
-function configureQueryForm(config) {
+
+function configureQueryForm(ftName, field) {
     return {
         type: QUERYFORM_CONFIG_LOADED,
-        config: config
+        ftName: ftName,
+        field: field
     };
 }
 
@@ -33,29 +36,43 @@ function configureQueryFormError(e) {
     };
 }
 
+function getAttributeValues(ftName, field) {
+    return (dispatch) => {
+        if (field.valueService) {
+            return axios.get(field.valueService).then((response) => {
+                if (typeof response.data === "object") {
+                    let values = [];
+                    for (let feature in response.data.features) {
+                        if (feature) {
+                            values.push(response.data.features[feature].properties);
+                        }
+                    }
+                    dispatch(configureQueryForm(ftName, assign({}, field, {values: values})));
+                } else {
+                    try {
+                        JSON.parse(response.data);
+                    } catch(e) {
+                        dispatch(configureQueryFormError('Configuration broken (' + field.valueService + '): ' + e.message));
+                    }
+                }
+            }).catch((e) => {
+                dispatch(configureQueryFormError(e));
+            });
+        }
+
+        dispatch(configureQueryForm(ftName, assign({}, field, {})));
+    };
+}
+
 function loadQueryFormConfig(configUrl, configName) {
     return (dispatch) => {
-        /*dispatch(configureQueryForm([
-                {
-                    id: "ListAttribute",
-                    type: "list",
-                    values: [
-                        "value1",
-                        "value2",
-                        "value3",
-                        "value4",
-                        "value5"
-                    ]
-                },
-                {
-                    id: "DateAttribute",
-                    type: "date"
-                }
-            ]
-        ));*/
         return axios.get(configUrl + configName).then((response) => {
             if (typeof response.data === "object") {
-                dispatch(configureQueryForm(response.data));
+                for (let field in response.data.fields) {
+                    if (field) {
+                        dispatch(getAttributeValues(response.data.featureTypeName, response.data.fields[field]));
+                    }
+                }
             } else {
                 try {
                     JSON.parse(response.data);

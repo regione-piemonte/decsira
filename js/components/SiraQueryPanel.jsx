@@ -15,8 +15,12 @@ const {Panel, Glyphicon, Modal} = require('react-bootstrap');
 
 const {bindActionCreators} = require('redux');
 
+const Draggable = require('react-draggable');
+
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+
+require('../../assets/css/sira.css');
 
 const {
     // QueryBuilder action functions
@@ -49,9 +53,6 @@ const {
 const SiraQueryPanel = React.createClass({
     propTypes: {
         // Sira Query Panel props
-        width: React.PropTypes.number,
-        height: React.PropTypes.number,
-        maxHeight: React.PropTypes.number,
         removeButtonIcon: React.PropTypes.string,
         filterPanelExpanded: React.PropTypes.bool,
         loadingQueryFormConfigError: React.PropTypes.oneOfType([
@@ -80,9 +81,6 @@ const SiraQueryPanel = React.createClass({
     getDefaultProps() {
         return {
             // Sira Query Panel default props
-            width: 850,
-            height: 750,
-            maxHeight: 750,
             removeButtonIcon: "glyphicon glyphicon-trash",
             filterPanelExpanded: true,
             loadingQueryFormConfigError: null,
@@ -129,7 +127,7 @@ const SiraQueryPanel = React.createClass({
     renderHeader() {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
 
-        return this.props.filterPanelExpanded ? (
+        const heading = this.props.filterPanelExpanded ? (
             <span>
                 <span>{header}</span>
                 <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
@@ -144,6 +142,12 @@ const SiraQueryPanel = React.createClass({
                 </button>
             </span>
         );
+
+        return (
+            <div className="handle_querypanel">
+                {heading}
+            </div>
+        );
     },
     renderDatasetHeader() {
         const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
@@ -155,22 +159,10 @@ const SiraQueryPanel = React.createClass({
         );
     },
     renderQueryPanel() {
-        const panelWidth = this.props.width;
-        const panelHeight = this.props.height;
-        const panelMaxHeight = this.props.maxHeight;
-
         return (
-            <div
-                id="querypanel"
-                style={{
-                    "position": "absolute",
-                    "top": "50px",
-                    "left": "670px",
-                    "height": panelHeight + "px",
-                    "width": panelWidth + 35 + "px",
-                    "maxHeight": panelMaxHeight + "px"}}>
-                <Panel collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
-                    <div style={{height: panelHeight + "px", width: panelWidth + "px", maxHeight: panelMaxHeight + "px", overflowX: "hidden", overflowY: "auto"}}>
+            <Draggable start={{x: 670, y: 50}} handle=".handle_querypanel">
+                <Panel className="querypanel-container" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
+                    <Panel className="querypanel">
                         {this.renderDatasetHeader()}
                         <QueryBuilder
                             useMapProjection={this.props.useMapProjection}
@@ -186,9 +178,9 @@ const SiraQueryPanel = React.createClass({
                             spatialPanelExpanded={this.props.spatialPanelExpanded}
                             attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
                             spatialFilterActions={this.props.queryFormActions.spatialFilterActions}/>
-                    </div>
+                    </Panel>
                 </Panel>
-            </div>
+            </Draggable>
         );
     },
     renderLoadConfigException() {
