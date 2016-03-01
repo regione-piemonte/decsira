@@ -1,14 +1,59 @@
 
+--DROP VIEW IF EXISTS sipra.v_aua;
+--CREATE VIEW sipra.v_aua AS
+--    SELECT
+--        s.codice_sira || '_' || ia.id_istanza || '_' || ia.id_attivita AS id_aua, -- single-column surrogate key
+--        ia.id_istanza || '_' || ia.id_attivita AS id_rifiuto, -- single-column surrogate FK
+--        s.codice_sira, ia.id_istanza, ia.id_attivita, g.geometria
+--    FROM
+--        sipra_dt_r_istanza_attivita ia
+--            LEFT OUTER JOIN sipra_r_istanza_sede s ON (s.id_istanza = ia.id_istanza)
+--            LEFT OUTER JOIN sipra_geo_pt_sede g ON (g.codice_sira = s.codice_sira);
+
 DROP VIEW IF EXISTS sipra.v_aua;
 CREATE VIEW sipra.v_aua AS
+    WITH istanza AS (
+        SELECT
+	       ia.id_istanza, ia.data_rilascio, ia.nr_provvedimento, ia.cf_soggetto,
+	       p.id_procedimento, p.des_procedimento, p.codice_bdc
+	    FROM
+	        sipra.sipra_t_istanza_autorizzativa ia
+	            INNER JOIN sipra.sipra_r_proc_attivita pa ON (ia.fk_proc_attivita = pa.id_proc_attivita)
+	            LEFT OUTER JOIN sipra.sipra_d_procedimento p ON (pa.fk_procedimento = p.id_procedimento)
+    ),
+    sede AS (
+	    SELECT
+	       s.codice_sira, s.istat_comune, s.flg_depuratore, g.geometria,
+	       c.toponimo as comune, c.sigla_provincia as provincia,
+	       rs.id_istanza
+	    FROM
+	        sipra.sipra_r_istanza_sede rs
+	            INNER JOIN sipra.sipra_t_sede s ON (rs.codice_sira = s.codice_sira)
+	            INNER JOIN sipra.sipra_t_comuni c ON (s.istat_comune = c.istat)
+	            LEFT OUTER JOIN sipra.sipra_geo_pt_sede g ON (s.codice_sira = g.codice_sira)
+    ),
+    rifiuto AS (
+	    SELECT
+	        r.id_istanza, r.id_attivita, r.capacita_max_stocc_mc, r.capacita_max_stocc_t, r.qta_tot_recupero
+	    FROM
+	        sipra.sipra_dt_t_rifiuto r
+    )
     SELECT
         s.codice_sira || '_' || ia.id_istanza || '_' || ia.id_attivita AS id_aua, -- single-column surrogate key
         ia.id_istanza || '_' || ia.id_attivita AS id_rifiuto, -- single-column surrogate FK
-        s.codice_sira, ia.id_istanza, ia.id_attivita, g.geometria
+        ia.id_istanza, ia.id_attivita, ia.nota_quadro_tecnico,
+        i.data_rilascio, i.nr_provvedimento, i.cf_soggetto, i.id_procedimento, i.des_procedimento, i.codice_bdc,
+        s.codice_sira, s.istat_comune, s.flg_depuratore, s.comune, s.provincia, s.geometria,
+        r.capacita_max_stocc_mc, r.capacita_max_stocc_t, r.qta_tot_recupero,
+        tr.id_tipo_richiesta, tr.des_tipo_richiesta, tr.flg_richiesta,
+        a.des_attivita
     FROM
         sipra_dt_r_istanza_attivita ia
-            LEFT OUTER JOIN sipra_r_istanza_sede s ON (s.id_istanza = ia.id_istanza)
-            LEFT OUTER JOIN sipra_geo_pt_sede g ON (g.codice_sira = s.codice_sira);
+            INNER JOIN istanza i ON (ia.id_istanza = i.id_istanza)
+            INNER JOIN sede s ON (ia.id_istanza = s.id_istanza)
+            INNER JOIN rifiuto r ON (ia.id_istanza = r.id_istanza AND ia.id_attivita = r.id_attivita)
+            INNER JOIN sipra.sipra_dt_d_tipo_richiesta tr ON (ia.fk_tipo_richiesta = tr.id_tipo_richiesta)
+            INNER JOIN sipra.sipra_d_attivita a ON (ia.id_attivita = a.id_attivita);
 
 DROP VIEW IF EXISTS sipra.v_sede;
 CREATE VIEW sipra.v_sede AS
