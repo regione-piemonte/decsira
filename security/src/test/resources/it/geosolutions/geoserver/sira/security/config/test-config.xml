@@ -1,0 +1,23 @@
+<Config>
+    <rules>
+        <Rule>
+            <priority>10</priority>
+            <roles>Profilo_A</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <accessMode>READ</accessMode>
+            <filter>"sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/@gml:id" = 'attivita.23'</filter>
+            <hiddenAttributes>
+                <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</attribute>
+            </hiddenAttributes>
+        </Rule>
+        <Rule>
+            <priority>15</priority>
+            <roles>Profilo_B</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <accessMode>WRITE</accessMode>
+            <filter>INCLUDE</filter>
+        </Rule>
+    </rules>
+</Config>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:AppSchemaDataAccess xmlns:ns2="http://www.opengis.net/ogc" xmlns:ns3="http://www.geotools.org/app-schema">
+    <namespaces>
+        <Namespace>
+            <prefix>sira</prefix>
+            <uri>http://www.regione.piemonte.it/ambiente/sira/1.0</uri>
+        </Namespace>
+        <Namespace>
+            <prefix>gml</prefix>
+            <uri>http://www.opengis.net/gml/3.2</uri>
+        </Namespace>
+    </namespaces>
+    <sourceDataStores>
+        <DataStore>
+            <id>sira</id>
+            <parameters>
+                <Parameter>
+                    <name>directory</name>
+                    <!-- path can be relative to this file if starts with "file: -->
+                    <value>file:./</value>
+                </Parameter>
+            </parameters>
+        </DataStore>
+    </sourceDataStores>
+    <catalog>sira-catalog.xml</catalog>
+    <targetTypes>
+        <FeatureType>
+            <schemaUri>http://www.regione.piemonte.it/ambiente/sira/1.0/sipra.xsd</schemaUri>
+        </FeatureType>
+    </targetTypes>
+    <typeMappings>
+        <FeatureTypeMapping>
+            <sourceDataStore>sira</sourceDataStore>
+            <sourceType>aua</sourceType>
+            <targetElement>sira:AutorizzazioneUnicaAmbientale</targetElement>
+            <attributeMappings>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
+                        <linkElement>sira:IstanzaAutorizzativa</linkElement>
+                        <linkField>FEATURE_LINK[1]</linkField>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:geometria</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>geometria</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:AutorizzazioneUnicaAmbientale</targetAttribute>
+                    <idExpression>
+                        <OCQL>strConcat('aua.', id_aua)</OCQL>
+                    </idExpression>
+                </AttributeMapping>
+            </attributeMappings>
+        </FeatureTypeMapping>
+    </typeMappings>
+</ns3:AppSchemaDataAccess>

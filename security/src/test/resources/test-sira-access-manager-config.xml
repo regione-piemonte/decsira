@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+    <rules>
+        <Rule>
+            <roles>Profilo_A</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <accessMode>READ</accessMode>
+            <filter>"sira:istanza/sira:IstanzaAutorizzativa/sira:tipoRichiesta/sira:TipoRichiesta/@gml:id" = 'tipo_richiesta.2'</filter>
+            <hiddenAttributes>
+                <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio</attribute>
+            </hiddenAttributes>
+        </Rule>
+        <Rule>
+            <roles>Profilo_B</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <accessMode>READ</accessMode>
+            <filter>INCLUDE</filter>
+        </Rule>
+    </rules>
+</Config>
