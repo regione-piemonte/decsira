@@ -1,0 +1,14 @@
+<wfs:GetFeature service="WFS" version="2.0.0"
+    xmlns:wfs="http://www.opengis.net/wfs/2.0"
+    xmlns:fes="http://www.opengis.net/fes/2.0"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:sira="http://www.regione.piemonte.it/ambiente/sira/1.0">
+    <wfs:Query typeNames="sira:AutorizzazioneUnicaAmbientale">
+        <fes:Filter>
+            <fes:PropertyIsEqualTo>
+                <fes:ValueReference>sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:operazioneRecupero/sira:OperazioneRecupero/@gml:id</fes:ValueReference>
+                <fes:Literal>operaz_rec.9</fes:Literal> <!-- Rigenerazione o altri reimpieghi degli oli -->
+            </fes:PropertyIsEqualTo>
+        </fes:Filter>
+    </wfs:Query>
+</wfs:GetFeature>
