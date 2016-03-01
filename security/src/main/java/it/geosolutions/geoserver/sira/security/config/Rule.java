@@ -150,6 +150,9 @@ public class Rule implements Comparable<Rule> {
         if (catalogMode == null) {
             catalogMode = CatalogMode.HIDE;
         }
+        if (filter == null) {
+            filter = "INCLUDE";
+        }
 
         return this;
     }

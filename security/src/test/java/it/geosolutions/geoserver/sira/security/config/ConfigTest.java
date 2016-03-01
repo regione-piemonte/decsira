@@ -137,7 +137,7 @@ public class ConfigTest {
         assertEquals("cite", r.workspace);
         assertEquals("buildings", r.layer);
         assertEquals(AccessMode.READ, r.accessMode);
-        assertNull(r.filter);
+        assertEquals("INCLUDE", r.filter);
         assertEquals(CatalogMode.HIDE, r.catalogMode);
         assertTrue(r.hiddenAttributes != null);
         assertEquals(0, r.hiddenAttributes.size());
@@ -203,7 +203,7 @@ public class ConfigTest {
         assertEquals(CiteTestData.CITE_PREFIX, matchingRule.workspace);
         assertEquals(Rule.ANY, matchingRule.layer);
         assertEquals(AccessMode.READ, matchingRule.accessMode);
-        assertNull(matchingRule.filter);
+        assertEquals("INCLUDE", matchingRule.filter);
 
         // second rule with priority 15 should match, since user was not granted role A
         matchingRule = config.findFirstMatchingRuleForResource(userB, buildings);
