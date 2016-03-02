@@ -43,7 +43,9 @@ const Section = React.createClass({
     render() {
         return (
             <Panel collapsible header={this.renderHeader()} expanded={this.isActive()}>
-                {this.props.children}
+                <div className="template">
+                    {this.props.children}
+                </div>
             </Panel>
         );
     },

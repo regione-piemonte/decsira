@@ -22,7 +22,7 @@ describe('Test correctness of the card template actions', () => {
         loadCardTemplate('base/js/test-resources/template-test.config', '')((e) => {
             try {
                 expect(e).toExist();
-                expect(e).withArgs('ftName', 'field');
+                expect(e).withArgs('template', 'wfsUrl');
                 done();
             } catch(ex) {
                 done(ex);
