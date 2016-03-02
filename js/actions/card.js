@@ -7,6 +7,8 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 
+const TemplateUtils = require('../utils/TemplateUtils');
+
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const CARD_TEMPLATE_TOOGLE = 'CARD_TEMPLATE_TOOGLE';
@@ -19,10 +21,11 @@ function toggleCard(state) {
     };
 }
 
-function configureCard(config) {
+function configureCard(template, model) {
     return {
         type: CARD_TEMPLATE_LOADED,
-        config: config
+        template: template,
+        model: model
     };
 }
 
@@ -41,14 +44,84 @@ function selectSection(section, active) {
     };
 }
 
-function loadCardTemplate(configUrl, configName) {
+function loadCardModel(template, wfsUrl) {
+    return (dispatch) => {
+        return axios.get(wfsUrl).then((response) => {
+            let modelConfig = [
+                {
+                    field: "id",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()'],
+                    type: TemplateUtils.NUMBER_TYPE
+                },
+                {
+                    field: "codicesira",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()'],
+                    type: TemplateUtils.NUMBER_TYPE
+                },
+                {
+                    field: "comune",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:comune/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "provincia",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:provincia/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "tipo",
+                    xpath: [
+                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione/text()',
+                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/sira:descrizione/text()'
+                    ],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "numauth",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "dataauth",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "tipoimpianto",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:impianto/sira:TipoImpianto/sira:descrizione/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "quantita",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero/text()'],
+                    type: TemplateUtils.NUMBER_TYPE
+                },
+                {
+                    field: "numscheda",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:nrScheda/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    field: "tiporecupero",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()'],
+                    type: TemplateUtils.STRING_TYPE
+                }
+            ];
+
+            let model = TemplateUtils.getModel(response.data, modelConfig);
+
+            dispatch(configureCard(template, model));
+        }).catch((e) => {
+            dispatch(configureCardError(e));
+        });
+    };
+}
+
+function loadCardTemplate(configUrl, configName, wfsUrl) {
     return (dispatch) => {
         return axios.get(configUrl + configName).then((response) => {
-            if (typeof response.data === "object") {
-                dispatch(configureCard(response.data));
-            } else {
-                dispatch(configureCard(response.data));
-            }
+            let template = response.data;
+            dispatch(loadCardModel(template, wfsUrl));
         }).catch((e) => {
             dispatch(configureCardError(e));
         });
@@ -61,8 +134,8 @@ module.exports = {
     CARD_TEMPLATE_TOOGLE,
     SELECT_SECTION,
     loadCardTemplate,
+    loadCardModel,
     toggleCard,
     configureCardError,
     selectSection
-
 };

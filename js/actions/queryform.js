@@ -40,21 +40,22 @@ function getAttributeValues(ftName, field) {
     return (dispatch) => {
         if (field.valueService) {
             return axios.get(field.valueService).then((response) => {
-                if (typeof response.data === "object") {
-                    let values = [];
-                    for (let feature in response.data.features) {
-                        if (feature) {
-                            values.push(response.data.features[feature].properties);
-                        }
-                    }
-                    dispatch(configureQueryForm(ftName, assign({}, field, {values: values})));
-                } else {
+                let config = response.data;
+                if (typeof config !== "object") {
                     try {
-                        JSON.parse(response.data);
+                        config = JSON.parse(config);
                     } catch(e) {
                         dispatch(configureQueryFormError('Configuration broken (' + field.valueService + '): ' + e.message));
                     }
                 }
+
+                let values = [];
+                for (let feature in config.features) {
+                    if (feature) {
+                        values.push(config.features[feature].properties);
+                    }
+                }
+                dispatch(configureQueryForm(ftName, assign({}, field, {values: values})));
             }).catch((e) => {
                 dispatch(configureQueryFormError(e));
             });
@@ -67,17 +68,18 @@ function getAttributeValues(ftName, field) {
 function loadQueryFormConfig(configUrl, configName) {
     return (dispatch) => {
         return axios.get(configUrl + configName).then((response) => {
-            if (typeof response.data === "object") {
-                for (let field in response.data.fields) {
-                    if (field) {
-                        dispatch(getAttributeValues(response.data.featureTypeName, response.data.fields[field]));
-                    }
-                }
-            } else {
+            let config = response.data;
+            if (typeof config !== "object") {
                 try {
-                    JSON.parse(response.data);
+                    config = JSON.parse(config);
                 } catch(e) {
                     dispatch(configureQueryFormError('Configuration file broken (' + configUrl + "/" + configName + '): ' + e.message));
+                }
+            }
+
+            for (let field in config.fields) {
+                if (field) {
+                    dispatch(getAttributeValues(config.featureTypeName, config.fields[field]));
                 }
             }
         }).catch((e) => {

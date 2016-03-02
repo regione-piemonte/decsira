@@ -6,6 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
+
+if (!global.Intl) {
+    global.Intl = require('intl');
+}
+
 const ReactDOM = require('react-dom');
 
 const {Provider} = require('react-redux');
@@ -43,7 +48,13 @@ function startApp() {
             store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));
 
             // load the card template
-            store.dispatch(loadCardTemplate("assets/", "cardTemplate.config"));
+            store.dispatch(
+                loadCardTemplate(
+                    "assets/",
+                    "cardTemplate.config",
+                    "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&FEATUREID=aua.12336_66_22"
+                )
+            );
         });
 
     ReactDOM.render(
@@ -59,7 +70,6 @@ function startApp() {
 
 if (!global.Intl) {
     require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        global.Intl = require('intl');
         require('intl/locale-data/jsonp/en.js');
         require('intl/locale-data/jsonp/it.js');
         startApp();

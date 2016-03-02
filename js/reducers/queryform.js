@@ -9,7 +9,8 @@
 const {
     QUERYFORM_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
-    QUERYFORM_CONFIG_LOAD_ERROR} = require('../actions/queryform');
+    QUERYFORM_CONFIG_LOAD_ERROR
+} = require('../actions/queryform');
 
 const assign = require('object-assign');
 
