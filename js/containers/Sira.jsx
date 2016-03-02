@@ -15,36 +15,53 @@ const SiraQueryPanel = require('../components/SiraQueryPanel');
 const Card = require('../components/template/Card');
 const {Link} = require('react-router');
 
-const Sira = (props) => (
-    <Localized messages={props.messages} locale={props.locale}>
-        <div>
-            <span className={props.error && 'error' || !props.loading && 'hidden' || ''}>
-                {props.error && ("Error: " + props.error) || (props.loading && "Loading...")}
-            </span>
+const Sira = React.createClass({
+    propTypes: {
+        params: React.PropTypes.shape({
+            profile: React.PropTypes.string
+        }),
+        error: React.PropTypes.object,
+        loading: React.PropTypes.bool,
+        messages: React.PropTypes.object,
+        locale: React.PropTypes.string,
+        cardModel: React.PropTypes.object,
+        nsResolver: React.PropTypes.func
+    },
+    getDefaultProps() {
+        return {};
+    },
+    render() {
+        let card = this.props.cardModel ? (
+            <Card model={this.props.cardModel}/>
+        ) : (
+            <span/>
+        );
 
-            <div className="links"><Link to="/">Home</Link></div>
-            <div className="info">Profile: {props.params.profile}</div>
-            <SiraMap/>
-            <SiraQueryPanel/>
-            <Card model={{id: 10, codicesira: "12345", comune: "Torino", provincia: "Torino", tipo: "Provvedimento"}}/>
-            <Debug/>
-        </div>
-    </Localized>
-);
+        return (
+            <Localized messages={this.props.messages} locale={this.props.locale}>
+                <div>
+                    <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
+                        {this.props.error && ("Error: " + this.props.error) || (this.props.loading && "Loading...")}
+                    </span>
 
-Sira.propTypes = {
-    params: React.PropTypes.shape({
-        profile: React.PropTypes.string
-    }),
-    messages: React.PropTypes.object,
-    locale: React.PropTypes.string
-};
+                    <div className="links"><Link to="/">Home</Link></div>
+                    <div className="info">Profile: {this.props.params.profile}</div>
+                    <SiraMap/>
+                    <SiraQueryPanel/>
+                    {card}
+                    <Debug/>
+                </div>
+            </Localized>
+        );
+    }
+});
 
 module.exports = connect((state) => {
     return {
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         locale: state.locale && state.locale.locale,
-        messages: state.locale && state.locale.messages || {}
+        messages: state.locale && state.locale.messages || {},
+        cardModel: state.cardtemplate.model
     };
 })(Sira);

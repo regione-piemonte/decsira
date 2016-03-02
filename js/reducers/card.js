@@ -9,11 +9,18 @@
 const {CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_TOOGLE, SELECT_SECTION} = require('../actions/card');
 const assign = require('object-assign');
 
-function cardtemplate(state = {show: true}, action) {
+const initialState = {
+    show: true,
+    template: null,
+    model: null
+};
+
+function cardtemplate(state = initialState, action) {
     switch (action.type) {
         case CARD_TEMPLATE_LOADED: {
             return assign({}, state, {
-                template: action.config
+                template: action.template,
+                model: action.model
             });
         }
         case CARD_TEMPLATE_LOAD_ERROR: {

@@ -12,6 +12,7 @@ const {
     CARD_TEMPLATE_LOAD_ERROR,
     CARD_TEMPLATE_TOOGLE,
     loadCardTemplate,
+    loadCardModel,
     toggleCard
 } = require('../card');
 
@@ -21,15 +22,18 @@ describe('Test correctness of the card template actions', () => {
         loadCardTemplate('base/js/test-resources/template-test.config', '')((e) => {
             try {
                 expect(e).toExist();
-                expect(e.type).toBe(CARD_TEMPLATE_LOADED);
+                expect(e).withArgs('ftName', 'field');
                 done();
             } catch(ex) {
                 done(ex);
             }
         });
     });
-    it('loads an existing template file json', (done) => {
-        loadCardTemplate('base/js/test-resources/testQueryFormConfig.json', '')((e) => {
+
+    it('loads an existing template file 2', (done) => {
+        const template = "<Panel header={(<DetailTitle title='Autorizzazione Unica Ambientale (AUA ) - Recupero rifiuti' subtitle='Codice SIRA  impianto=' id={model.id}/>)}>Scheda</Panel>";
+
+        loadCardModel(template, 'base/js/test-resources/testWFSModel.xml')((e) => {
             try {
                 expect(e).toExist();
                 expect(e.type).toBe(CARD_TEMPLATE_LOADED);

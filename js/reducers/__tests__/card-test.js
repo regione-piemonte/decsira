@@ -53,10 +53,12 @@ describe('Test the card template reducer', () => {
     it('Card Template loaded', () => {
         let testAction = {
             type: CARD_TEMPLATE_LOADED,
-            config: "Test Template"
+            template: "Test Template",
+            model: "Test Model"
         };
         let state = cardtemplate(null, testAction);
         expect(state).toExist();
         expect(state.template).toBe("Test Template");
+        expect(state.model).toBe("Test Model");
     });
 });

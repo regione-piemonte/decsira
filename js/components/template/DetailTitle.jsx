@@ -10,6 +10,7 @@ const {Grid, Row, Col} = require('react-bootstrap');
 const {toggleCard} = require('../../actions/card');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
+
 const DetailTitle = React.createClass({
     propTypes: {
         title: React.PropTypes.string,
@@ -43,5 +44,4 @@ const DetailTitle = React.createClass({
 
 module.exports = connect(null, dispatch => {
     return bindActionCreators({toggleCard: toggleCard}, dispatch);
-
 })(DetailTitle);
