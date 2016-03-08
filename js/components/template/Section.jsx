@@ -43,9 +43,7 @@ const Section = React.createClass({
     render() {
         return (
             <Panel collapsible header={this.renderHeader()} expanded={this.isActive()}>
-                <div className="template">
-                    {this.props.children}
-                </div>
+                {this.props.children}
             </Panel>
         );
     },
@@ -56,7 +54,7 @@ const Section = React.createClass({
 
 module.exports = connect((state) => {
     return {
-            activeSections: state.cardtemplate.activeSections || {}
+        activeSections: state.cardtemplate.activeSections || {}
     };
 }, dispatch => {
     return bindActionCreators({selectSection: selectSection}, dispatch);
