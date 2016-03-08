@@ -37,7 +37,9 @@ const {
     selectSpatialMethod,
     selectSpatialOperation,
     removeSpatialSelection,
-    showSpatialSelectionDetails
+    showSpatialSelectionDetails,
+    query,
+    reset
 } = require('../../MapStore2/web/client/actions/queryform');
 
 const {
@@ -71,6 +73,8 @@ const SiraQueryPanel = React.createClass({
         groupFields: React.PropTypes.array,
         spatialField: React.PropTypes.object,
         showDetailsPanel: React.PropTypes.bool,
+        toolbarEnabled: React.PropTypes.bool,
+        searchUrl: React.PropTypes.string,
         attributePanelExpanded: React.PropTypes.bool,
         spatialPanelExpanded: React.PropTypes.bool,
         queryFormActions: React.PropTypes.object
@@ -100,6 +104,8 @@ const SiraQueryPanel = React.createClass({
             attributePanelExpanded: true,
             spatialPanelExpanded: true,
             showDetailsPanel: false,
+            toolbarEnabled: true,
+            searchUrl: "",
             queryFormActions: {
                 attributeFilterActions: {
                     onAddGroupField: () => {},
@@ -120,6 +126,11 @@ const SiraQueryPanel = React.createClass({
                     onRemoveSpatialSelection: () => {},
                     onShowSpatialSelectionDetails: () => {},
                     onEndDrawing: () => {}
+                },
+                queryToolbarActions: {
+                    onQuery: () => {},
+                    onReset: () => {},
+                    onChangeDrawingStatus: () => {}
                 }
             }
         };
@@ -160,25 +171,25 @@ const SiraQueryPanel = React.createClass({
     },
     renderQueryPanel() {
         return (
-            <Draggable start={{x: 670, y: 50}} handle=".handle_querypanel">
+            <Draggable start={{x: 670, y: 15}} handle=".handle_querypanel">
                 <Panel className="querypanel-container" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
-                    <Panel className="querypanel">
-                        {this.renderDatasetHeader()}
-                        <QueryBuilder
-                            useMapProjection={this.props.useMapProjection}
-                            removeButtonIcon={this.props.removeButtonIcon}
-                            groupLevels={this.props.groupLevels}
-                            groupFields={this.props.groupFields}
-                            filterFields={this.props.filterFields}
-                            spatialField={this.props.spatialField}
-                            attributes={this.props.attributes}
-                            showDetailsPanel={this.props.showDetailsPanel}
-                            actions={this.props.queryFormActions}
-                            attributePanelExpanded={this.props.attributePanelExpanded}
-                            spatialPanelExpanded={this.props.spatialPanelExpanded}
-                            attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
-                            spatialFilterActions={this.props.queryFormActions.spatialFilterActions}/>
-                    </Panel>
+                    {this.renderDatasetHeader()}
+                    <QueryBuilder
+                        useMapProjection={this.props.useMapProjection}
+                        removeButtonIcon={this.props.removeButtonIcon}
+                        groupLevels={this.props.groupLevels}
+                        groupFields={this.props.groupFields}
+                        filterFields={this.props.filterFields}
+                        spatialField={this.props.spatialField}
+                        attributes={this.props.attributes}
+                        showDetailsPanel={this.props.showDetailsPanel}
+                        toolbarEnabled={this.props.toolbarEnabled}
+                        searchUrl={this.props.searchUrl}
+                        attributePanelExpanded={this.props.attributePanelExpanded}
+                        spatialPanelExpanded={this.props.spatialPanelExpanded}
+                        attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
+                        spatialFilterActions={this.props.queryFormActions.spatialFilterActions}
+                        queryToolbarActions={this.props.queryFormActions.queryToolbarActions}/>
                 </Panel>
             </Draggable>
         );
@@ -235,9 +246,11 @@ module.exports = connect((state) => {
         attributes: state.queryformconfig.attributes,
         spatialField: state.queryform.spatialField,
         showDetailsPanel: state.queryform.showDetailsPanel,
+        toolbarEnabled: state.queryform.toolbarEnabled,
         attributePanelExpanded: state.queryform.attributePanelExpanded,
         spatialPanelExpanded: state.queryform.spatialPanelExpanded,
-        useMapProjection: state.queryform.useMapProjection
+        useMapProjection: state.queryform.useMapProjection,
+        searchUrl: state.queryform.searchUrl
     };
 }, dispatch => {
     return {
@@ -266,6 +279,11 @@ module.exports = connect((state) => {
                 onRemoveSpatialSelection: removeSpatialSelection,
                 onShowSpatialSelectionDetails: showSpatialSelectionDetails,
                 onEndDrawing: endDrawing
+            }, dispatch),
+            queryToolbarActions: bindActionCreators({
+                onQuery: query,
+                onReset: reset,
+                onChangeDrawingStatus: changeDrawingStatus
             }, dispatch)
         }
     };
