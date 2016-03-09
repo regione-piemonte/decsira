@@ -31,6 +31,7 @@ const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
 const {loadQueryFormConfig} = require('./actions/queryform');
 const {loadCardTemplate} = require('./actions/card');
+const {loadGridModel} = require('./actions/grid');
 
 function startApp() {
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
@@ -42,7 +43,7 @@ function startApp() {
             store.dispatch(loadMapConfig(configUrl, legacy));
 
             let locale = LocaleUtils.getUserLocale();
-            store.dispatch(loadLocale('MapStore2/web/client/translations', locale));
+            store.dispatch(loadLocale('translations', locale));
 
             // load the queryform configuration
             store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));
@@ -52,7 +53,16 @@ function startApp() {
                 loadCardTemplate(
                     "assets/",
                     "cardTemplate.config",
-                    "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&FEATUREID=aua.12336_66_22"
+                    "assets/features.xml",
+                    "aua.12336_66_22"
+                    // "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&FEATUREID=aua.12336_66_22"
+                )
+            );
+            // load the grid data
+            store.dispatch(
+                loadGridModel(
+                    // "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&maxFeatures=20"
+                    "assets/features.xml"
                 )
             );
         });

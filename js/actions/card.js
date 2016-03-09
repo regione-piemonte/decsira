@@ -44,66 +44,70 @@ function selectSection(section, active) {
     };
 }
 
-function loadCardModel(template, wfsUrl) {
+function loadCardModel(template, wfsUrl, id) {
     return (dispatch) => {
         return axios.get(wfsUrl).then((response) => {
+            let extra = '';
+            if (id) {
+                extra = '[@gml:id=\'' + id + '\']';
+            }
             let modelConfig = [
                 {
                     field: "id",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:codiceSira/text()'],
                     type: TemplateUtils.NUMBER_TYPE
                 },
                 {
                     field: "codicesira",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:codiceSira/text()'],
                     type: TemplateUtils.NUMBER_TYPE
                 },
                 {
                     field: "comune",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:comune/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:comune/text()'],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "provincia",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:provincia/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:provincia/text()'],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "tipo",
                     xpath: [
-                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione/text()',
-                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/sira:descrizione/text()'
+                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione/text()',
+                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/sira:descrizione/text()'
                     ],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "numauth",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()'],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "dataauth",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()'],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "tipoimpianto",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:impianto/sira:TipoImpianto/sira:descrizione/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:impianto/sira:TipoImpianto/sira:descrizione/text()'],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "quantita",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero/text()'],
                     type: TemplateUtils.NUMBER_TYPE
                 },
                 {
                     field: "numscheda",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:nrScheda/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:nrScheda/text()'],
                     type: TemplateUtils.STRING_TYPE
                 },
                 {
                     field: "tiporecupero",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()'],
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()'],
                     type: TemplateUtils.STRING_TYPE
                 }
             ];
@@ -117,11 +121,11 @@ function loadCardModel(template, wfsUrl) {
     };
 }
 
-function loadCardTemplate(configUrl, configName, wfsUrl) {
+function loadCardTemplate(configUrl, configName, wfsUrl, id) {
     return (dispatch) => {
         return axios.get(configUrl + configName).then((response) => {
             let template = response.data;
-            dispatch(loadCardModel(template, wfsUrl));
+            dispatch(loadCardModel(template, wfsUrl, id));
         }).catch((e) => {
             dispatch(configureCardError(e));
         });

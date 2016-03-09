@@ -3,7 +3,7 @@
     "projection": "EPSG:900913",
     "units": "m",
     "center": {"x": 1250000.000000, "y": 5370000.000000, "crs": "EPSG:900913"},
-    "zoom":5,
+    "zoom":7,
     "maxExtent": [
       -20037508.34, -20037508.34,
       20037508.34, 20037508.34
@@ -15,6 +15,16 @@
             "source": "osm",
       "group": "background",
             "visibility": true
-        }]
+        },
+        {
+  				"type": "wms",
+          "url":"http://sira.csi.geo-solutions.it/geoserver/wms",
+          "visibility": false,
+  				"title": "AUA",
+  				"name": "sira:AutorizzazioneUnicaAmbientale",
+  				"group": "Overlays",
+  				"format": "image/png",
+          "visibility": true
+  			}]
   }
 }

@@ -29,19 +29,29 @@ const TemplateUtils = {
 
         switch (type) {
             case 1 /*NUMBER_TYPE*/: {
-                return parseFloat(result.nodeValue);
+                return parseFloat(result && result.nodeValue || '0');
             }
             case 2 /*STRING_TYPE*/: {
-                return result.nodeValue;
+                return result && result.nodeValue || '';
             }
             case 3 /*BOOLEAN_TYPE*/: {
-                return result.nodeValue === "true";
+                return result && result.nodeValue === "true" || false;
             }
             default: return result;
         }
     },
-    getModel(data, config) {
+    getModels(data, root, config) {
         let doc = new Dom().parseFromString(data);
+
+        let select = XPath.useNamespaces(this.nsResolver());
+
+        let rows = select(root, doc);
+        return rows.map((row) => {
+            return this.getModel(data, config, row);
+        });
+    },
+    getModel(data, config, el) {
+        let doc = el || new Dom().parseFromString(data);
 
         let model = {};
         for (let element in config) {
@@ -49,7 +59,10 @@ const TemplateUtils = {
                 let value = "";
                 for (let i = 0; i < config[element].xpath.length; i++) {
                     if (config[element].type === this.STRING_TYPE) {
-                        value += " " + this.getElementValue(doc, config[element].xpath[i], config[element].type);
+                        if (i > 0) {
+                            value += " ";
+                        }
+                        value += this.getElementValue(doc, config[element].xpath[i], config[element].type);
                     } else {
                         value = this.getElementValue(doc, config[element].xpath[i], config[element].type);
                     }

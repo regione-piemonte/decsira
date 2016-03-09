@@ -10,7 +10,7 @@ const {CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_TOOGLE, SEL
 const assign = require('object-assign');
 
 const initialState = {
-    show: true,
+    show: false,
     template: null,
     model: null
 };
