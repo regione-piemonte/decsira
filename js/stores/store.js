@@ -17,10 +17,12 @@ const rootReducer = combineReducers({
     locale: require('../../MapStore2/web/client/reducers/locale'),
     map: require('../../MapStore2/web/client/reducers/map'),
     draw: require('../../MapStore2/web/client/reducers/draw'),
+    controls: require('../reducers/controls'),
     queryform: require('../../MapStore2/web/client/reducers/queryform'),
     queryformconfig: require('../reducers/queryform'),
     routing: routeReducer,
-    cardtemplate: require('../reducers/card')
+    cardtemplate: require('../reducers/card'),
+    grid: require('../reducers/grid')
 });
 
 const store = DebugUtils.createDebugStore(rootReducer, {}, [reduxRouterMiddleware]);

@@ -12,8 +12,11 @@ const {connect} = require('react-redux');
 
 const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
+const SiraFeatureGrid = require('../components/SiraFeatureGrid');
 const Card = require('../components/template/Card');
 const {Link} = require('react-router');
+
+const {toggleControl} = require('../actions/controls');
 
 const Sira = React.createClass({
     propTypes: {
@@ -25,7 +28,9 @@ const Sira = React.createClass({
         messages: React.PropTypes.object,
         locale: React.PropTypes.string,
         cardModel: React.PropTypes.object,
-        nsResolver: React.PropTypes.func
+        nsResolver: React.PropTypes.func,
+        controls: React.PropTypes.object,
+        toggleControl: React.PropTypes.func
     },
     getDefaultProps() {
         return {};
@@ -45,14 +50,27 @@ const Sira = React.createClass({
                     </span>
 
                     <div className="links"><Link to="/">Home</Link></div>
+                    <div className="toolbar">
+                        <div className={"toolbar-item" + (this.props.controls.grid ? " open" : "")}><a href="#" onClick={this.toggleGrid}>Lista</a></div>
+                        <div className={"toolbar-item" + (this.props.controls.detail ? " open" : "")}><a href="#" onClick={this.toggleDetail}>Scheda</a></div>
+                    </div>
                     <div className="info">Profile: {this.props.params.profile}</div>
                     <SiraMap/>
                     <SiraQueryPanel/>
+                    <SiraFeatureGrid/>
                     {card}
                     <Debug/>
                 </div>
             </Localized>
         );
+    },
+    toggleGrid(evt) {
+        evt.preventDefault();
+        this.props.toggleControl('grid');
+    },
+    toggleDetail(evt) {
+        evt.preventDefault();
+        this.props.toggleControl('detail');
     }
 });
 
@@ -62,6 +80,9 @@ module.exports = connect((state) => {
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         locale: state.locale && state.locale.locale,
         messages: state.locale && state.locale.messages || {},
-        cardModel: state.cardtemplate.model
+        cardModel: state.cardtemplate.model,
+        controls: state.controls
     };
+}, {
+    toggleControl
 })(Sira);
