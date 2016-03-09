@@ -4,6 +4,7 @@ const React = require('react');
 const DetailTitle = require("./DetailTitle");
 const Section = require("./Section");
 const LabeledField = require("./LabeledField");
+const TipoRifiuti = require("./TipoRifiuti");
 
 const renderSira = function(comp, model) {
         return eval(comp);
