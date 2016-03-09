@@ -13,7 +13,7 @@ const Draggable = require('react-draggable');
 
 const {Panel, Grid, Row, Col} = require('react-bootstrap');
 const FeatureGrid = require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid');
-
+const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 
 const {reactCellRendererFactory} = require('ag-grid-react');
@@ -32,7 +32,8 @@ const SiraFeatureGrid = React.createClass({
         map: React.PropTypes.object,
         onDetail: React.PropTypes.func,
         onShowDetail: React.PropTypes.func,
-        toggleControl: React.PropTypes.func
+        toggleControl: React.PropTypes.func,
+        changeMapView: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -46,7 +47,8 @@ const SiraFeatureGrid = React.createClass({
             features: [],
             onDetail: () => {},
             onShowDetail: () => {},
-            toggleControl: () => {}
+            toggleControl: () => {},
+            changeMapView: () => {}
         };
     },
     renderHeader() {
@@ -98,7 +100,7 @@ const SiraFeatureGrid = React.createClass({
             return (
                 <Draggable start={{x: 20, y: 50}} handle=".panel-heading">
                     <Panel className="featuregrid-container" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
-                        <FeatureGrid map={this.props.map} columnDefs={columns} features={this.props.features} style={{height: "300px", width: "100%"}}/>
+                        <FeatureGrid changeMapView={this.props.changeMapView} srs="EPSG:4326" map={this.props.map} columnDefs={columns} features={this.props.features} style={{height: "300px", width: "100%"}}/>
                     </Panel>
                 </Draggable>
             );
@@ -127,5 +129,6 @@ module.exports = connect((state) => ({
 }), {
     onDetail: loadCardTemplate,
     onShowDetail: toggleControl.bind(null, 'detail'),
-    toggleControl: toggleControl.bind(null, 'grid')
+    toggleControl: toggleControl.bind(null, 'grid'),
+    changeMapView: changeMapView
 })(SiraFeatureGrid);

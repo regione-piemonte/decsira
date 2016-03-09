@@ -7,11 +7,6 @@
  */
 
 const React = require('react');
-const {isObject} = require('lodash');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
-const FeatureGrid = require('../../../MapStore2/web/client/components/data/featuregrid/FeatureGrid');
-const agGrid = require('ag-grid');
 const {AgGridReact} = require('ag-grid-react');
 require("ag-grid/dist/styles/ag-grid.css");
 require("ag-grid/dist/styles/theme-fresh.css");
