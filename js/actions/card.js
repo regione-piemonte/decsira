@@ -109,7 +109,23 @@ function loadCardModel(template, wfsUrl, id) {
                     field: "tiporecupero",
                     xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()'],
                     type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    type: TemplateUtils.OBJECT_TYPE,
+                    field: "tiporifiuto",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio'],
+                    fields: [{
+                        field: "codice",
+                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:codice/text()'],
+                        type: TemplateUtils.STRING_TYPE
+                    },
+                    {
+                        field: "descrizione",
+                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:descrizione/text()'],
+                        type: TemplateUtils.STRING_TYPE
+                    }]
                 }
+
             ];
 
             let model = TemplateUtils.getModel(response.data, modelConfig);

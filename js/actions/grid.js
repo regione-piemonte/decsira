@@ -56,7 +56,13 @@ function loadGridModel(wfsUrl) {
                         'sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/sira:descrizione/text()'
                     ],
                     type: TemplateUtils.STRING_TYPE
+                },
+                {
+                    type: TemplateUtils.GEOMETRY_TYPE,
+                    field: "geometry",
+                    xpath: ['sira:geometria/text()']
                 }
+
             ];
 
             let model = TemplateUtils.getModels(response.data, '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale', modelConfig);

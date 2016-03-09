@@ -8,11 +8,14 @@
 
 const XPath = require('xpath');
 const Dom = require('xmldom').DOMParser;
-
+const parse = require('wellknown');
 const TemplateUtils = {
     NUMBER_TYPE: 1,
     STRING_TYPE: 2,
     BOOLEAN_TYPE: 3,
+    OBJECT_TYPE: 4,
+    ARRAY_TYPE: 5,
+    GEOMETRY_TYPE: 6,
 
     nsResolver() {
         let ns = {
@@ -22,10 +25,7 @@ const TemplateUtils = {
         };
         return ns;
     },
-    getElementValue(doc, xpath, type) {
-        let select = XPath.useNamespaces(this.nsResolver());
-
-        let result = select(xpath, doc)[0];
+    getElementValue(result, type) {
 
         switch (type) {
             case 1 /*NUMBER_TYPE*/: {
@@ -36,6 +36,9 @@ const TemplateUtils = {
             }
             case 3 /*BOOLEAN_TYPE*/: {
                 return result && result.nodeValue === "true" || false;
+            }
+            case 6 /*GEOMETRY_TYPE*/: {
+                return result && result.nodeValue && parse(result.nodeValue) || {};
             }
             default: return result;
         }
@@ -56,22 +59,45 @@ const TemplateUtils = {
         let model = {};
         for (let element in config) {
             if (config[element]) {
-                let value = "";
-                for (let i = 0; i < config[element].xpath.length; i++) {
-                    if (config[element].type === this.STRING_TYPE) {
-                        if (i > 0) {
-                            value += " ";
-                        }
-                        value += this.getElementValue(doc, config[element].xpath[i], config[element].type);
-                    } else {
-                        value = this.getElementValue(doc, config[element].xpath[i], config[element].type);
-                    }
-                }
-                model[config[element].field] = value;
+                model[config[element].field] = this.getElement(config[element], doc);
             }
         }
-
         return model;
+    },
+    getElement(element, doc) {
+        let select = XPath.useNamespaces(this.nsResolver());
+        let value = "";
+        let result;
+
+        if (element.type === this.OBJECT_TYPE) {
+            let values = [];
+            let results = select(element.xpath, doc);
+            results.forEach((res) => {
+                value = {};
+                element.fields.forEach((f) => {
+                    let r = select(f.xpath, res)[0];
+                    value[f.field] = this.getElementValue(r, f.type);
+                });
+                values.push(value);
+            });
+            value = values;
+        }else if (element.type === this.GEOMETRY_TYPE) {
+            result = select(element.xpath, doc)[0];
+            value = this.getElementValue(result, element.type);
+        }else {
+            for (let i = 0; i < element.xpath.length; i++) {
+                result = select(element.xpath[i], doc)[0];
+                if (element.type === this.STRING_TYPE) {
+                    if (i > 0) {
+                        value += " ";
+                    }
+                    value += this.getElementValue(result, element.type);
+                } else {
+                    value = this.getElementValue(result, element.type);
+                }
+            }
+        }
+        return value;
     }
 };
 
