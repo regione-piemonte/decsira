@@ -68,7 +68,7 @@ const TemplateUtils = {
         let select = XPath.useNamespaces(this.nsResolver());
         let value = "";
         let result;
-
+        const me = this;
         if (element.type === this.OBJECT_TYPE) {
             let values = [];
             let results = select(element.xpath, doc);
@@ -76,7 +76,7 @@ const TemplateUtils = {
                 value = {};
                 element.fields.forEach((f) => {
                     let r = select(f.xpath, res)[0];
-                    value[f.field] = this.getElementValue(r, f.type);
+                    value[f.field] = (f.type === me.OBJECT_TYPE) ? me.getElement(f, res) : this.getElementValue(r, f.type);
                 });
                 values.push(value);
             });

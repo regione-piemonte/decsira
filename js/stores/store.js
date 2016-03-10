@@ -22,7 +22,8 @@ const rootReducer = combineReducers({
     queryformconfig: require('../reducers/queryform'),
     routing: routeReducer,
     cardtemplate: require('../reducers/card'),
-    grid: require('../reducers/grid')
+    grid: require('../reducers/grid'),
+    rifiuti: require('../reducers/rifiuti')
 });
 
 const store = DebugUtils.createDebugStore(rootReducer, {}, [reduxRouterMiddleware]);

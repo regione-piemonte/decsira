@@ -8,45 +8,47 @@
 
 const React = require('react');
 const {AgGridReact} = require('ag-grid-react');
-const {selectRifiuto} = require('../../actions/rifiuti');
-const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 require("ag-grid/dist/styles/ag-grid.css");
 require("ag-grid/dist/styles/theme-blue.css");
 
-const TipoRifiuto = React.createClass({
+const Cer = React.createClass({
     propTypes: {
         style: React.PropTypes.object,
         features: React.PropTypes.array,
-        selectRifiuto: React.PropTypes.func
+        activeFeature: React.PropTypes.string
     },
     getDefaultProps() {
         return {
             style: {height: "200px", width: "100%"},
             features: [],
-            selectRifiuto: () => {}
+            activeFeature: ''
         };
     },
     render() {
+        let filtredFeaturs = this.filterFeatures();
         return (
             <div fluid={false} style={this.props.style} className="ag-blue">
-                <AgGridReact columnDefs={[
+                <AgGridReact
+                        columnDefs={[
                             {headerName: "Tipologia", width: 100, field: "codice"},
                             {headerName: "Descrizione", width: 500, field: "descrizione"}
-                            ]}
-                            rowSelection="single"
-                            rowData={this.props.features}
-                            onSelectionChanged={this.selectDettaglio}
-                            enableColResize={true}
-                            />
+                        ]}
+                        rowData={(filtredFeaturs[0]) ? filtredFeaturs[0].codiceCER : []}
+                        enableColResize={true}
+
+                />
             </div>);
     },
-    selectDettaglio(params) {
-        this.props.selectRifiuto((params.selectedRows[0]) ? params.selectedRows[0].id : '');
+    filterFeatures() {
+        return this.props.features.filter(function(value) {
+            return value.id === this.props.activeFeature;
+        }, this);
     }
 
 });
-module.exports = connect(null, dispatch => {
-    return bindActionCreators({selectRifiuto: selectRifiuto}, dispatch);
-})(TipoRifiuto);
-
+module.exports = connect((state) => {
+    return {
+            activeFeature: state.rifiuti && state.rifiuti.id_rifiuto || ''
+    };
+})(Cer);
