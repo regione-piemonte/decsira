@@ -54,7 +54,7 @@ function startApp() {
                     "assets/",
                     "cardTemplate.config",
                     "assets/features.xml",
-                    "aua.12336_66_22"
+                    "aua.2210_41_22"
                     // "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&FEATUREID=aua.12336_66_22"
                 )
             );

@@ -114,7 +114,13 @@ function loadCardModel(template, wfsUrl, id) {
                     type: TemplateUtils.OBJECT_TYPE,
                     field: "tiporifiuto",
                     xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio'],
-                    fields: [{
+                    fields: [
+                    {
+                        field: "id",
+                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@id'],
+                        type: TemplateUtils.STRING_TYPE
+                    },
+                    {
                         field: "codice",
                         xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:codice/text()'],
                         type: TemplateUtils.STRING_TYPE
@@ -124,8 +130,51 @@ function loadCardModel(template, wfsUrl, id) {
                         xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:descrizione/text()'],
                         type: TemplateUtils.STRING_TYPE
                     }]
+                },
+                {
+                    type: TemplateUtils.OBJECT_TYPE,
+                    field: "dettagliorifiuto",
+                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio'],
+                    fields: [
+                    {
+                        field: "id",
+                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@id'],
+                        type: TemplateUtils.STRING_TYPE
+                    },
+                    {
+                        type: TemplateUtils.OBJECT_TYPE,
+                        field: "codiceCER",
+                        xpath: ['sira:SchedaRifiuto/sira:codiceCER'],
+                        fields: [
+                        {
+                            field: "codice",
+                            xpath: ['sira:CodiceCER/sira:codice/text()'],
+                            type: TemplateUtils.STRING_TYPE
+                        },
+                        {
+                            field: "descrizione",
+                            xpath: ['sira:CodiceCER/sira:descrizione/text()'],
+                            type: TemplateUtils.STRING_TYPE
+                        }]
+                    },
+                    {
+                        type: TemplateUtils.OBJECT_TYPE,
+                        field: "opRecupero",
+                        xpath: ['sira:SchedaRifiuto/sira:operazioneRecupero'],
+                        fields: [
+                        {
+                            field: "codice",
+                            xpath: ['sira:OperazioneRecupero/sira:codice/text()'],
+                            type: TemplateUtils.STRING_TYPE
+                        },
+                        {
+                            field: "descrizione",
+                            xpath: ['sira:OperazioneRecupero/sira:descrizione/text()'],
+                            type: TemplateUtils.STRING_TYPE
+                        }]
+                    }
+                    ]
                 }
-
             ];
 
             let model = TemplateUtils.getModel(response.data, modelConfig);
