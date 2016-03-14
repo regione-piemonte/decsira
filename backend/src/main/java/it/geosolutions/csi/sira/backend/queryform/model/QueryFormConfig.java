@@ -12,11 +12,26 @@ import java.util.List;
 public class QueryFormConfig {
 
     private String featureTypeName;
+    private String featureTypeNameLabel;
+    private String geometricField;
     private List<QueryFormField> fields;
 
     QueryFormConfig(String featureTypeName) {
         this.featureTypeName = featureTypeName;
+        this.featureTypeNameLabel = featureTypeName;
+        this.geometricField = "geometry";
         fields = new ArrayList<QueryFormField>();
+    }
+
+    public QueryFormConfig(String featureTypeName, String featureTypeNameLabel) {
+        this(featureTypeName);
+        this.featureTypeNameLabel = featureTypeNameLabel;
+    }
+
+    public QueryFormConfig(String featureTypeName, String featureTypeNameLabel,
+            String geometricField) {
+        this(featureTypeName, featureTypeNameLabel);
+        this.geometricField = geometricField;
     }
 
     /**
@@ -25,6 +40,22 @@ public class QueryFormConfig {
      */
     public String getFeatureTypeName() {
         return featureTypeName;
+    }
+
+    /**
+     * 
+     * @return the display name of the feature type associated to the query form configuration
+     */
+    public String getFeatureTypeNameLabel() {
+        return featureTypeNameLabel;
+    }
+
+    /**
+     * 
+     * @return the name of the geometry field in the feature type associated to the query form configuration
+     */
+    public String getGeometricField() {
+        return geometricField;
     }
 
     /**

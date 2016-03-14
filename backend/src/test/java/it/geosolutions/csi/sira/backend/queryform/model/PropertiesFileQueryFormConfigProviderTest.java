@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,15 +26,19 @@ public class PropertiesFileQueryFormConfigProviderTest {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(PropertiesFileQueryFormConfigProviderTest.class);
 
-    private static final String TEST_FEATURE_TYPE_NAME = "test-feature";
+    private static final int NUM_PROPERTIES = 23;
+    private static final String TEST_FEATURE_TYPE_CONFIG_NAME = "test-feature";
+    private static final String TEST_FEATURE_TYPE_NAME = "cite:TestFeature";
+    private static final String TEST_FEATURE_TYPE_LABEL = "Test Feature";
+    private static final String TEST_FEATURE_TYPE_GEOMETRY = "geometria";
 
     @Test
     public void testLoadFromClasspath() {
         PropertiesFileQueryFormConfigProvider provider = new PropertiesFileQueryFormConfigProvider();
         try {
-            Properties p = provider.loadFromClasspath(TEST_FEATURE_TYPE_NAME);
+            Properties p = provider.loadFromClasspath(TEST_FEATURE_TYPE_CONFIG_NAME);
             assertNotNull(p);
-            assertEquals(18, p.keySet().size());
+            assertEquals(NUM_PROPERTIES, p.keySet().size());
         } catch (IOException e) {
             LOGGER.error("Exception trown loading configuration from classpath", e);
             fail();
@@ -50,7 +55,7 @@ public class PropertiesFileQueryFormConfigProviderTest {
             tempDir = tempDirPath.toFile();
 
             // copy config file to temp directory
-            String resourceName = TEST_FEATURE_TYPE_NAME + ".properties";
+            String resourceName = TEST_FEATURE_TYPE_CONFIG_NAME + ".properties";
             tempFile = new File(tempDir, resourceName);
             Files.copy(getClass().getResourceAsStream("/" + resourceName),
                     Paths.get(tempFile.getPath()));
@@ -64,9 +69,9 @@ public class PropertiesFileQueryFormConfigProviderTest {
                 assertTrue(provider.isConfigDirSet());
 
                 Properties p = provider.loadFromConfigDir(provider.getConfigDir(),
-                        TEST_FEATURE_TYPE_NAME);
+                        TEST_FEATURE_TYPE_CONFIG_NAME);
                 assertNotNull(p);
-                assertEquals(18, p.keySet().size());
+                assertEquals(NUM_PROPERTIES, p.keySet().size());
             } catch (IOException e) {
                 LOGGER.error("Exception trown loading configuration from configuration directory",
                         e);
@@ -92,15 +97,18 @@ public class PropertiesFileQueryFormConfigProviderTest {
         PropertiesFileQueryFormConfigProvider provider = new PropertiesFileQueryFormConfigProvider();
         provider.attributeParser = new JsonAttributeParser();
 
-        QueryFormConfig config = provider.getConfiguration(TEST_FEATURE_TYPE_NAME);
+        QueryFormConfig config = provider.getConfiguration(TEST_FEATURE_TYPE_CONFIG_NAME);
 
         assertNotNull(config);
         assertEquals(TEST_FEATURE_TYPE_NAME, config.getFeatureTypeName());
+        assertEquals(TEST_FEATURE_TYPE_LABEL, config.getFeatureTypeNameLabel());
+        assertEquals(TEST_FEATURE_TYPE_GEOMETRY, config.getGeometricField());
         assertNotNull(config.getFields());
         assertEquals(5, config.getFields().size());
 
         QueryFormField fieldColor = config.getFields().get(0);
         assertEquals("field-color", fieldColor.id);
+        assertEquals(fieldColor.id, fieldColor.name);
         assertEquals(QueryFormFieldType.list, fieldColor.type);
         List<Object> fieldColorValues = ((ListField) fieldColor).getValues();
         assertEquals(3, fieldColorValues.size());
@@ -110,10 +118,12 @@ public class PropertiesFileQueryFormConfigProviderTest {
 
         QueryFormField fieldPeriod = config.getFields().get(1);
         assertEquals("field-period", fieldPeriod.id);
+        assertEquals("Period", fieldPeriod.name);
         assertEquals(QueryFormFieldType.date, fieldPeriod.type);
 
         QueryFormField fieldShapeClass = config.getFields().get(2);
         assertEquals("field-shapeclass", fieldShapeClass.id);
+        assertEquals(fieldShapeClass.id, fieldShapeClass.name);
         assertEquals(QueryFormFieldType.list, fieldShapeClass.type);
         List<Object> fieldShapeClassValues = ((ListField) fieldShapeClass).getValues();
         assertEquals(2, fieldShapeClassValues.size());
@@ -128,6 +138,7 @@ public class PropertiesFileQueryFormConfigProviderTest {
 
         QueryFormField fieldShape = config.getFields().get(3);
         assertEquals("field-shape", fieldShape.id);
+        assertEquals("Geometric Shape", fieldShape.name);
         assertEquals(QueryFormFieldType.list, fieldShape.type);
         assertTrue(fieldShape instanceof ListField);
         ListField shape = (ListField) fieldShape;
@@ -150,6 +161,7 @@ public class PropertiesFileQueryFormConfigProviderTest {
 
         QueryFormField fieldRemote = config.getFields().get(4);
         assertEquals("field-remote", fieldRemote.id);
+        assertEquals(fieldRemote.id, fieldRemote.name);
         assertEquals(QueryFormFieldType.list, fieldRemote.type);
         assertTrue(fieldRemote instanceof ListField);
         ListField remote = (ListField) fieldRemote;
@@ -161,10 +173,10 @@ public class PropertiesFileQueryFormConfigProviderTest {
         assertEquals(
                 "service=WFS&version=1.1.0&request=GetFeature&typeName=cite:buildings&outputFormat=application/json",
                 remote.getValueService().getQuery());
-        assertNotNull(remote.getIdField());
-        assertEquals("id_building", remote.getIdField());
-        assertNotNull(remote.getLabelField());
-        assertEquals("description", remote.getLabelField());
+        assertNotNull(remote.getValueId());
+        assertEquals("id_building", remote.getValueId());
+        assertNotNull(remote.getValueLabel());
+        assertEquals("description", remote.getValueLabel());
     }
 
 }

@@ -36,9 +36,9 @@ public class ListField extends QueryFormField {
 
     public static final String EXTRA_ATTR_VALUE_SERVICE = "valueService";
 
-    public static final String EXTRA_ATTR_ID_FIELD = "idField";
+    public static final String EXTRA_ATTR_ID_FIELD = "valueId";
 
-    public static final String EXTRA_ATTR_LABEL_FIELD = "labelField";
+    public static final String EXTRA_ATTR_LABEL_FIELD = "valueLabel";
 
     public static final String DEFAULT_ID_FIELD = "id";
 
@@ -52,9 +52,9 @@ public class ListField extends QueryFormField {
 
     private URL valueService;
 
-    private String idField;
+    private String valueId;
 
-    private String labelField;
+    private String valueLabel;
 
     ListField() {
         super(QueryFormFieldType.list);
@@ -125,15 +125,15 @@ public class ListField extends QueryFormField {
      * @return the name of the ID field
      */
     @JsonSerialize(include = Inclusion.NON_NULL)
-    public String getIdField() {
-        return idField;
+    public String getValueId() {
+        return valueId;
     }
 
-    public void setIdField(String idField) {
-        if (!StringUtils.hasText(idField)) {
-            this.idField = DEFAULT_ID_FIELD;
+    public void setValueId(String valueId) {
+        if (!StringUtils.hasText(valueId)) {
+            this.valueId = DEFAULT_ID_FIELD;
         } else {
-            this.idField = idField;
+            this.valueId = valueId;
         }
     }
 
@@ -142,15 +142,15 @@ public class ListField extends QueryFormField {
      * @return the name of the field to be used as textual description
      */
     @JsonSerialize(include = Inclusion.NON_NULL)
-    public String getLabelField() {
-        return labelField;
+    public String getValueLabel() {
+        return valueLabel;
     }
 
-    public void setLabelField(String labelField) {
-        if (!StringUtils.hasText(labelField)) {
-            this.labelField = DEFAULT_LABEL_FIELD;
+    public void setValueLabel(String valueLabel) {
+        if (!StringUtils.hasText(valueLabel)) {
+            this.valueLabel = DEFAULT_LABEL_FIELD;
         } else {
-            this.labelField = labelField;
+            this.valueLabel = valueLabel;
         }
     }
 
@@ -176,11 +176,11 @@ public class ListField extends QueryFormField {
             parseValueServiceAttribute(value);
         } else if (EXTRA_ATTR_ID_FIELD.equals(name)) {
             if (value != null && value instanceof String) {
-                setIdField(value.toString());
+                setValueId(value.toString());
             }
         } else if (EXTRA_ATTR_LABEL_FIELD.equals(name)) {
             if (value != null && value instanceof String) {
-                setLabelField(value.toString());
+                setValueLabel(value.toString());
             }
         } else {
             logger.debug("unknown attribute specified : '" + name + "'");

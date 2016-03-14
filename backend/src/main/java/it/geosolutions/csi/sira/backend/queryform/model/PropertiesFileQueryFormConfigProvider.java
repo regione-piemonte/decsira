@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 /**
@@ -32,6 +31,10 @@ import org.springframework.util.StringUtils;
  * 
  * <blockquote>
  * <pre>
+ * # the display name of the feature type
+ * label=Test Feature
+ * # the name of the geometry field in the feature type
+ * geometry=the_geom
  * # the fields that will be part of the query form
  * fields=color,period
  * 
@@ -44,6 +47,7 @@ import org.springframework.util.StringUtils;
  * 
  * # configuration for the field "period"
  * period.id=field-period
+ * period.name=Period
  * period.type=date
  * </pre>
  * </blockquote>
@@ -56,9 +60,17 @@ public class PropertiesFileQueryFormConfigProvider implements QueryFormConfigPro
 
     public static final String CONFIG_DIR_SYSTEM_PROP = "queryform.config.dir";
 
+    public static final String NAME_PROP = "name";
+
+    public static final String LABEL_PROP = "label";
+
+    public static final String GEOMETRY_PROP = "geometry";
+
     public static final String FIELDS_PROP = "fields";
 
     public static final String FIELD_ID_PROP_SUFFIX = ".id";
+
+    public static final String FIELD_NAME_PROP_SUFFIX = ".name";
 
     public static final String FIELD_TYPE_PROP_SUFFIX = ".type";
 
@@ -90,7 +102,23 @@ public class PropertiesFileQueryFormConfigProvider implements QueryFormConfigPro
             throw new QueryFormConfigNotFoundException(featureTypeName);
         }
 
-        QueryFormConfig queryFormConfig = new QueryFormConfig(featureTypeName);
+        String name = conf.getProperty(NAME_PROP, "");
+        if (name.trim().isEmpty()) {
+            // default to feature type name used for loading the configuration file
+            name = featureTypeName;
+        }
+        String label = conf.getProperty(LABEL_PROP, "");
+        if (label.trim().isEmpty()) {
+            // default to name
+            label = name;
+        }
+        String geometry = conf.getProperty(GEOMETRY_PROP, "");
+        if (geometry.trim().isEmpty()) {
+            // default to "geometry"
+            geometry = "geometry";
+        }
+
+        QueryFormConfig queryFormConfig = new QueryFormConfig(name, label, geometry);
         return processConfiguration(queryFormConfig, conf);
     }
 
@@ -145,6 +173,12 @@ public class PropertiesFileQueryFormConfigProvider implements QueryFormConfigPro
         if (field != null) {
             String fieldIdProperty = fieldName + FIELD_ID_PROP_SUFFIX;
             field.id = conf.getProperty(fieldIdProperty);
+            String fieldNameProperty = fieldName + FIELD_NAME_PROP_SUFFIX;
+            field.name = conf.getProperty(fieldNameProperty, "");
+            if (field.name.trim().isEmpty()) {
+                // default to field.id
+                field.name = field.id;
+            }
             // set extra attributes
             for (String attribute : fieldType.getExtraAttributes()) {
                 String attributeProperty = fieldName + "." + attribute;

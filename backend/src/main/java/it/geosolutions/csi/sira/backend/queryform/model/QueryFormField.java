@@ -1,10 +1,10 @@
 package it.geosolutions.csi.sira.backend.queryform.model;
 
+import it.geosolutions.csi.sira.backend.queryform.model.parser.AttributeParser;
+
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-
-import it.geosolutions.csi.sira.backend.queryform.model.parser.AttributeParser;
 
 /**
  * Base class for query form field types.
@@ -15,6 +15,7 @@ import it.geosolutions.csi.sira.backend.queryform.model.parser.AttributeParser;
 public abstract class QueryFormField {
 
     protected String id;
+    protected String name;
     protected QueryFormFieldType type;
     protected AttributeParser attributeParser;
 
@@ -50,6 +51,14 @@ public abstract class QueryFormField {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * 
+     * @return the human readable field name
+     */
+    public String getFieldName() {
+        return name;
     }
 
     /**
