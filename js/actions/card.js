@@ -44,141 +44,10 @@ function selectSection(section, active) {
     };
 }
 
-function loadCardModel(template, wfsUrl, id) {
+function loadCardModel(template, modelConfig, wfsUrl) {
     return (dispatch) => {
         return axios.get(wfsUrl).then((response) => {
-            let extra = '';
-            if (id) {
-                extra = '[@gml:id=\'' + id + '\']';
-            }
-            let modelConfig = [
-                {
-                    field: "id",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:codiceSira/text()'],
-                    type: TemplateUtils.NUMBER_TYPE
-                },
-                {
-                    field: "codicesira",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:codiceSira/text()'],
-                    type: TemplateUtils.NUMBER_TYPE
-                },
-                {
-                    field: "comune",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:comune/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "provincia",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:impianto/sira:Sede/sira:provincia/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "tipo",
-                    xpath: [
-                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione/text()',
-                        '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/sira:descrizione/text()'
-                    ],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "numauth",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "dataauth",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "tipoimpianto",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:impianto/sira:TipoImpianto/sira:descrizione/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "quantita",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero/text()'],
-                    type: TemplateUtils.NUMBER_TYPE
-                },
-                {
-                    field: "numscheda",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:nrScheda/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "tiporecupero",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    type: TemplateUtils.OBJECT_TYPE,
-                    field: "tiporifiuto",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio'],
-                    fields: [
-                    {
-                        field: "id",
-                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@id'],
-                        type: TemplateUtils.STRING_TYPE
-                    },
-                    {
-                        field: "codice",
-                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:codice/text()'],
-                        type: TemplateUtils.STRING_TYPE
-                    },
-                    {
-                        field: "descrizione",
-                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:descrizione/text()'],
-                        type: TemplateUtils.STRING_TYPE
-                    }]
-                },
-                {
-                    type: TemplateUtils.OBJECT_TYPE,
-                    field: "dettagliorifiuto",
-                    xpath: ['/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale' + extra + '/sira:rifiuto/sira:Rifiuto/sira:dettaglio'],
-                    fields: [
-                    {
-                        field: "id",
-                        xpath: ['sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@id'],
-                        type: TemplateUtils.STRING_TYPE
-                    },
-                    {
-                        type: TemplateUtils.OBJECT_TYPE,
-                        field: "codiceCER",
-                        xpath: ['sira:SchedaRifiuto/sira:codiceCER'],
-                        fields: [
-                        {
-                            field: "codice",
-                            xpath: ['sira:CodiceCER/sira:codice/text()'],
-                            type: TemplateUtils.STRING_TYPE
-                        },
-                        {
-                            field: "descrizione",
-                            xpath: ['sira:CodiceCER/sira:descrizione/text()'],
-                            type: TemplateUtils.STRING_TYPE
-                        }]
-                    },
-                    {
-                        type: TemplateUtils.OBJECT_TYPE,
-                        field: "opRecupero",
-                        xpath: ['sira:SchedaRifiuto/sira:operazioneRecupero'],
-                        fields: [
-                        {
-                            field: "codice",
-                            xpath: ['sira:OperazioneRecupero/sira:codice/text()'],
-                            type: TemplateUtils.STRING_TYPE
-                        },
-                        {
-                            field: "descrizione",
-                            xpath: ['sira:OperazioneRecupero/sira:descrizione/text()'],
-                            type: TemplateUtils.STRING_TYPE
-                        }]
-                    }
-                    ]
-                }
-            ];
-
             let model = TemplateUtils.getModel(response.data, modelConfig);
-
             dispatch(configureCard(template, model));
         }).catch((e) => {
             dispatch(configureCardError(e));
@@ -186,11 +55,29 @@ function loadCardModel(template, wfsUrl, id) {
     };
 }
 
-function loadCardTemplate(configUrl, configName, wfsUrl, id) {
+function loadCardModelConfig(template, modelConfigURL, wfsUrl) {
     return (dispatch) => {
-        return axios.get(configUrl + configName).then((response) => {
+        return axios.get(modelConfigURL).then((response) => {
+            let modelConfig = response.data;
+            if (typeof modelConfig !== "object") {
+                try {
+                    modelConfig = JSON.parse(modelConfig);
+                } catch(e) {
+                    dispatch(configureCardError(e));
+                }
+            }
+            dispatch(loadCardModel(template, modelConfig, wfsUrl));
+        }).catch((e) => {
+            dispatch(configureCardError(e));
+        });
+    };
+}
+
+function loadCardTemplate(templateConfigURL, modelConfigURL, wfsUrl) {
+    return (dispatch) => {
+        return axios.get(templateConfigURL).then((response) => {
             let template = response.data;
-            dispatch(loadCardModel(template, wfsUrl, id));
+            dispatch(loadCardModelConfig(template, modelConfigURL, wfsUrl));
         }).catch((e) => {
             dispatch(configureCardError(e));
         });
@@ -206,5 +93,6 @@ module.exports = {
     loadCardModel,
     toggleCard,
     configureCardError,
+    loadCardModelConfig,
     selectSection
 };

@@ -8,18 +8,32 @@
 
 const {
     QUERYFORM_CONFIG_LOADED,
+    FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR
 } = require('../actions/queryform');
 
 const assign = require('object-assign');
 
-function queryformconfig(state = {filterPanelExpanded: true, attributes: [], loadingQueryFormConfigError: null}, action) {
+const initialState = {
+    filterPanelExpanded: true,
+    attributes: [],
+    loadingQueryFormConfigError: null,
+    queryform: null
+};
+
+function queryformconfig(state = initialState, action) {
     switch (action.type) {
-        case QUERYFORM_CONFIG_LOADED: {
+        case FEATURETYPE_CONFIG_LOADED: {
             return assign({}, state, {
                 attributes: [...state.attributes, action.field],
-                featureTypeName: action.ftName
+                featureTypeName: action.ftName,
+                featureTypeNameLabel: action.ftNameLabel
+            });
+        }
+        case QUERYFORM_CONFIG_LOADED: {
+            return assign({}, state, {
+                queryform: action.config
             });
         }
         case EXPAND_FILTER_PANEL: {

@@ -7,12 +7,18 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 
-const TemplateUtils = require('../utils/TemplateUtils');
-
 const GRID_MODEL_LOADED = 'GRID_MODEL_LOADED';
 const GRID_LOAD_ERROR = 'GRID_LOAD_ERROR';
+const GRID_CONFIG_LOADED = 'GRID_CONFIG_LOADED';
 
-function configureGrid(model) {
+function configureGrid(config) {
+    return {
+        type: GRID_CONFIG_LOADED,
+        config: config
+    };
+}
+
+function configureGridModel(model) {
     return {
         type: GRID_MODEL_LOADED,
         model: model
@@ -29,45 +35,38 @@ function configureGridError(e) {
 function loadGridModel(wfsUrl) {
     return (dispatch) => {
         return axios.get(wfsUrl).then((response) => {
-            let modelConfig = [
-                {
-                    field: "id",
-                    xpath: ['@gml:id'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "codice",
-                    xpath: ['sira:impianto/sira:Sede/sira:codiceSira/text()'],
-                    type: TemplateUtils.NUMBER_TYPE
-                },
-                {
-                    field: "codicefisc",
-                    xpath: ['sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "comune",
-                    xpath: ['sira:impianto/sira:Sede/sira:comune/text()'],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    field: "autamb",
-                    xpath: [
-                        'sira:rifiuto/sira:Rifiuto/sira:attivita/sira:Attivita/sira:descrizione/text()'
-                    ],
-                    type: TemplateUtils.STRING_TYPE
-                },
-                {
-                    type: TemplateUtils.GEOMETRY_TYPE,
-                    field: "geometry",
-                    xpath: ['sira:geometria/text()']
+            dispatch(configureGridModel(response.data));
+        }).catch((e) => {
+            dispatch(configureGridError(e));
+        });
+    };
+}
+
+function loadGridModelWithFilter(wfsUrl, data) {
+    return (dispatch) => {
+        return axios.post(wfsUrl, data, {
+          timeout: 10000,
+          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+        }).then((response) => {
+            dispatch(configureGridModel(response.data));
+        }).catch((e) => {
+            dispatch(configureGridError(e));
+        });
+    };
+}
+
+function loadFeatureGridConfig(configUrl) {
+    return (dispatch) => {
+        return axios.get(configUrl).then((response) => {
+            let gridConfig = response.data;
+            if (typeof gridConfig !== "object") {
+                try {
+                    gridConfig = JSON.parse(gridConfig);
+                } catch(e) {
+                    dispatch(configureGridError(e));
                 }
-
-            ];
-
-            let model = TemplateUtils.getModels(response.data, '/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale', modelConfig);
-
-            dispatch(configureGrid(model));
+            }
+            dispatch(configureGrid(gridConfig));
         }).catch((e) => {
             dispatch(configureGridError(e));
         });
@@ -77,6 +76,11 @@ function loadGridModel(wfsUrl) {
 module.exports = {
     GRID_MODEL_LOADED,
     GRID_LOAD_ERROR,
+    GRID_CONFIG_LOADED,
+    configureGrid,
+    configureGridModel,
+    loadFeatureGridConfig,
     loadGridModel,
+    loadGridModelWithFilter,
     configureGridError
 };

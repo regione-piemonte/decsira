@@ -7,6 +7,7 @@
  */
 
 const {TOGGLE_CONTROL} = require('../actions/controls');
+const {GRID_MODEL_LOADED} = require('../actions/grid');
 const assign = require('object-assign');
 
 const initialState = {
@@ -20,6 +21,11 @@ function controls(state = initialState, action) {
         case TOGGLE_CONTROL: {
             return assign({}, state, {
                 [action.control]: !state[action.control]
+            });
+        }
+        case GRID_MODEL_LOADED: {
+            return assign({}, state, {
+                grid: true
             });
         }
         default:

@@ -29,6 +29,7 @@ const SiraFeatureGrid = React.createClass({
         expanded: React.PropTypes.bool,
         header: React.PropTypes.string,
         features: React.PropTypes.array,
+        detailsConfig: React.PropTypes.object,
         map: React.PropTypes.object,
         onDetail: React.PropTypes.func,
         onShowDetail: React.PropTypes.func,
@@ -45,6 +46,7 @@ const SiraFeatureGrid = React.createClass({
             expanded: true,
             header: "featuregrid.header",
             features: [],
+            detailsConfig: {},
             onDetail: () => {},
             onShowDetail: () => {},
             toggleControl: () => {},
@@ -55,7 +57,6 @@ const SiraFeatureGrid = React.createClass({
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
 
         return (
-
             <div className="handle_featuregrid">
                 <Grid className="featuregrid-title" fluid={true}>
                     <Row>
@@ -105,16 +106,16 @@ const SiraFeatureGrid = React.createClass({
                 </Draggable>
             );
         }
+
         return null;
     },
     goToDetail(params) {
         this.props.onDetail(
-            "assets/",
-            "cardTemplate.config",
-            // "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&FEATUREID=" + params.data.id
-            "assets/features.xml",
-            params.data.id
+            this.props.detailsConfig.cardTemplateConfigUrl,
+            this.props.detailsConfig.cardModelConfigUrl,
+            this.props.detailsConfig.wfsUrl + "&FEATUREID=" + params.data.id
         );
+
         if (!this.props.detailOpen) {
             this.props.onShowDetail();
         }
@@ -124,6 +125,7 @@ const SiraFeatureGrid = React.createClass({
 module.exports = connect((state) => ({
     open: state.controls.grid,
     detailOpen: state.controls.detail,
+    detailsConfig: state.grid.detailsConfig,
     features: state.grid && state.grid.model || [],
     map: (state.map && state.map) || (state.config && state.config.map)
 }), {

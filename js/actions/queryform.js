@@ -8,17 +8,26 @@
 const axios = require('../../MapStore2/web/client/libs/ajax');
 
 const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
+const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 
 const assign = require('object-assign');
 
 
-function configureQueryForm(ftName, field) {
+function configureFeatureType(ft, field) {
+    return {
+        type: FEATURETYPE_CONFIG_LOADED,
+        ftName: ft.id,
+        ftNameLabel: ft.name,
+        field: field
+    };
+}
+
+function configureQueryForm(config) {
     return {
         type: QUERYFORM_CONFIG_LOADED,
-        ftName: ftName,
-        field: field
+        config: config
     };
 }
 
@@ -55,13 +64,36 @@ function getAttributeValues(ftName, field) {
                         values.push(config.features[feature].properties);
                     }
                 }
-                dispatch(configureQueryForm(ftName, assign({}, field, {values: values})));
+                dispatch(configureFeatureType(ftName, assign({}, field, {values: values})));
             }).catch((e) => {
                 dispatch(configureQueryFormError(e));
             });
         }
 
-        dispatch(configureQueryForm(ftName, assign({}, field, {})));
+        dispatch(configureFeatureType(ftName, assign({}, field, {})));
+    };
+}
+
+function loadFeatureTypeConfig(configUrl, configName) {
+    return (dispatch) => {
+        return axios.get(configUrl + configName).then((response) => {
+            let config = response.data;
+            if (typeof config !== "object") {
+                try {
+                    config = JSON.parse(config);
+                } catch(e) {
+                    dispatch(configureQueryFormError('Configuration file broken (' + configUrl + "/" + configName + '): ' + e.message));
+                }
+            }
+
+            for (let field in config.fields) {
+                if (field) {
+                    dispatch(getAttributeValues({id: config.featureTypeName, name: config.featureTypeNameLabel}, config.fields[field]));
+                }
+            }
+        }).catch((e) => {
+            dispatch(configureQueryFormError(e));
+        });
     };
 }
 
@@ -77,11 +109,7 @@ function loadQueryFormConfig(configUrl, configName) {
                 }
             }
 
-            for (let field in config.fields) {
-                if (field) {
-                    dispatch(getAttributeValues(config.featureTypeName, config.fields[field]));
-                }
-            }
+            dispatch(configureQueryForm(config));
         }).catch((e) => {
             dispatch(configureQueryFormError(e));
         });
@@ -90,9 +118,11 @@ function loadQueryFormConfig(configUrl, configName) {
 
 module.exports = {
     QUERYFORM_CONFIG_LOADED,
+    FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
     loadQueryFormConfig,
+    loadFeatureTypeConfig,
     configureQueryForm,
     expandFilterPanel,
     configureQueryFormError,
