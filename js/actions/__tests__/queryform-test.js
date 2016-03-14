@@ -8,10 +8,11 @@
 
 const expect = require('expect');
 const {
-    QUERYFORM_CONFIG_LOADED,
+    FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
     loadQueryFormConfig,
+    loadFeatureTypeConfig,
     expandFilterPanel,
     getAttributeValues
 } = require('../queryform');
@@ -19,10 +20,10 @@ const {
 describe('Test correctness of the queryform actions', () => {
 
     it('loads an existing configuration file 1', (done) => {
-        loadQueryFormConfig('base/js/test-resources/testQueryFormConfig.json', '')((e) => {
+        loadFeatureTypeConfig('base/js/test-resources/', 'testQueryFormConfig.json')((e) => {
             try {
                 expect(e).toExist();
-                expect(e).withArgs('ftName', 'field');
+                expect(e).withArgs('config');
                 done();
             } catch(ex) {
                 done(ex);
@@ -44,7 +45,7 @@ describe('Test correctness of the queryform actions', () => {
         getAttributeValues(ftName, field)((e) => {
             try {
                 expect(e).toExist();
-                expect(e.type).toBe(QUERYFORM_CONFIG_LOADED);
+                expect(e.type).toBe(FEATURETYPE_CONFIG_LOADED);
                 done();
             } catch(ex) {
                 done(ex);

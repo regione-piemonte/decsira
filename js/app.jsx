@@ -29,9 +29,8 @@ const {loadLocale} = require('../MapStore2/web/client/actions/locale');
 const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
-const {loadQueryFormConfig} = require('./actions/queryform');
-const {loadCardTemplate} = require('./actions/card');
-const {loadGridModel} = require('./actions/grid');
+const {loadQueryFormConfig, loadFeatureTypeConfig} = require('./actions/queryform');
+const {loadFeatureGridConfig} = require('./actions/grid');
 
 function startApp() {
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
@@ -46,25 +45,12 @@ function startApp() {
             store.dispatch(loadLocale('translations', locale));
 
             // load the queryform configuration
-            store.dispatch(loadQueryFormConfig("/sira/services/queryformconfig/", "aua"));
+            // store.dispatch(loadFeatureTypeConfig("/sira/services/queryformconfig/", "aua"));
+            store.dispatch(loadFeatureTypeConfig("assets/", "aua.json"));
 
-            // load the card template
-            store.dispatch(
-                loadCardTemplate(
-                    "assets/",
-                    "cardTemplate.config",
-                    "assets/features.xml",
-                    "aua.2210_41_22"
-                    // "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&FEATUREID=aua.12336_66_22"
-                )
-            );
-            // load the grid data
-            store.dispatch(
-                loadGridModel(
-                    // "http://sira.csi.geo-solutions.it/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale&maxFeatures=20"
-                    "assets/features.xml"
-                )
-            );
+            store.dispatch(loadQueryFormConfig("assets/", "queryFormConfig.json"));
+
+            store.dispatch(loadFeatureGridConfig("assets/featureGridConfig.json"));
         });
 
     ReactDOM.render(

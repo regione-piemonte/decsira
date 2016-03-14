@@ -38,8 +38,8 @@ const {
     selectSpatialOperation,
     removeSpatialSelection,
     showSpatialSelectionDetails,
-    query,
-    reset
+    reset,
+    changeDwithinValue
 } = require('../../MapStore2/web/client/actions/queryform');
 
 const {
@@ -52,6 +52,10 @@ const {
     endDrawing
 } = require('../../MapStore2/web/client/actions/draw');
 
+const {
+    loadGridModelWithFilter
+} = require('../actions/grid');
+
 const SiraQueryPanel = React.createClass({
     propTypes: {
         // Sira Query Panel props
@@ -61,9 +65,14 @@ const SiraQueryPanel = React.createClass({
             React.PropTypes.string,
             React.PropTypes.object
         ]),
+        loadingGridError: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]),
         header: React.PropTypes.string,
         datasetHeader: React.PropTypes.string,
         featureTypeName: React.PropTypes.string,
+        featureTypeNameLabel: React.PropTypes.string,
         siraActions: React.PropTypes.object,
         // QueryBuilder props
         useMapProjection: React.PropTypes.bool,
@@ -75,6 +84,10 @@ const SiraQueryPanel = React.createClass({
         showDetailsPanel: React.PropTypes.bool,
         toolbarEnabled: React.PropTypes.bool,
         searchUrl: React.PropTypes.string,
+        showGeneratedFilter: React.PropTypes.oneOfType([
+            React.PropTypes.bool,
+            React.PropTypes.string
+        ]),
         attributePanelExpanded: React.PropTypes.bool,
         spatialPanelExpanded: React.PropTypes.bool,
         queryFormActions: React.PropTypes.object
@@ -88,9 +101,11 @@ const SiraQueryPanel = React.createClass({
             removeButtonIcon: "glyphicon glyphicon-trash",
             filterPanelExpanded: true,
             loadingQueryFormConfigError: null,
+            loadingGridError: null,
             header: "queryform.form.header",
             datasetHeader: "queryform.form.dataset_header",
             featureTypeName: null,
+            featureTypeNameLabel: null,
             siraActions: {
                 onExpandFilterPanel: () => {}
             },
@@ -106,6 +121,7 @@ const SiraQueryPanel = React.createClass({
             showDetailsPanel: false,
             toolbarEnabled: true,
             searchUrl: "",
+            showGeneratedFilter: false,
             queryFormActions: {
                 attributeFilterActions: {
                     onAddGroupField: () => {},
@@ -125,7 +141,8 @@ const SiraQueryPanel = React.createClass({
                     onChangeDrawingStatus: () => {},
                     onRemoveSpatialSelection: () => {},
                     onShowSpatialSelectionDetails: () => {},
-                    onEndDrawing: () => {}
+                    onEndDrawing: () => {},
+                    onChangeDwithinValue: () => {}
                 },
                 queryToolbarActions: {
                     onQuery: () => {},
@@ -165,7 +182,7 @@ const SiraQueryPanel = React.createClass({
         return (
             <div className="dhContainer">
                 <h4>{datasetHeader}</h4>
-                <h4 className="ftheader">{this.props.featureTypeName}</h4>
+                <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
             </div>
         );
     },
@@ -185,6 +202,8 @@ const SiraQueryPanel = React.createClass({
                         showDetailsPanel={this.props.showDetailsPanel}
                         toolbarEnabled={this.props.toolbarEnabled}
                         searchUrl={this.props.searchUrl}
+                        showGeneratedFilter={this.props.showGeneratedFilter}
+                        featureTypeName={this.props.featureTypeName}
                         attributePanelExpanded={this.props.attributePanelExpanded}
                         spatialPanelExpanded={this.props.spatialPanelExpanded}
                         attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
@@ -194,20 +213,20 @@ const SiraQueryPanel = React.createClass({
             </Draggable>
         );
     },
-    renderLoadConfigException() {
+    renderLoadConfigException(loadingError, msg) {
         let exception;
-        if (isObject(this.props.loadingQueryFormConfigError)) {
-            exception = this.props.loadingQueryFormConfigError.status +
-                "(" + this.props.loadingQueryFormConfigError.statusText + ")" +
-                ": " + this.props.loadingQueryFormConfigError.data;
+        if (isObject(loadingError)) {
+            exception = loadingError.status +
+                "(" + loadingError.statusText + ")" +
+                ": " + loadingError.data;
         } else {
-            exception = this.props.loadingQueryFormConfigError;
+            exception = loadingError;
         }
 
         return (
-            <Modal show={this.props.loadingQueryFormConfigError ? true : false} bsSize="small">
-                <Modal.Header closeButton>
-                    <Modal.Title><I18N.Message msgId={"queryform.config.load_config_exception"}/></Modal.Title>
+            <Modal show={loadingError ? true : false} bsSize="small">
+                <Modal.Header>
+                    <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mapstore-error">{exception}</div>
@@ -218,9 +237,11 @@ const SiraQueryPanel = React.createClass({
         );
     },
     render() {
-        if (this.props.loadingQueryFormConfigError) {
+        let loadingError = this.props.loadingQueryFormConfigError || this.props.loadingGridError;
+        if (loadingError) {
             return (
-                this.renderLoadConfigException()
+                this.renderLoadConfigException(loadingError,
+                    this.props.loadingQueryFormConfigError ? "queryform.config.load_config_exception" : "queryform.query_request_exception")
             );
         }
 
@@ -238,7 +259,9 @@ module.exports = connect((state) => {
         // SiraQueryPanel prop
         filterPanelExpanded: state.queryformconfig.filterPanelExpanded,
         loadingQueryFormConfigError: state.queryformconfig.loadingQueryFormConfigError,
+        loadingGridError: state.grid.loadingGridError,
         featureTypeName: state.queryformconfig.featureTypeName,
+        featureTypeNameLabel: state.queryformconfig.featureTypeNameLabel,
         // QueryBuilder props
         groupLevels: state.queryform.groupLevels,
         groupFields: state.queryform.groupFields,
@@ -250,7 +273,8 @@ module.exports = connect((state) => {
         attributePanelExpanded: state.queryform.attributePanelExpanded,
         spatialPanelExpanded: state.queryform.spatialPanelExpanded,
         useMapProjection: state.queryform.useMapProjection,
-        searchUrl: state.queryform.searchUrl
+        searchUrl: state.queryform.searchUrl,
+        showGeneratedFilter: state.queryform.showGeneratedFilter
     };
 }, dispatch => {
     return {
@@ -278,10 +302,11 @@ module.exports = connect((state) => {
                 onChangeDrawingStatus: changeDrawingStatus,
                 onRemoveSpatialSelection: removeSpatialSelection,
                 onShowSpatialSelectionDetails: showSpatialSelectionDetails,
-                onEndDrawing: endDrawing
+                onEndDrawing: endDrawing,
+                onChangeDwithinValue: changeDwithinValue
             }, dispatch),
             queryToolbarActions: bindActionCreators({
-                onQuery: query,
+                onQuery: loadGridModelWithFilter,
                 onReset: reset,
                 onChangeDrawingStatus: changeDrawingStatus
             }, dispatch)
