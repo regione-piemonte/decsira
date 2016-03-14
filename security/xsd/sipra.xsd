@@ -32,6 +32,8 @@
         <complexContent>
             <extension base="gml:AbstractFeatureType">
                 <sequence>
+                    <!-- associations -->
+                    <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
                     <xs:element name="istanza" minOccurs="1" maxOccurs="1" type="sira:IstanzaAutorizzativaPropertyType" />
                     <xs:element name="rifiuto" minOccurs="1" maxOccurs="1" type="sira:RifiutoPropertyType" />
                     <xs:element name="impianto" minOccurs="1" maxOccurs="1" type="sira:SedePropertyType" />
@@ -102,7 +104,7 @@
                     <!-- associations -->
                     <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
                     <xs:element name="tipoRichiesta" type="sira:TipoRichiestaPropertyType"
-                        minOccurs="1" maxOccurs="1" />
+                        minOccurs="0" maxOccurs="1" />
                     <xs:element name="impianto" type="sira:TipoImpiantoPropertyType" minOccurs="0"
                         maxOccurs="unbounded" />
                     <xs:element name="dettaglio" type="sira:SchedaRifiutoPropertyType" minOccurs="0"
