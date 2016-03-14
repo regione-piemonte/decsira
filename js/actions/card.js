@@ -13,6 +13,7 @@ const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const CARD_TEMPLATE_TOOGLE = 'CARD_TEMPLATE_TOOGLE';
 const SELECT_SECTION = 'SELECT_SECTION';
+const ACTIVE_SECTION = 'ACTIVE_SECTION';
 
 function toggleCard(state) {
     return {
@@ -43,6 +44,13 @@ function selectSection(section, active) {
         active: active
     };
 }
+
+function activateSection(section) {
+     return {
+         type: ACTIVE_SECTION,
+         section: section
+     };
+ }
 
 function loadCardModel(template, modelConfig, wfsUrl) {
     return (dispatch) => {
@@ -89,10 +97,12 @@ module.exports = {
     CARD_TEMPLATE_LOAD_ERROR,
     CARD_TEMPLATE_TOOGLE,
     SELECT_SECTION,
+    ACTIVE_SECTION,
     loadCardTemplate,
     loadCardModel,
     toggleCard,
     configureCardError,
     loadCardModelConfig,
-    selectSection
+    selectSection,
+    activateSection
 };
