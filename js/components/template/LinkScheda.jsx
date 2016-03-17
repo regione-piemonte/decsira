@@ -22,7 +22,8 @@ const LinkScheda = React.createClass({
         activateSection: React.PropTypes.func,
         card: React.PropTypes.object,
         open: React.PropTypes.bool,
-        detailsConfig: React.PropTypes.object
+        detailsConfig: React.PropTypes.object,
+        authParam: React.PropTypes.object
     },
     getDefaultProps() {
         return {
@@ -35,7 +36,8 @@ const LinkScheda = React.createClass({
             activateSection: () => {},
             card: {},
             open: false,
-            detailsConfig: {}
+            detailsConfig: {},
+            authParam: {}
         };
     },
     render() {
@@ -46,8 +48,8 @@ const LinkScheda = React.createClass({
         ) : null;
     },
     btnClick() {
-        this.props.loadCardModelConfig(this.props.card.template, this.props.detailsConfig.cardModelConfigUrl,
-            this.props.detailsConfig.wfsUrl + "&FEATUREID=" + this.props.id);
+        let url = this.props.detailsConfig.wfsUrl + "&FEATUREID=" + this.props.id + "&authkey=" + this.props.authParam.authkey;
+        this.props.loadCardModelConfig(this.props.card.template, this.props.detailsConfig.cardModelConfigUrl, url);
         if (!this.props.open) {
             this.props.toggleDetail('detail');
         }
