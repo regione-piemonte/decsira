@@ -9,6 +9,7 @@ const React = require('react');
 const Debug = require('../../MapStore2/web/client/components/development/Debug');
 const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
 const {connect} = require('react-redux');
+const assign = require('object-assign');
 
 const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
@@ -53,7 +54,7 @@ const Sira = React.createClass({
     },
     render() {
         let card = this.props.cardModel ? (
-            <Card model={this.props.cardModel}/>
+            <Card model={assign({}, this.props.cardModel, {authParam: authParams[this.props.params.profile]})}/>
         ) : (
             <span/>
         );
