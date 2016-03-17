@@ -46,10 +46,10 @@ const PreviewMap = React.createClass({
     render() {
         return this.props.map && this.props.center && this.props.center.coordinates ?
         (
-            <div id="scheda_pMap" style={this.props.style} >
                 <PMap
                 ref="mappa"
                 {...this.props.map}
+                style={this.props.style}
                 mapOptions={{interactions: {
                     doubleClickZoom: false,
                     dragPan: false,
@@ -69,7 +69,6 @@ const PreviewMap = React.createClass({
                             options={assign({}, layer, {srs: this.props.map.projection})}/>
                     )}
                 </PMap>
-            </div>
         ) : <span/>;
     },
     getCenter() {
