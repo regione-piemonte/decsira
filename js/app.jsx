@@ -29,8 +29,7 @@ const {loadLocale} = require('../MapStore2/web/client/actions/locale');
 const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
-const {loadQueryFormConfig, loadFeatureTypeConfig} = require('./actions/queryform');
-const {loadFeatureGridConfig} = require('./actions/grid');
+const {loadQueryFormConfig} = require('./actions/queryform');
 
 function startApp() {
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
@@ -44,13 +43,7 @@ function startApp() {
             let locale = LocaleUtils.getUserLocale();
             store.dispatch(loadLocale('translations', locale));
 
-            // load the queryform configuration
-            // store.dispatch(loadFeatureTypeConfig("/sira/services/queryformconfig/", "aua"));
-            store.dispatch(loadFeatureTypeConfig("assets/", "aua.json"));
-
             store.dispatch(loadQueryFormConfig("assets/", "queryFormConfig.json"));
-
-            store.dispatch(loadFeatureGridConfig("assets/featureGridConfig.json"));
         });
 
     ReactDOM.render(

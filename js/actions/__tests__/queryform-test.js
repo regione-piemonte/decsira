@@ -20,7 +20,7 @@ const {
 describe('Test correctness of the queryform actions', () => {
 
     it('loads an existing configuration file 1', (done) => {
-        loadFeatureTypeConfig('base/js/test-resources/', 'testQueryFormConfig.json')((e) => {
+        loadFeatureTypeConfig('base/js/test-resources/testQueryFormConfig.json')((e) => {
             try {
                 expect(e).toExist();
                 expect(e).withArgs('config');

@@ -8,19 +8,25 @@
 
 const React = require('react');
 const {connect} = require('react-redux');
+const {isObject} = require('lodash');
 
 const Draggable = require('react-draggable');
 
-const {Panel, Grid, Row, Col} = require('react-bootstrap');
+const {Modal, Panel, Grid, Row, Col} = require('react-bootstrap');
 const FeatureGrid = require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
+const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 
 const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('./GoToDetail');
 
 const {loadCardTemplate} = require('../actions/card');
 const {toggleControl} = require('../actions/controls');
+const {loadFeatureGridConfig} = require('../actions/grid');
+
+const Spinner = require('react-spinkit');
 
 const SiraFeatureGrid = React.createClass({
     propTypes: {
@@ -31,10 +37,19 @@ const SiraFeatureGrid = React.createClass({
         features: React.PropTypes.array,
         detailsConfig: React.PropTypes.object,
         map: React.PropTypes.object,
+        loadingGrid: React.PropTypes.bool,
+        loadingGridError: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.object
+        ]),
+        authParam: React.PropTypes.object,
+        featureConfigUrl: React.PropTypes.string,
+        profile: React.PropTypes.string,
         onDetail: React.PropTypes.func,
         onShowDetail: React.PropTypes.func,
         toggleControl: React.PropTypes.func,
-        changeMapView: React.PropTypes.func
+        changeMapView: React.PropTypes.func,
+        loadFeatureGridConfig: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -43,15 +58,33 @@ const SiraFeatureGrid = React.createClass({
         return {
             open: true,
             detailOpen: true,
+            loadingGrid: false,
+            loadingGridError: null,
+            featureConfigUrl: null,
+            profile: null,
             expanded: true,
             header: "featuregrid.header",
             features: [],
+            authParam: null,
             detailsConfig: {},
             onDetail: () => {},
             onShowDetail: () => {},
             toggleControl: () => {},
-            changeMapView: () => {}
+            changeMapView: () => {},
+            loadFeatureGridConfig: () => {}
         };
+    },
+    componentDidMount() {
+        if (this.props.featureConfigUrl && this.props.profile) {
+            this.props.loadFeatureGridConfig(this.props.featureConfigUrl + this.props.profile + ".json");
+        }
+    },
+    componentWillReceiveProps(props) {
+        let url = props.featureConfigUrl;
+        let profile = props.profile;
+        if (url !== this.props.featureConfigUrl && profile !== this.props.profile) {
+            this.props.loadFeatureGridConfig(this.props.featureConfigUrl + this.props.profile + ".json");
+        }
     },
     renderHeader() {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
@@ -71,8 +104,38 @@ const SiraFeatureGrid = React.createClass({
             </div>
         );
     },
+    renderLoadingException(loadingError, msg) {
+        let exception;
+        if (isObject(loadingError)) {
+            exception = loadingError.status +
+                "(" + loadingError.statusText + ")" +
+                ": " + loadingError.data;
+        } else {
+            exception = loadingError;
+        }
+
+        return (
+            <Modal show={loadingError ? true : false} bsSize="small">
+                <Modal.Header>
+                    <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="mapstore-error">{exception}</div>
+                </Modal.Body>
+                <Modal.Footer>
+                </Modal.Footer>
+            </Modal>
+        );
+    },
     render() {
-        const columns = [{
+        let loadingError = this.props.loadingGridError;
+        if (loadingError) {
+            return (
+                this.renderLoadingException(loadingError, "Error while loading the features")
+            );
+        }
+
+        let columns = [{
             onCellClicked: this.goToDetail,
             headerName: '',
             cellRenderer: reactCellRendererFactory(GoToDetail),
@@ -86,22 +149,41 @@ const SiraFeatureGrid = React.createClass({
             field: 'codice',
             width: 100
         }, {
-            headerName: 'Codice fiscale (P.IVA)',
-            field: 'codicefisc'
-        }, {
             headerName: 'Comune',
             field: 'comune'
         }, {
             headerName: 'Autorizzazioni ambientali',
             field: 'autamb',
-            width: 250
+            width: this.props.profile === "B" ? 250 : 445
         }];
+
+        columns = this.props.profile === "B" ? columns.push({
+            headerName: 'Codice fiscale (P.IVA)',
+            field: 'codicefisc'
+        }) : columns;
 
         if (this.props.open) {
             return (
                 <Draggable start={{x: 20, y: 50}} handle=".panel-heading">
                     <Panel className="featuregrid-container" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
-                        <FeatureGrid changeMapView={this.props.changeMapView} srs="EPSG:4326" map={this.props.map} columnDefs={columns} features={this.props.features} style={{height: "300px", width: "100%"}}/>
+                        {!this.props.loadingGrid ? (
+                            <FeatureGrid
+                                changeMapView={this.props.changeMapView}
+                                srs="EPSG:4326"
+                                map={this.props.map}
+                                columnDefs={columns}
+                                features={this.props.features}
+                                style={{height: "300px", width: "100%"}}/>
+                        ) : (
+                            <div style={{height: "300px", width: "100%"}}>
+                                <div style={{
+                                    position: "relative",
+                                    width: "60px",
+                                    top: "50%",
+                                    left: "45%"
+                                }}><Spinner spinnerName="three-bounce" noFadeIn/></div>
+                            </div>
+                        )}
                     </Panel>
                 </Draggable>
             );
@@ -113,7 +195,7 @@ const SiraFeatureGrid = React.createClass({
         this.props.onDetail(
             this.props.detailsConfig.cardTemplateConfigUrl,
             this.props.detailsConfig.cardModelConfigUrl,
-            this.props.detailsConfig.wfsUrl + "&FEATUREID=" + params.data.id
+            this.props.detailsConfig.wfsUrl + "&FEATUREID=" + params.data.id + "&authkey=" + this.props.authParam.authkey
         );
 
         if (!this.props.detailOpen) {
@@ -127,10 +209,13 @@ module.exports = connect((state) => ({
     detailOpen: state.controls.detail,
     detailsConfig: state.grid.detailsConfig,
     features: state.grid && state.grid.model || [],
-    map: (state.map && state.map) || (state.config && state.config.map)
+    map: (state.map && state.map) || (state.config && state.config.map),
+    loadingGrid: state.grid.loadingGrid,
+    loadingGridError: state.grid.loadingGridError
 }), {
     onDetail: loadCardTemplate,
     onShowDetail: toggleControl.bind(null, 'detail'),
     toggleControl: toggleControl.bind(null, 'grid'),
-    changeMapView: changeMapView
+    changeMapView: changeMapView,
+    loadFeatureGridConfig: loadFeatureGridConfig
 })(SiraFeatureGrid);
