@@ -36,7 +36,7 @@ const PreviewMap = React.createClass({
             center: null,
             zoom: 15,
             activeSections: {},
-            authParam: null
+            authParam: {}
         };
     },
     componentDidUpdate() {
