@@ -148,19 +148,25 @@ const SiraFeatureGrid = React.createClass({
             headerName: 'Codice SIRA',
             field: 'codice',
             width: 100
-        }, {
+        }];
+
+        if (this.props.profile === "B") {
+            columns.push({
+                headerName: 'Codice fiscale (P.IVA)',
+                field: 'codicefisc'
+            });
+        }
+
+        columns.push({
             headerName: 'Comune',
             field: 'comune'
-        }, {
+        });
+
+        columns.push({
             headerName: 'Autorizzazioni ambientali',
             field: 'autamb',
             width: this.props.profile === "B" ? 250 : 445
-        }];
-
-        columns = this.props.profile === "B" ? columns.push({
-            headerName: 'Codice fiscale (P.IVA)',
-            field: 'codicefisc'
-        }) : columns;
+        });
 
         if (this.props.open) {
             return (
