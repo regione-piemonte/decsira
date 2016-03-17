@@ -18,11 +18,27 @@ const {Link} = require('react-router');
 
 const {toggleControl} = require('../actions/controls');
 
+const authParams = {
+    admin: {
+        userName: "admin",
+        authkey: "84279da9-f0b9-4e45-ac97-48413a48e33f"
+    },
+    A: {
+        userName: "profiloa",
+        authkey: "59ccadf2-963e-448c-bc9a-b3a5e8ed20d7"
+    },
+    B: {
+        userName: "profilob",
+        authkey: "d6e5f5a5-2d26-43aa-8af3-13f8dcc0d03c"
+    }
+};
+
 const Sira = React.createClass({
     propTypes: {
         params: React.PropTypes.shape({
             profile: React.PropTypes.string
         }),
+        featureConfigUrl: React.PropTypes.string,
         error: React.PropTypes.object,
         loading: React.PropTypes.bool,
         messages: React.PropTypes.object,
@@ -55,9 +71,14 @@ const Sira = React.createClass({
                         <div className={"toolbar-item" + (this.props.controls.detail ? " open" : "")}><a href="#" onClick={this.toggleDetail}>Scheda</a></div>
                     </div>
                     <div className="info">Profile: {this.props.params.profile}</div>
-                    <SiraMap/>
-                    <SiraQueryPanel/>
-                    <SiraFeatureGrid/>
+                    <SiraMap
+                        authParam={authParams[this.props.params.profile]}/>
+                    <SiraQueryPanel
+                        authParam={authParams[this.props.params.profile]}/>
+                    <SiraFeatureGrid
+                        authParam={authParams[this.props.params.profile]}
+                        featureConfigUrl={this.props.featureConfigUrl}
+                        profile={this.props.params.profile}/>
                     {card}
                     <Debug/>
                 </div>
@@ -81,7 +102,8 @@ module.exports = connect((state) => {
         locale: state.locale && state.locale.locale,
         messages: state.locale && state.locale.messages || {},
         cardModel: state.cardtemplate.model,
-        controls: state.controls
+        controls: state.controls,
+        featureConfigUrl: state.grid.featureConfigUrl
     };
 }, {
     toggleControl

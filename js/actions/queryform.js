@@ -14,7 +14,6 @@ const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 
 const assign = require('object-assign');
 
-
 function configureFeatureType(ft, field) {
     return {
         type: FEATURETYPE_CONFIG_LOADED,
@@ -45,16 +44,23 @@ function configureQueryFormError(e) {
     };
 }
 
-function getAttributeValues(ftName, field) {
+function getAttributeValues(ftName, field, params) {
     return (dispatch) => {
         if (field.valueService) {
-            return axios.get(field.valueService).then((response) => {
+            let url = field.valueService;
+            for (let param in params) {
+                if (params.hasOwnProperty(param)) {
+                    url += "&" + param + "=" + params[param];
+                }
+            }
+
+            return axios.get(url).then((response) => {
                 let config = response.data;
                 if (typeof config !== "object") {
                     try {
                         config = JSON.parse(config);
                     } catch(e) {
-                        dispatch(configureQueryFormError('Configuration broken (' + field.valueService + '): ' + e.message));
+                        dispatch(configureQueryFormError('Configuration broken (' + url + '): ' + e.message));
                     }
                 }
 
@@ -74,21 +80,21 @@ function getAttributeValues(ftName, field) {
     };
 }
 
-function loadFeatureTypeConfig(configUrl, configName) {
+function loadFeatureTypeConfig(url, params) {
     return (dispatch) => {
-        return axios.get(configUrl + configName).then((response) => {
+        return axios.get(url).then((response) => {
             let config = response.data;
             if (typeof config !== "object") {
                 try {
                     config = JSON.parse(config);
                 } catch(e) {
-                    dispatch(configureQueryFormError('Configuration file broken (' + configUrl + "/" + configName + '): ' + e.message));
+                    dispatch(configureQueryFormError('Configuration file broken (' + url + '): ' + e.message));
                 }
             }
 
             for (let field in config.fields) {
                 if (field) {
-                    dispatch(getAttributeValues({id: config.featureTypeName, name: config.featureTypeNameLabel}, config.fields[field]));
+                    dispatch(getAttributeValues({id: config.featureTypeName, name: config.featureTypeNameLabel}, config.fields[field], params));
                 }
             }
         }).catch((e) => {

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {GRID_MODEL_LOADED, GRID_LOAD_ERROR, GRID_CONFIG_LOADED} = require('../actions/grid');
+const {GRID_MODEL_LOADED, GRID_LOAD_ERROR, GRID_CONFIG_LOADED, SHOW_LOADING} = require('../actions/grid');
 
 const assign = require('object-assign');
 const TemplateUtils = require('../utils/TemplateUtils');
@@ -14,7 +14,9 @@ const TemplateUtils = require('../utils/TemplateUtils');
 const initialState = {
     model: null,
     detailsConfig: null,
-    modelConfig: null
+    modelConfig: null,
+    loadingGrid: false,
+    featureConfigUrl: "assets/featureGridConfig"
 };
 
 function grid(state = initialState, action) {
@@ -28,12 +30,19 @@ function grid(state = initialState, action) {
         case GRID_MODEL_LOADED: {
             let model = TemplateUtils.getModels(action.model, state.modelConfig.root, state.modelConfig.config);
             return assign({}, state, {
-                model: model
+                model: model,
+                loadingGrid: false
             });
         }
         case GRID_LOAD_ERROR: {
             return assign({}, state, {
-                loadingGridError: action.error
+                loadingGridError: action.error,
+                loadingGrid: false
+            });
+        }
+        case SHOW_LOADING: {
+            return assign({}, state, {
+                loadingGrid: action.show
             });
         }
         default:

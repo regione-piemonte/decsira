@@ -10,6 +10,7 @@ const axios = require('../../MapStore2/web/client/libs/ajax');
 const GRID_MODEL_LOADED = 'GRID_MODEL_LOADED';
 const GRID_LOAD_ERROR = 'GRID_LOAD_ERROR';
 const GRID_CONFIG_LOADED = 'GRID_CONFIG_LOADED';
+const SHOW_LOADING = 'SHOW_LOADING';
 
 function configureGrid(config) {
     return {
@@ -32,7 +33,19 @@ function configureGridError(e) {
     };
 }
 
-function loadGridModel(wfsUrl) {
+function showLoading(show) {
+    return {
+        type: SHOW_LOADING,
+        show: show
+    };
+}
+
+function loadGridModel(wfsUrl, params) {
+    let url = wfsUrl;
+    url = params.forEach((param) => {
+        url += "&" + param + "=" + params[param];
+    });
+
     return (dispatch) => {
         return axios.get(wfsUrl).then((response) => {
             dispatch(configureGridModel(response.data));
@@ -42,9 +55,18 @@ function loadGridModel(wfsUrl) {
     };
 }
 
-function loadGridModelWithFilter(wfsUrl, data) {
+function loadGridModelWithFilter(wfsUrl, data, params) {
+    let url = wfsUrl;
+    for (let param in params) {
+        if (params.hasOwnProperty(param)) {
+            url += "&" + param + "=" + params[param];
+        }
+    }
+
     return (dispatch) => {
-        return axios.post(wfsUrl, data, {
+        dispatch(showLoading(true));
+
+        return axios.post(url, data, {
           timeout: 10000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
@@ -77,6 +99,7 @@ module.exports = {
     GRID_MODEL_LOADED,
     GRID_LOAD_ERROR,
     GRID_CONFIG_LOADED,
+    SHOW_LOADING,
     configureGrid,
     configureGridModel,
     loadFeatureGridConfig,
