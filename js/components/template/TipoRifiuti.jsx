@@ -31,6 +31,7 @@ const TipoRifiuto = React.createClass({
         return (
             <div fluid={false} style={this.props.style} className="ag-blue">
                 <AgGridReact columnDefs={[
+                            {checkboxSelection: true, width: 30, headerName: ''},
                             {headerName: "Tipologia", width: 100, field: "codice"},
                             {headerName: "Descrizione", width: 500, field: "descrizione"}
                             ]}
