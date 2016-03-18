@@ -32,7 +32,7 @@ const SiraMap = (props) => {
             <WMap {...props.map} {...props.actions}>
                 {props.layers.map((layer, index) =>
                     <Layer key={layer.name} position={index} type={layer.type}
-                        options={assign({}, layer, {params: {authkey: props.authParam.authkey}})}/>
+                        options={assign({}, layer, {params: props.params})}/>
                 )}
                 <DrawSupport
                     map={props.map}
@@ -52,7 +52,7 @@ SiraMap.propTypes = {
     drawOwner: React.PropTypes.string,
     drawMethod: React.PropTypes.string,
     features: React.PropTypes.array,
-    authParam: React.PropTypes.object
+    params: React.PropTypes.object
 };
 
 SiraMap.defaultProps = {
@@ -61,7 +61,7 @@ SiraMap.defaultProps = {
     drawOwner: null,
     drawMethod: null,
     features: [],
-    authParam: null
+    params: null
 };
 
 module.exports = connect((state) => {

@@ -15,7 +15,7 @@ const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
 const SiraFeatureGrid = require('../components/SiraFeatureGrid');
 const Card = require('../components/template/Card');
-const {Link} = require('react-router');
+// const {Link} = require('react-router');
 
 const {toggleControl} = require('../actions/controls');
 
@@ -65,15 +65,14 @@ const Sira = React.createClass({
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading && "Loading...")}
                     </span>
-
-                    <div className="links"><Link to="/">Home</Link></div>
+                    <div className="links"><a href="/">Home</a></div>
                     <div className="toolbar">
                         <div className={"toolbar-item" + (this.props.controls.grid ? " open" : "")}><a href="#" onClick={this.toggleGrid}>Lista</a></div>
                         <div className={"toolbar-item" + (this.props.controls.detail ? " open" : "")}><a href="#" onClick={this.toggleDetail}>Scheda</a></div>
                     </div>
                     <div className="info">Profile: {this.props.params.profile}</div>
                     <SiraMap
-                        authParam={authParams[this.props.params.profile]}/>
+                        params={{authkey: authParams[this.props.params.profile].authkey}}/>
                     <SiraQueryPanel
                         authParam={authParams[this.props.params.profile]}/>
                     <SiraFeatureGrid

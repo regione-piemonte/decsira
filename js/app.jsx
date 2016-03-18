@@ -43,6 +43,7 @@ function startApp() {
             let locale = LocaleUtils.getUserLocale();
             store.dispatch(loadLocale('translations', locale));
 
+            // "/sira/services/queryformconfig/aua"
             store.dispatch(loadQueryFormConfig("assets/", "queryFormConfig.json"));
         });
 
