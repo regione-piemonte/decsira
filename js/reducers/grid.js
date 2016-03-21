@@ -16,7 +16,7 @@ const initialState = {
     detailsConfig: null,
     modelConfig: null,
     loadingGrid: false,
-    featureConfigUrl: "assets/featureGridConfig"
+    featureGrigConfigUrl: "assets/featureGridConfig"
 };
 
 function grid(state = initialState, action) {

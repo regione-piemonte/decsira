@@ -15,6 +15,11 @@
         "type": 2
     },
     {
+      "field": "codicefisc",
+      "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()"],
+      "type": 2
+    },
+    {
         "field": "provincia",
         "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:provincia/text()"],
         "type": 2
@@ -48,16 +53,6 @@
         "type": 1
     },
     {
-        "field": "numscheda",
-        "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:nrScheda/text()"],
-        "type": 2
-    },
-    {
-        "field": "tiporecupero",
-        "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()"],
-        "type": 2
-    },
-    {
         "type": 4,
         "field": "tiporifiuto",
         "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio"],
@@ -65,6 +60,16 @@
         {
             "field": "id",
             "xpath": ["sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id"],
+            "type": 2
+        },
+        {
+            "field": "numscheda",
+            "xpath": ["sira:SchedaRifiuto/sira:nrScheda/text()"],
+            "type": 2
+        },
+        {
+            "field": "tiporecupero",
+            "xpath": ["sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()"],
             "type": 2
         },
         {
@@ -96,6 +101,11 @@
             {
                 "field": "codice",
                 "xpath": ["sira:CodiceCER/sira:codice/text()"],
+                "type": 2
+            },
+            {
+                "field": "tipo",
+                "xpath": ["sira:CodiceCER/sira:pericoloso/text()"],
                 "type": 2
             },
             {
