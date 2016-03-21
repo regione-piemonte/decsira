@@ -31,7 +31,7 @@ const OperazioniRecupero = React.createClass({
             <div fluid={false} style={this.props.style} className="ag-blue">
                 <AgGridReact
                     columnDefs={[
-                        {headerName: "Tipologia", width: 100, field: "codice"},
+                        {headerName: "Codice", width: 100, field: "codice"},
                         {headerName: "Descrizione", width: 500, field: "descrizione"}
                         ]}
                     rowData={(filtredFeaturs[0]) ? filtredFeaturs[0].opRecupero : []}

@@ -39,7 +39,7 @@ const Sira = React.createClass({
         params: React.PropTypes.shape({
             profile: React.PropTypes.string
         }),
-        featureConfigUrl: React.PropTypes.string,
+        featureGrigConfigUrl: React.PropTypes.string,
         error: React.PropTypes.object,
         loading: React.PropTypes.bool,
         messages: React.PropTypes.object,
@@ -77,7 +77,7 @@ const Sira = React.createClass({
                         authParam={authParams[this.props.params.profile]}/>
                     <SiraFeatureGrid
                         authParam={authParams[this.props.params.profile]}
-                        featureConfigUrl={this.props.featureConfigUrl}
+                        featureGrigConfigUrl={this.props.featureGrigConfigUrl}
                         profile={this.props.params.profile}/>
                     {card}
                     <Debug/>
@@ -103,7 +103,7 @@ module.exports = connect((state) => {
         messages: state.locale && state.locale.messages || {},
         cardModel: state.cardtemplate.model,
         controls: state.controls,
-        featureConfigUrl: state.grid.featureConfigUrl
+        featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {
     toggleControl

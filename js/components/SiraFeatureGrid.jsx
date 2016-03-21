@@ -43,7 +43,7 @@ const SiraFeatureGrid = React.createClass({
             React.PropTypes.object
         ]),
         authParam: React.PropTypes.object,
-        featureConfigUrl: React.PropTypes.string,
+        featureGrigConfigUrl: React.PropTypes.string,
         profile: React.PropTypes.string,
         onDetail: React.PropTypes.func,
         onShowDetail: React.PropTypes.func,
@@ -60,7 +60,7 @@ const SiraFeatureGrid = React.createClass({
             detailOpen: true,
             loadingGrid: false,
             loadingGridError: null,
-            featureConfigUrl: null,
+            featureGrigConfigUrl: null,
             profile: null,
             expanded: true,
             header: "featuregrid.header",
@@ -75,15 +75,15 @@ const SiraFeatureGrid = React.createClass({
         };
     },
     componentDidMount() {
-        if (this.props.featureConfigUrl && this.props.profile) {
-            this.props.loadFeatureGridConfig(this.props.featureConfigUrl + this.props.profile + ".json");
+        if (this.props.featureGrigConfigUrl && this.props.profile) {
+            this.props.loadFeatureGridConfig(this.props.featureGrigConfigUrl + this.props.profile + ".json");
         }
     },
     componentWillReceiveProps(props) {
-        let url = props.featureConfigUrl;
+        let url = props.featureGrigConfigUrl;
         let profile = props.profile;
-        if (url !== this.props.featureConfigUrl && profile !== this.props.profile) {
-            this.props.loadFeatureGridConfig(this.props.featureConfigUrl + this.props.profile + ".json");
+        if (url !== this.props.featureGrigConfigUrl && profile !== this.props.profile) {
+            this.props.loadFeatureGridConfig(this.props.featureGrigConfigUrl + this.props.profile + ".json");
         }
     },
     renderHeader() {
