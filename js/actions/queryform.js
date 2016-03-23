@@ -13,6 +13,7 @@ const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 
 const assign = require('object-assign');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 function configureFeatureType(ft, field) {
     return {
@@ -47,7 +48,7 @@ function configureQueryFormError(e) {
 function getAttributeValues(ftName, field, params) {
     return (dispatch) => {
         if (field.valueService) {
-            let url = field.valueService;
+            let {url} = ConfigUtils.setUrlPlaceholders({url: field.valueService});
             for (let param in params) {
                 if (params.hasOwnProperty(param)) {
                     url += "&" + param + "=" + params[param];

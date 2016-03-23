@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const TemplateUtils = require('../utils/TemplateUtils');
 
@@ -53,8 +54,9 @@ function activateSection(section) {
  }
 
 function loadCardModel(template, modelConfig, wfsUrl) {
+    let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     return (dispatch) => {
-        return axios.get(wfsUrl).then((response) => {
+        return axios.get(url).then((response) => {
             let model = TemplateUtils.getModel(response.data, modelConfig);
             dispatch(configureCard(template, model));
         }).catch((e) => {

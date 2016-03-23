@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const GRID_MODEL_LOADED = 'GRID_MODEL_LOADED';
 const GRID_LOAD_ERROR = 'GRID_LOAD_ERROR';
@@ -41,7 +42,7 @@ function showLoading(show) {
 }
 
 function loadGridModel(wfsUrl, params) {
-    let url = wfsUrl;
+    let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     url = params.forEach((param) => {
         url += "&" + param + "=" + params[param];
     });
@@ -56,7 +57,7 @@ function loadGridModel(wfsUrl, params) {
 }
 
 function loadGridModelWithFilter(wfsUrl, data, params) {
-    let url = wfsUrl;
+    let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     for (let param in params) {
         if (params.hasOwnProperty(param)) {
             url += "&" + param + "=" + params[param];
