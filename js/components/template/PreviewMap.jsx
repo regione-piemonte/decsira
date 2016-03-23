@@ -90,7 +90,8 @@ const PreviewMap = React.createClass({
     changeMapView() {
         let center = this.getCenter();
         let zoom = this.props.zoom;
-        this.props.changeMapView( center, zoom);
+        const proj = this.props.map.projection || "EPSG:3857";
+        this.props.changeMapView( center, zoom, this.props.map.bbox, this.props.map.size, null, proj);
     }
 });
 
