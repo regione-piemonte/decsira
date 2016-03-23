@@ -17,7 +17,7 @@ require("ag-grid/dist/styles/theme-blue.css");
 const TipoRifiuto = React.createClass({
     propTypes: {
         style: React.PropTypes.object,
-        checkBoxSelection: React.PropTypes.string,
+        checkBoxSelection: React.PropTypes.bool,
         features: React.PropTypes.array,
         selectRifiuto: React.PropTypes.func
     },
@@ -35,7 +35,7 @@ const TipoRifiuto = React.createClass({
                 <AgGridReact columnDefs={
                         [
                             {
-                                checkboxSelection: this.props.checkBoxSelection === "true",
+                                checkboxSelection: this.props.checkBoxSelection,
                                 width: 30,
                                 headerName: ''
                             },
