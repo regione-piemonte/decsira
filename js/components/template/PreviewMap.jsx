@@ -12,6 +12,9 @@ const CoordinatesUtils = require('../../../MapStore2/web/client/utils/Coordinate
 const PMap = require('../../../MapStore2/web/client/components/map/' + mapType + '/Map');
 const Layer = require('../../../MapStore2/web/client/components/map/' + mapType + '/Layer');
 require('../../../MapStore2/web/client/components/map/' + mapType + '/plugins/index');
+const {changeMapView} = require('../../../MapStore2/web/client/actions/map');
+const {Button} = require("react-bootstrap");
+const img = require('../../../MapStore2/web/client/components/data/featuregrid/images/magnifier.png');
 const assign = require('object-assign');
 
 
@@ -25,7 +28,8 @@ const PreviewMap = React.createClass({
             center: React.PropTypes.object,
             zoom: React.PropTypes.number,
             activeSections: React.PropTypes.object,
-            authParam: React.PropTypes.object
+            authParam: React.PropTypes.object,
+            changeMapView: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -36,7 +40,8 @@ const PreviewMap = React.createClass({
             center: null,
             zoom: 15,
             activeSections: {},
-            authParam: null
+            authParam: null,
+            changeMapView: () => {}
         };
     },
     componentDidUpdate() {
@@ -48,6 +53,7 @@ const PreviewMap = React.createClass({
     render() {
         return this.props.map && this.props.center && this.props.center.coordinates ?
         (
+        <div>
                 <PMap
                 ref="mappa"
                 {...this.props.map}
@@ -70,13 +76,21 @@ const PreviewMap = React.createClass({
                     <Layer key={layer.name} position={index} type={layer.type}
                         options={assign({}, layer, {params: {authkey: this.props.authParam.authkey}})}/>
                 )}
+
                 </PMap>
+                <Button onClick={this.changeMapView} style={{position: "relative", top: "-" + this.props.style.height, 'float': "right", margin: "2px"}}><img src={img} width={16}/></Button>
+        </div>
         ) : <span/>;
     },
     getCenter() {
         let point = {crs: this.props.pointSRS, x: this.props.center.coordinates[0], y: this.props.center.coordinates[1]};
         return this.props.pointSRS !== "EPSG:4326" ?
             CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
+    },
+    changeMapView() {
+        let center = this.getCenter();
+        let zoom = this.props.zoom;
+        this.props.changeMapView( center, zoom);
     }
 });
 
@@ -86,5 +100,8 @@ module.exports = connect((state) => {
         layers: state.config && state.config.layers || [],
         activeSections: state.cardtemplate.activeSections || {}
     };
-})(PreviewMap);
+}, {
+    changeMapView: changeMapView
+}
+)(PreviewMap);
 

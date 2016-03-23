@@ -179,7 +179,8 @@ const SiraFeatureGrid = React.createClass({
                                 map={this.props.map}
                                 columnDefs={columns}
                                 features={this.props.features}
-                                style={{height: "300px", width: "100%"}}/>
+                                style={{height: "300px", width: "100%"}}
+                                maxZoom={16}/>
                         ) : (
                             <div style={{height: "300px", width: "100%"}}>
                                 <div style={{
