@@ -11,6 +11,7 @@ const {AgGridReact} = require('ag-grid-react');
 const {selectRifiuto} = require('../../actions/rifiuti');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
+const {selectSection} = require('../../actions/card');
 require("ag-grid/dist/styles/ag-grid.css");
 require("ag-grid/dist/styles/theme-blue.css");
 
@@ -19,14 +20,17 @@ const TipoRifiuto = React.createClass({
         style: React.PropTypes.object,
         checkBoxSelection: React.PropTypes.bool,
         features: React.PropTypes.array,
-        selectRifiuto: React.PropTypes.func
+        selectRifiuto: React.PropTypes.func,
+        cerOpSec: React.PropTypes.array,
+        selectSection: React.PropTypes.func
     },
     getDefaultProps() {
         return {
             style: {height: "200px", width: "100%"},
             features: [],
             checkBoxSelection: false,
-            selectRifiuto: () => {}
+            selectRifiuto: () => {},
+            cerOpSec: []
         };
     },
     render() {
@@ -68,10 +72,15 @@ const TipoRifiuto = React.createClass({
             </div>);
     },
     selectDettaglio(params) {
+        this.props.cerOpSec.forEach( function(sec) {
+            this.props.selectSection(sec, true);
+        }, this);
         this.props.selectRifiuto((params.selectedRows[0]) ? params.selectedRows[0].id : '');
     }
 
 });
 module.exports = connect(null, dispatch => {
-    return bindActionCreators({selectRifiuto: selectRifiuto}, dispatch);
+    return bindActionCreators({
+        selectRifiuto: selectRifiuto,
+        selectSection: selectSection}, dispatch);
 })(TipoRifiuto);
