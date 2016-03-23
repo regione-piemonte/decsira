@@ -80,7 +80,7 @@ module.exports = {
             host: "mapstore.geo-solutions.it",
             target: "http://mapstore.geo-solutions.it"
         }, {
-            path: new RegExp("/mapstore/proxy(.*)"),
+            path: new RegExp("/sira/proxy(.*)"),
             rewrite: rewriteUrl("/sira/proxy$1"),
             host: "localhost",
             target: "http://localhost:8080"
