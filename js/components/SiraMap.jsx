@@ -12,7 +12,7 @@ const {bindActionCreators} = require('redux');
 
 const assign = require('object-assign');
 
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {changeMapView, clickOnMap} = require('../../MapStore2/web/client/actions/map');
 
 const {
     changeDrawingStatus,
@@ -26,14 +26,23 @@ require('../../MapStore2/web/client/components/map/' + mapType + '/plugins/index
 
 const DrawSupport = require('../../MapStore2/web/client/components/map/' + mapType + '/DrawSupport');
 
+const ScaleBar = require("../../MapStore2/web/client/components/map/" + mapType + "/ScaleBar");
+
 const SiraMap = (props) => {
     return props.map ?
         (
             <WMap {...props.map} {...props.actions}>
-                {props.layers.map((layer, index) =>
-                    <Layer key={layer.name} position={index} type={layer.type}
-                        options={assign({}, layer, {params: props.params})}/>
+                {
+                    props.layers.map((layer, index) => {
+                        let options = assign({}, layer, {srs: props.map.projection});
+                        options = layer.type === "wms" ? assign({}, options, {params: props.params}) : options;
+                        return (
+                            <Layer key={layer.name || layer.title} position={index} type={layer.type}
+                                options={options}/>
+                        );
+                    }
                 )}
+
                 <DrawSupport
                     map={props.map}
                     drawStatus={props.drawStatus}
@@ -42,6 +51,10 @@ const SiraMap = (props) => {
                     features={props.features}
                     onChangeDrawingStatus={props.actions.onChangeDrawingStatus}
                     onEndDrawing={props.actions.onEndDrawing}/>
+
+                <ScaleBar
+                    className={'sira-scalebar ol-scale-line'}
+                    key="scaleBar"/>
             </WMap>
         ) : <span/>;
 };
@@ -67,7 +80,7 @@ SiraMap.defaultProps = {
 module.exports = connect((state) => {
     return {
         map: (state.map && state.map) || (state.config && state.config.map),
-        layers: state.config && state.config.layers || [],
+        layers: state.layers && state.layers.flat || [],
         drawStatus: state.draw.drawStatus,
         drawOwner: state.draw.drawOwner,
         drawMethod: state.draw.drawMethod,
@@ -78,7 +91,8 @@ module.exports = connect((state) => {
         actions: bindActionCreators({
             onMapViewChanges: changeMapView,
             onChangeDrawingStatus: changeDrawingStatus,
-            onEndDrawing: endDrawing
+            onEndDrawing: endDrawing,
+            onClick: clickOnMap
         }, dispatch)
     };
 })(SiraMap);

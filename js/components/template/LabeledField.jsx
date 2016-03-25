@@ -35,4 +35,3 @@ const LabeledField = React.createClass({
 });
 
 module.exports = LabeledField;
-

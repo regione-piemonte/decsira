@@ -2,29 +2,61 @@
   "map": {
     "projection": "EPSG:900913",
     "units": "m",
-    "center": {"x": 1250000.000000, "y": 5370000.000000, "crs": "EPSG:900913"},
+    "center": {"x": 1450000.000000, "y": 5570000.000000, "crs": "EPSG:900913"},
     "zoom":7,
     "maxExtent": [
       -20037508.34, -20037508.34,
       20037508.34, 20037508.34
     ],
-    "layers": [{
-      "type": "osm",
-      "title": "Open Street Map",
-      "name": "mapnik",
-            "source": "osm",
-      "group": "background",
-            "visibility": true
-        },
-        {
-  				"type": "wms",
-          "url":"{geoserverUrl}/wms",
-          "visibility": false,
-  				"title": "AUA",
-  				"name": "sira:AutorizzazioneUnicaAmbientale",
-  				"group": "Overlays",
-  				"format": "image/png",
-          "visibility": true
-  			}]
+    "layers":[
+      {
+        "type": "ol",
+        "title": "None",
+        "name": "None",
+        "source": "ol",
+        "group": "background",
+        "visibility": false
+      },
+      {
+        "type": "osm",
+        "title": "Open Street Map",
+        "name": "mapnik",
+        "source": "osm",
+        "group": "background",
+        "visibility": true
+      },
+      {
+        "type": "google",
+        "title": "Google HYBRID",
+        "name": "HYBRID",
+        "source": "google",
+        "group": "background",
+        "visibility": false
+      },
+      {
+        "type": "google",
+        "title": "Google TERRAIN",
+        "name": "TERRAIN",
+        "source": "google",
+        "group": "background",
+        "visibility": false
+      },
+      {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
+        "name": "OrtofotoRegione2010",
+        "title": "Ortofoto Piemonte 2009-2011",
+        "group": "background",
+        "visibility": false
+      },
+      {
+  			"type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+  			"title": "AUA",
+  			"name": "sira:AutorizzazioneUnicaAmbientale",
+  			"group": "Overlays",
+  			"format": "image/png"
+  		}]
   }
 }

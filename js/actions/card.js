@@ -47,11 +47,11 @@ function selectSection(section, active) {
 }
 
 function activateSection(section) {
-     return {
-         type: ACTIVE_SECTION,
-         section: section
-     };
- }
+    return {
+        type: ACTIVE_SECTION,
+        section: section
+    };
+}
 
 function loadCardModel(template, modelConfig, wfsUrl) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});

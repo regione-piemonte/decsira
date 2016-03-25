@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {TOGGLE_CONTROL} = require('../actions/controls');
+const {TOGGLE_SIRA_CONTROL} = require('../actions/controls');
 const {GRID_MODEL_LOADED, SHOW_LOADING} = require('../actions/grid');
 const assign = require('object-assign');
 
@@ -18,7 +18,7 @@ const initialState = {
 
 function controls(state = initialState, action) {
     switch (action.type) {
-        case TOGGLE_CONTROL: {
+        case TOGGLE_SIRA_CONTROL: {
             return assign({}, state, {
                 [action.control]: !state[action.control]
             });
