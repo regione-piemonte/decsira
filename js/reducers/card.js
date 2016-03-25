@@ -6,7 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_TOOGLE, SELECT_SECTION, ACTIVE_SECTION} = require('../actions/card');
+const {
+    CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR,
+    CARD_TEMPLATE_TOOGLE, SELECT_SECTION, ACTIVE_SECTION
+} = require('../actions/card');
+
 const assign = require('object-assign');
 
 const initialState = {

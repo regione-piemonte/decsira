@@ -12,7 +12,7 @@ const {isObject} = require('lodash');
 
 const Draggable = require('react-draggable');
 
-const {Modal, Panel, Grid, Row, Col} = require('react-bootstrap');
+const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 const FeatureGrid = require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 
@@ -23,10 +23,15 @@ const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('./GoToDetail');
 
 const {loadCardTemplate} = require('../actions/card');
-const {toggleControl} = require('../actions/controls');
+const {toggleSiraControl} = require('../actions/controls');
 const {loadFeatureGridConfig} = require('../actions/grid');
 
 const Spinner = require('react-spinkit');
+
+const {
+    // SiraQueryPanel action functions
+    expandFilterPanel
+} = require('../actions/queryform');
 
 const SiraFeatureGrid = React.createClass({
     propTypes: {
@@ -47,9 +52,10 @@ const SiraFeatureGrid = React.createClass({
         profile: React.PropTypes.string,
         onDetail: React.PropTypes.func,
         onShowDetail: React.PropTypes.func,
-        toggleControl: React.PropTypes.func,
+        toggleSiraControl: React.PropTypes.func,
         changeMapView: React.PropTypes.func,
-        loadFeatureGridConfig: React.PropTypes.func
+        loadFeatureGridConfig: React.PropTypes.func,
+        onExpandFilterPanel: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -69,9 +75,10 @@ const SiraFeatureGrid = React.createClass({
             detailsConfig: {},
             onDetail: () => {},
             onShowDetail: () => {},
-            toggleControl: () => {},
+            toggleSiraControl: () => {},
             changeMapView: () => {},
-            loadFeatureGridConfig: () => {}
+            loadFeatureGridConfig: () => {},
+            onExpandFilterPanel: () => {}
         };
     },
     componentDidMount() {
@@ -86,6 +93,10 @@ const SiraFeatureGrid = React.createClass({
             this.props.loadFeatureGridConfig(this.props.featureGrigConfigUrl + this.props.profile + ".json");
         }
     },
+    onGridClose() {
+        this.props.toggleSiraControl();
+        this.props.onExpandFilterPanel(true);
+    },
     renderHeader() {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
 
@@ -97,7 +108,7 @@ const SiraFeatureGrid = React.createClass({
                             <span>{header}</span>
                         </Col>
                         <Col xs={1} sm={1} md={1} lg={1}>
-                            <button onClick={this.props.toggleControl} className="close grid-close"><span>×</span></button>
+                            <button onClick={this.onGridClose} className="close grid-close"><span>×</span></button>
                         </Col>
                     </Row>
                 </Grid>
@@ -170,25 +181,32 @@ const SiraFeatureGrid = React.createClass({
 
         if (this.props.open) {
             return (
-                <Draggable start={{x: 20, y: 50}} handle=".panel-heading">
+                <Draggable start={{x: 700, y: 80}} handle=".panel-heading">
                     <Panel className="featuregrid-container" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
                         {!this.props.loadingGrid ? (
-                            <FeatureGrid
-                                changeMapView={this.props.changeMapView}
-                                srs="EPSG:4326"
-                                map={this.props.map}
-                                columnDefs={columns}
-                                features={this.props.features}
-                                style={{height: "300px", width: "100%"}}
-                                maxZoom={16}/>
+                            <div>
+                                <Button
+                                    style={{marginBottom: "12px"}}
+                                    onClick={this.onGridClose}><span>Torna al pannello di ricerca</span>
+                                </Button>
+                                <FeatureGrid
+                                    changeMapView={this.props.changeMapView}
+                                    srs="EPSG:4326"
+                                    map={this.props.map}
+                                    columnDefs={columns}
+                                    features={this.props.features}
+                                    style={{height: "300px", width: "100%"}}
+                                    maxZoom={16}/>
+                            </div>
                         ) : (
                             <div style={{height: "300px", width: "100%"}}>
                                 <div style={{
                                     position: "relative",
                                     width: "60px",
                                     top: "50%",
-                                    left: "45%"
-                                }}><Spinner spinnerName="three-bounce" noFadeIn/></div>
+                                    left: "45%"}}>
+                                    <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                                </div>
                             </div>
                         )}
                     </Panel>
@@ -212,8 +230,8 @@ const SiraFeatureGrid = React.createClass({
 });
 
 module.exports = connect((state) => ({
-    open: state.controls.grid,
-    detailOpen: state.controls.detail,
+    open: state.siraControls.grid,
+    detailOpen: state.siraControls.detail,
     detailsConfig: state.grid.detailsConfig,
     features: state.grid && state.grid.model || [],
     map: (state.map && state.map) || (state.config && state.config.map),
@@ -221,8 +239,9 @@ module.exports = connect((state) => ({
     loadingGridError: state.grid.loadingGridError
 }), {
     onDetail: loadCardTemplate,
-    onShowDetail: toggleControl.bind(null, 'detail'),
-    toggleControl: toggleControl.bind(null, 'grid'),
+    onShowDetail: toggleSiraControl.bind(null, 'detail'),
+    toggleSiraControl: toggleSiraControl.bind(null, 'grid'),
     changeMapView: changeMapView,
-    loadFeatureGridConfig: loadFeatureGridConfig
+    loadFeatureGridConfig: loadFeatureGridConfig,
+    onExpandFilterPanel: expandFilterPanel
 })(SiraFeatureGrid);

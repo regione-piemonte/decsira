@@ -11,27 +11,48 @@ const {syncHistory, routeReducer} = require('redux-simple-router');
 const {hashHistory} = require('react-router');
 const reduxRouterMiddleware = syncHistory(hashHistory);
 
+const {isArray} = require('lodash');
+const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
+
+const layers = require('../../MapStore2/web/client/reducers/layers');
+const mapConfig = require('../../MapStore2/web/client/reducers/config');
+
+const map = require('../../MapStore2/web/client/reducers/map');
+
 const queryform = require('../../MapStore2/web/client/reducers/queryform');
 const queryformconfig = require('../reducers/queryform');
 
 const assign = require('object-assign');
 
 const allReducers = combineReducers({
+    mapInfo: require('../../MapStore2/web/client/reducers/mapInfo'),
+    search: require('../../MapStore2/web/client/reducers/search').searchResults,
     browser: require('../../MapStore2/web/client/reducers/browser'),
-    config: require('../../MapStore2/web/client/reducers/config'),
     locale: require('../../MapStore2/web/client/reducers/locale'),
-    map: require('../../MapStore2/web/client/reducers/map'),
     draw: require('../../MapStore2/web/client/reducers/draw'),
-    controls: require('../reducers/controls'),
+    siraControls: require('../reducers/controls'),
+    controls: require('../../MapStore2/web/client/product/reducers/controls'),
     routing: routeReducer,
     queryform: () => {return {}; },
     queryformconfig: () => {return {}; },
+    map: () => {return null; },
+    layers: () => {return null; },
     cardtemplate: require('../reducers/card'),
     grid: require('../reducers/grid'),
     rifiuti: require('../reducers/rifiuti')
 });
 
 const rootReducer = (state = {}, action) => {
+    let mapState = mapConfig({
+        map: state && state.map,
+        layers: state && state.layers
+    }, action);
+
+    if (mapState && isArray(mapState.layers)) {
+        let groups = LayersUtils.getLayersByGroup(mapState.layers);
+        mapState.layers = {flat: LayersUtils.reorder(groups, mapState.layers), groups: groups};
+    }
+
     let queryformconfigState = queryformconfig(state.queryformconfig, action);
     let queryformState = queryform(state.queryform, action);
 
@@ -41,7 +62,9 @@ const rootReducer = (state = {}, action) => {
 
     let newState = assign({}, {...allReducers(state, action)}, {
         queryformconfig: queryformconfigState,
-        queryform: queryformState
+        queryform: queryformState,
+        map: mapState && mapState.map ? map(mapState.map, action) : null,
+        layers: mapState ? layers(mapState.layers, action) : null
     });
 
     return newState;

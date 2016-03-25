@@ -55,28 +55,29 @@ const PreviewMap = React.createClass({
         (
         <div>
                 <PMap
-                ref="mappa"
-                {...this.props.map}
-                style={this.props.style}
-                mapOptions={{interactions: {
-                    doubleClickZoom: false,
-                    dragPan: false,
-                    altShiftDragRotate: false,
-                    keyboard: false,
-                    mouseWheelZoom: false,
-                    shiftDragZoom: false,
-                    pinchRotate: false,
-                    pinchZoom: false
-                }}}
-                zoomControl={false}
-                zoom={this.props.zoom}
-                center={this.getCenter()}
-                id="scheda_pMap">
-                {this.props.layers.map((layer, index) =>
-                    <Layer key={layer.name} position={index} type={layer.type}
-                        options={assign({}, layer, {params: {authkey: this.props.authParam.authkey}})}/>
-                )}
-
+                    ref="mappa"
+                    {...this.props.map}
+                    style={this.props.style}
+                    mapOptions={{interactions: {
+                        doubleClickZoom: false,
+                        dragPan: false,
+                        altShiftDragRotate: false,
+                        keyboard: false,
+                        mouseWheelZoom: false,
+                        shiftDragZoom: false,
+                        pinchRotate: false,
+                        pinchZoom: false
+                    }}}
+                    zoomControl={false}
+                    zoom={this.props.zoom}
+                    center={this.getCenter()}
+                    id="scheda_pMap">
+                    {
+                        this.props.layers.map((layer, index) =>
+                            <Layer key={layer.title || layer.name} position={index} type={layer.type}
+                                options={assign({}, layer, {params: {authkey: this.props.authParam.authkey}})}/>
+                        )
+                    }
                 </PMap>
                 <Button onClick={this.changeMapView} style={{position: "relative", top: "-" + this.props.style.height, 'float': "right", margin: "2px"}}><img src={img} width={16}/></Button>
         </div>
@@ -98,10 +99,27 @@ const PreviewMap = React.createClass({
 module.exports = connect((state) => {
     return {
         map: (state.map && state.map) || (state.config && state.config.map),
-        layers: state.config && state.config.layers || [],
+        layers: [
+            {
+              "type": "osm",
+              "title": "Open Street Map Preview",
+              "name": "mapnik",
+              "source": "osm",
+              "group": "background",
+              "visibility": true
+            },
+            {
+              "type": "wms",
+              "url": "http://sira.csi.geo-solutions.it/geoserver/wms",
+              "visibility": true,
+              "title": "AUA Preview",
+              "name": "sira:AutorizzazioneUnicaAmbientale",
+              "group": "Overlays",
+              "format": "image/png"
+            }
+        ],
         activeSections: state.cardtemplate.activeSections || {}
     };
 }, {
     changeMapView: changeMapView
-}
-)(PreviewMap);
+})(PreviewMap);

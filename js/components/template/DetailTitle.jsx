@@ -7,7 +7,7 @@
  */
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
-const {toggleControl} = require('../../actions/controls');
+const {toggleSiraControl} = require('../../actions/controls');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 
@@ -16,14 +16,14 @@ const DetailTitle = React.createClass({
         title: React.PropTypes.string,
         subtitle: React.PropTypes.string,
         id: React.PropTypes.number,
-        toggleControl: React.PropTypes.func
+        toggleSiraControl: React.PropTypes.func
     },
     getDefaultProps() {
         return {
             title: '',
             subtitle: '',
             id: null,
-            toggleControl: () => {}
+            toggleSiraControl: () => {}
         };
     },
     render() {
@@ -34,7 +34,7 @@ const DetailTitle = React.createClass({
                         <h4>{this.props.title}<br/><small>{this.props.subtitle + this.props.id}</small></h4>
                     </Col>
                     <Col xs={1} sm={1} md={1} lg={1}>
-                        <button onClick={this.props.toggleControl} className="close card-close"><span>×</span></button>
+                        <button style={{paddingRight: "15px"}} onClick={this.props.toggleSiraControl} className="close card-close"><span>×</span></button>
                     </Col>
                 </Row>
             </Grid>
@@ -43,5 +43,5 @@ const DetailTitle = React.createClass({
 });
 
 module.exports = connect(null, dispatch => {
-    return bindActionCreators({toggleControl: toggleControl.bind(null, 'detail')}, dispatch);
+    return bindActionCreators({toggleSiraControl: toggleSiraControl.bind(null, 'detail')}, dispatch);
 })(DetailTitle);

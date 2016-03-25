@@ -12,8 +12,8 @@ const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
 const {Modal} = require('react-bootstrap');
-const {toggleControl} = require("../../actions/controls");
-const toggleDetail = toggleControl.bind(null, 'detail');
+const {toggleSiraControl} = require("../../actions/controls");
+const toggleDetail = toggleSiraControl.bind(null, 'detail');
 
 const Draggable = require('react-draggable');
 require("./card.css");
@@ -21,12 +21,12 @@ require("./card.css");
 const Card = React.createClass({
     propTypes: {
         card: React.PropTypes.shape({
-                template: React.PropTypes.oneOfType([
-                        React.PropTypes.string,
-                        React.PropTypes.func]),
-                loadingCardTemplateError: React.PropTypes.oneOfType([
-                        React.PropTypes.string,
-                        React.PropTypes.object])
+            template: React.PropTypes.oneOfType([
+                    React.PropTypes.string,
+                    React.PropTypes.func]),
+            loadingCardTemplateError: React.PropTypes.oneOfType([
+                    React.PropTypes.string,
+                    React.PropTypes.object])
         }),
         open: React.PropTypes.bool,
         model: React.PropTypes.object,
@@ -50,8 +50,10 @@ const Card = React.createClass({
         }
 
         return (
-            <Modal show={ (exception) ? true : false} bsSize="small"
-            onHide={this.props.toggleDetail} >
+            <Modal
+                show={ (exception) ? true : false}
+                bsSize="small"
+                onHide={this.props.toggleDetail} >
                 <Modal.Header closeButton>
                     <Modal.Title>Data Exception</Modal.Title>
                 </Modal.Header>
@@ -67,7 +69,7 @@ const Card = React.createClass({
         return (this.props.card.loadingCardTemplateError) ? (
                 this.renderLoadTemplateException()
             ) : (
-            <Draggable start={{x: 600, y: 83}} handle=".panel-heading">
+            <Draggable start={{x: 672, y: 180}} handle=".panel-heading">
                 <div className="scheda-sira">
                     <TemplateSira template={this.props.card.template} model={this.props.model}/>
                 </div>
@@ -79,9 +81,11 @@ const Card = React.createClass({
 });
 module.exports = connect((state) => {
     return {
-            card: state.cardtemplate || {},
-            open: state.controls.detail
+        card: state.cardtemplate || {},
+        open: state.siraControls.detail
     };
 }, dispatch => {
-    return bindActionCreators({toggleDetail: toggleDetail}, dispatch);
+    return bindActionCreators({
+        toggleDetail: toggleDetail
+    }, dispatch);
 })(Card);

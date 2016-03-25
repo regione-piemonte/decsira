@@ -20,6 +20,7 @@ const Draggable = require('react-draggable');
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 
+const assign = require('object-assign');
 const Spinner = require('react-spinkit');
 
 require('../../assets/css/sira.css');
@@ -164,15 +165,15 @@ const SiraQueryPanel = React.createClass({
 
         const heading = this.props.filterPanelExpanded ? (
             <span>
-                <span>{header}</span>
-                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
+                <span style={{paddingLeft: "15px"}}>{header}</span>
+                <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
                     <Glyphicon glyph="glyphicon glyphicon-collapse-down collapsible"/>
                 </button>
             </span>
         ) : (
             <span>
-                <span>{header}</span>
-                <button onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
+                <span style={{paddingLeft: "15px"}}>{header}</span>
+                <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
                     <Glyphicon glyph="glyphicon glyphicon-expand collapsible"/>
                 </button>
             </span>
@@ -195,7 +196,7 @@ const SiraQueryPanel = React.createClass({
     },
     renderQueryPanel() {
         return (
-            <Draggable start={{x: 670, y: 15}} handle=".handle_querypanel">
+            <Draggable start={{x: 700, y: 15}} handle=".handle_querypanel">
                 <Panel className="querypanel-container" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
                     {this.renderDatasetHeader()}
                     <QueryBuilder
@@ -217,7 +218,7 @@ const SiraQueryPanel = React.createClass({
                         spatialPanelExpanded={this.props.spatialPanelExpanded}
                         attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
                         spatialFilterActions={this.props.queryFormActions.spatialFilterActions}
-                        queryToolbarActions={this.props.queryFormActions.queryToolbarActions}/>
+                        queryToolbarActions={assign({}, this.props.queryFormActions.queryToolbarActions, {onQuery: this.onQuery})}/>
                 </Panel>
             </Draggable>
         );
@@ -233,14 +234,14 @@ const SiraQueryPanel = React.createClass({
         }
 
         return (
-            <Modal show={loadingError ? true : false} bsSize="small">
-                <Modal.Header>
+            <Modal show={loadingError ? true : false} bsSize="small" id="loading-error-dialog">
+                <Modal.Header className="dialog-error-header">
                     <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className="mapstore-error">{exception}</div>
+                <Modal.Body className="dialog-error-body">
+                    <div>{exception}</div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="dialog-error-footer">
                 </Modal.Footer>
             </Modal>
         );
@@ -262,14 +263,19 @@ const SiraQueryPanel = React.createClass({
                     position: "fixed",
                     width: "60px",
                     top: "50%",
-                    left: "50%"}}><Spinner spinnerName="three-bounce"/></div>
+                    left: "50%"}}>
+                    <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                </div>
             );
+    },
+    onQuery: function(url, filter, params) {
+        this.props.siraActions.onExpandFilterPanel(false);
+        this.props.queryFormActions.queryToolbarActions.onQuery(url, filter, params);
     }
 });
 
 module.exports = connect((state) => {
     return {
-
         // SiraQueryPanel prop
         filterPanelExpanded: state.queryformconfig.filterPanelExpanded,
         loadingQueryFormConfigError: state.queryformconfig.loadingQueryFormConfigError,

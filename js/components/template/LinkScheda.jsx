@@ -10,7 +10,7 @@ const {Button} = require('react-bootstrap');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const {loadCardModelConfig, activateSection} = require('../../actions/card');
-const {toggleControl} = require('../../actions/controls');
+const {toggleSiraControl} = require('../../actions/controls');
 const LinkScheda = React.createClass({
     propTypes: {
         id: React.PropTypes.string,
@@ -67,14 +67,13 @@ const LinkScheda = React.createClass({
 module.exports = connect((state) => {
     return {
             card: state.cardtemplate || {},
-            open: state.controls.detail,
+            open: state.siraControls.detail,
             detailsConfig: state.grid.detailsConfig
     };
 }, dispatch => {
     return bindActionCreators({
-        toggleDetail: toggleControl,
+        toggleDetail: toggleSiraControl,
         loadCardModelConfig: loadCardModelConfig,
         activateSection: activateSection
     }, dispatch);
 })(LinkScheda);
-

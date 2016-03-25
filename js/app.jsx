@@ -15,11 +15,6 @@ const ReactDOM = require('react-dom');
 
 const {Provider} = require('react-redux');
 
-const {Router, Route, hashHistory} = require('react-router');
-
-const Sira = require('./containers/Sira');
-const Home = require('./containers/Home');
-
 const store = require('./stores/store');
 
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
@@ -32,6 +27,8 @@ const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 const {loadQueryFormConfig} = require('./actions/queryform');
 
 function startApp() {
+    const App = require('./containers/App');
+
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
 
     ConfigUtils
@@ -49,10 +46,7 @@ function startApp() {
 
     ReactDOM.render(
         <Provider store={store}>
-            <Router history={hashHistory}>
-                <Route path="/" component={Home}/>
-                <Route path="/map/:profile" component={Sira}/>
-            </Router>
+            <App/>
         </Provider>
         , document.getElementById("container")
     );

@@ -16,13 +16,15 @@ const {Link} = require('react-router');
 const {Glyphicon} = require('react-bootstrap');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
+require('../../assets/css/home.css');
+
 const Home = (props) => (
     <Localized messages={props.messages} locale={props.locale}>
-        <div>
+        <div className="home">
             <div className="homepage">
                 <div className="header">
                     <div className="header-text">
-                        Sistema della conoscenza dell'Ambiente
+                        Sistema della conoscenza dell&apos;Ambiente
                     </div>
                     <div className="header-burger">
                         <Glyphicon glyph="glyphicon glyphicon-menu-hamburger"/>
