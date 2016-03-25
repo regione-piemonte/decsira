@@ -38,8 +38,7 @@ const allReducers = combineReducers({
     map: () => {return null; },
     layers: () => {return null; },
     cardtemplate: require('../reducers/card'),
-    grid: require('../reducers/grid'),
-    rifiuti: require('../reducers/rifiuti')
+    grid: require('../reducers/grid')
 });
 
 const rootReducer = (state = {}, action) => {

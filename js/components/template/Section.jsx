@@ -23,13 +23,9 @@ const Section = React.createClass({
     getDefaultProps() {
         return {
             activeSections: {},
-            selectSection: () => {}
+            selectSection: () => {},
+            expanded: false
         };
-    },
-    componentDidMount() {
-        if (this.props.expanded && !this.isActive()) {
-            this.props.selectSection(this.props.eventKey, true);
-        }
     },
     renderHeader() {
         let isActive = this.isActive();
@@ -48,7 +44,13 @@ const Section = React.createClass({
         );
     },
     isActive() {
-        return (this.props.activeSections.hasOwnProperty(this.props.eventKey) && this.props.activeSections[this.props.eventKey]);
+        let active = false;
+        if (this.props.activeSections.hasOwnProperty(this.props.eventKey)) {
+            active = this.props.activeSections[this.props.eventKey];
+        } else {
+            active = this.props.expanded;
+        }
+        return active;
     }
 });
 
