@@ -25,8 +25,15 @@ const initialState = {
 function queryformconfig(state = initialState, action) {
     switch (action.type) {
         case FEATURETYPE_CONFIG_LOADED: {
+            let attributes = [...state.attributes, action.field];
+
+            // Sorting the attributes by the given index in configuration
+            attributes.sort((attA, attB) => {
+                return attA.index - attB.index;
+            });
+
             return assign({}, state, {
-                attributes: [...state.attributes, action.field],
+                attributes: attributes,
                 featureTypeName: action.ftName,
                 featureTypeNameLabel: action.ftNameLabel
             });
