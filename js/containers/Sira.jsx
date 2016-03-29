@@ -123,6 +123,27 @@ const ZoomToMaxExtentButton = connect((state) => ({
 
 const ToggleButton = require('../../MapStore2/web/client/components/buttons/ToggleButton');
 
+const {changeLocateState} = require('../../MapStore2/web/client/actions/locate');
+const LocateBtn = connect((state) => ({
+    locate: state.locate && state.locate.state || 'DISABLED'
+}), {
+    onClick: changeLocateState
+})(require('../../MapStore2/web/client/components/mapcontrols/locate/LocateBtn'));
+
+const lineRuleIcon = require('../../MapStore2/web/client/product/assets/img/line-ruler.png');
+
+const {changeMeasurementState} = require('../../MapStore2/web/client/actions/measurement');
+const MeasureComponent = connect((state) => {
+    return {
+        measurement: state.measurement || {},
+        lineMeasureEnabled: state.measurement && state.measurement.lineMeasureEnabled || false,
+        areaMeasureEnabled: state.measurement && state.measurement.areaMeasureEnabled || false,
+        bearingMeasureEnabled: state.measurement && state.measurement.bearingMeasureEnabled || false
+    };
+}, {
+    toggleMeasure: changeMeasurementState
+})(require('../../MapStore2/web/client/components/mapcontrols/measure/MeasureComponent'));
+
 const Sira = React.createClass({
     propTypes: {
         params: React.PropTypes.shape({
@@ -190,10 +211,15 @@ const Sira = React.createClass({
 
                     {homeButton}
 
+                    <LocateBtn
+                        key="locate"
+                        tooltip={<Message msgId="locate.tooltip"/>}/>
+
                     <Info
                         key="infoButton"
                         isButton={true}
                         glyphicon="info-sign"/>
+
                     <LayerTree
                         key="layerSwitcher"
                         isPanel={true}
@@ -201,6 +227,7 @@ const Sira = React.createClass({
                         title={<Message msgId="layers"/>}
                         helpText={<Message msgId="helptexts.layerSwitcher"/>}
                         icon={<img src={layersIcon}/>}/>
+
                     <BackgroundSwitcher
                         key="backgroundSwitcher"
                         isPanel={true}
@@ -208,6 +235,20 @@ const Sira = React.createClass({
                         helpText={<Message msgId="helptexts.backgroundSwitcher"/>}
                         buttonTooltip={<Message msgId="backgroundSwither.tooltip"/>}
                         icon={<Glyphicon glyph="globe"/>}/>
+
+                    <MeasureComponent
+                        key="measureComponent"
+                        icon={<img src={lineRuleIcon}/>}
+                        isPanel={true}
+                        title={<div><Message msgId="measureComponent.title"/></div>}
+                        buttonTooltip={<Message msgId="measureComponent.tooltip"/>}
+                        helpText={<Message msgId="helptexts.measureComponent"/>}
+                        lengthButtonText={<Message msgId="measureComponent.lengthButtonText"/>}
+                        areaButtonText={<Message msgId="measureComponent.areaButtonText"/>}
+                        resetButtonText={<Message msgId="measureComponent.resetButtonText"/>}
+                        lengthLabel={<Message msgId="measureComponent.lengthLabel"/>}
+                        areaLabel={<Message msgId="measureComponent.areaLabel"/>}
+                        bearingLabel={<Message msgId="measureComponent.bearingLabel"/>}/>
                 </MapToolBar>
 
                 <SearchBar

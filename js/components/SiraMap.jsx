@@ -26,7 +26,13 @@ require('../../MapStore2/web/client/components/map/' + mapType + '/plugins/index
 
 const DrawSupport = require('../../MapStore2/web/client/components/map/' + mapType + '/DrawSupport');
 
-const ScaleBar = require("../../MapStore2/web/client/components/map/" + mapType + "/ScaleBar");
+const MeasurementSupport = require('../../MapStore2/web/client/components/map/' + mapType + '/MeasurementSupport');
+const Locate = require('../../MapStore2/web/client/components/map/' + mapType + '/Locate');
+const ScaleBar = require('../../MapStore2/web/client/components/map/' + mapType + '/ScaleBar');
+const Overview = require('../../MapStore2/web/client/components/map/' + mapType + '/Overview');
+
+const {changeMeasurementState} = require('../../MapStore2/web/client/actions/measurement');
+const {changeLocateState, onLocateError} = require('../../MapStore2/web/client/actions/locate');
 
 const SiraMap = (props) => {
     return props.map ?
@@ -55,6 +61,30 @@ const SiraMap = (props) => {
                 <ScaleBar
                     className={'sira-scalebar ol-scale-line'}
                     key="scaleBar"/>
+
+                <Locate
+                    key="locate"
+                    status={props.locate.state}
+                    changeLocateState={props.actions.changeLocateState}
+                    onLocateError={props.actions.onLocateError}
+                    messages={props.locateMessages}/>
+
+                <MeasurementSupport
+                    key="measuresupport"
+                    changeMeasurementState={props.actions.changeMeasurementState}
+                    measurement={props.measurement}/>
+
+                <Overview
+                    key="overview"
+                    overviewOpt={{ // overviewOpt accept config param for ol and leflet overview control
+                            // refer to https://github.com/Norkart/Leaflet-MiniMap and http://openlayers.org/en/v3.10.1/apidoc/ol.control.OverviewMap.html
+                            position: 'bottomright',
+                            collapsedWidth: 25,
+                            collapsedHeight: 25,
+                            zoomLevelOffset: -5,
+                            toggleDisplay: true
+                    }}// If not passed overview will use osm as default layer
+                    layers={[{type: "osm"}]}/>
             </WMap>
         ) : <span/>;
 };
@@ -65,7 +95,9 @@ SiraMap.propTypes = {
     drawOwner: React.PropTypes.string,
     drawMethod: React.PropTypes.string,
     features: React.PropTypes.array,
-    params: React.PropTypes.object
+    params: React.PropTypes.object,
+    locate: React.PropTypes.object,
+    locateMessages: React.PropTypes.object
 };
 
 SiraMap.defaultProps = {
@@ -84,7 +116,9 @@ module.exports = connect((state) => {
         drawStatus: state.draw.drawStatus,
         drawOwner: state.draw.drawOwner,
         drawMethod: state.draw.drawMethod,
-        features: state.draw.features
+        features: state.draw.features,
+        locate: state.locate || {},
+        measurement: state.measurement || {}
     };
 }, dispatch => {
     return {
@@ -92,7 +126,10 @@ module.exports = connect((state) => {
             onMapViewChanges: changeMapView,
             onChangeDrawingStatus: changeDrawingStatus,
             onEndDrawing: endDrawing,
-            onClick: clickOnMap
+            onClick: clickOnMap,
+            changeLocateState: changeLocateState,
+            onLocateError: onLocateError,
+            changeMeasurementState: changeMeasurementState
         }, dispatch)
     };
 })(SiraMap);
