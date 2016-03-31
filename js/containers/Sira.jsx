@@ -65,12 +65,17 @@ const Info = connect((state) => ({
 })(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
 
 const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../../MapStore2/web/client/actions/mapInfo');
+const {loadGetFeatureInfoConfig} = require('../actions/mapInfo');
 
 const GetFeatureInfo = connect((state) => ({
     enabled: state.mapInfo && state.mapInfo.enabled || false,
     htmlResponses: state.mapInfo && state.mapInfo.responses || [],
     htmlRequests: state.mapInfo && state.mapInfo.requests || {length: 0},
     // infoFormat: state.mapInfo && state.mapInfo.infoFormat,
+
+    detailsConfig: state.siraMapInfo.detailsConfig,
+    modelConfig: state.siraMapInfo.modelConfig,
+    template: state.siraMapInfo.template,
     map: state.map,
     layers: state.layers && state.layers.flat || [],
     clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint
@@ -81,10 +86,11 @@ const GetFeatureInfo = connect((state) => ({
             purgeMapInfoResults,
             changeMousePointer,
             showMapinfoMarker,
-            hideMapinfoMarker
+            hideMapinfoMarker,
+            loadGetFeatureInfoConfig
         }, dispatch)
     };
-})(require('../../MapStore2/web/client/product/components/viewer/mapInfo/GetFeatureInfo'));
+})(require('../components/identify/GetFeatureInfo'));
 
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
 const {changeLayerProperties, toggleNode, sortNode} = require('../../MapStore2/web/client/actions/layers');
@@ -143,6 +149,9 @@ const MeasureComponent = connect((state) => {
 }, {
     toggleMeasure: changeMeasurementState
 })(require('../../MapStore2/web/client/components/mapcontrols/measure/MeasureComponent'));
+
+let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
 const Sira = React.createClass({
     propTypes: {
@@ -256,9 +265,10 @@ const Sira = React.createClass({
                 <NominatimResultList
                     key="nominatimresults"/>
                 <GetFeatureInfo
-                    infoFormat={'text/html'}
+                    infoFormat={'application/vnd.ogc.gml/3.1.1'}
                     display={"accordion"}
                     params={{authkey: authParams[this.props.params.profile].authkey}}
+                    profile={this.props.params.profile}
                     key="getFeatureInfo"/>
                 <ScaleBox
                     key="scaleBox"/>

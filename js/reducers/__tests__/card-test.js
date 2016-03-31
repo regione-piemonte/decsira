@@ -9,8 +9,7 @@ const expect = require('expect');
 const cardtemplate = require('../card');
 const {
     CARD_TEMPLATE_LOADED,
-    CARD_TEMPLATE_LOAD_ERROR,
-    CARD_TEMPLATE_TOOGLE
+    CARD_TEMPLATE_LOAD_ERROR
 } = require('../../actions/card');
 
 describe('Test the card template reducer', () => {
@@ -27,18 +26,6 @@ describe('Test the card template reducer', () => {
 
         let state = cardtemplate(initialState, {type: 'UNKNOWN'});
         expect(state).toBe(initialState);
-    });
-
-
-    it('Toogle the Card Tempalate', () => {
-        let testAction = {
-            type: CARD_TEMPLATE_TOOGLE,
-            show: false
-        };
-
-        let state = cardtemplate(null, testAction);
-        expect(state).toExist();
-        expect(state.show).toBe(false);
     });
 
     it('Card Template load error', () => {

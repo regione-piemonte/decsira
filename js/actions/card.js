@@ -12,17 +12,9 @@ const TemplateUtils = require('../utils/TemplateUtils');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
-const CARD_TEMPLATE_TOOGLE = 'CARD_TEMPLATE_TOOGLE';
 const SELECT_SECTION = 'SELECT_SECTION';
 const ACTIVE_SECTION = 'ACTIVE_SECTION';
 const SELECT_ROWS = 'SELECT_ROWS';
-
-function toggleCard(state) {
-    return {
-        type: CARD_TEMPLATE_TOOGLE,
-        show: state
-    };
-}
 
 function configureCard(template, model) {
     return {
@@ -106,13 +98,11 @@ function selectRows(tableId, rows) {
 module.exports = {
     CARD_TEMPLATE_LOADED,
     CARD_TEMPLATE_LOAD_ERROR,
-    CARD_TEMPLATE_TOOGLE,
     SELECT_SECTION,
     ACTIVE_SECTION,
     SELECT_ROWS,
     loadCardTemplate,
     loadCardModel,
-    toggleCard,
     configureCardError,
     loadCardModelConfig,
     selectSection,

@@ -69,7 +69,7 @@ const Card = React.createClass({
         return (this.props.card.loadingCardTemplateError) ? (
                 this.renderLoadTemplateException()
             ) : (
-            <Draggable start={{x: 672, y: 180}} handle=".panel-heading">
+            <Draggable start={{x: 672, y: 180}} handle=".panel-heading,.panel-heading *">
                 <div className="scheda-sira">
                     <TemplateSira template={this.props.card.template} model={this.props.model}/>
                 </div>

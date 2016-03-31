@@ -19,8 +19,9 @@ const SiraTable = React.createClass({
         id: React.PropTypes.string,
         style: React.PropTypes.object,
         features: React.PropTypes.oneOfType([
-                        React.PropTypes.array,
-                        React.PropTypes.func]),
+            React.PropTypes.array,
+            React.PropTypes.func
+        ]),
         selectRows: React.PropTypes.func
     },
     getDefaultProps() {
@@ -49,5 +50,6 @@ const SiraTable = React.createClass({
 });
 module.exports = connect(null, dispatch => {
     return bindActionCreators({
-        selectRows: selectRows }, dispatch);
+        selectRows: selectRows
+    }, dispatch);
 })(SiraTable);

@@ -10,12 +10,10 @@ const expect = require('expect');
 const {
     CARD_TEMPLATE_LOADED,
     CARD_TEMPLATE_LOAD_ERROR,
-    CARD_TEMPLATE_TOOGLE,
     SELECT_SECTION,
     ACTIVE_SECTION,
     loadCardTemplate,
     loadCardModel,
-    toggleCard,
     loadCardModelConfig,
     selectSection,
     activateSection
@@ -198,14 +196,6 @@ describe('Test correctness of the card template actions', () => {
                 done(ex);
             }
         });
-    });
-
-    it('toggle card template', () => {
-        let retval = toggleCard(false);
-
-        expect(retval).toExist();
-        expect(retval.type).toBe(CARD_TEMPLATE_TOOGLE);
-        expect(retval.show).toBe(false);
     });
 
     it('select section', () => {
