@@ -9,7 +9,7 @@
 
 const {
     CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR,
-    CARD_TEMPLATE_TOOGLE, SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS
+    SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS
 } = require('../actions/card');
 
 const assign = require('object-assign');
@@ -32,11 +32,6 @@ function cardtemplate(state = initialState, action) {
         case CARD_TEMPLATE_LOAD_ERROR: {
             return assign({}, state, {
                 loadingCardTemplateError: action.error
-            });
-        }
-        case CARD_TEMPLATE_TOOGLE: {
-            return assign({}, state, {
-                show: action.show
             });
         }
         case SELECT_SECTION: {

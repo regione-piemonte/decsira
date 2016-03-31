@@ -26,6 +26,7 @@ const assign = require('object-assign');
 
 const allReducers = combineReducers({
     mapInfo: require('../../MapStore2/web/client/reducers/mapInfo'),
+    siraMapInfo: require('../reducers/mapInfo'),
     search: require('../../MapStore2/web/client/reducers/search').searchResults,
     browser: require('../../MapStore2/web/client/reducers/browser'),
     locale: require('../../MapStore2/web/client/reducers/locale'),
