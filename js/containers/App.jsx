@@ -11,7 +11,6 @@ const Debug = require('../../MapStore2/web/client/components/development/Debug')
 
 const {Router, Route, hashHistory} = require('react-router');
 
-const Home = require('./Home');
 const Sira = require('./Sira');
 
 const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
