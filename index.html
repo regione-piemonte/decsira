@@ -1,21 +1,247 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="x-ua-compatible" content="IE=Edge">
-        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CSI-SIRA</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>Sistema Piemonte - Conoscenze ambientali</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" name="viewport" />
+        <meta name="author" content="CSI-Piemonte" />
+        <meta name="description" content="Sistema Piemonte il portale per cittadini ed imprese" />
+        <meta name="keywords" content="piemonte, servizi, cittadini, imprese, sistema, amministrazione" />
+		<style>
+		@font-face{font-family:'Glyphicons Halflings';src:url(assets/application/conoscenze_ambientali/fonts/glyphicons-halflings-regular.eot);src:url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(../fonts/glyphicons-halflings-regular.woff) format('woff'),url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}
+		</style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    	<link rel="stylesheet" href="assets/global/css/bootstrap-themes/yeti/bootstrap.css" />
+        <!-- Optional theme
+        <link rel="stylesheet" href="assets/global/css/bootstrap3/bootstrap-theme.min.css">
+                               -->
 
-        <script src="http://maps.google.com/maps/api/js?v=3"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
 
+        <!-- Custom styles for this template -->
+        <link href="assets/global/css/skin.css" rel="stylesheet">
+        <link href="assets/application/conoscenze_ambientali/css/skin-home.css" rel="stylesheet">
+        <link href="assets/application/conoscenze_ambientali/css/skin-interna.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/application/conoscenze_ambientali/css/jquery-ui-core_autocomplete_datepicker.min.css"/>
+        <link href="assets/global/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript"
+            src="assets/application/conoscenze_ambientali/js/jquery-ui-core_autocomplete_datepicker.min.js"></script>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <div id="container"></div>
-        <script src="dist/sira.js"></script>
+    <body class="home-page">
+
+        <!-- Header servizio-->
+        <div id="header-servizio" class="container-fluid">
+            <div class="row-fluid">
+                <div class="container testalino">
+                    <div class="row">
+
+                        <div id="portalHeader">
+                            <noscript class="alert_js">
+                            <p>ATTENZIONE! Il browser in uso non supporta le applicazioni Javascript.<br />
+                            Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
+                            potrebbe essere necessario l&acute;utilizzo dei Javascript.</p></noscript>
+
+                            <div class="header" >
+                            	<h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
+                            </div>
+
+                        </div>
+                        <div id="sx">
+                        </div>
+
+                        <div id="dx">
+                        </div>
+                        <div class="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                            <h2>Sira</h2>
+                        </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
+                              <button class="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
+                                <i class="fa fa-bars"></i>
+                              </button>
+                            </div>
+                        </div>
+
+                        <nav class="pimenu-navbar-collapse collapse">
+            					<ul class="nav navbar-nav">
+            				<li class="item-113"><a href="map.html#/A">Profilo A</a></li>
+                            <li class="item-125"><a href="map.html#/B">Profilo B</a></li>
+                            	</ul>
+            		    </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+<div class="row-fluid sb-sx">
+<div class="container search-home">
+<div class="row">
+<div class="col-md-7 col-xs-12 testo-home">
+<div>
+  Piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte), che si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Imprese, Regione, Province e ARPA)
+</div>
+</div>
+<div class="col-md-5 col-xs-12 ricerca-home">
+  <form class="form-inline">
+  <div class="form-group">
+    <!--label for="search">Email</label-->
+    <input type="text" class="form-control" id="search" placeholder="cerca oggetti, applicazioni tematiche">
+  </div>
+  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+</form>
+</div>
+  </div>
+</div>
+  </div>
+</div>
+
+<div class="container-fluid">
+<div class="row-fluid sb-dx">
+<div class="container news-home">
+<div class="row">
+<div class="col-md-12 testo-news">
+ <p class="data-news">7 aprile 2016</p>
+ <h3 class="titolo-news">Nuova risorsa Disponibile</h3>
+ <p>&Egrave; disponibile questa nuova risorsa "Impianti autorizzati a recupero di energia e materia" <a href="#" data-toggle="modal" data-target="#modalNews">Continua</a></p>
+  </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Nuova risorsa Disponibile</h4>
+      </div>
+      <div class="modal-body">
+        <p>Nuova risorsa Disponibile: &egrave; disponibile questa nuova risorsa "Impianti autorizzati a recupero di energia e materia"</p>
+
+          <p>Proin quam metus, bibendum a lacus eget, tempor tincidunt est. Ut ac laoreet diam. Integer pretium pharetra venenatis. Sed luctus metus lacinia mauris porta, eget imperdiet enim commodo. Phasellus ornare diam sed massa tempus varius. Fusce mollis blandit vehicula. Phasellus ac vulputate purus, eget aliquam arcu. Nam nec orci nunc. Mauris pellentesque tellus eget nulla auctor, nec consectetur nisl porttitor. Proin ullamcorper vestibulum sapien, et congue sem ultricies nec. Fusce imperdiet imperdiet neque sit amet elementum. Suspendisse ac massa volutpat, iaculis augue nec, tristique urna. In ut congue nisi.</p>
+
+          <p>Praesent condimentum tincidunt condimentum. Sed et convallis dui. Duis id nisl dui. Duis commodo ex non nulla aliquet pulvinar. Donec venenatis, purus eu efficitur dapibus, enim urna eleifend nisi, eu sodales nisl ligula in turpis. Donec posuere ullamcorper tellus in sagittis. Donec ullamcorper vel risus vitae finibus. Suspendisse viverra enim in cursus gravida. In hac habitasse platea dictumst. Suspendisse ac enim in justo vestibulum placerat eu et massa. Curabitur elementum neque sit amet semper blandit. Suspendisse imperdiet dolor et est consectetur, nec luctus nulla pharetra.</p>
+
+          <p>Duis rutrum felis a ultrices ornare. Maecenas non ex suscipit, pharetra tellus vitae, placerat ligula. Aliquam dolor neque, lacinia a congue id, rhoncus lobortis urna. Duis mollis tortor eros, vel efficitur libero fringilla a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed erat lectus, interdum eu pellentesque sed, posuere eu risus. Morbi facilisis fringilla molestie. Pellentesque ac feugiat erat, quis aliquet turpis. Aenean dapibus dui non venenatis finibus.</p>
+
+          <p>Sed commodo sollicitudin diam at sagittis. In at maximus leo. Pellentesque sed dolor nec nulla sagittis volutpat a sed nisi. Phasellus tristique facilisis enim eu congue. Sed egestas libero nulla, non fringilla felis bibendum id. Praesent et eros aliquet, elementum mauris vel, iaculis nunc. Nam congue accumsan nisl. Mauris vitae egestas nisl. Curabitur rutrum vehicula dui, laoreet ultricies mi finibus vel. Sed quam felis, lacinia ac eros quis, dignissim tincidunt quam. Aliquam eleifend varius lacus. Donec non interdum odio. Fusce sed tellus interdum, condimentum nulla vitae, commodo libero. Pellentesque nulla mi, commodo non lectus sit amet, mollis suscipit nisl. Proin auctor nisi risus, id finibus leo cursus vitae. </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container blocchetti">
+<div class="row">
+<ul class="list-group categorie">
+  <li class="list-group-item col-md-3 col-xs-4 acqua">Acqua<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 aria">Aria<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 bonifiche">Bonifiche<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 energia">Energia<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 acustico">Inquinamento acustico<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 elettro">Inquinamento elettromagnetico<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 imprese">Imprese aut. in campo ambientale<div class="ogg_appl"><span><a href="dataset.html" class="list-group-item">Oggetti</a></span> <span><a href="applicazioni.html" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 rifiuti">Rifiuti<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 rischio">Rischio industriale<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 via">Valutazione impatto ambientale<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 info">Informazioni ambientali<div class="ogg_appl"><span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">App tematiche</a></span></div></li>
+  <li class="list-group-item col-md-3 col-xs-4 vuoto"></li>
+  <!-- li class="list-group-item col-md-3 col-xs-4">Altro<span><a href="#" class="list-group-item">Oggetti</a></span> <span><a href="#" class="list-group-item">Applicazioni tematiche</a></span></li -->
+</ul>
+  </div>
+</div>
+
+<div class="container-fluid piattaforma">
+<div class="row-fluid">
+<div class="container">
+<div class="row">
+<h3>I numeri della piattaforma</h3>
+<ul class="list-group numeri">
+  <li class="list-group-item col-md-4"><span class="cifra">25</span> <span class="sotto_cifra">Oggetti in continuo aggiornamento</span></li>
+  <li class="list-group-item col-md-4"><span class="cifra">24<span class="con_cifra">%</span></span> <span class="sotto_cifra">Crescita annuale base&nbsp;dati previsto</span></li>
+  <li class="list-group-item col-md-4"><span class="cifra">50</span> <span class="sotto_cifra">Indicatori ambientali disponibili</span></li>
+</ul>
+  </div>
+</div>
+  </div>
+</div>
+
+<div class="container-fluid trebox">
+<div class="row-fluid">
+<div class="container">
+<div class="row">
+<div class="col-md-6 col-xs-12 trebox-sx">
+  <div class="piu_visti">
+  <h4>I pi&ugrave; visti</h4>
+  <div class="colonna-sx">
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  </div>
+  <div class="colonna-dx">
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  </div>
+  </div>
+  <div class="ultimi">
+  <h4>Ultimi inseriti</h4>
+  <div class="colonna-sx">
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  <a href="#">dataset</a>
+  </div>
+  <div class="colonna-dx">
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  <a href="#">applicazione</a>
+  </div>
+  </div>
+</div>
+<div class="col-md-6 col-xs-12 trebox-dx">
+  <div class="tags"><a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#">lorem</a> <a href="#" class="tag_grande">lorem</a> <a href="#">lorem</a> </div>
+</div>
+  </div>
+</div>
+  </div>
+</div>
+<!-- Footer -->
+	<footer class="footer" role="contentinfo">
+		<div class="container-fluid">
+
+<!--messe url assoluta ad accessibilità per applicativi che girano su secure perché la cartella CMS non è proxata-->
+<div class="custom footerCsi row-fluid">
+		<div class="container">
+<div class="row">
+	<div class="span6 col-sm-6 footer-sx">
+	<a href=""><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
+    </div>
+<div class="span6 col-sm-6 footer-dx">
+	<a href="http://www.sistemapiemonte.it"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/sistemapiemonte.png" /></a>
+    </div>
+</div>
+</div>
+</div>
+
+
+		</div>
+	</footer>
     </body>
 </html>

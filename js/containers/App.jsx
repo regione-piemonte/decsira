@@ -11,7 +11,6 @@ const Debug = require('../../MapStore2/web/client/components/development/Debug')
 
 const {Router, Route, hashHistory} = require('react-router');
 
-const Home = require('./Home');
 const Sira = require('./Sira');
 
 const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
@@ -21,7 +20,7 @@ const App = (props) => {
         <div className="fill">
             <Localized messages={props.messages} locale={props.current} loadingError={props.localeError}>
                 <Router history={hashHistory}>
-                    <Route path="/" component={Home}/>
+                    <Route path="/:profile" component={Sira}/>
                     <Route path="/map/:profile" component={Sira}/>
                 </Router>
             </Localized>

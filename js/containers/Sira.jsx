@@ -18,6 +18,7 @@ const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
 const SiraFeatureGrid = require('../components/SiraFeatureGrid');
 const Card = require('../components/template/Card');
+const Header = require('../components/MapHeader');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
@@ -203,93 +204,96 @@ const Sira = React.createClass({
         );
 
         return (
-            <div>
-                <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
-                    {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
-                </span>
-                <div className="info">Profile: {this.props.params.profile}</div>
-                <SiraMap
-                    params={{authkey: authParams[this.props.params.profile].authkey}}/>
-                <SiraQueryPanel
-                    authParam={authParams[this.props.params.profile]}/>
-                <SiraFeatureGrid
-                    authParam={authParams[this.props.params.profile]}
-                    featureGrigConfigUrl={this.props.featureGrigConfigUrl}
-                    profile={this.props.params.profile}/>
+            <div className="mappaSiraDecisionale">
+                <Header/>
+                <div className="mapbody">
+                    <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
+                        {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
+                    </span>
+                    <div className="info">Profile: {this.props.params.profile}</div>
+                    <SiraMap
+                        params={{authkey: authParams[this.props.params.profile].authkey}}/>
+                    <SiraQueryPanel
+                        authParam={authParams[this.props.params.profile]}/>
+                    <SiraFeatureGrid
+                        authParam={authParams[this.props.params.profile]}
+                        featureGrigConfigUrl={this.props.featureGrigConfigUrl}
+                        profile={this.props.params.profile}/>
 
-                {card}
+                    {card}
 
-                <MapToolBar
-                    key="mapToolbar"
-                    containerStyle={{
-                        position: "absolute",
-                        top: "50px",
-                        right: "5px",
-                        marginRight: "10px",
-                        marginTop: "5px",
-                        zIndex: 1000
-                    }}>
+                    <MapToolBar
+                        key="mapToolbar"
+                        containerStyle={{
+                            position: "absolute",
+                            top: "50px",
+                            right: "5px",
+                            marginRight: "10px",
+                            marginTop: "5px",
+                            zIndex: 1000
+                        }}>
 
-                    {homeButton}
+                        {homeButton}
 
-                    <LocateBtn
-                        key="locate"
-                        tooltip={<Message msgId="locate.tooltip"/>}/>
+                        <LocateBtn
+                            key="locate"
+                            tooltip={<Message msgId="locate.tooltip"/>}/>
 
-                    <Info
-                        key="infoButton"
-                        isButton={true}
-                        glyphicon="info-sign"/>
+                        <Info
+                            key="infoButton"
+                            isButton={true}
+                            glyphicon="info-sign"/>
 
-                    <LayerTree
-                        key="layerSwitcher"
-                        isPanel={true}
-                        buttonTooltip={<Message msgId="layers"/>}
-                        title={<Message msgId="layers"/>}
-                        helpText={<Message msgId="helptexts.layerSwitcher"/>}
-                        icon={<img src={layersIcon}/>}/>
+                        <LayerTree
+                            key="layerSwitcher"
+                            isPanel={true}
+                            buttonTooltip={<Message msgId="layers"/>}
+                            title={<Message msgId="layers"/>}
+                            helpText={<Message msgId="helptexts.layerSwitcher"/>}
+                            icon={<img src={layersIcon}/>}/>
 
-                    <BackgroundSwitcher
-                        key="backgroundSwitcher"
-                        isPanel={true}
-                        title={<div><Message msgId="background"/></div>}
-                        helpText={<Message msgId="helptexts.backgroundSwitcher"/>}
-                        buttonTooltip={<Message msgId="backgroundSwither.tooltip"/>}
-                        icon={<Glyphicon glyph="globe"/>}/>
+                        <BackgroundSwitcher
+                            key="backgroundSwitcher"
+                            isPanel={true}
+                            title={<div><Message msgId="background"/></div>}
+                            helpText={<Message msgId="helptexts.backgroundSwitcher"/>}
+                            buttonTooltip={<Message msgId="backgroundSwither.tooltip"/>}
+                            icon={<Glyphicon glyph="globe"/>}/>
 
-                    <MeasureComponent
-                        key="measureComponent"
-                        icon={<img src={lineRuleIcon}/>}
-                        isPanel={true}
-                        title={<div><Message msgId="measureComponent.title"/></div>}
-                        buttonTooltip={<Message msgId="measureComponent.tooltip"/>}
-                        helpText={<Message msgId="helptexts.measureComponent"/>}
-                        lengthButtonText={<Message msgId="measureComponent.lengthButtonText"/>}
-                        areaButtonText={<Message msgId="measureComponent.areaButtonText"/>}
-                        resetButtonText={<Message msgId="measureComponent.resetButtonText"/>}
-                        lengthLabel={<Message msgId="measureComponent.lengthLabel"/>}
-                        areaLabel={<Message msgId="measureComponent.areaLabel"/>}
-                        bearingLabel={<Message msgId="measureComponent.bearingLabel"/>}/>
+                        <MeasureComponent
+                            key="measureComponent"
+                            icon={<img src={lineRuleIcon}/>}
+                            isPanel={true}
+                            title={<div><Message msgId="measureComponent.title"/></div>}
+                            buttonTooltip={<Message msgId="measureComponent.tooltip"/>}
+                            helpText={<Message msgId="helptexts.measureComponent"/>}
+                            lengthButtonText={<Message msgId="measureComponent.lengthButtonText"/>}
+                            areaButtonText={<Message msgId="measureComponent.areaButtonText"/>}
+                            resetButtonText={<Message msgId="measureComponent.resetButtonText"/>}
+                            lengthLabel={<Message msgId="measureComponent.lengthLabel"/>}
+                            areaLabel={<Message msgId="measureComponent.areaLabel"/>}
+                            bearingLabel={<Message msgId="measureComponent.bearingLabel"/>}/>
 
-                    <TopologyInfo
-                        key="topologyInfoButton"
-                        isButton={true}
-                        glyphicon="glyphicon glyphicon-picture"/>
-                </MapToolBar>
+                        <TopologyInfo
+                            key="topologyInfoButton"
+                            isButton={true}
+                            glyphicon="glyphicon glyphicon-picture"/>
+                    </MapToolBar>
 
-                <SearchBar
-                    key="seachBar"/>
-                <NominatimResultList
-                    key="nominatimresults"/>
-                <GetFeatureInfo
-                    display={"accordion"}
-                    params={{authkey: authParams[this.props.params.profile].authkey}}
-                    profile={this.props.params.profile}
-                    key="getFeatureInfo"/>
-                <ScaleBox
-                    key="scaleBox"/>
-                <ZoomToMaxExtentButton
-                    key="zoomToMaxExtent"/>
+                    <SearchBar
+                        key="seachBar"/>
+                    <NominatimResultList
+                        key="nominatimresults"/>
+                    <GetFeatureInfo
+                        display={"accordion"}
+                        params={{authkey: authParams[this.props.params.profile].authkey}}
+                        profile={this.props.params.profile}
+                        key="getFeatureInfo"/>
+                    <ScaleBox
+                        key="scaleBox"/>
+                    <ZoomToMaxExtentButton
+                        key="zoomToMaxExtent"/>
+                </div>
             </div>
         );
     },
