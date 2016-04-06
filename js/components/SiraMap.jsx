@@ -34,7 +34,10 @@ const Overview = require('../../MapStore2/web/client/components/map/' + mapType 
 const {changeMeasurementState} = require('../../MapStore2/web/client/actions/measurement');
 const {changeLocateState, onLocateError} = require('../../MapStore2/web/client/actions/locate');
 
+const Feature = require('../../MapStore2/web/client/components/map/' + mapType + '/Feature');
+
 const SiraMap = (props) => {
+    let features = (props.selFeatures && props.selFeatures.length > 0) ? props.selFeatures : props.features;
     return props.map ?
         (
             <WMap {...props.map} {...props.actions}>
@@ -46,15 +49,26 @@ const SiraMap = (props) => {
                             <Layer key={layer.name || layer.title} position={index} type={layer.type}
                                 options={options}/>
                         );
+                    })
+                }
+
+                <Layer type="vector" position={1} options={{name: "ZONES_IPR"}}>
+                    {
+                        features.map( (feature) => {
+                            return (<Feature
+                                key={feature.id}
+                                type={feature.type}
+                                geometry={feature.geometry}/>);
+                        })
                     }
-                )}
+                </Layer>
 
                 <DrawSupport
                     map={props.map}
                     drawStatus={props.drawStatus}
                     drawOwner={props.drawOwner}
                     drawMethod={props.drawMethod}
-                    features={props.features}
+                    features={props.drawFeatures}
                     onChangeDrawingStatus={props.actions.onChangeDrawingStatus}
                     onEndDrawing={props.actions.onEndDrawing}/>
 
@@ -94,10 +108,12 @@ SiraMap.propTypes = {
     drawStatus: React.PropTypes.string,
     drawOwner: React.PropTypes.string,
     drawMethod: React.PropTypes.string,
-    features: React.PropTypes.array,
+    drawFeatures: React.PropTypes.array,
     params: React.PropTypes.object,
     locate: React.PropTypes.object,
-    locateMessages: React.PropTypes.object
+    locateMessages: React.PropTypes.object,
+    features: React.PropTypes.array,
+    selFeatures: React.PropTypes.array
 };
 
 SiraMap.defaultProps = {
@@ -105,8 +121,10 @@ SiraMap.defaultProps = {
     drawStatus: null,
     drawOwner: null,
     drawMethod: null,
+    drawFeatures: [],
+    params: null,
     features: [],
-    params: null
+    selFeatures: []
 };
 
 module.exports = connect((state) => {
@@ -116,9 +134,11 @@ module.exports = connect((state) => {
         drawStatus: state.draw.drawStatus,
         drawOwner: state.draw.drawOwner,
         drawMethod: state.draw.drawMethod,
-        features: state.draw.features,
+        drawFeatures: state.draw.features,
         locate: state.locate || {},
-        measurement: state.measurement || {}
+        measurement: state.measurement || {},
+        features: state.featuregrid && state.featuregrid.features || [],
+        selFeatures: state.featuregrid && state.featuregrid.select || null
     };
 }, dispatch => {
     return {

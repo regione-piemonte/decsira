@@ -25,8 +25,7 @@ const queryformconfig = require('../reducers/queryform');
 const assign = require('object-assign');
 
 const allReducers = combineReducers({
-    mapInfo: require('../../MapStore2/web/client/reducers/mapInfo'),
-    siraMapInfo: require('../reducers/mapInfo'),
+    mapInfo: require('../reducers/mapInfo'),
     search: require('../../MapStore2/web/client/reducers/search').searchResults,
     browser: require('../../MapStore2/web/client/reducers/browser'),
     locale: require('../../MapStore2/web/client/reducers/locale'),
@@ -41,6 +40,7 @@ const allReducers = combineReducers({
     map: () => {return null; },
     layers: () => {return null; },
     cardtemplate: require('../reducers/card'),
+    featuregrid: require('../reducers/featuregrid'),
     grid: require('../reducers/grid')
 });
 
