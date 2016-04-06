@@ -21,7 +21,7 @@ const App = (props) => {
         <div className="fill">
             <Localized messages={props.messages} locale={props.current} loadingError={props.localeError}>
                 <Router history={hashHistory}>
-                    <Route path="/" component={Home}/>
+                    <Route path="/:profile" component={Sira}/>
                     <Route path="/map/:profile" component={Sira}/>
                 </Router>
             </Localized>
