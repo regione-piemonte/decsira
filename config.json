@@ -53,9 +53,19 @@
   			"type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-  			"title": "AUA",
+  			"title": "Autorizzazione Unica Ambientale",
   			"name": "sira:AutorizzazioneUnicaAmbientale",
         "infoTemplateURL": "assets/getFeatureInfoConfig",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+          "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+          "wfsVersion": "1.1.0",
+          "layerName": "ZONES_IPR",
+          "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+          "geomAttribute": "msGeometry",
+          "geometryType": "Polygon",
+          "topologyModelURL": "assets/topologyModelConfig.json"
+        },
   			"group": "Overlays",
   			"format": "image/png"
   		}]

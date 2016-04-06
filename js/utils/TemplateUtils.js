@@ -26,7 +26,8 @@ const TemplateUtils = {
                 return {
                     "wfs": "http://www.opengis.net/wfs",
                     "gml": "http://www.opengis.net/gml",
-                    "sira": "http://www.regione.piemonte.it/ambiente/sira/1.0"
+                    "sira": "http://www.regione.piemonte.it/ambiente/sira/1.0",
+                    "ms": "http://mapserver.gis.umn.edu/mapserver"
                 };
             }
             case "2.0": {
@@ -57,10 +58,10 @@ const TemplateUtils = {
             }
             case 6 /*GEOMETRY_TYPE*/: {
                 let value;
-                if (wfsVersion !== "2.0") {
-                    value = result && result.nodeValue && parse(result.nodeValue) || {};
-                } else {
+                if (wfsVersion === "2.0") {
                     value = result && result.nodeValue || {};
+                } else {
+                    value = result && result.nodeValue && parse(result.nodeValue) || result && result.nodeValue || {};
                 }
                 return value;
             }
@@ -109,10 +110,20 @@ const TemplateUtils = {
             result = select(element.xpath, doc)[0];
             value = this.getElementValue(result, element.type, wfsVersion);
 
-            if (wfsVersion === "2.0") {
+            if (wfsVersion === "2.0" || !value.geometry) {
                 try {
-                    let coordinates = value.split(" ");
-                    coordinates = coordinates.map((coord) => parseFloat(coord));
+                    let coords = value.split(" ");
+                    let coordinates = [];
+
+                    for (let j = 0; j < coords.length; j = j + 2) {
+                        if (j + 1 <= coords.length) {
+                            if (parseFloat(coords[j]) && parseFloat(coords[j + 1])) {
+                                coordinates.push([parseFloat(coords[j]), parseFloat(coords[j + 1])]);
+                            }
+                        }
+                    }
+
+                    // coordinates = coords.map((coord) => parseFloat(coord));
                     value = {
                         type: "geometry",
                         coordinates: coordinates

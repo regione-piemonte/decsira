@@ -58,9 +58,9 @@ const GetFeatureInfoViewer = React.createClass({
     shouldComponentUpdate(nextProps) {
         return nextProps.responses !== this.props.responses || nextProps.missingRequests !== this.props.missingRequests;
     },
-    getValidator() {
+    getValidator(infoFormat) {
         var infoFormats = MapInfoUtils.getAvailableInfoFormat();
-        switch (this.props.infoFormat) {
+        switch (infoFormat) {
             case infoFormats.JSON:
                 return FeatureInfoUtils.Validator.JSON;
             case infoFormats.HTML:
@@ -68,7 +68,7 @@ const GetFeatureInfoViewer = React.createClass({
             case infoFormats.TEXT:
                 return FeatureInfoUtils.Validator.TEXT;
             case infoFormats.GML3:
-                    return FeatureInfoUtils.Validator.GML3;
+                return FeatureInfoUtils.Validator.GML3;
             default:
                 return null;
         }
@@ -99,9 +99,9 @@ const GetFeatureInfoViewer = React.createClass({
     /**
      * Render a single layer feature info
      */
-    renderInfoPage(response) {
+    renderInfoPage(response, requesInfoFormat, layerId) {
         var infoFormats = MapInfoUtils.getAvailableInfoFormat();
-        switch (this.props.infoFormat) {
+        switch (requesInfoFormat) {
             case infoFormats.JSON:
                 return <JSONFeatureInfoViewer display={this.props.display} response={response} />;
             case infoFormats.HTML:
@@ -109,13 +109,22 @@ const GetFeatureInfoViewer = React.createClass({
             case infoFormats.TEXT:
                 return <TEXTFeatureInfoViewer display={this.props.display} response={response} />;
             case infoFormats.GML3:
-                return (
-                    <GMLFeatureInfoViewer
-                        display={this.props.display}
-                        response={response}
-                        contentConfig={this.props.contentConfig}
-                        params={this.props.params}/>
-                );
+                return this.props.contentConfig &&
+                    this.props.contentConfig.template[layerId] &&
+                    this.props.contentConfig.detailsConfig[layerId] &&
+                    this.props.contentConfig.modelConfig[layerId] ? (
+                        <GMLFeatureInfoViewer
+                            display={this.props.display}
+                            response={response}
+                            contentConfig={{
+                                template: this.props.contentConfig.template[layerId],
+                                detailsConfig: this.props.contentConfig.detailsConfig[layerId],
+                                modelConfig: this.props.contentConfig.modelConfig[layerId]
+                            }}
+                            params={this.props.params}/>
+                    ) : (
+                        <span/>
+                    );
             default:
                 return null;
         }
@@ -145,13 +154,19 @@ const GetFeatureInfoViewer = React.createClass({
         return <a style={{"float": "right"}} onClick={() => {this.refs.container.swipe.next(); }}><Glyphicon glyph="chevron-right" /></a>;
     },
     renderPageHeader(res, layerMetadata) {
-        return (<span>{this.props.display === "accordion" ? "" : this.renderLeftButton()} <span>{layerMetadata.title}</span> {this.props.display === "accordion" ? "" : this.renderRightButton()}</span>);
+        return (
+            <span>
+                {this.props.display === "accordion" ? "" : this.renderLeftButton()}
+                <span>{layerMetadata.title}</span>
+                {this.props.display === "accordion" ? "" : this.renderRightButton()}
+            </span>
+        );
     },
     /**
      * render all the feature info pages
      */
     renderPages(responses) {
-        if (this.props.missingRequests === 0 && responses.length === 0) {
+        if ((this.props.missingRequests === 0 && responses.length === 0) || !responses) {
             return (
                 <Alert bsStyle={"danger"}>
                     <h4><I18N.HTML msgId={"noFeatureInfo"}/></h4>
@@ -169,15 +184,24 @@ const GetFeatureInfoViewer = React.createClass({
                     header={pageHeader}
                     style={this.props.display === "accordion" ?
                         {maxHeight: "500px", overflow: "auto"} : {maxHeight: "500px", overflow: "auto"}}>
-                    {this.renderInfoPage(response)}
+                    {this.renderInfoPage(response, res.queryParams.info_format, res.queryParams.id)}
                 </Panel>
             );
         });
     },
     render() {
         const Container = this.props.display === "accordion" ? Accordion : ReactSwipe;
-        const validator = this.getValidator();
-        const validResponses = validator.getValidResponses(this.props.responses);
+        let validResponses = [];
+
+        if (this.props.responses.length > 0) {
+            this.props.responses.forEach((response) => {
+                let validator = this.getValidator(response.queryParams.info_format);
+                if (validator.getValidResponses([response])[0]) {
+                    validResponses.push(validator.getValidResponses([response])[0]);
+                }
+            });
+        }
+
         return (
             <div>
                 <Container ref="container" defaultActiveKey={0} key={"swiper-" + this.props.responses.length + "-" + this.props.missingRequests} shouldUpdate={(nextProps, props) => {return nextProps !== props; }}>

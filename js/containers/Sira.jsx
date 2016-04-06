@@ -57,26 +57,35 @@ const NominatimResultList = connect((state) => ({
 
 const MapToolBar = require("../../MapStore2/web/client/product/components/viewer/MapToolBar");
 
-const {changeMapInfoState} = require('../../MapStore2/web/client/actions/mapInfo');
+const {changeMapInfoState} = require('../actions/mapInfo');
 const Info = connect((state) => ({
-    pressed: state.mapInfo && state.mapInfo.enabled
+    pressed: state.mapInfo && state.mapInfo.infoEnabled
 }), {
     onClick: changeMapInfoState
 })(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
 
-const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../../MapStore2/web/client/actions/mapInfo');
-const {loadGetFeatureInfoConfig} = require('../actions/mapInfo');
+const {changeTopologyMapInfoState} = require('../actions/mapInfo');
+const TopologyInfo = connect((state) => ({
+    pressed: state.mapInfo && state.mapInfo.topologyInfoEnabled
+}), {
+    onClick: changeTopologyMapInfoState
+})(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
+
+const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../actions/mapInfo');
+const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
+const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
 const GetFeatureInfo = connect((state) => ({
-    enabled: state.mapInfo && state.mapInfo.enabled || false,
+    infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,
+    topologyInfoEnabled: state.mapInfo && state.mapInfo.topologyInfoEnabled || false,
     htmlResponses: state.mapInfo && state.mapInfo.responses || [],
     htmlRequests: state.mapInfo && state.mapInfo.requests || {length: 0},
-    // infoFormat: state.mapInfo && state.mapInfo.infoFormat,
-
-    detailsConfig: state.siraMapInfo.detailsConfig,
-    modelConfig: state.siraMapInfo.modelConfig,
-    template: state.siraMapInfo.template,
+    infoFormat: state.mapInfo && state.mapInfo.infoFormat,
+    detailsConfig: state.mapInfo.detailsConfig,
+    modelConfig: state.mapInfo.modelConfig,
+    template: state.mapInfo.template,
     map: state.map,
+    infoType: state.mapInfo.infoType,
     layers: state.layers && state.layers.flat || [],
     clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint
 }), (dispatch) => {
@@ -87,7 +96,10 @@ const GetFeatureInfo = connect((state) => ({
             changeMousePointer,
             showMapinfoMarker,
             hideMapinfoMarker,
-            loadGetFeatureInfoConfig
+            loadGetFeatureInfoConfig,
+            setFeatures,
+            selectFeatures,
+            setModelConfig
         }, dispatch)
     };
 })(require('../components/identify/GetFeatureInfo'));
@@ -258,6 +270,11 @@ const Sira = React.createClass({
                         lengthLabel={<Message msgId="measureComponent.lengthLabel"/>}
                         areaLabel={<Message msgId="measureComponent.areaLabel"/>}
                         bearingLabel={<Message msgId="measureComponent.bearingLabel"/>}/>
+
+                    <TopologyInfo
+                        key="topologyInfoButton"
+                        isButton={true}
+                        glyphicon="glyphicon glyphicon-picture"/>
                 </MapToolBar>
 
                 <SearchBar
@@ -265,7 +282,6 @@ const Sira = React.createClass({
                 <NominatimResultList
                     key="nominatimresults"/>
                 <GetFeatureInfo
-                    infoFormat={'application/vnd.ogc.gml/3.1.1'}
                     display={"accordion"}
                     params={{authkey: authParams[this.props.params.profile].authkey}}
                     profile={this.props.params.profile}

@@ -17,7 +17,6 @@ const {Button} = require("react-bootstrap");
 const img = require('../../../MapStore2/web/client/components/data/featuregrid/images/magnifier.png');
 const assign = require('object-assign');
 
-
 const PreviewMap = React.createClass({
 
     propTypes: {
@@ -84,7 +83,7 @@ const PreviewMap = React.createClass({
         ) : <span/>;
     },
     getCenter() {
-        let point = {crs: this.props.pointSRS, x: this.props.center.coordinates[0], y: this.props.center.coordinates[1]};
+        let point = {crs: this.props.pointSRS, x: this.props.center.coordinates[0][0], y: this.props.center.coordinates[0][1]};
         return this.props.pointSRS !== "EPSG:4326" ?
             CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
     },

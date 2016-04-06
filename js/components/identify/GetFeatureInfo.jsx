@@ -6,18 +6,40 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var assign = require('object-assign');
-var {Glyphicon, Panel} = require('react-bootstrap');
-var GetFeatureInfoViewer = require('./GetFeatureInfoViewer');
+const React = require('react');
+const assign = require('object-assign');
+const {Glyphicon, Panel} = require('react-bootstrap');
+
+const {connect} = require('react-redux');
+const {bindActionCreators} = require('redux');
+
+const {setFeatures} = require('../../../MapStore2/web/client/actions/featuregrid');
+
+const TopologyInfoViewer = connect((state) => ({
+    modelConfig: state.mapInfo.modelConfig,
+    topologyConfig: state.mapInfo.topologyConfig,
+    infoTopologyResponse: state.mapInfo.infoTopologyResponse
+}), (dispatch) => {
+    return {
+        actions: bindActionCreators({
+            setFeatures
+        }, dispatch)
+    };
+})(require('./TopologyInfoViewer'));
+
+const {loadInfoTopologyConfig} = require('../../actions/mapInfo');
+
+const GetFeatureInfoViewer = require('./GetFeatureInfoViewer');
+
 const Draggable = require('react-draggable');
 
-var I18N = require('../../../MapStore2/web/client/components/I18N/I18N');
-var Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
+const I18N = require('../../../MapStore2/web/client/components/I18N/I18N');
+const Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
 
-var CoordinatesUtils = require('../../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinatesUtils = require('../../../MapStore2/web/client/utils/CoordinatesUtils');
+const FilterUtils = require('../../../MapStore2/web/client/utils/FilterUtils');
 
-var MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
+const MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
 const {isArray} = require('lodash');
@@ -32,7 +54,8 @@ const GetFeatureInfo = React.createClass({
         htmlResponses: React.PropTypes.array,
         htmlRequests: React.PropTypes.object,
         btnConfig: React.PropTypes.object,
-        enabled: React.PropTypes.bool,
+        infoEnabled: React.PropTypes.bool,
+        topologyInfoEnabled: React.PropTypes.bool,
         map: React.PropTypes.object,
         layers: React.PropTypes.array,
         layerFilter: React.PropTypes.func,
@@ -42,7 +65,10 @@ const GetFeatureInfo = React.createClass({
             changeMousePointer: React.PropTypes.func,
             showMapinfoMarker: React.PropTypes.func,
             hideMapinfoMarker: React.PropTypes.func,
-            loadGetFeatureInfoConfig: React.PropTypes.func
+            loadGetFeatureInfoConfig: React.PropTypes.func,
+            selectFeatures: React.PropTypes.func,
+            setFeatures: React.PropTypes.func,
+            setModelConfig: React.PropTypes.func
         }),
         clickedMapPoint: React.PropTypes.object,
         display: React.PropTypes.string,
@@ -53,12 +79,14 @@ const GetFeatureInfo = React.createClass({
         profile: React.PropTypes.string,
         detailsConfig: React.PropTypes.object,
         modelConfig: React.PropTypes.object,
-        template: React.PropTypes.string
+        template: React.PropTypes.object,
+        infoType: React.PropTypes.string
     },
     getDefaultProps() {
         return {
             profile: null,
-            enabled: false,
+            infoEnabled: false,
+            topologyInfoEnabled: false,
             featureCount: 10,
             draggable: true,
             display: "accordion",
@@ -98,7 +126,7 @@ const GetFeatureInfo = React.createClass({
         // if there's a new clicked point on map and GetFeatureInfo is active
         // it composes and sends a getFeatureInfo action.
         var refreshInfo = () => {
-            if (newProps.enabled && newProps.clickedMapPoint && newProps.clickedMapPoint.pixel) {
+            if ((newProps.infoEnabled || newProps.topologyInfoEnabled) && newProps.clickedMapPoint && newProps.clickedMapPoint.pixel) {
                 if (!this.props.clickedMapPoint.pixel || this.props.clickedMapPoint.pixel.x !== newProps.clickedMapPoint.pixel.x ||
                         this.props.clickedMapPoint.pixel.y !== newProps.clickedMapPoint.pixel.y ) {
                     return true;
@@ -109,56 +137,90 @@ const GetFeatureInfo = React.createClass({
             }
             return false;
         };
-        if ( refreshInfo() ) {
-            this.props.actions.purgeMapInfoResults();
-            const wmsVisibleLayers = newProps.layers.filter(newProps.layerFilter);
+        if (refreshInfo()) {
             const {bounds, crs} = this.reprojectBbox(newProps.map.bbox, newProps.map.projection);
-            for (let l = 0; l < wmsVisibleLayers.length; l++) {
-                const layer = wmsVisibleLayers[l];
-                let requestConf = {
-                    id: layer.id,
-                    layers: layer.name,
-                    query_layers: layer.name,
-                    styles: layer.style,
-                    x: parseInt(newProps.clickedMapPoint.pixel.x, 10),
-                    y: parseInt(newProps.clickedMapPoint.pixel.y, 10),
-                    height: parseInt(newProps.map.size.height, 10),
-                    width: parseInt(newProps.map.size.width, 10),
-                    srs: crs,
-                    bbox: bounds.minx + "," +
-                          bounds.miny + "," +
-                          bounds.maxx + "," +
-                          bounds.maxy,
-                    feature_count: newProps.featureCount,
-                    info_format: newProps.infoFormat
-                };
 
-                if (newProps.params) {
-                    requestConf = assign({}, requestConf, newProps.params);
+            if (newProps.infoType === "getfeatureinfo") {
+                this.props.actions.purgeMapInfoResults();
+                const wmsVisibleLayers = newProps.layers.filter(newProps.layerFilter);
+
+                for (let l = 0; l < wmsVisibleLayers.length; l++) {
+                    const layer = wmsVisibleLayers[l];
+                    const {url, requestConf, layerMetadata} = this.calculateRequestParameters(layer, bounds, crs, newProps);
+
+                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams);
+
+                    // Load the template if required
+                    if (layer.infoTemplateURL) {
+                        this.props.actions.loadGetFeatureInfoConfig(layer.id, layer.infoTemplateURL + this.props.profile + ".json");
+                    }
                 }
 
-                const layerMetadata = {
-                    title: layer.title,
-                    regex: layer.featureInfoRegex
-                };
-                const url = isArray(layer.url) ?
-                    layer.url[0] :
-                    layer.url.replace(/[?].*$/g, '');
+                this.props.actions.showMapinfoMarker();
 
-                this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams);
+            } else if (newProps.infoType === "topology") {
+                this.props.actions.purgeMapInfoResults();
+                const wmsVisibleLayers = newProps.layers.filter((layer) => {
+                    return layer.topologyConfig &&
+                        layer.visibility &&
+                        layer.type === 'wms' &&
+                        (layer.queryable === undefined || layer.queryable) &&
+                        layer.group !== "background";
+                });
 
-                // Load the template if required
-                if (layer.infoTemplateURL) {
-                    this.props.actions.loadGetFeatureInfoConfig(layer.infoTemplateURL + this.props.profile + ".json");
+                for (let l = 0; l < wmsVisibleLayers.length; l++) {
+                    const layer = wmsVisibleLayers[l];
+                    const {url, requestConf, layerMetadata} = this.calculateRequestParameters(layer, bounds, crs, newProps);
+
+                    // Load the template if required
+                    let topologyOptions = {};
+                    if (layer.topologyConfig && layer.topologyConfig.topologyModelURL) {
+                        let topologyConfig = assign({}, layer.topologyConfig, {clickedMapPoint: newProps.clickedMapPoint});
+
+                        let filterObj = {
+                            spatialField: {
+                                attribute: topologyConfig.geomAttribute,
+                                geometry: {
+                                    coordinates: [
+                                        topologyConfig.wfsVersion === "1.1.0" || topologyConfig.wfsVersion === "2.0" ?
+                                        [[
+                                            topologyConfig.clickedMapPoint.latlng.lat,
+                                            topologyConfig.clickedMapPoint.latlng.lng
+                                        ]] : [[
+                                            topologyConfig.clickedMapPoint.latlng.lng,
+                                            topologyConfig.clickedMapPoint.latlng.lat
+                                        ]]
+                                    ],
+                                    projection: "EPSG:4326",
+                                    type: "Point"
+                                },
+                                method: "POINT",
+                                operation: "INTERSECTS"
+                            }
+                        };
+
+                        let filter = FilterUtils.toOGCFilter(topologyConfig.layerName, filterObj, "1.1.0");
+
+                        topologyOptions.topologyConfig = topologyConfig;
+                        topologyOptions.layerId = layer.id;
+                        topologyOptions.filter = filter;
+                        topologyOptions.callback = loadInfoTopologyConfig;
+
+                        this.props.actions.selectFeatures([]);
+                        this.props.actions.setFeatures([]);
+                        this.props.actions.setModelConfig({});
+                    }
+
+                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams, topologyOptions);
                 }
             }
-
-            this.props.actions.showMapinfoMarker();
         }
 
-        if (newProps.enabled && !this.props.enabled) {
+        if ((newProps.infoEnabled && !this.props.infoEnabled) ||
+            (newProps.topologyInfoEnabled && !this.props.topologyInfoEnabled)) {
             this.props.actions.changeMousePointer('pointer');
-        } else if (!newProps.enabled && this.props.enabled) {
+        } else if ((!newProps.infoEnabled && this.props.infoEnabled) ||
+            (!newProps.topologyInfoEnabled && this.props.topologyInfoEnabled)) {
             this.props.actions.changeMousePointer('auto');
             this.props.actions.hideMapinfoMarker();
             this.props.actions.purgeMapInfoResults();
@@ -169,25 +231,53 @@ const GetFeatureInfo = React.createClass({
         this.props.actions.purgeMapInfoResults();
     },
     renderInfo(missingRequests) {
-        return (
-            <GetFeatureInfoViewer
-                infoFormat={this.props.infoFormat}
-                missingRequests={missingRequests}
-                responses={this.props.htmlResponses}
-                contentConfig={{
-                    template: this.props.template,
-                    detailsConfig: this.props.detailsConfig,
-                    modelConfig: this.props.modelConfig
-                }}
-                params={this.props.params}
-                display={this.props.display}/>
-        );
+        let component;
+
+        if (this.props.infoType === "getfeatureinfo") {
+            component = (
+                <GetFeatureInfoViewer
+                    missingRequests={missingRequests}
+                    responses={this.props.htmlResponses}
+                    contentConfig={{
+                        template: this.props.template,
+                        detailsConfig: this.props.detailsConfig,
+                        modelConfig: this.props.modelConfig
+                    }}
+                    params={this.props.params}
+                    display={this.props.display}/>
+            );
+        } else {
+            if (this.props.modelConfig) {
+                component = (
+                    <TopologyInfoViewer
+                        missingRequests={missingRequests}
+                        responses={this.props.htmlResponses}
+                        display={this.props.display}/>
+                );
+            } else {
+                component = (
+                    <div style={{height: "100px", width: "100%"}}>
+                        <div style={{
+                            position: "relative",
+                            width: "60px",
+                            top: "50%",
+                            left: "45%"}}>
+                            <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        return component;
     },
     renderHeader(missingRequests) {
+        let glyph = this.props.infoType === "getfeatureinfo" ? "info-sign" : "glyphicon glyphicon-picture";
+
         return (
             <div className="handle_infopanel">
                 { (missingRequests !== 0 ) ? <Spinner value={missingRequests} sSize="sp-small" /> : null }
-                <Glyphicon glyph="info-sign" />&nbsp;<I18N.Message msgId="getFeatureInfoTitle" />
+                <Glyphicon glyph={glyph} />&nbsp;<I18N.Message msgId="getFeatureInfoTitle" />
                 <button onClick={this.onModalHiding} className="close"><span>×</span></button>
             </div>
         );
@@ -206,17 +296,56 @@ const GetFeatureInfo = React.createClass({
         );
     },
     render() {
-        if (this.props.htmlRequests.length !== 0 &&
-            this.props.template &&
-            this.props.detailsConfig &&
-            this.props.modelConfig) {
+        const renderInfoTypeCheck = this.props.infoType === "getfeatureinfo" ?
+            this.props.htmlRequests.length !== 0 && this.props.template && this.props.detailsConfig && this.props.modelConfig :
+            this.props.htmlRequests.length !== 0;
+
+        if (renderInfoTypeCheck) {
             return this.props.draggable ? (
-                    <Draggable handle=".handle_infopanel,.handle_infopanel *">
-                        {this.renderContent()}
-                    </Draggable>
-                ) : this.renderContent();
+                <Draggable handle=".handle_infopanel, .handle_infopanel *">
+                    {this.renderContent()}
+                </Draggable>
+            ) : this.renderContent();
         }
         return null;
+    },
+    calculateRequestParameters(layer, bounds, crs, newProps) {
+        let requestConf = {
+            id: layer.id,
+            layers: layer.name,
+            query_layers: layer.name,
+            styles: layer.style,
+            x: parseInt(newProps.clickedMapPoint.pixel.x, 10),
+            y: parseInt(newProps.clickedMapPoint.pixel.y, 10),
+            height: parseInt(newProps.map.size.height, 10),
+            width: parseInt(newProps.map.size.width, 10),
+            srs: crs,
+            bbox: bounds.minx + "," +
+                  bounds.miny + "," +
+                  bounds.maxx + "," +
+                  bounds.maxy,
+            feature_count: newProps.featureCount,
+            info_format: layer.infoFormat ? layer.infoFormat : newProps.infoFormat
+        };
+
+        if (newProps.params) {
+            requestConf = assign({}, requestConf, newProps.params);
+        }
+
+        const layerMetadata = {
+            title: layer.title,
+            regex: layer.featureInfoRegex
+        };
+
+        const url = isArray(layer.url) ?
+            layer.url[0] :
+            layer.url.replace(/[?].*$/g, '');
+
+        return assign({}, {
+            url: url,
+            layerMetadata: layerMetadata,
+            requestConf: requestConf
+        });
     },
     reprojectBbox(bbox, destSRS) {
         let newBbox = CoordinatesUtils.reprojectBbox([
