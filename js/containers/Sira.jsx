@@ -12,7 +12,7 @@ require('../../assets/css/sira.css');
 const {connect} = require('react-redux');
 const assign = require('object-assign');
 
-const {Glyphicon, Tooltip} = require('react-bootstrap');
+const {Glyphicon} = require('react-bootstrap');
 
 const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
@@ -22,6 +22,9 @@ const Header = require('../components/MapHeader');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
+
+const url = require('url');
+const urlQuery = url.parse(window.location.href, true).query;
 
 const authParams = {
     admin: {
@@ -106,17 +109,32 @@ const GetFeatureInfo = connect((state) => ({
 })(require('../components/identify/GetFeatureInfo'));
 
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
-const {changeLayerProperties, toggleNode, sortNode} = require('../../MapStore2/web/client/actions/layers');
+const {changeLayerProperties, changeGroupProperties, toggleNode, sortNode} = require('../../MapStore2/web/client/actions/layers');
 const layersIcon = require('../../MapStore2/web/client/product/assets/img/layers.png');
 
+const getGroupVisibility = (nodes) => {
+    let visibility = true;
+    nodes.forEach((node) => {
+        if (!node.visibility) {
+            visibility = false;
+        }
+    });
+    return visibility;
+};
+
+const addGroupVisibility = (groups) => {
+    return groups.map((group) => assign({}, group, {visibility: getGroupVisibility(group.nodes)}));
+};
+
 const LayerTree = connect((state) => ({
-    groups: state.layers && state.layers.groups && LayersUtils.denormalizeGroups(state.layers.flat, state.layers.groups).groups || []
+    groups: addGroupVisibility(state.layers && state.layers.groups && LayersUtils.denormalizeGroups(state.layers.flat, state.layers.groups).groups || [])
 }), {
     propertiesChangeHandler: changeLayerProperties,
+    changeGroupProperties,
     onToggleGroup: LayersUtils.toggleByType('groups', toggleNode),
     onToggleLayer: LayersUtils.toggleByType('layers', toggleNode),
     onSort: LayersUtils.sortUsing(LayersUtils.sortLayers, sortNode)
-})(require('../../MapStore2/web/client/product/components/viewer/LayerTree'));
+})(require('../components/LayerTree'));
 
 const BackgroundSwitcher = connect((state) => ({
     layers: state.layers && state.layers.flat && state.layers.flat.filter((layer) => layer.group === "background") || []
@@ -139,8 +157,6 @@ const ZoomToMaxExtentButton = connect((state) => ({
         }, dispatch)
     };
 })(require("../../MapStore2/web/client/components/buttons/ZoomToMaxExtentButton"));
-
-const ToggleButton = require('../../MapStore2/web/client/components/buttons/ToggleButton');
 
 const {changeLocateState} = require('../../MapStore2/web/client/actions/locate');
 const LocateBtn = connect((state) => ({
@@ -189,23 +205,9 @@ const Sira = React.createClass({
             <span/>
         );
 
-        let tooltip = <Tooltip id="toolbar-home-button">{<Message msgId="gohome"/>}</Tooltip>;
-        let homeButton = (
-            <ToggleButton
-                id="home-button"
-                key="gohome"
-                isButton={true}
-                pressed={false}
-                glyphicon="home"
-                helpText={<Message msgId="helptexts.gohome"/>}
-                onClick={() => {location.href = "/"; }}
-                tooltip={tooltip}
-                tooltipPlace="left"/>
-        );
-
         return (
             <div className="mappaSiraDecisionale">
-                <Header/>
+                <Header onBack={this.back} onHome={this.goHome}/>
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
@@ -233,7 +235,6 @@ const Sira = React.createClass({
                             zIndex: 1000
                         }}>
 
-                        {homeButton}
 
                         <LocateBtn
                             key="locate"
@@ -296,6 +297,12 @@ const Sira = React.createClass({
                 </div>
             </div>
         );
+    },
+    back() {
+        window.location.href = urlQuery.back + ".html?profile=" + this.props.params.profile;
+    },
+    goHome() {
+        window.location.href = "index.html?profile=" + this.props.params.profile;
     },
     toggleGrid(evt) {
         evt.preventDefault();

@@ -9,6 +9,16 @@
 const React = require('react');
 
 const MapHeader = React.createClass({
+    propTypes: {
+        onBack: React.PropTypes.func,
+        onHome: React.PropTypes.func
+    },
+    getDefaultProps() {
+        return {
+            onBack: () => {},
+            onHome: () => {}
+        };
+    },
     render() {
         return (
             <div id="header-servizio" className="container-fluid">
@@ -23,11 +33,11 @@ const MapHeader = React.createClass({
                                                 <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home
                                                     page Sistemapiemonte">SP</a></h1>
                                             </div>
-                                            <div className="col-lg-8 col-md-8 col-sm-8 col-xs-8 titolo-interna"><h2>Siradec</h2></div>
+                                            <div className="col-lg-8 col-md-8 col-sm-8 col-xs-8 titolo-interna"><h2 style={{cursor: "pointer"}} onClick={this.props.onHome}>Siradec</h2></div>
                                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                                 <div data-toggle="buttons" className="btn-group map-list">
                                                     <label className="btn btn-primary ">
-                                                        <input type="radio" checked="" autoComplete="off" id="option1"
+                                                        <input type="radio" onChange={this.props.onBack} checked="" autoComplete="off" id="option1"
                                                             name="options"/> Lista
                                                     </label>
                                                     <label className="btn btn-primary active">
