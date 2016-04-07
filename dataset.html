@@ -31,6 +31,8 @@
 
     <script type="text/javascript"
         src="assets/application/conoscenze_ambientali/js/jquery-ui-core_autocomplete_datepicker.min.js"></script>
+    <script type="text/javascript"
+        src="assets/application/conoscenze_ambientali/js/sira.js"></script>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -62,7 +64,7 @@
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 spiemonte">
         	<h1 class="pull-right"><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
     		</div>
-            <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6 titolo-interna"><a href="index.html"><h2>Siradec</h2></a></div>
+            <div class="col-lg-8 col-md-7 col-sm-6 col-xs-6 titolo-interna"><a id="homeLink" href="#"><h2>Siradec</h2></a></div>
 
 		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
 
@@ -71,7 +73,7 @@
     <input type="radio" checked="" autocomplete="off" id="option1" name="options"> Lista
   </label>
   <label class="btn btn-primary">
-    <input type="radio" autocomplete="off" id="option2" name="options"> Mappa  <span class="badge">4</span>
+    <input type="radio" data-back="dataset" autocomplete="off" id="option2" name="options"> Mappa  <span class="badge">4</span>
   </label>
 </div>
 <!-- div class="checkbox-on-off">
@@ -97,8 +99,8 @@
 		<!-- NAVBAR MAIN -->
 		<nav class="pimenu-navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-                        <li class="item-113"><a href="map.html#/A">Profilo A</a></li>
-                        <li class="item-125"><a href="map.html#/B">Profilo B</a></li>
+                        <li class="item-113"><a id="profileALink" href="#">Profilo A</a></li>
+                        <li class="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
                 	</ul>
 
 		</nav>
@@ -154,7 +156,7 @@
 <div class="row">
 <ul role="tablist" class="nav nav-tabs" id="myTabs">
  <li class="active" role="presentation"><a aria-expanded="true" aria-controls="oggetti" role="tab" id="oggetti-tab" href="#oggetti">Oggetti</a></li>
- <li class="disactive" role="presentation"><a aria-controls="tematiche" id="tematiche-tab" role="tab" href="applicazioni.html">Applicazioni tematiche</a></li>
+ <li class="disactive" role="presentation"><a aria-controls="tematiche" role="tab" id="applicazioniLink" href="#">Applicazioni tematiche</a></li>
  </ul>
    </div>
 </div>
@@ -222,7 +224,7 @@
   <a href="#" class="ico_cerca">Cerca</a>
 </div>
 <div class="col-md-1 col-sm-3 col-xs-3 azione">
-  <a href="#" class="ico_mappa">Mappa</a>
+  <a id="mapLink" data-back="dataset" href="#" class="ico_mappa">Mappa</a>
 </div>
 <div class="col-md-1 col-sm-3 col-xs-3 azione">
   <a href="#" class="ico_indica">Indicatori</a>
