@@ -240,7 +240,6 @@ const Sira = React.createClass({
                             zIndex: 1000
                         }}>
 
-
                         <LocateBtn
                             key="locate"
                             tooltip={<Message msgId="locate.tooltip"/>}/>

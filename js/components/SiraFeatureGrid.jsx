@@ -189,6 +189,7 @@ const SiraFeatureGrid = React.createClass({
                                     style={{marginBottom: "12px"}}
                                     onClick={this.onGridClose}><span>Torna al pannello di ricerca</span>
                                 </Button>
+                                <h5>Risultati - {this.props.features.length}</h5>
                                 <FeatureGrid
                                     changeMapView={this.props.changeMapView}
                                     srs="EPSG:4326"
