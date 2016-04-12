@@ -22,10 +22,10 @@ const {
 describe('Test correctness of the card template actions', () => {
 
     it('loads an existing template file', (done) => {
-        loadCardTemplate('base/js/test-resources/template-test.config', '', '')((e) => {
+        loadCardTemplate('base/js/test-resources/template-test.config', 'modelconfig/url', 'wfs/url')((e) => {
             try {
                 expect(e).toExist();
-                expect(e).withArgs('template', 'wfsUrl');
+                expect(e).withArgs('templateConfigURL', 'modelConfigURL', 'wfsUrl');
                 done();
             } catch(ex) {
                 done(ex);
@@ -34,12 +34,12 @@ describe('Test correctness of the card template actions', () => {
     });
 
     it('loads an existing template file 2', (done) => {
-        const template = "<Panel header={(<DetailTitle title='Autorizzazione Unica Ambientale (AUA ) - Recupero rifiuti' subtitle='Codice SIRA  impianto=' id={model.id}/>)}>Scheda</Panel>";
+        const template = "<Panel header={(<DetailTitle title='Autorizzazione Unica Ambientale (AUA ) - Recupero rifiuti' subtitle={['N°', model.numauth, 'del', model.dataauth]} id={model.id}/>)}>Scheda</Panel>";
 
         loadCardModelConfig(template, 'base/js/test-resources/testCardModelConfig.json', '')((e) => {
             try {
                 expect(e).toExist();
-                expect(e).withArgs('template', 'modelConfig', 'wfsUrl');
+                expect(e).withArgs('templateConfigURL', 'modelConfigURL', 'wfsUrl');
                 done();
             } catch(ex) {
                 done(ex);
@@ -48,7 +48,7 @@ describe('Test correctness of the card template actions', () => {
     });
 
     it('loads an existing template file 3', (done) => {
-        const template = "<Panel header={(<DetailTitle title='Autorizzazione Unica Ambientale (AUA ) - Recupero rifiuti' subtitle='Codice SIRA  impianto=' id={model.id}/>)}>Scheda</Panel>";
+        const template = "<Panel header={(<DetailTitle title='Autorizzazione Unica Ambientale (AUA ) - Recupero rifiuti' subtitle={['N°', model.numauth, 'del', model.dataauth]} id={model.id}/>)}>Scheda</Panel>";
         const modelConfig = [
             {
                 "field": "id",

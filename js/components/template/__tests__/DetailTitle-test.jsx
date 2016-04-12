@@ -25,7 +25,7 @@ describe('DetailTitle tests', () => {
     });
 
     it('Test DetailTitle rendering', () => {
-        let comp = ReactDOM.render(<DetailTitle store={store}/>, document.getElementById("container"));
+        let comp = ReactDOM.render(<DetailTitle subtitle={['x', "y", 'z']} store={store}/>, document.getElementById("container"));
         expect(comp).toExist();
     });
 

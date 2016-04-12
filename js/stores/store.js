@@ -25,6 +25,7 @@ const queryformconfig = require('../reducers/queryform');
 const assign = require('object-assign');
 
 const allReducers = combineReducers({
+    userprofile: require('../reducers/userprofile'),
     mapInfo: require('../reducers/mapInfo'),
     search: require('../../MapStore2/web/client/reducers/search').searchResults,
     browser: require('../../MapStore2/web/client/reducers/browser'),

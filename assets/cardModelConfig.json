@@ -133,8 +133,40 @@
         ]
     },
     {
+      "field": "attivita",
+      "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:attivita/sira:Attivita/sira:descrizione/text()"],
+      "type": 2
+    },
+    {
+        "type": 5,
+        "field": "list",
+        "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede"],
+        "fields": [
+          {
+              "field": "codicesira",
+              "xpath": ["sira:codiceSira/text()"],
+              "type": 1
+          },
+          {
+              "field": "comune",
+              "xpath": ["sira:comune/text()"],
+              "type": 2
+          },
+          {
+              "field": "provincia",
+              "xpath": ["sira:provincia/text()"],
+              "type": 2
+          },
+          {
+              "field": "suap",
+              "xpath": ["sira:suap/text()"],
+              "type": 1
+          }
+        ]
+    },
+    {
         "type": 6,
         "field": "geometry",
-        "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:geometria/gml:Point/gml:pos/text()"]
+        "xpath": ["/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:geometria/gml:Point/gml:pos/text()"]
     }
 ]

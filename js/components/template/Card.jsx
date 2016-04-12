@@ -30,6 +30,7 @@ const Card = React.createClass({
         }),
         open: React.PropTypes.bool,
         model: React.PropTypes.object,
+        impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func
     },
     getDefaultProps() {
@@ -71,7 +72,7 @@ const Card = React.createClass({
             ) : (
             <Draggable start={{x: 672, y: 180}} handle=".panel-heading,.panel-heading *">
                 <div className="scheda-sira">
-                    <TemplateSira template={this.props.card.template} model={this.props.model}/>
+                    <TemplateSira template={this.props.card.template} model={this.props.model} impiantoModel={this.props.impiantoModel}/>
                 </div>
             </Draggable>);
     },
@@ -79,8 +80,10 @@ const Card = React.createClass({
         return (this.props.open) ? this.renderCard() : null;
     }
 });
+
 module.exports = connect((state) => {
     return {
+        impiantoModel: state.cardtemplate.impiantoModel,
         card: state.cardtemplate || {},
         open: state.siraControls.detail
     };
