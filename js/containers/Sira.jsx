@@ -22,6 +22,7 @@ const Header = require('../components/MapHeader');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
+const {setProfile} = require('../actions/userprofile');
 
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
@@ -193,10 +194,14 @@ const Sira = React.createClass({
         cardModel: React.PropTypes.object,
         nsResolver: React.PropTypes.func,
         controls: React.PropTypes.object,
-        toggleSiraControl: React.PropTypes.func
+        toggleSiraControl: React.PropTypes.func,
+        setProfile: React.PropTypes.func
     },
     getDefaultProps() {
         return {};
+    },
+    componentWillMount() {
+        this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
     },
     render() {
         let card = this.props.cardModel ? (
@@ -323,5 +328,6 @@ module.exports = connect((state) => {
         featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {
-    toggleSiraControl
+    toggleSiraControl,
+    setProfile
 })(Sira);

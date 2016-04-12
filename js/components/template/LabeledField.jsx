@@ -30,7 +30,7 @@ const LabeledField = React.createClass({
                     </Col>
                 </Row>
             </Grid>
-            );
+        );
     }
 });
 

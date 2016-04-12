@@ -106,33 +106,72 @@ const TemplateUtils = {
                 values.push(value);
             });
             value = values;
-        }else if (element.type === this.GEOMETRY_TYPE) {
-            result = select(element.xpath, doc)[0];
-            value = this.getElementValue(result, element.type, wfsVersion);
+        } else if (element.type === this.ARRAY_TYPE) {
+            let values = [];
+            let results = select(element.xpath, doc);
+            results.forEach((res) => {
+                value = {};
+                element.fields.forEach((f) => {
+                    let r = select(f.xpath, res);
+                    r.forEach((v) => {
+                        value[f.field] = (f.type === me.OBJECT_TYPE) ? me.getElement(f, v, wfsVersion) : this.getElementValue(v, f.type, wfsVersion);
+                    });
+                });
+                values.push(value);
+            });
+            value = values;
+        } else if (element.type === this.GEOMETRY_TYPE) {
+            let results = select(element.xpath, doc);
 
-            if (wfsVersion === "2.0" || !value.geometry) {
-                try {
-                    let coords = value.split(" ");
-                    let coordinates = [];
+            let values = [];
+            for (let k = 0; k < results.length; k++) {
+                result = results[k];
 
-                    for (let j = 0; j < coords.length; j = j + 2) {
-                        if (j + 1 <= coords.length) {
-                            if (parseFloat(coords[j]) && parseFloat(coords[j + 1])) {
-                                coordinates.push([parseFloat(coords[j]), parseFloat(coords[j + 1])]);
+                value = this.getElementValue(result, element.type, wfsVersion);
+
+                if (wfsVersion === "2.0" || !value.geometry) {
+                    try {
+                        let coords = value.split(" ");
+                        let coordinates = [];
+
+                        for (let j = 0; j < coords.length; j = j + 2) {
+                            if (j + 1 <= coords.length) {
+                                if (parseFloat(coords[j]) && parseFloat(coords[j + 1])) {
+                                    coordinates.push([parseFloat(coords[j]), parseFloat(coords[j + 1])]);
+                                }
                             }
                         }
-                    }
 
-                    // coordinates = coords.map((coord) => parseFloat(coord));
-                    value = {
-                        type: "geometry",
-                        coordinates: coordinates
-                    };
-                } catch(e) {
-                    value = value;
+                        value = {
+                            type: "geometry",
+                            coordinates: coordinates
+                        };
+                    } catch(e) {
+                        value = value;
+                    }
                 }
+
+                values.push(value);
             }
-        }else {
+
+            if (values.length > 1) {
+                let coordinates = [];
+                for (let k = 0; k < values.length; k++) {
+                    let coords = values[k].coordinates;
+                    for (let l = 0; l < coords.length; l++) {
+                        coordinates.push(coords[l]);
+                    }
+                }
+
+                value = {
+                    type: "geometry",
+                    coordinates: coordinates
+                };
+            } else {
+                value = values[0];
+            }
+
+        } else {
             for (let i = 0; i < element.xpath.length; i++) {
                 result = select(element.xpath[i], doc)[0];
                 if (element.type === this.STRING_TYPE) {

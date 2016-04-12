@@ -15,6 +15,7 @@ const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const SELECT_SECTION = 'SELECT_SECTION';
 const ACTIVE_SECTION = 'ACTIVE_SECTION';
 const SELECT_ROWS = 'SELECT_ROWS';
+const SET_IMPIANTO_MODEL = 'SET_IMPIANTO_MODEL';
 
 function configureCard(template, model) {
     return {
@@ -80,7 +81,11 @@ function loadCardTemplate(templateConfigURL, modelConfigURL, wfsUrl) {
     return (dispatch) => {
         return axios.get(templateConfigURL).then((response) => {
             let template = response.data;
-            dispatch(loadCardModelConfig(template, modelConfigURL, wfsUrl));
+            if (modelConfigURL && wfsUrl) {
+                dispatch(loadCardModelConfig(template, modelConfigURL, wfsUrl));
+            } else {
+                dispatch(configureCard(template));
+            }
         }).catch((e) => {
             dispatch(configureCardError(e));
         });
@@ -95,17 +100,26 @@ function selectRows(tableId, rows) {
     };
 }
 
+function setSiraImpiantoModel(impiantoModel) {
+    return {
+        type: SET_IMPIANTO_MODEL,
+        impiantoModel: impiantoModel
+    };
+}
+
 module.exports = {
     CARD_TEMPLATE_LOADED,
     CARD_TEMPLATE_LOAD_ERROR,
     SELECT_SECTION,
     ACTIVE_SECTION,
     SELECT_ROWS,
+    SET_IMPIANTO_MODEL,
     loadCardTemplate,
     loadCardModel,
     configureCardError,
     loadCardModelConfig,
     selectSection,
     activateSection,
-    selectRows
+    selectRows,
+    setSiraImpiantoModel
 };

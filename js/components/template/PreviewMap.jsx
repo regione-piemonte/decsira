@@ -69,7 +69,7 @@ const PreviewMap = React.createClass({
                     }}}
                     zoomControl={false}
                     zoom={this.props.zoom}
-                    center={this.getCenter()}
+                    center={this.getCenter([this.props.center])}
                     id="scheda_pMap">
                     {
                         this.props.layers.map((layer, index) =>
@@ -82,13 +82,17 @@ const PreviewMap = React.createClass({
         </div>
         ) : <span/>;
     },
-    getCenter() {
-        let point = {crs: this.props.pointSRS, x: this.props.center.coordinates[0][0], y: this.props.center.coordinates[0][1]};
+    getCenter(geometries) {
+        let extent = geometries.reduce((prev, next) => {
+            return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
+        }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
+
+        let point = {crs: this.props.pointSRS, x: (extent[0] + extent[2]) / 2, y: (extent[1] + extent[3]) / 2};
         return this.props.pointSRS !== "EPSG:4326" ?
             CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
     },
     changeMapView() {
-        let center = this.getCenter();
+        let center = this.getCenter([this.props.center]);
         let zoom = this.props.zoom;
         const proj = this.props.map.projection || "EPSG:3857";
         this.props.changeMapView( center, zoom, this.props.map.bbox, this.props.map.size, null, proj);

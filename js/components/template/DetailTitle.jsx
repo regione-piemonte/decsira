@@ -14,7 +14,7 @@ const {connect} = require('react-redux');
 const DetailTitle = React.createClass({
     propTypes: {
         title: React.PropTypes.string,
-        subtitle: React.PropTypes.string,
+        subtitle: React.PropTypes.array,
         id: React.PropTypes.number,
         toggleSiraControl: React.PropTypes.func
     },
@@ -27,11 +27,13 @@ const DetailTitle = React.createClass({
         };
     },
     render() {
+        let subtitle = this.props.subtitle.join(" ");
+
         return (
             <Grid className="detail-title" fluid={true}>
                 <Row>
                     <Col xs={11} sm={11} md={11} lg={11}>
-                        <h4>{this.props.title}<br/><small>{this.props.subtitle + this.props.id}</small></h4>
+                        <h4>{this.props.title}<br/><small>{subtitle}</small></h4>
                     </Col>
                     <Col xs={1} sm={1} md={1} lg={1}>
                         <button style={{paddingRight: "15px"}} onClick={this.props.toggleSiraControl} className="close card-close"><span>×</span></button>
