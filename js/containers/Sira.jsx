@@ -110,14 +110,15 @@ const GetFeatureInfo = connect((state) => ({
 })(require('../components/identify/GetFeatureInfo'));
 
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
-const {changeLayerProperties, changeGroupProperties, toggleNode, sortNode} = require('../../MapStore2/web/client/actions/layers');
+const {changeLayerProperties, changeGroupProperties, toggleNode} = require('../../MapStore2/web/client/actions/layers');
+// const {sortNode} = require('../../MapStore2/web/client/actions/layers');
 const layersIcon = require('../../MapStore2/web/client/product/assets/img/layers.png');
 
 const getGroupVisibility = (nodes) => {
-    let visibility = true;
+    let visibility = false;
     nodes.forEach((node) => {
-        if (!node.visibility) {
-            visibility = false;
+        if (node.visibility) {
+            visibility = true;
         }
     });
     return visibility;
@@ -133,8 +134,8 @@ const LayerTree = connect((state) => ({
     propertiesChangeHandler: changeLayerProperties,
     changeGroupProperties,
     onToggleGroup: LayersUtils.toggleByType('groups', toggleNode),
-    onToggleLayer: LayersUtils.toggleByType('layers', toggleNode),
-    onSort: LayersUtils.sortUsing(LayersUtils.sortLayers, sortNode)
+    onToggleLayer: LayersUtils.toggleByType('layers', toggleNode)
+    // onSort: LayersUtils.sortUsing(LayersUtils.sortLayers, sortNode)
 })(require('../components/LayerTree'));
 
 const BackgroundSwitcher = connect((state) => ({

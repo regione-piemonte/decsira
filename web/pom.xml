@@ -13,6 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<url.geoserver>http://tst-gisserver.territorio.csi.it</url.geoserver>
   </properties>
 
   <dependencies>
@@ -147,6 +148,7 @@
                                     <exclude>MapStore2/*</exclude>
                                     <exclude>MapStore2/**/*</exclude>
                                 </excludes>
+								<filtering>true</filtering>
                             </resource>
                         </resources>
                     </configuration>
@@ -251,5 +253,20 @@
         </plugin>
     </plugins>
   </build>
+
+   <profiles>
+        <profile>
+            <id>produzione</id>
+            <properties>
+             <url.geoserver>http://gisserver.territorio.csi.i</url.geoserver>
+            </properties>
+        </profile>
+        <profile>
+            <id>demo</id>
+            <properties>
+             <url.geoserver>http://sira.csi.geo-solutions.it</url.geoserver>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

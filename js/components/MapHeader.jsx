@@ -30,8 +30,7 @@ const MapHeader = React.createClass({
                                     <div className="header-section">
                                         <div className="navbar-header">
                                             <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 spiemonte">
-                                                <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home
-                                                    page Sistemapiemonte">SP</a></h1>
+                                                <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
                                             </div>
                                             <div className="col-lg-8 col-md-8 col-sm-8 col-xs-8 titolo-interna"><h2 style={{cursor: "pointer"}} onClick={this.props.onHome}>Siradec</h2></div>
                                             <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -42,7 +41,7 @@ const MapHeader = React.createClass({
                                                     </label>
                                                     <label className="btn btn-primary active">
                                                         <input type="radio" autoComplete="off" id="option2" name="options"/> Mappa
-                                                        <span className="badge">4</span>
+                                                        <span className="badge">1</span>
                                                     </label>
                                                 </div>
                                             </div>
