@@ -44,7 +44,12 @@ const SiraMap = (props) => {
                 {
                     props.layers.map((layer, index) => {
                         let options = assign({}, layer, {srs: props.map.projection});
-                        options = layer.type === "wms" ? assign({}, options, {params: props.params}) : options;
+                        if (layer.params) {
+                            options.params = layer.type === "wms" && layer.group !== "background" ? assign({}, options.params, props.params) : options.params;
+                        } else {
+                            options = layer.type === "wms" && layer.group !== "background" ? assign({}, options, {params: props.params}) : options;
+                        }
+
                         return (
                             <Layer key={layer.name || layer.title} position={index} type={layer.type}
                                 options={options}/>
