@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:int="http://interfaces.policy.iride2.csi.it">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <int:findRuoliForPersonaInApplication soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+         <in0 xsi:type="urn:Identita" xmlns:urn="urn:PolicyEnforcerBase">
+            <nome xsi:type="xsd:string">%NOME%</nome>
+            <livelloAutenticazione xsi:type="xsd:int">%LIVELLOAUTH%</livelloAutenticazione>
+            <codFiscale xsi:type="xsd:string">%CODICEFISCALE%</codFiscale>
+            <timestamp xsi:type="xsd:string">%TIMESTAMP%</timestamp>
+            <mac xsi:type="xsd:string">%MAC%</mac>
+            <idProvider xsi:type="xsd:string">%PROVIDER%</idProvider>
+            <rappresentazioneInterna xsi:type="xsd:string">%FULLUSER%</rappresentazioneInterna>
+            <cognome xsi:type="xsd:string">%COGNOME%</cognome>
+         </in0>
+         <in1 xsi:type="urn:Application" xmlns:urn="urn:PolicyEnforcerBase">
+            <id xsi:type="xsd:string">%APPLICATION%</id>
+         </in1>
+      </int:findRuoliForPersonaInApplication>
+   </soapenv:Body>
+</soapenv:Envelope>
