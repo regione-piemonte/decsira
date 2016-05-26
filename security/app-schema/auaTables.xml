@@ -11,7 +11,7 @@
         </Namespace>
     </namespaces>
     <includedTypes>
-        <Include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">includedTypes.xml</Include>
+        <Include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">includedTypesTables.xml</Include>
     </includedTypes>
     <sourceDataStores>
         <DataStore>
@@ -23,11 +23,11 @@
                 </Parameter>
                 <Parameter>
                     <name>port</name>
-                    <value>5432</value>
+                    <value>${db.port}</value>
                 </Parameter>
                 <Parameter>
                     <name>passwd</name>
-                    <value>sipra</value>
+                    <value>${db.password}</value>
                 </Parameter>
                 <Parameter>
                     <name>dbtype</name>
@@ -47,7 +47,7 @@
                 </Parameter>
                 <Parameter>
                     <name>schema</name>
-                    <value>sipra</value>
+                    <value>${db.schema}</value>
                 </Parameter>
                 <Parameter>
                     <name>create database</name>
@@ -71,7 +71,7 @@
                 </Parameter>
                 <Parameter>
                     <name>host</name>
-                    <value>192.168.122.51</value>
+                    <value>${db.host}</value>
                 </Parameter>
                 <Parameter>
                     <name>validate connections</name>
@@ -83,7 +83,7 @@
                 </Parameter>
                 <Parameter>
                     <name>database</name>
-                    <value>sipra</value>
+                    <value>${db.name}</value>
                 </Parameter>
                 <Parameter>
                     <name>Support on the fly geometry simplification</name>
@@ -115,58 +115,22 @@
                 </Parameter>
                 <Parameter>
                     <name>user</name>
-                    <value>sipra</value>
+                    <value>${db.user}</value>
                 </Parameter>
             </parameters>
         </DataStore>
     </sourceDataStores>
     <targetTypes>
         <FeatureType>
-            <schemaUri>file:/home/stefano/Lavoro/GeoSolutions/projects/sira/my-csi-sira/security/xsd/sipra.xsd</schemaUri>
+            <schemaUri>sipra.xsd</schemaUri>
         </FeatureType>
     </targetTypes>
     <typeMappings>
         <FeatureTypeMapping>
             <sourceDataStore>dataStore</sourceDataStore>
-            <sourceType>v_sede</sourceType>
+            <sourceType>t_denorm_sede</sourceType>
             <targetElement>sira:Sede</targetElement>
             <attributeMappings>
-                <AttributeMapping>
-                    <targetAttribute>sira:codiceSira</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>codice_sira</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:Sede</targetAttribute>
-                    <idExpression>
-                        <OCQL>strConcat('sede.', codice_sira)</OCQL>
-                    </idExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:comune</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>istat_comune</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:depuratore</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>flg_depuratore</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:suap</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>fk_suap</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:geometria</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>geometria</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
                 <AttributeMapping>
                     <targetAttribute>sira:tipoSede</targetAttribute>
                     <sourceExpression>
@@ -177,105 +141,62 @@
                     <isMultiple>true</isMultiple>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
+                    <targetAttribute>sira:codiceSira</targetAttribute>
                     <sourceExpression>
                         <OCQL>codice_sira</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:Sede</targetAttribute>
+                    <idExpression>
+                        <OCQL>gml_id</OCQL>
+                    </idExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:comune</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>comune</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:depuratore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>flg_depuratore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:provincia</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>provincia</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:geometria</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>geometria</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
             </attributeMappings>
         </FeatureTypeMapping>
         <FeatureTypeMapping>
             <sourceDataStore>dataStore</sourceDataStore>
-            <sourceType>denorm_aua</sourceType>
+            <sourceType>t_aua</sourceType>
             <targetElement>sira:AutorizzazioneUnicaAmbientale</targetElement>
-            <isDenormalised>false</isDenormalised>
             <attributeMappings>
                 <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio</targetAttribute>
+                    <targetAttribute>sira:impianto</targetAttribute>
                     <sourceExpression>
-                        <OCQL>data_rilascio</OCQL>
+                        <OCQL>id_istanza</OCQL>
+                        <linkElement>sira:Sede</linkElement>
+                        <linkField>FEATURE_LINK[1]</linkField>
                     </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>nr_provvedimento</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>cf_soggetto</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:tipoRichiesta/sira:TipoRichiesta/sira:descrizione</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>des_tipo_richiesta</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:tipoRichiesta/sira:TipoRichiesta/sira:flag</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>flg_richiesta</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>des_procedimento</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:codiceBdc</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>codice_bdc</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa</targetAttribute>
-                    <ClientProperty>
-                        <name>gml:id</name>
-                        <value>strConcat('istanza.', id_istanza)</value>
-                    </ClientProperty>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento</targetAttribute>
-                    <ClientProperty>
-                        <name>gml:id</name>
-                        <value>strConcat('procedimento.', id_procedimento)</value>
-                    </ClientProperty>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:tipoRichiesta/sira:TipoRichiesta</targetAttribute>
-                    <ClientProperty>
-                        <name>gml:id</name>
-                        <value>strConcat('tipo_richiesta.', id_tipo_richiesta)</value>
-                    </ClientProperty>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:capacitaMaxStoccMC</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>capacita_max_stocc_mc</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:capacitaMaxStoccT</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>capacita_max_stocc_t</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:notaQuadroTecnico</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>nota_quadro_tecnico</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>qta_tot_recupero</OCQL>
-                    </sourceExpression>
+                    <isMultiple>true</isMultiple>
                 </AttributeMapping>
                 <AttributeMapping>
                     <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:impianto</targetAttribute>
@@ -296,10 +217,34 @@
                     <isMultiple>true</isMultiple>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>sira:rifiuto/sira:Rifiuto</targetAttribute>
-                    <idExpression>
-                        <OCQL>strConcat('rifiuto.', id_rifiuto)</OCQL>
-                    </idExpression>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:capacitaMaxStoccMC</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>capacita_max_stocc_mc</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:capacitaMaxStoccT</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>capacita_max_stocc_t</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>cf_soggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:codiceBdc</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_bdc</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_rilascio</OCQL>
+                    </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
                     <targetAttribute>sira:attivita/sira:Attivita/sira:descrizione</targetAttribute>
@@ -308,44 +253,22 @@
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>sira:attivita/sira:Attivita</targetAttribute>
-                    <ClientProperty>
-                        <name>gml:id</name>
-                        <value>strConcat('attivita.', id_attivita)</value>
-                    </ClientProperty>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:impianto/sira:Sede/sira:codiceSira</targetAttribute>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione</targetAttribute>
                     <sourceExpression>
-                        <OCQL>codice_sira</OCQL>
+                        <OCQL>des_procedimento</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>sira:impianto/sira:Sede</targetAttribute>
-                    <idExpression>
-                        <OCQL>strConcat('sede.', codice_sira)</OCQL>
-                    </idExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:impianto/sira:Sede/sira:comune</targetAttribute>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:tipoRichiesta/sira:TipoRichiesta/sira:descrizione</targetAttribute>
                     <sourceExpression>
-                        <OCQL>comune</OCQL>
+                        <OCQL>des_tipo_richiesta</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>sira:impianto/sira:Sede/sira:depuratore</targetAttribute>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:tipoRichiesta/sira:TipoRichiesta/sira:flag</targetAttribute>
                     <sourceExpression>
-                        <OCQL>flg_depuratore</OCQL>
+                        <OCQL>flg_richiesta</OCQL>
                     </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>sira:impianto/sira:Sede/sira:tipoSede</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>codice_sira</OCQL>
-                        <linkElement>sira:TipoSede</linkElement>
-                        <linkField>FEATURE_LINK[1]</linkField>
-                    </sourceExpression>
-                    <isMultiple>true</isMultiple>
                 </AttributeMapping>
                 <AttributeMapping>
                     <targetAttribute>sira:geometria</targetAttribute>
@@ -354,10 +277,63 @@
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
+                    <targetAttribute>sira:attivita/sira:Attivita</targetAttribute>
+                    <ClientProperty>
+                        <name>gml:id</name>
+                        <value>gml_id_attivita</value>
+                    </ClientProperty>
+                </AttributeMapping>
+                <AttributeMapping>
                     <targetAttribute>sira:AutorizzazioneUnicaAmbientale</targetAttribute>
                     <idExpression>
-                        <OCQL>id_aua</OCQL>
+                        <OCQL>gml_id</OCQL>
                     </idExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto</targetAttribute>
+                    <ClientProperty>
+                        <name>gml:id</name>
+                        <value>id_rifiuto</value>
+                    </ClientProperty>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa</targetAttribute>
+                    <ClientProperty>
+                        <name>gml:id</name>
+                        <value>gml_id_istanza</value>
+                    </ClientProperty>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento</targetAttribute>
+                    <ClientProperty>
+                        <name>gml:id</name>
+                        <value>gml_id_procedimento</value>
+                    </ClientProperty>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:tipoRichiesta/sira:TipoRichiesta</targetAttribute>
+                    <ClientProperty>
+                        <name>gml:id</name>
+                        <value>gml_id_tipo_richiesta</value>
+                    </ClientProperty>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:notaQuadroTecnico</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>nota_quadro_tecnico</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>nr_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>qta_tot_recupero</OCQL>
+                    </sourceExpression>
                 </AttributeMapping>
             </attributeMappings>
         </FeatureTypeMapping>

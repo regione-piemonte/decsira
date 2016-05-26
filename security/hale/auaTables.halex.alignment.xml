@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cf2f629e6-0739-4c92-a364-92696953c630" priority="normal">
+        <source>
+            <class>
+                <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TipoSedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C0d375cfa-254b-48d2-83ca-1068eb307a46" priority="normal">
+        <source name="var">
+            <property>
+                <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="id_tipo_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoSedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="tipo_sede.{id_tipo_sede}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C06b29e4d-6f16-4b9a-adf7-0c1105028bb6" priority="normal">
+        <source>
+            <property>
+                <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_tipo_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoSedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5d56957b-70a7-4b6a-bdd4-5f75ebc8a0c9" priority="normal">
+        <source>
+            <property>
+                <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoSedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C4774128c-a2e5-4dc4-b8ba-183459a3b220" priority="normal">
+        <source>
+            <class>
+                <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="CodiceCERType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8737f37a-d3ab-4c7d-98c8-470b212d8e7e" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="codice_cer"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CodiceCERType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codice" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc0be0198-b387-471b-a405-924d9154c05f" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_cer"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CodiceCERType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C25d4c2d5-67de-483f-a0a9-31124d3243a6" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="flg_pericoloso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CodiceCERType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="pericoloso" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C66347415-81c1-4a59-8b54-dbee5e2d5c82" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CodiceCERType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ced6cb859-2c7a-4f06-a16b-3265f832b222" priority="normal">
+        <source>
+            <class>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5ffdf81d-4ce7-46e8-81d4-358318bfffb0" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="codice_operaz_recupero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codice" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C50a2c78c-1812-4906-b09a-a8383eca3c8e" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_operaz_recupero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccb0edd5e-117d-4585-9bfc-ce4954e58127" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="qta_max_gest"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="qtaMaxGest" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3bff7550-e304-4f41-ab55-d87ec01164b8" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="qta_max_recupero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="qtaMaxRecupero" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C467d26a0-e90d-44c0-904f-089f2a893ef5" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="qta_max_stocc_mc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="qtaMaxStoccMC" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdd2f17ac-8809-43d6-a9c5-e739f8ff981c" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="qta_max_stocc_t"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="qtaMaxStoccT" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C05fe157f-3e51-4262-8034-23aa47d07bb7" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OperazioneRecuperoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C71c3cb0a-edaf-4c06-b03e-cf9c197e7526" priority="normal">
+        <source>
+            <class>
+                <type name="t_denorm_tipo_impianto" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TipoImpiantoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf3555b69-3e1b-4c2b-8b23-ea5708fb0435" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_tipo_impianto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_tipo_impianto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoImpiantoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6907ab21-9d91-468d-8720-9d884fe551cc" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_tipo_impianto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoImpiantoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C213a3363-5d67-48a1-8148-a1ac98e1c5fb" priority="normal">
+        <source name="types">
+            <class>
+                <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <class>
+                    <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="codice_sira"/>
+                    </property>
+                    <property>
+                        <type name="v_tipo_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="codice_sira"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb7b4310b-988d-4319-aad3-efe1404fa2be" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5125aa93-51e5-415f-be0a-2ca34d2fb0e1" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cafd91948-fbba-4755-bef2-8bc9597e34ca" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="comune" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5c59c1f1-c883-404a-b3d7-5cfca9d0c247" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="flg_depuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="depuratore" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd76dcbe0-d771-4989-b10a-feba5f0f13cd" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="provincia" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1a664a78-42de-42d4-9e82-681b49bdac68" priority="normal">
+        <source>
+            <property>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SedeType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C9a52843b-1a13-462d-b43e-1bda67e1c5c7" priority="normal">
+        <source name="types">
+            <class>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <class>
+                    <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <class>
+                    <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_scheda_rifiuto"/>
+                    </property>
+                    <property>
+                        <type name="t_denorm_operaz_recupero" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_scheda_rifiuto"/>
+                    </property>
+                </jp:condition>
+                <jp:condition>
+                    <property>
+                        <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_scheda_rifiuto"/>
+                    </property>
+                    <property>
+                        <type name="t_denorm_codice_cer" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_scheda_rifiuto"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2a5f3b77-f833-4b04-b081-c5c31214c5be" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="codice_tipo_rifiuto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codice" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf627a8d5-6406-413d-a2d3-ed76cc5c9059" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_tipo_recupero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRecupero" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRecupero" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3c9a40aa-df4e-4613-b45b-179b5702b3eb" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_tipo_rifiuto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37d78d84-9ee7-4e98-9fe3-4bd9909753d7" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="flg_pericoloso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="pericoloso" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbeb00297-2f19-4ccf-b3aa-a3a8acb1c176" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="flg_quadro_tecn"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="quadroTecnico" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caf571815-3235-44fb-8e29-cd16cc1a262e" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id_tipo_recupero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRecupero" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRecupero" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1f228bd8-2b37-4bc3-95e0-1565c2119a77" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id_tipo_rifiuto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd894b30e-a659-4e74-b900-fed2cda0add7" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="id_scheda_rifiuto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd7002def-c6ad-40c9-9cf3-9d749137d7b8" priority="normal">
+        <source>
+            <property>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="nr_scheda"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SchedaRifiutoType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="nrScheda" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C41fed7a6-30dd-4a7f-8b75-c4aa99f120ae" priority="normal">
+        <source name="types">
+            <class>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="t_denorm_tipo_impianto" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <class>
+                    <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <class>
+                    <type name="t_denorm_tipo_impianto" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <class>
+                    <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_rifiuto"/>
+                    </property>
+                    <property>
+                        <type name="t_denorm_tipo_impianto" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_rifiuto"/>
+                    </property>
+                </jp:condition>
+                <jp:condition>
+                    <property>
+                        <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_rifiuto"/>
+                    </property>
+                    <property>
+                        <type name="t_scheda_rifiuto" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_rifiuto"/>
+                    </property>
+                </jp:condition>
+                <jp:condition>
+                    <property>
+                        <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_istanza"/>
+                    </property>
+                    <property>
+                        <type name="t_denorm_sede" ns="jdbc:postgresql:sipra:sipra"/>
+                        <child name="id_istanza"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb874a8af-c18d-421e-ba6d-551df230485a" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="capacita_max_stocc_mc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="capacitaMaxStoccMC" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0cd47380-d26e-4099-8f9e-92ec12977d9c" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="capacita_max_stocc_t"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="capacitaMaxStoccT" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc9623f92-75bb-4c0e-b8cc-76d730b62634" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="cf_soggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codiceFiscale" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccbd0b954-c827-4feb-8cf3-547a2d367bcb" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="codice_bdc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="procedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Procedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="codiceBdc" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb9e91eb7-6581-40ed-9e31-6a4c25826ec3" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="data_rilascio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="dataRilascio" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca12fc9eb-8773-40b1-8322-e8aad6308093" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="attivita" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Attivita" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7a37bd78-52f5-4d1c-9c52-79ab2cfa137a" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_procedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="procedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Procedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1c1f313e-a45e-415a-9d12-687e5d2a7ab9" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="des_tipo_richiesta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRichiesta" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRichiesta" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C02e7d4cf-8c42-4753-bfe0-bcda220112e3" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="flg_richiesta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRichiesta" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRichiesta" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="flag" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca1ea993a-bb33-4faa-8798-e4b550e9300e" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C493953af-12ee-4f76-98cf-609143108805" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="attivita" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Attivita" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6f6443d9-4377-4267-9b59-d5bc61bc964f" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb41a319b-f845-4541-b650-bf897044a0f7" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="id_rifiuto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C54034fb9-6563-4fbb-9554-dcc1e424bfd7" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C610ab432-a3f9-4ef2-b83c-e43bccd3114d" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id_procedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="procedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Procedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd83fbeb3-f92f-4f47-89c9-fdc9eb884d79" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="gml_id_tipo_richiesta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="tipoRichiesta" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="TipoRichiesta" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C58229a5b-2b44-40ac-9f15-bd4fc427ac6a" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="nota_quadro_tecnico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="notaQuadroTecnico" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4a601350-d02c-4bde-b4ea-8924db8fe2a8" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="nr_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="istanza" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="IstanzaAutorizzativa" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="nrProvvedimento" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8425e8ad-e665-4b34-b62b-94842c490d69" priority="normal">
+        <source>
+            <property>
+                <type name="t_aua" ns="jdbc:postgresql:sipra:sipra"/>
+                <child name="qta_tot_recupero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneUnicaAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="Rifiuto" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+                <child name="qtaTotRecupero" ns="http://www.regione.piemonte.it/ambiente/sira/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>

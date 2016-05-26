@@ -1,8 +1,8 @@
+curl -v -u admin:geoserver -XPOST -d @aua_istanza.xml -H "Content-Type: text/xml" http://localhost:8080/geoserver/ows > output.xml
 curl -v -u admin:geoserver -XPOST -d @aua_comune.xml -H "Content-Type: text/xml" http://localhost:8080/geoserver/ows > output.xml
+curl -v -u admin:geoserver -XPOST -d @aua_tipologia_rifiuti.xml -H "Content-Type: text/xml" http://localhost:8080/geoserver/ows > output.xml
 # ^^^^^ VERY FAST :-)
 
-
-curl -v -u admin:geoserver -XPOST -d @aua_tipologia_rifiuti.xml -H "Content-Type: text/xml" http://localhost:8080/geoserver/ows > output.xml
 curl -v -u admin:geoserver -XPOST -d @aua_operazione_recupero.xml -H "Content-Type: text/xml" http://localhost:8080/geoserver/ows > output.xml
 curl -v -u admin:geoserver -XPOST -d @aua_tipo_impianto.xml -H "Content-Type: text/xml" http://localhost:8080/geoserver/ows > output.xml
 # ^^^^^ VERY SLOW :-(
