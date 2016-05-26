@@ -36,7 +36,7 @@
                     <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
                     <xs:element name="istanza" minOccurs="1" maxOccurs="1" type="sira:IstanzaAutorizzativaPropertyType" />
                     <xs:element name="rifiuto" minOccurs="1" maxOccurs="1" type="sira:RifiutoPropertyType" />
-                    <xs:element name="impianto" minOccurs="1" maxOccurs="1" type="sira:SedePropertyType" />
+                    <xs:element name="impianto" minOccurs="1" maxOccurs="unbounded" type="sira:SedePropertyType" />
                     <xs:element name="geometria" type="gml:GeometryPropertyType" minOccurs="0" />
                 </sequence>
             </extension>
@@ -88,7 +88,6 @@
                     <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
                     <xs:element name="tipoRichiesta" type="sira:TipoRichiestaPropertyType" minOccurs="0" maxOccurs="1" />
                     <xs:element name="procedimento" type="sira:ProcedimentoPropertyType" />
-                    <xs:element name="rifiuto" type="sira:RifiutoPropertyType" minOccurs="0" maxOccurs="unbounded" />
                 </sequence>
             </xs:extension>
         </xs:complexContent>
@@ -102,7 +101,6 @@
                     <xs:element name="capacitaMaxStoccT" type="decimal" minOccurs="0" />
                     <xs:element name="capacitaMaxStoccMC" type="decimal" minOccurs="0" />
                     <!-- associations -->
-                    <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
                     <xs:element name="tipoRichiesta" type="sira:TipoRichiestaPropertyType"
                         minOccurs="0" maxOccurs="1" />
                     <xs:element name="impianto" type="sira:TipoImpiantoPropertyType" minOccurs="0"

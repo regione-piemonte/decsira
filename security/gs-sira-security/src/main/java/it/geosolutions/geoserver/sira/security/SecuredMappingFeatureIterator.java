@@ -1,18 +1,16 @@
 package it.geosolutions.geoserver.sira.security;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.geoserver.security.WrapperPolicy;
 import org.geotools.data.complex.IMappingFeatureIterator;
 import org.geotools.factory.Hints;
+import org.geotools.filter.expression.FeaturePropertyAccessorFactory;
 import org.geotools.filter.expression.PropertyAccessor;
 import org.geotools.filter.expression.PropertyAccessorFactory;
-import org.geotools.filter.expression.PropertyAccessors;
 import org.geotools.util.logging.Logging;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
@@ -57,12 +55,17 @@ public class SecuredMappingFeatureIterator implements IMappingFeatureIterator {
             if (policy.limits instanceof HidingAccessLimits) {
                 HidingAccessLimits accessLimits = (HidingAccessLimits) policy.limits;
                 List<PropertyName> hiddenAttrs = accessLimits.getHiddenProperties();
+                long startTime = System.currentTimeMillis();
                 for (PropertyName hiddenAttr : hiddenAttrs) {
                     Property hiddenProperty = getProperty(next, hiddenAttr.getPropertyName(), null,
                             hiddenAttr.getNamespaceContext());
                     if (hiddenProperty != null) {
                         hiddenProperty.setValue(null);
                     }
+                }
+                long endTime = System.currentTimeMillis();
+                if (LOGGER.isLoggable(Level.FINER)) {
+                    LOGGER.log(Level.FINER, "{0} properties were hidden in {1} ms", new Object[] { hiddenAttrs.size(), endTime-startTime });
                 }
             }
             ;
@@ -77,67 +80,24 @@ public class SecuredMappingFeatureIterator implements IMappingFeatureIterator {
     }
 
     <T> T getProperty(Object obj, String attPath, Class<T> target, NamespaceSupport namespaceSupport) {
-        PropertyAccessor accessor = getLastPropertyAccessor();
-        AtomicReference<Exception> e = new AtomicReference<Exception>();
-
-        if (accessor == null || !accessor.canHandle(obj, attPath, target)
-                || !tryAccessor(accessor, obj, attPath, target, e)) {
-            boolean success = false;
-            Hints hints = null;
-            if (namespaceSupport != null) {
-                hints = new Hints(PropertyAccessorFactory.NAMESPACE_CONTEXT, namespaceSupport);
-            }
-            List<PropertyAccessor> accessors = PropertyAccessors.findPropertyAccessors(obj,
-                    attPath, target, hints);
-
-            if (accessors != null) {
-                Iterator<PropertyAccessor> it = accessors.iterator();
-                while (!success && it.hasNext()) {
-                    accessor = it.next();
-                    success = tryAccessor(accessor, obj, attPath, target, e);
-                }
-            }
-
-            if (!success) {
-                LOGGER.log(Level.WARNING,
-                        "Could not find working property accessor for attribute (" + attPath
-                                + ") in object (" + obj + ")", e.get());
-                return null;
-            } else {
-                setLastPropertyAccessor(accessor);
-            }
+        Hints hints = null;
+        if (namespaceSupport != null) {
+            hints = new Hints(PropertyAccessorFactory.NAMESPACE_CONTEXT, namespaceSupport);
         }
-
-        return accessor.get(obj, attPath, target);
-
+        PropertyAccessor accessor = new FeaturePropertyAccessorFactory().createPropertyAccessor(obj.getClass(), attPath, target, hints);
+        try {
+            return accessor.get(obj, attPath, target);
+        } catch (Exception e) {
+            LOGGER.log(Level.FINER,
+                  "Could not find working property accessor for attribute (" + attPath
+                          + ") in object (" + obj + ")", e);
+            return null;
+        }
     }
 
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
-    }
-
-    // SC - helper method for evaluation - attempt to use property accessor
-    private boolean tryAccessor(PropertyAccessor accessor, Object obj, String attPath,
-            Class<?> target, AtomicReference<Exception> ex) {
-        try {
-            accessor.get(obj, attPath, target);
-            return true;
-        } catch (Exception e) {
-            ex.set(e);
-            return false;
-        }
-    }
-
-    // accessor caching, scanning the registry every time is really very expensive
-    private PropertyAccessor lastAccessor;
-
-    private synchronized PropertyAccessor getLastPropertyAccessor() {
-        return lastAccessor;
-    }
-
-    private synchronized void setLastPropertyAccessor(PropertyAccessor accessor) {
-        lastAccessor = accessor;
     }
 
 }
