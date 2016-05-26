@@ -6,9 +6,9 @@ CREATE VIEW sipra.v_aua AS (
 	    ia.id_istanza || '_' || ia.id_attivita AS id_aua,
 	    ia.id_istanza, ia.id_attivita,
 	    ST_Union(g.geometria) AS geometria
-	FROM sipra_dt_r_istanza_attivita ia
-	    LEFT JOIN sipra_r_istanza_sede s ON s.id_istanza = ia.id_istanza
-	    LEFT JOIN sipra_geo_pt_sede g ON g.codice_sira = s.codice_sira
+	FROM sipra.sipra_dt_r_istanza_attivita ia
+	    LEFT JOIN sipra.sipra_r_istanza_sede s ON s.id_istanza = ia.id_istanza
+	    LEFT JOIN sipra.sipra_geo_pt_sede g ON g.codice_sira = s.codice_sira
 	GROUP BY
 	    ia.id_istanza, ia.id_attivita
 );
