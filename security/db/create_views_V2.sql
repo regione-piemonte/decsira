@@ -1,17 +1,44 @@
--- viste denormalizzate versione 1, denormalizzano solo ove necessario
+-- viste denormalizzate versione 2, evitano feature chaining ove possibile
 
-DROP VIEW IF EXISTS sipra.v_aua;
-CREATE VIEW sipra.v_aua AS (
-	SELECT
-	    ia.id_istanza || '_' || ia.id_attivita AS id_aua,
-	    ia.id_istanza, ia.id_attivita,
-	    ST_Union(g.geometria) AS geometria
-	FROM sipra_dt_r_istanza_attivita ia
-	    LEFT JOIN sipra_r_istanza_sede s ON s.id_istanza = ia.id_istanza
-	    LEFT JOIN sipra_geo_pt_sede g ON g.codice_sira = s.codice_sira
-	GROUP BY
-	    ia.id_istanza, ia.id_attivita
-);
+DROP VIEW IF EXISTS sipra.v_aua_v2;
+CREATE VIEW sipra.v_aua_v2 AS
+    WITH istanza AS (
+        SELECT
+	       ia.id_istanza, ia.data_rilascio, ia.nr_provvedimento, ia.cf_soggetto,
+	       p.id_procedimento, p.des_procedimento, p.codice_bdc
+	    FROM
+	        sipra.sipra_t_istanza_autorizzativa ia
+	            INNER JOIN sipra.sipra_r_proc_attivita pa ON (ia.fk_proc_attivita = pa.id_proc_attivita)
+	            LEFT OUTER JOIN sipra.sipra_d_procedimento p ON (pa.fk_procedimento = p.id_procedimento)
+    ),
+    rifiuto AS (
+	    SELECT
+	        r.id_istanza, r.id_attivita, r.capacita_max_stocc_mc, r.capacita_max_stocc_t, r.qta_tot_recupero
+	    FROM
+	        sipra.sipra_dt_t_rifiuto r
+    )
+    SELECT
+        ia.id_istanza || '_' || ia.id_attivita AS id_aua, -- single-column surrogate key
+        ia.id_istanza, ia.id_attivita, ia.nota_quadro_tecnico,
+        i.data_rilascio, i.nr_provvedimento, i.cf_soggetto, i.id_procedimento, i.des_procedimento, i.codice_bdc,
+        r.capacita_max_stocc_mc, r.capacita_max_stocc_t, r.qta_tot_recupero,
+        tr.id_tipo_richiesta, tr.des_tipo_richiesta, tr.flg_richiesta,
+        a.des_attivita,
+        ST_Union(g.geometria) AS geometria
+    FROM
+        sipra_dt_r_istanza_attivita ia
+            INNER JOIN istanza i ON (ia.id_istanza = i.id_istanza)
+            INNER JOIN rifiuto r ON (ia.id_istanza = r.id_istanza AND ia.id_attivita = r.id_attivita)
+            INNER JOIN sipra.sipra_dt_d_tipo_richiesta tr ON (ia.fk_tipo_richiesta = tr.id_tipo_richiesta)
+            INNER JOIN sipra.sipra_d_attivita a ON (ia.id_attivita = a.id_attivita)
+            LEFT JOIN sipra_r_istanza_sede s ON s.id_istanza = ia.id_istanza
+            LEFT JOIN sipra_geo_pt_sede g ON g.codice_sira = s.codice_sira
+    GROUP BY
+        ia.id_istanza, ia.id_attivita, ia.nota_quadro_tecnico,
+        i.data_rilascio, i.nr_provvedimento, i.cf_soggetto, i.id_procedimento, i.des_procedimento, i.codice_bdc,
+        r.capacita_max_stocc_mc, r.capacita_max_stocc_t, r.qta_tot_recupero,
+        tr.id_tipo_richiesta, tr.des_tipo_richiesta, tr.flg_richiesta,
+        a.des_attivita;
 
 
 DROP VIEW IF EXISTS sipra.v_sede;
@@ -43,7 +70,6 @@ CREATE VIEW sipra.v_istanza_autorizzativa AS
             LEFT OUTER JOIN sipra.sipra_d_attivita a ON (pa.fk_attivita = a.id_attivita)
     WHERE
         ia.fk_stato = 9;
-
 
 DROP VIEW IF EXISTS sipra.v_rifiuto;
 CREATE VIEW sipra.v_rifiuto AS
