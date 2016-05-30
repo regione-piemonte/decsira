@@ -45,6 +45,8 @@ const authParams = {
 const Message = require('../../MapStore2/web/client/components/I18N/Message');
 
 const {changeMapView, changeZoomLevel, changeMousePointer} = require('../../MapStore2/web/client/actions/map');
+const {setControlProperty} = require('../../MapStore2/web/client/actions/controls');
+
 
 const {textSearch, resultsPurge} = require("../../MapStore2/web/client/actions/search");
 const SearchBar = connect(() => ({}), {
@@ -60,7 +62,12 @@ const NominatimResultList = connect((state) => ({
     afterItemClick: resultsPurge
 })(require('../../MapStore2/web/client/components/mapcontrols/search/geocoding/NominatimResultList'));
 
-const MapToolBar = require("../../MapStore2/web/client/product/components/viewer/MapToolBar");
+const MapToolBar = connect((state) => ({
+    activeKey: state.controls && state.controls.toolbar && state.controls.toolbar.active || null
+}),
+{
+    onActivateItem: setControlProperty.bind(null, 'toolbar', 'active')
+})(require("../../MapStore2/web/client/components/toolbar/MapToolbar"));
 
 const {changeMapInfoState} = require('../actions/mapInfo');
 const Info = connect((state) => ({

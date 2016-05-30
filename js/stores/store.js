@@ -32,7 +32,7 @@ const allReducers = combineReducers({
     locale: require('../../MapStore2/web/client/reducers/locale'),
     draw: require('../../MapStore2/web/client/reducers/draw'),
     siraControls: require('../reducers/controls'),
-    controls: require('../../MapStore2/web/client/product/reducers/controls'),
+    controls: require('../../MapStore2/web/client/reducers/controls'),
     locate: require('../../MapStore2/web/client/reducers/locate'),
     measurement: require('../../MapStore2/web/client/reducers/measurement'),
     routing: routeReducer,
