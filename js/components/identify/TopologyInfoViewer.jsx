@@ -22,7 +22,7 @@ const TemplateUtils = require('../../utils/TemplateUtils');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const {changeMapView} = require('../../../MapStore2/web/client/actions/map');
-const {selectFeatures} = require('../../../MapStore2/web/client/actions/featuregrid');
+const {selectFeatures} = require('../../actions/featuregrid');
 
 const FeatureGrid = connect((state) => {
     return {
