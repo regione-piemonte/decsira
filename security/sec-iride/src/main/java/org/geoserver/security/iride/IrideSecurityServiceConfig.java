@@ -16,55 +16,83 @@
  */
 package org.geoserver.security.iride;
 
+import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
+
+import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.BaseSecurityNamedServiceConfig;
 import org.geoserver.security.config.SecurityAuthProviderConfig;
 import org.geoserver.security.config.SecurityRoleServiceConfig;
 
 /**
+ * <code>GeoServer</code> <code>IRIDE</code> Security Provider configuration.
+ *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
+ * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  *
  */
-public class IrideSecurityServiceConfig  extends BaseSecurityNamedServiceConfig 
-implements SecurityAuthProviderConfig, SecurityRoleServiceConfig{
+public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig implements SecurityAuthProviderConfig, SecurityRoleServiceConfig {
 
+    private static final long serialVersionUID = -8931342487350680340L;
+
+    /**
+     * <code>IRIDE</code> server <code>URL</code>.
+     */
     private String serverURL;
+
+    /**
+     * Application name requesting <code>IRIDE</code> service.
+     *
+     * @todo should be set dynamically at runtime
+     */
     private String applicationName;
+
+    /**
+     * Admin role.
+     * Used for both <code>admin role name</code> and <code>group admin role name</code>.
+     */
     private String adminRole;
 
+    /**
+     * Constructor.
+     */
     public IrideSecurityServiceConfig() {
+        /* NOP */
     }
-    
+
+    /**
+     * Constructor.
+     * Copy constructor receiving another {@link IrideSecurityServiceConfig} instance.
+     * Needed by <code>GeoServer</code>.
+     *
+     * @param other the other {@link IrideSecurityServiceConfig} instance to copy from
+     */
     public IrideSecurityServiceConfig(IrideSecurityServiceConfig other) {
         super(other);
-        serverURL = other.getServerURL();
-        adminRole = other.getAdminRole();
+
+        this.serverURL       = other.getServerURL();
+        this.applicationName = other.getApplicationName();
+        this.adminRole       = other.getAdminRole();
     }
 
-    @Override
-    public String getUserGroupServiceName() {
-        return null;
-    }
-
-    @Override
-    public void setUserGroupServiceName(String userGroupServiceName) {
-        
-    }
-    
+    /**
+     * @return the serverURL
+     */
     public String getServerURL() {
-        return serverURL;
+        return this.serverURL;
     }
-    
+
+    /**
+     * @param serverURL the serverURL to set
+     */
     public void setServerURL(String serverURL) {
         this.serverURL = serverURL;
     }
 
-    
-    
     /**
      * @return the applicationName
      */
     public String getApplicationName() {
-        return applicationName;
+        return this.applicationName;
     }
 
     /**
@@ -78,7 +106,7 @@ implements SecurityAuthProviderConfig, SecurityRoleServiceConfig{
      * @return the adminRole
      */
     public String getAdminRole() {
-        return adminRole;
+        return this.adminRole;
     }
 
     /**
@@ -88,25 +116,85 @@ implements SecurityAuthProviderConfig, SecurityRoleServiceConfig{
         this.adminRole = adminRole;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.SecurityRoleServiceConfig#getAdminRoleName()
+     */
+    /**
+     * @see {@link #getAdminRole()}.
+     */
     @Override
     public String getAdminRoleName() {
         return this.getAdminRole();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.SecurityRoleServiceConfig#setAdminRoleName(java.lang.String)
+     */
+    /**
+     * @see #setAdminRole(String)
+     */
     @Override
     public void setAdminRoleName(String adminRoleName) {
         this.setAdminRole(adminRoleName);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.SecurityRoleServiceConfig#getGroupAdminRoleName()
+     */
+    /**
+     * @see {@link #getAdminRole()}.
+     */
     @Override
     public String getGroupAdminRoleName() {
         return this.getAdminRole();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.SecurityRoleServiceConfig#setGroupAdminRoleName(java.lang.String)
+     */
+    /**
+     * @see #setAdminRole(String)
+     */
     @Override
     public void setGroupAdminRoleName(String adminRoleName) {
         this.setAdminRole(adminRoleName);
     }
 
-    
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.SecurityAuthProviderConfig#getUserGroupServiceName()
+     */
+    /**
+     * No {@link GeoServerUserGroupService} needed, returning {@code null}.
+     */
+    @Override
+    public String getUserGroupServiceName() {
+        return null;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.SecurityAuthProviderConfig#setUserGroupServiceName(java.lang.String)
+     */
+    /**
+     * No {@link GeoServerUserGroupService} needed, nothing to do.
+     */
+    @Override
+    public void setUserGroupServiceName(String userGroupServiceName) {
+        /* NOP */
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.config.BaseSecurityNamedServiceConfig#toString()
+     */
+    @Override
+    public String toString() {
+        return reflectToString(this);
+    }
+
 }
