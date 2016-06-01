@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,8 +11,8 @@
 
     <name>GeoServer CSI-Piemonte Iride2 Plugin</name>
     <description>
-        org.geoserver.security.sec-iride is a GeoServer security provider plugin 
-        used to retrieve authorization roles (and eventually other authorization informations) 
+        org.geoserver.security.sec-iride is a GeoServer security provider plugin
+        used to retrieve authorization roles (and eventually other authorization informations)
         from CSI-Piemonte IRIDE2 Authorization Service
     </description>
 
@@ -31,6 +31,18 @@
           <email>simone.cornacchia AT assioma.net</email>
           <organization>Assioma.net</organization>
           <organizationUrl>http://www.assioma.net</organizationUrl>
+          <roles>
+            <role>architect</role>
+            <role>developer</role>
+          </roles>
+          <timezone>+1</timezone>
+        </developer>
+        <developer>
+          <id>SANMARTINO Diego 1647</id>
+          <name>Diego Sanmartino</name>
+          <email>diego.sanmartino AT csi.it</email>
+          <organization>CSI-Piemonte</organization>
+          <organizationUrl>http://www.csipiemonte.it</organizationUrl>
           <roles>
             <role>architect</role>
             <role>developer</role>
@@ -132,11 +144,25 @@
             <version>${gs.version}</version>
         </dependency>
 
+        <!-- Utilities -->
+		<!-- commons-lang3 (http://mvnrepository.com/artifact/org.apache.commons/commons-lang3) -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.4</version>
+		</dependency>
+		<!-- Google Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+
         <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>1.8.5</version>
+            <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
 
@@ -144,7 +170,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.2</version>
+            <version>4.8.1</version>
         </dependency>
     </dependencies>
 
@@ -186,7 +212,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
+                <version>2.4</version>
                 <configuration>
                     <attach>true</attach>
                 </configuration>
@@ -221,7 +247,6 @@
             </plugin>
 
             <!-- eclipse ide integration -->
-            <!--
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>2.4</version>
@@ -232,7 +257,6 @@
                     </additionalProjectnatures>
                 </configuration>
             </plugin>
-            -->
 
             <!-- initialize git revision info -->
             <plugin>
@@ -277,7 +301,7 @@
                         </manifest>
                         <manifestEntries>
                             <GeoServerModule>extension</GeoServerModule>
-                            <Application-Name><!-- ${project.build.finalname} --></Application-Name>
+                            <Application-Name>${artifactId}-${version}</Application-Name>
                             <Project-Version>${project.version}</Project-Version>
                             <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
                             <Git-Revision>${build.commit.id}</Git-Revision>
