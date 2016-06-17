@@ -13,8 +13,18 @@ const {isObject} = require('lodash');
 const Draggable = require('react-draggable');
 
 const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
-const FeatureGrid = require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid');
+
+const {bindActionCreators} = require('redux');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {selectFeatures} = require('../actions/featuregrid');
+
+const FeatureGrid = connect(() => {
+    return {};
+}, dispatch => {
+    return bindActionCreators({
+        selectFeatures: selectFeatures
+    }, dispatch);
+})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
@@ -157,31 +167,31 @@ const SiraFeatureGrid = React.createClass({
             suppressResize: true
         }, {
             headerName: 'Codice SIRA',
-            field: 'codice',
+            field: "properties.codice",
             width: 100
         }];
 
         if (this.props.profile === "B") {
             columns.push({
                 headerName: 'Codice fiscale (P.IVA)',
-                field: 'codicefisc'
+                field: "properties.codicefisc"
             });
         }
 
         columns.push({
             headerName: 'Comune',
-            field: 'comune'
+            field: "properties.comune"
         });
 
         columns.push({
             headerName: 'Autorizzazioni ambientali',
-            field: 'autamb',
+            field: "properties.autamb",
             width: this.props.profile === "B" ? 250 : 445
         });
 
         if (this.props.open) {
             return (
-                <Draggable start={{x: 700, y: 80}} handle=".panel-heading">
+                <Draggable start={{x: 760, y: 120}} handle=".panel-heading">
                     <Panel className="featuregrid-container" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
                         {!this.props.loadingGrid ? (
                             <div>

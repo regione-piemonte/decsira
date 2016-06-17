@@ -38,6 +38,33 @@ const Feature = require('../../MapStore2/web/client/components/map/' + mapType +
 
 const SiraMap = (props) => {
     let features = (props.selFeatures && props.selFeatures.length > 0) ? props.selFeatures : props.features;
+    let auaStyle = {
+        style: {
+            type: "Polygon",
+            stroke: {
+                width: 2,
+                color: "rgba(28, 128, 9, 1)"
+            },
+            fill: {
+                color: "rgba(28, 128, 9, 0.3)"
+            }
+        }
+    };
+
+    let topologyStyle = {
+        style: {
+            type: "Point",
+            radius: 10,
+            stroke: {
+                width: 3,
+                color: "blue"
+            },
+            fill: {
+                color: "blue"
+            }
+        }
+    };
+
     return props.map ?
         (
             <WMap {...props.map} {...props.actions}>
@@ -57,7 +84,24 @@ const SiraMap = (props) => {
                     })
                 }
 
-                <Layer type="vector" position={1} options={{name: "ZONES_IPR"}}>
+                <Layer
+                    type="vector"
+                    position={1}
+                    options={assign({}, {name: "topology_selection"}, topologyStyle)}>
+                    {
+                        features.map( (feature) => {
+                            return (<Feature
+                                key={feature.id}
+                                type={feature.type}
+                                geometry={feature.geometry}/>);
+                        })
+                    }
+                </Layer>
+
+                <Layer
+                    type="vector"
+                    position={1}
+                    options={assign({}, {name: "aua_selection"}, auaStyle)}>
                     {
                         features.map( (feature) => {
                             return (<Feature

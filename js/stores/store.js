@@ -40,16 +40,14 @@ const allReducers = combineReducers({
     queryformconfig: () => {return {}; },
     map: () => {return null; },
     layers: () => {return null; },
+    mapInitialConfig: () => {return null; },
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
     grid: require('../reducers/grid')
 });
 
 const rootReducer = (state = {}, action) => {
-    let mapState = mapConfig({
-        map: state && state.map,
-        layers: state && state.layers
-    }, action);
+    let mapState = LayersUtils.splitMapAndLayers(mapConfig(state, action));
 
     if (mapState && isArray(mapState.layers)) {
         let groups = LayersUtils.getLayersByGroup(mapState.layers);
@@ -66,6 +64,7 @@ const rootReducer = (state = {}, action) => {
     let newState = assign({}, {...allReducers(state, action)}, {
         queryformconfig: queryformconfigState,
         queryform: queryformState,
+        mapInitialConfig: mapState ? mapState.mapInitialConfig : null,
         map: mapState && mapState.map ? map(mapState.map, action) : null,
         layers: mapState ? layers(mapState.layers, action) : null
     });

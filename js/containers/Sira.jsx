@@ -157,14 +157,12 @@ const ScaleBox = connect((state) => ({
     onChange: changeZoomLevel
 })(require("../../MapStore2/web/client/components/mapcontrols/scale/ScaleBox"));
 
-const ZoomToMaxExtentButton = connect((state) => ({
-    mapConfig: state.map || {}
-}), (dispatch) => {
-    return {
-        actions: bindActionCreators({
-            changeMapView
-        }, dispatch)
-    };
+const {createSelector} = require('reselect');
+const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
+const selector = createSelector([mapSelector, state => state.mapInitialConfig], (map, mapInitialConfig) => ({mapConfig: map, mapInitialConfig: mapInitialConfig}));
+
+const ZoomToMaxExtentButton = connect(selector, {
+    changeMapView
 })(require("../../MapStore2/web/client/components/buttons/ZoomToMaxExtentButton"));
 
 const {changeLocateState} = require('../../MapStore2/web/client/actions/locate');
@@ -305,7 +303,7 @@ const Sira = React.createClass({
                     <ScaleBox
                         key="scaleBox"/>
                     <ZoomToMaxExtentButton
-                        key="zoomToMaxExtent"/>
+                        key="zoomToMaxExtent" useInitialExtent={true}/>
                 </div>
             </div>
         );
