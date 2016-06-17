@@ -47,7 +47,7 @@ import org.mockito.stubbing.Answer;
 /**
  *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
- * @author 71740 (Simone Cornacchia)
+ * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public class IrideRoleServiceTest extends TestCase {
 
@@ -74,6 +74,8 @@ public class IrideRoleServiceTest extends TestCase {
         config = new IrideSecurityServiceConfig();
         config.setApplicationName("SIIG");
         config.setAdminRole("SUPERUSER_SIIG");
+        config.setClassName(IrideRoleService.class.getName());
+        config.setName("iride");
     }
 
     @Override
@@ -163,7 +165,7 @@ public class IrideRoleServiceTest extends TestCase {
             public HttpMethod answer(InvocationOnMock invocation) throws Throwable {
                 Object[] args = invocation.getArguments();
                 final String requestXml = args[0].toString();
-                IrideRoleService mock = (IrideRoleService)invocation.getMock();
+                IrideRoleService mock = (IrideRoleService) invocation.getMock();
                 mock.getHttpClient().setState(new HttpState() {
                     @Override
                     public synchronized String toString() {

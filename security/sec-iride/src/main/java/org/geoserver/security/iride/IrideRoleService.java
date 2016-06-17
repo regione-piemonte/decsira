@@ -16,6 +16,8 @@
  */
 package org.geoserver.security.iride;
 
+import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,6 +39,8 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.geoserver.ows.Dispatcher;
+import org.geoserver.ows.Request;
 import org.geoserver.platform.GeoServerExtensions;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerRoleStore;
@@ -144,7 +148,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(this.logLevel, "Initializing {0}, with configuration object: {1}", new Object[] { this.getClass().getSimpleName(), config });
+        LOGGER.log(Level.INFO, "Initializing {0}, with configuration object: {1}", new Object[] { this.getClass().getSimpleName(), config });
 
         this.name = config.getName();
 
@@ -204,16 +208,23 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
-        TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
-        String requestXml = getServiceRequestXml(username);
-        String responseXml = callWebService(requestXml).replace("\\r", "").replace("\\n", "");
+    	final Request request = Dispatcher.REQUEST.get();
 
-        Matcher m = ROLE_REGEX.matcher(responseXml);
-        while(m.find()) {
-            String roleName = m.group(1);
-            roles.add(createRoleObject(roleName));
+    	LOGGER.info("Request " + reflectToString(request));
+
+        final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
+        final String requestXml = this.getServiceRequestXml(username);
+        final String responseXml = this.callWebService(requestXml).replace("\\r", "").replace("\\n", "");
+
+        final Matcher m = ROLE_REGEX.matcher(responseXml);
+        while (m.find()) {
+            final String roleName = m.group(1);
+
+            roles.add(this.createRoleObject(roleName));
+
             LOGGER.info("Added role " + roleName + " from Iride to " + username);
         }
+
         return roles;
     }
 
@@ -456,7 +467,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
             index++;
         }
 
-        line = line.replace("%APPLICATION%", applicationName);
+        line = line.replace("%APPLICATION%", this.applicationName);
         line = line.replace("%FULLUSER%", username.substring(0, fullUser.lastIndexOf("/")));
 
         return line;

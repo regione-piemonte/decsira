@@ -1,8 +1,10 @@
 package org.geoserver.security.iride.util.builder;
 
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
 
-import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang.builder.StandardToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  *
@@ -23,15 +25,19 @@ public final class ToStringReflectionBuilder {
      *     <li><code>nullText</code>: <code>"&lt;NULL&gt;"</code></li>
      * </ul>
      */
-    public static final ToStringStyle TO_STRING_STYLE = new MultilineRecursiveToStringStyle() {
+    public static final ToStringStyle TO_STRING_STYLE = new StandardToStringStyle() {
 
         private static final long serialVersionUID = -7977293159579371869L;
 
     {
+    	this.setArrayStart("[");
+    	this.setArrayEnd("]");
+    	this.setContentStart("(");
+    	this.setFieldSeparator(", ");
+    	this.setContentEnd(")");
     	this.setUseShortClassName(true);
         this.setNullText("<NULL>");
     }};
-
 
     /**
      * Restituisce una rappresentazione testuale,
