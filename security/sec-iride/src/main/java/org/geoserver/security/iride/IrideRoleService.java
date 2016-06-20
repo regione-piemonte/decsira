@@ -16,6 +16,8 @@
  */
 package org.geoserver.security.iride;
 
+import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,6 +39,8 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.geoserver.ows.Dispatcher;
+import org.geoserver.ows.Request;
 import org.geoserver.platform.GeoServerExtensions;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerRoleStore;
@@ -125,26 +129,26 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     private final Level logLevel = LOGGER.getLevel() == null ? Level.INFO : LOGGER.getLevel();
 
     /**
-	 * @param httpClient the httpClient to set
-	 */
-	public void setHttpClient(HttpClient httpClient) {
-	    this.httpClient = httpClient;
-	}
+     * @param httpClient the httpClient to set
+     */
+    public void setHttpClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
 
-	/**
-	 * @return the httpClient
-	 */
-	public HttpClient getHttpClient() {
-	    return this.httpClient;
-	}
+    /**
+     * @return the httpClient
+     */
+    public HttpClient getHttpClient() {
+        return this.httpClient;
+    }
 
-	/*
+    /*
      * (non-Javadoc)
      * @see org.geoserver.security.impl.AbstractGeoServerSecurityService#initializeFromConfig(org.geoserver.security.config.SecurityNamedServiceConfig)
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(this.logLevel, "Initializing {0}, with configuration object: {1}", new Object[] { this.getClass().getSimpleName(), config });
+        LOGGER.log(Level.INFO, "Initializing {0}, with configuration object: {1}", new Object[] { this.getClass().getSimpleName(), config });
 
         this.name = config.getName();
 
@@ -195,7 +199,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<String> getUserNamesForRole(GeoServerRole role) throws IOException {
-    	return ImmutableSortedSet.of();
+        return ImmutableSortedSet.of();
     }
 
     /*
@@ -204,117 +208,24 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
-        TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
-        String requestXml = getServiceRequestXml(username);
-        String responseXml = callWebService(requestXml).replace("\\r", "").replace("\\n", "");
+    	final Request request = Dispatcher.REQUEST.get();
 
-        Matcher m = ROLE_REGEX.matcher(responseXml);
-        while(m.find()) {
-            String roleName = m.group(1);
-            roles.add(createRoleObject(roleName));
+    	LOGGER.info("Request " + reflectToString(request));
+
+        final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
+        final String requestXml = this.getServiceRequestXml(username);
+        final String responseXml = this.callWebService(requestXml).replace("\\r", "").replace("\\n", "");
+
+        final Matcher m = ROLE_REGEX.matcher(responseXml);
+        while (m.find()) {
+            final String roleName = m.group(1);
+
+            roles.add(this.createRoleObject(roleName));
+
             LOGGER.info("Added role " + roleName + " from Iride to " + username);
         }
+
         return roles;
-    }
-
-    /**
-     * @param requestXml
-     * @return
-     * @throws IOException
-     * @throws HttpException
-     */
-    private String callWebService(final String requestXml) throws HttpException, IOException {
-        HttpMethod post = createHttpMethod(requestXml);
-        Header header = new Header();
-        header.setName("Content-type");
-        header.setValue("text/xml; charset=UTF-8");
-        post.setRequestHeader(header);
-        header.setName("SOAPAction");
-        header.setValue("dummy");
-        post.setRequestHeader(header);
-        LOGGER.info("Request sent to Iride: " + requestXml);
-
-        try {
-            int status = httpClient.executeMethod(post);
-            if (status == 200) {
-                String responseXml = post.getResponseBodyAsString();
-                LOGGER.info("Response received from Iride: " + responseXml);
-                return responseXml;
-            } else {
-                LOGGER.info("Got error from Iride: " + status);
-                return "";
-                /*throw new IOException("Error getting remote resources from " + serverURL
-                        + ", http error " + status + ": " + post.getStatusText());*/
-            }
-        } finally {
-            post.releaseConnection();
-        }
-
-    }
-
-    /**
-     * @param requestXml
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    protected HttpMethod createHttpMethod(String requestXml) throws UnsupportedEncodingException {
-        PostMethod post = new PostMethod(serverURL);
-        post.setRequestEntity(new StringRequestEntity(requestXml, "text/xml", "UTF-8"));
-        return post;
-    }
-
-    /**
-     * @param username
-     * @return
-     * @throws IOException
-     */
-    private String getServiceRequestXml(String username) throws IOException {
-
-        BufferedReader reader = null;
-        StringBuilder result = new StringBuilder();
-        try {
-            reader= new BufferedReader(new InputStreamReader(this.getClass()
-                    .getResourceAsStream("/findRuoliForPersonaInApplication.xml")));
-            String line;
-            while((line = reader.readLine()) != null) {
-                result.append(replaceParamsInRequest(line, username));
-            }
-            return result.toString();
-        } finally {
-            if(reader != null) {
-                reader.close();
-            }
-        }
-    }
-
-    /**
-     * @param line
-     * @param usernameParts
-     * @return
-     */
-    private String replaceParamsInRequest(String line, String username) {
-        String[] usernameParts = username.split("\\/");
-        // the last part of the username can use the separator as a valid char
-        // so we append to the last element the "extra" parts, if they exist
-        if(REQUEST_PARAMS.length < usernameParts.length) {
-
-            for(int count = REQUEST_PARAMS.length; count < usernameParts.length; count++) {
-                usernameParts[REQUEST_PARAMS.length - 1] += "/" +  usernameParts[count];
-            }
-        }
-        int index = 0;
-        String fullUser = "";;
-        for(String param : REQUEST_PARAMS) {
-            line = line.replace("%" + param + "%", usernameParts[index]);
-            // full user is made of all parts except the last one
-            if(index < REQUEST_PARAMS.length -1) {
-                fullUser += usernameParts[index] + "/";
-            }
-            index++;
-        }
-        line = line.replace("%APPLICATION%", applicationName);
-        line = line.replace("%FULLUSER%", username.substring(0, fullUser.lastIndexOf("/")));
-        return line;
     }
 
     /*
@@ -326,7 +237,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<GeoServerRole> getRolesForGroup(String groupname) throws IOException {
-    	return ImmutableSortedSet.of();
+        return ImmutableSortedSet.of();
     }
 
     /*
@@ -338,7 +249,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<GeoServerRole> getRoles() throws IOException {
-    	return ImmutableSortedSet.of();
+        return ImmutableSortedSet.of();
     }
 
     /*
@@ -386,7 +297,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public void load() throws IOException {
-    	/* NOP */
+        /* NOP */
     }
 
     /*
@@ -449,7 +360,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public void registerRoleLoadedListener(RoleLoadedListener listener) {
-    	/* NOP */
+        /* NOP */
     }
 
     /*
@@ -458,7 +369,108 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public void unregisterRoleLoadedListener(RoleLoadedListener listener) {
-    	/* NOP */
+        /* NOP */
+    }
+
+    /**
+     * @param requestXml
+     * @return
+     * @throws IOException
+     * @throws HttpException
+     */
+    private String callWebService(final String requestXml) throws HttpException, IOException {
+        final HttpMethod post = this.createHttpMethod(requestXml);
+        final Header header = new Header();
+        header.setName("Content-type");
+        header.setValue("text/xml; charset=UTF-8");
+        post.setRequestHeader(header);
+        header.setName("SOAPAction");
+        header.setValue("dummy");
+        post.setRequestHeader(header);
+
+        LOGGER.info("Request sent to Iride: " + requestXml);
+
+        try {
+            final int status = this.httpClient.executeMethod(post);
+            if (status == 200) {
+                final String responseXml = post.getResponseBodyAsString();
+
+                LOGGER.info("Response received from Iride: " + responseXml);
+
+                return responseXml;
+            } else {
+                LOGGER.info("Got error from Iride: " + status);
+
+                return "";
+                /*throw new IOException("Error getting remote resources from " + serverURL
+                        + ", http error " + status + ": " + post.getStatusText());*/
+            }
+        } finally {
+            post.releaseConnection();
+        }
+    }
+
+    /**
+     * @param requestXml
+     * @return
+     * @throws UnsupportedEncodingException
+     */
+    protected HttpMethod createHttpMethod(String requestXml) throws UnsupportedEncodingException {
+        final PostMethod post = new PostMethod(this.serverURL);
+        post.setRequestEntity(new StringRequestEntity(requestXml, "text/xml", "UTF-8"));
+
+        return post;
+    }
+
+    /**
+     * @param username
+     * @return
+     * @throws IOException
+     */
+    private String getServiceRequestXml(String username) throws IOException {
+        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
+        	this.getClass().getResourceAsStream("/findRuoliForPersonaInApplication.xml"))
+        )) {
+        	final StringBuilder result = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                result.append(this.replaceParamsInRequest(line, username));
+            }
+
+            return result.toString();
+        }
+    }
+
+    /**
+     * @param line
+     * @param usernameParts
+     * @return
+     */
+    private String replaceParamsInRequest(String line, String username) {
+        String[] usernameParts = username.split("\\/");
+        // the last part of the username can use the separator as a valid char
+        // so we append to the last element the "extra" parts, if they exist
+        if (REQUEST_PARAMS.length < usernameParts.length) {
+            for (int count = REQUEST_PARAMS.length; count < usernameParts.length; count++) {
+                usernameParts[REQUEST_PARAMS.length - 1] += "/" +  usernameParts[count];
+            }
+        }
+
+        int index = 0;
+        String fullUser = "";
+        for (final String param : REQUEST_PARAMS) {
+            line = line.replace("%" + param + "%", usernameParts[index]);
+            // full user is made of all parts except the last one
+            if (index < REQUEST_PARAMS.length -1) {
+                fullUser += usernameParts[index] + "/";
+            }
+            index++;
+        }
+
+        line = line.replace("%APPLICATION%", this.applicationName);
+        line = line.replace("%FULLUSER%", username.substring(0, fullUser.lastIndexOf("/")));
+
+        return line;
     }
 
 }
