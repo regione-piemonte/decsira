@@ -68,7 +68,7 @@ function loadGridModelWithFilter(wfsUrl, data, params) {
         dispatch(showLoading(true));
 
         return axios.post(url, data, {
-          timeout: 10000,
+          timeout: 60000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             dispatch(configureGridModel(response.data));
