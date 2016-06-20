@@ -259,7 +259,7 @@ function loadGetFeatureInfoConfig(layerId, infoConfigURL) {
 function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter) {
     return (dispatch) => {
         return axios.post(topologyConfig.wfsUrl, filter, {
-          timeout: 10000,
+          timeout: 60000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             let infoTopologyResponse = response.data;
