@@ -8,20 +8,18 @@
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
-const TemplateUtils = require('../utils/TemplateUtils');
-
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const SELECT_SECTION = 'SELECT_SECTION';
 const ACTIVE_SECTION = 'ACTIVE_SECTION';
 const SELECT_ROWS = 'SELECT_ROWS';
-const SET_IMPIANTO_MODEL = 'SET_IMPIANTO_MODEL';
+// const SET_IMPIANTO_MODEL = 'SET_IMPIANTO_MODEL';
 
-function configureCard(template, model) {
+function configureCard(template, xml) {
     return {
         type: CARD_TEMPLATE_LOADED,
         template: template,
-        model: model
+        xml: xml
     };
 }
 
@@ -47,19 +45,19 @@ function activateSection(section) {
     };
 }
 
-function loadCardModel(template, modelConfig, wfsUrl) {
+function loadCardData(template, wfsUrl) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     return (dispatch) => {
         return axios.get(url).then((response) => {
-            let model = TemplateUtils.getModel(response.data, modelConfig);
-            dispatch(configureCard(template, model));
+            // let model = TemplateUtils.getModel(response.data, modelConfig);
+            dispatch(configureCard(template, response.data));
         }).catch((e) => {
             dispatch(configureCardError(e));
         });
     };
 }
 
-function loadCardModelConfig(template, modelConfigURL, wfsUrl) {
+/*function loadCardModelConfig(template, modelConfigURL, wfsUrl) {
     return (dispatch) => {
         return axios.get(modelConfigURL).then((response) => {
             let modelConfig = response.data;
@@ -75,14 +73,15 @@ function loadCardModelConfig(template, modelConfigURL, wfsUrl) {
             dispatch(configureCardError(e));
         });
     };
-}
+}*/
 
-function loadCardTemplate(templateConfigURL, modelConfigURL, wfsUrl) {
+function loadCardTemplate(templateConfigURL, wfsUrl) {
     return (dispatch) => {
         return axios.get(templateConfigURL).then((response) => {
             let template = response.data;
-            if (modelConfigURL && wfsUrl) {
-                dispatch(loadCardModelConfig(template, modelConfigURL, wfsUrl));
+            if (wfsUrl) {
+                dispatch(loadCardData(template, wfsUrl));
+                // dispatch(loadCardModelConfig(template, modelConfigURL, wfsUrl));
             } else {
                 dispatch(configureCard(template));
             }
@@ -95,17 +94,17 @@ function loadCardTemplate(templateConfigURL, modelConfigURL, wfsUrl) {
 function selectRows(tableId, rows) {
     return {
         type: SELECT_ROWS,
-        table_id: tableId,
+        tableId: tableId,
         rows: rows
     };
 }
 
-function setSiraImpiantoModel(impiantoModel) {
+/*function setSiraImpiantoModel(impiantoModel) {
     return {
         type: SET_IMPIANTO_MODEL,
         impiantoModel: impiantoModel
     };
-}
+}*/
 
 module.exports = {
     CARD_TEMPLATE_LOADED,
@@ -113,13 +112,13 @@ module.exports = {
     SELECT_SECTION,
     ACTIVE_SECTION,
     SELECT_ROWS,
-    SET_IMPIANTO_MODEL,
+    // SET_IMPIANTO_MODEL,
     loadCardTemplate,
-    loadCardModel,
+    loadCardData,
     configureCardError,
-    loadCardModelConfig,
+    // loadCardModelConfig,
     selectSection,
     activateSection,
-    selectRows,
-    setSiraImpiantoModel
+    selectRows
+    // setSiraImpiantoModel
 };

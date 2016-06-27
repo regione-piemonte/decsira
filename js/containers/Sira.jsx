@@ -88,13 +88,17 @@ const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo')
 const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
 const GetFeatureInfo = connect((state) => ({
+    siraFeatureTypeName: state.siradec.featureTypeName,
+    siraFeatureInfoDetails: assign({}, state.siradec.featureinfo, {card: state.siradec.card}),
+    siraTopology: state.siradec.topology,
+    siraTopologyConfig: state.mapInfo.topologyConfig,
     infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,
     topologyInfoEnabled: state.mapInfo && state.mapInfo.topologyInfoEnabled || false,
     htmlResponses: state.mapInfo && state.mapInfo.responses || [],
     htmlRequests: state.mapInfo && state.mapInfo.requests || {length: 0},
     infoFormat: state.mapInfo && state.mapInfo.infoFormat,
     detailsConfig: state.mapInfo.detailsConfig,
-    modelConfig: state.mapInfo.modelConfig,
+    // modelConfig: state.mapInfo.modelConfig,
     template: state.mapInfo.template,
     map: state.map,
     infoType: state.mapInfo.infoType,
@@ -186,6 +190,10 @@ const MeasureComponent = connect((state) => {
     toggleMeasure: changeMeasurementState
 })(require('../../MapStore2/web/client/components/mapcontrols/measure/MeasureComponent'));
 
+const {
+    loadFeatureTypeConfig
+} = require('../actions/siradec');
+
 let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
@@ -194,27 +202,47 @@ const Sira = React.createClass({
         params: React.PropTypes.shape({
             profile: React.PropTypes.string
         }),
-        featureGrigConfigUrl: React.PropTypes.string,
+        // featureGrigConfigUrl: React.PropTypes.string,
+        featureTypeConfigUrl: React.PropTypes.string,
         error: React.PropTypes.object,
         loading: React.PropTypes.bool,
-        cardModel: React.PropTypes.object,
+        // card: React.PropTypes.string,
         nsResolver: React.PropTypes.func,
         controls: React.PropTypes.object,
         toggleSiraControl: React.PropTypes.func,
-        setProfile: React.PropTypes.func
+        setProfile: React.PropTypes.func,
+        onLoadFeatureTypeConfig: React.PropTypes.func
     },
     getDefaultProps() {
-        return {};
+        return {
+            featureTypeConfigUrl: "assets/aua.json",
+            toggleSiraControl: () => {},
+            setProfile: () => {},
+            onLoadFeatureTypeConfig: () => {}
+        };
     },
     componentWillMount() {
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
     },
+    componentDidMount() {
+        if (this.props.featureTypeConfigUrl) {
+            this.props.onLoadFeatureTypeConfig(
+                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey});
+        }
+    },
+    componentWillReceiveProps(props) {
+        let fturl = props.featureTypeConfigUrl;
+        if (fturl !== this.props.featureTypeConfigUrl) {
+            this.props.onLoadFeatureTypeConfig(url, {authkey: authParams[this.props.params.profile].authkey});
+        }
+    },
     render() {
-        let card = this.props.cardModel ? (
-            <Card model={assign({}, this.props.cardModel, {authParam: authParams[this.props.params.profile]})}/>
+        /*let card = this.props.card.xml ? (
+            // <Card model={{xml: this.props.cardXml, authParam: authParams[this.props.params.profile]}}/>
+            <Card authParam={authParams[this.props.params.profile]}/>
         ) : (
             <span/>
-        );
+        );*/
 
         return (
             <div className="mappaSiraDecisionale">
@@ -227,13 +255,17 @@ const Sira = React.createClass({
                     <SiraMap
                         params={{authkey: authParams[this.props.params.profile].authkey}}/>
                     <SiraQueryPanel
-                        authParam={authParams[this.props.params.profile]}/>
+                        params={{
+                            authkey: authParams[this.props.params.profile].authkey
+                        }}/>
                     <SiraFeatureGrid
-                        authParam={authParams[this.props.params.profile]}
-                        featureGrigConfigUrl={this.props.featureGrigConfigUrl}
+                        params={{
+                            authkey: authParams[this.props.params.profile].authkey
+                        }}
+                        // featureGrigConfigUrl={this.props.featureGrigConfigUrl}
                         profile={this.props.params.profile}/>
 
-                    {card}
+                    <Card authParam={authParams[this.props.params.profile]}/>
 
                     <MapToolBar
                         key="mapToolbar"
@@ -328,11 +360,12 @@ module.exports = connect((state) => {
     return {
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
-        cardModel: state.cardtemplate.model,
-        controls: state.siraControls,
-        featureGrigConfigUrl: state.grid.featureGrigConfigUrl
+        // card: state.cardtemplate,
+        controls: state.siraControls
+        // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {
     toggleSiraControl,
-    setProfile
+    setProfile,
+    onLoadFeatureTypeConfig: loadFeatureTypeConfig
 })(Sira);

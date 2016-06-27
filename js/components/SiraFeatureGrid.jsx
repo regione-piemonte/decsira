@@ -18,8 +18,10 @@ const {bindActionCreators} = require('redux');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {selectFeatures} = require('../actions/featuregrid');
 
-const FeatureGrid = connect(() => {
-    return {};
+const FeatureGrid = connect((state) => {
+    return {
+        select: state.featuregrid && state.featuregrid.select || []
+    };
 }, dispatch => {
     return bindActionCreators({
         selectFeatures: selectFeatures
@@ -34,14 +36,16 @@ const GoToDetail = require('./GoToDetail');
 
 const {loadCardTemplate} = require('../actions/card');
 const {toggleSiraControl} = require('../actions/controls');
-const {loadFeatureGridConfig} = require('../actions/grid');
+// const {loadFeatureGridConfig} = require('../actions/grid');
 
 const Spinner = require('react-spinkit');
 
 const {
     // SiraQueryPanel action functions
     expandFilterPanel
-} = require('../actions/queryform');
+} = require('../actions/siradec');
+
+const assign = require('object-assign');
 
 const SiraFeatureGrid = React.createClass({
     propTypes: {
@@ -51,21 +55,23 @@ const SiraFeatureGrid = React.createClass({
         header: React.PropTypes.string,
         features: React.PropTypes.array,
         detailsConfig: React.PropTypes.object,
+        columnsDef: React.PropTypes.array,
         map: React.PropTypes.object,
         loadingGrid: React.PropTypes.bool,
         loadingGridError: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.object
         ]),
-        authParam: React.PropTypes.object,
-        featureGrigConfigUrl: React.PropTypes.string,
+        params: React.PropTypes.object,
+        // featureGrigConfigUrl: React.PropTypes.string,
         profile: React.PropTypes.string,
         onDetail: React.PropTypes.func,
         onShowDetail: React.PropTypes.func,
         toggleSiraControl: React.PropTypes.func,
         changeMapView: React.PropTypes.func,
-        loadFeatureGridConfig: React.PropTypes.func,
-        onExpandFilterPanel: React.PropTypes.func
+        // loadFeatureGridConfig: React.PropTypes.func,
+        onExpandFilterPanel: React.PropTypes.func,
+        selectFeatures: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -76,22 +82,24 @@ const SiraFeatureGrid = React.createClass({
             detailOpen: true,
             loadingGrid: false,
             loadingGridError: null,
-            featureGrigConfigUrl: null,
+            // featureGrigConfigUrl: null,
             profile: null,
             expanded: true,
             header: "featuregrid.header",
             features: [],
-            authParam: null,
+            params: null,
             detailsConfig: {},
+            columnsDef: [],
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
             changeMapView: () => {},
-            loadFeatureGridConfig: () => {},
-            onExpandFilterPanel: () => {}
+            // loadFeatureGridConfig: () => {},
+            onExpandFilterPanel: () => {},
+            selectFeatures: () => {}
         };
     },
-    componentDidMount() {
+    /*componentDidMount() {
         if (this.props.featureGrigConfigUrl && this.props.profile) {
             this.props.loadFeatureGridConfig(this.props.featureGrigConfigUrl + this.props.profile + ".json");
         }
@@ -102,8 +110,9 @@ const SiraFeatureGrid = React.createClass({
         if (url !== this.props.featureGrigConfigUrl && profile !== this.props.profile) {
             this.props.loadFeatureGridConfig(this.props.featureGrigConfigUrl + this.props.profile + ".json");
         }
-    },
+    },*/
     onGridClose() {
+        this.props.selectFeatures([]);
         this.props.toggleSiraControl();
         this.props.onExpandFilterPanel(true);
     },
@@ -156,7 +165,7 @@ const SiraFeatureGrid = React.createClass({
             );
         }
 
-        let columns = [{
+        /*let columns = [{
             onCellClicked: this.goToDetail,
             headerName: '',
             cellRenderer: reactCellRendererFactory(GoToDetail),
@@ -169,9 +178,24 @@ const SiraFeatureGrid = React.createClass({
             headerName: 'Codice SIRA',
             field: "properties.codice",
             width: 100
-        }];
+        }];*/
 
-        if (this.props.profile === "B") {
+        let columns = [{
+            onCellClicked: this.goToDetail,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            suppressSorting: true,
+            suppressMenu: true,
+            pinned: true,
+            width: 25,
+            suppressResize: true
+        }, ...(this.props.columnsDef.map((column) => {
+            if (!column.profiles || (column.profiles && column.profiles.indexOf(this.props.profile) !== -1)) {
+                return assign({}, column, {field: "properties." + column.field});
+            }
+        })).filter((c) => c )];
+
+        /*if (this.props.profile === "B") {
             columns.push({
                 headerName: 'Codice fiscale (P.IVA)',
                 field: "properties.codicefisc"
@@ -187,7 +211,7 @@ const SiraFeatureGrid = React.createClass({
             headerName: 'Autorizzazioni ambientali',
             field: "properties.autamb",
             width: this.props.profile === "B" ? 250 : 445
-        });
+        });*/
 
         if (this.props.open) {
             return (
@@ -207,7 +231,14 @@ const SiraFeatureGrid = React.createClass({
                                     columnDefs={columns}
                                     features={this.props.features}
                                     style={{height: "300px", width: "100%"}}
-                                    maxZoom={16}/>
+                                    maxZoom={16}
+                                    zoom={15}
+                                    toolbar={{
+                                        zoom: true,
+                                        exporter: true,
+                                        toolPanel: false,
+                                        selectAll: true
+                                    }}/>
                             </div>
                         ) : (
                             <div style={{height: "300px", width: "100%"}}>
@@ -228,10 +259,18 @@ const SiraFeatureGrid = React.createClass({
         return null;
     },
     goToDetail(params) {
+        let url = this.props.detailsConfig.service.url;
+        let urlParams = this.props.detailsConfig.service.params;
+        for (let param in urlParams) {
+            if (urlParams.hasOwnProperty(param)) {
+                url += "&" + param + "=" + urlParams[param];
+            }
+        }
+
         this.props.onDetail(
-            this.props.detailsConfig.cardTemplateConfigUrl,
-            this.props.detailsConfig.cardModelConfigUrl,
-            this.props.detailsConfig.wfsUrl + "&FEATUREID=" + params.data.id + "&authkey=" + this.props.authParam.authkey
+            this.props.detailsConfig.template,
+            // this.props.detailsConfig.cardModelConfigUrl,
+            url + "&FEATUREID=" + params.data.id + (this.props.params.authkey ? "&authkey=" + this.props.params.authkey : "")
         );
 
         if (!this.props.detailOpen) {
@@ -243,8 +282,9 @@ const SiraFeatureGrid = React.createClass({
 module.exports = connect((state) => ({
     open: state.siraControls.grid,
     detailOpen: state.siraControls.detail,
-    detailsConfig: state.grid.detailsConfig,
-    features: state.grid && state.grid.model || [],
+    detailsConfig: state.siradec && state.siradec.card || {},
+    columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
+    features: state.grid && state.grid.data || [],
     map: (state.map && state.map) || (state.config && state.config.map),
     loadingGrid: state.grid.loadingGrid,
     loadingGridError: state.grid.loadingGridError
@@ -253,6 +293,7 @@ module.exports = connect((state) => ({
     onShowDetail: toggleSiraControl.bind(null, 'detail'),
     toggleSiraControl: toggleSiraControl.bind(null, 'grid'),
     changeMapView: changeMapView,
-    loadFeatureGridConfig: loadFeatureGridConfig,
-    onExpandFilterPanel: expandFilterPanel
+    // loadFeatureGridConfig: loadFeatureGridConfig,
+    onExpandFilterPanel: expandFilterPanel,
+    selectFeatures: selectFeatures
 })(SiraFeatureGrid);

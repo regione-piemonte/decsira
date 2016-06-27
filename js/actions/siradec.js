@@ -11,6 +11,10 @@ const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
+const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
+const FEATUREINFO_CONFIG_LOADED = 'FEATUREINFO_CONFIG_LOADED';
+const TOPOLOGY_CONFIG_LOADED = 'TOPOLOGY_CONFIG_LOADED';
+const CARD_CONFIG_LOADED = 'CARD_CONFIG_LOADED';
 
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
@@ -20,6 +24,8 @@ function configureFeatureType(ft, field) {
         type: FEATURETYPE_CONFIG_LOADED,
         ftName: ft.id,
         ftNameLabel: ft.name,
+        geometryName: ft.geometryName,
+        geometryType: ft.geometryType,
         field: field
     };
 }
@@ -27,6 +33,34 @@ function configureFeatureType(ft, field) {
 function configureQueryForm(config) {
     return {
         type: QUERYFORM_CONFIG_LOADED,
+        config: config
+    };
+}
+
+function configureFeatureGrid(config) {
+    return {
+        type: FEATUREGRID_CONFIG_LOADED,
+        config: config
+    };
+}
+
+function configureCard(config) {
+    return {
+        type: CARD_CONFIG_LOADED,
+        config: config
+    };
+}
+
+function configureTopology(config) {
+    return {
+        type: TOPOLOGY_CONFIG_LOADED,
+        config: config
+    };
+}
+
+function configureFeatureInfo(config) {
+    return {
+        type: FEATUREINFO_CONFIG_LOADED,
         config: config
     };
 }
@@ -45,10 +79,11 @@ function configureQueryFormError(e) {
     };
 }
 
-function getAttributeValues(ftName, field, params) {
+function getAttributeValues(ft, field, params, serviceUrl) {
     return (dispatch) => {
-        if (field.valueService) {
-            let {url} = ConfigUtils.setUrlPlaceholders({url: field.valueService});
+        if (serviceUrl) {
+            let {url} = ConfigUtils.setUrlPlaceholders({url: serviceUrl});
+
             for (let param in params) {
                 if (params.hasOwnProperty(param)) {
                     url += "&" + param + "=" + params[param];
@@ -71,13 +106,13 @@ function getAttributeValues(ftName, field, params) {
                         values.push(config.features[feature].properties);
                     }
                 }
-                dispatch(configureFeatureType(ftName, assign({}, field, {values: values})));
+                dispatch(configureFeatureType(ft, assign({}, field, {values: values})));
             }).catch((e) => {
                 dispatch(configureQueryFormError(e));
             });
         }
 
-        dispatch(configureFeatureType(ftName, assign({}, field, {})));
+        dispatch(configureFeatureType(ft, assign({}, field, {})));
     };
 }
 
@@ -93,18 +128,36 @@ function loadFeatureTypeConfig(url, params) {
                 }
             }
 
-            for (let field in config.fields) {
+            let serviceUrl = config.query.service.url;
+
+            // Configure QueryForm attributes
+            for (let field in config.query.fields) {
                 if (field) {
-                    dispatch(getAttributeValues({id: config.featureTypeName, name: config.featureTypeNameLabel}, config.fields[field], params));
+                    let f = config.query.fields[field];
+
+                    let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
+                    urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
+
+                    dispatch(getAttributeValues({
+                        id: config.featureTypeName,
+                        name: config.featureTypeNameLabel,
+                        geometryName: config.geometryName,
+                        geometryType: config.geometryType
+                    }, f, urlParams, f.valueService && f.valueService.urlParams ? serviceUrl : null));
                 }
             }
+
+            // Configure the FeatureGrid for WFS results list
+            dispatch(configureFeatureGrid(config.featuregrid));
+            dispatch(configureFeatureInfo(config.featureinfo));
+            dispatch(configureCard(config.card));
         }).catch((e) => {
             dispatch(configureQueryFormError(e));
         });
     };
 }
 
-function loadQueryFormConfig(configUrl, configName) {
+/*function loadQueryFormConfig(configUrl, configName) {
     return (dispatch) => {
         return axios.get(configUrl + configName).then((response) => {
             let config = response.data;
@@ -121,14 +174,21 @@ function loadQueryFormConfig(configUrl, configName) {
             dispatch(configureQueryFormError(e));
         });
     };
-}
+}*/
 
 module.exports = {
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
-    loadQueryFormConfig,
+    FEATUREGRID_CONFIG_LOADED,
+    FEATUREINFO_CONFIG_LOADED,
+    TOPOLOGY_CONFIG_LOADED,
+    CARD_CONFIG_LOADED,
+    configureTopology,
+    configureFeatureGrid,
+    configureCard,
+    // loadQueryFormConfig,
     loadFeatureTypeConfig,
     configureQueryForm,
     expandFilterPanel,

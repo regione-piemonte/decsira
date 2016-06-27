@@ -11,9 +11,12 @@ const React = require('react');
 const TemplateSira = require('../../template/TemplateSira');
 const TemplateUtils = require('../../../utils/TemplateUtils');
 
+const assign = require('object-assign');
+
 const GMLViewer = React.createClass({
     propTypes: {
         params: React.PropTypes.object,
+        profile: React.PropTypes.string,
         response: React.PropTypes.string,
         contentConfig: React.PropTypes.object,
         detailOpen: React.PropTypes.bool,
@@ -26,33 +29,52 @@ const GMLViewer = React.createClass({
         return nextProps.response !== this.props.response;
     },
     onCellClicked(node) {
-        if (node.colIndex === 0) {
-            this.goToDetail(node.data);
+        if (node.colIndex === 0 && node.colDef.id) {
+            this.goToDetail(node.data, node.colDef.field);
         }
     },
     render() {
-        let model = TemplateUtils.getModels(this.props.response,
+        const xml = this.props.response;
+        // const authParam = this.props.authParam;
+        const model = {
+            // authParam: authParam,
+            profile: this.props.profile,
+            getValue: (element) => TemplateUtils.getValue(xml, element, null)
+        };
+
+        /*let model = TemplateUtils.getModels(this.props.response,
             this.props.contentConfig.modelConfig.root,
-            this.props.contentConfig.modelConfig.config, "1.1.0");
+            this.props.contentConfig.modelConfig.columns, "1.1.0");*/
 
         return (
             <TemplateSira
                 template={this.props.contentConfig.template}
-                model={{rows: model}}
+                model={model}
                 onCellClicked={this.onCellClicked}/>
         );
     },
-    goToDetail(data) {
-        let reqURL = this.props.contentConfig.detailsConfig.wfsUrl + "&FEATUREID=" + data.id;
+    goToDetail(data, idFieldName) {
+        /*let reqURL = this.props.contentConfig.detailsConfig.wfsUrl + "&FEATUREID=" + data.id;
         for (let param in this.props.params) {
             if (this.props.params.hasOwnProperty(param)) {
                 reqURL += "&" + param + "=" + this.props.params[param];
             }
+        }*/
+
+        let url = this.props.contentConfig.detailsConfig.service.url;
+        let urlParams = this.props.contentConfig.detailsConfig.service.params;
+        let params = assign({}, this.props.params, urlParams);
+        for (let param in params) {
+            if (params.hasOwnProperty(param)) {
+                url += "&" + param + "=" + params[param];
+            }
         }
 
+        let reqURL = url + "&FEATUREID=" + data[idFieldName];
+
         this.props.actions.onDetail(
-            this.props.contentConfig.detailsConfig.cardTemplateConfigUrl,
-            this.props.contentConfig.detailsConfig.cardModelConfigUrl,
+            this.props.contentConfig.detailsConfig.template,
+            /*this.props.contentConfig.detailsConfig.cardModelConfigUrl,*/
             reqURL
         );
 

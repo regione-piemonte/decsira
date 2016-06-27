@@ -15,7 +15,7 @@ const DetailTitle = React.createClass({
     propTypes: {
         title: React.PropTypes.string,
         subtitle: React.PropTypes.array,
-        id: React.PropTypes.number,
+        id: React.PropTypes.string,
         toggleSiraControl: React.PropTypes.func
     },
     getDefaultProps() {

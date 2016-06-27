@@ -20,14 +20,16 @@ const mapConfig = require('../../MapStore2/web/client/reducers/config');
 const map = require('../../MapStore2/web/client/reducers/map');
 
 const queryform = require('../../MapStore2/web/client/reducers/queryform');
-const queryformconfig = require('../reducers/queryform');
+const siradec = require('../reducers/siradec');
+
+const grid = require('../reducers/grid');
 
 const assign = require('object-assign');
 
 const allReducers = combineReducers({
     userprofile: require('../reducers/userprofile'),
     mapInfo: require('../reducers/mapInfo'),
-    search: require('../../MapStore2/web/client/reducers/search').searchResults,
+    search: require('../../MapStore2/web/client/reducers/search'),
     browser: require('../../MapStore2/web/client/reducers/browser'),
     locale: require('../../MapStore2/web/client/reducers/locale'),
     draw: require('../../MapStore2/web/client/reducers/draw'),
@@ -37,13 +39,13 @@ const allReducers = combineReducers({
     measurement: require('../../MapStore2/web/client/reducers/measurement'),
     routing: routeReducer,
     queryform: () => {return {}; },
-    queryformconfig: () => {return {}; },
+    siradec: () => {return {}; },
     map: () => {return null; },
     layers: () => {return null; },
     mapInitialConfig: () => {return null; },
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
-    grid: require('../reducers/grid')
+    grid: () => {return {}; }
 });
 
 const rootReducer = (state = {}, action) => {
@@ -54,16 +56,31 @@ const rootReducer = (state = {}, action) => {
         mapState.layers = {flat: LayersUtils.reorder(groups, mapState.layers), groups: groups};
     }
 
-    let queryformconfigState = queryformconfig(state.queryformconfig, action);
+    let siradecState = siradec(state.siradec, action);
     let queryformState = queryform(state.queryform, action);
+    let gridState = grid(state.grid, action);
 
-    if (!queryformState.searchUrl && (queryformconfigState.queryform && queryformconfigState.queryform.searchUrl)) {
-        queryformState = assign(queryformState, queryformconfigState.queryform);
+    if (!queryformState.searchUrl && (siradecState.queryform && siradecState.queryform.searchUrl)) {
+        queryformState = assign({}, queryformState, siradecState.queryform);
+    }
+
+    if (queryformState.searchUrl && (siradecState.queryform && siradecState.queryform.geometryName)) {
+        queryformState = assign({}, queryformState, {spatialField: assign({}, queryformState.spatialField, {attribute: siradecState.queryform.geometryName})});
+    }
+
+    if (!gridState.featuregrid && siradecState.featuregrid) {
+        gridState = assign({}, gridState, {featuregrid: siradecState.featuregrid});
+    }
+
+    if (siradecState.featuregrid && siradecState.featuregrid.geometryType) {
+        gridState = assign({}, gridState, {
+            featuregrid: assign({}, gridState.featuregrid, {grid: assign({}, gridState.featuregrid.grid, {geometryType: siradecState.featuregrid.geometryType})})});
     }
 
     let newState = assign({}, {...allReducers(state, action)}, {
-        queryformconfig: queryformconfigState,
+        siradec: siradecState,
         queryform: queryformState,
+        grid: gridState,
         mapInitialConfig: mapState ? mapState.mapInitialConfig : null,
         map: mapState && mapState.map ? map(mapState.map, action) : null,
         layers: mapState ? layers(mapState.layers, action) : null

@@ -7,10 +7,16 @@
  */
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
+
+const LocaleUtils = require('../../../MapStore2/web/client/utils/LocaleUtils');
+
 const LabeledField = React.createClass({
     propTypes: {
         label: React.PropTypes.string,
         value: React.PropTypes.any
+    },
+    contextTypes: {
+        messages: React.PropTypes.object
     },
     getDefaultProps() {
         return {
@@ -26,7 +32,12 @@ const LabeledField = React.createClass({
                         {this.props.label}
                     </Col>
                     <Col className="value-sira" xs={7} sm={7} md={7} lg={7}>
-                        {this.props.value}
+                        {
+                            this.props.value ? this.props.value :
+                                <span className="labeledfield-no-value">
+                                    {LocaleUtils.getMessageById(this.context.messages, "labeledfield.label_value_not_specified")}
+                                </span>
+                        }
                     </Col>
                 </Row>
             </Grid>

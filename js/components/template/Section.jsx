@@ -31,7 +31,7 @@ const Section = React.createClass({
         let isActive = this.isActive();
         return (
             <span className="sectionHader">
-                <a style={{"cursor": "pointer"}} onClick={this.props.selectSection.bind(null, this.props.eventKey, (isActive) ? false : true )}><span>{this.props.header}</span></a>
+                <span style={{"cursor": "pointer"}} onClick={this.props.selectSection.bind(null, this.props.eventKey, (isActive) ? false : true )}>{this.props.header}</span>
                 <button onClick={this.props.selectSection.bind(null, this.props.eventKey, (isActive) ? false : true )} className="close"><Glyphicon glyph={(isActive) ? "glyphicon glyphicon-collapse-down" : "glyphicon glyphicon-expand"}/></button>
             </span>
         );

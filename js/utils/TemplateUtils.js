@@ -45,29 +45,6 @@ const TemplateUtils = {
                 };
         }
     },
-    getElementValue(result, type, wfsVersion="2.0") {
-        switch (type) {
-            case 1 /*NUMBER_TYPE*/: {
-                return parseFloat(result && result.nodeValue || '0');
-            }
-            case 2 /*STRING_TYPE*/: {
-                return result && result.nodeValue || '';
-            }
-            case 3 /*BOOLEAN_TYPE*/: {
-                return result && result.nodeValue === "true" || false;
-            }
-            case 6 /*GEOMETRY_TYPE*/: {
-                let value;
-                if (wfsVersion === "2.0") {
-                    value = result && result.nodeValue || {};
-                } else {
-                    value = result && result.nodeValue && parse(result.nodeValue) || result && result.nodeValue || {};
-                }
-                return value;
-            }
-            default: return result;
-        }
-    },
     getModels(data, root, config, wfsVersion="2.0") {
         let doc = new Dom().parseFromString(data);
 
@@ -89,11 +66,44 @@ const TemplateUtils = {
         }
         return model;
     },
+    getElementValue(result, type, wfsVersion="2.0") {
+        switch (type) {
+            case 1 /*NUMBER_TYPE*/: {
+                return parseFloat(result && result.nodeValue || '0');
+            }
+            case 2 /*STRING_TYPE*/: {
+                return result && result.nodeValue || '';
+            }
+            case 3 /*BOOLEAN_TYPE*/: {
+                return result && result.nodeValue === "true" || false;
+            }
+            case 6 /*GEOMETRY_TYPE*/: {
+                let value;
+                if (wfsVersion === "2.0") {
+                    value = result && result.nodeValue || {};
+                } else {
+                    value = result && result.nodeValue && parse(result.nodeValue) || result && result.nodeValue || {};
+                }
+                return value;
+            }
+            default: return result.nodeValue || result;
+        }
+    },
     getElement(element, doc, wfsVersion="2.0") {
         let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
         let value = "";
         let result;
         const me = this;
+
+        if (!element.type) {
+            let values = [];
+            let results = select(element.xpath, doc);
+            results.forEach((res) => {
+                values.push(this.getElementValue(res));
+            });
+            value = values.length > 1 ? values : values[0];
+        }
+
         if (element.type === this.OBJECT_TYPE) {
             let values = [];
             let results = select(element.xpath, doc);
@@ -110,14 +120,18 @@ const TemplateUtils = {
             let values = [];
             let results = select(element.xpath, doc);
             results.forEach((res) => {
-                value = {};
-                element.fields.forEach((f) => {
-                    let r = select(f.xpath, res);
-                    r.forEach((v) => {
-                        value[f.field] = (f.type === me.OBJECT_TYPE) ? me.getElement(f, v, wfsVersion) : this.getElementValue(v, f.type, wfsVersion);
+                if (element.fields) {
+                    value = {};
+                    element.fields.forEach((f) => {
+                        let r = select(f.xpath, res);
+                        r.forEach((v) => {
+                            value[f.field] = (f.type === me.OBJECT_TYPE) ? me.getElement(f, v, wfsVersion) : this.getElementValue(v, f.type, wfsVersion);
+                        });
                     });
-                });
-                values.push(value);
+                    values.push(value);
+                } else {
+                    values.push(this.getElementValue(res, element.type, wfsVersion));
+                }
             });
             value = values;
         } else if (element.type === this.GEOMETRY_TYPE) {
@@ -171,19 +185,40 @@ const TemplateUtils = {
                 value = values[0];
             }
 
-        } else {
+        } else if (element.type === this.STRING_TYPE) {
             for (let i = 0; i < element.xpath.length; i++) {
                 result = select(element.xpath[i], doc)[0];
-                if (element.type === this.STRING_TYPE) {
-                    if (i > 0) {
-                        value += " ";
-                    }
-                    value += this.getElementValue(result, element.type, wfsVersion);
-                } else {
-                    value = this.getElementValue(result, element.type, wfsVersion);
+                // if (element.type === this.STRING_TYPE) {
+                if (i > 0) {
+                    value += " ";
                 }
+                value += this.getElementValue(result, element.type, wfsVersion);
+                /*} else {
+                    value = this.getElementValue(result, element.type, wfsVersion);
+                }*/
             }
+        } else if (element.type === this.NUMBER_TYPE) {
+            result = select(element.xpath, doc)[0];
+            value = this.getElementValue(result, element.type, wfsVersion);
         }
+        return value;
+    },
+    getValue(xml, element, wfsVersion="2.0") {
+        let doc = new Dom().parseFromString(xml);
+        let value;
+
+        if (typeof element === "object") {
+            value = this.getElement(element, doc, wfsVersion);
+        } else {
+            let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
+            let values = [];
+            let results = select(element, doc);
+            results.forEach((res) => {
+                values.push(this.getElementValue(res));
+            });
+            value = values.length > 1 ? values : values[0];
+        }
+
         return value;
     }
 };
