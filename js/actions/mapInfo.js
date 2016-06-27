@@ -117,6 +117,7 @@ function getFeatureInfo(wmsBasePath, requestParams, lMetaData, options = {}, top
                         dispatch(topologyOptions.callback(
                             topologyOptions.layerId,
                             topologyOptions.topologyConfig,
+                            topologyOptions.modelConfig,
                             topologyOptions.filter,
                             {reqId: reqId, response: response.data, requestParams: requestParams, lMetaData: lMetaData}
                         ));
@@ -237,9 +238,12 @@ function loadFeatureInfoTemplateConfig(layerId, templateURL) {
     };
 }
 
-function loadGetFeatureInfoConfig(layerId, infoConfigURL) {
+function loadGetFeatureInfoConfig(layerId, featureinfoconfig) {
     return (dispatch) => {
-        return axios.get(infoConfigURL).then((response) => {
+        dispatch(configureGetFeatureInfo(layerId, featureinfoconfig));
+        dispatch(loadFeatureInfoTemplateConfig(layerId, featureinfoconfig.templateURL));
+
+        /* return axios.get(infoConfigURL).then((response) => {
             let infoConfig = response.data;
             if (typeof infoConfig !== "object") {
                 try {
@@ -252,7 +256,7 @@ function loadGetFeatureInfoConfig(layerId, infoConfigURL) {
             dispatch(loadFeatureInfoTemplateConfig(layerId, infoConfig.templateURL));
         }).catch((e) => {
             dispatch(configureGetFeatureInfoError(layerId, e));
-        });
+        }); */
     };
 }
 
@@ -264,8 +268,14 @@ function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter
         }).then((response) => {
             let infoTopologyResponse = response.data;
 
+            if (modelConfig.columns) {
+                modelConfig.columns = modelConfig.columns.map((column) => {
+                    return !column.field ? assign({}, column, {field: uuid.v1()}) : column;
+                });
+            }
+
             let features = TemplateUtils.getModels(infoTopologyResponse,
-                modelConfig.modelConfig.root, modelConfig.modelConfig.config, "1.1.0");
+                modelConfig.root, modelConfig.columns, "1.1.0");
 
             let data = {
                 "type": "FeatureCollection",
@@ -318,9 +328,12 @@ function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter
     };
 }
 
-function loadInfoTopologyConfig(layerId, topologyConfig, filter, infoParams) {
+function loadInfoTopologyConfig(layerId, topologyConfig, modelConfig, filter, infoParams) {
     return (dispatch) => {
-        return axios.get(topologyConfig.topologyModelURL).then((response) => {
+        dispatch(loadFeatureInfo(infoParams.reqId, infoParams.response, infoParams.requestParams, infoParams.lMetaData));
+        dispatch(loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter));
+
+        /*return axios.get(topologyConfig.topologyModelURL).then((response) => {
             let modelConfig = response.data;
             if (typeof modelConfig !== "object") {
                 try {
@@ -334,7 +347,7 @@ function loadInfoTopologyConfig(layerId, topologyConfig, filter, infoParams) {
             dispatch(loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter));
         }).catch((e) => {
             dispatch(configureInfoTopologyConfigError(layerId, e));
-        });
+        });*/
     };
 }
 

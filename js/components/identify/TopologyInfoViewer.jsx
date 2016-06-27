@@ -44,7 +44,7 @@ const TopologyInfoViewer = React.createClass({
         missingRequests: React.PropTypes.number,
         infoTopologyResponse: React.PropTypes.object,
         display: React.PropTypes.string,
-        modelConfig: React.PropTypes.object,
+        // modelConfig: React.PropTypes.object,
         topologyConfig: React.PropTypes.object,
         actions: React.PropTypes.shape({
             setFeatures: React.PropTypes.func
@@ -82,9 +82,10 @@ const TopologyInfoViewer = React.createClass({
         let columns;
         if (this.props.infoTopologyResponse &&
             this.props.infoTopologyResponse[layerId] &&
-            this.props.modelConfig &&
-            this.props.modelConfig[layerId]) {
-            columns = this.props.modelConfig[layerId].config.filter((element) => element.type !== TemplateUtils.GEOMETRY_TYPE);
+            this.props.topologyConfig &&
+            this.props.topologyConfig[layerId] &&
+            this.props.topologyConfig[layerId].modelConfig) {
+            columns = this.props.topologyConfig[layerId].modelConfig.columns.filter((element) => element.type !== TemplateUtils.GEOMETRY_TYPE);
             columns = columns.map((element) => {
                 return {
                     headerName: element.header,
@@ -96,8 +97,9 @@ const TopologyInfoViewer = React.createClass({
 
         return this.props.infoTopologyResponse &&
             this.props.infoTopologyResponse[layerId] &&
-            this.props.modelConfig &&
-            this.props.modelConfig[layerId] ? (
+            this.props.topologyConfig &&
+            this.props.topologyConfig[layerId] &&
+            this.props.topologyConfig[layerId].modelConfig ? (
             <FeatureGrid
                 columnDefs={columns}
                 toolbar={{

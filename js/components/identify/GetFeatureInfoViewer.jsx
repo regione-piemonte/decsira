@@ -41,6 +41,7 @@ const GetFeatureInfoViewer = React.createClass({
         infoFormat: React.PropTypes.oneOf(
             MapInfoUtils.getAvailableInfoFormatValues()
         ),
+        profile: React.PropTypes.string,
         responses: React.PropTypes.array,
         missingRequests: React.PropTypes.number,
         display: React.PropTypes.string,
@@ -50,6 +51,7 @@ const GetFeatureInfoViewer = React.createClass({
     getDefaultProps() {
         return {
             display: "accordion",
+            profile: null,
             responses: [],
             missingRequests: 0,
             contentConfig: {}
@@ -111,15 +113,16 @@ const GetFeatureInfoViewer = React.createClass({
             case infoFormats.GML3:
                 return this.props.contentConfig &&
                     this.props.contentConfig.template[layerId] &&
-                    this.props.contentConfig.detailsConfig[layerId] &&
-                    this.props.contentConfig.modelConfig[layerId] ? (
+                    this.props.contentConfig.detailsConfig[layerId]/*&&
+                    this.props.contentConfig.modelConfig[layerId]*/ ? (
                         <GMLFeatureInfoViewer
                             display={this.props.display}
                             response={response}
+                            profile={this.props.profile}
                             contentConfig={{
                                 template: this.props.contentConfig.template[layerId],
-                                detailsConfig: this.props.contentConfig.detailsConfig[layerId],
-                                modelConfig: this.props.contentConfig.modelConfig[layerId]
+                                detailsConfig: this.props.contentConfig.detailsConfig[layerId]
+                                // modelConfig: this.props.contentConfig.modelConfig[layerId]
                             }}
                             params={this.props.params}/>
                     ) : (

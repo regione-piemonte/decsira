@@ -49,7 +49,7 @@ const {
     // SiraQueryPanel action functions
     expandFilterPanel,
     loadFeatureTypeConfig
-} = require('../actions/queryform');
+} = require('../actions/siradec');
 
 const {
     changeDrawingStatus,
@@ -77,7 +77,7 @@ const SiraQueryPanel = React.createClass({
         siraActions: React.PropTypes.object,
 
         // QueryBuilder props
-        authParam: React.PropTypes.object,
+        params: React.PropTypes.object,
         featureTypeConfigUrl: React.PropTypes.string,
         useMapProjection: React.PropTypes.bool,
         attributes: React.PropTypes.array,
@@ -115,7 +115,7 @@ const SiraQueryPanel = React.createClass({
             },
 
             // QueryBuilder default props
-            authParam: {},
+            params: {},
             featureTypeConfigUrl: null,
             useMapProjection: true,
             attributes: [],
@@ -200,7 +200,7 @@ const SiraQueryPanel = React.createClass({
                 <Panel className="querypanel-container" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
                     {this.renderDatasetHeader()}
                     <QueryBuilder
-                        authParam={this.props.authParam}
+                        params={this.props.params}
                         featureTypeConfigUrl={this.props.featureTypeConfigUrl}
                         useMapProjection={this.props.useMapProjection}
                         removeButtonIcon={this.props.removeButtonIcon}
@@ -277,16 +277,16 @@ const SiraQueryPanel = React.createClass({
 module.exports = connect((state) => {
     return {
         // SiraQueryPanel prop
-        filterPanelExpanded: state.queryformconfig.filterPanelExpanded,
-        loadingQueryFormConfigError: state.queryformconfig.loadingQueryFormConfigError,
-        featureTypeName: state.queryformconfig.featureTypeName,
-        featureTypeNameLabel: state.queryformconfig.featureTypeNameLabel,
+        filterPanelExpanded: state.siradec.filterPanelExpanded,
+        loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
+        featureTypeName: state.siradec.featureTypeName,
+        featureTypeNameLabel: state.siradec.featureTypeNameLabel,
 
         // QueryBuilder props
         groupLevels: state.queryform.groupLevels,
         groupFields: state.queryform.groupFields,
         filterFields: state.queryform.filterFields,
-        attributes: state.queryformconfig.attributes,
+        attributes: state.siradec.attributes,
         spatialField: state.queryform.spatialField,
         showDetailsPanel: state.queryform.showDetailsPanel,
         toolbarEnabled: state.queryform.toolbarEnabled,

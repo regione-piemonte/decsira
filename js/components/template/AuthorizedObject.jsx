@@ -10,16 +10,19 @@ const React = require('react');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 
-const {loadCardTemplate, setSiraImpiantoModel} = require('../../actions/card');
+const {loadCardTemplate/*, setSiraImpiantoModel*/} = require('../../actions/card');
 
 const AuthorizedObject = React.createClass({
     propTypes: {
-        list: React.PropTypes.array,
+        list: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array
+        ]),
         listTitle: React.PropTypes.string,
         detailsTemplateConfigURL: React.PropTypes.string,
         actions: React.PropTypes.shape({
-            drillDown: React.PropTypes.func,
-            setSiraImpiantoModel: React.PropTypes.func
+            drillDown: React.PropTypes.func/*,
+            setSiraImpiantoModel: React.PropTypes.func*/
         })
     },
     getDefaultProps() {
@@ -37,16 +40,19 @@ const AuthorizedObject = React.createClass({
                 <h4>{this.props.listTitle}</h4>
                 <ul className={"list-style-type:circle"}>
                     {
-                        this.props.list.map((element) => (
-                            <li key={"factoryelement_" + element.codicesira}><a style={{cursor: "pointer"}} onClick={() => this.drillDown(element)}>Impianto codice sira {element.codicesira}</a></li>
-                        ))
+                        this.props.list instanceof Array ? this.props.list.map((codicesira) => (
+                            // <li key={"factoryelement_" + element.codicesira}><a style={{cursor: "pointer"}} onClick={() => this.drillDown(element)}>Impianto codice sira {element.codicesira}</a></li>
+                            <li key={"factoryelement_" + codicesira}><a style={{cursor: "pointer"}} onClick={() => this.drillDown()}>Impianto codice sira {codicesira}</a></li>
+                        )) : (
+                            <li key={"factoryelement_" + this.props.list}><a style={{cursor: "pointer"}} onClick={() => this.drillDown()}>Impianto codice sira {this.props.list}</a></li>
+                        )
                     }
                 </ul>
             </div>
         );
     },
-    drillDown(element) {
-        this.props.actions.setSiraImpiantoModel(element);
+    drillDown() {
+        // this.props.actions.setSiraImpiantoModel(element);
         this.props.actions.drillDown(this.props.detailsTemplateConfigURL);
     }
 });
@@ -54,7 +60,7 @@ const AuthorizedObject = React.createClass({
 module.exports = connect(null, dispatch => {
     return {
         actions: bindActionCreators({
-            setSiraImpiantoModel: setSiraImpiantoModel,
+            // setSiraImpiantoModel: setSiraImpiantoModel,
             drillDown: loadCardTemplate
         }, dispatch)
     };

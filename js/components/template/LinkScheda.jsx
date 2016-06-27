@@ -11,6 +11,7 @@ const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const {loadCardModelConfig, activateSection} = require('../../actions/card');
 const {toggleSiraControl} = require('../../actions/controls');
+
 const LinkScheda = React.createClass({
     propTypes: {
         id: React.PropTypes.string,
@@ -66,9 +67,9 @@ const LinkScheda = React.createClass({
 
 module.exports = connect((state) => {
     return {
-            card: state.cardtemplate || {},
-            open: state.siraControls.detail,
-            detailsConfig: state.grid.detailsConfig
+        card: state.cardtemplate || {},
+        open: state.siraControls.detail,
+        detailsConfig: state.grid.detailsConfig
     };
 }, dispatch => {
     return bindActionCreators({

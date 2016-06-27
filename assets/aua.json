@@ -1,75 +1,169 @@
 {
    "featureTypeName":"sira:AutorizzazioneUnicaAmbientale",
    "featureTypeNameLabel":"AUA - IMPIANTI DI RECUPERO ENERGIA E MATERIA",
-   "fields":[
-      {
-         "index": 1,
-         "id": "sira:impianto/sira:Sede/sira:provincia",
-         "fieldName":"Provincia",
-         "type":"list",
-         "valueService":"{geoserverUrl}/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:province&outputFormat=application%2Fjson",
-         "valueId":"sigla",
-         "valueLabel":"toponimo"
-      },
-      {
-         "index": 2,
-         "id": "sira:impianto/sira:Sede/sira:comune",
-         "fieldName":"Comune",
-         "type":"list",
-         "valueService":"{geoserverUrl}/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:comuni&propertyName=id_comune,sigla_provincia,toponimo&sortBy=toponimo+A&outputFormat=application%2Fjson",
-         "valueId":"toponimo",
-         "valueLabel":"toponimo",
-         "dependson":{
-            "field": "sira:impianto/sira:Sede/sira:provincia",
-            "from": "sigla",
-            "to": "sigla_provincia"
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+     "template": "assets/cardTemplate.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "sira:AutorizzazioneUnicaAmbientale",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplate.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice SIRA",
+           "xpath": ["sira:impianto/sira:Sede/sira:codiceSira/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Codice fiscale (P.IVA)",
+           "xpath": ["sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()"],
+           "profiles": ["B"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "xpath": ["sira:impianto/sira:Sede/sira:comune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Autorizzazioni ambientali",
+           "xpath": ["sira:attivita/sira:Attivita/sira:descrizione/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "xpath": ["sira:impianto/sira:Sede/sira:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
          }
-      },
-      {
-         "index": 3,
-         "id": "sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/@gml:id",
-         "fieldName":"Tipo Recupero",
-         "type":"list",
-         "valueService":"{geoserverUrl}/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:tipo_recupero&sortBy=id_tipo_recupero+A&outputFormat=application%2Fjson",
-         "fidPrefix": "tipo_recupero",
-         "valueId":"id_tipo_recupero",
-         "valueLabel":"des_tipo_recupero"
-      },
-      {
-         "index": 4,
-         "id": "sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id",
-         "fieldName":"Tipo Rifiuto",
-         "type":"list",
-         "valueService":"{geoserverUrl}/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:tipo_rifiuto&sortBy=id+A&outputFormat=application%2Fjson",
-         "fidPrefix": "tipo_rifiuto",
-         "valueId":"id",
-         "valueLabel":"label"
-      },
-      {
-         "index": 5,
-         "id": "sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:operazioneRecupero/sira:OperazioneRecupero/@gml:id",
-         "fieldName":"Operazione Recupero",
-         "type":"list",
-         "valueService":"{geoserverUrl}/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:operaz_recupero&sortBy=id+A&outputFormat=application%2Fjson",
-         "fidPrefix": "operaz_rec",
-         "valueId":"id",
-         "valueLabel":"label"
-      },
-      {
-         "index": 6,
-         "id": "sira:attivita/sira:Attivita/@gml:id",
-         "fieldName":"Attività",
-         "type":"list",
-         "valueService":"{geoserverUrl}/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:sipra_d_attivita&sortBy=id_attivita+A&outputFormat=application%2Fjson",
-         "fidPrefix": "attivita",
-         "valueId":"id_attivita",
-         "valueLabel":"des_attivita"
-      },
-      {
-         "index": 7,
-         "id": "sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio",
-         "fieldName":"Data Provvedimento",
-         "type":"date"
-      }
-   ]
+       ]
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+           "index": 1,
+           "attribute": "sira:impianto/sira:Sede/sira:provincia",
+           "label":"Provincia",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:province"
+             }
+           },
+           "valueId":"sigla",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "sira:impianto/sira:Sede/sira:comune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+              "field": "sira:impianto/sira:Sede/sira:provincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 3,
+           "attribute": "sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/@gml:id",
+           "label":"Tipo Recupero",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:tipo_recupero",
+               "sortBy": "id_tipo_recupero+A"
+             }
+           },
+           "fidPrefix": "tipo_recupero",
+           "valueId":"id_tipo_recupero",
+           "valueLabel":"des_tipo_recupero"
+        },
+        {
+           "index": 4,
+           "attribute": "sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id",
+           "label":"Tipo Rifiuto",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:tipo_rifiuto",
+               "sortBy": "id+A"
+             }
+           },
+           "fidPrefix": "tipo_rifiuto",
+           "valueId":"id",
+           "valueLabel":"label"
+        },
+        {
+           "index": 5,
+           "attribute": "sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:operazioneRecupero/sira:OperazioneRecupero/@gml:id",
+           "label":"Operazione Recupero",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:operaz_recupero",
+               "sortBy": "id+A"
+             }
+           },
+           "fidPrefix": "operaz_rec",
+           "valueId":"id",
+           "valueLabel":"label"
+        },
+        {
+           "index": 6,
+           "attribute": "sira:attivita/sira:Attivita/@gml:id",
+           "label":"Attività",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:sipra_d_attivita",
+               "sortBy": "id_attivita+A"
+             }
+           },
+           "fidPrefix": "attivita",
+           "valueId":"id_attivita",
+           "valueLabel":"des_attivita"
+        },
+        {
+           "index": 7,
+           "attribute": "sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio",
+           "label":"Data Provvedimento",
+           "type":"date"
+        }
+     ]
+   }
 }

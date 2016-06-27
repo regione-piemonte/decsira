@@ -29,7 +29,7 @@ const assign = require('object-assign');
 
 const initialState = {
     detailsConfig: null,
-    modelConfig: null,
+    // modelConfig: null,
     template: null,
     topologyConfig: null,
     infoTopologyResponse: null
@@ -45,7 +45,7 @@ function mapInfo(state = initialState, action) {
                 responses: [],
                 requests: {length: 0},
                 detailsConfig: null,
-                modelConfig: null,
+                // modelConfig: null,
                 template: null
             });
         }
@@ -175,12 +175,13 @@ function mapInfo(state = initialState, action) {
         // ---------------------- SIRA ----------------------- //
 
         case CONFIGURE_INFO_TOPOLOGY: {
-            let modelConfig = assign({}, state.modelConfig, {[action.layerId]: action.modelConfig.modelConfig});
-            let topologyConfig = assign({}, state.topologyConfig, {[action.layerId]: action.topologyConfig});
+            // let modelConfig = assign({}, state.modelConfig, {[action.layerId]: action.modelConfig.modelConfig});
+            let topologyConfig = assign({}, action.topologyConfig, {modelConfig: action.modelConfig});
+            topologyConfig = assign({}, state.topologyConfig, {[action.layerId]: topologyConfig});
             let infoTopologyResponse = assign({}, state.infoTopologyResponse, {[action.layerId]: action.infoTopologyResponse});
 
             return assign({}, state, {
-                modelConfig: modelConfig,
+                // modelConfig: modelConfig,
                 topologyConfig: topologyConfig,
                 infoTopologyResponse: infoTopologyResponse
             });
@@ -193,17 +194,17 @@ function mapInfo(state = initialState, action) {
                 responses: [],
                 requests: {length: 0},
                 detailsConfig: null,
-                modelConfig: null,
+                // modelConfig: null,
                 template: null
             });
         }
         case CONFIGURE_GET_FEATURE_INFO: {
-            let detailsConfig = assign({}, state.detailsConfig, {[action.layerId]: action.config.detailsConfig});
-            let modelConfig = assign({}, state.modelConfig, {[action.layerId]: action.config.modelConfig});
+            let detailsConfig = assign({}, state.detailsConfig, {[action.layerId]: action.config.card});
+            // let modelConfig = assign({}, state.modelConfig, {[action.layerId]: action.config.grid});
 
             return assign({}, state, {
-                detailsConfig: detailsConfig,
-                modelConfig: modelConfig
+                detailsConfig: detailsConfig
+                // modelConfig: modelConfig
             });
         }
         case LOAD_TEMPLATE_INFO: {

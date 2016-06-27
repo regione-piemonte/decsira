@@ -38,7 +38,7 @@ const Feature = require('../../MapStore2/web/client/components/map/' + mapType +
 
 const SiraMap = (props) => {
     let features = (props.selFeatures && props.selFeatures.length > 0) ? props.selFeatures : props.features;
-    let auaStyle = {
+    let topologyStyle = {
         style: {
             type: "Polygon",
             stroke: {
@@ -51,7 +51,7 @@ const SiraMap = (props) => {
         }
     };
 
-    let topologyStyle = {
+    let auaStyle = {
         style: {
             type: "Point",
             radius: 10,
@@ -91,6 +91,7 @@ const SiraMap = (props) => {
                     {
                         features.map( (feature) => {
                             return (<Feature
+                                msId={feature.id}
                                 key={feature.id}
                                 type={feature.type}
                                 geometry={feature.geometry}/>);
@@ -105,6 +106,7 @@ const SiraMap = (props) => {
                     {
                         features.map( (feature) => {
                             return (<Feature
+                                msId={feature.id}
                                 key={feature.id}
                                 type={feature.type}
                                 geometry={feature.geometry}/>);

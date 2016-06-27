@@ -15,7 +15,12 @@ const {Modal} = require('react-bootstrap');
 const {toggleSiraControl} = require("../../actions/controls");
 const toggleDetail = toggleSiraControl.bind(null, 'detail');
 
+const assign = require('object-assign');
+
+const TemplateUtils = require('../../utils/TemplateUtils');
+
 const Draggable = require('react-draggable');
+
 require("./card.css");
 
 const Card = React.createClass({
@@ -26,21 +31,26 @@ const Card = React.createClass({
                     React.PropTypes.func]),
             loadingCardTemplateError: React.PropTypes.oneOfType([
                     React.PropTypes.string,
-                    React.PropTypes.object])
+                    React.PropTypes.object]),
+            xml: React.PropTypes.oneOfType([
+                    React.PropTypes.string])
         }),
+        authParam: React.PropTypes.object,
         open: React.PropTypes.bool,
-        model: React.PropTypes.object,
-        impiantoModel: React.PropTypes.object,
+        // model: React.PropTypes.object,
+        // impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func
     },
     getDefaultProps() {
         return {
             card: {
                 template: "",
+                xml: null,
                 loadingCardTemplateError: null
             },
+            authParam: null,
             open: false,
-            model: {},
+            // model: {},
             toggleDetail: () => {}
         };
     },
@@ -67,12 +77,21 @@ const Card = React.createClass({
         );
     },
     renderCard() {
+        const xml = this.props.card.xml;
+        const authParam = this.props.authParam;
+
+        const model = assign({}, this.props.card, {
+            authParam: authParam,
+            profile: authParam.userName,
+            getValue: (element) => TemplateUtils.getValue(xml, element)
+        });
+
         return (this.props.card.loadingCardTemplateError) ? (
                 this.renderLoadTemplateException()
             ) : (
-            <Draggable start={{x: 732, y: 165}} handle=".panel-heading,.panel-heading *">
+            <Draggable start={{x: 732, y: 165}} handle=".panel-heading, .panel-heading *">
                 <div className="scheda-sira">
-                    <TemplateSira template={this.props.card.template} model={this.props.model} impiantoModel={this.props.impiantoModel}/>
+                    <TemplateSira template={this.props.card.template} model={model} /* impiantoModel={this.props.impiantoModel} *//>
                 </div>
             </Draggable>);
     },
@@ -83,7 +102,7 @@ const Card = React.createClass({
 
 module.exports = connect((state) => {
     return {
-        impiantoModel: state.cardtemplate.impiantoModel,
+        // impiantoModel: state.cardtemplate.impiantoModel,
         card: state.cardtemplate || {},
         open: state.siraControls.detail
     };

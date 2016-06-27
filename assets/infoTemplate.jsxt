@@ -4,26 +4,30 @@
     id="infoTemplate"
     rowSelection={false}
     onCellClicked={props.onCellClicked}
-    columnDefs={[
+    profile={model.profile}
+    columns={[
         {
             width: 30,
             headerName: '',
             cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
         }, {
             headerName: 'Codice SIRA',
             width: 90,
-            field: 'codice'
+            xpath: "sira:impianto/sira:Sede/sira:codiceSira/text()"
         }, {
             headerName: 'Codice fiscale (P.IVA)',
-            field: 'codicefisc'
+            xpath: "sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()",
+            profiles: ["B"]
         }, {
             headerName: 'Comune',
             width: 100,
-            field: 'comune'
+            "xpath": ["sira:impianto/sira:Sede/sira:comune/text()"],
         }, {
             headerName: 'Autorizzazioni ambientali',
             width: 200,
-            field: 'autamb'
+            xpath: "sira:attivita/sira:Attivita/sira:descrizione/text()"
         }
     ]}
-    features={model.rows}/>
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/sira:AutorizzazioneUnicaAmbientale")}/>

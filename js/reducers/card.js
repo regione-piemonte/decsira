@@ -6,10 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 const {
     CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR,
-    SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS, SET_IMPIANTO_MODEL
+    SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS // , SET_IMPIANTO_MODEL
 } = require('../actions/card');
 
 const assign = require('object-assign');
@@ -17,8 +16,8 @@ const assign = require('object-assign');
 const initialState = {
     show: false,
     template: null,
-    model: null,
-    impiantoModel: null
+    xml: null
+    // impiantoModel: null
 };
 
 function cardtemplate(state = initialState, action) {
@@ -26,7 +25,7 @@ function cardtemplate(state = initialState, action) {
         case CARD_TEMPLATE_LOADED: {
             return assign({}, state, {
                 template: action.template,
-                model: action.model || state.model,
+                xml: action.xml || state.xml,
                 activeSections: null
             });
         }
@@ -50,13 +49,13 @@ function cardtemplate(state = initialState, action) {
             });
         }
         case SELECT_ROWS: {
-            let model = assign({}, state.model);
-            model[action.table_id] = action.rows;
-            return assign({}, state, {model: model});
+            // let model = assign({}, state.model);
+            // model[action.table_id] = action.rows;
+            return assign({}, state, {[action.tableId]: action.rows});
         }
-        case SET_IMPIANTO_MODEL: {
+        /* case SET_IMPIANTO_MODEL: {
             return assign({}, state, {impiantoModel: action.impiantoModel});
-        }
+        } */
         default:
             return state;
     }

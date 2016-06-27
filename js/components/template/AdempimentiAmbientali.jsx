@@ -14,8 +14,8 @@ const {loadCardTemplate} = require('../../actions/card');
 
 const AdempimentiAmbientali = React.createClass({
     propTypes: {
-        profile: React.PropTypes.string,
-        codiceSira: React.PropTypes.number,
+        // profile: React.PropTypes.string,
+        codiceSira: React.PropTypes.string,
         listTitle: React.PropTypes.string,
         numAuth: React.PropTypes.string,
         dataAuth: React.PropTypes.string,
@@ -43,13 +43,13 @@ const AdempimentiAmbientali = React.createClass({
         );
     },
     drillUp() {
-        this.props.actions.drillUp(this.props.detailsTemplateConfigURL + this.props.profile + ".config");
+        this.props.actions.drillUp(this.props.detailsTemplateConfigURL);
     }
 });
 
-module.exports = connect((state) => {
+module.exports = connect(() => {
     return {
-        profile: state.userprofile && state.userprofile.profile || false
+        // profile: state.userprofile && state.userprofile.profile || false
     };
 }, dispatch => {
     return {
