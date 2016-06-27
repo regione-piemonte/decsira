@@ -11,11 +11,11 @@ const {
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
-    loadQueryFormConfig,
+    // loadQueryFormConfig,
     loadFeatureTypeConfig,
     expandFilterPanel,
     getAttributeValues
-} = require('../queryform');
+} = require('../siradec');
 
 describe('Test correctness of the queryform actions', () => {
 
@@ -23,7 +23,6 @@ describe('Test correctness of the queryform actions', () => {
         loadFeatureTypeConfig('base/js/test-resources/testQueryFormConfig.json')((e) => {
             try {
                 expect(e).toExist();
-                expect(e).withArgs('config');
                 done();
             } catch(ex) {
                 done(ex);
@@ -53,7 +52,7 @@ describe('Test correctness of the queryform actions', () => {
         });
     });
 
-    it('loads an broken configuration file 1', (done) => {
+    /*it('loads a broken configuration file 1', (done) => {
         loadQueryFormConfig('base/js/test-resources/testQueryFormConfig.broken.json')((e) => {
             try {
                 expect(e).toExist();
@@ -63,11 +62,11 @@ describe('Test correctness of the queryform actions', () => {
                 done(ex);
             }
         });
-    });
+    });*/
 
-    it('loads an broken configuration file 2', (done) => {
+    it('loads a broken configuration file 2', (done) => {
         const field = {
-            id: "Provincia",
+            attribute: "Provincia",
             type: "list",
             valueService: "base/js/test-resources/testQueryFormFieldConfig.broken.json",
             idField: "sigla",
@@ -76,7 +75,7 @@ describe('Test correctness of the queryform actions', () => {
 
         const ftName = "aua";
 
-        getAttributeValues(ftName, field)((e) => {
+        getAttributeValues(ftName, field, null, field.valueService)((e) => {
             try {
                 expect(e).toExist();
                 expect(e.type).toBe(QUERYFORM_CONFIG_LOAD_ERROR);
