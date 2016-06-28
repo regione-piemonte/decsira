@@ -182,7 +182,7 @@ const SiraFeatureGrid = React.createClass({
 
         let columns = [{
             onCellClicked: this.goToDetail,
-            headerName: '',
+            headerName: "",
             cellRenderer: reactCellRendererFactory(GoToDetail),
             suppressSorting: true,
             suppressMenu: true,
@@ -236,7 +236,7 @@ const SiraFeatureGrid = React.createClass({
                                     toolbar={{
                                         zoom: true,
                                         exporter: true,
-                                        toolPanel: false,
+                                        toolPanel: true,
                                         selectAll: true
                                     }}/>
                             </div>
