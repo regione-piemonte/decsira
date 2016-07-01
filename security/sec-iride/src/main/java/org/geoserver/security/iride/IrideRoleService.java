@@ -177,14 +177,12 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
         LOGGER.info("Username: " + username);
 
-        // TODO: check username format
-        // ~
-
         final Request request = Dispatcher.REQUEST.get();
 
         LOGGER.info("OWS Request: " + reflectToString(request));
 
         final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
+
         // Check username format: it may be an Identita Digitale IRIDE, or not
         if (! IdentitaIrideValidator.getInstance().isValid(username) && this.config.hasFallbackRoleServiceName()) {
             LOGGER.info("Username " + username + " is not a valid IRIDE Identity: falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
@@ -196,6 +194,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
             return roles;
         }
         // ~
+
         final String requestXml  = this.getServiceRequestXml(username);
         final String responseXml = this.callWebService(requestXml).replace("\\r", "").replace("\\n", "");
 
