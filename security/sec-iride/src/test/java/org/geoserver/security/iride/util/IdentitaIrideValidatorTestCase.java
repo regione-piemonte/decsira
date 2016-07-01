@@ -13,13 +13,15 @@ import org.junit.Test;
 public class IdentitaIrideValidatorTestCase {
 
     private String identitaIride;
+    private String notIdentitaIride;
 
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
-        this.identitaIride = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+        this.identitaIride    = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+        this.notIdentitaIride = "Simone";
     }
 
     /**
@@ -30,6 +32,16 @@ public class IdentitaIrideValidatorTestCase {
         final boolean valid = IdentitaIrideValidator.getInstance().isValid(this.identitaIride);
 
         assertTrue(valid);
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.validator.IdentitaIrideValidator#isValid(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValid() {
+    	final boolean valid = IdentitaIrideValidator.getInstance().isValid(this.notIdentitaIride);
+
+    	assertFalse(valid);
     }
 
 }
