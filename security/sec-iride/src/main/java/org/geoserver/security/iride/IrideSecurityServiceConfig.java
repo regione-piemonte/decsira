@@ -18,6 +18,7 @@ package org.geoserver.security.iride;
 
 import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
 
+import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.BaseSecurityNamedServiceConfig;
 import org.geoserver.security.config.SecurityAuthProviderConfig;
@@ -53,6 +54,12 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
     private String adminRole;
 
     /**
+     * Name of the {@link GeoServerRoleService} to rely on as a fallback
+     * when {@link IrideRoleService} does not found any roles for a given user.
+     */
+    private String fallbackRoleService;
+
+    /**
      * Constructor.
      */
     public IrideSecurityServiceConfig() {
@@ -69,9 +76,10 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
     public IrideSecurityServiceConfig(IrideSecurityServiceConfig other) {
         super(other);
 
-        this.serverURL       = other.getServerURL();
-        this.applicationName = other.getApplicationName();
-        this.adminRole       = other.getAdminRole();
+        this.serverURL           = other.getServerURL();
+        this.applicationName     = other.getApplicationName();
+        this.adminRole           = other.getAdminRole();
+        this.fallbackRoleService = other.getFallbackRoleService();
     }
 
     /**
@@ -114,6 +122,12 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
      */
     public void setAdminRole(String adminRole) {
         this.adminRole = adminRole;
+    }
+    public String getFallbackRoleService() {
+        return this.fallbackRoleService;
+    }
+    public void setFallbackRoleService(String fallbackRoleService) {
+        this.fallbackRoleService = fallbackRoleService;
     }
 
     /*
