@@ -49,6 +49,7 @@ import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.event.RoleLoadedListener;
 import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
+import org.geoserver.security.iride.util.validator.IdentitaIrideValidator;
 import org.geotools.util.logging.Logging;
 
 import com.google.common.collect.ImmutableMap;
@@ -115,7 +116,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
         LOGGER.log(Level.INFO,
-            "Initializing \n\t {0} \n\t configuration object {1}",
+            "Initializing {0} with configuration object: \n\t {1}",
             new Object[] { this.getClass().getSimpleName(), config }
         );
 
@@ -184,6 +185,17 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
         LOGGER.info("OWS Request: " + reflectToString(request));
 
         final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
+        // Check username format: it may be an Identita Digitale IRIDE, or not
+        if (! IdentitaIrideValidator.getInstance().isValid(username) && this.config.hasFallbackRoleServiceName()) {
+            LOGGER.info("Username " + username + " is not a valid IRIDE Identity: falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
+
+            final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
+
+            roles.addAll(fallbackRoleService.getRolesForUser(username));
+
+            return roles;
+        }
+        // ~
         final String requestXml  = this.getServiceRequestXml(username);
         final String responseXml = this.callWebService(requestXml).replace("\\r", "").replace("\\n", "");
 
@@ -198,6 +210,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
 
         // Rely on the fallback RoleService (if configured) when IRIDE has not found any roles for the given user
         if (roles.isEmpty() && this.config.hasFallbackRoleServiceName()) {
+            LOGGER.info("IRIDE has not found any roles for the given user " + username + ": falling back to " + this.config.fallbackRoleServiceName + " RoleService.");
             final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
 
             roles.addAll(fallbackRoleService.getRolesForUser(username));
@@ -293,7 +306,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     @Override
     public Properties personalizeRoleParams(String roleName, Properties roleParams, String userName, Properties userProps) throws IOException {
         LOGGER.log(Level.INFO,
-            "Role: {0},\t Role Params: {1},\t User: {2},\t User Properties: {3}",
+            "\n\t Role: {0},\n\t Role Params: {1},\n\t User: {2},\n\t User Properties: {3}",
             new Object[] { roleName, roleParams, userName, userProps }
         );
 
