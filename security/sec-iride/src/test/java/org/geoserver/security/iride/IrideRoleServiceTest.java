@@ -76,6 +76,7 @@ public class IrideRoleServiceTest extends TestCase {
         config.setAdminRole("SUPERUSER_SIIG");
         config.setClassName(IrideRoleService.class.getName());
         config.setName("iride");
+        config.setServerURL("http://localhost:8085/iride2simApplIridepepWsfad/services/iride2simIridepep");
     }
 
     @Override
@@ -83,6 +84,15 @@ public class IrideRoleServiceTest extends TestCase {
         tempFolder.delete();
     }
 
+    public void testGetRolesForBaseUserWithInvalidServerURL() throws IOException {
+    	config.setServerURL(null);
+    	try {
+    		IrideRoleService roleService = wrapRoleService(createRoleService(), "base");
+			roleService.getRolesForUser(BASE_SAMPLE_USER);
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "'null' is not a valid IRIDE server URL ");
+		}
+    }
     public void testGetRolesForBaseUser() throws IOException {
         //config.setServerURL("http://localhost:8085/iride2simApplIridepepWsfad/services/iride2simIridepep");
         IrideRoleService roleService = wrapRoleService(createRoleService(), "base");

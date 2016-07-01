@@ -23,7 +23,7 @@ public final class UrlValidatorFactory {
      */
     private static final UrlValidator DEFAULT_URL_VALIDATOR = new UrlValidator(
         new String[] {"http", "https"},
-        UrlValidator.NO_FRAGMENTS
+        UrlValidator.NO_FRAGMENTS + UrlValidator.ALLOW_LOCAL_URLS
     );
 
     /**
