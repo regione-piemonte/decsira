@@ -105,7 +105,7 @@ const SiraQueryPanel = React.createClass({
         return {
 
             // Sira Query Panel default props
-            removeButtonIcon: "glyphicon glyphicon-trash",
+            removeButtonIcon: "glyphicon glyphicon-remove",
             filterPanelExpanded: true,
             loadingQueryFormConfigError: null,
             header: "queryform.form.header",
@@ -169,14 +169,14 @@ const SiraQueryPanel = React.createClass({
             <span>
                 <span style={{paddingLeft: "15px"}}>{header}</span>
                 <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
-                    <Glyphicon glyph="glyphicon glyphicon-collapse-down collapsible"/>
+                    <Glyphicon glyph="glyphicon glyphicon-triangle-bottom collapsible"/>
                 </button>
             </span>
         ) : (
             <span>
                 <span style={{paddingLeft: "15px"}}>{header}</span>
                 <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
-                    <Glyphicon glyph="glyphicon glyphicon-expand collapsible"/>
+                    <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
                 </button>
             </span>
         );
@@ -191,7 +191,7 @@ const SiraQueryPanel = React.createClass({
         const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
         return (
             <div className="dhContainer">
-                <h4>{datasetHeader}</h4>
+                <label>{datasetHeader}</label>
                 <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
             </div>
         );
