@@ -23,6 +23,8 @@ const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const assign = require('object-assign');
 const Spinner = require('react-spinkit');
 
+const {hideQueryError} = require('../actions/siradec');
+
 require('../../assets/css/sira.css');
 
 const {
@@ -234,8 +236,8 @@ const SiraQueryPanel = React.createClass({
         }
 
         return (
-            <Modal show={loadingError ? true : false} bsSize="small" id="loading-error-dialog">
-                <Modal.Header className="dialog-error-header">
+            <Modal show={loadingError ? true : false} bsSize="small" onHide={this.props.siraActions.onCloseError} id="loading-error-dialog">
+                <Modal.Header className="dialog-error-header" closeButton>
                     <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="dialog-error-body">
@@ -301,7 +303,8 @@ module.exports = connect((state) => {
     return {
         siraActions: bindActionCreators({
             // SiraQueryPanel actions
-            onExpandFilterPanel: expandFilterPanel
+            onExpandFilterPanel: expandFilterPanel,
+            onCloseError: hideQueryError
         }, dispatch),
         queryFormActions: {
             // QueryBuilder actions

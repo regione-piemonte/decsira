@@ -14,10 +14,14 @@ const {
     FEATUREGRID_CONFIG_LOADED,
     FEATUREINFO_CONFIG_LOADED,
     TOPOLOGY_CONFIG_LOADED,
-    CARD_CONFIG_LOADED
+    CARD_CONFIG_LOADED,
+    QUERYFORM_HIDE_ERROR
 } = require('../actions/siradec');
 
 const assign = require('object-assign');
+
+const url = require('url');
+const urlQuery = url.parse(window.location.href, true).query;
 
 const initialState = {
     filterPanelExpanded: true,
@@ -26,7 +30,8 @@ const initialState = {
     queryform: null,
     featuregrid: null,
     featureinfo: null,
-    card: null
+    card: null,
+    featureType: urlQuery.featureType || 'aua'
 };
 
 function siradec(state = initialState, action) {
@@ -90,6 +95,11 @@ function siradec(state = initialState, action) {
         case QUERYFORM_CONFIG_LOAD_ERROR: {
             return {
                 loadingQueryFormConfigError: action.error
+            };
+        }
+        case QUERYFORM_HIDE_ERROR: {
+            return {
+                loadingQueryFormConfigError: null
             };
         }
         default:
