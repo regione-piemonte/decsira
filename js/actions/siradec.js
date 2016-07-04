@@ -11,6 +11,7 @@ const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
+const QUERYFORM_HIDE_ERROR = 'QUERYFORM_HIDE_ERROR';
 const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
 const FEATUREINFO_CONFIG_LOADED = 'FEATUREINFO_CONFIG_LOADED';
 const TOPOLOGY_CONFIG_LOADED = 'TOPOLOGY_CONFIG_LOADED';
@@ -76,6 +77,12 @@ function configureQueryFormError(e) {
     return {
         type: QUERYFORM_CONFIG_LOAD_ERROR,
         error: e
+    };
+}
+
+function hideQueryError() {
+    return {
+        type: QUERYFORM_HIDE_ERROR
     };
 }
 
@@ -181,6 +188,7 @@ module.exports = {
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
+    QUERYFORM_HIDE_ERROR,
     FEATUREGRID_CONFIG_LOADED,
     FEATUREINFO_CONFIG_LOADED,
     TOPOLOGY_CONFIG_LOADED,
@@ -193,5 +201,6 @@ module.exports = {
     configureQueryForm,
     expandFilterPanel,
     configureQueryFormError,
-    getAttributeValues
+    getAttributeValues,
+    hideQueryError
 };
