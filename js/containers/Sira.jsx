@@ -215,7 +215,6 @@ const Sira = React.createClass({
     },
     getDefaultProps() {
         return {
-            featureTypeConfigUrl: "assets/aua.json",
             toggleSiraControl: () => {},
             setProfile: () => {},
             onLoadFeatureTypeConfig: () => {}
@@ -361,7 +360,8 @@ module.exports = connect((state) => {
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
-        controls: state.siraControls
+        controls: state.siraControls,
+        featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json'
         // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {
