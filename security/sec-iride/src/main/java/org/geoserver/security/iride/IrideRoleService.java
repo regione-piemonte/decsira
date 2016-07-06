@@ -51,6 +51,9 @@ import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
 import org.geoserver.security.iride.util.validator.IdentitaIrideValidator;
 import org.geotools.util.logging.Logging;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
@@ -94,8 +97,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
 
     private HttpClient httpClient = new HttpClient();
     private HttpConnectionManagerParams params = new HttpConnectionManagerParams();
-
-    private String username;
 
     /**
      * @param httpClient the httpClient to set
@@ -178,8 +179,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     @Override
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
         LOGGER.info("Username: " + username);
-
-        this.username = username;
 
         final Request request = Dispatcher.REQUEST.get();
 
@@ -322,13 +321,20 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public GeoServerRole getAdminRole() {
-    	LOGGER.info("AdminRole Username: " + this.username);
+        String username = null;
+        final SecurityContext context = SecurityContextHolder.getContext();
+        final Authentication authentication = context.getAuthentication();
+        if (authentication != null) {
+            username = String.valueOf(authentication.getPrincipal());
+        }
 
-    	GeoServerRole role;
+        LOGGER.info("AdminRole Username: " + username);
+
+        GeoServerRole role;
         try {
             // Check username format: it may be an Identita Digitale IRIDE, or not
-            if (StringUtils.isNotBlank(this.username) &&
-                ! IdentitaIrideValidator.getInstance().isValid(this.username) && this.config.hasFallbackRoleServiceName()) {
+            if (StringUtils.isNotBlank(username) &&
+                ! IdentitaIrideValidator.getInstance().isValid(username) && this.config.hasFallbackRoleServiceName()) {
                 LOGGER.info("Username " + username + " is not a valid IRIDE Identity: falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
 
                 final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
