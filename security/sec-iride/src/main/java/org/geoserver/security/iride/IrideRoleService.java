@@ -180,10 +180,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
         LOGGER.info("Username: " + username);
 
-        final Request request = Dispatcher.REQUEST.get();
-
-        LOGGER.info("OWS Request: " + reflectToString(request));
-
         final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
 
         // Check username format: it may be an Identita Digitale IRIDE, or not
