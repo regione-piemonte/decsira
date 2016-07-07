@@ -9,11 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>GeoServer CSI-Piemonte Iride2 Plugin</name>
+    <name>CSI-Piemonte IRIDE / GeoServer Security Provider plugin</name>
     <description>
-        org.geoserver.security.sec-iride is a GeoServer security provider plugin
-        used to retrieve authorization roles (and eventually other authorization informations)
-        from CSI-Piemonte IRIDE2 Authorization Service
+        org.geoserver.security.sec-iride is a GeoServer Security Provider plugin
+        used for doing authentication and authorization operations against
+        CSI-Piemonte IRIDE Service
     </description>
 
     <url>https://github.com/geosolutions-it/csi-sira/tree/master/security/sec-iride</url>
@@ -238,9 +238,15 @@
                         <exclude>${test.exclude.pattern}</exclude>
                     </excludes>
                     <forkMode>once</forkMode>
-                    <argLine>-Xmx${test.maxHeapSize} -XX:MaxPermSize=${test.maxPermSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -DremoteOwsTests=${remoteOwsTests}</argLine>
+                    <argLine>-Xmx${test.maxHeapSize} -XX:MaxPermSize=${test.maxPermSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -DremoteOwsTests=${remoteOwsTests} -Duser.language=EN</argLine>
                     <printSummary>true</printSummary>
                     <testFailureIgnore>${test.allow.failure.ignore}</testFailureIgnore>
+					<systemProperties>
+						<property>
+							<name>java.util.logging.config.file</name>
+							<value>src/test/resources/conf/logging.properties</value>
+						</property>
+					</systemProperties>
                 </configuration>
             </plugin>
 

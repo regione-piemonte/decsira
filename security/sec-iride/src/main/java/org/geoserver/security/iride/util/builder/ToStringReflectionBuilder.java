@@ -43,7 +43,7 @@ public final class ToStringReflectionBuilder {
     /**
      * {@code null} textual representation.
      */
-    public static final String NULL_TEXT = "<NULL>";
+    public static final String NULL_TEXT = "<null>";
 
     /**
      * Restituisce una rappresentazione testuale,
