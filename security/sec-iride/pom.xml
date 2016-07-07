@@ -112,6 +112,12 @@
             <name>GeoSolutions Repository</name>
             <url>http://maven.geo-solutions.it</url>
         </repository>
+
+	    <repository>
+	        <id>sec-iride.local</id>
+	        <name>CSI-Piemonte IRIDE / GeoServer Security Provider plugin local Maven repository</name>
+	        <url>file:${project.basedir}/repo</url>
+	    </repository>
     </repositories>
 
     <dependencies>
@@ -155,6 +161,18 @@
             <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
+
+        <!-- IRIDEv2 -->
+		<dependency>
+		    <groupId>it.csipiemonte.iridev2-pep-nmsf</groupId>
+		    <artifactId>iridev2-pep-base-wsnmsf</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>it.csipiemonte.iridev2-pep-nmsf</groupId>
+		    <artifactId>iridev2-pep-helper-wsnmsf</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
 
         <!-- Mockito -->
         <dependency>
