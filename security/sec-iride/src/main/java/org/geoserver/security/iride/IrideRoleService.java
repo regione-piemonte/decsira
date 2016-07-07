@@ -17,7 +17,6 @@
 package org.geoserver.security.iride;
 
 import static org.geoserver.security.iride.util.builder.IrideServerURLBuilder.buildServerURL;
-import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,8 +40,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.lang.StringUtils;
-import org.geoserver.ows.Dispatcher;
-import org.geoserver.ows.Request;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerRoleStore;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
@@ -179,10 +176,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     @Override
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
         LOGGER.info("Username: " + username);
-
-        final Request request = Dispatcher.REQUEST.get();
-
-        LOGGER.info("OWS Request: " + reflectToString(request));
 
         final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
 
