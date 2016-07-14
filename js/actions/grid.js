@@ -13,6 +13,7 @@ const GRID_MODEL_LOADED = 'GRID_MODEL_LOADED';
 const GRID_LOAD_ERROR = 'GRID_LOAD_ERROR';
 const GRID_CONFIG_LOADED = 'GRID_CONFIG_LOADED';
 const SHOW_LOADING = 'SHOW_LOADING';
+const CREATE_GRID_DATA_SOURCE = 'CREATE_GRID_DATA_SOURCE';
 
 function configureGrid(config) {
     return {
@@ -21,10 +22,11 @@ function configureGrid(config) {
     };
 }
 
-function configureGridData(data) {
+function configureGridData(data, add = false ) {
     return {
         type: GRID_MODEL_LOADED,
-        data: data
+        data: data,
+        add
     };
 }
 
@@ -57,7 +59,7 @@ function loadGridModel(wfsUrl, params) {
     };
 }
 
-function loadGridModelWithFilter(wfsUrl, data, params) {
+function loadGridModelWithFilter(wfsUrl, data, params, add = false) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     for (let param in params) {
         if (params.hasOwnProperty(param)) {
@@ -72,13 +74,40 @@ function loadGridModelWithFilter(wfsUrl, data, params) {
           timeout: 60000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
-            dispatch(configureGridData(response.data));
+            dispatch(configureGridData(response.data, add));
         }).catch((e) => {
             dispatch(configureGridError(e));
         });
     };
 }
+function createGridDataSource(data, pagination) {
+    return {
+        type: CREATE_GRID_DATA_SOURCE,
+        data: data,
+        pagination
+    };
+}
 
+function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
+    let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
+    for (let param in params) {
+        if (params.hasOwnProperty(param)) {
+            url += "&" + param + "=" + params[param];
+        }
+    }
+    return (dispatch) => {
+        dispatch(showLoading(true));
+
+        return axios.post(url, data, {
+          timeout: 60000,
+          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+        }).then((response) => {
+            dispatch(createGridDataSource(response.data, pagination));
+        }).catch((e) => {
+            dispatch(configureGridError(e));
+        });
+    };
+}
 /*function loadFeatureGridConfig(configUrl) {
     return (dispatch) => {
         return axios.get(configUrl).then((response) => {
@@ -102,8 +131,11 @@ module.exports = {
     GRID_LOAD_ERROR,
     GRID_CONFIG_LOADED,
     SHOW_LOADING,
+    CREATE_GRID_DATA_SOURCE,
     configureGrid,
     configureGridData,
+    createGridDataSource,
+    loadGridModelWithPagination,
     // loadFeatureGridConfig,
     loadGridModel,
     loadGridModelWithFilter,

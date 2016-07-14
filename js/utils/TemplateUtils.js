@@ -220,6 +220,14 @@ const TemplateUtils = {
         }
 
         return value;
+    },
+    getNumberOfFeatures(data, wfsVersion="2.0") {
+        let doc = new Dom().parseFromString(data);
+
+        let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
+
+        let elements = select("/wfs:ValueCollection/wfs:member", doc);
+        return elements.length;
     }
 };
 

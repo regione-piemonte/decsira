@@ -59,7 +59,8 @@ const {
 } = require('../../MapStore2/web/client/actions/draw');
 
 const {
-    loadGridModelWithFilter
+    loadGridModelWithFilter,
+    loadGridModelWithPagination
 } = require('../actions/grid');
 
 const SiraQueryPanel = React.createClass({
@@ -96,7 +97,10 @@ const SiraQueryPanel = React.createClass({
         ]),
         attributePanelExpanded: React.PropTypes.bool,
         spatialPanelExpanded: React.PropTypes.bool,
-        queryFormActions: React.PropTypes.object
+        queryFormActions: React.PropTypes.object,
+        pagination: React.PropTypes.object,
+        sortOptions: React.PropTypes.object,
+        hits: React.PropTypes.bool
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -131,6 +135,9 @@ const SiraQueryPanel = React.createClass({
             toolbarEnabled: true,
             searchUrl: "",
             showGeneratedFilter: false,
+            pagination: null,
+            sortOptions: null,
+            hits: false,
             queryFormActions: {
                 attributeFilterActions: {
                     onAddGroupField: () => {},
@@ -157,6 +164,7 @@ const SiraQueryPanel = React.createClass({
                 queryToolbarActions: {
                     onQuery: () => {},
                     onReset: () => {},
+                    onQueryPagination: () => {},
                     onChangeDrawingStatus: () => {}
                 }
             }
@@ -220,7 +228,9 @@ const SiraQueryPanel = React.createClass({
                         spatialPanelExpanded={this.props.spatialPanelExpanded}
                         attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
                         spatialFilterActions={this.props.queryFormActions.spatialFilterActions}
-                        queryToolbarActions={assign({}, this.props.queryFormActions.queryToolbarActions, {onQuery: this.onQuery})}/>
+                        queryToolbarActions={assign({}, this.props.queryFormActions.queryToolbarActions, {onQuery: this.onQuery})}
+                        sortOptions={this.props.pagination}
+                        />
                 </Panel>
             </Draggable>
         );
@@ -272,7 +282,13 @@ const SiraQueryPanel = React.createClass({
     },
     onQuery: function(url, filter, params) {
         this.props.siraActions.onExpandFilterPanel(false);
-        this.props.queryFormActions.queryToolbarActions.onQuery(url, filter, params);
+        if (this.props.pagination && (this.props.pagination.startIndex || this.props.pagination.startIndex === 0)) {
+            let newFilter = filter.replace("<wfs:GetFeature", "<wfs:GetPropertyValue valueReference='" + this.props.attributes[0].attribute + "' ");
+            newFilter = newFilter.replace("</wfs:GetFeature", "</wfs:GetPropertyValue");
+            this.props.queryFormActions.queryToolbarActions.onQueryPagination(url, newFilter, params, this.props.pagination);
+        }else {
+            this.props.queryFormActions.queryToolbarActions.onQuery(url, filter, params);
+        }
     }
 });
 
@@ -297,7 +313,9 @@ module.exports = connect((state) => {
         useMapProjection: state.queryform.useMapProjection,
         searchUrl: state.queryform.searchUrl,
         showGeneratedFilter: state.queryform.showGeneratedFilter,
-        featureTypeConfigUrl: state.queryform.featureTypeConfigUrl
+        featureTypeConfigUrl: state.queryform.featureTypeConfigUrl,
+        pagination: state.queryform.pagination,
+        sortOptions: state.queryform.sortOptions
     };
 }, dispatch => {
     return {
@@ -332,6 +350,7 @@ module.exports = connect((state) => {
             }, dispatch),
             queryToolbarActions: bindActionCreators({
                 onQuery: loadGridModelWithFilter,
+                onQueryPagination: loadGridModelWithPagination,
                 onReset: reset,
                 onChangeDrawingStatus: changeDrawingStatus
             }, dispatch)
