@@ -31,6 +31,7 @@ const SiraTable = React.createClass({
             React.PropTypes.array,
             React.PropTypes.func
         ]),
+        selectedRow: React.PropTypes.string,
         wfsVersion: React.PropTypes.string,
         profile: React.PropTypes.string,
         rowSelection: React.PropTypes.oneOfType([
@@ -50,8 +51,22 @@ const SiraTable = React.createClass({
             columns: [],
             profile: null,
             rowSelection: "single",
+            selectedRow: null,
             selectRows: () => {}
         };
+    },
+    componentDidUpdate() {
+        if (this.api && this.props.selectedRow) {
+            let me = this;
+            this.api.forEachNode((n) => {
+                if (n.data[this.idFieldName] === this.props.selectedRow) {
+                    me.api.selectNode(n, true, true);
+                }
+            });
+        }
+    },
+    onGridReady(params) {
+        this.api = params.api;
     },
     /*shouldComponentUpdate(nextProps) {
         let update = typeof nextProps.features === "function";
@@ -112,7 +127,9 @@ const SiraTable = React.createClass({
                             headerName: ''
                         }, ...columns] : columns
                     }
-                    {...this.props}/>
+                    onGridReady={this.onGridReady}
+                    {...this.props}
+                    />
             </div>);
     },
     selectRows(params) {
