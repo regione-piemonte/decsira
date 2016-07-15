@@ -134,6 +134,10 @@ function loadFeatureTypeConfig(url, params) {
                     dispatch(configureQueryFormError('Configuration file broken (' + url + '): ' + e.message));
                 }
             }
+            // Configure the FeatureGrid for WFS results list
+            dispatch(configureFeatureGrid(config.featuregrid));
+            dispatch(configureFeatureInfo(config.featureinfo));
+            dispatch(configureCard(config.card));
 
             let serviceUrl = config.query.service.url;
 
@@ -154,10 +158,7 @@ function loadFeatureTypeConfig(url, params) {
                 }
             }
 
-            // Configure the FeatureGrid for WFS results list
-            dispatch(configureFeatureGrid(config.featuregrid));
-            dispatch(configureFeatureInfo(config.featureinfo));
-            dispatch(configureCard(config.card));
+
         }).catch((e) => {
             dispatch(configureQueryFormError(e));
         });
