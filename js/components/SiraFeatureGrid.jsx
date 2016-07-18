@@ -14,6 +14,8 @@ const Draggable = require('react-draggable');
 
 const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 
+const {Resizable} = require('react-resizable');
+
 const {bindActionCreators} = require('redux');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {selectFeatures} = require('../actions/featuregrid');
@@ -51,6 +53,8 @@ const {
 } = require('../actions/siradec');
 
 const assign = require('object-assign');
+require('react-resizable/css/styles.css');
+require('./SiraFeatureGrid.css');
 
 const SiraFeatureGrid = React.createClass({
     propTypes: {
@@ -91,6 +95,12 @@ const SiraFeatureGrid = React.createClass({
     },
     contextTypes: {
         messages: React.PropTypes.object
+    },
+    getInitialState() {
+        return {
+            width: 800,
+            height: 400
+        };
     },
     getDefaultProps() {
         return {
@@ -162,6 +172,11 @@ const SiraFeatureGrid = React.createClass({
         this.props.selectFeatures([]);
         this.props.toggleSiraControl();
         this.props.onExpandFilterPanel(true);
+    },
+    onResize(event, resize) {
+        let size = resize.size;
+        this.setState({width: size.width, height: size.height});
+
     },
     getFeatures(params) {
         if (!this.props.loadingGrid) {
@@ -294,20 +309,22 @@ const SiraFeatureGrid = React.createClass({
 
         if (this.props.open) {
             return (
-                <Draggable start={{x: 760, y: 120}} handle=".panel-heading">
+                 <Draggable start={{x: 760, y: 120}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
                     <Panel className="featuregrid-container" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
-                            <div style={this.props.loadingGrid ? {display: "none"} : {}}>
+                        <Resizable className="box" height={this.state.height} width={this.state.width} onResize={this.onResize} minConstraints={[500, 250]}>
+                            <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
                                 <Button
                                     style={{marginBottom: "12px"}}
                                     onClick={this.onGridClose}><span>Torna al pannello di ricerca</span>
                                 </Button>
                                 <h5>Risultati - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
+
                                 <FeatureGrid
                                     changeMapView={this.props.changeMapView}
                                     srs="EPSG:4326"
                                     map={this.props.map}
                                     columnDefs={columns}
-                                    style={{height: "300px", width: "100%"}}
+                                    style={{height: this.state.height - 120, width: this.state.width}}
                                     maxZoom={16}
                                     paging={this.props.pagination}
                                     zoom={15}
@@ -319,8 +336,10 @@ const SiraFeatureGrid = React.createClass({
                                     }}
                                     {...gridConf}
                                     />
+
                             </div>
-                            {this.props.loadingGrid ? (<div style={{height: "300px", width: "100%"}}>
+                            </Resizable>
+                            {this.props.loadingGrid ? (<div style={{height: "300px", width: this.state.width}}>
                                 <div style={{
                                     position: "relative",
                                     width: "60px",
@@ -330,7 +349,7 @@ const SiraFeatureGrid = React.createClass({
                                 </div>
                             </div>) : null}
                     </Panel>
-                </Draggable>
+              </Draggable>
             );
         }
 

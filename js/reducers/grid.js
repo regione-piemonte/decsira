@@ -148,6 +148,19 @@ function grid(state = initialState, action) {
                 dataSourceOptions: dataSourceOptions
             });
         }
+        case 'FEATUREGRID_CONFIG_LOADED': {
+            return assign({}, state, {
+                featuregrid: action.config
+            });
+        }
+        case 'FEATURETYPE_CONFIG_LOADED': {
+            return assign({}, state, {
+                featuregrid: assign({}, state.featuregrid, {
+                        grid: assign({}, state.featuregrid.grid, {
+                            geometryType: action.geometryType})
+                        })
+            });
+        }
         default:
             return state;
     }

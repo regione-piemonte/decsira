@@ -19,7 +19,7 @@ const mapConfig = require('../../MapStore2/web/client/reducers/config');
 
 const map = require('../../MapStore2/web/client/reducers/map');
 
-const queryform = require('../../MapStore2/web/client/reducers/queryform');
+const queryform = require('../reducers/queryform');
 const siradec = require('../reducers/siradec');
 
 const grid = require('../reducers/grid');
@@ -38,14 +38,14 @@ const allReducers = combineReducers({
     locate: require('../../MapStore2/web/client/reducers/locate'),
     measurement: require('../../MapStore2/web/client/reducers/measurement'),
     routing: routeReducer,
-    queryform: () => {return {}; },
-    siradec: () => {return {}; },
+    queryform: queryform,
+    siradec: siradec,
     map: () => {return null; },
     layers: () => {return null; },
     mapInitialConfig: () => {return null; },
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
-    grid: () => {return {}; }
+    grid: grid
 });
 
 const rootReducer = (state = {}, action) => {
@@ -56,31 +56,7 @@ const rootReducer = (state = {}, action) => {
         mapState.layers = {flat: LayersUtils.reorder(groups, mapState.layers), groups: groups};
     }
 
-    let siradecState = siradec(state.siradec, action);
-    let queryformState = queryform(state.queryform, action);
-    let gridState = grid(state.grid, action);
-
-    if (!queryformState.searchUrl && (siradecState.queryform && siradecState.queryform.searchUrl)) {
-        queryformState = assign({}, queryformState, siradecState.queryform);
-    }
-
-    if (queryformState.searchUrl && (siradecState.queryform && siradecState.queryform.geometryName)) {
-        queryformState = assign({}, queryformState, {spatialField: assign({}, queryformState.spatialField, {attribute: siradecState.queryform.geometryName})});
-    }
-
-    if (!gridState.featuregrid && siradecState.featuregrid) {
-        gridState = assign({}, gridState, {featuregrid: siradecState.featuregrid});
-    }
-
-    if (siradecState.featuregrid && siradecState.featuregrid.geometryType) {
-        gridState = assign({}, gridState, {
-            featuregrid: assign({}, gridState.featuregrid, {grid: assign({}, gridState.featuregrid.grid, {geometryType: siradecState.featuregrid.geometryType})})});
-    }
-
     let newState = assign({}, {...allReducers(state, action)}, {
-        siradec: siradecState,
-        queryform: queryformState,
-        grid: gridState,
         mapInitialConfig: mapState ? mapState.mapInitialConfig : null,
         map: mapState && mapState.map ? map(mapState.map, action) : null,
         layers: mapState ? layers(mapState.layers, action) : null
