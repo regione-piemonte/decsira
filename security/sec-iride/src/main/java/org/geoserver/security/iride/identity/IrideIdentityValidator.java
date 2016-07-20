@@ -50,8 +50,6 @@ public final class IrideIdentityValidator {
 
     private static final Pattern FISCAL_CODE_STRONG_VALIDATION_PATTERN = Pattern.compile("^(?:[B-DF-HJ-NP-TV-Z](?:[AEIOU]{2}|[AEIOU]X)|[AEIOU]{2}X|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\\dLMNP-V]{2}|[A-M][0L](?:[\\dLMNP-V][1-9MNP-V]|[1-9MNP-V][0L]))[A-Z]$");
 
-    private static final Pattern TIMESTAMP_NUMBERS_VALIDATION_PATTERN = Pattern.compile("^\\d{4}\\d{2}\\d{2}\\d{2}\\d{2}\\d{2}$");
-
     private static final String TIMESTAMP_DATETIME_FORMAT = "yyyyMMddHHmmss";
 
     private static final int[] IRIDE_AUTHENTICATION_LEVELS = new int[] { 1, 2, 4, 8, 16 };
@@ -258,13 +256,9 @@ public final class IrideIdentityValidator {
         try {
             this.dateFormat.parse(value);
 
-            if (! TIMESTAMP_NUMBERS_VALIDATION_PATTERN.matcher(value).matches()) {
-                return false;
-            }
-
             return true;
         } catch (ParseException e) {
-            LOGGER.severe(e.getMessage());
+            LOGGER.severe("Invalid date format: " + e.getMessage());
 
             return false;
         }
@@ -287,10 +281,6 @@ public final class IrideIdentityValidator {
      * @return
      */
     private boolean isValidLivelloAutenticazione(String value) {
-        if (! StringUtils.isNumeric(value)) {
-            return false;
-        }
-
         try {
             final int livello = NumberUtils.createInteger(value);
             if (! ArrayUtils.contains(IRIDE_AUTHENTICATION_LEVELS, livello)) {
@@ -299,7 +289,7 @@ public final class IrideIdentityValidator {
 
             return true;
         } catch (NumberFormatException e) {
-            LOGGER.severe(e.getMessage());
+            LOGGER.severe("Invalid number format: " + e.getMessage());
 
             return false;
         }
