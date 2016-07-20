@@ -50,8 +50,6 @@ public final class IrideIdentityValidator {
 
     private static final Pattern FISCAL_CODE_STRONG_VALIDATION_PATTERN = Pattern.compile("^(?:[B-DF-HJ-NP-TV-Z](?:[AEIOU]{2}|[AEIOU]X)|[AEIOU]{2}X|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\\dLMNP-V]{2}|[A-M][0L](?:[\\dLMNP-V][1-9MNP-V]|[1-9MNP-V][0L]))[A-Z]$");
 
-    private static final String TIMESTAMP_DATETIME_FORMAT = "yyyyMMddHHmmss";
-
     private static final int[] IRIDE_AUTHENTICATION_LEVELS = new int[] { 1, 2, 4, 8, 16 };
 
     private static final int MAC_LENGTH = 24;
@@ -65,7 +63,7 @@ public final class IrideIdentityValidator {
      * Constructor.
      */
     public IrideIdentityValidator() {
-        this.dateFormat = new SimpleDateFormat(TIMESTAMP_DATETIME_FORMAT);
+        this.dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         this.dateFormat.setLenient(false);
     }
 
