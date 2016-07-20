@@ -18,6 +18,7 @@
  */
 package org.geoserver.security.iride;
 
+import org.geoserver.security.iride.util.IrideSecurityUtilsTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -28,7 +29,11 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @RunWith(Suite.class)
-@SuiteClasses({ IrideRoleServiceTest.class, org.geoserver.security.iride.identity.AllTests.class })
+@SuiteClasses({
+	IrideRoleServiceTest.class,
+	IrideSecurityUtilsTest.class,
+	org.geoserver.security.iride.identity.AllTests.class
+})
 public final class AllTests {
 
     /**
