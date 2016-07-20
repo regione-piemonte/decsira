@@ -77,7 +77,7 @@ public final class IrideIdentityValidator {
      * @return
      */
     public IrideIdentityInvalidTokenValue[] validate(String[] tokens) {
-        LOGGER.fine("IRIDE Identity tokens: " + Arrays.toString(tokens));
+        LOGGER.finer("IRIDE Identity tokens: " + Arrays.toString(tokens));
 
         this.checkValidExpectedTokensLength(tokens);
 

@@ -18,14 +18,14 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.geoserver.security.iride.Utils.randomBlankOrEmptyString;
 import static org.geoserver.security.iride.util.IrideSecurityUtils.printInvalidTokenValues;
-import static org.apache.commons.lang.StringUtils.repeat;
-import static org.apache.commons.lang.math.RandomUtils.nextInt;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.math.RandomUtils;
 import org.geoserver.security.iride.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTokenValue;
 import org.geotools.util.logging.Logging;
@@ -43,11 +43,6 @@ public final class IrideIdentityValidatorTest {
      * Logger.
      */
     private static final Logger LOGGER = Logging.getLogger(IrideIdentityValidatorTest.class);
-
-    /**
-     * A single space character string.
-     */
-    private static final String A_SPACE = " ";
 
     /**
      * {@link IrideIdentityValidator} instance.
@@ -101,7 +96,7 @@ public final class IrideIdentityValidatorTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testValidateFailForInvalidExpectedTokensLength() {
-        final String[] tokens = new String[nextInt(IrideIdentityToken.values().length)];
+        final String[] tokens = new String[RandomUtils.nextInt(IrideIdentityToken.values().length)];
 
         LOGGER.entering(this.getClass().getName(), "testValidateFailForInvalidExpectedTokensLength");
         try {
@@ -116,7 +111,7 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCodiceFiscaleBlankOrEmpty() {
-        final String[] tokens = new String[] { repeat(A_SPACE, nextInt(10)), "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+        final String[] tokens = new String[] { randomBlankOrEmptyString(), "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
 
         LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleBlankOrEmpty");
         try {
@@ -137,8 +132,8 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForCodiceFiscaleOfInvalidFormat() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleOfInvalidFormat");
+    public void testValidateFailForCodiceFiscaleWithInvalidFormat() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormat");
 
         final String[] tokens = new String[] { "AAAAAA00011D000L", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
@@ -151,7 +146,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleOfInvalidFormat");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormat");
         }
     }
 
@@ -162,7 +157,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForNomeBlankOrEmpty() {
         LOGGER.entering(this.getClass().getName(), "testValidateFailForNomeBlankOrEmpty");
 
-        final String[] tokens = new String[] { "AAAAAA00B77B000F", repeat(A_SPACE, nextInt(10)), "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+        final String[] tokens = new String[] { "AAAAAA00B77B000F", randomBlankOrEmptyString(), "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -184,7 +179,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForCognomeBlankOrEmpty() {
         LOGGER.entering(this.getClass().getName(), "testValidateFailForCognomeBlankOrEmpty");
 
-        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", repeat(A_SPACE, nextInt(10)), "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", randomBlankOrEmptyString(), "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -206,7 +201,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForIdProviderBlankOrEmpty() {
         LOGGER.entering(this.getClass().getName(), "testValidateFailForIdProviderBlankOrEmpty");
 
-        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", repeat(A_SPACE, nextInt(10)), "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", randomBlankOrEmptyString(), "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -228,7 +223,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForTimestampBlankOrEmpty() {
         LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampBlankOrEmpty");
 
-        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", repeat(A_SPACE, nextInt(10)), "2", "1IQssTaf4vNMa66qU52m7g==" };
+        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", randomBlankOrEmptyString(), "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -247,8 +242,8 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForTimestampOfInvalidFormat() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampOfInvalidFormat");
+    public void testValidateFailForTimestampWithInvalidFormat() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampWithInvalidFormat");
 
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "201605311139", "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
@@ -261,7 +256,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampOfInvalidFormat");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampWithInvalidFormat");
         }
     }
 
@@ -269,8 +264,8 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForLivelloAutenticazioneOfInvalidFormat() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneOfInvalidFormat");
+    public void testValidateFailForLivelloAutenticazioneWithInvalidFormat() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithInvalidFormat");
 
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "A", "1IQssTaf4vNMa66qU52m7g==" };
         try {
@@ -283,7 +278,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneOfInvalidFormat");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithInvalidFormat");
         }
     }
 
@@ -291,8 +286,8 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForLivelloAutenticazioneValue0NotInRange() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneValue0NotInRange");
+    public void testValidateFailForLivelloAutenticazioneWithValue0NotInRange() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue0NotInRange");
 
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "0", "1IQssTaf4vNMa66qU52m7g==" };
         try {
@@ -305,7 +300,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneValue0NotInRange");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue0NotInRange");
         }
     }
 
@@ -313,8 +308,8 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForLivelloAutenticazioneValue3NotInRange() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneValue3NotInRange");
+    public void testValidateFailForLivelloAutenticazioneWithValue3NotInRange() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue3NotInRange");
 
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "3", "1IQssTaf4vNMa66qU52m7g==" };
         try {
@@ -327,7 +322,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneValue3NotInRange");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue3NotInRange");
         }
     }
 
@@ -338,7 +333,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForMacBlankOrEmpty() {
         LOGGER.entering(this.getClass().getName(), "testValidateFailForMacBlankOrEmpty");
 
-        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", repeat(A_SPACE, nextInt(10)) };
+        final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", randomBlankOrEmptyString() };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -357,8 +352,8 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForMacOfInvalidLenght() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForMacOfInvalidLenght");
+    public void testValidateFailForMacWithInvalidLenght() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForMacWithInvalidLenght");
 
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g" };
         try {
@@ -371,7 +366,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacOfInvalidLenght");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacWithInvalidLenght");
         }
     }
 
@@ -379,10 +374,10 @@ public final class IrideIdentityValidatorTest {
      * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
-    public void testValidateFailForCodiceFiscaleOfInvalidFormatAndForNomeBlankOrEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleOfInvalidFormatAndForNomeBlankOrEmpty");
+    public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlankOrEmpty() {
+        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlankOrEmpty");
 
-        final String[] tokens = new String[] { "AAAAAA00011D000L", repeat(A_SPACE, nextInt(10)), "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+        final String[] tokens = new String[] { "AAAAAA00011D000L", randomBlankOrEmptyString(), "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -395,7 +390,7 @@ public final class IrideIdentityValidatorTest {
 
             LOGGER.warning(printInvalidTokenValues(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleOfInvalidFormatAndForNomeBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlankOrEmpty");
         }
     }
 
@@ -406,7 +401,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForAllInvalidTokens() {
         LOGGER.entering(this.getClass().getName(), "testValidateFailForAllInvalidTokens");
 
-        final String[] tokens = new String[] { repeat(A_SPACE, nextInt(10)), repeat(A_SPACE, nextInt(10)), repeat(A_SPACE, nextInt(10)), repeat(A_SPACE, nextInt(10)), repeat(A_SPACE, nextInt(10)), repeat(A_SPACE, nextInt(10)), repeat(A_SPACE, nextInt(10)) };
+        final String[] tokens = new String[] { randomBlankOrEmptyString(), randomBlankOrEmptyString(), randomBlankOrEmptyString(), randomBlankOrEmptyString(), randomBlankOrEmptyString(), randomBlankOrEmptyString(), randomBlankOrEmptyString() };
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 

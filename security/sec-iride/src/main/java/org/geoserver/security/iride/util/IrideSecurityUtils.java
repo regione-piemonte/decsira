@@ -75,14 +75,14 @@ public final class IrideSecurityUtils {
         }
 
         try {
-            final String[] tokens = TOKENIZER.tokenize(candidateIrideIdentity);
+            final IrideIdentityInvalidTokenValue[] result = VALIDATOR.validate(
+                TOKENIZER.tokenize(candidateIrideIdentity)
+            );
 
-            final IrideIdentityInvalidTokenValue[] validationResult = VALIDATOR.validate(tokens);
-
-            if (ArrayUtils.isEmpty(validationResult)) {
+            if (ArrayUtils.isEmpty(result)) {
                 return true;
             } else {
-                LOGGER.warning(printInvalidTokenValues(validationResult));
+                LOGGER.warning(printInvalidTokenValues(result));
 
                 return false;
             }
@@ -91,6 +91,15 @@ public final class IrideSecurityUtils {
 
             return false;
         }
+    }
+
+    /**
+     *
+     * @param candidateIrideIdentity
+     * @return
+     */
+    public static boolean isNotValidIrideIdentity(String candidateIrideIdentity) {
+        return ! isValidIrideIdentity(candidateIrideIdentity);
     }
 
     /**

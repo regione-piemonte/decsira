@@ -18,13 +18,12 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.geoserver.security.iride.Utils.randomBlankOrEmptyString;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.geoserver.security.iride.identity.exception.IrideIdentityMissingTokenException;
 import org.geoserver.security.iride.identity.token.IrideIdentityToken;
 import org.geotools.util.logging.Logging;
@@ -80,7 +79,7 @@ public final class IrideIdentityTokenizerTest {
      */
     @Test(expected = IrideIdentityMissingTokenException.class)
     public void testTokenizationFailForEmptyOrBlankValue() throws IrideIdentityMissingTokenException {
-        final String value = StringUtils.repeat(" ", RandomUtils.nextInt(10));
+        final String value = randomBlankOrEmptyString();
 
         LOGGER.entering(this.getClass().getName(), "testTokenizationFailForEmptyOrBlankValue", value);
         try {
@@ -102,7 +101,7 @@ public final class IrideIdentityTokenizerTest {
      */
     @Test(expected = IrideIdentityMissingTokenException.class)
     public void testTokenizationFailForUnrecognizedValue() throws IrideIdentityMissingTokenException {
-        final String value = "UnrecognizedValue";
+        final String value = "UNRECOGNIZED_VALUE";
 
         LOGGER.entering(this.getClass().getName(), "testTokenizationFailForUnrecognizedValue", value);
         try {
