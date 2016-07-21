@@ -22,9 +22,14 @@ import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilde
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.geoserver.security.iride.identity.exception.IrideIdentityException;
+import org.geoserver.security.iride.identity.exception.IrideIdentityInvalidTokensException;
+import org.geoserver.security.iride.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTokenValue;
 
 /**
  * <code>IRIDE</code> Digital Identity entity object.
@@ -68,7 +73,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     /**
      * <code>IRIDE</code> Digital Identity entity 'Livello Autenticazione' property.
      */
-    private final String livelloAutenticazione;
+    private final int livelloAutenticazione;
 
     /**
      * <code>IRIDE</code> Digital Identity entity 'MAC' property.
@@ -83,14 +88,43 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     /**
      * Constructor.
      *
-     * @param codFiscale
-     * @param nome
-     * @param cognome
-     * @param idProvider
-     * @param timestamp
-     * @param livelloAutenticazione
-     * @param mac
-     * @param internalRepresentation
+     * @param irideDigitalIdentity <code>IRIDE</code> Digital Identity string representation
+     *
+     * @throws IrideIdentityException
+     */
+    public IrideIdentity(String irideDigitalIdentity) throws IrideIdentityException {
+        final IrideIdentityTokenizer tokenizer = new IrideIdentityTokenizer();
+        final IrideIdentityValidator validator = new IrideIdentityValidator();
+
+        final String[] tokens = tokenizer.tokenize(irideDigitalIdentity);
+        final IrideIdentityInvalidTokenValue[] invalidTokens = validator.validate(tokens);
+        if (ArrayUtils.isNotEmpty(invalidTokens)) {
+            throw new IrideIdentityInvalidTokensException(invalidTokens);
+        }
+
+        this.codFiscale            = tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()];
+        this.nome                  = tokens[IrideIdentityToken.NOME.getPosition()];
+        this.cognome               = tokens[IrideIdentityToken.COGNOME.getPosition()];
+        this.idProvider            = tokens[IrideIdentityToken.ID_PROVIDER.getPosition()];
+        this.timestamp             = tokens[IrideIdentityToken.TIMESTAMP.getPosition()];
+        this.livelloAutenticazione = Integer.valueOf(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]);
+        this.mac                   = tokens[IrideIdentityToken.MAC.getPosition()];
+
+        this.internalRepresentation = null;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param codFiscale <code>IRIDE</code> Digital Identity 'Codice Fiscale'
+     * @param nome <code>IRIDE</code> Digital Identity 'Nome'
+     * @param cognome <code>IRIDE</code> Digital Identity 'Cognome'
+     * @param idProvider <code>IRIDE</code> Digital Identity 'IdProvider'
+     * @param timestamp <code>IRIDE</code> Digital Identity 'Timestamp'
+     * @param livelloAutenticazione <code>IRIDE</code> Digital Identity 'Livello Autenticazione'
+     * @param mac <code>IRIDE</code> Digital Identity 'MAC'
+     *
+     * @throws IrideIdentityException
      */
     public IrideIdentity(
         String codFiscale,
@@ -98,8 +132,23 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
         String cognome,
         String idProvider,
         String timestamp,
-        String livelloAutenticazione,
-        String mac) {
+        int livelloAutenticazione,
+        String mac) throws IrideIdentityException {
+        final IrideIdentityValidator validator = new IrideIdentityValidator();
+
+        final IrideIdentityInvalidTokenValue[] invalidTokens = validator.validate(new String[] {
+            codFiscale,
+            nome,
+            cognome,
+            idProvider,
+            timestamp,
+            String.valueOf(livelloAutenticazione),
+            mac
+        });
+        if (ArrayUtils.isNotEmpty(invalidTokens)) {
+            throw new IrideIdentityInvalidTokensException(invalidTokens);
+        }
+
         this.codFiscale            = codFiscale;
         this.nome                  = nome;
         this.cognome               = cognome;
@@ -107,6 +156,8 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
         this.timestamp             = timestamp;
         this.livelloAutenticazione = livelloAutenticazione;
         this.mac                   = mac;
+
+        this.internalRepresentation = null;
     }
 
     /**
@@ -147,7 +198,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     /**
      * @return the livelloAutenticazione
      */
-    public String getLivelloAutenticazione() {
+    public int getLivelloAutenticazione() {
         return this.livelloAutenticazione;
     }
 
