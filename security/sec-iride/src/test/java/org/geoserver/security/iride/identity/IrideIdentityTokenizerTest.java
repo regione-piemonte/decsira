@@ -18,13 +18,13 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.geoserver.security.iride.Utils.BLANK;
+import static org.geoserver.security.iride.Utils.EMPTY;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.geoserver.security.iride.identity.exception.IrideIdentityMissingTokenException;
 import org.geoserver.security.iride.identity.token.IrideIdentityToken;
 import org.geotools.util.logging.Logging;
@@ -79,10 +79,10 @@ public final class IrideIdentityTokenizerTest {
      * @throws IrideIdentityMissingTokenException
      */
     @Test(expected = IrideIdentityMissingTokenException.class)
-    public void testTokenizationFailForEmptyOrBlankValue() throws IrideIdentityMissingTokenException {
-        final String value = StringUtils.repeat(" ", RandomUtils.nextInt(10));
+    public void testTokenizationFailForEmptyValue() throws IrideIdentityMissingTokenException {
+        final String value = EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForEmptyOrBlankValue", value);
+        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForEmptyValue", value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -91,7 +91,29 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForEmptyOrBlankValue");
+            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForEmptyValue");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     *
+     * @throws IrideIdentityMissingTokenException
+     */
+    @Test(expected = IrideIdentityMissingTokenException.class)
+    public void testTokenizationFailForBlankValue() throws IrideIdentityMissingTokenException {
+        final String value = BLANK;
+
+        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForBlankValue", value);
+        try {
+            this.tokenizer.tokenize(value);
+        } catch (IrideIdentityMissingTokenException e) {
+            assertThat(e.getMissingTokenValue().getToken(), is(IrideIdentityToken.CODICE_FISCALE));
+            assertThat(e.getMissingTokenValue().getValue(), is(value));
+
+            throw e;
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForBlankValue");
         }
     }
 
@@ -102,7 +124,7 @@ public final class IrideIdentityTokenizerTest {
      */
     @Test(expected = IrideIdentityMissingTokenException.class)
     public void testTokenizationFailForUnrecognizedValue() throws IrideIdentityMissingTokenException {
-        final String value = "UnrecognizedValue";
+        final String value = "UNRECOGNIZED_VALUE";
 
         LOGGER.entering(this.getClass().getName(), "testTokenizationFailForUnrecognizedValue", value);
         try {
