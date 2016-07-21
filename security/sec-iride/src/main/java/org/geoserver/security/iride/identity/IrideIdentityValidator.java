@@ -50,7 +50,7 @@ public final class IrideIdentityValidator {
 
     private static final Pattern FISCAL_CODE_STRONG_VALIDATION_PATTERN = Pattern.compile("^(?:[B-DF-HJ-NP-TV-Z](?:[AEIOU]{2}|[AEIOU]X)|[AEIOU]{2}X|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\\dLMNP-V]{2}|[A-M][0L](?:[\\dLMNP-V][1-9MNP-V]|[1-9MNP-V][0L]))[A-Z]$");
 
-    private static final int[] IRIDE_AUTHENTICATION_LEVELS = new int[] { 1, 2, 4, 8, 16 };
+    private static final Integer[] IRIDE_AUTHENTICATION_LEVELS = new Integer[] { 1, 2, 4, 8, 16 };
 
     private static final int MAC_LENGTH = 24;
 
@@ -251,6 +251,10 @@ public final class IrideIdentityValidator {
      * @return
      */
     private boolean isValidTimestamp(String value) {
+        if (value == null) {
+            return false;
+        }
+
         try {
             this.dateFormat.parse(value);
 
@@ -280,7 +284,7 @@ public final class IrideIdentityValidator {
      */
     private boolean isValidLivelloAutenticazione(String value) {
         try {
-            final int livello = NumberUtils.createInteger(value);
+            final Integer livello = NumberUtils.createInteger(value);
             if (! ArrayUtils.contains(IRIDE_AUTHENTICATION_LEVELS, livello)) {
                 return false;
             }

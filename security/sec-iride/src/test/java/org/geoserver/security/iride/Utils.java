@@ -19,7 +19,6 @@
 package org.geoserver.security.iride;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 
 /**
  *
@@ -28,18 +27,14 @@ import org.apache.commons.lang.math.RandomUtils;
 public final class Utils {
 
     /**
-     * A single space character string.
+     * An empty string <code>""</code>.
      */
-    private static final String A_SPACE = " ";
+    public static final String EMPTY = StringUtils.EMPTY;
 
     /**
-     * Returns a random blank or empty string, with a length comprised between 0 and 9 characters.
-     *
-     * @return a random blank or empty string, with a length comprised between 0 and 9 characters
+     * A single space character string.
      */
-    public static String randomBlankOrEmptyString() {
-        return StringUtils.repeat(A_SPACE, RandomUtils.nextInt(10));
-    }
+    public static final String BLANK = " ";
 
     /**
      * Constructor.

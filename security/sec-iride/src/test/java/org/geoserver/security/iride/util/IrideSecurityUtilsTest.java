@@ -18,14 +18,13 @@
  */
 package org.geoserver.security.iride.util;
 
-import static org.geoserver.security.iride.Utils.randomBlankOrEmptyString;
+import static org.geoserver.security.iride.Utils.BLANK;
+import static org.geoserver.security.iride.Utils.EMPTY;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.geotools.util.logging.Logging;
 import org.junit.Test;
 
@@ -40,6 +39,23 @@ public final class IrideSecurityUtilsTest {
      * Logger.
      */
     private static final Logger LOGGER = Logging.getLogger(IrideSecurityUtilsTest.class);
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotInvalidIrideIdentity() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotInvalidIrideIdentity", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(false));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotInvalidIrideIdentity");
+        }
+    }
 
     /**
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
@@ -62,16 +78,33 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithEmptyOrBlankValue() {
-        final String value = StringUtils.repeat(" ", RandomUtils.nextInt(10));
+    public void testIsNotValidIrideIdentityWithBlankValue() {
+        final String value = BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyOrBlankValue", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithBlankValue", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyOrBlankValue");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithBlankValue");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithEmptyValue() {
+        final String value = EMPTY;
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyValue", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyValue");
         }
     }
 
@@ -215,16 +248,33 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithCodiceFiscaleBlankOrEmpty() {
-        final String value = randomBlankOrEmptyString() + "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithCodiceFiscaleEmpty() {
+        final String value = "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleEmpty", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleEmpty");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithCodiceFiscaleBlank() {
+        final String value = BLANK + "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlank", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlank");
         }
     }
 
@@ -249,16 +299,16 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithNomeBlankOrEmpty() {
-        final String value = "AAAAAA00B77B000F/" + randomBlankOrEmptyString() + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithNomeEmpty() {
+        final String value = "AAAAAA00B77B000F/" + EMPTY + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeEmpty", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeEmpty");
         }
     }
 
@@ -266,16 +316,16 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithCognomeBlankOrEmpty() {
-        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + randomBlankOrEmptyString() + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithNomeBlank() {
+        final String value = "AAAAAA00B77B000F/" + BLANK + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlank", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlank");
         }
     }
 
@@ -283,16 +333,16 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithIdProviderBlankOrEmpty() {
-        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + randomBlankOrEmptyString() + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithCognomeEmpty() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + EMPTY + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeEmpty", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeEmpty");
         }
     }
 
@@ -300,16 +350,84 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithTimestampBlankOrEmpty() {
-        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + randomBlankOrEmptyString() + "/2/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithCognomeBlank() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + BLANK + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlank", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlank");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithIdProviderEmpty() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + EMPTY + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderEmpty", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderEmpty");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithIdProviderBlank() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + BLANK + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlank", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlank");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithTimestampEmpty() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + EMPTY + "/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampEmpty", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampEmpty");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithTimestampBlank() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + BLANK + "/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlank", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlank");
         }
     }
 
@@ -334,16 +452,33 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithLivelloAutenticazioneBlankOrEmpty() {
-        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + randomBlankOrEmptyString() + "/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + EMPTY + "/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + BLANK + "/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank");
         }
     }
 
@@ -402,16 +537,33 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithMacBlankOrEmpty() {
-        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + randomBlankOrEmptyString();
+    public void testIsNotValidIrideIdentityWithMacEmpty() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacEmpty", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacEmpty");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithMacBlank() {
+        final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + BLANK;
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlank", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlank");
         }
     }
 
@@ -436,16 +588,16 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlankOrEmpty() {
-        final String value = "AAAAAA00011D000L/" + randomBlankOrEmptyString() + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+    public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty() {
+        final String value = "AAAAAA00011D000L/" + EMPTY + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlankOrEmpty", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlankOrEmpty");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty");
         }
     }
 
@@ -453,22 +605,85 @@ public final class IrideSecurityUtilsTest {
      * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
-    public void testIsNotValidIrideIdentityWithAllInvalidTokens() {
-        final String value = randomBlankOrEmptyString() + "/" +
-                             randomBlankOrEmptyString() + "/" +
-                             randomBlankOrEmptyString() + "/" +
-                             randomBlankOrEmptyString() + "/" +
-                             randomBlankOrEmptyString() + "/" +
-                             randomBlankOrEmptyString() + "/" +
-                             randomBlankOrEmptyString();
+    public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank() {
+        final String value = "AAAAAA00011D000L/" + BLANK + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllInvalidTokens", value);
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank", value);
         try {
             final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllInvalidTokens");
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithAllNullTokens() {
+        final String value = null + "/" +
+                             null + "/" +
+                             null + "/" +
+                             null + "/" +
+                             null + "/" +
+                             null + "/" +
+                             null;
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllNullTokens", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllNullTokens");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithAllEmptyTokens() {
+        final String value = EMPTY + "/" +
+                             EMPTY + "/" +
+                             EMPTY + "/" +
+                             EMPTY + "/" +
+                             EMPTY + "/" +
+                             EMPTY + "/" +
+                             EMPTY;
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllEmptyTokens", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllEmptyTokens");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.util.IrideSecurityUtils#isNotValidIrideIdentity(java.lang.String)}.
+     */
+    @Test
+    public void testIsNotValidIrideIdentityWithAllBlankTokens() {
+        final String value = BLANK + "/" +
+                             BLANK + "/" +
+                             BLANK + "/" +
+                             BLANK + "/" +
+                             BLANK + "/" +
+                             BLANK + "/" +
+                             BLANK;
+
+        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllBlankTokens", value);
+        try {
+            final boolean result = IrideSecurityUtils.isNotValidIrideIdentity(value);
+
+            assertThat(result, is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllBlankTokens");
         }
     }
 
