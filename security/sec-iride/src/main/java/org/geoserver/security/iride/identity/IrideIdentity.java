@@ -122,7 +122,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     public static IrideIdentity parseIrideIdentity(String irideDigitalIdentity) {
         IrideIdentity irideIdentity = null;
         try {
-            irideIdentity = new IrideIdentity(irideDigitalIdentity);
+            irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
         } catch (IrideIdentityTokenizationException e) {
             LOGGER.severe(e.getMessage());
         }
