@@ -70,7 +70,7 @@ public final class IrideIdentityInvalidTokensException extends IrideIdentityToke
      */
     public IrideIdentityInvalidTokensException(IrideIdentityInvalidTokenValue[] invalidTokens) {
         this(
-            IrideSecurityUtils.printInvalidTokenValues(Constants.INVALID_TOKENS_SPECIFIC_EXCEPTION_MESSAGE, invalidTokens),
+            IrideSecurityUtils.toString(Constants.INVALID_TOKENS_SPECIFIC_EXCEPTION_MESSAGE, invalidTokens),
             invalidTokens
         );
     }

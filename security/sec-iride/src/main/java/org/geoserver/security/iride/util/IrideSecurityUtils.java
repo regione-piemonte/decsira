@@ -19,18 +19,14 @@
 package org.geoserver.security.iride.util;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
-import org.geoserver.security.iride.identity.IrideIdentityTokenizer;
-import org.geoserver.security.iride.identity.IrideIdentityValidator;
-import org.geoserver.security.iride.identity.exception.IrideIdentityException;
+import org.geoserver.security.iride.identity.IrideIdentity;
 import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTokenValue;
-import org.geotools.util.logging.Logging;
 
 /**
  * <code>IRIDE</code> Digital Identity utilities.
@@ -38,21 +34,6 @@ import org.geotools.util.logging.Logging;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class IrideSecurityUtils {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = Logging.getLogger(IrideSecurityUtils.class);
-
-    /**
-     * IRIDE Digital Identity tokenizer  instance.
-     */
-    private static final IrideIdentityTokenizer TOKENIZER = new IrideIdentityTokenizer();
-
-    /**
-     * IRIDE Digital Identity tokenizer instance.
-     */
-    private static final IrideIdentityValidator VALIDATOR = new IrideIdentityValidator();
 
     /**
      *
@@ -66,40 +47,24 @@ public final class IrideSecurityUtils {
 
     /**
      *
-     * @param candidateIrideIdentity
+     * @deprecated
+     * @param irideDigitalIdentity
      * @return
      */
-    public static boolean isValidIrideIdentity(String candidateIrideIdentity) {
-        if (StringUtils.isEmpty(candidateIrideIdentity)) {
-            return false;
-        }
-
-        try {
-            final IrideIdentityInvalidTokenValue[] result = VALIDATOR.validate(
-                TOKENIZER.tokenize(candidateIrideIdentity)
-            );
-
-            if (ArrayUtils.isEmpty(result)) {
-                return true;
-            } else {
-                LOGGER.warning(printInvalidTokenValues(result));
-
-                return false;
-            }
-        } catch (IrideIdentityException e) {
-            LOGGER.severe(e.getMessage());
-
-            return false;
-        }
+    @Deprecated
+    public static boolean isValidIrideIdentity(String irideDigitalIdentity) {
+        return IrideIdentity.isValidIrideIdentity(irideDigitalIdentity);
     }
 
     /**
      *
-     * @param candidateIrideIdentity
+     * @deprecated
+     * @param irideDigitalIdentity
      * @return
      */
-    public static boolean isNotValidIrideIdentity(String candidateIrideIdentity) {
-        return ! isValidIrideIdentity(candidateIrideIdentity);
+    @Deprecated
+    public static boolean isNotValidIrideIdentity(String irideDigitalIdentity) {
+        return IrideIdentity.isNotValidIrideIdentity(irideDigitalIdentity);
     }
 
     /**
@@ -107,8 +72,8 @@ public final class IrideSecurityUtils {
      * @param invalidTokenValues
      * @return
      */
-    public static String printInvalidTokenValues(IrideIdentityInvalidTokenValue... invalidTokenValues) {
-        return printInvalidTokenValues(Constants.INVALID_TOKENS_SPECIFIC_EXCEPTION_MESSAGE, invalidTokenValues);
+    public static String toString(IrideIdentityInvalidTokenValue... invalidTokenValues) {
+        return toString(Constants.INVALID_TOKENS_SPECIFIC_EXCEPTION_MESSAGE, invalidTokenValues);
     }
 
     /**
@@ -116,7 +81,7 @@ public final class IrideSecurityUtils {
      * @param result
      * @return
      */
-    public static String printInvalidTokenValues(final String invalidTokenValuesMessageTemplate, IrideIdentityInvalidTokenValue... invalidTokenValues) {
+    public static String toString(final String invalidTokenValuesMessageTemplate, IrideIdentityInvalidTokenValue... invalidTokenValues) {
         return StringUtils.join(
             CollectionUtils.collect(
                 Arrays.asList(defaultToEmpty(invalidTokenValues)),
