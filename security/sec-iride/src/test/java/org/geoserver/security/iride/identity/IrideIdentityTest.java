@@ -336,29 +336,43 @@ public final class IrideIdentityTest {
      * @throws IrideIdentityTokenizationException
      */
     @Test
+    public void testIrideIdentityInstanceComparesToItself() throws IrideIdentityTokenizationException {
+        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToItself", value);
+        try {
+            final IrideIdentity irideIdentity1 = new IrideIdentity(value);
+
+            assertThat(irideIdentity1, is(notNullValue()));
+
+            final IrideIdentity irideIdentity2 = irideIdentity1;
+
+            assertThat(irideIdentity1.compareTo(irideIdentity2), is(0));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceComparesToItself");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#compareTo(IrideIdentity)}.
+     *
+     * @throws IrideIdentityTokenizationException
+     */
+    @Test
     public void testIrideIdentityInstanceComparesToAnother() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother", value);
         try {
-            final IrideIdentity irideIrideIdentity1 = new IrideIdentity(value);
+            final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
-            assertThat(irideIrideIdentity1, is(notNullValue()));
-            assertThat(irideIrideIdentity1.getCodFiscale(), is(this.tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
-            assertThat(irideIrideIdentity1.getNome(), is(this.tokens[IrideIdentityToken.NOME.getPosition()]));
-            assertThat(irideIrideIdentity1.getCognome(), is(this.tokens[IrideIdentityToken.COGNOME.getPosition()]));
-            assertThat(irideIrideIdentity1.getIdProvider(), is(this.tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
-            assertThat(irideIrideIdentity1.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
-            assertThat(String.valueOf(irideIrideIdentity1.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
-            assertThat(irideIrideIdentity1.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(irideIrideIdentity1.toInternalRepresentation(), is(value));
-            assertThat(irideIrideIdentity1.toInternalRepresentation(), is(irideIrideIdentity1.toInternalRepresentation()));
+            assertThat(irideIdentity1, is(notNullValue()));
 
-            final IrideIdentity irideIrideIdentity2 = new IrideIdentity(irideIrideIdentity1);
+            final IrideIdentity irideIdentity2 = new IrideIdentity(irideIdentity1);
 
-            assertThat(irideIrideIdentity1, is(notNullValue()));
-            assertThat(irideIrideIdentity1, is(irideIrideIdentity2));
-            assertThat(irideIrideIdentity1.compareTo(irideIrideIdentity2), is(0));
+            assertThat(irideIdentity1, is(notNullValue()));
+            assertThat(irideIdentity1, is(irideIdentity2));
+            assertThat(irideIdentity1.compareTo(irideIdentity2), is(0));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother");
         }
