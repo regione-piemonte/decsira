@@ -243,11 +243,6 @@ public final class IrideIdentityTest {
             assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR)));
             assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
 
-            final IrideIdentity copy = new IrideIdentity(result);
-
-            assertThat(result, is(notNullValue()));
-            assertThat(result, is(copy));
-
             LOGGER.info("IrideIdentity: " + result);
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityTokens");
@@ -284,11 +279,6 @@ public final class IrideIdentityTest {
             assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR)));
             assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
 
-            final IrideIdentity copy = new IrideIdentity(result);
-
-            assertThat(result, is(notNullValue()));
-            assertThat(result, is(copy));
-
             LOGGER.info("IrideIdentity: " + result);
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityParameters");
@@ -318,11 +308,6 @@ public final class IrideIdentityTest {
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
             assertThat(result.toInternalRepresentation(), is(value));
             assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
-
-            final IrideIdentity copy = new IrideIdentity(result);
-
-            assertThat(result, is(notNullValue()));
-            assertThat(result, is(copy));
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
@@ -360,21 +345,111 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceComparesToAnother() throws IrideIdentityTokenizationException {
+        final String value1 = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value2 = "NNRLSN69P26L570X/Aldesino/Innerkofler/IPA/20160531113948/2//VZjBdhZTwU+/7AU0A8HjQ==";
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother", new String[] { value1, value2 });
+        try {
+            final IrideIdentity irideIdentity1 = new IrideIdentity(value1);
+
+            assertThat(irideIdentity1, is(notNullValue()));
+
+            final IrideIdentity irideIdentity2 = new IrideIdentity(value2);
+
+            assertThat(irideIdentity2, is(notNullValue()));
+            assertThat(irideIdentity1.compareTo(irideIdentity2), is(lessThan(0)));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     *
+     * @throws IrideIdentityTokenizationException
+     */
+    @Test
+    public void testIrideIdentityInstanceIsEqualToItself() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother", value);
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItself", value);
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
             assertThat(irideIdentity1, is(notNullValue()));
 
-            final IrideIdentity irideIdentity2 = new IrideIdentity(irideIdentity1);
+            final IrideIdentity irideIdentity2 = irideIdentity1;
+
+            assertThat(irideIdentity1.equals(irideIdentity2), is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItself");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     *
+     * @throws IrideIdentityTokenizationException
+     */
+    @Test
+    public void testIrideIdentityInstanceIsNotEqualToNull() throws IrideIdentityTokenizationException {
+        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToNull", value);
+        try {
+            final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
             assertThat(irideIdentity1, is(notNullValue()));
-            assertThat(irideIdentity1, is(irideIdentity2));
-            assertThat(irideIdentity1.compareTo(irideIdentity2), is(0));
+
+            assertThat(irideIdentity1.equals(null), is(false));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother");
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToNull");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     *
+     * @throws IrideIdentityTokenizationException
+     */
+    @Test
+    public void testIrideIdentityInstanceIsNotEqualToAnotherClassInstance() throws IrideIdentityTokenizationException {
+        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToSubclassInstance", value);
+        try {
+            final IrideIdentity irideIdentity1 = new IrideIdentity(value);
+
+            assertThat(irideIdentity1, is(notNullValue()));
+
+            final Object anotherClassInstance = new Object();
+
+            assertThat(irideIdentity1.equals(anotherClassInstance), is(false));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToSubclassInstance");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     *
+     * @throws IrideIdentityTokenizationException
+     */
+    @Test
+    public void testIrideIdentityInstanceIsEqualToItsCopy() throws IrideIdentityTokenizationException {
+        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItsCopy", value);
+        try {
+            final IrideIdentity irideIdentity1 = new IrideIdentity(value);
+
+            assertThat(irideIdentity1, is(notNullValue()));
+
+            final IrideIdentity irideIdentity2 = new IrideIdentity(irideIdentity1.toInternalRepresentation());
+
+            assertThat(irideIdentity1.equals(irideIdentity2), is(true));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItsCopy");
         }
     }
 

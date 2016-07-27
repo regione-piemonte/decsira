@@ -219,20 +219,6 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
     /**
      * Constructor.<p>
-     * Copy constructor.
-     *
-     * If the given <code>IRIDE</code> Digital Identity entity object value is {@code null}, then a {@link NullPointerException} is thrown.
-     *
-     * @param other <code>IRIDE</code> Digital Identity entity object
-     * @throws NullPointerException if the given <code>IRIDE</code> Digital Identity entity object value is {@code null}
-     * @throws IrideIdentityTokenizationException if any error occurs during tokenization or validation processes
-     */
-    public IrideIdentity(IrideIdentity other) throws IrideIdentityTokenizationException {
-        this(other.getCodFiscale(), other.getNome(), other.getCognome(), other.getIdProvider(), other.getTimestamp(), other.getLivelloAutenticazione(), other.getMac());
-    }
-
-    /**
-     * Constructor.<p>
      * Builds an <code>IRIDE</code> Digital Identity entity object
      * out of the given <code>IRIDE</code> Digital Identity string representation tokens,
      * which are validated with {@link IrideIdentityValidator#validate(String[])}.
