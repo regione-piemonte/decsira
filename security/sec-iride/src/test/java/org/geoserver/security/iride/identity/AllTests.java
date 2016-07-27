@@ -23,12 +23,16 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * <code>IRIDE</code> Identity tokenization and validation <code>JUnit</code> Test Suite.
+ * <code>IRIDE</code> Identity entity object, tokenization and validation <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @RunWith(Suite.class)
-@SuiteClasses({ IrideIdentityTokenizerTest.class, IrideIdentityValidatorTest.class })
+@SuiteClasses({
+    IrideIdentityTest.class,
+    IrideIdentityTokenizerTest.class,
+    IrideIdentityValidatorTest.class
+})
 public final class AllTests {
 
     /**

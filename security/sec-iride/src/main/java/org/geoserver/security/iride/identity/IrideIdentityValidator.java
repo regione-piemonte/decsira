@@ -23,7 +23,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
@@ -64,18 +66,19 @@ public final class IrideIdentityValidator {
      */
     public IrideIdentityValidator() {
         this.dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        this.dateFormat.setCalendar(Calendar.getInstance(Locale.ITALY));
         this.dateFormat.setLenient(false);
     }
 
     /**
      *
-     * @param value
+     * @param tokens
      * @return
      */
-    public IrideIdentityInvalidTokenValue[] validate(String[] tokens) {
+    public IrideIdentityInvalidTokenValue[] validate(String... tokens) {
         LOGGER.finer("IRIDE Identity tokens: " + Arrays.toString(tokens));
 
-        this.checkValidExpectedTokensLength(tokens);
+        this.checkTokens(tokens);
 
         final List<IrideIdentityInvalidTokenValue> invalidTokenValues = new ArrayList<IrideIdentityInvalidTokenValue>();
 
@@ -129,12 +132,13 @@ public final class IrideIdentityValidator {
 
     /**
      * Check that the given tokens length equals the expected length, which should be {@link IrideIdentityToken#values()} length
-     * (i.e.: the number of tokens defined in {@link IrideIdentityToken} enum).<p>
+     * (i.e.: the number of tokens defined in {@link IrideIdentityToken} enum).<br />
+     * {@code null} tokens array is considered of length 0.<p>
      * If not so, an {@link IllegalArgumentException} is thrown, detailing the given tokens length vs the expected one.
      *
      * @param tokens the given tokens array to check for valid length
      */
-    private void checkValidExpectedTokensLength(String[] tokens) {
+    private void checkTokens(String[] tokens) {
         final int expectedTokenLength = IrideIdentityToken.values().length;
 
         if (ArrayUtils.getLength(tokens) != expectedTokenLength) {

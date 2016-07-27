@@ -41,7 +41,7 @@ public final class IrideIdentityTokenizer {
      *
      * @param value a string value that should represents an <code>IRIDE</code> Digital Identity
      * @return <code>IRIDE</code> Digital Identity tokens.
-     *         A successful tokenization should return a string array composed of <em>exactly</em> 7 elements
+     *         A successful tokenization should return a string array composed of <em>exactly</em> {@link IrideIdentityToken#values()} elements
      * @throws NullPointerException if the given string value is {@code null}
      * @throws IrideIdentityMissingTokenException a specialized <code>IrideIdentityTokenizationException</code> thrown as soon as
      *         any one of the seven expected tokens is not found in the tokenized string value

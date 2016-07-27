@@ -20,7 +20,6 @@ package org.geoserver.security.iride.identity;
 
 import static org.geoserver.security.iride.Utils.BLANK;
 import static org.geoserver.security.iride.Utils.EMPTY;
-import static org.geoserver.security.iride.util.IrideSecurityUtils.printInvalidTokenValues;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -28,6 +27,7 @@ import java.util.logging.Logger;
 
 import org.geoserver.security.iride.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTokenValue;
+import org.geoserver.security.iride.util.IrideSecurityUtils;
 import org.geotools.util.logging.Logging;
 import org.junit.Before;
 import org.junit.Test;
@@ -152,7 +152,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleNull");
         }
@@ -174,7 +174,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleBlank");
         }
@@ -196,7 +196,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleEmpty");
         }
@@ -218,7 +218,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormat");
         }
@@ -240,7 +240,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeNull");
         }
@@ -262,7 +262,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeBlank");
         }
@@ -284,7 +284,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeEmpty");
         }
@@ -306,7 +306,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeNull");
         }
@@ -328,7 +328,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeBlank");
         }
@@ -350,7 +350,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeEmpty");
         }
@@ -372,7 +372,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderNull");
         }
@@ -394,7 +394,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderBlank");
         }
@@ -416,7 +416,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderEmpty");
         }
@@ -438,7 +438,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampNull");
         }
@@ -460,7 +460,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampBlank");
         }
@@ -482,7 +482,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampEmpty");
         }
@@ -504,7 +504,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampWithInvalidFormat");
         }
@@ -526,7 +526,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneNull");
         }
@@ -548,7 +548,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneBlank");
         }
@@ -570,7 +570,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneEmpty");
         }
@@ -592,7 +592,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithInvalidFormat");
         }
@@ -614,7 +614,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue0NotInRange");
         }
@@ -636,7 +636,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue3NotInRange");
         }
@@ -658,7 +658,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacNull");
         }
@@ -680,7 +680,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacBlank");
         }
@@ -702,7 +702,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacEmpty");
         }
@@ -724,7 +724,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacWithInvalidLenght");
         }
@@ -748,7 +748,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull");
         }
@@ -772,7 +772,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank");
         }
@@ -796,7 +796,7 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty");
         }
@@ -823,7 +823,7 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllNullTokens");
         }
@@ -850,7 +850,7 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllBlankTokens");
         }
@@ -877,7 +877,7 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(printInvalidTokenValues(result));
+            LOGGER.warning(IrideSecurityUtils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllEmptyTokens");
         }

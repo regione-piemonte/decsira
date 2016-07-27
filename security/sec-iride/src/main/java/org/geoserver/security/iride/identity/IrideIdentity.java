@@ -20,11 +20,22 @@ package org.geoserver.security.iride.identity;
 
 import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
 
+import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.geoserver.security.iride.identity.exception.IrideIdentityInvalidTokensException;
+import org.geoserver.security.iride.identity.exception.IrideIdentitySerializationException;
+import org.geoserver.security.iride.identity.exception.IrideIdentityTokenizationException;
+import org.geoserver.security.iride.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTokenValue;
+import org.geoserver.security.iride.util.IrideSecurityUtils;
+import org.geotools.util.logging.Logging;
 
 /**
  * <code>IRIDE</code> Digital Identity entity object.
@@ -39,6 +50,25 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
      * <code>IRIDE</code> Digital Identity tokens separator character.
      */
     public static final char IRIDE_IDENTITY_TOKEN_SEPARATOR = '/';
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logging.getLogger(IrideIdentityValidator.class);
+
+    /**
+     * IRIDE Digital Identity tokenizer  instance.
+     *
+     * @see IrideIdentityTokenizer
+     */
+    private static final IrideIdentityTokenizer TOKENIZER = new IrideIdentityTokenizer();
+
+    /**
+     * IRIDE Digital Identity validator instance.
+     *
+     * @see IrideIdentityValidator
+     */
+    private static final IrideIdentityValidator VALIDATOR = new IrideIdentityValidator();
 
     /**
      * <code>IRIDE</code> Digital Identity entity 'Codice Fiscale' property.
@@ -68,7 +98,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     /**
      * <code>IRIDE</code> Digital Identity entity 'Livello Autenticazione' property.
      */
-    private final String livelloAutenticazione;
+    private final int livelloAutenticazione;
 
     /**
      * <code>IRIDE</code> Digital Identity entity 'MAC' property.
@@ -81,32 +111,142 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     private transient String internalRepresentation;
 
     /**
-     * Constructor.
+     * Utility method to parse an <code>IRIDE</code> Digital Identity string representation,
+     * returning an <code>IRIDE</code> Digital Identity entity object if the given string value
+     * represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise.
      *
-     * @param codFiscale
-     * @param nome
-     * @param cognome
-     * @param idProvider
-     * @param timestamp
-     * @param livelloAutenticazione
-     * @param mac
-     * @param internalRepresentation
+     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
+     * @return an <code>IRIDE</code> Digital Identity entity object if the given string value
+     *         represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise
      */
-    public IrideIdentity(
-        String codFiscale,
-        String nome,
-        String cognome,
-        String idProvider,
-        String timestamp,
-        String livelloAutenticazione,
-        String mac) {
-        this.codFiscale            = codFiscale;
-        this.nome                  = nome;
-        this.cognome               = cognome;
-        this.idProvider            = idProvider;
-        this.timestamp             = timestamp;
-        this.livelloAutenticazione = livelloAutenticazione;
-        this.mac                   = mac;
+    public static IrideIdentity parseIrideIdentity(String irideDigitalIdentity) {
+        IrideIdentity irideIdentity = null;
+        try {
+            irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
+        } catch (IrideIdentityTokenizationException e) {
+            LOGGER.severe(e.getMessage());
+        }
+
+        return irideIdentity;
+    }
+
+    /**
+     * Utility method to validate an <code>IRIDE</code> Digital Identity string representation,
+     * returning {@code true} if the given string value represents a valid <code>IRIDE</code> Digital Identity,
+     * {@code false} otherwise.
+     *
+     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
+     * @return {@code true} if the given string value represents a valid <code>IRIDE</code> Digital Identity,
+     *         {@code false} otherwise
+     */
+    public static boolean isValidIrideIdentity(String irideDigitalIdentity) {
+        if (StringUtils.isEmpty(irideDigitalIdentity)) {
+            return false;
+        }
+
+        try {
+            final IrideIdentityInvalidTokenValue[] invalidTokens = VALIDATOR.validate(
+                TOKENIZER.tokenize(irideDigitalIdentity)
+            );
+
+            if (ArrayUtils.isEmpty(invalidTokens)) {
+                return true;
+            } else {
+                LOGGER.warning(IrideSecurityUtils.toString(invalidTokens));
+
+                return false;
+            }
+        } catch (IrideIdentityTokenizationException e) {
+            LOGGER.severe(e.getMessage());
+
+            return false;
+        }
+    }
+
+    /**
+     * Utility method to validate an <code>IRIDE</code> Digital Identity string representation,
+     * returning {@code true} if the given string value <em>does not</em> represent a valid <code>IRIDE</code> Digital Identity,
+     * {@code false} otherwise.
+     *
+     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
+     * @return {@code true} if the given string value <em>does not</em> represent a valid <code>IRIDE</code> Digital Identity,
+     *         {@code false} otherwise
+     */
+    public static boolean isNotValidIrideIdentity(String irideDigitalIdentity) {
+        return ! isValidIrideIdentity(irideDigitalIdentity);
+    }
+
+    /**
+     * Constructor.<p>
+     * Builds an <code>IRIDE</code> Digital Identity entity object
+     * out of an <code>IRIDE</code> Digital Identity string representation,
+     * which is first tokenized, with {@link IrideIdentityTokenizer#tokenize(String)},
+     * and then validated, with {@link IrideIdentityValidator#validate(String[])}.
+     *
+     * If the given <code>IRIDE</code> Digital Identity string representation value is {@code null}, then a {@link NullPointerException} is thrown.
+     *
+     * @see IrideIdentityTokenizer#tokenize(String)
+     * @see IrideIdentityValidator#validate(String[])
+     *
+     * @param irideDigitalIdentity <code>IRIDE</code> Digital Identity string representation
+     * @throws NullPointerException if the given <code>IRIDE</code> Digital Identity string representation value is {@code null}
+     * @throws IrideIdentityTokenizationException if any error occurs during tokenization or validation processes
+     */
+    public IrideIdentity(String irideDigitalIdentity) throws IrideIdentityTokenizationException {
+        this(TOKENIZER.tokenize(irideDigitalIdentity));
+    }
+
+    /**
+     * Constructor.<p>
+     * Builds an <code>IRIDE</code> Digital Identity entity object
+     * out of the given <code>IRIDE</code> Digital Identity parameters,
+     * which are validated with {@link IrideIdentityValidator#validate(String[])}.
+     *
+     * @see IrideIdentityValidator#validate(String[])
+     *
+     * @param codFiscale <code>IRIDE</code> Digital Identity 'Codice Fiscale'
+     * @param nome <code>IRIDE</code> Digital Identity 'Nome'
+     * @param cognome <code>IRIDE</code> Digital Identity 'Cognome'
+     * @param idProvider <code>IRIDE</code> Digital Identity 'IdProvider'
+     * @param timestamp <code>IRIDE</code> Digital Identity 'Timestamp'
+     * @param livelloAutenticazione <code>IRIDE</code> Digital Identity 'Livello Autenticazione'
+     * @param mac <code>IRIDE</code> Digital Identity 'MAC'
+     * @throws IrideIdentityTokenizationException if any error occurs during tokenization or validation processes
+     */
+    public IrideIdentity(String codFiscale, String nome, String cognome, String idProvider, String timestamp, int livelloAutenticazione, String mac) throws IrideIdentityTokenizationException {
+        this(new String[] { codFiscale, nome, cognome, idProvider, timestamp, String.valueOf(livelloAutenticazione), mac });
+    }
+
+    /**
+     * Constructor.<p>
+     * Builds an <code>IRIDE</code> Digital Identity entity object
+     * out of the given <code>IRIDE</code> Digital Identity string representation tokens,
+     * which are validated with {@link IrideIdentityValidator#validate(String[])}.
+     *
+     * @see IrideIdentityValidator#validate(String[])
+     *
+     * @param tokens <code>IRIDE</code> Digital Identity string representation tokens
+     * @throws IllegalArgumentException if given tokens array length is not equal to the expected length,
+     *         which should be {@link IrideIdentityToken#values()} length
+     *         (i.e.: the number of tokens defined in {@link IrideIdentityToken} enum).<br />
+     *         {@code null} tokens array is considered of length 0.
+     * @throws IrideIdentityTokenizationException if any error occurs during tokenization or validation processes
+     */
+    public IrideIdentity(String... tokens) throws IrideIdentityTokenizationException {
+        final IrideIdentityInvalidTokenValue[] invalidTokens = VALIDATOR.validate(tokens);
+        if (ArrayUtils.isNotEmpty(invalidTokens)) {
+            throw new IrideIdentityInvalidTokensException(invalidTokens);
+        }
+
+        this.codFiscale            = tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()];
+        this.nome                  = tokens[IrideIdentityToken.NOME.getPosition()];
+        this.cognome               = tokens[IrideIdentityToken.COGNOME.getPosition()];
+        this.idProvider            = tokens[IrideIdentityToken.ID_PROVIDER.getPosition()];
+        this.timestamp             = tokens[IrideIdentityToken.TIMESTAMP.getPosition()];
+        this.livelloAutenticazione = Integer.valueOf(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]);
+        this.mac                   = tokens[IrideIdentityToken.MAC.getPosition()];
+
+        this.internalRepresentation = null;
     }
 
     /**
@@ -147,7 +287,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     /**
      * @return the livelloAutenticazione
      */
-    public String getLivelloAutenticazione() {
+    public int getLivelloAutenticazione() {
         return this.livelloAutenticazione;
     }
 
@@ -256,6 +396,103 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     @Override
     public String toString() {
         return reflectToString(this);
+    }
+
+    /**
+     * Serializes this {@link IrideIdentity} instance.
+     *
+     * @return a new {@link SerializationProxy} for this {@link IrideIdentity} instance
+     */
+    private Object writeReplace() {
+        return new SerializationProxy(this);
+    }
+
+    /**
+     * Prevents deserialization attempts outside of the serialization proxy pattern.
+     *
+     * @param object
+     */
+    private void readObject(ObjectInputStream object) {
+        throw new IrideIdentitySerializationException("Serialization Proxy required!");
+    }
+
+    /**
+     * Serialization proxy class for <code>IRIDE</code> Digital Identity entity objects.
+     *
+     * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+     *
+     * @see the <em>Serialization Proxy Pattern</em> as described in
+     *      Joshua Bloch's "Effective Java, (2n Edition)", Item 78: Consider serialization proxies instead of serialized instances
+     */
+    private static final class SerializationProxy implements Serializable {
+
+        private static final long serialVersionUID = -7526003150371224025L;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'Codice Fiscale' property.
+         */
+        private final String codFiscale;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'Nome' property.
+         */
+        private final String nome;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'Cognome' property.
+         */
+        private final String cognome;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'IdProvider' property.
+         */
+        private final String idProvider;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'Timestamp' property.
+         */
+        private final String timestamp;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'Livello Autenticazione' property.
+         */
+        private final int livelloAutenticazione;
+
+        /**
+         * <code>IRIDE</code> Digital Identity entity 'MAC' property.
+         */
+        private final String mac;
+
+        /**
+         * Constructor.
+         *
+         * @param version {@link IrideIdentity} instance to serialize
+         */
+        public SerializationProxy(IrideIdentity irideIdentity) {
+            this.codFiscale            = irideIdentity.codFiscale;
+            this.nome                  = irideIdentity.nome;
+            this.cognome               = irideIdentity.cognome;
+            this.idProvider            = irideIdentity.idProvider;
+            this.timestamp             = irideIdentity.timestamp;
+            this.livelloAutenticazione = irideIdentity.livelloAutenticazione;
+            this.mac                   = irideIdentity.mac;
+        }
+
+        /**
+         * Deserializes a new {@link IrideIdentity} instance.
+         *
+         * @return a new {@link IrideIdentity} instance
+         *
+         * @throws IrideIdentityApplicationException
+         */
+        private Object readResolve() {
+            try {
+                return new IrideIdentity(this.codFiscale, this.nome, this.cognome, this.idProvider, this.timestamp, this.livelloAutenticazione, this.mac);
+            } catch (IrideIdentityTokenizationException e) {
+                throw new IrideIdentitySerializationException("An error occured during deserialization", e);
+            }
+        }
+
     }
 
 }

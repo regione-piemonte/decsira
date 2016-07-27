@@ -48,7 +48,7 @@ import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.event.RoleLoadedListener;
 import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
-import org.geoserver.security.iride.util.IrideSecurityUtils;
+import org.geoserver.security.iride.identity.IrideIdentity;
 import org.geotools.util.logging.Logging;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -182,7 +182,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
         final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
 
         // Check username format: it may be an Identita Digitale IRIDE, or not
-        if (! IrideSecurityUtils.isValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
+        if (IrideIdentity.isNotValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
             LOGGER.info("Username " + username + " is not a valid IRIDE Identity: falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
 
             final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
@@ -328,7 +328,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
         GeoServerRole role;
         try {
             // Check username format: it may be an Identita Digitale IRIDE, or not
-            if (! IrideSecurityUtils.isValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
+            if (IrideIdentity.isNotValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
                 LOGGER.info("Username " + username + " is not a valid IRIDE Identity: falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
 
                 final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
