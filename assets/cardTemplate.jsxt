@@ -154,6 +154,25 @@
                         xpath: "/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:geometria/gml:Point/gml:pos/text()"
                     })
                 }
+                layers={[
+                {
+                    "type": "osm",
+                    "title": "Open Street Map Preview",
+                    "name": "mapnik",
+                    "source": "osm",
+                    "group": "background",
+                    "visibility": true
+                },
+                {
+                    "type": "wms",
+                    "url": "http://sira2.csi.geo-solutions.it/geoserver/wms",
+                    "visibility": true,
+                    "title": "AUA Preview",
+                    "name": "sira:AutorizzazioneUnicaAmbientale",
+                    "group": "Overlays",
+                    "format": "image/png"
+                }
+        ]}
                 authParam={model.authParam}/>
         </Section>
         <Section header='METADATI' eventKey='7'>
