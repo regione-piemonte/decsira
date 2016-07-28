@@ -1,6 +1,6 @@
-<project 
-    xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,10 +11,19 @@
 
     <name>CSI SIRA - Security submodules</name>
 
+    <!-- Temporary workaround until IRIDE WS libraries will be publicly available... somewhere -->
+    <profiles>
+        <profile>
+            <id>modules.sec-iride</id>
+            <modules>
+                <module>sec-iride</module>
+            </modules>
+        </profile>
+    </profiles>
+
 	<!-- sotto moduli del layer di sicurezza -->
     <modules>
         <module>gs-sira-security</module>
-        <module>sec-iride</module>
     </modules>
 
 </project>
