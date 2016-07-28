@@ -113,7 +113,7 @@ module.exports = connect((state) => {
             },
             {
               "type": "wms",
-              "url": "http://sira.csi.geo-solutions.it/geoserver/wms",
+              "url": "http://sira2.csi.geo-solutions.it/geoserver/wms",
               "visibility": true,
               "title": "AUA Preview",
               "name": "sira:AutorizzazioneUnicaAmbientale",
