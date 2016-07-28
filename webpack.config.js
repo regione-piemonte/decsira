@@ -72,7 +72,7 @@ module.exports = {
         }, {
             path: new RegExp("/geoserver/ows(.*)"),
             host: "localhost",
-            target: "http://sira.csi.geo-solutions.it"
+            target: "http://sira2.csi.geo-solutions.it"
         }]
     },
 

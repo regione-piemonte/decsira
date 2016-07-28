@@ -102,25 +102,6 @@ const PreviewMap = React.createClass({
 module.exports = connect((state) => {
     return {
         map: (state.map && state.map) || (state.config && state.config.map),
-        layers: [
-            {
-              "type": "osm",
-              "title": "Open Street Map Preview",
-              "name": "mapnik",
-              "source": "osm",
-              "group": "background",
-              "visibility": true
-            },
-            {
-              "type": "wms",
-              "url": "http://sira.csi.geo-solutions.it/geoserver/wms",
-              "visibility": true,
-              "title": "AUA Preview",
-              "name": "sira:AutorizzazioneUnicaAmbientale",
-              "group": "Overlays",
-              "format": "image/png"
-            }
-        ],
         activeSections: state.cardtemplate.activeSections || {}
     };
 }, {

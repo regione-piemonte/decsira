@@ -11,7 +11,8 @@ const {
     GRID_LOAD_ERROR,
     GRID_CONFIG_LOADED,
     SHOW_LOADING,
-    CREATE_GRID_DATA_SOURCE
+    CREATE_GRID_DATA_SOURCE,
+    UPDATE_TOTAL_FEATURES
 } = require('../actions/grid');
 
 const assign = require('object-assign');
@@ -134,19 +135,22 @@ function grid(state = initialState, action) {
                 });
             }
             let newFeatureGrid = {...state.featuregrid, grid: {...state.featuregrid.grid, columns: columns}};
-            let totalFeatures = TemplateUtils.getNumberOfFeatures(action.data);
 
             let dataSourceOptions = {
-                    rowCount: totalFeatures,
+                    rowCount: -1,
                     pageSize: action.pagination.maxFeatures
             };
             return assign({}, state, {
                 data: [],
-                totalFeatures: totalFeatures,
+                totalFeatures: -1,
                 featuregrid: newFeatureGrid,
                 loadingGrid: false,
                 dataSourceOptions: dataSourceOptions
             });
+        }
+        case UPDATE_TOTAL_FEATURES: {
+            let totalFeatures = TemplateUtils.getNumberOfFeatures(action.data);
+            return {...state, totalFeatures };
         }
         case 'FEATUREGRID_CONFIG_LOADED': {
             return assign({}, state, {
