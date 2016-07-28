@@ -150,7 +150,6 @@ function grid(state = initialState, action) {
         }
         case UPDATE_TOTAL_FEATURES: {
             let totalFeatures = TemplateUtils.getNumberOfFeatures(action.data);
-            let dataSourceOptions = {...state.dataSourceOptions, rowCount: totalFeatures};
             return {...state, totalFeatures };
         }
         case 'FEATUREGRID_CONFIG_LOADED': {
