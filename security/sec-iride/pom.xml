@@ -73,6 +73,7 @@
 
         <!-- Dependencies -->
         <gs.version>2.8-SNAPSHOT</gs.version>
+        <spring.version>3.1.4.RELEASE</spring.version>
 
         <!-- Testing -->
         <test.exclude.pattern>none</test.exclude.pattern>
@@ -170,6 +171,20 @@
             <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
+
+        <!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+            <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+            <scope>provided</scope>
+		</dependency>
 
         <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
 
