@@ -16,7 +16,7 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride;
+package org.geoserver.security.iride.config;
 
 import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
 
@@ -33,7 +33,7 @@ import org.geoserver.security.config.SecurityRoleServiceConfig;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  *
  */
-public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig implements SecurityAuthProviderConfig, SecurityRoleServiceConfig {
+public final class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig implements SecurityAuthProviderConfig, SecurityRoleServiceConfig {
 
     private static final long serialVersionUID = -8931342487350680340L;
 
@@ -62,6 +62,11 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
     private String fallbackRoleService;
 
     /**
+     * Name of the {@link GeoServerUserGroupService} to use.
+     */
+    private String userGroupServiceName;
+
+    /**
      * Constructor.
      */
     public IrideSecurityServiceConfig() {
@@ -69,19 +74,20 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
     }
 
     /**
-     * Constructor.
+     * Constructor.<p>
      * Copy constructor receiving another {@link IrideSecurityServiceConfig} instance.
-     * Needed by <code>GeoServer</code>.
+     * <em>Needed by <code>GeoServer</code></em>.
      *
      * @param other the other {@link IrideSecurityServiceConfig} instance to copy from
      */
     public IrideSecurityServiceConfig(IrideSecurityServiceConfig other) {
         super(other);
 
-        this.serverURL           = other.getServerURL();
-        this.applicationName     = other.getApplicationName();
-        this.adminRole           = other.getAdminRole();
-        this.fallbackRoleService = other.getFallbackRoleService();
+        this.serverURL            = other.getServerURL();
+        this.applicationName      = other.getApplicationName();
+        this.adminRole            = other.getAdminRole();
+        this.fallbackRoleService  = other.getFallbackRoleService();
+        this.userGroupServiceName = other.getUserGroupServiceName();
     }
 
     /**
@@ -125,9 +131,19 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
     public void setAdminRole(String adminRole) {
         this.adminRole = adminRole;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getFallbackRoleService() {
         return this.fallbackRoleService;
     }
+
+    /**
+     *
+     * @param fallbackRoleService
+     */
     public void setFallbackRoleService(String fallbackRoleService) {
         this.fallbackRoleService = fallbackRoleService;
     }
@@ -185,11 +201,11 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
      * @see org.geoserver.security.config.SecurityAuthProviderConfig#getUserGroupServiceName()
      */
     /**
-     * No {@link GeoServerUserGroupService} needed, returning {@code null}.
+     * Return the name of the {@link GeoServerUserGroupService} to use.
      */
     @Override
     public String getUserGroupServiceName() {
-        return null;
+        return this.userGroupServiceName;
     }
 
     /*
@@ -197,11 +213,11 @@ public class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig i
      * @see org.geoserver.security.config.SecurityAuthProviderConfig#setUserGroupServiceName(java.lang.String)
      */
     /**
-     * No {@link GeoServerUserGroupService} needed, nothing to do.
+     * Set the name of the {@link GeoServerUserGroupService} to use.
      */
     @Override
     public void setUserGroupServiceName(String userGroupServiceName) {
-        /* NOP */
+        this.userGroupServiceName = userGroupServiceName;
     }
 
     /*

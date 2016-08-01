@@ -18,8 +18,6 @@
  */
 package org.geoserver.security.iride.identity;
 
-import static org.geoserver.security.iride.identity.IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,42 +48,42 @@ public final class IrideIdentityTokenizer {
         final List<String> tokens = new ArrayList<>();
 
         // 1) 'Codice Fiscale' token
-        int i1 = value.indexOf(IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        int i1 = value.indexOf(IrideIdentityToken.SEPARATOR);
         if (i1 == -1) {
             throw newMissingTokenException(IrideIdentityToken.CODICE_FISCALE, value);
         }
         tokens.add(value.substring(0, i1));
 
         // 2) 'Nome' token
-        int i2 = value.indexOf(IRIDE_IDENTITY_TOKEN_SEPARATOR, i1 + 1);
+        int i2 = value.indexOf(IrideIdentityToken.SEPARATOR, i1 + 1);
         if (i2 == -1) {
             throw newMissingTokenException(IrideIdentityToken.NOME, value);
         }
         tokens.add(value.substring(i1 + 1, i2));
 
         // 3) 'Cognome' token
-        int i3 = value.indexOf(IRIDE_IDENTITY_TOKEN_SEPARATOR, i2 + 1);
+        int i3 = value.indexOf(IrideIdentityToken.SEPARATOR, i2 + 1);
         if (i3 == -1) {
             throw newMissingTokenException(IrideIdentityToken.COGNOME, value);
         }
         tokens.add(value.substring(i2 + 1, i3));
 
         // 4) 'IdProvider' token
-        int i4 = value.indexOf(IRIDE_IDENTITY_TOKEN_SEPARATOR, i3 + 1);
+        int i4 = value.indexOf(IrideIdentityToken.SEPARATOR, i3 + 1);
         if (i4 == -1) {
             throw newMissingTokenException(IrideIdentityToken.ID_PROVIDER, value);
         }
         tokens.add(value.substring(i3 + 1, i4));
 
         // 5) 'Timestamp' token
-        int i5 = value.indexOf(IRIDE_IDENTITY_TOKEN_SEPARATOR, i4 + 1);
+        int i5 = value.indexOf(IrideIdentityToken.SEPARATOR, i4 + 1);
         if (i5 == -1) {
             throw newMissingTokenException(IrideIdentityToken.TIMESTAMP, value);
         }
         tokens.add(value.substring(i4 + 1, i5));
 
         // 6) 'Livello Autenticazione' token
-        int i6 = value.indexOf(IRIDE_IDENTITY_TOKEN_SEPARATOR, i5 + 1);
+        int i6 = value.indexOf(IrideIdentityToken.SEPARATOR, i5 + 1);
         if (i6 == -1) {
             throw newMissingTokenException(IrideIdentityToken.LIVELLO_AUTENTICAZIONE, value);
         }

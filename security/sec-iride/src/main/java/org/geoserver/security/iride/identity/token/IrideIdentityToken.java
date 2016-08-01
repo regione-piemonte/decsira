@@ -68,12 +68,17 @@ public enum IrideIdentityToken {
     ;
 
     /**
+     * <code>IRIDE</code> Digital Identity tokens separator character.
+     */
+    public static final char SEPARATOR = '/';
+
+    /**
      * <code>IRIDE</code> Digital Identity token position.
      */
     private int position;
 
     /**
-     * <code>IRIDE</code> Digital Identity token name.
+     * <code>IRIDE</code> Digital Identity token property name.
      */
     private String property;
 
@@ -86,7 +91,7 @@ public enum IrideIdentityToken {
      * Constructor.
      *
      * @param position <code>IRIDE</code> Digital Identity token position
-     * @param property <code>IRIDE</code> Digital Identity token name
+     * @param property <code>IRIDE</code> Digital Identity token property name
      * @param description <code>IRIDE</code> Digital Identity token description
      */
     private IrideIdentityToken(int position, String property, String description) {
@@ -105,11 +110,11 @@ public enum IrideIdentityToken {
     }
 
     /**
-     * Returns the <code>IRIDE</code> Digital Identity token name.
+     * Returns the <code>IRIDE</code> Digital Identity token property name.
      *
-     * @return the <code>IRIDE</code> Digital Identity token name
+     * @return the <code>IRIDE</code> Digital Identity token property name
      */
-    public String getName() {
+    public String getProperty() {
         return this.property;
     }
 
