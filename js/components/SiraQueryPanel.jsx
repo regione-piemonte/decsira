@@ -229,7 +229,6 @@ const SiraQueryPanel = React.createClass({
                         attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
                         spatialFilterActions={this.props.queryFormActions.spatialFilterActions}
                         queryToolbarActions={assign({}, this.props.queryFormActions.queryToolbarActions, {onQuery: this.onQuery})}
-                        sortOptions={this.props.pagination}
                         />
                 </Panel>
             </Draggable>
