@@ -26,6 +26,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.iride.identity.IrideIdentity;
 import org.geoserver.security.iride.identity.exception.IrideIdentityTokenizationException;
@@ -35,9 +36,10 @@ import org.geoserver.security.iride.identity.token.IrideIdentityToken;
 import org.geotools.util.logging.Logging;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.util.SerializationUtils;
 
 /**
- * <code>IRIDE</code> Digital Identity entity object <code>JUnit</code> Test Case.
+ * <code>IRIDE</code> Digital Identity entity <code>JUnit</code> Test Case.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -62,13 +64,13 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IRIDE_IDENTITY_TOKEN_SEPARATOR}.
+     * Test method for {@link org.geoserver.security.iride.identity.token.IrideIdentityToken#SEPARATOR}.
      */
     @Test
     public void testIrideIdentityTokenSeparatorIsSlashCharacter() {
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityTokenSeparatorIsSlashCharacter", IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityTokenSeparatorIsSlashCharacter", IrideIdentityToken.SEPARATOR);
 
-        assertThat(IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR, is('/'));
+        assertThat(IrideIdentityToken.SEPARATOR, is('/'));
 
         LOGGER.exiting(this.getClass().getName(), "testIrideIdentityTokenSeparatorIsSlashCharacter");
     }
@@ -240,7 +242,7 @@ public final class IrideIdentityTest {
             assertThat(result.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
             assertThat(String.valueOf(result.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR)));
+            assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
             assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
 
             LOGGER.info("IrideIdentity: " + result);
@@ -276,7 +278,7 @@ public final class IrideIdentityTest {
             assertThat(result.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
             assertThat(String.valueOf(result.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR)));
+            assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
             assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
 
             LOGGER.info("IrideIdentity: " + result);
@@ -292,7 +294,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation() throws IrideIdentityTokenizationException {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation", value);
         try {
@@ -322,7 +324,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceComparesToItself() throws IrideIdentityTokenizationException {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToItself", value);
         try {
@@ -345,7 +347,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceComparesToAnother() throws IrideIdentityTokenizationException {
-        final String value1 = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value1 = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
         final String value2 = "NNRLSN69P26L570X/Aldesino/Innerkofler/IPA/20160531113948/2//VZjBdhZTwU+/7AU0A8HjQ==";
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother", new String[] { value1, value2 });
@@ -370,7 +372,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceIsEqualToItself() throws IrideIdentityTokenizationException {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItself", value);
         try {
@@ -393,7 +395,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceIsNotEqualToNull() throws IrideIdentityTokenizationException {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToNull", value);
         try {
@@ -414,7 +416,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceIsNotEqualToAnotherClassInstance() throws IrideIdentityTokenizationException {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToSubclassInstance", value);
         try {
@@ -437,7 +439,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityInstanceIsEqualToItsCopy() throws IrideIdentityTokenizationException {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItsCopy", value);
         try {
@@ -454,7 +456,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#parseIrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -473,13 +475,32 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#parseIrideIdentity(String)}.
+     *
+     * @throws IrideIdentityTokenizationException
+     */
+    @Test
+    public void testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull() {
+        final String value = "AAAAAA00011D000L/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
+
+        LOGGER.entering(this.getClass().getName(), "testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull", value);
+        try {
+            final IrideIdentity result = IrideIdentity.parseIrideIdentity(value);
+
+            assertThat(result, is(nullValue()));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#parseIrideIdentity(String[])}.
      *
      * @throws IrideIdentityTokenizationException
      */
     @Test
     public void testParseIrideIdentityWithValidDigitalRepresentation() {
-        final String value = StringUtils.join(this.tokens, IrideIdentity.IRIDE_IDENTITY_TOKEN_SEPARATOR);
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
         LOGGER.entering(this.getClass().getName(), "testParseIrideIdentityWithNullDigitalRepresentationReturnsNull", value);
         try {
@@ -503,7 +524,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotInvalidIrideIdentity() {
@@ -1197,6 +1218,57 @@ public final class IrideIdentityTest {
             assertThat(result, is(true));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentityWithRealisticDigitalIdentity");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity} serialization.
+     */
+    @Test
+    public void testIrideIdentitySuccesfulSerialization() {
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentitySuccesfulSerialization", value);
+        try {
+            final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(value);
+
+            final byte[] serialized = SerializationUtils.serialize(irideIdentity);
+
+            assertThat(serialized, is(not(nullValue())));
+            assertThat(ArrayUtils.toObject(serialized), is(arrayWithSize(greaterThan(0))));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentitySuccesfulSerialization");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity} serialization.
+     */
+    @Test
+    public void testIrideIdentitySuccesfulDeserialization() {
+        final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentitySuccesfulDeserialization", value);
+        try {
+            final IrideIdentity irideIdentity1 = IrideIdentity.parseIrideIdentity(value);
+
+            final byte[] serialized = SerializationUtils.serialize(irideIdentity1);
+
+            assertThat(serialized, is(not(nullValue())));
+            assertThat(ArrayUtils.toObject(serialized), is(arrayWithSize(greaterThan(0))));
+
+            final Object deserialized = SerializationUtils.deserialize(serialized);
+
+            assertThat(deserialized, is(not(nullValue())));
+            assertThat(deserialized, is(instanceOf(IrideIdentity.class)));
+
+            final IrideIdentity irideIdentity2 = (IrideIdentity) deserialized;
+
+            assertThat(irideIdentity1, is(not(sameInstance(irideIdentity2))));
+            assertThat(irideIdentity1, is(irideIdentity2));
+            assertThat(irideIdentity1.compareTo(irideIdentity2), is(0));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentitySuccesfulDeserialization");
         }
     }
 

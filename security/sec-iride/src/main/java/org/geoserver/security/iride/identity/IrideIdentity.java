@@ -18,8 +18,6 @@
  */
 package org.geoserver.security.iride.identity;
 
-import static org.geoserver.security.iride.util.builder.ToStringReflectionBuilder.reflectToString;
-
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -38,18 +36,13 @@ import org.geoserver.security.iride.util.IrideSecurityUtils;
 import org.geotools.util.logging.Logging;
 
 /**
- * <code>IRIDE</code> Digital Identity entity object.
+ * <code>IRIDE</code> Digital Identity entity.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class IrideIdentity implements Comparable<IrideIdentity>, Serializable {
 
     private static final long serialVersionUID = -5499674345064933580L;
-
-    /**
-     * <code>IRIDE</code> Digital Identity tokens separator character.
-     */
-    public static final char IRIDE_IDENTITY_TOKEN_SEPARATOR = '/';
 
     /**
      * Logger.
@@ -111,12 +104,17 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     private transient String internalRepresentation;
 
     /**
+     * <code>IRIDE</code> Digital Identity entity formatter.
+     */
+    private final transient IrideIdentityFormatter formatter;
+
+    /**
      * Utility method to parse an <code>IRIDE</code> Digital Identity string representation,
-     * returning an <code>IRIDE</code> Digital Identity entity object if the given string value
+     * returning an <code>IRIDE</code> Digital Identity entity if the given string value
      * represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise.
      *
      * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
-     * @return an <code>IRIDE</code> Digital Identity entity object if the given string value
+     * @return an <code>IRIDE</code> Digital Identity entity if the given string value
      *         represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise
      */
     public static IrideIdentity parseIrideIdentity(String irideDigitalIdentity) {
@@ -178,7 +176,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
     /**
      * Constructor.<p>
-     * Builds an <code>IRIDE</code> Digital Identity entity object
+     * Builds an <code>IRIDE</code> Digital Identity entity
      * out of an <code>IRIDE</code> Digital Identity string representation,
      * which is first tokenized, with {@link IrideIdentityTokenizer#tokenize(String)},
      * and then validated, with {@link IrideIdentityValidator#validate(String[])}.
@@ -198,7 +196,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
     /**
      * Constructor.<p>
-     * Builds an <code>IRIDE</code> Digital Identity entity object
+     * Builds an <code>IRIDE</code> Digital Identity entity
      * out of the given <code>IRIDE</code> Digital Identity parameters,
      * which are validated with {@link IrideIdentityValidator#validate(String[])}.
      *
@@ -219,7 +217,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
     /**
      * Constructor.<p>
-     * Builds an <code>IRIDE</code> Digital Identity entity object
+     * Builds an <code>IRIDE</code> Digital Identity entity
      * out of the given <code>IRIDE</code> Digital Identity string representation tokens,
      * which are validated with {@link IrideIdentityValidator#validate(String[])}.
      *
@@ -247,6 +245,8 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
         this.mac                   = tokens[IrideIdentityToken.MAC.getPosition()];
 
         this.internalRepresentation = null;
+
+        this.formatter = new IrideIdentityFormatter(this);
     }
 
     /**
@@ -305,16 +305,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
      */
     public String toInternalRepresentation() {
         if (this.internalRepresentation == null) {
-            final StringBuilder builder = new StringBuilder();
-            builder.append(this.codFiscale).append(IRIDE_IDENTITY_TOKEN_SEPARATOR)
-                   .append(this.nome).append(IRIDE_IDENTITY_TOKEN_SEPARATOR)
-                   .append(this.cognome).append(IRIDE_IDENTITY_TOKEN_SEPARATOR)
-                   .append(this.idProvider).append(IRIDE_IDENTITY_TOKEN_SEPARATOR)
-                   .append(this.timestamp).append(IRIDE_IDENTITY_TOKEN_SEPARATOR)
-                   .append(this.livelloAutenticazione).append(IRIDE_IDENTITY_TOKEN_SEPARATOR)
-                   .append(this.mac);
-
-            this.internalRepresentation = builder.toString();
+            this.internalRepresentation = this.formatter.format(IrideIdentityFormatter.FormatStyle.INTERNAL_REPRESENTATION);
         }
 
         return this.internalRepresentation;
@@ -395,7 +386,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
      */
     @Override
     public String toString() {
-        return reflectToString(this);
+        return this.formatter.format(IrideIdentityFormatter.FormatStyle.REFLECTION_TO_STRING);
     }
 
     /**
@@ -417,7 +408,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     }
 
     /**
-     * Serialization proxy class for <code>IRIDE</code> Digital Identity entity objects.
+     * Serialization proxy class for <code>IRIDE</code> Digital Identity entitys.
      *
      * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
      *

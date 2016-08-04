@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     IrideIdentityTest.class,
+    IrideIdentityFormatterTest.class,
     IrideIdentityTokenizerTest.class,
     IrideIdentityValidatorTest.class
 })

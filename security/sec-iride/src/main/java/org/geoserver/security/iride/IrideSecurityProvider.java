@@ -19,12 +19,16 @@
 package org.geoserver.security.iride;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import org.geoserver.config.util.XStreamPersister;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.GeoServerSecurityProvider;
+import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
+import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geotools.util.logging.Logging;
 
 /**
  *
@@ -32,6 +36,11 @@ import org.geoserver.security.config.SecurityNamedServiceConfig;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public class IrideSecurityProvider extends GeoServerSecurityProvider {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logging.getLogger(IrideSecurityProvider.class);
 
     /**
      * <code>GeoServer</code> security manager.
@@ -72,6 +81,27 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
         final IrideRoleService service = new IrideRoleService();
+        service.initializeFromConfig(config);
+
+        return service;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.GeoServerSecurityProvider#getUserGroupServiceClass()
+     */
+    @Override
+    public Class<? extends GeoServerUserGroupService> getUserGroupServiceClass() {
+        return IrideUserGroupService.class;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.GeoServerSecurityProvider#createUserGroupService(org.geoserver.security.config.SecurityNamedServiceConfig)
+     */
+    @Override
+    public GeoServerUserGroupService createUserGroupService(SecurityNamedServiceConfig config) throws IOException {
+        final IrideUserGroupService service = new IrideUserGroupService();
         service.initializeFromConfig(config);
 
         return service;

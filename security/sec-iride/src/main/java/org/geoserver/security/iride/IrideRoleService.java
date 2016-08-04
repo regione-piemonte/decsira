@@ -48,6 +48,7 @@ import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.event.RoleLoadedListener;
 import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
+import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
 import org.geoserver.security.iride.identity.IrideIdentity;
 import org.geotools.util.logging.Logging;
 import org.springframework.security.core.Authentication;
@@ -58,7 +59,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
 
 /**
- * <code>GeoServer</code> user group and roles security service, backed by  <code>CSI</code> <code>IRIDE</code> service.
+ * <code>GeoServer</code> roles security service, backed by  <code>CSI</code> <code>IRIDE</code> service.
  *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
@@ -453,7 +454,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     private String getServiceRequestXml(String username) throws IOException {
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
-            this.getClass().getResourceAsStream("/findRuoliForPersonaInApplication.xml"))
+            this.getClass().getResourceAsStream("/soap/request/iride/findRuoliForPersonaInApplication.xml"))
         )) {
             final StringBuilder result = new StringBuilder();
             String line;

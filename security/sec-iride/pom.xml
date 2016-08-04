@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
   Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
 
   This program is free software; you can redistribute it and/or modify
@@ -28,11 +28,9 @@
     <packaging>jar</packaging>
 
     <name>CSI-Piemonte IRIDE / GeoServer Security Provider plugin</name>
-    <description>
-        org.geoserver.security.sec-iride is a GeoServer Security Provider plugin
-        used for doing authentication and authorization operations against
-        CSI-Piemonte IRIDE Service
-    </description>
+    <description>org.geoserver.security.sec-iride is a GeoServer Security Provider plugin
+        with which doing authentication and authorization operations against
+        CSI-Piemonte IRIDE Service</description>
 
     <url>https://github.com/geosolutions-it/csi-sira/tree/master/security/sec-iride</url>
     <inceptionYear>2016</inceptionYear>
@@ -75,6 +73,7 @@
 
         <!-- Dependencies -->
         <gs.version>2.8-SNAPSHOT</gs.version>
+        <spring.version>3.1.4.RELEASE</spring.version>
 
         <!-- Testing -->
         <test.exclude.pattern>none</test.exclude.pattern>
@@ -172,6 +171,20 @@
             <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
+
+        <!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+            <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+            <scope>provided</scope>
+		</dependency>
 
         <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
 
