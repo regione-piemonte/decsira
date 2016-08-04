@@ -66,7 +66,7 @@ public final class IrideIdentityFormatterTest {
 
         this.irideIdentity = new IrideIdentity(this.tokens);
 
-        this.formatter = new IrideIdentityFormatter(this.irideIdentity);
+        this.formatter = new IrideIdentityFormatter();
     }
 
     /**
@@ -94,7 +94,7 @@ public final class IrideIdentityFormatterTest {
 
         LOGGER.entering(this.getClass().getName(), "testFormatWithNullStyleReturnsNull", formatStyle);
         try {
-            final String result = this.formatter.format(formatStyle);
+            final String result = this.formatter.format(this.irideIdentity, formatStyle);
 
             assertThat(result, is(nullValue()));
 
@@ -113,7 +113,7 @@ public final class IrideIdentityFormatterTest {
 
         LOGGER.entering(this.getClass().getName(), "testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation", formatStyle);
         try {
-            final String result = this.formatter.format(formatStyle);
+            final String result = this.formatter.format(this.irideIdentity, formatStyle);
 
             assertThat(result, is(not(nullValue())));
             assertThat(result, is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
@@ -133,7 +133,7 @@ public final class IrideIdentityFormatterTest {
 
         LOGGER.entering(this.getClass().getName(), "testFormatWithReflectionToStringStyle", formatStyle);
         try {
-            final String result = this.formatter.format(formatStyle);
+            final String result = this.formatter.format(this.irideIdentity, formatStyle);
 
             assertThat(result, is(not(nullValue())));
 

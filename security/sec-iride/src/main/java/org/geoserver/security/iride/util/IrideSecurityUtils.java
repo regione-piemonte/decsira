@@ -22,6 +22,7 @@ import java.util.Arrays;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
@@ -34,6 +35,13 @@ import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTok
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class IrideSecurityUtils {
+
+    /**
+     * Constructor.
+     */
+    private IrideSecurityUtils() {
+        /* NOP */
+    }
 
     /**
      *
@@ -78,7 +86,8 @@ public final class IrideSecurityUtils {
 
     /**
      *
-     * @param result
+     * @param invalidTokenValuesMessageTemplate
+     * @param invalidTokenValues
      * @return
      */
     public static String toString(final String invalidTokenValuesMessageTemplate, IrideIdentityInvalidTokenValue... invalidTokenValues) {
@@ -86,7 +95,6 @@ public final class IrideSecurityUtils {
             CollectionUtils.collect(
                 Arrays.asList(defaultToEmpty(invalidTokenValues)),
                 new Transformer() {
-
                     /*
                      * (non-Javadoc)
                      * @see org.apache.commons.collections.Transformer#transform(java.lang.Object)
@@ -105,7 +113,6 @@ public final class IrideSecurityUtils {
                             );
                         }
                     }
-
                 }
             ),
             SystemUtils.LINE_SEPARATOR
@@ -113,10 +120,17 @@ public final class IrideSecurityUtils {
     }
 
     /**
-     * Constructor.
+     *
+     * @param filename
+     * @param extension
+     * @return
      */
-    private IrideSecurityUtils() {
-        /* NOP */
+    public static String ensureExtension(String filename, String extension) {
+        if (! FilenameUtils.isExtension(filename, extension)) {
+            return filename + "." + extension;
+        }
+
+        return filename;
     }
 
 }
