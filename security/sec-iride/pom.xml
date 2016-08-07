@@ -75,6 +75,7 @@
         <gs.version>2.8-SNAPSHOT</gs.version>
         <freeemarker.version>2.3.18</freeemarker.version>
         <spring.version>3.1.4.RELEASE</spring.version>
+        <spring-security.version>3.1.4.RELEASE</spring-security.version>
 
         <!-- Testing -->
         <test.exclude.pattern>none</test.exclude.pattern>
@@ -239,6 +240,30 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-expression</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>${spring-security.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${spring-security.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${spring-security.version}</version>
+		    <scope>test</scope>
+		</dependency>
     </dependencies>
 
     <build>

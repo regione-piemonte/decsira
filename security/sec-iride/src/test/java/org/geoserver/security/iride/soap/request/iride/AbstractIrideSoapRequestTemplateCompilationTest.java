@@ -25,52 +25,80 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.geoserver.security.iride.IrideSecurityProvider;
 import org.geoserver.security.iride.util.IrideSecurityUtils;
 import org.geotools.util.logging.Logging;
 import org.hamcrest.Matcher;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.xmlunit.matchers.EvaluateXPathMatcher;
 
-import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
 
 /**
  * <code>IRIDE</code> service <code>SOAP</code> request template compilation (using <a href="http://freemarker.org/"><code>FreeMarker</code></a>) <code>JUnit</code>.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:testContext.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
-
-    /**
-     * <code>FreeMarker</code> Configuration instance.
-     */
-    private static final Configuration CONFIGURATION;
-    static {
-        /*
-         * Configure FreeMarker
-         *
-         *  - Specify the TemplateLoader to handle the resolution of where the template files come from
-         *  - Specify the preferred charset template files are stored in to UTF-8
-         *  - Specify the TemplateExceptionHandler to handler errors
-         */
-        CONFIGURATION = new Configuration();
-        CONFIGURATION.setTemplateLoader(new ClassTemplateLoader(IrideSecurityProvider.class, "/iride/soap/request"));
-        CONFIGURATION.setDefaultEncoding("UTF-8");
-        CONFIGURATION.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-    }
 
     /**
      * Logger.
      */
-    protected final Logger LOGGER = Logging.getLogger(this.getClass());
+    protected final Logger logger = Logging.getLogger(this.getClass());
+
+    /**
+     * Namespace context mapping to be used in <code>XPath</code> matching.<br />
+     * Maps from prefix to namespace <code>URI</code>,
+     * and is used to resolve <code>XML</code> namespace prefixes in the <code>XPath</code> expression.
+     */
+    private static Map<String, String> namespaceContext;
+
+    /**
+     * <code>FreeMarker</code>'ed <code>SOAP</code> request template file extension.
+     */
+    private static String templateExtension;
+
+    /**
+     * <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.
+     */
+    private Configuration templateConfiguration;
 
     /**
      * <code>FreeMarker</code> template <code>data model</code>.
      */
-    private final Map<String, Object> dataModel = new HashMap<String, Object>();
+    private Map<String, Object> dataModel;
+
+    /**
+     * <code>FreeMarker</code>'ed <code>SOAP</code> request template file name, without extension.
+     */
+    private String templateName;
+
+    /**
+     * Set the namespace context mapping to be used in <code>XPath</code> matching.
+     *
+     * @return the namespace context mapping to be used in <code>XPath</code> matching
+     */
+    public static final void setNamespaceContext(Map<String, String> nsContext) {
+        namespaceContext = nsContext;
+    }
+
+    /**
+     * Set the <code>FreeMarker</code>'ed <code>SOAP</code> request template file extension.
+     *
+     * @param tplExtension the <code>FreeMarker</code>'ed <code>SOAP</code> request template file extension
+     */
+    public static final void setTemplateExtension(String tplExtension) {
+        templateExtension = tplExtension;
+    }
 
     /**
      * Convenient facade to {@link EvaluateXPathMatcher#hasXPath(String, Matcher)}.<br />
@@ -87,53 +115,17 @@ public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
      * @see EvaluateXPathMatcher#hasXPath(String, Matcher)
      */
     protected static final EvaluateXPathMatcher hasXPath(String xPath, Matcher<String> valueMatcher) {
-        return EvaluateXPathMatcher.hasXPath(xPath, valueMatcher).withNamespaceContext(getNamespaceContext());
+        return EvaluateXPathMatcher.hasXPath(xPath, valueMatcher).withNamespaceContext(namespaceContext);
     }
 
     /**
+     * Set the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.
      *
-     * @return
+     * @param templateConfiguration the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}
      */
-    protected static final Map<String, String> getNamespaceContext() {
-        return new HashMap<String, String>() {
-            private static final long serialVersionUID = 1L;
-
-            {
-                this.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                this.put("xsd", "http://www.w3.org/2001/XMLSchema");
-                this.put("soapenv", "http://schemas.xmlsoap.org/soap/envelope/");
-                this.put("int", "http://interfaces.policy.iride2.csi.it");
-            }
-        };
-    }
-
-    /**
-     *
-     * @throws Exception
-     */
-    protected abstract void setUp() throws Exception;
-
-    /**
-     *
-     * @return
-     * @throws TemplateException
-     * @throws IOException
-     */
-    protected final String processTemplate() throws TemplateException, IOException {
-        final Writer out = new StringWriter();
-
-        final Template template = this.getTemplate();
-
-        LOGGER.fine("IRIDE SOAP request '" + this.getTemplateName() + "' template: \n" + template);
-        LOGGER.fine("IRIDE SOAP request '" + this.getTemplateName() + "' context: \n" + this.getDataModel());
-
-        template.process(this.getDataModel(), out);
-
-        final String result = out.toString();
-
-        LOGGER.fine("IRIDE SOAP request '" + this.getTemplateName() + "' template processing result: \n" + result);
-
-        return result;
+    @Autowired
+    protected final void setTemplateConfiguration(Configuration templateConfiguration) {
+        this.templateConfiguration = templateConfiguration;
     }
 
     /**
@@ -146,10 +138,29 @@ public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
     }
 
     /**
+     * Set the <code>FreeMarker</code> template <code>data model</code>.
+     *
+     * @param the <code>FreeMarker</code> template <code>data model</code>
+     */
+    protected void setDataModel(Map<String, Object> dataModel) {
+        this.dataModel = dataModel == null ? new HashMap<String, Object>() : dataModel;
+    }
+
+    /**
      *
      * @return
      */
-    protected abstract String getTemplateName();
+    protected final String getTemplateName() {
+        return this.templateName;
+    }
+
+    /**
+     *
+     * @param templateName
+     */
+    protected void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
 
     /**
      *
@@ -157,10 +168,34 @@ public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
      * @throws IOException
      */
     protected final Template getTemplate() throws IOException {
-        return CONFIGURATION.getTemplate(
-            IrideSecurityUtils.ensureExtension(this.getTemplateName(), "xml"),
-            CONFIGURATION.getDefaultEncoding()
+        return this.templateConfiguration.getTemplate(
+            IrideSecurityUtils.ensureFileWithExtension(this.getTemplateName(), templateExtension),
+            this.templateConfiguration.getDefaultEncoding()
         );
+    }
+
+    /**
+     *
+     * @return
+     * @throws TemplateException
+     * @throws IOException
+     */
+    protected final String processTemplate() throws TemplateException, IOException {
+        final Template            template  = this.getTemplate();
+        final Map<String, Object> dataModel = this.getDataModel();
+
+        final Writer out = new StringWriter();
+
+        logger.fine("IRIDE SOAP request '" + this.getTemplateName() + "' template: \n" + template);
+        logger.fine("IRIDE SOAP request '" + this.getTemplateName() + "' dataModel: \n" + dataModel);
+
+        template.process(dataModel, out);
+
+        final String output = out.toString();
+
+        logger.fine("IRIDE SOAP request '" + this.getTemplateName() + "' template processing output: \n" + output);
+
+        return output;
     }
 
 }

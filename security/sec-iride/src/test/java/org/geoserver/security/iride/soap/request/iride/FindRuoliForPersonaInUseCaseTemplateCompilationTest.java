@@ -24,11 +24,11 @@ import static org.junit.Assert.*;
 import it.csi.iride2.policy.entity.UseCase;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
 import org.geoserver.security.iride.identity.IrideIdentity;
-import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -39,22 +39,6 @@ import freemarker.template.TemplateException;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class FindRuoliForPersonaInUseCaseTemplateCompilationTest extends AbstractIrideSoapRequestTemplateCompilationTest {
-
-    /* (non-Javadoc)
-     * @see org.geoserver.security.iride.soap.request.iride.IrideSoapRequestTemplateCompilationTest#setUp()
-     */
-    @Before
-    @Override
-    public void setUp() throws Exception {
-        this.getDataModel().putAll(new HashMap<String, Object>() {
-            private static final long serialVersionUID = 1L;
-
-            {
-                put("irideIdentity", IrideIdentity.parseIrideIdentity("AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g=="));
-                put("useCase", new UseCase("DECSIRA", "UC001"));
-            }
-        });
-    }
 
     /**
      * Test method for {@link Template#process(Object, java.io.Writer)}.
@@ -84,11 +68,22 @@ public final class FindRuoliForPersonaInUseCaseTemplateCompilationTest extends A
 
     /*
      * (non-Javadoc)
-     * @see org.geoserver.security.iride.soap.request.iride.IrideSoapRequestTemplateCompilationTest#getTemplateName()
+     * @see org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest#setDataModel(java.util.Map)
      */
     @Override
-    protected String getTemplateName() {
-        return "findRuoliForPersonaInUseCase";
+    @Value("#{irideIdentityAndUseCase}")
+    protected void setDataModel(Map<String, Object> dataModel) {
+        super.setDataModel(dataModel);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest#setTemplateName(java.lang.String)
+     */
+    @Override
+    @Value("#{'findRuoliForPersonaInUseCase'}")
+    protected void setTemplateName(String templateName) {
+        super.setTemplateName(templateName);
     }
 
 }

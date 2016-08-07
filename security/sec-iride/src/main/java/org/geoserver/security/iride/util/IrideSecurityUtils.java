@@ -125,7 +125,7 @@ public final class IrideSecurityUtils {
      * @param extension
      * @return
      */
-    public static String ensureExtension(String filename, String extension) {
+    public static String ensureFileWithExtension(String filename, String extension) {
         if (! FilenameUtils.isExtension(filename, extension)) {
             return filename + "." + extension;
         }

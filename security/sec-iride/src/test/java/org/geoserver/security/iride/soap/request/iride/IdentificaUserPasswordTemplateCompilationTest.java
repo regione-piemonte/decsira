@@ -22,10 +22,10 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -36,22 +36,6 @@ import freemarker.template.TemplateException;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class IdentificaUserPasswordTemplateCompilationTest extends AbstractIrideSoapRequestTemplateCompilationTest {
-
-    /* (non-Javadoc)
-     * @see org.geoserver.security.iride.soap.request.iride.IrideSoapRequestTemplateCompilationTest#setUp()
-     */
-    @Before
-    @Override
-    public void setUp() throws Exception {
-        this.getDataModel().putAll(new HashMap<String, Object>() {
-            private static final long serialVersionUID = 1L;
-
-            {
-                put("username", "username");
-                put("password", "********");
-            }
-        });
-    }
 
     /**
      * Test method for {@link Template#process(Object, java.io.Writer)}.
@@ -71,11 +55,22 @@ public final class IdentificaUserPasswordTemplateCompilationTest extends Abstrac
 
     /*
      * (non-Javadoc)
-     * @see org.geoserver.security.iride.soap.request.iride.IrideSoapRequestTemplateCompilationTest#getTemplateName()
+     * @see org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest#setDataModel(java.util.Map)
      */
     @Override
-    protected String getTemplateName() {
-        return "identificaUserPassword";
+    @Value("#{usernameAndPassword}")
+    protected void setDataModel(Map<String, Object> dataModel) {
+        super.setDataModel(dataModel);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest#setTemplateName(java.lang.String)
+     */
+    @Override
+    @Value("#{'identificaUserPassword'}")
+    protected void setTemplateName(String templateName) {
+        super.setTemplateName(templateName);
     }
 
 }
