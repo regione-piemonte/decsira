@@ -29,7 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-//    FindRuoliForPersonaInApplicationTemplateCompilationTest.class,
+    FindRuoliForPersonaInApplicationTemplateCompilationTest.class,
     FindRuoliForPersonaInUseCaseTemplateCompilationTest.class,
     FindUseCaseForPersonaInApplicationTemplateCompilationTest.class,
     GetInfoPersonaInUseCaseTemplateCompilationTest.class,
