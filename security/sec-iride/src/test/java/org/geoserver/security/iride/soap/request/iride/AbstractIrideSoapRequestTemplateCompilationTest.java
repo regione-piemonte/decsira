@@ -29,7 +29,7 @@ import org.geoserver.security.iride.util.IrideSecurityUtils;
 import org.geotools.util.logging.Logging;
 import org.hamcrest.Matcher;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -46,7 +46,7 @@ import freemarker.template.TemplateException;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:testContext.xml" })
+@ContextConfiguration(locations = { "classpath:/testContext.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
 
@@ -123,7 +123,7 @@ public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
      *
      * @param templateConfiguration the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}
      */
-    @Autowired
+    @Value("#{templateConfiguration}")
     protected final void setTemplateConfiguration(Configuration templateConfiguration) {
         this.templateConfiguration = templateConfiguration;
     }
