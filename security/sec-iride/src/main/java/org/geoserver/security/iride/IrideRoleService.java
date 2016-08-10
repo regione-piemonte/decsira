@@ -454,7 +454,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     private String getServiceRequestXml(String username) throws IOException {
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
-            this.getClass().getResourceAsStream("/soap/request/iride/findRuoliForPersonaInApplication.xml"))
+            this.getClass().getResourceAsStream("/iride/soap/request/findRuoliForPersonaInApplication.xml"))
         )) {
             final StringBuilder result = new StringBuilder();
             String line;
