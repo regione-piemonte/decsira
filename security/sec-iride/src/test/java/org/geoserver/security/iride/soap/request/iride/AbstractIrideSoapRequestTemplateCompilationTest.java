@@ -46,7 +46,10 @@ import freemarker.template.TemplateException;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/testContext.xml" })
+@ContextConfiguration(locations = {
+    "classpath:/testContext.xml",
+	"classpath:/templateContext.xml"
+})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 public abstract class AbstractIrideSoapRequestTemplateCompilationTest {
 

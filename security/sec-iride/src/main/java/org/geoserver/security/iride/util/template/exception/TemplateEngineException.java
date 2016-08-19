@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,33 +16,51 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride;
+package org.geoserver.security.iride.util.template.exception;
 
-import org.geoserver.security.iride.util.IrideSecurityUtilsTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.geoserver.security.iride.exception.IrideSecuritySystemException;
 
 /**
- * <code>IRIDE</code> Identity main <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-    IrideRoleServiceTest.class,
-    IrideSecurityUtilsTest.class,
-    org.geoserver.security.iride.identity.AllTests.class,
-    org.geoserver.security.iride.soap.request.iride.AllTests.class,
-    org.geoserver.security.iride.util.template.AllTests.class,
-})
-public final class AllTests {
+public final class TemplateEngineException extends IrideSecuritySystemException {
+
+    private static final long serialVersionUID = 1741548507964965577L;
 
     /**
      * Constructor.
      */
-    private AllTests() {
+    public TemplateEngineException() {
         /* NOP */
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param message
+     */
+    public TemplateEngineException(String message) {
+        super(message);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param cause
+     */
+    public TemplateEngineException(Throwable cause) {
+        super(cause);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param message
+     * @param cause
+     */
+    public TemplateEngineException(String message, Throwable cause) {
+        super(message, cause);
     }
 
 }
