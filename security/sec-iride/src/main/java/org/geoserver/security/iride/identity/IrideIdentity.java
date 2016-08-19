@@ -18,8 +18,11 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.geoserver.security.iride.identity.IrideIdentityFormatter.FormatStyle;
+
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -109,72 +112,6 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     private final transient IrideIdentityFormatter formatter;
 
     /**
-     * Utility method to parse an <code>IRIDE</code> Digital Identity string representation,
-     * returning an <code>IRIDE</code> Digital Identity entity if the given string value
-     * represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise.
-     *
-     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
-     * @return an <code>IRIDE</code> Digital Identity entity if the given string value
-     *         represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise
-     */
-    public static IrideIdentity parseIrideIdentity(String irideDigitalIdentity) {
-        IrideIdentity irideIdentity = null;
-        try {
-            irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
-        } catch (IrideIdentityTokenizationException e) {
-            LOGGER.severe(e.getMessage());
-        }
-
-        return irideIdentity;
-    }
-
-    /**
-     * Utility method to validate an <code>IRIDE</code> Digital Identity string representation,
-     * returning {@code true} if the given string value represents a valid <code>IRIDE</code> Digital Identity,
-     * {@code false} otherwise.
-     *
-     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
-     * @return {@code true} if the given string value represents a valid <code>IRIDE</code> Digital Identity,
-     *         {@code false} otherwise
-     */
-    public static boolean isValidIrideIdentity(String irideDigitalIdentity) {
-        if (StringUtils.isEmpty(irideDigitalIdentity)) {
-            return false;
-        }
-
-        try {
-            final IrideIdentityInvalidTokenValue[] invalidTokens = VALIDATOR.validate(
-                TOKENIZER.tokenize(irideDigitalIdentity)
-            );
-
-            if (ArrayUtils.isEmpty(invalidTokens)) {
-                return true;
-            } else {
-                LOGGER.warning(IrideSecurityUtils.toString(invalidTokens));
-
-                return false;
-            }
-        } catch (IrideIdentityTokenizationException e) {
-            LOGGER.severe(e.getMessage());
-
-            return false;
-        }
-    }
-
-    /**
-     * Utility method to validate an <code>IRIDE</code> Digital Identity string representation,
-     * returning {@code true} if the given string value <em>does not</em> represent a valid <code>IRIDE</code> Digital Identity,
-     * {@code false} otherwise.
-     *
-     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
-     * @return {@code true} if the given string value <em>does not</em> represent a valid <code>IRIDE</code> Digital Identity,
-     *         {@code false} otherwise
-     */
-    public static boolean isNotValidIrideIdentity(String irideDigitalIdentity) {
-        return ! isValidIrideIdentity(irideDigitalIdentity);
-    }
-
-    /**
      * Constructor.<p>
      * Builds an <code>IRIDE</code> Digital Identity entity
      * out of an <code>IRIDE</code> Digital Identity string representation,
@@ -246,7 +183,73 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
         this.internalRepresentation = null;
 
-        this.formatter = new IrideIdentityFormatter(this);
+        this.formatter = new IrideIdentityFormatter();
+    }
+
+    /**
+     * Utility method to parse an <code>IRIDE</code> Digital Identity string representation,
+     * returning an <code>IRIDE</code> Digital Identity entity if the given string value
+     * represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise.
+     *
+     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
+     * @return an <code>IRIDE</code> Digital Identity entity if the given string value
+     *         represents a valid <code>IRIDE</code> Digital Identity, {@code null} otherwise
+     */
+    public static IrideIdentity parseIrideIdentity(String irideDigitalIdentity) {
+        IrideIdentity irideIdentity = null;
+        try {
+            irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
+        } catch (IrideIdentityTokenizationException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+
+        return irideIdentity;
+    }
+
+    /**
+     * Utility method to validate an <code>IRIDE</code> Digital Identity string representation,
+     * returning {@code true} if the given string value represents a valid <code>IRIDE</code> Digital Identity,
+     * {@code false} otherwise.
+     *
+     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
+     * @return {@code true} if the given string value represents a valid <code>IRIDE</code> Digital Identity,
+     *         {@code false} otherwise
+     */
+    public static boolean isValidIrideIdentity(String irideDigitalIdentity) {
+        if (StringUtils.isEmpty(irideDigitalIdentity)) {
+            return false;
+        }
+
+        try {
+            final IrideIdentityInvalidTokenValue[] invalidTokens = VALIDATOR.validate(
+                TOKENIZER.tokenize(irideDigitalIdentity)
+            );
+
+            if (ArrayUtils.isEmpty(invalidTokens)) {
+                return true;
+            } else {
+                LOGGER.warning(IrideSecurityUtils.toString(invalidTokens));
+
+                return false;
+            }
+        } catch (IrideIdentityTokenizationException e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+
+            return false;
+        }
+    }
+
+    /**
+     * Utility method to validate an <code>IRIDE</code> Digital Identity string representation,
+     * returning {@code true} if the given string value <em>does not</em> represent a valid <code>IRIDE</code> Digital Identity,
+     * {@code false} otherwise.
+     *
+     * @param irideDigitalIdentity an <code>IRIDE</code> Digital Identity string representation
+     * @return {@code true} if the given string value <em>does not</em> represent a valid <code>IRIDE</code> Digital Identity,
+     *         {@code false} otherwise
+     */
+    public static boolean isNotValidIrideIdentity(String irideDigitalIdentity) {
+        return ! isValidIrideIdentity(irideDigitalIdentity);
     }
 
     /**
@@ -305,7 +308,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
      */
     public String toInternalRepresentation() {
         if (this.internalRepresentation == null) {
-            this.internalRepresentation = this.formatter.format(IrideIdentityFormatter.FormatStyle.INTERNAL_REPRESENTATION);
+            this.internalRepresentation = this.formatter.format(this, FormatStyle.INTERNAL_REPRESENTATION);
         }
 
         return this.internalRepresentation;
@@ -386,7 +389,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
      */
     @Override
     public String toString() {
-        return this.formatter.format(IrideIdentityFormatter.FormatStyle.REFLECTION_TO_STRING);
+        return this.formatter.format(this, FormatStyle.REFLECTION_TO_STRING);
     }
 
     /**
