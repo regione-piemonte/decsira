@@ -31,10 +31,12 @@
          {
            "headerName": "Codice SIRA",
            "xpath": ["sira:impianto/sira:Sede/sira:codiceSira/text()"],
+           "sortAttribute": "sira:impianto/sira:Sede/sira:codiceSira",
            "type": 1
          },
          {
            "headerName": "Codice fiscale (P.IVA)",
+           "sortAttribute": "sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()",
            "xpath": ["sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()"],
            "profiles": ["B"],
            "type": 2
@@ -42,11 +44,13 @@
          {
            "headerName": "Comune",
            "xpath": ["sira:impianto/sira:Sede/sira:comune/text()"],
+           "sortAttribute": "sira:impianto/sira:Sede/sira:comune",
            "type": 2
          },
          {
            "headerName": "Autorizzazioni ambientali",
            "xpath": ["sira:attivita/sira:Attivita/sira:descrizione/text()"],
+           "suppressSorting": true,
            "type": 2
          },
          {
