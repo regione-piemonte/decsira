@@ -21,7 +21,7 @@
     background-color: white;
     border-radius: 10px;
     opacity: 0.7;
-    top: 5px;
+    top: 55px;
 }
 
 .links {
@@ -155,7 +155,7 @@
     margin: 8px;
 }
 
-#mapstore-zoomtomaxextent {
+#mapstore-zoomtomaxextents {
     box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
     z-index: 10;
     top: 67px;
@@ -205,19 +205,40 @@
 .handle_querypanel {
     cursor: move;
 }
-
+div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class^="glyphicon-triangle-"]:before, [class*=" glyphicon-triangle-"]:before {
+    font-family: inherit !important;
+}
 .querypanel-container .glyphicon-collapse-down:before {
+    color: black;
     content: "\e252";
+    font-family: inherit !important;
 }
-
+.querypanel-container .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
 .querypanel-container .glyphicon-expand:before {
+    color: black;
     content: "\e251";
+    font-family: inherit !important;
 }
 
-.querypanel-container .glyphicon-minus-sign {
+.querypanel-container [class*=" glyphicon-minus"]:before  {
+    content: "\e082";
+    font-family: inherit !important;
+    font-size: 14px;
+}
+.querypanel-container [class*=" glyphicon-remove"]:before {
     content: "\e014";
+    font-family: inherit !important;
+    font-size: 14px;
 }
-
+.querypanel-container [class*=" glyphicon-plus"]:before {
+    content: "\2b";
+    font-family: inherit !important;
+    font-size: 14px;
+}
 .querypanel-container .col-xs-12 h4 {
     color: #31708f;
     background-color: #d9edf7;
@@ -227,4 +248,6 @@
     border-radius: 4px;
     font-size: 14px;
 }
-
+#mapstore-getfeatureinfo .panel-body {
+    padding: 15px;
+}

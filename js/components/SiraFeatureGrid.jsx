@@ -228,7 +228,7 @@ const SiraFeatureGrid = React.createClass({
                             <span>{header}</span>
                         </Col>
                         <Col xs={1} sm={1} md={1} lg={1}>
-                            <button onClick={this.onGridClose} className="close grid-close"><span>×</span></button>
+                            <button onClick={this.onGridClose} className="close grid-close"><span>X</span></button>
                         </Col>
                     </Row>
                 </Grid>
