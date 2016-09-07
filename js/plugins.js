@@ -9,6 +9,11 @@
 module.exports = {
     plugins: {
         MapPlugin: require('../MapStore2/web/client/plugins/Map'),
+        MousePositionPlugin: require('../MapStore2/web/client/plugins/MousePosition'),
+        PrintPlugin: require('../MapStore2/web/client/plugins/Print'),
+        SnapshotPlugin: require('../MapStore2/web/client/plugins/Snapshot'),
+        ShapeFilePlugin: require('../MapStore2/web/client/plugins/ShapeFile'),
+        MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
         DrawerMenuPlugin: require('../MapStore2/web/client/plugins/DrawerMenu'),
         TOCPlugin: require('../MapStore2/web/client/plugins/TOC'),
         BackgroundSwitcherPlugin: require('../MapStore2/web/client/plugins/BackgroundSwitcher'),
