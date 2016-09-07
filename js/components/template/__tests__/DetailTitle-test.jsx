@@ -9,7 +9,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const expect = require('expect');
 
-const store = require('../../../stores/store');
+const store = require('../../../stores/store')(undefined, undefined, {});
 const DetailTitle = require('../DetailTitle');
 
 describe('DetailTitle tests', () => {

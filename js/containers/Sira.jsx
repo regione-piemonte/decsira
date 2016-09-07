@@ -7,14 +7,13 @@
  */
 const React = require('react');
 
+
 require('../../assets/css/sira.css');
+require('../../MapStore2/web/client/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
 const assign = require('object-assign');
 
-const {Glyphicon} = require('react-bootstrap');
-
-const SiraMap = require('../components/SiraMap');
 const SiraQueryPanel = require('../components/SiraQueryPanel');
 const SiraFeatureGrid = require('../components/SiraFeatureGrid');
 const Card = require('../components/template/Card');
@@ -42,46 +41,9 @@ const authParams = {
     }
 };
 
-const Message = require('../../MapStore2/web/client/components/I18N/Message');
+const { changeMousePointer} = require('../../MapStore2/web/client/actions/map');
 
-const {changeMapView, changeZoomLevel, changeMousePointer} = require('../../MapStore2/web/client/actions/map');
-const {setControlProperty} = require('../../MapStore2/web/client/actions/controls');
-
-
-const {textSearch, resultsPurge} = require("../../MapStore2/web/client/actions/search");
-const SearchBar = connect(() => ({}), {
-     onSearch: textSearch,
-     onSearchReset: resultsPurge
-})(require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar'));
-
-const NominatimResultList = connect((state) => ({
-    results: state.search || null,
-    mapConfig: state.map || {}
-}), {
-    onItemClick: changeMapView,
-    afterItemClick: resultsPurge
-})(require('../../MapStore2/web/client/components/mapcontrols/search/geocoding/NominatimResultList'));
-
-const MapToolBar = connect((state) => ({
-    activeKey: state.controls && state.controls.toolbar && state.controls.toolbar.active || null
-}),
-{
-    onActivateItem: setControlProperty.bind(null, 'toolbar', 'active')
-})(require("../../MapStore2/web/client/components/toolbar/MapToolbar"));
-
-const {changeMapInfoState} = require('../actions/mapInfo');
-const Info = connect((state) => ({
-    pressed: state.mapInfo && state.mapInfo.infoEnabled
-}), {
-    onClick: changeMapInfoState
-})(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
-
-const {changeTopologyMapInfoState} = require('../actions/mapInfo');
-const TopologyInfo = connect((state) => ({
-    pressed: state.mapInfo && state.mapInfo.topologyInfoEnabled
-}), {
-    onClick: changeTopologyMapInfoState
-})(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
+const MapViewer = require('../../MapStore2/web/client/containers/MapViewer');
 
 const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../actions/mapInfo');
 const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
@@ -100,7 +62,7 @@ const GetFeatureInfo = connect((state) => ({
     detailsConfig: state.mapInfo.detailsConfig,
     // modelConfig: state.mapInfo.modelConfig,
     template: state.mapInfo.template,
-    map: state.map,
+    map: state.map && state.map.present,
     infoType: state.mapInfo.infoType,
     layers: state.layers && state.layers.flat || [],
     clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint
@@ -120,88 +82,20 @@ const GetFeatureInfo = connect((state) => ({
     };
 })(require('../components/identify/GetFeatureInfo'));
 
-const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
-const {changeLayerProperties, changeGroupProperties, toggleNode} = require('../../MapStore2/web/client/actions/layers');
-// const {sortNode} = require('../../MapStore2/web/client/actions/layers');
-const layersIcon = require('../../MapStore2/web/client/product/assets/img/layers.png');
-
-const getGroupVisibility = (nodes) => {
-    let visibility = false;
-    nodes.forEach((node) => {
-        if (node.visibility) {
-            visibility = true;
-        }
-    });
-    return visibility;
-};
-
-const addGroupVisibility = (groups) => {
-    return groups.map((group) => assign({}, group, {visibility: getGroupVisibility(group.nodes)}));
-};
-
-const LayerTree = connect((state) => ({
-    groups: addGroupVisibility(state.layers && state.layers.groups && LayersUtils.denormalizeGroups(state.layers.flat, state.layers.groups).groups || [])
-}), {
-    propertiesChangeHandler: changeLayerProperties,
-    changeGroupProperties,
-    onToggleGroup: LayersUtils.toggleByType('groups', toggleNode),
-    onToggleLayer: LayersUtils.toggleByType('layers', toggleNode)
-    // onSort: LayersUtils.sortUsing(LayersUtils.sortLayers, sortNode)
-})(require('../components/LayerTree'));
-
-const BackgroundSwitcher = connect((state) => ({
-    layers: state.layers && state.layers.flat && state.layers.flat.filter((layer) => layer.group === "background") || []
-}), {
-    propertiesChangeHandler: changeLayerProperties
-})(require('../../MapStore2/web/client/components/TOC/background/BackgroundSwitcher'));
-
-const ScaleBox = connect((state) => ({
-    currentZoomLvl: state.map && state.map.zoom
-}), {
-    onChange: changeZoomLevel
-})(require("../../MapStore2/web/client/components/mapcontrols/scale/ScaleBox"));
-
-const {createSelector} = require('reselect');
-const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
-const selector = createSelector([mapSelector, state => state.mapInitialConfig], (map, mapInitialConfig) => ({mapConfig: map, mapInitialConfig: mapInitialConfig}));
-
-const ZoomToMaxExtentButton = connect(selector, {
-    changeMapView
-})(require("../../MapStore2/web/client/components/buttons/ZoomToMaxExtentButton"));
-
-const {changeLocateState} = require('../../MapStore2/web/client/actions/locate');
-const LocateBtn = connect((state) => ({
-    locate: state.locate && state.locate.state || 'DISABLED'
-}), {
-    onClick: changeLocateState
-})(require('../../MapStore2/web/client/components/mapcontrols/locate/LocateBtn'));
-
-const lineRuleIcon = require('../../MapStore2/web/client/product/assets/img/line-ruler.png');
-
-const {changeMeasurementState} = require('../../MapStore2/web/client/actions/measurement');
-const MeasureComponent = connect((state) => {
-    return {
-        measurement: state.measurement || {},
-        lineMeasureEnabled: state.measurement && state.measurement.lineMeasureEnabled || false,
-        areaMeasureEnabled: state.measurement && state.measurement.areaMeasureEnabled || false,
-        bearingMeasureEnabled: state.measurement && state.measurement.bearingMeasureEnabled || false
-    };
-}, {
-    toggleMeasure: changeMeasurementState
-})(require('../../MapStore2/web/client/components/mapcontrols/measure/MeasureComponent'));
-
 const {
     loadFeatureTypeConfig
 } = require('../actions/siradec');
 
 let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
 const Sira = React.createClass({
     propTypes: {
-        params: React.PropTypes.shape({
-            profile: React.PropTypes.string
-        }),
+        mode: React.PropTypes.string,
+        params: React.PropTypes.object,
+        loadMapConfig: React.PropTypes.func,
+        reset: React.PropTypes.func,
         // featureGrigConfigUrl: React.PropTypes.string,
         featureTypeConfigUrl: React.PropTypes.string,
         error: React.PropTypes.object,
@@ -211,13 +105,17 @@ const Sira = React.createClass({
         controls: React.PropTypes.object,
         toggleSiraControl: React.PropTypes.func,
         setProfile: React.PropTypes.func,
-        onLoadFeatureTypeConfig: React.PropTypes.func
+        onLoadFeatureTypeConfig: React.PropTypes.func,
+        plugins: React.PropTypes.object,
+        viewerParams: React.PropTypes.object
     },
     getDefaultProps() {
         return {
             toggleSiraControl: () => {},
             setProfile: () => {},
-            onLoadFeatureTypeConfig: () => {}
+            onLoadFeatureTypeConfig: () => {},
+            mode: 'desktop',
+            viewerParams: {mapType: "openlayers"}
         };
     },
     componentWillMount() {
@@ -236,13 +134,6 @@ const Sira = React.createClass({
         }
     },
     render() {
-        /*let card = this.props.card.xml ? (
-            // <Card model={{xml: this.props.cardXml, authParam: authParams[this.props.params.profile]}}/>
-            <Card authParam={authParams[this.props.params.profile]}/>
-        ) : (
-            <span/>
-        );*/
-
         return (
             <div className="mappaSiraDecisionale">
                 <Header onBack={this.back} onHome={this.goHome}/>
@@ -251,90 +142,26 @@ const Sira = React.createClass({
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
                     <div className="info">Profile: {this.props.params.profile}</div>
-                    <SiraMap
-                        params={{authkey: authParams[this.props.params.profile].authkey}}/>
+                    <MapViewer
+                    plugins={this.props.plugins}
+                    params={this.props.viewerParams}
+                    />
                     <SiraQueryPanel
-                        params={{
-                            authkey: authParams[this.props.params.profile].authkey
-                        }}/>
+                    params={{
+                        authkey: authParams[this.props.params.profile].authkey
+                    }}/>
                     <SiraFeatureGrid
-                        params={{
-                            authkey: authParams[this.props.params.profile].authkey
-                        }}
+                    params={{
+                        authkey: authParams[this.props.params.profile].authkey
+                    }}
                         // featureGrigConfigUrl={this.props.featureGrigConfigUrl}
                         profile={this.props.params.profile}/>
-
                     <Card authParam={authParams[this.props.params.profile]}/>
-
-                    <MapToolBar
-                        key="mapToolbar"
-                        containerStyle={{
-                            position: "absolute",
-                            top: "50px",
-                            right: "5px",
-                            marginRight: "10px",
-                            marginTop: "5px",
-                            zIndex: 1000
-                        }}>
-
-                        <LocateBtn
-                            key="locate"
-                            tooltip={<Message msgId="locate.tooltip"/>}/>
-
-                        <Info
-                            key="infoButton"
-                            isButton={true}
-                            glyphicon="info-sign"/>
-
-                        <LayerTree
-                            key="layerSwitcher"
-                            isPanel={true}
-                            buttonTooltip={<Message msgId="layers"/>}
-                            title={<Message msgId="layers"/>}
-                            helpText={<Message msgId="helptexts.layerSwitcher"/>}
-                            icon={<img src={layersIcon}/>}/>
-
-                        <BackgroundSwitcher
-                            key="backgroundSwitcher"
-                            isPanel={true}
-                            title={<div><Message msgId="background"/></div>}
-                            helpText={<Message msgId="helptexts.backgroundSwitcher"/>}
-                            buttonTooltip={<Message msgId="backgroundSwither.tooltip"/>}
-                            icon={<Glyphicon glyph="globe"/>}/>
-
-                        <MeasureComponent
-                            key="measureComponent"
-                            icon={<img src={lineRuleIcon}/>}
-                            isPanel={true}
-                            title={<div><Message msgId="measureComponent.title"/></div>}
-                            buttonTooltip={<Message msgId="measureComponent.tooltip"/>}
-                            helpText={<Message msgId="helptexts.measureComponent"/>}
-                            lengthButtonText={<Message msgId="measureComponent.lengthButtonText"/>}
-                            areaButtonText={<Message msgId="measureComponent.areaButtonText"/>}
-                            resetButtonText={<Message msgId="measureComponent.resetButtonText"/>}
-                            lengthLabel={<Message msgId="measureComponent.lengthLabel"/>}
-                            areaLabel={<Message msgId="measureComponent.areaLabel"/>}
-                            bearingLabel={<Message msgId="measureComponent.bearingLabel"/>}/>
-
-                        <TopologyInfo
-                            key="topologyInfoButton"
-                            isButton={true}
-                            glyphicon="glyphicon glyphicon-picture"/>
-                    </MapToolBar>
-
-                    <SearchBar
-                        key="seachBar"/>
-                    <NominatimResultList
-                        key="nominatimresults"/>
                     <GetFeatureInfo
                         display={"accordion"}
                         params={{authkey: authParams[this.props.params.profile].authkey}}
                         profile={this.props.params.profile}
                         key="getFeatureInfo"/>
-                    <ScaleBox
-                        key="scaleBox"/>
-                    <ZoomToMaxExtentButton
-                        key="zoomToMaxExtent" useInitialExtent={true}/>
                 </div>
             </div>
         );
@@ -357,6 +184,7 @@ const Sira = React.createClass({
 
 module.exports = connect((state) => {
     return {
+        mode: 'desktop',
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
