@@ -103,31 +103,22 @@ public final class IrideIdentityFormatter {
     }
 
     /**
-     * <code>IRIDE</code> Digital Identity entity instance.
-     */
-    private final IrideIdentity irideIdentity;
-
-    /**
-     * Constructor.
-     *
-     * @param irideIdentity
-     */
-    public IrideIdentityFormatter(IrideIdentity irideIdentity) {
-        this.irideIdentity = irideIdentity;
-    }
-
-    /**
      * Returns the formatted representation of the <code>IRIDE</code> Digital Identity entity
      * around which this {@link IrideIdentityFormatter} instance is built, as per given {@link FormatStyle},
      * or {@code null} if no {@link FormatStyle} is given.
      *
+     * @param irideIdentity <code>IRIDE</code> Digital Identity entity object to format
      * @param style the given {@link FormatStyle}
      * @return the formatted representation of the <code>IRIDE</code> Digital Identity entity
      *         around which this {@link IrideIdentityFormatter} instance is built, as per given {@link FormatStyle},
      *         or {@code null} if no {@link FormatStyle} is given
      */
-    public String format(FormatStyle style) {
-        return style == null ? null : style.format(this.irideIdentity);
+    public String format(IrideIdentity irideIdentity, FormatStyle style) {
+        if (irideIdentity == null || style == null) {
+            return null;
+        }
+
+        return style.format(irideIdentity);
     }
 
 }
