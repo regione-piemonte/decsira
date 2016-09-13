@@ -327,12 +327,12 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
         final CompareToBuilder builder = new CompareToBuilder();
         builder.append(this.codFiscale, other.codFiscale)
-        .append(this.nome, other.nome)
-        .append(this.cognome, other.cognome)
-        .append(this.idProvider, other.idProvider)
-        .append(this.timestamp, other.timestamp)
-        .append(this.livelloAutenticazione, other.livelloAutenticazione)
-        .append(this.mac, other.mac);
+               .append(this.nome, other.nome)
+               .append(this.cognome, other.cognome)
+               .append(this.idProvider, other.idProvider)
+               .append(this.timestamp, other.timestamp)
+               .append(this.livelloAutenticazione, other.livelloAutenticazione)
+               .append(this.mac, other.mac);
 
         return builder.toComparison();
     }
@@ -344,12 +344,12 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
     public int hashCode() {
         final HashCodeBuilder builder = new HashCodeBuilder();
         builder.append(this.codFiscale)
-        .append(this.nome)
-        .append(this.cognome)
-        .append(this.idProvider)
-        .append(this.timestamp)
-        .append(this.livelloAutenticazione)
-        .append(this.mac);
+               .append(this.nome)
+               .append(this.cognome)
+               .append(this.idProvider)
+               .append(this.timestamp)
+               .append(this.livelloAutenticazione)
+               .append(this.mac);
 
         return builder.toHashCode();
     }
@@ -373,12 +373,12 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
 
         final EqualsBuilder builder = new EqualsBuilder();
         builder.append(this.codFiscale, other.codFiscale)
-        .append(this.nome, other.nome)
-        .append(this.cognome, other.cognome)
-        .append(this.idProvider, other.idProvider)
-        .append(this.timestamp, other.timestamp)
-        .append(this.livelloAutenticazione, other.livelloAutenticazione)
-        .append(this.mac, other.mac);
+               .append(this.nome, other.nome)
+               .append(this.cognome, other.cognome)
+               .append(this.idProvider, other.idProvider)
+               .append(this.timestamp, other.timestamp)
+               .append(this.livelloAutenticazione, other.livelloAutenticazione)
+               .append(this.mac, other.mac);
 
         return builder.isEquals();
     }

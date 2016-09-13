@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,33 +16,22 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride;
-
-import org.geoserver.security.iride.util.IrideSecurityUtilsTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+package org.geoserver.security.iride.util.factory;
 
 /**
- * <code>IRIDE</code> Identity main <code>JUnit</code> Test Suite.
+ * Generic interface for <em>Factory</em> classes.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+ *
+ * @param <T> the type of objects the <em>Factory</em> can create.
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-    IrideRoleServiceTest.class,
-    IrideSecurityUtilsTest.class,
-    org.geoserver.security.iride.identity.AllTests.class,
-    org.geoserver.security.iride.soap.request.iride.AllTests.class,
-    org.geoserver.security.iride.util.template.AllTests.class,
-})
-public final class AllTests {
+public interface Factory<T> {
 
     /**
-     * Constructor.
+     * Returns a new object of the speficic type &lt;T&gt;.
+     *
+     * @return
      */
-    private AllTests() {
-        /* NOP */
-    }
+    T create();
 
 }

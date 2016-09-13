@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,33 +16,42 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride;
+package org.geoserver.security.iride.policy;
 
-import org.geoserver.security.iride.util.IrideSecurityUtilsTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import it.csi.iride2.policy.entity.Application;
+import it.csi.iride2.policy.entity.UseCase;
 
 /**
- * <code>IRIDE</code> Identity main <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-    IrideRoleServiceTest.class,
-    IrideSecurityUtilsTest.class,
-    org.geoserver.security.iride.identity.AllTests.class,
-    org.geoserver.security.iride.soap.request.iride.AllTests.class,
-    org.geoserver.security.iride.util.template.AllTests.class,
-})
-public final class AllTests {
+public interface PolicyEnforcerHelper {
 
     /**
-     * Constructor.
+     *
+     * @return
      */
-    private AllTests() {
-        /* NOP */
-    }
+    Application[] findApplications();
+
+    /**
+     *
+     * @param application
+     * @return
+     */
+    UseCase[] findUseCasesForApplication(Application application);
+
+    /**
+     *
+     * @param application
+     * @return
+     */
+    boolean isApplicationEsistente(Application application);
+
+    /**
+     *
+     * @param useCase
+     * @return
+     */
+    boolean isUseCaseEsistente(UseCase useCase);
 
 }
