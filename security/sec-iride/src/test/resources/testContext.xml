@@ -10,41 +10,8 @@
 
     <!-- === FreeMarker === BEGIN === -->
 
-    <!--
-      Configure FreeMarker:
-
-       - preferred charset: template files are stored in to UTF-8
-       - TemplateExceptionHandler to handler errors
-       - TemplateLoader to handle the resolution of where the template files come from
-    -->
     <bean id="templateConfiguration"
-          class="freemarker.template.Configuration">
-        <property name="defaultEncoding" value="UTF-8" />
-        <property name="templateExceptionHandler">
-            <util:constant static-field="freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER" />
-        </property>
-    </bean>
-    <!--
-      Unfortunately, even if it "seems" a property of freemarker.template.Configuration class, "templateLoader" it's not.
-      Therefore we need to split in two the preparation of "templateConfiguration" bean,
-      using MethodInvokingFactoryBean to explicitly call "setTemplateLoader" method.
-    -->
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="templateConfiguration"/>
-        </property>
-        <property name="targetMethod">
-            <value>setTemplateLoader</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <bean class="freemarker.cache.ClassTemplateLoader">
-                    <constructor-arg index="0" value="org.geoserver.security.iride.IrideSecurityProvider" />
-                    <constructor-arg index="1" value="/iride/soap/request" />
-                </bean>
-            </list>
-        </property>
-    </bean>
+          class="org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerConfigurationFactoryBean" />
 
     <!-- === FreeMarker ===   END === -->
 
