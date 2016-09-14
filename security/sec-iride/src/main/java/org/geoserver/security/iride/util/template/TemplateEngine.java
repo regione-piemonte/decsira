@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,33 +16,31 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride;
+package org.geoserver.security.iride.util.template;
 
-import org.geoserver.security.iride.util.IrideSecurityUtilsTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
- * <code>IRIDE</code> Identity main <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-    IrideRoleServiceTest.class,
-    IrideSecurityUtilsTest.class,
-    org.geoserver.security.iride.identity.AllTests.class,
-    org.geoserver.security.iride.soap.request.iride.AllTests.class,
-    org.geoserver.security.iride.util.template.AllTests.class,
-})
-public final class AllTests {
+public interface TemplateEngine {
 
     /**
-     * Constructor.
+     *
+     * @param template
+     * @param context
+     * @param writer
      */
-    private AllTests() {
-        /* NOP */
-    }
+    void process(String template, Object context, Writer writer) throws IOException;
+
+    /**
+     *
+     * @param template
+     * @param context
+     * @return
+     */
+    String process(String template, Object context) throws IOException;
 
 }
