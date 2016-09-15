@@ -38,6 +38,14 @@ const authParams = {
     B: {
         userName: "profilob",
         authkey: "d6e5f5a5-2d26-43aa-8af3-13f8dcc0d03c"
+    },
+    C: {
+        userName: "profiloc",
+        authkey: "0505bb64-21b6-436c-86f9-9c1280f15a6c"
+    },
+    D: {
+        userName: "profilod",
+        authkey: "4176ea85-9a9a-42a5-8913-8f6f85813dab"
     }
 };
 

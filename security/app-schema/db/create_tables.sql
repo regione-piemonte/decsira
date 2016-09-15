@@ -97,6 +97,7 @@ CREATE TABLE sipra.t_denorm_operaz_recupero AS
         sipra.sipra_dt_r_rifiuto_or ror
             INNER JOIN sipra.sipra_dt_d_operaz_recupero _or ON (ror.id_operaz_recupero = _or.id_operaz_recupero);
 
+ALTER TABLE sipra.t_denorm_operaz_recupero ADD CONSTRAINT pk_t_denorm_operaz_recupero PRIMARY KEY ("gml_id", "id_scheda_rifiuto");
 ALTER TABLE sipra.t_denorm_operaz_recupero ADD CONSTRAINT fk_t_denorm_operaz_recupero__id_scheda_rifiuto FOREIGN KEY (id_scheda_rifiuto) REFERENCES sipra.t_scheda_rifiuto (id_scheda_rifiuto);
 
 
@@ -110,6 +111,7 @@ CREATE TABLE sipra.t_denorm_codice_cer AS
         sipra.sipra_dt_r_rifiuto_cer rc
             INNER JOIN sipra.sipra_dt_d_codice_cer cc ON (rc.codice_cer = cc.codice_cer);
 
+ALTER TABLE sipra.t_denorm_codice_cer ADD CONSTRAINT pk_t_denorm_codice_cer PRIMARY KEY ("gml_id", "id_scheda_rifiuto");
 ALTER TABLE sipra.t_denorm_codice_cer ADD CONSTRAINT fk_t_denorm_codice_cer__id_scheda_rifiuto FOREIGN KEY (id_scheda_rifiuto) REFERENCES sipra.t_scheda_rifiuto (id_scheda_rifiuto);
 
 
@@ -122,5 +124,6 @@ CREATE TABLE sipra.t_denorm_tipo_impianto AS
     FROM
         sipra.sipra_dt_r_tipimp_imprif rti
             INNER JOIN sipra.sipra_dt_d_tipo_impianto ti ON (rti.id_tipo_impianto = ti.id_tipo_impianto);
-
+            
+ALTER TABLE sipra.t_denorm_tipo_impianto ADD CONSTRAINT pk_t_denorm_tipo_impianto PRIMARY KEY ("gml_id", "id_rifiuto");
 ALTER TABLE sipra.t_denorm_tipo_impianto ADD CONSTRAINT fk_t_denorm_tipo_impianto__id_rifiuto FOREIGN KEY (id_rifiuto) REFERENCES sipra.t_aua (id_rifiuto);
