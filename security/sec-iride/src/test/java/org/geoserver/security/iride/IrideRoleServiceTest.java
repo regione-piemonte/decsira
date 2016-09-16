@@ -44,6 +44,9 @@ import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.impl.GeoServerRole;
 import org.geoserver.security.impl.RoleCalculator;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory;
+import org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerConfigurationDefaultFactory;
+import org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerTemplateEngineFactory;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -58,8 +61,11 @@ public class IrideRoleServiceTest extends TestCase {
     private static final String MAJOR_SAMPLE_USER = "AAAAAA00A11F000N/DEMO 25/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3ukdZkuV0A1ffg==";
     private static final String SUPER_SAMPLE_USER = "AAAAAA00A11E000M/DEMO 24/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3ukdZkuV0A1ffg==";
     private static final String USER_WITH_EXTRA_PARTS = "AAAAAA00A11D000L/DEMO 23/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3/kdZkuV0A1ffg==";
+
     File tempFolder;
     GeoServerSecurityManager securityManager;
+    IrideRoleServiceFactory irideRoleServiceFactory;
+    FreeMarkerTemplateEngineFactory freeMarkerTemplateEngineFactory;
     IrideSecurityProvider securityProvider;
     IrideSecurityServiceConfig config;
 
@@ -73,7 +79,13 @@ public class IrideRoleServiceTest extends TestCase {
         tempFolder.mkdirs();
         GeoServerResourceLoader resourceLoader = new GeoServerResourceLoader(tempFolder);
         securityManager = new GeoServerSecurityManager(new GeoServerDataDirectory(resourceLoader));
-        securityProvider = new IrideSecurityProvider(securityManager);
+        irideRoleServiceFactory = new IrideRoleServiceFactory(
+        	FreeMarkerTemplateEngineFactory.createTemplateEngine(
+        		FreeMarkerConfigurationDefaultFactory.createConfiguration(),
+        		"xml"
+        	)
+        );
+        securityProvider = new IrideSecurityProvider(securityManager, irideRoleServiceFactory);
         config = new IrideSecurityServiceConfig();
         config.setApplicationName("SIIG");
         config.setAdminRole("SUPERUSER_SIIG");
@@ -96,6 +108,7 @@ public class IrideRoleServiceTest extends TestCase {
 			assertEquals(e.getMessage(), "'null' is not a valid IRIDE server URL ");
 		}
     }
+
     public void testGetRolesForBaseUser() throws IOException {
         //config.setServerURL("http://localhost:8085/iride2simApplIridepepWsfad/services/iride2simIridepep");
         IrideRoleService roleService = wrapRoleService(createRoleService(), "base");
@@ -162,7 +175,7 @@ public class IrideRoleServiceTest extends TestCase {
         assertEquals("52paOWJH3/kdZkuV0A1ffg==", m.group(1));
         m = lookForInterna.matcher(roleService.getHttpClient().getState().toString());
         assertTrue(m.find());
-        assertEquals("AAAAAA00A11D000L/DEMO 23/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8", m.group(1));
+        assertEquals("AAAAAA00A11D000L/DEMO 23/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3/kdZkuV0A1ffg==", m.group(1));
     }
 
     /**

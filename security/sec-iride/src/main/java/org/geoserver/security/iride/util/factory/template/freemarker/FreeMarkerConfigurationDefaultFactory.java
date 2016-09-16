@@ -21,6 +21,7 @@ package org.geoserver.security.iride.util.factory.template.freemarker;
 import java.nio.charset.StandardCharsets;
 
 import freemarker.cache.ClassTemplateLoader;
+import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 
@@ -40,6 +41,17 @@ public class FreeMarkerConfigurationDefaultFactory extends FreeMarkerConfigurati
      */
     private static final String TEMPLATE_BASE_PATH = "/iride/soap/request";
 
+    /**
+     * Static factory method, useful for testing.
+     *
+     * @return a new {@link Configuration} object
+     */
+    public static Configuration createConfiguration() {
+        final FreeMarkerConfigurationFactory factory = new FreeMarkerConfigurationDefaultFactory();
+
+        return factory.create();
+    }
+
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.iride.util.factory.template.freemarker.AbstractFreeMarkerConfigurationFactory#newConfiguration()
@@ -47,19 +59,20 @@ public class FreeMarkerConfigurationDefaultFactory extends FreeMarkerConfigurati
     /**
      * Return a new {@link Configuration} object, configured as follows:
      * <ul>
-     *   <li>the default encoding with which template files are stored is set to <code>UTF-8</code></li>
-     *   <li>the <code>TemplateExceptionHandler</code> with which to handle errors is set <code>TemplateExceptionHandler.RETHROW_HANDLER</code></li>
-     *   <li>the <code>TemplateLoader</code> with which to handle the resolution of where the template files come from, that is set to <code>ClassTemplateLoader</code></li>
+     *   <li>the {@link TemplateLoader} with which to handle the resolution of where the template files come from, that is set to {@link ClassTemplateLoader}</li>
+     *   <li>the default encoding with which template files are stored,, that is set to <code>UTF-8</code></li>
+     *   <li>the output encoding with which template files get compiled to, that is set to <code>UTF-8</code></li>
+     *   <li>the {@link TemplateExceptionHandler} with which to handle errors, that is set to {@link TemplateExceptionHandler#RETHROW_HANDLER}</li>
      * </ul>
      */
     @Override
     protected Configuration newConfiguration() {
         final Configuration configuration = new Configuration();
+
+        configuration.setClassForTemplateLoading(this.getClass(), TEMPLATE_BASE_PATH);
         configuration.setDefaultEncoding(StandardCharsets.UTF_8.name());
+        configuration.setOutputEncoding(configuration.getDefaultEncoding());
         configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        configuration.setTemplateLoader(
-            new ClassTemplateLoader(this.getClass(), TEMPLATE_BASE_PATH)
-        );
 
         return configuration;
     }

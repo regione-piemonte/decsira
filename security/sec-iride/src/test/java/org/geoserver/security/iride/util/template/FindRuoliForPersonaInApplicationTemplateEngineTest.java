@@ -16,7 +16,7 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.soap.request.iride;
+package org.geoserver.security.iride.util.template;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -24,32 +24,47 @@ import static org.junit.Assert.*;
 import it.csi.iride2.policy.entity.Application;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.geoserver.security.iride.identity.IrideIdentity;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
-
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
- * <code>IRIDE</code> service <code>SOAP</code> <em>findRuoliForPersonaInApplication</em> request template compilation (using <a href="http://freemarker.org/">FreeMarker</a>) <code>JUnit</code>.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class FindRuoliForPersonaInApplicationTemplateCompilationTest extends AbstractIrideSoapRequestTemplateCompilationTest {
+public final class FindRuoliForPersonaInApplicationTemplateEngineTest extends AbstractTemplateEngineTest {
 
     /**
-     * Test method for {@link Template#process(Object, java.io.Writer)}.
+     * Constructor.
+     *
+     * @param templateName
+     * @param contextBeanName
      */
-    @Test
-    public void test() throws TemplateException, IOException {
+    public FindRuoliForPersonaInApplicationTemplateEngineTest(String templateName, String contextBeanName) {
+        super(templateName, contextBeanName);
+    }
+
+    @Parameters(name = "Processing {0} template, with {1} Spring Bean context")
+    public static Collection<String[]> getTestParameters() {
+        return Arrays.asList(
+            new String[][] {
+                {"findRuoliForPersonaInApplication", "irideIdentityAndApplication"},
+            }
+        );
+    }
+
+    /* (non-Javadoc)
+     * @see org.geoserver.security.iride.util.template.AbstractTemplateEngineTest#doTestTemplateCompilation()
+     */
+    @Override
+    protected void doTestTemplateCompilation() throws IOException {
         final String result = this.processTemplate();
 
         assertThat(result, not(isEmptyOrNullString()));
 
-        final IrideIdentity irideIdentity = (IrideIdentity) this.getDataModel().get("irideIdentity");
+        final IrideIdentity irideIdentity = (IrideIdentity) this.getContext().get("irideIdentity");
 
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in0/codFiscale", equalTo(irideIdentity.getCodFiscale())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in0/nome", equalTo(irideIdentity.getNome())));
@@ -60,29 +75,9 @@ public final class FindRuoliForPersonaInApplicationTemplateCompilationTest exten
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in0/mac", equalTo(irideIdentity.getMac())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
 
-        final Application application = (Application) this.getDataModel().get("application");
+        final Application application = (Application) this.getContext().get("application");
 
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in1/id", equalTo(application.getId())));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest#setDataModel(java.util.Map)
-     */
-    @Override
-    @Value("#{irideIdentityAndApplication}")
-    protected void setDataModel(Map<String, Object> dataModel) {
-        super.setDataModel(dataModel);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest#setTemplateName(java.lang.String)
-     */
-    @Override
-    @Value("#{'findRuoliForPersonaInApplication'}")
-    protected void setTemplateName(String templateName) {
-        super.setTemplateName(templateName);
     }
 
 }

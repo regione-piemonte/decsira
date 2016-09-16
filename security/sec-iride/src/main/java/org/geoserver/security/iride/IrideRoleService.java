@@ -19,11 +19,11 @@
 package org.geoserver.security.iride;
 
 import static org.geoserver.security.iride.util.builder.IrideServerURLBuilder.buildServerURL;
+import it.csi.iride2.policy.entity.Application;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.SortedSet;
@@ -50,6 +50,7 @@ import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
 import org.geoserver.security.iride.identity.IrideIdentity;
+import org.geoserver.security.iride.util.template.TemplateEngine;
 import org.geotools.util.logging.Logging;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -72,19 +73,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     private static final Logger LOGGER = Logging.getLogger(IrideRoleService.class);
 
     /**
-     * Params sent along with <code>IRIDE</code> <code>findRuoliForPersonaInApplication</code> <code>SOAP</code> request.
-     */
-    private static final String[] REQUEST_PARAMS = new String[] {
-        "CODICEFISCALE",
-        "NOME",
-        "COGNOME",
-        "PROVIDER",
-        "TIMESTAMP",
-        "LIVELLOAUTH",
-        "MAC"
-    };
-
-    /**
      * Regular Expression to extract role's relevant informations from the
      * <code>IRIDE</code> <code>findRuoliForPersonaInApplication</code> <code>SOAP</code> response.
      */
@@ -99,6 +87,11 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     private HttpConnectionManagerParams params = new HttpConnectionManagerParams();
 
     /**
+     * {@link TemplateEngine} implementation.
+     */
+    private TemplateEngine templateEngine;
+
+    /**
      * @param httpClient the httpClient to set
      */
     public void setHttpClient(HttpClient httpClient) {
@@ -110,6 +103,15 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     public HttpClient getHttpClient() {
         return this.httpClient;
+    }
+
+    /**
+     * Set the {@link TemplateEngine} implementation
+     *
+     * @param templateEngine the {@link TemplateEngine} implementation
+     */
+    public void setTemplateEngine(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
     }
 
     /*
@@ -180,7 +182,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
         LOGGER.info("Username: " + username);
 
-        final TreeSet<GeoServerRole> roles = new TreeSet<GeoServerRole>();
+        final TreeSet<GeoServerRole> roles = new TreeSet<>();
 
         // Check username format: it may be an Identita Digitale IRIDE, or not
         if (IrideIdentity.isNotValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
@@ -452,50 +454,19 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      * @return
      * @throws IOException
      */
-    private String getServiceRequestXml(String username) throws IOException {
-        try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
-            this.getClass().getResourceAsStream("/iride/soap/request/findRuoliForPersonaInApplication.xml"))
-        )) {
-            final StringBuilder result = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                result.append(this.replaceParamsInRequest(line, username));
+    private String getServiceRequestXml(final String username) throws IOException {
+        return this.templateEngine.process(
+            "findRuoliForPersonaInApplication",
+            new HashMap<String, Object>() {
+
+                private static final long serialVersionUID = 1L;
+
+                {
+                    this.put("irideIdentity", IrideIdentity.parseIrideIdentity(username));
+                    this.put("application", new Application("DECSIRA"));
+                }
             }
-
-            return result.toString();
-        }
-    }
-
-    /**
-     * @param line
-     * @param usernameParts
-     * @return
-     */
-    private String replaceParamsInRequest(String line, String username) {
-        String[] usernameParts = username.split("\\/");
-        // the last part of the username can use the separator as a valid char
-        // so we append to the last element the "extra" parts, if they exist
-        if (REQUEST_PARAMS.length < usernameParts.length) {
-            for (int count = REQUEST_PARAMS.length; count < usernameParts.length; count++) {
-                usernameParts[REQUEST_PARAMS.length - 1] += "/" +  usernameParts[count];
-            }
-        }
-
-        int index = 0;
-        String fullUser = "";
-        for (final String param : REQUEST_PARAMS) {
-            line = line.replace("%" + param + "%", usernameParts[index]);
-            // full user is made of all parts except the last one
-            if (index < REQUEST_PARAMS.length -1) {
-                fullUser += usernameParts[index] + "/";
-            }
-            index++;
-        }
-
-        line = line.replace("%APPLICATION%", this.config.applicationName);
-        line = line.replace("%FULLUSER%", username.substring(0, fullUser.lastIndexOf("/")));
-
-        return line;
+        );
     }
 
     /**

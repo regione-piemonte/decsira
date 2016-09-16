@@ -18,22 +18,22 @@
  */
 package org.geoserver.security.iride.util.factory.template.freemarker;
 
+import org.geoserver.security.iride.util.template.TemplateEngine;
+import org.geoserver.security.iride.util.template.impl.freemarker.FreeMarkerTemplateEngine;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import freemarker.template.Configuration;
-
 /**
- * Factory bean that creates a <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link Configuration}, and provides it as bean reference.
+ * Factory that configures a <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation, and provides it as bean reference.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class FreeMarkerConfigurationFactoryBean extends FreeMarkerConfigurationDefaultFactory implements FactoryBean<Configuration>, InitializingBean {
+public final class FreeMarkerTemplateEngineFactoryBean extends FreeMarkerTemplateEngineFactory implements FactoryBean<FreeMarkerTemplateEngine>, InitializingBean {
 
     /**
-     * <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.
+     * <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine}.
      */
-    private Configuration templateConfiguration;
+    private FreeMarkerTemplateEngine freeMarkerTemplateEngine;
 
     /*
      * (non-Javadoc)
@@ -41,7 +41,7 @@ public final class FreeMarkerConfigurationFactoryBean extends FreeMarkerConfigur
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        this.templateConfiguration = this.create();
+        this.freeMarkerTemplateEngine = this.create();
     }
 
     /*
@@ -49,8 +49,8 @@ public final class FreeMarkerConfigurationFactoryBean extends FreeMarkerConfigur
      * @see org.springframework.beans.factory.FactoryBean#getObject()
      */
     @Override
-    public Configuration getObject() throws Exception {
-        return this.templateConfiguration;
+    public FreeMarkerTemplateEngine getObject() throws Exception {
+        return this.freeMarkerTemplateEngine;
     }
 
     /*
@@ -59,7 +59,7 @@ public final class FreeMarkerConfigurationFactoryBean extends FreeMarkerConfigur
      */
     @Override
     public Class<?> getObjectType() {
-        return Configuration.class;
+        return FreeMarkerTemplateEngine.class;
     }
 
     /*

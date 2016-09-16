@@ -16,17 +16,48 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.util.factory;
+package org.geoserver.security.iride.util.factory.roleservice;
 
 import org.geoserver.security.iride.IrideRoleService;
+import org.geoserver.security.iride.util.factory.Factory;
+import org.geoserver.security.iride.util.template.TemplateEngine;
 
 /**
  * Factory that creates a new, configured, {@link IrideRoleService} instance.
  *
- *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class IrideRoleServiceFactory implements Factory<IrideRoleService> {
+
+    /**
+     * {@link TemplateEngine} implementation.
+     */
+    private TemplateEngine templateEngine;
+
+    /**
+     * Constructor.
+     */
+    public IrideRoleServiceFactory() {
+        /* NOP */
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param templateEngine the {@link TemplateEngine} implementation
+     */
+    public IrideRoleServiceFactory(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
+
+    /**
+     * Set the {@link TemplateEngine} implementation
+     *
+     * @param templateEngine the {@link TemplateEngine} implementation
+     */
+    public void setTemplateEngine(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
 
     /*
      * (non-Javadoc)
@@ -36,7 +67,8 @@ public final class IrideRoleServiceFactory implements Factory<IrideRoleService> 
     public IrideRoleService create() {
         final IrideRoleService irideRoleService = new IrideRoleService();
 
-        // TODO: implement me!
+        // Set the TemplateEngine implementation
+        irideRoleService.setTemplateEngine(this.templateEngine);
 
         return irideRoleService;
     }
