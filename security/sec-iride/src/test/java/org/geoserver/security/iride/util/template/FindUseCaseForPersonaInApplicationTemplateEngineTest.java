@@ -20,8 +20,7 @@ package org.geoserver.security.iride.util.template;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
-
-import it.csi.iride2.policy.entity.UseCase;
+import it.csi.iride2.policy.entity.Application;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -34,7 +33,7 @@ import org.junit.runners.Parameterized.Parameters;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class GetInfoPersonaInUseCaseTemplateEngineTest extends AbstractTemplateEngineTest {
+public final class FindUseCaseForPersonaInApplicationTemplateEngineTest extends AbstractTemplateEngineTest {
 
     /**
      * Constructor.
@@ -42,7 +41,7 @@ public final class GetInfoPersonaInUseCaseTemplateEngineTest extends AbstractTem
      * @param templateName
      * @param contextBeanName
      */
-    public GetInfoPersonaInUseCaseTemplateEngineTest(String templateName, String contextBeanName) {
+    public FindUseCaseForPersonaInApplicationTemplateEngineTest(String templateName, String contextBeanName) {
         super(templateName, contextBeanName);
     }
 
@@ -50,7 +49,7 @@ public final class GetInfoPersonaInUseCaseTemplateEngineTest extends AbstractTem
     public static Collection<String[]> getTestParameters() {
         return Arrays.asList(
             new String[][] {
-            	{"getInfoPersonaInUseCase", "irideIdentityAndUseCase"},
+                {"findUseCasesForPersonaInApplication", "irideIdentityAndApplication"},
             }
         );
     }
@@ -66,19 +65,18 @@ public final class GetInfoPersonaInUseCaseTemplateEngineTest extends AbstractTem
 
         final IrideIdentity irideIdentity = (IrideIdentity) this.getContext().get("irideIdentity");
 
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/codFiscale", equalTo(irideIdentity.getCodFiscale())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/nome", equalTo(irideIdentity.getNome())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/cognome", equalTo(irideIdentity.getCognome())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/idProvider", equalTo(irideIdentity.getIdProvider())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/timestamp", equalTo(irideIdentity.getTimestamp())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/livelloAutenticazione", equalTo(String.valueOf(irideIdentity.getLivelloAutenticazione()))));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/mac", equalTo(irideIdentity.getMac())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/codFiscale", equalTo(irideIdentity.getCodFiscale())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/nome", equalTo(irideIdentity.getNome())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/cognome", equalTo(irideIdentity.getCognome())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/idProvider", equalTo(irideIdentity.getIdProvider())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/timestamp", equalTo(irideIdentity.getTimestamp())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/livelloAutenticazione", equalTo(String.valueOf(irideIdentity.getLivelloAutenticazione()))));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/mac", equalTo(irideIdentity.getMac())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
 
-        final UseCase useCase = (UseCase) this.getContext().get("useCase");
+        final Application application = (Application) this.getContext().get("application");
 
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in1/appId/id", equalTo(useCase.getAppId().getId())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:getInfoPersonaInUseCase/in1/id", equalTo(useCase.getId())));
+        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findUseCasesForPersonaInApplication/in1/id", equalTo(application.getId())));
     }
 
 }

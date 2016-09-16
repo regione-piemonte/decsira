@@ -25,8 +25,18 @@
 
     <!-- === TemplateEngine ===   END === -->
 
+    <!-- === IrideRoleService Factory === BEGIN -->
+
+    <bean id="irideRoleServiceFactory"
+          class="org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory"
+          p:templateEngine-ref="templateEngine"
+    />
+
+    <!-- === IrideRoleService Factory ===   END -->
+
     <bean id="irideSecurityProvider" class="org.geoserver.security.iride.IrideSecurityProvider">
         <constructor-arg ref="geoServerSecurityManager"/>
+        <constructor-arg ref="irideRoleServiceFactory"/>
     </bean>
 
 </beans>

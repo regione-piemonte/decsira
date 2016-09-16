@@ -8,20 +8,6 @@
     <soapenv:Body>
         <int:findRuoliForPersonaInApplication soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
             <in0 xsi:type="urn:Identita" xmlns:urn="urn:PolicyEnforcerBase">
-                <nome xsi:type="xsd:string">%NOME%</nome>
-                <livelloAutenticazione xsi:type="xsd:int">%LIVELLOAUTH%</livelloAutenticazione>
-                <codFiscale xsi:type="xsd:string">%CODICEFISCALE%</codFiscale>
-                <timestamp xsi:type="xsd:string">%TIMESTAMP%</timestamp>
-                <mac xsi:type="xsd:string">%MAC%</mac>
-                <idProvider xsi:type="xsd:string">%PROVIDER%</idProvider>
-                <rappresentazioneInterna xsi:type="xsd:string">%FULLUSER%</rappresentazioneInterna>
-                <cognome xsi:type="xsd:string">%COGNOME%</cognome>
-            </in0>
-            <in1 xsi:type="urn:Application" xmlns:urn="urn:PolicyEnforcerBase">
-                <id xsi:type="xsd:string">%APPLICATION%</id>
-            </in1>
-<!--
-            <in0 xsi:type="urn:Identita" xmlns:urn="urn:PolicyEnforcerBase">
                 <codFiscale xsi:type="xsd:string">${irideIdentity.codFiscale}</codFiscale>
                 <nome xsi:type="xsd:string">${irideIdentity.nome}</nome>
                 <cognome xsi:type="xsd:string">${irideIdentity.cognome}</cognome>
@@ -34,7 +20,6 @@
             <in1 xsi:type="urn:Application" xmlns:urn="urn:PolicyEnforcerBase">
                 <id xsi:type="xsd:string">${application.id}</id>
             </in1>
--->
         </int:findRuoliForPersonaInApplication>
     </soapenv:Body>
 </soapenv:Envelope>

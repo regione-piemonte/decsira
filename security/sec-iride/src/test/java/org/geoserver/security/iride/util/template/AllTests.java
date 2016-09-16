@@ -29,7 +29,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+    FindRuoliForPersonaInApplicationTemplateEngineTest.class,
     FindRuoliForPersonaInUseCaseTemplateEngineTest.class,
+    FindUseCaseForPersonaInApplicationTemplateEngineTest.class,
     GetInfoPersonaInUseCaseTemplateEngineTest.class,
     IdentificaUserPasswordTemplateEngineTest.class,
     IsIdentitaAutenticaTemplateEngineTest.class,

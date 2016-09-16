@@ -28,9 +28,11 @@ import org.geoserver.security.GeoServerSecurityProvider;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory;
 import org.geotools.util.logging.Logging;
 
 /**
+ * <code>IRIDE</code> {@link GeoServerSecurityProvider}.
  *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
@@ -48,12 +50,19 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     private GeoServerSecurityManager securityManager;
 
     /**
+     * Factory that creates a new, configured, {@link IrideRoleService} instance.
+     */
+    private IrideRoleServiceFactory irideRoleServiceFactory;
+
+    /**
      * Constructor.
      *
      * @param securityManager {@link GeoServerSecurityManager} instance
+     * @param irideRoleServiceFactory Factory that creates a new, configured, {@link IrideRoleService} instance
      */
-    public IrideSecurityProvider(GeoServerSecurityManager securityManager) {
-        this.securityManager = securityManager;
+    public IrideSecurityProvider(GeoServerSecurityManager securityManager, IrideRoleServiceFactory irideRoleServiceFactory) {
+        this.securityManager         = securityManager;
+        this.irideRoleServiceFactory = irideRoleServiceFactory;
     }
 
     /*
@@ -80,7 +89,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
-        final IrideRoleService service = new IrideRoleService();
+        final IrideRoleService service = this.irideRoleServiceFactory.create();
         service.initializeFromConfig(config);
 
         return service;
