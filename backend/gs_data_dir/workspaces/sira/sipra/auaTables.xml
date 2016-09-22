@@ -18,18 +18,6 @@
             <id>dataStore</id>
             <parameters>
                 <Parameter>
-                    <name>Connection timeout</name>
-                    <value>20</value>
-                </Parameter>
-                <Parameter>
-                    <name>port</name>
-                    <value>${db.port}</value>
-                </Parameter>
-                <Parameter>
-                    <name>passwd</name>
-                    <value>${db.password}</value>
-                </Parameter>
-                <Parameter>
                     <name>dbtype</name>
                     <value>postgis</value>
                 </Parameter>
@@ -38,63 +26,19 @@
                     <value>true</value>
                 </Parameter>
                 <Parameter>
-                    <name>Evictor run periodicity</name>
-                    <value>300</value>
-                </Parameter>
-                <Parameter>
-                    <name>namespace</name>
-                    <value></value>
+                    <name>jndiReferenceName</name>
+                    <value>${db.jndi}</value>
                 </Parameter>
                 <Parameter>
                     <name>schema</name>
                     <value>${db.schema}</value>
                 </Parameter>
                 <Parameter>
-                    <name>create database</name>
-                    <value>false</value>
-                </Parameter>
-                <Parameter>
-                    <name>fetch size</name>
-                    <value>1000</value>
-                </Parameter>
-                <Parameter>
                     <name>preparedStatements</name>
                     <value>false</value>
                 </Parameter>
                 <Parameter>
-                    <name>min connections</name>
-                    <value>1</value>
-                </Parameter>
-                <Parameter>
-                    <name>Evictor tests per run</name>
-                    <value>3</value>
-                </Parameter>
-                <Parameter>
-                    <name>host</name>
-                    <value>${db.host}</value>
-                </Parameter>
-                <Parameter>
-                    <name>validate connections</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>max connections</name>
-                    <value>10</value>
-                </Parameter>
-                <Parameter>
-                    <name>database</name>
-                    <value>${db.name}</value>
-                </Parameter>
-                <Parameter>
                     <name>Support on the fly geometry simplification</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>Max connection idle time</name>
-                    <value>300</value>
-                </Parameter>
-                <Parameter>
-                    <name>Test while idle</name>
                     <value>true</value>
                 </Parameter>
                 <Parameter>
@@ -106,16 +50,8 @@
                     <value>true</value>
                 </Parameter>
                 <Parameter>
-                    <name>Max open prepared statements</name>
-                    <value>50</value>
-                </Parameter>
-                <Parameter>
                     <name>Estimated extends</name>
                     <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>user</name>
-                    <value>${db.user}</value>
                 </Parameter>
             </parameters>
         </DataStore>
