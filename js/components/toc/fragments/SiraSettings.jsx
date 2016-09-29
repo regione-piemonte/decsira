@@ -79,13 +79,13 @@ const SiraSettings = React.createClass({
         const renderLegendTool = this.props.element.type !== "vector";
         return (<div id="sira-layer-settings">
             {renderLeg ? this.renderLegend() : this.renderOpacity()}
-            {renderSTool ? this.renderSiraTool() : (<div/>)}
+            {renderSTool ? this.renderSiraTool() : (<span/>)}
             {renderLegendTool ? (<Glyphicon
                 style={glyphStyle}
                 key="toggle-legned"
                 glyph="list"
                 onClick={this.toggleLegend}
-            />) : (<div/>)}
+            />) : (<span/>)}
             </div>);
     },
     updateOpacity(newParams) {
