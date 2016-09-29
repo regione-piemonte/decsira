@@ -8,6 +8,7 @@
 
 const msLayers = require('../../MapStore2/web/client/reducers/layers');
 
+const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE} = require('../../MapStore2/web/client/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
 
@@ -30,6 +31,21 @@ function layers(state = [], action) {
         case SET_FEATURES:
         case CONFIGURE_INFO_TOPOLOGY:
             return msLayers(state, getAction("topologyItems", action.features || action.infoTopologyResponse.features));
+        case SHOW_SETTINGS: {
+            return msLayers(msLayers(state, {
+                    type: TOGGLE_NODE,
+                    node: action.node,
+                    nodeType: "layers",
+                    status: true}), action);
+
+        }
+        case HIDE_SETTINGS: {
+            return msLayers(msLayers(state, {
+                    type: 'TOGGLE_NODE',
+                    node: action.node,
+                    nodeType: "layers",
+                    status: false}), action);
+        }
         default:
             return msLayers(state, action);
     }
