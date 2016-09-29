@@ -24,7 +24,7 @@ const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 
 const initialState = {
-    filterPanelExpanded: true,
+    filterPanelExpanded: false,
     attributes: [],
     loadingQueryFormConfigError: null,
     queryform: null,

@@ -15,7 +15,7 @@ module.exports = {
         ShapeFilePlugin: require('../MapStore2/web/client/plugins/ShapeFile'),
         MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
         DrawerMenuPlugin: require('../MapStore2/web/client/plugins/DrawerMenu'),
-        TOCPlugin: require('../MapStore2/web/client/plugins/TOC'),
+        TOCPlugin: require('./plugins/SIRATOC'),
         BackgroundSwitcherPlugin: require('../MapStore2/web/client/plugins/BackgroundSwitcher'),
         MeasurePlugin: require('../MapStore2/web/client/plugins/Measure'),
         MeasureResultsPlugin: require('../MapStore2/web/client/plugins/MeasureResults'),

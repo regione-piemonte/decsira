@@ -14,8 +14,7 @@ require('../../MapStore2/web/client/product/assets/css/viewer.css');
 const {connect} = require('react-redux');
 const assign = require('object-assign');
 
-const SiraQueryPanel = require('../components/SiraQueryPanel');
-const SiraFeatureGrid = require('../components/SiraFeatureGrid');
+const SidePanel = require('./SidePanel');
 const Card = require('../components/template/Card');
 const Header = require('../components/MapHeader');
 
@@ -150,20 +149,11 @@ const Sira = React.createClass({
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
                     <div className="info">Profile: {this.props.params.profile}</div>
+                    <SidePanel auth={authParams[this.props.params.profile]} profile={this.props.params.profile}/>
                     <MapViewer
                     plugins={this.props.plugins}
                     params={this.props.viewerParams}
                     />
-                    <SiraQueryPanel
-                    params={{
-                        authkey: authParams[this.props.params.profile].authkey
-                    }}/>
-                    <SiraFeatureGrid
-                    params={{
-                        authkey: authParams[this.props.params.profile].authkey
-                    }}
-                        // featureGrigConfigUrl={this.props.featureGrigConfigUrl}
-                        profile={this.props.params.profile}/>
                     <Card authParam={authParams[this.props.params.profile]}/>
                     <GetFeatureInfo
                         display={"accordion"}
