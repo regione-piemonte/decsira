@@ -20,6 +20,7 @@ const store = require('./stores/store');
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {changeBrowserProperties} = require('../MapStore2/web/client/actions/browser');
 const {loadLocale} = require('../MapStore2/web/client/actions/locale');
+const {loadTiles} = require('./actions/mosaictile');
 
 const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
@@ -31,6 +32,7 @@ function startApp() {
     const App = require('./containers/App');
 
     store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
+    store.dispatch(loadTiles());
 
     ConfigUtils
         .loadConfiguration()                       // localConfig.json: Global configuration

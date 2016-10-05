@@ -27,6 +27,7 @@ const grid = require('../reducers/grid');
 const assign = require('object-assign');
 
 const allReducers = combineReducers({
+	mosaic: require('../reducers/mosaic'),
     userprofile: require('../reducers/userprofile'),
     mapInfo: require('../reducers/mapInfo'),
     search: require('../../MapStore2/web/client/reducers/search'),

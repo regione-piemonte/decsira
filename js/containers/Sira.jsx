@@ -20,6 +20,11 @@ const SiraFeatureGrid = require('../components/SiraFeatureGrid');
 const Card = require('../components/template/Card');
 const Header = require('../components/MapHeader');
 
+//diego
+//const BoxInfo = require('../components/BoxInfo');
+//const MosaicTile = require('../components/MosaicTile');
+//const Mosaic = require('../components/Mosaic');
+
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile} = require('../actions/userprofile');
@@ -246,7 +251,13 @@ const Sira = React.createClass({
         return (
             <div className="mappaSiraDecisionale">
                 <Header onBack={this.back} onHome={this.goHome}/>
+                
                 <div className="mapbody">
+                
+                
+                  
+                
+                
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
