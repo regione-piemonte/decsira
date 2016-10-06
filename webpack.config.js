@@ -29,6 +29,7 @@ module.exports = {
         new NormalModuleReplacementPlugin(/leaflet$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "leaflet")),
         new NormalModuleReplacementPlugin(/openlayers$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "openlayers")),
         new NormalModuleReplacementPlugin(/proj4$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "proj4")),
+        new NormalModuleReplacementPlugin(/ConfigUtils/, path.join(__dirname, "js", "utils", "ConfigUtils.js")),
         new NoErrorsPlugin()
     ],
     resolve: {
