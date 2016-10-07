@@ -16,6 +16,7 @@ module.exports = {
         MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
         DrawerMenuPlugin: require('../MapStore2/web/client/plugins/DrawerMenu'),
         TOCPlugin: require('./plugins/SIRATOC'),
+        CatalogPlugin: require('./plugins/SiraCatalog'),
         BackgroundSwitcherPlugin: require('../MapStore2/web/client/plugins/BackgroundSwitcher'),
         MeasurePlugin: require('../MapStore2/web/client/plugins/Measure'),
         MeasureResultsPlugin: require('../MapStore2/web/client/plugins/MeasureResults'),
@@ -33,6 +34,7 @@ module.exports = {
         SettingsPlugin: require('../MapStore2/web/client/plugins/Settings'),
         InfoPlugin: require('./plugins/InfoPlugin'),
         TopologyPlugin: require('./plugins/TopologyPlugin')
+
     },
     requires: {}
 };
