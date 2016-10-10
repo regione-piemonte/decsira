@@ -12,7 +12,8 @@ const {
     GRID_CONFIG_LOADED,
     SHOW_LOADING,
     CREATE_GRID_DATA_SOURCE,
-    UPDATE_TOTAL_FEATURES
+    UPDATE_TOTAL_FEATURES,
+    FEATURES_LOADED_PAG
 } = require('../actions/grid');
 
 const assign = require('object-assign');
@@ -141,7 +142,7 @@ function grid(state = initialState, action) {
                     pageSize: action.pagination.maxFeatures
             };
             return assign({}, state, {
-                data: [],
+                data: {},
                 totalFeatures: -1,
                 featuregrid: newFeatureGrid,
                 loadingGrid: false,
@@ -151,6 +152,56 @@ function grid(state = initialState, action) {
         case UPDATE_TOTAL_FEATURES: {
             let totalFeatures = TemplateUtils.getNumberOfFeatures(action.data);
             return {...state, totalFeatures };
+        }
+        case FEATURES_LOADED_PAG: {
+
+            let idFieldName = state.featuregrid.grid.columns.find((c) => c.id === true).field;
+            let features = TemplateUtils.getModels(action.data, state.featuregrid.grid.root, state.featuregrid.grid.columns);
+
+            features = features.map((feature) => {
+                let f = {
+                    "type": "Feature",
+                    "id": feature[idFieldName] || feature.id,
+                    "geometry_name": "the_geom",
+                    "properties": {}
+                };
+
+                let geometry;
+                for (let prop in feature) {
+                    if (feature[prop] && feature[prop].type === "geometry") {
+                        geometry = feature[prop];
+                    } else if (feature.hasOwnProperty(prop)) {
+                        f.properties[prop] = feature[prop];
+                    }
+                }
+
+                f.geometry = {
+                    "type": state.featuregrid.grid.geometryType
+                };
+
+                // Setting coordinates
+                if (state.featuregrid.grid.geometryType === "Polygon") {
+                    let coordinates = [[]];
+                    for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                        let coords = state.featuregrid.grid.wfsVersion === "1.1.0" ?
+                            [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
+                        coordinates[0].push(coords);
+                    }
+
+                    f.geometry.coordinates = coordinates;
+                } else if (state.featuregrid.grid.geometryType === "Point") {
+                    f.geometry.coordinates = geometry ? [geometry.coordinates[0][0], geometry.coordinates[0][1]] : null;
+                }
+
+                return f;
+            });
+            let data = {...state.data};
+            data[action.requestId] = features;
+            return {
+                ...state,
+                data,
+                loadingGrid: false
+                };
         }
         case 'FEATUREGRID_CONFIG_LOADED': {
             return assign({}, state, {

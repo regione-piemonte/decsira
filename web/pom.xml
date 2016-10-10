@@ -14,6 +14,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<url.geoserver>http://tst-gisserver.territorio.csi.it</url.geoserver>
+    <component.name>decsiraweb</component.name>
+    <component.version>1.0.0</component.version>
   </properties>
 
   <dependencies>
@@ -233,6 +235,32 @@
             </configuration>
         </plugin>
 
+         <!-- configurazione standard CSI per la UI -->
+
+        <plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<finalName>${component.name}-${component.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<filters>
+						<filter>src/assembly/filter.properties</filter>
+					</filters>
+					<descriptors>
+						<descriptor>src/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+        
         <!-- Run the application using "mvn jetty:run" -->
         <plugin>
             <groupId>org.mortbay.jetty</groupId>
@@ -259,12 +287,16 @@
             <id>produzione</id>
             <properties>
              <url.geoserver>http://gisserver.territorio.csi.it</url.geoserver>
+             <component.name>decsiraweb</component.name>
+             <component.version>1.0.0</component.version>
             </properties>
         </profile>
         <profile>
             <id>demo</id>
             <properties>
-             <url.geoserver>http://sira2.csi.geo-solutions.it</url.geoserver>
+             <url.geoserver>http://sira.csi.geo-solutions.it</url.geoserver>
+             <component.name>decsiraweb</component.name>
+             <component.version>1.0.0</component.version>
             </properties>
         </profile>
     </profiles>

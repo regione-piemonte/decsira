@@ -1,118 +1,385 @@
 {
-	"proxyUrl": "/sira/proxy/?url=",
-	"geoStoreUrl": "/sira/rest/geostore",
-	"geoserverUrl": "http://sira2.csi.geo-solutions.it/geoserver",
-	"query": {
-	  "searchUrl": "{geoserverUrl}/ows?service=WFS",
-	  "showGeneratedFilter": false,
-	  "attributePanelExpanded": true,
-	  "spatialPanelExpanded": false,
-	  "showDetailsPanel": false,
-	  "groupLevels": 1,
-	  "useMapProjection": false,
-	  "toolbarEnabled": true,
-	  "pagination": {
-	  	"startIndex": 0,
-	  	"maxFeatures": 15
-	  },
-	  "groupFields": [
-	      {
-	          "id": 1,
-	          "logic": "AND",
-	          "index": 0
-	      }
-	  ],
-	  "filterFields": [{
-	      "rowId": 1,
-	      "groupId": 1,
-	      "attribute": null,
-	      "operator": "=",
-	      "value": null,
-	      "type": null,
-	      "exception": null
-	  }],
-	  "spatialField": {
-	      "method": null,
-	      "attribute": null,
-	      "operation": "INTERSECTS",
-	      "geometry": null
-	  }
-	},
-	"topology": {
-	  "grid": {
-	    "root": "/wfs:FeatureCollection/gml:featureMember/ms:ZONES_IPR",
-	    "columns": [
-	      {
-	        "header": "Id",
-	        "width": 100,
-	        "xpath": ["@gml:id"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Codice",
-	        "width": 100,
-	        "xpath": ["ms:zone_code/text()"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Nome",
-	        "width": 100,
-	        "xpath": ["ms:zone_name/text()"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Data Inizio",
-	        "width": 100,
-	        "xpath": ["ms:zone_start_date/text()"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Data Fine",
-	        "width": 100,
-	        "xpath": ["ms:zone_end_date/text()"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Ultimo Aggiornamento",
-	        "width": 100,
-	        "xpath": ["ms:zone_last_update/text()"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Popolazione",
-	        "width": 100,
-	        "xpath": ["ms:zone_population/text()"],
-	        "type": 1
-	      },
-	      {
-	        "header": "Anno",
-	        "width": 100,
-	        "xpath": ["ms:zone_population_year/text()"],
-	        "type": 1
-	      },
-	      {
-	        "header": "Area",
-	        "width": 100,
-	        "xpath": ["ms:zone_area/text()"],
-	        "type": 1
-	      },
-	      {
-	        "header": "Tipo",
-	        "width": 100,
-	        "xpath": ["ms:zone_type_label/text()"],
-	        "type": 2
-	      },
-	      {
-	        "header": "Anno Inquinamento",
-	        "width": 100,
-	        "xpath": ["ms:pollutant_year/text()"],
-	        "type": 1
-	      },
-	      {
-	        "type": 6,
-	        "xpath": ["ms:msGeometry/gml:MultiSurface/gml:surfaceMembers/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"]
-	      }
-	    ]
-	  }
-	}
+    "geoStoreUrl": "/sira/rest/geostore",
+    "geoserverUrl": "${url.geoserver}/geoserver",
+    "useAuthenticationRules": true,
+    "authenticationRules": [
+        {
+            "urlPattern": ".*geoserver.*",
+            "method": "authkey"
+        }
+    ],
+    "plugins": {
+        "desktop": [
+            {
+                "cfg": {
+                    "tools": [
+                        "measurement",
+                        "locate",
+                        "overview",
+                        "scalebar",
+                        "draw"
+                    ],
+                    "toolsOptions": {
+                        "scalebar": {
+                            "leaflet": {
+                                "position": "bottomright"
+                            }
+                        }
+                    },
+                    "zoomControl": false
+                },
+                "name": "Map"
+            },
+            {
+                "cfg": {
+                    "buttonClassName": "square-button",
+                    "buttonStyle": "primary",
+                    "glyph": "1-stilo",
+                    "singleSection": true
+                },
+                "name": "DrawerMenu"
+            },
+            {
+                "cfg": {
+                    "columnProperties": {
+                        "md": 12,
+                        "sm": 12,
+                        "xs": 12
+                    },
+                    "fluid": true
+                },
+                "name": "BackgroundSwitcher",
+                "override": {
+                    "DrawerMenu": {
+                        "buttonConfig": {
+                            "buttonClassName": "square-button no-border"
+                        },
+                        "glyph": "1-map",
+                        "position": 3
+                    }
+                }
+            },
+            {
+                "cfg": {
+                    "areaGlyph": "1-measure-area",
+                    "bearingGlyph": "1-bearing",
+                    "lineGlyph": "1-measure-lenght",
+                    "showResults": false,
+                    "useButtonGroup": false
+                },
+                "name": "Measure",
+                "override": {
+                    "DrawerMenu": {
+                        "buttonConfig": {
+                            "buttonClassName": "square-button no-border"
+                        },
+                        "glyph": "1-stilo",
+                        "position": 4
+                    }
+                }
+            },
+            {
+                "cfg": {
+                    "closeGlyph": "1-close",
+                    "withPanelAsContainer": false
+                },
+                "name": "MeasureResults"
+            },{
+                "name": "TOC",
+                "cfg": {
+                    "visibilityCheckType": "glyph",
+                    "settingsOptions": {
+                        "includeCloseButton": false,
+                        "closeGlyph": "1-close",
+                        "asModal": false,
+                        "buttonSize": "small"
+                    },
+                    "activateSettingsTool": true,
+                    "activateLegendTool": true
+                },
+                "override": {
+                    "DrawerMenu": {
+                        "glyph": "1-layer",
+                        "buttonConfig": {
+                          "buttonClassName": "square-button no-border"
+                      }
+                  }
+              }
+            },
+            {
+                "name": "Catalog",
+                "override": {
+                    "DrawerMenu": {
+                        "buttonConfig": {
+                          "buttonClassName": "square-button no-border"
+                      }
+                  }
+              }
+            },
+            {
+              "name":"ShapeFile",
+              "cfg":{
+                 "wrap":true,
+                 "wrapWithPanel":false,
+                 "closeGlyph":"1-close",
+                 "buttonSize":"small"
+              }
+           },
+           {
+              "name":"MetadataExplorer",
+              "cfg":{
+                 "showGetCapLinks":false,
+                 "addAuthentication":false,
+                 "wrap":true,
+                 "wrapWithPanel":false,
+                 "closeGlyph":"1-close"
+              }
+           },
+           "MousePosition",
+           {
+              "name":"Snapshot",
+              "cfg":{
+                 "wrap":true,
+                 "wrapWithPanel":false,
+                 "closeGlyph":"1-close",
+                 "buttonStyle":"primary"
+              }
+           },
+            {
+                "name": "Toolbar",
+                "id": "NavigationBar",
+                "stateSelector": "toolbar",
+                "cfg": {
+                    "buttonStyle": "primary",
+                    "id": "navigationBar"
+                }
+            },
+            {
+                "name": "Locate",
+                "cfg": {
+                    "glyph": "1-position-1",
+                    "btnConfig": {
+                        "className": "square-button"
+                    }
+            },
+                "override": {
+                    "Toolbar": {
+                        "alwaysVisible": true
+                    }
+                }
+            },
+            {
+                "name": "ZoomAll",
+                "hide": true,
+                "cfg":{
+                    "className": "square-button"
+                }
+            },
+            {
+                "name": "MapLoading",
+                "cfg": {
+                    "className": "ms2-loading"
+                },
+                "override": {
+                    "Toolbar": {
+                        "alwaysVisible": true
+                    }
+                }
+            },
+            {
+                "name":"ZoomIn",
+                "override": {
+                    "Toolbar": {
+                        "alwaysVisible": true,
+                        "position": 4
+                    }
+                }
+            },
+            {
+                "name":"ZoomOut",
+                "override": {
+                    "Toolbar": {
+                        "alwaysVisible": true,
+                        "position": 5
+                    }
+                }
+            },
+            "OmniBar",
+            {
+                "name": "BurgerMenu"
+            },
+            {
+                "name": "Expander",
+                "cfg":{
+                    "className": "square-button"
+                }
+            },
+            "ScaleBox",
+            {
+                "name": "Search",
+                "cfg": {
+                    "withToggle": ["max-width: 768px", "min-width: 768px", "top: 10px"]
+                }
+            },
+            {
+                "name": "Settings",
+                "cfg": {
+                    "wrapWithPanel": false,
+                    "closeGlyph": "1-close",
+                    "overrideSettings": {
+                        "history": false
+                    },
+                    "wrap": true
+                }
+            },
+            {
+                "name":"Info",
+                "hide": true
+            },
+            {
+                "name":"Topology",
+                "hide": true
+            }
+        ]
+},
+"proxyUrl": "/sira/proxy/?url=",
+"query": {
+    "attributePanelExpanded": true,
+    "filterFields": [
+        {
+            "attribute": null,
+            "exception": null,
+            "groupId": 1,
+            "operator": "=",
+            "rowId": 1,
+            "type": null,
+            "value": null
+        }
+    ],
+    "groupFields": [
+        {
+            "id": 1,
+            "index": 0,
+            "logic": "AND"
+        }
+    ],
+    "groupLevels": 1,
+    "pagination": {
+        "maxFeatures": 15,
+        "startIndex": 0
+    },
+    "searchUrl": "{geoserverUrl}/ows?service=WFS",
+    "showDetailsPanel": false,
+    "showGeneratedFilter": false,
+    "spatialField": {
+        "attribute": null,
+        "geometry": null,
+        "method": null,
+        "operation": "INTERSECTS"
+    },
+    "spatialPanelExpanded": false,
+    "toolbarEnabled": true,
+    "useMapProjection": false
+},
+"topology": {
+    "grid": {
+        "columns": [
+            {
+                "header": "Id",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "@gml:id"
+                ]
+            },
+            {
+                "header": "Codice",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_code/text()"
+                ]
+            },
+            {
+                "header": "Nome",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_name/text()"
+                ]
+            },
+            {
+                "header": "Data Inizio",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_start_date/text()"
+                ]
+            },
+            {
+                "header": "Data Fine",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_end_date/text()"
+                ]
+            },
+            {
+                "header": "Ultimo Aggiornamento",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_last_update/text()"
+                ]
+            },
+            {
+                "header": "Popolazione",
+                "type": 1,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_population/text()"
+                ]
+            },
+            {
+                "header": "Anno",
+                "type": 1,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_population_year/text()"
+                ]
+            },
+            {
+                "header": "Area",
+                "type": 1,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_area/text()"
+                ]
+            },
+            {
+                "header": "Tipo",
+                "type": 2,
+                "width": 100,
+                "xpath": [
+                    "ms:zone_type_label/text()"
+                ]
+            },
+            {
+                "header": "Anno Inquinamento",
+                "type": 1,
+                "width": 100,
+                "xpath": [
+                    "ms:pollutant_year/text()"
+                ]
+            },
+            {
+                "type": 6,
+                "xpath": [
+                    "ms:msGeometry/gml:MultiSurface/gml:surfaceMembers/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+                ]
+            }
+        ],
+        "root": "/wfs:FeatureCollection/gml:featureMember/ms:ZONES_IPR"
+    }
+}
 }

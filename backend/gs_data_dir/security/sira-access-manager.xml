@@ -1,0 +1,37 @@
+<Config>
+    <rules>
+        <Rule>
+            <priority>10</priority>
+            <roles>Profilo_A</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <accessMode>READ</accessMode>
+            <filter>"sira:attivita/sira:Attivita/sira:descrizione" = 'Recupero di rifiuti non pericolosi'</filter>
+            <hiddenAttributes>
+                <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</attribute>
+            </hiddenAttributes>
+        </Rule>
+        <Rule>
+            <priority>15</priority>
+            <roles>Profilo_B</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <accessMode>READ</accessMode>
+        </Rule>
+        <Rule>
+            <priority>5</priority>
+            <roles>Profilo_A,Profilo_B</roles>
+            <workspace>sira</workspace>
+            <layer>*</layer>
+            <accessMode>READ</accessMode>
+        </Rule>
+        <Rule>
+            <priority>1</priority>
+            <roles>*</roles>
+            <workspace>sira</workspace>
+            <layer>*</layer>
+            <accessMode>READ</accessMode>
+            <filter>EXCLUDE</filter>
+        </Rule>
+    </rules>
+</Config>

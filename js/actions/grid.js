@@ -15,6 +15,7 @@ const GRID_CONFIG_LOADED = 'GRID_CONFIG_LOADED';
 const SHOW_LOADING = 'SHOW_LOADING';
 const CREATE_GRID_DATA_SOURCE = 'CREATE_GRID_DATA_SOURCE';
 const UPDATE_TOTAL_FEATURES = 'UPDATE_TOTAL_FEATURES';
+const FEATURES_LOADED_PAG = 'FEATURES_LOADED_PAG';
 
 function configureGrid(config) {
     return {
@@ -81,6 +82,38 @@ function loadGridModelWithFilter(wfsUrl, data, params, add = false) {
         });
     };
 }
+
+function configureGridDataWithPagination(data, requestId) {
+    return {
+        type: FEATURES_LOADED_PAG,
+        data,
+        requestId
+    };
+}
+
+function loadFeaturesWithPagination(wfsUrl, data, params, requestId) {
+    let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
+    for (let param in params) {
+        if (params.hasOwnProperty(param)) {
+            url += "&" + param + "=" + params[param];
+        }
+    }
+
+    return (dispatch) => {
+        dispatch(showLoading(true));
+
+        return axios.post(url, data, {
+          timeout: 60000,
+          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+        }).then((response) => {
+            dispatch(configureGridDataWithPagination(response.data, requestId));
+        }).catch((e) => {
+            dispatch(configureGridError(e));
+        });
+    };
+}
+
+
 function createGridDataSource(pagination) {
     return {
         type: CREATE_GRID_DATA_SOURCE,
@@ -94,6 +127,8 @@ function updateTotalFeatures(data) {
         data
     };
 }
+
+
 function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     for (let param in params) {
@@ -138,6 +173,7 @@ module.exports = {
     SHOW_LOADING,
     CREATE_GRID_DATA_SOURCE,
     UPDATE_TOTAL_FEATURES,
+    FEATURES_LOADED_PAG,
     configureGrid,
     configureGridData,
     createGridDataSource,
@@ -145,5 +181,6 @@ module.exports = {
     // loadFeatureGridConfig,
     loadGridModel,
     loadGridModelWithFilter,
-    configureGridError
+    configureGridError,
+    loadFeaturesWithPagination
 };

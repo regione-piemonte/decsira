@@ -10,7 +10,7 @@ const ReactDOM = require('react-dom');
 const { Provider } = require('react-redux');
 const expect = require('expect');
 
-const store = require('../../stores/store');
+const store = require('../../stores/store')(undefined, undefined, {});
 const Home = require('../Home');
 
 describe('Home test suite', () => {

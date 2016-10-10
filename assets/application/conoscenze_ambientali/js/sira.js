@@ -24,6 +24,18 @@ $(function() {
         $('.pimenu-navbar-collapse').css({height:0});
     });
 
+    $('#profileCLink').click(function(e) {
+        currentProfile = 'C';
+        $('.pimenu-navbar-collapse').removeClass('in');
+        $('.pimenu-navbar-collapse').css({height:0});
+    });
+
+    $('#profileDLink').click(function(e) {
+        currentProfile = 'D';
+        $('.pimenu-navbar-collapse').removeClass('in');
+        $('.pimenu-navbar-collapse').css({height:0});
+    });
+
     $('#datasetLink').click(function(e) {
         e.preventDefault();
         window.location.href="dataset.html?profile=" + (currentProfile || '');

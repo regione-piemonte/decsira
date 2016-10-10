@@ -1,8 +1,8 @@
 {
   "map": {
-    "projection": "EPSG:900913",
+    "projection": "EPSG:3857",
     "units": "m",
-    "center": {"x": 1159311.21, "y": 5614758.35, "crs": "EPSG:900913"},
+    "center": {"x": 1159311.21, "y": 5614758.35, "crs": "EPSG:3857"},
     "zoom": 8,
     "maxExtent": [
       -20037508.34, -20037508.34,
@@ -52,6 +52,26 @@
         "tiled": true
       },
       {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
+        "name": "SfondoCartRifBN",
+        "title": "Sfondo Cartografico BN",
+        "group": "background",
+        "visibility": false,
+        "format": "image/png",
+        "tiled": true
+      },
+      {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+        "name": "SfondoCartRif",
+        "title": "Sfondo Cartografico",
+        "group": "background",
+        "visibility": false,
+        "format": "image/png",
+        "tiled": true
+      },
+      {
   			"type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
@@ -68,6 +88,49 @@
         },
   			"group": "Oggetti",
   			"format": "image/png"
-  		}]
+  		},
+        {
+            "type": "vector",
+            "name": "Topology ",
+            "queryable": false,
+            "position": 1,
+            "id": "topologyItems",
+            "features": [],
+            "crs": "EPSG:4326",
+            "hideLoading": true,
+            "visibility": true,
+            "style": {
+                "type": "Polygon",
+                "stroke": {
+                    "width": 2,
+                    "color": "rgba(28, 128, 9, 1)"
+                },
+                "fill": {
+                    "color": "rgba(28, 128, 9, 0.3)"
+                }
+            }
+        },
+    {
+          "type": "vector",
+          "position": 1,
+          "queryable": false,
+          "visibility": true,
+          "name": "Selected Feature",
+          "id": "gridItems",
+          "crs": "EPSG:4326",
+          "style": {
+              "type": "Point",
+              "radius": 10,
+              "stroke": {
+                  "width": 3,
+                  "color": "blue"
+              },
+              "fill": {
+                  "color": "blue"
+              }
+            },
+            "features" : []
+          }
+      ]
   }
 }

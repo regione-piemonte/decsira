@@ -22,7 +22,7 @@ const {selectFeatures} = require('../actions/featuregrid');
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
 
 const {
-    loadGridModelWithFilter
+    loadFeaturesWithPagination
 } = require('../actions/grid');
 
 const FeatureGrid = connect((state) => {
@@ -62,7 +62,7 @@ const SiraFeatureGrid = React.createClass({
         detailOpen: React.PropTypes.bool,
         expanded: React.PropTypes.bool,
         header: React.PropTypes.string,
-        features: React.PropTypes.array,
+        features: React.PropTypes.oneOfType([ React.PropTypes.array, React.PropTypes.object]),
         detailsConfig: React.PropTypes.object,
         columnsDef: React.PropTypes.array,
         map: React.PropTypes.object,
@@ -162,9 +162,9 @@ const SiraFeatureGrid = React.createClass({
         if (!nextProps.loadingGrid && nextProps.pagination && (nextProps.dataSourceOptions !== this.props.dataSourceOptions)) {
             this.dataSource = this.getDataSource(nextProps.dataSourceOptions);
         }
-        if (!nextProps.loadingGrid && this.featureLoaded && this.props.features !== nextProps.features) {
-            let rowsThisPage = nextProps.features.slice(this.featureLoaded.startRow, this.featureLoaded.endRow);
-            this.featureLoaded.successCallback(rowsThisPage, this.props.totalFeatures);
+        if (!nextProps.loadingGrid && this.featureLoaded && nextProps.features !== this.props.features && Object.keys(nextProps.features).length > 0) {
+            let rowsThisPage = nextProps.features[this.getRequestId(this.featureLoaded)] || [];
+            this.featureLoaded.successCallback(rowsThisPage, nextProps.totalFeatures);
             this.featureLoaded = null;
         }
     },
@@ -178,14 +178,21 @@ const SiraFeatureGrid = React.createClass({
         this.setState({width: size.width, height: size.height});
 
     },
+    getRequestId(params) {
+        return `${params.startRow}_${params.endRow}_${params.sortModel.map((m) => `${m.colId}_${m.sort}` ).join('_')}`;
+    },
+    getSortAttribute(colId) {
+        let col = this.props.columnsDef.find((c) => colId === `properties.${c.field}`);
+        return col && col.sortAttribute ? col.sortAttribute : '';
+    },
+    getSortOptions(params) {
+        return params.sortModel.reduce((o, m) => ({sortBy: this.getSortAttribute(m.colId), sortOrder: m.sort}), {});
+    },
     getFeatures(params) {
         if (!this.props.loadingGrid) {
-            let data = this.props.features || [];
-            if (params.endRow <= data.length || (data.length > params.startRow && data.length < params.endRow)) {
-                if (params.sortModel.length > 0) {
-                    data = this.sortData(params.sortModel, data);
-                }
-                let rowsThisPage = data.slice(params.startRow, params.endRow);
+            let reqId = this.getRequestId(params);
+            let rowsThisPage = this.props.features[reqId];
+            if (rowsThisPage) {
                 params.successCallback(rowsThisPage, this.props.totalFeatures);
             }else {
                 let pagination = {startIndex: params.startRow, maxFeatures: params.endRow - params.startRow};
@@ -193,11 +200,12 @@ const SiraFeatureGrid = React.createClass({
                 groupFields: this.props.groupFields,
                 filterFields: this.props.filterFields.filter((field) => field.value),
                 spatialField: this.props.spatialField,
-                pagination: pagination
+                pagination
                 };
-                let filter = FilterUtils.toOGCFilter(this.props.featureTypeName, filterObj, this.props.ogcVersion);
+                let filter = FilterUtils.toOGCFilter(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.getSortOptions(params));
                 this.featureLoaded = params;
-                this.props.onQuery(this.props.searchUrl, filter, this.props.params, true);
+                this.sortModel = params.sortModel;
+                this.props.onQuery(this.props.searchUrl, filter, this.props.params, reqId);
             }
         }
     },
@@ -220,7 +228,7 @@ const SiraFeatureGrid = React.createClass({
                             <span>{header}</span>
                         </Col>
                         <Col xs={1} sm={1} md={1} lg={1}>
-                            <button onClick={this.onGridClose} className="close grid-close"><span>×</span></button>
+                            <button onClick={this.onGridClose} className="close grid-close"><span>X</span></button>
                         </Col>
                     </Row>
                 </Grid>
@@ -258,21 +266,6 @@ const SiraFeatureGrid = React.createClass({
             );
         }
 
-        /*let columns = [{
-            onCellClicked: this.goToDetail,
-            headerName: '',
-            cellRenderer: reactCellRendererFactory(GoToDetail),
-            suppressSorting: true,
-            suppressMenu: true,
-            pinned: true,
-            width: 25,
-            suppressResize: true
-        }, {
-            headerName: 'Codice SIRA',
-            field: "properties.codice",
-            width: 100
-        }];*/
-
         let columns = [{
             onCellClicked: this.goToDetail,
             headerName: "",
@@ -287,24 +280,16 @@ const SiraFeatureGrid = React.createClass({
                 return assign({}, column, {field: "properties." + column.field});
             }
         })).filter((c) => c )];
-
-        /*if (this.props.profile === "B") {
-            columns.push({
-                headerName: 'Codice fiscale (P.IVA)',
-                field: "properties.codicefisc"
+        if (this.sortModel && this.sortModel.length > 0) {
+            columns = columns.map((c) => {
+                let model = this.sortModel.find((m) => m.colId === c.field);
+                if ( model ) {
+                    c.sort = model.sort;
+                }
+                return c;
             });
         }
 
-        columns.push({
-            headerName: 'Comune',
-            field: "properties.comune"
-        });
-
-        columns.push({
-            headerName: 'Autorizzazioni ambientali',
-            field: "properties.autamb",
-            width: this.props.profile === "B" ? 250 : 445
-        });*/
         let gridConf = this.props.pagination ? {dataSource: this.dataSource, features: []} : {features: this.props.features};
 
         if (this.props.open) {
@@ -328,6 +313,7 @@ const SiraFeatureGrid = React.createClass({
                                     maxZoom={16}
                                     paging={this.props.pagination}
                                     zoom={15}
+                                    agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true}}
                                     toolbar={{
                                         zoom: true,
                                         exporter: true,
@@ -373,34 +359,6 @@ const SiraFeatureGrid = React.createClass({
         if (!this.props.detailOpen) {
             this.props.onShowDetail();
         }
-    },
-    sortData(sortModel, data) {
-        // do an in memory sort of the data, across all the fields
-        let resultOfSort = data.slice();
-        resultOfSort.sort(function(a, b) {
-            for (let k = 0; k < sortModel.length; k++) {
-                let sortColModel = sortModel[k];
-                let colId = sortColModel.colId.split(".");
-                /*eslint-disable */
-                let valueA = colId.reduce(function(d, key) {
-                    return (d) ? d[key] : null;
-                }, a);
-                let valueB = colId.reduce(function(d, key) {
-                    return (d) ? d[key] : null;
-                }, b);
-                /*eslint-enable */
-                // this filter didn't find a difference, move onto the next one
-                if (valueA === valueB) {
-                    continue;
-                }
-                let sortDirection = sortColModel.sort === 'asc' ? 1 : -1;
-                return (valueA > valueB) ? sortDirection : sortDirection * -1;
-
-            }
-            // no filters found a difference
-            return 0;
-        });
-        return resultOfSort;
     }
 });
 
@@ -429,5 +387,5 @@ module.exports = connect((state) => ({
     // loadFeatureGridConfig: loadFeatureGridConfig,
     onExpandFilterPanel: expandFilterPanel,
     selectFeatures: selectFeatures,
-    onQuery: loadGridModelWithFilter
+    onQuery: loadFeaturesWithPagination
 })(SiraFeatureGrid);

@@ -1,8 +1,42 @@
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<beans>
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <!-- === FreeMarker === BEGIN === -->
+
+    <bean id="templateConfiguration"
+          class="org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerConfigurationFactoryBean" />
+
+    <!-- === FreeMarker ===   END === -->
+
+    <!-- === TemplateEngine === BEGIN === -->
+
+    <bean id="templateEngine"
+          class="org.geoserver.security.iride.util.template.impl.freemarker.FreeMarkerTemplateEngine"
+          p:templateConfiguration-ref="templateConfiguration"
+          p:templateExtension="xml"
+    />
+
+    <!-- === TemplateEngine ===   END === -->
+
+    <!-- === IrideRoleService Factory === BEGIN -->
+
+    <bean id="irideRoleServiceFactory"
+          class="org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory"
+          p:templateEngine-ref="templateEngine"
+    />
+
+    <!-- === IrideRoleService Factory ===   END -->
 
     <bean id="irideSecurityProvider" class="org.geoserver.security.iride.IrideSecurityProvider">
         <constructor-arg ref="geoServerSecurityManager"/>
+        <constructor-arg ref="irideRoleServiceFactory"/>
     </bean>
 
 </beans>
