@@ -19,16 +19,19 @@ const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/sea
 require('../../assets/css/home.css');
 require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 
+//todo Multiselect
+const Multiselect = require('react-widgets').Multiselect;
+//const Multiselect = ReactWidgets.Multiselect;
+var colors = ['orange','blu','yellow','purple'];
+
 const Mosaic = connect((state) => ({
     tiles: state.mosaic.tiles
 }))(require('../components/Mosaic'));
 
-
-
 const Home = (props) => (
     <Localized messages={props.messages} locale={props.locale}>
         <div className="home">
-          
+
           <div id="header-servizio" className="container-fluid">
               <div className="row-fluid">
                     <div className="container testalino">
@@ -39,51 +42,52 @@ const Home = (props) => (
                                     Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
                                     potrebbe essere necessario l&acute;utilizzo dei Javascript.
                                     </p></noscript>
-        
+
                                     <div className="header" >
                                         <h1><h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
                                         </h1>
                                     </div>
-        
+
                              </div>
-                             
+
                              <div id="sx">
                              </div>
-        
+
                              <div id="dx">
                              </div>
-                            
+
                              <div className="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
                                 <h2>Sira</h2>
                              </div>
-                             
+
                              <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
                               <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
                                 <i className="fa fa-bars"></i>
                               </button>
                             </div>
-                            
+
                             <nav className="pimenu-navbar-collapse collapse">
                                 <ul className="nav navbar-nav">
                                     <li className="item-113"><a id="profileALink" href="#">Profilo A</a></li>
                                     <li className="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
                                 </ul>
                             </nav>
-                            
-                            
+
+
                         </div>
                     </div>
-              </div>           
+              </div>
           </div>
-        
-        
-        
+
+
+
           <div className="container-fluid">
               <div className="row-fluid sb-sx">
                   <div className="container search-home">
                       <div className="row">
                           <div clclassNameass="col-md-7 col-xs-12 testo-home">
                               <div>
+                                <Multiselect data={colors} />
                                 Piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte), che si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Imprese, Regione, Province e ARPA)
                               </div>
                           </div>
@@ -99,7 +103,7 @@ const Home = (props) => (
                   </div>
               </div>
           </div>
-          
+
           <div className="container-fluid">
             <div className="row-fluid sb-dx">
                 <div className="container news-home">
@@ -113,8 +117,8 @@ const Home = (props) => (
                 </div>
             </div>
           </div>
-          
-          
+
+
             <div className="modal fade" id="modalNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
@@ -124,23 +128,23 @@ const Home = (props) => (
                   </div>
                   <div className="modal-body">
                     <p>Nuova risorsa Disponibile: &egrave; disponibile questa nuova risorsa "Impianti autorizzati a recupero di energia e materia"</p>
-            
+
                       <p>Proin quam metus, bibendum a lacus eget, tempor tincidunt est. Ut ac laoreet diam. Integer pretium pharetra venenatis. Sed luctus metus lacinia mauris porta, eget imperdiet enim commodo. Phasellus ornare diam sed massa tempus varius. Fusce mollis blandit vehicula. Phasellus ac vulputate purus, eget aliquam arcu. Nam nec orci nunc. Mauris pellentesque tellus eget nulla auctor, nec consectetur nisl porttitor. Proin ullamcorper vestibulum sapien, et congue sem ultricies nec. Fusce imperdiet imperdiet neque sit amet elementum. Suspendisse ac massa volutpat, iaculis augue nec, tristique urna. In ut congue nisi.</p>
-            
+
                       <p>Praesent condimentum tincidunt condimentum. Sed et convallis dui. Duis id nisl dui. Duis commodo ex non nulla aliquet pulvinar. Donec venenatis, purus eu efficitur dapibus, enim urna eleifend nisi, eu sodales nisl ligula in turpis. Donec posuere ullamcorper tellus in sagittis. Donec ullamcorper vel risus vitae finibus. Suspendisse viverra enim in cursus gravida. In hac habitasse platea dictumst. Suspendisse ac enim in justo vestibulum placerat eu et massa. Curabitur elementum neque sit amet semper blandit. Suspendisse imperdiet dolor et est consectetur, nec luctus nulla pharetra.</p>
-            
+
                       <p>Duis rutrum felis a ultrices ornare. Maecenas non ex suscipit, pharetra tellus vitae, placerat ligula. Aliquam dolor neque, lacinia a congue id, rhoncus lobortis urna. Duis mollis tortor eros, vel efficitur libero fringilla a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed erat lectus, interdum eu pellentesque sed, posuere eu risus. Morbi facilisis fringilla molestie. Pellentesque ac feugiat erat, quis aliquet turpis. Aenean dapibus dui non venenatis finibus.</p>
-            
+
                       <p>Sed commodo sollicitudin diam at sagittis. In at maximus leo. Pellentesque sed dolor nec nulla sagittis volutpat a sed nisi. Phasellus tristique facilisis enim eu congue. Sed egestas libero nulla, non fringilla felis bibendum id. Praesent et eros aliquet, elementum mauris vel, iaculis nunc. Nam congue accumsan nisl. Mauris vitae egestas nisl. Curabitur rutrum vehicula dui, laoreet ultricies mi finibus vel. Sed quam felis, lacinia ac eros quis, dignissim tincidunt quam. Aliquam eleifend varius lacus. Donec non interdum odio. Fusce sed tellus interdum, condimentum nulla vitae, commodo libero. Pellentesque nulla mi, commodo non lectus sit amet, mollis suscipit nisl. Proin auctor nisi risus, id finibus leo cursus vitae. </p>
                   </div>
                 </div>
               </div>
             </div>
-          
-        
+
+
            <Mosaic />
-        
-        
+
+
            <div className="container-fluid piattaforma">
             <div className="row-fluid">
                 <div className="container">
@@ -155,15 +159,15 @@ const Home = (props) => (
                 </div>
             </div>
            </div>
-           
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
             <div className="homepage">
                 <div className="header">
                     <div className="header-text">
@@ -202,7 +206,7 @@ const Home = (props) => (
                         </Link>
                     </div>
                 </div>
-                
+
             </div>
 
             <Debug/>
