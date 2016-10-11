@@ -1,0 +1,105 @@
+{
+   "featureTypeName":"siraemissioni:AutorizzazioneEmissioneAtmosfera",
+   "featureTypeNameLabel":"Autorizzazione Emissioni in Atmosfera",
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+     "template": "assets/cardTemplate.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "sira:AutorizzazioneUnicaAmbientale",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplate.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice SIRA",
+           "xpath": ["sira:impianto/sira:Sede/sira:codiceSira/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Codice fiscale (P.IVA)",
+           "xpath": ["sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()"],
+           "profiles": ["B"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "xpath": ["sira:impianto/sira:Sede/sira:comune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Autorizzazioni ambientali",
+           "xpath": ["sira:attivita/sira:Attivita/sira:descrizione/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["sira:impianto/sira:Sede/sira:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ]
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+           "index": 1,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:provincia",
+           "label":"Provincia",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:province"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nomeComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+              "field": "sira:impianto/sira:Sede/sira:provincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        }
+     ]
+   }
+}

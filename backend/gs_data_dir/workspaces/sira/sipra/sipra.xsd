@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:sira="http://www.regione.piemonte.it/ambiente/sira/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/sira/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" />
+
+    <!-- elements -->
+    <element name="AutorizzazioneUnicaAmbientale" type="sira:AutorizzazioneUnicaAmbientaleType" substitutionGroup="gml:AbstractFeature" />
+    <element name="Sede" type="sira:SedeType" substitutionGroup="gml:AbstractFeature" />
+    <element name="IstanzaAutorizzativa" type="sira:IstanzaAutorizzativaType" substitutionGroup="gml:AbstractObject" />
+    <element name="Rifiuto" type="sira:RifiutoType" substitutionGroup="gml:AbstractObject" />
+    <element name="SchedaRifiuto" type="sira:SchedaRifiutoType" substitutionGroup="gml:AbstractObject" />
+    <element name="Attivita" type="sira:AttivitaType" substitutionGroup="gml:AbstractObject" />
+    <element name="Procedimento" type="sira:ProcedimentoType" substitutionGroup="gml:AbstractObject" />
+    <element name="TipoSede" type="sira:TipoSedeType" substitutionGroup="gml:AbstractObject" />
+    <element name="TipoRichiesta" type="sira:TipoRichiestaType" substitutionGroup="gml:AbstractObject" />
+    <element name="TipoImpianto" type="sira:TipoImpiantoType" substitutionGroup="gml:AbstractObject" />
+    <element name="TipoRecupero" type="sira:TipoRecuperoType" substitutionGroup="gml:AbstractObject" />
+    <element name="TipoRifiuto" type="sira:TipoRifiutoType" substitutionGroup="gml:AbstractObject" />
+    <element name="CodiceCER" type="sira:CodiceCERType" substitutionGroup="gml:AbstractObject" />
+    <element name="OperazioneRecupero" type="sira:OperazioneRecuperoType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- shared attributes -->
+    <element name="codiceSira" type="integer" />
+
+    <!-- types -->
+    <complexType name="AutorizzazioneUnicaAmbientaleType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+                    <!-- associations -->
+                    <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
+                    <xs:element name="istanza" minOccurs="1" maxOccurs="1" type="sira:IstanzaAutorizzativaPropertyType" />
+                    <xs:element name="rifiuto" minOccurs="1" maxOccurs="1" type="sira:RifiutoPropertyType" />
+                    <xs:element name="impianto" minOccurs="1" maxOccurs="unbounded" type="sira:SedePropertyType" />
+                    <xs:element name="geometria" type="gml:GeometryPropertyType" minOccurs="0" />
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="SedeType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+                    <xs:element ref="sira:codiceSira" />
+                    <xs:element name="comune" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="provincia" type="sira:SiglaProvinciaType" minOccurs="0" />
+                    <xs:element name="depuratore" type="sira:FlagDepuratoreType" minOccurs="0" />
+                    <xs:element name="suap" type="integer" minOccurs="0" />
+                    <xs:element name="geometria" type="gml:GeometryPropertyType" minOccurs="0" />
+                    <!-- associations -->
+                    <xs:element name="tipoSede" type="sira:TipoSedePropertyType" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="autorizzazione" type="sira:IstanzaAutorizzativaPropertyType" minOccurs="0" maxOccurs="unbounded" />
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="IstanzaAutorizzativaType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <xs:element name="nrProvvedimento" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="dataRilascio" type="date" minOccurs="0" />
+                    <xs:element name="codiceFiscale" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="string">
+                                <xs:maxLength value="16" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <!-- associations -->
+                    <xs:element name="attivita" type="sira:AttivitaPropertyType" minOccurs="0" />
+                    <xs:element name="tipoRichiesta" type="sira:TipoRichiestaPropertyType" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="procedimento" type="sira:ProcedimentoPropertyType" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="RifiutoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <xs:element name="notaQuadroTecnico" type="string" minOccurs="0" />
+                    <xs:element name="qtaTotRecupero" type="decimal" minOccurs="0" />
+                    <xs:element name="capacitaMaxStoccT" type="decimal" minOccurs="0" />
+                    <xs:element name="capacitaMaxStoccMC" type="decimal" minOccurs="0" />
+                    <!-- associations -->
+                    <xs:element name="tipoRichiesta" type="sira:TipoRichiestaPropertyType"
+                        minOccurs="0" maxOccurs="1" />
+                    <xs:element name="impianto" type="sira:TipoImpiantoPropertyType" minOccurs="0"
+                        maxOccurs="unbounded" />
+                    <xs:element name="dettaglio" type="sira:SchedaRifiutoPropertyType" minOccurs="0"
+                        maxOccurs="unbounded" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="SchedaRifiutoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="nrScheda" type="integer" minOccurs="1" />
+                    <element name="pericoloso" type="sira:FlagType" minOccurs="0" />
+                    <element name="quadroTecnico" type="sira:FlagType" minOccurs="0" />
+                    <!-- associations -->
+                    <element name="tipoRecupero" type="sira:TipoRecuperoPropertyType" minOccurs="1" />
+                    <element name="tipoRifiuto" type="sira:TipoRifiutoPropertyType" minOccurs="1" />
+                    <element name="codiceCER" type="sira:CodiceCERPropertyType" minOccurs="0" maxOccurs="unbounded" />
+                    <element name="operazioneRecupero" type="sira:OperazioneRecuperoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="AttivitaType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="descrizione" type="sira:DescrizioneLungaType" minOccurs="0" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="ProcedimentoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="descrizione" type="sira:DescrizioneLungaType" minOccurs="0" />
+                    <xs:element name="flagVisualizza" type="sira:FlagType" minOccurs="0" />
+                    <xs:element name="codiceBdc" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="TipoRichiestaType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <xs:element name="descrizione" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="flag" type="sira:FlagTipoRichiestaType" minOccurs="0" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="TipoImpiantoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="descrizione" type="sira:DescrizioneType" minOccurs="1" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="TipoRecuperoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="descrizione" type="sira:DescrizioneType" minOccurs="1" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="TipoRifiutoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="codice" minOccurs="0">
+                        <simpleType>
+                            <restriction base="string">
+                                <maxLength value="10" />
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element name="descrizione" type="sira:DescrizioneType" minOccurs="1" />
+                    <element name="pericoloso" type="sira:FlagType" minOccurs="0" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="CodiceCERType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="codice" minOccurs="1">
+                        <simpleType>
+                            <restriction base="string">
+                                <maxLength value="8" />
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element name="descrizione" minOccurs="0">
+                        <simpleType>
+                            <restriction base="string">
+                                <maxLength value="300" />
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element name="pericoloso" type="sira:FlagType" minOccurs="0" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="OperazioneRecuperoType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element name="codice" minOccurs="0">
+                        <simpleType>
+                            <restriction base="string">
+                                <maxLength value="10" />
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element name="descrizione" type="sira:DescrizioneType" minOccurs="1" />
+                    <element name="qtaMaxRecupero" type="integer" minOccurs="0" />
+                    <element name="qtaMaxGest" type="integer" minOccurs="0" />
+                    <element name="qtaMaxStoccT" type="integer" minOccurs="0" />
+                    <element name="qtaMaxStoccMC" type="integer" minOccurs="0" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <complexType name="TipoSedeType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractGMLType">
+                <sequence>
+                    <element ref="sira:codiceSira" />
+                    <element name="descrizione" type="sira:DescrizioneType" minOccurs="1" />
+                </sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </complexType>
+    <simpleType name="FlagType">
+        <restriction base="string">
+            <enumeration value="S" />
+            <enumeration value="N" />
+        </restriction>
+    </simpleType>
+    <simpleType name="FlagDepuratoreType">
+        <restriction base="string">
+            <enumeration value="D" />
+            <enumeration value="S" />
+            <enumeration value="E" />
+        </restriction>
+    </simpleType>
+    <simpleType name="FlagTipoRichiestaType">
+        <restriction base="string">
+            <enumeration value="I" />
+            <enumeration value="A" />
+        </restriction>
+    </simpleType>
+    <simpleType name="DescrizioneType">
+        <restriction base="string">
+            <maxLength value="100" />
+        </restriction>
+    </simpleType>
+    <simpleType name="DescrizioneLungaType">
+        <restriction base="string">
+            <maxLength value="500" />
+        </restriction>
+    </simpleType>
+    <simpleType name="IstatComuneType">
+        <restriction base="string">
+            <maxLength value="6" />
+        </restriction>
+    </simpleType>
+    <simpleType name="SiglaProvinciaType">
+        <restriction base="string">
+            <maxLength value="2" />
+        </restriction>
+    </simpleType>
+
+    <!-- property types -->
+    <complexType name="SedePropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:Sede" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="IstanzaAutorizzativaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:IstanzaAutorizzativa" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="RifiutoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:Rifiuto" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="SchedaRifiutoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:SchedaRifiuto" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="AttivitaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:Attivita" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="ProcedimentoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:Procedimento" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="TipoSedePropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:TipoSede" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="TipoRichiestaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:TipoRichiesta" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="TipoImpiantoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:TipoImpianto" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="TipoRecuperoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:TipoRecupero" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="TipoRifiutoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:TipoRifiuto" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="CodiceCERPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:CodiceCER" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+    <complexType name="OperazioneRecuperoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="sira:OperazioneRecupero" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+</schema>

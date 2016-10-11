@@ -17,6 +17,8 @@ const {Button} = require("react-bootstrap");
 const img = require('../../../MapStore2/web/client/components/data/featuregrid/images/magnifier.png');
 const assign = require('object-assign');
 
+const ConfigUtils = require('../../../MapStore2/web/client/utils/ConfigUtils');
+
 const PreviewMap = React.createClass({
 
     propTypes: {
@@ -49,6 +51,14 @@ const PreviewMap = React.createClass({
             m.map.setTarget("scheda_pMap");
         }
     },
+    fillUrl(layer) {
+        if (layer.url) {
+            return assign({}, layer, {
+                url: layer.url.replace("{geoserverUrl}", ConfigUtils.getConfigProp('geoserverUrl'))
+            });
+        }
+        return layer;
+    },
     render() {
         return this.props.map && this.props.center && this.props.center.coordinates ?
         (
@@ -74,7 +84,7 @@ const PreviewMap = React.createClass({
                     {
                         this.props.layers.map((layer, index) =>
                             <Layer key={layer.title || layer.name} position={index} type={layer.type}
-                                options={assign({}, layer, {params: {authkey: this.props.authParam.authkey}})}/>
+                                options={assign({}, this.fillUrl(layer), {params: {authkey: this.props.authParam.authkey}})}/>
                         )
                     }
                 </PMap>

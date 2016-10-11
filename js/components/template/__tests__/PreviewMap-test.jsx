@@ -9,7 +9,10 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const expect = require('expect');
 
-const store = require('../../../stores/store');
+const store = require('../../../stores/store')(undefined, {
+    siradec: require('../../../reducers/siradec'),
+    cardtemplate: require('../../../reducers/card')
+    }, {} );
 const PreviewMap = require('../PreviewMap');
 
 describe('PreviewMap tests', () => {

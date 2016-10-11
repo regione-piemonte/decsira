@@ -22,7 +22,7 @@ const App = (props) => {
         <div className="fill">
             <Localized messages={props.messages} locale={props.current} loadingError={props.localeError}>
                 <Router history={hashHistory}>
-                    <Route path="/new" component={Home}/>
+                    <Route path="/" component={Home}/>
                     <Route path="/dataset/:oggetto/:tematica" component={Dataset}/>
                     <Route path="/map/:profile" component={Sira}/>
                 </Router>

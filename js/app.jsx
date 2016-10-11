@@ -5,68 +5,67 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
 
-if (!global.Intl) {
-    global.Intl = require('intl');
-}
-
+ const React = require('react');
 const ReactDOM = require('react-dom');
+const {connect} = require('react-redux');
 
-const {Provider} = require('react-redux');
-
-const store = require('./stores/store');
-
-const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
-const {changeBrowserProperties} = require('../MapStore2/web/client/actions/browser');
-const {loadLocale} = require('../MapStore2/web/client/actions/locale');
-const {loadTiles} = require('./actions/mosaictile');
-
-const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
+const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {configureQueryForm, configureTopology/*, configureFeatureGrid*/} = require('./actions/siradec');
-// const {configureGrid} = require('./actions/grid');
 
-function startApp() {
-    const App = require('./containers/App');
+const appReducers = {
+    userprofile: require('./reducers/userprofile'),
+    siraControls: require('./reducers/controls'),
+    queryform: require('./reducers/queryform'),
+    siradec: require('./reducers/siradec'),
+    grid: require('./reducers/grid'),
+    cardtemplate: require('./reducers/card'),
+    featuregrid: require('./reducers/featuregrid'),
+    draw: require('../MapStore2/web/client/reducers/draw'),
+    security: require('./reducers/siraSecurity')
 
-    store.dispatch(changeBrowserProperties(ConfigUtils.getBrowserProperties()));
-    store.dispatch(loadTiles());
+};
 
-    ConfigUtils
-        .loadConfiguration()                       // localConfig.json: Global configuration
-        .then(() => {                              // config.json: app configuration
-            const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
-            store.dispatch(loadMapConfig(configUrl, legacy));
+const startApp = () => {
+    const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
+    const StandardApp = require('../MapStore2/web/client/components/app/StandardApp');
 
-            let locale = LocaleUtils.getUserLocale();
-            store.dispatch(loadLocale('translations', locale));
+    const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');
 
-            // "/sira/services/queryformconfig/aua"
-            // store.dispatch(loadQueryFormConfig("assets/", "queryFormConfig.json"));
+    const StandardRouter = connect((state) => ({
+        locale: state.locale || {},
+        pages
+    }))(require('../MapStore2/web/client/components/app/StandardRouter'));
 
-            store.dispatch(configureQueryForm(ConfigUtils.getConfigProp("query")));
-            store.dispatch(configureTopology(ConfigUtils.getConfigProp("topology")));
-            // store.dispatch(configureFeatureGrid(ConfigUtils.getConfigProp("featuregrid")));
+    const appStore = require('./stores/store').bind(null, initialState, appReducers);
+    const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
 
-            // store.dispatch(configureGrid(ConfigUtils.getConfigProp("featuregrid")));
-        });
+    const initialActions = [
+        () => loadMapConfig(configUrl, legacy),
+        () => configureQueryForm(ConfigUtils.getConfigProp("query")),
+        () => configureTopology(ConfigUtils.getConfigProp("topology"))
+    ];
+
+    const appConfig = {
+        storeOpts,
+        appStore,
+        pluginsDef,
+        initialActions,
+        appComponent: StandardRouter,
+        printingEnabled: false
+    };
 
     ReactDOM.render(
-        <Provider store={store}>
-            <App/>
-        </Provider>
-        , document.getElementById("container")
+        <StandardApp {...appConfig}/>,
+        document.getElementById('container')
     );
-}
+};
 
-if (!global.Intl) {
-    require.ensure(['intl', 'intl/locale-data/jsonp/en.js', 'intl/locale-data/jsonp/it.js'], (require) => {
-        require('intl/locale-data/jsonp/en.js');
-        require('intl/locale-data/jsonp/it.js');
-        startApp();
-    });
+if (!global.Intl ) {
+    // Ensure Intl is loaded, then call the given callback
+    LocaleUtils.ensureIntl(startApp);
 }else {
     startApp();
 }

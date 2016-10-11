@@ -21,7 +21,7 @@
     background-color: white;
     border-radius: 10px;
     opacity: 0.7;
-    top: 5px;
+    top: 55px;
 }
 
 .links {
@@ -91,6 +91,7 @@
     width: 500px;
 }
 
+
 .dialog-error-body{
     height: 600px;
     width: 500px;
@@ -104,7 +105,29 @@
 #loading-error-dialog .modal-content{
     width: 510px;
 }
-
+/* QUERY PANEL IN SIDEBAR*/
+.side-querypanel{
+    width: 100% !important;
+    height: calc(100% - 32px);
+}
+.side-querypanel #add-condition-group{
+   position: relative;
+   left: 60px;
+}
+.side-querypanel #attributeFilterPanel .logicHeader .col-xs-5 {
+    width: 50% !important;
+}
+.side-querypanel #attributeFilterPanel .logicHeader .col-xs-6 {
+    width: 40% !important;
+}
+.side-querypanel #spatialFilterPanel .detail_geom_button {
+    position: relative;
+    left: 25px;
+}
+.sidepanel-featuregrid {
+    margin-bottom: 0px !important;
+    border-width: 0px;
+}
 /* SIRA FeatureGrid */
 
 .grid-close{
@@ -116,7 +139,6 @@
 }
 
 .featuregrid-container{
-
     position: absolute;
     top: 0;
 }
@@ -156,7 +178,7 @@
     margin: 8px;
 }
 
-#mapstore-zoomtomaxextent {
+#mapstore-zoomtomaxextents {
     box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
     z-index: 10;
     top: 67px;
@@ -206,19 +228,40 @@
 .handle_querypanel {
     cursor: move;
 }
-
+div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class^="glyphicon-triangle-"]:before, [class*=" glyphicon-triangle-"]:before {
+    font-family: inherit !important;
+}
 .querypanel-container .glyphicon-collapse-down:before {
+    color: black;
     content: "\e252";
+    font-family: inherit !important;
 }
-
+.querypanel-container .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
 .querypanel-container .glyphicon-expand:before {
+    color: black;
     content: "\e251";
+    font-family: inherit !important;
 }
 
-.querypanel-container .glyphicon-minus-sign {
+.querypanel-container [class*=" glyphicon-minus"]:before  {
+    content: "\e082";
+    font-family: inherit !important;
+    font-size: 14px;
+}
+.querypanel-container [class*=" glyphicon-remove"]:before {
     content: "\e014";
+    font-family: inherit !important;
+    font-size: 14px;
 }
-
+.querypanel-container [class*=" glyphicon-plus"]:before {
+    content: "\2b";
+    font-family: inherit !important;
+    font-size: 14px;
+}
 .querypanel-container .col-xs-12 h4 {
     color: #31708f;
     background-color: #d9edf7;
@@ -228,10 +271,90 @@
     border-radius: 4px;
     font-size: 14px;
 }
-#btFirst{
-    display: none
+#mapstore-getfeatureinfo .panel-body {
+    padding: 15px;
 }
-#btLast{
-    display: none
+/* Catalog styles */
+.catalog-object {
+    background-color: rgba(181, 208, 208, 0.2);
 }
+.catalog-object .toc-title{
+    margin-left: 15px;
+}
+.toc-group-children .catalog-object:nth-child(2n+1) {
+    background-color: rgba(181, 208, 208, 0.1);
+}
+#siracatalog .glyphicon-folder-open:before {
+   content: "\31";
+}
+#siracatalog .glyphicon-folder-close:before {
+   content: "\33";
+}
+#siracatalog .toc-group-children {
+    margin-left: 0px !important;
+}
+#siracatalog .toc-default-group {
+    padding: 0px !important;
+    margin-bottom: 0px !important;
 
+}
+#siracatalog .toc-group-title span:nth-child(2) {
+    position: relative;
+        top: -10px;
+}
+#siracatalog .toc-default-group .toc-default-group{
+    margin-left: 10px;
+    border: none;
+}
+#siracatalog .toc-default-group .toc-default-group:last-child{
+    margin-left: 10px;
+    border: none !important;
+}
+.sira-view {
+    border-bottom: 1px solid #dddddd;
+}
+.sira-view-title {
+    position: relative;
+    padding:4px;
+}
+.sira-view-title span:first-child{
+    display: inline-block;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    max-width: 230px;
+}
+.sira-view-title .glyphicon{
+    float: right;
+    margin-top: 10px;
+    color: #078aa3;
+    font-size: 23px !important;
+    cursor: pointer;
+}
+.sira-view-object{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color:  rgba(181, 208, 208, 0.2);
+}
+.sira-view-object:nth-child(2n+1) {
+    background-color: rgba(181, 208, 208, 0.1);
+}
+.sira-view-object span:first-child{
+    margin-left: 15px;
+}
+.sira-view-object .glyphicon{
+    float: right;
+    color: #078aa3;
+    font-size: 23px !important;
+    cursor: pointer;
+}
+.sira-cat-search{
+    position: relative !important;
+    left: 1px !important;
+    width: 298px !important;
+}
+.sira-cat-search .input-group{
+    width: 298px;
+}
+.catalog-tabs{
+    position: relative;
+}
