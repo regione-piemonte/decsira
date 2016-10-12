@@ -98,8 +98,9 @@ const SideQueryPanel = React.createClass({
         queryFormActions: React.PropTypes.object,
         pagination: React.PropTypes.object,
         sortOptions: React.PropTypes.object,
-        hits: React.PropTypes.bool
-    },
+        hits: React.PropTypes.bool,
+        withMap: React.PropTypes.bool.isRequired
+        },
     contextTypes: {
         messages: React.PropTypes.object
     },
@@ -136,6 +137,7 @@ const SideQueryPanel = React.createClass({
             pagination: null,
             sortOptions: null,
             hits: false,
+            withMap: true,
             queryFormActions: {
                 attributeFilterActions: {
                     onAddGroupField: () => {},
@@ -198,7 +200,7 @@ const SideQueryPanel = React.createClass({
     renderQueryPanel() {
         return (
 
-                <Panel className="querypanel-container side-querypanel" header={this.renderHeader()} bsStyle="primary">
+                <Panel className={this.props.withMap ? "querypanel-container side-querypanel" : "querypanel-container side-querypanel hideSpatialFilter" } header={this.renderHeader()} bsStyle="primary">
                     {this.renderDatasetHeader()}
                     <QueryBuilder
                         params={this.props.params}
