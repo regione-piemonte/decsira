@@ -5,27 +5,27 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
- const React = require('react');
+const React = require('react');
 
 
- require('../../assets/css/sira.css');
- require('../../MapStore2/web/client/product/assets/css/viewer.css');
+require('../../assets/css/sira.css');
+require('../../MapStore2/web/client/product/assets/css/viewer.css');
 
- const {connect} = require('react-redux');
- const assign = require('object-assign');
+const {connect} = require('react-redux');
+const assign = require('object-assign');
 
- const SidePanel = require('./SidePanel');
- const Card = require('../components/template/Card');
- const Header = require('../components/MapHeader');
+const SidePanel = require('./SidePanel');
+const Card = require('../components/template/Card');
+const Header = require('../components/MapHeader');
 
- const {bindActionCreators} = require('redux');
- const {toggleSiraControl} = require('../actions/controls');
- const {setProfile} = require('../actions/userprofile');
+const {bindActionCreators} = require('redux');
+const {toggleSiraControl} = require('../actions/controls');
+const {setProfile} = require('../actions/userprofile');
 
- const url = require('url');
- const urlQuery = url.parse(window.location.href, true).query;
+const url = require('url');
+const urlQuery = url.parse(window.location.href, true).query;
 
- const authParams = {
+const authParams = {
      admin: {
          userName: "admin",
          authkey: "84279da9-f0b9-4e45-ac97-48413a48e33f"
@@ -48,15 +48,15 @@
      }
  };
 
- const { changeMousePointer} = require('../../MapStore2/web/client/actions/map');
+const { changeMousePointer} = require('../../MapStore2/web/client/actions/map');
 
- const MapViewer = require('../../MapStore2/web/client/containers/MapViewer');
+const MapViewer = require('../../MapStore2/web/client/containers/MapViewer');
 
- const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../actions/mapInfo');
- const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
- const {selectFeatures, setFeatures} = require('../actions/featuregrid');
+const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../actions/mapInfo');
+const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
+const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
- const GetFeatureInfo = connect((state) => ({
+const GetFeatureInfo = connect((state) => ({
      siraFeatureTypeName: state.siradec.featureTypeName,
      siraFeatureInfoDetails: assign({}, state.siradec.featureinfo, {card: state.siradec.card}),
      siraTopology: state.siradec.topology,
@@ -89,15 +89,15 @@
      };
  })(require('../components/identify/GetFeatureInfo'));
 
- const {
+const {
      loadFeatureTypeConfig
  } = require('../actions/siradec');
 
- let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
 
- MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
+MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
- const Sira = React.createClass({
+const Sira = React.createClass({
      propTypes: {
          mode: React.PropTypes.string,
          params: React.PropTypes.object,
@@ -180,8 +180,8 @@
      }
  });
 
- module.exports = connect((state) => {
-     return {
+module.exports = connect((state) => {
+    return {
          mode: 'desktop',
          loading: !state.config || !state.locale || false,
          error: state.loadingError || (state.locale && state.locale.localeError) || null,
@@ -190,7 +190,7 @@
          featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json'
          // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
      };
- }, {
+}, {
      toggleSiraControl,
      setProfile,
      onLoadFeatureTypeConfig: loadFeatureTypeConfig

@@ -64,18 +64,15 @@ const {TILES_LOADED, TILES_LOAD_ERROR} = require('../actions/mosaictile');
         }
 ]};*/
 
-
-function mosaic(state = {tiles:[]}, action) {
+function mosaic(state = {tiles: []}, action) {
     switch (action.type) {
-    case TILES_LOADED:{
-    	return {tiles: action.tiles, error: null}
-    	break;
+    case TILES_LOADED: {
+        return {tiles: action.tiles, error: null };
     }
-    case TILES_LOAD_ERROR:{
-    	return {tiles: [], error: action.error}
-    	break;
+    case TILES_LOAD_ERROR: {
+        return {tiles: [], error: action.error};
     }
-        default:
+    default:
         return state;
     }
 }
