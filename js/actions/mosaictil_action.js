@@ -1,6 +1,6 @@
 const SET_BOX = 'SET_BOX';
 
-function setMosaicTile(name,icon, objectNumber, tematicViewNumber) {
+function setMosaicTile(name, icon, objectNumber, tematicViewNumber) {
     return {
         type: SET_BOX,
         icon: icon,

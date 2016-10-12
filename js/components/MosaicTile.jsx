@@ -28,7 +28,7 @@ const MosaicTile = React.createClass({
                {this.props.name}
                <div className="ogg_appl">
                   <span>
-                      <Link to={'/dataset/' + this.props.objectNumber +'/0'} className="list-group-item">
+                      <Link to={'/dataset/' + this.props.objectNumber + '/0'} className="list-group-item">
                                    Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
                       </Link>
                   </span>
@@ -39,7 +39,7 @@ const MosaicTile = React.createClass({
                   </span>
                </div>
             </li>
-                   
+
         );
     }
 

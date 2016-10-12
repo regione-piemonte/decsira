@@ -5,28 +5,26 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
- const React = require('react');
- const Debug = require('../../MapStore2/web/client/components/development/Debug');
- const {connect} = require('react-redux');
+const React = require('react');
+const Debug = require('../../MapStore2/web/client/components/development/Debug');
+const {connect} = require('react-redux');
 
- const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
+const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
 
- const {Link} = require('react-router');
+const {Link} = require('react-router');
 
- const {Glyphicon} = require('react-bootstrap');
- const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+const {Glyphicon} = require('react-bootstrap');
+const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
- require('../../assets/css/home.css');
- require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
+require('../../assets/css/home.css');
+require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 
-//TODO ma state quanto vale???
- const Mosaic = connect((state) => ({
+const Mosaic = connect((state) => ({
      tiles: state.mosaic.tiles
  }))(require('../components/Mosaic'));
 
 
-
- const Home = (props) => (
+const Home = (props) => (
      <Localized messages={props.messages} locale={props.locale}>
          <div className="home">
 
@@ -75,7 +73,6 @@
                      </div>
                </div>
            </div>
-
 
 
            <div className="container-fluid">
@@ -157,13 +154,6 @@
             </div>
 
 
-
-
-
-
-
-
-
              <div className="homepage">
                  <div className="header">
                      <div className="header-text">
@@ -210,10 +200,10 @@
      </Localized>
  );
 
- module.exports = connect((state) => {
-     return {
+module.exports = connect((state) => {
+    return {
          error: state.loadingError || (state.locale && state.locale.localeError) || null,
          locale: state.locale && state.locale.locale,
          messages: state.locale && state.locale.messages || {}
      };
- })(Home);
+})(Home);
