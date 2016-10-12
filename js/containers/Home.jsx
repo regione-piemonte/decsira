@@ -19,6 +19,7 @@
  require('../../assets/css/home.css');
  require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 
+//TODO ma state quanto vale???
  const Mosaic = connect((state) => ({
      tiles: state.mosaic.tiles
  }))(require('../components/Mosaic'));
@@ -41,8 +42,7 @@
                                      </p></noscript>
 
                                      <div className="header" >
-                                         <h1><h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
-                                         </h1>
+                                         <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
                                      </div>
 
                               </div>
@@ -82,7 +82,7 @@
                <div className="row-fluid sb-sx">
                    <div className="container search-home">
                        <div className="row">
-                           <div clclassNameass="col-md-7 col-xs-12 testo-home">
+                           <div clclassName="col-md-7 col-xs-12 testo-home">
                                <div>
                                  Piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte), che si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Imprese, Regione, Province e ARPA)
                                </div>
@@ -90,7 +90,7 @@
                            <div className="col-md-5 col-xs-12 ricerca-home">
                              <form className="form-inline">
                                  <div className="form-group">
-                                   <input type="text" className="form-control" id="search" placeholder="cerca oggetti, viste tematiche"> </input>
+                                   <input type="text" className="form-control" id="search" placeholder="cerca oggetti, viste tematiche" />
                                  </div>
                                  <button type="submit" className="btn btn-default"><i className="fa fa-search"></i></button>
                              </form>
@@ -115,7 +115,7 @@
            </div>
 
 
-             <div className="modal fade" id="modalNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+             <div className="modal fade" id="modalNews" role="dialog" aria-labelledby="myModalLabel">
                <div className="modal-dialog" role="document">
                  <div className="modal-content">
                    <div className="modal-header">
@@ -148,7 +148,7 @@
                          <h3>I numeri della piattaforma</h3>
                          <ul className="list-group numeri">
                            <li className="list-group-item col-md-4"><span className="cifra">25</span> <span className="sotto_cifra">Oggetti in continuo aggiornamento</span></li>
-                           <li className="list-group-item col-md-4"><span className="cifra">24<span class="con_cifra">%</span></span> <span className="sotto_cifra">Crescita annuale base&nbsp;dati previsto</span></li>
+                           <li className="list-group-item col-md-4"><span className="cifra">24<span className="con_cifra">%</span></span> <span className="sotto_cifra">Crescita annuale base&nbsp;dati previsto</span></li>
                            <li className="list-group-item col-md-4"><span className="cifra">50</span> <span className="sotto_cifra">Indicatori ambientali disponibili</span></li>
                          </ul>
                      </div>
