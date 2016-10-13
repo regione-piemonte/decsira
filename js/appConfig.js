@@ -8,7 +8,8 @@
 module.exports = {
     pages: [
         { path: "/:profile", component: require('./containers/Sira')},
-        { path: "/map/:profile", component: require('./containers/Sira')}
+        { path: "/map/:profile", component: require('./containers/Sira')},
+        { path: "/nomap/:profile", component: require('./containers/NoMap')}
         ],
     pluginsDef: require('./plugins.js'),
     initialState: {

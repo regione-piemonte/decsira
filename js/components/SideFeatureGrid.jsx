@@ -15,10 +15,12 @@ const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 const {bindActionCreators} = require('redux');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {selectFeatures} = require('../actions/featuregrid');
-const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+const FilterUtils = require('../utils/SiraFilterUtils');
 
 const {
-    loadFeaturesWithPagination
+    loadFeaturesWithPagination,
+    loadGridModelWithPagination,
+    configureGridError
 } = require('../actions/grid');
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 const FeatureGrid = connect((state) => {
@@ -87,9 +89,11 @@ const SideFeatureGrid = React.createClass({
         ogcVersion: React.PropTypes.string,
         onQuery: React.PropTypes.func,
         searchUrl: React.PropTypes.string,
-        newQuery: React.PropTypes.bool,
         dataSourceOptions: React.PropTypes.object,
-        withMap: React.PropTypes.bool.isRequired
+        withMap: React.PropTypes.bool.isRequired,
+        onConfigureQuery: React.PropTypes.func,
+        attributes: React.PropTypes.array,
+        cleanError: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -103,7 +107,7 @@ const SideFeatureGrid = React.createClass({
             detailOpen: true,
             loadingGrid: false,
             loadingGridError: null,
-            // featureGrigConfigUrl: null,
+            attributes: [],
             profile: null,
             expanded: true,
             header: "featuregrid.header",
@@ -118,7 +122,6 @@ const SideFeatureGrid = React.createClass({
             filterFields: [],
             spatialField: {},
             searchUrl: null,
-            newQuery: false,
             dataSourceOptions: {
                 rowCount: -1,
                 pageSize: 10
@@ -132,14 +135,26 @@ const SideFeatureGrid = React.createClass({
             // loadFeatureGridConfig: () => {},
             onExpandFilterPanel: () => {},
             selectFeatures: () => {},
-            onQuery: () => {}
+            onQuery: () => {},
+            onConfigureQuery: () => {},
+            cleanError: () => {}
         };
     },
     componentWillMount() {
         let height = getWindowSize().maxHeight - 108;
         this.setState({width: this.props.initWidth - 30, height});
-        if (this.props.pagination) {
+        if (this.props.pagination && this.props.dataSourceOptions.pageSize) {
             this.dataSource = this.getDataSource(this.props.dataSourceOptions);
+        }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize) {
+            let newFilter = `<wfs:GetPropertyValue service="WFS"
+                    valueReference='${this.props.attributes[0].attribute}'
+                    version="2.0" xmlns:fes="http://www.opengis.net/fes/2.0"
+                    xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd"><wfs:Query typeNames="${this.props.featureTypeName}"/>
+                    </wfs:GetPropertyValue>"`;
+            this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
+                "maxFeatures": 15,
+                "startIndex": 0
+                });
         }
     },
     shouldComponentUpdate() {
@@ -235,8 +250,11 @@ const SideFeatureGrid = React.createClass({
         }
 
         return (
-            <Modal show={loadingError ? true : false} bsSize="small">
-                <Modal.Header>
+            <Modal show={loadingError ? true : false} bsSize="small" onHide={() => {
+                this.props.cleanError(false);
+               // this.onGridClose(true);
+            }}>
+                <Modal.Header className="dialog-error-header-side" closeButton>
                     <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -251,7 +269,7 @@ const SideFeatureGrid = React.createClass({
         let loadingError = this.props.loadingGridError;
         if (loadingError) {
             return (
-                this.renderLoadingException(loadingError, "Error while loading the features")
+                this.renderLoadingException(loadingError, "queryform.query_request_exception")
             );
         }
 
@@ -355,6 +373,7 @@ module.exports = connect((state) => ({
     detailOpen: state.siraControls.detail,
     detailsConfig: state.siradec && state.siradec.card || {},
     columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
+    attributes: state.siradec.attributes,
     features: state.grid && state.grid.data || [],
     totalFeatures: state.grid.totalFeatures,
     map: (state.map && state.map) || (state.config && state.config.map),
@@ -372,8 +391,9 @@ module.exports = connect((state) => ({
     onShowDetail: toggleSiraControl.bind(null, 'detail'),
     toggleSiraControl: toggleSiraControl.bind(null, 'grid'),
     changeMapView: changeMapView,
-    // loadFeatureGridConfig: loadFeatureGridConfig,
     onExpandFilterPanel: expandFilterPanel,
     selectFeatures: selectFeatures,
-    onQuery: loadFeaturesWithPagination
+    onQuery: loadFeaturesWithPagination,
+    onConfigureQuery: loadGridModelWithPagination,
+    cleanError: configureGridError
 })(SideFeatureGrid);
