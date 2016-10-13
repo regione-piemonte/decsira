@@ -115,7 +115,8 @@ const Sira = React.createClass({
         onLoadFeatureTypeConfig: React.PropTypes.func,
         plugins: React.PropTypes.object,
         viewerParams: React.PropTypes.object,
-        configureInlineMap: React.PropTypes.func
+        configureInlineMap: React.PropTypes.func,
+        configLoaded: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
@@ -123,7 +124,8 @@ const Sira = React.createClass({
             setProfile: () => {},
             onLoadFeatureTypeConfig: () => {},
             mode: 'desktop',
-            viewerParams: {mapType: "openlayers"}
+            viewerParams: {mapType: "openlayers"},
+            configLoaded: false
         };
     },
     componentWillMount() {
@@ -133,7 +135,7 @@ const Sira = React.createClass({
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
     },
     componentDidMount() {
-        if (this.props.featureTypeConfigUrl) {
+        if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
             this.props.onLoadFeatureTypeConfig(
                 this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey});
         }
@@ -177,7 +179,8 @@ module.exports = connect((state) => {
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
         controls: state.siraControls,
-        featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json'
+        featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
+        configLoaded: state.siradec && state.siradec.card ? true : false
         // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {
