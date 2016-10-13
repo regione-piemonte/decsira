@@ -38,11 +38,6 @@ const Home = (props) => (
                                      Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
                                      potrebbe essere necessario l&acute;utilizzo dei Javascript.
                                      </p></noscript>
-
-                                     <div className="header" >
-                                         <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
-                                     </div>
-
                               </div>
 
                               <div id="sx">
