@@ -21,7 +21,7 @@ const Header = require('../components/MapHeader');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile} = require('../actions/userprofile');
-
+const {configureInlineMap} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 
@@ -114,7 +114,9 @@ const Sira = React.createClass({
         setProfile: React.PropTypes.func,
         onLoadFeatureTypeConfig: React.PropTypes.func,
         plugins: React.PropTypes.object,
-        viewerParams: React.PropTypes.object
+        viewerParams: React.PropTypes.object,
+        configureInlineMap: React.PropTypes.func,
+        configLoaded: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
@@ -122,14 +124,18 @@ const Sira = React.createClass({
             setProfile: () => {},
             onLoadFeatureTypeConfig: () => {},
             mode: 'desktop',
-            viewerParams: {mapType: "openlayers"}
+            viewerParams: {mapType: "openlayers"},
+            configLoaded: false
         };
     },
     componentWillMount() {
+        if (urlQuery.map) {
+            this.props.configureInlineMap(JSON.parse(urlQuery.map));
+        }
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
     },
     componentDidMount() {
-        if (this.props.featureTypeConfigUrl) {
+        if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
             this.props.onLoadFeatureTypeConfig(
                 this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey});
         }
@@ -163,20 +169,6 @@ const Sira = React.createClass({
                 </div>
             </div>
         );
-    },
-    back() {
-        window.location.href = urlQuery.back + ".html?profile=" + this.props.params.profile;
-    },
-    goHome() {
-        window.location.href = "index.html?profile=" + this.props.params.profile;
-    },
-    toggleGrid(evt) {
-        evt.preventDefault();
-        this.props.toggleSiraControl('grid');
-    },
-    toggleDetail(evt) {
-        evt.preventDefault();
-        this.props.toggleSiraControl('detail');
     }
 });
 
@@ -187,11 +179,13 @@ module.exports = connect((state) => {
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
         controls: state.siraControls,
-        featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json'
+        featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
+        configLoaded: state.siradec && state.siradec.card ? true : false
         // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {
     toggleSiraControl,
     setProfile,
-    onLoadFeatureTypeConfig: loadFeatureTypeConfig
+    onLoadFeatureTypeConfig: loadFeatureTypeConfig,
+    configureInlineMap
 })(Sira);

@@ -16,9 +16,16 @@ const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
 const FEATUREINFO_CONFIG_LOADED = 'FEATUREINFO_CONFIG_LOADED';
 const TOPOLOGY_CONFIG_LOADED = 'TOPOLOGY_CONFIG_LOADED';
 const CARD_CONFIG_LOADED = 'CARD_CONFIG_LOADED';
-
+const INLINE_MAP_CONFIG = 'INLINE_MAP_CONFIG';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+
+function configureInlineMap(mapconfig) {
+    return {
+        type: INLINE_MAP_CONFIG,
+        mapconfig
+    };
+}
 
 function configureFeatureType(ft, field) {
     return {
@@ -194,6 +201,7 @@ module.exports = {
     FEATUREINFO_CONFIG_LOADED,
     TOPOLOGY_CONFIG_LOADED,
     CARD_CONFIG_LOADED,
+    INLINE_MAP_CONFIG,
     configureTopology,
     configureFeatureGrid,
     configureCard,
@@ -203,5 +211,7 @@ module.exports = {
     expandFilterPanel,
     configureQueryFormError,
     getAttributeValues,
-    hideQueryError
+    hideQueryError,
+    configureInlineMap
+
 };

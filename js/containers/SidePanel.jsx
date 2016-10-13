@@ -19,7 +19,8 @@ const SidePanel = React.createClass({
         gridExpanded: React.PropTypes.bool,
         auth: React.PropTypes.object,
         profile: React.PropTypes.string,
-        changeMapStyle: React.PropTypes.func
+        changeMapStyle: React.PropTypes.func,
+        withMap: React.PropTypes.bool.isRequired
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -31,11 +32,12 @@ const SidePanel = React.createClass({
         return {
             filterPanelExpanded: false,
             gridExpanded: false,
+            withMap: true,
             changeMapStyle: () => {}
         };
     },
     componentDidMount() {
-        if (this.props.filterPanelExpanded || this.props.gridExpanded) {
+        if (this.props.withMap && (this.props.filterPanelExpanded || this.props.gridExpanded)) {
             let style = {left: this.state.width, width: `calc(100% - ${this.state.width}px)`};
             this.props.changeMapStyle(style, "sirasidepanel");
         }
@@ -43,19 +45,21 @@ const SidePanel = React.createClass({
     componentDidUpdate(prevProps) {
         const prevShowing = prevProps.filterPanelExpanded || prevProps.gridExpanded;
         const show = this.props.filterPanelExpanded || this.props.gridExpanded;
-        if (prevShowing !== show) {
+        if (prevShowing !== show && this.props.withMap) {
             let style = show ? {left: this.state.width, width: `calc(100% - ${this.state.width}px)`} : {};
             this.props.changeMapStyle(style, "sirasidepanel");
         }
     },
     renderQueryPanel() {
         return (<SideQueryPanel
+                    withMap={this.props.withMap}
                     params={{
                         authkey: this.props.auth.authkey
                     }}/>);
     },
     renderGrid() {
         return (<SideFeatureGrid
+            withMap={this.props.withMap}
             initWidth={this.state.width}
             params={{authkey: this.props.auth.authkey}}
             profile={this.props.profile}/>);
@@ -76,7 +80,7 @@ const SidePanel = React.createClass({
                 sidebar={this.renderContent()}
                 styles={{
                         sidebar: {
-                            backgroundColor: 'white',
+                            backgroundColor: 'transparent',
                             zIndex: 1024,
                             width: this.state.width
                         },
