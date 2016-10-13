@@ -18,7 +18,7 @@ const img = require('../../../MapStore2/web/client/components/data/featuregrid/i
 const assign = require('object-assign');
 
 const ConfigUtils = require('../../../MapStore2/web/client/utils/ConfigUtils');
-
+const {goToMapPage} = require('../../utils/SiraUtils');
 const PreviewMap = React.createClass({
 
     propTypes: {
@@ -30,7 +30,8 @@ const PreviewMap = React.createClass({
             zoom: React.PropTypes.number,
             activeSections: React.PropTypes.object,
             authParam: React.PropTypes.object,
-            changeMapView: React.PropTypes.func
+            changeMapView: React.PropTypes.func,
+            withMap: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
@@ -42,6 +43,7 @@ const PreviewMap = React.createClass({
             zoom: 15,
             activeSections: {},
             authParam: null,
+            withMap: true,
             changeMapView: () => {}
         };
     },
@@ -106,6 +108,9 @@ const PreviewMap = React.createClass({
         let zoom = this.props.zoom;
         const proj = this.props.map.projection || "EPSG:3857";
         this.props.changeMapView( center, zoom, this.props.map.bbox, this.props.map.size, null, proj);
+        if (!this.props.withMap) {
+            goToMapPage(center, zoom);
+        }
     }
 });
 

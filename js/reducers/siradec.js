@@ -15,7 +15,8 @@ const {
     FEATUREINFO_CONFIG_LOADED,
     TOPOLOGY_CONFIG_LOADED,
     CARD_CONFIG_LOADED,
-    QUERYFORM_HIDE_ERROR
+    QUERYFORM_HIDE_ERROR,
+    INLINE_MAP_CONFIG
 } = require('../actions/siradec');
 
 const assign = require('object-assign');
@@ -31,11 +32,15 @@ const initialState = {
     featuregrid: null,
     featureinfo: null,
     card: null,
-    featureType: urlQuery.featureType || 'aua'
+    featureType: urlQuery.featureType || 'aua',
+    inlineMapConfig: null
 };
 
 function siradec(state = initialState, action) {
     switch (action.type) {
+        case INLINE_MAP_CONFIG: {
+            return assign({}, state, {inlineMapConfig: action.mapconfig});
+        }
         case FEATURETYPE_CONFIG_LOADED: {
             let attributes = [...state.attributes, action.field];
 

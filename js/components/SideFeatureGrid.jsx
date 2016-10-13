@@ -88,7 +88,8 @@ const SideFeatureGrid = React.createClass({
         onQuery: React.PropTypes.func,
         searchUrl: React.PropTypes.string,
         newQuery: React.PropTypes.bool,
-        dataSourceOptions: React.PropTypes.object
+        dataSourceOptions: React.PropTypes.object,
+        withMap: React.PropTypes.bool.isRequired
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -123,6 +124,7 @@ const SideFeatureGrid = React.createClass({
                 pageSize: 10
             },
             initWidth: 600,
+            withMap: true,
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -301,9 +303,10 @@ const SideFeatureGrid = React.createClass({
                                     maxZoom={16}
                                     paging={this.props.pagination}
                                     zoom={15}
+                                    enableZoomToFeature={this.props.withMap}
                                     agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true}}
                                     toolbar={{
-                                        zoom: true,
+                                        zoom: this.props.withMap,
                                         exporter: true,
                                         toolPanel: true,
                                         selectAll: true

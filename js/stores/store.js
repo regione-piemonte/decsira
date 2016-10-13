@@ -38,7 +38,7 @@ const {mapConfigHistory, createHistory} = require('../../MapStore2/web/client/ut
 const map = mapConfigHistory(require('../../MapStore2/web/client/reducers/map'));
 
 const layers = require('../reducers/siraLayers');
-const mapConfig = require('../../MapStore2/web/client/reducers/config');
+const mapConfig = require('../reducers/SiraMapConfig');
 
 const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils');
 const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
