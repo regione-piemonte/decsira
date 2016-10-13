@@ -150,7 +150,7 @@ const SideFeatureGrid = React.createClass({
                     valueReference='${this.props.attributes[0].attribute}'
                     version="2.0" xmlns:fes="http://www.opengis.net/fes/2.0"
                     xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd"><wfs:Query typeNames="${this.props.featureTypeName}"/>
-                    </wfs:GetPropertyValue>"`;
+                    </wfs:GetPropertyValue>`;
             this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
                 "maxFeatures": 15,
                 "startIndex": 0
