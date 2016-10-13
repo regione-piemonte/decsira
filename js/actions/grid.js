@@ -106,9 +106,13 @@ function loadFeaturesWithPagination(wfsUrl, data, params, requestId) {
           timeout: 60000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
-            dispatch(configureGridDataWithPagination(response.data, requestId));
-        }).catch((e) => {
-            dispatch(configureGridError(e));
+            if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+                dispatch(configureGridDataWithPagination(response.data, requestId));
+            }else {
+                dispatch(configureGridError("GeoServer Exception, query fallita!"));
+            }
+        }).catch(() => {
+            dispatch(configureGridError("Network problem query fallita!"));
         });
     };
 }
@@ -142,9 +146,13 @@ function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
           timeout: 120000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
-            dispatch(updateTotalFeatures(response.data));
-        }).catch((e) => {
-            dispatch(configureGridError(e));
+            if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+                dispatch(updateTotalFeatures(response.data));
+            }else {
+                dispatch(configureGridError("GeoServer Exception, impossibile recuperare numero totale oggetti!"));
+            }
+        }).catch(() => {
+            dispatch(configureGridError("Network problem, impossibile recuperare numero totale oggetti!"));
         });
     };
 }
