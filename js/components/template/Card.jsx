@@ -37,6 +37,7 @@ const Card = React.createClass({
         }),
         authParam: React.PropTypes.object,
         open: React.PropTypes.bool,
+        withMap: React.PropTypes.bool,
         // model: React.PropTypes.object,
         // impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func
@@ -48,6 +49,7 @@ const Card = React.createClass({
                 xml: null,
                 loadingCardTemplateError: null
             },
+            withMap: true,
             authParam: null,
             open: false,
             // model: {},
@@ -83,6 +85,7 @@ const Card = React.createClass({
         const model = assign({}, this.props.card, {
             authParam: authParam,
             profile: authParam.userName,
+            withMap: this.props.withMap,
             getValue: (element) => TemplateUtils.getValue(xml, element)
         });
 
