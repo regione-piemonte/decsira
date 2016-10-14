@@ -9,7 +9,8 @@ module.exports = {
     pages: [
         { path: "/:profile", component: require('./containers/Sira')},
         { path: "/map/:profile", component: require('./containers/Sira')},
-        { path: "/new/:profile", component: require('./containers/Home')}
+        { path: "/new/:profile", component: require('./containers/Home')},
+        { path: "/nomap/:profile", component: require('./containers/NoMap')}
         ],
     pluginsDef: require('./plugins.js'),
     initialState: {
