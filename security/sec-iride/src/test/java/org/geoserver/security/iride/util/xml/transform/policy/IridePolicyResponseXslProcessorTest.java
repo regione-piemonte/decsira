@@ -29,22 +29,36 @@ import org.junit.runners.Parameterized.Parameters;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class FindRuoliForPersonaInUseCaseXslProcessorTest extends AbstractIridePolicyResponseXslProcessorTest {
+public final class IridePolicyResponseXslProcessorTest extends AbstractIridePolicyResponseXslProcessorTest {
 
     /**
      * Constructor.
      *
      * @param policy
+     * @param operationName
      */
-    public FindRuoliForPersonaInUseCaseXslProcessorTest(IridePolicy policy) {
-        super(policy);
+    public IridePolicyResponseXslProcessorTest(IridePolicy policy, String operationName) {
+        super(policy, operationName);
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     @Parameters(name = "Processing {0} response")
     public static Collection<Object[]> getTestParameters() throws IOException {
         return Arrays.asList(
             new Object[][] {
-                { IridePolicy.FIND_RUOLI_FOR_PERSONA_IN_USE_CASE },
+                { IridePolicy.FIND_RUOLI_FOR_PERSONA_IN_APPLICATION, null },
+                { IridePolicy.FIND_RUOLI_FOR_PERSONA_IN_USE_CASE, null },
+                { IridePolicy.FIND_USE_CASES_FOR_PERSONA_IN_APPLICATION, null },
+                { IridePolicy.GET_INFO_PERSONA_IN_USE_CASE, "getInfoPersonaInUseCaseReturn" },
+                { IridePolicy.GET_INFO_PERSONA_IN_USE_CASE, null },
+                { IridePolicy.IDENTIFICA_USER_PASSWORD, null },
+                { IridePolicy.IS_IDENTITA_AUTENTICA, null },
+                { IridePolicy.IS_PERSONA_AUTORIZZATA_IN_USE_CASE, null },
+                { IridePolicy.IS_PERSONA_AUTORIZZATA_IN_USE_CASE, null },
             }
         );
     }

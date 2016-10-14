@@ -30,15 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-    FindRuoliForPersonaInApplicationXslProcessorTest.class,
-    FindRuoliForPersonaInUseCaseXslProcessorTest.class,
-    FindUseCasesForPersonaInApplicationXslProcessorTest.class,
-    GetInfoPersonaInUseCaseReturnXslProcessorTest.class,
-    GetInfoPersonaInUseCaseXslProcessorTest.class,
-    IdentificaUserPasswordXslProcessorTest.class,
-    IsIdentitaAutenticaXslProcessorTest.class,
-    IsPersonaAutorizzataInUseCaseXslProcessorTest.class,
-    IsPersonaInRuoloXslProcessorTest.class,
+	IridePolicyResponseXslProcessorTest.class,
 })
 public final class AllTests {
 

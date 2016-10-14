@@ -49,23 +49,24 @@ public abstract class AbstractIridePolicyResponseXslProcessorTest extends Abstra
      * Constructor.
      *
      * @param policy
-     */
-    protected AbstractIridePolicyResponseXslProcessorTest(IridePolicy policy) {
-        this(policy, policy.getServiceName(), policy.getServiceName(), policy.getServiceName());
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param policy
      * @param xslSourceName
      * @param xmlSourceName
      * @param expectedResultName
      */
-    protected AbstractIridePolicyResponseXslProcessorTest(IridePolicy policy, String xslSourceName, String xmlSourceName, String expectedResultName) {
-        super(xslSourceName, xmlSourceName, expectedResultName);
+    protected AbstractIridePolicyResponseXslProcessorTest(IridePolicy policy, String operationName) {
+        super(toOperationName(policy, operationName), toOperationName(policy, operationName), toOperationName(policy, operationName));
 
         this.policy = policy;
+    }
+
+    /**
+     *
+     * @param policy
+     * @param operationName
+     * @return
+     */
+    private static String toOperationName(IridePolicy policy, String operationName) {
+    	return operationName == null ? policy.getServiceName() : operationName;
     }
 
     /**
@@ -77,13 +78,6 @@ public abstract class AbstractIridePolicyResponseXslProcessorTest extends Abstra
     @Override
     public final void testXslProcessing() throws TransformerException {
         assertThat(this.doTestXslProcessing(), isSimilarTo(this.getExpectedResult()));
-    }
-
-    /**
-     * @return the policy
-     */
-    protected final IridePolicy getPolicy() {
-        return this.policy;
     }
 
     /*
