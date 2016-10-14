@@ -23,10 +23,10 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.logging.Logger;
 
-import org.geoserver.security.iride.util.IrideSecurityUtils;
+import org.geoserver.security.iride.util.Utils;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.geoserver.security.iride.util.template.TemplateEngine;
 import org.geoserver.security.iride.util.template.exception.TemplateEngineException;
-import org.geotools.util.logging.Logging;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -43,7 +43,7 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(FreeMarkerTemplateEngine.class);
+    private static final Logger LOGGER = LoggerProvider.UTIL.getLogger();
 
     /**
      * <code>FreeMarker</code> Template {@link Configuration}.
@@ -51,25 +51,31 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
     private Configuration templateConfiguration;
 
     /**
-     * <code>FreeMarker</code> template file extension, could be {@code null}.
+     * <code>FreeMarker</code> template file extension (could be {@code null}).
      */
     private String templateExtension;
 
     /**
-     * @return the templateConfiguration
+     * Get the <code>FreeMarker</code> Template {@link Configuration}.
+     *
+     * @return the <code>FreeMarker</code> Template {@link Configuration}
      */
     public Configuration getTemplateConfiguration() {
         return this.templateConfiguration;
     }
 
     /**
-     * @param templateConfiguration the templateConfiguration to set
+     * Set the <code>FreeMarker</code> Template {@link Configuration}.
+     *
+     * @param templateConfiguration the <code>FreeMarker</code> Template {@link Configuration}
      */
     public void setTemplateConfiguration(Configuration templateConfiguration) {
         this.templateConfiguration = templateConfiguration;
     }
 
     /**
+     * Get the <code>FreeMarker</code> template file extension (could be {@code null}).
+     *
      * @return the templateExtension
      */
     public String getTemplateExtension() {
@@ -77,7 +83,9 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
     }
 
     /**
-     * @param templateExtension the templateExtension to set
+     * Set the <code>FreeMarker</code> template file extension (could be {@code null}).
+     *
+     * @param templateExtension the <code>FreeMarker</code> template file extension (could be {@code null})
      */
     public void setTemplateExtension(String templateExtension) {
         this.templateExtension = templateExtension;
@@ -90,14 +98,14 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
     public void process(String template, Object context, Writer writer) throws IOException {
         final Template freeMarkerTemplate = this.getTemplate(template);
 
-        LOGGER.fine("Processing template '" + template + "':\n" + freeMarkerTemplate + "\nwith context:\n" + context);
+        LOGGER.finest("Processing template '" + template + "':\n" + freeMarkerTemplate + "\nwith context:\n" + context);
 
         try {
             freeMarkerTemplate.process(context == null ? TemplateModel.NOTHING : context, writer);
         } catch (TemplateException e) {
             /*
              * Rethrow any FreeMarker exception thrown here
-             * encapsulated in a SimpleTemplateEngine runtime exception,
+             * encapsulated in a TemplateEngine runtime exception,
              * since there's nothing we can do if anything goes wrong at this point
              */
             throw new TemplateEngineException(e);
@@ -115,7 +123,7 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
 
         final String output = writer.toString();
 
-        LOGGER.fine("Processed template '" + template + "':\n" + output);
+        LOGGER.finest("Processed template '" + template + "':\n" + output);
 
         return output;
     }
@@ -135,7 +143,7 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
         }
 
         return this.getTemplateConfiguration().getTemplate(
-            IrideSecurityUtils.ensureFileWithExtension(templateName, this.getTemplateExtension()),
+            Utils.ensureFileWithExtension(templateName, this.getTemplateExtension()),
             this.getTemplateConfiguration().getDefaultEncoding()
         );
     }

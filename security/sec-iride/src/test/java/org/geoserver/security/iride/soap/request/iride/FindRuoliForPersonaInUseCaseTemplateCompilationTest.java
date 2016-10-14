@@ -21,12 +21,11 @@ package org.geoserver.security.iride.soap.request.iride;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import it.csi.iride2.policy.entity.UseCase;
-
 import java.io.IOException;
 import java.util.Map;
 
-import org.geoserver.security.iride.identity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideUseCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -60,7 +59,7 @@ public final class FindRuoliForPersonaInUseCaseTemplateCompilationTest extends A
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInUseCase/in0/mac", equalTo(irideIdentity.getMac())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInUseCase/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
 
-        final UseCase useCase = (UseCase) this.getDataModel().get("useCase");
+        final IrideUseCase useCase = (IrideUseCase) this.getDataModel().get("useCase");
 
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInUseCase/in1/appId/id", equalTo(useCase.getAppId().getId())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInUseCase/in1/id", equalTo(useCase.getId())));

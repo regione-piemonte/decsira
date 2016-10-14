@@ -19,7 +19,6 @@
 package org.geoserver.security.iride;
 
 import java.io.IOException;
-import java.util.SortedSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,11 +27,11 @@ import org.geoserver.security.GeoServerUserGroupStore;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.impl.AbstractUserGroupService;
 import org.geoserver.security.impl.GeoServerUser;
-import org.geoserver.security.impl.GeoServerUserGroup;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 /**
  * <code>GeoServer</code> user group security service, backed by <code>CSI</code> <code>IRIDE</code> service.
+ * <p><em><code>IRIDE</code> user group service is <em>read-only</em>, therefore there is no support for {@link GeoServerUserGroupStore} usage</em>
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -41,7 +40,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideUserGroupService.class);
+    private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
      * Constructor.
@@ -63,7 +62,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
 
         this.name = config.getName();
 
-        // TODO: check if needed and, if so, implement
+        // TODO: implement!
         super.initializeFromConfig(config);
     }
 
@@ -79,28 +78,12 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
         return false;
     }
 
-    /**
-     * <code>IRIDE</code> user group service is <em>read-only</em>, therefore there is no support for {@link GeoServerUserGroupStore}.
-     */
     /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#createStore()
+     * E' il "main" per eseguire l'autenticazione via IRIDE.
+     * -> richiamare servizi per verificare IrideIdentity
+     * ->      //      //    per recuperare IrideInfoPersona(s)
+     * -> "assemblare" informazioni su istanza GeoServerUser
      */
-    @Override
-    public GeoServerUserGroupStore createStore() throws IOException {
-        return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getGroupByGroupname(java.lang.String)
-     */
-    @Override
-    public GeoServerUserGroup getGroupByGroupname(String groupname) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getGroupByGroupname(groupname);
-    }
-
     /*
      *
      * (non-Javadoc)
@@ -108,71 +91,12 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public GeoServerUser getUserByUsername(String username) throws IOException {
-        // TODO: check if needed and, if so, implement
+        // TODO: implement!
         return super.getUserByUsername(username);
     }
 
     /*
      * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#createUserObject(java.lang.String, java.lang.String, boolean)
-     */
-    @Override
-    public GeoServerUser createUserObject(String username, String password, boolean isEnabled) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.createUserObject(username, password, isEnabled);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#createGroupObject(java.lang.String, boolean)
-     */
-    @Override
-    public GeoServerUserGroup createGroupObject(String groupname, boolean isEnabled) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.createGroupObject(groupname, isEnabled);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getUsers()
-     */
-    @Override
-    public SortedSet<GeoServerUser> getUsers() throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUsers();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getUserGroups()
-     */
-    @Override
-    public SortedSet<GeoServerUserGroup> getUserGroups() throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUserGroups();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getUsersForGroup(org.geoserver.security.impl.GeoServerUserGroup)
-     */
-    @Override
-    public SortedSet<GeoServerUser> getUsersForGroup(GeoServerUserGroup group) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUsersForGroup(group);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getGroupsForUser(org.geoserver.security.impl.GeoServerUser)
-     */
-    @Override
-    public SortedSet<GeoServerUserGroup> getGroupsForUser(GeoServerUser user) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getGroupsForUser(user);
-    }
-
-    /* (non-Javadoc)
      * @see org.geoserver.security.impl.AbstractUserGroupService#deserialize()
      */
     @Override

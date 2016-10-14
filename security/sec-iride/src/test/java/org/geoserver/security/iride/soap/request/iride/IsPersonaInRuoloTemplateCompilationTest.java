@@ -21,12 +21,11 @@ package org.geoserver.security.iride.soap.request.iride;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import it.csi.iride2.iridefed.entity.Role;
-
 import java.io.IOException;
 import java.util.Map;
 
-import org.geoserver.security.iride.identity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideRole;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -60,7 +59,7 @@ public final class IsPersonaInRuoloTemplateCompilationTest extends AbstractIride
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/mac", equalTo(irideIdentity.getMac())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
 
-        final Role role = (Role) this.getDataModel().get("role");
+        final IrideRole role = (IrideRole) this.getDataModel().get("role");
 
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in1/codiceRuolo", equalTo(role.getCode())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in1/mnemonico", equalTo(role.toMnemonicRepresentation())));

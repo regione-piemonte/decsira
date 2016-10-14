@@ -22,24 +22,31 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
+ * A simple yet complete <a href="https://en.wikipedia.org/wiki/Template_processor">Template Engine<a/> interface definition.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public interface TemplateEngine {
 
     /**
+     * Processes the given <code>source template</code> with the given context (i.e.: the <code>data model</code>),
+     * directing the output of the resulting <code>result document</code> to the given {@link Writer} instance.
+     * <p>The exact meaning of what the <code>source template</code> and <code>data model</code> are is implementation dependant.
      *
-     * @param template
-     * @param context
-     * @param writer
+     * @param template <code>source template</code>
+     * @param context context (i.e.: the <code>data model</code>)
+     * @param writer {@link Writer} instance where the output of the resulting <code>result document</code> is directed to
      */
     void process(String template, Object context, Writer writer) throws IOException;
 
     /**
+     * Processes the given <code>source template</code> with the given context (i.e.: the <code>data model</code>),
+     * returning the resulting <code>result document</code> as a string.
+     * <p>The exact meaning of what the <code>source template</code> and <code>data model</code> are is implementation dependant.
      *
-     * @param template
-     * @param context
-     * @return
+     * @param template <code>source template</code>
+     * @param context context (i.e.: the <code>data model</code>)
+     * @return the resulting <code>result document</code> as a string
      */
     String process(String template, Object context) throws IOException;
 

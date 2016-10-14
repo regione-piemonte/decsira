@@ -18,8 +18,10 @@
  */
 package org.geoserver.security.iride.util;
 
+import java.util.logging.Logger;
+
 /**
- * Utility class for <code>IRIDE</code> Digital Identity exceptions constants.
+ * Utility class for application constants.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -49,6 +51,11 @@ public final class Constants {
      * Exception message for an unspecified missing token.
      */
     public static final String MISSING_UNSPECIFIED_TOKEN_EXCEPTION_MESSAGE = INVALID_TOKENS_EXCEPTION_MESSAGE_CAPTION + ": an unspecified token is missing";
+
+    /**
+     * {@link Logger} base name.
+     */
+    public static final String LOGGER_BASE_NAME = "org.geoserver.security.iride";
 
     /**
      * Constructor.

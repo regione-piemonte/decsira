@@ -21,17 +21,20 @@ package org.geoserver.security.iride.identity;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
-import org.geoserver.security.iride.identity.IrideIdentityFormatter.FormatStyle;
-import org.geoserver.security.iride.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.identity.IrideIdentityFormatter;
+import org.geoserver.security.iride.entity.identity.IrideIdentityFormatter.FormatStyle;
+import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geotools.util.logging.Logging;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * <code>IRIDE</code> Digital Identity entity formatter <code>JUnit</code> Test Case.
+ * <code>IRIDE</code> <code>Digital Identity</code> entity formatter <code>JUnit</code> Test Case.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -43,17 +46,17 @@ public final class IrideIdentityFormatterTest {
     private static final Logger LOGGER = Logging.getLogger(IrideIdentityTest.class);
 
     /**
-     * <code>IRIDE</code> Digital Identity tokens.
+     * <code>IRIDE</code> <code>Digital Identity</code> tokens.
      */
     private String[] tokens;
 
     /**
-     * <code>IRIDE</code> Digital Identity entity instance.
+     * <code>IRIDE</code> <code>Digital Identity</code> entity instance.
      */
     private IrideIdentity irideIdentity;
 
     /**
-     * <code>IRIDE</code> Digital Identity entity formatter.
+     * <code>IRIDE</code> <code>Digital Identity</code> entity formatter.
      */
     private IrideIdentityFormatter formatter;
 
@@ -70,23 +73,65 @@ public final class IrideIdentityFormatterTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityFormatter.FormatStyle#values()}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter.FormatStyle#values()}.
      */
     @Test
-    public void testIrideIdentityFormatterHasTwoFormatStyles() {
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityFormatterHasTwoFormatStyles");
+    public void testIrideIdentityFormatterHasExpectedFormatStylesCount() {
+        final int expectedFormatStyleCount = 3;
+
+        LOGGER.entering(this.getClass().getName(), "testIrideIdentityFormatterHasExpectedFormatStylesCount");
         try {
             final FormatStyle[] result = IrideIdentityFormatter.FormatStyle.values();
 
             assertThat(result, is(not(nullValue())));
-            assertThat(result, is(arrayWithSize(2)));
+            assertThat(result, is(arrayWithSize(expectedFormatStyleCount)));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityFormatterHasTwoFormatStyles");
+            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityFormatterHasExpectedFormatStylesCount");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityFormatter#format(org.geoserver.security.iride.identity.IrideIdentityFormatter.FormatStyle)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter#format(IrideIdentity, FormatStyle)}.
+     */
+    @Test
+    public void testFormatWithNullIrideIdentityAndNullStyleReturnsNull() {
+        final IrideIdentity                      irideIdentity = null;
+        final IrideIdentityFormatter.FormatStyle formatStyle   = null;
+
+        LOGGER.entering(this.getClass().getName(), "testFormatWithNullIrideIdentityAndNullStyleReturnsNull", new Object[] {irideIdentity, formatStyle});
+        try {
+            final String result = this.formatter.format(irideIdentity, formatStyle);
+
+            assertThat(result, is(nullValue()));
+
+            LOGGER.info("Formatted IrideIdentity: " + result);
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testFormatWithNullIrideIdentityAndNullStyleReturnsNull");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter#format(IrideIdentity, FormatStyle)}.
+     */
+    @Test
+    public void testFormatWithNullIrideIdentityReturnsNull() {
+        final IrideIdentity                      irideIdentity = null;
+        final IrideIdentityFormatter.FormatStyle formatStyle   = IrideIdentityFormatter.FormatStyle.INTERNAL_REPRESENTATION;
+
+        LOGGER.entering(this.getClass().getName(), "testFormatWithNullIrideIdentityReturnsNull", new Object[] {irideIdentity, formatStyle});
+        try {
+            final String result = this.formatter.format(irideIdentity, formatStyle);
+
+            assertThat(result, is(nullValue()));
+
+            LOGGER.info("Formatted IrideIdentity: " + result);
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testFormatWithNullIrideIdentityReturnsNull");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter#format(IrideIdentity, FormatStyle)}.
      */
     @Test
     public void testFormatWithNullStyleReturnsNull() {
@@ -105,7 +150,7 @@ public final class IrideIdentityFormatterTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityFormatter#format(org.geoserver.security.iride.identity.IrideIdentityFormatter.FormatStyle)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter#format(IrideIdentity, FormatStyle)}.
      */
     @Test
     public void testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation() {
@@ -116,7 +161,7 @@ public final class IrideIdentityFormatterTest {
             final String result = this.formatter.format(this.irideIdentity, formatStyle);
 
             assertThat(result, is(not(nullValue())));
-            assertThat(result, is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
+            assertThat(result, is(StringUtils.join(Arrays.copyOfRange(this.tokens, 0, this.tokens.length - 1), IrideIdentityToken.SEPARATOR)));
 
             LOGGER.info("Formatted IrideIdentity: " + result);
         } finally {
@@ -125,7 +170,7 @@ public final class IrideIdentityFormatterTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityFormatter#format(org.geoserver.security.iride.identity.IrideIdentityFormatter.FormatStyle)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter#format(IrideIdentity, FormatStyle)}.
      */
     @Test
     public void testFormatWithReflectionToStringStyle() {

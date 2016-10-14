@@ -18,15 +18,16 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.geoserver.security.iride.Utils.BLANK;
-import static org.geoserver.security.iride.Utils.EMPTY;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
-import org.geoserver.security.iride.identity.exception.IrideIdentityMissingTokenException;
-import org.geoserver.security.iride.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer;
+import org.geoserver.security.iride.entity.identity.exception.IrideIdentityMissingTokenException;
+import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geotools.util.logging.Logging;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -74,7 +75,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -96,7 +97,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -118,7 +119,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -140,7 +141,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -162,7 +163,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -184,7 +185,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -206,7 +207,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -228,7 +229,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -250,7 +251,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -272,7 +273,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -294,7 +295,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */
@@ -314,7 +315,7 @@ public final class IrideIdentityTokenizerTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer#tokenize(java.lang.String)}.
      *
      * @throws IrideIdentityMissingTokenException
      */

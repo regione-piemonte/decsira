@@ -28,8 +28,8 @@ import org.geoserver.security.GeoServerSecurityProvider;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
-import org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 /**
  * <code>IRIDE</code> {@link GeoServerSecurityProvider}.
@@ -42,7 +42,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideSecurityProvider.class);
+    private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
      * <code>GeoServer</code> security manager.

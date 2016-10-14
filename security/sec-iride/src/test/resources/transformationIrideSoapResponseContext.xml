@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <import resource="transformationContext.xml"/>
+
+    <!-- === XML Transformation Resources === BEGIN === -->
+
+    <!-- FIND_RUOLI_FOR_PERSONA_IN_APPLICATION -->
+
+    <bean id="findRuoliForPersonaInApplicationXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/findRuoliForPersonaInApplication.xml"
+    />
+
+    <bean id="findRuoliForPersonaInApplicationXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/findRuoliForPersonaInApplication.xsl"
+    />
+
+    <bean id="findRuoliForPersonaInApplicationRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><list><role>PA_SPEC_DECSIRA@REG_PMN</role></list>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- FIND_RUOLI_FOR_PERSONA_IN_USE_CASE -->
+
+    <bean id="findRuoliForPersonaInUseCaseXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/findRuoliForPersonaInUseCase.xml"
+    />
+
+    <bean id="findRuoliForPersonaInUseCaseXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/findRuoliForPersonaInUseCase.xsl"
+    />
+
+    <bean id="findRuoliForPersonaInUseCaseRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><list><role>PA_SPEC_DECSIRA@REG_PMN</role></list>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- FIND_USE_CASES_FOR_PERSONA_IN_APPLICATION -->
+
+    <bean id="findUseCasesForPersonaInApplicationXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/findUseCasesForPersonaInApplication.xml"
+    />
+
+    <bean id="findUseCasesForPersonaInApplicationXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/findUseCasesForPersonaInApplication.xsl"
+    />
+
+    <bean id="findUseCasesForPersonaInApplicationRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><list><useCase><appId><id>DECSIRA</id></appId><id>UC001</id></useCase><useCase><appId><id>DECSIRA</id></appId><id>UC003</id></useCase><useCase><appId><id>DECSIRA</id></appId><id>UC004</id></useCase><useCase><appId><id>DECSIRA</id></appId><id>UC006</id></useCase><useCase><appId><id>DECSIRA</id></appId><id>UC008</id></useCase><useCase><appId><id>DECSIRA</id></appId><id>UC009</id></useCase><useCase><appId><id>DECSIRA</id></appId><id>UC010</id></useCase></list>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- GET_INFO_PERSONA_IN_USE_CASE -->
+
+    <bean id="getInfoPersonaInUseCaseXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/getInfoPersonaInUseCase.xml"
+    />
+
+    <bean id="getInfoPersonaInUseCaseXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/getInfoPersonaInUseCase.xsl"
+    />
+
+    <bean id="getInfoPersonaInUseCaseRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><info-persona-group><info-persona ruolo="PA_SPEC_DECSIRA@REG_PMN"><ID_AUTORITA>1</ID_AUTORITA><ISTAT_PROVINCIA/><ISTAT_COMUNE/></info-persona></info-persona-group>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- GET_INFO_PERSONA_IN_USE_CASE (Return Value) -->
+
+    <bean id="getInfoPersonaInUseCaseReturnXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/getInfoPersonaInUseCaseReturn.xml"
+    />
+
+    <bean id="getInfoPersonaInUseCaseReturnXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/getInfoPersonaInUseCaseReturn.xsl"
+    />
+
+    <bean id="getInfoPersonaInUseCaseReturnRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><list><infoPersona><role>PA_SPEC_DECSIRA@REG_PMN</role><properties><property name="ID_AUTORITA" value="1"/><property name="ISTAT_PROVINCIA" value=""/><property name="ISTAT_COMUNE" value=""/></properties></infoPersona></list>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- IDENTIFICA_USER_PASSWORD -->
+
+    <bean id="identificaUserPasswordXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/identificaUserPassword.xml"
+    />
+
+    <bean id="identificaUserPasswordXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/identificaUserPassword.xsl"
+    />
+
+    <bean id="identificaUserPasswordRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><identity>AAAAAA00A11D000L/CSI PIEMONTE/DEMO 23/IPA/20160927095928/2/YvNVYmg9ttpRv+JjNV9mHQ==</identity>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- IS_IDENTITA_AUTENTICA -->
+
+    <bean id="isIdentitaAutenticaXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/isIdentitaAutentica.xml"
+    />
+
+    <bean id="isIdentitaAutenticaXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/isIdentitaAutentica.xsl"
+    />
+
+    <bean id="isIdentitaAutenticaRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><boolean>true</boolean>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- IS_PERSONA_AUTORIZZATA_IN_USE_CASE -->
+
+    <bean id="isPersonaAutorizzataInUseCaseXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/isPersonaAutorizzataInUseCase.xml"
+    />
+
+    <bean id="isPersonaAutorizzataInUseCaseXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/isPersonaAutorizzataInUseCase.xsl"
+    />
+
+    <bean id="isPersonaAutorizzataInUseCaseRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><boolean>true</boolean>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- IS_PERSONA_IN_RUOLO -->
+
+    <bean id="isPersonaInRuoloXML"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:transformations/iride/soap/response/isPersonaInRuolo.xml"
+    />
+
+    <bean id="isPersonaInRuoloXSL"
+          parent="abstractSAXSourceFactory"
+          class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+        p:resource="classpath:iride/soap/response/isPersonaInRuolo.xsl"
+    />
+
+    <bean id="isPersonaInRuoloRES"
+          class="java.lang.String">
+        <constructor-arg>
+            <value><![CDATA[<?xml version="1.0" encoding="UTF-8"?><boolean>true</boolean>]]></value>
+        </constructor-arg>
+    </bean>
+
+    <!-- === XML Transformation Resources ===   END === -->
+
+</beans>

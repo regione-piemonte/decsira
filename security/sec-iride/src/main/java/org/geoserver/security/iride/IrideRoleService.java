@@ -19,10 +19,8 @@
 package org.geoserver.security.iride;
 
 import static org.geoserver.security.iride.util.builder.IrideServerURLBuilder.buildServerURL;
-import it.csi.iride2.policy.entity.Application;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -33,14 +31,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerRoleStore;
@@ -49,9 +39,11 @@ import org.geoserver.security.event.RoleLoadedListener;
 import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
-import org.geoserver.security.iride.identity.IrideIdentity;
-import org.geoserver.security.iride.util.template.TemplateEngine;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.entity.IrideApplication;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.service.policy.IridePolicy;
+import org.geoserver.security.iride.service.policy.IridePolicyManager;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -70,7 +62,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideRoleService.class);
+    private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
      * Regular Expression to extract role's relevant informations from the
@@ -83,35 +75,23 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     private Config config;
 
-    private HttpClient httpClient = new HttpClient();
-    private HttpConnectionManagerParams params = new HttpConnectionManagerParams();
+    /**
+     * {@link IridePolicyManager} istance.
+     */
+    private IridePolicyManager policyManager;
 
     /**
-     * {@link TemplateEngine} implementation.
+     * @return the policyManager
      */
-    private TemplateEngine templateEngine;
-
-    /**
-     * @param httpClient the httpClient to set
-     */
-    public void setHttpClient(HttpClient httpClient) {
-        this.httpClient = httpClient;
+    public IridePolicyManager getPolicyManager() {
+        return this.policyManager;
     }
 
     /**
-     * @return the httpClient
+     * @param policyManager the policyManager to set
      */
-    public HttpClient getHttpClient() {
-        return this.httpClient;
-    }
-
-    /**
-     * Set the {@link TemplateEngine} implementation
-     *
-     * @param templateEngine the {@link TemplateEngine} implementation
-     */
-    public void setTemplateEngine(TemplateEngine templateEngine) {
-        this.templateEngine = templateEngine;
+    public void setPolicyManager(IridePolicyManager policyManager) {
+        this.policyManager = policyManager;
     }
 
     /*
@@ -127,14 +107,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
 
         this.name   = config.getName();
         this.config = new Config(config);
-
-        this.params.setSoTimeout(30000);
-        this.params.setConnectionTimeout(30000);
-
-        final MultiThreadedHttpConnectionManager manager = new MultiThreadedHttpConnectionManager();
-        manager.setParams(this.params);
-
-        this.httpClient.setHttpConnectionManager(manager);
     }
 
     /*
@@ -179,7 +151,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      * @see org.geoserver.security.GeoServerRoleService#getRolesForUser(java.lang.String)
      */
     @Override
-    public SortedSet<GeoServerRole> getRolesForUser(String username) throws IOException {
+    public SortedSet<GeoServerRole> getRolesForUser(final String username) throws IOException {
         LOGGER.info("Username: " + username);
 
         final TreeSet<GeoServerRole> roles = new TreeSet<>();
@@ -195,8 +167,18 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
             return roles;
         }
 
-        final String requestXml  = this.getServiceRequestXml(username);
-        final String responseXml = this.callWebService(requestXml).replace("\\r", "").replace("\\n", "");
+        final String responseXml = this.policyManager.getPolicyRequestHandler(IridePolicy.FIND_RUOLI_FOR_PERSONA_IN_APPLICATION).handlePolicyRequest(
+            this.config.serverURL,
+            new HashMap<String, Object>() {
+
+                private static final long serialVersionUID = 1L;
+
+                {
+                    this.put("irideIdentity", IrideIdentity.parseIrideIdentity(username));
+                    this.put("application", new IrideApplication(IrideRoleService.this.config.applicationName));
+                }
+            }
+        ).replace("\\r", "").replace("\\n", "");
 
         final Matcher m = ROLE_REGEX.matcher(responseXml);
         while (m.find()) {
@@ -400,76 +382,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     }
 
     /**
-     * @param requestXml
-     * @return
-     * @throws IOException
-     * @throws HttpException
-     */
-    private String callWebService(final String requestXml) throws HttpException, IOException {
-        final HttpMethod post = this.createHttpMethod(requestXml);
-        final Header header = new Header();
-        header.setName("Content-type");
-        header.setValue("text/xml; charset=UTF-8");
-        post.setRequestHeader(header);
-        header.setName("SOAPAction");
-        header.setValue("dummy");
-        post.setRequestHeader(header);
-
-        LOGGER.info("Request sent to IRIDE: " + requestXml);
-
-        try {
-            final int status = this.httpClient.executeMethod(post);
-            if (status == 200) {
-                final String responseXml = post.getResponseBodyAsString();
-
-                LOGGER.info("Response received from IRIDE: " + responseXml);
-
-                return responseXml;
-            } else {
-                LOGGER.info("Got error from IRIDE: " + status);
-
-                return "";
-                /*throw new IOException("Error getting remote resources from " + serverURL
-                        + ", http error " + status + ": " + post.getStatusText());*/
-            }
-        } finally {
-            post.releaseConnection();
-        }
-    }
-
-    /**
-     * @param requestXml
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    protected HttpMethod createHttpMethod(String requestXml) throws UnsupportedEncodingException {
-        final PostMethod post = new PostMethod(this.config.serverURL);
-        post.setRequestEntity(new StringRequestEntity(requestXml, "text/xml", "UTF-8"));
-
-        return post;
-    }
-
-    /**
-     * @param username
-     * @return
-     * @throws IOException
-     */
-    private String getServiceRequestXml(final String username) throws IOException {
-        return this.templateEngine.process(
-            "findRuoliForPersonaInApplication",
-            new HashMap<String, Object>() {
-
-                private static final long serialVersionUID = 1L;
-
-                {
-                    this.put("irideIdentity", IrideIdentity.parseIrideIdentity(username));
-                    this.put("application", new Application("DECSIRA"));
-                }
-            }
-        );
-    }
-
-    /**
      *
      * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
      *
@@ -499,6 +411,26 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
          * when {@link IrideRoleService} does not found any roles for a given user.
          */
         private final String fallbackRoleServiceName;
+
+        /**
+         * Constructor.
+         *
+         * Initialize a {@link Config} object from a {@link SecurityNamedServiceConfig} instance.
+         *
+         * @param cfg a {@link SecurityNamedServiceConfig} instance
+         */
+        Config(SecurityNamedServiceConfig cfg) {
+            if (! (cfg instanceof IrideSecurityServiceConfig)) {
+                throw new IllegalArgumentException("Config object must be of IrideSecurityServiceConfig type");
+            }
+
+            final IrideSecurityServiceConfig irideCfg = (IrideSecurityServiceConfig) cfg;
+
+            this.serverURL               = buildServerURL(irideCfg.getServerURL());
+            this.applicationName         = validateApplicationName(irideCfg.getApplicationName());
+            this.adminRole               = validateAdminRole(irideCfg.getAdminRole());
+            this.fallbackRoleServiceName = StringUtils.trimToNull(irideCfg.getFallbackRoleService());
+        }
 
         /**
          * Returns the given <code>applicationName</code> if it's deemed a valid,
@@ -534,26 +466,6 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
             }
 
             return adminRole;
-        }
-
-        /**
-         * Constructor.
-         *
-         * Initialize a {@link Config} object from a {@link SecurityNamedServiceConfig} instance.
-         *
-         * @param cfg a {@link SecurityNamedServiceConfig} instance
-         */
-        Config(SecurityNamedServiceConfig cfg) {
-            if (! (cfg instanceof IrideSecurityServiceConfig)) {
-                throw new IllegalArgumentException("Config object must be of IrideSecurityServiceConfig type");
-            }
-
-            final IrideSecurityServiceConfig irideCfg = (IrideSecurityServiceConfig) cfg;
-
-            this.serverURL               = buildServerURL(irideCfg.getServerURL());
-            this.applicationName         = validateApplicationName(irideCfg.getApplicationName());
-            this.adminRole               = validateAdminRole(irideCfg.getAdminRole());
-            this.fallbackRoleServiceName = StringUtils.trimToNull(irideCfg.getFallbackRoleService());
         }
 
         /**
