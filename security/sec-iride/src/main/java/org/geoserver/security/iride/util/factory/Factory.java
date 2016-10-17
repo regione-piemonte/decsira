@@ -28,7 +28,7 @@ package org.geoserver.security.iride.util.factory;
 public interface Factory<T> {
 
     /**
-     * Returns a new object of the speficic type &lt;T&gt;.
+     * Creates a new instance of the speficic type &lt;T&gt;.
      *
      * @return
      */

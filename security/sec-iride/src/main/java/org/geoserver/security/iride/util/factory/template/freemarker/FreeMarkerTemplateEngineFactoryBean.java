@@ -24,7 +24,8 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * Factory that configures a <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation, and provides it as bean reference.
+ * Factory that configures a <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation,
+ * and provides it as a <code>Spring</code> bean reference.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */

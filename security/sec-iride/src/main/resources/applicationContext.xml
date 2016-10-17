@@ -8,6 +8,13 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <!-- === HttpClient === BEGIN === -->
+
+    <bean id="httpClient"
+          class="org.geoserver.security.iride.util.factory.httpclient.HttpClientFactoryBean" />
+
+    <!-- === HttpClient ===   END === -->
+
     <!-- === FreeMarker === BEGIN === -->
 
     <bean id="templateConfiguration"
@@ -28,8 +35,8 @@
     <!-- === IrideRoleService Factory === BEGIN -->
 
     <bean id="irideRoleServiceFactory"
-          class="org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory"
-          p:templateEngine-ref="templateEngine"
+          class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
+          p:policyManager-ref="policyManager"
     />
 
     <!-- === IrideRoleService Factory ===   END -->
@@ -38,5 +45,94 @@
         <constructor-arg ref="geoServerSecurityManager"/>
         <constructor-arg ref="irideRoleServiceFactory"/>
     </bean>
+
+    <!-- HTTP Headers === BEGIN === -->
+
+    <util:list id="httpHeaders"
+               value-type="org.apache.commons.httpclient.Header">
+        <bean class="org.apache.commons.httpclient.Header"
+              p:name="Content-type"
+              p:value="text/xml; charset=UTF-8"
+        />
+        <bean class="org.apache.commons.httpclient.Header"
+              p:name="SOAPAction"
+              p:value="dummy"
+        />
+    </util:list>
+
+    <!-- HTTP Headers ===   END === -->
+
+    <!-- === IRIDE Policies Helpers === BEGIN === -->
+
+    <bean id="policyManager"
+          class="org.geoserver.security.iride.service.policy.IridePolicyManager">
+        <constructor-arg ref="policyRegistry" />
+    </bean>
+
+    <bean id="abstractIridePolicyCaller"
+          abstract="true"
+          p:httpClient-ref="httpClient"
+          p:httpHeaders-ref="httpHeaders"
+          p:templateEngine-ref="templateEngine"
+    />
+
+    <bean id="policyRegistry"
+          class="org.geoserver.security.iride.service.policy.IridePolicyRegistry">
+        <constructor-arg index="0">
+		    <util:list value-type="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler">
+		        <!-- Base Policies -->
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_RUOLI_FOR_PERSONA_IN_APPLICATION</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_RUOLI_FOR_PERSONA_IN_USE_CASE</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_USE_CASES_FOR_PERSONA_IN_APPLICATION</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IDENTIFICA_USER_PASSWORD</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_IDENTITA_AUTENTICA</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_PERSONA_AUTORIZZATA_IN_USE_CASE</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_PERSONA_IN_RUOLO</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">GET_INFO_PERSONA_IN_USE_CASE</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_RUOLI_FOR_PERSONA_IN_APPLICATION</value></constructor-arg>
+		        </bean>
+		        <!-- Helper Policies -->
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_APPLICATIONS</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_USE_CASES_FOR_APPLICATION</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_APPLICATION_ESISTENTE</value></constructor-arg>
+		        </bean>
+		        <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler" parent="abstractIridePolicyCaller">
+		            <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_USE_CASE_ESISTENTE</value></constructor-arg>
+		        </bean>
+		    </util:list>
+        </constructor-arg>
+    </bean>
+
+    <!-- === IRIDE Policies Helpers ===   END === -->
+
+    <!-- === IRIDE XStream Factory === BEGIN === -->
+
+    <bean id="irideXStreamFactory"
+          class="org.geoserver.security.iride.util.factory.xstream.XStreamFactory"
+    />
+
+    <!-- === IRIDE XStream Factory ===   END === -->
 
 </beans>

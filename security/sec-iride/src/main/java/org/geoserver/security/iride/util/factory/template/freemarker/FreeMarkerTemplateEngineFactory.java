@@ -18,18 +18,19 @@
  */
 package org.geoserver.security.iride.util.factory.template.freemarker;
 
-import org.geoserver.security.iride.util.factory.Factory;
+import org.geoserver.security.iride.util.factory.AbstractFactory;
 import org.geoserver.security.iride.util.template.TemplateEngine;
 import org.geoserver.security.iride.util.template.impl.freemarker.FreeMarkerTemplateEngine;
 
 import freemarker.template.Configuration;
 
 /**
- * Factory that configures a <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation.
+ * <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation Factory.
+ * <p>Useful for tests.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class FreeMarkerTemplateEngineFactory implements Factory<FreeMarkerTemplateEngine> {
+public class FreeMarkerTemplateEngineFactory extends AbstractFactory<FreeMarkerTemplateEngine> {
 
     /**
      * <code>FreeMarker</code> Template {@link Configuration}.
@@ -56,7 +57,7 @@ public class FreeMarkerTemplateEngineFactory implements Factory<FreeMarkerTempla
      *
      * @param templateConfiguration <code>FreeMarker</code> Template {@link Configuration}
      * @param templateExtension <code>FreeMarker</code> template file extension, could be {@code null}
-     * @return @return a new <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation
+     * @return a new <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation
      */
     public static FreeMarkerTemplateEngine createTemplateEngine(Configuration templateConfiguration, String templateExtension) {
         final FreeMarkerTemplateEngineFactory factory = new FreeMarkerTemplateEngineFactory();
@@ -65,7 +66,6 @@ public class FreeMarkerTemplateEngineFactory implements Factory<FreeMarkerTempla
 
         return factory.create();
     }
-
 
     /**
      * Set the <code>FreeMarker</code> Template {@link Configuration}.
@@ -85,10 +85,10 @@ public class FreeMarkerTemplateEngineFactory implements Factory<FreeMarkerTempla
 
     /*
      * (non-Javadoc)
-     * @see org.geoserver.security.iride.util.factory.Factory#create()
+     * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
      */
     @Override
-    public FreeMarkerTemplateEngine create() {
+    protected final FreeMarkerTemplateEngine newInstance() {
         final FreeMarkerTemplateEngine freeMarkerTemplateEngine = new FreeMarkerTemplateEngine();
 
         // Inject the FreeMarker Template Configuration

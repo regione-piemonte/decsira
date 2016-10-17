@@ -18,8 +18,8 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.geoserver.security.iride.Utils.BLANK;
-import static org.geoserver.security.iride.Utils.EMPTY;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -28,18 +28,18 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.geoserver.security.iride.identity.IrideIdentity;
-import org.geoserver.security.iride.identity.exception.IrideIdentityTokenizationException;
-import org.geoserver.security.iride.identity.exception.IrideIdentityInvalidTokensException;
-import org.geoserver.security.iride.identity.exception.IrideIdentityMissingTokenException;
-import org.geoserver.security.iride.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.identity.exception.IrideIdentityTokenizationException;
+import org.geoserver.security.iride.entity.identity.exception.IrideIdentityInvalidTokensException;
+import org.geoserver.security.iride.entity.identity.exception.IrideIdentityMissingTokenException;
+import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geotools.util.logging.Logging;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.SerializationUtils;
 
 /**
- * <code>IRIDE</code> Digital Identity entity <code>JUnit</code> Test Case.
+ * <code>IRIDE</code> <code>Digital Identity</code> entity <code>JUnit</code> Test Case.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -51,7 +51,7 @@ public final class IrideIdentityTest {
     private static final Logger LOGGER = Logging.getLogger(IrideIdentityTest.class);
 
     /**
-     * <code>IRIDE</code> Digital Identity tokens.
+     * <code>IRIDE</code> <code>Digital Identity</code> tokens.
      */
     private String[] tokens;
 
@@ -76,7 +76,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String[])}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -93,7 +93,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String[])}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -111,7 +111,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String[])}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -137,7 +137,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String[])}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -163,7 +163,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -180,7 +180,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -202,7 +202,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -224,7 +224,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String[])}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -242,8 +242,8 @@ public final class IrideIdentityTest {
             assertThat(result.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
             assertThat(String.valueOf(result.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
-            assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
+            assertThat(result.toString(), is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
+            assertThat(result.toInternalRepresentation(), is(tokensToInternalRepresentation()));
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
@@ -252,7 +252,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -278,8 +278,8 @@ public final class IrideIdentityTest {
             assertThat(result.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
             assertThat(String.valueOf(result.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(result.toInternalRepresentation(), is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
-            assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
+            assertThat(result.toString(), is(StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR)));
+            assertThat(result.toInternalRepresentation(), is(tokensToInternalRepresentation()));
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
@@ -288,7 +288,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#IrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#IrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -308,8 +308,8 @@ public final class IrideIdentityTest {
             assertThat(result.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
             assertThat(String.valueOf(result.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(result.toInternalRepresentation(), is(value));
-            assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
+            assertThat(result.toString(), is(value));
+            assertThat(result.toInternalRepresentation(), is(tokensToInternalRepresentation()));
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
@@ -318,7 +318,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#compareTo(IrideIdentity)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#compareTo(IrideIdentity)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -341,7 +341,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#compareTo(IrideIdentity)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#compareTo(IrideIdentity)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -366,7 +366,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#equals(Object)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -389,7 +389,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#equals(Object)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -410,7 +410,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#equals(Object)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -433,7 +433,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#equals(IrideIdentity)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#equals(Object)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -447,7 +447,7 @@ public final class IrideIdentityTest {
 
             assertThat(irideIdentity1, is(notNullValue()));
 
-            final IrideIdentity irideIdentity2 = new IrideIdentity(irideIdentity1.toInternalRepresentation());
+            final IrideIdentity irideIdentity2 = new IrideIdentity(irideIdentity1.toString());
 
             assertThat(irideIdentity1.equals(irideIdentity2), is(true));
         } finally {
@@ -456,7 +456,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#parseIrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#parseIrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -475,7 +475,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#parseIrideIdentity(String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#parseIrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -494,7 +494,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#parseIrideIdentity(String[])}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#parseIrideIdentity(String)}.
      *
      * @throws IrideIdentityTokenizationException
      */
@@ -514,8 +514,8 @@ public final class IrideIdentityTest {
             assertThat(result.getTimestamp(), is(this.tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
             assertThat(String.valueOf(result.getLivelloAutenticazione()), is(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
             assertThat(result.getMac(), is(this.tokens[IrideIdentityToken.MAC.getPosition()]));
-            assertThat(result.toInternalRepresentation(), is(value));
-            assertThat(result.toInternalRepresentation(), is(result.toInternalRepresentation()));
+            assertThat(result.toString(), is(value));
+            assertThat(result.toInternalRepresentation(), is(tokensToInternalRepresentation()));
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
@@ -524,7 +524,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotInvalidIrideIdentity() {
@@ -541,7 +541,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithNullValue() {
@@ -558,7 +558,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithBlankValue() {
@@ -575,7 +575,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithEmptyValue() {
@@ -592,7 +592,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithUnrecognizedValue() {
@@ -609,7 +609,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken() {
@@ -626,7 +626,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingNomeToken() {
@@ -643,7 +643,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingCognomeToken() {
@@ -660,7 +660,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingIdProviderToken() {
@@ -677,7 +677,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingTimestampToken() {
@@ -694,7 +694,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken() {
@@ -711,7 +711,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMissingMacToken() {
@@ -728,7 +728,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCodiceFiscaleEmpty() {
@@ -745,7 +745,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCodiceFiscaleBlank() {
@@ -762,7 +762,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat() {
@@ -779,7 +779,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithNomeEmpty() {
@@ -796,7 +796,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithNomeBlank() {
@@ -813,7 +813,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCognomeEmpty() {
@@ -830,7 +830,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCognomeBlank() {
@@ -847,7 +847,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithIdProviderEmpty() {
@@ -864,7 +864,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithIdProviderBlank() {
@@ -881,7 +881,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithTimestampEmpty() {
@@ -898,7 +898,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithTimestampBlank() {
@@ -915,7 +915,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithTimestampWithInvalidFormat() {
@@ -932,7 +932,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty() {
@@ -949,7 +949,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank() {
@@ -966,7 +966,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat() {
@@ -983,7 +983,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange() {
@@ -1000,7 +1000,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange() {
@@ -1017,7 +1017,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMacEmpty() {
@@ -1034,7 +1034,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMacBlank() {
@@ -1051,7 +1051,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithMacOfInvalidLength() {
@@ -1068,7 +1068,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty() {
@@ -1085,7 +1085,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank() {
@@ -1102,7 +1102,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithAllNullTokens() {
@@ -1125,7 +1125,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithAllEmptyTokens() {
@@ -1148,7 +1148,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isNotValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsNotValidIrideIdentityWithAllBlankTokens() {
@@ -1171,7 +1171,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsValidIrideIdentity() {
@@ -1188,7 +1188,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsValidIrideIdentityWithComplexMacToken() {
@@ -1205,7 +1205,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
      */
     @Test
     public void testIsValidIrideIdentityWithRealisticDigitalIdentity() {
@@ -1222,7 +1222,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity} serialization.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity} serialization.
      */
     @Test
     public void testIrideIdentitySuccesfulSerialization() {
@@ -1242,7 +1242,7 @@ public final class IrideIdentityTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentity} serialization.
+     * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity} serialization.
      */
     @Test
     public void testIrideIdentitySuccesfulDeserialization() {
@@ -1270,6 +1270,15 @@ public final class IrideIdentityTest {
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testIrideIdentitySuccesfulDeserialization");
         }
+    }
+
+    /**
+     * Helper method to build an {@link IrideIdentity#toInternalRepresentation()} equivalent string joining {@link #tokens}.
+     *
+     * @return an {@link IrideIdentity#toInternalRepresentation()} equivalent string joining {@link #tokens}
+     */
+    private String tokensToInternalRepresentation() {
+        return StringUtils.join(Arrays.copyOfRange(this.tokens, 0, this.tokens.length - 1), IrideIdentityToken.SEPARATOR);
     }
 
 }

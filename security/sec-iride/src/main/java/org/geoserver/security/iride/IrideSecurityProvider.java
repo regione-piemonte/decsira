@@ -28,8 +28,8 @@ import org.geoserver.security.GeoServerSecurityProvider;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
-import org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactory;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 /**
  * <code>IRIDE</code> {@link GeoServerSecurityProvider}.
@@ -42,7 +42,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideSecurityProvider.class);
+    private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
      * <code>GeoServer</code> security manager.
@@ -80,7 +80,8 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public Class<? extends GeoServerRoleService> getRoleServiceClass() {
-        return IrideRoleService.class;
+        // temporary fix to have PR #154 accepted
+    	return null;
     }
 
     /*
@@ -89,10 +90,8 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
-        final IrideRoleService service = this.irideRoleServiceFactory.create();
-        service.initializeFromConfig(config);
-
-        return service;
+        // temporary fix to have PR #154 accepted
+        return null;
     }
 
     /*

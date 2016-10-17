@@ -18,16 +18,17 @@
  */
 package org.geoserver.security.iride.identity;
 
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.geoserver.security.iride.Utils.BLANK;
-import static org.geoserver.security.iride.Utils.EMPTY;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
-import org.geoserver.security.iride.identity.token.IrideIdentityToken;
-import org.geoserver.security.iride.identity.token.value.IrideIdentityInvalidTokenValue;
-import org.geoserver.security.iride.util.IrideSecurityUtils;
+import org.geoserver.security.iride.entity.identity.IrideIdentityValidator;
+import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
+import org.geoserver.security.iride.util.Utils;
 import org.geotools.util.logging.Logging;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public final class IrideIdentityValidatorTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateSuccessful() {
@@ -75,7 +76,7 @@ public final class IrideIdentityValidatorTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateSuccessfulForRealisticDigitalIdentity() {
@@ -92,7 +93,7 @@ public final class IrideIdentityValidatorTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testValidateFailForInvalidNullTokensArray() {
@@ -107,7 +108,7 @@ public final class IrideIdentityValidatorTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testValidateFailForInvalidEmptyTokensArray() {
@@ -122,7 +123,7 @@ public final class IrideIdentityValidatorTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testValidateFailForInvalidLengthTokensArray() {
@@ -137,7 +138,7 @@ public final class IrideIdentityValidatorTest {
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleNull() {
@@ -152,14 +153,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleBlank() {
@@ -174,14 +175,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleEmpty() {
@@ -196,14 +197,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormat() {
@@ -218,14 +219,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormat");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForNomeNull() {
@@ -240,14 +241,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForNomeBlank() {
@@ -262,14 +263,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForNomeEmpty() {
@@ -284,14 +285,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCognomeNull() {
@@ -306,14 +307,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCognomeBlank() {
@@ -328,14 +329,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCognomeEmpty() {
@@ -350,14 +351,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForIdProviderNull() {
@@ -372,14 +373,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForIdProviderBlank() {
@@ -394,14 +395,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForIdProviderEmpty() {
@@ -416,14 +417,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForTimestampNull() {
@@ -438,14 +439,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForTimestampBlank() {
@@ -460,14 +461,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForTimestampEmpty() {
@@ -482,14 +483,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForTimestampWithInvalidFormat() {
@@ -504,14 +505,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampWithInvalidFormat");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneNull() {
@@ -526,14 +527,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneBlank() {
@@ -548,14 +549,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneEmpty() {
@@ -570,14 +571,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneWithInvalidFormat() {
@@ -592,14 +593,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithInvalidFormat");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneWithValue0NotInRange() {
@@ -614,14 +615,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue0NotInRange");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneWithValue3NotInRange() {
@@ -636,14 +637,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue3NotInRange");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForMacNull() {
@@ -658,14 +659,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForMacBlank() {
@@ -680,14 +681,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForMacEmpty() {
@@ -702,14 +703,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForMacWithInvalidLenght() {
@@ -724,14 +725,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacWithInvalidLenght");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull() {
@@ -748,14 +749,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank() {
@@ -772,14 +773,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty() {
@@ -796,14 +797,14 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForAllNullTokens() {
@@ -823,14 +824,14 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllNullTokens");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForAllBlankTokens() {
@@ -850,14 +851,14 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllBlankTokens");
         }
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator.IrideIdentityValidator#validate(java.lang.String)}.
      */
     @Test
     public void testValidateFailForAllEmptyTokens() {
@@ -877,7 +878,7 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(IrideSecurityUtils.toString(result));
+            LOGGER.warning(Utils.toString(result));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllEmptyTokens");
         }

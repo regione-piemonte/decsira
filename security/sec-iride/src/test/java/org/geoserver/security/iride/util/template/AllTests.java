@@ -31,7 +31,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     FindRuoliForPersonaInApplicationTemplateEngineTest.class,
     FindRuoliForPersonaInUseCaseTemplateEngineTest.class,
-    FindUseCaseForPersonaInApplicationTemplateEngineTest.class,
+    FindUseCasesForPersonaInApplicationTemplateEngineTest.class,
     GetInfoPersonaInUseCaseTemplateEngineTest.class,
     IdentificaUserPasswordTemplateEngineTest.class,
     IsIdentitaAutenticaTemplateEngineTest.class,

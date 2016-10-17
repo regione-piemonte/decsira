@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.geoserver.security.iride.identity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideIdentity;
 import org.junit.runners.Parameterized.Parameters;
 
 /**

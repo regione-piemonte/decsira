@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Map;
 
-import org.geoserver.security.iride.identity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideIdentity;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 

@@ -21,13 +21,12 @@ package org.geoserver.security.iride.util.template;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import it.csi.iride2.policy.entity.Application;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.geoserver.security.iride.identity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideApplication;
+import org.geoserver.security.iride.entity.IrideIdentity;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
@@ -75,7 +74,7 @@ public final class FindRuoliForPersonaInApplicationTemplateEngineTest extends Ab
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in0/mac", equalTo(irideIdentity.getMac())));
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
 
-        final Application application = (Application) this.getContext().get("application");
+        final IrideApplication application = (IrideApplication) this.getContext().get("application");
 
         assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:findRuoliForPersonaInApplication/in1/id", equalTo(application.getId())));
     }

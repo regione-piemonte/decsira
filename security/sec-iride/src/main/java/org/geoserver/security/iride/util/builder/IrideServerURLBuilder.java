@@ -20,7 +20,7 @@ package org.geoserver.security.iride.util.builder;
 
 import org.apache.commons.validator.routines.UrlValidator;
 import org.geoserver.platform.GeoServerExtensions;
-import org.geoserver.security.iride.util.factory.UrlValidatorFactory;
+import org.geoserver.security.iride.util.factory.util.UrlValidatorFactory;
 
 /**
  *
@@ -34,10 +34,20 @@ public final class IrideServerURLBuilder implements Builder<String> {
     private final String url;
 
     /**
+     * Constructor.
+     *
+     * @param url candidate <code>IRIDE</code> server <code>URL</code>
+     */
+    public IrideServerURLBuilder(String url) {
+        this.url = url;
+    }
+
+    /**
      * "Builds" the candidate <code>IRIDE</code> server <code>URL</code>, returning the result.
      * May throw an {@link IllegalArgumentException} if the given url is not deemed <em>valid</em>.
      *
      * @param url candidate <code>IRIDE</code> server <code>URL</code>
+     * @return the "built" <code>IRIDE</code> server <code>URL</code>
      * @see UrlValidator#isValid(String)
      */
     public static String buildServerURL(String url) {
@@ -55,7 +65,7 @@ public final class IrideServerURLBuilder implements Builder<String> {
      */
     private static String parse(String url) {
         if (url != null && url.startsWith("${") && url.endsWith("}")) {
-            url = GeoServerExtensions.getProperty(url.substring(2, url.length() - 1));
+            return GeoServerExtensions.getProperty(url.substring(2, url.length() - 1));
         }
 
         return url;
@@ -71,7 +81,7 @@ public final class IrideServerURLBuilder implements Builder<String> {
      * @see UrlValidator#isValid(String)
      */
     private static String validate(String url) {
-        if (! UrlValidatorFactory.getDefaultUrlValidator().isValid(url)) {
+        if (! UrlValidatorFactory.createUrlValidator().isValid(url)) {
             throw new IllegalArgumentException(String.format(
                 "'%s' is not a valid IRIDE server URL ", url
             ));
@@ -80,22 +90,16 @@ public final class IrideServerURLBuilder implements Builder<String> {
         return url;
     }
 
-    /**
-     * Constructor.
-     *
-     * @param url candidate <code>IRIDE</code> server <code>URL</code>
-     */
-    public IrideServerURLBuilder(String url) {
-        this.url = url;
-    }
-
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.iride.util.builder.Builder#build()
      */
     /**
      * "Builds" the candidate <code>IRIDE</code> server <code>URL</code>, returning the result.
+     *
+     * @return the "built" <code>IRIDE</code> server <code>URL</code>
      */
+    @Override
     public String build() {
         return validate(parse(this.url));
     }

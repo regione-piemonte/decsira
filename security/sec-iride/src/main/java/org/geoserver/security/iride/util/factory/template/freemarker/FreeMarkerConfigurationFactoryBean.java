@@ -24,11 +24,12 @@ import org.springframework.beans.factory.InitializingBean;
 import freemarker.template.Configuration;
 
 /**
- * Factory bean that creates a <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link Configuration}, and provides it as bean reference.
+ * <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link Configuration} Factory
+ * that provides {@link Configuration} as a <code>Spring</code> bean reference.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class FreeMarkerConfigurationFactoryBean extends FreeMarkerConfigurationDefaultFactory implements FactoryBean<Configuration>, InitializingBean {
+public final class FreeMarkerConfigurationFactoryBean extends FreeMarkerConfigurationFactory implements FactoryBean<Configuration>, InitializingBean {
 
     /**
      * <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.

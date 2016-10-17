@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Map;
 
-import org.hamcrest.Matcher;
+import org.geoserver.security.iride.AbstractXmlUnitTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,13 +33,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextManager;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.xmlunit.matchers.EvaluateXPathMatcher;
-
 
 /**
- * <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} template compilation <code>JUnit</code>.
+ * Base class for <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} template compilation <code>JUnit</code> Test.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  * @see https://github.com/spring-projects/spring-framework/blob/master/spring-test/src/test/java/org/springframework/test/context/junit4/ParameterizedDependencyInjectionTests.java
@@ -49,21 +45,13 @@ import org.xmlunit.matchers.EvaluateXPathMatcher;
     "classpath:/testContext.xml",
     "classpath:/templateContext.xml"
 })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
-public abstract class AbstractTemplateEngineTest {
-
-    /**
-     * Namespace context mapping to be used in <code>XPath</code> matching.<br />
-     * Maps from prefix to namespace <code>URI</code>,
-     * and is used to resolve <code>XML</code> namespace prefixes in the <code>XPath</code> expression.
-     */
-    private static Map<String, String> namespaceContext;
+public abstract class AbstractTemplateEngineTest extends AbstractXmlUnitTest {
 
     private final TestContextManager testContextManager;
 
-    private String templateName;
+    private final String templateName;
 
-    private String contextName;
+    private final String contextName;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -81,37 +69,10 @@ public abstract class AbstractTemplateEngineTest {
      * @param contextBeanName
      */
     protected AbstractTemplateEngineTest(String templateName, String contextBeanName) {
+    	this.testContextManager = new TestContextManager(this.getClass());
+
         this.templateName = templateName;
         this.contextName  = contextBeanName;
-
-        this.testContextManager = new TestContextManager(this.getClass());
-    }
-
-    /**
-     * Set the namespace context mapping to be used in <code>XPath</code> matching.
-     *
-     * @return the namespace context mapping to be used in <code>XPath</code> matching
-     */
-    public static final void setNamespaceContext(Map<String, String> nsContext) {
-        namespaceContext = nsContext;
-    }
-
-    /**
-     * Convenient facade to {@link EvaluateXPathMatcher#hasXPath(String, Matcher)}.<br />
-     * It has the same behaviour, with the added bonus to set the correct <em>Namespace Context</em> to {@link #getNamespaceContext()}.<p>
-     * Creates a matcher that matches when the examined XML input has a value at the
-     * specified <code>xPath</code> that satisfies the specified <code>valueMatcher</code>.
-     *
-     * <p>For example:</p>
-     * <pre>assertThat(xml, hasXPath(&quot;//fruits/fruit/@name&quot;, equalTo(&quot;apple&quot;))</pre>
-     *
-     * @param xPath the target xpath
-     * @param valueMatcher matcher for the value at the specified xpath
-     * @return the xpath matcher
-     * @see EvaluateXPathMatcher#hasXPath(String, Matcher)
-     */
-    protected static final EvaluateXPathMatcher hasXPath(String xPath, Matcher<String> valueMatcher) {
-        return EvaluateXPathMatcher.hasXPath(xPath, valueMatcher).withNamespaceContext(namespaceContext);
     }
 
     /**
