@@ -9,8 +9,6 @@ const React = require('react');
 const Debug = require('../../MapStore2/web/client/components/development/Debug');
 const {connect} = require('react-redux');
 
-const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
-
 const {Link} = require('react-router');
 
 const {Glyphicon} = require('react-bootstrap');
@@ -22,8 +20,7 @@ const Mosaic = require('../components/Mosaic');
 
 require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 
-const Home = (props) => (
-    <Localized messages={props.messages} locale={props.locale}>
+const Dataset = () => (
         <div className="home">
             <div className="homepage">
                 <div className="header">
@@ -68,7 +65,6 @@ const Home = (props) => (
 
             <Debug/>
         </div>
-    </Localized>
 );
 
 module.exports = connect((state) => {
@@ -77,4 +73,4 @@ module.exports = connect((state) => {
         locale: state.locale && state.locale.locale,
         messages: state.locale && state.locale.messages || {}
     };
-})(Home);
+})(Dataset);
