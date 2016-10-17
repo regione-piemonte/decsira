@@ -115,7 +115,7 @@ public class SAXSourceFactory extends AbstractFactory<SAXSource> {
         try {
             /*
              * Each new SAXSource instance MUST have a fresh, new XMLReader instance as well,
-             * or else null (a new XMLReader will be instantiated by JAXP).
+             * or else null (a new XMLReader will be instantiated by JAXP under the hood).
              */
             return new SAXSource(this.xmlReader, createInputSource(this.resource));
         } catch (IOException e) {

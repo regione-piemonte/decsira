@@ -18,7 +18,6 @@
  */
 package org.geoserver.security.iride.util.factory.security;
 
-import org.geoserver.security.iride.IrideRoleService;
 import org.geoserver.security.iride.service.policy.IridePolicyManager;
 import org.geoserver.security.iride.util.factory.AbstractFactory;
 
@@ -27,7 +26,7 @@ import org.geoserver.security.iride.util.factory.AbstractFactory;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleServiceFactory extends AbstractFactory<IrideRoleService> {
+public final class IrideRoleServiceFactory extends AbstractFactory<Object> {
 
     /**
      * {@link IridePolicyManager} istance.
@@ -69,13 +68,9 @@ public final class IrideRoleServiceFactory extends AbstractFactory<IrideRoleServ
      * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
      */
     @Override
-    protected final IrideRoleService newInstance() {
-        final IrideRoleService irideRoleService = new IrideRoleService();
-
-        // Set the Policy Manager
-        irideRoleService.setPolicyManager(this.policyManager);
-
-        return irideRoleService;
+    protected final Object newInstance() {
+    	// temporary fix to have PR #154 accepted
+        return null;
     }
 
 }
