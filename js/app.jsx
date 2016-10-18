@@ -13,19 +13,20 @@ const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {configureQueryForm, configureTopology/*, configureFeatureGrid*/} = require('./actions/siradec');
+const {loadTiles} = require('./actions/mosaictile');
 
 const appReducers = {
-    userprofile: require('./reducers/userprofile'),
-    siraControls: require('./reducers/controls'),
-    queryform: require('./reducers/queryform'),
-    siradec: require('./reducers/siradec'),
-    grid: require('./reducers/grid'),
-    cardtemplate: require('./reducers/card'),
-    featuregrid: require('./reducers/featuregrid'),
-    draw: require('../MapStore2/web/client/reducers/draw'),
-    security: require('./reducers/siraSecurity')
-
-};
+     userprofile: require('./reducers/userprofile'),
+     siraControls: require('./reducers/controls'),
+     queryform: require('./reducers/queryform'),
+     siradec: require('./reducers/siradec'),
+     grid: require('./reducers/grid'),
+     cardtemplate: require('./reducers/card'),
+     featuregrid: require('./reducers/featuregrid'),
+     draw: require('../MapStore2/web/client/reducers/draw'),
+     security: require('./reducers/siraSecurity'),
+     mosaic: require('./reducers/mosaic')
+ };
 
 const startApp = () => {
     const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
@@ -34,36 +35,37 @@ const startApp = () => {
     const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');
 
     const StandardRouter = connect((state) => ({
-        locale: state.locale || {},
-        pages
-    }))(require('../MapStore2/web/client/components/app/StandardRouter'));
+         locale: state.locale || {},
+         pages
+     }))(require('../MapStore2/web/client/components/app/StandardRouter'));
 
     const appStore = require('./stores/store').bind(null, initialState, appReducers);
     const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
 
     const initialActions = [
-        () => loadMapConfig(configUrl, legacy),
-        () => configureQueryForm(ConfigUtils.getConfigProp("query")),
-        () => configureTopology(ConfigUtils.getConfigProp("topology"))
-    ];
+         () => loadTiles(),
+         () => loadMapConfig(configUrl, legacy),
+         () => configureQueryForm(ConfigUtils.getConfigProp("query")),
+         () => configureTopology(ConfigUtils.getConfigProp("topology"))
+     ];
 
     const appConfig = {
-        storeOpts,
-        appStore,
-        pluginsDef,
-        initialActions,
-        appComponent: StandardRouter,
-        printingEnabled: false
-    };
+         storeOpts,
+         appStore,
+         pluginsDef,
+         initialActions,
+         appComponent: StandardRouter,
+         printingEnabled: false
+     };
 
     ReactDOM.render(
-        <StandardApp {...appConfig}/>,
-        document.getElementById('container')
-    );
+         <StandardApp {...appConfig}/>,
+         document.getElementById('container')
+     );
 };
 
 if (!global.Intl ) {
-    // Ensure Intl is loaded, then call the given callback
+     // Ensure Intl is loaded, then call the given callback
     LocaleUtils.ensureIntl(startApp);
 }else {
     startApp();

@@ -7,7 +7,33 @@
  */
 const assign = require('object-assign');
 
+/*
+const allReducers = combineReducers({
+	mosaic: require('../reducers/mosaic'),
+    userprofile: require('../reducers/userprofile'),
+    mapInfo: require('../reducers/mapInfo'),
+    search: require('../../MapStore2/web/client/reducers/search'),
+    browser: require('../../MapStore2/web/client/reducers/browser'),
+    locale: require('../../MapStore2/web/client/reducers/locale'),
+    draw: require('../../MapStore2/web/client/reducers/draw'),
+    siraControls: require('../reducers/controls'),
+    controls: require('../../MapStore2/web/client/reducers/controls'),
+    locate: require('../../MapStore2/web/client/reducers/locate'),
+    measurement: require('../../MapStore2/web/client/reducers/measurement'),
+    routing: routeReducer,
+    queryform: queryform,
+    siradec: siradec,
+    map: () => {return null; },
+    layers: () => {return null; },
+    mapInitialConfig: () => {return null; },
+    cardtemplate: require('../reducers/card'),
+    featuregrid: require('../reducers/featuregrid'),
+    grid: grid
+});
+
+*/
 const {mapConfigHistory, createHistory} = require('../../MapStore2/web/client/utils/MapHistoryUtils');
+
 
 const map = mapConfigHistory(require('../../MapStore2/web/client/reducers/map'));
 
@@ -30,6 +56,7 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         locale: require('../../MapStore2/web/client/reducers/locale'),
         controls: require('../../MapStore2/web/client/reducers/controls'),
         help: require('../../MapStore2/web/client/reducers/help'),
+        mosaic: require('../reducers/mosaic'),
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
         layers: () => {return null; }

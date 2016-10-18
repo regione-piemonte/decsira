@@ -35,11 +35,5 @@ describe('Home test suite', () => {
         let headerElems = homeNode.getElementsByClassName('header');
         expect(headerElems.length).toBe(1);
         expect(headerElems[0].firstChild.innerHTML).toBe("Sistema della conoscenza dell'Ambiente");
-
-        // check links
-        let anchorElems = homeNode.getElementsByTagName('a');
-        expect(anchorElems.length).toBe(2);
-        expect(anchorElems[0].firstChild.firstChild.innerHTML).toBe('AUA');
-        expect(anchorElems[1].firstChild.firstChild.innerHTML).toBe('AUA');
     });
 });
