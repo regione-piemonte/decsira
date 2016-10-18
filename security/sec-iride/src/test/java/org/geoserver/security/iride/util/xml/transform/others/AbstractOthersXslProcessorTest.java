@@ -20,14 +20,13 @@ package org.geoserver.security.iride.util.xml.transform.others;
 
 import static org.junit.Assert.assertThat;
 
-import java.io.StringWriter;
 import java.util.Map;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.stream.StreamResult;
 
 import org.geoserver.security.iride.util.xml.transform.AbstractXslProcessorTest;
+import org.geoserver.security.iride.util.xml.transform.StringResult;
 import org.geoserver.security.iride.util.xml.transform.XmlTransformer;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
@@ -100,11 +99,11 @@ public abstract class AbstractOthersXslProcessorTest extends AbstractXslProcesso
      */
     @Override
     protected String transform() throws TransformerException {
-        final StringWriter writer = new StringWriter();
+        final StringResult result = XmlTransformer.newStreamResult();
 
-        this.getProcessor().transform(this.getXslSource(), this.getXmlSource(), new StreamResult(writer), this.params, true);
+        this.getProcessor().transform(this.getXslSource(), this.getXmlSource(), result, this.params, true);
 
-        return writer.toString();
+        return result.toString();
     }
 
 }

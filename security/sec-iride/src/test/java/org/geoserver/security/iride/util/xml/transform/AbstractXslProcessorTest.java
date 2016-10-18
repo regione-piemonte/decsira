@@ -21,11 +21,8 @@ package org.geoserver.security.iride.util.xml.transform;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.io.StringWriter;
-
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.iride.AbstractXmlUnitTest;
@@ -139,11 +136,11 @@ public abstract class AbstractXslProcessorTest extends AbstractXmlUnitTest {
      * @see {@link XmlTransformer#transform(Source, Source, javax.xml.transform.Result, boolean)}
      */
     protected String transform() throws TransformerException {
-        final StringWriter writer = new StringWriter();
+        final StringResult result = XmlTransformer.newStreamResult();
 
-        this.xmlTransformer.transform(this.xslSource, this.xmlSource, new StreamResult(writer), true);
+        this.xmlTransformer.transform(this.xslSource, this.xmlSource, result, true);
 
-        return writer.toString();
+        return result.toString();
     }
 
     /**

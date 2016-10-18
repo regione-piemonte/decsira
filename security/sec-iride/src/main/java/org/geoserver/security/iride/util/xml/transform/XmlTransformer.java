@@ -18,6 +18,7 @@
  */
 package org.geoserver.security.iride.util.xml.transform;
 
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
@@ -32,6 +33,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamSource;
 
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 
@@ -53,6 +55,24 @@ public final class XmlTransformer {
      * <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance.
      */
     private XmlTransformerErrorHandler errorHandler;
+
+    /**
+     *
+     *
+     * @param source
+     * @return
+     */
+    public static StreamSource newStreamSource(String source) {
+        return new StreamSource(new StringReader(source));
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static StringResult newStreamResult() {
+        return new StringResult();
+    }
 
     /**
      * Get the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance.
