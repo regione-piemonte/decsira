@@ -9,8 +9,6 @@ const React = require('react');
 const Debug = require('../../MapStore2/web/client/components/development/Debug');
 const {connect} = require('react-redux');
 
-const Localized = require('../../MapStore2/web/client/components/I18N/Localized');
-
 const {Link} = require('react-router');
 
 const {Glyphicon} = require('react-bootstrap');
@@ -24,9 +22,8 @@ const Mosaic = connect((state) => ({
  }))(require('../components/Mosaic'));
 
 
-const Home = (props) => (
-     <Localized messages={props.messages} locale={props.locale}>
-         <div className="home">
+const Home = () => (
+     <div className="home">
 
            <div id="header-servizio" className="container-fluid">
                <div className="row-fluid">
@@ -191,8 +188,7 @@ const Home = (props) => (
              </div>
 
              <Debug/>
-         </div>
-     </Localized>
+</div>
  );
 
 module.exports = connect((state) => {
