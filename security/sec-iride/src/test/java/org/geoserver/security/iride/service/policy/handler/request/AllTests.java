@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,25 +16,27 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.service.policy;
+package org.geoserver.security.iride.service.policy.handler.request;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
+ * <code>IRIDE</code> service "policy" request handler <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class IrideFindRuoliForPersonaInApplicationPolicyCallerTest {
+@RunWith(Suite.class)
+@SuiteClasses({
+})
+public final class AllTests {
 
-    // TODO: implement me!
     /**
-     * Test method for {@link org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler#handlePolicyRequest(java.lang.String, java.util.Map)}.
+     * Constructor.
      */
-    @Test
-    public void testCallPolicy() {
-        assertTrue(true);
+    private AllTests() {
+        /* NOP */
     }
 
 }

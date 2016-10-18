@@ -23,6 +23,7 @@ import static org.junit.Assert.*;
 
 import java.util.logging.Logger;
 
+import org.geoserver.security.iride.IrideRoleService;
 import org.geoserver.security.iride.service.policy.IridePolicyManager;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geotools.util.logging.Logging;
@@ -89,10 +90,9 @@ public final class IrideRoleServiceFactoryTest {
         try {
             this.irideRoleServiceFactory.setPolicyManager(this.policyManager);
 
-            // temporary fix to have PR #154 accepted
-            final Object irideRoleService = this.irideRoleServiceFactory.create();
+            final IrideRoleService irideRoleService = this.irideRoleServiceFactory.create();
 
-            assertThat(irideRoleService, is(nullValue()));
+            assertThat(irideRoleService.getPolicyManager(), is(this.policyManager));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testIrideRoleServiceFactoryCreate");
         }

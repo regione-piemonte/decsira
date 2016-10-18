@@ -80,8 +80,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public Class<? extends GeoServerRoleService> getRoleServiceClass() {
-        // temporary fix to have PR #154 accepted
-    	return null;
+        return IrideRoleService.class;
     }
 
     /*
@@ -90,8 +89,10 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
-        // temporary fix to have PR #154 accepted
-        return null;
+        final IrideRoleService service = this.irideRoleServiceFactory.create();
+        service.initializeFromConfig(config);
+
+        return service;
     }
 
     /*

@@ -40,6 +40,7 @@ import org.junit.runners.Suite.SuiteClasses;
     FreeMarkerTemplateEngineFactoryTest.class,
     org.geoserver.security.iride.entity.converter.AllTests.class,
     org.geoserver.security.iride.identity.AllTests.class,
+    org.geoserver.security.iride.service.policy.handler.request.AllTests.class,
     org.geoserver.security.iride.soap.request.iride.AllTests.class,
     org.geoserver.security.iride.util.template.AllTests.class,
     org.geoserver.security.iride.util.xml.transform.AllTests.class,
