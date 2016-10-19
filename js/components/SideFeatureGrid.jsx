@@ -152,14 +152,15 @@ const SideFeatureGrid = React.createClass({
         }
     },
     shouldComponentUpdate(nextProps) {
-        for (const prop in this.props) {
-            if ( prop !== 'map' && this.props[prop] !== nextProps[prop]) {
+        return Object.keys(this.props).reduce((prev, prop) => {
+            if ( !prev && (prop !== 'map' && this.props[prop] !== nextProps[prop])) {
                 return true;
             }
-        }
-        return false;
+            return prev;
+        }, false);
     },
     componentWillUpdate(nextProps) {
+        console.log("UPDATO");
         if (!nextProps.loadingGrid && nextProps.pagination && (nextProps.dataSourceOptions !== this.props.dataSourceOptions)) {
             this.dataSource = this.getDataSource(nextProps.dataSourceOptions);
         }
