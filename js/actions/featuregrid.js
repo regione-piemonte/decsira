@@ -8,6 +8,7 @@
 
 const SELECT_FEATURES = 'SELECT_FEATURES';
 const SET_FEATURES = 'SET_FEATURES';
+const SELECT_ALL = 'SELECT_ALL';
 
 function selectFeatures(features) {
     return {
@@ -23,9 +24,19 @@ function setFeatures(features) {
     };
 }
 
+function selectAllToggle(featureTypeName, sldBody) {
+    return {
+        type: SELECT_ALL,
+        featureTypeName,
+        sldBody
+    };
+}
+
 module.exports = {
     SELECT_FEATURES,
     SET_FEATURES,
+    SELECT_ALL,
     selectFeatures,
-    setFeatures
+    setFeatures,
+    selectAllToggle
 };

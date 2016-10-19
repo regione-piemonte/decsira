@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 const assign = require("object-assign");
-const {SELECT_FEATURES, SET_FEATURES} = require('../actions/featuregrid');
+const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
 
 function featuregrid(state = {
     select: [],
-    features: []
+    features: [],
+    selectAll: false
 }, action) {
     switch (action.type) {
         case CHANGE_TOPOLOGY_MAPINFO_STATE:
@@ -23,6 +24,8 @@ function featuregrid(state = {
         case SET_FEATURES:
         case CONFIGURE_INFO_TOPOLOGY:
             return assign({}, state, {features: action.features || action.infoTopologyResponse.features});
+        case SELECT_ALL:
+            return assign({}, state, {selectAll: (action.sldBody && action.featureTypeName) ? true : false});
         default:
             return state;
     }

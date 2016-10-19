@@ -12,9 +12,8 @@ const {isObject} = require('lodash');
 
 const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 
-const {bindActionCreators} = require('redux');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
-const {selectFeatures} = require('../actions/featuregrid');
+const {selectFeatures, selectAllToggle} = require('../actions/featuregrid');
 const FilterUtils = require('../utils/SiraFilterUtils');
 
 const {
@@ -25,13 +24,10 @@ const {
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 const FeatureGrid = connect((state) => {
     return {
-        select: state.featuregrid && state.featuregrid.select || []
+        select: state.featuregrid && state.featuregrid.select || [],
+        selectAllActive: state.featuregrid && state.featuregrid.selectAll
     };
-}, dispatch => {
-    return bindActionCreators({
-        selectFeatures: selectFeatures
-    }, dispatch);
-})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+}, {})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
@@ -93,7 +89,8 @@ const SideFeatureGrid = React.createClass({
         withMap: React.PropTypes.bool.isRequired,
         onConfigureQuery: React.PropTypes.func,
         attributes: React.PropTypes.array,
-        cleanError: React.PropTypes.func
+        cleanError: React.PropTypes.func,
+        selectAllToggle: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -137,7 +134,8 @@ const SideFeatureGrid = React.createClass({
             selectFeatures: () => {},
             onQuery: () => {},
             onConfigureQuery: () => {},
-            cleanError: () => {}
+            cleanError: () => {},
+            selectAllToggle: () => {}
         };
     },
     componentWillMount() {
@@ -146,19 +144,20 @@ const SideFeatureGrid = React.createClass({
         if (this.props.pagination && this.props.dataSourceOptions.pageSize) {
             this.dataSource = this.getDataSource(this.props.dataSourceOptions);
         }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize) {
-            let newFilter = `<wfs:GetPropertyValue service="WFS"
-                    valueReference='${this.props.attributes[0].attribute}'
-                    version="2.0" xmlns:fes="http://www.opengis.net/fes/2.0"
-                    xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:wfs="http://www.opengis.net/wfs/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd"><wfs:Query typeNames="${this.props.featureTypeName}"/>
-                    </wfs:GetPropertyValue>`;
+            let newFilter = FilterUtils.getOgcAllPropertyValue(this.props.featureTypeName, this.props.attributes[0].attribute);
             this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
                 "maxFeatures": 15,
                 "startIndex": 0
                 });
         }
     },
-    shouldComponentUpdate() {
-        return true;
+    shouldComponentUpdate(nextProps) {
+        for (const prop in this.props) {
+            if ( prop !== 'map' && this.props[prop] !== nextProps[prop]) {
+                return true;
+            }
+        }
+        return false;
     },
     componentWillUpdate(nextProps) {
         if (!nextProps.loadingGrid && nextProps.pagination && (nextProps.dataSourceOptions !== this.props.dataSourceOptions)) {
@@ -172,6 +171,7 @@ const SideFeatureGrid = React.createClass({
     },
     onGridClose(filter) {
         this.props.selectFeatures([]);
+        this.props.selectAllToggle();
         this.props.toggleSiraControl();
         if (filter) {
             this.props.onExpandFilterPanel(true);
@@ -206,7 +206,7 @@ const SideFeatureGrid = React.createClass({
                 spatialField: this.props.spatialField,
                 pagination
                 };
-                let filter = FilterUtils.toOGCFilter(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.getSortOptions(params));
+                let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.getSortOptions(params));
                 this.featureLoaded = params;
                 this.sortModel = params.sortModel;
                 this.props.onQuery(this.props.searchUrl, filter, this.props.params, reqId);
@@ -319,6 +319,8 @@ const SideFeatureGrid = React.createClass({
                                     columnDefs={columns}
                                     style={{height: this.state.height - 120, width: this.state.width}}
                                     maxZoom={16}
+                                    selectFeatures={this.selectFeatures}
+                                    selectAll={this.selectAll}
                                     paging={this.props.pagination}
                                     zoom={15}
                                     enableZoomToFeature={this.props.withMap}
@@ -346,6 +348,23 @@ const SideFeatureGrid = React.createClass({
         }
 
         return null;
+    },
+    selectAll(select) {
+        if (select) {
+            let filterObj = {
+                groupFields: this.props.groupFields,
+                filterFields: this.props.filterFields.filter((field) => field.value),
+                spatialField: this.props.spatialField
+            };
+            let SLD_BODY = FilterUtils.getSLD(this.props.featureTypeName, filterObj, '1.0');
+            this.props.selectAllToggle(this.props.featureTypeName, SLD_BODY);
+        } else {
+            this.props.selectAllToggle();
+        }
+    },
+    selectFeatures(features) {
+        this.props.selectAllToggle();
+        this.props.selectFeatures(features);
     },
     goToDetail(params) {
         let url = this.props.detailsConfig.service.url;
@@ -395,5 +414,6 @@ module.exports = connect((state) => ({
     selectFeatures: selectFeatures,
     onQuery: loadFeaturesWithPagination,
     onConfigureQuery: loadGridModelWithPagination,
-    cleanError: configureGridError
+    cleanError: configureGridError,
+    selectAllToggle: selectAllToggle
 })(SideFeatureGrid);

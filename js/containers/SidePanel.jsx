@@ -80,7 +80,7 @@ const SidePanel = React.createClass({
                 sidebar={this.renderContent()}
                 styles={{
                         sidebar: {
-                            backgroundColor: 'transparent',
+                            backgroundColor: 'white',
                             zIndex: 1024,
                             width: this.state.width
                         },

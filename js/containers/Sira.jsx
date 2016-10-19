@@ -24,7 +24,7 @@ const {setProfile} = require('../actions/userprofile');
 const {configureInlineMap} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
-
+require("../components/WMSLayer.js");
 const authParams = {
     admin: {
         userName: "admin",
