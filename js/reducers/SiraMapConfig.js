@@ -7,12 +7,14 @@
  */
 
 const msMapConfig = require('../../MapStore2/web/client/reducers/config');
+const CommonLayers = require('json!../../siraCommonLayers.json');
 const assign = require('object-assign');
-
 
 function mapConfig(state = null, action) {
     switch (action.type) {
         case 'MAP_CONFIG_LOADED': {
+            let layers = action.config.map.layers.concat(CommonLayers);
+            action.config.map = assign({}, action.config.map, {layers: layers});
             if (state.siradec.inlineMapConfig) {
                 action.config.map = assign({}, action.config.map, state.siradec.inlineMapConfig);
             }

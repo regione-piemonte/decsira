@@ -73,7 +73,7 @@ const LayerTree = React.createClass({
         };
     },
     getNoBackgroundLayers(group) {
-        return group.name !== 'background';
+        return (group.name !== 'background' && group.name !== 'hidden');
     },
     render() {
         if (!this.props.groups) {

@@ -7,82 +7,39 @@
  */
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
 
-FilterUtils.toOGCFilter = function(ftName, json, version, sortOptions = null, hits = false, format = null) {
-        try {
-            this.objFilter = (json instanceof Object) ? json : JSON.parse(json);
-        } catch(e) {
-            return e;
-        }
+FilterUtils.toOGCFilterSira = function(ftName, json, version, sortOptions = null, hits = false, format = null) {
+    let newFilter = this.toOGCFilter(ftName, json, version, sortOptions, hits, format);
+    let undefFilter = `<${this.nsplaceholder}:Filter>undefined</${this.nsplaceholder}:Filter>`;
+    return newFilter.replace(undefFilter, '');
 
-        const versionOGC = version || this.ogcVersion;
-        this.nsplaceholder = versionOGC === "2.0" ? "fes" : "ogc";
-        this.setOperatorsPlaceholders("{namespace}", this.nsplaceholder);
+};
+FilterUtils.toCQLFilterSira = function(json) {
+    let filter = this.toCQLFilter(json);
+    return filter === "(undefined)" ? "(INCLUDE)" : filter;
+};
+FilterUtils.getOgcAllPropertyValue = function(featureTypeName, attribute) {
+    return `<wfs:GetPropertyValue service="WFS" valueReference='${attribute}'
+                version="2.0" xmlns:fes="http://www.opengis.net/fes/2.0"
+                xmlns:gml="http://www.opengis.net/gml/3.2"
+                xmlns:wfs="http://www.opengis.net/wfs/2.0"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd">
+                    <wfs:Query typeNames="${featureTypeName}"/>
+            </wfs:GetPropertyValue>`;
+};
+FilterUtils.getSLD = function(ftName, json, version) {
+    let filter = this.toOGCFilterSira(ftName, json, version);
+    let sIdx = filter.search( `<${this.nsplaceholder}:Filter>`);
+    if (sIdx !== -1) {
+        let eIndx = filter.search( `</wfs:Query>`);
+        filter = filter.substr(sIdx, eIndx - sIdx);
+    } else {
+        filter = '';
+    }
+    return `<StyledLayerDescriptor version="1.0.0"
+            xmlns:sira="http://www.regione.piemonte.it/ambiente/sira/1.0"
+            xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
 
-        let ogcFilter = this.getGetFeatureBase(versionOGC, this.objFilter.pagination, hits, format);
-        let filters = [];
-
-        let attributeFilter;
-        if (this.objFilter.filterFields && this.objFilter.filterFields.length > 0) {
-            if (this.objFilter.groupFields && this.objFilter.groupFields.length > 0) {
-                attributeFilter = this.processOGCFilterGroup(this.objFilter.groupFields[0]);
-            } else {
-                attributeFilter = this.processOGCFilterFields();
-            }
-            filters.push(attributeFilter);
-        }else if (this.objFilter.simpleFilterFields && this.objFilter.simpleFilterFields.length > 0) {
-            let ogc = "";
-            ogc += this.ogcLogicalOperator.AND.startTag;
-            this.objFilter.simpleFilterFields.forEach((filter) => {
-                ogc += this.processOGCSimpleFilterField(filter);
-            }, this);
-            ogc += this.ogcLogicalOperator.AND.endTag;
-            filters.push(ogc);
-        }
-
-        let spatialFilter;
-        if (this.objFilter.spatialField && this.objFilter.spatialField.geometry && this.objFilter.spatialField.method) {
-            spatialFilter = this.processOGCSpatialFilter(versionOGC);
-            filters.push(spatialFilter);
-        }
-        let filter = '';
-        if (filters.length >= 1 ) {
-            filter += "<" + this.nsplaceholder + ":Filter>";
-
-            if (filters.length > 1) {
-                filter += "<" + this.nsplaceholder + ":And>";
-                filters.forEach((subFilter) => {
-                    filter += subFilter;
-                });
-                filter += "</" + this.nsplaceholder + ":And>";
-            } else if (filters.length === 1) {
-                filter += filters[0];
-            }
-            filter += "</" + this.nsplaceholder + ":Filter>";
-        }
-        ogcFilter += '<wfs:Query ' + (versionOGC === "2.0" ? "typeNames" : "typeName") + '="' + ftName + '" srsName="EPSG:4326">';
-        ogcFilter += filter;
-
-        if (sortOptions && sortOptions.sortBy && sortOptions.sortOrder) {
-            ogcFilter +=
-                "<" + this.nsplaceholder + ":SortBy>" +
-                    "<" + this.nsplaceholder + ":SortProperty>" +
-                        this.propertyTagReference[this.nsplaceholder].startTag +
-                            sortOptions.sortBy +
-                        this.propertyTagReference[this.nsplaceholder].endTag +
-                        "<" + this.nsplaceholder + ":SortOrder>" +
-                            sortOptions.sortOrder +
-                        "</" + this.nsplaceholder + ":SortOrder>" +
-                    "</" + this.nsplaceholder + ":SortProperty>" +
-                "</" + this.nsplaceholder + ":SortBy>";
-        }
-
-        ogcFilter +=
-                    '</wfs:Query>' +
-            '</wfs:GetFeature>';
-
-        this.setOperatorsPlaceholders(this.nsplaceholder, "{namespace}");
-
-        return ogcFilter;
-    };
+};
 
 module.exports = FilterUtils;
