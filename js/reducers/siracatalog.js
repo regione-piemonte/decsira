@@ -6,13 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 const initialState = {};
-const { TOGGLE_NODE} = require('../actions/siracatalog');
+const { TOGGLE_NODE, SELECT_CATEGORY} = require('../actions/siracatalog');
 const assign = require('object-assign');
 function siracatalog(state = initialState, action) {
     switch (action.type) {
         case TOGGLE_NODE: {
             let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
             return assign({}, state, {nodes});
+        }
+        case SELECT_CATEGORY: {
+            return assign({}, state, {category: action.category});
         }
         default:
             return state;
