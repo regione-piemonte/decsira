@@ -39,12 +39,9 @@ function getWMSURLs( urls ) {
 function postTileLoadFunction(queryParameters, imageTile, src) {
     const parsedUrl = urllib.parse(src, true);
     const urlQuery = parsedUrl.query;
-    const newSrc = Object.keys(urlQuery).reduce((url, param) => {
-        if (param !== "SLD_BODY") {
-            return `${url}&${param}=${urlQuery[param]}`;
-        }
-        return url;
-    }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}?`);
+    const newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
+        return (param !== "SLD_BODY") ? `${url}${idx ? '&' : '?'}${param}=${urlQuery[param]}` : url;
+    }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`);
     const srs = queryParameters.SRS.split(":")[1];
     const BBOX = urlQuery.BBOX.split(',');
     const request = `<?xml version="1.0" encoding="UTF-8"?>
