@@ -7,6 +7,7 @@
  */
 
 const TOGGLE_NODE = 'TOGGLE_NODE';
+const SELECT_CATEGORY = 'SELECT_CATEGORY';
 
 function toggleNode(id, status) {
     return {
@@ -15,9 +16,17 @@ function toggleNode(id, status) {
         status
     };
 }
+function selectCategory(category) {
+    return {
+        type: SELECT_CATEGORY,
+        category
+    };
+}
 
 
 module.exports = {
     TOGGLE_NODE,
-    toggleNode
+    SELECT_CATEGORY,
+    toggleNode,
+    selectCategory
 };

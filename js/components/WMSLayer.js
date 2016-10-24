@@ -37,7 +37,11 @@ function getWMSURLs( urls ) {
 
 // Works with geosolutions proxy
 function postTileLoadFunction(queryParameters, imageTile, src) {
-    const urlQuery = urllib.parse(src, true).query;
+    const parsedUrl = urllib.parse(src, true);
+    const urlQuery = parsedUrl.query;
+    const newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
+        return (param !== "SLD_BODY") ? `${url}${idx ? '&' : '?'}${param}=${urlQuery[param]}` : url;
+    }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`);
     const srs = queryParameters.SRS.split(":")[1];
     const BBOX = urlQuery.BBOX.split(',');
     const request = `<?xml version="1.0" encoding="UTF-8"?>
@@ -55,7 +59,7 @@ function postTileLoadFunction(queryParameters, imageTile, src) {
       <Size><Width>${urlQuery.WIDTH}</Width><Height>${urlQuery.HEIGHT}</Height></Size>
    </Output>
    </ogc:GetMap>`;
-    axios.post(src, request, {
+    axios.post(newSrc, request, {
         timeout: 60000,
            responseType: 'blob',
            headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}

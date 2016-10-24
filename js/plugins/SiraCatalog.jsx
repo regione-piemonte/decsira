@@ -8,10 +8,10 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {toggleNode} = require('../actions/siracatalog');
+const {toggleNode, selectCategory} = require('../actions/siracatalog');
 const {groupsSelector} = require('../../MapStore2/web/client/selectors/layers');
 const assign = require('object-assign');
-const {Tabs, Tab} = require("react-bootstrap");
+const {Tabs, Tab, Button, OverlayTrigger, Popover, Image} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 const {expandFilterPanel} = require('../actions/siradec');
 
@@ -38,13 +38,15 @@ const normalizeObjects = function(nodes) {
 const tocSelector = createSelector([
         (state) => state.siracatalog.nodes || [],
         groupsSelector,
-        (state) => state.layers.settings || {expanded: false, options: {opacity: 1}}
-    ], ( nodes, groups, settings) => ({
+        (state) => state.layers.settings || {expanded: false, options: {opacity: 1}},
+        (state) => state.siracatalog.category
+    ], ( nodes, groups, settings, category) => ({
         views: normalizeViews(nodes),
         nodes: normalizeCatalog(nodes),
         objects: normalizeObjects(nodes),
         groups,
-        settings
+        settings,
+        category
     })
 );
 
@@ -52,7 +54,12 @@ const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNode');
 const Vista = require('../components/catalog/Vista');
+
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+
+const SearchCategories = connect(()=> ({}), {
+    onSelect: selectCategory
+})(require('../components/catalog/SearchCategories'));
 
 const LayerTree = React.createClass({
     propTypes: {
@@ -62,11 +69,19 @@ const LayerTree = React.createClass({
         objects: React.PropTypes.array,
         onToggle: React.PropTypes.func,
         toggleSiraControl: React.PropTypes.func,
-        expandFilterPanel: React.PropTypes.func
+        expandFilterPanel: React.PropTypes.func,
+        category: React.PropTypes.shape({
+            title: React.PropTypes.string.isRequired,
+            id: React.PropTypes.string.isRequired,
+            img: React.PropTypes.string.isRequired
+        }).isRequired
     },
     getDefaultProps() {
         return {
-            onToggle: () => {}
+            onToggle: () => {},
+            category: {
+                title: "Acqua", id: "acqua", img: "./assets/application/conoscenze_ambientali/css/images/gocce-small.png"
+            }
         };
     },
     render() {
@@ -90,7 +105,14 @@ const LayerTree = React.createClass({
             onToggle={this.props.onToggle}/>)) : (<div/>);
         return (
             <div id="siracatalog">
+             <div className="catalog-search-container">
              <SearchBar placeholder="Cerca oggetti" placeholderMsgId="" className="sira-cat-search"/>
+             <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories/></Popover>)}>
+                       <Button className="siracatalog-search-selector">
+                            <Image src={this.props.category.img}/>
+                        </Button>
+             </OverlayTrigger>
+             </div>
             <Tabs className="catalog-tabs" defaultActiveKey={1}>
                 <Tab eventKey={1} title={`Oggetti (${this.props.objects.length})`}>{objects}</Tab>
                 <Tab eventKey={2} title={`Viste Tematiche (${this.props.views ? this.props.views.length : 0})`}>{viste}</Tab>
