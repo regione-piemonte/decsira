@@ -18,11 +18,15 @@
  */
 package org.geoserver.security.iride.util.factory.template.freemarker.roleservice;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import java.util.logging.Logger;
 
+import org.geoserver.security.iride.IrideRoleService;
+import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.service.policy.IridePolicyManager;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geotools.util.logging.Logging;
@@ -55,28 +59,28 @@ public final class IrideRoleServiceFactoryTest {
      * {@link IrideRoleService} Factory.
      */
     @Autowired
-    private IrideRoleServiceFactory irideRoleServiceFactory;
+    private IrideRoleServiceFactory irideRoleServiceFactoryTest;
 
     /**
-     * {@link IridePolicyManager} istance.
+     * <code>IRIDE</code> service "policies" enforcer instance.
      */
     @Autowired
-    private IridePolicyManager policyManager;
+    private IrideService irideService;
 
     /**
      * Test method for {@link org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory#setPolicyManager(IridePolicyManager)}.
      */
     @Test
-    public void testSetIrideRoleServiceFactoryPolicyManager() {
-        LOGGER.entering(this.getClass().getName(), "testSetIrideRoleServiceFactoryPolicyManager");
+    public void testSetIrideRoleServiceFactoryPolicyEnforcer() {
+        LOGGER.entering(this.getClass().getName(), "testSetIrideRoleServiceFactoryPolicyEnforcer");
         try {
-            assertThat(this.irideRoleServiceFactory.getPolicyManager(), is(nullValue()));
+            assertThat(this.irideRoleServiceFactoryTest.getIrideService(), is(nullValue()));
 
-            this.irideRoleServiceFactory.setPolicyManager(this.policyManager);
+            this.irideRoleServiceFactoryTest.setIrideService(this.irideService);
 
-            assertThat(this.irideRoleServiceFactory.getPolicyManager(), is(not(nullValue())));
+            assertThat(this.irideRoleServiceFactoryTest.getIrideService(), is(not(nullValue())));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testSetIrideRoleServiceFactoryPolicyManager");
+            LOGGER.exiting(this.getClass().getName(), "testSetIrideRoleServiceFactoryPolicyEnforcer");
         }
     }
 
@@ -87,12 +91,11 @@ public final class IrideRoleServiceFactoryTest {
     public void testIrideRoleServiceFactoryCreate() {
         LOGGER.entering(this.getClass().getName(), "testIrideRoleServiceFactoryCreate");
         try {
-            this.irideRoleServiceFactory.setPolicyManager(this.policyManager);
+            this.irideRoleServiceFactoryTest.setIrideService(this.irideService);
 
-            // temporary fix to have PR #154 accepted
-            final Object irideRoleService = this.irideRoleServiceFactory.create();
+            final IrideRoleService irideRoleService = this.irideRoleServiceFactoryTest.create();
 
-            assertThat(irideRoleService, is(nullValue()));
+            assertThat(irideRoleService.getIrideService(), is(this.irideService));
         } finally {
             LOGGER.exiting(this.getClass().getName(), "testIrideRoleServiceFactoryCreate");
         }

@@ -18,7 +18,8 @@
  */
 package org.geoserver.security.iride.util.factory.security;
 
-import org.geoserver.security.iride.service.policy.IridePolicyManager;
+import org.geoserver.security.iride.IrideRoleService;
+import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.util.factory.AbstractFactory;
 
 /**
@@ -26,12 +27,12 @@ import org.geoserver.security.iride.util.factory.AbstractFactory;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleServiceFactory extends AbstractFactory<Object> {
+public final class IrideRoleServiceFactory extends AbstractFactory<IrideRoleService> {
 
     /**
-     * {@link IridePolicyManager} istance.
+     * <code>IRIDE</code> service "policies" enforcer instance.
      */
-    private IridePolicyManager policyManager;
+    private IrideService irideService;
 
     /**
      * Constructor.
@@ -43,24 +44,28 @@ public final class IrideRoleServiceFactory extends AbstractFactory<Object> {
     /**
      * Constructor.
      *
-     * @param policyManager
+     * @param irideService <code>IRIDE</code> service "policies" enforcer instance
      */
-    public IrideRoleServiceFactory(IridePolicyManager policyManager) {
-        this.policyManager = policyManager;
+    public IrideRoleServiceFactory(IrideService irideService) {
+        this.irideService = irideService;
     }
 
     /**
-     * @return the policyManager
+     * Get the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @return the <code>IRIDE</code> service "policies" enforcer instance
      */
-    public IridePolicyManager getPolicyManager() {
-        return this.policyManager;
+    public IrideService getIrideService() {
+        return this.irideService;
     }
 
     /**
-     * @param policyManager the policyManager to set
+     * Set the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
      */
-    public void setPolicyManager(IridePolicyManager policyManager) {
-        this.policyManager = policyManager;
+    public void setIrideService(IrideService irideService) {
+        this.irideService = irideService;
     }
 
     /*
@@ -68,9 +73,13 @@ public final class IrideRoleServiceFactory extends AbstractFactory<Object> {
      * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
      */
     @Override
-    protected final Object newInstance() {
-    	// temporary fix to have PR #154 accepted
-        return null;
+    protected final IrideRoleService newInstance() {
+        final IrideRoleService irideRoleService = new IrideRoleService();
+
+        // Set the Policy Manager
+        irideRoleService.setIrideService(this.irideService);
+
+        return irideRoleService;
     }
 
 }

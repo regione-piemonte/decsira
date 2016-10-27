@@ -16,25 +16,28 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.service.policy;
+package org.geoserver.security.iride.service;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
 
-import org.junit.Test;
+import org.geoserver.security.config.SecurityNamedServiceConfig;
+import org.geoserver.security.iride.service.api.PolicyEnforcerBase;
 
 /**
+ * <code>IRIDE</code> service interface.
+ * <p>This interface act as a facade to the needed <code>IRIDE</code> "policies" enforcer interfaces,
+ * adding integration to GeoServer Security Provider.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class IrideFindRuoliForPersonaInApplicationPolicyCallerTest {
+public interface IrideService extends PolicyEnforcerBase {
 
-    // TODO: implement me!
     /**
-     * Test method for {@link org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler#handlePolicyRequest(java.lang.String, java.util.Map)}.
+     * Initialize from configuration object
+     *
+     * @param config
+     * @throws IOException
      */
-    @Test
-    public void testCallPolicy() {
-        assertTrue(true);
-    }
+    void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException;
 
 }

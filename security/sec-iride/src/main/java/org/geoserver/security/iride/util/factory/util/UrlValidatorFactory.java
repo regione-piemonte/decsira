@@ -47,7 +47,7 @@ public class UrlValidatorFactory extends AbstractFactory<UrlValidator> {
     protected final UrlValidator newInstance() {
         return new UrlValidator(
             new String[] {"http", "https"},
-            UrlValidator.NO_FRAGMENTS + UrlValidator.ALLOW_LOCAL_URLS
+            UrlValidator.NO_FRAGMENTS
         );
     }
 
