@@ -60,6 +60,9 @@ public abstract class AbstractXslProcessorTest extends AbstractXmlUnitTest {
 
     private String expectedResult;
 
+    /**
+     * <code>Spring</code> <a href="https://spring.io/understanding/application-context">application context</a>.
+     */
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -101,7 +104,7 @@ public abstract class AbstractXslProcessorTest extends AbstractXmlUnitTest {
      * @throws Exception
      */
     @Before
-    public final void prepareXslProcessorTest() throws Exception {
+    public final void setUp() throws Exception {
         // Preparation of test instance
         this.testContextManager.prepareTestInstance(this);
 

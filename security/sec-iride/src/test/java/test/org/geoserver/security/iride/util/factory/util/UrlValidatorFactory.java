@@ -16,42 +16,39 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.service;
+package test.org.geoserver.security.iride.util.factory.util;
 
-import org.geoserver.security.iride.entity.IrideApplication;
-import org.geoserver.security.iride.entity.IrideUseCase;
+import org.apache.commons.validator.routines.UrlValidator;
+import org.geoserver.security.iride.util.factory.AbstractFactory;
 
 /**
+ * {@link UrlValidator} <em>test stub</em> Factory.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public interface PolicyEnforcerHelper {
+public class UrlValidatorFactory extends AbstractFactory<UrlValidator> {
 
     /**
+     * Static factory method, useful for testing.
      *
-     * @return
+     * @return a new {@link UrlValidator} object
      */
-    IrideApplication[] findApplications();
+    public static UrlValidator createUrlValidator() {
+        final UrlValidatorFactory factory = new UrlValidatorFactory();
 
-    /**
-     *
-     * @param application
-     * @return
-     */
-    IrideUseCase[] findUseCasesForApplication(IrideApplication application);
+        return factory.create();
+    }
 
-    /**
-     *
-     * @param application
-     * @return
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
      */
-    boolean isApplicationEsistente(IrideApplication application);
-
-    /**
-     *
-     * @param useCase
-     * @return
-     */
-    boolean isUseCaseEsistente(IrideUseCase useCase);
+    @Override
+    protected final UrlValidator newInstance() {
+        return new UrlValidator(
+            new String[] {"http", "https"},
+            UrlValidator.NO_FRAGMENTS + UrlValidator.ALLOW_LOCAL_URLS
+        );
+    }
 
 }

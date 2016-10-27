@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,28 +16,42 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.service.policy.handler.request;
+package org.geoserver.security.iride.service.api;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.geoserver.security.iride.entity.IrideApplication;
+import org.geoserver.security.iride.entity.IrideUseCase;
 
 /**
- * <code>IRIDE</code> service "policy" <em>request</em>handler <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-    IridePolicyRequestHandlerTest.class,
-})
-public final class AllTests {
+public interface PolicyEnforcerHelper {
 
     /**
-     * Constructor.
+     *
+     * @return
      */
-    private AllTests() {
-        /* NOP */
-    }
+    IrideApplication[] findApplications();
+
+    /**
+     *
+     * @param application
+     * @return
+     */
+    IrideUseCase[] findUseCasesForApplication(IrideApplication application);
+
+    /**
+     *
+     * @param application
+     * @return
+     */
+    Boolean isApplicationEsistente(IrideApplication application);
+
+    /**
+     *
+     * @param useCase
+     * @return
+     */
+    Boolean isUseCaseEsistente(IrideUseCase useCase);
 
 }

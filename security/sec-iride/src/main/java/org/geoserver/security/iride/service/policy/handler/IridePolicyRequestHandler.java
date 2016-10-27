@@ -19,23 +19,18 @@
 package org.geoserver.security.iride.service.policy.handler;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.geoserver.security.iride.service.policy.IridePolicy;
+import org.geoserver.security.iride.util.builder.http.HttpPostBuilder;
 import org.geoserver.security.iride.util.template.TemplateEngine;
 
-import com.google.common.net.MediaType;
-
 /**
- * <code>IRIDE</code> service "policy" request handler.
+ * <code>IRIDE</code> service "policy" <em>request</em> handler.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -57,9 +52,14 @@ public final class IridePolicyRequestHandler extends AbstractIridePolicyHandler 
     private TemplateEngine templateEngine;
 
     /**
+     * <code>HTTP</code> <code>POST</code> <em>request</em> builder.
+     */
+    private HttpPostBuilder httpPostBuilder;
+
+    /**
      * Constructor.
      *
-     * @param policy <code>IRIDE</code> service "policy": the specific service operation to request
+     * @param policy <code>IRIDE</code> service "policy": the specific service operation to <em>request</em>
      */
     public IridePolicyRequestHandler(IridePolicy policy) {
         super(policy);
@@ -120,18 +120,36 @@ public final class IridePolicyRequestHandler extends AbstractIridePolicyHandler 
     }
 
     /**
+     * Get the <code>HTTP</code> <code>POST</code> <em>request</em> builder.
+     *
+     * @return the <code>HTTP</code> <code>POST</code> <em>request</em> builder
+     */
+    public HttpPostBuilder getHttpPostBuilder() {
+        return this.httpPostBuilder;
+    }
+
+    /**
+     * Set the <code>HTTP</code> <code>POST</code> <em>request</em> builder.
+     *
+     * @param httpPostBuilder the <code>HTTP</code> <code>POST</code> <em>request</em> builder
+     */
+    public void setHttpPostBuilder(HttpPostBuilder httpPostBuilder) {
+        this.httpPostBuilder = httpPostBuilder;
+    }
+
+    /**
      *
      * @param serverURL
      * @param params
      * @return
      * @throws IOException
      */
-    public String handlePolicyRequest(String serverURL, Map<String, Object> params) throws IOException {
+    public String handleRequest(String serverURL, Map<String, Object> params) throws IOException {
         final String     requestXml        = this.createPolicyRequestXml(params);
         final HttpMethod requestHttpMethod = this.createPolicyRequestMethod(requestXml, serverURL);
 
         try {
-            final int status = this.httpClient.executeMethod(requestHttpMethod);
+            final int status = this.getHttpClient().executeMethod(requestHttpMethod);
             if (status == HttpStatus.SC_OK ) {
                 final String responseXml = requestHttpMethod.getResponseBodyAsString();
 
@@ -155,7 +173,7 @@ public final class IridePolicyRequestHandler extends AbstractIridePolicyHandler 
      * @throws IOException
      */
     private String createPolicyRequestXml(Map<String, Object> params) throws IOException {
-        return this.templateEngine.process(this.getPolicy().getServiceName(), params);
+        return this.getTemplateEngine().process(this.getPolicy().getServiceName(), params);
     }
 
     /**
@@ -165,28 +183,8 @@ public final class IridePolicyRequestHandler extends AbstractIridePolicyHandler 
      * @return
      * @throws IOException
      */
-    private HttpMethod createPolicyRequestMethod(String requestXml, String serverURL) throws IOException {
-        final PostMethod post = new PostMethod(serverURL);
-        post.setRequestEntity(this.createPolicyRequestEntity(requestXml));
-        for (Header header : this.getHttpHeaders()) {
-            post.setRequestHeader(header);
-        }
-
-        return post;
-    }
-
-    /**
-     *
-     * @param requestXml
-     * @return
-     * @throws IOException
-     */
-    private RequestEntity createPolicyRequestEntity(String requestXml) throws IOException {
-        return new StringRequestEntity(
-            requestXml,
-            MediaType.APPLICATION_XML_UTF_8.toString(),
-            StandardCharsets.UTF_8.name()
-        );
+    private HttpMethod createPolicyRequestMethod(String requestXml, String serverURL) {
+        return this.getHttpPostBuilder().build(serverURL, requestXml, this.getHttpHeaders());
     }
 
 }

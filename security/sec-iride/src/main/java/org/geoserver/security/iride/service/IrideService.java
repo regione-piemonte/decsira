@@ -18,10 +18,26 @@
  */
 package org.geoserver.security.iride.service;
 
+import java.io.IOException;
+
+import org.geoserver.security.config.SecurityNamedServiceConfig;
+import org.geoserver.security.iride.service.api.PolicyEnforcerBase;
+
 /**
+ * <code>IRIDE</code> service interface.
+ * <p>This interface act as a facade to the needed <code>IRIDE</code> "policies" enforcer interfaces,
+ * adding integration to GeoServer Security Provider.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public interface IridePolicyEnforcerDelegate extends PolicyEnforcerBase, PolicyEnforcerHelper {
+public interface IrideService extends PolicyEnforcerBase {
+
+    /**
+     * Initialize from configuration object
+     *
+     * @param config
+     * @throws IOException
+     */
+    void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException;
 
 }
