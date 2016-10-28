@@ -20,7 +20,6 @@ package org.geoserver.security.iride.entity;
 
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -201,7 +200,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
         try {
             irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
         } catch (IrideIdentityTokenizationException e) {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            LOGGER.warning("IRIDE Identity tokenization error: " + e.getMessage());
         }
 
         return irideIdentity;
@@ -234,7 +233,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
                 return false;
             }
         } catch (IrideIdentityTokenizationException e) {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            LOGGER.warning("IRIDE Identity tokenization error: " + e.getMessage());
 
             return false;
         }
