@@ -19,54 +19,13 @@
 package org.geoserver.security.iride.util.factory.security;
 
 import org.geoserver.security.iride.IrideRoleService;
-import org.geoserver.security.iride.service.IrideService;
-import org.geoserver.security.iride.util.factory.AbstractFactory;
 
 /**
  * {@link IrideRoleService} Factory.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleServiceFactory extends AbstractFactory<IrideRoleService> {
-
-    /**
-     * <code>IRIDE</code> service "policies" enforcer instance.
-     */
-    private IrideService irideService;
-
-    /**
-     * Constructor.
-     */
-    public IrideRoleServiceFactory() {
-        /* NOP */
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param irideService <code>IRIDE</code> service "policies" enforcer instance
-     */
-    public IrideRoleServiceFactory(IrideService irideService) {
-        this.irideService = irideService;
-    }
-
-    /**
-     * Get the <code>IRIDE</code> service "policies" enforcer instance.
-     *
-     * @return the <code>IRIDE</code> service "policies" enforcer instance
-     */
-    public IrideService getIrideService() {
-        return this.irideService;
-    }
-
-    /**
-     * Set the <code>IRIDE</code> service "policies" enforcer instance.
-     *
-     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
-     */
-    public void setIrideService(IrideService irideService) {
-        this.irideService = irideService;
-    }
+public final class IrideRoleServiceFactory extends AbstractIrideSecurityServiceFactory<IrideRoleService> {
 
     /*
      * (non-Javadoc)
@@ -76,8 +35,8 @@ public final class IrideRoleServiceFactory extends AbstractFactory<IrideRoleServ
     protected final IrideRoleService newInstance() {
         final IrideRoleService irideRoleService = new IrideRoleService();
 
-        // Set the Policy Manager
-        irideRoleService.setIrideService(this.irideService);
+        irideRoleService.setSecurityManager(this.getSecurityManager());
+        irideRoleService.setIrideService(this.getIrideService());
 
         return irideRoleService;
     }

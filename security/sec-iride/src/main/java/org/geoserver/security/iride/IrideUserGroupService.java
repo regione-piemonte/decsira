@@ -27,6 +27,7 @@ import org.geoserver.security.GeoServerUserGroupStore;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.impl.AbstractUserGroupService;
 import org.geoserver.security.impl.GeoServerUser;
+import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 /**
@@ -43,10 +44,22 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
-     * Constructor.
+     * <code>IRIDE</code> service "policies" enforcer instance.
      */
-    public IrideUserGroupService() {
-        super();
+    private IrideService irideService;
+
+    /**
+     * @return the irideService
+     */
+    public IrideService getIrideService() {
+        return this.irideService;
+    }
+
+    /**
+     * @param irideService the irideService to set
+     */
+    public void setIrideService(IrideService irideService) {
+        this.irideService = irideService;
     }
 
     /*

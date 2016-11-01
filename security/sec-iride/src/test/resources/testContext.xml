@@ -46,6 +46,15 @@
 
     <!-- === IrideRoleServiceFactory ===   END === -->
 
+    <!-- === IrideUserGroupServiceFactory === BEGIN === -->
+
+    <bean id="irideUserGroupServiceFactory"
+          class="org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory"
+          p:irideService-ref="irideService"
+    />
+
+    <!-- === IrideUserGroupServiceFactory ===   END === -->
+
     <!-- === IridePolicyEnforcer === BEGIN === -->
 
     <bean id="irideService"

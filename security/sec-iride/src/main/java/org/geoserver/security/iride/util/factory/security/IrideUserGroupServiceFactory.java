@@ -19,30 +19,26 @@
 package org.geoserver.security.iride.util.factory.security;
 
 import org.geoserver.security.iride.IrideUserGroupService;
-import org.geoserver.security.iride.util.factory.AbstractFactory;
 
 /**
  * {@link IrideUserGroupService} Factory.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideUserGroupServiceFactory extends AbstractFactory<IrideUserGroupService> {
-
-    /**
-     * Constructor.
-     */
-    public IrideUserGroupServiceFactory() {
-        /* NOP */
-    }
+public final class IrideUserGroupServiceFactory extends AbstractIrideSecurityServiceFactory<IrideUserGroupService> {
 
     /*
-     *
      * (non-Javadoc)
-     * @see org.geoserver.security.iride.util.factory.AbstractFactory#create()
+     * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
      */
     @Override
     protected final IrideUserGroupService newInstance() {
-        return new IrideUserGroupService();
+        final IrideUserGroupService irideUserGroupService = new IrideUserGroupService();
+
+        irideUserGroupService.setSecurityManager(this.getSecurityManager());
+        irideUserGroupService.setIrideService(this.getIrideService());
+
+        return irideUserGroupService;
     }
 
 }
