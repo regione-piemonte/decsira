@@ -12,6 +12,7 @@ const Sidebar = require('react-sidebar').default;
 const SideQueryPanel = require('../components/SideQueryPanel');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
+const {expandFilterPanel} = require('../actions/siradec');
 
 const SidePanel = React.createClass({
     propTypes: {
@@ -20,7 +21,8 @@ const SidePanel = React.createClass({
         auth: React.PropTypes.object,
         profile: React.PropTypes.string,
         changeMapStyle: React.PropTypes.func,
-        withMap: React.PropTypes.bool.isRequired
+        withMap: React.PropTypes.bool.isRequired,
+        expandFilterPanel: React.PropTypes.func.isRequired
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -33,6 +35,7 @@ const SidePanel = React.createClass({
             filterPanelExpanded: false,
             gridExpanded: false,
             withMap: true,
+            expandFilterPanel: () => {},
             changeMapStyle: () => {}
         };
     },
@@ -55,7 +58,9 @@ const SidePanel = React.createClass({
                     withMap={this.props.withMap}
                     params={{
                         authkey: this.props.auth.authkey
-                    }}/>);
+                    }}
+                    toggleControl={this.props.expandFilterPanel.bind(null, false)}
+                    />);
     },
     renderGrid() {
         return (<SideFeatureGrid
@@ -105,6 +110,7 @@ module.exports = connect((state) => {
         gridExpanded: state.siraControls.grid
     };
 }, {
-    changeMapStyle
+    changeMapStyle,
+    expandFilterPanel
 })(SidePanel);
 
