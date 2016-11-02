@@ -20,9 +20,8 @@ const QGisFeatureGrid = require('../components/QGisFeatureGrid');
 const Card = require('../components/template/Card');
 
 const {setProfile} = require('../actions/userprofile');
-
-const url = require('url');
-const urlQuery = url.parse(window.location.href, true).query;
+const Spinner = require('react-spinkit');
+const urlQuery = require('url').parse(window.location.href, true).query;
 
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 const authParams = {
@@ -52,7 +51,7 @@ const {
     loadFeatureTypeConfig,
     expandFilterPanel
 } = require('../actions/siradec');
-
+const {loadCardTemplate} = require('../actions/card');
 const {toggleSiraControl} = require('../actions/controls');
 const {selectFeatures} = require('../actions/featuregrid');
 const QGis = React.createClass({
@@ -68,8 +67,9 @@ const QGis = React.createClass({
         configLoaded: React.PropTypes.bool,
         profile: React.PropTypes.object,
         siraControls: React.PropTypes.object,
-        selectFeatures: React.PropTypes.func
-
+        selectFeatures: React.PropTypes.func,
+        detailsConfig: React.PropTypes.object,
+        loadCardTemplate: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -95,9 +95,17 @@ const QGis = React.createClass({
         if (props.featureType !== this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(`assets/${props.featureType}.json`, {authkey: this.props.profile.authParams.authkey});
         }
+        if (urlQuery.featureTypeId && props.configLoaded && !props.siraControls.detail) {
+            this.props.toggleSiraControl('detail', true);
+            this.goToDetail(urlQuery.featureTypeId, props.detailsConfig);
+        }
     },
     renderQueryPanel() {
-        return (
+        return urlQuery.featureTypeId || true ? (
+            <div className="qgis-spinner">
+                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+            </div>
+            ) : (
           <SideQueryPanel
                withMap={false}
                params={{authkey: this.props.profile.authParams.authkey}}
@@ -149,6 +157,21 @@ const QGis = React.createClass({
             console.log(`window.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
             /*eslint-enable */
         }
+    },
+    goToDetail(id, detailsConfig) {
+        let url = detailsConfig.service.url;
+        let urlParams = detailsConfig.service.params;
+        for (let param in urlParams) {
+            if (urlParams.hasOwnProperty(param)) {
+                url += "&" + param + "=" + urlParams[param];
+            }
+        }
+        let templateUrl = typeof detailsConfig.template === "string" ? detailsConfig.template : detailsConfig.template.QGIS;
+        this.props.loadCardTemplate(
+             templateUrl,
+            // this.props.detailsConfig.cardModelConfigUrl,
+            `${url}&FEATUREID=${id}${(this.props.profile.authParams.authkey ? "&authkey=" + this.props.profile.authParams.authkey : "")}`
+        );
     }
 });
 
@@ -160,12 +183,14 @@ module.exports = connect((state) => {
         featureType: state.siradec && state.siradec.featureType,
         configLoaded: state.siradec && state.siradec.card ? true : false,
         filterPanelExpanded: state.siradec.filterPanelExpanded,
-        siraControls: state.siraControls
+        siraControls: state.siraControls,
+        detailsConfig: state.siradec && state.siradec.card
     };
 }, {
     setProfile,
     onLoadFeatureTypeConfig: loadFeatureTypeConfig,
     expandFilterPanel,
     toggleSiraControl,
-    selectFeatures
+    selectFeatures,
+    loadCardTemplate
 })(QGis);
