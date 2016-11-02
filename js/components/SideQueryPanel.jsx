@@ -99,7 +99,9 @@ const SideQueryPanel = React.createClass({
         pagination: React.PropTypes.object,
         sortOptions: React.PropTypes.object,
         hits: React.PropTypes.bool,
-        withMap: React.PropTypes.bool.isRequired
+        withMap: React.PropTypes.bool.isRequired,
+        collapsible: React.PropTypes.bool,
+        toggleControl: React.PropTypes.func
         },
     contextTypes: {
         messages: React.PropTypes.object
@@ -118,7 +120,6 @@ const SideQueryPanel = React.createClass({
             siraActions: {
                 onExpandFilterPanel: () => {}
             },
-
             // QueryBuilder default props
             params: {},
             featureTypeConfigUrl: null,
@@ -138,6 +139,8 @@ const SideQueryPanel = React.createClass({
             sortOptions: null,
             hits: false,
             withMap: true,
+            collapsible: false,
+            toggleControl: () => {},
             queryFormActions: {
                 attributeFilterActions: {
                     onAddGroupField: () => {},
@@ -172,15 +175,33 @@ const SideQueryPanel = React.createClass({
     },
     renderHeader() {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
-
-        const heading = (
-            <span>
-                <span style={{paddingLeft: "15px"}}>{header}</span>
-                <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
-                    <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
-                </button>
-            </span>
-        );
+        let heading;
+        if (this.props.collapsible) {
+            heading = this.props.filterPanelExpanded ? (
+                <span>
+                    <span style={{paddingLeft: "15px"}}>{header}</span>
+                    <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-bottom collapsible"/>
+                    </button>
+                </span>
+            ) : (
+                <span>
+                    <span style={{paddingLeft: "15px"}}>{header}</span>
+                    <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
+                    </button>
+                </span>
+            );
+        }else {
+            heading = (
+                <span>
+                    <span style={{paddingLeft: "15px"}}>{header}</span>
+                    <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
+                    </button>
+                </span>
+            );
+        }
 
         return (
             <div className="handle_querypanel">
@@ -200,7 +221,7 @@ const SideQueryPanel = React.createClass({
     renderQueryPanel() {
         return (
 
-                <Panel className={this.props.withMap ? "querypanel-container side-querypanel" : "querypanel-container side-querypanel hideSpatialFilter" } header={this.renderHeader()} bsStyle="primary">
+                <Panel className={this.props.withMap ? "querypanel-container side-querypanel" : "querypanel-container side-querypanel hideSpatialFilter" } collapsible={this.props.collapsible} expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
                     {this.renderDatasetHeader()}
                     <QueryBuilder
                         params={this.props.params}

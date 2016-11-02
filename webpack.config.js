@@ -16,7 +16,8 @@ module.exports = {
         'webpack-dev-server': 'webpack-dev-server/client?http://0.0.0.0:8081', // WebpackDevServer host and port
         'webpack': 'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
         sira: path.join(__dirname, "js", "app"),
-        siranomap: path.join(__dirname, "js", "siranomap", "app")
+        siranomap: path.join(__dirname, "js", "siranomap", "app"),
+        qgis: path.join(__dirname, "js", "qGis", "app")
     },
     output: {
         path: path.join(__dirname, "dist"),

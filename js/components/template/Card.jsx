@@ -38,6 +38,7 @@ const Card = React.createClass({
         authParam: React.PropTypes.object,
         open: React.PropTypes.bool,
         withMap: React.PropTypes.bool,
+        draggable: React.PropTypes.bool,
         // model: React.PropTypes.object,
         // impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func
@@ -52,6 +53,7 @@ const Card = React.createClass({
             withMap: true,
             authParam: null,
             open: false,
+            draggable: true,
             // model: {},
             toggleDetail: () => {}
         };
@@ -88,15 +90,18 @@ const Card = React.createClass({
             withMap: this.props.withMap,
             getValue: (element) => TemplateUtils.getValue(xml, element)
         });
-
-        return (this.props.card.loadingCardTemplateError) ? (
-                this.renderLoadTemplateException()
-            ) : (
+        if (this.props.card.loadingCardTemplateError) {
+            return this.renderLoadTemplateException();
+        }
+        const Template = (
+            <div className="scheda-sira">
+                    <TemplateSira template={this.props.card.template} model={model}/>
+            </div>
+            );
+        return (this.props.draggable) ? (
             <Draggable start={{x: 732, y: 165}} handle=".panel-heading, .panel-heading *">
-                <div className="scheda-sira">
-                    <TemplateSira template={this.props.card.template} model={model} /* impiantoModel={this.props.impiantoModel} *//>
-                </div>
-            </Draggable>);
+                {Template}
+            </Draggable>) : Template;
     },
     render() {
         return (this.props.open) ? this.renderCard() : null;

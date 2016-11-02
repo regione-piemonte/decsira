@@ -1,0 +1,170 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='AUA - IMPIANTI RECUPERO ENERGIA E MATERIA' subtitle={[
+            'N°',
+            model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()"),
+            'del',
+            model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()")
+            ]} id={model.id}>
+         </DetailTitle>
+    )}>
+    <QGisZoom
+    geometry={
+        model.getValue({
+            type: TemplateUtils.GEOMETRY_TYPE,
+            xpath: "/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:geometria/gml:Point/gml:pos/text()"
+        })
+    }
+    style={{position: "absolute", top: "36px", right: "16px", borderRadius: "10px"}}
+    />
+    <Panel className="template">
+        <Section header='DATI GENERALI - Provvedimento' eventKey='1' expanded={true}>
+            <ProfileWrapper condition={() => model.profile === "profilob"}>
+                <LabeledField label='Codice Fiscale (P.IVA)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()")
+                }/>
+            </ProfileWrapper>
+            <LabeledField label='Tipo di provvedimento' value={
+                model.getValue({
+                    xpath: [
+                        "/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:procedimento/sira:Procedimento/sira:descrizione/text()",
+                        "/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:attivita/sira:Attivita/sira:descrizione/text()"
+                    ],
+                    type: 2
+                })
+            }/>
+            <LabeledField label='Num. Autorizzazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()")
+            }/>
+            <LabeledField label='Data autorizzazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()")
+            }/>
+            <LabeledField label='Tipologie impiantistiche' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:impianto/sira:TipoImpianto/sira:descrizione/text()")
+            }/>
+            <LabeledField label='Quantità inviata al recupero totale (t/a)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:qtaTotRecupero/text()")
+            }/>
+            <LabeledField label='Capacità massima stoccabile (t)'/>
+            <LabeledField label='Capacità massima stoccabile (m3)'/>
+            <LabeledField label='Note'/>
+        </Section>
+        <Section header='OGGETTI AUTORIZZATI' eventKey='3' expanded={true}>
+            <AuthorizedObject
+                list={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()")}
+                listTitle={"Impianto Autorizzato"}
+                detailsTemplateConfigURL={"assets/impiantoAutorizzato.jsxt"}/>
+        </Section>
+        <Section header='RIEPILOGO RECUPERO RIFIUTI' eventKey='2' expanded={true}>
+            <SiraTable
+                id="RecuperoRifiuti"
+                selectedRow={model.RecuperoRifiuti}
+                wfsVersion="2.0"
+                rowSelection={model.profile === "profilob" ? "single" : false}
+                columns={
+                    [
+                        {
+                            hide: true,
+                            id: true,
+                            xpath: "sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id"
+                        },
+                        {
+                            headerName: 'Numero scheda',
+                            width: 90,
+                            xpath:"sira:SchedaRifiuto/sira:nrScheda/text()"
+                        },
+                        {
+                            headerName: 'Tipo recupero',
+                            width: 300,
+                            xpath: "sira:SchedaRifiuto/sira:tipoRecupero/sira:TipoRecupero/sira:descrizione/text()"
+                        },
+                        {
+                            headerName: 'Tipologia di rifiuto',
+                            width: 100,
+                            xpath: "sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:codice/text()"
+                        },
+                        {
+                            headerName: 'Descrizione',
+                            width: 500,
+                            xpath: "sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/sira:descrizione/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio")}/>
+        </Section>
+        <ProfileWrapper condition={() => model.profile === "profilob"}>
+            <Section header='DETTAGLIO RECUPERO RIFIUTI - CODIFICHE CER' eventKey='4' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
+                <SiraTable
+                    id="CerTable"
+                    wfsVersion="2.0"
+                    dependsOn={{
+                        tableId: "RecuperoRifiuti"
+                    }}
+                    rowSelection={false}
+                    columns={[
+                        {
+                            hide: true,
+                            id: true,
+                            xpath: "../sira:tipoRifiuto/sira:TipoRifiuto/@gml:id"
+                        },
+                        {
+                            headerName: "Codice",
+                            width: 100,
+                            xpath: "sira:CodiceCER/sira:codice/text()"
+                        },
+                        {
+                            headerName: "Tipo Pericoloso",
+                            width: 100,
+                            xpath: "sira:CodiceCER/sira:pericoloso/text()"
+                        },
+                        {
+                            headerName: "Descrizione",
+                            width: 500,
+                            xpath: "sira:CodiceCER/sira:descrizione/text()"
+                        }
+                    ]}
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:codiceCER")}/>
+            </Section>
+        </ProfileWrapper>
+        <ProfileWrapper condition={() => model.profile === "profilob"}>
+            <Section header='DETTAGLIO RECUPERO RIFIUTI - OPERAZIONI DI RECUPERO' eventKey='5' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
+                <SiraTable
+                    id="CerTable"
+                    rowSelection={false}
+                    wfsVersion="2.0"
+                    dependsOn={{
+                        tableId: "RecuperoRifiuti"
+                    }}
+                    columns={[
+                        {
+                            hide: true,
+                            id: true,
+                            xpath: "../sira:tipoRifiuto/sira:TipoRifiuto/@gml:id"
+                        },
+                        {
+                            headerName: "Codice",
+                            width: 100,
+                            xpath: "sira:OperazioneRecupero/sira:codice/text()"
+                        },
+                        {
+                            headerName: "Descrizione",
+                            width: 500,
+                            xpath: "sira:OperazioneRecupero/sira:descrizione/text()"
+                        }
+                    ]}
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:operazioneRecupero")}/>
+            </Section>
+        </ProfileWrapper>
+        <Section header='METADATI' eventKey='6'>
+            <LinkToPage
+                txt="Visualizza la scheda dei metadati"
+                url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+                params={{
+                    id: 2658 || model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()"),
+                    currTab: 'rndt'
+                }}
+            />
+        </Section>
+    </Panel>
+</Panel>

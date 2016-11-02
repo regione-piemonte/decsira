@@ -9,7 +9,7 @@
 const {connect} = require('react-redux');
 
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
-const {selectFeatures, selectAllToggle} = require('../actions/featuregrid');
+const {selectAllToggle} = require('../actions/featuregrid');
 
 const {
     loadFeaturesWithPagination,
@@ -53,7 +53,6 @@ module.exports = connect((state) => ({
     toggleSiraControl: toggleSiraControl.bind(null, 'grid'),
     changeMapView: changeMapView,
     onExpandFilterPanel: expandFilterPanel,
-    selectFeatures: selectFeatures,
     onQuery: loadFeaturesWithPagination,
     onConfigureQuery: loadGridModelWithPagination,
     cleanError: configureGridError,
