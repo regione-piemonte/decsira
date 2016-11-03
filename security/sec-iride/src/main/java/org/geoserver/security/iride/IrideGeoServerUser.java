@@ -16,29 +16,39 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.util.factory.security;
+package org.geoserver.security.iride;
 
-import org.geoserver.security.iride.IrideRoleService;
+import org.geoserver.security.impl.GeoServerUser;
+import org.springframework.util.StringUtils;
 
 /**
- * {@link IrideRoleService} Factory.
+ * <code>IRIDE</code> specialized {@link GeoServerUser}.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleServiceFactory extends AbstractIrideSecurityServiceFactory<IrideRoleService> {
+public final class IrideGeoServerUser extends GeoServerUser {
+
+    private static final long serialVersionUID = 4174436058680260397L;
+
+    /**
+     * Constructor.
+     *
+     * @param username
+     */
+    public IrideGeoServerUser(String username) {
+        super(username);
+    }
 
     /*
      * (non-Javadoc)
-     * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
+     * @see org.geoserver.security.impl.GeoServerUser#toString()
      */
     @Override
-    protected final IrideRoleService newInstance() {
-        final IrideRoleService irideRoleService = new IrideRoleService();
+    public String toString() {
+        final StringBuilder sb = new StringBuilder(StringUtils.trimTrailingWhitespace(super.toString()));
+        sb.append("; ").append("User Properties: ").append(this.getProperties());
 
-        irideRoleService.setSecurityManager(this.getSecurityManager());
-        irideRoleService.setIrideService(this.getIrideService());
-
-        return irideRoleService;
+        return sb.toString();
     }
 
 }

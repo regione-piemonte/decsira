@@ -109,9 +109,11 @@ public class IridePolicyManager {
      * @param policyRequestHandlers the registry for available <code>IRIDE</code> service "policy" <em>request</em> handlers
      */
     public void setPolicyRequestHandlers(IridePolicyRegistry<IridePolicyRequestHandler> policyRequestHandlers) {
-        this.policyRequestHandlers  = policyRequestHandlers == null
-            ? new IridePolicyRegistry<IridePolicyRequestHandler>()
-            : policyRequestHandlers;
+        if (policyRequestHandlers == null) {
+            this.policyRequestHandlers = new IridePolicyRegistry<>();
+        } else {
+            this.policyRequestHandlers = policyRequestHandlers;
+        }
     }
 
     /**
@@ -159,9 +161,11 @@ public class IridePolicyManager {
      * @param policyResponseHandlers the registry for available <code>IRIDE</code> service "policy" <em>response</em> handlers
      */
     public void setPolicyResponseHandlers(IridePolicyRegistry<IridePolicyResponseHandler> policyResponseHandlers) {
-        this.policyResponseHandlers = policyResponseHandlers == null
-            ? new IridePolicyRegistry<IridePolicyResponseHandler>()
-            : policyResponseHandlers;
+        if (policyResponseHandlers == null) {
+            this.policyResponseHandlers = new IridePolicyRegistry<>();
+        } else {
+            this.policyResponseHandlers = policyResponseHandlers;
+        }
     }
 
 }

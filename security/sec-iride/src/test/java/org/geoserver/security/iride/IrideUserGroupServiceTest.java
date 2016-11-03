@@ -23,13 +23,12 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.SortedSet;
 import java.util.logging.Logger;
 
 import org.geoserver.config.GeoServerDataDirectory;
 import org.geoserver.platform.GeoServerResourceLoader;
 import org.geoserver.security.GeoServerSecurityManager;
-import org.geoserver.security.impl.GeoServerRole;
+import org.geoserver.security.impl.GeoServerUser;
 import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
@@ -45,7 +44,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 /**
- * <code>GeoServer</code> roles security service, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service <code>JUnit</code> Test.
+ * <code>GeoServer</code> users/groups security service, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service <code>JUnit</code> Test.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -54,7 +53,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
     "classpath:/testContext.xml",
 })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
-public final class IrideRoleServiceTest {
+public final class IrideUserGroupServiceTest {
 
     /**
      * Logger.
@@ -62,11 +61,6 @@ public final class IrideRoleServiceTest {
     private static final Logger LOGGER = Logging.getLogger(IrideRoleServiceTest.class);
 
     private static final String SAMPLE_USER_WITH_NO_ROLES = "AAAAAA00A11M000U/CSI PIEMONTE/DEMO 32/IPA/20161027103359/2/uQ4hHIMEEruA6DGThS3EuA==";
-
-    /**
-     * A "dummy" {@link GeoServerRole}.
-     */
-    private static final GeoServerRole DUMMY_ROLE = new GeoServerRole("dummy");
 
     private File tempFolder;
 
@@ -95,7 +89,7 @@ public final class IrideRoleServiceTest {
         this.tempFolder.delete();
         this.tempFolder.mkdirs();
 
-        this.irideRoleServiceFactory.setSecurityManager(
+        this.irideUserGroupServiceFactory.setSecurityManager(
             new GeoServerSecurityManager(
                 new GeoServerDataDirectory(
                     new GeoServerResourceLoader(this.tempFolder)
@@ -121,8 +115,10 @@ public final class IrideRoleServiceTest {
         this.tempFolder.delete();
     }
 
+    // TODO: implement other tests
+
     /**
-     * Test method for {@link org.geoserver.security.iride.IrideRoleService#canCreateStore()}.
+     * Test method for {@link org.geoserver.security.iride.IrideUserGroupService#canCreateStore()}.
      *
      * @throws IOException
      */
@@ -130,13 +126,13 @@ public final class IrideRoleServiceTest {
     public void testCannotCreateStore() throws IOException {
         LOGGER.entering(this.getClass().getName(), "testCannotCreateStore");
 
-        assertThat(false, is(this.createRoleService().canCreateStore()));
+        assertThat(false, is(this.createUserGroupService().canCreateStore()));
 
         LOGGER.exiting(this.getClass().getName(), "testCannotCreateStore");
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.IrideRoleService#canCreateStore()}.
+     * Test method for {@link org.geoserver.security.iride.IrideUserGroupService#canCreateStore()}.
      *
      * @throws IOException
      */
@@ -144,67 +140,52 @@ public final class IrideRoleServiceTest {
     public void testCreateStoreReturnsNull() throws IOException {
         LOGGER.entering(this.getClass().getName(), "testCreateStoreReturnsNull");
 
-        assertThat(this.createRoleService().createStore(), is(nullValue()));
+        assertThat(this.createUserGroupService().createStore(), is(nullValue()));
 
         LOGGER.exiting(this.getClass().getName(), "testCreateStoreReturnsNull");
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.IrideRoleService#getRolesForUser(java.lang.String)}.
-     *
-     * @throws IOException
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetRolesForSampleUserWithInvalidServerURL() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserWithInvalidServerURL", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
-
-        this.config.setServerURL(null);
-
-        try {
-            this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
-        } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserWithInvalidServerURL");
-        }
-    }
-
-    /**
-     * Test method for {@link org.geoserver.security.iride.IrideRoleService#getRolesForUser(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.IrideUserGroupService#createGroupObject(String, boolean)}.
      *
      * @throws IOException
      */
     @Test
-    public void testGetRolesForSampleUserWithNoRoles() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserWithNoRoles", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+    public void testCreateUserObjectSpecializedForIride() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testCreateUserObjectSpecializedForIride");
 
-        try {
-            final SortedSet<GeoServerRole> roles = this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
+        final String password = "xyz";
+        final boolean isEnabled = true;
 
-            assertThat(roles, not(nullValue()));
-            assertThat(roles.size(), is(0));
-        } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserWithNoRoles");
-        }
+        final GeoServerUser user = this.createUserGroupService().createUserObject(SAMPLE_USER_WITH_NO_ROLES, password, isEnabled);
+
+        LOGGER.info("User: " + user);
+
+        assertThat(user, instanceOf(IrideGeoServerUser.class));
+        assertThat(user.getUsername(), is(SAMPLE_USER_WITH_NO_ROLES));
+        assertThat(user.getPassword(), is(password));
+        assertThat(user.isEnabled(), is(isEnabled));
+
+        LOGGER.exiting(this.getClass().getName(), "testCreateUserObjectSpecializedForIride");
     }
 
     /**
-     * Test method for {@link org.geoserver.security.iride.IrideRoleService#getRolesForUser(java.lang.String)}.
+     * Test method for {@link org.geoserver.security.iride.IrideUserGroupService#getUserByUsername(String)}.
      *
      * @throws IOException
      */
-    @Test(expected = UnsupportedOperationException.class)
-    public void testGetRolesForSampleUserNotModifiable() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserNotModifiable", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetUserByUsernameForSampleUserWithInvalidServerURL() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testGetUserByUsernameForSampleUserWithInvalidServerURL", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+
+        this.config.setServerURL(null);
 
         try {
-            final SortedSet<GeoServerRole> roles = this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
+            final GeoServerUser user = this.createUserGroupService().getUserByUsername(SAMPLE_USER_WITH_NO_ROLES);
 
-            assertThat(roles, not(nullValue()));
-            assertThat(roles.size(), is(0));
-
-            // throws UnsupportedOperationException
-            roles.add(DUMMY_ROLE);
+            assertThat(user, is(nullValue()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserNotModifiable");
+            LOGGER.exiting(this.getClass().getName(), "testGetUserByUsernameForSampleUserWithInvalidServerURL");
         }
     }
 
@@ -213,8 +194,8 @@ public final class IrideRoleServiceTest {
      * @return
      * @throws IOException
      */
-    private IrideRoleService createRoleService() throws IOException {
-        return (IrideRoleService) this.securityProvider.createRoleService(this.config);
+    private IrideUserGroupService createUserGroupService() throws IOException {
+        return (IrideUserGroupService) this.securityProvider.createUserGroupService(this.config);
     }
 
 }

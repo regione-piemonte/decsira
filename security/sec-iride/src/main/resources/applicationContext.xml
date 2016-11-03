@@ -11,29 +11,30 @@
     <!-- === IrideSecurityProvider === BEGIN === -->
 
     <bean id="irideSecurityProvider" class="org.geoserver.security.iride.IrideSecurityProvider">
-        <constructor-arg ref="geoServerSecurityManager"/>
-        <constructor-arg ref="irideRoleServiceFactory"/>
+        <constructor-arg index="0">
+            <bean class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
+		          p:securityManager-ref="geoServerSecurityManager"
+		          p:irideService-ref="irideService"
+            />
+        </constructor-arg>
+        <constructor-arg index="1">
+            <bean class="org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory"
+		          p:securityManager-ref="geoServerSecurityManager"
+		          p:irideService-ref="irideService"
+            />
+        </constructor-arg>
     </bean>
 
     <!-- === IrideSecurityProvider ===   END === -->
 
-    <!-- === IrideRoleServiceFactory === BEGIN === -->
-
-    <bean id="irideRoleServiceFactory"
-          class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
-          p:irideService-ref="irideService"
-    />
-
-    <!-- === IrideRoleServiceFactory ===   END === -->
-
-    <!-- === IridePolicyEnforcer === BEGIN === -->
+    <!-- === IRIDE Service Facade === BEGIN === -->
 
     <bean id="irideService"
           class="org.geoserver.security.iride.service.IrideServiceImpl"
           p:policyManager-ref="policyManager"
     />
 
-    <!-- === IridePolicyEnforcer ===   END === -->
+    <!-- === IRIDE Service Facade ===   END === -->
 
     <!-- === IRIDE Policies Helpers === BEGIN === -->
 
