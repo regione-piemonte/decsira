@@ -101,7 +101,7 @@ const QGis = React.createClass({
         }
     },
     renderQueryPanel() {
-        return urlQuery.featureTypeId || true ? (
+        return urlQuery.featureTypeId ? (
             <div className="qgis-spinner">
                 <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
             </div>
