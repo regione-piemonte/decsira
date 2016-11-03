@@ -5,12 +5,8 @@
 
     <xsl:strip-space elements="*" />
 
-    <xsl:template match="/">
-        <xsl:apply-templates />
-    </xsl:template>
-
-    <xsl:template match="multiRef">
-        <identity><xsl:value-of select="rappresentazioneInterna" />/<xsl:value-of select="mac" /></identity>
+    <xsl:template match="*[local-name()='identificaUserPasswordReturn']">
+        <identity><xsl:value-of select="./*[local-name()='rappresentazioneInterna']" />/<xsl:value-of select="./*[local-name()='mac']" /></identity>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -11,8 +11,8 @@
         </list>
     </xsl:template>
 
-    <xsl:template match="multiRef">
-        <role><xsl:value-of select="mnemonico" /></role>
+    <xsl:template match="//*[local-name()='findRuoliForPersonaInUseCaseReturn']">
+        <role><xsl:value-of select="./*[local-name()='mnemonico']" /></role>
     </xsl:template>
 
 </xsl:stylesheet>

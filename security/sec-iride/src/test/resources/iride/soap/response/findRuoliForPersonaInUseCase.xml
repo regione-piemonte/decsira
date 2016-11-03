@@ -1,14 +1,19 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<soapenv:Envelope 
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <soapenv:Body>
-        <ns1:findRuoliForPersonaInUseCaseResponse soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="http://interfaces.policy.iride2.csi.it">
-            <findRuoliForPersonaInUseCaseReturn xsi:type="soapenc:Array" soapenc:arrayType="ns2:Ruolo[1]" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns2="urn:PolicyEnforcerBase">
-                <item href="#id0"/>
+        <findRuoliForPersonaInUseCaseResponse xmlns="http://interfaces.policy.iride2.csi.it">
+            <findRuoliForPersonaInUseCaseReturn>
+                <codiceRuolo>PA_SPEC_DECSIRA</codiceRuolo>
+                <mnemonico>PA_SPEC_DECSIRA@REG_PMN</mnemonico>
+                <codiceDominio>REG_PMN</codiceDominio>
             </findRuoliForPersonaInUseCaseReturn>
-        </ns1:findRuoliForPersonaInUseCaseResponse>
-        <multiRef id="id0" soapenc:root="0" soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" xsi:type="ns3:Ruolo" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns3="urn:PolicyEnforcerBase">
-            <codiceRuolo xsi:type="xsd:string">PA_SPEC_DECSIRA</codiceRuolo>
-            <mnemonico xsi:type="xsd:string">PA_SPEC_DECSIRA@REG_PMN</mnemonico>
-            <codiceDominio xsi:type="xsd:string">REG_PMN</codiceDominio>
-        </multiRef>
+            <findRuoliForPersonaInUseCaseReturn>
+                <codiceRuolo>PA_SPEC_CONS_DECSIRA</codiceRuolo>
+                <mnemonico>PA_SPEC_CONS_DECSIRA@REG_PMN</mnemonico>
+                <codiceDominio>REG_PMN</codiceDominio>
+            </findRuoliForPersonaInUseCaseReturn>
+        </findRuoliForPersonaInUseCaseResponse>
     </soapenv:Body>
 </soapenv:Envelope>
