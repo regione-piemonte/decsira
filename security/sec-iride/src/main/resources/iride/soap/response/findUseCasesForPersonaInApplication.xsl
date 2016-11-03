@@ -5,33 +5,27 @@
 
     <xsl:strip-space elements="*" />
 
-    <!-- http://forum.spring.io/forum/spring-projects/web-services/723656-solution-for-working-with-multiref-messages-aka-axis-1-rpc-encoded-style -->
-    <xsl:key name="multiref-by-id" match="multiRef" use="@id"/>
-
     <xsl:template match="/">
         <list>
-            <xsl:apply-templates select="//findUseCasesForPersonaInApplicationReturn"/>
+            <xsl:apply-templates />
         </list>
     </xsl:template>
 
-    <xsl:template match="*[starts-with(@href, '#')]">
-        <xsl:choose>
-            <xsl:when test="local-name(.) = 'item'">
-                <useCase>
-                    <xsl:apply-templates select="key('multiref-by-id', substring-after(@href, '#'))/node()"/>
-                </useCase>
-            </xsl:when>
-            <xsl:when test="local-name(.) = 'appId'">
-                <appId>
-                    <xsl:apply-templates select="key('multiref-by-id', substring-after(@href, '#'))/node()"/>
-                </appId>
-            </xsl:when>
-        </xsl:choose>
+    <xsl:template match="*[local-name()='findUseCasesForPersonaInApplicationReturn']">
+        <useCase>
+            <xsl:apply-templates />
+        </useCase>
     </xsl:template>
 
-    <xsl:template match="id">
+    <xsl:template match="*[local-name()='appId']">
+        <appId>
+            <xsl:apply-templates />
+        </appId>
+    </xsl:template>
+
+    <xsl:template match="*[local-name()='id']">
         <id>
-            <xsl:value-of select="."/>
+            <xsl:copy-of select="text()" />
         </id>
     </xsl:template>
 
