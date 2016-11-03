@@ -136,14 +136,14 @@ const QGis = React.createClass({
         this.props.toggleSiraControl('grid');
     },
     selectFeatures(features) {
-        let ids = JSON.stringify(features.map((f) => {
+        let ids = features.map((f) => {
             return f.id;
-        }));
+        }).join(',');
         if (window.VALAMB && window.VALAMB.viewOnMapById) {
-            window.VALAMB.viewOnMapById(`'${this.props.featureType}','${ids}'`);
+            window.VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
         }else {
         /*eslint-disable */
-            console.log(`VALAMB.viewOnMapById('${this.props.featureType}',${ids})`);
+            console.log(`VALAMB.viewOnMapById('${this.props.featureType}',"${ids}")`);
         /*eslint-enable */
         }
         this.props.selectFeatures(features);

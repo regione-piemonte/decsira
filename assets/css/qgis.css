@@ -1,6 +1,3 @@
-.fill {
-    overflow-y: auto !important;
-}
 .links {
     padding: 10px;
     background-color: white;
@@ -196,13 +193,39 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
 button.close.grid-close{
     visibility: visible;
 }
-
+#qgis-container{
+    height:100%;
+    width: 100%;
+    background-color: white;
+}
+#qgis-container .querypanel-container{
+    height: 100%;
+    overflow: auto;
+}
 #qgis-container .scheda-sira {
     left: 0px;
     top: 0px;
     height: 100%;
     width: 100%;
     margin: 0px;
+    overflow: hidden;
+    background-color: white;
+}
+#qgis-container .scheda-sira .panel-primary{
+    height: 100%;
+    width: 100%;
+}
+#qgis-container .scheda-sira .panel-primary .panel-body{
+    height: 100%;
+    width: 100%;
+}
+#qgis-container .scheda-sira .template {
+    height: 600px;
+    max-height: 10000px;
+}
+#qgis-container .featuregrid-container{
+    height: 100%;
+    width:100%;
 }
 #qgis-container .featuregrid-container .panel-body div div button:nth-child(1), button:nth-child(4){
     visibility: hidden;
