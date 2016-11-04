@@ -29,7 +29,7 @@ import org.geoserver.security.GeoServerUserGroupStore;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.impl.AbstractUserGroupService;
 import org.geoserver.security.impl.GeoServerUser;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.config.IrideUserGroupServiceConfig;
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
@@ -200,11 +200,9 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
          *                               as per {@link StringUtils#isNotBlank(String)} check rules.
          */
         Config(SecurityNamedServiceConfig cfg) {
-            if (! (cfg instanceof IrideSecurityServiceConfig)) {
-                throw new IllegalArgumentException("Config object must be of IrideSecurityServiceConfig type");
-            }
+            Preconditions.checkArgument(cfg instanceof IrideUserGroupServiceConfig, "Config object must be of IrideUserGroupServiceConfig type");
 
-            final IrideSecurityServiceConfig irideCfg = (IrideSecurityServiceConfig) cfg;
+            final IrideUserGroupServiceConfig irideCfg = (IrideUserGroupServiceConfig) cfg;
 
             this.applicationName = irideCfg.getApplicationName();
 

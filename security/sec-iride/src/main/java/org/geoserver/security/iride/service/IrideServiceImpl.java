@@ -31,7 +31,7 @@ import javax.xml.transform.TransformerException;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.config.BaseIrideSecurityServiceConfig;
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
@@ -40,6 +40,8 @@ import org.geoserver.security.iride.entity.IrideUseCase;
 import org.geoserver.security.iride.service.policy.IridePolicy;
 import org.geoserver.security.iride.service.policy.IridePolicyManager;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+
+import com.google.common.base.Preconditions;
 
 /**
  * <code>IRIDE</code> service implementation.
@@ -89,11 +91,9 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        if (! (config instanceof IrideSecurityServiceConfig)) {
-            throw new IllegalArgumentException("Config object must be of IrideSecurityServiceConfig type");
-        }
+        Preconditions.checkArgument(config instanceof BaseIrideSecurityServiceConfig, "Config object must be of BaseIrideSecurityServiceConfig type");
 
-        final IrideSecurityServiceConfig irideConfig = (IrideSecurityServiceConfig) config;
+        final BaseIrideSecurityServiceConfig irideConfig = (BaseIrideSecurityServiceConfig) config;
 
         this.serverURL = buildServerUrl(irideConfig.getServerURL());
     }

@@ -18,36 +18,27 @@
  */
 package org.geoserver.security.iride.config;
 
-import static org.geoserver.security.iride.util.builder.util.ToStringReflectionBuilder.reflectToString;
-
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerUserGroupService;
-import org.geoserver.security.config.BaseSecurityNamedServiceConfig;
 import org.geoserver.security.config.SecurityAuthProviderConfig;
 import org.geoserver.security.config.SecurityRoleServiceConfig;
 
+import com.thoughtworks.xstream.XStream;
+
 /**
- * <code>GeoServer</code> <code>IRIDE</code> Security Provider configuration.
+ * <code>GeoServer</code> <code>IRIDE</code> <a href="http://docs.geoserver.org/stable/en/user/security/usergrouprole/roleservices.html">Role Service</a> configuration.
  *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
- *
  */
-public final class IrideSecurityServiceConfig extends BaseSecurityNamedServiceConfig implements SecurityAuthProviderConfig, SecurityRoleServiceConfig {
+public final class IrideRoleServiceConfig extends BaseIrideSecurityServiceConfig implements SecurityAuthProviderConfig, SecurityRoleServiceConfig {
 
     private static final long serialVersionUID = -8931342487350680340L;
 
     /**
-     * <code>IRIDE</code> server <code>URL</code>.
+     * Alias to be used for the {@link XStream}ed <a href="http://docs.geoserver.org/stable/en/user/security/usergrouprole/roleservices.html">Role Service</a> configuration.
      */
-    private String serverURL;
-
-    /**
-     * Application name requesting <code>IRIDE</code> service.
-     *
-     * @todo should be set dynamically at runtime
-     */
-    private String applicationName;
+    public static final String ALIAS = "irideRoleService";
 
     /**
      * Admin role.
@@ -69,53 +60,21 @@ public final class IrideSecurityServiceConfig extends BaseSecurityNamedServiceCo
     /**
      * Constructor.
      */
-    public IrideSecurityServiceConfig() {
+    public IrideRoleServiceConfig() {
         /* NOP */
     }
 
     /**
-     * Constructor.<p>
-     * Copy constructor receiving another {@link IrideSecurityServiceConfig} instance.
-     * <em>Needed by <code>GeoServer</code></em>.
+     * <a href="https://en.wikipedia.org/wiki/Constructor_(object-oriented_programming)#Copy_constructors">Copy constructor</a>.
      *
-     * @param other the other {@link IrideSecurityServiceConfig} instance to copy from
+     * @param other the other {@link IrideRoleServiceConfig} instance to copy from
      */
-    public IrideSecurityServiceConfig(IrideSecurityServiceConfig other) {
+    public IrideRoleServiceConfig(IrideRoleServiceConfig other) {
         super(other);
 
-        this.serverURL            = other.getServerURL();
-        this.applicationName      = other.getApplicationName();
         this.adminRole            = other.getAdminRole();
         this.fallbackRoleService  = other.getFallbackRoleService();
         this.userGroupServiceName = other.getUserGroupServiceName();
-    }
-
-    /**
-     * @return the serverURL
-     */
-    public String getServerURL() {
-        return this.serverURL;
-    }
-
-    /**
-     * @param serverURL the serverURL to set
-     */
-    public void setServerURL(String serverURL) {
-        this.serverURL = serverURL;
-    }
-
-    /**
-     * @return the applicationName
-     */
-    public String getApplicationName() {
-        return this.applicationName;
-    }
-
-    /**
-     * @param applicationName the applicationName to set
-     */
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
     }
 
     /**
@@ -218,15 +177,6 @@ public final class IrideSecurityServiceConfig extends BaseSecurityNamedServiceCo
     @Override
     public void setUserGroupServiceName(String userGroupServiceName) {
         this.userGroupServiceName = userGroupServiceName;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.config.BaseSecurityNamedServiceConfig#toString()
-     */
-    @Override
-    public String toString() {
-        return reflectToString(this);
     }
 
 }
