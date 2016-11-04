@@ -11,7 +11,7 @@ const React = require('react');
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 
 require('../../assets/css/qgis.css');
-require('../../MapStore2/web/client/product/assets/css/viewer.css');
+// require('../../MapStore2/web/client/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
 
@@ -81,6 +81,10 @@ const QGis = React.createClass({
         };
     },
     componentWillMount() {
+        this.setState({width: getWindowSize().maxWidth});
+        window.onresize = () => {
+            this.setState({width: window.innerWidth});
+        };
         let profile = this.props.params.profile ? this.props.params.profile : urlQuery.profile;
         this.props.setProfile(profile, authParams[profile]);
     },
@@ -116,7 +120,7 @@ const QGis = React.createClass({
         return (
             <QGisFeatureGrid
                 withMap={true}
-                initWidth={getWindowSize().maxWidth}
+                initWidth={this.state.width}
                 params={{authkey: this.props.profile.authParams.authkey}}
                 profile={this.props.profile.profile}
                 templateProfile="QGIS"

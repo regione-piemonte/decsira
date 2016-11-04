@@ -134,6 +134,10 @@ const SiraGrid = React.createClass({
         }, false);
     },
     componentWillUpdate(nextProps) {
+        if (nextProps.initWidht !== this.props.initWidth) {
+            let height = getWindowSize().maxHeight - 108;
+            this.setState({width: nextProps.initWidth - 30, height});
+        }
         if (!nextProps.loadingGrid && nextProps.pagination && (nextProps.dataSourceOptions !== this.props.dataSourceOptions)) {
             this.dataSource = this.getDataSource(nextProps.dataSourceOptions);
         }
