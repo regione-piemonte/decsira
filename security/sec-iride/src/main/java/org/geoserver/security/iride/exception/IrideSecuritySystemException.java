@@ -19,7 +19,7 @@
 package org.geoserver.security.iride.exception;
 
 /**
- * <code>IRIDE</code> Digital Identity base system exception class.
+ * <code>IRIDE</code> <code>Digital Identity</code> base system exception class.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */

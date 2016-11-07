@@ -19,20 +19,32 @@
 package org.geoserver.security.iride;
 
 import java.io.IOException;
-import java.util.SortedSet;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.GeoServerUserGroupStore;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.impl.AbstractUserGroupService;
 import org.geoserver.security.impl.GeoServerUser;
-import org.geoserver.security.impl.GeoServerUserGroup;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.config.IrideUserGroupServiceConfig;
+import org.geoserver.security.iride.entity.IrideApplication;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideInfoPersona;
+import org.geoserver.security.iride.entity.IrideUseCase;
+import org.geoserver.security.iride.service.IrideService;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 /**
- * <code>GeoServer</code> user group security service, backed by <code>CSI</code> <code>IRIDE</code> service.
+ * <code>GeoServer</code> user group security service, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
+ * <p><code>IRIDE</code> user group security service is <em>read-only</em>, therefore <em>there is no support for {@link GeoServerUserGroupStore} usage</em>:
+ * {@link #canCreateStore()} will return {@code false} and {@link #createStore()} will return {@code null}.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -41,13 +53,44 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideUserGroupService.class);
+    private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
-     * Constructor.
+     * <code>GeoServer</code> user property for associated {@link IrideIdentity} instance.
      */
-    public IrideUserGroupService() {
-        super();
+    private static final String USER_PROPERTY_IRIDE_IDENTITY = "irideIdentity";
+
+    /**
+     * <code>GeoServer</code> user property for associated {@link IrideInfoPersona} instances, if any, expressed as a list.
+     * <p>An empty list property in the case there are no associated {@link IrideInfoPersona} instances.
+     * <p>Whichever the case, the list is <em>immutable</em>.
+     *
+     * @see ImmutableList
+     */
+    private static final String USER_PROPERTY_INFO_PERSONAE = "irideInfoPersonae";
+
+    /**
+     * {@link IrideUserGroupService} configuration object.
+     */
+    private Config config;
+
+    /**
+     * <code>IRIDE</code> service "policies" enforcer instance.
+     */
+    private IrideService irideService;
+
+    /**
+     * @return the irideService
+     */
+    public IrideService getIrideService() {
+        return this.irideService;
+    }
+
+    /**
+     * @param irideService the irideService to set
+     */
+    public void setIrideService(IrideService irideService) {
+        this.irideService = irideService;
     }
 
     /*
@@ -61,46 +104,18 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
             new Object[] { this.getClass().getSimpleName(), config }
         );
 
-        this.name = config.getName();
+        this.name   = config.getName();
+        this.config = new Config(config);
 
-        // TODO: check if needed and, if so, implement
-        super.initializeFromConfig(config);
-    }
-
-    /**
-     * <code>IRIDE</code> user group service is <em>read-only</em>, therefore there is no support for {@link GeoServerUserGroupStore}.
-     */
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractGeoServerSecurityService#canCreateStore()
-     */
-    @Override
-    public boolean canCreateStore() {
-        return false;
-    }
-
-    /**
-     * <code>IRIDE</code> user group service is <em>read-only</em>, therefore there is no support for {@link GeoServerUserGroupStore}.
-     */
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#createStore()
-     */
-    @Override
-    public GeoServerUserGroupStore createStore() throws IOException {
-        return null;
+        this.getIrideService().initializeFromConfig(config);
     }
 
     /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getGroupByGroupname(java.lang.String)
+     * E' il "main" per eseguire l'autenticazione via IRIDE.
+     *  -> richiamare servizi per verificare IrideIdentity
+     *  ->      //      //    per recuperare IrideInfoPersona(s)
+     *  -> "assemblare" informazioni su istanza GeoServerUser
      */
-    @Override
-    public GeoServerUserGroup getGroupByGroupname(String groupname) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getGroupByGroupname(groupname);
-    }
-
     /*
      *
      * (non-Javadoc)
@@ -108,76 +123,92 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public GeoServerUser getUserByUsername(String username) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUserByUsername(username);
-    }
+        LOGGER.info("User: " + username);
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#createUserObject(java.lang.String, java.lang.String, boolean)
-     */
-    @Override
-    public GeoServerUser createUserObject(String username, String password, boolean isEnabled) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.createUserObject(username, password, isEnabled);
-    }
+        GeoServerUser user = null;
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#createGroupObject(java.lang.String, boolean)
-     */
-    @Override
-    public GeoServerUserGroup createGroupObject(String groupname, boolean isEnabled) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.createGroupObject(groupname, isEnabled);
-    }
+        final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(username);
+        if (irideIdentity == null) {
+            // Houston? We have a problem...
+        } else {
+            // A formallly valid IRIDE digital identity was given: collect the InfoPersona instances, if any
+            final IrideUseCase[] irideUseCases = this.getIrideService().findUseCasesForPersonaInApplication(
+                irideIdentity,
+                new IrideApplication(this.config.applicationName)
+            );
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getUsers()
-     */
-    @Override
-    public SortedSet<GeoServerUser> getUsers() throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUsers();
-    }
+            final List<IrideInfoPersona> infoPersonae = Lists.newArrayList();
+            IrideInfoPersona infoPersona;
+            for (final IrideUseCase irideUseCase : irideUseCases) {
+                infoPersona = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
+                if (infoPersona != null) {
+                    infoPersonae.add(infoPersona);
+                }
+            }
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getUserGroups()
-     */
-    @Override
-    public SortedSet<GeoServerUserGroup> getUserGroups() throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUserGroups();
-    }
+            user = this.createUserObject(username, null, true);
+            user.getProperties().put(USER_PROPERTY_IRIDE_IDENTITY, irideIdentity);
+            user.getProperties().put(USER_PROPERTY_INFO_PERSONAE, ImmutableList.copyOf(infoPersonae));
+        }
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getUsersForGroup(org.geoserver.security.impl.GeoServerUserGroup)
-     */
-    @Override
-    public SortedSet<GeoServerUser> getUsersForGroup(GeoServerUserGroup group) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getUsersForGroup(group);
-    }
+        LOGGER.info("Retrieved User: " + user);
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.impl.AbstractUserGroupService#getGroupsForUser(org.geoserver.security.impl.GeoServerUser)
-     */
-    @Override
-    public SortedSet<GeoServerUserGroup> getGroupsForUser(GeoServerUser user) throws IOException {
-        // TODO: check if needed and, if so, implement
-        return super.getGroupsForUser(user);
+        return user;
     }
 
     /* (non-Javadoc)
+     * @see org.geoserver.security.GeoserverUserGroupService#createUserObject(java.lang.String, java.lang.String, boolean)
+     */
+    @Override
+    public GeoServerUser createUserObject(String username, String password, boolean isEnabled) throws IOException {
+       final GeoServerUser user = new IrideGeoServerUser(username);
+       user.setEnabled(isEnabled);
+       user.setPassword(password);
+
+       return user;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see org.geoserver.security.impl.AbstractUserGroupService#deserialize()
      */
     @Override
     protected void deserialize() throws IOException {
         /* NOP */
+    }
+
+    /**
+     * {@link IrideUserGroupService} configuration.
+     *
+     * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+     */
+    private static final class Config {
+
+        /**
+         * Application name requesting <code>IRIDE</code> service.
+         */
+        private final String applicationName;
+
+        /**
+         * Constructor.
+         *
+         * Initialize a {@link Config} object from a {@link SecurityNamedServiceConfig} instance.
+         *
+         * @param cfg a {@link SecurityNamedServiceConfig} instance
+         * @throws IllegalStateException if the {@link #applicationName} is not deemed valid:
+         *                               valid {@link #applicationName} must be <em>non-empty</em>,
+         *                               as per {@link StringUtils#isNotBlank(String)} check rules.
+         */
+        Config(SecurityNamedServiceConfig cfg) {
+            Preconditions.checkArgument(cfg instanceof IrideUserGroupServiceConfig, "Config object must be of IrideUserGroupServiceConfig type");
+
+            final IrideUserGroupServiceConfig irideCfg = (IrideUserGroupServiceConfig) cfg;
+
+            this.applicationName = irideCfg.getApplicationName();
+
+            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be of an empty string");
+        }
+
     }
 
 }

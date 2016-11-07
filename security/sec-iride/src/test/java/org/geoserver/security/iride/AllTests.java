@@ -18,21 +18,33 @@
  */
 package org.geoserver.security.iride;
 
-import org.geoserver.security.iride.util.IrideSecurityUtilsTest;
+import org.geoserver.security.iride.util.IrideIdentityValidityTest;
+import org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerConfigurationDefaultFactoryTest;
+import org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerTemplateEngineFactoryTest;
+import org.geoserver.security.iride.util.factory.template.freemarker.roleservice.IrideRoleServiceFactoryTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * <code>IRIDE</code> Identity main <code>JUnit</code> Test Suite.
+ * Main <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	IrideRoleServiceTest.class,
-	IrideSecurityUtilsTest.class,
-	org.geoserver.security.iride.identity.AllTests.class
+    IrideRoleServiceTest.class,
+    IrideUserGroupServiceTest.class,
+    IrideIdentityValidityTest.class,
+    IrideRoleServiceFactoryTest.class,
+    FreeMarkerConfigurationDefaultFactoryTest.class,
+    FreeMarkerTemplateEngineFactoryTest.class,
+    org.geoserver.security.iride.entity.converter.AllTests.class,
+    org.geoserver.security.iride.identity.AllTests.class,
+    org.geoserver.security.iride.service.policy.handler.request.AllTests.class,
+    org.geoserver.security.iride.soap.request.iride.AllTests.class,
+    org.geoserver.security.iride.util.template.AllTests.class,
+    org.geoserver.security.iride.util.xml.transform.AllTests.class,
 })
 public final class AllTests {
 

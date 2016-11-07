@@ -23,14 +23,20 @@ import java.util.logging.Logger;
 
 import org.geoserver.config.util.XStreamPersister;
 import org.geoserver.security.GeoServerRoleService;
-import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.GeoServerSecurityProvider;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.config.IrideAuthenticationProviderConfig;
+import org.geoserver.security.iride.config.IrideRoleServiceConfig;
+import org.geoserver.security.iride.config.IrideUserGroupServiceConfig;
+import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
+import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
+
+import com.google.common.base.Preconditions;
 
 /**
+ * <code>IRIDE</code> {@link GeoServerSecurityProvider}.
  *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
@@ -40,20 +46,33 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideSecurityProvider.class);
+    private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
 
     /**
-     * <code>GeoServer</code> security manager.
+     * <code>GeoServer</code> <code>IRIDE</code> <a href="http://docs.geoserver.org/stable/en/user/security/">security services</a> configurations logging message pattern.
      */
-    private GeoServerSecurityManager securityManager;
+    private static final String CONFIG_MESSAGE_PATTERN = "Configuring alias %s for %s instance";
+
+    /**
+     * Factory that creates a new, configured, {@link IrideRoleService} instance.
+     */
+    private final IrideRoleServiceFactory irideRoleServiceFactory;
+
+    /**
+     * Factory that creates a new, configured, {@link IrideUserGroupService} instance.
+     */
+    private final IrideUserGroupServiceFactory irideUserGroupServiceFactory;
 
     /**
      * Constructor.
      *
-     * @param securityManager {@link GeoServerSecurityManager} instance
+     * @param irideRoleServiceFactory Factory that creates a new, configured, {@link IrideRoleService} instance
+     * @param irideUserGroupServiceFactory Factory that creates a new, configured, {@link IrideUserGroupService} instance.
+     * @throws NullPointerException if any one of the two factories is {@code null}
      */
-    public IrideSecurityProvider(GeoServerSecurityManager securityManager) {
-        this.securityManager = securityManager;
+    public IrideSecurityProvider(IrideRoleServiceFactory irideRoleServiceFactory, IrideUserGroupServiceFactory irideUserGroupServiceFactory) {
+        this.irideRoleServiceFactory      = Preconditions.checkNotNull(irideRoleServiceFactory);
+        this.irideUserGroupServiceFactory = Preconditions.checkNotNull(irideUserGroupServiceFactory);
     }
 
     /*
@@ -62,7 +81,13 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public void configure(XStreamPersister xp) {
-        xp.getXStream().alias("iride", IrideSecurityServiceConfig.class);
+        LOGGER.info(String.format(CONFIG_MESSAGE_PATTERN, IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class.getSimpleName()));
+        LOGGER.info(String.format(CONFIG_MESSAGE_PATTERN, IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class.getSimpleName()));
+        LOGGER.info(String.format(CONFIG_MESSAGE_PATTERN, IrideUserGroupServiceConfig.ALIAS, IrideUserGroupServiceConfig.class.getSimpleName()));
+
+        xp.getXStream().alias(IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class);
+        xp.getXStream().alias(IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class);
+        xp.getXStream().alias(IrideUserGroupServiceConfig.ALIAS, IrideUserGroupServiceConfig.class);
     }
 
     /*
@@ -80,8 +105,10 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
-        final IrideRoleService service = new IrideRoleService();
-        service.initializeFromConfig(config);
+        final IrideRoleService service = this.irideRoleServiceFactory.create();
+        service.initializeFromConfig((IrideRoleServiceConfig) config);
+
+        LOGGER.info("Initialized IRIDE Role Service");
 
         return service;
     }
@@ -101,8 +128,10 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerUserGroupService createUserGroupService(SecurityNamedServiceConfig config) throws IOException {
-        final IrideUserGroupService service = new IrideUserGroupService();
-        service.initializeFromConfig(config);
+        final IrideUserGroupService service = this.irideUserGroupServiceFactory.create();
+        service.initializeFromConfig((IrideUserGroupServiceConfig) config);
+
+        LOGGER.info("Initialized IRIDE User Group Service");
 
         return service;
     }

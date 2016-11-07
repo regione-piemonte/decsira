@@ -18,18 +18,11 @@
  */
 package org.geoserver.security.iride;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public final class Utils {
-
-    /**
-     * An empty string <code>""</code>.
-     */
-    public static final String EMPTY = StringUtils.EMPTY;
 
     /**
      * A single space character string.

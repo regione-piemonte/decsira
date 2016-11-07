@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin used for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -18,91 +18,194 @@
  */
 package org.geoserver.security.iride;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.SortedSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.logging.Logger;
 
-import junit.framework.TestCase;
-
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.io.IOUtils;
 import org.geoserver.config.GeoServerDataDirectory;
 import org.geoserver.platform.GeoServerResourceLoader;
 import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.impl.GeoServerRole;
-import org.geoserver.security.impl.RoleCalculator;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+import org.geoserver.security.iride.config.IrideRoleServiceConfig;
+import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
+import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
+import org.geotools.util.logging.Logging;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 /**
+ * <code>GeoServer</code> roles security service, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service <code>JUnit</code> Test.
  *
- * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class IrideRoleServiceTest extends TestCase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+    "classpath:/testContext.xml",
+})
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
+public final class IrideRoleServiceTest {
 
-    private static final String BASE_SAMPLE_USER = "AAAAAA00A11D000L/DEMO 23/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3ukdZkuV0A1ffg==";
-    private static final String MAJOR_SAMPLE_USER = "AAAAAA00A11F000N/DEMO 25/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3ukdZkuV0A1ffg==";
-    private static final String SUPER_SAMPLE_USER = "AAAAAA00A11E000M/DEMO 24/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3ukdZkuV0A1ffg==";
-    private static final String USER_WITH_EXTRA_PARTS = "AAAAAA00A11D000L/DEMO 23/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8/52paOWJH3/kdZkuV0A1ffg==";
-    File tempFolder;
-    GeoServerSecurityManager securityManager;
-    IrideSecurityProvider securityProvider;
-    IrideSecurityServiceConfig config;
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logging.getLogger(IrideRoleServiceTest.class);
 
-    Pattern lookForMac = Pattern.compile("<mac[^>]*?>\\s*(.*?)\\s*<\\/mac>", Pattern.CASE_INSENSITIVE);
-    Pattern lookForInterna = Pattern.compile("<rappresentazioneInterna[^>]*?>\\s*(.*?)\\s*<\\/rappresentazioneInterna>", Pattern.CASE_INSENSITIVE);
+    private static final String SAMPLE_USER_WITH_NO_ROLES = "AAAAAA00A11M000U/CSI PIEMONTE/DEMO 32/IPA/20161027103359/2/uQ4hHIMEEruA6DGThS3EuA==";
 
-    @Override
+    /**
+     * A "dummy" {@link GeoServerRole}.
+     */
+    private static final GeoServerRole DUMMY_ROLE = new GeoServerRole("dummy");
+
+    private File tempFolder;
+
+    /**
+     * Factory that creates a new, configured, {@link IrideRoleService} instance.
+     */
+    @Autowired
+    private IrideRoleServiceFactory irideRoleServiceFactory;
+
+    /**
+     * Factory that creates a new, configured, {@link IrideRoleService} instance.
+     */
+    @Autowired
+    private IrideUserGroupServiceFactory irideUserGroupServiceFactory;
+
+    private IrideSecurityProvider securityProvider;
+
+    private IrideRoleServiceConfig config;
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
     public void setUp() throws Exception {
-        tempFolder = File.createTempFile("ldap", "test");
-        tempFolder.delete();
-        tempFolder.mkdirs();
-        GeoServerResourceLoader resourceLoader = new GeoServerResourceLoader(tempFolder);
-        securityManager = new GeoServerSecurityManager(new GeoServerDataDirectory(resourceLoader));
-        securityProvider = new IrideSecurityProvider(securityManager);
-        config = new IrideSecurityServiceConfig();
-        config.setApplicationName("SIIG");
-        config.setAdminRole("SUPERUSER_SIIG");
-        config.setClassName(IrideRoleService.class.getName());
-        config.setName("iride");
-        config.setServerURL("http://localhost:8085/iride2simApplIridepepWsfad/services/iride2simIridepep");
+        this.tempFolder = File.createTempFile("iride", "test");
+        this.tempFolder.delete();
+        this.tempFolder.mkdirs();
+
+        this.irideRoleServiceFactory.setSecurityManager(
+            new GeoServerSecurityManager(
+                new GeoServerDataDirectory(
+                    new GeoServerResourceLoader(this.tempFolder)
+                )
+            )
+        );
+        this.securityProvider = new IrideSecurityProvider(this.irideRoleServiceFactory, this.irideUserGroupServiceFactory);
+
+        this.config = new IrideRoleServiceConfig();
+        this.config.setName("iride");
+        this.config.setClassName(IrideRoleService.class.getName());
+        this.config.setServerURL("http://local-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase");
+        this.config.setApplicationName("DECSIRA");
+        this.config.setAdminRole("SUPUSR_DECSIRA");
+        this.config.setFallbackRoleService("default");
     }
 
-    @Override
+    /**
+     * @throws java.lang.Exception
+     */
+    @After
     public void tearDown() throws Exception {
-        tempFolder.delete();
+        this.tempFolder.delete();
     }
 
-    public void testGetRolesForBaseUserWithInvalidServerURL() throws IOException {
-    	config.setServerURL(null);
-    	try {
-    		IrideRoleService roleService = wrapRoleService(createRoleService(), "base");
-			roleService.getRolesForUser(BASE_SAMPLE_USER);
-		} catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "'null' is not a valid IRIDE server URL ");
-		}
+    /**
+     * Test method for {@link org.geoserver.security.iride.IrideRoleService#canCreateStore()}.
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testCannotCreateStore() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testCannotCreateStore");
+
+        assertThat(false, is(this.createRoleService().canCreateStore()));
+
+        LOGGER.exiting(this.getClass().getName(), "testCannotCreateStore");
     }
-    public void testGetRolesForBaseUser() throws IOException {
-        //config.setServerURL("http://localhost:8085/iride2simApplIridepepWsfad/services/iride2simIridepep");
-        IrideRoleService roleService = wrapRoleService(createRoleService(), "base");
-        SortedSet<GeoServerRole> roles = roleService.getRolesForUser(BASE_SAMPLE_USER);
-        assertNotNull(roles);
-        assertEquals(1, roles.size());
-        assertEquals("BASEUSER_SIIG", roles.iterator().next().toString());
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.IrideRoleService#canCreateStore()}.
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testCreateStoreReturnsNull() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testCreateStoreReturnsNull");
+
+        assertThat(this.createRoleService().createStore(), is(nullValue()));
+
+        LOGGER.exiting(this.getClass().getName(), "testCreateStoreReturnsNull");
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.IrideRoleService#getRolesForUser(java.lang.String)}.
+     *
+     * @throws IOException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetRolesForSampleUserWithInvalidServerURL() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserWithInvalidServerURL", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+
+        this.config.setServerURL(null);
+
+        try {
+            this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserWithInvalidServerURL");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.IrideRoleService#getRolesForUser(java.lang.String)}.
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testGetRolesForSampleUserWithNoRoles() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserWithNoRoles", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+
+        try {
+            final SortedSet<GeoServerRole> roles = this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
+
+            assertThat(roles, not(nullValue()));
+            assertThat(roles.size(), is(0));
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserWithNoRoles");
+        }
+    }
+
+    /**
+     * Test method for {@link org.geoserver.security.iride.IrideRoleService#getRolesForUser(java.lang.String)}.
+     *
+     * @throws IOException
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void testGetRolesForSampleUserNotModifiable() throws IOException {
+        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserNotModifiable", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+
+        try {
+            final SortedSet<GeoServerRole> roles = this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
+
+            assertThat(roles, not(nullValue()));
+            assertThat(roles.size(), is(0));
+
+            // throws UnsupportedOperationException
+            roles.add(DUMMY_ROLE);
+        } finally {
+            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserNotModifiable");
+        }
     }
 
     /**
@@ -111,104 +214,7 @@ public class IrideRoleServiceTest extends TestCase {
      * @throws IOException
      */
     private IrideRoleService createRoleService() throws IOException {
-        IrideRoleService roleService = (IrideRoleService) securityProvider.createRoleService(config);
-        roleService.setHttpClient(new HttpClient() {
-            @Override
-            public int executeMethod(HttpMethod method) throws IOException,
-                    HttpException {
-                return 200;
-            }
-
-        });
-        return roleService;
-    }
-
-    public void testGetRolesForMajorUser() throws IOException {
-        IrideRoleService roleService = wrapRoleService(createRoleService(), "major");
-        SortedSet<GeoServerRole> roles = roleService.getRolesForUser(MAJOR_SAMPLE_USER);
-        assertNotNull(roles);
-        assertEquals(1, roles.size());
-        assertEquals("MAJORUSER_SIIG", roles.iterator().next().toString());
-    }
-
-    public void testGetRolesForSuperUser() throws IOException {
-        IrideRoleService roleService = wrapRoleService(createRoleService(), "super");
-        SortedSet<GeoServerRole> roles = roleService.getRolesForUser(SUPER_SAMPLE_USER);
-        assertNotNull(roles);
-        assertEquals(1, roles.size());
-        assertEquals("SUPERUSER_SIIG", roles.iterator().next().toString());
-        //assertEquals(GeoServerRole.ADMIN_ROLE, roles.iterator().next());
-
-        RoleCalculator roleCalc = new RoleCalculator(roleService);
-        roles = roleCalc.calculateRoles(SUPER_SAMPLE_USER);
-        assertNotNull(roles);
-        assertEquals(3, roles.size());
-        boolean foundAdmin = false;
-        for(GeoServerRole role : roles) {
-            if(role.equals(GeoServerRole.ADMIN_ROLE)) {
-                foundAdmin = true;
-            }
-        }
-        assertTrue(foundAdmin);
-    }
-
-    public void testExtraPartsInUserName() throws IOException {
-        IrideRoleService roleService = wrapRoleService(createRoleService(), "major");
-
-        SortedSet<GeoServerRole> roles = roleService.getRolesForUser(USER_WITH_EXTRA_PARTS);
-        assertNotNull(roles);
-        Matcher m = lookForMac.matcher(roleService.getHttpClient().getState().toString());
-        assertTrue(m.find());
-        assertEquals("52paOWJH3/kdZkuV0A1ffg==", m.group(1));
-        m = lookForInterna.matcher(roleService.getHttpClient().getState().toString());
-        assertTrue(m.find());
-        assertEquals("AAAAAA00A11D000L/DEMO 23/CSI PIEMONTE/CSI_NUOVACA/20131112095654/8", m.group(1));
-    }
-
-    /**
-     * @param createRoleService
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    private IrideRoleService wrapRoleService(final IrideRoleService roleService, final String roleName) throws UnsupportedEncodingException {
-        IrideRoleService wrapped = spy(roleService);
-        when(wrapped.createHttpMethod(anyString())).thenAnswer(new Answer<HttpMethod>() {
-
-            @Override
-            public HttpMethod answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                final String requestXml = args[0].toString();
-                IrideRoleService mock = (IrideRoleService) invocation.getMock();
-                mock.getHttpClient().setState(new HttpState() {
-                    @Override
-                    public synchronized String toString() {
-                        return requestXml;
-                    }
-
-                });
-                return new HttpMethodBase() {
-
-                    @Override
-                    public String getName() {
-                        return "FileMethod";
-                    }
-
-                    @Override
-                    public String getResponseBodyAsString() throws IOException {
-                        InputStream in = getClass().getResource("/" + roleName + ".xml").openStream();
-
-                        try {
-                          return IOUtils.toString(in);
-                        } finally {
-                          IOUtils.closeQuietly(in);
-                        }
-                    }
-
-                };
-            }
-
-        });
-        return wrapped;
+        return (IrideRoleService) this.securityProvider.createRoleService(this.config);
     }
 
 }
