@@ -14,6 +14,8 @@ const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
 const {expandFilterPanel} = require('../actions/siradec');
 
+require('../../assets/css/sira.css');
+
 const SidePanel = React.createClass({
     propTypes: {
         filterPanelExpanded: React.PropTypes.bool,

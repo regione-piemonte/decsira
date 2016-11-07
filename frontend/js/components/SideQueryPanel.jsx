@@ -23,8 +23,6 @@ const Spinner = require('react-spinkit');
 
 const {hideQueryError} = require('../actions/siradec');
 
-require('../../assets/css/sira.css');
-
 const {
     // QueryBuilder action functions
     addGroupField,
