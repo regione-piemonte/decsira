@@ -29,7 +29,7 @@ import org.geoserver.config.GeoServerDataDirectory;
 import org.geoserver.platform.GeoServerResourceLoader;
 import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.impl.GeoServerUser;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.config.IrideUserGroupServiceConfig;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
 import org.geotools.util.logging.Logging;
@@ -78,7 +78,7 @@ public final class IrideUserGroupServiceTest {
 
     private IrideSecurityProvider securityProvider;
 
-    private IrideSecurityServiceConfig config;
+    private IrideUserGroupServiceConfig config;
 
     /**
      * @throws java.lang.Exception
@@ -98,13 +98,11 @@ public final class IrideUserGroupServiceTest {
         );
         this.securityProvider = new IrideSecurityProvider(this.irideRoleServiceFactory, this.irideUserGroupServiceFactory);
 
-        this.config = new IrideSecurityServiceConfig();
+        this.config = new IrideUserGroupServiceConfig();
         this.config.setName("iride");
         this.config.setClassName(IrideRoleService.class.getName());
         this.config.setServerURL("http://local-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase");
         this.config.setApplicationName("DECSIRA");
-        this.config.setAdminRole("SUPUSR_DECSIRA");
-        this.config.setFallbackRoleService("default");
     }
 
     /**

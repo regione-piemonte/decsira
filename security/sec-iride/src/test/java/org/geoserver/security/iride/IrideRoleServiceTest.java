@@ -30,7 +30,7 @@ import org.geoserver.config.GeoServerDataDirectory;
 import org.geoserver.platform.GeoServerResourceLoader;
 import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.impl.GeoServerRole;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.config.IrideRoleServiceConfig;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
 import org.geotools.util.logging.Logging;
@@ -84,7 +84,7 @@ public final class IrideRoleServiceTest {
 
     private IrideSecurityProvider securityProvider;
 
-    private IrideSecurityServiceConfig config;
+    private IrideRoleServiceConfig config;
 
     /**
      * @throws java.lang.Exception
@@ -104,7 +104,7 @@ public final class IrideRoleServiceTest {
         );
         this.securityProvider = new IrideSecurityProvider(this.irideRoleServiceFactory, this.irideUserGroupServiceFactory);
 
-        this.config = new IrideSecurityServiceConfig();
+        this.config = new IrideRoleServiceConfig();
         this.config.setName("iride");
         this.config.setClassName(IrideRoleService.class.getName());
         this.config.setServerURL("http://local-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase");

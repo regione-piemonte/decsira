@@ -34,7 +34,7 @@ import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.event.RoleLoadedListener;
 import org.geoserver.security.impl.AbstractGeoServerSecurityService;
 import org.geoserver.security.impl.GeoServerRole;
-import org.geoserver.security.iride.config.IrideSecurityServiceConfig;
+import org.geoserver.security.iride.config.IrideRoleServiceConfig;
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideRole;
@@ -393,11 +393,9 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
          *                               as per {@link StringUtils#isNotBlank(String)} check rules.
          */
         Config(SecurityNamedServiceConfig cfg) {
-            if (! (cfg instanceof IrideSecurityServiceConfig)) {
-                throw new IllegalArgumentException("Config object must be of IrideSecurityServiceConfig type");
-            }
+            Preconditions.checkArgument(cfg instanceof IrideRoleServiceConfig, "Config object must be of IrideRoleServiceConfig type");
 
-            final IrideSecurityServiceConfig irideCfg = (IrideSecurityServiceConfig) cfg;
+            final IrideRoleServiceConfig irideCfg = (IrideRoleServiceConfig) cfg;
 
             this.applicationName         = irideCfg.getApplicationName();
             this.adminRole               = irideCfg.getAdminRole();
