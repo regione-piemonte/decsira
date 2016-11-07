@@ -134,7 +134,7 @@ const SiraGrid = React.createClass({
         }, false);
     },
     componentWillUpdate(nextProps) {
-        if (nextProps.initWidht !== this.props.initWidth) {
+        if (nextProps.initWidth !== this.props.initWidth) {
             let height = getWindowSize().maxHeight - 108;
             this.setState({width: nextProps.initWidth - 30, height});
         }
