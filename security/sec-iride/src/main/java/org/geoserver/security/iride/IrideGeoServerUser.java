@@ -18,11 +18,21 @@
  */
 package org.geoserver.security.iride;
 
+import java.util.Set;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.geoserver.security.impl.GeoServerUser;
+import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideInfoPersona;
 import org.springframework.util.StringUtils;
 
+import com.google.common.collect.ImmutableSet;
+
 /**
- * <code>IRIDE</code> specialized {@link GeoServerUser}.
+ * <code>IRIDE</code> specialized {@link GeoServerUser}: it adds the following functionalities to the base class:
+ * <ul>
+ *   <li>specialized {@link #toString()} adding <code>IRIDE</code> <em>User Properties</em> detail (see {@link GeoServerUser#getProperties()}).</li>
+ * </ul>
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -31,12 +41,99 @@ public final class IrideGeoServerUser extends GeoServerUser {
     private static final long serialVersionUID = 4174436058680260397L;
 
     /**
+     * <code>GeoServer</code> user property for associated {@link IrideIdentity} instance.
+     */
+    public static final String USER_PROPERTY_IRIDE_IDENTITY = "irideIdentity";
+
+    /**
+     * <code>GeoServer</code> user property for associated {@link IrideInfoPersona} instances, if any, expressed as a set.
+     * <p>An empty set property in the case there are no associated {@link IrideInfoPersona} instances.
+     * <p>Whichever the case, the set is <em>immutable</em>.
+     *
+     * @see ImmutableSet
+     */
+    public static final String USER_PROPERTY_INFO_PERSONAE = "irideInfoPersonae";
+
+    /**
      * Constructor.
      *
      * @param username
      */
     public IrideGeoServerUser(String username) {
         super(username);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.impl.GeoServerUser#getPassword()
+     */
+    @Override
+    public String getPassword() {
+        if (super.getPassword() == null) {
+            this.setPassword("");
+        }
+
+        return super.getPassword();
+    }
+
+    /**
+     * Returns {@code true} if this <code>IRIDE</code> specialized {@link GeoServerUser}
+     * instance has an associated {@link IrideIdentity} instance, {@code false} otherwise.
+     *
+     * @return {@code true} if this <code>IRIDE</code> specialized {@link GeoServerUser}
+     *         instance has an associated {@link IrideIdentity} instance, {@code false} otherwise
+     */
+    public boolean hasIrideIdentity() {
+        return
+            this.getProperties().containsKey(USER_PROPERTY_IRIDE_IDENTITY) &&
+            this.getProperties().get(USER_PROPERTY_IRIDE_IDENTITY) instanceof IrideIdentity;
+    }
+
+    /**
+     * Get the {@link IrideIdentity} instance associated with this <code>IRIDE</code> specialized {@link GeoServerUser}.
+     *
+     * @return the {@link IrideIdentity} instance associated with this <code>IRIDE</code> specialized {@link GeoServerUser}
+     */
+    public IrideIdentity getIrideIdentity() {
+        return (IrideIdentity) this.getProperties().get(USER_PROPERTY_IRIDE_IDENTITY);
+    }
+
+    /**
+     * Set the {@link IrideIdentity} instance associated with this <code>IRIDE</code> specialized {@link GeoServerUser}.
+     */
+    public void setIrideIdentity(IrideIdentity irideIdentity) {
+        this.getProperties().put(USER_PROPERTY_IRIDE_IDENTITY, irideIdentity);
+    }
+
+    /**
+     * Returns {@code true} if this <code>IRIDE</code> specialized {@link GeoServerUser}
+     * instance has one or more associated {@link IrideInfoPersona} instances expressed as a set, {@code false} otherwise.
+     *
+     * @return {@code true} if this <code>IRIDE</code> specialized {@link GeoServerUser}
+     *         instance has one or more associated {@link IrideInfoPersona} instances expressed as a set, {@code false} otherwise
+     */
+    @SuppressWarnings("unchecked")
+    public boolean hasInfoPersonae() {
+        return
+            this.getProperties().containsKey(USER_PROPERTY_INFO_PERSONAE) &&
+            CollectionUtils.isNotEmpty((Set<IrideInfoPersona>) this.getProperties().get(USER_PROPERTY_INFO_PERSONAE));
+    }
+
+    /**
+     * Get the {@link IrideInfoPersona} instances associated with this <code>IRIDE</code> specialized {@link GeoServerUser}.
+     *
+     * @return the {@link IrideInfoPersona} instances associated with this <code>IRIDE</code> specialized {@link GeoServerUser}
+     */
+    @SuppressWarnings("unchecked")
+    public Set<IrideInfoPersona> getInfoPersonae() {
+        return (Set<IrideInfoPersona>) this.getProperties().get(USER_PROPERTY_INFO_PERSONAE);
+    }
+
+    /**
+     * Set the {@link IrideInfoPersona} instances associated with this <code>IRIDE</code> specialized {@link GeoServerUser}.
+     */
+    public void setInfoPersonae(Set<IrideInfoPersona> infoPersonae) {
+        this.getProperties().put(USER_PROPERTY_INFO_PERSONAE, infoPersonae == null ? ImmutableSet.of() : ImmutableSet.copyOf(infoPersonae));
     }
 
     /*

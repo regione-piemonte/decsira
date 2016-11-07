@@ -71,6 +71,16 @@ public final class IrideServiceImpl implements IrideService {
     private static final String IRIDE_USECASE_PARAM = "useCase";
 
     /**
+     * {@link IrideIdentity} <code>IRIDE</code> policy request parameter.
+     */
+    private static final String IRIDE_AUTH_USERNAME_PARAM = "username";
+
+    /**
+     * {@link IrideUseCase} <code>IRIDE</code> policy request parameter.
+     */
+    private static final String IRIDE_AUTH_PASSWORD_PARAM = "password";
+
+    /**
      * Policy execution error message format.
      */
     private static final String ERROR_MESSAGE_FORMAT = "%s error: %s";
@@ -192,8 +202,24 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public IrideIdentity identificaUserPassword(String username, String password) {
-        // TODO: implement...
-        return null;
+        IrideIdentity result = null;
+
+        final IridePolicy policy = IridePolicy.IDENTIFICA_USER_PASSWORD;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_AUTH_USERNAME_PARAM, username);
+        params.put(IRIDE_AUTH_PASSWORD_PARAM, password);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                result = (IrideIdentity) this.handleResponse(policy, policyResponse);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
+        }
+
+        return result;
     }
 
     /*

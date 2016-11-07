@@ -49,8 +49,9 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSortedSet;
 
 /**
- * <code>GeoServer</code> roles security service, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
- * <p><code>IRIDE</code> roles security service is <em>read-only</em>, therefore <em>there is no support for {@link GeoServerUserGroupStore} usage</em>:
+ * <code>GeoServer</code> <code>IRIDE</code> <a href="http://docs.geoserver.org/stable/en/user/security/usergrouprole/roleservices.html">Role Service</a>,
+ * backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
+ * <p><code>IRIDE</code> Role Service is <em>read-only</em>, therefore <em>there is no support for {@link GeoServerUserGroupStore} usage</em>:
  * {@link #canCreateStore()} will return {@code false} and {@link #createStore()} will return {@code null}.
  *
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"

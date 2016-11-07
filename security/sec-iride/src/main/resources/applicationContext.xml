@@ -12,12 +12,24 @@
 
     <bean id="irideSecurityProvider" class="org.geoserver.security.iride.IrideSecurityProvider">
         <constructor-arg index="0">
+            <bean class="org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory"
+		          p:securityManager-ref="geoServerSecurityManager"
+            >
+                <property name="delegateAuthProviderFactory">
+		            <bean class="org.geoserver.security.iride.util.factory.security.IridePolicyAuthenticationProviderFactory"
+		                  p:securityManager-ref="geoServerSecurityManager"
+		                  p:irideService-ref="irideService"
+		            />
+                </property>
+            </bean>
+        </constructor-arg>
+        <constructor-arg index="1">
             <bean class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
 		          p:securityManager-ref="geoServerSecurityManager"
 		          p:irideService-ref="irideService"
             />
         </constructor-arg>
-        <constructor-arg index="1">
+        <constructor-arg index="2">
             <bean class="org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory"
 		          p:securityManager-ref="geoServerSecurityManager"
 		          p:irideService-ref="irideService"

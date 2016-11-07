@@ -20,12 +20,10 @@ package org.geoserver.security.iride.util.factory.sax;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.logging.Logger;
 
 import javax.xml.transform.sax.SAXSource;
 
 import org.geoserver.security.iride.util.factory.AbstractFactory;
-import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.springframework.core.io.Resource;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -38,11 +36,6 @@ import org.xml.sax.XMLReader;
  * @see http://docs.spring.io/spring-ws/site/apidocs/org/springframework/xml/sax/SaxUtils.html
  */
 public class SAXSourceFactory extends AbstractFactory<SAXSource> {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerProvider.UTIL.getLogger();
 
     /**
      * <code>SAX</code> {@link XMLReader} istance.

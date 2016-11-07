@@ -31,6 +31,7 @@ import org.geoserver.platform.GeoServerResourceLoader;
 import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.impl.GeoServerRole;
 import org.geoserver.security.iride.config.IrideRoleServiceConfig;
+import org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
 import org.geotools.util.logging.Logging;
@@ -71,6 +72,12 @@ public final class IrideRoleServiceTest {
     private File tempFolder;
 
     /**
+     * Factory that creates a new, configured, {@link IrideAuthenticationProviderFactory} instance.
+     */
+    @Autowired
+    private IrideAuthenticationProviderFactory irideAuthenticationProviderFactory;
+
+    /**
      * Factory that creates a new, configured, {@link IrideRoleService} instance.
      */
     @Autowired
@@ -102,7 +109,11 @@ public final class IrideRoleServiceTest {
                 )
             )
         );
-        this.securityProvider = new IrideSecurityProvider(this.irideRoleServiceFactory, this.irideUserGroupServiceFactory);
+        this.securityProvider = new IrideSecurityProvider(
+            this.irideAuthenticationProviderFactory,
+            this.irideRoleServiceFactory,
+            this.irideUserGroupServiceFactory
+        );
 
         this.config = new IrideRoleServiceConfig();
         this.config.setName("iride");

@@ -21,7 +21,7 @@ package org.geoserver.security.iride.util.factory.security;
 import org.geoserver.security.iride.IrideRoleService;
 
 /**
- * {@link IrideRoleService} Factory.
+ * Factory that creates a new, configured, {@link IrideRoleService} instance.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
