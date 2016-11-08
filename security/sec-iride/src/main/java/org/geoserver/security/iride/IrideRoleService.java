@@ -39,6 +39,7 @@ import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideRole;
 import org.geoserver.security.iride.service.IrideService;
+import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -57,7 +58,7 @@ import com.google.common.collect.ImmutableSortedSet;
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class IrideRoleService extends AbstractGeoServerSecurityService implements GeoServerRoleService {
+public class IrideRoleService extends AbstractGeoServerSecurityService implements GeoServerRoleService, IrideServiceAware {
 
     /**
      * Logger.

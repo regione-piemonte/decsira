@@ -143,7 +143,7 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_APPLICATION_PARAM, application);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
                 @SuppressWarnings("unchecked")
                 final List<IrideRole> policyResult = (List<IrideRole>) this.handleResponse(policy, policyResponse);
@@ -182,7 +182,7 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_APPLICATION_PARAM, application);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
                 @SuppressWarnings("unchecked")
                 final List<IrideUseCase> policyResult = (List<IrideUseCase>) this.handleResponse(policy, policyResponse);
@@ -211,7 +211,7 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_AUTH_PASSWORD_PARAM, password);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
                 result = (IrideIdentity) this.handleResponse(policy, policyResponse);
             }
@@ -256,9 +256,10 @@ public final class IrideServiceImpl implements IrideService {
      * (non-Javadoc)
      * @see org.geoserver.security.iride.policy.PolicyEnforcerBase#getInfoPersonaInUseCase(org.geoserver.security.iride.entity.IrideIdentity, it.csi.iride2.policy.entity.UseCase)
      */
-    @Override
-    public IrideInfoPersona getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase) {
-        IrideInfoPersona result = null;
+    @SuppressWarnings("unchecked")
+	@Override
+    public List<IrideInfoPersona> getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase) {
+        List<IrideInfoPersona> result = null;
 
         final IridePolicy policy = IridePolicy.GET_INFO_PERSONA_IN_USE_CASE;
 
@@ -267,9 +268,9 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_USECASE_PARAM, useCase);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
-                result = (IrideInfoPersona) this.handleResponse(policy, policyResponse);
+                result = (List<IrideInfoPersona>) this.handleResponse(policy, policyResponse);
             }
         } catch (IOException | TransformerException e) {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
@@ -298,7 +299,7 @@ public final class IrideServiceImpl implements IrideService {
      * @return
      * @throws IOException
      */
-    private String handleRequest(IridePolicy policy, String serverURL, Map<String, Object> params) throws IOException {
+    private String handleRequest(IridePolicy policy, Map<String, Object> params) throws IOException {
         return this.getPolicyManager().getPolicyRequestHandler(policy).handleRequest(this.serverURL, params);
     }
 

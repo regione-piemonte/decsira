@@ -13,29 +13,26 @@
     <bean id="irideSecurityProvider" class="org.geoserver.security.iride.IrideSecurityProvider">
         <constructor-arg index="0">
             <bean class="org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory"
-		          p:securityManager-ref="geoServerSecurityManager"
-            >
+		          parent="geoServerSecurityManagerBean">
                 <property name="delegateAuthProviderFactory">
 		            <bean class="org.geoserver.security.iride.util.factory.security.IridePolicyAuthenticationProviderFactory"
-		                  p:securityManager-ref="geoServerSecurityManager"
-		                  p:irideService-ref="irideService"
-		            />
+		                  parent="irideServiceBean" />
                 </property>
             </bean>
         </constructor-arg>
         <constructor-arg index="1">
             <bean class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
-		          p:securityManager-ref="geoServerSecurityManager"
-		          p:irideService-ref="irideService"
-            />
+		          parent="irideServiceBean" />
         </constructor-arg>
         <constructor-arg index="2">
             <bean class="org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory"
-		          p:securityManager-ref="geoServerSecurityManager"
-		          p:irideService-ref="irideService"
-            />
+		          parent="irideServiceBean" />
         </constructor-arg>
     </bean>
+
+    <bean id="geoServerSecurityManagerBean" abstract="true" p:securityManager-ref="geoServerSecurityManager" />
+
+    <bean id="irideServiceBean" abstract="true" parent="geoServerSecurityManagerBean" p:irideService-ref="irideService" />
 
     <!-- === IrideSecurityProvider ===   END === -->
 

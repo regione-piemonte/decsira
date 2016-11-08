@@ -19,6 +19,7 @@
 package org.geoserver.security.iride;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +36,7 @@ import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
 import org.geoserver.security.iride.entity.IrideUseCase;
 import org.geoserver.security.iride.service.IrideService;
+import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 import com.google.common.base.Preconditions;
@@ -48,7 +50,7 @@ import com.google.common.collect.Sets;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class IrideUserGroupService extends AbstractUserGroupService implements GeoServerUserGroupService {
+public class IrideUserGroupService extends AbstractUserGroupService implements GeoServerUserGroupService, IrideServiceAware {
 
     /**
      * Logger.
@@ -118,11 +120,11 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
             );
 
             final Set<IrideInfoPersona> infoPersonae = Sets.newLinkedHashSet();
-            IrideInfoPersona infoPersona;
+            List<IrideInfoPersona> infoPersonaInUseCase;
             for (final IrideUseCase irideUseCase : irideUseCases) {
-                infoPersona = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
-                if (infoPersona != null) {
-                    infoPersonae.add(infoPersona);
+                infoPersonaInUseCase = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
+                if (infoPersonaInUseCase != null) {
+                    infoPersonae.addAll(infoPersonaInUseCase);
                 }
             }
 

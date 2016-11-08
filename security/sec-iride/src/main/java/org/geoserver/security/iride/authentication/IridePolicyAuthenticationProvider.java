@@ -24,6 +24,7 @@ import org.geoserver.security.iride.IrideGeoServerUser;
 import org.geoserver.security.iride.IrideUserGroupService;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.service.IrideService;
+import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -41,7 +42,7 @@ import com.google.common.base.Preconditions;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IridePolicyAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+public final class IridePolicyAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider implements IrideServiceAware {
 
     /**
      * Logger.

@@ -25,6 +25,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.geoserver.security.iride.service.policy.IridePolicy;
 import org.geoserver.security.iride.util.xml.transform.XmlTransformer;
 
@@ -138,6 +139,8 @@ public final class IridePolicyResponseHandler extends AbstractIridePolicyHandler
      */
     public Object handleResponse(String policyResponse) throws TransformerException {
         final String policyResponseMarshalledXml = this.createPolicyResponseMarshalledXml(policyResponse);
+
+        LOGGER.fine("Marshalled Policy IRIDE Response: " + policyResponseMarshalledXml);
 
         return this.getXs().fromXML(policyResponseMarshalledXml);
     }

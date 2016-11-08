@@ -29,9 +29,22 @@ import org.springframework.util.StringUtils;
 import com.google.common.collect.ImmutableSet;
 
 /**
- * <code>IRIDE</code> specialized {@link GeoServerUser}: it adds the following functionalities to the base class:
+ * <code>IRIDE</code> specialized {@link GeoServerUser}: it adds the following functionalities to the base class,
+ * easing the operations involving <code>IRIDE</code> <em>User Properties</em> (see {@link GeoServerUser#getProperties()}):
  * <ul>
- *   <li>specialized {@link #toString()} adding <code>IRIDE</code> <em>User Properties</em> detail (see {@link GeoServerUser#getProperties()}).</li>
+ *   <li>defines constants for referencing <code>IRIDE</code> <em>User Properties</em>:
+ *     <ul>
+ *       <li>{@link #USER_PROPERTY_IRIDE_IDENTITY}</li>
+ *       <li>{@link #USER_PROPERTY_INFO_PERSONAE}</li>
+ *     </ul>
+ *   </li>
+ *   <li>specialized <a href="https://en.wikipedia.org/wiki/Mutator_method">accessor/mutator methods</a> to manipulate <code>IRIDE</code> <em>User Properties</em>.
+ *     <ul>
+ *       <li>{@link #hasIrideIdentity()}/{@link #getIrideIdentity()}/{@link #setIrideIdentity(IrideIdentity)}</li>
+ *       <li>{@link #hasInfoPersonae()}/{@link #getInfoPersonae()}/{@link #setInfoPersonae(Set)}</li>
+ *     </ul>
+ *   </li>
+ *   <li>specialized {@link #toString()} adding <code>IRIDE</code> <em>User Properties</em> detail.</li>
  * </ul>
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"

@@ -16,16 +16,27 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.util.factory.security;
-
-import org.geoserver.security.impl.AbstractGeoServerSecurityService;
+package org.geoserver.security.iride.service;
 
 /**
- * Factory that creates a new, configured, {@link AbstractGeoServerSecurityService} instance,
- * specialized in the context of <code>IRIDE</code>service.
+ * Common interface for all <code>IRIDE</code> service "policies" enforcer aware types.
  *
- * @param <T>
+ * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public abstract class AbstractIrideSecurityServiceFactory<T extends AbstractGeoServerSecurityService> extends AbstractIrideServiceFactory<T> {
+public interface IrideServiceAware {
+
+    /**
+     * Get the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @return the <code>IRIDE</code> service "policies" enforcer instance
+     */
+    IrideService getIrideService();
+
+    /**
+     * Set the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
+     */
+    void setIrideService(IrideService irideService);
 
 }
