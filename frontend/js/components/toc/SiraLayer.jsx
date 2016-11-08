@@ -39,7 +39,8 @@ var DefaultLayer = React.createClass({
         modalOptions: React.PropTypes.object,
         settingsOptions: React.PropTypes.object,
         visibilityCheckType: React.PropTypes.string,
-        groups: React.PropTypes.array
+        groups: React.PropTypes.array,
+        expandFilterPanel: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -52,7 +53,8 @@ var DefaultLayer = React.createClass({
             activateSettingsTool: false,
             modalOptions: {},
             settingsOptions: {},
-            visibilityCheckType: "glyph"
+            visibilityCheckType: "glyph",
+            expandFilterPanel: () => {}
         };
     },
     renderCollapsible() {
@@ -85,7 +87,7 @@ var DefaultLayer = React.createClass({
             <VisibilityCheck key="visibilitycheck"
                 checkType={this.props.visibilityCheckType}
                 propertiesChangeHandler={this.props.propertiesChangeHandler}
-                style={{"float": "right", cursor: "pointer", marginLeft: 0, marginRight: 0}}/>
+                style={{"float": "left", cursor: "pointer", marginLeft: 0, marginRight: 0}}/>
                 );
         if (this.props.activateSettingsTool) {
             tools.push(
@@ -100,6 +102,13 @@ var DefaultLayer = React.createClass({
                                     {opacity: parseFloat(node.opacity !== undefined ? node.opacity : 1)});
                             }}}/>
             );
+            if (this.props.node.group && this.props.node.group === 'Oggetti') {
+                tools.push(<Glyphicon
+                        style={{"float": "right", cursor: 'pointer'}}
+                        key="toggle-query"
+                        glyph="search"
+                        onClick={()=>this.props.expandFilterPanel(true)}/>);
+            }
         }
         return tools;
     },

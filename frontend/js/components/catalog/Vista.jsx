@@ -33,7 +33,7 @@ const Viste = React.createClass({
     renderObjectTools() {
         return [(<Glyphicon
             key="toggle-featuregrid"
-            glyph="tasks"
+            glyph="th"
             onClick={() => this.props.toggleSiraControl('grid', true)}/>),
         (<Glyphicon
             key="toggle-query"

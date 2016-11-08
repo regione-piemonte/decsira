@@ -21,7 +21,8 @@ const Card = require('../components/template/Card');
 
 const {setProfile} = require('../actions/userprofile');
 const Spinner = require('react-spinkit');
-const urlQuery = require('url').parse(window.location.href, true).query;
+const parsedUrl = require('url').parse(window.location.href, true);
+const urlQuery = parsedUrl.query;
 
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 const authParams = {
@@ -81,7 +82,7 @@ const QGis = React.createClass({
         };
     },
     componentWillMount() {
-        this.setState({width: getWindowSize().maxWidth});
+        this.setState({width: getWindowSize().maxWidth, qGisType: this.getQGisType(parsedUrl.pathname)});
         window.onresize = () => {
             this.setState({width: window.innerWidth});
         };
@@ -99,13 +100,29 @@ const QGis = React.createClass({
         if (props.featureType !== this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(`assets/${props.featureType}.json`, {authkey: this.props.profile.authParams.authkey});
         }
-        if (urlQuery.featureTypeId && props.configLoaded && !props.siraControls.detail) {
+        if (this.state.qGisType === "detail" && urlQuery.featureTypeId && props.configLoaded && !props.siraControls.detail) {
             this.props.toggleSiraControl('detail', true);
             this.goToDetail(urlQuery.featureTypeId, props.detailsConfig);
         }
+        // if (this.state.qGisType === "list" && urlQuery.featureTypeId && props.configLoaded && !props.siraControls.detail) {
+        //     this.props.toggleSiraControl('detail', true);
+        //     this.goToDetail(urlQuery.featureTypeId, props.detailsConfig);
+        // }
+
+    },
+    getQGisType(pathname) {
+        if (pathname.search(/search.html$/) !== -1) {
+            return "search";
+        }
+        if (pathname.search(/detail.html$/) !== -1) {
+            return "detail";
+        }
+        if (pathname.search(/list.html$/) !== -1) {
+            return "list";
+        }
     },
     renderQueryPanel() {
-        return urlQuery.featureTypeId ? (
+        return this.state.qGisType === "detail" ? (
             <div className="qgis-spinner">
                 <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
             </div>
@@ -132,7 +149,7 @@ const QGis = React.createClass({
         return (
             <div id="qgis-container" className="mappaSiraDecisionale">
              {this.props.siraControls.grid ? this.renderGrid() : this.renderQueryPanel()}
-             <Card draggable={false} authParam={this.props.profile}/>
+             <Card draggable={false} authParam={this.props.profile.authParams}/>
             </div>
         );
     },
