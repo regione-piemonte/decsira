@@ -42,7 +42,7 @@ var DefaultNode = React.createClass({
         (<Glyphicon
             style={glyphStyle}
             key="toggle-featuregrid"
-            glyph="tasks"
+            glyph="th"
             onClick={() => this.props.toggleSiraControl('grid', true)}/>),
         (<Glyphicon
             style={glyphStyle}

@@ -11,8 +11,6 @@ const React = require('react');
 const TemplateSira = require('../../template/TemplateSira');
 const TemplateUtils = require('../../../utils/TemplateUtils');
 
-const assign = require('object-assign');
-
 const GMLViewer = React.createClass({
     propTypes: {
         params: React.PropTypes.object,
@@ -20,10 +18,16 @@ const GMLViewer = React.createClass({
         response: React.PropTypes.string,
         contentConfig: React.PropTypes.object,
         detailOpen: React.PropTypes.bool,
+        templateProfile: React.PropTypes.string,
         actions: React.PropTypes.shape({
             onDetail: React.PropTypes.func,
             onShowDetail: React.PropTypes.func
         })
+    },
+    getDefaultProps() {
+        return {
+            templateProfile: 'default'
+        };
     },
     shouldComponentUpdate(nextProps) {
         return nextProps.response !== this.props.response;
@@ -54,28 +58,19 @@ const GMLViewer = React.createClass({
         );
     },
     goToDetail(data, idFieldName) {
-        /*let reqURL = this.props.contentConfig.detailsConfig.wfsUrl + "&FEATUREID=" + data.id;
-        for (let param in this.props.params) {
-            if (this.props.params.hasOwnProperty(param)) {
-                reqURL += "&" + param + "=" + this.props.params[param];
-            }
-        }*/
-
         let url = this.props.contentConfig.detailsConfig.service.url;
         let urlParams = this.props.contentConfig.detailsConfig.service.params;
-        let params = assign({}, this.props.params, urlParams);
-        for (let param in params) {
-            if (params.hasOwnProperty(param)) {
-                url += "&" + param + "=" + params[param];
+        for (let param in urlParams) {
+            if (urlParams.hasOwnProperty(param)) {
+                url += "&" + param + "=" + urlParams[param];
             }
         }
 
-        let reqURL = url + "&FEATUREID=" + data[idFieldName];
-
+        let templateUrl = typeof this.props.contentConfig.detailsConfig.template === "string" ? this.props.contentConfig.detailsConfig.template : this.props.contentConfig.detailsConfig.template[this.props.templateProfile];
         this.props.actions.onDetail(
-            this.props.contentConfig.detailsConfig.template,
-            /*this.props.contentConfig.detailsConfig.cardModelConfigUrl,*/
-            reqURL
+             templateUrl,
+            // this.props.detailsConfig.cardModelConfigUrl,
+            url + "&FEATUREID=" + data[idFieldName]
         );
 
         if (!this.props.detailOpen) {

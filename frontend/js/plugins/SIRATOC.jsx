@@ -18,7 +18,10 @@ const Message = require('../../MapStore2/web/client/plugins/locale/Message');
 const assign = require('object-assign');
 
 const layersIcon = require('../../MapStore2/web/client/plugins/toolbar/assets/img/layers.png');
-
+const {
+    // SiraQueryPanel action functions
+    expandFilterPanel
+} = require('../actions/siradec');
 const tocSelector = createSelector(
     [
         (state) => state.controls && state.controls.toolbar && state.controls.toolbar.active === 'toc',
@@ -55,7 +58,8 @@ const LayerTree = React.createClass({
         activateLegendTool: React.PropTypes.bool,
         activateSettingsTool: React.PropTypes.bool,
         visibilityCheckType: React.PropTypes.string,
-        settingsOptions: React.PropTypes.object
+        settingsOptions: React.PropTypes.object,
+        expandFilterPanel: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -69,7 +73,8 @@ const LayerTree = React.createClass({
             activateLegendTool: true,
             activateSettingsTool: true,
             visibilityCheckType: "checkbox",
-            settingsOptions: {}
+            settingsOptions: {},
+            expandFilterPanel: () => {}
         };
     },
     getNoBackgroundLayers(group) {
@@ -108,7 +113,8 @@ const LayerTree = React.createClass({
                             opacityText={<Message msgId="opacity"/>}
                             saveText={<Message msgId="save"/>}
                             closeText={<Message msgId="close"/>}
-                            groups={this.props.groups}/>
+                            groups={this.props.groups}
+                            expandFilterPanel={this.props.expandFilterPanel}/>
                     </DefaultGroup>
                 </TOC>
             </div>
@@ -126,7 +132,8 @@ const TOCPlugin = connect(tocSelector, {
     hideSettings,
     updateSettings,
     updateNode,
-    removeNode
+    removeNode,
+    expandFilterPanel
 })(LayerTree);
 
 module.exports = {
