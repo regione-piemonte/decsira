@@ -9,7 +9,7 @@
 const {connect} = require('react-redux');
 
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
-const {selectAllToggle} = require('../actions/featuregrid');
+
 
 const {
     loadFeaturesWithPagination,
@@ -40,7 +40,6 @@ module.exports = connect((state) => ({
     map: (state.map && state.map) || (state.config && state.config.map),
     loadingGrid: state.grid.loadingGrid,
     loadingGridError: state.grid.loadingGridError,
-    pagination: (state.queryform.pagination && state.queryform.pagination.maxFeatures) ? true : false,
     groupFields: state.queryform.groupFields,
     filterFields: state.queryform.filterFields,
     spatialField: state.queryform.spatialField,
@@ -55,6 +54,5 @@ module.exports = connect((state) => ({
     onExpandFilterPanel: expandFilterPanel,
     onQuery: loadFeaturesWithPagination,
     onConfigureQuery: loadGridModelWithPagination,
-    cleanError: configureGridError,
-    selectAllToggle: selectAllToggle
+    cleanError: configureGridError
 })(require('./FeatureGrid'));

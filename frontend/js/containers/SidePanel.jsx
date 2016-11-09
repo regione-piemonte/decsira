@@ -117,7 +117,8 @@ const SidePanel = React.createClass({
                         sidebar: {
                             backgroundColor: 'white',
                             zIndex: 1024,
-                            width: this.state.boxwidth
+                            width: this.state.boxwidth,
+                            overflowX: 'hidden'
                         },
                         overlay: {
                             zIndex: 1023,
