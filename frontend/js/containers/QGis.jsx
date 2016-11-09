@@ -23,8 +23,13 @@ const {setProfile} = require('../actions/userprofile');
 const Spinner = require('react-spinkit');
 const parsedUrl = require('url').parse(window.location.href, true);
 const urlQuery = parsedUrl.query;
+const {
+    loadGridModelWithFilter,
+    loadGridModelWithPagination
+} = require('../actions/grid');
 
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const SiraFilterUtils = require('../utils/SiraFilterUtils');
 const authParams = {
     admin: {
         userName: "admin",
@@ -70,6 +75,8 @@ const QGis = React.createClass({
         siraControls: React.PropTypes.object,
         selectFeatures: React.PropTypes.func,
         detailsConfig: React.PropTypes.object,
+        gridConfig: React.PropTypes.object,
+        pagination: React.PropTypes.object,
         loadCardTemplate: React.PropTypes.func
     },
     getDefaultProps() {
@@ -81,7 +88,13 @@ const QGis = React.createClass({
             toggleSiraControl: () => {}
         };
     },
+    getInitialState() {
+        return {
+            loadList: true
+        };
+    },
     componentWillMount() {
+        this.counter = 0;
         this.setState({width: getWindowSize().maxWidth, qGisType: this.getQGisType(parsedUrl.pathname)});
         window.onresize = () => {
             this.setState({width: window.innerWidth});
@@ -104,11 +117,13 @@ const QGis = React.createClass({
             this.props.toggleSiraControl('detail', true);
             this.goToDetail(urlQuery.featureTypeId, props.detailsConfig);
         }
-        // if (this.state.qGisType === "list" && urlQuery.featureTypeId && props.configLoaded && !props.siraControls.detail) {
-        //     this.props.toggleSiraControl('detail', true);
-        //     this.goToDetail(urlQuery.featureTypeId, props.detailsConfig);
-        // }
-
+        if (this.state.qGisType === "list" && this.state.loadList && urlQuery.featureTypeIds && props.configLoaded && props.gridConfig && props.featureTypeName) {
+            // find id field
+            this.setState({loadList: false});
+            let idField = this.props.gridConfig.columns.find((c) => c.id === true);
+            let filter = SiraFilterUtils.getFilterByIds(props.featureTypeName, urlQuery.featureTypeIds.split(','), idField, props.pagination);
+            props.onQuery(props.searchUrl, filter);
+        }
     },
     getQGisType(pathname) {
         if (pathname.search(/search.html$/) !== -1) {
@@ -138,6 +153,7 @@ const QGis = React.createClass({
             <QGisFeatureGrid
                 withMap={true}
                 initWidth={this.state.width}
+                pagination= {(this.state.qGisType !== 'list' && this.props.pagination && this.props.pagination .maxFeatures) ? true : false}
                 params={{authkey: this.props.profile.authParams.authkey}}
                 profile={this.props.profile.profile}
                 templateProfile="QGIS"
@@ -148,7 +164,7 @@ const QGis = React.createClass({
     render() {
         return (
             <div id="qgis-container" className="mappaSiraDecisionale">
-             {this.props.siraControls.grid ? this.renderGrid() : this.renderQueryPanel()}
+             {this.props.siraControls.grid || (this.state.qGisType === 'list' && this.props.configLoaded && !this.state.loadList) ? this.renderGrid() : this.renderQueryPanel()}
              <Card draggable={false} authParam={this.props.profile.authParams}/>
             </div>
         );
@@ -202,10 +218,14 @@ module.exports = connect((state) => {
         profile: state.userprofile,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         featureType: state.siradec && state.siradec.featureType,
-        configLoaded: state.siradec && state.siradec.card ? true : false,
+        configLoaded: state.siradec && state.siradec.card && state.siradec.featuregrid ? true : false,
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         siraControls: state.siraControls,
-        detailsConfig: state.siradec && state.siradec.card
+        detailsConfig: state.siradec && state.siradec.card,
+        gridConfig: state.siradec && state.siradec.featuregrid && state.siradec.featuregrid.grid,
+        featureTypeName: state.siradec && state.siradec.featureTypeName,
+        searchUrl: state.queryform.searchUrl,
+        pagination: state.queryform.pagination
     };
 }, {
     setProfile,
@@ -213,5 +233,8 @@ module.exports = connect((state) => {
     expandFilterPanel,
     toggleSiraControl,
     selectFeatures,
-    loadCardTemplate
+    loadCardTemplate,
+    onQuery: loadGridModelWithFilter,
+    onQueryPagination: loadGridModelWithPagination
+
 })(QGis);

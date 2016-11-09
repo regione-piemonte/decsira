@@ -39,7 +39,15 @@ FilterUtils.getSLD = function(ftName, json, version) {
     return `<StyledLayerDescriptor version="1.0.0"
             xmlns:sira="http://www.regione.piemonte.it/ambiente/sira/1.0"
             xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
-
 };
 
+FilterUtils.getFilterByIds = function(ftName, ids, idField, pagination) {
+    let filterObj = {
+    groupFields: [{id: 1, index: 0, logic: "OR"}],
+    filterFields: ids.map((id) => ({ attribute: idField.xpath[0], groupId: 1, operator: "=", value: id, type: 'string'})),
+    spatialField: {},
+    pagination
+    };
+    return this.toOGCFilter(ftName, filterObj, "2.0");
+};
 module.exports = FilterUtils;

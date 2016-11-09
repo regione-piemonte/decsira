@@ -108,16 +108,15 @@ const SiraGrid = React.createClass({
             selectFeatures: () => {},
             onQuery: () => {},
             onConfigureQuery: () => {},
-            cleanError: () => {},
-            selectAllToggle: () => {}
+            cleanError: () => {}
         };
     },
     componentWillMount() {
-        let height = getWindowSize().maxHeight - 108;
+        let height = getWindowSize().maxHeight - 110;
         this.setState({width: this.props.initWidth - 30, height});
         if (this.props.pagination && this.props.dataSourceOptions.pageSize) {
             this.dataSource = this.getDataSource(this.props.dataSourceOptions);
-        }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize) {
+        }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize && this.props.attributes[0]) {
             let newFilter = FilterUtils.getOgcAllPropertyValue(this.props.featureTypeName, this.props.attributes[0].attribute);
             this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
                 "maxFeatures": 15,
@@ -127,7 +126,7 @@ const SiraGrid = React.createClass({
     },
     componentWillReceiveProps(nextProps) {
         if (nextProps.initWidth !== this.props.initWidth) {
-            let height = getWindowSize().maxHeight - 108;
+            let height = getWindowSize().maxHeight - 110;
             this.setState({width: nextProps.initWidth - 30, height});
         }
     },
@@ -288,6 +287,7 @@ const SiraGrid = React.createClass({
                     <Panel className="featuregrid-container sidepanel-featuregrid" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
                             <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
                                 <Button
+                                    className="back-to-query"
                                     style={{marginBottom: "12px"}}
                                     onClick={() => this.onGridClose(true)}><span>Torna al pannello di ricerca</span>
                                 </Button>
@@ -302,7 +302,7 @@ const SiraGrid = React.createClass({
                                     style={{height: this.state.height - 120, width: "100%"}}
                                     maxZoom={16}
                                     selectFeatures={this.selectFeatures}
-                                    selectAll={this.selectAll}
+                                    selectAll={this.props.selectAllToggle ? this.selectAll : undefined}
                                     paging={this.props.pagination}
                                     zoom={15}
                                     enableZoomToFeature={this.props.withMap}
@@ -346,7 +346,9 @@ const SiraGrid = React.createClass({
         }
     },
     selectFeatures(features) {
-        this.props.selectAllToggle();
+        if (this.props.selectAllToggle) {
+            this.props.selectAllToggle();
+        }
         this.props.selectFeatures(features);
     },
     goToDetail(params) {
