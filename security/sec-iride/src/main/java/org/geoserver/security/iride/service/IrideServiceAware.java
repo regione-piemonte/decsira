@@ -16,29 +16,27 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.util.factory.security;
-
-import org.geoserver.security.iride.IrideRoleService;
+package org.geoserver.security.iride.service;
 
 /**
- * Factory that creates a new, configured, {@link IrideRoleService} instance.
+ * Common interface for all <code>IRIDE</code> service "policies" enforcer aware types.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleServiceFactory extends AbstractIrideSecurityServiceFactory<IrideRoleService> {
+public interface IrideServiceAware {
 
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
+    /**
+     * Get the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @return the <code>IRIDE</code> service "policies" enforcer instance
      */
-    @Override
-    protected final IrideRoleService newInstance() {
-        final IrideRoleService irideRoleService = new IrideRoleService();
+    IrideService getIrideService();
 
-        irideRoleService.setSecurityManager(this.getSecurityManager());
-        irideRoleService.setIrideService(this.getIrideService());
-
-        return irideRoleService;
-    }
+    /**
+     * Set the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
+     */
+    void setIrideService(IrideService irideService);
 
 }

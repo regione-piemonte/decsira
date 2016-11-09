@@ -32,6 +32,20 @@
 
     <!-- === TemplateEngine ===   END === -->
 
+    <!-- === IrideAuthenticationProvider === BEGIN === -->
+
+    <bean id="irideAuthenticationProviderFactory"
+          class="org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory"
+    >
+        <property name="delegateAuthProviderFactory">
+            <bean class="org.geoserver.security.iride.util.factory.security.IridePolicyAuthenticationProviderFactory"
+                  p:irideService-ref="irideService"
+            />
+        </property>
+    </bean>
+
+    <!-- === IrideAuthenticationProvider ===   END === -->
+
     <!-- === IrideRoleServiceFactory === BEGIN === -->
 
     <bean id="irideRoleServiceFactoryTest"

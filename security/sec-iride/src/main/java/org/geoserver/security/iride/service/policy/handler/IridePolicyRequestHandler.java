@@ -148,19 +148,20 @@ public final class IridePolicyRequestHandler extends AbstractIridePolicyHandler 
         final String     requestXml        = this.createPolicyRequestXml(params);
         final HttpMethod requestHttpMethod = this.createPolicyRequestMethod(requestXml, serverURL);
 
+        String result = "";
         try {
-            final int status = this.getHttpClient().executeMethod(requestHttpMethod);
-            if (status == HttpStatus.SC_OK ) {
-                final String responseXml = requestHttpMethod.getResponseBodyAsString();
+            final int    responseCode = this.getHttpClient().executeMethod(requestHttpMethod);
+            final String responseXml  = requestHttpMethod.getResponseBodyAsString();
 
-                LOGGER.info("Response received from IRIDE: " + responseXml);
-
-                return responseXml;
+            if (responseCode == HttpStatus.SC_OK ) {
+                result = responseXml;
             } else {
-                LOGGER.info("Got error from IRIDE: " + String.format("%d %s", status, HttpStatus.getStatusText(status)));
-
-                return "";
+                LOGGER.info("Got error from IRIDE: " + String.format("%d %s", responseCode, HttpStatus.getStatusText(responseCode)));
             }
+
+            LOGGER.fine("Response received from IRIDE: " + responseXml);
+
+            return result;
         } finally {
             requestHttpMethod.releaseConnection();
         }

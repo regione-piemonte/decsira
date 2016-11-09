@@ -18,6 +18,10 @@
  */
 package org.geoserver.security.iride.util.factory;
 
+import java.util.logging.Logger;
+
+import org.geoserver.security.iride.util.logging.LoggerProvider;
+
 /**
  * Base <em>Factory</em> class.
  *
@@ -26,6 +30,11 @@ package org.geoserver.security.iride.util.factory;
  * @param <T> the type of objects the <em>Factory</em> can create.
  */
 public abstract class AbstractFactory<T> implements Factory<T> {
+
+    /**
+     * Logger.
+     */
+    protected static final Logger LOGGER = LoggerProvider.UTIL.getLogger();
 
     /* (non-Javadoc)
      * @see org.geoserver.security.iride.util.factory.Factory#create()
