@@ -15,6 +15,17 @@ function mapConfig(state = null, action) {
         case 'MAP_CONFIG_LOADED': {
             let layers = action.config.map.layers.concat(CommonLayers);
             action.config.map = assign({}, action.config.map, {layers: layers});
+            if (localStorage.getItem('sira.config.layers')) {
+                const storedLayersConfig = JSON.parse(localStorage.getItem('sira.config.layers'));
+                layers = action.config.map.layers.concat(storedLayersConfig);
+                action.config.map = assign({}, action.config.map, {layers: layers});
+                localStorage.removeItem('sira.config.layers');
+            }
+            if (localStorage.getItem('sira.config.map')) {
+                const storedMapConfig = JSON.parse(localStorage.getItem('sira.config.map'));
+                action.config.map = assign({}, action.config.map, storedMapConfig);
+                localStorage.removeItem('sira.config.map');
+            }
             if (state.siradec.inlineMapConfig) {
                 action.config.map = assign({}, action.config.map, state.siradec.inlineMapConfig);
             }
