@@ -8,37 +8,35 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <util:map id="namespaceContext"
+              map-class="java.util.HashMap"
+              key-type="java.lang.String"
+              value-type="java.lang.String">
+        <entry key="xsi" value="http://www.w3.org/2001/XMLSchema-instance" />
+        <entry key="xsd" value="http://www.w3.org/2001/XMLSchema" />
+        <entry key="soapenv" value="http://schemas.xmlsoap.org/soap/envelope/" />
+        <entry key="int" value="http://interfaces.policy.iride2.csi.it" />
+        <entry key="pep" value="http://pep.base.nmsf.csi.it" />
+        <entry key="urn" value="urn:PolicyEnforcerBase.policy.entity" />
+    </util:map>
+
     <!-- http://stackoverflow.com/questions/11324372/how-to-make-spring-inject-value-into-a-static-field -->
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod" value="org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest.setNamespaceContext"/>
         <property name="arguments">
-            <util:map map-class="java.util.HashMap"
-                      key-type="java.lang.String"
-                      value-type="java.lang.String">
-                <entry key="xsi" value="http://www.w3.org/2001/XMLSchema-instance" />
-                <entry key="xsd" value="http://www.w3.org/2001/XMLSchema" />
-                <entry key="soapenv" value="http://schemas.xmlsoap.org/soap/envelope/" />
-                <entry key="int" value="http://interfaces.policy.iride2.csi.it"/>
-            </util:map>
+            <ref bean="namespaceContext" />
        </property>
     </bean>
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod" value="org.geoserver.security.iride.util.template.AbstractTemplateEngineTest.setNamespaceContext"/>
         <property name="arguments">
-            <util:map map-class="java.util.HashMap"
-                      key-type="java.lang.String"
-                      value-type="java.lang.String">
-                <entry key="xsi" value="http://www.w3.org/2001/XMLSchema-instance" />
-                <entry key="xsd" value="http://www.w3.org/2001/XMLSchema" />
-                <entry key="soapenv" value="http://schemas.xmlsoap.org/soap/envelope/" />
-                <entry key="int" value="http://interfaces.policy.iride2.csi.it"/>
-            </util:map>
+            <ref bean="namespaceContext" />
        </property>
     </bean>
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod" value="org.geoserver.security.iride.soap.request.iride.AbstractIrideSoapRequestTemplateCompilationTest.setTemplateExtension"/>
         <property name="arguments">
-            <value>xml</value>
+            <value>ftl</value>
        </property>
     </bean>
 
