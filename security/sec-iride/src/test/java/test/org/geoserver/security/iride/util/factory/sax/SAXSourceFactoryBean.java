@@ -16,10 +16,11 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.util.factory.sax;
+package test.org.geoserver.security.iride.util.factory.sax;
 
 import javax.xml.transform.sax.SAXSource;
 
+import org.geoserver.security.iride.util.factory.sax.SAXSourceFactory;
 import org.springframework.beans.factory.FactoryBean;
 
 /**

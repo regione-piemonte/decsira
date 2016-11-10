@@ -18,18 +18,18 @@
  */
 package org.geoserver.security.iride.service.policy.handler;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.geoserver.security.iride.service.policy.IridePolicy;
+import org.geoserver.security.iride.util.factory.sax.SAXSourceFactory;
+import org.geoserver.security.iride.util.xml.transform.StringResult;
 import org.geoserver.security.iride.util.xml.transform.XmlTransformer;
 
-import com.google.common.collect.Sets;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -45,10 +45,11 @@ public final class IridePolicyResponseHandler extends AbstractIridePolicyHandler
     private XmlTransformer xmlTransformer;
 
     /**
-     * The <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformations</a>
-     * with which to process a <code>IRIDE</code> service "policy" <em>response</em>.
+     * The <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> sources factories
+     * with which create <code>SAX</code> {@link Source} instances
+     * used during <code>IRIDE</code> service "policy" <em>response</em> processing.
      */
-    private Set<Source> transformations;
+    private Set<SAXSourceFactory> transformationSources;
 
     /**
      * <a href="http://x-stream.github.io/"><code>XStream</code></a> instance, configured for <code>IRIDE</code> entities.
@@ -83,29 +84,33 @@ public final class IridePolicyResponseHandler extends AbstractIridePolicyHandler
     }
 
     /**
-     * Set the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformations</a>
-     * with which to process a <code>IRIDE</code> service "policy" <em>response</em>.
+     * Set the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> sources factories
+     * with which create <code>SAX</code> {@link Source} instances
+     * used during <code>IRIDE</code> service "policy" <em>response</em> processing.
      *
-     * @return the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformations</a>
-     *         with which to process a <code>IRIDE</code> service "policy" <em>response</em>
+     * @return the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> sources factories
+     *         with which create <code>SAX</code> {@link Source} instances
+     *         used during <code>IRIDE</code> service "policy" <em>response</em> processing
      */
-    public Set<Source> getTransformations() {
-        return this.transformations;
+    public Set<SAXSourceFactory> getTransformationSources() {
+        return this.transformationSources;
     }
 
     /**
-     * Get the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformations</a>
-     * with which to process a <code>IRIDE</code> service "policy" <em>response</em>.
+     * Get the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> sources factories
+     * with which create <code>SAX</code> {@link Source} instances
+     * used during <code>IRIDE</code> service "policy" <em>response</em> processing.
      *
-     * @param transformations the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformations</a>
-     *        with which to process a <code>IRIDE</code> service "policy" <em>response</em>
+     * @param transformationSources the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> sources factories
+     *                              with which create <code>SAX</code> {@link Source} instances
+     *                              used during <code>IRIDE</code> service "policy" <em>response</em> processing
      */
-    public void setTransformations(Set<Source> transformations) {
-        if (transformations == null) {
-            this.transformations = Sets.<Source>newLinkedHashSet();
+    public void setTransformationSources(Set<SAXSourceFactory> transformationSources) {
+        if (transformationSources == null) {
+            this.transformationSources = new LinkedHashSet<>();
         }
 
-        this.transformations = transformations;
+        this.transformationSources = transformationSources;
     }
 
     /**
@@ -154,15 +159,15 @@ public final class IridePolicyResponseHandler extends AbstractIridePolicyHandler
     private String createPolicyResponseMarshalledXml(String policyResponse) throws TransformerException {
         String policyResponseMarshalledXml = null;
 
-        for (final Source transformation : this.getTransformations()) {
+        for (final SAXSourceFactory transformationSource : this.getTransformationSources()) {
             final StreamSource source = XmlTransformer.newStreamSource(
                 policyResponseMarshalledXml == null
                     ? policyResponse
                     : policyResponseMarshalledXml
             );
-            final StreamResult output = XmlTransformer.newStreamResult();
+            final StringResult output = XmlTransformer.newStreamResult();
 
-            this.getXmlTransformer().transform(transformation, source, output);
+            this.getXmlTransformer().transform(transformationSource.create(), source, output);
 
             policyResponseMarshalledXml = output.toString();
         }
