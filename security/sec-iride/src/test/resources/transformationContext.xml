@@ -14,19 +14,11 @@
 
     <!-- === XmlTransformerErrorHandler ===   END === -->
 
-    <!-- === XMLReader === BEGIN === -->
-
-    <bean id="xmlReader" class="org.geoserver.security.iride.util.factory.sax.XMLReaderFactoryBean"
-        p:errorHandler-ref="errorHandler"
-    />
-
-    <!-- === XMLReader ===   END === -->
-
     <!-- === SAXSource === BEGIN === -->
 
     <bean id="abstractSAXSourceFactory"
           abstract="true"
-          p:xmlReader-ref="xmlReader"
+          p:errorHandler-ref="errorHandler"
     />
 
     <!-- === SAXSource ===   END === -->

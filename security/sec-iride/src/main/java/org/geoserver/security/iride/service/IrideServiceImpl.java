@@ -21,6 +21,7 @@ package org.geoserver.security.iride.service;
 import static org.geoserver.security.iride.util.builder.util.IrideUrlBuilder.buildServerUrl;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,11 @@ public final class IrideServiceImpl implements IrideService {
      * {@link IrideUseCase} <code>IRIDE</code> policy request parameter.
      */
     private static final String IRIDE_AUTH_PASSWORD_PARAM = "password";
+
+    /**
+     * Policy execution result message format.
+     */
+    private static final String RESULT_MESSAGE_FORMAT = "Policy '%s' result: %s: ";
 
     /**
      * Policy execution error message format.
@@ -154,6 +160,8 @@ public final class IrideServiceImpl implements IrideService {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
 
+        logPolicyExecutionResult(policy, result);
+
         return result;
     }
 
@@ -193,6 +201,8 @@ public final class IrideServiceImpl implements IrideService {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
 
+        logPolicyExecutionResult(policy, result);
+
         return result;
     }
 
@@ -218,6 +228,8 @@ public final class IrideServiceImpl implements IrideService {
         } catch (IOException | TransformerException e) {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
+
+        logPolicyExecutionResult(policy, result);
 
         return result;
     }
@@ -257,7 +269,7 @@ public final class IrideServiceImpl implements IrideService {
      * @see org.geoserver.security.iride.policy.PolicyEnforcerBase#getInfoPersonaInUseCase(org.geoserver.security.iride.entity.IrideIdentity, it.csi.iride2.policy.entity.UseCase)
      */
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public List<IrideInfoPersona> getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase) {
         List<IrideInfoPersona> result = null;
 
@@ -276,6 +288,8 @@ public final class IrideServiceImpl implements IrideService {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
 
+        logPolicyExecutionResult(policy, result);
+
         return result;
     }
 
@@ -290,6 +304,20 @@ public final class IrideServiceImpl implements IrideService {
     }
 
     // === PolicyEnforcerBase interface ===   END =============================
+
+    /**
+     * Log the <code>IRIDE</code> service "policy" execution result.
+     *
+     * @param policy the <code>IRIDE</code> service "policy"
+     * @param result the execution result
+     */
+    private static void logPolicyExecutionResult(IridePolicy policy, Object result) {
+        LOGGER.fine(String.format(
+            RESULT_MESSAGE_FORMAT,
+            policy.getServiceName(),
+            result instanceof Object[] ? Arrays.toString((Object[]) result) : result)
+        );
+    }
 
     /**
      *

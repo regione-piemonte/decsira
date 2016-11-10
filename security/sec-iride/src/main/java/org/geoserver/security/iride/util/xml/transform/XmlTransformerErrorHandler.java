@@ -30,7 +30,7 @@ import org.xml.sax.SAXParseException;
 
 /**
  * <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler.
- * <p>An {@link ErrorListener} and {@link ErrorHandler} implementation which logs warnings and errors,
+ * <p>An {@link ErrorHandler} and {@link ErrorListener} implementation which logs warnings and errors,
  * rethrowing the latter to discontinue the <code>XML</code> transformation.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
