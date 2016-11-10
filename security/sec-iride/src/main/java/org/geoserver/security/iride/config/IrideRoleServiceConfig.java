@@ -19,9 +19,8 @@
 package org.geoserver.security.iride.config;
 
 import org.geoserver.security.GeoServerRoleService;
-import org.geoserver.security.GeoServerUserGroupService;
-import org.geoserver.security.config.SecurityAuthProviderConfig;
 import org.geoserver.security.config.SecurityRoleServiceConfig;
+import org.geoserver.security.iride.IrideRoleService;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -31,7 +30,7 @@ import com.thoughtworks.xstream.XStream;
  * @author "Mauro Bartolomeoli - mauro.bartolomeoli@geo-solutions.it"
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleServiceConfig extends BaseIrideSecurityServiceConfig implements SecurityAuthProviderConfig, SecurityRoleServiceConfig {
+public final class IrideRoleServiceConfig extends BaseIrideSecurityServiceConfig implements SecurityRoleServiceConfig {
 
     private static final long serialVersionUID = -8931342487350680340L;
 
@@ -53,11 +52,6 @@ public final class IrideRoleServiceConfig extends BaseIrideSecurityServiceConfig
     private String fallbackRoleService;
 
     /**
-     * Name of the {@link GeoServerUserGroupService} to use.
-     */
-    private String userGroupServiceName;
-
-    /**
      * Constructor.
      */
     public IrideRoleServiceConfig() {
@@ -74,7 +68,6 @@ public final class IrideRoleServiceConfig extends BaseIrideSecurityServiceConfig
 
         this.adminRole            = other.getAdminRole();
         this.fallbackRoleService  = other.getFallbackRoleService();
-        this.userGroupServiceName = other.getUserGroupServiceName();
     }
 
     /**
@@ -153,30 +146,6 @@ public final class IrideRoleServiceConfig extends BaseIrideSecurityServiceConfig
     @Override
     public void setGroupAdminRoleName(String adminRoleName) {
         this.setAdminRole(adminRoleName);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.config.SecurityAuthProviderConfig#getUserGroupServiceName()
-     */
-    /**
-     * Return the name of the {@link GeoServerUserGroupService} to use.
-     */
-    @Override
-    public String getUserGroupServiceName() {
-        return this.userGroupServiceName;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.config.SecurityAuthProviderConfig#setUserGroupServiceName(java.lang.String)
-     */
-    /**
-     * Set the name of the {@link GeoServerUserGroupService} to use.
-     */
-    @Override
-    public void setUserGroupServiceName(String userGroupServiceName) {
-        this.userGroupServiceName = userGroupServiceName;
     }
 
 }

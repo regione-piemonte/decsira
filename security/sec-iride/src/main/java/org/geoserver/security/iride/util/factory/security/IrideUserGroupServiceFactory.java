@@ -35,8 +35,8 @@ public final class IrideUserGroupServiceFactory extends AbstractIrideSecuritySer
     protected final IrideUserGroupService newInstance() {
         final IrideUserGroupService irideUserGroupService = new IrideUserGroupService();
 
-        irideUserGroupService.setSecurityManager(this.getSecurityManager());
-        irideUserGroupService.setIrideService(this.getIrideService());
+        irideUserGroupService.setSecurityManager(this.securityManager);
+        irideUserGroupService.setIrideService(this.irideService);
 
         return irideUserGroupService;
     }

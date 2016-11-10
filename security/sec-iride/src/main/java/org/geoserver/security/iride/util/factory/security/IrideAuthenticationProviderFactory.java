@@ -58,7 +58,7 @@ public final class IrideAuthenticationProviderFactory extends AbstractIrideSecur
     protected final IrideAuthenticationProvider newInstance() {
         final IrideAuthenticationProvider irideAuthenticationProvider = new IrideAuthenticationProvider();
 
-        irideAuthenticationProvider.setSecurityManager(this.getSecurityManager());
+        irideAuthenticationProvider.setSecurityManager(this.securityManager);
         irideAuthenticationProvider.setDelegateAuthProviderFactory(this.delegateAuthProviderFactory);
 
         return irideAuthenticationProvider;

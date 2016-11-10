@@ -35,8 +35,8 @@ public final class IrideRoleServiceFactory extends AbstractIrideSecurityServiceF
     protected final IrideRoleService newInstance() {
         final IrideRoleService irideRoleService = new IrideRoleService();
 
-        irideRoleService.setSecurityManager(this.getSecurityManager());
-        irideRoleService.setIrideService(this.getIrideService());
+        irideRoleService.setSecurityManager(this.securityManager);
+        irideRoleService.setIrideService(this.irideService);
 
         return irideRoleService;
     }

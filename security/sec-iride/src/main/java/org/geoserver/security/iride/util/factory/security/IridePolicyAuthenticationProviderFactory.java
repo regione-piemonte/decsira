@@ -64,15 +64,15 @@ public final class IridePolicyAuthenticationProviderFactory extends AbstractIrid
         try {
             userGroupService = this.getSecurityManager().loadUserGroupService(this.userGroupServiceName);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Unable to load User/Group Service: " + this.userGroupServiceName, e);
+            throw new IllegalStateException("Unable to load User/Group Service: " + this.userGroupServiceName, e);
         }
         if (userGroupService == null) {
-            throw new IllegalArgumentException("Unable to load User/Group Service: " + this.userGroupServiceName);
+            throw new IllegalStateException("Unable to load User/Group Service: " + this.userGroupServiceName);
         }
 
         final IridePolicyAuthenticationProvider iridePolicyAuthenticationProvider = new IridePolicyAuthenticationProvider();
         iridePolicyAuthenticationProvider.setUserDetailsService(userGroupService);
-        iridePolicyAuthenticationProvider.setIrideService(this.getIrideService());
+        iridePolicyAuthenticationProvider.setIrideService(this.irideService);
 
         return iridePolicyAuthenticationProvider;
     }
