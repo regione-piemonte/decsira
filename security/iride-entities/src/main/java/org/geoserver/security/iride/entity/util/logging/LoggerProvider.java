@@ -16,12 +16,9 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.util.logging;
+package org.geoserver.security.iride.entity.util.logging;
 
 import java.util.logging.Logger;
-
-import org.geoserver.security.iride.service.api.PolicyEnforcerBase;
-import org.geoserver.security.iride.service.api.PolicyEnforcerHelper;
 import org.geotools.util.logging.Logging;
 
 /**
@@ -32,28 +29,10 @@ import org.geotools.util.logging.Logging;
 public enum LoggerProvider {
 
     /**
-     * {@link Logger} used by all <a href="http://docs.geoserver.org/latest/en/developer/programming-guide/security/index.html#security-services">Security Services</a>.
-     */
-    SECURITY(
-        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".security")
-    ),
-    /**
      * {@link Logger} used by all <code>IRIDE</code> entities (and related) objects.
      */
     ENTITY(
-        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".entity")
-    ),
-    /**
-     * {@link Logger} used by {@link PolicyEnforcerBase} and {@link PolicyEnforcerHelper} instances.
-     */
-    POLICY(
-        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".policy")
-    ),
-    /**
-     * {@link Logger} used by utility and/or helper classes.
-     */
-    UTIL(
-        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".util")
+        Logging.getLogger("org.geoserver.security.iride.entity")
     ),
     ;
 
@@ -78,27 +57,6 @@ public enum LoggerProvider {
      */
     public Logger getLogger() {
         return this.logger;
-    }
-
-    /**
-     * Constants used by {@link LoggerProvider}.
-     *
-     * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
-     */
-    private static final class Constants {
-
-        /**
-         * {@link Logger} base name.
-         */
-        static final String LOGGER_BASE_NAME = "org.geoserver.security.iride";
-
-        /**
-         * Constructor.
-         */
-        private Constants() {
-            /* NOP */
-        }
-
     }
 
 }
