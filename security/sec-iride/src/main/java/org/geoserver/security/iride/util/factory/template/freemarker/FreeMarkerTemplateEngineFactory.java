@@ -25,7 +25,7 @@ import org.geoserver.security.iride.util.template.impl.freemarker.FreeMarkerTemp
 import freemarker.template.Configuration;
 
 /**
- * <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation Factory.
+ * <a href="http://freemarker.org/"><a href="http://freemarker.org/"><code>FreeMarker</code></a></a> {@link TemplateEngine} implementation Factory.
  * <p>Useful for tests.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
@@ -33,20 +33,20 @@ import freemarker.template.Configuration;
 public class FreeMarkerTemplateEngineFactory extends AbstractFactory<FreeMarkerTemplateEngine> {
 
     /**
-     * <code>FreeMarker</code> Template {@link Configuration}.
+     * <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.
      */
     private Configuration templateConfiguration;
 
     /**
-     * <code>FreeMarker</code> template file extension, could be {@code null}.
+     * <a href="http://freemarker.org/"><code>FreeMarker</code></a> template file extension (could be {@code null}).
      */
     private String templateExtension;
 
     /**
      * Static factory method, useful for testing.
      *
-     * @param templateConfiguration <code>FreeMarker</code> Template {@link Configuration}
-     * @return a new <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation
+     * @param templateConfiguration <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}
+     * @return a new <a href="http://freemarker.org/"><a href="http://freemarker.org/"><code>FreeMarker</code></a></a> {@link TemplateEngine} implementation
      */
     public static FreeMarkerTemplateEngine createTemplateEngine(Configuration templateConfiguration) {
         return createTemplateEngine(templateConfiguration, null);
@@ -55,9 +55,9 @@ public class FreeMarkerTemplateEngineFactory extends AbstractFactory<FreeMarkerT
     /**
      * Static factory method, useful for testing.
      *
-     * @param templateConfiguration <code>FreeMarker</code> Template {@link Configuration}
-     * @param templateExtension <code>FreeMarker</code> template file extension, could be {@code null}
-     * @return a new <a href="http://freemarker.org/"><code>FreeMarker</code></a> {@link TemplateEngine} implementation
+     * @param templateConfiguration <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}
+     * @param templateExtension <a href="http://freemarker.org/"><code>FreeMarker</code></a> template file extension (could be {@code null})
+     * @return a new <a href="http://freemarker.org/"><a href="http://freemarker.org/"><code>FreeMarker</code></a></a> {@link TemplateEngine} implementation
      */
     public static FreeMarkerTemplateEngine createTemplateEngine(Configuration templateConfiguration, String templateExtension) {
         final FreeMarkerTemplateEngineFactory factory = new FreeMarkerTemplateEngineFactory();
@@ -68,16 +68,36 @@ public class FreeMarkerTemplateEngineFactory extends AbstractFactory<FreeMarkerT
     }
 
     /**
-     * Set the <code>FreeMarker</code> Template {@link Configuration}.
+     * Get the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.
      *
-     * @param templateConfiguration the <code>FreeMarker</code> Template {@link Configuration}
+	 * @return the the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}
+	 */
+	public final Configuration getTemplateConfiguration() {
+		return this.templateConfiguration;
+	}
+
+	/**
+     * Set the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}.
+     *
+     * @param templateConfiguration the <a href="http://freemarker.org/"><code>FreeMarker</code></a> Template {@link Configuration}
      */
     public final void setTemplateConfiguration(Configuration templateConfiguration) {
         this.templateConfiguration = templateConfiguration;
     }
 
     /**
-     * @param templateExtension the templateExtension to set
+     * Get the <a href="http://freemarker.org/"><code>FreeMarker</code></a> template file extension (could be {@code null}).
+     *
+	 * @return the <a href="http://freemarker.org/"><code>FreeMarker</code></a> template file extension (could be {@code null})
+	 */
+	public final String getTemplateExtension() {
+		return this.templateExtension;
+	}
+
+	/**
+	 * Set the <a href="http://freemarker.org/"><code>FreeMarker</code></a> template file extension (could be {@code null}).
+	 *
+     * @param templateExtension the <a href="http://freemarker.org/"><code>FreeMarker</code></a> template file extension (could be {@code null})
      */
     public final void setTemplateExtension(String templateExtension) {
         this.templateExtension = templateExtension;

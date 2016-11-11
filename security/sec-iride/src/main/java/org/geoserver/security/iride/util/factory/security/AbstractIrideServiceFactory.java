@@ -34,12 +34,12 @@ public abstract class AbstractIrideServiceFactory<T> extends AbstractFactory<T> 
     /**
      * <code>GeoServer</code> security manager.
      */
-    private GeoServerSecurityManager securityManager;
+    protected GeoServerSecurityManager securityManager;
 
     /**
      * <code>IRIDE</code> service "policies" enforcer instance.
      */
-    private IrideService irideService;
+    protected IrideService irideService;
 
     /**
      * Get the <code>IRIDE</code> service "policies" enforcer instance.
