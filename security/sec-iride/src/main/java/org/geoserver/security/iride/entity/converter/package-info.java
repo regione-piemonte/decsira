@@ -17,14 +17,11 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 /**
- * <code>IRIDE</code> <code>Digital Identity</code> entity helper classes.
- * <p>The helper classes are responsible for the following operations:
- * <ul>
- *   <li>Formatting ({@link org.geoserver.security.iride.entity.identity.IrideIdentityFormatter})</li>
- *   <li>Tokenization ({@link org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer})</li>
- *   <li>Validation ({@link org.geoserver.security.iride.entity.identity.IrideIdentityValidator})</li>
- * </ul>
+ * <code>IRIDE</code> entities {@link XStream} {@link Converter}.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-package org.geoserver.security.iride.entity.identity;
+package org.geoserver.security.iride.entity.converter;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;

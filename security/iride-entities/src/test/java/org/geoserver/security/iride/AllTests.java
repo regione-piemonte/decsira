@@ -16,26 +16,30 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-package org.geoserver.security.iride.entity.identity.token.value;
+package org.geoserver.security.iride;
 
-import org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer;
-import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
+import org.geoserver.security.iride.util.IrideIdentityValidityTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * <code>IRIDE</code> <code>Digital Identity</code> placeholder object for any missing token.
+ * Main <code>JUnit</code> Test Suite.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideIdentityMissingTokenValue extends IrideIdentityTokenValue {
+@RunWith(Suite.class)
+@SuiteClasses({
+	org.geoserver.security.iride.identity.AllTests.class,
+    IrideIdentityValidityTest.class,
+})
+public final class AllTests {
 
     /**
      * Constructor.
-     *
-     * @param token the <code>IRIDE</code> <code>Digital Identity</code> missing token
-     * @param value the candidate <code>IRIDE</code> <code>Digital Identity</code> string representation being tokenized by {@link IrideIdentityTokenizer}
      */
-    public IrideIdentityMissingTokenValue(IrideIdentityToken token, String value) {
-        super(token, value);
+    private AllTests() {
+        /* NOP */
     }
 
 }

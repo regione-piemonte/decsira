@@ -38,12 +38,6 @@ public enum LoggerProvider {
         Logging.getLogger(Constants.LOGGER_BASE_NAME + ".security")
     ),
     /**
-     * {@link Logger} used by all <code>IRIDE</code> entities (and related) objects.
-     */
-    ENTITY(
-        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".entity")
-    ),
-    /**
      * {@link Logger} used by {@link PolicyEnforcerBase} and {@link PolicyEnforcerHelper} instances.
      */
     POLICY(
