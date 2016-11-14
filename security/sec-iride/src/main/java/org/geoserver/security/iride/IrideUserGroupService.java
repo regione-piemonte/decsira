@@ -107,7 +107,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public GeoServerUser getUserByUsername(String username) throws IOException {
-        LOGGER.finer("User: " + username);
+        LOGGER.finer("Username: " + username);
 
         IrideGeoServerUser user = null;
 
