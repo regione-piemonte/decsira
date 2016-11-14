@@ -17,10 +17,61 @@ const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/sea
 require('../../assets/css/home.css');
 require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 
+const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
+
 const Mosaic = connect((state) => ({
      tiles: state.mosaic.tiles
  }))(require('../components/Mosaic'));
 
+const mapDispatchToPropsLinkMIB = (dispatch) => {
+    return {
+    openMetadataInfobox: () => {
+        // todo forse manca il load...
+        dispatch(loadMetadata());
+        dispatch(showBox());
+    }
+  };
+};
+
+const LinkToMetadataInfoBox = connect(
+    null,
+    mapDispatchToPropsLinkMIB
+    )(require('../components/LinkToMetadataInfoBox'));
+
+const mapStateToPropsMIB = (state) => {
+    return {
+      show: state.metadatainfobox.show,
+      openLegendPanel: state.metadatainfobox.openLegendPanel,
+      panelStyle: state.metadatainfobox.panelStyle,
+      title: state.metadatainfobox.title,
+      text: state.metadatainfobox.text,
+      numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
+      dataProvider: state.metadatainfobox.dataProvider,
+      urlWMS: state.metadatainfobox.urlWMS,
+      urlWFS: state.metadatainfobox.urlWFS,
+      urlLegend: state.metadatainfobox.urlLegend,
+      error: state.metadatainfobox.error
+  };
+};
+
+const mapDispatchToPropsMIB = (dispatch) => {
+    return {
+    loadLegend: (url, actualUrl) => {
+        if (actualUrl && actualUrl.length === 0) {
+            dispatch(loadLegends(url));
+        }
+        dispatch(toggleLegendBox());
+    },
+    closePanel: () => {
+        dispatch(hideBox());
+    }
+  };
+};
+
+const MetadataInfoBox = connect(
+    mapStateToPropsMIB,
+    mapDispatchToPropsMIB
+    )(require('../components/MetadataInfoBox'));
 
 const Home = () => (
      <div className="home">
@@ -128,7 +179,8 @@ const Home = () => (
 
 
             <Mosaic />
-
+            <LinkToMetadataInfoBox />
+            <MetadataInfoBox />
 
             <div className="container-fluid piattaforma">
              <div className="row-fluid">
