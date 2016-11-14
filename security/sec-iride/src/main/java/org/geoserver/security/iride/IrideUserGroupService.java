@@ -20,6 +20,7 @@ package org.geoserver.security.iride;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,39 +36,26 @@ import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
 import org.geoserver.security.iride.entity.IrideUseCase;
 import org.geoserver.security.iride.service.IrideService;
+import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
- * <code>GeoServer</code> user group security service, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
- * <p><code>IRIDE</code> user group security service is <em>read-only</em>, therefore <em>there is no support for {@link GeoServerUserGroupStore} usage</em>:
+ * <code>GeoServer</code> <code>IRIDE</code> <a href="http://docs.geoserver.org/stable/en/user/security/usergrouprole/usergroupservices.html">User/Group Service</a>,
+ * backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
+ * <p><code>IRIDE</code> User/Group Service is <em>read-only</em>, therefore <em>there is no support for {@link GeoServerUserGroupStore} usage</em>:
  * {@link #canCreateStore()} will return {@code false} and {@link #createStore()} will return {@code null}.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class IrideUserGroupService extends AbstractUserGroupService implements GeoServerUserGroupService {
+public class IrideUserGroupService extends AbstractUserGroupService implements GeoServerUserGroupService, IrideServiceAware {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER = LoggerProvider.SECURITY.getLogger();
-
-    /**
-     * <code>GeoServer</code> user property for associated {@link IrideIdentity} instance.
-     */
-    private static final String USER_PROPERTY_IRIDE_IDENTITY = "irideIdentity";
-
-    /**
-     * <code>GeoServer</code> user property for associated {@link IrideInfoPersona} instances, if any, expressed as a list.
-     * <p>An empty list property in the case there are no associated {@link IrideInfoPersona} instances.
-     * <p>Whichever the case, the list is <em>immutable</em>.
-     *
-     * @see ImmutableList
-     */
-    private static final String USER_PROPERTY_INFO_PERSONAE = "irideInfoPersonae";
 
     /**
      * {@link IrideUserGroupService} configuration object.
@@ -111,12 +99,6 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     }
 
     /*
-     * E' il "main" per eseguire l'autenticazione via IRIDE.
-     *  -> richiamare servizi per verificare IrideIdentity
-     *  ->      //      //    per recuperare IrideInfoPersona(s)
-     *  -> "assemblare" informazioni su istanza GeoServerUser
-     */
-    /*
      *
      * (non-Javadoc)
      * @see org.geoserver.security.impl.AbstractUserGroupService#getUserByUsername(java.lang.String)
@@ -125,33 +107,33 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     public GeoServerUser getUserByUsername(String username) throws IOException {
         LOGGER.info("User: " + username);
 
-        GeoServerUser user = null;
+        IrideGeoServerUser user = null;
 
         final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(username);
         if (irideIdentity == null) {
             // Houston? We have a problem...
         } else {
-            // A formallly valid IRIDE digital identity was given: collect the InfoPersona instances, if any
+            // A formally valid IRIDE digital identity was given: collect the InfoPersona instances, if any
             final IrideUseCase[] irideUseCases = this.getIrideService().findUseCasesForPersonaInApplication(
                 irideIdentity,
                 new IrideApplication(this.config.applicationName)
             );
 
-            final List<IrideInfoPersona> infoPersonae = Lists.newArrayList();
-            IrideInfoPersona infoPersona;
+            final Set<IrideInfoPersona> infoPersonae = Sets.newLinkedHashSet();
+            List<IrideInfoPersona> infoPersonaInUseCase;
             for (final IrideUseCase irideUseCase : irideUseCases) {
-                infoPersona = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
-                if (infoPersona != null) {
-                    infoPersonae.add(infoPersona);
+                infoPersonaInUseCase = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
+                if (infoPersonaInUseCase != null) {
+                    infoPersonae.addAll(infoPersonaInUseCase);
                 }
             }
 
             user = this.createUserObject(username, null, true);
-            user.getProperties().put(USER_PROPERTY_IRIDE_IDENTITY, irideIdentity);
-            user.getProperties().put(USER_PROPERTY_INFO_PERSONAE, ImmutableList.copyOf(infoPersonae));
+            user.setIrideIdentity(irideIdentity);
+            user.setInfoPersonae(infoPersonae);
         }
 
-        LOGGER.info("Retrieved User: " + user);
+        LOGGER.info("Retrieved IRIDE User: " + user);
 
         return user;
     }
@@ -160,8 +142,8 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      * @see org.geoserver.security.GeoserverUserGroupService#createUserObject(java.lang.String, java.lang.String, boolean)
      */
     @Override
-    public GeoServerUser createUserObject(String username, String password, boolean isEnabled) throws IOException {
-       final GeoServerUser user = new IrideGeoServerUser(username);
+    public IrideGeoServerUser createUserObject(String username, String password, boolean isEnabled) throws IOException {
+       final IrideGeoServerUser user = new IrideGeoServerUser(username);
        user.setEnabled(isEnabled);
        user.setPassword(password);
 

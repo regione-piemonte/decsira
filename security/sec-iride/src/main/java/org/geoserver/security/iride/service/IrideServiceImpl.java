@@ -21,6 +21,7 @@ package org.geoserver.security.iride.service;
 import static org.geoserver.security.iride.util.builder.util.IrideUrlBuilder.buildServerUrl;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,21 @@ public final class IrideServiceImpl implements IrideService {
      * {@link IrideUseCase} <code>IRIDE</code> policy request parameter.
      */
     private static final String IRIDE_USECASE_PARAM = "useCase";
+
+    /**
+     * {@link IrideIdentity} <code>IRIDE</code> policy request parameter.
+     */
+    private static final String IRIDE_AUTH_USERNAME_PARAM = "username";
+
+    /**
+     * {@link IrideUseCase} <code>IRIDE</code> policy request parameter.
+     */
+    private static final String IRIDE_AUTH_PASSWORD_PARAM = "password";
+
+    /**
+     * Policy execution result message format.
+     */
+    private static final String RESULT_MESSAGE_FORMAT = "Policy '%s' result: %s: ";
 
     /**
      * Policy execution error message format.
@@ -133,7 +149,7 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_APPLICATION_PARAM, application);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
                 @SuppressWarnings("unchecked")
                 final List<IrideRole> policyResult = (List<IrideRole>) this.handleResponse(policy, policyResponse);
@@ -143,6 +159,8 @@ public final class IrideServiceImpl implements IrideService {
         } catch (IOException | TransformerException e) {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
+
+        logPolicyExecutionResult(policy, result);
 
         return result;
     }
@@ -172,7 +190,7 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_APPLICATION_PARAM, application);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
                 @SuppressWarnings("unchecked")
                 final List<IrideUseCase> policyResult = (List<IrideUseCase>) this.handleResponse(policy, policyResponse);
@@ -183,6 +201,8 @@ public final class IrideServiceImpl implements IrideService {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
 
+        logPolicyExecutionResult(policy, result);
+
         return result;
     }
 
@@ -192,8 +212,26 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public IrideIdentity identificaUserPassword(String username, String password) {
-        // TODO: implement...
-        return null;
+        IrideIdentity result = null;
+
+        final IridePolicy policy = IridePolicy.IDENTIFICA_USER_PASSWORD;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_AUTH_USERNAME_PARAM, username);
+        params.put(IRIDE_AUTH_PASSWORD_PARAM, password);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                result = (IrideIdentity) this.handleResponse(policy, policyResponse);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
+        }
+
+        logPolicyExecutionResult(policy, result);
+
+        return result;
     }
 
     /*
@@ -230,9 +268,10 @@ public final class IrideServiceImpl implements IrideService {
      * (non-Javadoc)
      * @see org.geoserver.security.iride.policy.PolicyEnforcerBase#getInfoPersonaInUseCase(org.geoserver.security.iride.entity.IrideIdentity, it.csi.iride2.policy.entity.UseCase)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public IrideInfoPersona getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase) {
-        IrideInfoPersona result = null;
+    public List<IrideInfoPersona> getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase) {
+        List<IrideInfoPersona> result = null;
 
         final IridePolicy policy = IridePolicy.GET_INFO_PERSONA_IN_USE_CASE;
 
@@ -241,13 +280,15 @@ public final class IrideServiceImpl implements IrideService {
         params.put(IRIDE_USECASE_PARAM, useCase);
 
         try {
-            final String policyResponse = this.handleRequest(policy, this.serverURL, params);
+            final String policyResponse = this.handleRequest(policy, params);
             if (StringUtils.isNotBlank(policyResponse)) {
-                result = (IrideInfoPersona) this.handleResponse(policy, policyResponse);
+                result = (List<IrideInfoPersona>) this.handleResponse(policy, policyResponse);
             }
         } catch (IOException | TransformerException e) {
             LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
         }
+
+        logPolicyExecutionResult(policy, result);
 
         return result;
     }
@@ -265,6 +306,20 @@ public final class IrideServiceImpl implements IrideService {
     // === PolicyEnforcerBase interface ===   END =============================
 
     /**
+     * Log the <code>IRIDE</code> service "policy" execution result.
+     *
+     * @param policy the <code>IRIDE</code> service "policy"
+     * @param result the execution result
+     */
+    private static void logPolicyExecutionResult(IridePolicy policy, Object result) {
+        LOGGER.fine(String.format(
+            RESULT_MESSAGE_FORMAT,
+            policy.getServiceName(),
+            result instanceof Object[] ? Arrays.toString((Object[]) result) : result)
+        );
+    }
+
+    /**
      *
      * @param policy
      * @param serverURL
@@ -272,7 +327,7 @@ public final class IrideServiceImpl implements IrideService {
      * @return
      * @throws IOException
      */
-    private String handleRequest(IridePolicy policy, String serverURL, Map<String, Object> params) throws IOException {
+    private String handleRequest(IridePolicy policy, Map<String, Object> params) throws IOException {
         return this.getPolicyManager().getPolicyRequestHandler(policy).handleRequest(this.serverURL, params);
     }
 

@@ -49,8 +49,8 @@ public final class IdentificaUserPasswordTemplateCompilationTest extends Abstrac
         final String username = (String) this.getDataModel().get("username");
         final String password = (String) this.getDataModel().get("password");
 
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:identificaUserPassword/in0", equalTo(username)));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:identificaUserPassword/in1", equalTo(password)));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='identificaUserPassword']/*[local-name()='in0']", equalTo(username)));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='identificaUserPassword']/*[local-name()='in1']", equalTo(password)));
     }
 
     /*

@@ -50,20 +50,20 @@ public final class IsPersonaInRuoloTemplateCompilationTest extends AbstractIride
 
         final IrideIdentity irideIdentity = (IrideIdentity) this.getDataModel().get("irideIdentity");
 
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/codFiscale", equalTo(irideIdentity.getCodFiscale())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/nome", equalTo(irideIdentity.getNome())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/cognome", equalTo(irideIdentity.getCognome())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/idProvider", equalTo(irideIdentity.getIdProvider())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/timestamp", equalTo(irideIdentity.getTimestamp())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/livelloAutenticazione", equalTo(String.valueOf(irideIdentity.getLivelloAutenticazione()))));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/mac", equalTo(irideIdentity.getMac())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='codFiscale']", equalTo(irideIdentity.getCodFiscale())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='nome']", equalTo(irideIdentity.getNome())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='cognome']", equalTo(irideIdentity.getCognome())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='idProvider']", equalTo(irideIdentity.getIdProvider())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='timestamp']", equalTo(irideIdentity.getTimestamp())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='livelloAutenticazione']", equalTo(String.valueOf(irideIdentity.getLivelloAutenticazione()))));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='mac']", equalTo(irideIdentity.getMac())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in0']/*[local-name()='rappresentazioneInterna']", equalTo(irideIdentity.toInternalRepresentation())));
 
         final IrideRole role = (IrideRole) this.getDataModel().get("role");
 
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in1/codiceRuolo", equalTo(role.getCode())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in1/mnemonico", equalTo(role.toMnemonicRepresentation())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isPersonaInRuolo/in1/codiceDominio", equalTo(role.getDomain())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in1']/*[local-name()='codiceRuolo']", equalTo(role.getCode())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in1']/*[local-name()='mnemonico']", equalTo(role.toMnemonicRepresentation())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isPersonaInRuolo']/*[local-name()='in1']/*[local-name()='codiceDominio']", equalTo(role.getDomain())));
     }
 
     /*

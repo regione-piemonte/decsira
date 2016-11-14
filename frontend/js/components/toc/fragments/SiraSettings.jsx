@@ -65,13 +65,9 @@ const SiraSettings = React.createClass({
         return [ (<Glyphicon
                     style={glyphStyle}
                     key="toggle-featuregrid"
-                    glyph="tasks"
-                    onClick={this.props.toggleSiraControl}/>),
-                    (<Glyphicon
-                    style={glyphStyle}
-                    key="toggle-query"
-                    glyph="search"
-                    onClick={()=>this.props.expandFilterPanel(true)}/>)];
+                    glyph="th"
+                    onClick={this.props.toggleSiraControl}/>)
+                    ];
     },
     render() {
         const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && this.props.element.type === "wms";
@@ -83,7 +79,7 @@ const SiraSettings = React.createClass({
             {renderLegendTool ? (<Glyphicon
                 style={glyphStyle}
                 key="toggle-legned"
-                glyph="list"
+                glyph={renderLeg ? "adjust" : "list"}
                 onClick={this.toggleLegend}
             />) : (<span/>)}
             </div>);

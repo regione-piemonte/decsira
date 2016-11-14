@@ -18,63 +18,14 @@
  */
 package org.geoserver.security.iride.util.factory.security;
 
-import org.geoserver.security.GeoServerSecurityManager;
 import org.geoserver.security.impl.AbstractGeoServerSecurityService;
-import org.geoserver.security.iride.service.IrideService;
-import org.geoserver.security.iride.util.factory.AbstractFactory;
 
 /**
- *
- * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+ * Factory that creates a new, configured, {@link AbstractGeoServerSecurityService} instance,
+ * specialized in the context of <code>IRIDE</code>service.
  *
  * @param <T>
  */
-public abstract class AbstractIrideSecurityServiceFactory<T extends AbstractGeoServerSecurityService> extends AbstractFactory<T> {
-
-    /**
-     * <code>GeoServer</code> security manager.
-     */
-    private GeoServerSecurityManager securityManager;
-
-    /**
-     * <code>IRIDE</code> service "policies" enforcer instance.
-     */
-    private IrideService irideService;
-
-    /**
-     * Get the <code>IRIDE</code> service "policies" enforcer instance.
-     *
-     * @return the <code>IRIDE</code> service "policies" enforcer instance
-     */
-    public final IrideService getIrideService() {
-        return this.irideService;
-    }
-
-    /**
-     * Set the <code>IRIDE</code> service "policies" enforcer instance.
-     *
-     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
-     */
-    public final void setIrideService(IrideService irideService) {
-        this.irideService = irideService;
-    }
-
-    /**
-     * Get the <code>GeoServer</code> security manager.
-     *
-     * @return the <code>GeoServer</code> security manager
-     */
-    public final GeoServerSecurityManager getSecurityManager() {
-        return this.securityManager;
-    }
-
-    /**
-     * Set the <code>GeoServer</code> security manager.
-     *
-     * @param securityManager the <code>GeoServer</code> security manager
-     */
-    public final void setSecurityManager(GeoServerSecurityManager securityManager) {
-        this.securityManager = securityManager;
-    }
+public abstract class AbstractIrideSecurityServiceFactory<T extends AbstractGeoServerSecurityService> extends AbstractIrideServiceFactory<T> {
 
 }

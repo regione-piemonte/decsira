@@ -21,7 +21,7 @@ package org.geoserver.security.iride.util.factory.security;
 import org.geoserver.security.iride.IrideUserGroupService;
 
 /**
- * {@link IrideUserGroupService} Factory.
+ * Factory that creates a new, configured, {@link IrideUserGroupService} instance.
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
@@ -35,8 +35,8 @@ public final class IrideUserGroupServiceFactory extends AbstractIrideSecuritySer
     protected final IrideUserGroupService newInstance() {
         final IrideUserGroupService irideUserGroupService = new IrideUserGroupService();
 
-        irideUserGroupService.setSecurityManager(this.getSecurityManager());
-        irideUserGroupService.setIrideService(this.getIrideService());
+        irideUserGroupService.setSecurityManager(this.securityManager);
+        irideUserGroupService.setIrideService(this.irideService);
 
         return irideUserGroupService;
     }

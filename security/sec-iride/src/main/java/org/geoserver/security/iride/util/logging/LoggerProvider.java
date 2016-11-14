@@ -18,8 +18,6 @@
  */
 package org.geoserver.security.iride.util.logging;
 
-import static org.geoserver.security.iride.util.Constants.LOGGER_BASE_NAME;
-
 import java.util.logging.Logger;
 
 import org.geoserver.security.iride.service.api.PolicyEnforcerBase;
@@ -37,25 +35,19 @@ public enum LoggerProvider {
      * {@link Logger} used by all <a href="http://docs.geoserver.org/latest/en/developer/programming-guide/security/index.html#security-services">Security Services</a>.
      */
     SECURITY(
-        Logging.getLogger(LOGGER_BASE_NAME + ".security")
-    ),
-    /**
-     * {@link Logger} used by all <code>IRIDE</code> entities (and related) objects.
-     */
-    ENTITY(
-        Logging.getLogger(LOGGER_BASE_NAME + ".entity")
+        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".security")
     ),
     /**
      * {@link Logger} used by {@link PolicyEnforcerBase} and {@link PolicyEnforcerHelper} instances.
      */
     POLICY(
-        Logging.getLogger(LOGGER_BASE_NAME + ".policy")
+        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".policy")
     ),
     /**
      * {@link Logger} used by utility and/or helper classes.
      */
     UTIL(
-        Logging.getLogger(LOGGER_BASE_NAME + ".util")
+        Logging.getLogger(Constants.LOGGER_BASE_NAME + ".util")
     ),
     ;
 
@@ -81,4 +73,26 @@ public enum LoggerProvider {
     public Logger getLogger() {
         return this.logger;
     }
+
+    /**
+     * Constants used by {@link LoggerProvider}.
+     *
+     * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+     */
+    private static final class Constants {
+
+        /**
+         * {@link Logger} base name.
+         */
+        static final String LOGGER_BASE_NAME = "org.geoserver.security.iride";
+
+        /**
+         * Constructor.
+         */
+        private Constants() {
+            /* NOP */
+        }
+
+    }
+
 }

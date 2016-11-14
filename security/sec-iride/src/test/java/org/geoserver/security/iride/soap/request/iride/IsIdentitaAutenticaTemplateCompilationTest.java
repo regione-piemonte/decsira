@@ -49,14 +49,14 @@ public final class IsIdentitaAutenticaTemplateCompilationTest extends AbstractIr
 
         final IrideIdentity irideIdentity = (IrideIdentity) this.getDataModel().get("irideIdentity");
 
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/codFiscale", equalTo(irideIdentity.getCodFiscale())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/nome", equalTo(irideIdentity.getNome())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/cognome", equalTo(irideIdentity.getCognome())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/idProvider", equalTo(irideIdentity.getIdProvider())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/timestamp", equalTo(irideIdentity.getTimestamp())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/livelloAutenticazione", equalTo(String.valueOf(irideIdentity.getLivelloAutenticazione()))));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/mac", equalTo(irideIdentity.getMac())));
-        assertThat(result, hasXPath("/soapenv:Envelope/soapenv:Body/int:isIdentitaAutentica/in0/rappresentazioneInterna", equalTo(irideIdentity.toInternalRepresentation())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='codFiscale']", equalTo(irideIdentity.getCodFiscale())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='nome']", equalTo(irideIdentity.getNome())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='cognome']", equalTo(irideIdentity.getCognome())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='idProvider']", equalTo(irideIdentity.getIdProvider())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='timestamp']", equalTo(irideIdentity.getTimestamp())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='livelloAutenticazione']", equalTo(String.valueOf(irideIdentity.getLivelloAutenticazione()))));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='mac']", equalTo(irideIdentity.getMac())));
+        assertThat(result, hasXPath("/*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='isIdentitaAutentica']/*[local-name()='in0']/*[local-name()='rappresentazioneInterna']", equalTo(irideIdentity.toInternalRepresentation())));
     }
 
     /*

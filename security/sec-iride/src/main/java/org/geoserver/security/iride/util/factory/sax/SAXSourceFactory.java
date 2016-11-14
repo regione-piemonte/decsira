@@ -20,15 +20,18 @@ package org.geoserver.security.iride.util.factory.sax;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.logging.Logger;
 
+import javax.xml.transform.ErrorListener;
 import javax.xml.transform.sax.SAXSource;
 
 import org.geoserver.security.iride.util.factory.AbstractFactory;
-import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.geoserver.security.iride.util.xml.transform.XmlTransformerErrorHandler;
 import org.springframework.core.io.Resource;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * {@link SAXSource} Factory, specialized to create {@link SAXSource} instances reading from a Spring {@link Resource} for an <code>XML</code> source.
@@ -40,14 +43,9 @@ import org.xml.sax.XMLReader;
 public class SAXSourceFactory extends AbstractFactory<SAXSource> {
 
     /**
-     * Logger.
+     * <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance.
      */
-    private static final Logger LOGGER = LoggerProvider.UTIL.getLogger();
-
-    /**
-     * <code>SAX</code> {@link XMLReader} istance.
-     */
-    private XMLReader xmlReader;
+    private XmlTransformerErrorHandler errorHandler;
 
     /**
      * Spring {@link Resource} for an <code>XML</code> source.
@@ -55,7 +53,27 @@ public class SAXSourceFactory extends AbstractFactory<SAXSource> {
     private Resource resource;
 
     /**
-     * Creates a SAX <code>InputSource</code> from the given resource.
+     * Creates a <code>SAX</code> {@link XMLReader}, with the given error handler.
+     * <p>The error handler, implements both the {@link ErrorHandler} and {@link ErrorListener} interfaces.
+     *
+     * @param errorHandler the given error handler
+     * @return the <code>SAX</code> {@link XMLReader}, or {@code null} if an error occurs during {@link XMLReader} creation
+     */
+    private static XMLReader createXmlReader(XmlTransformerErrorHandler errorHandler) {
+        try {
+            XMLReader xmlReader = XMLReaderFactory.createXMLReader();
+            xmlReader.setErrorHandler(errorHandler);
+
+            return xmlReader;
+        } catch (SAXException e) {
+            LOGGER.warning("SAX XMLReader creation error: " + e.getMessage());
+
+            return null;
+        }
+    }
+
+    /**
+     * Creates a <code>SAX</code> {@link InputSource} from the given resource.
      * <p>Sets the system identifier to the resource's <code>URL</code>, if available.
      *
      * @param resource the given resource
@@ -83,19 +101,37 @@ public class SAXSourceFactory extends AbstractFactory<SAXSource> {
         try {
             return resource.getURL().toURI().toString();
         } catch (IOException | URISyntaxException e) {
-            LOGGER.severe(String.format("Could not get System ID from [%s], error: %s", resource, e.getMessage()));
+            LOGGER.warning(String.format("Could not get System ID from [%s], error: %s", resource, e.getMessage()));
 
             return null;
         }
     }
 
     /**
-     * Set the <code>SAX</code> {@link XMLReader}.
+     * Get the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance.
      *
-     * @param xmlReader the <code>SAX</code> {@link XMLReader}
+     * @return the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance
      */
-    public final void setXmlReader(XMLReader xmlReader) {
-        this.xmlReader = xmlReader;
+    public final XmlTransformerErrorHandler getErrorHandler() {
+        return this.errorHandler;
+    }
+
+    /**
+     * Set the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance.
+     *
+     * @param errorHandler the <a href="https://en.wikipedia.org/wiki/XSLT"><code>XML</code> transformation</a> processor error handler instance
+     */
+    public final void setErrorHandler(XmlTransformerErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
+
+    /**
+     * Get the Spring {@link Resource} for an <code>XML</code> source.
+     *
+     * @return the Spring {@link Resource} for an <code>XML</code> source
+     */
+    public final Resource getResource() {
+        return this.resource;
     }
 
     /**
@@ -107,19 +143,22 @@ public class SAXSourceFactory extends AbstractFactory<SAXSource> {
         this.resource = resource;
     }
 
+    /**
+     * @throws IllegalStateException if any error occurs opening the input to the <code>SAX</code> source.
+     */
     /* (non-Javadoc)
      * @see org.geoserver.security.iride.util.factory.AbstractFactory#newInstance()
      */
     @Override
-    protected SAXSource newInstance() {
+    protected final SAXSource newInstance() {
         try {
             /*
              * Each new SAXSource instance MUST have a fresh, new XMLReader instance as well,
              * or else null (a new XMLReader will be instantiated by JAXP under the hood).
              */
-            return new SAXSource(this.xmlReader, createInputSource(this.resource));
+            return new SAXSource(createXmlReader(this.errorHandler), createInputSource(this.resource));
         } catch (IOException e) {
-            return null;
+            throw new IllegalStateException(e);
         }
     }
 

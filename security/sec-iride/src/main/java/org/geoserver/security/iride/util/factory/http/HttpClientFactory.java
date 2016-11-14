@@ -60,6 +60,16 @@ public class HttpClientFactory extends AbstractFactory<HttpClient> {
     }
 
     /**
+     * Get the timeout (in milliseconds) for waiting until a connection is established.
+     * A value of zero means that no timeout is used.
+     *
+     * @return the the timeout (in milliseconds) for waiting until a connection is established.
+     */
+    public final Integer getConnectionTimeout() {
+        return this.connectionTimeout;
+    }
+
+    /**
      * Set the timeout (in milliseconds) for waiting until a connection is established.
      * A value of zero means that no timeout is used.
      *
@@ -70,10 +80,20 @@ public class HttpClientFactory extends AbstractFactory<HttpClient> {
     }
 
     /**
-     * Set the socket timeout (<code>SO_TIMEOUT</code>)(in milliseconds) for waiting data.
+     * The socket timeout <code>SO_TIMEOUT</code> (in milliseconds) for waiting data.
      * A value of zero means that no timeout is used.
      *
-     * @param socketTimeout the default socket timeout (<code>SO_TIMEOUT</code>)(in milliseconds) for waiting data
+     * @return the socket timeout <code>SO_TIMEOUT</code> (in milliseconds) for waiting data.
+     */
+    public final Integer getSocketTimeout() {
+        return this.socketTimeout;
+    }
+
+    /**
+     * Set the socket timeout <code>SO_TIMEOUT</code> (in milliseconds) for waiting data.
+     * A value of zero means that no timeout is used.
+     *
+     * @param socketTimeout the default socket timeout <code>SO_TIMEOUT</code> (in milliseconds) for waiting data
      */
     public final void setSocketTimeout(Integer socketTimeout) {
         this.socketTimeout = socketTimeout;

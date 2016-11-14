@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.geoserver.config.util.XStreamPersister;
+import org.geoserver.security.GeoServerAuthenticationProvider;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerSecurityProvider;
 import org.geoserver.security.GeoServerUserGroupService;
@@ -29,6 +30,7 @@ import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.iride.config.IrideAuthenticationProviderConfig;
 import org.geoserver.security.iride.config.IrideRoleServiceConfig;
 import org.geoserver.security.iride.config.IrideUserGroupServiceConfig;
+import org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
@@ -54,25 +56,32 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     private static final String CONFIG_MESSAGE_PATTERN = "Configuring alias %s for %s instance";
 
     /**
+     * Factory that creates a new, configured, {@link IrideAuthenticationProviderFactory} instance.
+     */
+    private final IrideAuthenticationProviderFactory authenticationProviderFactory;
+
+    /**
      * Factory that creates a new, configured, {@link IrideRoleService} instance.
      */
-    private final IrideRoleServiceFactory irideRoleServiceFactory;
+    private final IrideRoleServiceFactory roleServiceFactory;
 
     /**
      * Factory that creates a new, configured, {@link IrideUserGroupService} instance.
      */
-    private final IrideUserGroupServiceFactory irideUserGroupServiceFactory;
+    private final IrideUserGroupServiceFactory userGroupServiceFactory;
 
     /**
      * Constructor.
      *
-     * @param irideRoleServiceFactory Factory that creates a new, configured, {@link IrideRoleService} instance
-     * @param irideUserGroupServiceFactory Factory that creates a new, configured, {@link IrideUserGroupService} instance.
-     * @throws NullPointerException if any one of the two factories is {@code null}
+     * @param authenticationProviderFactory Factory that creates a new, configured, {@link IrideAuthenticationProviderFactory} instance
+     * @param roleServiceFactory Factory that creates a new, configured, {@link IrideRoleService} instance
+     * @param userGroupServiceFactory Factory that creates a new, configured, {@link IrideUserGroupService} instance.
+     * @throws NullPointerException if any one of the factories is {@code null}
      */
-    public IrideSecurityProvider(IrideRoleServiceFactory irideRoleServiceFactory, IrideUserGroupServiceFactory irideUserGroupServiceFactory) {
-        this.irideRoleServiceFactory      = Preconditions.checkNotNull(irideRoleServiceFactory);
-        this.irideUserGroupServiceFactory = Preconditions.checkNotNull(irideUserGroupServiceFactory);
+    public IrideSecurityProvider(IrideAuthenticationProviderFactory authenticationProviderFactory, IrideRoleServiceFactory roleServiceFactory, IrideUserGroupServiceFactory userGroupServiceFactory) {
+        this.authenticationProviderFactory = Preconditions.checkNotNull(authenticationProviderFactory);
+        this.roleServiceFactory            = Preconditions.checkNotNull(roleServiceFactory);
+        this.userGroupServiceFactory       = Preconditions.checkNotNull(userGroupServiceFactory);
     }
 
     /*
@@ -92,6 +101,33 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
 
     /*
      * (non-Javadoc)
+     * @see org.geoserver.security.GeoServerSecurityProvider#getAuthenticationProviderClass()
+     */
+    @Override
+    public Class<? extends GeoServerAuthenticationProvider> getAuthenticationProviderClass() {
+        return IrideAuthenticationProvider.class;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.geoserver.security.GeoServerSecurityProvider#createAuthenticationProvider(org.geoserver.security.config.SecurityNamedServiceConfig)
+     */
+    @Override
+    public GeoServerAuthenticationProvider createAuthenticationProvider(SecurityNamedServiceConfig config) {
+        final IrideAuthenticationProvider provider = this.authenticationProviderFactory.create();
+        try {
+            provider.initializeFromConfig(config);
+        } catch (IOException e) {
+            throw new IllegalStateException("IRIDE Authentication Provider initialization failed", e);
+        }
+
+        LOGGER.info("Initialized IRIDE Authentication Provider");
+
+        return provider;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see org.geoserver.security.GeoServerSecurityProvider#getRoleServiceClass()
      */
     @Override
@@ -105,7 +141,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
-        final IrideRoleService service = this.irideRoleServiceFactory.create();
+        final IrideRoleService service = this.roleServiceFactory.create();
         service.initializeFromConfig((IrideRoleServiceConfig) config);
 
         LOGGER.info("Initialized IRIDE Role Service");
@@ -128,7 +164,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public GeoServerUserGroupService createUserGroupService(SecurityNamedServiceConfig config) throws IOException {
-        final IrideUserGroupService service = this.irideUserGroupServiceFactory.create();
+        final IrideUserGroupService service = this.userGroupServiceFactory.create();
         service.initializeFromConfig((IrideUserGroupServiceConfig) config);
 
         LOGGER.info("Initialized IRIDE User Group Service");

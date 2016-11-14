@@ -13,6 +13,7 @@ const SideQueryPanel = require('../components/SideQueryPanel');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
 const {expandFilterPanel} = require('../actions/siradec');
+const Resizable = require('react-resizable').Resizable;
 
 require('../../assets/css/sira.css');
 
@@ -30,7 +31,10 @@ const SidePanel = React.createClass({
         messages: React.PropTypes.object
     },
     getInitialState: function() {
-        return {width: 600};
+        return {
+            width: 600,
+            boxwidth: 600
+        };
     },
     getDefaultProps() {
         return {
@@ -55,12 +59,20 @@ const SidePanel = React.createClass({
             this.props.changeMapStyle(style, "sirasidepanel");
         }
     },
+    onResize(event, obj) {
+        const {size} = obj;
+        this.setState({boxwidth: size.width});
+    },
+    onResizeStop(event, obj) {
+        const {size} = obj;
+        this.setState({width: size.width, boxwidth: size.width});
+        this.props.changeMapStyle({left: size.width, width: `calc(100% - ${size.width}px)`}, "sirasidepanel");
+
+    },
     renderQueryPanel() {
         return (<SideQueryPanel
                     withMap={this.props.withMap}
-                    params={{
-                        authkey: this.props.auth.authkey
-                    }}
+                    params={this.props.auth}
                     toggleControl={this.props.expandFilterPanel.bind(null, false)}
                     />);
     },
@@ -68,20 +80,36 @@ const SidePanel = React.createClass({
         return (<SideFeatureGrid
             withMap={this.props.withMap}
             initWidth={this.state.width}
-            params={{authkey: this.props.auth.authkey}}
+            params={this.props.auth}
             profile={this.props.profile}/>);
     },
     renderContent() {
+        let comp;
         if (this.props.filterPanelExpanded) {
-            return this.renderQueryPanel();
+            comp = this.renderQueryPanel();
         }else if (this.props.gridExpanded) {
-            return this.renderGrid();
+            comp = this.renderGrid();
+        }else {
+            comp = (<div/>);
         }
-        return (<div/>);
+        return (
+            <Resizable
+            draggableOpts={{grid: [10, 0]}}
+            onResize={this.onResize}
+            width={this.state.boxwidth}
+            height={100}
+            onResizeStop={this.onResizeStop}
+            minConstraints={[400]}
+            className="box">
+                <div className="box" style={{width: `${this.state.boxwidth}px`, height: "100%"}}>
+                {comp}
+                </div>
+            </Resizable>);
     },
     render() {
         const show = this.props.filterPanelExpanded || this.props.gridExpanded;
         return (
+
             <Sidebar
                 open={show}
                 sidebar={this.renderContent()}
@@ -89,7 +117,8 @@ const SidePanel = React.createClass({
                         sidebar: {
                             backgroundColor: 'white',
                             zIndex: 1024,
-                            width: this.state.width
+                            width: this.state.boxwidth,
+                            overflowX: 'hidden'
                         },
                         overlay: {
                             zIndex: 1023,
@@ -103,7 +132,9 @@ const SidePanel = React.createClass({
                     }}
                 >
                 <div/>
-            </Sidebar>);
+            </Sidebar>
+
+            );
     }
 });
 module.exports = connect((state) => {

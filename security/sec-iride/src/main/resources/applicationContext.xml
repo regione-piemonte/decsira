@@ -12,18 +12,27 @@
 
     <bean id="irideSecurityProvider" class="org.geoserver.security.iride.IrideSecurityProvider">
         <constructor-arg index="0">
-            <bean class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
-		          p:securityManager-ref="geoServerSecurityManager"
-		          p:irideService-ref="irideService"
-            />
+            <bean class="org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory"
+		          parent="geoServerSecurityManagerBean">
+                <property name="delegateAuthProviderFactory">
+		            <bean class="org.geoserver.security.iride.util.factory.security.IridePolicyAuthenticationProviderFactory"
+		                  parent="irideServiceBean" />
+                </property>
+            </bean>
         </constructor-arg>
         <constructor-arg index="1">
+            <bean class="org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory"
+		          parent="irideServiceBean" />
+        </constructor-arg>
+        <constructor-arg index="2">
             <bean class="org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory"
-		          p:securityManager-ref="geoServerSecurityManager"
-		          p:irideService-ref="irideService"
-            />
+		          parent="irideServiceBean" />
         </constructor-arg>
     </bean>
+
+    <bean id="geoServerSecurityManagerBean" abstract="true" p:securityManager-ref="geoServerSecurityManager" />
+
+    <bean id="irideServiceBean" abstract="true" parent="geoServerSecurityManagerBean" p:irideService-ref="irideService" />
 
     <!-- === IrideSecurityProvider ===   END === -->
 
@@ -98,10 +107,10 @@
                 <!-- Base Policies -->
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_RUOLI_FOR_PERSONA_IN_APPLICATION</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/findRuoliForPersonaInApplication.xsl"
                             />
                         </util:set>
@@ -109,10 +118,10 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_RUOLI_FOR_PERSONA_IN_USE_CASE</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/findRuoliForPersonaInUseCase.xsl"
                             />
                         </util:set>
@@ -120,10 +129,10 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">FIND_USE_CASES_FOR_PERSONA_IN_APPLICATION</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/findUseCasesForPersonaInApplication.xsl"
                             />
                         </util:set>
@@ -131,10 +140,10 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IDENTIFICA_USER_PASSWORD</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/identificaUserPassword.xsl"
                             />
                         </util:set>
@@ -142,10 +151,10 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_IDENTITA_AUTENTICA</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/isIdentitaAutentica.xsl"
                             />
                         </util:set>
@@ -153,10 +162,10 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_PERSONA_AUTORIZZATA_IN_USE_CASE</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/isPersonaAutorizzataInUseCase.xsl"
                             />
                         </util:set>
@@ -164,10 +173,10 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">IS_PERSONA_IN_RUOLO</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/isPersonaInRuolo.xsl"
                             />
                         </util:set>
@@ -175,14 +184,14 @@
                 </bean>
                 <bean class="org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler" parent="abstractIridePolicyResponseHandler">
                     <constructor-arg><value type="org.geoserver.security.iride.service.policy.IridePolicy">GET_INFO_PERSONA_IN_USE_CASE</value></constructor-arg>
-                    <property name="transformations">
+                    <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/getInfoPersonaInUseCase.xsl"
                             />
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactoryBean"
+                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/getInfoPersonaInUseCaseReturn.xsl"
                             />
                         </util:set>
@@ -217,7 +226,7 @@
     <bean id="templateEngine"
           class="org.geoserver.security.iride.util.template.impl.freemarker.FreeMarkerTemplateEngine"
           p:templateConfiguration-ref="templateConfiguration"
-          p:templateExtension="xml"
+          p:templateExtension="ftl"
     />
 
     <!-- === TemplateEngine ===   END === -->
@@ -253,19 +262,11 @@
 
     <!-- === XmlTransformerErrorHandler ===   END === -->
 
-    <!-- === XMLReader === BEGIN === -->
-
-    <bean id="xmlReader" class="org.geoserver.security.iride.util.factory.sax.XMLReaderFactoryBean"
-        p:errorHandler-ref="errorHandler"
-    />
-
-    <!-- === XMLReader ===   END === -->
-
     <!-- === SAXSource === BEGIN === -->
 
     <bean id="abstractSAXSourceFactory"
           abstract="true"
-          p:xmlReader-ref="xmlReader"
+          p:errorHandler-ref="errorHandler"
     />
 
     <!-- === SAXSource ===   END === -->

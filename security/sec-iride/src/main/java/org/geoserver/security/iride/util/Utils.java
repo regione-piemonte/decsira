@@ -18,15 +18,7 @@
  */
 package org.geoserver.security.iride.util;
 
-import java.util.Arrays;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.SystemUtils;
-import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
 
 /**
  * <code>IRIDE</code> <code>Digital Identity</code> utilities.
@@ -40,60 +32,6 @@ public final class Utils {
      */
     private Utils() {
         /* NOP */
-    }
-
-    /**
-     *
-     * @param array
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T[] defaultToEmpty(T[] array) {
-        return (T[]) ArrayUtils.nullToEmpty(array);
-    }
-
-    /**
-     *
-     * @param invalidTokenValues
-     * @return
-     */
-    public static String toString(IrideIdentityInvalidTokenValue... invalidTokenValues) {
-        return toString(Constants.INVALID_TOKENS_SPECIFIC_EXCEPTION_MESSAGE, invalidTokenValues);
-    }
-
-    /**
-     *
-     * @param invalidTokenValuesMessageTemplate
-     * @param invalidTokenValues
-     * @return
-     */
-    public static String toString(final String invalidTokenValuesMessageTemplate, IrideIdentityInvalidTokenValue... invalidTokenValues) {
-        return StringUtils.join(
-            CollectionUtils.collect(
-                Arrays.asList(defaultToEmpty(invalidTokenValues)),
-                new Transformer() {
-                    /*
-                     * (non-Javadoc)
-                     * @see org.apache.commons.collections.Transformer#transform(java.lang.Object)
-                     */
-                    @Override
-                    public String transform(Object input) {
-                        if (input == null) {
-                            return "";
-                        } else {
-                            final IrideIdentityInvalidTokenValue invalidToken = (IrideIdentityInvalidTokenValue) input;
-
-                            return String.format(
-                                invalidTokenValuesMessageTemplate,
-                                invalidToken.getToken(),
-                                String.valueOf(invalidToken.getValue())
-                            );
-                        }
-                    }
-                }
-            ),
-            SystemUtils.LINE_SEPARATOR
-        );
     }
 
     /**

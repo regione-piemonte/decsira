@@ -18,6 +18,8 @@
  */
 package org.geoserver.security.iride.service.api;
 
+import java.util.List;
+
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
@@ -91,7 +93,7 @@ public interface PolicyEnforcerBase {
      * @param useCase
      * @return
      */
-    IrideInfoPersona getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase);
+    List<IrideInfoPersona> getInfoPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase);
 
     /**
      *
