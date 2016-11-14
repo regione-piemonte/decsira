@@ -199,7 +199,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
         try {
             irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
         } catch (IrideIdentityTokenizationException e) {
-            LOGGER.warning("IRIDE Identity tokenization error: " + e.getMessage());
+            LOGGER.fine("IRIDE Identity tokenization error: " + e.getMessage());
         }
 
         return irideIdentity;
@@ -227,12 +227,12 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
             if (ArrayUtils.isEmpty(invalidTokens)) {
                 return true;
             } else {
-                LOGGER.warning(Utils.toString(invalidTokens));
+                LOGGER.fine(Utils.toString(invalidTokens));
 
                 return false;
             }
         } catch (IrideIdentityTokenizationException e) {
-            LOGGER.warning("IRIDE Identity tokenization error: " + e.getMessage());
+            LOGGER.fine("IRIDE Identity tokenization error: " + e.getMessage());
 
             return false;
         }

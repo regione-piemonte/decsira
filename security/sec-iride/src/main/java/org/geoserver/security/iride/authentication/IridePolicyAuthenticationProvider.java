@@ -73,6 +73,7 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
      *
      * @return the <code>IRIDE</code> service "policies" enforcer instance
      */
+    @Override
     public IrideService getIrideService() {
         return this.irideService;
     }
@@ -82,6 +83,7 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
      *
      * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
      */
+    @Override
     public void setIrideService(IrideService irideService) {
         this.irideService = irideService;
     }

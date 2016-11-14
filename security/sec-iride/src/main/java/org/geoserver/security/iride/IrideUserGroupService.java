@@ -70,6 +70,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     /**
      * @return the irideService
      */
+    @Override
     public IrideService getIrideService() {
         return this.irideService;
     }
@@ -77,6 +78,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     /**
      * @param irideService the irideService to set
      */
+    @Override
     public void setIrideService(IrideService irideService) {
         this.irideService = irideService;
     }
@@ -87,7 +89,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(Level.INFO,
+        LOGGER.log(Level.CONFIG,
             "Initializing {0} with configuration object: \n\t {1}",
             new Object[] { this.getClass().getSimpleName(), config }
         );
@@ -105,7 +107,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public GeoServerUser getUserByUsername(String username) throws IOException {
-        LOGGER.info("User: " + username);
+        LOGGER.finer("User: " + username);
 
         IrideGeoServerUser user = null;
 
@@ -133,7 +135,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
             user.setInfoPersonae(infoPersonae);
         }
 
-        LOGGER.info("Retrieved IRIDE User: " + user);
+        LOGGER.fine("Retrieved IRIDE User: " + user);
 
         return user;
     }
