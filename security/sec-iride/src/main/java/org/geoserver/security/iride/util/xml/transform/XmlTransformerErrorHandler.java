@@ -48,7 +48,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void warning(SAXParseException exception) throws SAXException {
-        LOGGER.severe(exception.toString());
+        LOGGER.fine(exception.toString());
     }
 
     /* (non-Javadoc)
@@ -65,7 +65,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void error(SAXParseException exception) throws SAXException {
-        LOGGER.severe(exception.toString());
+        LOGGER.warning(exception.toString());
     }
 
     /* (non-Javadoc)
@@ -73,7 +73,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void error(TransformerException exception) throws TransformerException {
-        LOGGER.severe(ErrorHandlerUtils.getErrorMessage(exception));
+        LOGGER.warning(ErrorHandlerUtils.getErrorMessage(exception));
     }
 
     /*

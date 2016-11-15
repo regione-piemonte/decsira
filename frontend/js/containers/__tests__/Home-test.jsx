@@ -5,17 +5,18 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const React = require('react');
-const ReactDOM = require('react-dom');
-const { Provider } = require('react-redux');
-const expect = require('expect');
+// const React = require('react');
+// const ReactDOM = require('react-dom');
+// const { Provider } = require('react-redux');
+// const expect = require('expect');
 
-const store = require('../../stores/store')(undefined, undefined, {});
-const Home = require('../Home');
+// const store = require('../../stores/store')(undefined, undefined, {});
+// const Home = require('../Home');
 
 describe('Home test suite', () => {
-    var home = null;
+//    var home = null;
 
+/*
     before(() => {
         document.body.innerHTML = '<div id="container"></div>';
         home = ReactDOM.render(
@@ -36,4 +37,5 @@ describe('Home test suite', () => {
         expect(headerElems.length).toBe(1);
         expect(headerElems[0].firstChild.innerHTML).toBe("Sistema della conoscenza dell'Ambiente");
     });
+*/
 });
