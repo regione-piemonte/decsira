@@ -59,7 +59,8 @@ const NoMap = React.createClass({
         setProfile: React.PropTypes.func,
         onLoadFeatureTypeConfig: React.PropTypes.func,
         expandFilterPanel: React.PropTypes.func,
-        configLoaded: React.PropTypes.bool
+        configLoaded: React.PropTypes.bool,
+        featureType: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -74,13 +75,13 @@ const NoMap = React.createClass({
     componentDidMount() {
         if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
             this.props.onLoadFeatureTypeConfig(
-                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey});
+                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey}, this.props.featureType, true);
         }
     },
     componentWillReceiveProps(props) {
         let fturl = props.featureTypeConfigUrl;
         if (fturl !== this.props.featureTypeConfigUrl) {
-            this.props.onLoadFeatureTypeConfig(url, {authkey: authParams[this.props.params.profile].authkey});
+            this.props.onLoadFeatureTypeConfig(fturl, {authkey: authParams[this.props.params.profile].authkey}, this.props.featureType, true);
         }
     },
     render() {
@@ -105,8 +106,9 @@ module.exports = connect((state) => {
         mode: 'desktop',
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
+        featureType: state.siradec && state.siradec.featureType,
         featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
-        configLoaded: state.siradec && state.siradec.card ? true : false
+        configLoaded: state.siradec && state.siradec[state.siradec.activeFeatureType] && state.siradec[state.siradec.activeFeatureType].card ? true : false
         // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {

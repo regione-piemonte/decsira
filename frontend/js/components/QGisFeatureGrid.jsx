@@ -29,12 +29,14 @@ const {
 require('react-resizable/css/styles.css');
 require('./SiraFeatureGrid.css');
 
-module.exports = connect((state) => ({
+module.exports = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    return {
     open: state.siraControls.grid,
     detailOpen: state.siraControls.detail,
-    detailsConfig: state.siradec && state.siradec.card || {},
+    detailsConfig: activeConfig && activeConfig.card || {},
     columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
-    attributes: state.siradec.attributes,
+    attributes: activeConfig.attributes,
     features: state.grid && state.grid.data || [],
     totalFeatures: state.grid.totalFeatures,
     map: (state.map && state.map) || (state.config && state.config.map),
@@ -43,10 +45,10 @@ module.exports = connect((state) => ({
     groupFields: state.queryform.groupFields,
     filterFields: state.queryform.filterFields,
     spatialField: state.queryform.spatialField,
-    featureTypeName: state.siradec.featureTypeName,
+    featureTypeName: activeConfig.featureTypeName,
     searchUrl: state.queryform.searchUrl,
-    dataSourceOptions: state.grid.dataSourceOptions
-}), {
+    dataSourceOptions: state.grid.dataSourceOptions};
+}, {
     onDetail: loadCardTemplate,
     onShowDetail: toggleSiraControl.bind(null, 'detail'),
     toggleSiraControl: toggleSiraControl.bind(null, 'grid'),

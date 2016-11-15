@@ -303,18 +303,19 @@ const SideQueryPanel = React.createClass({
 });
 
 module.exports = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         // SiraQueryPanel prop
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
-        featureTypeName: state.siradec.featureTypeName,
-        featureTypeNameLabel: state.siradec.featureTypeNameLabel,
+        featureTypeName: activeConfig.featureTypeName,
+        featureTypeNameLabel: activeConfig.featureTypeNameLabel,
 
         // QueryBuilder props
         groupLevels: state.queryform.groupLevels,
         groupFields: state.queryform.groupFields,
         filterFields: state.queryform.filterFields,
-        attributes: state.siradec.attributes,
+        attributes: activeConfig.attributes,
         spatialField: state.queryform.spatialField,
         showDetailsPanel: state.queryform.showDetailsPanel,
         toolbarEnabled: state.queryform.toolbarEnabled,

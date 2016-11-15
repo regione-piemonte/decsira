@@ -19,14 +19,11 @@ const {
 const assign = require('object-assign');
 const TemplateUtils = require('../utils/TemplateUtils');
 
-const uuid = require('node-uuid');
-
 const initialState = {
     data: null,
     featuregrid: null,
     loadingGrid: false,
     dataSourceOptions: {}
-    // featureGrigConfigUrl: "assets/featureGridConfig"
 };
 
 function grid(state = initialState, action) {
@@ -37,20 +34,8 @@ function grid(state = initialState, action) {
             });
         }
         case GRID_MODEL_LOADED: {
-            // /////////////////////////////////////////////////////////////////////////////
-            // Generate the needed 'field' property internally for each column definition
-            // /////////////////////////////////////////////////////////////////////////////
-            let idFieldName;
-            let columns = [];
-            if (state.featuregrid.grid.columns) {
-                columns = state.featuregrid.grid.columns.map((column) => {
-                    let fieldName = !column.field ? uuid.v1() : column.field;
-                    idFieldName = column.id === true ? fieldName : idFieldName;
-                    return assign({}, column, {field: fieldName});
-                });
-            }
-            let newFeatureGrid = {...state.featuregrid, grid: {...state.featuregrid.grid, columns: columns}};
-            let features = TemplateUtils.getModels(action.data, state.featuregrid.grid.root, newFeatureGrid.grid.columns);
+            let idFieldName = state.featuregrid.idFieldName;
+            let features = TemplateUtils.getModels(action.data, state.featuregrid.grid.root, state.featuregrid.grid.columns);
             let totalFeatures = (!action.add) ? features.length : state.totalFeatures;
             let data = {
                 "type": "FeatureCollection",
@@ -82,20 +67,20 @@ function grid(state = initialState, action) {
                 }
 
                 f.geometry = {
-                    "type": newFeatureGrid.grid.geometryType
+                    "type": state.featuregrid.grid.geometryType
                 };
 
                 // Setting coordinates
-                if (newFeatureGrid.grid.geometryType === "Polygon") {
+                if (state.featuregrid.grid.geometryType === "Polygon") {
                     let coordinates = [[]];
                     for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
-                        let coords = newFeatureGrid.grid.wfsVersion === "1.1.0" ?
+                        let coords = state.featuregrid.grid.wfsVersion === "1.1.0" ?
                             [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
                         coordinates[0].push(coords);
                     }
 
                     f.geometry.coordinates = coordinates;
-                } else if (newFeatureGrid.grid.geometryType === "Point") {
+                } else if (state.featuregrid.grid.geometryType === "Point") {
                     f.geometry.coordinates = geometry ? [geometry.coordinates[0][0], geometry.coordinates[0][1]] : null;
                 }
 
@@ -107,7 +92,6 @@ function grid(state = initialState, action) {
             return assign({}, state, {
                 data: data.features,
                 totalFeatures: data.totalFeatures,
-                featuregrid: newFeatureGrid,
                 loadingGrid: false
             });
         }
@@ -123,20 +107,6 @@ function grid(state = initialState, action) {
             });
         }
         case CREATE_GRID_DATA_SOURCE: {
-            // /////////////////////////////////////////////////////////////////////////////
-            // Generate the needed 'field' property internally for each column definition
-            // /////////////////////////////////////////////////////////////////////////////
-            let idFieldName;
-            let columns = [];
-            if (state.featuregrid.grid.columns) {
-                columns = state.featuregrid.grid.columns.map((column) => {
-                    let fieldName = !column.field ? uuid.v1() : column.field;
-                    idFieldName = column.id === true ? fieldName : idFieldName;
-                    return assign({}, column, {field: fieldName});
-                });
-            }
-            let newFeatureGrid = {...state.featuregrid, grid: {...state.featuregrid.grid, columns: columns}};
-
             let dataSourceOptions = {
                     rowCount: -1,
                     pageSize: action.pagination.maxFeatures
@@ -144,7 +114,6 @@ function grid(state = initialState, action) {
             return assign({}, state, {
                 data: {},
                 totalFeatures: -1,
-                featuregrid: newFeatureGrid,
                 loadingGrid: false,
                 dataSourceOptions: dataSourceOptions
             });
@@ -155,7 +124,7 @@ function grid(state = initialState, action) {
         }
         case FEATURES_LOADED_PAG: {
 
-            let idFieldName = state.featuregrid.grid.columns.find((c) => c.id === true).field;
+            let idFieldName = state.featuregrid.idFieldName;
             let features = TemplateUtils.getModels(action.data, state.featuregrid.grid.root, state.featuregrid.grid.columns);
 
             features = features.map((feature) => {
@@ -202,19 +171,6 @@ function grid(state = initialState, action) {
                 data,
                 loadingGrid: false
                 };
-        }
-        case 'FEATUREGRID_CONFIG_LOADED': {
-            return assign({}, state, {
-                featuregrid: action.config
-            });
-        }
-        case 'FEATURETYPE_CONFIG_LOADED': {
-            return assign({}, state, {
-                featuregrid: assign({}, state.featuregrid, {
-                        grid: assign({}, state.featuregrid.grid, {
-                            geometryType: action.geometryType})
-                        })
-            });
         }
         default:
             return state;
