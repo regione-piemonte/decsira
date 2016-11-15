@@ -20,7 +20,7 @@ const LinkToMetadataInfoBox = React.createClass({
 
      render() {
          return (
-         <a href="http://localhost:8082/map.html?back=dataset#/new/B?_k=nzfvpv"
+         <a href="/map.html?back=dataset#/new/B?_k=nzfvpv"
             onClick={this.props.openMetadataInfobox} >
             Metadata Info Box
          </a>
