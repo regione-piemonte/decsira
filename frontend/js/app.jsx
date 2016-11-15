@@ -25,7 +25,8 @@ const appReducers = {
      featuregrid: require('./reducers/featuregrid'),
      draw: require('../MapStore2/web/client/reducers/draw'),
      security: require('./reducers/siraSecurity'),
-     mosaic: require('./reducers/mosaic')
+     mosaic: require('./reducers/mosaic'),
+     metadatainfobox: require('./reducers/metadatainfobox')
  };
 
 const startApp = () => {
