@@ -109,31 +109,31 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
     public GeoServerUser getUserByUsername(String username) throws IOException {
         LOGGER.finer("Username: " + username);
 
-        IrideGeoServerUser user = null;
-
         final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(username);
         if (irideIdentity == null) {
-            // Houston? We have a problem...
-        } else {
-            // A formally valid IRIDE digital identity was given: collect the InfoPersona instances, if any
-            final IrideUseCase[] irideUseCases = this.getIrideService().findUseCasesForPersonaInApplication(
-                irideIdentity,
-                new IrideApplication(this.config.applicationName)
-            );
+            LOGGER.warning("Username: " + username + " is not a formally valid IRIDE digital identity");
 
-            final Set<IrideInfoPersona> infoPersonae = Sets.newLinkedHashSet();
-            List<IrideInfoPersona> infoPersonaInUseCase;
-            for (final IrideUseCase irideUseCase : irideUseCases) {
-                infoPersonaInUseCase = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
-                if (infoPersonaInUseCase != null) {
-                    infoPersonae.addAll(infoPersonaInUseCase);
-                }
-            }
-
-            user = this.createUserObject(username, null, true);
-            user.setIrideIdentity(irideIdentity);
-            user.setInfoPersonae(infoPersonae);
+            return null;
         }
+
+        // A formally valid IRIDE digital identity was given: collect the associated InfoPersonae, if any
+        final IrideUseCase[] irideUseCases = this.getIrideService().findUseCasesForPersonaInApplication(
+            irideIdentity,
+            new IrideApplication(this.config.applicationName)
+        );
+
+        final Set<IrideInfoPersona> infoPersonae = Sets.newLinkedHashSet();
+        List<IrideInfoPersona> infoPersonaInUseCase;
+        for (final IrideUseCase irideUseCase : irideUseCases) {
+            infoPersonaInUseCase = this.getIrideService().getInfoPersonaInUseCase(irideIdentity, irideUseCase);
+            if (infoPersonaInUseCase != null) {
+                infoPersonae.addAll(infoPersonaInUseCase);
+            }
+        }
+
+        final IrideGeoServerUser user = this.createUserObject(username, null, true);
+        user.setIrideIdentity(irideIdentity);
+        user.setInfoPersonae(infoPersonae);
 
         LOGGER.fine("Retrieved IRIDE User: " + user);
 
