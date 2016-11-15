@@ -48,12 +48,24 @@ public final class IrideIdentityValidator {
      */
     private static final Logger LOGGER = LoggerProvider.ENTITY.getLogger();
 
+    /**
+     * "Weak" <a href="http://blog.marketto.it/2016/01/regex-validazione-codice-fiscale-con-omocodia/">regular expressions validation pattern for italian fiscal codes</a>.
+     */
     private static final Pattern FISCAL_CODE_WEAK_VALIDATION_PATTERN = Pattern.compile("^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$");
 
+    /**
+     * "Strong" <a href="http://blog.marketto.it/2016/01/regex-validazione-codice-fiscale-con-omocodia/">regular expressions validation pattern for italian fiscal codes</a>.
+     */
     private static final Pattern FISCAL_CODE_STRONG_VALIDATION_PATTERN = Pattern.compile("^(?:[B-DF-HJ-NP-TV-Z](?:[AEIOU]{2}|[AEIOU]X)|[AEIOU]{2}X|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\\dLMNP-V]{2}|[A-M][0L](?:[\\dLMNP-V][1-9MNP-V]|[1-9MNP-V][0L]))[A-Z]$");
 
+    /**
+     * Possible <code>IRIDE</code> authentication levels.
+     */
     private static final Integer[] IRIDE_AUTHENTICATION_LEVELS = new Integer[] { 1, 2, 4, 8, 16 };
 
+    /**
+     * Fixed length of an <code>IRIDE</code> <code>Digital Identity</code> "mac" token.
+     */
     private static final int MAC_LENGTH = 24;
 
     /**
@@ -71,12 +83,14 @@ public final class IrideIdentityValidator {
     }
 
     /**
+     * Validates the given <code>IRIDE</code> <code>Digital Identity</code> tokens,
+     * returning {@code true} <em>if and only if all tokens are valid</em>, {@code false} otherwise.
      *
-     * @param tokens
-     * @return
+     * @param tokens the given <code>IRIDE</code> <code>Digital Identity</code> tokens to validate
+     * @return {@code true} <em>if and only if all tokens are valid</em>, {@code false} otherwise
      */
     public IrideIdentityInvalidTokenValue[] validate(String... tokens) {
-        LOGGER.finest("IRIDE Identity tokens: " + Arrays.toString(tokens));
+        LOGGER.finer("IRIDE Identity tokens: " + Arrays.toString(tokens));
 
         this.checkTokens(tokens);
 
@@ -264,7 +278,7 @@ public final class IrideIdentityValidator {
 
             return true;
         } catch (ParseException e) {
-            LOGGER.severe("Invalid date format: " + e.getMessage());
+            LOGGER.fine("Invalid date format: " + e.getMessage());
 
             return false;
         }
@@ -295,7 +309,7 @@ public final class IrideIdentityValidator {
 
             return true;
         } catch (NumberFormatException e) {
-            LOGGER.severe("Invalid number format: " + e.getMessage());
+            LOGGER.fine("Invalid number format: " + e.getMessage());
 
             return false;
         }

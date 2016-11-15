@@ -89,7 +89,7 @@ public class IridePolicyManager {
     public IridePolicyRequestHandler getPolicyRequestHandler(IridePolicy policy) {
         final IridePolicyRequestHandler policyRequestHandler = this.getPolicyRequestHandlers().lookup(policy);
 
-        LOGGER.finer(String.format("Request Handler for IRIDE Policy '%s' found: %b", policy.getServiceName(), policyRequestHandler != null));
+        LOGGER.finest(String.format("Request Handler for IRIDE Policy '%s' found: %b", policy.getServiceName(), policyRequestHandler != null));
 
         return policyRequestHandler;
     }
@@ -141,7 +141,7 @@ public class IridePolicyManager {
     public IridePolicyResponseHandler getPolicyResponseHandler(IridePolicy policy) {
         final IridePolicyResponseHandler policyResponseHandler = this.getPolicyResponseHandlers().lookup(policy);
 
-        LOGGER.finer(String.format("Response Handler for IRIDE Policy '%s' found: %b", policy.getServiceName(), policyResponseHandler != null));
+        LOGGER.finest(String.format("Response Handler for IRIDE Policy '%s' found: %b", policy.getServiceName(), policyResponseHandler != null));
 
         return policyResponseHandler;
     }

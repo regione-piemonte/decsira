@@ -67,7 +67,7 @@ public final class IridePolicyRegistry<H extends AbstractIridePolicyHandler> ext
      */
     @Override
     protected void register(H[] policyHandlers) {
-        LOGGER.finer(String.format("Adding %d IRIDE Policy Handlers", policyHandlers.length));
+        LOGGER.finest(String.format("Adding %d IRIDE Policy Handlers", policyHandlers.length));
 
         super.register(policyHandlers);
     }
@@ -85,7 +85,7 @@ public final class IridePolicyRegistry<H extends AbstractIridePolicyHandler> ext
     protected void register(H policyHandler) {
         super.register(policyHandler);
 
-        LOGGER.finer(String.format("Added IRIDE Policy Handler '%s'", policyHandler.getObjectId().getServiceName()));
+        LOGGER.finest(String.format("Added IRIDE Policy Handler '%s'", policyHandler.getObjectId().getServiceName()));
     }
 
     /* (non-Javadoc)

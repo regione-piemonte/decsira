@@ -90,9 +90,9 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public void configure(XStreamPersister xp) {
-        LOGGER.info(String.format(CONFIG_MESSAGE_PATTERN, IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class.getSimpleName()));
-        LOGGER.info(String.format(CONFIG_MESSAGE_PATTERN, IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class.getSimpleName()));
-        LOGGER.info(String.format(CONFIG_MESSAGE_PATTERN, IrideUserGroupServiceConfig.ALIAS, IrideUserGroupServiceConfig.class.getSimpleName()));
+        LOGGER.config(String.format(CONFIG_MESSAGE_PATTERN, IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class.getSimpleName()));
+        LOGGER.config(String.format(CONFIG_MESSAGE_PATTERN, IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class.getSimpleName()));
+        LOGGER.config(String.format(CONFIG_MESSAGE_PATTERN, IrideUserGroupServiceConfig.ALIAS, IrideUserGroupServiceConfig.class.getSimpleName()));
 
         xp.getXStream().alias(IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class);
         xp.getXStream().alias(IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class);
@@ -142,7 +142,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     @Override
     public GeoServerRoleService createRoleService(SecurityNamedServiceConfig config) throws IOException {
         final IrideRoleService service = this.roleServiceFactory.create();
-        service.initializeFromConfig((IrideRoleServiceConfig) config);
+        service.initializeFromConfig(config);
 
         LOGGER.info("Initialized IRIDE Role Service");
 
@@ -165,7 +165,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     @Override
     public GeoServerUserGroupService createUserGroupService(SecurityNamedServiceConfig config) throws IOException {
         final IrideUserGroupService service = this.userGroupServiceFactory.create();
-        service.initializeFromConfig((IrideUserGroupServiceConfig) config);
+        service.initializeFromConfig(config);
 
         LOGGER.info("Initialized IRIDE User Group Service");
 

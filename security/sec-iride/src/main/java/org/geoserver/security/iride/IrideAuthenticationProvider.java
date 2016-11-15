@@ -96,7 +96,7 @@ public class IrideAuthenticationProvider extends GeoServerAuthenticationProvider
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(Level.INFO,
+        LOGGER.log(Level.CONFIG,
             "Initializing {0} with configuration object: \n\t {1}",
             new Object[] { this.getClass().getSimpleName(), config }
         );
@@ -133,7 +133,11 @@ public class IrideAuthenticationProvider extends GeoServerAuthenticationProvider
             this.log(e);
         }
 
-        return this.buildAuthenticationToken(auth);
+        final Authentication authToken = this.buildAuthenticationToken(auth);
+
+        LOGGER.fine("Authentication Token: " + authToken);
+
+        return authToken;
     }
 
     /**

@@ -84,7 +84,7 @@ public final class IrideServiceImpl implements IrideService {
     /**
      * Policy execution result message format.
      */
-    private static final String RESULT_MESSAGE_FORMAT = "Policy '%s' result: %s: ";
+    private static final String RESULT_MESSAGE_FORMAT = "IRIDE Policy '%s' result: %s: ";
 
     /**
      * Policy execution error message format.
@@ -312,7 +312,7 @@ public final class IrideServiceImpl implements IrideService {
      * @param result the execution result
      */
     private static void logPolicyExecutionResult(IridePolicy policy, Object result) {
-        LOGGER.fine(String.format(
+        LOGGER.finest(String.format(
             RESULT_MESSAGE_FORMAT,
             policy.getServiceName(),
             result instanceof Object[] ? Arrays.toString((Object[]) result) : result)
