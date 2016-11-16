@@ -40,10 +40,10 @@
             <LabeledField label='Capacità massima stoccabile (m3)'/>
             <LabeledField label='Note'/>
         </Section>
+
         <Section header='OGGETTI AUTORIZZATI' eventKey='3' expanded={true}>
-            <AuthorizedObject
-                list={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()")}
-                listTitle={"Impianto Autorizzato"}
+            <LinkScheda
+                linkTitle={"Impianto Autorizzato " + model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()") }
                 detailsTemplateConfigURL={"assets/impiantoAutorizzato.jsxt"}/>
         </Section>
         <Section header='RIEPILOGO RECUPERO RIFIUTI' eventKey='2' expanded={true}>
@@ -185,6 +185,12 @@
                     currTab: 'rndt'
                 }}
             />
+        </Section>
+        <Section header='Link Oggetti' eventKey='8' expanded={true}>
+            <LinkScheda
+                linkTitle="Esempio scheda link, id aua.109_22 featureType autorizzazioeemissioneatmosfera"
+                id="aua.109_22"
+                featureType={"autorizzazioeemissioneatmosfera"}/>
         </Section>
     </Panel>
 </Panel>

@@ -19,20 +19,9 @@
             }/>
         </Section>
         <Section header='ADEMPIMENTI AMBIENTALI' eventKey='2' expanded={true}>
-            <AdempimentiAmbientali
-                codiceSira={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()")
-                }
-                numAuth={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()")
-                }
-                dataAuth={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()")
-                }
-                activity={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:attivita/sira:Attivita/sira:descrizione/text()")
-                }
-                listTitle={"AUA"}
+            <h5>AUA - N° {model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento/text()") + " data " + model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()")}</h5>
+            <LinkScheda
+                linkTitle={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:attivita/sira:Attivita/sira:descrizione/text()") }
                 detailsTemplateConfigURL={"assets/cardTemplate.jsxt"}/>
         </Section>
     </Panel>

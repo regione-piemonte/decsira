@@ -29,7 +29,8 @@ const SiraTable = React.createClass({
         dependsOn: React.PropTypes.object,
         features: React.PropTypes.oneOfType([
             React.PropTypes.array,
-            React.PropTypes.func
+            React.PropTypes.func,
+            React.PropTypes.object
         ]),
         selectedRow: React.PropTypes.string,
         wfsVersion: React.PropTypes.string,
