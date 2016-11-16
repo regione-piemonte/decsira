@@ -106,12 +106,12 @@ const QGis = React.createClass({
         let profile = this.props.params.profile ? this.props.params.profile : urlQuery.profile;
         if (!this.props.configLoaded && this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(
-                `assets/${this.props.featureType}.json`, {authkey: authParams[profile].authkey});
+                `assets/${this.props.featureType}.json`, {authkey: authParams[profile].authkey}, this.props.featureType, true);
         }
     },
     componentWillReceiveProps(props) {
         if (props.featureType !== this.props.featureType) {
-            this.props.onLoadFeatureTypeConfig(`assets/${props.featureType}.json`, {authkey: this.props.profile.authParams.authkey});
+            this.props.onLoadFeatureTypeConfig(`assets/${props.featureType}.json`, {authkey: this.props.profile.authParams.authkey}, props.featureType, true);
         }
         if (this.state.qGisType === "detail" && urlQuery.featureTypeId && props.configLoaded && !props.siraControls.detail) {
             this.props.toggleSiraControl('detail', true);
@@ -120,7 +120,7 @@ const QGis = React.createClass({
         if (this.state.qGisType === "list" && this.state.loadList && urlQuery.featureTypeIds && props.configLoaded && props.gridConfig && props.featureTypeName) {
             // find id field
             this.setState({loadList: false});
-            let idField = this.props.gridConfig.columns.find((c) => c.id === true);
+            let idField = props.gridConfig.grid.columns.find((c) => c.id === true);
             let filter = SiraFilterUtils.getFilterByIds(props.featureTypeName, urlQuery.featureTypeIds.split(','), idField, props.pagination);
             props.onQuery(props.searchUrl, filter);
         }
@@ -137,7 +137,7 @@ const QGis = React.createClass({
         }
     },
     renderQueryPanel() {
-        return this.state.qGisType === "detail" ? (
+        return this.state.qGisType === "detail" || this.state.qGisType === "list" ? (
             <div className="qgis-spinner">
                 <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
             </div>
@@ -213,17 +213,18 @@ const QGis = React.createClass({
 });
 
 module.exports = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         mode: 'desktop',
         profile: state.userprofile,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         featureType: state.siradec && state.siradec.featureType,
-        configLoaded: state.siradec && state.siradec.card && state.siradec.featuregrid ? true : false,
+        configLoaded: activeConfig && activeConfig.card && activeConfig.featuregrid ? true : false,
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         siraControls: state.siraControls,
-        detailsConfig: state.siradec && state.siradec.card,
-        gridConfig: state.siradec && state.siradec.featuregrid && state.siradec.featuregrid.grid,
-        featureTypeName: state.siradec && state.siradec.featureTypeName,
+        detailsConfig: activeConfig && activeConfig.card,
+        gridConfig: activeConfig && activeConfig.featuregrid,
+        featureTypeName: activeConfig && activeConfig.featureTypeName,
         searchUrl: state.queryform.searchUrl,
         pagination: state.queryform.pagination
     };
