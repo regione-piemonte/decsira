@@ -16,7 +16,7 @@ const {
 const LinkScheda = React.createClass({
     propTypes: {
         id: React.PropTypes.string,
-        linkTitle: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
+        link: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
         btProps: React.PropTypes.object,
         card: React.PropTypes.object,
         open: React.PropTypes.bool,
@@ -34,7 +34,7 @@ const LinkScheda = React.createClass({
         return {
             id: null,
             btProps: {},
-            linkTitle: 'Link',
+            link: 'Link',
             templateProfile: 'default',
             toggleDetail: () => {},
             loadCardModelConfig: () => {},
@@ -65,7 +65,7 @@ const LinkScheda = React.createClass({
     render() {
         return (
             <Button bsStyle="link" onClick={this.btnClick} {...this.props.btProps} disabled={this.state.linkDisabled}>
-                {this.props.linkTitle}
+                {this.props.link}
             </Button>
         );
     },
@@ -81,8 +81,7 @@ const LinkScheda = React.createClass({
             });
             url = `${url}&FEATUREID=${this.props.id}&authkey=${this.props.authParams.authkey}`;
         }
-        this.props.loadCardTemplate(
-                    templateUrl, url);
+        this.props.loadCardTemplate(templateUrl, url);
         if (!this.props.open) {
             this.props.toggleDetail();
         }
