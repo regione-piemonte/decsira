@@ -92,6 +92,17 @@
                        c.id_metadato = a.id_metadato and
                        d.id_fontedati = a.fk_fontedati]]>
 	</entry>		
+	
+	<entry key="GET_SIRADEC_OBJECT_NUMBER">
+	    <![CDATA[select sum(nr_oggetti_dataset_calc) as object_numbers 
+	             from sipra_mtd_t_mtd_plus]]>
+	</entry>	
+	
+	<entry key="GET_FUNCTION_OBJECT_NUMBER">
+	    <![CDATA[select count(*) as object_numbers 
+                 from sipra_mtd_t_metadato a, sipra_mtd_t_funzione b
+                 where b.fk_metadato = a.id_metadato and b.fk_tipo_funzione = :fk_tipo_funzione]]>
+	</entry>			
 		
 </properties>
 
