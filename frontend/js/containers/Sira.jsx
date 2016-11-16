@@ -56,9 +56,11 @@ const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker
 const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
 const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
-const GetFeatureInfo = connect((state) => ({
-    siraFeatureTypeName: state.siradec.featureTypeName,
-    siraFeatureInfoDetails: assign({}, state.siradec.featureinfo, {card: state.siradec.card}),
+const GetFeatureInfo = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    return {
+    siraFeatureTypeName: activeConfig.featureTypeName,
+    siraFeatureInfoDetails: assign({}, activeConfig.featureinfo, {card: activeConfig.card}),
     siraTopology: state.siradec.topology,
     siraTopologyConfig: state.mapInfo.topologyConfig,
     infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,
@@ -72,8 +74,8 @@ const GetFeatureInfo = connect((state) => ({
     map: state.map && state.map.present,
     infoType: state.mapInfo.infoType,
     layers: state.layers && state.layers.flat || [],
-    clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint
-}), (dispatch) => {
+    clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint};
+}, (dispatch) => {
     return {
         actions: bindActionCreators({
             getFeatureInfo,
@@ -105,6 +107,7 @@ const Sira = React.createClass({
         reset: React.PropTypes.func,
         // featureGrigConfigUrl: React.PropTypes.string,
         featureTypeConfigUrl: React.PropTypes.string,
+        featureType: React.PropTypes.string,
         error: React.PropTypes.object,
         loading: React.PropTypes.bool,
         // card: React.PropTypes.string,
@@ -137,13 +140,13 @@ const Sira = React.createClass({
     componentDidMount() {
         if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
             this.props.onLoadFeatureTypeConfig(
-                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey});
+                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey}, this.props.featureType, true);
         }
     },
     componentWillReceiveProps(props) {
         let fturl = props.featureTypeConfigUrl;
         if (fturl !== this.props.featureTypeConfigUrl) {
-            this.props.onLoadFeatureTypeConfig(url, {authkey: authParams[this.props.params.profile].authkey});
+            this.props.onLoadFeatureTypeConfig(fturl, {authkey: authParams[this.props.params.profile].authkey}, props.featureType, true);
         }
     },
     render() {
@@ -173,15 +176,16 @@ const Sira = React.createClass({
 });
 
 module.exports = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         mode: 'desktop',
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
         controls: state.siraControls,
+        featureType: state.siradec && state.siradec.featureType,
         featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
-        configLoaded: state.siradec && state.siradec.card ? true : false
-        // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
+        configLoaded: activeConfig && activeConfig.card ? true : false
     };
 }, {
     toggleSiraControl,

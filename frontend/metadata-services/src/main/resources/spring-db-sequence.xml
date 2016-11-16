@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="sequenceManager" class="it.csi.sira.backend.metadata.utils.SequenceManager">
+
+		<property name="seqSipraMtdTMetadato" ref="seqSipraMtdTMetadato" />
+		<property name="seqSipraMtdTFunzione" ref="seqSipraMtdTFunzione" />
+
+	</bean>
+
+	<bean id="seqSipraMtdTMetadato"
+		class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer">
+		<constructor-arg ref="dataSource" />
+		<constructor-arg value="seq_sipra_mtd_t_metadato" />
+	</bean>
+
+	<bean id="seqSipraMtdTFunzione"
+		class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer">
+		<constructor-arg ref="dataSource" />
+		<constructor-arg value="seq_sipra_mtd_t_funzione" />
+	</bean>	
+
+
+
+</beans>

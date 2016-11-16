@@ -150,7 +150,9 @@ const SiraGrid = React.createClass({
     },
     onGridClose(filter) {
         this.props.selectFeatures([]);
-        this.props.selectAllToggle();
+        if (this.props.selectAllToggle) {
+            this.props.selectAllToggle();
+        }
         this.props.toggleSiraControl();
         if (filter) {
             this.props.onExpandFilterPanel(true);

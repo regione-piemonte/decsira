@@ -1,243 +1,247 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>it.geosolutions.csi.sira</groupId>
-    <artifactId>sira-root</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>sira-web</artifactId>
-  <packaging>war</packaging>
-  <name>CSI SIRA - WAR</name>
-  <url>http://www.geo-solutions.it</url>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>it.geosolutions.csi.sira</groupId>
+		<artifactId>sira-root</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>sira-web</artifactId>
+	<packaging>war</packaging>
+	<name>CSI SIRA - WAR</name>
+	<url>http://www.geo-solutions.it</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<url.geoserver>http://tst-gisserver.territorio.csi.it</url.geoserver>
-    <component.name>decsiraweb</component.name>
-    <component.version>1.0.0</component.version>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<url.geoserver>http://tst-gisserver.territorio.csi.it</url.geoserver>
+		<component.name>decsiraweb</component.name>
+		<component.version>1.0.0</component.version>
+	</properties>
 
-  <dependencies>
-    <!-- ================================================================ -->
-    <!-- CSI SIRA modules -->
-    <!-- ================================================================ -->
-    <dependency>
-        <groupId>it.geosolutions.csi.sira</groupId>
-        <artifactId>sira-backend</artifactId>
-        <version>${project.version}</version>
-    </dependency>
-    <!-- ================================================================ -->
-    <!-- GeoStore modules -->
-    <!-- ================================================================ -->
-    <dependency>
-      <groupId>it.geosolutions.geostore</groupId>
-      <artifactId>geostore-webapp</artifactId>
-      <version>1.3-SNAPSHOT</version>
-      <type>war</type>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>proxy</groupId>
-      <artifactId>http_proxy</artifactId>
-      <version>1.1-SNAPSHOT</version>
-      <type>war</type>
-      <scope>runtime</scope>
-    </dependency>
-    <!-- JUnit -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<!-- ================================================================ -->
+		<!-- CSI SIRA modules -->
+		<!-- ================================================================ -->
+		<dependency>
+			<groupId>it.geosolutions.csi.sira</groupId>
+			<artifactId>sira-backend</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>it.geosolutions.csi.sira</groupId>
+			<artifactId>metadata-services</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- ================================================================ -->
+		<!-- GeoStore modules -->
+		<!-- ================================================================ -->
+		<dependency>
+			<groupId>it.geosolutions.geostore</groupId>
+			<artifactId>geostore-webapp</artifactId>
+			<version>1.3-SNAPSHOT</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>proxy</groupId>
+			<artifactId>http_proxy</artifactId>
+			<version>1.1-SNAPSHOT</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
 
-  <build>
-    <finalName>sira</finalName>
-    <plugins>
-        <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.24</version>
+	<build>
+		<finalName>sira</finalName>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>0.0.24</version>
 
-                <executions>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v0.12.4</nodeVersion>
+							<npmVersion>2.10.1</npmVersion>
+							<installDirectory>..</installDirectory>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>v0.12.4</nodeVersion>
-                            <npmVersion>2.10.1</npmVersion>
-                            <installDirectory>..</installDirectory>
-                        </configuration>
-                    </execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- Optional configuration which provides for running any npm command -->
+						<configuration>
+							<arguments>install</arguments>
+							<installDirectory>..</installDirectory>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <!-- Optional configuration which provides for running any npm command -->
-                        <configuration>
-                            <arguments>install</arguments>
-                            <installDirectory>..</installDirectory>
-                        </configuration>
-                    </execution>
+					<execution>
+						<id>npm run compile</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- Optional configuration which provides for running any npm command -->
+						<configuration>
+							<arguments>run compile</arguments>
+							<installDirectory>..</installDirectory>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>npm run compile</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <!-- Optional configuration which provides for running any npm command -->
-                        <configuration>
-                            <arguments>run compile</arguments>
-                            <installDirectory>..</installDirectory>
-                        </configuration>
-                    </execution>
+					<execution>
+						<id>npm run lint</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>test</phase>
+						<!-- Optional configuration which provides for running any npm command -->
+						<configuration>
+							<arguments>run lint</arguments>
+							<installDirectory>..</installDirectory>
+						</configuration>
+					</execution>
 
-                    <execution>
-                        <id>npm run lint</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <!-- Optional configuration which provides for running any npm command -->
-                        <configuration>
-                            <arguments>run lint</arguments>
-                            <installDirectory>..</installDirectory>
-                        </configuration>
-                    </execution>
+					<execution>
+						<id>npm test</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>test</phase>
+						<!-- Optional configuration which provides for running any npm command -->
+						<configuration>
+							<skip>${skipTests}</skip>
+							<arguments>run mvntest</arguments>
+							<installDirectory>..</installDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-                    <execution>
-                        <id>npm test</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <!-- Optional configuration which provides for running any npm command -->
-                        <configuration>
-                            <skip>${skipTests}</skip>
-                            <arguments>run mvntest</arguments>
-                            <installDirectory>..</installDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>html, configuration files and images</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/sira</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>${basedir}/..</directory>
+									<includes>
+										<include>*.html</include>
+										<include>*.json</include>
+										<include>img/*</include>
+									</includes>
+									<excludes>
+										<exclude>MapStore2/*</exclude>
+										<exclude>MapStore2/**/*</exclude>
+									</excludes>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>js files</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/sira/dist</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>${basedir}/../dist</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>CSS files</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/sira/assets</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>${basedir}/../assets</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>translations</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/sira</outputDirectory>
+							<encoding>UTF-8</encoding>
+							<resources>
+								<resource>
+									<directory>${basedir}/..</directory>
+									<includes>
+										<include>translations/*</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
-        <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-                <execution>
-                    <id>html, configuration files and images</id>
-                    <phase>process-classes</phase>
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${basedir}/target/sira</outputDirectory>
-                        <encoding>UTF-8</encoding>
-                        <resources>
-                            <resource>
-                                <directory>${basedir}/..</directory>
-                                <includes>
-                                    <include>*.html</include>
-                                    <include>*.json</include>
-                                    <include>img/*</include>
-                                </includes>
-                                <excludes>
-                                    <exclude>MapStore2/*</exclude>
-                                    <exclude>MapStore2/**/*</exclude>
-                                </excludes>
-								<filtering>true</filtering>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>js files</id>
-                    <phase>process-classes</phase>
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${basedir}/target/sira/dist</outputDirectory>
-                        <encoding>UTF-8</encoding>
-                        <resources>
-                            <resource>
-                                <directory>${basedir}/../dist</directory>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>CSS files</id>
-                    <phase>process-classes</phase>
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${basedir}/target/sira/assets</outputDirectory>
-                        <encoding>UTF-8</encoding>
-                        <resources>
-                            <resource>
-                                <directory>${basedir}/../assets</directory>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>translations</id>
-                    <phase>process-classes</phase>
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${basedir}/target/sira</outputDirectory>
-                        <encoding>UTF-8</encoding>
-                        <resources>
-                            <resource>
-                                <directory>${basedir}/..</directory>
-                                <includes>
-                                    <include>translations/*</include>
-                                </includes>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<overlays>
+						<overlay>
+							<groupId>it.geosolutions.geostore</groupId>
+							<artifactId>geostore-webapp</artifactId>
+							<excludes>
+								<exclude>WEB-INF/lib/commons-logging-*</exclude>
+							</excludes>
+						</overlay>
+						<overlay>
+							<groupId>proxy</groupId>
+							<artifactId>http_proxy</artifactId>
+							<excludes>
+								<exclude>WEB-INF/lib/commons-codec-*</exclude>
+								<exclude>WEB-INF/lib/commons-logging-*</exclude>
+								<exclude>WEB-INF/lib/log4j-*</exclude>
+							</excludes>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
 
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>2.1.1</version>
-            <configuration>
-                <overlays>
-                    <overlay>
-                        <groupId>it.geosolutions.geostore</groupId>
-                        <artifactId>geostore-webapp</artifactId>
-                        <excludes>
-                            <exclude>WEB-INF/lib/commons-logging-*</exclude>
-                        </excludes>
-                    </overlay>
-                    <overlay>
-                        <groupId>proxy</groupId>
-                        <artifactId>http_proxy</artifactId>
-                        <excludes>
-                            <exclude>WEB-INF/lib/commons-codec-*</exclude>
-                            <exclude>WEB-INF/lib/commons-logging-*</exclude>
-                            <exclude>WEB-INF/lib/log4j-*</exclude>
-                        </excludes>
-                    </overlay>
-                </overlays>
-            </configuration>
-        </plugin>
+			<!-- configurazione standard CSI per la UI -->
 
-         <!-- configurazione standard CSI per la UI -->
-
-        <plugin>
+			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
@@ -260,45 +264,55 @@
 					</execution>
 				</executions>
 			</plugin>
-        
-        <!-- Run the application using "mvn jetty:run" -->
-        <plugin>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
-            <version>6.1.20</version>
-            <configuration>
-                <webAppConfig>
-                    <contextPath>/sira</contextPath>
-                </webAppConfig>
-                <connectors>
-                    <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                        <port>9191</port>
-                        <maxIdleTime>60000</maxIdleTime>
-                    </connector>
-                </connectors>
-                <reload>manual</reload>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
 
-   <profiles>
-        <profile>
-            <id>produzione</id>
-            <properties>
-             <url.geoserver>http://gisserver.territorio.csi.it</url.geoserver>
-             <component.name>decsiraweb</component.name>
-             <component.version>1.0.0</component.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>demo</id>
-            <properties>
-             <url.geoserver>http://sira.csi.geo-solutions.it</url.geoserver>
-             <component.name>decsiraweb</component.name>
-             <component.version>1.0.0</component.version>
-            </properties>
-        </profile>
-    </profiles>
+			<!-- Run the application using "mvn jetty:run" -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.3.14.v20161028</version>
+				<configuration>
+					<webApp>
+						<contextPath>/sira</contextPath>
+					</webApp>
+					<httpConnector>
+						<port>9191</port>
+						<idleTimeout>60000</idleTimeout>
+					</httpConnector>
+					<war>${project.basedir}/target/sira.war</war>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>c3p0</groupId>
+						<artifactId>c3p0</artifactId>
+						<version>0.9.1.2</version>
+					</dependency>
+					<dependency>
+						<groupId>postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.1-901-1.jdbc4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>produzione</id>
+			<properties>
+				<url.geoserver>http://gisserver.territorio.csi.it</url.geoserver>
+				<component.name>decsiraweb</component.name>
+				<component.version>1.0.0</component.version>
+			</properties>
+		</profile>
+		<profile>
+			<id>demo</id>
+			<properties>
+				<url.geoserver>http://sira.csi.geo-solutions.it</url.geoserver>
+				<component.name>decsiraweb</component.name>
+				<component.version>1.0.0</component.version>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

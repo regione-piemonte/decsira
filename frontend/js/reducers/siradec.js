@@ -23,16 +23,16 @@ const assign = require('object-assign');
 
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
+const uuid = require('node-uuid');
 
 const initialState = {
     filterPanelExpanded: false,
-    attributes: [],
+    configOggetti: {
+    },
+    topology: null,
     loadingQueryFormConfigError: null,
-    queryform: null,
-    featuregrid: null,
-    featureinfo: null,
-    card: null,
     featureType: urlQuery.featureType || 'aua',
+    activeFeatureType: null,
     inlineMapConfig: null
 };
 
@@ -42,7 +42,7 @@ function siradec(state = initialState, action) {
             return assign({}, state, {inlineMapConfig: action.mapconfig});
         }
         case FEATURETYPE_CONFIG_LOADED: {
-            let attributes = [...state.attributes, action.field];
+            let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
 
             // Sorting the attributes by the given index in configuration
             attributes.sort((attA, attB) => {
@@ -51,21 +51,29 @@ function siradec(state = initialState, action) {
                 }
             });
 
-            let newState = assign({}, state, {
+            const queryform = assign({}, state.queryform, {geometryName: action.geometryName, spatialField: assign({}, state.queryform.spatialField, {attribute: action.geometryName})});
+
+            let newConf = assign({}, state.configOggetti[action.featureType], {
                 attributes: attributes,
                 featureTypeName: action.ftName,
-                featureTypeNameLabel: action.ftNameLabel
-            });
+                featureTypeNameLabel: action.ftNameLabel,
+                queryform
+                });
 
-            if (newState.queryform) {
-                newState = assign({}, newState, {queryform: assign({}, newState.queryform, {geometryName: action.geometryName})});
+            if (newConf.featuregrid) {
+                const featuregrid = assign({}, newConf.featuregrid, {geometryType: action.geometryType, grid: assign({}, newConf.featuregrid.grid, {geometryType: action.geometryType})});
+                newConf = assign({}, newConf, {featuregrid: featuregrid});
             }
-
-            if (newState.featuregrid) {
-                newState = assign({}, newState, {featuregrid: assign({}, state.featuregrid, {geometryType: action.geometryType})});
+            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
+            if (action.activate) {
+                return assign({}, state, {
+                                configOggetti: configOggetti,
+                                activeFeatureType: action.featureType
+                            });
             }
-
-            return newState;
+            return assign({}, state, {
+                            configOggetti: configOggetti
+                        });
         }
         case QUERYFORM_CONFIG_LOADED: {
             return assign({}, state, {
@@ -73,18 +81,34 @@ function siradec(state = initialState, action) {
             });
         }
         case FEATUREGRID_CONFIG_LOADED: {
+            let featureGrid = action.config;
+            let idFieldName;
+            if (featureGrid.grid.columns) {
+                featureGrid.grid.columns.forEach((column) => {
+                    let fieldName = !column.field ? uuid.v1() : column.field;
+                    idFieldName = column.id === true ? fieldName : idFieldName;
+                    column.field = fieldName;
+                });
+            }
+            featureGrid.idFieldName = idFieldName;
+            let newConf = assign({}, state.configOggetti[action.featureType], {featuregrid: featureGrid});
+            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
             return assign({}, state, {
-                featuregrid: action.config
+                configOggetti: configOggetti
             });
         }
         case FEATUREINFO_CONFIG_LOADED: {
+            let newConf = assign({}, state.configOggetti[action.featureType], {featureinfo: action.config});
+            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
             return assign({}, state, {
-                featureinfo: action.config
+                configOggetti: configOggetti
             });
         }
         case CARD_CONFIG_LOADED: {
+            let newConf = assign({}, state.configOggetti[action.featureType], {card: action.config});
+            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
             return assign({}, state, {
-                card: action.config
+                configOggetti: configOggetti
             });
         }
         case TOPOLOGY_CONFIG_LOADED: {

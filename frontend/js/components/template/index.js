@@ -10,7 +10,7 @@ const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('../GoToDetail');
 const ZoomToRenderer = require ('../../../MapStore2/web/client/components/data/featuregrid/ZoomToFeatureRenderer');
 const MappaScheda = require("./PreviewMap");
-
+const LinkScheda = require("./LinkScheda");
 const AuthorizedObject = require("./AuthorizedObject");
 const AdempimentiAmbientali = require("./AdempimentiAmbientali");
 const SiraTable = require("./SiraTable");
