@@ -36,6 +36,28 @@ public class MetadataController {
 
   private Properties logger = null;
   private MetadataManager metadataManager = null;
+  
+  @RequestMapping(value = "/getPlatformNumbers", method = RequestMethod.GET)
+  public @ResponseBody String getPlatformNumbers(@ModelAttribute RequestParam params) {
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	String json = null;
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+
+	try {
+	  json = metadataManager.getPlatformNumbers();
+	} catch (MetadataManagerException e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  json = "{\"error\": " + e.getMessage() + "\"\"}";
+	  e.printStackTrace();
+	}
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+
+	return json;
+  }    
 
   @RequestMapping(value = "/getMosaico", method = RequestMethod.GET)
   public @ResponseBody String getMosaico(@ModelAttribute RequestParam params) {
