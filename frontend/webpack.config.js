@@ -67,7 +67,7 @@ module.exports = {
             path: new RegExp("/sira/proxy(.*)"),
             rewrite: rewriteUrl("/sira/proxy$1"),
             host: "localhost",
-            target: "http://tst-sipradecweb.territorio.csi.it:8080"
+            target: "http://localhost:8080"
         }, {
             path: new RegExp("/sira/services/queryformconfig(.*)"),
             host: "localhost",
