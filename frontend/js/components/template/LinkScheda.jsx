@@ -8,73 +8,97 @@
 const React = require('react');
 const {Button} = require('react-bootstrap');
 const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
-const {loadCardModelConfig, activateSection} = require('../../actions/card');
+const {loadCardTemplate} = require('../../actions/card');
 const {toggleSiraControl} = require('../../actions/controls');
-
+const {
+    loadFeatureTypeConfig
+} = require('../../actions/siradec');
 const LinkScheda = React.createClass({
     propTypes: {
         id: React.PropTypes.string,
-        section: React.PropTypes.string,
-        txt: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
+        linkTitle: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
         btProps: React.PropTypes.object,
-        toggleDetail: React.PropTypes.func,
-        loadCardModelConfig: React.PropTypes.func,
-        activateSection: React.PropTypes.func,
         card: React.PropTypes.object,
         open: React.PropTypes.bool,
-        detailsConfig: React.PropTypes.object
+        detailsTemplateConfigURL: React.PropTypes.string,
+        featureType: React.PropTypes.string,
+        activeFeatureType: React.PropTypes.string,
+        configOggetti: React.PropTypes.object,
+        authParams: React.PropTypes.object,
+        templateProfile: React.PropTypes.string,
+        loadFeatureTypeConfig: React.PropTypes.func,
+        toggleDetail: React.PropTypes.func,
+        loadCardTemplate: React.PropTypes.func
     },
     getDefaultProps() {
         return {
             id: null,
-            section: null,
             btProps: {},
-            txt: 'Link',
+            linkTitle: 'Link',
+            templateProfile: 'default',
             toggleDetail: () => {},
             loadCardModelConfig: () => {},
-            activateSection: () => {},
-            card: {},
-            open: false,
-            detailsConfig: {}
+            activateSection: () => {}
         };
     },
+    getInitialState() {
+        return {
+            linkDisabled: false
+        };
+    },
+    componentWillMount() {
+        // Se non passano un detailsTemplateConfigUrl e mi passano la featureType ma non ho la configuraziine caricata, devo disabilitare il link e caricare le configurazioni
+        if (!this.props.detailsTemplateConfigURL && this.props.featureType && !this.props.configOggetti[this.props.featureType]) {
+            this.setState({linkDisabled: true});
+            this.props.loadFeatureTypeConfig(
+                `assets/${this.props.featureType}.json`, {authkey: this.props.authParams.authkey}, this.props.featureType, false);
+        }
+    },
+    componentWillReceiveProps(nextProps) {
+        if (this.state.linkDisabled && nextProps.featureType && nextProps.configOggetti[nextProps.featureType]) {
+            this.setState({linkDisabled: false});
+        }
+    },
+    getTempleteUrl(detailsConfig) {
+        return typeof detailsConfig.template === "string" ? detailsConfig.template : detailsConfig.template[this.props.templateProfile];
+    },
     render() {
-        return (this.props.id) ? (
-            <Button bsStyle="link" onClick={this.btnClick} {...this.props.btProps}>
-            {this.props.txt}
+        return (
+            <Button bsStyle="link" onClick={this.btnClick} {...this.props.btProps} disabled={this.state.linkDisabled}>
+                {this.props.linkTitle}
             </Button>
-        ) : null;
+        );
     },
     btnClick() {
-        this.props.loadCardModelConfig(this.props.card.template, this.props.detailsConfig.cardModelConfigUrl,
-            this.props.detailsConfig.wfsUrl + "&FEATUREID=" + this.props.id);
+        // Solo configurazione è un drill up and down come in authorizedObject
+        const detailsConfig = this.props.configOggetti[this.props.featureType] || this.props.configOggetti[this.props.activeFeatureType];
+        const templateUrl = this.props.detailsTemplateConfigURL ? this.props.detailsTemplateConfigURL : this.getTempleteUrl(detailsConfig.card);
+        let url;
+        if (this.props.id) {
+            url = detailsConfig.card.service.url;
+            Object.keys(detailsConfig.card.service.params).forEach((param) => {
+                url += `&${param}=${detailsConfig.card.service.params[param]}`;
+            });
+            url = `${url}&FEATUREID=${this.props.id}&authkey=${this.props.authParams.authkey}`;
+        }
+        this.props.loadCardTemplate(templateUrl, url);
         if (!this.props.open) {
-            this.props.toggleDetail('detail');
+            this.props.toggleDetail();
         }
-        if (this.props.section) {
-            let sections = this.props.card.activeSections;
-            let update = Object.keys(sections).some((k) => {
-                return (k !== this.props.section && sections[k]);
-            }, this);
-            if (update || !this.props.card.activeSections[this.props.section]) {
-                this.props.activateSection(this.props.section);
-            }
-        }
-
     }
 });
 
 module.exports = connect((state) => {
+
     return {
+        activeFeatureType: state.siradec.activeFeatureType,
+        configOggetti: state.siradec.configOggetti,
         card: state.cardtemplate || {},
         open: state.siraControls.detail,
-        detailsConfig: state.grid.detailsConfig
+        authParams: state.userprofile.authParams
     };
-}, dispatch => {
-    return bindActionCreators({
+}, {
         toggleDetail: toggleSiraControl,
-        loadCardModelConfig: loadCardModelConfig,
-        activateSection: activateSection
-    }, dispatch);
-})(LinkScheda);
+        loadCardTemplate,
+        loadFeatureTypeConfig
+    })(LinkScheda);

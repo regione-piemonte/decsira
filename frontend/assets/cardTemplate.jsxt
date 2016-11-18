@@ -40,11 +40,15 @@
             <LabeledField label='Capacità massima stoccabile (m3)'/>
             <LabeledField label='Note'/>
         </Section>
+
         <Section header='OGGETTI AUTORIZZATI' eventKey='3' expanded={true}>
-            <AuthorizedObject
-                list={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()")}
-                listTitle={"Impianto Autorizzato"}
+            <ul key='factorylist' className={"list-style-type:circle"}>
+            <li>
+            <LinkScheda
+                linkTitle={"Impianto Autorizzato " + model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()") }
                 detailsTemplateConfigURL={"assets/impiantoAutorizzato.jsxt"}/>
+            </li>
+            </ul>
         </Section>
         <Section header='RIEPILOGO RECUPERO RIFIUTI' eventKey='2' expanded={true}>
             <SiraTable

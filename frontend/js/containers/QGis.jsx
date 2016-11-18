@@ -94,7 +94,6 @@ const QGis = React.createClass({
         };
     },
     componentWillMount() {
-        this.counter = 0;
         this.setState({width: getWindowSize().maxWidth, qGisType: this.getQGisType(parsedUrl.pathname)});
         window.onresize = () => {
             this.setState({width: window.innerWidth});
