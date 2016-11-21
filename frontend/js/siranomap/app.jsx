@@ -23,7 +23,8 @@ const appReducers = {
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
     draw: require('../../MapStore2/web/client/reducers/draw'),
-    security: require('../reducers/siraSecurity')
+    security: require('../reducers/siraSecurity'),
+    siraexporter: require('../reducers/siraexporter')
 };
 
 const startApp = () => {

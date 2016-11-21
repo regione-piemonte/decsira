@@ -26,7 +26,8 @@ const appReducers = {
      draw: require('../MapStore2/web/client/reducers/draw'),
      security: require('./reducers/siraSecurity'),
      mosaic: require('./reducers/mosaic'),
-     metadatainfobox: require('./reducers/metadatainfobox')
+     metadatainfobox: require('./reducers/metadatainfobox'),
+     siraexporter: require('./reducers/siraexporter')
  };
 
 const startApp = () => {
