@@ -122,8 +122,7 @@ function grid(state = initialState, action) {
                 data: {},
                 totalFeatures: -1,
                 loadingGrid: false,
-                dataSourceOptions: dataSourceOptions,
-                gridType: "search"
+                dataSourceOptions: dataSourceOptions
             });
         }
         case UPDATE_TOTAL_FEATURES: {

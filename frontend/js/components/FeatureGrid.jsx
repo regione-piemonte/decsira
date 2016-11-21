@@ -79,6 +79,7 @@ const SiraGrid = React.createClass({
         templateProfile: React.PropTypes.string,
         zoomToFeatureAction: React.PropTypes.func,
         backToSearch: React.PropTypes.string,
+        gridType: React.PropTypes.string,
         setExportParams: React.PropTypes.func
     },
     contextTypes: {
@@ -116,6 +117,7 @@ const SiraGrid = React.createClass({
             withMap: true,
             templateProfile: 'default',
             backToSearch: "featuregrid.backtosearch",
+            gridType: "search",
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -131,9 +133,9 @@ const SiraGrid = React.createClass({
     componentWillMount() {
         let height = getWindowSize().maxHeight - 110;
         this.setState({width: this.props.initWidth - 30, height});
-        if (this.props.pagination && this.props.dataSourceOptions.pageSize) {
+        if (this.props.pagination && this.props.gridType === 'search') {
             this.dataSource = this.getDataSource(this.props.dataSourceOptions);
-        }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize && this.props.attributes[0]) {
+        }else if ( this.props.pagination && this.props.gridType === 'all_results' && this.props.attributes[0]) {
             let newFilter = FilterUtils.getOgcAllPropertyValue(this.props.featureTypeName, this.props.attributes[0].attribute);
             this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
                 "maxFeatures": this.props.dataSourceOptions.pageSize || 20,
@@ -198,10 +200,15 @@ const SiraGrid = React.createClass({
                 params.successCallback(rowsThisPage, this.props.totalFeatures);
             }else {
                 let pagination = {startIndex: params.startRow, maxFeatures: params.endRow - params.startRow};
-                let filterObj = {
+                let filterObj = this.props.gridType === 'search' ? {
                 groupFields: this.props.groupFields,
                 filterFields: this.props.filterFields.filter((field) => field.value),
                 spatialField: this.props.spatialField,
+                pagination
+                } : {
+                groupFields: [],
+                filterFields: [],
+                spatialField: {},
                 pagination
                 };
                 let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.getSortOptions(params));
@@ -360,10 +367,14 @@ const SiraGrid = React.createClass({
     },
     selectAll(select) {
         if (select) {
-            let filterObj = {
+            let filterObj = this.props.gridType === 'search' ? {
                 groupFields: this.props.groupFields,
                 filterFields: this.props.filterFields.filter((field) => field.value),
                 spatialField: this.props.spatialField
+            } : {
+                groupFields: [],
+                filterFields: [],
+                spatialField: {}
             };
             let SLD_BODY = FilterUtils.getSLD(this.props.featureTypeName, filterObj, '1.0');
             this.props.selectAllToggle(this.props.featureTypeName, SLD_BODY);
@@ -399,10 +410,14 @@ const SiraGrid = React.createClass({
     },
     exportFeatures(api) {
         this.props.toggleSiraControl("exporter", true);
-        let filterObj = {
-        groupFields: this.props.groupFields,
-        filterFields: this.props.filterFields.filter((field) => field.value),
-        spatialField: this.props.spatialField
+        let filterObj = this.props.gridType === 'search' ? {
+            groupFields: this.props.groupFields,
+            filterFields: this.props.filterFields.filter((field) => field.value),
+            spatialField: this.props.spatialField
+        } : {
+            groupFields: [],
+            filterFields: [],
+            spatialField: {}
         };
         let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion);
         let features = [];

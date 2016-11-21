@@ -50,7 +50,8 @@ module.exports = connect((state) => {
     searchUrl: state.queryform.searchUrl,
     dataSourceOptions: state.grid.dataSourceOptions,
     header: state.grid.gridType === 'search' ? "featuregrid.header" : "featuregrid.header_all",
-    backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch"
+    backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch",
+    gridType: state.grid.gridType
     };
 }, {
     onDetail: loadCardTemplate,
