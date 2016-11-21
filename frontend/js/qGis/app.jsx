@@ -21,7 +21,8 @@ const appReducers = {
     grid: require('../reducers/grid'),
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
-    security: require('../reducers/siraSecurity')
+    security: require('../reducers/siraSecurity'),
+    siraexporter: require('../reducers/siraexporter')
 };
 
 const startApp = () => {

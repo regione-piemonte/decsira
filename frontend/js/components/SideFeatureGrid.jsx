@@ -19,7 +19,7 @@ const {
 
 const {loadCardTemplate} = require('../actions/card');
 const {toggleSiraControl} = require('../actions/controls');
-// const {loadFeatureGridConfig} = require('../actions/grid');
+const {setExportParams} = require('../actions/siraExporter');
 
 const {
     // SiraQueryPanel action functions
@@ -53,12 +53,13 @@ module.exports = connect((state) => {
 }, {
     onDetail: loadCardTemplate,
     onShowDetail: toggleSiraControl.bind(null, 'detail'),
-    toggleSiraControl: toggleSiraControl.bind(null, 'grid'),
+    toggleSiraControl: toggleSiraControl,
     changeMapView: changeMapView,
     onExpandFilterPanel: expandFilterPanel,
     selectFeatures: selectFeatures,
     onQuery: loadFeaturesWithPagination,
     onConfigureQuery: loadGridModelWithPagination,
     cleanError: configureGridError,
-    selectAllToggle: selectAllToggle
+    selectAllToggle: selectAllToggle,
+    setExportParams
 })(require('./FeatureGrid'));
