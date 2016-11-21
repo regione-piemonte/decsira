@@ -13,7 +13,8 @@ const {
     SHOW_LOADING,
     CREATE_GRID_DATA_SOURCE,
     UPDATE_TOTAL_FEATURES,
-    FEATURES_LOADED_PAG
+    FEATURES_LOADED_PAG,
+    SET_GRID_TYPE
 } = require('../actions/grid');
 
 const assign = require('object-assign');
@@ -23,7 +24,8 @@ const initialState = {
     data: null,
     featuregrid: null,
     loadingGrid: false,
-    dataSourceOptions: {}
+    dataSourceOptions: {},
+    gridType: 'search'
 };
 
 function grid(state = initialState, action) {
@@ -106,6 +108,11 @@ function grid(state = initialState, action) {
                 loadingGrid: action.show
             });
         }
+        case SET_GRID_TYPE: {
+            return assign({}, state, {
+                gridType: action.gridType
+            });
+        }
         case CREATE_GRID_DATA_SOURCE: {
             let dataSourceOptions = {
                     rowCount: -1,
@@ -115,7 +122,8 @@ function grid(state = initialState, action) {
                 data: {},
                 totalFeatures: -1,
                 loadingGrid: false,
-                dataSourceOptions: dataSourceOptions
+                dataSourceOptions: dataSourceOptions,
+                gridType: "search"
             });
         }
         case UPDATE_TOTAL_FEATURES: {

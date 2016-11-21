@@ -48,7 +48,9 @@ module.exports = connect((state) => {
     spatialField: state.queryform.spatialField,
     featureTypeName: activeConfig.featureTypeName,
     searchUrl: state.queryform.searchUrl,
-    dataSourceOptions: state.grid.dataSourceOptions
+    dataSourceOptions: state.grid.dataSourceOptions,
+    header: state.grid.gridType === 'search' ? "featuregrid.header" : "featuregrid.header_all",
+    backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch"
     };
 }, {
     onDetail: loadCardTemplate,

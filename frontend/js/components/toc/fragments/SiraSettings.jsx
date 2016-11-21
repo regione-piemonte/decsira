@@ -14,6 +14,7 @@ const WMSLegend = require('../../../../MapStore2/web/client/components/TOC/fragm
 const assign = require('object-assign');
 
 const {toggleSiraControl} = require('../../../actions/controls');
+const {setGridType} = require('../../../actions/grid');
 const {
     // SiraQueryPanel action functions
     expandFilterPanel
@@ -31,7 +32,8 @@ const SiraSettings = React.createClass({
         updateNode: React.PropTypes.func,
         updateSettings: React.PropTypes.func,
         expandFilterPanel: React.PropTypes.func,
-        toggleSiraControl: React.PropTypes.func
+        toggleSiraControl: React.PropTypes.func,
+        setGridType: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -41,7 +43,8 @@ const SiraSettings = React.createClass({
             updateSettings: () => {},
             updateNode: () => {},
             expandFilterPanel: () => {},
-            toggleSiraControl: () => {}
+            toggleSiraControl: () => {},
+            setGridType: () => {}
         };
     },
     renderOpacity() {
@@ -66,7 +69,7 @@ const SiraSettings = React.createClass({
                     style={glyphStyle}
                     key="toggle-featuregrid"
                     glyph="th"
-                    onClick={this.props.toggleSiraControl}/>)
+                    onClick={this.toggleSiraControl}/>)
                     ];
     },
     render() {
@@ -84,6 +87,10 @@ const SiraSettings = React.createClass({
             />) : (<span/>)}
             </div>);
     },
+    toggleSiraControl() {
+        this.props.toggleSiraControl();
+        this.props.setGridType('all_results');
+    },
     updateOpacity(newParams) {
         this.props.updateSettings(newParams);
         this.props.updateNode(
@@ -99,5 +106,6 @@ const SiraSettings = React.createClass({
 
 module.exports = connect(() =>({}), {
     expandFilterPanel,
-    toggleSiraControl: toggleSiraControl.bind(null, 'grid', true)
+    toggleSiraControl: toggleSiraControl.bind(null, 'grid', true),
+    setGridType: setGridType
 })(SiraSettings);

@@ -29,6 +29,7 @@ const FeatureGrid = connect((state) => {
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const Message = require('../../MapStore2/web/client/components/I18N/Message');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('./GoToDetail');
 const Spinner = require('react-spinkit');
@@ -77,6 +78,7 @@ const SiraGrid = React.createClass({
         selectAllToggle: React.PropTypes.func,
         templateProfile: React.PropTypes.string,
         zoomToFeatureAction: React.PropTypes.func,
+        backToSearch: React.PropTypes.string,
         setExportParams: React.PropTypes.func
     },
     contextTypes: {
@@ -108,11 +110,12 @@ const SiraGrid = React.createClass({
             searchUrl: null,
             dataSourceOptions: {
                 rowCount: -1,
-                pageSize: 10
+                pageSize: 20
             },
             initWidth: 600,
             withMap: true,
             templateProfile: 'default',
+            backToSearch: "featuregrid.backtosearch",
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -310,7 +313,7 @@ const SiraGrid = React.createClass({
                                 <Button
                                     className="back-to-query"
                                     style={{marginBottom: "12px"}}
-                                    onClick={() => this.onGridClose(true)}><span>Torna al pannello di ricerca</span>
+                                    onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
                                 </Button>
                                 <h5>Risultati - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
 
