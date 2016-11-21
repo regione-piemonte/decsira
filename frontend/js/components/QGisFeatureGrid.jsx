@@ -19,7 +19,7 @@ const {
 
 const {loadCardTemplate} = require('../actions/card');
 const {toggleSiraControl} = require('../actions/controls');
-const {setExportParams} = require('../actions/siraExporter');
+const {setExportParams} = require('../actions/siraexporter');
 
 const {
     // SiraQueryPanel action functions
