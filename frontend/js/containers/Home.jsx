@@ -17,7 +17,7 @@ require('../../assets/css/home.css');
 require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 require('../../assets/global/css/skin.css');
 require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
-require('../../assets/global/css/bootstrap-themes/yeti/bootstrap.css');
+// require('../../assets/global/css/bootstrap-themes/yeti/bootstrap.css');
 
 const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 

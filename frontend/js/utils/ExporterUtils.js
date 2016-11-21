@@ -9,17 +9,18 @@ const FileSaver = require('browser-filesaver');
 const shpwrite = require('shp-write');
 const ExporterUtils = {
     exportFeatures: function(outputformat, features, columns, filename = 'export') {
+        const name = filename.replace(':', "_");
         switch (outputformat) {
             case "csv": {
-                this.exportCSV(features, columns, filename);
+                this.exportCSV(features, columns, name);
                 break;
             }
             case "shp": {
-                this.exportShp(features, columns, filename);
+                this.exportShp(features, columns, name);
                 break;
             }
             default:
-                this.exportCSV(features, columns, filename);
+                this.exportCSV(features, columns, name);
         }
     },
     exportCSV: function(features, columns, filename) {

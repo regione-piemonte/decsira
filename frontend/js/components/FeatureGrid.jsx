@@ -136,7 +136,7 @@ const SiraGrid = React.createClass({
         }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize && this.props.attributes[0]) {
             let newFilter = FilterUtils.getOgcAllPropertyValue(this.props.featureTypeName, this.props.attributes[0].attribute);
             this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
-                "maxFeatures": 15,
+                "maxFeatures": this.props.dataSourceOptions.pageSize || 20,
                 "startIndex": 0
                 });
         }
