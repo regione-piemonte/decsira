@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="spring-db-context.xml" />
+
+	<bean id="cswAdapter" class="it.csi.sira.backend.metadata.integration.servizi.csw.CswAdapter">
+		<property name="integratioManager" ref="integratioManager" />
+	</bean>
+
+	<bean id="cswService" class="it.csi.sira.backend.metadata.integration.servizi.csw.CswService">
+	</bean>
+
+	<bean id="metadataManager" class="it.csi.sira.backend.metadata.business.MetadataManager">
+		<property name="integratioManager" ref="integratioManager" />
+		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="cswAdapter" ref="cswAdapter" />
+		<property name="cswService" ref="cswService" />
+	</bean>
+
+	<bean id="integratioManager" class="it.csi.sira.backend.metadata.utils.IntegratioManager">
+		<property name="daoManager" ref="daoManager" />
+		<property name="sequenceManager" ref="sequenceManager" />
+		<property name="queries" ref="queries" />
+	</bean>
+
+	<bean id="queries" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations" value="classpath:/queries.xml" />
+	</bean>
+
+</beans>
