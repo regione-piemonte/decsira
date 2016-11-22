@@ -16,6 +16,7 @@ const SHOW_LOADING = 'SHOW_LOADING';
 const CREATE_GRID_DATA_SOURCE = 'CREATE_GRID_DATA_SOURCE';
 const UPDATE_TOTAL_FEATURES = 'UPDATE_TOTAL_FEATURES';
 const FEATURES_LOADED_PAG = 'FEATURES_LOADED_PAG';
+const SET_GRID_TYPE = 'SET_GRID_TYPE';
 
 function configureGrid(config) {
     return {
@@ -125,6 +126,13 @@ function createGridDataSource(pagination) {
     };
 }
 
+function setGridType(gridType) {
+    return {
+        type: SET_GRID_TYPE,
+        gridType
+    };
+}
+
 function updateTotalFeatures(data) {
     return {
         type: UPDATE_TOTAL_FEATURES,
@@ -182,6 +190,7 @@ module.exports = {
     CREATE_GRID_DATA_SOURCE,
     UPDATE_TOTAL_FEATURES,
     FEATURES_LOADED_PAG,
+    SET_GRID_TYPE,
     configureGrid,
     configureGridData,
     createGridDataSource,
@@ -190,5 +199,6 @@ module.exports = {
     loadGridModel,
     loadGridModelWithFilter,
     configureGridError,
-    loadFeaturesWithPagination
+    loadFeaturesWithPagination,
+    setGridType
 };

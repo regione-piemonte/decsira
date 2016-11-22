@@ -56,7 +56,8 @@ const {
 
 const {
     loadGridModelWithFilter,
-    loadGridModelWithPagination
+    loadGridModelWithPagination,
+    setGridType
 } = require('../actions/grid');
 
 const SideQueryPanel = React.createClass({
@@ -292,6 +293,7 @@ const SideQueryPanel = React.createClass({
     },
     onQuery: function(url, filter, params) {
         this.props.siraActions.onExpandFilterPanel(false);
+        this.props.siraActions.setGridType('search');
         if (this.props.pagination && (this.props.pagination.startIndex || this.props.pagination.startIndex === 0)) {
             let newFilter = filter.replace("<wfs:GetFeature", "<wfs:GetPropertyValue valueReference='" + this.props.attributes[0].attribute + "' ");
             newFilter = newFilter.replace("</wfs:GetFeature", "</wfs:GetPropertyValue");
@@ -333,7 +335,8 @@ module.exports = connect((state) => {
         siraActions: bindActionCreators({
             // SiraQueryPanel actions
             onExpandFilterPanel: expandFilterPanel,
-            onCloseError: hideQueryError
+            onCloseError: hideQueryError,
+            setGridType
         }, dispatch),
         queryFormActions: {
             // QueryBuilder actions

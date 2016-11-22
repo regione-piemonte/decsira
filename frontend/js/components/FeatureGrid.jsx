@@ -7,15 +7,29 @@ const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 const FilterUtils = require('../utils/SiraFilterUtils');
 
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
+const {getFeaturesAndExport} = require('../actions/siraexporter');
+const SiraExporter = connect((state) => {
+    return {
+        show: state.siraControls.exporter,
+        exportParams: state.siraexporter.params,
+        featuregrid: state.grid && state.grid.featuregrid,
+        loading: state.siraexporter.loading,
+        errormsg: state.siraexporter.errormsg
+    };
+}, {
+    getFeaturesAndExport
+})(require('./SiraExporter'));
+
 const FeatureGrid = connect((state) => {
     return {
         select: state.featuregrid && state.featuregrid.select || [],
         selectAllActive: state.featuregrid && state.featuregrid.selectAll
     };
-}, {})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const Message = require('../../MapStore2/web/client/components/I18N/Message');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('./GoToDetail');
 const Spinner = require('react-spinkit');
@@ -63,7 +77,9 @@ const SiraGrid = React.createClass({
         cleanError: React.PropTypes.func,
         selectAllToggle: React.PropTypes.func,
         templateProfile: React.PropTypes.string,
-        zoomToFeatureAction: React.PropTypes.func
+        zoomToFeatureAction: React.PropTypes.func,
+        backToSearch: React.PropTypes.string,
+        setExportParams: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -94,11 +110,12 @@ const SiraGrid = React.createClass({
             searchUrl: null,
             dataSourceOptions: {
                 rowCount: -1,
-                pageSize: 10
+                pageSize: 20
             },
             initWidth: 600,
             withMap: true,
             templateProfile: 'default',
+            backToSearch: "featuregrid.backtosearch",
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -119,7 +136,7 @@ const SiraGrid = React.createClass({
         }else if ( this.props.pagination && !this.props.dataSourceOptions.pageSize && this.props.attributes[0]) {
             let newFilter = FilterUtils.getOgcAllPropertyValue(this.props.featureTypeName, this.props.attributes[0].attribute);
             this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
-                "maxFeatures": 15,
+                "maxFeatures": this.props.dataSourceOptions.pageSize || 20,
                 "startIndex": 0
                 });
         }
@@ -153,7 +170,7 @@ const SiraGrid = React.createClass({
         if (this.props.selectAllToggle) {
             this.props.selectAllToggle();
         }
-        this.props.toggleSiraControl();
+        this.props.toggleSiraControl('grid');
         if (filter) {
             this.props.onExpandFilterPanel(true);
         }
@@ -287,11 +304,16 @@ const SiraGrid = React.createClass({
         if (this.props.open) {
             return (
                     <Panel className="featuregrid-container sidepanel-featuregrid" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
+                    <SiraExporter
+                        toggleExporter={this.props.toggleSiraControl}
+                        searchUrl={this.props.searchUrl}
+                        params={this.props.params}
+                    />
                             <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
                                 <Button
                                     className="back-to-query"
                                     style={{marginBottom: "12px"}}
-                                    onClick={() => this.onGridClose(true)}><span>Torna al pannello di ricerca</span>
+                                    onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
                                 </Button>
                                 <h5>Risultati - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
 
@@ -316,6 +338,7 @@ const SiraGrid = React.createClass({
                                         toolPanel: true,
                                         selectAll: true
                                     }}
+                                    exportAction={this.exportFeatures}
                                     {...gridConf}
                                     />
                             </div>
@@ -328,6 +351,7 @@ const SiraGrid = React.createClass({
                                     <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                                 </div>
                             </div>) : null}
+
                     </Panel>
             );
         }
@@ -372,6 +396,24 @@ const SiraGrid = React.createClass({
         if (!this.props.detailOpen) {
             this.props.onShowDetail();
         }
+    },
+    exportFeatures(api) {
+        this.props.toggleSiraControl("exporter", true);
+        let filterObj = {
+        groupFields: this.props.groupFields,
+        filterFields: this.props.filterFields.filter((field) => field.value),
+        spatialField: this.props.spatialField
+        };
+        let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion);
+        let features = [];
+        api.forEachNode((n) => (features.push(n.data)));
+        let columns = api.columnController.getAllDisplayedColumns().reduce((cols, c) => {
+            if ( c.colId.startsWith("properties.")) {
+                cols.push(c.colDef);
+            }
+            return cols;
+        }, []);
+        this.props.setExportParams({filter, features, columns, featureType: this.props.featureTypeName});
     }
 });
 

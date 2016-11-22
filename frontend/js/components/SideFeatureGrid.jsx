@@ -19,7 +19,7 @@ const {
 
 const {loadCardTemplate} = require('../actions/card');
 const {toggleSiraControl} = require('../actions/controls');
-// const {loadFeatureGridConfig} = require('../actions/grid');
+const {setExportParams} = require('../actions/siraexporter');
 
 const {
     // SiraQueryPanel action functions
@@ -48,17 +48,20 @@ module.exports = connect((state) => {
     spatialField: state.queryform.spatialField,
     featureTypeName: activeConfig.featureTypeName,
     searchUrl: state.queryform.searchUrl,
-    dataSourceOptions: state.grid.dataSourceOptions
+    dataSourceOptions: state.grid.dataSourceOptions,
+    header: state.grid.gridType === 'search' ? "featuregrid.header" : "featuregrid.header_all",
+    backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch"
     };
 }, {
     onDetail: loadCardTemplate,
     onShowDetail: toggleSiraControl.bind(null, 'detail'),
-    toggleSiraControl: toggleSiraControl.bind(null, 'grid'),
+    toggleSiraControl: toggleSiraControl,
     changeMapView: changeMapView,
     onExpandFilterPanel: expandFilterPanel,
     selectFeatures: selectFeatures,
     onQuery: loadFeaturesWithPagination,
     onConfigureQuery: loadGridModelWithPagination,
     cleanError: configureGridError,
-    selectAllToggle: selectAllToggle
+    selectAllToggle: selectAllToggle,
+    setExportParams
 })(require('./FeatureGrid'));

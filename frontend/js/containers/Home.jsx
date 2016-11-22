@@ -9,13 +9,15 @@ const React = require('react');
 const Debug = require('../../MapStore2/web/client/components/development/Debug');
 const {connect} = require('react-redux');
 
-const {Link} = require('react-router');
-
-const {Glyphicon} = require('react-bootstrap');
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+const Footer = require('../components/Footer');
+const Header = require('../components/Header');
+const PlatformNumbers = require('../components/PlatformNumbers');
 
 require('../../assets/css/home.css');
 require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
+require('../../assets/global/css/skin.css');
+require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
+// require('../../assets/global/css/bootstrap-themes/yeti/bootstrap.css');
 
 const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 
@@ -76,47 +78,7 @@ const MetadataInfoBox = connect(
 const Home = () => (
      <div className="home">
 
-           <div id="header-servizio" className="container-fluid">
-               <div className="row-fluid">
-                     <div className="container testalino">
-                         <div className="row">
-                              <div id="portalHeader">
-                                     <noscript className="alert_js">
-                                     <p>ATTENZIONE! Il browser in uso non supporta le applicazioni Javascript.<br />
-                                     Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
-                                     potrebbe essere necessario l&acute;utilizzo dei Javascript.
-                                     </p></noscript>
-                              </div>
-
-                              <div id="sx">
-                              </div>
-
-                              <div id="dx">
-                              </div>
-
-                              <div className="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                                 <h2>Sira</h2>
-                              </div>
-
-                              <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
-                               <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
-                                 <i className="fa fa-bars"></i>
-                               </button>
-                             </div>
-
-                             <nav className="pimenu-navbar-collapse collapse">
-                                 <ul className="nav navbar-nav">
-                                     <li className="item-113"><a id="profileALink" href="#">Profilo A</a></li>
-                                     <li className="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
-                                 </ul>
-                             </nav>
-
-
-                         </div>
-                     </div>
-               </div>
-           </div>
-
+       <Header />
 
            <div className="container-fluid">
                <div className="row-fluid sb-sx">
@@ -181,65 +143,9 @@ const Home = () => (
             <Mosaic />
             <LinkToMetadataInfoBox />
             <MetadataInfoBox />
-
-            <div className="container-fluid piattaforma">
-             <div className="row-fluid">
-                 <div className="container">
-                     <div className="row">
-                         <h3>I numeri della piattaforma</h3>
-                         <ul className="list-group numeri">
-                           <li className="list-group-item col-md-4"><span className="cifra">25</span> <span className="sotto_cifra">Oggetti in continuo aggiornamento</span></li>
-                           <li className="list-group-item col-md-4"><span className="cifra">24<span className="con_cifra">%</span></span> <span className="sotto_cifra">Crescita annuale base&nbsp;dati previsto</span></li>
-                           <li className="list-group-item col-md-4"><span className="cifra">50</span> <span className="sotto_cifra">Indicatori ambientali disponibili</span></li>
-                         </ul>
-                     </div>
-                 </div>
-             </div>
-            </div>
-
-
-             <div className="homepage">
-                 <div className="header">
-                     <div className="header-text">
-                         Sistema della conoscenza dell&apos;Ambiente
-                     </div>
-                     <div className="header-burger">
-                         <Glyphicon glyph="glyphicon glyphicon-menu-hamburger"/>
-                     </div>
-                 </div>
-                 <div className="header-2">
-                     <p>
-                         <span>
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at urna lobortis libero viverra elementum et et nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut a felis sit amet libero ultricies elementum a vitae quam...... scopri di più
-                         </span>
-                     </p>
-                 </div>
-                 <div className="header-3">
-                     <div className="header-4">
-                         <h2 className="search-title">Cerca</h2>
-                         <SearchBar
-                             className="siraSearchBar"
-                             placeholder="Cerca dataset, applicazioni tematiche"/>
-                     </div>
-                 </div>
-                 <div className="header-5">
-                     <div className="box-left">
-                         <Link to="/map/A">
-                             <p><span style={{"color": "rgb(66, 66, 66)", "fontSize": "24px", "fontWeight": "bold"}}>AUA</span></p>
-                             <p><span style={{"color": "#808080", "fontSize": "16px"}}>PROFILO A</span></p>
-                         </Link>
-                     </div>
-                     <div className="box-right">
-                         <Link to="/map/B">
-                             <p><span style={{"color": "rgb(66, 66, 66)", "fontSize": "24px", "fontWeight": "bold"}}>AUA</span></p>
-                             <p><span style={{"color": "#808080", "fontSize": "16px"}}>PROFILO B</span></p>
-                         </Link>
-                     </div>
-                 </div>
-
-             </div>
-
-             <Debug/>
+            <PlatformNumbers />
+            <Footer />
+            <Debug/>
 </div>
  );
 
