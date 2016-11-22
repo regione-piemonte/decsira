@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="GET_METADATA_OBJECTS_BY_ID_CATEGORIA">
+	    <![CDATA[
+		select distinct(c.*) 
+	    from sipra_mtd_r_categoria_mtd a, sipra_mtd_t_metadato b, sipra_mtd_t_mtd_csw c, sipra_mtd_t_funzione d 
+		where id_categoria = :id_categoria and 
+		      b.id_metadato = a.id_metadato and 
+		      c.id_metadato = b.id_metadato and
+		      d.fk_metadato = b.id_metadato and
+              d.fk_tipo_funzione in (1, 2, 3)
+		]]>
+	</entry>
+
+	<entry key="GET_METADATA_VIEWS_BY_ID_CATEGORIA">
+	    <![CDATA[
+		select distinct(c.*)  
+	    from sipra_mtd_r_categoria_mtd a, sipra_mtd_t_metadato b, sipra_mtd_t_mtd_csw c, sipra_mtd_t_funzione d 
+		where id_categoria = :id_categoria and 
+		      b.id_metadato = a.id_metadato and 
+		      c.id_metadato = b.id_metadato and
+		      d.fk_metadato = b.id_metadato and
+              d.fk_tipo_funzione in (4)
+		]]>
+	</entry>
+</properties>
