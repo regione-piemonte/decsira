@@ -3,7 +3,7 @@
 <properties>
 	<entry key="GET_METADATA_OBJECTS_BY_ID_CATEGORIA">
 	    <![CDATA[
-		select c.* 
+		select distinct(c.*) 
 	    from sipra_mtd_r_categoria_mtd a, sipra_mtd_t_metadato b, sipra_mtd_t_mtd_csw c, sipra_mtd_t_funzione d 
 		where id_categoria = :id_categoria and 
 		      b.id_metadato = a.id_metadato and 
@@ -15,7 +15,7 @@
 
 	<entry key="GET_METADATA_VIEWS_BY_ID_CATEGORIA">
 	    <![CDATA[
-		select c.* 
+		select distinct(c.*)  
 	    from sipra_mtd_r_categoria_mtd a, sipra_mtd_t_metadato b, sipra_mtd_t_mtd_csw c, sipra_mtd_t_funzione d 
 		where id_categoria = :id_categoria and 
 		      b.id_metadato = a.id_metadato and 

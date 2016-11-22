@@ -1,10 +1,10 @@
 package it.csi.sira.backend.metadata.business;
 
 import it.csi.sira.backend.metadata.dto.MetaObject;
+
 import it.csi.sira.backend.metadata.exception.MetadataManagerException;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdDFontedati;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdRCategLingua;
-import it.csi.sira.backend.metadata.integration.dto.SipraMtdRCategSottocateg;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdRCategappCategori;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdRCategoriaMtd;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdRParolachiaveMtd;
@@ -13,7 +13,6 @@ import it.csi.sira.backend.metadata.integration.dto.SipraMtdTFunzione;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTMetadato;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTMtdCsw;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTParolaChiave;
-import it.csi.sira.backend.metadata.integration.dto.SipraMtdTSottocategoria;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTStoricoFunzione;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTStoricoMtdCsw;
 import it.csi.sira.backend.metadata.integration.servizi.csw.CswAdapter;
@@ -39,9 +38,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class MetadataManager {
 
@@ -145,7 +141,7 @@ public class MetadataManager {
 	return children;
   }
 
-  private MetaObject[] getMetaCategories(int idCategoria) {
+  private MetaObject[] getMetaCategories(int idCategoria) throws MetadataManagerException {
 
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
@@ -167,14 +163,14 @@ public class MetadataManager {
 
 		SipraMtdRCategappCategori sipraMtdRCategappCategori = metaCategories.get(i);
 
-		SipraMtdRCategLingua metaCat = integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO()
+		SipraMtdRCategLingua sipraMtdRCategLingua = integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO()
 			.findByPK(sipraMtdRCategappCategori.getIdCategoria(), 1);
 
 		MetaObject metaCategory = new MetaObject();
-		metaCategory.setTitle(metaCat.getDesCategoria());
+		metaCategory.setTitle(sipraMtdRCategLingua.getDesCategoria());
 
-		if ("S".equals(metaCat.getFlAlias())) {
-		  metaCategory.setTitle(metaCat.getDesAlias());
+		if ("S".equals(sipraMtdRCategLingua.getFlAlias())) {
+		  metaCategory.setTitle(sipraMtdRCategLingua.getDesAlias());
 		}
 
 		metaCategory.setObjectCounter(0);
@@ -197,22 +193,23 @@ public class MetadataManager {
 		  metaViewsList = new ArrayList<MetaObject>(Arrays.asList(metaViews));
 		}
 
-		ArrayList<MetaObject> metaList = new ArrayList<MetaObject>();
+		ArrayList<MetaObject> metadataList = new ArrayList<MetaObject>();
+
 		if (metaObjectsList != null && metaViewsList != null) {
-		  metaList.addAll(metaObjectsList);
-		  metaList.addAll(metaViewsList);
+		  metadataList.addAll(metaObjectsList);
+		  metadataList.addAll(metaViewsList);
 		}
 
 		if (metaObjectsList != null && metaViewsList == null) {
-		  metaList.addAll(metaObjectsList);
+		  metadataList.addAll(metaObjectsList);
 		}
 
 		if (metaObjectsList == null && metaViewsList != null) {
-		  metaList.addAll(metaViewsList);
+		  metadataList.addAll(metaViewsList);
 		}
 
-		if (metaList != null) {
-		  metaCategory.setMetadata(metaList.toArray(new MetaObject[metaList.size()]));
+		if (metadataList != null) {
+		  metaCategory.setMetadata(metadataList.toArray(new MetaObject[metadataList.size()]));
 		}
 
 		children[i] = metaCategory;
@@ -224,8 +221,7 @@ public class MetadataManager {
 	return children;
   }
 
-  
-  private MetaObject getAppCategories(Integer idCategoria) throws MetadataManagerException {
+  private MetaObject getAppCategories(Integer idAppCategory) throws MetadataManagerException {
 
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
@@ -233,20 +229,20 @@ public class MetadataManager {
 	logger.debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	Map<String, Object> params = null;
-	MetaObject appCategory = null;
+	MetaObject metaObject = null;
 
-	SipraMtdTCategoriaAppl appCat = integratioManager.getDaoManager().getSipraMtdTCategoriaApplDAO().findByPK(idCategoria);
+	SipraMtdTCategoriaAppl appCat = integratioManager.getDaoManager().getSipraMtdTCategoriaApplDAO().findByPK(idAppCategory);
 
 	if (appCat != null) {
-	  appCategory = new MetaObject();
-	  appCategory.setTitle(appCat.getDesCategoria());
+	  metaObject = new MetaObject();
+	  metaObject.setTitle(appCat.getDesCategoria());
 
 	} else {
 	  throw new MetadataManagerException("Category not found in sipra_mtd_t_categoria_appl!!");
 	}
 
 	params = new HashMap<String, Object>();
-	params.put("fk_padre", idCategoria);
+	params.put("fk_padre", appCat.getIdCategoriaAppl());
 	List<SipraMtdTCategoriaAppl> appChildrenCategories = integratioManager.getDaoManager().getSipraMtdTCategoriaApplDAO().findByCriteria(params);
 
 	if (appChildrenCategories != null && appChildrenCategories.size() > 0) {
@@ -257,32 +253,30 @@ public class MetadataManager {
 		children[i] = getAppCategories(appChildrenCategories.get(i).getIdCategoriaAppl());
 	  }
 
-	  appCategory.setCategories(children);
+	  metaObject.setCategories(children);
 
-	  if (appCategory.getCategories() != null) {
-		for (int c = 0; c < appCategory.getCategories().length; c++) {
-		  appCategory.setObjectCounter(appCategory.getCategories()[c].getObjectCounter() + appCategory.getObjectCounter());
-		  appCategory.setTematicViewCounter(appCategory.getCategories()[c].getTematicViewCounter() + appCategory.getTematicViewCounter());
+	  if (metaObject.getCategories() != null) {
+		for (int c = 0; c < metaObject.getCategories().length; c++) {
+		  metaObject.setObjectCounter(metaObject.getCategories()[c].getObjectCounter() + metaObject.getObjectCounter());
+		  metaObject.setTematicViewCounter(metaObject.getCategories()[c].getTematicViewCounter() + metaObject.getTematicViewCounter());
 		}
 	  }
 	} else {
 
-	  
-	  // TODO qui o si va sui metadati o si va sulle sotto categorie !?!?!?!?!?!!?
-	  
-	  appCategory.setCategories(getMetaCategories(idCategoria));
+	  // categorie dei metadati ...........
+	  metaObject.setCategories(getMetaCategories(idAppCategory));
 
-	  if (appCategory.getCategories() != null) {
-		for (int i = 0; i < appCategory.getCategories().length; i++) {
-		  appCategory.setObjectCounter(appCategory.getCategories()[i].getObjectCounter() + appCategory.getObjectCounter());
-		  appCategory.setTematicViewCounter(appCategory.getCategories()[i].getTematicViewCounter() + appCategory.getTematicViewCounter());
+	  if (metaObject.getCategories() != null) {
+		for (int i = 0; i < metaObject.getCategories().length; i++) {
+		  metaObject.setObjectCounter(metaObject.getCategories()[i].getObjectCounter() + metaObject.getObjectCounter());
+		  metaObject.setTematicViewCounter(metaObject.getCategories()[i].getTematicViewCounter() + metaObject.getTematicViewCounter());
 		}
 	  }
 	}
 
 	logger.debug(LogFormatter.format(className, methodName, "END"));
 
-	return appCategory;
+	return metaObject;
   }
 
   public void updateMetadataCounters() throws MetadataManagerException {
@@ -465,6 +459,20 @@ public class MetadataManager {
 	updateCategories();
 	cleanKeyWords();
 
+	// *** IL BATCH LAVORA SOLO SULLE CATEGORIE INSPIRE E PSR IMPORTATE DAL CSW
+	String query = "select a.* from sipra_mtd_r_categ_lingua a, sipra_mtd_t_categoria b where b.id_categoria = a.id_categoria and b.fk_tipo_categoria in (1, 2)";
+
+	params = new HashMap<String, Object>();
+	List<SipraMtdRCategLingua> filterAategories = integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO()
+		.findByGenericCriteria(query, integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO().getRowMapper(), params);
+
+	Map<String, Integer> filterAategoriesMap = new HashMap<String, Integer>();
+
+	for (SipraMtdRCategLingua categoria : filterAategories) {
+	  filterAategoriesMap.put((String) categoria.getDesCategoria(), (Integer) categoria.getIdCategoria());
+	}
+	// ***
+
 	params = new HashMap<String, Object>();
 	params.put("fl_attiva", "S");
 	List<SipraMtdDFontedati> elencoFontiDati = integratioManager.getDaoManager().getSipraMtdDFontedatiDAO().findByCriteria(params);
@@ -482,11 +490,9 @@ public class MetadataManager {
 
 	  cswService.setUrlService(fonteDati.getUrlServizio());
 
-	  List<SipraMtdRCategLingua> categorie = integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO().findAll();
+	  for (int i = 0; i < filterAategories.size(); i++) {
 
-	  for (int i = 0; i < categorie.size(); i++) {
-
-		SipraMtdRCategLingua categoria = categorie.get(i);
+		SipraMtdRCategLingua categoria = filterAategories.get(i);
 
 		logger.info(LogFormatter.format(className, methodName, "---------: "));
 		logger.info(LogFormatter.format(className, methodName, "CATEGORIA: " + categoria.getDesCategoria()));
@@ -498,7 +504,7 @@ public class MetadataManager {
 
 		  logger.info(LogFormatter.format(className, methodName, "RECORD ESTRATTI: " + cswRecords.size()));
 
-		  List<CswRecord> cswValidRecords = this.filterOnCategory(cswRecords);
+		  List<CswRecord> cswValidRecords = this.filterOnCategory(cswRecords, filterAategoriesMap);
 
 		  logger.info(LogFormatter.format(className, methodName, "RECORD VALIDI: " + cswValidRecords.size()));
 
@@ -526,30 +532,6 @@ public class MetadataManager {
   }
 
   /**
-   * get json metadata
-   *
-   * @param cswRecords
-   *          csw metadata records
-   * 
-   * @return json string
-   */
-  private String getJson(List<CswRecord> cswRecords) {
-	final String methodName = new Object() {
-	}.getClass().getEnclosingMethod().getName();
-
-	String json = null;
-
-	logger.debug(LogFormatter.format(className, methodName, "BEGIN"));
-
-	Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-	json = gson.toJson(cswRecords.toArray(new CswRecord[cswRecords.size()]));
-
-	logger.debug(LogFormatter.format(className, methodName, "END"));
-
-	return json;
-  }
-
-  /**
    * filter metadata
    *
    * @param cswRecords
@@ -558,21 +540,13 @@ public class MetadataManager {
    * @return csw metadata records (list of metadata that meet the database
    *         update rules)
    */
-  private List<CswRecord> filterOnCategory(List<CswRecord> cswRecords) {
+  private List<CswRecord> filterOnCategory(List<CswRecord> cswRecords, Map<String, Integer> categorieMap) {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
 	logger.debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	List<CswRecord> cswRecordsValid = new ArrayList<CswRecord>();
-
-	Map<String, Integer> categorieMap = new HashMap<String, Integer>();
-
-	List<SipraMtdRCategLingua> categorie = integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO().findAll();
-
-	for (SipraMtdRCategLingua categoria : categorie) {
-	  categorieMap.put((String) categoria.getDesCategoria(), (Integer) categoria.getIdCategoria());
-	}
 
 	// cerco i record validi ossia quelli che tra i subject hanno almeno
 	// una categoria tra quelle passate in input
@@ -668,10 +642,6 @@ public class MetadataManager {
 		integratioManager.getDaoManager().getSipraMtdRCategoriaMtdDAO()
 			.delete("delete from sipra_mtd_r_categoria_mtd where id_metadato = :id_metadato", params);
 
-		if (cswRecord.getIdMetadato() == 31411) {
-		  logger.debug(LogFormatter.format(className, methodName, "BREAKPOINT"));
-		}
-
 		if (cswRecord.getSubjects() != null) {
 		  for (int s = 0; s < cswRecord.getSubjects().length; s++) {
 
@@ -691,6 +661,10 @@ public class MetadataManager {
 			  // una lingua diversa nell'ambito delle stesso metadato
 			  SipraMtdRCategoriaMtd cat = integratioManager.getDaoManager().getSipraMtdRCategoriaMtdDAO()
 				  .findByPK(categoria.getIdCategoria(), categoria.getIdMetadato());
+
+			  if (categoria.getIdCategoria() == 55) {
+				logger.debug(LogFormatter.format(className, methodName, "BREAK"));
+			  }
 
 			  if (cat == null) {
 				integratioManager.getDaoManager().getSipraMtdRCategoriaMtdDAO().insert(categoria);
@@ -771,69 +745,6 @@ public class MetadataManager {
 	}
 
 	logger.debug(LogFormatter.format(className, methodName, "END"));
-  }
-
-  /**
-   * search metadata
-   *
-   * @param txt
-   *          text to search
-   * @param service
-   *          service to use
-   * @param startPosition
-   *          first record
-   * @param maxRecords
-   *          number of records
-   * 
-   * @return json string
-   */
-  public String searchMetadata(String txt, String service, int startPosition, int maxRecords) throws MetadataManagerException {
-
-	String json = null;
-	Map<String, Object> params = null;
-
-	params = new HashMap<String, Object>();
-	params.put("des_fontedati", "r_piemon");
-	SipraMtdDFontedati fonteDatiX = integratioManager.getDaoManager().getSipraMtdDFontedatiDAO().findByCriteria(params).get(0);
-
-	// **************************
-
-	cswService.setUrlService(fonteDatiX.getUrlServizio());
-
-	String xmlCSW = null;
-
-	try {
-	  xmlCSW = cswService.getRecords(txt, startPosition, maxRecords);
-	} catch (Exception e) {
-	  e.printStackTrace();
-	  json = "{\"status\":\"error: " + e.getMessage() + "\"\"}";
-	}
-
-	// **************************
-
-	List<CswRecord> cswRecords = null;
-
-	try {
-	  cswRecords = cswAdapter.getCswRecords(xmlCSW, fonteDatiX);
-	} catch (CswAdapterException e) {
-	  e.printStackTrace();
-	  cswRecords = null;
-	  json = "{\"status\":\"error: " + e.getMessage() + "\"\"}";
-	}
-
-	// **************************
-
-	List<CswRecord> cswValidRecords = null;
-
-	if (cswRecords != null) {
-	  cswValidRecords = this.filterOnCategory(cswRecords);
-	}
-
-	if (cswValidRecords != null) {
-	  json = this.getJson(cswValidRecords);
-	}
-
-	return json;
   }
 
   private void mapping(SipraMtdTMtdCsw metadatoCSW, CswRecord cswRecord, int idMetadato) {
