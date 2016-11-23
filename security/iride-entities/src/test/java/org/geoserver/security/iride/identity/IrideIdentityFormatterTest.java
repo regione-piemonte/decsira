@@ -29,7 +29,7 @@ import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.identity.IrideIdentityFormatter;
 import org.geoserver.security.iride.entity.identity.IrideIdentityFormatter.FormatStyle;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public final class IrideIdentityFormatterTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideIdentityTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideIdentityTest.class);
 
     /**
      * <code>IRIDE</code> <code>Digital Identity</code> tokens.

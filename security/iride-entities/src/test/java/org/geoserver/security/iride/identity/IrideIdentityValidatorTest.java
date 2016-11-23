@@ -29,7 +29,7 @@ import org.geoserver.security.iride.entity.identity.IrideIdentityValidator;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
 import org.geoserver.security.iride.entity.util.Utils;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public final class IrideIdentityValidatorTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideIdentityValidatorTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideIdentityValidatorTest.class);
 
     /**
      * {@link IrideIdentityValidator} instance.

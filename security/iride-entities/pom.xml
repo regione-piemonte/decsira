@@ -75,7 +75,6 @@
         <java.version>1.7</java.version>
 
         <!-- Dependencies -->
-        <gs.version>2.8-SNAPSHOT</gs.version>
         <spring.version>3.1.4.RELEASE</spring.version>
         <spring-security.version>3.1.0.RELEASE</spring-security.version>
 
@@ -136,14 +135,19 @@
     </repositories>
 
     <dependencies>
-        <!-- GeoServer -->
+        <!-- SIRA modules -->
         <dependency>
-            <groupId>org.geoserver</groupId>
-            <artifactId>gs-main</artifactId>
-            <version>${gs.version}</version>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Utilities -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.1</version>
+        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>

@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Simple SOAP service client for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.geoserver.security</groupId>
+    <artifactId>iride-service-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>IRIDE service client</name>
+    <description>Simple SOAP service client for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.</description>
+
+    <url>https://github.com/geosolutions-it/csi-sira/tree/master/security/iride-service-client</url>
+    <inceptionYear>2016</inceptionYear>
+
+    <organization>
+        <name>CSI-Piemonte</name>
+        <url>http://www.csipiemonte.it</url>
+    </organization>
+
+    <developers>
+        <developer>
+          <id>seancrow76</id>
+          <name>Simone Cornacchia</name>
+          <email>simone.cornacchia AT assioma.net</email>
+          <organization>Assioma.net</organization>
+          <organizationUrl>http://www.assioma.net</organizationUrl>
+          <roles>
+            <role>architect</role>
+            <role>developer</role>
+          </roles>
+          <timezone>+1</timezone>
+          <properties>
+            <skype>seancrow76</skype>
+          </properties>
+          <url>https://github.com/seancrow</url>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+          <name>Diego Sanmartino</name>
+          <email>diego.sanmartino AT csi.it</email>
+          <organization>CSI-Piemonte</organization>
+          <organizationUrl>http://www.csipiemonte.it</organizationUrl>
+          <roles>
+            <role>architect</role>
+          </roles>
+          <timezone>+1</timezone>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <!-- Java Version -->
+        <java.version>1.7</java.version>
+
+        <!-- Dependencies -->
+        <freeemarker.version>2.3.18</freeemarker.version>
+        <spring.version>3.1.4.RELEASE</spring.version>
+        <spring-security.version>3.1.0.RELEASE</spring-security.version>
+
+        <!-- Testing -->
+        <test.exclude.pattern>none</test.exclude.pattern>
+        <test.maxHeapSize>512M</test.maxHeapSize>
+        <test.maxPermSize>128M</test.maxPermSize>
+        <jvm.opts />
+        <java.awt.headless>true</java.awt.headless>
+        <remoteOwsTests>false</remoteOwsTests>
+        <test.allow.failure.ignore>false</test.allow.failure.ignore>
+
+        <!-- Build -->
+        <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>boundless</id>
+            <name>Boundless Maven Repository</name>
+            <url>http://repo.boundlessgeo.com/main</url>
+            <!-- contains snapshot and release (including third-party-dependences) -->
+            <!-- Restlet maven Repository (http://maven.restlet.org) -->
+            <!-- ucar (https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases) -->
+            <!-- geosolutions (http://maven.geo-solutions.it/) -->
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>osgeo</id>
+            <name>Open Source Geospatial Foundation Repository</name>
+            <url>http://download.osgeo.org/webdav/geotools/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>maven-restlet</id>
+            <name>Restlet Maven Repository</name>
+            <url>http://maven.restlet.org</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>geosolutions</id>
+            <name>GeoSolutions Repository</name>
+            <url>http://maven.geo-solutions.it</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- SIRA modules -->
+        <dependency>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-entities</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Utilities -->
+		<dependency>
+		    <groupId>commons-collections</groupId>
+		    <artifactId>commons-collections</artifactId>
+		    <version>3.1</version>
+		</dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- Google Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+
+        <!-- FreeMarker -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freeemarker.version}</version>
+        </dependency>
+
+		<!-- XStream -->
+		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+
+        <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.9.5</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Hamcrest -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- XMLUnit -->
+        <dependency>
+            <groupId>org.xmlunit</groupId>
+            <artifactId>xmlunit-core</artifactId>
+            <version>2.2.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xmlunit</groupId>
+            <artifactId>xmlunit-matchers</artifactId>
+            <version>2.2.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-beans</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!--debug>true</debug-->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- versioning -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.2.2</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <!-- resources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- unit testing -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>${test.exclude.pattern}</exclude>
+                    </excludes>
+                    <forkMode>once</forkMode>
+                    <argLine>-Xmx${test.maxHeapSize} -XX:MaxPermSize=${test.maxPermSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -DremoteOwsTests=${remoteOwsTests} -Duser.language=EN</argLine>
+                    <printSummary>true</printSummary>
+                    <testFailureIgnore>${test.allow.failure.ignore}</testFailureIgnore>
+                    <systemProperties>
+                        <property>
+                            <name>java.util.logging.config.file</name>
+                            <value>src/test/resources/conf/logging.properties</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+
+            <!-- eclipse ide integration -->
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <downloadSources>false</downloadSources>
+                    <additionalProjectnatures>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    </additionalProjectnatures>
+                </configuration>
+            </plugin>
+
+            <!-- initialize git revision info -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- https://github.com/ktoso/maven-git-commit-id-plugin -->
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/../../.git</dotGitDirectory>
+                    <prefix>build</prefix>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <skipPoms>false</skipPoms>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+
+            <!-- packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <GeoServerModule>extension</GeoServerModule>
+                            <Application-Name>${project.artifactId}-${project.version}</Application-Name>
+                            <Project-Version>${project.version}</Project-Version>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <Git-Revision>${build.commit.id}</Git-Revision>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <show>public</show>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <!-- surefire -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <showSuccess>false</showSuccess>
+                </configuration>
+            </plugin>
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <show>private</show>
+                    <!-- https://web.archive.org/web/20071203010311/http://www.umlgraph.org/ -->
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>umlgraph</artifactId>
+                        <version>5.6.6</version>
+                    </docletArtifact>
+                    <additionalparam>-qualify -enumerations -postfixpackage -hide java.*|com.google.* -views -inferrel -inferreltype -inferdep -inferdepvis private</additionalparam>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc-no-fork</report>
+                            <report>test-javadoc-no-fork</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <!-- cobertura -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>

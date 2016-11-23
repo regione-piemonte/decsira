@@ -105,7 +105,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
         this.name   = config.getName();
         this.config = new Config(config);
 
-        this.getIrideService().initializeFromConfig(config);
+        this.getIrideService().initializeFromConfig(this.config.serverUrl);
     }
 
     /*
@@ -387,13 +387,18 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
         private final String fallbackRoleServiceName;
 
         /**
+         * <code>IRIDE</code> service server <code>URL</code>.
+         */
+        private final String serverUrl;
+
+        /**
          * Constructor.
          *
          * Initialize a {@link Config} object from a {@link SecurityNamedServiceConfig} instance.
          *
          * @param cfg a {@link SecurityNamedServiceConfig} instance
-         * @throws IllegalStateException if the {@link #applicationName} or the {@link #adminRole} are not deemed valid:
-         *                               a valid {@link #applicationName} or {@link #adminRole} must be <em>non-blank</em>,
+         * @throws IllegalStateException if one of the {@link #applicationName}, the {@link #adminRole} or the {@link #serverUrl} are not deemed valid:
+         *                               a valid {@link #applicationName}, {@link #adminRole} or {@link #serverUrl} must be <em>non-blank</em>,
          *                               as per {@link StringUtils#isNotBlank(String)} check rules.
          */
         Config(SecurityNamedServiceConfig cfg) {
@@ -403,10 +408,12 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
 
             this.applicationName         = irideCfg.getApplicationName();
             this.adminRole               = irideCfg.getAdminRole();
-            this.fallbackRoleServiceName = StringUtils.trimToNull(irideCfg.getFallbackRoleService());
+            this.fallbackRoleServiceName = irideCfg.getFallbackRoleService();
+            this.serverUrl               = irideCfg.getServerURL();
 
-            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be of an empty string");
-            Preconditions.checkState(StringUtils.isNotBlank(this.adminRole), "Admin role must not be of an empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be an empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.adminRole), "Admin role must not be an empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.serverUrl), "Server URL must not be an empty string");
         }
 
         /**

@@ -37,7 +37,7 @@ import org.geoserver.security.iride.entity.identity.exception.IrideIdentityToken
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
 import org.geoserver.security.iride.entity.util.Utils;
-import org.geoserver.security.iride.entity.util.logging.LoggerProvider;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 
 /**
  * <code>IRIDE</code> <code>Digital Identity</code> entity.

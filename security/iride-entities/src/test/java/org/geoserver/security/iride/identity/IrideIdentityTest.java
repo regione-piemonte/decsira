@@ -33,7 +33,7 @@ import org.geoserver.security.iride.entity.identity.exception.IrideIdentityToken
 import org.geoserver.security.iride.entity.identity.exception.IrideIdentityInvalidTokensException;
 import org.geoserver.security.iride.entity.identity.exception.IrideIdentityMissingTokenException;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.SerializationUtils;
@@ -48,7 +48,7 @@ public final class IrideIdentityTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideIdentityTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideIdentityTest.class);
 
     /**
      * <code>IRIDE</code> <code>Digital Identity</code> tokens.

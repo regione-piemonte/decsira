@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
 import java.util.logging.Logger;
 
 import org.geoserver.security.iride.entity.IrideIdentity;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Test;
 
 /**
@@ -39,7 +39,7 @@ public final class IrideIdentityValidityTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideIdentityValidityTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideIdentityValidityTest.class);
 
     /**
      * Test method for {@link org.geoserver.security.iride.entity.IrideIdentity#isValidIrideIdentity(java.lang.String)}.
