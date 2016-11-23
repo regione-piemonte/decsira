@@ -223,8 +223,8 @@ public class IrideAuthenticationProvider extends GeoServerAuthenticationProvider
             this.applicationName      = irideCfg.getApplicationName();
             this.userGroupServiceName = irideCfg.getUserGroupServiceName();
 
-            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be of an empty string");
-            Preconditions.checkState(StringUtils.isNotBlank(this.userGroupServiceName), "User/Group Service name must be of a non-empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be an empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.userGroupServiceName), "User/Group Service name must not be an empty string");
         }
 
     }

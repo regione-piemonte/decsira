@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 import org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer;
 import org.geoserver.security.iride.entity.identity.exception.IrideIdentityMissingTokenException;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public final class IrideIdentityTokenizerTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideIdentityTokenizerTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideIdentityTokenizerTest.class);
 
     /**
      * {@link IrideIdentityTokenizer} instance.

@@ -20,10 +20,10 @@ package org.geoserver.security.iride;
 
 import java.util.Set;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.geoserver.security.impl.GeoServerUser;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.google.common.collect.ImmutableSet;
@@ -129,7 +129,7 @@ public final class IrideGeoServerUser extends GeoServerUser {
     public boolean hasInfoPersonae() {
         return
             this.getProperties().containsKey(USER_PROPERTY_INFO_PERSONAE) &&
-            CollectionUtils.isNotEmpty((Set<IrideInfoPersona>) this.getProperties().get(USER_PROPERTY_INFO_PERSONAE));
+            ! CollectionUtils.isEmpty((Set<IrideInfoPersona>) this.getProperties().get(USER_PROPERTY_INFO_PERSONAE));
     }
 
     /**
