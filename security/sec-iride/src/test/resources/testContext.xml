@@ -8,30 +8,6 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <!-- === HttpClient === BEGIN === -->
-
-    <bean id="httpClient"
-          class="test.org.geoserver.security.iride.util.factory.http.HttpClientFactoryBean" />
-
-    <!-- === HttpClient ===   END === -->
-
-    <!-- === FreeMarker === BEGIN === -->
-
-    <bean id="templateConfiguration"
-          class="org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerConfigurationFactoryBean" />
-
-    <!-- === FreeMarker ===   END === -->
-
-    <!-- === TemplateEngine === BEGIN === -->
-
-    <bean id="templateEngine"
-          class="org.geoserver.security.iride.util.template.impl.freemarker.FreeMarkerTemplateEngine"
-          p:templateConfiguration-ref="templateConfiguration"
-          p:templateExtension="ftl"
-    />
-
-    <!-- === TemplateEngine ===   END === -->
-
     <!-- === IrideAuthenticationProvider === BEGIN === -->
 
     <bean id="irideAuthenticationProviderFactory"
@@ -69,14 +45,38 @@
 
     <!-- === IrideUserGroupServiceFactory ===   END === -->
 
-    <!-- === IridePolicyEnforcer === BEGIN === -->
+    <!-- === HttpClient === BEGIN === -->
+
+    <bean id="httpClient"
+          class="test.org.geoserver.security.iride.util.factory.http.HttpClientFactoryBean" />
+
+    <!-- === HttpClient ===   END === -->
+
+    <!-- === FreeMarker === BEGIN === -->
+
+    <bean id="templateConfiguration"
+          class="org.geoserver.security.iride.service.util.factory.template.freemarker.FreeMarkerConfigurationFactoryBean" />
+
+    <!-- === FreeMarker ===   END === -->
+
+    <!-- === TemplateEngine === BEGIN === -->
+
+    <bean id="templateEngine"
+          class="org.geoserver.security.iride.service.util.template.impl.freemarker.FreeMarkerTemplateEngine"
+          p:templateConfiguration-ref="templateConfiguration"
+          p:templateExtension="ftl"
+    />
+
+    <!-- === TemplateEngine ===   END === -->
+
+    <!-- === IRIDE Service Facade === BEGIN === -->
 
     <bean id="irideService"
           class="org.geoserver.security.iride.service.IrideServiceImpl"
           p:policyManager-ref="policyManager"
     />
 
-    <!-- === IridePolicyEnforcer ===   END === -->
+    <!-- === IRIDE Service Facade ===   END === -->
 
     <!-- === HTTP Headers === BEGIN === -->
 
@@ -97,7 +97,7 @@
     <!-- === HTTP POST method Builder === BEGIN === -->
 
     <bean id="httpPostBuilder"
-          class="org.geoserver.security.iride.util.builder.http.HttpPostBuilder" />
+          class="org.geoserver.security.iride.service.util.builder.http.HttpPostBuilder" />
 
     <!-- === HTTP POST method Builder ===   END === -->
 
@@ -189,7 +189,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/findRuoliForPersonaInApplication.xsl"
                             />
                         </util:set>
@@ -200,7 +200,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/findRuoliForPersonaInUseCase.xsl"
                             />
                         </util:set>
@@ -211,7 +211,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/findUseCasesForPersonaInApplication.xsl"
                             />
                         </util:set>
@@ -222,7 +222,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/identificaUserPassword.xsl"
                             />
                         </util:set>
@@ -233,7 +233,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/isIdentitaAutentica.xsl"
                             />
                         </util:set>
@@ -244,7 +244,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/isPersonaAutorizzataInUseCase.xsl"
                             />
                         </util:set>
@@ -255,7 +255,7 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/isPersonaInRuolo.xsl"
                             />
                         </util:set>
@@ -266,11 +266,11 @@
                     <property name="transformationSources">
                         <util:set>
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/getInfoPersonaInUseCase.xsl"
                             />
                             <bean parent="abstractSAXSourceFactory"
-                                  class="org.geoserver.security.iride.util.factory.sax.SAXSourceFactory"
+                                  class="org.geoserver.security.iride.service.util.factory.sax.SAXSourceFactory"
                                   p:resource="classpath:iride/soap/response/getInfoPersonaInUseCaseReturn.xsl"
                             />
                         </util:set>
@@ -293,7 +293,7 @@
 
     <!-- Factory -->
     <bean id="xs"
-          class="org.geoserver.security.iride.util.factory.xstream.XStreamFactoryBean">
+          class="org.geoserver.security.iride.service.util.factory.xstream.XStreamFactoryBean">
         <property name="aliases">
             <map>
                 <entry key="appId" value="org.geoserver.security.iride.entity.IrideApplication" />

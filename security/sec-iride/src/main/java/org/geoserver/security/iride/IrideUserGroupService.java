@@ -97,7 +97,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
         this.name   = config.getName();
         this.config = new Config(config);
 
-        this.getIrideService().initializeFromConfig(config);
+        this.getIrideService().initializeFromConfig(this.config.serverUrl);
     }
 
     /*
@@ -174,6 +174,11 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
         private final String applicationName;
 
         /**
+         * <code>IRIDE</code> service server <code>URL</code>.
+         */
+        private final String serverUrl;
+
+        /**
          * Constructor.
          *
          * Initialize a {@link Config} object from a {@link SecurityNamedServiceConfig} instance.
@@ -189,8 +194,10 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
             final IrideUserGroupServiceConfig irideCfg = (IrideUserGroupServiceConfig) cfg;
 
             this.applicationName = irideCfg.getApplicationName();
+            this.serverUrl       = irideCfg.getServerURL();
 
-            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be of an empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.applicationName), "Application name must not be an empty string");
+            Preconditions.checkState(StringUtils.isNotBlank(this.serverUrl), "Server URL must not be an empty string");
         }
 
     }

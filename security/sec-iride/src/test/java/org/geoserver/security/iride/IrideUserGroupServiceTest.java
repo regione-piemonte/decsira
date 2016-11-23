@@ -183,7 +183,7 @@ public final class IrideUserGroupServiceTest {
      *
      * @throws IOException
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testGetUserByUsernameForSampleUserWithInvalidServerURL() throws IOException {
         LOGGER.entering(this.getClass().getName(), "testGetUserByUsernameForSampleUserWithInvalidServerURL", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
 

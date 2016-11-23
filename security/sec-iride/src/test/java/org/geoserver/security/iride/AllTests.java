@@ -18,9 +18,6 @@
  */
 package org.geoserver.security.iride;
 
-import org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerConfigurationDefaultFactoryTest;
-import org.geoserver.security.iride.util.factory.template.freemarker.FreeMarkerTemplateEngineFactoryTest;
-import org.geoserver.security.iride.util.factory.template.freemarker.roleservice.IrideRoleServiceFactoryTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -34,14 +31,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     IrideRoleServiceTest.class,
     IrideUserGroupServiceTest.class,
-    IrideRoleServiceFactoryTest.class,
-    FreeMarkerConfigurationDefaultFactoryTest.class,
-    FreeMarkerTemplateEngineFactoryTest.class,
-    org.geoserver.security.iride.entity.converter.AllTests.class,
-    org.geoserver.security.iride.service.policy.handler.request.AllTests.class,
-    org.geoserver.security.iride.soap.request.iride.AllTests.class,
-    org.geoserver.security.iride.util.template.AllTests.class,
-    org.geoserver.security.iride.util.xml.transform.AllTests.class,
 })
 public final class AllTests {
 
