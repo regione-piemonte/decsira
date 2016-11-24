@@ -8,9 +8,9 @@
 
 const React = require('react');
 
-require('../../assets/global/css/skin.css');
-require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
-require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
+// require('../../assets/global/css/skin.css');
+// require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
+// require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
 
 const Header = React.createClass({
     render() {
