@@ -54,10 +54,14 @@ function getSearchCategories(serviceUrl = 'sira/services/metadata/getMosaico?', 
     return (dispatch) => {
         dispatch(catalogLoading(true));
         return axios.get(url).then((response) => {
-            try {
-                dispatch(serchCategoriesLoaded(JSON.parse(response.data)));
-            }catch (e) {
-                // dispatch(serchCategoriesLoaded(response.data));
+            if (typeof response.data !== "object" ) {
+                try {
+                    dispatch(serchCategoriesLoaded(JSON.parse(response.data)));
+                }catch (e) {
+                    // dispatch(serchCategoriesLoaded(response.data));
+                }
+            }else {
+                dispatch(serchCategoriesLoaded(response.data));
             }
             dispatch(catalogLoading(false));
         }).catch(() => {
@@ -73,10 +77,14 @@ function getMetadataView({serviceUrl = 'sira/services/metadata/getMetadataView?'
         return `${u}&${p}=${params[p]}`;
     }, serviceUrl);
     return axios.post(url).then((response) => {
-        try {
-            return JSON.parse(response.data);
-        } catch(e) {
-            Promise.reject(`Configuration broken (${url}): ${ e.message}`);
+        if (typeof response.data !== "object" ) {
+            try {
+                return JSON.parse(response.data);
+            } catch(e) {
+                Promise.reject(`Configuration broken (${url}): ${ e.message}`);
+            }
+        }else {
+            return response.data;
         }
     });
 }
@@ -91,10 +99,14 @@ function getMetadataObjects({serviceUrl = 'sira/services/metadata/getMetadataObj
         dispatch(catalogLoading(true));
         return axios.post(url).then((response) => {
             getMetadataView({params}).then((result) => {
-                try {
-                    dispatch(objectsLoaded(JSON.parse(response.data), result));
-                }catch (e) {
-                    // dispatch(serchCategoriesLoaded(response.data));
+                if (typeof response.data !== "object" ) {
+                    try {
+                        dispatch(objectsLoaded(JSON.parse(response.data), result));
+                    }catch (e) {
+                        // dispatch(serchCategoriesLoaded(response.data));
+                    }
+                }else {
+                    dispatch(objectsLoaded(response.data, result));
                 }
                 dispatch(catalogLoading(false));
             });
