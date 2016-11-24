@@ -1,8 +1,8 @@
 package it.csi.sira.backend.metadata.dto;
 
-import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@JsonWriteNullProperties(false)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class JsonAppCategory {
 
   private Integer id;

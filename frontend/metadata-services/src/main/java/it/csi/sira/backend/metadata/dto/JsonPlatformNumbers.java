@@ -1,8 +1,8 @@
 package it.csi.sira.backend.metadata.dto;
 
-import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@JsonWriteNullProperties(false)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class JsonPlatformNumbers {
 
   private Long siradecObject; // 1) Numero dei record gestiti e pubblicati in
