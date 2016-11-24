@@ -38,17 +38,19 @@ var DefaultNode = React.createClass({
             style={glyphStyle}
             key="addToMap"
             glyph="plus-sign"
-            onClick={()=>this.props.addToMap()}/>),
-        (<Glyphicon
-            style={glyphStyle}
-            key="toggle-featuregrid"
-            glyph="th"
-            onClick={() => this.props.toggleSiraControl('grid', true)}/>),
-        (<Glyphicon
-            style={glyphStyle}
-            key="toggle-query"
-            glyph="search"
-            onClick={() => this.props.expandFilterPanel(true)}/>)];
+            onClick={()=>this.props.addToMap(this.props.node)}/>)];
+        if ( this.props.node.featureType) {
+            tools.push((<Glyphicon
+                style={glyphStyle}
+                key="toggle-featuregrid"
+                glyph="th"
+                onClick={() => this.props.toggleSiraControl(this.props.node.featureType)}/>));
+            tools.push((<Glyphicon
+                style={glyphStyle}
+                key="toggle-query"
+                glyph="search"
+                onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>));
+        }
         return tools;
     },
     render() {

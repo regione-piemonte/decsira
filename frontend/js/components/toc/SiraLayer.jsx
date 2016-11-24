@@ -40,7 +40,8 @@ var DefaultLayer = React.createClass({
         settingsOptions: React.PropTypes.object,
         visibilityCheckType: React.PropTypes.string,
         groups: React.PropTypes.array,
-        expandFilterPanel: React.PropTypes.func
+        expandFilterPanel: React.PropTypes.func,
+        searchAll: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -54,7 +55,8 @@ var DefaultLayer = React.createClass({
             modalOptions: {},
             settingsOptions: {},
             visibilityCheckType: "glyph",
-            expandFilterPanel: () => {}
+            expandFilterPanel: () => {},
+            searchAll: () => {}
         };
     },
     renderCollapsible() {
@@ -66,6 +68,7 @@ var DefaultLayer = React.createClass({
                 element={this.props.node}
                 updateSettings={this.props.updateSettings}
                 updateNode={this.props.updateNode}
+                searchAll={this.props.searchAll}
                 />);
             // <WMSLegend position="collapsible"/>;
         }
@@ -102,12 +105,12 @@ var DefaultLayer = React.createClass({
                                     {opacity: parseFloat(node.opacity !== undefined ? node.opacity : 1)});
                             }}}/>
             );
-            if (this.props.node.group && this.props.node.group === 'Oggetti') {
+            if (this.props.node.featureType) {
                 tools.push(<Glyphicon
                         style={{"float": "right", cursor: 'pointer'}}
                         key="toggle-query"
                         glyph="search"
-                        onClick={()=>this.props.expandFilterPanel(true)}/>);
+                        onClick={()=>this.props.expandFilterPanel(true, this.props.node.featureType)}/>);
             }
         }
         return tools;

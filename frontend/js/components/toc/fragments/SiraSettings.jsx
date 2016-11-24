@@ -13,13 +13,6 @@ const {Label, Glyphicon} = require('react-bootstrap');
 const WMSLegend = require('../../../../MapStore2/web/client/components/TOC/fragments/WMSLegend');
 const assign = require('object-assign');
 
-const {toggleSiraControl} = require('../../../actions/controls');
-const {setGridType} = require('../../../actions/grid');
-const {
-    // SiraQueryPanel action functions
-    expandFilterPanel
-} = require('../../../actions/siradec');
-const {connect} = require('react-redux');
 
 require('./SiraSettings.css');
 const glyphStyle = {"float": "right", marginTop: 12, cursor: 'pointer'};
@@ -31,8 +24,7 @@ const SiraSettings = React.createClass({
         element: React.PropTypes.object,
         updateNode: React.PropTypes.func,
         updateSettings: React.PropTypes.func,
-        expandFilterPanel: React.PropTypes.func,
-        toggleSiraControl: React.PropTypes.func,
+        searchAll: React.PropTypes.func,
         setGridType: React.PropTypes.func
     },
     contextTypes: {
@@ -42,8 +34,7 @@ const SiraSettings = React.createClass({
         return {
             updateSettings: () => {},
             updateNode: () => {},
-            expandFilterPanel: () => {},
-            toggleSiraControl: () => {},
+            searchAll: () => {},
             setGridType: () => {}
         };
     },
@@ -69,12 +60,12 @@ const SiraSettings = React.createClass({
                     style={glyphStyle}
                     key="toggle-featuregrid"
                     glyph="th"
-                    onClick={this.toggleSiraControl}/>)
+                    onClick={() => this.props.searchAll(this.props.element.featureType)}/>)
                     ];
     },
     render() {
         const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && this.props.element.type === "wms";
-        const renderSTool = this.props.element.group && this.props.element.group === 'Oggetti';
+        const renderSTool = this.props.element.featureType ? true : false;
         const renderLegendTool = this.props.element.type !== "vector";
         return (<div id="sira-layer-settings">
             {renderLeg ? this.renderLegend() : this.renderOpacity()}
@@ -86,10 +77,6 @@ const SiraSettings = React.createClass({
                 onClick={this.toggleLegend}
             />) : (<span/>)}
             </div>);
-    },
-    toggleSiraControl() {
-        this.props.toggleSiraControl();
-        this.props.setGridType('all_results');
     },
     updateOpacity(newParams) {
         this.props.updateSettings(newParams);
@@ -104,8 +91,4 @@ const SiraSettings = React.createClass({
     }
 });
 
-module.exports = connect(() =>({}), {
-    expandFilterPanel,
-    toggleSiraControl: toggleSiraControl.bind(null, 'grid', true),
-    setGridType: setGridType
-})(SiraSettings);
+module.exports = SiraSettings;

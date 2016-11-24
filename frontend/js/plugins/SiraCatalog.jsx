@@ -9,11 +9,19 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {toggleNode, selectCategory} = require('../actions/siracatalog');
-const {groupsSelector} = require('../../MapStore2/web/client/selectors/layers');
+
 const assign = require('object-assign');
 const {Tabs, Tab, Button, OverlayTrigger, Popover, Image} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
-const {expandFilterPanel} = require('../actions/siradec');
+const {getMetadataObjects} = require('../actions/siracatalog');
+const {
+    // SiraQueryPanel action functions
+    expandFilterPanel,
+    loadFeatureTypeConfig,
+    setActiveFeatureType
+} = require('../actions/siradec');
+
+const {setGridType} = require('../actions/grid');
 
 const getChildren = function(nodes, node) {
     return node.nodes.map((child) => {
@@ -25,7 +33,6 @@ const normalizeCatalog = function(nodes) {
     return nodes.filter( (n) => n.type === "root").map((n) => {
         return assign({expanded: false}, n, {nodes: getChildren(nodes, n)});
     });
-
 };
 const normalizeViews = function(nodes) {
     return nodes.filter( (n) => n.type === "view").map((n) => {
@@ -37,16 +44,21 @@ const normalizeObjects = function(nodes) {
 };
 const tocSelector = createSelector([
         (state) => state.siracatalog.nodes || [],
-        groupsSelector,
-        (state) => state.layers.settings || {expanded: false, options: {opacity: 1}},
-        (state) => state.siracatalog.category
-    ], ( nodes, groups, settings, category) => ({
-        views: normalizeViews(nodes),
+        (state) => state.siracatalog.category,
+        (state) => state.siracatalog,
+        (state) => state.siradec && state.siradec.configOggetti,
+        (state) => state.userprofile,
+        (state) => state.siradec && state.siradec.activeFeatureType
+    ], ( nodes, category, catalog, configOggetti, userprofile, activeFeatureType) => ({
+        views: normalizeViews(catalog.views || []),
         nodes: normalizeCatalog(nodes),
         objects: normalizeObjects(nodes),
-        groups,
-        settings,
-        category
+        nodesLoaded: catalog.nodes ? true : false,
+        category,
+        loading: catalog.loading,
+        configOggetti,
+        userprofile,
+        activeFeatureType
     })
 );
 
@@ -54,10 +66,12 @@ const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNode');
 const Vista = require('../components/catalog/Vista');
-
+const Spinner = require('react-spinkit');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
-const SearchCategories = connect(()=> ({}), {
+const SearchCategories = connect((state)=> ({
+    categories: state.siracatalog && state.siracatalog.searchCategories
+}), {
     onSelect: selectCategory
 })(require('../components/catalog/SearchCategories'));
 
@@ -67,22 +81,45 @@ const LayerTree = React.createClass({
         nodes: React.PropTypes.array,
         views: React.PropTypes.array,
         objects: React.PropTypes.array,
+        loading: React.PropTypes.bool,
+        nodesLoaded: React.PropTypes.bool,
         onToggle: React.PropTypes.func,
         toggleSiraControl: React.PropTypes.func,
         expandFilterPanel: React.PropTypes.func,
+        getMetadataObjects: React.PropTypes.func,
         category: React.PropTypes.shape({
-            title: React.PropTypes.string.isRequired,
-            id: React.PropTypes.string.isRequired,
-            img: React.PropTypes.string.isRequired
-        }).isRequired
+            name: React.PropTypes.string.isRequired,
+            id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
+            icon: React.PropTypes.string.isRequired
+        }).isRequired,
+        configOggetti: React.PropTypes.object,
+        authParams: React.PropTypes.object,
+        userprofile: React.PropTypes.object,
+        activeFeatureType: React.PropTypes.string,
+        loadFeatureTypeConfig: React.PropTypes.func,
+        setActiveFeatureType: React.PropTypes.func,
+        setGridType: React.PropTypes.func
     },
     getDefaultProps() {
         return {
-            onToggle: () => {},
-            category: {
-                title: "Acqua", id: "acqua", img: "./assets/application/conoscenze_ambientali/css/images/gocce-small.png"
-            }
+            loading: false,
+            onToggle: () => {}
         };
+    },
+    getInitialState() {
+        return {
+            searchText: ""
+        };
+    },
+    componentWillMount() {
+        if (!this.props.nodesLoaded && !this.props.loading) {
+            this.props.getMetadataObjects({params: {category: this.props.category.id}});
+        }
+    },
+    componentWillReceiveProps(nextProps) {
+        if (!nextProps.loading && (!nextProps.nodesLoaded || nextProps.category.id !== this.props.category.id )) {
+            this.props.getMetadataObjects({params: {category: nextProps.category.id}});
+        }
     },
     render() {
         if (!this.props.nodes) {
@@ -92,13 +129,13 @@ const LayerTree = React.createClass({
             <TOC nodes={this.props.nodes}>
                     <DefaultGroup onToggle={this.props.onToggle}>
                     <DefaultNode
-                            expandFilterPanel={this.props.expandFilterPanel}
-                            toggleSiraControl={this.props.toggleSiraControl}
+                            expandFilterPanel={this.openFilterPanel}
+                            toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
                             groups={this.props.nodes}/>
                     </DefaultGroup>
                 </TOC>);
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista
+        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
             node={v}
@@ -106,10 +143,20 @@ const LayerTree = React.createClass({
         return (
             <div id="siracatalog">
              <div className="catalog-search-container">
-             <SearchBar placeholder="Cerca oggetti" placeholderMsgId="" className="sira-cat-search"/>
+             <SearchBar placeholder="Cerca oggetti" placeholderMsgId=""
+              className="sira-cat-search"
+              onSearchTextChange={(text) => this.setState({ searchText: text})}
+              typeAhead={false}
+              searchText={this.state.searchText}
+              onSearch={this.loadMetadata}
+              onSearchReset={() => {
+                  this.setState({ searchText: ""});
+                  this.loadMetadata();
+              }}
+            />
              <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories/></Popover>)}>
                        <Button className="siracatalog-search-selector">
-                            <Image src={this.props.category.img}/>
+                            <Image style={{width: "30px"}} src={this.props.category.icon}/>
                         </Button>
              </OverlayTrigger>
              </div>
@@ -117,14 +164,48 @@ const LayerTree = React.createClass({
                 <Tab eventKey={1} title={`Oggetti (${this.props.objects.length})`}>{objects}</Tab>
                 <Tab eventKey={2} title={`Viste Tematiche (${this.props.views ? this.props.views.length : 0})`}>{viste}</Tab>
             </Tabs>
+            {this.props.loading ? (
+                <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
             </div>);
+    },
+    loadMetadata(text) {
+        let params = {category: this.props.category.id};
+        if (text && text.length > 0) {
+            params.text = text;
+        }
+        if (!this.props.loading) {
+            this.props.getMetadataObjects({params});
+        }
+    },
+    openFilterPanel(status, ftType) {
+        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+        }else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
+        this.props.expandFilterPanel(status);
+    },
+    searchAll(ftType) {
+        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            }else if (this.props.activeFeatureType !== featureType) {
+                this.props.setActiveFeatureType(featureType);
+            }
+        this.props.setGridType('all_results');
+        this.props.toggleSiraControl('grid', true);
     }
 });
 
 const CatalogPlugin = connect(tocSelector, {
     onToggle: toggleNode,
     toggleSiraControl,
-    expandFilterPanel
+    expandFilterPanel,
+    getMetadataObjects,
+    loadFeatureTypeConfig,
+    setActiveFeatureType,
+    setGridType
 })(LayerTree);
 
 module.exports = {

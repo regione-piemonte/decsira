@@ -50,8 +50,7 @@ const LinkScheda = React.createClass({
         // Se non passano un detailsTemplateConfigUrl e mi passano la featureType ma non ho la configuraziine caricata, devo disabilitare il link e caricare le configurazioni
         if (!this.props.detailsTemplateConfigURL && this.props.featureType && !this.props.configOggetti[this.props.featureType]) {
             this.setState({linkDisabled: true});
-            this.props.loadFeatureTypeConfig(
-                `assets/${this.props.featureType}.json`, {authkey: this.props.authParams.authkey}, this.props.featureType, false);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.authParams.authkey}, this.props.featureType, false);
         }
     },
     componentWillReceiveProps(nextProps) {
