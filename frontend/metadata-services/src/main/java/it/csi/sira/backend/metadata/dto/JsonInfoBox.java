@@ -2,6 +2,9 @@ package it.csi.sira.backend.metadata.dto;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+
+@JsonWriteNullProperties(false)
 public class JsonInfoBox {
   private String title;
   private String text;

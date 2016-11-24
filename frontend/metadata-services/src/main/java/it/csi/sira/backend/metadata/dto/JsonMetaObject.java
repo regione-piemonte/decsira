@@ -1,6 +1,10 @@
 package it.csi.sira.backend.metadata.dto;
 
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+
+@JsonWriteNullProperties(false)
 public class JsonMetaObject {
+
 
   private Integer id;
 
@@ -10,7 +14,7 @@ public class JsonMetaObject {
   private String url;
 
   private Integer objectCounter = 0;
-  private Integer tematicViewCounter = 0;  
+  private Integer tematicViewCounter = 0;
 
   private JsonMetaObject[] categories;
   private JsonMetaObject[] metadata;
@@ -73,39 +77,27 @@ public class JsonMetaObject {
   }
 
   public Integer getId() {
-    return id;
+	return id;
   }
 
   public void setId(Integer id) {
-    this.id = id;
+	this.id = id;
   }
 
   public Integer getObjectCounter() {
-    return objectCounter;
+	return objectCounter;
   }
 
   public void setObjectCounter(Integer objectCounter) {
-    this.objectCounter = objectCounter;
+	this.objectCounter = objectCounter;
   }
 
   public Integer getTematicViewCounter() {
-    return tematicViewCounter;
+	return tematicViewCounter;
   }
 
   public void setTematicViewCounter(Integer tematicViewCounter) {
-    this.tematicViewCounter = tematicViewCounter;
+	this.tematicViewCounter = tematicViewCounter;
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
