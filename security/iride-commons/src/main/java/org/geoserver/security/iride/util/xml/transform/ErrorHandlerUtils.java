@@ -1,5 +1,5 @@
 /*
- *  Simple SOAP service client for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  Classes common to the modules offering authentication and authorization functionalities using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify

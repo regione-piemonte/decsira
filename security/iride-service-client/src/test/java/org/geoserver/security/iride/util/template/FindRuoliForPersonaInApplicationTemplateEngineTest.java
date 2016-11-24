@@ -1,5 +1,5 @@
 /*
- *  GeoServer Security Provider plugin with which doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
+ *  Simple SOAP service client for doing authentication and authorization operations using CSI-Piemonte IRIDE Service.
  *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
  *
  *  This program is free software; you can redistribute it and/or modify
