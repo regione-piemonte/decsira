@@ -47,7 +47,7 @@ function objectsLoaded(objects, views) {
     };
 }
 
-function getSearchCategories(serviceUrl = 'sira/services/metadata/getMosaico?', params = {}) {
+function getSearchCategories(serviceUrl = 'services/metadata/getMosaico?', params = {}) {
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
     }, serviceUrl);
@@ -72,7 +72,7 @@ function getSearchCategories(serviceUrl = 'sira/services/metadata/getMosaico?', 
 
 }
 
-function getMetadataView({serviceUrl = 'sira/services/metadata/getMetadataView?', params = {}} = {}) {
+function getMetadataView({serviceUrl = 'services/metadata/getMetadataView?', params = {}} = {}) {
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
     }, serviceUrl);
@@ -89,7 +89,7 @@ function getMetadataView({serviceUrl = 'sira/services/metadata/getMetadataView?'
     });
 }
 
-function getMetadataObjects({serviceUrl = 'sira/services/metadata/getMetadataObject?', params = {}} = {}) {
+function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?', params = {}} = {}) {
 
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
