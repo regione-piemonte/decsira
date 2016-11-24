@@ -91,10 +91,6 @@ const GetFeatureInfo = connect((state) => {
     };
 })(require('../components/identify/GetFeatureInfo'));
 
-const {
-    loadFeatureTypeConfig
-} = require('../actions/siradec');
-
 let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
 
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
@@ -105,17 +101,12 @@ const Sira = React.createClass({
         params: React.PropTypes.object,
         loadMapConfig: React.PropTypes.func,
         reset: React.PropTypes.func,
-        // featureGrigConfigUrl: React.PropTypes.string,
-        featureTypeConfigUrl: React.PropTypes.string,
-        featureType: React.PropTypes.string,
         error: React.PropTypes.object,
         loading: React.PropTypes.bool,
-        // card: React.PropTypes.string,
         nsResolver: React.PropTypes.func,
         controls: React.PropTypes.object,
         toggleSiraControl: React.PropTypes.func,
         setProfile: React.PropTypes.func,
-        onLoadFeatureTypeConfig: React.PropTypes.func,
         plugins: React.PropTypes.object,
         viewerParams: React.PropTypes.object,
         configureInlineMap: React.PropTypes.func,
@@ -136,18 +127,6 @@ const Sira = React.createClass({
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
-    },
-    componentDidMount() {
-        if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
-            this.props.onLoadFeatureTypeConfig(
-                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey}, this.props.featureType, true);
-        }
-    },
-    componentWillReceiveProps(props) {
-        let fturl = props.featureTypeConfigUrl;
-        if (fturl !== this.props.featureTypeConfigUrl) {
-            this.props.onLoadFeatureTypeConfig(fturl, {authkey: authParams[this.props.params.profile].authkey}, props.featureType, true);
-        }
     },
     render() {
         return (
@@ -183,13 +162,10 @@ module.exports = connect((state) => {
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         // card: state.cardtemplate,
         controls: state.siraControls,
-        featureType: state.siradec && state.siradec.featureType,
-        featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
         configLoaded: activeConfig && activeConfig.card ? true : false
     };
 }, {
     toggleSiraControl,
     setProfile,
-    onLoadFeatureTypeConfig: loadFeatureTypeConfig,
     configureInlineMap
 })(Sira);

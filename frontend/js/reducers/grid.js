@@ -24,8 +24,8 @@ const initialState = {
     data: null,
     featuregrid: null,
     loadingGrid: false,
-    dataSourceOptions: {},
-    gridType: 'search'
+    totalFeatures: null,
+    dataSourceOptions: {}
 };
 
 function grid(state = initialState, action) {
@@ -178,6 +178,10 @@ function grid(state = initialState, action) {
                 data,
                 loadingGrid: false
                 };
+        }
+        case 'FEATURETYPE_CONFIG_LOADED':
+        case 'SET_ACTIVE_FEATURE_TYPE': {
+            return assign({}, state, initialState);
         }
         default:
             return state;

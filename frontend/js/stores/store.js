@@ -75,10 +75,11 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         if (action && action.type === CHANGE_BROWSER_PROPERTIES && newState.browser.mobile) {
             newState = assign(newState, mobileOverride);
         }
-        if (action && action.type === 'FEATURETYPE_CONFIG_LOADED' && newState.siradec.configOggetti[action.featureType] && action.activate) {
+        if (action && (action.type === 'FEATURETYPE_CONFIG_LOADED' || action.type === 'SET_ACTIVE_FEATURE_TYPE') && newState.siradec.configOggetti[action.featureType] && action.activate) {
             const configOggetti = newState.siradec.configOggetti[action.featureType];
         //     // Devi assegnare a queryform e grid i valori che hai in     siradec.configOggetti.featureType
-            newState = assign({}, newState, {queryform: configOggetti.queryform, grid: {featuregrid: configOggetti.featuregrid, data: null, dataSourceOptions: {}, loadingGrid: false}});
+            const newGrid = assign({}, newState.grid, {featuregrid: configOggetti.featuregrid});
+            newState = assign({}, newState, {queryform: configOggetti.queryform, grid: newGrid});
         }
         return newState;
     };

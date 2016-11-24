@@ -14,7 +14,7 @@ const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
 const {expandFilterPanel} = require('../actions/siradec');
 const Resizable = require('react-resizable').Resizable;
-
+const Spinner = require('react-spinkit');
 require('../../assets/css/sira.css');
 
 const SidePanel = React.createClass({
@@ -25,7 +25,8 @@ const SidePanel = React.createClass({
         profile: React.PropTypes.string,
         changeMapStyle: React.PropTypes.func,
         withMap: React.PropTypes.bool.isRequired,
-        expandFilterPanel: React.PropTypes.func.isRequired
+        expandFilterPanel: React.PropTypes.func.isRequired,
+        fTypeConfigLoading: React.PropTypes.bool.isRequired
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -41,6 +42,7 @@ const SidePanel = React.createClass({
             filterPanelExpanded: false,
             gridExpanded: false,
             withMap: true,
+            fTypeConfigLoading: true,
             expandFilterPanel: () => {},
             changeMapStyle: () => {}
         };
@@ -83,6 +85,17 @@ const SidePanel = React.createClass({
             params={this.props.auth}
             profile={this.props.profile}/>);
     },
+    renderLoading() {
+        return (
+                <div style={{
+                    position: "absolute",
+                    width: "60px",
+                    top: "50%",
+                    left: "45%"}}>
+                    <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                </div>
+            );
+    },
     renderContent() {
         let comp;
         if (this.props.filterPanelExpanded) {
@@ -112,7 +125,7 @@ const SidePanel = React.createClass({
 
             <Sidebar
                 open={show}
-                sidebar={this.renderContent()}
+                sidebar={this.props.fTypeConfigLoading ? this.renderLoading() : this.renderContent()}
                 styles={{
                         sidebar: {
                             backgroundColor: 'white',
@@ -140,7 +153,8 @@ const SidePanel = React.createClass({
 module.exports = connect((state) => {
     return {
         filterPanelExpanded: state.siradec.filterPanelExpanded,
-        gridExpanded: state.siraControls.grid
+        gridExpanded: state.siraControls.grid,
+        fTypeConfigLoading: state.siradec.fTypeConfigLoading
     };
 }, {
     changeMapStyle,

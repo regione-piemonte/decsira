@@ -17,6 +17,8 @@ const FEATUREINFO_CONFIG_LOADED = 'FEATUREINFO_CONFIG_LOADED';
 const TOPOLOGY_CONFIG_LOADED = 'TOPOLOGY_CONFIG_LOADED';
 const CARD_CONFIG_LOADED = 'CARD_CONFIG_LOADED';
 const INLINE_MAP_CONFIG = 'INLINE_MAP_CONFIG';
+const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
+const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
@@ -157,9 +159,15 @@ function getAttributeValues(ft, field, params, serviceUrl) {
         dispatch(configureFeatureType(ft, assign({}, field, {})));
     };
 }
-
-function loadFeatureTypeConfig(url, params, featureType, activate = false) {
+function configurationLoading() {
+    return {
+        type: FEATURETYPE_CONFIG_LOADING
+    };
+}
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false) {
+    const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch) => {
+        dispatch(configurationLoading());
         return axios.get(url).then((response) => {
             let config = response.data;
             if (typeof config !== "object") {
@@ -212,25 +220,12 @@ function loadFeatureTypeConfig(url, params, featureType, activate = false) {
         });
     };
 }
-
-/*function loadQueryFormConfig(configUrl, configName) {
-    return (dispatch) => {
-        return axios.get(configUrl + configName).then((response) => {
-            let config = response.data;
-            if (typeof config !== "object") {
-                try {
-                    config = JSON.parse(config);
-                } catch(e) {
-                    dispatch(configureQueryFormError('Configuration file broken (' + configUrl + "/" + configName + '): ' + e.message));
-                }
-            }
-
-            dispatch(configureQueryForm(config));
-        }).catch((e) => {
-            dispatch(configureQueryFormError(e));
-        });
+function setActiveFeatureType(featureType) {
+    return {
+        type: SET_ACTIVE_FEATURE_TYPE,
+        featureType
     };
-}*/
+}
 
 module.exports = {
     QUERYFORM_CONFIG_LOADED,
@@ -243,6 +238,8 @@ module.exports = {
     TOPOLOGY_CONFIG_LOADED,
     CARD_CONFIG_LOADED,
     INLINE_MAP_CONFIG,
+    SET_ACTIVE_FEATURE_TYPE,
+    FEATURETYPE_CONFIG_LOADING,
     configureTopology,
     configureFeatureGrid,
     configureCard,
@@ -253,6 +250,7 @@ module.exports = {
     configureQueryFormError,
     getAttributeValues,
     hideQueryError,
-    configureInlineMap
+    configureInlineMap,
+    setActiveFeatureType
 
 };

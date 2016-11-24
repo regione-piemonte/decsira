@@ -20,17 +20,28 @@ const assign = require('object-assign');
 const layersIcon = require('../../MapStore2/web/client/plugins/toolbar/assets/img/layers.png');
 const {
     // SiraQueryPanel action functions
-    expandFilterPanel
+    expandFilterPanel,
+    loadFeatureTypeConfig,
+    setActiveFeatureType
 } = require('../actions/siradec');
+const {toggleSiraControl} = require('../actions/controls');
+const {setGridType} = require('../actions/grid');
+
 const tocSelector = createSelector(
     [
         (state) => state.controls && state.controls.toolbar && state.controls.toolbar.active === 'toc',
         groupsSelector,
-        (state) => state.layers.settings || {expanded: false, options: {opacity: 1}}
-    ], (enabled, groups, settings) => ({
+        (state) => state.layers.settings || {expanded: false, options: {opacity: 1}},
+        (state) => state.siradec && state.siradec.configOggetti,
+        (state) => state.userprofile,
+        (state) => state.siradec && state.siradec.activeFeatureType
+    ], (enabled, groups, settings, configOggetti, userprofile, activeFeatureType) => ({
         enabled,
         groups,
-        settings
+        settings,
+        configOggetti,
+        userprofile,
+        activeFeatureType
     })
 );
 
@@ -59,7 +70,15 @@ const LayerTree = React.createClass({
         activateSettingsTool: React.PropTypes.bool,
         visibilityCheckType: React.PropTypes.string,
         settingsOptions: React.PropTypes.object,
-        expandFilterPanel: React.PropTypes.func
+        configOggetti: React.PropTypes.object,
+        authParams: React.PropTypes.object,
+        userprofile: React.PropTypes.object,
+        activeFeatureType: React.PropTypes.string,
+        expandFilterPanel: React.PropTypes.func,
+        loadFeatureTypeConfig: React.PropTypes.func,
+        setActiveFeatureType: React.PropTypes.func,
+        toggleSiraControl: React.PropTypes.func,
+        setGridType: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -74,6 +93,7 @@ const LayerTree = React.createClass({
             activateSettingsTool: true,
             visibilityCheckType: "checkbox",
             settingsOptions: {},
+            configOggetti: {},
             expandFilterPanel: () => {}
         };
     },
@@ -114,12 +134,32 @@ const LayerTree = React.createClass({
                             saveText={<Message msgId="save"/>}
                             closeText={<Message msgId="close"/>}
                             groups={this.props.groups}
-                            expandFilterPanel={this.props.expandFilterPanel}/>
+                            expandFilterPanel={this.openFilterPanel}
+                            searchAll={this.searchAll}/>
                     </DefaultGroup>
                 </TOC>
             </div>
         );
+    },
+    openFilterPanel(status, featureType) {
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+        }else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
+        this.props.expandFilterPanel(status);
+    },
+    searchAll(featureType) {
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+        }else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
+        this.props.setGridType('all_results');
+        this.props.toggleSiraControl('grid', true);
     }
+
+
 });
 
 const TOCPlugin = connect(tocSelector, {
@@ -133,7 +173,11 @@ const TOCPlugin = connect(tocSelector, {
     updateSettings,
     updateNode,
     removeNode,
-    expandFilterPanel
+    expandFilterPanel,
+    loadFeatureTypeConfig,
+    setActiveFeatureType,
+    toggleSiraControl,
+    setGridType
 })(LayerTree);
 
 module.exports = {

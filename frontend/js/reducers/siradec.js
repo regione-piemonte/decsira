@@ -16,7 +16,9 @@ const {
     TOPOLOGY_CONFIG_LOADED,
     CARD_CONFIG_LOADED,
     QUERYFORM_HIDE_ERROR,
-    INLINE_MAP_CONFIG
+    INLINE_MAP_CONFIG,
+    SET_ACTIVE_FEATURE_TYPE,
+    FEATURETYPE_CONFIG_LOADING
 } = require('../actions/siradec');
 
 const assign = require('object-assign');
@@ -33,13 +35,20 @@ const initialState = {
     loadingQueryFormConfigError: null,
     featureType: urlQuery.featureType || 'aua',
     activeFeatureType: null,
-    inlineMapConfig: null
+    inlineMapConfig: null,
+    fTypeConfigLoading: false
 };
 
 function siradec(state = initialState, action) {
     switch (action.type) {
         case INLINE_MAP_CONFIG: {
             return assign({}, state, {inlineMapConfig: action.mapconfig});
+        }
+        case SET_ACTIVE_FEATURE_TYPE: {
+            return assign({}, state, {activeFeatureType: action.featureType});
+        }
+        case FEATURETYPE_CONFIG_LOADING: {
+            return assign({}, state, {fTypeConfigLoading: true});
         }
         case FEATURETYPE_CONFIG_LOADED: {
             let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
@@ -68,11 +77,13 @@ function siradec(state = initialState, action) {
             if (action.activate) {
                 return assign({}, state, {
                                 configOggetti: configOggetti,
-                                activeFeatureType: action.featureType
+                                activeFeatureType: action.featureType,
+                                fTypeConfigLoading: false
                             });
             }
             return assign({}, state, {
-                            configOggetti: configOggetti
+                            configOggetti: configOggetti,
+                            fTypeConfigLoading: false
                         });
         }
         case QUERYFORM_CONFIG_LOADED: {
@@ -123,7 +134,8 @@ function siradec(state = initialState, action) {
         }
         case QUERYFORM_CONFIG_LOAD_ERROR: {
             return {
-                loadingQueryFormConfigError: action.error
+                loadingQueryFormConfigError: action.error,
+                fTypeConfigLoading: false
             };
         }
         case QUERYFORM_HIDE_ERROR: {
