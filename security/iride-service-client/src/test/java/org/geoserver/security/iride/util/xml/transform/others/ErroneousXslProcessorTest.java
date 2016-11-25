@@ -89,7 +89,7 @@ public final class ErroneousXslProcessorTest extends AbstractOthersXslProcessorT
     protected String doTestXslProcessing() throws TransformerException {
         final String result = this.transform();
 
-        logger.trace("Transformation result:\n", result);
+        logger.trace("Transformation result:\n{}", result);
 
         return result;
     }
