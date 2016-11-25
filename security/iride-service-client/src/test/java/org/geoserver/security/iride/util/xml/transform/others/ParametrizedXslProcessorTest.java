@@ -72,7 +72,7 @@ public final class ParametrizedXslProcessorTest extends AbstractOthersXslProcess
     protected String doTestXslProcessing() throws TransformerException {
         final String result = this.transform();
 
-        logger.fine("Transformation result:\n" + result);
+        logger.trace("Transformation result:\n", result);
 
         return result;
     }

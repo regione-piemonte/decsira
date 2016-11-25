@@ -77,7 +77,7 @@ public final class IrideApplicationConverterTest extends AbstractXStreamTest {
 
         assertThat(result, not(isEmptyOrNullString()));
 
-        this.logger.fine("Marshalling result:\n" + result);
+        this.logger.trace("Marshalling result:\n{}", result);
     }
 
     /**
@@ -90,7 +90,7 @@ public final class IrideApplicationConverterTest extends AbstractXStreamTest {
         assertThat(result, is(not(nullValue())));
         assertThat(result, is(this.application));
 
-        this.logger.fine("Unmarshalling result:\n" + result);
+        this.logger.trace("Unmarshalling result:\n{}", result);
     }
 
 }

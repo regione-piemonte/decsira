@@ -18,6 +18,7 @@
  */
 package org.geoserver.security.iride;
 
+import org.geoserver.security.iride.util.factory.roleservice.IrideRoleServiceFactoryTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -30,6 +31,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
     IrideRoleServiceTest.class,
+    IrideRoleServiceFactoryTest.class,
     IrideUserGroupServiceTest.class,
 })
 public final class AllTests {

@@ -181,20 +181,20 @@ public class XStreamFactory extends AbstractFactory<XStream> {
         xs.setMode(XStream.NO_REFERENCES);
 
         // Aliases for IRIDE entities
-        LOGGER.finest(String.format("IRIDE XStream: aliasing %d types", this.getAliases().size()));
+        LOGGER.trace("IRIDE XStream: aliasing {} types", this.getAliases().size());
         for (final Entry<String, Class<?>> entry : this.getAliases().entrySet()) {
             xs.alias(entry.getKey(), entry.getValue());
 
-            LOGGER.finest(String.format("IRIDE XStream: aliased %s to '%s'", entry.getValue(), entry.getKey()));
+            LOGGER.trace("IRIDE XStream: aliased {} to '{}'", entry.getValue(), entry.getKey());
         }
 
         // Allowed types
         final Collection<Class<?>> types = this.getAliases().values();
-        LOGGER.finest(String.format("IRIDE XStream: allowing %d types", types.size()));
+        LOGGER.trace("IRIDE XStream: allowing {} types", types.size());
         xs.allowTypes(types.toArray(new Class<?>[types.size()]));
 
         // Custom converters for IRIDE entities
-        LOGGER.finest(String.format("IRIDE XStream: registering %d converters", this.converters.size()));
+        LOGGER.trace("IRIDE XStream: registering {} converters", this.converters.size());
         for (final ConverterMatcher converter : this.converters) {
             if (converter instanceof Converter) {
                 xs.registerConverter((Converter) converter);
@@ -202,7 +202,7 @@ public class XStreamFactory extends AbstractFactory<XStream> {
                 xs.registerConverter((SingleValueConverter) converter);
             }
 
-            LOGGER.finest(String.format("IRIDE XStream: registered %s converter", converter.getClass()));
+            LOGGER.trace("IRIDE XStream: registered {} converter", converter.getClass());
         }
 
         return xs;

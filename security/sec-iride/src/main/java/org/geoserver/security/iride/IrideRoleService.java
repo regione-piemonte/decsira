@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.GeoServerRoleService;
@@ -41,6 +39,7 @@ import org.geoserver.security.iride.entity.IrideRole;
 import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -97,10 +96,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(Level.CONFIG,
-            "Initializing {0} with configuration object: \n\t {1}",
-            new Object[] { this.getClass().getSimpleName(), config }
-        );
+        LOGGER.debug("Initializing {} with configuration object: \n\t {}", this.getClass().getSimpleName(), config);
 
         this.name   = config.getName();
         this.config = new Config(config);
@@ -117,7 +113,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<String> getGroupNamesForRole(GeoServerRole role) throws IOException {
-        LOGGER.finer("Role: " + role);
+        LOGGER.trace("Role: {}", role);
 
         return ImmutableSortedSet.of();
     }
@@ -131,7 +127,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<String> getUserNamesForRole(GeoServerRole role) throws IOException {
-        LOGGER.finer("Role: " + role);
+    	LOGGER.trace("Role: {}", role);
 
         return ImmutableSortedSet.of();
     }
@@ -142,7 +138,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<GeoServerRole> getRolesForUser(final String username) throws IOException {
-        LOGGER.finer("User: " + username);
+        LOGGER.trace("User: {}", username);
 
         final TreeSet<GeoServerRole> roles = new TreeSet<>();
 
@@ -159,17 +155,17 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
 
         // Rely on the fallback RoleService (if configured) when no IRIDE roles are available for the given user
         if (roles.isEmpty() && this.config.hasFallbackRoleServiceName()) {
-            LOGGER.info("No IRIDE roles available for the given user " + username + ": falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
+            LOGGER.info("No IRIDE roles available for the given user {}: falling back to RoleService '{}'", username, this.config.fallbackRoleServiceName);
 
             final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
             if (fallbackRoleService != null) {
                 roles.addAll(fallbackRoleService.getRolesForUser(username));
             } else {
-                LOGGER.warning("A fallback RoleService '" + this.config.fallbackRoleServiceName + "' was specified, but none was found!");
+                LOGGER.warn("A fallback RoleService '{}' was specified, but none was found!", this.config.fallbackRoleServiceName);
             }
         }
 
-        LOGGER.fine("Added " + roles.size() + " roles for User " + username);
+        LOGGER.trace("Added {} roles for User {}", roles.size(), username);
 
         return ImmutableSortedSet.copyOf(roles);
     }
@@ -183,7 +179,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<GeoServerRole> getRolesForGroup(String groupname) throws IOException {
-        LOGGER.finer("Group: " + groupname);
+        LOGGER.trace("Group: {}", groupname);
 
         return ImmutableSortedSet.of();
     }
@@ -218,7 +214,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public GeoServerRole createRoleObject(String role) throws IOException {
-        LOGGER.finer("Role: " + role);
+        LOGGER.trace("Role: {}", role);
 
         return new GeoServerRole(role);
     }
@@ -229,7 +225,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public GeoServerRole getParentRole(GeoServerRole role) throws IOException {
-        LOGGER.finer("Role: " + role);
+        LOGGER.trace("Role: {}", role);
 
         return null;
     }
@@ -240,7 +236,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public GeoServerRole getRoleByName(String role) throws IOException {
-        LOGGER.finer("Role: " + role);
+        LOGGER.trace("Role: {}", role);
 
         return null;
     }
@@ -260,8 +256,8 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public Properties personalizeRoleParams(String roleName, Properties roleParams, String userName, Properties userProps) throws IOException {
-        LOGGER.log(Level.CONFIG,
-            "\n\t Role: {0},\n\t Role Params: {1},\n\t User: {2},\n\t User Properties: {3}",
+        LOGGER.debug(
+        	"\n\t Role: {},\n\t Role Params: {},\n\t User: {},\n\t User Properties: {}",
             new Object[] { roleName, roleParams, userName, userProps }
         );
 
@@ -284,21 +280,21 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
         }
         // ~
 
-        LOGGER.finer("AdminRole Username: " + username);
+        LOGGER.trace("AdminRole Username: {}", username);
 
         GeoServerRole role = null;
         try {
             // Check username format: it may be an Identita Digitale IRIDE, or not
             if (IrideIdentity.isNotValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
-                LOGGER.warning("Username " + username + " is not a valid IRIDE Identity: falling back to RoleService '" + this.config.fallbackRoleServiceName + "'");
+                LOGGER.warn("Username {} is not a valid IRIDE Identity: falling back to RoleService '{}'", username, this.config.fallbackRoleServiceName);
 
                 final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
                 if (fallbackRoleService != null) {
                     role = fallbackRoleService.getAdminRole();
 
-                    LOGGER.info("Role: " + role.getAuthority());
+                    LOGGER.info("Role: {}", role.getAuthority());
                 } else {
-                    LOGGER.warning("A fallback RoleService '" + this.config.fallbackRoleServiceName + "' was specified, but none was found!");
+                    LOGGER.warn("A fallback RoleService '{}' was specified, but none was found!", this.config.fallbackRoleServiceName);
                 }
             } else {
                 role = this.createRoleObject(this.config.adminRole);
@@ -306,7 +302,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
 
             return role;
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, e.getMessage(), e);
+            LOGGER.warn(e.getMessage(), e);
 
             return null;
         }

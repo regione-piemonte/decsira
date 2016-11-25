@@ -18,11 +18,10 @@
  */
 package org.geoserver.security.iride.service.policy.handler;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.service.policy.IridePolicy;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.geoserver.security.iride.util.object.RegistrableObject;
+import org.slf4j.Logger;
 
 /**
  * Base class for <code>IRIDE</code> service "policy" handlers.

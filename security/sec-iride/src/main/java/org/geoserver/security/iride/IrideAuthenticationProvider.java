@@ -21,8 +21,6 @@ package org.geoserver.security.iride;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,6 +33,7 @@ import org.geoserver.security.iride.authentication.IridePolicyAuthenticationProv
 import org.geoserver.security.iride.config.IrideAuthenticationProviderConfig;
 import org.geoserver.security.iride.util.factory.security.IridePolicyAuthenticationProviderFactory;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -96,10 +95,7 @@ public class IrideAuthenticationProvider extends GeoServerAuthenticationProvider
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(Level.CONFIG,
-            "Initializing {0} with configuration object: \n\t {1}",
-            new Object[] { this.getClass().getSimpleName(), config }
-        );
+        LOGGER.debug("Initializing {} with configuration object: \n\t {}", this.getClass().getSimpleName(), config);
 
         this.config = new Config(config);
 
@@ -129,34 +125,17 @@ public class IrideAuthenticationProvider extends GeoServerAuthenticationProvider
         UsernamePasswordAuthenticationToken auth = null;
         try {
             auth = (UsernamePasswordAuthenticationToken) this.delegateAuthProvider.authenticate(authentication);
+        } catch (UsernameNotFoundException | BadCredentialsException | DisabledException e) {
+        	LOGGER.trace(e.getMessage(), e);
         } catch (AuthenticationException e) {
-            this.log(e);
+        	LOGGER.warn(e.getMessage(), e);
         }
 
         final Authentication authToken = this.buildAuthenticationToken(auth);
 
-        LOGGER.fine("Authentication Token: " + authToken);
+        LOGGER.trace("Authentication Token: {}", authToken);
 
         return authToken;
-    }
-
-    /**
-     * Overridden to log with this Authentication Provider {@link #LOGGER}.
-     */
-    /*
-     * (non-Javadoc)
-     * @see org.geoserver.security.GeoServerAuthenticationProvider#log(org.springframework.security.core.AuthenticationException)
-     */
-    @Override
-    protected void log(AuthenticationException ex) {
-        Level l = Level.WARNING;
-        if (ex instanceof UsernameNotFoundException ||
-            ex instanceof BadCredentialsException ||
-            ex instanceof DisabledException) {
-            l = Level.FINE;
-        }
-
-        LOGGER.log(l, ex.getLocalizedMessage(), ex);
     }
 
     /**

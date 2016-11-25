@@ -22,7 +22,6 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.iride.entity.IrideIdentity;
@@ -32,6 +31,7 @@ import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * <code>IRIDE</code> <code>Digital Identity</code> entity formatter <code>JUnit</code> Test Case.
@@ -79,14 +79,14 @@ public final class IrideIdentityFormatterTest {
     public void testIrideIdentityFormatterHasExpectedFormatStylesCount() {
         final int expectedFormatStyleCount = 2;
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityFormatterHasExpectedFormatStylesCount");
+        LOGGER.trace("BEGIN {}::testIrideIdentityFormatterHasExpectedFormatStylesCount - {}", this.getClass().getName());
         try {
             final FormatStyle[] result = IrideIdentityFormatter.FormatStyle.values();
 
             assertThat(result, is(not(nullValue())));
             assertThat(result, is(arrayWithSize(expectedFormatStyleCount)));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityFormatterHasExpectedFormatStylesCount");
+        	LOGGER.trace("END {}::testIrideIdentityFormatterHasExpectedFormatStylesCount", this.getClass().getName());
         }
     }
 
@@ -98,7 +98,7 @@ public final class IrideIdentityFormatterTest {
         final IrideIdentity                      irideIdentity = null;
         final IrideIdentityFormatter.FormatStyle formatStyle   = null;
 
-        LOGGER.entering(this.getClass().getName(), "testFormatWithNullIrideIdentityAndNullStyleReturnsNull", new Object[] {irideIdentity, formatStyle});
+        LOGGER.trace("BEGIN {}::testFormatWithNullIrideIdentityAndNullStyleReturnsNull - {}, {}", new Object[] {this.getClass().getName(), irideIdentity, formatStyle});
         try {
             final String result = this.formatter.format(irideIdentity, formatStyle);
 
@@ -106,7 +106,7 @@ public final class IrideIdentityFormatterTest {
 
             LOGGER.info("Formatted IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testFormatWithNullIrideIdentityAndNullStyleReturnsNull");
+        	LOGGER.trace("END {}::testFormatWithNullIrideIdentityAndNullStyleReturnsNull", this.getClass().getName());
         }
     }
 
@@ -118,7 +118,7 @@ public final class IrideIdentityFormatterTest {
         final IrideIdentity                      irideIdentity = null;
         final IrideIdentityFormatter.FormatStyle formatStyle   = IrideIdentityFormatter.FormatStyle.INTERNAL_REPRESENTATION;
 
-        LOGGER.entering(this.getClass().getName(), "testFormatWithNullIrideIdentityReturnsNull", new Object[] {irideIdentity, formatStyle});
+        LOGGER.trace("BEGIN {}::testFormatWithNullIrideIdentityReturnsNull - {}, {}", new Object[] {this.getClass().getName(), irideIdentity, formatStyle});
         try {
             final String result = this.formatter.format(irideIdentity, formatStyle);
 
@@ -126,7 +126,7 @@ public final class IrideIdentityFormatterTest {
 
             LOGGER.info("Formatted IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testFormatWithNullIrideIdentityReturnsNull");
+        	LOGGER.trace("END {}::testFormatWithNullIrideIdentityAndNullStyleReturnsNull", this.getClass().getName());
         }
     }
 
@@ -137,7 +137,7 @@ public final class IrideIdentityFormatterTest {
     public void testFormatWithNullStyleReturnsNull() {
         final IrideIdentityFormatter.FormatStyle formatStyle = null;
 
-        LOGGER.entering(this.getClass().getName(), "testFormatWithNullStyleReturnsNull", formatStyle);
+        LOGGER.trace("BEGIN {}::testFormatWithNullStyleReturnsNull - {}, {}", new Object[] {this.getClass().getName(), irideIdentity, formatStyle});
         try {
             final String result = this.formatter.format(this.irideIdentity, formatStyle);
 
@@ -145,7 +145,7 @@ public final class IrideIdentityFormatterTest {
 
             LOGGER.info("Formatted IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testFormatWithNullStyleReturnsNull");
+        	LOGGER.trace("END {}::testFormatWithNullStyleReturnsNull", this.getClass().getName());
         }
     }
 
@@ -156,7 +156,7 @@ public final class IrideIdentityFormatterTest {
     public void testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation() {
         final IrideIdentityFormatter.FormatStyle formatStyle = IrideIdentityFormatter.FormatStyle.INTERNAL_REPRESENTATION;
 
-        LOGGER.entering(this.getClass().getName(), "testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation", formatStyle);
+        LOGGER.trace("BEGIN {}::testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation - {}, {}", new Object[] {this.getClass().getName(), irideIdentity, formatStyle});
         try {
             final String result = this.formatter.format(this.irideIdentity, formatStyle);
 
@@ -165,7 +165,7 @@ public final class IrideIdentityFormatterTest {
 
             LOGGER.info("Formatted IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation");
+        	LOGGER.trace("END {}::testFormatWithInternalRepresentationStyleReturnsValidDigitalRepresentation", this.getClass().getName());
         }
     }
 

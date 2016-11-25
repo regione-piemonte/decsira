@@ -156,10 +156,10 @@ public final class IridePolicyRequestHandler extends AbstractIridePolicyHandler 
             if (responseCode == HttpStatus.SC_OK ) {
                 result = responseXml;
             } else {
-                LOGGER.warning("IRIDE error response code: " + String.format("%d %s", responseCode, HttpStatus.getStatusText(responseCode)));
+                LOGGER.warn("IRIDE error response code: {} {}", responseCode, HttpStatus.getStatusText(responseCode));
             }
 
-            LOGGER.finest("IRIDE SOAP response: " + responseXml);
+            LOGGER.trace("IRIDE SOAP response: " + responseXml);
 
             return result;
         } finally {

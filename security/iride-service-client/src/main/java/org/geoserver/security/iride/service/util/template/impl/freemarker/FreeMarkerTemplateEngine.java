@@ -21,12 +21,12 @@ package org.geoserver.security.iride.service.util.template.impl.freemarker;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.logging.Logger;
 
 import org.geoserver.security.iride.util.io.Filename;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.geoserver.security.iride.util.template.TemplateEngine;
 import org.geoserver.security.iride.util.template.TemplateEngineException;
+import org.slf4j.Logger;
 
 import com.google.common.base.Preconditions;
 
@@ -100,7 +100,7 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
     public void process(String template, Object context, Writer writer) throws IOException {
         final Template freeMarkerTemplate = this.getTemplate(template);
 
-        LOGGER.finest("Processing template '" + template + "':\n" + freeMarkerTemplate + "\nwith context:\n" + context);
+        LOGGER.trace("Processing template '{}':\n{}\nwith context:\n{}", new Object[] { template, freeMarkerTemplate, context });
 
         try {
             freeMarkerTemplate.process(context == null ? TemplateModel.NOTHING : context, writer);
@@ -125,7 +125,7 @@ public final class FreeMarkerTemplateEngine implements TemplateEngine {
 
         final String output = writer.toString();
 
-        LOGGER.finest("Processed template '" + template + "':\n" + output);
+        LOGGER.trace("Processed template '{}':\n{}", template, output);
 
         return output;
     }

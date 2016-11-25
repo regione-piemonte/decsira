@@ -19,17 +19,16 @@
 package org.geoserver.security.iride.util.factory.roleservice;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
-
-import java.util.logging.Logger;
+import static org.junit.Assert.*;
 
 import org.geoserver.security.iride.IrideRoleService;
 import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.service.policy.IridePolicyManager;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -51,7 +50,7 @@ public final class IrideRoleServiceFactoryTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideRoleServiceFactoryTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideRoleServiceFactoryTest.class);
 
     /**
      * {@link IrideRoleService} Factory.
@@ -70,7 +69,8 @@ public final class IrideRoleServiceFactoryTest {
      */
     @Test
     public void testSetIrideRoleServiceFactoryPolicyEnforcer() {
-        LOGGER.entering(this.getClass().getName(), "testSetIrideRoleServiceFactoryPolicyEnforcer");
+    	LOGGER.trace("BEGIN {}::testSetIrideRoleServiceFactoryPolicyEnforcer", this.getClass().getName());
+
         try {
             assertThat(this.irideRoleServiceFactoryTest.getIrideService(), is(nullValue()));
 
@@ -78,7 +78,7 @@ public final class IrideRoleServiceFactoryTest {
 
             assertThat(this.irideRoleServiceFactoryTest.getIrideService(), is(not(nullValue())));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testSetIrideRoleServiceFactoryPolicyEnforcer");
+        	LOGGER.trace("END {}::testSetIrideRoleServiceFactoryPolicyEnforcer", this.getClass().getName());
         }
     }
 
@@ -87,7 +87,8 @@ public final class IrideRoleServiceFactoryTest {
      */
     @Test
     public void testIrideRoleServiceFactoryCreate() {
-        LOGGER.entering(this.getClass().getName(), "testIrideRoleServiceFactoryCreate");
+    	LOGGER.trace("BEGIN {}::testIrideRoleServiceFactoryCreate", this.getClass().getName());
+
         try {
             this.irideRoleServiceFactoryTest.setIrideService(this.irideService);
 
@@ -95,7 +96,7 @@ public final class IrideRoleServiceFactoryTest {
 
             assertThat(irideRoleService.getIrideService(), is(this.irideService));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideRoleServiceFactoryCreate");
+        	LOGGER.trace("END {}::testIrideRoleServiceFactoryCreate", this.getClass().getName());
         }
     }
 

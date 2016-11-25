@@ -18,10 +18,9 @@
  */
 package org.geoserver.security.iride.entity.converter;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;

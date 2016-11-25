@@ -23,11 +23,10 @@ import static org.geoserver.security.iride.Utils.BLANK;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * <code>IRIDE</code> <code>Digital Identity</code> validity <code>JUnit</code> Test Case.
@@ -48,13 +47,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotInvalidIrideIdentity() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotInvalidIrideIdentity", value);
+        LOGGER.trace("BEGIN {}::testIsNotInvalidIrideIdentity - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(false));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotInvalidIrideIdentity");
+            LOGGER.trace("END {}::testIsNotInvalidIrideIdentity", this.getClass().getName());
         }
     }
 
@@ -65,13 +64,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithNullValue() {
         final String value = null;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNullValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithNullValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNullValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithNullValue", this.getClass().getName());
         }
     }
 
@@ -82,13 +81,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithBlankValue() {
         final String value = BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithBlankValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithBlankValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithBlankValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithBlankValue", this.getClass().getName());
         }
     }
 
@@ -99,13 +98,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithEmptyValue() {
         final String value = EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithEmptyValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithEmptyValue", this.getClass().getName());
         }
     }
 
@@ -116,13 +115,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithUnrecognizedValue() {
         final String value = "UNRECOGNIZED_VALUE";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithUnrecognizedValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithUnrecognizedValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithUnrecognizedValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithUnrecognizedValue", this.getClass().getName());
         }
     }
 
@@ -133,13 +132,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken() {
         final String value = "AAAAAA00B77B000F";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken", this.getClass().getName());
         }
     }
 
@@ -150,13 +149,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingNomeToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingNomeToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingNomeToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingNomeToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingNomeToken", this.getClass().getName());
         }
     }
 
@@ -167,13 +166,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingCognomeToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCognomeToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingCognomeToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCognomeToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingCognomeToken", this.getClass().getName());
         }
     }
 
@@ -184,13 +183,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingIdProviderToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingIdProviderToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingIdProviderToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingIdProviderToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingIdProviderToken", this.getClass().getName());
         }
     }
 
@@ -201,13 +200,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingTimestampToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingTimestampToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingTimestampToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingTimestampToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingTimestampToken", this.getClass().getName());
         }
     }
 
@@ -218,13 +217,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken", this.getClass().getName());
         }
     }
 
@@ -235,13 +234,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMissingMacToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingMacToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingMacToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingMacToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingMacToken", this.getClass().getName());
         }
     }
 
@@ -252,13 +251,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleEmpty() {
         final String value = "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleEmpty", this.getClass().getName());
         }
     }
 
@@ -269,13 +268,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleBlank() {
         final String value = BLANK + "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleBlank", this.getClass().getName());
         }
     }
 
@@ -286,13 +285,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat() {
         final String value = "AAAAAA00011D000L/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -303,13 +302,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithNomeEmpty() {
         final String value = "AAAAAA00B77B000F/" + EMPTY + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithNomeEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithNomeEmpty", this.getClass().getName());
         }
     }
 
@@ -320,13 +319,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithNomeBlank() {
         final String value = "AAAAAA00B77B000F/" + BLANK + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithNomeBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithNomeBlank", this.getClass().getName());
         }
     }
 
@@ -337,13 +336,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCognomeEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + EMPTY + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCognomeEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCognomeEmpty", this.getClass().getName());
         }
     }
 
@@ -354,13 +353,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCognomeBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + BLANK + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCognomeBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCognomeBlank", this.getClass().getName());
         }
     }
 
@@ -371,13 +370,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithIdProviderEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + EMPTY + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithIdProviderEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithIdProviderEmpty", this.getClass().getName());
         }
     }
 
@@ -388,13 +387,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithIdProviderBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + BLANK + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithIdProviderBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithIdProviderBlank", this.getClass().getName());
         }
     }
 
@@ -405,13 +404,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithTimestampEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + EMPTY + "/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithTimestampEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithTimestampEmpty", this.getClass().getName());
         }
     }
 
@@ -422,13 +421,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithTimestampBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + BLANK + "/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithTimestampBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithTimestampBlank", this.getClass().getName());
         }
     }
 
@@ -439,13 +438,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithTimestampWithInvalidFormat() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/201605311139/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampWithInvalidFormat", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithTimestampWithInvalidFormat - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampWithInvalidFormat");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithTimestampWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -456,13 +455,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + EMPTY + "/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty", this.getClass().getName());
         }
     }
 
@@ -473,13 +472,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + BLANK + "/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank", this.getClass().getName());
         }
     }
 
@@ -490,13 +489,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/A/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -507,13 +506,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/0/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange", this.getClass().getName());
         }
     }
 
@@ -524,13 +523,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/3/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange", this.getClass().getName());
         }
     }
 
@@ -541,13 +540,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMacEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMacEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMacEmpty", this.getClass().getName());
         }
     }
 
@@ -558,13 +557,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMacBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMacBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMacBlank", this.getClass().getName());
         }
     }
 
@@ -575,13 +574,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithMacOfInvalidLength() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacOfInvalidLength", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMacOfInvalidLength - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacOfInvalidLength");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMacOfInvalidLength", this.getClass().getName());
         }
     }
 
@@ -592,13 +591,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty() {
         final String value = "AAAAAA00011D000L/" + EMPTY + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty", this.getClass().getName());
         }
     }
 
@@ -609,13 +608,13 @@ public final class IrideIdentityValidityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank() {
         final String value = "AAAAAA00011D000L/" + BLANK + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank", this.getClass().getName());
         }
     }
 
@@ -632,13 +631,13 @@ public final class IrideIdentityValidityTest {
                              null + "/" +
                              null;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllNullTokens", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithAllNullTokens - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllNullTokens");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithAllNullTokens", this.getClass().getName());
         }
     }
 
@@ -655,13 +654,13 @@ public final class IrideIdentityValidityTest {
                              EMPTY + "/" +
                              EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllEmptyTokens", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithAllEmptyTokens - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllEmptyTokens");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithAllEmptyTokens", this.getClass().getName());
         }
     }
 
@@ -678,13 +677,13 @@ public final class IrideIdentityValidityTest {
                              BLANK + "/" +
                              BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllBlankTokens", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithAllBlankTokens - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllBlankTokens");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithAllBlankTokens", this.getClass().getName());
         }
     }
 
@@ -695,13 +694,13 @@ public final class IrideIdentityValidityTest {
     public void testIsValidIrideIdentity() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsValidIrideIdentity", value);
+        LOGGER.trace("BEGIN {}::testIsValidIrideIdentity - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentity");
+        	LOGGER.trace("END {}::testIsValidIrideIdentity", this.getClass().getName());
         }
     }
 
@@ -712,13 +711,13 @@ public final class IrideIdentityValidityTest {
     public void testIsValidIrideIdentityWithComplexMacToken() {
         final String value = "AAAAAA00A11D000L/CSI PIEMONTE/DEMO 23/IPA/20150223095441/2//VZjBdhZTwU+/7AUMNSHjQ==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsValidIrideIdentityWithComplexMacToken", value);
+        LOGGER.trace("BEGIN {}::testIsValidIrideIdentityWithComplexMacToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentityWithComplexMacToken");
+        	LOGGER.trace("END {}::testIsValidIrideIdentityWithComplexMacToken", this.getClass().getName());
         }
     }
 
@@ -729,13 +728,13 @@ public final class IrideIdentityValidityTest {
     public void testIsValidIrideIdentityWithRealisticDigitalIdentity() {
         final String value = "NNRLSN69P26L570X/Aldesino/Innerkofler/IPA/20160531113948/2//VZjBdhZTwU+/7AU0A8HjQ==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsValidIrideIdentityWithRealisticDigitalIdentity", value);
+        LOGGER.trace("BEGIN {}::testIsValidIrideIdentityWithRealisticDigitalIdentity - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentityWithRealisticDigitalIdentity");
+        	LOGGER.trace("END {}::testIsValidIrideIdentityWithRealisticDigitalIdentity", this.getClass().getName());
         }
     }
 

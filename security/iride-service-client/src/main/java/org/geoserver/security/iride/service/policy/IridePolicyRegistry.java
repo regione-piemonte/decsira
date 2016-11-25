@@ -21,11 +21,11 @@ package org.geoserver.security.iride.service.policy;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.geoserver.security.iride.service.policy.handler.AbstractIridePolicyHandler;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.geoserver.security.iride.util.object.ObjectRegistry;
+import org.slf4j.Logger;
 
 /**
  * Registry class for available <code>IRIDE</code> service "policy" handlers.
@@ -67,7 +67,7 @@ public final class IridePolicyRegistry<H extends AbstractIridePolicyHandler> ext
      */
     @Override
     protected void register(H[] policyHandlers) {
-        LOGGER.finest(String.format("Adding %d IRIDE Policy Handlers", policyHandlers.length));
+        LOGGER.trace("Adding {} IRIDE Policy Handlers", policyHandlers.length);
 
         super.register(policyHandlers);
     }
@@ -85,7 +85,7 @@ public final class IridePolicyRegistry<H extends AbstractIridePolicyHandler> ext
     protected void register(H policyHandler) {
         super.register(policyHandler);
 
-        LOGGER.finest(String.format("Added IRIDE Policy Handler '%s'", policyHandler.getObjectId().getServiceName()));
+        LOGGER.trace("Added IRIDE Policy Handler '{}'", policyHandler.getObjectId().getServiceName());
     }
 
     /* (non-Javadoc)

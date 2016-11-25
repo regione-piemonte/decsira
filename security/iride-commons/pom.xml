@@ -77,6 +77,7 @@
         <!-- Dependencies -->
         <spring.version>3.1.4.RELEASE</spring.version>
         <spring-security.version>3.1.0.RELEASE</spring-security.version>
+        <slf4j.version>1.6.4</slf4j.version>
 
         <!-- Testing -->
         <test.exclude.pattern>none</test.exclude.pattern>
@@ -159,12 +160,17 @@
             <version>17.0</version>
         </dependency>
 
-		<!-- org.geotools/gt-metadata -->
-		<dependency>
-		    <groupId>org.geotools</groupId>
-		    <artifactId>gt-metadata</artifactId>
-		    <version>14.0</version>
-		</dependency>
+        <!-- LOGGING -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
 
         <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
 
@@ -292,7 +298,7 @@
                     <testFailureIgnore>${test.allow.failure.ignore}</testFailureIgnore>
                     <systemProperties>
                         <property>
-                            <name>java.util.logging.config.file</name>
+                            <name>log4j.configuration</name>
                             <value>src/test/resources/conf/logging.properties</value>
                         </property>
                     </systemProperties>

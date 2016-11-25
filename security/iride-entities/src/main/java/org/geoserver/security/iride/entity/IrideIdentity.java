@@ -20,7 +20,6 @@ package org.geoserver.security.iride.entity;
 
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -38,6 +37,7 @@ import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
 import org.geoserver.security.iride.entity.util.Utils;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 /**
  * <code>IRIDE</code> <code>Digital Identity</code> entity.
@@ -199,7 +199,7 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
         try {
             irideIdentity = new IrideIdentity(StringUtils.defaultString(irideDigitalIdentity));
         } catch (IrideIdentityTokenizationException e) {
-            LOGGER.fine("IRIDE Identity tokenization error: " + e.getMessage());
+            LOGGER.trace("IRIDE Identity tokenization error: {}", e.getMessage());
         }
 
         return irideIdentity;
@@ -227,12 +227,12 @@ public final class IrideIdentity implements Comparable<IrideIdentity>, Serializa
             if (ArrayUtils.isEmpty(invalidTokens)) {
                 return true;
             } else {
-                LOGGER.fine(Utils.toString(invalidTokens));
+                LOGGER.trace(Utils.toString(invalidTokens));
 
                 return false;
             }
         } catch (IrideIdentityTokenizationException e) {
-            LOGGER.fine("IRIDE Identity tokenization error: " + e.getMessage());
+            LOGGER.trace("IRIDE Identity tokenization error: {}", e.getMessage());
 
             return false;
         }

@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.geoserver.config.GeoServerDataDirectory;
 import org.geoserver.platform.GeoServerResourceLoader;
@@ -33,11 +32,12 @@ import org.geoserver.security.iride.config.IrideUserGroupServiceConfig;
 import org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -59,7 +59,7 @@ public final class IrideUserGroupServiceTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideRoleServiceTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideRoleServiceTest.class);
 
     private static final String SAMPLE_USER_WITH_NO_ROLES = "AAAAAA00A11M000U/CSI PIEMONTE/DEMO 32/IPA/20161027103359/2/uQ4hHIMEEruA6DGThS3EuA==";
 
@@ -133,11 +133,11 @@ public final class IrideUserGroupServiceTest {
      */
     @Test
     public void testCannotCreateStore() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testCannotCreateStore");
+    	LOGGER.trace("BEGIN {}::testCannotCreateStore", this.getClass().getName());
 
         assertThat(false, is(this.createUserGroupService().canCreateStore()));
 
-        LOGGER.exiting(this.getClass().getName(), "testCannotCreateStore");
+        LOGGER.trace("END {}::testCannotCreateStore", this.getClass().getName());
     }
 
     /**
@@ -147,11 +147,11 @@ public final class IrideUserGroupServiceTest {
      */
     @Test
     public void testCreateStoreReturnsNull() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testCreateStoreReturnsNull");
+    	LOGGER.trace("BEGIN {}::testCreateStoreReturnsNull", this.getClass().getName());
 
         assertThat(this.createUserGroupService().createStore(), is(nullValue()));
 
-        LOGGER.exiting(this.getClass().getName(), "testCreateStoreReturnsNull");
+        LOGGER.trace("END {}::testCreateStoreReturnsNull", this.getClass().getName());
     }
 
     /**
@@ -161,7 +161,7 @@ public final class IrideUserGroupServiceTest {
      */
     @Test
     public void testCreateUserObjectSpecializedForIride() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testCreateUserObjectSpecializedForIride");
+        LOGGER.trace("BEGIN {}::testCreateUserObjectSpecializedForIride", this.getClass().getName());
 
         final String password = "xyz";
         final boolean isEnabled = true;
@@ -175,7 +175,7 @@ public final class IrideUserGroupServiceTest {
         assertThat(user.getPassword(), is(password));
         assertThat(user.isEnabled(), is(isEnabled));
 
-        LOGGER.exiting(this.getClass().getName(), "testCreateUserObjectSpecializedForIride");
+        LOGGER.trace("END {}::testGetUserByUsernameForSampleUserWithInvalidServerURL", this.getClass().getName());
     }
 
     /**
@@ -185,7 +185,7 @@ public final class IrideUserGroupServiceTest {
      */
     @Test(expected = IllegalStateException.class)
     public void testGetUserByUsernameForSampleUserWithInvalidServerURL() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetUserByUsernameForSampleUserWithInvalidServerURL", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+        LOGGER.trace("BEGIN {}::testGetUserByUsernameForSampleUserWithInvalidServerURL - {}", this.getClass().getName(), new Object[] { SAMPLE_USER_WITH_NO_ROLES, this.config });
 
         this.config.setServerURL(null);
 
@@ -194,7 +194,7 @@ public final class IrideUserGroupServiceTest {
 
             assertThat(user, is(nullValue()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetUserByUsernameForSampleUserWithInvalidServerURL");
+        	LOGGER.trace("END {}::testGetUserByUsernameForSampleUserWithInvalidServerURL", this.getClass().getName());
         }
     }
 

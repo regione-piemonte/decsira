@@ -24,7 +24,6 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -36,6 +35,7 @@ import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 import org.springframework.util.SerializationUtils;
 
 /**
@@ -68,11 +68,11 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testIrideIdentityTokenSeparatorIsSlashCharacter() {
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityTokenSeparatorIsSlashCharacter", IrideIdentityToken.SEPARATOR);
+        LOGGER.trace("BEGIN {}::testIrideIdentityTokenSeparatorIsSlashCharacter - {}", this.getClass().getName(), IrideIdentityToken.SEPARATOR);
 
         assertThat(IrideIdentityToken.SEPARATOR, is('/'));
 
-        LOGGER.exiting(this.getClass().getName(), "testIrideIdentityTokenSeparatorIsSlashCharacter");
+        LOGGER.trace("END {}::testIrideIdentityTokenSeparatorIsSlashCharacter", this.getClass().getName());
     }
 
     /**
@@ -84,11 +84,11 @@ public final class IrideIdentityTest {
     public void testNewIrideIdentityInstanceWithNullDigitalIdentityTokens() throws IrideIdentityTokenizationException {
         final String[] tokens = null;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithNullDigitalIdentityTokens", tokens);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithNullDigitalIdentityTokens - {}", this.getClass().getName(), tokens);
         try {
             new IrideIdentity(tokens);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithNullDigitalIdentityTokens");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithNullDigitalIdentityTokens", this.getClass().getName());
         }
     }
 
@@ -102,11 +102,11 @@ public final class IrideIdentityTest {
         final String[] tokensWithCodiceFiscaleNull = Arrays.copyOf(this.tokens, this.tokens.length);
         tokensWithCodiceFiscaleNull[IrideIdentityToken.CODICE_FISCALE.getPosition()] = null;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleNull", tokensWithCodiceFiscaleNull);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleNull - {}", this.getClass().getName(), tokensWithCodiceFiscaleNull);
         try {
             new IrideIdentity(tokensWithCodiceFiscaleNull);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleNull");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleNull", this.getClass().getName());
         }
     }
 
@@ -117,22 +117,22 @@ public final class IrideIdentityTest {
      */
     @Test(expected = IrideIdentityInvalidTokensException.class)
     public void testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleEmpty() throws IrideIdentityTokenizationException {
-        final String[] tokensWithCodiceFiscaleNull = Arrays.copyOf(this.tokens, this.tokens.length);
-        tokensWithCodiceFiscaleNull[IrideIdentityToken.CODICE_FISCALE.getPosition()] = EMPTY;
+        final String[] tokensWithCodiceFiscaleEmpty = Arrays.copyOf(this.tokens, this.tokens.length);
+        tokensWithCodiceFiscaleEmpty[IrideIdentityToken.CODICE_FISCALE.getPosition()] = EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleEmpty", tokensWithCodiceFiscaleNull);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleEmpty - {}", this.getClass().getName(), tokensWithCodiceFiscaleEmpty);
         try {
-            new IrideIdentity(tokensWithCodiceFiscaleNull);
+            new IrideIdentity(tokensWithCodiceFiscaleEmpty);
         } catch (IrideIdentityInvalidTokensException e) {
             assertThat(e.getInvalidTokens(), is(not(nullValue())));
             assertThat(e.getInvalidTokens(), is(not(emptyArray())));
             assertThat(e.getInvalidTokens(), is(arrayWithSize(1)));
             assertThat(e.getInvalidTokens()[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
-            assertThat(e.getInvalidTokens()[0].getValue(), is(tokensWithCodiceFiscaleNull[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
+            assertThat(e.getInvalidTokens()[0].getValue(), is(tokensWithCodiceFiscaleEmpty[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleEmpty");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleEmpty", this.getClass().getName());
         }
     }
 
@@ -143,22 +143,22 @@ public final class IrideIdentityTest {
      */
     @Test(expected = IrideIdentityInvalidTokensException.class)
     public void testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleBlank() throws IrideIdentityTokenizationException {
-        final String[] tokensWithCodiceFiscaleNull = Arrays.copyOf(this.tokens, this.tokens.length);
-        tokensWithCodiceFiscaleNull[IrideIdentityToken.CODICE_FISCALE.getPosition()] = BLANK;
+        final String[] tokensWithCodiceFiscaleBlank = Arrays.copyOf(this.tokens, this.tokens.length);
+        tokensWithCodiceFiscaleBlank[IrideIdentityToken.CODICE_FISCALE.getPosition()] = BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleBlank", tokensWithCodiceFiscaleNull);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleBlank - {}", this.getClass().getName(), tokensWithCodiceFiscaleBlank);
         try {
-            new IrideIdentity(tokensWithCodiceFiscaleNull);
+            new IrideIdentity(tokensWithCodiceFiscaleBlank);
         } catch (IrideIdentityInvalidTokensException e) {
             assertThat(e.getInvalidTokens(), is(not(nullValue())));
             assertThat(e.getInvalidTokens(), is(not(emptyArray())));
             assertThat(e.getInvalidTokens(), is(arrayWithSize(1)));
             assertThat(e.getInvalidTokens()[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
-            assertThat(e.getInvalidTokens()[0].getValue(), is(tokensWithCodiceFiscaleNull[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
+            assertThat(e.getInvalidTokens()[0].getValue(), is(tokensWithCodiceFiscaleBlank[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleBlank");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithDigitalIdentityTokensWithCodiceFiscaleBlank", this.getClass().getName());
         }
     }
 
@@ -171,11 +171,11 @@ public final class IrideIdentityTest {
     public void testNewIrideIdentityInstanceWithNullDigitalIdentityStringRepresentation() throws IrideIdentityTokenizationException {
         final String value = null;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithNullDigitalIdentityStringRepresentation", value);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithNullDigitalIdentityStringRepresentation - {}", this.getClass().getName(), value);
         try {
             new IrideIdentity(value);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithNullDigitalIdentityStringRepresentation");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithNullDigitalIdentityStringRepresentation", this.getClass().getName());
         }
     }
 
@@ -188,7 +188,7 @@ public final class IrideIdentityTest {
     public void testNewIrideIdentityInstanceWithBlankDigitalIdentityStringRepresentation() throws IrideIdentityTokenizationException {
         final String value = BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithBlankDigitalIdentityStringRepresentation", value);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithBlankDigitalIdentityStringRepresentation - {}", this.getClass().getName(), value);
         try {
             new IrideIdentity(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -197,7 +197,7 @@ public final class IrideIdentityTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithBlankDigitalIdentityStringRepresentation");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithBlankDigitalIdentityStringRepresentation", this.getClass().getName());
         }
     }
 
@@ -210,7 +210,7 @@ public final class IrideIdentityTest {
     public void testNewIrideIdentityInstanceWithEmptyDigitalIdentityStringRepresentation() throws IrideIdentityTokenizationException {
         final String value = EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithEmptyDigitalIdentityStringRepresentation", value);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithEmptyDigitalIdentityStringRepresentation - {}", this.getClass().getName(), value);
         try {
             new IrideIdentity(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -219,7 +219,7 @@ public final class IrideIdentityTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithEmptyDigitalIdentityStringRepresentation");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithEmptyDigitalIdentityStringRepresentation", this.getClass().getName());
         }
     }
 
@@ -230,7 +230,7 @@ public final class IrideIdentityTest {
      */
     @Test
     public void testNewIrideIdentityInstanceWithValidDigitalIdentityTokens() throws IrideIdentityTokenizationException {
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityTokens", this.tokens);
+    	LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithValidDigitalIdentityTokens - {}", this.getClass().getName(), this.tokens);
         try {
             final IrideIdentity result = new IrideIdentity(this.tokens);
 
@@ -247,7 +247,7 @@ public final class IrideIdentityTest {
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityTokens");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithValidDigitalIdentityTokens", this.getClass().getName());
         }
     }
 
@@ -266,7 +266,7 @@ public final class IrideIdentityTest {
         final int livelloAutenticazione    = Integer.valueOf(this.tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]);
         final String mac                   = this.tokens[IrideIdentityToken.MAC.getPosition()];
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityParameters", this.tokens);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithValidDigitalIdentityParameters - {}", this.getClass().getName(), this.tokens);
         try {
             final IrideIdentity result = new IrideIdentity(codFiscale, nome, cognome, idProvider, timestamp, livelloAutenticazione, mac);
 
@@ -283,7 +283,7 @@ public final class IrideIdentityTest {
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityParameters");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithValidDigitalIdentityParameters", this.getClass().getName());
         }
     }
 
@@ -296,7 +296,7 @@ public final class IrideIdentityTest {
     public void testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation", value);
+        LOGGER.trace("BEGIN {}::testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation - {}", this.getClass().getName(), this.tokens);
         try {
             final IrideIdentity result = new IrideIdentity(value);
 
@@ -313,7 +313,7 @@ public final class IrideIdentityTest {
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation");
+        	LOGGER.trace("END {}::testNewIrideIdentityInstanceWithValidDigitalIdentityStringRepresentation", this.getClass().getName());
         }
     }
 
@@ -326,7 +326,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentityInstanceComparesToItself() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToItself", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentityInstanceComparesToItself - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
@@ -336,7 +336,7 @@ public final class IrideIdentityTest {
 
             assertThat(irideIdentity1.compareTo(irideIdentity2), is(0));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceComparesToItself");
+        	LOGGER.trace("END {}::testIrideIdentityInstanceComparesToItself", this.getClass().getName());
         }
     }
 
@@ -350,7 +350,7 @@ public final class IrideIdentityTest {
         final String value1 = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
         final String value2 = "NNRLSN69P26L570X/Aldesino/Innerkofler/IPA/20160531113948/2//VZjBdhZTwU+/7AU0A8HjQ==";
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother", new String[] { value1, value2 });
+        LOGGER.trace("BEGIN {}::testIrideIdentityInstanceComparesToAnother - {}", new String[] { this.getClass().getName(), value1, value2 });
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value1);
 
@@ -361,7 +361,7 @@ public final class IrideIdentityTest {
             assertThat(irideIdentity2, is(notNullValue()));
             assertThat(irideIdentity1.compareTo(irideIdentity2), is(lessThan(0)));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceComparesToAnother");
+        	LOGGER.trace("END {}::testIrideIdentityInstanceComparesToAnother", this.getClass().getName());
         }
     }
 
@@ -374,7 +374,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentityInstanceIsEqualToItself() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItself", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentityInstanceIsEqualToItself - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
@@ -384,7 +384,7 @@ public final class IrideIdentityTest {
 
             assertThat(irideIdentity1.equals(irideIdentity2), is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItself");
+        	LOGGER.trace("END {}::testIrideIdentityInstanceIsEqualToItself", this.getClass().getName());
         }
     }
 
@@ -397,7 +397,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentityInstanceIsNotEqualToNull() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToNull", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentityInstanceIsNotEqualToNull - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
@@ -405,7 +405,7 @@ public final class IrideIdentityTest {
 
             assertThat(irideIdentity1.equals(null), is(false));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToNull");
+        	LOGGER.trace("END {}::testIrideIdentityInstanceIsNotEqualToNull", this.getClass().getName());
         }
     }
 
@@ -418,7 +418,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentityInstanceIsNotEqualToAnotherClassInstance() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToSubclassInstance", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentityInstanceIsNotEqualToSubclassInstance - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
@@ -428,7 +428,7 @@ public final class IrideIdentityTest {
 
             assertThat(irideIdentity1.equals(anotherClassInstance), is(false));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsNotEqualToSubclassInstance");
+        	LOGGER.trace("END {}::testIrideIdentityInstanceIsNotEqualToSubclassInstance", this.getClass().getName());
         }
     }
 
@@ -441,7 +441,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentityInstanceIsEqualToItsCopy() throws IrideIdentityTokenizationException {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItsCopy", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentityInstanceIsEqualToItsCopy - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity1 = new IrideIdentity(value);
 
@@ -451,7 +451,7 @@ public final class IrideIdentityTest {
 
             assertThat(irideIdentity1.equals(irideIdentity2), is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentityInstanceIsEqualToItsCopy");
+        	LOGGER.trace("END {}::testIrideIdentityInstanceIsEqualToItsCopy", this.getClass().getName());
         }
     }
 
@@ -464,13 +464,13 @@ public final class IrideIdentityTest {
     public void testParseIrideIdentityWithNullDigitalRepresentationReturnsNull() {
         final String value = null;
 
-        LOGGER.entering(this.getClass().getName(), "testParseIrideIdentityWithNullDigitalRepresentationReturnsNull", value);
+        LOGGER.trace("BEGIN {}::testParseIrideIdentityWithNullDigitalRepresentationReturnsNull - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity result = IrideIdentity.parseIrideIdentity(value);
 
             assertThat(result, is(nullValue()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testParseIrideIdentityWithNullDigitalRepresentationReturnsNull");
+            LOGGER.trace("END {}::testParseIrideIdentityWithNullDigitalRepresentationReturnsNull", this.getClass().getName());
         }
     }
 
@@ -483,13 +483,13 @@ public final class IrideIdentityTest {
     public void testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull() {
         final String value = "AAAAAA00011D000L/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull", value);
+        LOGGER.trace("BEGIN {}::testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity result = IrideIdentity.parseIrideIdentity(value);
 
             assertThat(result, is(nullValue()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull");
+        	LOGGER.trace("END {}::testParseIrideIdentityWithNotValidDigitalRepresentationReturnsNull", this.getClass().getName());
         }
     }
 
@@ -502,7 +502,7 @@ public final class IrideIdentityTest {
     public void testParseIrideIdentityWithValidDigitalRepresentation() {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testParseIrideIdentityWithNullDigitalRepresentationReturnsNull", value);
+        LOGGER.trace("BEGIN {}::testParseIrideIdentityWithValidDigitalRepresentation - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity result = IrideIdentity.parseIrideIdentity(value);
 
@@ -519,7 +519,7 @@ public final class IrideIdentityTest {
 
             LOGGER.info("IrideIdentity: " + result);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testParseIrideIdentityWithNullDigitalRepresentationReturnsNull");
+        	LOGGER.trace("END {}::testParseIrideIdentityWithValidDigitalRepresentation", this.getClass().getName());
         }
     }
 
@@ -530,13 +530,13 @@ public final class IrideIdentityTest {
     public void testIsNotInvalidIrideIdentity() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotInvalidIrideIdentity", value);
+        LOGGER.trace("BEGIN {}::testIsNotInvalidIrideIdentity - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(false));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotInvalidIrideIdentity");
+        	LOGGER.trace("END {}::testIsNotInvalidIrideIdentity", this.getClass().getName());
         }
     }
 
@@ -547,13 +547,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithNullValue() {
         final String value = null;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNullValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithNullValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNullValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithNullValue", this.getClass().getName());
         }
     }
 
@@ -564,13 +564,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithBlankValue() {
         final String value = BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithBlankValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithBlankValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithBlankValue");
+            LOGGER.trace("END {}::testIsNotValidIrideIdentityWithBlankValue", this.getClass().getName());
         }
     }
 
@@ -581,13 +581,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithEmptyValue() {
         final String value = EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithEmptyValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithEmptyValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithEmptyValue", this.getClass().getName());
         }
     }
 
@@ -598,13 +598,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithUnrecognizedValue() {
         final String value = "UNRECOGNIZED_VALUE";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithUnrecognizedValue", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithUnrecognizedValue - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithUnrecognizedValue");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithUnrecognizedValue", this.getClass().getName());
         }
     }
 
@@ -615,13 +615,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken() {
         final String value = "AAAAAA00B77B000F";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingCodiceFiscaleToken", this.getClass().getName());
         }
     }
 
@@ -632,13 +632,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingNomeToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingNomeToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingNomeToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingNomeToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingNomeToken", this.getClass().getName());
         }
     }
 
@@ -649,13 +649,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingCognomeToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCognomeToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingCognomeToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingCognomeToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingCognomeToken", this.getClass().getName());
         }
     }
 
@@ -666,13 +666,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingIdProviderToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingIdProviderToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingIdProviderToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingIdProviderToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingIdProviderToken", this.getClass().getName());
         }
     }
 
@@ -683,13 +683,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingTimestampToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingTimestampToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingTimestampToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingTimestampToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingTimestampToken", this.getClass().getName());
         }
     }
 
@@ -700,13 +700,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingLivelloAutenticazioneToken", this.getClass().getName());
         }
     }
 
@@ -717,13 +717,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMissingMacToken() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingMacToken", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMissingMacToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMissingMacToken");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMissingMacToken", this.getClass().getName());
         }
     }
 
@@ -734,13 +734,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleEmpty() {
         final String value = "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleEmpty", this.getClass().getName());
         }
     }
 
@@ -751,13 +751,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleBlank() {
         final String value = BLANK + "/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleBlank", this.getClass().getName());
         }
     }
 
@@ -768,13 +768,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat() {
         final String value = "AAAAAA00011D000L/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -785,13 +785,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithNomeEmpty() {
         final String value = "AAAAAA00B77B000F/" + EMPTY + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithNomeEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithNomeEmpty", this.getClass().getName());
         }
     }
 
@@ -802,13 +802,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithNomeBlank() {
         final String value = "AAAAAA00B77B000F/" + BLANK + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithNomeBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithNomeBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithNomeBlank", this.getClass().getName());
         }
     }
 
@@ -819,13 +819,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCognomeEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + EMPTY + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCognomeEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCognomeEmpty", this.getClass().getName());
         }
     }
 
@@ -836,13 +836,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCognomeBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/" + BLANK + "/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCognomeBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCognomeBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCognomeBlank", this.getClass().getName());
         }
     }
 
@@ -853,13 +853,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithIdProviderEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + EMPTY + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithIdProviderEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithIdProviderEmpty", this.getClass().getName());
         }
     }
 
@@ -870,13 +870,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithIdProviderBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/" + BLANK + "/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithIdProviderBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithIdProviderBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithIdProviderBlank", this.getClass().getName());
         }
     }
 
@@ -887,13 +887,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithTimestampEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + EMPTY + "/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithTimestampEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithTimestampEmpty", this.getClass().getName());
         }
     }
 
@@ -904,13 +904,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithTimestampBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/" + BLANK + "/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithTimestampBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithTimestampBlank", this.getClass().getName());
         }
     }
 
@@ -921,13 +921,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithTimestampWithInvalidFormat() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/201605311139/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampWithInvalidFormat", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithTimestampWithInvalidFormat - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithTimestampWithInvalidFormat");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithTimestampWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -938,13 +938,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + EMPTY + "/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneEmpty", this.getClass().getName());
         }
     }
 
@@ -955,13 +955,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/" + BLANK + "/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneBlank", this.getClass().getName());
         }
     }
 
@@ -972,13 +972,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/A/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -989,13 +989,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/0/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue0NotInRange", this.getClass().getName());
         }
     }
 
@@ -1006,13 +1006,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/3/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithLivelloAutenticazioneValue3NotInRange", this.getClass().getName());
         }
     }
 
@@ -1023,13 +1023,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMacEmpty() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMacEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMacEmpty", this.getClass().getName());
         }
     }
 
@@ -1040,13 +1040,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMacBlank() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/" + BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMacBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMacBlank", this.getClass().getName());
         }
     }
 
@@ -1057,13 +1057,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithMacOfInvalidLength() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacOfInvalidLength", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithMacOfInvalidLength - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithMacOfInvalidLength");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithMacOfInvalidLength", this.getClass().getName());
         }
     }
 
@@ -1074,13 +1074,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty() {
         final String value = "AAAAAA00011D000L/" + EMPTY + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeEmpty", this.getClass().getName());
         }
     }
 
@@ -1091,13 +1091,13 @@ public final class IrideIdentityTest {
     public void testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank() {
         final String value = "AAAAAA00011D000L/" + BLANK + "/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithCodiceFiscaleWithInvalidFormatAndWithNomeBlank", this.getClass().getName());
         }
     }
 
@@ -1114,13 +1114,13 @@ public final class IrideIdentityTest {
                              null + "/" +
                              null;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllNullTokens", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithAllNullTokens - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllNullTokens");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithAllNullTokens", this.getClass().getName());
         }
     }
 
@@ -1137,13 +1137,13 @@ public final class IrideIdentityTest {
                              EMPTY + "/" +
                              EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllEmptyTokens", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithAllEmptyTokens - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllEmptyTokens");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithAllEmptyTokens", this.getClass().getName());
         }
     }
 
@@ -1160,13 +1160,13 @@ public final class IrideIdentityTest {
                              BLANK + "/" +
                              BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllBlankTokens", value);
+        LOGGER.trace("BEGIN {}::testIsNotValidIrideIdentityWithAllBlankTokens - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isNotValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsNotValidIrideIdentityWithAllBlankTokens");
+        	LOGGER.trace("END {}::testIsNotValidIrideIdentityWithAllBlankTokens", this.getClass().getName());
         }
     }
 
@@ -1177,13 +1177,13 @@ public final class IrideIdentityTest {
     public void testIsValidIrideIdentity() {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsValidIrideIdentity", value);
+        LOGGER.trace("BEGIN {}::testIsValidIrideIdentity - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentity");
+        	LOGGER.trace("END {}::testIsValidIrideIdentity", this.getClass().getName());
         }
     }
 
@@ -1194,13 +1194,13 @@ public final class IrideIdentityTest {
     public void testIsValidIrideIdentityWithComplexMacToken() {
         final String value = "AAAAAA00A11D000L/CSI PIEMONTE/DEMO 23/IPA/20150223095441/2//VZjBdhZTwU+/7AUMNSHjQ==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsValidIrideIdentityWithComplexMacToken", value);
+        LOGGER.trace("BEGIN {}::testIsValidIrideIdentityWithComplexMacToken - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentityWithComplexMacToken");
+        	LOGGER.trace("END {}::testIsValidIrideIdentityWithComplexMacToken", this.getClass().getName());
         }
     }
 
@@ -1211,13 +1211,13 @@ public final class IrideIdentityTest {
     public void testIsValidIrideIdentityWithRealisticDigitalIdentity() {
         final String value = "NNRLSN69P26L570X/Aldesino/Innerkofler/IPA/20160531113948/2//VZjBdhZTwU+/7AU0A8HjQ==";
 
-        LOGGER.entering(this.getClass().getName(), "testIsValidIrideIdentityWithRealisticDigitalIdentity", value);
+        LOGGER.trace("BEGIN {}::testIsValidIrideIdentityWithRealisticDigitalIdentity - {}", this.getClass().getName(), value);
         try {
             final boolean result = IrideIdentity.isValidIrideIdentity(value);
 
             assertThat(result, is(true));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIsValidIrideIdentityWithRealisticDigitalIdentity");
+        	LOGGER.trace("END {}::testIsValidIrideIdentityWithRealisticDigitalIdentity", this.getClass().getName());
         }
     }
 
@@ -1228,7 +1228,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentitySuccesfulSerialization() {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentitySuccesfulSerialization", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentitySuccesfulSerialization - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(value);
 
@@ -1237,7 +1237,7 @@ public final class IrideIdentityTest {
             assertThat(serialized, is(not(nullValue())));
             assertThat(ArrayUtils.toObject(serialized), is(arrayWithSize(greaterThan(0))));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentitySuccesfulSerialization");
+        	LOGGER.trace("END {}::testIrideIdentitySuccesfulSerialization", this.getClass().getName());
         }
     }
 
@@ -1248,7 +1248,7 @@ public final class IrideIdentityTest {
     public void testIrideIdentitySuccesfulDeserialization() {
         final String value = StringUtils.join(this.tokens, IrideIdentityToken.SEPARATOR);
 
-        LOGGER.entering(this.getClass().getName(), "testIrideIdentitySuccesfulDeserialization", value);
+        LOGGER.trace("BEGIN {}::testIrideIdentitySuccesfulDeserialization - {}", this.getClass().getName(), value);
         try {
             final IrideIdentity irideIdentity1 = IrideIdentity.parseIrideIdentity(value);
 
@@ -1265,10 +1265,10 @@ public final class IrideIdentityTest {
             final IrideIdentity irideIdentity2 = (IrideIdentity) deserialized;
 
             assertThat(irideIdentity1, is(not(sameInstance(irideIdentity2))));
-            assertThat(irideIdentity1, is(irideIdentity2));
+            assertThat(irideIdentity1, is(equalTo(irideIdentity2)));
             assertThat(irideIdentity1.compareTo(irideIdentity2), is(0));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testIrideIdentitySuccesfulDeserialization");
+        	LOGGER.trace("END {}::testIrideIdentitySuccesfulDeserialization", this.getClass().getName());
         }
     }
 

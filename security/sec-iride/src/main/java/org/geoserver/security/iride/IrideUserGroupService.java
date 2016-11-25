@@ -21,8 +21,7 @@ package org.geoserver.security.iride;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.GeoServerUserGroupService;
@@ -89,10 +88,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public void initializeFromConfig(SecurityNamedServiceConfig config) throws IOException {
-        LOGGER.log(Level.CONFIG,
-            "Initializing {0} with configuration object: \n\t {1}",
-            new Object[] { this.getClass().getSimpleName(), config }
-        );
+        LOGGER.debug("Initializing {} with configuration object: \n\t {}", this.getClass().getSimpleName(), config);
 
         this.name   = config.getName();
         this.config = new Config(config);
@@ -107,11 +103,11 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
      */
     @Override
     public GeoServerUser getUserByUsername(String username) throws IOException {
-        LOGGER.finer("Username: " + username);
+        LOGGER.trace("Username: {}", username);
 
         final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(username);
         if (irideIdentity == null) {
-            LOGGER.warning("Username: " + username + " is not a formally valid IRIDE digital identity");
+            LOGGER.warn("Username: {} is not a formally valid IRIDE digital identity", username);
 
             return null;
         }
@@ -135,7 +131,7 @@ public class IrideUserGroupService extends AbstractUserGroupService implements G
         user.setIrideIdentity(irideIdentity);
         user.setInfoPersonae(infoPersonae);
 
-        LOGGER.fine("Retrieved IRIDE User: " + user);
+        LOGGER.trace("Retrieved IRIDE User: {}", user);
 
         return user;
     }
