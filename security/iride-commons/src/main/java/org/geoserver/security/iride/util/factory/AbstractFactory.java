@@ -18,9 +18,8 @@
  */
 package org.geoserver.security.iride.util.factory;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 /**
  * Base <em>Factory</em> class.

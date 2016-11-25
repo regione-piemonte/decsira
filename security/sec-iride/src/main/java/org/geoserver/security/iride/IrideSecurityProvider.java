@@ -19,12 +19,12 @@
 package org.geoserver.security.iride;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.geoserver.config.util.XStreamPersister;
 import org.geoserver.security.GeoServerAuthenticationProvider;
 import org.geoserver.security.GeoServerRoleService;
 import org.geoserver.security.GeoServerSecurityProvider;
+import org.geoserver.security.GeoServerSecurityService;
 import org.geoserver.security.GeoServerUserGroupService;
 import org.geoserver.security.config.SecurityNamedServiceConfig;
 import org.geoserver.security.iride.config.IrideAuthenticationProviderConfig;
@@ -34,6 +34,7 @@ import org.geoserver.security.iride.util.factory.security.IrideAuthenticationPro
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 import com.google.common.base.Preconditions;
 
@@ -53,7 +54,7 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     /**
      * <code>GeoServer</code> <code>IRIDE</code> <a href="http://docs.geoserver.org/stable/en/user/security/">security services</a> configurations logging message pattern.
      */
-    private static final String CONFIG_MESSAGE_PATTERN = "Configuring alias %s for %s instance";
+    private static final String CONFIG_MESSAGE_PATTERN = "Configuring alias {} for {} instance";
 
     /**
      * Factory that creates a new, configured, {@link IrideAuthenticationProviderFactory} instance.
@@ -90,9 +91,9 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
      */
     @Override
     public void configure(XStreamPersister xp) {
-        LOGGER.config(String.format(CONFIG_MESSAGE_PATTERN, IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class.getSimpleName()));
-        LOGGER.config(String.format(CONFIG_MESSAGE_PATTERN, IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class.getSimpleName()));
-        LOGGER.config(String.format(CONFIG_MESSAGE_PATTERN, IrideUserGroupServiceConfig.ALIAS, IrideUserGroupServiceConfig.class.getSimpleName()));
+        LOGGER.debug(CONFIG_MESSAGE_PATTERN, IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class.getSimpleName());
+        LOGGER.debug(CONFIG_MESSAGE_PATTERN, IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class.getSimpleName());
+        LOGGER.debug(CONFIG_MESSAGE_PATTERN, IrideUserGroupServiceConfig.ALIAS, IrideUserGroupServiceConfig.class.getSimpleName());
 
         xp.getXStream().alias(IrideAuthenticationProviderConfig.ALIAS, IrideAuthenticationProviderConfig.class);
         xp.getXStream().alias(IrideRoleServiceConfig.ALIAS, IrideRoleServiceConfig.class);
@@ -111,6 +112,14 @@ public class IrideSecurityProvider extends GeoServerSecurityProvider {
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.GeoServerSecurityProvider#createAuthenticationProvider(org.geoserver.security.config.SecurityNamedServiceConfig)
+     */
+    /**
+     * @throws IllegalStateException if any error occurs during {@link GeoServerSecurityService#initializeFromConfig(SecurityNamedServiceConfig)}
+     *                               execution.
+     *                               <p>{@link #createAuthenticationProvider(SecurityNamedServiceConfig)} is different in respect of the other two creational methods
+     *                               (namely {@link #createRoleService(SecurityNamedServiceConfig)} and {@link #createUserGroupService(SecurityNamedServiceConfig)}) because
+     *                               <em>it does not</em> declare to throw an {@link IOException} to signal that errors occured during initialization
+     *                               (interface design flaw maybe?)
      */
     @Override
     public GeoServerAuthenticationProvider createAuthenticationProvider(SecurityNamedServiceConfig config) {

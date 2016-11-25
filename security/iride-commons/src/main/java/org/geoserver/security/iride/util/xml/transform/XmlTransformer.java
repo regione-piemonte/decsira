@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
@@ -36,6 +35,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 import com.google.common.base.Preconditions;
 
@@ -183,7 +183,7 @@ public final class XmlTransformer {
 
             return transformer;
         } catch (TransformerConfigurationException e) {
-            LOGGER.severe(ErrorHandlerUtils.getErrorMessage(e));
+            LOGGER.error(ErrorHandlerUtils.getErrorMessage(e));
 
             throw e;
         }

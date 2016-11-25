@@ -27,13 +27,13 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.iride.service.util.factory.template.freemarker.FreeMarkerConfigurationFactory;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -76,7 +76,7 @@ public final class FreeMarkerConfigurationDefaultFactoryTest {
      */
     @Test
     public void testCreateConfiguration() throws IOException, URISyntaxException {
-        LOGGER.entering(this.getClass().getName(), "testCreateConfiguration");
+    	LOGGER.trace("BEGIN {}::testCreateConfiguration", this.getClass().getName());
         try {
             final Configuration templateConfiguration = FreeMarkerConfigurationFactory.createConfiguration();
 
@@ -104,7 +104,7 @@ public final class FreeMarkerConfigurationDefaultFactoryTest {
             // FreeMarker TemplateExceptionHandler Configuration
             assertThat(templateConfiguration.getTemplateExceptionHandler(), is(TemplateExceptionHandler.RETHROW_HANDLER));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testCreateConfiguration");
+        	LOGGER.trace("END {}::testCreateConfiguration", this.getClass().getName());
         }
     }
 
@@ -116,7 +116,7 @@ public final class FreeMarkerConfigurationDefaultFactoryTest {
      */
     @Test
     public void testCreate() throws IOException, URISyntaxException {
-        LOGGER.entering(this.getClass().getName(), "testCreate");
+        LOGGER.trace("BEGIN {}::testCreate", this.getClass().getName());
         try {
             final Configuration templateConfiguration = this.templateConfigurationFactory.create();
 
@@ -144,7 +144,7 @@ public final class FreeMarkerConfigurationDefaultFactoryTest {
             // FreeMarker TemplateExceptionHandler Configuration
             assertThat(templateConfiguration.getTemplateExceptionHandler(), is(TemplateExceptionHandler.RETHROW_HANDLER));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testCreate");
+        	LOGGER.trace("END {}::testCreate", this.getClass().getName());
         }
     }
 

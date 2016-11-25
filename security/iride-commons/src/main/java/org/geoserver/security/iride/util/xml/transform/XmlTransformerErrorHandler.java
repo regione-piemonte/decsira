@@ -18,12 +18,11 @@
  */
 package org.geoserver.security.iride.util.xml.transform;
 
-import java.util.logging.Logger;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -48,7 +47,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void warning(SAXParseException exception) throws SAXException {
-        LOGGER.fine(exception.toString());
+        LOGGER.trace(exception.toString());
     }
 
     /* (non-Javadoc)
@@ -56,7 +55,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void warning(TransformerException exception) throws TransformerException {
-        LOGGER.fine(ErrorHandlerUtils.getErrorMessage(exception));
+        LOGGER.trace(ErrorHandlerUtils.getErrorMessage(exception));
     }
 
     /*
@@ -65,7 +64,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void error(SAXParseException exception) throws SAXException {
-        LOGGER.warning(exception.toString());
+        LOGGER.warn(exception.toString());
     }
 
     /* (non-Javadoc)
@@ -73,7 +72,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void error(TransformerException exception) throws TransformerException {
-        LOGGER.warning(ErrorHandlerUtils.getErrorMessage(exception));
+        LOGGER.warn(ErrorHandlerUtils.getErrorMessage(exception));
     }
 
     /*
@@ -82,7 +81,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void fatalError(SAXParseException exception) throws SAXException {
-        LOGGER.severe(exception.toString());
+        LOGGER.error(exception.toString());
 
         throw exception;
     }
@@ -92,7 +91,7 @@ public final class XmlTransformerErrorHandler implements ErrorHandler, ErrorList
      */
     @Override
     public void fatalError(TransformerException exception) throws TransformerException {
-        LOGGER.severe(ErrorHandlerUtils.getErrorMessage(exception));
+        LOGGER.error(ErrorHandlerUtils.getErrorMessage(exception));
 
         throw exception;
     }

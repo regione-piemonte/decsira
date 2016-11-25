@@ -20,8 +20,6 @@ package org.geoserver.security.iride.service.util.builder.http;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -29,6 +27,7 @@ import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.geoserver.security.iride.util.builder.Builder;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 import com.google.common.net.MediaType;
 
@@ -143,7 +142,7 @@ public class HttpPostBuilder implements Builder<PostMethod> {
         try {
             return this.createPostMethod();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "HTTP POST method build failed: " + e.getMessage(), e);
+            LOGGER.error("HTTP POST method build failed: {}", e.getMessage(), e);
 
             return null;
         }

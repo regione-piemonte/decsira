@@ -86,11 +86,11 @@ public abstract class AbstractIridePolicyResponseXslProcessorTest extends Abstra
      */
     @Override
     protected String doTestXslProcessing() throws TransformerException {
-        logger.fine("Processing " + this.policy.getServiceName() + " IRIDE policy response");
+        logger.trace("Processing {} IRIDE policy response", this.policy.getServiceName());
 
         final String result = this.transform();
 
-        logger.fine("Processed " + this.policy.getServiceName() + " IRIDE policy response result:\n" + result);
+        logger.trace("Processed {} IRIDE policy response result:\n", this.policy.getServiceName(), result);
 
         return result;
     }

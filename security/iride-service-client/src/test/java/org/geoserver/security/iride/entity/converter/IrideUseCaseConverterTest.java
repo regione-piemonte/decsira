@@ -84,7 +84,7 @@ public final class IrideUseCaseConverterTest extends AbstractXStreamTest {
 
         assertThat(result, not(isEmptyOrNullString()));
 
-        this.logger.fine("Marshalling result:\n" + result);
+        this.logger.trace("Marshalling result:\n{}", result);
     }
 
     /**
@@ -99,7 +99,7 @@ public final class IrideUseCaseConverterTest extends AbstractXStreamTest {
         assertThat(result.size(), is(7));
         assertThat(result.get(0), is(this.useCase));
 
-        this.logger.fine("Unmarshalling result:\n" + result);
+        this.logger.trace("Unmarshalling result:\n{}", result);
     }
 
 }

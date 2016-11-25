@@ -26,7 +26,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -35,6 +34,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 /**
  * <code>IRIDE</code> <code>Digital Identity</code> validator.
@@ -90,7 +90,7 @@ public final class IrideIdentityValidator {
      * @return {@code true} <em>if and only if all tokens are valid</em>, {@code false} otherwise
      */
     public IrideIdentityInvalidTokenValue[] validate(String... tokens) {
-        LOGGER.finer("IRIDE Identity tokens: " + Arrays.toString(tokens));
+        LOGGER.trace("IRIDE Identity tokens: {}", Arrays.toString(tokens));
 
         this.checkTokens(tokens);
 
@@ -278,7 +278,7 @@ public final class IrideIdentityValidator {
 
             return true;
         } catch (ParseException e) {
-            LOGGER.fine("Invalid date format: " + e.getMessage());
+            LOGGER.trace("Invalid date format: {}", e.getMessage());
 
             return false;
         }
@@ -309,7 +309,7 @@ public final class IrideIdentityValidator {
 
             return true;
         } catch (NumberFormatException e) {
-            LOGGER.fine("Invalid number format: " + e.getMessage());
+            LOGGER.trace("Invalid number format: {}", e.getMessage());
 
             return false;
         }

@@ -86,7 +86,7 @@ public final class IrideInfoPersonaConverterTest extends AbstractXStreamTest {
 
         assertThat(result, not(isEmptyOrNullString()));
 
-        this.logger.fine("Marshalling result:\n" + result);
+        this.logger.trace("Marshalling result:\n{}", result);
     }
 
     /**
@@ -101,7 +101,7 @@ public final class IrideInfoPersonaConverterTest extends AbstractXStreamTest {
         assertThat(result.size(), is(1));
         assertThat(result.get(0), is(this.infoPersona));
 
-        this.logger.fine("Unmarshalling result:\n" + result);
+        this.logger.trace("Unmarshalling result:\n{}", result);
     }
 
 }

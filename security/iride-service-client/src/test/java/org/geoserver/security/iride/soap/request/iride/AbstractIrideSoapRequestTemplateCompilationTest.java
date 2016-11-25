@@ -145,14 +145,14 @@ public abstract class AbstractIrideSoapRequestTemplateCompilationTest extends Ab
 
         final Writer out = new StringWriter();
 
-        logger.fine("IRIDE SOAP request '" + this.getTemplateName() + "' template: \n" + template);
-        logger.fine("IRIDE SOAP request '" + this.getTemplateName() + "' dataModel: \n" + dataModel);
+        logger.trace("IRIDE SOAP request '{}' template: \n{}", this.getTemplateName(), template);
+        logger.trace("IRIDE SOAP request '{}' dataModel: \n{}", this.getTemplateName(), dataModel);
 
         template.process(dataModel, out);
 
         final String output = out.toString();
 
-        logger.fine("IRIDE SOAP request '" + this.getTemplateName() + "' template processing output: \n" + output);
+        logger.trace("IRIDE SOAP request '{}' template processing output: \n{}", this.getTemplateName(), output);
 
         return output;
     }

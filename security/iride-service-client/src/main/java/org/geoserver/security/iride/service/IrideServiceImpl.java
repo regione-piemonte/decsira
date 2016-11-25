@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.transform.TransformerException;
 
@@ -39,6 +37,7 @@ import org.geoserver.security.iride.entity.IrideUseCase;
 import org.geoserver.security.iride.service.policy.IridePolicy;
 import org.geoserver.security.iride.service.policy.IridePolicyManager;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 import com.google.common.base.Preconditions;
 
@@ -82,7 +81,7 @@ public final class IrideServiceImpl implements IrideService {
     /**
      * Policy execution result message format.
      */
-    private static final String RESULT_MESSAGE_FORMAT = "IRIDE Policy '%s' result: %s: ";
+    private static final String RESULT_MESSAGE_FORMAT = "IRIDE Policy '{}' result: {}: ";
 
     /**
      * Policy execution error message format.
@@ -153,7 +152,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = policyResult.toArray(new IrideRole[policyResult.size()]);
             }
         } catch (IOException | TransformerException e) {
-            LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -194,7 +193,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = policyResult.toArray(new IrideUseCase[policyResult.size()]);
             }
         } catch (IOException | TransformerException e) {
-            LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
+        	LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -222,7 +221,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = (IrideIdentity) this.handleResponse(policy, policyResponse);
             }
         } catch (IOException | TransformerException e) {
-            LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
+        	LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -281,7 +280,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = (List<IrideInfoPersona>) this.handleResponse(policy, policyResponse);
             }
         } catch (IOException | TransformerException e) {
-            LOGGER.log(Level.SEVERE, String.format(ERROR_MESSAGE_FORMAT, policy.getServiceName(), e.getMessage()), e);
+        	LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -308,10 +307,10 @@ public final class IrideServiceImpl implements IrideService {
      * @param result the execution result
      */
     private static void logPolicyExecutionResult(IridePolicy policy, Object result) {
-        LOGGER.finest(String.format(
+        LOGGER.trace(
             RESULT_MESSAGE_FORMAT,
             policy.getServiceName(),
-            result instanceof Object[] ? Arrays.toString((Object[]) result) : result)
+            result instanceof Object[] ? Arrays.toString((Object[]) result) : result
         );
     }
 

@@ -19,10 +19,10 @@
 package org.geoserver.security.iride;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.hamcrest.Matcher;
+import org.slf4j.Logger;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.xmlunit.builder.DiffBuilder;

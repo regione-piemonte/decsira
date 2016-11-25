@@ -23,14 +23,13 @@ import static org.geoserver.security.iride.Utils.BLANK;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.entity.identity.IrideIdentityTokenizer;
 import org.geoserver.security.iride.entity.identity.exception.IrideIdentityMissingTokenException;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * {@link IrideIdentityTokenizer} <code>JUnit</code> Test Case.
@@ -66,11 +65,11 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationThrowNullPointerExceptionForNullValue() throws IrideIdentityMissingTokenException {
         final String value = null;
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationThrowNullPointerExceptionForNullValue", value);
+        LOGGER.trace("BEGIN {}::testTokenizationThrowNullPointerExceptionForNullValue - {}", this.getClass().getName(), IrideIdentityToken.SEPARATOR);
         try {
             this.tokenizer.tokenize(value);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationThrowNullPointerExceptionForNullValue");
+        	LOGGER.trace("END {}::testTokenizationThrowNullPointerExceptionForNullValue", this.getClass().getName());
         }
     }
 
@@ -83,7 +82,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForEmptyValue() throws IrideIdentityMissingTokenException {
         final String value = EMPTY;
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForEmptyValue", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForEmptyValue - {}", this.getClass().getName(), IrideIdentityToken.SEPARATOR);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -92,7 +91,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForEmptyValue");
+        	LOGGER.trace("END {}::testTokenizationFailForEmptyValue", this.getClass().getName());
         }
     }
 
@@ -105,7 +104,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForBlankValue() throws IrideIdentityMissingTokenException {
         final String value = BLANK;
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForBlankValue", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForBlankValue - {}", this.getClass().getName(), IrideIdentityToken.SEPARATOR);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -114,7 +113,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForBlankValue");
+        	LOGGER.trace("END {}::testTokenizationFailForBlankValue", this.getClass().getName());
         }
     }
 
@@ -127,7 +126,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForUnrecognizedValue() throws IrideIdentityMissingTokenException {
         final String value = "UNRECOGNIZED_VALUE";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForUnrecognizedValue", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForUnrecognizedValue - {}", this.getClass().getName(), IrideIdentityToken.SEPARATOR);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -136,7 +135,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForUnrecognizedValue");
+        	LOGGER.trace("END {}::testTokenizationFailForUnrecognizedValue", this.getClass().getName());
         }
     }
 
@@ -149,7 +148,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingCodiceFiscaleToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingCodiceFiscaleToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingCodiceFiscaleToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -158,7 +157,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingCodiceFiscaleToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingCodiceFiscaleToken", this.getClass().getName());
         }
     }
 
@@ -171,7 +170,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingNomeToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingNomeToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingNomeToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -180,7 +179,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingNomeToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingNomeToken", this.getClass().getName());
         }
     }
 
@@ -193,7 +192,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingCognomeToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingCognomeToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingCognomeToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -202,7 +201,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingCognomeToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingCognomeToken", this.getClass().getName());
         }
     }
 
@@ -215,7 +214,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingIdProviderToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingIdProviderToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingIdProviderToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -224,7 +223,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingIdProviderToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingIdProviderToken", this.getClass().getName());
         }
     }
 
@@ -237,7 +236,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingTimestampToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingTimestampToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingTimestampToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -246,7 +245,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingTimestampToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingTimestampToken", this.getClass().getName());
         }
     }
 
@@ -259,7 +258,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingLivelloAutenticazioneToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingLivelloAutenticazioneToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingLivelloAutenticazioneToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -268,7 +267,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingLivelloAutenticazioneToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingLivelloAutenticazioneToken", this.getClass().getName());
         }
     }
 
@@ -281,7 +280,7 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationFailForMissingMacToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationFailForMissingMacToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationFailForMissingMacToken - {}", this.getClass().getName(), value);
         try {
             this.tokenizer.tokenize(value);
         } catch (IrideIdentityMissingTokenException e) {
@@ -290,7 +289,7 @@ public final class IrideIdentityTokenizerTest {
 
             throw e;
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationFailForMissingMacToken");
+        	LOGGER.trace("END {}::testTokenizationFailForMissingMacToken", this.getClass().getName());
         }
     }
 
@@ -303,14 +302,14 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationSuccessful() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationSuccessful", value);
+        LOGGER.trace("BEGIN {}::testTokenizationSuccessful - {}", this.getClass().getName(), value);
         try {
             final String[] result = this.tokenizer.tokenize(value);
 
             assertThat(result, is(arrayWithSize(IrideIdentityToken.values().length)));
             assertThat(result, is(arrayContaining("AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==")));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationSuccessful");
+        	LOGGER.trace("END {}::testTokenizationSuccessful", this.getClass().getName());
         }
     }
 
@@ -323,14 +322,14 @@ public final class IrideIdentityTokenizerTest {
     public void testTokenizationSuccessfulForComplexMacToken() throws IrideIdentityMissingTokenException {
         final String value = "AAAAAA00A11D000L/CSI PIEMONTE/DEMO 23/IPA/20150223095441/2//VZjBdhZTwU+/7AUMNSHjQ==";
 
-        LOGGER.entering(this.getClass().getName(), "testTokenizationSuccessfulForComplexMacToken", value);
+        LOGGER.trace("BEGIN {}::testTokenizationSuccessfulForComplexMacToken - {}", this.getClass().getName(), value);
         try {
             final String[] result = this.tokenizer.tokenize(value);
 
             assertThat(result, is(arrayWithSize(IrideIdentityToken.values().length)));
             assertThat(result, is(arrayContaining("AAAAAA00A11D000L", "CSI PIEMONTE", "DEMO 23", "IPA", "20150223095441", "2", "/VZjBdhZTwU+/7AUMNSHjQ==")));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testTokenizationSuccessfulForComplexMacToken");
+        	LOGGER.trace("END {}::testTokenizationSuccessfulForComplexMacToken", this.getClass().getName());
         }
     }
 

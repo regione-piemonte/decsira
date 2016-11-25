@@ -18,14 +18,13 @@
  */
 package org.geoserver.security.iride.authentication;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.IrideGeoServerUser;
 import org.geoserver.security.iride.IrideUserGroupService;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -118,7 +117,7 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
             throw new AuthenticationServiceException("UserDetailsService returned null, which is an interface contract violation");
         }
 
-        LOGGER.fine("Loaded IRIDE User: " + loadedUser);
+        LOGGER.trace("Loaded IRIDE User: {}", loadedUser);
 
         return loadedUser;
     }
@@ -129,7 +128,7 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) {
         if (authentication.getCredentials() == null) {
-            LOGGER.warning("Authentication failed: no credentials provided");
+            LOGGER.warn("Authentication failed: no credentials provided");
 
             throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
@@ -137,7 +136,7 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
         if (! IrideGeoServerUser.class.isInstance(userDetails)) {
             final String msg = "Authentication succeded but wrong UserDetails type, expected IrideGeoServerUser but got " + userDetails == null ? "<NULL>" : userDetails.getClass().getSimpleName();
 
-            LOGGER.warning(msg);
+            LOGGER.warn(msg);
 
             throw new AuthenticationServiceException(msg);
         }
@@ -147,7 +146,7 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
             ! irideGeoServerUser.hasInfoPersonae()) {
             final String msg = "Authentication succeded but wrong UserDetails type, expected IrideGeoServerUser with both an IrideIdentity and a Set<InfoPersona> properties defined";
 
-            LOGGER.warning(msg);
+            LOGGER.warn(msg);
 
             throw new AuthenticationServiceException(msg);
         }

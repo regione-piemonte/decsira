@@ -27,7 +27,6 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.geoserver.security.iride.service.util.factory.template.freemarker.FreeMarkerConfigurationFactory;
@@ -38,6 +37,7 @@ import org.geoserver.security.iride.util.template.TemplateEngine;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -88,7 +88,7 @@ public final class FreeMarkerTemplateEngineFactoryTest {
      */
     @Test
     public void testCreateTemplateEngineConfiguration() throws IOException, URISyntaxException {
-        LOGGER.entering(this.getClass().getName(), "testCreateTemplateEngineConfiguration");
+    	LOGGER.trace("BEGIN {}::testCreateTemplateEngineConfiguration", this.getClass().getName());
         try {
             final FreeMarkerTemplateEngine templateEngine = FreeMarkerTemplateEngineFactory.createTemplateEngine(this.defaultConfiguration);
 
@@ -123,7 +123,7 @@ public final class FreeMarkerTemplateEngineFactoryTest {
             // FreeMarker Template Extension
             assertThat(templateEngine.getTemplateExtension(), is(nullValue()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testCreateTemplateEngineConfiguration");
+        	LOGGER.trace("END {}::testCreateTemplateEngineConfiguration", this.getClass().getName());
         }
     }
 
@@ -135,7 +135,7 @@ public final class FreeMarkerTemplateEngineFactoryTest {
      */
     @Test
     public void testCreateTemplateEngineConfigurationWithExtension() throws IOException, URISyntaxException {
-        LOGGER.entering(this.getClass().getName(), "testCreateTemplateEngineConfigurationWithExtension");
+    	LOGGER.trace("BEGIN {}::testCreateTemplateEngineConfigurationWithExtension", this.getClass().getName());
         try {
             final FreeMarkerTemplateEngine templateEngine = FreeMarkerTemplateEngineFactory.createTemplateEngine(this.defaultConfiguration, "xml");
 
@@ -170,7 +170,7 @@ public final class FreeMarkerTemplateEngineFactoryTest {
             // FreeMarker Template Extension
             assertThat(templateEngine.getTemplateExtension(), is("xml"));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testCreateTemplateEngineConfigurationWithExtension");
+        	LOGGER.trace("END {}::testCreateTemplateEngineConfigurationWithExtension", this.getClass().getName());
         }
     }
 

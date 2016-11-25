@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.logging.Logger;
 
 import javax.xml.transform.TransformerException;
 
@@ -39,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -153,7 +153,7 @@ public final class IridePolicyResponseHandlerTest {
 
         assertThat(result, not(nullValue()));
 
-        LOGGER.fine(String.format("Policy '%s' Response Object: %s", this.policy, result));
+        LOGGER.trace("Policy '{}' Response Object: {}", this.policy, result);
     }
 
     /**

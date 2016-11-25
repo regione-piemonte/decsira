@@ -18,11 +18,10 @@
  */
 package org.geoserver.security.iride.service.policy;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.service.policy.handler.IridePolicyRequestHandler;
 import org.geoserver.security.iride.service.policy.handler.IridePolicyResponseHandler;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
+import org.slf4j.Logger;
 
 /**
  * Manager class for <code>IRIDE</code> service "policy" handlers.
@@ -89,7 +88,7 @@ public class IridePolicyManager {
     public IridePolicyRequestHandler getPolicyRequestHandler(IridePolicy policy) {
         final IridePolicyRequestHandler policyRequestHandler = this.getPolicyRequestHandlers().lookup(policy);
 
-        LOGGER.finest(String.format("Request Handler for IRIDE Policy '%s' found: %b", policy.getServiceName(), policyRequestHandler != null));
+        LOGGER.trace("Request Handler for IRIDE Policy '{}' found: {}", policy.getServiceName(), policyRequestHandler != null);
 
         return policyRequestHandler;
     }
@@ -141,7 +140,7 @@ public class IridePolicyManager {
     public IridePolicyResponseHandler getPolicyResponseHandler(IridePolicy policy) {
         final IridePolicyResponseHandler policyResponseHandler = this.getPolicyResponseHandlers().lookup(policy);
 
-        LOGGER.finest(String.format("Response Handler for IRIDE Policy '%s' found: %b", policy.getServiceName(), policyResponseHandler != null));
+        LOGGER.trace("Response Handler for IRIDE Policy '{}' found: {}", policy.getServiceName(), policyResponseHandler != null);
 
         return policyResponseHandler;
     }

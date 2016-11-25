@@ -145,7 +145,7 @@ public final class IridePolicyResponseHandler extends AbstractIridePolicyHandler
     public Object handleResponse(String policyResponse) throws TransformerException {
         final String policyResponseMarshalledXml = this.createPolicyResponseMarshalledXml(policyResponse);
 
-        LOGGER.finest("IRIDE Policy marshalled response: " + policyResponseMarshalledXml);
+        LOGGER.trace("IRIDE Policy marshalled response: {}", policyResponseMarshalledXml);
 
         return this.getXs().fromXML(policyResponseMarshalledXml);
     }

@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.SortedSet;
-import java.util.logging.Logger;
 
 import org.geoserver.config.GeoServerDataDirectory;
 import org.geoserver.platform.GeoServerResourceLoader;
@@ -34,11 +33,12 @@ import org.geoserver.security.iride.config.IrideRoleServiceConfig;
 import org.geoserver.security.iride.util.factory.security.IrideAuthenticationProviderFactory;
 import org.geoserver.security.iride.util.factory.security.IrideRoleServiceFactory;
 import org.geoserver.security.iride.util.factory.security.IrideUserGroupServiceFactory;
-import org.geotools.util.logging.Logging;
+import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -60,7 +60,7 @@ public final class IrideRoleServiceTest {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logging.getLogger(IrideRoleServiceTest.class);
+    private static final Logger LOGGER = LoggerProvider.getLogger(IrideRoleServiceTest.class);
 
     private static final String SAMPLE_USER_WITH_NO_ROLES = "AAAAAA00A11M000U/CSI PIEMONTE/DEMO 32/IPA/20161027103359/2/uQ4hHIMEEruA6DGThS3EuA==";
 
@@ -139,11 +139,11 @@ public final class IrideRoleServiceTest {
      */
     @Test
     public void testCannotCreateStore() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testCannotCreateStore");
+    	LOGGER.trace("BEGIN {}::testCannotCreateStore", this.getClass().getName());
 
         assertThat(false, is(this.createRoleService().canCreateStore()));
 
-        LOGGER.exiting(this.getClass().getName(), "testCannotCreateStore");
+        LOGGER.trace("END {}::testCannotCreateStore", this.getClass().getName());
     }
 
     /**
@@ -153,11 +153,11 @@ public final class IrideRoleServiceTest {
      */
     @Test
     public void testCreateStoreReturnsNull() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testCreateStoreReturnsNull");
+    	LOGGER.trace("BEGIN {}::testCreateStoreReturnsNull", this.getClass().getName());
 
         assertThat(this.createRoleService().createStore(), is(nullValue()));
 
-        LOGGER.exiting(this.getClass().getName(), "testCreateStoreReturnsNull");
+        LOGGER.trace("END {}::testCreateStoreReturnsNull", this.getClass().getName());
     }
 
     /**
@@ -167,14 +167,14 @@ public final class IrideRoleServiceTest {
      */
     @Test(expected = IllegalStateException.class)
     public void testGetRolesForSampleUserWithInvalidServerURL() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserWithInvalidServerURL", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+        LOGGER.trace("BEGIN {}::testGetRolesForSampleUserWithInvalidServerURL", this.getClass().getName(), new Object[] { SAMPLE_USER_WITH_NO_ROLES, this.config });
 
         this.config.setServerURL(null);
 
         try {
             this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserWithInvalidServerURL");
+        	LOGGER.trace("END {}::testGetRolesForSampleUserWithInvalidServerURL", this.getClass().getName());
         }
     }
 
@@ -185,7 +185,7 @@ public final class IrideRoleServiceTest {
      */
     @Test
     public void testGetRolesForSampleUserWithNoRoles() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserWithNoRoles", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+    	LOGGER.trace("BEGIN {}::testGetRolesForSampleUserWithNoRoles", this.getClass().getName(), new Object[] { SAMPLE_USER_WITH_NO_ROLES, this.config });
 
         try {
             final SortedSet<GeoServerRole> roles = this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
@@ -193,7 +193,7 @@ public final class IrideRoleServiceTest {
             assertThat(roles, not(nullValue()));
             assertThat(roles.size(), is(0));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserWithNoRoles");
+        	LOGGER.trace("END {}::testGetRolesForSampleUserWithNoRoles", this.getClass().getName());
         }
     }
 
@@ -204,7 +204,7 @@ public final class IrideRoleServiceTest {
      */
     @Test(expected = UnsupportedOperationException.class)
     public void testGetRolesForSampleUserNotModifiable() throws IOException {
-        LOGGER.entering(this.getClass().getName(), "testGetRolesForSampleUserNotModifiable", new Object[] {SAMPLE_USER_WITH_NO_ROLES, this.config});
+    	LOGGER.trace("BEGIN {}::testGetRolesForSampleUserNotModifiable", this.getClass().getName(), new Object[] { SAMPLE_USER_WITH_NO_ROLES, this.config });
 
         try {
             final SortedSet<GeoServerRole> roles = this.createRoleService().getRolesForUser(SAMPLE_USER_WITH_NO_ROLES);
@@ -215,7 +215,7 @@ public final class IrideRoleServiceTest {
             // throws UnsupportedOperationException
             roles.add(DUMMY_ROLE);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testGetRolesForSampleUserNotModifiable");
+        	LOGGER.trace("END {}::testGetRolesForSampleUserNotModifiable", this.getClass().getName());
         }
     }
 

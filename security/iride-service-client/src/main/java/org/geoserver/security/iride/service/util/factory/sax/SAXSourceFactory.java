@@ -66,7 +66,7 @@ public class SAXSourceFactory extends AbstractFactory<SAXSource> {
 
             return xmlReader;
         } catch (SAXException e) {
-            LOGGER.warning("SAX XMLReader creation error: " + e.getMessage());
+            LOGGER.warn("SAX XMLReader creation error: ", e.getMessage());
 
             return null;
         }
@@ -101,7 +101,7 @@ public class SAXSourceFactory extends AbstractFactory<SAXSource> {
         try {
             return resource.getURL().toURI().toString();
         } catch (IOException | URISyntaxException e) {
-            LOGGER.warning(String.format("Could not get System ID from [%s], error: %s", resource, e.getMessage()));
+            LOGGER.warn("Could not get System ID from [{}], error: {}", resource, e.getMessage());
 
             return null;
         }

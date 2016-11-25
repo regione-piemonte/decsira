@@ -23,8 +23,6 @@ import static org.geoserver.security.iride.Utils.BLANK;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.logging.Logger;
-
 import org.geoserver.security.iride.entity.identity.IrideIdentityValidator;
 import org.geoserver.security.iride.entity.identity.token.IrideIdentityToken;
 import org.geoserver.security.iride.entity.identity.token.value.IrideIdentityInvalidTokenValue;
@@ -32,6 +30,7 @@ import org.geoserver.security.iride.entity.util.Utils;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * {@link IrideIdentityValidator} <code>JUnit</code> Test Case.
@@ -65,13 +64,13 @@ public final class IrideIdentityValidatorTest {
     public void testValidateSuccessful() {
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
 
-        LOGGER.entering(this.getClass().getName(), "testValidateSuccessful");
+        LOGGER.trace("BEGIN {}::testValidateSuccessful - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
             assertThat(result, is(emptyArray()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateSuccessful");
+        	LOGGER.trace("END {}::testValidateSuccessful", this.getClass().getName());
         }
     }
 
@@ -82,13 +81,13 @@ public final class IrideIdentityValidatorTest {
     public void testValidateSuccessfulForRealisticDigitalIdentity() {
         final String[] tokens = new String[] { "NNRLSN69P26L570X", "Aldesino", "Innerkofler", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
 
-        LOGGER.entering(this.getClass().getName(), "testValidateSuccessfulForRealisticCodiceFiscale");
+        LOGGER.trace("BEGIN {}::testValidateSuccessfulForRealisticDigitalIdentity - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
             assertThat(result, is(emptyArray()));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateSuccessfulForRealisticCodiceFiscale");
+        	LOGGER.trace("END {}::testValidateSuccessfulForRealisticDigitalIdentity", this.getClass().getName());
         }
     }
 
@@ -99,11 +98,11 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForInvalidNullTokensArray() {
         final String[] tokens = null;
 
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForInvalidNullTokensArray");
+        LOGGER.trace("BEGIN {}::testValidateFailForInvalidNullTokensArray - {}", this.getClass().getName(), tokens);
         try {
             this.validator.validate(tokens);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForInvalidNullTokensArray");
+        	LOGGER.trace("END {}::testValidateFailForInvalidNullTokensArray", this.getClass().getName());
         }
     }
 
@@ -114,11 +113,11 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForInvalidEmptyTokensArray() {
         final String[] tokens = new String[0];
 
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForInvalidEmptyTokensArray");
+        LOGGER.trace("BEGIN {}::testValidateFailForInvalidEmptyTokensArray - {}", this.getClass().getName(), tokens);
         try {
             this.validator.validate(tokens);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForInvalidEmptyTokensArray");
+        	LOGGER.trace("END {}::testValidateFailForInvalidEmptyTokensArray", this.getClass().getName());
         }
     }
 
@@ -129,11 +128,11 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForInvalidLengthTokensArray() {
         final String[] tokens = new String[5];
 
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForInvalidLengthTokensArray");
+        LOGGER.trace("BEGIN {}::testValidateFailForInvalidLengthTokensArray - {}", this.getClass().getName(), tokens);
         try {
             this.validator.validate(tokens);
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForInvalidLengthTokensArray");
+        	LOGGER.trace("END {}::testValidateFailForInvalidLengthTokensArray", this.getClass().getName());
         }
     }
 
@@ -144,7 +143,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForCodiceFiscaleNull() {
         final String[] tokens = new String[] { null, "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
 
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleNull");
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -153,9 +152,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleNull");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleNull", this.getClass().getName());
         }
     }
 
@@ -166,7 +165,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForCodiceFiscaleBlank() {
         final String[] tokens = new String[] { BLANK, "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
 
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleBlank");
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -175,9 +174,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleBlank");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleBlank", this.getClass().getName());
         }
     }
 
@@ -188,7 +187,7 @@ public final class IrideIdentityValidatorTest {
     public void testValidateFailForCodiceFiscaleEmpty() {
         final String[] tokens = new String[] { EMPTY, "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
 
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleEmpty");
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -197,9 +196,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleEmpty");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleEmpty", this.getClass().getName());
         }
     }
 
@@ -208,9 +207,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormat() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormat");
-
         final String[] tokens = new String[] { "AAAAAA00011D000L", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleWithInvalidFormat - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -219,9 +218,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.CODICE_FISCALE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.CODICE_FISCALE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormat");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -230,9 +229,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForNomeNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForNomeNull");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", null, "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForNomeNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -241,9 +240,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeNull");
+        	LOGGER.trace("END {}::testValidateFailForNomeNull", this.getClass().getName());
         }
     }
 
@@ -252,9 +251,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForNomeBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForNomeBlank");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", BLANK, "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForNomeBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -263,9 +262,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeBlank");
+        	LOGGER.trace("END {}::testValidateFailForNomeBlank", this.getClass().getName());
         }
     }
 
@@ -274,9 +273,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForNomeEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForNomeEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", EMPTY, "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForNomeEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -285,9 +284,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForNomeEmpty");
+        	LOGGER.trace("END {}::testValidateFailForNomeEmpty", this.getClass().getName());
         }
     }
 
@@ -296,9 +295,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCognomeNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCognomeNull");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", null, "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCognomeNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -307,9 +306,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeNull");
+        	LOGGER.trace("END {}::testValidateFailForCognomeNull", this.getClass().getName());
         }
     }
 
@@ -318,9 +317,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCognomeBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCognomeBlank");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", BLANK, "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCognomeBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -329,9 +328,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeBlank");
+        	LOGGER.trace("END {}::testValidateFailForCognomeNull", this.getClass().getName());
         }
     }
 
@@ -340,9 +339,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCognomeEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCognomeEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", EMPTY, "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCognomeEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -351,9 +350,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.COGNOME));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.COGNOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCognomeEmpty");
+        	LOGGER.trace("END {}::testValidateFailForCognomeEmpty", this.getClass().getName());
         }
     }
 
@@ -362,9 +361,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForIdProviderNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForIdProviderNull");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", null, "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForIdProviderNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -373,9 +372,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderNull");
+        	LOGGER.trace("END {}::testValidateFailForIdProviderNull", this.getClass().getName());
         }
     }
 
@@ -384,9 +383,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForIdProviderBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForIdProviderBlank");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", BLANK, "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForIdProviderBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -395,9 +394,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderBlank");
+        	LOGGER.trace("END {}::testValidateFailForIdProviderBlank", this.getClass().getName());
         }
     }
 
@@ -406,9 +405,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForIdProviderEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForIdProviderEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", EMPTY, "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForIdProviderEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -417,9 +416,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.ID_PROVIDER));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.ID_PROVIDER.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForIdProviderEmpty");
+        	LOGGER.trace("END {}::testValidateFailForIdProviderEmpty", this.getClass().getName());
         }
     }
 
@@ -428,9 +427,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForTimestampNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampNull");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", null, "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForTimestampNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -439,9 +438,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampNull");
+        	LOGGER.trace("END {}::testValidateFailForTimestampNull", this.getClass().getName());
         }
     }
 
@@ -450,9 +449,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForTimestampBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampBlank");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", BLANK, "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForTimestampBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -461,9 +460,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampBlank");
+        	LOGGER.trace("END {}::testValidateFailForTimestampBlank", this.getClass().getName());
         }
     }
 
@@ -472,9 +471,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForTimestampEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", EMPTY, "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForTimestampEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -483,9 +482,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampEmpty");
+        	LOGGER.trace("END {}::testValidateFailForTimestampEmpty", this.getClass().getName());
         }
     }
 
@@ -494,9 +493,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForTimestampWithInvalidFormat() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForTimestampWithInvalidFormat");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "201605311139", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForTimestampWithInvalidFormat - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -505,9 +504,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.TIMESTAMP));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.TIMESTAMP.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForTimestampWithInvalidFormat");
+        	LOGGER.trace("END {}::testValidateFailForTimestampWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -516,9 +515,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneNull");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", null, "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForLivelloAutenticazioneNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -527,9 +526,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneNull");
+        	LOGGER.trace("END {}::testValidateFailForLivelloAutenticazioneNull", this.getClass().getName());
         }
     }
 
@@ -538,9 +537,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneBlank");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", BLANK, "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForLivelloAutenticazioneBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -549,9 +548,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneBlank");
+        	LOGGER.trace("END {}::testValidateFailForLivelloAutenticazioneBlank", this.getClass().getName());
         }
     }
 
@@ -560,9 +559,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", EMPTY, "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForLivelloAutenticazioneEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -571,9 +570,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneEmpty");
+        	LOGGER.trace("END {}::testValidateFailForLivelloAutenticazioneEmpty", this.getClass().getName());
         }
     }
 
@@ -582,9 +581,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneWithInvalidFormat() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithInvalidFormat");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "A", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForLivelloAutenticazioneWithInvalidFormat - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -593,9 +592,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithInvalidFormat");
+        	LOGGER.trace("END {}::testValidateFailForLivelloAutenticazioneWithInvalidFormat", this.getClass().getName());
         }
     }
 
@@ -604,9 +603,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneWithValue0NotInRange() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue0NotInRange");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "0", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForLivelloAutenticazioneWithValue0NotInRange - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -615,9 +614,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue0NotInRange");
+        	LOGGER.trace("END {}::testValidateFailForLivelloAutenticazioneWithValue0NotInRange", this.getClass().getName());
         }
     }
 
@@ -626,9 +625,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForLivelloAutenticazioneWithValue3NotInRange() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue3NotInRange");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "3", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForLivelloAutenticazioneWithValue3NotInRange - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -637,9 +636,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.LIVELLO_AUTENTICAZIONE));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.LIVELLO_AUTENTICAZIONE.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForLivelloAutenticazioneWithValue3NotInRange");
+        	LOGGER.trace("END {}::testValidateFailForLivelloAutenticazioneWithValue3NotInRange", this.getClass().getName());
         }
     }
 
@@ -648,9 +647,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForMacNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForMacNull");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", null };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForMacNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -659,9 +658,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacNull");
+        	LOGGER.trace("END {}::testValidateFailForMacNull", this.getClass().getName());
         }
     }
 
@@ -670,9 +669,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForMacBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForMacBlank");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", BLANK };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForMacBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -681,9 +680,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacBlank");
+        	LOGGER.trace("END {}::testValidateFailForMacBlank", this.getClass().getName());
         }
     }
 
@@ -692,9 +691,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForMacEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForMacEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", EMPTY };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForMacEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -703,9 +702,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacEmpty");
+        	LOGGER.trace("END {}::testValidateFailForMacEmpty", this.getClass().getName());
         }
     }
 
@@ -714,9 +713,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForMacWithInvalidLenght() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForMacWithInvalidLenght");
-
         final String[] tokens = new String[] { "AAAAAA00B77B000F", "CSI PIEMONTE", "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForMacWithInvalidLenght - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -725,9 +724,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[0].getToken(), is(IrideIdentityToken.MAC));
             assertThat(result[0].getValue(), is(tokens[IrideIdentityToken.MAC.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForMacWithInvalidLenght");
+        	LOGGER.trace("END {}::testValidateFailForMacWithInvalidLenght", this.getClass().getName());
         }
     }
 
@@ -736,9 +735,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull");
-
         final String[] tokens = new String[] { "AAAAAA00011D000L", null, "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -749,9 +748,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeNull", this.getClass().getName());
         }
     }
 
@@ -760,9 +759,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank");
-
         final String[] tokens = new String[] { "AAAAAA00011D000L", BLANK, "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -773,9 +772,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeBlank", this.getClass().getName());
         }
     }
 
@@ -784,9 +783,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty");
-
         final String[] tokens = new String[] { "AAAAAA00011D000L", EMPTY, "DEMO 20", "IPA", "20160531113948", "2", "1IQssTaf4vNMa66qU52m7g==" };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -797,9 +796,9 @@ public final class IrideIdentityValidatorTest {
             assertThat(result[1].getToken(), is(IrideIdentityToken.NOME));
             assertThat(result[1].getValue(), is(tokens[IrideIdentityToken.NOME.getPosition()]));
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty");
+        	LOGGER.trace("END {}::testValidateFailForCodiceFiscaleWithInvalidFormatAndForNomeEmpty", this.getClass().getName());
         }
     }
 
@@ -808,9 +807,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForAllNullTokens() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForAllNullTokens");
-
         final String[] tokens = new String[] { null, null, null, null, null, null, null };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForAllNullTokens - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -824,9 +823,9 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllNullTokens");
+        	LOGGER.trace("END {}::testValidateFailForAllNullTokens", this.getClass().getName());
         }
     }
 
@@ -835,9 +834,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForAllBlankTokens() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForAllBlankTokens");
-
         final String[] tokens = new String[] { BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForAllBlankTokens - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -851,9 +850,9 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllBlankTokens");
+        	LOGGER.trace("END {}::testValidateFailForAllBlankTokens", this.getClass().getName());
         }
     }
 
@@ -862,9 +861,9 @@ public final class IrideIdentityValidatorTest {
      */
     @Test
     public void testValidateFailForAllEmptyTokens() {
-        LOGGER.entering(this.getClass().getName(), "testValidateFailForAllEmptyTokens");
-
         final String[] tokens = new String[] { EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY };
+
+        LOGGER.trace("BEGIN {}::testValidateFailForAllEmptyTokens - {}", this.getClass().getName(), tokens);
         try {
             final IrideIdentityInvalidTokenValue[] result = this.validator.validate(tokens);
 
@@ -878,9 +877,9 @@ public final class IrideIdentityValidatorTest {
                 assertThat(result[i].getValue(), is(tokens[irideIdentityTokens[i].getPosition()]));
             }
 
-            LOGGER.warning(Utils.toString(result));
+            LOGGER.warn(Utils.toString(result));
         } finally {
-            LOGGER.exiting(this.getClass().getName(), "testValidateFailForAllEmptyTokens");
+        	LOGGER.trace("END {}::testValidateFailForAllEmptyTokens", this.getClass().getName());
         }
     }
 
