@@ -175,24 +175,25 @@ const QGis = React.createClass({
         let ids = features.map((f) => {
             return f.id;
         }).join(',');
-        if (window.VALAMB && window.VALAMB.viewOnMapById) {
-            window.VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
-        }else {
         /*eslint-disable */
-            console.log(`VALAMB.viewOnMapById('${this.props.featureType}',"${ids}")`);
-        /*eslint-enable */
+        if (VALAMB && VALAMB.viewOnMapById) {
+            VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
+        }else {
+            console.log(`viewOnMapById('${this.props.featureType}',"${ids}")`);
+
         }
+        /*eslint-enable */
         this.props.selectFeatures(features);
     },
     zoomToFeature(data) {
         let [minX, minY, maxX, maxY] = CoordinatesUtils.getGeoJSONExtent(data.geometry);
-        if (window.VALAMB && window.VALAMB.zoomOn) {
-            window.VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+        /*eslint-disable */
+        if (VALAMB && VALAMB.zoomOn) {
+            VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
         }else {
-            /*eslint-disable */
-            console.log(`window.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
-            /*eslint-enable */
+            console.log(`VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
         }
+        /*eslint-enable */
     },
     goToDetail(id, detailsConfig) {
         let url = detailsConfig.service.url;
