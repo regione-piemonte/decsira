@@ -30,13 +30,9 @@ const QGisZoom = React.createClass({
     },
     zoomTo() {
         let [minX, minY, maxX, maxY] = CoordinatesUtils.getGeoJSONExtent(this.props.geometry);
-        if (window.VALAMB && window.VALAMB.zoomOn) {
-            window.VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
-        }else {
-           /*eslint-disable */
-           console.log(`window.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
-           /*eslint-enable */
-        }
+        /*eslint-disable */
+        VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+        /*eslint-enable */
     }
 });
 
