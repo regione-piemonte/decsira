@@ -75,14 +75,16 @@ final class ErrorHandlerUtils {
      * @return a message string describing the location
      */
     private static String getLocationMessage(TransformerException err) {
-        SourceLocator loc = err.getLocator();
+        TransformerException e = err;
+
+        SourceLocator loc = e.getLocator();
         while (loc == null) {
-            if (err.getException() instanceof TransformerException) {
-                err = (TransformerException) err.getException();
-                loc = err.getLocator();
-            } else if (err.getCause() instanceof TransformerException) {
-                err = (TransformerException) err.getCause();
-                loc = err.getLocator();
+            if (e.getException() instanceof TransformerException) {
+                e = (TransformerException) e.getException();
+                loc = e.getLocator();
+            } else if (e.getCause() instanceof TransformerException) {
+                e = (TransformerException) e.getCause();
+                loc = e.getLocator();
             } else {
                 return "";
             }
@@ -115,9 +117,7 @@ final class ErrorHandlerUtils {
                 locMessage += "column " + locator.getColumnNumber() + ' ';
             }
         }
-        if (StringUtils.length(systemId) == 0) {
-            systemId = null;
-        } else {
+        if (StringUtils.length(systemId) > 0) {
             locMessage += (containsLineNumber ? "of " : "in ") + abbreviatePath(systemId) + ':';
         }
 
