@@ -176,14 +176,23 @@ const QGis = React.createClass({
             return f.id;
         }).join(',');
         /*eslint-disable */
-        VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
+        if (VALAMB && VALAMB.viewOnMapById) {
+            VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
+        }else {
+            console.log(`viewOnMapById('${this.props.featureType}',"${ids}")`);
+
+        }
         /*eslint-enable */
         this.props.selectFeatures(features);
     },
     zoomToFeature(data) {
         let [minX, minY, maxX, maxY] = CoordinatesUtils.getGeoJSONExtent(data.geometry);
         /*eslint-disable */
-        VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+        if (VALAMB && VALAMB.zoomOn) {
+            VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+        }else {
+            console.log(`VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+        }
         /*eslint-enable */
     },
     goToDetail(id, detailsConfig) {
