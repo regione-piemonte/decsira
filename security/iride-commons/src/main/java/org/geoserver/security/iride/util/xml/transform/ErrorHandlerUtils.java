@@ -117,9 +117,7 @@ final class ErrorHandlerUtils {
                 locMessage += "column " + locator.getColumnNumber() + ' ';
             }
         }
-        if (StringUtils.length(systemId) == 0) {
-            systemId = null;
-        } else {
+        if (StringUtils.length(systemId) > 0) {
             locMessage += (containsLineNumber ? "of " : "in ") + abbreviatePath(systemId) + ':';
         }
 
