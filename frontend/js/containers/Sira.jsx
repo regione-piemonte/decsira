@@ -12,7 +12,6 @@ require('../../assets/css/sira.css');
 require('../../MapStore2/web/client/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
-const assign = require('object-assign');
 
 const SidePanel = require('./SidePanel');
 const Card = require('../components/template/Card');
@@ -60,7 +59,7 @@ const GetFeatureInfo = connect((state) => {
     const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
     siraFeatureTypeName: activeConfig.featureTypeName,
-    siraFeatureInfoDetails: assign({}, activeConfig.featureinfo, {card: activeConfig.card}),
+    siraFeatureInfoDetails: state.siradec.configOggetti,
     siraTopology: state.siradec.topology,
     siraTopologyConfig: state.mapInfo.topologyConfig,
     infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,

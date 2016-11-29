@@ -17,6 +17,7 @@ const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../../actions/controls');
 const {loadCardTemplate} = require('../../actions/card');
+const {loadFeatureInfoTemplateConfig} = require('../../actions/mapInfo');
 
 const GMLFeatureInfoViewer = connect((state) => ({
     detailOpen: state.siraControls.detail
@@ -24,7 +25,8 @@ const GMLFeatureInfoViewer = connect((state) => ({
     return {
         actions: bindActionCreators({
             onShowDetail: toggleSiraControl.bind(null, 'detail'),
-            onDetail: loadCardTemplate
+            onDetail: loadCardTemplate,
+            loadTemplate: loadFeatureInfoTemplateConfig
         }, dispatch)
     };
 })(require('./viewers/GMLViewer'));
@@ -58,7 +60,8 @@ const GetFeatureInfoViewer = React.createClass({
         };
     },
     shouldComponentUpdate(nextProps) {
-        return nextProps.responses !== this.props.responses || nextProps.missingRequests !== this.props.missingRequests;
+        return nextProps.responses !== this.props.responses || nextProps.missingRequests !== this.props.missingRequests ||
+          nextProps.contentConfig !== this.props.contentConfig;
     },
     getValidator(infoFormat) {
         var infoFormats = MapInfoUtils.getAvailableInfoFormat();
@@ -112,16 +115,20 @@ const GetFeatureInfoViewer = React.createClass({
                 return <TEXTFeatureInfoViewer display={this.props.display} response={response} />;
             case infoFormats.GML3:
                 return this.props.contentConfig &&
+                    // this.props.contentConfig.template[layerId] &&
                     this.props.contentConfig.template[layerId] &&
-                    this.props.contentConfig.detailsConfig[layerId]/*&&
+                    this.props.contentConfig.detailsConfig[layerId] &&
+                    this.props.contentConfig.featureConfigs[this.props.contentConfig.detailsConfig[layerId]]
+                    /*&&
                     this.props.contentConfig.modelConfig[layerId]*/ ? (
                         <GMLFeatureInfoViewer
                             display={this.props.display}
                             response={response}
                             profile={this.props.profile}
                             contentConfig={{
+                                layerId,
                                 template: this.props.contentConfig.template[layerId],
-                                detailsConfig: this.props.contentConfig.detailsConfig[layerId]
+                                detailsConfig: this.props.contentConfig.featureConfigs[this.props.contentConfig.detailsConfig[layerId]]
                                 // modelConfig: this.props.contentConfig.modelConfig[layerId]
                             }}
                             params={this.props.params}/>

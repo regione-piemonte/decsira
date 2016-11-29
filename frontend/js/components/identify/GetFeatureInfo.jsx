@@ -159,8 +159,8 @@ const GetFeatureInfo = React.createClass({
                     this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams);
 
                     // Load the template if required
-                    if (layer.name === this.props.siraFeatureTypeName) {
-                        this.props.actions.loadGetFeatureInfoConfig(layer.id, this.props.siraFeatureInfoDetails /* + this.props.profile + ".json"*/);
+                    if (layer.featureType) {
+                        this.props.actions.loadGetFeatureInfoConfig(layer.id, layer.featureType, this.props.params);
                     }
                 }
 
@@ -182,7 +182,7 @@ const GetFeatureInfo = React.createClass({
 
                     // Load the template if required
                     let topologyOptions = {};
-                    if (layer.topologyConfig && layer.name === this.props.siraFeatureTypeName /*layer.topologyConfig.topologyModelURL*/) {
+                    if (layer.topologyConfig) {
                         let topologyConfig = assign({}, layer.topologyConfig, {clickedMapPoint: newProps.clickedMapPoint});
 
                         let filterObj = {
@@ -248,8 +248,9 @@ const GetFeatureInfo = React.createClass({
                     missingRequests={missingRequests}
                     responses={this.props.htmlResponses}
                     contentConfig={{
-                        template: this.props.template,
-                        detailsConfig: this.props.detailsConfig
+                        template: this.props.template || {},
+                        detailsConfig: this.props.detailsConfig,
+                        featureConfigs: this.props.siraFeatureInfoDetails
                         // modelConfig: this.props.modelConfig
                     }}
                     profile={this.props.profile}
@@ -307,7 +308,7 @@ const GetFeatureInfo = React.createClass({
     },
     render() {
         const renderInfoTypeCheck = this.props.infoType === "getfeatureinfo" ?
-            this.props.htmlRequests.length !== 0 && this.props.template && this.props.detailsConfig /*&& this.props.modelConfig*/ :
+            this.props.htmlRequests.length !== 0 && this.props.detailsConfig /*&& this.props.modelConfig*/ :
             this.props.htmlRequests.length !== 0;
 
         if (renderInfoTypeCheck) {

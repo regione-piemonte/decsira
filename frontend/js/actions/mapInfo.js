@@ -33,7 +33,7 @@ const SET_MODEL_CONFIG = 'SET_MODEL_CONFIG';
 
 const TemplateUtils = require('../utils/TemplateUtils');
 const {parseXMLResponse} = require('../../MapStore2/web/client/utils/FeatureInfoUtils');
-
+const {loadFeatureTypeConfig} = require('./siradec');
 /**
  * Private
  * @return a LOAD_FEATURE_INFO action with the response data to a wms GetFeatureInfo
@@ -229,6 +229,7 @@ function configureInfoTopologyConfigError(layerId, e) {
 
 function loadFeatureInfoTemplateConfig(layerId, templateURL) {
     return (dispatch) => {
+        dispatch(configureTemplate(layerId, {needsLoading: false}));
         return axios.get(templateURL).then((response) => {
             let template = response.data;
             dispatch(configureTemplate(layerId, template));
@@ -238,25 +239,16 @@ function loadFeatureInfoTemplateConfig(layerId, templateURL) {
     };
 }
 
-function loadGetFeatureInfoConfig(layerId, featureinfoconfig) {
-    return (dispatch) => {
-        dispatch(configureGetFeatureInfo(layerId, featureinfoconfig));
-        dispatch(loadFeatureInfoTemplateConfig(layerId, featureinfoconfig.templateURL));
-
-        /* return axios.get(infoConfigURL).then((response) => {
-            let infoConfig = response.data;
-            if (typeof infoConfig !== "object") {
-                try {
-                    infoConfig = JSON.parse(infoConfig);
-                } catch(e) {
-                    dispatch(configureGetFeatureInfoError(layerId, e));
-                }
-            }
-            dispatch(configureGetFeatureInfo(layerId, infoConfig));
-            dispatch(loadFeatureInfoTemplateConfig(layerId, infoConfig.templateURL));
-        }).catch((e) => {
-            dispatch(configureGetFeatureInfoError(layerId, e));
-        }); */
+function loadGetFeatureInfoConfig(layerId, featureType, params) {
+    return (dispatch, getState) => {
+        const state = getState();
+        if (!state.siradec.configOggetti[featureType]) {
+            dispatch(loadFeatureTypeConfig(null, params, featureType));
+        }
+        dispatch(configureGetFeatureInfo(layerId, featureType));
+        if (!state.mapInfo.template || !state.mapInfo.template[layerId]) {
+            dispatch(configureTemplate(layerId, {featureType, needsLoading: true}));
+        }
     };
 }
 
@@ -267,15 +259,12 @@ function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             let infoTopologyResponse = response.data;
-
-            if (modelConfig.columns) {
-                modelConfig.columns = modelConfig.columns.map((column) => {
-                    return !column.field ? assign({}, column, {field: uuid.v1()}) : column;
-                });
-            }
+            const columns = (modelConfig.columns || []).map((column) => {
+                return !column.field ? assign({}, column, {field: uuid.v1()}) : column;
+            });
 
             let features = TemplateUtils.getModels(infoTopologyResponse,
-                modelConfig.root, modelConfig.columns, "1.1.0");
+                modelConfig.root, columns, "1.1.0");
 
             let data = {
                 "type": "FeatureCollection",
@@ -389,5 +378,6 @@ module.exports = {
     configureGetFeatureInfo,
     changeTopologyMapInfoState,
     loadInfoTopologyConfig,
-    setModelConfig
+    setModelConfig,
+    loadFeatureInfoTemplateConfig
 };
