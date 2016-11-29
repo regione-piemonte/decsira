@@ -3,28 +3,26 @@ package it.csi.sira.backend.metadata.business;
 import it.csi.sira.backend.metadata.dto.JsonAppCategory;
 import it.csi.sira.backend.metadata.dto.JsonInfoBox;
 import it.csi.sira.backend.metadata.dto.JsonMetaObject;
+import it.csi.sira.backend.metadata.dto.JsonNews;
+import it.csi.sira.backend.metadata.dto.JsonNote;
 import it.csi.sira.backend.metadata.dto.JsonPlatformNumbers;
+import it.csi.sira.backend.metadata.dto.JsonKeywordCounter;
 import it.csi.sira.backend.metadata.exception.MetadataManagerException;
 import it.csi.sira.backend.metadata.integration.custom.dto.InfoBoxDTO;
-import it.csi.sira.backend.metadata.integration.dto.SipraMtdDFontedati;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdDTipoFunzione;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdRCategLingua;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdRCategappCategori;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTCategoriaAppl;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTFunzione;
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdTMtdCsw;
-import it.csi.sira.backend.metadata.integration.servizi.csw.CswAdapter;
-import it.csi.sira.backend.metadata.integration.servizi.csw.CswService;
-import it.csi.sira.backend.metadata.integration.servizi.csw.dto.CswRecord;
-import it.csi.sira.backend.metadata.integration.servizi.csw.exception.CswAdapterException;
-import it.csi.sira.backend.metadata.integration.servizi.csw.exception.CswServiceException;
+import it.csi.sira.backend.metadata.integration.dto.SipraMtdTNewsHomePage;
+import it.csi.sira.backend.metadata.integration.dto.SipraMtdTTestiHomePage;
 import it.csi.sira.backend.metadata.utils.Constants;
 import it.csi.sira.backend.metadata.utils.IntegratioManager;
 import it.csi.sira.backend.metadata.utils.LogFormatter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +37,6 @@ public class MetadataManager {
 
   private TransactionTemplate transactionTemplate = null;
   private IntegratioManager integratioManager = null;
-
-  private CswService cswService = null;
-  private CswAdapter cswAdapter = null;
 
   private Properties logger = null;
 
@@ -178,6 +173,127 @@ public class MetadataManager {
 	return jsonInfoBox;
   }
 
+  public JsonNews[] getNews() throws MetadataManagerException {
+
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	JsonNews[] json = null;
+	List<SipraMtdTNewsHomePage> news = null;
+
+	try {
+
+	  Map<String, Object> params = new HashMap<String, Object>();
+
+	  news = integratioManager
+		  .getDaoManager()
+		  .getSipraMtdTNewsHomePageDAO()
+		  .findByGenericCriteria("select * from sipra_mtd_t_news_home_page where data_fine is null order by priorita desc, data_inizio desc",
+			  integratioManager.getDaoManager().getSipraMtdTNewsHomePageDAO().getRowMapper(), params);
+
+	} catch (Exception e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  throw new MetadataManagerException(e);
+	}
+
+	if (news != null && news.size() > 0) {
+	  json = new JsonNews[news.size()];
+
+	  for (int i = 0; i < news.size(); i++) {
+		JsonNews j = new JsonNews();
+
+		j.setId(news.get(i).getIdNews());
+		j.setNews(news.get(i).getTitoloNews());
+		j.setPriority((news.get(i).getPriorita() != null) ? news.get(i).getPriorita().intValue() : 0);
+		j.setTitle(news.get(i).getTitoloNews());
+		j.setDate(news.get(i).getDataInizio());
+
+		json[i] = j;
+	  }
+	}
+
+	return json;
+  }
+
+  public JsonNote[] getNote() throws MetadataManagerException {
+
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	JsonNote[] json = null;
+	List<SipraMtdTTestiHomePage> note = null;
+
+	try {
+
+	  Map<String, Object> params = new HashMap<String, Object>();
+
+	  note = integratioManager
+		  .getDaoManager()
+		  .getSipraMtdTTestiHomePageDAO()
+		  .findByGenericCriteria("select * from sipra_mtd_t_testi_home_page where data_fine is null order by data_inizio desc",
+			  integratioManager.getDaoManager().getSipraMtdTTestiHomePageDAO().getRowMapper(), params);
+
+	} catch (Exception e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  throw new MetadataManagerException(e);
+	}
+
+	if (note != null && note.size() > 0) {
+	  json = new JsonNote[note.size()];
+
+	  for (int i = 0; i < note.size(); i++) {
+		JsonNote j = new JsonNote();
+
+		j.setId(note.get(i).getIdTesto());
+		j.setText(note.get(i).getTitoloTesto());
+		j.setTitle(note.get(i).getTitoloTesto());
+		j.setType(note.get(i).getTipoTesto());
+		j.setDate(note.get(i).getDataInizio());
+
+		json[i] = j;
+	  }
+	}
+
+	return json;
+  }
+
+  public JsonKeywordCounter[] getKeywordCounters() throws MetadataManagerException {
+
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	JsonKeywordCounter[] json = null;
+	List<KeywordCounter> kc = null;
+
+	Map<String, Object> params = new HashMap<String, Object>();
+
+	try {
+
+	  String query = integratioManager.getQueries().getProperty("GET_KEYWORD_COUNTER");
+
+	  kc = integratioManager.getDaoManager().getSipraMtdTParolaChiaveDAO().findByGenericCriteria(query, new KeywordCounterMapper(), params);
+
+	} catch (Exception e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  throw new MetadataManagerException(e);
+	}
+
+	if (kc != null && kc.size() > 0) {
+	  json = new JsonKeywordCounter[kc.size()];
+
+	  for (int i = 0; i < kc.size(); i++) {
+		JsonKeywordCounter j = new JsonKeywordCounter();
+
+		j.setKeyword(kc.get(i).getKeyword());
+		j.setMetadataCounter(kc.get(i).getCounter());
+
+		json[i] = j;
+	  }
+	}
+
+	return json;
+  }
+
   public JsonAppCategory[] getMosaico() throws MetadataManagerException {
 
 	final String methodName = new Object() {
@@ -222,7 +338,7 @@ public class MetadataManager {
 
 	return categories;
   }
-  
+
   public JsonMetaObject[] getMetadata(Integer idCategory, String text, String type) throws MetadataManagerException {
 
 	final String methodName = new Object() {
@@ -565,98 +681,6 @@ public class MetadataManager {
 	return children;
   }
 
-  private List<CswRecord> filterOnCategory(List<CswRecord> cswRecords) {
-	final String methodName = new Object() {
-	}.getClass().getEnclosingMethod().getName();
-
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
-
-	List<CswRecord> cswRecordsValid = new ArrayList<CswRecord>();
-
-	Map<String, Integer> categorieMap = new HashMap<String, Integer>();
-
-	List<SipraMtdRCategLingua> categorie = integratioManager.getDaoManager().getSipraMtdRCategLinguaDAO().findAll();
-
-	for (SipraMtdRCategLingua categoria : categorie) {
-	  categorieMap.put((String) categoria.getDesCategoria(), (Integer) categoria.getIdCategoria());
-	}
-
-	// cerco i record validi ossia quelli che tra i subject hanno almeno
-	// una categoria tra quelle passate in input
-
-	for (int i = 0; i < cswRecords.size(); i++) {
-
-	  CswRecord recordCSW = cswRecords.get(i);
-
-	  boolean isValid = false;
-
-	  for (int s = 0; s < recordCSW.getSubjects().length; s++) {
-
-		if (categorieMap.containsKey(recordCSW.getSubjects()[s].getTesto())) {
-		  Integer idCategoria = categorieMap.get(recordCSW.getSubjects()[s].getTesto());
-		  recordCSW.getSubjects()[s].setIdCategoria(idCategoria);
-		  isValid = true;
-		}
-	  }
-
-	  if (isValid) {
-		cswRecordsValid.add(recordCSW);
-	  }
-	}
-
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
-
-	return cswRecordsValid;
-  }
-  
-  public CswRecord[] searchCswMetadata(String txt, String service, int startPosition, int maxRecords) throws CswServiceException, CswAdapterException {
-	final String methodName = new Object() {
-	}.getClass().getEnclosingMethod().getName();
-
-	CswRecord[] json = null;
-
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
-
-	Map<String, Object> params = null;
-
-	params = new HashMap<String, Object>();
-	params.put("fl_attiva", "S");
-	List<SipraMtdDFontedati> elencoFontiDati = integratioManager.getDaoManager().getSipraMtdDFontedatiDAO().findByCriteria(params);
-
-	// **************************
-
-	List<CswRecord> rtn = new ArrayList<CswRecord>();
-
-	if (elencoFontiDati != null && elencoFontiDati.size() > 0) {
-
-	  for (int f = 0; f < elencoFontiDati.size(); f++) {
-		cswService.setUrlService(elencoFontiDati.get(f).getUrlServizio());
-
-		String xmlCSW = cswService.getRecords(txt, startPosition, maxRecords);
-
-		List<CswRecord> cswValidRecords = null;
-
-		List<CswRecord> cswRecords = cswAdapter.getCswRecords(xmlCSW, elencoFontiDati.get(f));
-
-		if (cswRecords != null) {
-		  cswValidRecords = this.filterOnCategory(cswRecords);
-		}
-
-		if (cswValidRecords != null) {
-		  rtn.addAll(cswValidRecords);
-		}
-	  }
-	}
-
-	if (rtn.size() > 0) {
-	  json = rtn.toArray(new CswRecord[rtn.size()]);
-	}
-
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
-
-	return json;
-  }
-  
   public TransactionTemplate getTransactionTemplate() {
 	return transactionTemplate;
   }
@@ -671,22 +695,6 @@ public class MetadataManager {
 
   public void setIntegratioManager(IntegratioManager integratioManager) {
 	this.integratioManager = integratioManager;
-  }
-
-  public CswService getCswService() {
-	return cswService;
-  }
-
-  public void setCswService(CswService cswService) {
-	this.cswService = cswService;
-  }
-
-  public CswAdapter getCswAdapter() {
-	return cswAdapter;
-  }
-
-  public void setCswAdapter(CswAdapter cswAdapter) {
-	this.cswAdapter = cswAdapter;
   }
 
   public Properties getLogger() {
@@ -706,6 +714,46 @@ public class MetadataManager {
 	public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
 	  return rs.getLong("object_numbers");
 	}
+  }
+
+  class KeywordCounterMapper implements RowMapper<KeywordCounter> {
+
+	public KeywordCounterMapper() {
+
+	}
+
+	public KeywordCounter mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+	  KeywordCounter kc = new KeywordCounter();
+
+	  kc.setKeyword(rs.getString("keyword"));
+	  kc.setCounter(rs.getInt("counter"));
+
+	  return kc;
+	}
+  }
+
+  class KeywordCounter {
+
+	private String keyword;
+	private int counter;
+
+	public String getKeyword() {
+	  return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+	  this.keyword = keyword;
+	}
+
+	public int getCounter() {
+	  return counter;
+	}
+
+	public void setCounter(int counter) {
+	  this.counter = counter;
+	}
+
   }
 
 }

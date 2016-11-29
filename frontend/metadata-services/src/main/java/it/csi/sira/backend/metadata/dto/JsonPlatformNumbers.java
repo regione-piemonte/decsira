@@ -5,50 +5,52 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class JsonPlatformNumbers {
 
-  private Long siradecObject; // 1) Numero dei record gestiti e pubblicati in
-							  // SIRADEC: quindi somma dei dati
-							  // "nr_oggetti_dataset_calc" della tavola
-							  // "sipra_mtd_t_mtd_plus"
-  private Long functionObjectMap; // 2) Numero dei WMS resi fruibili: cioè
-								  // numero di
-  // dati che hanno come tipo funzione = Mappa
-  private Long functionObjectSearch; // 3) Numero di Ricerche di dettaglio: cioè
-									 // numero
-  // di dati che hanno come tipo funzione = Cerca
-  private Long functionObjectView; // 4) Numero delle Viste Tematice rese
-								   // disponibili cioè numero di dati che hanno
-								   // come tipo funzione = Vista tematica
+	// 1) Numero dei record gestiti e pubblicati in SIRADEC: quindi somma dei
+	// dati nr_oggetti_dataset_calc della tavola sipra_mtd_t_mtd_plus
+	private Long siradecObject;
 
-  public Long getSiradecObject() {
-	return siradecObject;
-  }
+	// 2) Numero dei WMS resi fruibili: ossia numero di dati che hanno come tipo
+	// funzione = Mappa
+	private Long functionObjectMap;
 
-  public void setSiradecObject(Long siradecObject) {
-	this.siradecObject = siradecObject;
-  }
+	// 3) Numero di Ricerche di dettaglio: ossia numero di dati che hanno come
+	// tipo funzione = Cerca
+	private Long functionObjectSearch;
 
-  public Long getFunctionObjectMap() {
-	return functionObjectMap;
-  }
+	// 4) Numero delle Viste Tematice rese disponibili cioï¿½ numero di dati che
+	// hanno come tipo funzione = Vista tematica
+	private Long functionObjectView;
 
-  public void setFunctionObjectMap(Long functionObjectMap) {
-	this.functionObjectMap = functionObjectMap;
-  }
+	public Long getSiradecObject() {
+		return siradecObject;
+	}
 
-  public Long getFunctionObjectSearch() {
-	return functionObjectSearch;
-  }
+	public void setSiradecObject(Long siradecObject) {
+		this.siradecObject = siradecObject;
+	}
 
-  public void setFunctionObjectSearch(Long functionObjectSearch) {
-	this.functionObjectSearch = functionObjectSearch;
-  }
+	public Long getFunctionObjectMap() {
+		return functionObjectMap;
+	}
 
-  public Long getFunctionObjectView() {
-	return functionObjectView;
-  }
+	public void setFunctionObjectMap(Long functionObjectMap) {
+		this.functionObjectMap = functionObjectMap;
+	}
 
-  public void setFunctionObjectView(Long functionObjectView) {
-	this.functionObjectView = functionObjectView;
-  }
+	public Long getFunctionObjectSearch() {
+		return functionObjectSearch;
+	}
+
+	public void setFunctionObjectSearch(Long functionObjectSearch) {
+		this.functionObjectSearch = functionObjectSearch;
+	}
+
+	public Long getFunctionObjectView() {
+		return functionObjectView;
+	}
+
+	public void setFunctionObjectView(Long functionObjectView) {
+		this.functionObjectView = functionObjectView;
+	}
 
 }
