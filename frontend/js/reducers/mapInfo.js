@@ -199,7 +199,7 @@ function mapInfo(state = initialState, action) {
             });
         }
         case CONFIGURE_GET_FEATURE_INFO: {
-            let detailsConfig = assign({}, state.detailsConfig, {[action.layerId]: action.config.card});
+            let detailsConfig = assign({}, state.detailsConfig, {[action.layerId]: action.config});
             // let modelConfig = assign({}, state.modelConfig, {[action.layerId]: action.config.grid});
 
             return assign({}, state, {

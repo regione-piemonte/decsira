@@ -60,7 +60,7 @@ const GetFeatureInfo = connect((state) => {
     const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
     siraFeatureTypeName: activeConfig.featureTypeName,
-    siraFeatureInfoDetails: assign({}, activeConfig.featureinfo, {card: activeConfig.card}),
+    siraFeatureInfoDetails: state.siradec.configOggetti,
     siraTopology: state.siradec.topology,
     siraTopologyConfig: state.mapInfo.topologyConfig,
     infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,
