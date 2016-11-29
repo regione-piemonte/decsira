@@ -64,12 +64,12 @@ module.exports = {
             host: "mapstore.geo-solutions.it",
             target: "http://mapstore.geo-solutions.it"
         }, {
-            path: new RegExp("/sira/proxy(.*)"),
-            rewrite: rewriteUrl("/sira/proxy$1"),
+            path: new RegExp("/decsiraweb/proxy(.*)"),
+            rewrite: rewriteUrl("/decsiraweb/proxy$1"),
             host: "localhost",
             target: "http://localhost:8080"
         }, {
-            path: new RegExp("/sira/services/queryformconfig(.*)"),
+            path: new RegExp("/decsiraweb/services/queryformconfig(.*)"),
             host: "localhost",
             target: "http://localhost:8080"
         }, {
