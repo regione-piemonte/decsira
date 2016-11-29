@@ -7,6 +7,9 @@
  */
 const FileSaver = require('browser-filesaver');
 const shpwrite = require('shp-write');
+const JSZip = require('jszip');
+
+
 const ExporterUtils = {
     exportFeatures: function(outputformat, features, columns, filename = 'export') {
         const name = filename.replace(':', "_");
@@ -31,7 +34,7 @@ const ExporterUtils = {
         FileSaver.saveAs(file, `${filename}.csv`);
     },
     exportShp: function(features, columns, filename) {
-        shpwrite.download({
+        const shpString = shpwrite.zip({
             type: 'FeatureCollection',
             features: this.getFeaturesForShp(features, columns)
             }, {
@@ -41,6 +44,10 @@ const ExporterUtils = {
             polygon: 'SiraPolygons',
             line: 'SiraLines'
             }});
+        const zip = new JSZip();
+        zip.loadAsync(shpString, {base64: true}).then((result) => {
+            return result.generateAsync({ compression: 'STORE', type: 'blob'});
+        }).then((blob) => FileSaver.saveAs(blob, `${filename}.zip`));
     },
     cvsEscape: function(value) {
         if (value === null || value === undefined) {
