@@ -18,43 +18,44 @@
  */
 package it.csi.sira.frontend.iride.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-final class Constants {
+public final class IrideServiceConstants {
 
     /**
      * Application name requesting <code>IRIDE</code> service.
      */
-    static final String APPLICATION_NAME = "DECSIRA";
+    public static final String APPLICATION_NAME = "DECSIRA";
 
     /**
      * {@link RequestMapping} for {@link IrideServiceController} type.
      */
-    static final String MAPPING_IRIDE_SERVICE = "/iride";
+    public static final String MAPPING_IRIDE_SERVICE = "/iride";
 
     /**
      * {@link RequestMapping} for {@link IrideServiceController#getRolesForDigitalIdentity(String)} method.
      */
-    static final String MAPPING_ROLES_FOR_DIGITAL_IDENTITY = "/getRolesForDigitalIdentity";
+    public static final String MAPPING_ROLES_FOR_DIGITAL_IDENTITY = "/getRolesForDigitalIdentity";
 
     /**
      * <a href="https://shibboleth.net/">Shibboleth</a> <code>IRIDE</code> <code>HTTP</code> request header attribute.
      */
-    static final String HEADER_SHIBBOLETH_IRIDE = "Shib-Iride-IdentitaDigitale";
+    public static final String HEADER_SHIBBOLETH_IRIDE = "Shib-Iride-IdentitaDigitale";
 
     /**
      * <a href="https://www.w3.org/Protocols/HTTP/HTRQ_Headers.html#z3">Accept</a> <code>HTTP</code> request header attribute.
      */
-    static final String HEADER_ACCEPT_JSON = "Accept=application/json";
+    public static final String HEADER_ACCEPT_JSON = "Accept=" + MediaType.APPLICATION_JSON_VALUE;
 
     /**
      * Constructor.
      */
-    private Constants() {
+    private IrideServiceConstants() {
         /* NOP */
     }
 

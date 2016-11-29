@@ -18,7 +18,10 @@
  */
 package it.csi.sira.frontend.iride.controller;
 
+import it.csi.sira.frontend.iride.vo.IrideRoleVO;
+
 import java.io.IOException;
+import java.util.List;
 
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
@@ -26,6 +29,7 @@ import org.geoserver.security.iride.entity.IrideRole;
 import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,14 +40,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 
 /**
- * <code>IRIDE</code> <code>REST</code> action, backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
+ * <code>IRIDE</code> <code>REST</code> <a href="https://en.wikipedia.org/wiki/Spring_Framework#Model.E2.80.93view.E2.80.93controller_framework">Spring MVC</a> action,
+ * backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
+ * <p>Please see also:
+ * <ul>
+ *   <li><a href="http://stackoverflow.com/questions/19556039/spring-mvc-controller-rest-service-needs-access-to-header-information-how-to-do">Spring mvc controller REST service needs access to header information. How to do that in spring mvc?</a></li>
+ *   <li><a href="http://stackoverflow.com/questions/28209242/read-http-headers-in-java-spring-rest-api/28209710#28209710">Read http headers in Java Spring rest api</a></li>
+ * </ul>
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @Controller
-@RequestMapping(method = RequestMethod.GET, value = Constants.MAPPING_IRIDE_SERVICE)
+@RequestMapping(method = RequestMethod.GET, value = IrideServiceConstants.MAPPING_IRIDE_SERVICE)
 public class IrideServiceController {
 
     /**
@@ -71,6 +82,7 @@ public class IrideServiceController {
     /**
      * @param irideService the irideService to set
      */
+    @Autowired
     public void setIrideService(IrideService irideService) {
         this.irideService = irideService;
     }
@@ -81,18 +93,18 @@ public class IrideServiceController {
      * @return
      */
     @RequestMapping(
-    	headers = {
-    		Constants.HEADER_ACCEPT_JSON,
-    		Constants.HEADER_SHIBBOLETH_IRIDE,
-    	},
-    	value = Constants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY
+        headers = {
+            IrideServiceConstants.HEADER_ACCEPT_JSON,
+            IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
+        },
+        value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY
     )
     @ResponseBody
     public ResponseEntity<String> getRolesForDigitalIdentity(
-    	@RequestHeader(
-    		value = Constants.HEADER_SHIBBOLETH_IRIDE,
-    		defaultValue = ""
-    	) String user) {
+        @RequestHeader(
+            value = IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
+            defaultValue = ""
+        ) String user) {
         LOGGER.trace("IRIDE Digital Identity: {}", user);
 
         try {
@@ -120,7 +132,7 @@ public class IrideServiceController {
         if (irideIdentity != null) {
             roles = this.getIrideService().findRuoliForPersonaInApplication(
                 irideIdentity,
-                new IrideApplication(Constants.APPLICATION_NAME)
+                new IrideApplication(IrideServiceConstants.APPLICATION_NAME)
             );
         }
 
@@ -136,11 +148,25 @@ public class IrideServiceController {
     private String toJson(IrideRole[] roles) throws JsonProcessingException {
         final ObjectMapper mapper = new ObjectMapper();
 
-        final String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(roles);
+        final String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.toVO(roles));
 
         LOGGER.trace("IRIDE roles to JSON: {}", json);
 
         return json;
+    }
+
+    /**
+     *
+     * @param roles
+     * @return
+     */
+    private IrideRoleVO[] toVO(IrideRole[] roles) {
+        final List<IrideRoleVO> roleVOs = Lists.newArrayList();
+        for (final IrideRole role : roles) {
+            roleVOs.add(new IrideRoleVO(role));
+        }
+
+        return roleVOs.toArray(new IrideRoleVO[roles.length]);
     }
 
 }
