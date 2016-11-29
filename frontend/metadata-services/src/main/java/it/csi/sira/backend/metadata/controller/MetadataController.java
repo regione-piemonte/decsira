@@ -1,7 +1,6 @@
 package it.csi.sira.backend.metadata.controller;
 
 import java.io.IOException;
-
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import it.csi.sira.backend.metadata.business.MetadataManager;
 import it.csi.sira.backend.metadata.dto.JsonAppCategory;
 import it.csi.sira.backend.metadata.dto.JsonInfoBox;
+
 import it.csi.sira.backend.metadata.dto.JsonMetaObject;
+import it.csi.sira.backend.metadata.dto.JsonNews;
+import it.csi.sira.backend.metadata.dto.JsonNote;
 import it.csi.sira.backend.metadata.dto.JsonPlatformNumbers;
+import it.csi.sira.backend.metadata.dto.JsonKeywordCounter;
 import it.csi.sira.backend.metadata.dto.RequestParam;
-import it.csi.sira.backend.metadata.dto.RequestCswParam;
 import it.csi.sira.backend.metadata.exception.MetadataManagerException;
-import it.csi.sira.backend.metadata.integration.servizi.csw.dto.CswRecord;
-import it.csi.sira.backend.metadata.integration.servizi.csw.exception.CswAdapterException;
-import it.csi.sira.backend.metadata.integration.servizi.csw.exception.CswServiceException;
 import it.csi.sira.backend.metadata.utils.Constants;
 import it.csi.sira.backend.metadata.utils.LogFormatter;
 
@@ -42,7 +41,7 @@ public class MetadataController {
   private MetadataManager metadataManager = null;
 
   @RequestMapping(value = "/getMosaico", method = RequestMethod.GET)
-  public @ResponseBody JsonAppCategory[] getMosaico(@ModelAttribute RequestParam params) {
+  public @ResponseBody JsonAppCategory[] getMosaico() {
 
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
@@ -63,8 +62,74 @@ public class MetadataController {
 	return json;
   }
 
+  @RequestMapping(value = "/getNews", method = RequestMethod.GET)
+  public @ResponseBody JsonNews[] getNews() {
+
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	JsonNews[] json = null;
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+
+	try {
+	  json = metadataManager.getNews();
+	} catch (MetadataManagerException e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  e.printStackTrace();
+	}
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+
+	return json;
+  }
+
+  @RequestMapping(value = "/getNote", method = RequestMethod.GET)
+  public @ResponseBody JsonNote[] getNote() {
+
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	JsonNote[] json = null;
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+
+	try {
+	  json = metadataManager.getNote();
+	} catch (MetadataManagerException e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  e.printStackTrace();
+	}
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+
+	return json;
+  }
+
+  @RequestMapping(value = "/getKeywordCounters", method = RequestMethod.GET)
+  public @ResponseBody JsonKeywordCounter[] getKeywordCounters() {
+
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	JsonKeywordCounter[] json = null;
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+
+	try {
+	  json = metadataManager.getKeywordCounters();
+	} catch (MetadataManagerException e) {
+	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  e.printStackTrace();
+	}
+
+	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+
+	return json;
+  }
+
   @RequestMapping(value = "/getPlatformNumbers", method = RequestMethod.GET)
-  public @ResponseBody JsonPlatformNumbers getPlatformNumbers(@ModelAttribute RequestParam params) {
+  public @ResponseBody JsonPlatformNumbers getPlatformNumbers() {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
@@ -179,32 +244,7 @@ public class MetadataController {
 	return json;
   }
 
-  @RequestMapping(value = "/searchCswMetadata", method = RequestMethod.POST)
-  public @ResponseBody CswRecord[] searchCswMetadata(@ModelAttribute RequestCswParam text) {
-	final String methodName = new Object() {
-	}.getClass().getEnclosingMethod().getName();
-
-	CswRecord[] json = null;
-
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
-
-	String txt = text.getText();
-	String service = text.getService();
-	int startPosition = text.getStartPosition();
-	int maxRecords = text.getMaxRecords();
-
-	try {
-	  json = metadataManager.searchCswMetadata(txt, service, startPosition, maxRecords);
-	} catch (CswServiceException | CswAdapterException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
-	  e.printStackTrace();
-	}
-
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
-
-	return json;
-  }
-
+  /*
   @RequestMapping(value = "/index", method = RequestMethod.GET)
   public ModelAndView createIndexView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	final String methodName = new Object() {
@@ -222,6 +262,7 @@ public class MetadataController {
 
 	return modelAndView;
   }
+  */
 
   public MetadataManager getMetadataManager() {
 	return metadataManager;

@@ -103,6 +103,17 @@
                  from sipra_mtd_t_metadato a, sipra_mtd_t_funzione b
                  where b.fk_metadato = a.id_metadato and b.fk_tipo_funzione = :fk_tipo_funzione]]>
 	</entry>			
+	
+	<entry key="GET_KEYWORD_COUNTER">
+	    <![CDATA[select a.des_parola_chiave as keyword, count(b.id_metadato) as counter
+               from sipra_mtd_t_parola_chiave a, sipra_mtd_r_parolachiave_mtd b
+               where b.id_parola_chiave = a.id_parola_chiave
+               group by des_parola_chiave 
+               order by des_parola_chiave asc]]>
+	</entry>		
+	
+	
+
 		
 </properties>
 
