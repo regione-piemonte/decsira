@@ -40,9 +40,6 @@ import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.service.IrideServiceAware;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.slf4j.Logger;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
@@ -127,7 +124,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
      */
     @Override
     public SortedSet<String> getUserNamesForRole(GeoServerRole role) throws IOException {
-    	LOGGER.trace("Role: {}", role);
+        LOGGER.trace("Role: {}", role);
 
         return ImmutableSortedSet.of();
     }
@@ -257,37 +254,23 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
     @Override
     public Properties personalizeRoleParams(String roleName, Properties roleParams, String userName, Properties userProps) throws IOException {
         LOGGER.debug(
-        	"\n\t Role: {},\n\t Role Params: {},\n\t User: {},\n\t User Properties: {}",
+            "\n\t Role: {},\n\t Role Params: {},\n\t User: {},\n\t User Properties: {}",
             new Object[] { roleName, roleParams, userName, userProps }
         );
 
         return null;
     }
 
-    // TODO: review this method!
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.GeoServerRoleService#getAdminRole()
      */
     @Override
     public GeoServerRole getAdminRole() {
-        // TODO: temp code!
-        String username = null;
-        final SecurityContext context = SecurityContextHolder.getContext();
-        final Authentication authentication = context.getAuthentication();
-        if (authentication != null) {
-            username = String.valueOf(authentication.getPrincipal());
-        }
-        // ~
-
-        LOGGER.trace("AdminRole Username: {}", username);
-
         GeoServerRole role = null;
         try {
-            // Check username format: it may be an Identita Digitale IRIDE, or not
-            if (IrideIdentity.isNotValidIrideIdentity(username) && this.config.hasFallbackRoleServiceName()) {
-                LOGGER.warn("Username {} is not a valid IRIDE Identity: falling back to RoleService '{}'", username, this.config.fallbackRoleServiceName);
-
+            // Check if a fallback RoleService was specified, and if so rely on it for admin role retrieval...
+            if (this.config.hasFallbackRoleServiceName()) {
                 final GeoServerRoleService fallbackRoleService = this.getSecurityManager().loadRoleService(this.config.fallbackRoleServiceName);
                 if (fallbackRoleService != null) {
                     role = fallbackRoleService.getAdminRole();
@@ -297,6 +280,7 @@ public class IrideRoleService extends AbstractGeoServerSecurityService implement
                     LOGGER.warn("A fallback RoleService '{}' was specified, but none was found!", this.config.fallbackRoleServiceName);
                 }
             } else {
+            	// ...otherwise just use what is configured for admin role (which may or may not be defined on GeoServer)
                 role = this.createRoleObject(this.config.adminRole);
             }
 
