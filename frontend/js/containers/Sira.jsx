@@ -12,7 +12,6 @@ require('../../assets/css/sira.css');
 require('../../MapStore2/web/client/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
-const assign = require('object-assign');
 
 const SidePanel = require('./SidePanel');
 const Card = require('../components/template/Card');
