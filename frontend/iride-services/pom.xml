@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  REST service to query for IRIDE roles using CSI-Piemonte IRIDE Service.
+  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>it.geosolutions.csi.sira</groupId>
+		<artifactId>sira-root</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>iride-services</artifactId>
+	<packaging>jar</packaging>
+
+	<name>CSI SIRA - IRIDE REST Services</name>
+    <description>REST service to query for IRIDE roles using CSI-Piemonte IRIDE Service</description>
+
+	<url>https://github.com/geosolutions-it/csi-sira/tree/master/frontend/iride-services</url>
+    <inceptionYear>2016</inceptionYear>
+
+    <organization>
+        <name>CSI-Piemonte</name>
+        <url>http://www.csipiemonte.it</url>
+    </organization>
+
+    <developers>
+        <developer>
+          <id>seancrow76</id>
+          <name>Simone Cornacchia</name>
+          <email>simone.cornacchia AT assioma.net</email>
+          <organization>Assioma.net</organization>
+          <organizationUrl>http://www.assioma.net</organizationUrl>
+          <roles>
+            <role>architect</role>
+            <role>developer</role>
+          </roles>
+          <timezone>+1</timezone>
+          <properties>
+            <skype>seancrow76</skype>
+          </properties>
+          <url>https://github.com/seancrow</url>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+          <name>Diego Sanmartino</name>
+          <email>diego.sanmartino AT csi.it</email>
+          <organization>CSI-Piemonte</organization>
+          <organizationUrl>http://www.csipiemonte.it</organizationUrl>
+          <roles>
+            <role>architect</role>
+          </roles>
+          <timezone>+1</timezone>
+        </contributor>
+    </contributors>
+
+	<properties>
+        <!-- Java Version -->
+        <java.version>1.7</java.version>
+
+        <!-- Dependencies -->
+        <spring.version>3.1.4.RELEASE</spring.version>
+        <spring-security.version>3.1.0.RELEASE</spring-security.version>
+
+        <!-- Build -->
+        <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+	</properties>
+
+    <repositories>
+        <!-- https://maven-repository.com/artifact/org.springframework/spring-test-mvc/1.0.0.M2 -->
+		<repository>
+			<id>spring-milestones</id>
+			<url>http://repo.spring.io/libs-milestone/</url>
+		</repository>
+    </repositories>
+
+	<dependencies>
+        <!-- SIRA modules -->
+        <dependency>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.geoserver.security</groupId>
+		    <artifactId>iride-entities</artifactId>
+		    <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.geoserver.security</groupId>
+		    <artifactId>iride-service-client</artifactId>
+		    <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+        <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
+
+        <!-- Mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Hamcrest -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JSON Path -->
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>0.8.1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path-assert</artifactId>
+		    <version>0.8.1</version>
+		    <scope>test</scope>
+		</dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test-mvc</artifactId>
+		    <version>1.0.0.M2</version>
+		    <scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+	</dependencies>
+
+    <build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+        <plugins>
+            <!-- compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!--debug>true</debug-->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- versioning -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.2.2</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <!-- resources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- eclipse ide integration -->
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <downloadSources>false</downloadSources>
+                    <additionalProjectnatures>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    </additionalProjectnatures>
+                </configuration>
+            </plugin>
+
+            <!-- initialize git revision info -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- https://github.com/ktoso/maven-git-commit-id-plugin -->
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/../../.git</dotGitDirectory>
+                    <prefix>build</prefix>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <skipPoms>false</skipPoms>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+
+            <!-- packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Application-Name>${project.artifactId}-${project.version}</Application-Name>
+                            <Project-Version>${project.version}</Project-Version>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <Git-Revision>${build.commit.id}</Git-Revision>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <show>public</show>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
