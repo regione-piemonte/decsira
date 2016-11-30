@@ -73,14 +73,18 @@ public class IrideServiceController {
     private IrideService irideService;
 
     /**
-     * @return the irideService
+     * Get the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @return the <code>IRIDE</code> service "policies" enforcer instance
      */
     public IrideService getIrideService() {
         return this.irideService;
     }
 
     /**
-     * @param irideService the irideService to set
+     * Set the <code>IRIDE</code> service "policies" enforcer instance.
+     *
+     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
      */
     @Autowired
     public void setIrideService(IrideService irideService) {
@@ -94,8 +98,8 @@ public class IrideServiceController {
      */
     @RequestMapping(
         headers = {
-            IrideServiceConstants.HEADER_ACCEPT_JSON,
             IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
+            IrideServiceConstants.HEADER_ACCEPT_JSON
         },
         value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY
     )
@@ -110,7 +114,7 @@ public class IrideServiceController {
         try {
             final IrideRole[] roles = this.getRolesForUser(user);
 
-            LOGGER.trace("Got {} roles for IRIDE Digital Identity {}", roles.length, user);
+            LOGGER.trace("Got {} role(s) for IRIDE Digital Identity {}", roles.length, user);
 
             return new ResponseEntity<>(this.toJson(roles), HttpStatus.OK);
         } catch (IOException e) {
@@ -150,7 +154,7 @@ public class IrideServiceController {
 
         final String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.toVO(roles));
 
-        LOGGER.trace("IRIDE roles to JSON: {}", json);
+        LOGGER.trace("Convert IRIDE {} role(s) to JSON: {}", roles.length, json);
 
         return json;
     }
