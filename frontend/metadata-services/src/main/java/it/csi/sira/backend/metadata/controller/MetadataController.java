@@ -37,7 +37,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class MetadataController {
   private static String className = MetadataController.class.getSimpleName();
 
-  private Properties logger = null;
   private MetadataManager metadataManager = null;
 
   @RequestMapping(value = "/getMosaico", method = RequestMethod.GET)
@@ -48,16 +47,16 @@ public class MetadataController {
 
 	JsonAppCategory[] json = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	try {
 	  json = metadataManager.getMosaico();
 	} catch (MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -70,16 +69,16 @@ public class MetadataController {
 
 	JsonNews[] json = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	try {
 	  json = metadataManager.getNews();
 	} catch (MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -92,16 +91,16 @@ public class MetadataController {
 
 	JsonNote[] json = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	try {
 	  json = metadataManager.getNote();
 	} catch (MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -114,16 +113,16 @@ public class MetadataController {
 
 	JsonKeywordCounter[] json = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	try {
 	  json = metadataManager.getKeywordCounters();
 	} catch (MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -135,16 +134,16 @@ public class MetadataController {
 
 	JsonPlatformNumbers json = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	try {
 	  json = metadataManager.getPlatformNumbers();
 	} catch (MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -157,13 +156,13 @@ public class MetadataController {
 	JsonMetaObject[] json = null;
 	int idAppCategory = Constants.ID_ROOT_APP_CATEGORY;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	String text = params.getText();
 	String category = params.getCategory();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "category: " + category));
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "text: " + text));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "category: " + category));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "text: " + text));
 
 	try {
 	  if (category != null && category.length() > 0) {
@@ -173,11 +172,11 @@ public class MetadataController {
 	  json = metadataManager.getMetadata(idAppCategory, text, Constants.METADATA_OBJECTS);
 
 	} catch (NumberFormatException | MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -190,13 +189,13 @@ public class MetadataController {
 	JsonMetaObject[] json = null;
 	int idAppCategory = Constants.ID_ROOT_APP_CATEGORY;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	String text = params.getText();
 	String category = params.getCategory();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "category: " + category));
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "text: " + text));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "category: " + category));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "text: " + text));
 
 	try {
 	  if (category != null && category.length() > 0) {
@@ -206,11 +205,11 @@ public class MetadataController {
 	  json = metadataManager.getMetadata(idAppCategory, text, Constants.METADATA_VIEWS);
 
 	} catch (NumberFormatException | MetadataManagerException e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  e.printStackTrace();
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -223,7 +222,7 @@ public class MetadataController {
 	JsonInfoBox json = null;
 	Integer idMetadato = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	String metadato = params.getMetadato();
 
@@ -234,23 +233,22 @@ public class MetadataController {
 		json = metadataManager.getInfoBox(idMetadato);
 
 	  } catch (NumberFormatException | MetadataManagerException e) {
-		Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+		Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 		e.printStackTrace();
 	  }
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
 
-  /*
   @RequestMapping(value = "/index", method = RequestMethod.GET)
   public ModelAndView createIndexView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
 	Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	String date = formatter.format(new Date());
@@ -258,11 +256,10 @@ public class MetadataController {
 
 	ModelAndView modelAndView = new ModelAndView("metadata/index");
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
 
 	return modelAndView;
   }
-  */
 
   public MetadataManager getMetadataManager() {
 	return metadataManager;
@@ -272,11 +269,5 @@ public class MetadataController {
 	this.metadataManager = metadataManager;
   }
 
-  public Properties getLogger() {
-	return logger;
-  }
 
-  public void setLogger(Properties logger) {
-	this.logger = logger;
-  }
 }

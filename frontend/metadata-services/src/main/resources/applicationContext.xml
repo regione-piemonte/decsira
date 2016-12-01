@@ -7,7 +7,6 @@
 	<bean id="metadataManager" class="it.csi.sira.backend.metadata.business.MetadataManager">
 		<property name="integratioManager" ref="integratioManager" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
-		<property name="logger" ref="logger" />		
 	</bean>
 
 	<bean id="integratioManager" class="it.csi.sira.backend.metadata.utils.IntegratioManager">
@@ -16,10 +15,6 @@
 		<property name="queries" ref="queries" />
 	</bean>
 
-	<bean id="logger" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="locations" value="classpath*:/logger.properties" />
-	</bean>
-	
 	<bean id="queries" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations" value="classpath*:/queries.xml" />
 	</bean>	
