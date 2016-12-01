@@ -37,15 +37,13 @@ public class MetadataManager {
 
   private TransactionTemplate transactionTemplate = null;
   private IntegratioManager integratioManager = null;
-
-  private Properties logger = null;
-
+ 
   public JsonPlatformNumbers getPlatformNumbers() throws MetadataManagerException {
 
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	Map<String, Object> params = null;
 	JsonPlatformNumbers numbers = new JsonPlatformNumbers();
@@ -93,11 +91,11 @@ public class MetadataManager {
 	  }
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return numbers;
   }
@@ -107,7 +105,7 @@ public class MetadataManager {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	Map<String, Object> params = new HashMap<String, Object>();
 	params.put("id_metadato", idMetadato);
@@ -164,11 +162,11 @@ public class MetadataManager {
 	  }
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return jsonInfoBox;
   }
@@ -192,7 +190,7 @@ public class MetadataManager {
 			  integratioManager.getDaoManager().getSipraMtdTNewsHomePageDAO().getRowMapper(), params);
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
@@ -234,7 +232,7 @@ public class MetadataManager {
 			  integratioManager.getDaoManager().getSipraMtdTTestiHomePageDAO().getRowMapper(), params);
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
@@ -274,7 +272,7 @@ public class MetadataManager {
 	  kc = integratioManager.getDaoManager().getSipraMtdTParolaChiaveDAO().findByGenericCriteria(query, new KeywordCounterMapper(), params);
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
@@ -299,7 +297,7 @@ public class MetadataManager {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	JsonAppCategory[] categories = null;
 	Map<String, Object> params = null;
@@ -330,11 +328,11 @@ public class MetadataManager {
 		}
 	  }
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return categories;
   }
@@ -346,7 +344,7 @@ public class MetadataManager {
 
 	JsonMetaObject[] json = null;
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	if (idCategory == null) {
 	  throw new MetadataManagerException("Category not valid!!");
@@ -367,11 +365,11 @@ public class MetadataManager {
 	  }
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return json;
   }
@@ -381,7 +379,7 @@ public class MetadataManager {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	JsonMetaObject appCategory = null;
 	Map<String, Object> params = null;
@@ -431,11 +429,11 @@ public class MetadataManager {
 		}
 	  }
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return appCategory;
   }
@@ -445,7 +443,7 @@ public class MetadataManager {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
 	JsonMetaObject[] children = null;
 
@@ -498,11 +496,11 @@ public class MetadataManager {
 		}
 	  }
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return children;
   }
@@ -512,10 +510,10 @@ public class MetadataManager {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "idCategory: " + idCategory));
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "text: " + text));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "idCategory: " + idCategory));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "text: " + text));
 
 	String query = null;
 	RowMapper<SipraMtdTMtdCsw> rowMapper = integratioManager.getDaoManager().getSipraMtdTMtdCswDAO().getRowMapper();
@@ -562,11 +560,11 @@ public class MetadataManager {
 	  }
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return children;
   }
@@ -576,10 +574,10 @@ public class MetadataManager {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "BEGIN"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "BEGIN"));
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "idCategory: " + idCategory));
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "text: " + text));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "idCategory: " + idCategory));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "text: " + text));
 
 	String query = null;
 	RowMapper<SipraMtdTMtdCsw> rowMapper = integratioManager.getDaoManager().getSipraMtdTMtdCswDAO().getRowMapper();
@@ -627,12 +625,12 @@ public class MetadataManager {
 	  }
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 
 	}
 
-	Logger.getLogger(logger.getProperty("LOGGER_NAME")).debug(LogFormatter.format(className, methodName, "END"));
+	Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "END"));
 
 	return children;
   }
@@ -673,7 +671,7 @@ public class MetadataManager {
 	  }
 
 	} catch (Exception e) {
-	  Logger.getLogger(logger.getProperty("LOGGER_NAME")).error(LogFormatter.format(className, methodName, e.getMessage()));
+	  Logger.getLogger(Constants.LOGGER).error(LogFormatter.format(className, methodName, e.getMessage()));
 	  throw new MetadataManagerException(e);
 
 	}
@@ -695,14 +693,6 @@ public class MetadataManager {
 
   public void setIntegratioManager(IntegratioManager integratioManager) {
 	this.integratioManager = integratioManager;
-  }
-
-  public Properties getLogger() {
-	return logger;
-  }
-
-  public void setLogger(Properties logger) {
-	this.logger = logger;
   }
 
   class LongRowMapper implements RowMapper<Long> {
