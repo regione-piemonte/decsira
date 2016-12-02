@@ -71,6 +71,11 @@ public final class IrideServiceImpl implements IrideService {
     /**
      * {@link IrideIdentity} <code>IRIDE</code> policy request parameter.
      */
+    private static final String IRIDE_ROLE_PARAM = "role";
+
+    /**
+     * {@link IrideIdentity} <code>IRIDE</code> policy request parameter.
+     */
     private static final String IRIDE_AUTH_USERNAME_PARAM = "username";
 
     /**
@@ -166,8 +171,29 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public IrideRole[] findRuoliForPersonaInUseCase(IrideIdentity identity, IrideUseCase useCase) {
-        // TODO: implement...
-        return new IrideRole[0];
+        IrideRole[] result = new IrideRole[0];
+
+        final IridePolicy policy = IridePolicy.FIND_RUOLI_FOR_PERSONA_IN_USE_CASE;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_IDENTITY_PARAM, identity);
+        params.put(IRIDE_USECASE_PARAM, useCase);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                @SuppressWarnings("unchecked")
+                final List<IrideRole> policyResult = (List<IrideRole>) this.handleResponse(policy, policyResponse);
+
+                result = policyResult.toArray(new IrideRole[policyResult.size()]);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+        }
+
+        logPolicyExecutionResult(policy, result);
+
+        return result;
     }
 
     /*
@@ -193,7 +219,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = policyResult.toArray(new IrideUseCase[policyResult.size()]);
             }
         } catch (IOException | TransformerException e) {
-        	LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -221,7 +247,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = (IrideIdentity) this.handleResponse(policy, policyResponse);
             }
         } catch (IOException | TransformerException e) {
-        	LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -235,8 +261,25 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public Boolean isIdentitaAutentica(IrideIdentity identity) {
-        // TODO: implement...
-        return null;
+        Boolean result = null;
+
+        final IridePolicy policy = IridePolicy.IS_IDENTITA_AUTENTICA;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_IDENTITY_PARAM, identity);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                result = (Boolean) this.handleResponse(policy, policyResponse);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+        }
+
+        logPolicyExecutionResult(policy, result);
+
+        return result;
     }
 
     /*
@@ -245,8 +288,26 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public Boolean isPersonaAutorizzataInUseCase(IrideIdentity identity, IrideUseCase useCase) {
-        // TODO: implement...
-        return null;
+        Boolean result = null;
+
+        final IridePolicy policy = IridePolicy.IS_PERSONA_AUTORIZZATA_IN_USE_CASE;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_IDENTITY_PARAM, identity);
+        params.put(IRIDE_USECASE_PARAM, useCase);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                result = (Boolean) this.handleResponse(policy, policyResponse);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+        }
+
+        logPolicyExecutionResult(policy, result);
+
+        return result;
     }
 
     /*
@@ -255,8 +316,26 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public Boolean isPersonaInRuolo(IrideIdentity identity, IrideRole role) {
-        // TODO: implement...
-        return null;
+        Boolean result = null;
+
+        final IridePolicy policy = IridePolicy.IS_PERSONA_IN_RUOLO;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_IDENTITY_PARAM, identity);
+        params.put(IRIDE_ROLE_PARAM, role);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                result = (Boolean) this.handleResponse(policy, policyResponse);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+        }
+
+        logPolicyExecutionResult(policy, result);
+
+        return result;
     }
 
     /*
@@ -280,7 +359,7 @@ public final class IrideServiceImpl implements IrideService {
                 result = (List<IrideInfoPersona>) this.handleResponse(policy, policyResponse);
             }
         } catch (IOException | TransformerException e) {
-        	LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
         }
 
         logPolicyExecutionResult(policy, result);
@@ -294,8 +373,25 @@ public final class IrideServiceImpl implements IrideService {
      */
     @Override
     public String getInfoPersonaSchema(IrideRole role) {
-        // TODO: implement...
-        return null;
+        String result = null;
+
+        final IridePolicy policy = IridePolicy.GET_INFO_PERSONA_SCHEMA;
+
+        final Map<String, Object> params = new HashMap<>();
+        params.put(IRIDE_ROLE_PARAM, role);
+
+        try {
+            final String policyResponse = this.handleRequest(policy, params);
+            if (StringUtils.isNotBlank(policyResponse)) {
+                result = (String) this.handleResponse(policy, policyResponse);
+            }
+        } catch (IOException | TransformerException e) {
+            LOGGER.error(ERROR_MESSAGE_FORMAT, new Object[] { policy.getServiceName(), e.getMessage(), e });
+        }
+
+        logPolicyExecutionResult(policy, result);
+
+        return result;
     }
 
     // === PolicyEnforcerBase interface ===   END =============================
