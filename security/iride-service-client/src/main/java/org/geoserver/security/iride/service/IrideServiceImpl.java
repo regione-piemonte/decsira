@@ -86,7 +86,7 @@ public final class IrideServiceImpl implements IrideService {
     /**
      * Policy execution error message format.
      */
-    private static final String ERROR_MESSAGE_FORMAT = "%s error: %s";
+    private static final String ERROR_MESSAGE_FORMAT = "{} error: {}";
 
     /**
      * <code>IRIDE</code> server <code>URL</code>.
