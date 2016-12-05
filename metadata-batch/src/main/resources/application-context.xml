@@ -27,5 +27,9 @@
 	<bean id="queries" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations" value="classpath:/queries.xml" />
 	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:/config.properties" />
+	</bean>
 
 </beans>
