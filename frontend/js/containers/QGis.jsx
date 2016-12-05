@@ -27,6 +27,7 @@ const {
     loadGridModelWithFilter,
     loadGridModelWithPagination
 } = require('../actions/grid');
+const {selectAllQgis} = require('../actions/featuregrid');
 
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 const SiraFilterUtils = require('../utils/SiraFilterUtils');
@@ -77,7 +78,8 @@ const QGis = React.createClass({
         detailsConfig: React.PropTypes.object,
         gridConfig: React.PropTypes.object,
         pagination: React.PropTypes.object,
-        loadCardTemplate: React.PropTypes.func
+        loadCardTemplate: React.PropTypes.func,
+        selectAllToggle: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -157,7 +159,8 @@ const QGis = React.createClass({
                 profile={this.props.profile.profile}
                 templateProfile="QGIS"
                 selectFeatures={this.selectFeatures}
-                zoomToFeatureAction={this.zoomToFeature}/>
+                zoomToFeatureAction={this.zoomToFeature}
+                selectAllToggle={this.props.selectAllToggle && this.state.qGisType !== "list" ? this.props.selectAllToggle : undefined}/>
             );
     },
     render() {
@@ -176,7 +179,7 @@ const QGis = React.createClass({
             return f.id;
         }).join(',');
         /*eslint-disable */
-        if (VALAMB && VALAMB.viewOnMapById) {
+        if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
             VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
         }else {
             console.log(`viewOnMapById('${this.props.featureType}',"${ids}")`);
@@ -236,6 +239,6 @@ module.exports = connect((state) => {
     selectFeatures,
     loadCardTemplate,
     onQuery: loadGridModelWithFilter,
-    onQueryPagination: loadGridModelWithPagination
-
+    onQueryPagination: loadGridModelWithPagination,
+    selectAllToggle: selectAllQgis
 })(QGis);

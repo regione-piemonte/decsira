@@ -5,7 +5,11 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+const FilterUtils = require('../utils/SiraFilterUtils');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const TemplateUtils = require('../utils/TemplateUtils');
+const axios = require('../../MapStore2/web/client/libs/ajax');
+const {showLoading} = require('./grid');
 const SELECT_FEATURES = 'SELECT_FEATURES';
 const SET_FEATURES = 'SET_FEATURES';
 const SELECT_ALL = 'SELECT_ALL';
@@ -24,11 +28,51 @@ function setFeatures(features) {
     };
 }
 
-function selectAllToggle(featureTypeName, sldBody) {
+function selectAllToggle(featureTypeName, filterObj, ogcVersion) {
+    const sldBody = filterObj ? FilterUtils.getSLD(featureTypeName, filterObj, ogcVersion) : undefined;
     return {
         type: SELECT_ALL,
         featureTypeName,
         sldBody
+    };
+}
+
+function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
+    return (dispatch, getState) => {
+        if (featureTypeName) {
+            let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
+            for (let param in params) {
+                if (params.hasOwnProperty(param)) {
+                    url += "&" + param + "=" + params[param];
+                }
+            }
+            let filter = FilterUtils.toOGCFilterSira(featureTypeName, filterObj, ogcVersion);
+            dispatch(showLoading(true));
+            let state = getState();
+            const featuregrid = state.grid && state.grid.featuregrid;
+            return axios.post(url, filter, {
+              timeout: 60000,
+              headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+            }).then((response) => {
+
+                if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+                    const idFieldName = featuregrid.idFieldName;
+                    const features = TemplateUtils.getModels(response.data, featuregrid.grid.root, featuregrid.grid.columns);
+                    let ids = features.map((f) => {
+                        return f[idFieldName];
+                    }).join(',');
+                    /*eslint-disable */
+                    if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
+                        VALAMB.viewOnMapById(`'${state.siradec.featureType}',"${ids}"`);
+                    }else {
+                        console.log(`viewOnMapById('${state.siradec.featureType}',"${ids}")`);
+
+                    }
+                    /*eslint-enable */
+                }
+                dispatch(showLoading(false));
+            });
+        }
     };
 }
 
@@ -38,5 +82,6 @@ module.exports = {
     SELECT_ALL,
     selectFeatures,
     setFeatures,
-    selectAllToggle
+    selectAllToggle,
+    selectAllQgis
 };
