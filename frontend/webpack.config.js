@@ -69,6 +69,11 @@ module.exports = {
             host: "localhost",
             target: "http://localhost:8080"
         }, {
+            path: new RegExp("/services/metadata/(.*)"),
+            rewrite: rewriteUrl("/decsiraweb/services/metadata/$1"),
+            host: "localhost",
+            target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        }, {
             path: new RegExp("/decsiraweb/services/queryformconfig(.*)"),
             host: "localhost",
             target: "http://localhost:8080"
