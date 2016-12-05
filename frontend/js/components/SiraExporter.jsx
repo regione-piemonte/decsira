@@ -93,7 +93,10 @@ const SiraExporter = React.createClass({
     },
     exportFeatures() {
         const params = this.props.exportParams;
-        const name = this.state.outputformat === 'shp' ? this.props.shpName : this.props.csvName;
+        let name = this.state.outputformat === 'shp' ? this.props.shpName : this.props.csvName;
+        (name.match(/\{featureType\}/g) || []).forEach((placeholder) => {
+            name = name.replace(placeholder, params.featureType);
+        });
         if (this.state.type === 'page' && params.features && params.columns) {
             ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name);
         }else if (this.state.type === 'all' && params.filter && params.columns) {
