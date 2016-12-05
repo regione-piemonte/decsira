@@ -12,6 +12,7 @@ const {connect} = require('react-redux');
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 
 const {configureQueryForm} = require('../actions/siradec');
+const {configureExporter} = require('../actions/siraexporter');
 
 const appReducers = {
     userprofile: require('../reducers/userprofile'),
@@ -39,7 +40,8 @@ const startApp = () => {
     const appStore = require('../stores/qGisStore').bind(null, initialState, appReducers);
 
     const initialActions = [
-        ()=> configureQueryForm(ConfigUtils.getConfigProp("query"))
+        ()=> configureQueryForm(ConfigUtils.getConfigProp("query")),
+        () => configureExporter(ConfigUtils.getConfigProp("exporter"))
     ];
 
     const appConfig = {

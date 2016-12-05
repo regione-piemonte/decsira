@@ -9,7 +9,7 @@
 const React = require('react');
 const Dialog = require('../../MapStore2/web/client/components/misc/Dialog.jsx');
 const Select = require('react-select');
-const {Button, Glyphicon} = require('react-bootstrap');
+const {Button, Glyphicon, Alert} = require('react-bootstrap');
 const ExporterUtils = require('../utils/ExporterUtils');
 require('react-select/dist/react-select.css');
 const SiraExporter = React.createClass({
@@ -22,7 +22,9 @@ const SiraExporter = React.createClass({
         getFeaturesAndExport: React.PropTypes.func,
         featuregrid: React.PropTypes.object,
         loading: React.PropTypes.bool,
-        errormsg: React.PropTypes.string
+        errormsg: React.PropTypes.string,
+        csvName: React.PropTypes.string,
+        shpName: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -44,8 +46,9 @@ const SiraExporter = React.createClass({
                     </div>);
     },
     renderSelectors() {
+        const heigth = this.state.outputformat === 'shp' ? "260px" : "150px";
         return (
-            <div role="body" style={{height: "150px", display: "flex",
+            <div role="body" style={{height: heigth, display: "flex",
                     flexDirection: "column", justifyContent: "space-between"}}>
             <Select
                 name="outputformat"
@@ -65,6 +68,9 @@ const SiraExporter = React.createClass({
                     { value: 'page', label: 'Pagina corrente' }]}
                 onChange={(val) => this.setState({type: val.value})}
             />
+            {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
+                Solo gli elementi dotati di geometria verranno esportati
+              </Alert>) : null}
             <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export</span><Glyphicon glyph="download-alt" /></Button>
             </div>);
     },
@@ -77,16 +83,21 @@ const SiraExporter = React.createClass({
             style={{position: "fixed", display: "block", zIndex: 1030, width: "100%", height: "100%"}}
             onClickOut={this.props.toggleExporter.bind(null, 'exporter')}
             >
-            <div role="header">Export Data</div>
+            <span role="header">
+                <span>Export Data</span>
+                <button onClick={this.props.toggleExporter.bind(null, 'exporter')} className="exporter-close close"><Glyphicon glyph="1-close"/></button>
+            </span>
+            <div role="header"></div>
             {this.props.errormsg ? this.renderError() : this.renderSelectors()}
             </Dialog>) : null;
     },
     exportFeatures() {
         const params = this.props.exportParams;
+        const name = this.state.outputformat === 'shp' ? this.props.shpName : this.props.csvName;
         if (this.state.type === 'page' && params.features && params.columns) {
-            ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, params.featureType);
+            ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name);
         }else if (this.state.type === 'all' && params.filter && params.columns) {
-            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, params.featureType);
+            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name);
         }
     }
 });

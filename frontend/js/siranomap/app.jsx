@@ -13,6 +13,7 @@ const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 
 const {loadMapConfig} = require('../../MapStore2/web/client/actions/config');
 const {configureQueryForm} = require('../actions/siradec');
+const {configureExporter} = require('../actions/siraexporter');
 
 const appReducers = {
     userprofile: require('../reducers/userprofile'),
@@ -43,7 +44,8 @@ const startApp = () => {
 
     const initialActions = [
         () => loadMapConfig(configUrl, legacy),
-        ()=> configureQueryForm(ConfigUtils.getConfigProp("query"))
+        ()=> configureQueryForm(ConfigUtils.getConfigProp("query")),
+        ()=> configureExporter(ConfigUtils.getConfigProp("exporter"))
     ];
 
     const appConfig = {

@@ -14,7 +14,10 @@ const SiraExporter = connect((state) => {
         exportParams: state.siraexporter.params,
         featuregrid: state.grid && state.grid.featuregrid,
         loading: state.siraexporter.loading,
-        errormsg: state.siraexporter.errormsg
+        errormsg: state.siraexporter.errormsg,
+        csvName: state.siraexporter.csvName,
+        shpName: state.siraexporter.shpName
+
     };
 }, {
     getFeaturesAndExport
@@ -80,7 +83,8 @@ const SiraGrid = React.createClass({
         zoomToFeatureAction: React.PropTypes.func,
         backToSearch: React.PropTypes.string,
         gridType: React.PropTypes.string,
-        setExportParams: React.PropTypes.func
+        setExportParams: React.PropTypes.func,
+        maxFeatures: React.PropTypes.number
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -410,15 +414,21 @@ const SiraGrid = React.createClass({
     },
     exportFeatures(api) {
         this.props.toggleSiraControl("exporter", true);
+        const pagination = this.props.maxFeatures ? {
+            startIndex: 0,
+            maxFeatures: this.props.maxFeatures
+        } : null;
         let filterObj = this.props.gridType === 'search' ? {
             groupFields: this.props.groupFields,
             filterFields: this.props.filterFields.filter((field) => field.value),
-            spatialField: this.props.spatialField
-        } : {
+            spatialField: this.props.spatialField,
+            pagination
+            } : {
             groupFields: [],
             filterFields: [],
-            spatialField: {}
-        };
+            spatialField: {},
+            pagination
+            };
         let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion);
         let features = [];
         api.forEachNode((n) => (features.push(n.data)));

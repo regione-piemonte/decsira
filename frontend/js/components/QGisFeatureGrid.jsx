@@ -47,7 +47,9 @@ module.exports = connect((state) => {
     spatialField: state.queryform.spatialField,
     featureTypeName: activeConfig.featureTypeName,
     searchUrl: state.queryform.searchUrl,
-    dataSourceOptions: state.grid.dataSourceOptions};
+    dataSourceOptions: state.grid.dataSourceOptions,
+    maxFeatures: state.siraexporter.maxFeatures
+    };
 }, {
     onDetail: loadCardTemplate,
     onShowDetail: toggleSiraControl.bind(null, 'detail'),

@@ -14,6 +14,7 @@ const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {configureQueryForm, configureTopology/*, configureFeatureGrid*/} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
+const {configureExporter} = require('./actions/siraexporter');
 const {
     getSearchCategories
 } = require('./actions/siracatalog');
@@ -52,6 +53,7 @@ const startApp = () => {
          () => loadMapConfig(configUrl, legacy),
          () => configureQueryForm(ConfigUtils.getConfigProp("query")),
          () => configureTopology(ConfigUtils.getConfigProp("topology")),
+         () => configureExporter(ConfigUtils.getConfigProp("exporter")),
          () => getSearchCategories()
      ];
 

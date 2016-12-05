@@ -6,12 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 const assign = require("object-assign");
-const {SET_EXPORT_PARAMS, EXPORT_LOADING, EXPORT_ERROR} = require('../actions/siraexporter');
+const {SET_EXPORT_PARAMS, EXPORT_LOADING, EXPORT_ERROR, CONFIGURE_EXPORTER} = require('../actions/siraexporter');
 
 function siraexporter(state = {
     params: null,
     loading: false,
-    errormsg: null
+    errormsg: null,
+    csvName: "csv",
+    shpName: "shp",
+    maxFeatures: 40
 }, action) {
     switch (action.type) {
         case SET_EXPORT_PARAMS: {
@@ -22,6 +25,9 @@ function siraexporter(state = {
         }
         case EXPORT_ERROR: {
             return assign({}, state, {errormsg: action.error, loading: false});
+        }
+        case CONFIGURE_EXPORTER: {
+            return assign({}, state, action.config);
         }
         default:
             return state;
