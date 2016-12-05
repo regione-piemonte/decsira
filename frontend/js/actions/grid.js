@@ -164,23 +164,6 @@ function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
         });
     };
 }
-/*function loadFeatureGridConfig(configUrl) {
-    return (dispatch) => {
-        return axios.get(configUrl).then((response) => {
-            let gridConfig = response.data;
-            if (typeof gridConfig !== "object") {
-                try {
-                    gridConfig = JSON.parse(gridConfig);
-                } catch(e) {
-                    dispatch(configureGridError(e));
-                }
-            }
-            dispatch(configureGrid(gridConfig));
-        }).catch((e) => {
-            dispatch(configureGridError(e));
-        });
-    };
-}*/
 
 module.exports = {
     GRID_MODEL_LOADED,
@@ -200,5 +183,6 @@ module.exports = {
     loadGridModelWithFilter,
     configureGridError,
     loadFeaturesWithPagination,
-    setGridType
+    setGridType,
+    showLoading
 };

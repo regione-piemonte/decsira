@@ -376,8 +376,7 @@ const SiraGrid = React.createClass({
                 filterFields: [],
                 spatialField: {}
             };
-            let SLD_BODY = FilterUtils.getSLD(this.props.featureTypeName, filterObj, '1.0');
-            this.props.selectAllToggle(this.props.featureTypeName, SLD_BODY);
+            this.props.selectAllToggle(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.props.params, this.props.searchUrl);
         } else {
             this.props.selectAllToggle();
         }
