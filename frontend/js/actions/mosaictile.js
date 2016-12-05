@@ -15,7 +15,7 @@ const TILES_LOAD_ERROR = 'TILES_LOAD_ERROR';
 function tilesLoaded(data) {
     return {
 		type: TILES_LOADED,
-		tiles: data.tiles
+		tiles: data
 	};
 }
 
@@ -28,7 +28,7 @@ function loadTilesError(error) {
 
 function loadTiles() {
     return (dispatch) => {
-        return axios.get('tiles.json').then((response) => {
+        return axios.get('services/metadata/getMosaico').then((response) => {
             if (typeof response.data === 'object') {
                 dispatch(tilesLoaded(response.data));
             } else {
