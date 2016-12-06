@@ -12,6 +12,7 @@ const TemplateUtils = require('../utils/TemplateUtils');
 const SET_EXPORT_PARAMS = 'SET_EXPORT_PARAMS';
 const EXPORT_LOADING = 'EXPORT_LOADING';
 const EXPORT_ERROR = 'EXPORT_ERROR';
+const CONFIGURE_EXPORTER = 'CONFIGURE_EXPORTER';
 
 function setExportParams(params) {
     return {
@@ -27,9 +28,15 @@ function toggleLoading(loading) {
 }
 function exportError(error) {
     return {
-        type: EXPORT_ERROR,
-        error
-    };
+            type: EXPORT_ERROR,
+            error
+        };
+}
+function configureExporter(config) {
+    return {
+            type: CONFIGURE_EXPORTER,
+            config
+        };
 }
 function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, featuregrid, filename) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
@@ -99,7 +106,9 @@ module.exports = {
     SET_EXPORT_PARAMS,
     EXPORT_LOADING,
     EXPORT_ERROR,
+    CONFIGURE_EXPORTER,
     toggleLoading,
     setExportParams,
-    getFeaturesAndExport
+    getFeaturesAndExport,
+    configureExporter
 };

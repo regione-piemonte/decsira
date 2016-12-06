@@ -51,7 +51,8 @@ module.exports = connect((state) => {
     dataSourceOptions: state.grid.dataSourceOptions,
     header: state.grid.gridType === 'search' ? "featuregrid.header" : "featuregrid.header_all",
     backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch",
-    gridType: state.grid.gridType
+    gridType: state.grid.gridType,
+    maxFeatures: state.siraexporter.maxFeatures
     };
 }, {
     onDetail: loadCardTemplate,
