@@ -18,7 +18,6 @@
  */
 package it.csi.sira.frontend.iride.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -47,11 +46,6 @@ public final class IrideServiceConstants {
      * <a href="https://shibboleth.net/">Shibboleth</a> <code>IRIDE</code> <code>HTTP</code> request header attribute.
      */
     public static final String HEADER_SHIBBOLETH_IRIDE = "Shib-Iride-IdentitaDigitale";
-
-    /**
-     * <a href="https://www.w3.org/Protocols/HTTP/HTRQ_Headers.html#z3">Accept</a> <code>HTTP</code> request header attribute.
-     */
-    public static final String HEADER_ACCEPT_JSON = "Accept=" + MediaType.APPLICATION_JSON_VALUE;
 
     /**
      * Constructor.

@@ -97,10 +97,7 @@ public class IrideServiceController {
      * @return
      */
     @RequestMapping(
-        headers = {
-            IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
-            IrideServiceConstants.HEADER_ACCEPT_JSON
-        },
+        headers = { IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE },
         value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY
     )
     @ResponseBody

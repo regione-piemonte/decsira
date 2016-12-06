@@ -61,7 +61,6 @@ import org.springframework.web.context.WebApplicationContext;
 )
 public final class IrideServiceControllerTest {
 
-
     /**
      * Logger.
      */
@@ -123,7 +122,6 @@ public final class IrideServiceControllerTest {
                 get(url).header(IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE, this.irideIdentity.toString())
             )
             .andExpect(status().isOk())
-            .andExpect(content().mimeType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$", hasSize(1)))
             .andExpect(jsonPath("$[0].code", is("PA_GEN_DECSIRA")))
             .andExpect(jsonPath("$[0].domain", is("REG_PMN")))
@@ -157,7 +155,6 @@ public final class IrideServiceControllerTest {
                 get(url).header(IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE, "INVALID_DIGITAL_IDENTITY")
             )
             .andExpect(status().isOk())
-            .andExpect(content().mimeType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$", hasSize(0)))
             .andReturn();
 
