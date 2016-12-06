@@ -6,28 +6,72 @@
 		<artifactId>sira-root</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>sira-batch</artifactId>
+	<!-- <artifactId>sira-batch</artifactId> -->
+	<artifactId>decsirabatch</artifactId>
 
 	<packaging>jar</packaging>
 	<name>CSI SIRA - Metadata Batch</name>
 	<url>http://www.csipiemonte.it</url>
 
 	<properties>
-		<datasource>jdbc:postgresql://tst-territorio-vdb06.territorio.csi.it/DBSIRASVIL</datasource>
-		<username>decsira</username>
-		<password>mypass</password>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<component.name>decsirabatch</component.name>
+		<component.version>1.0.0</component.version>
 	</properties>
 
 	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<finalName>${component.name}-${component.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<filters>
+						<filter>src/assembly/filter.properties</filter>
+					</filters>
+					<descriptors>
+						<descriptor>src/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<directory>src/main/resources/spring</directory>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -100,6 +144,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-	</dependencies>	
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>			
+		</dependency>						
+	</dependencies>
 
 </project>
