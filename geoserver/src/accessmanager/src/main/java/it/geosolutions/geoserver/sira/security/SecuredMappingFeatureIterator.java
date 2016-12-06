@@ -1,100 +1,103 @@
+/*
+ *  CSI SIRA - Access Manager Security Module ("Rules Engine"), a GeoServer Secure Catalog Resource Access Manager plugin with which specify advanced rules evaluated to decide what the specified user can access.
+ *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 package it.geosolutions.geoserver.sira.security;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import it.geosolutions.geoserver.sira.security.util.FeatureUtils;
 
 import org.geoserver.security.WrapperPolicy;
 import org.geotools.data.complex.IMappingFeatureIterator;
-import org.geotools.factory.Hints;
-import org.geotools.filter.expression.FeaturePropertyAccessorFactory;
-import org.geotools.filter.expression.PropertyAccessor;
-import org.geotools.filter.expression.PropertyAccessorFactory;
-import org.geotools.util.logging.Logging;
 import org.opengis.feature.Feature;
-import org.opengis.feature.Property;
-import org.opengis.filter.expression.PropertyName;
-import org.xml.sax.helpers.NamespaceSupport;
 
 /**
  * Wraps a {@link IMappingFeatureIterator} and adds additional security checks to it.
- * 
+ *
  * <p>
  * More specifically, if the {@code limits} object inside the provided {@code policy} is an instance of {@link HidingAccessLimits}, sets to {@code null} all the
  * hidden properties specified there.
  * </p>
- * 
- * @author Stefano Costa, GeoSolutions
  *
+ * @author Stefano Costa, GeoSolutions
+ * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public class SecuredMappingFeatureIterator implements IMappingFeatureIterator {
 
-    private static final Logger LOGGER = Logging.getLogger(SecuredMappingFeatureIterator.class);
-
+    /**
+     * {@link Feature}s iterator.
+     */
     private IMappingFeatureIterator delegate;
 
+    /**
+     * {@link WrapperPolicy} instance.
+     */
     private WrapperPolicy policy;
 
+    /**
+     * Constructor.
+     *
+     * @param delegate {@link Feature}s iterator
+     * @param policy {@link WrapperPolicy} instance
+     */
     public SecuredMappingFeatureIterator(IMappingFeatureIterator delegate, WrapperPolicy policy) {
         this.delegate = delegate;
         this.policy = policy;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.util.Iterator#hasNext()
+     */
     @Override
     public boolean hasNext() {
         return delegate.hasNext();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.util.Iterator#next()
+     */
     @Override
-    public Feature next() throws NoSuchElementException {
-        Feature next = delegate.next();
-
+    public Feature next() {
+        final Feature next = this.delegate.next();
         if (next != null) {
             // set to null attributes that should be hidden
-            if (policy.limits instanceof HidingAccessLimits) {
-                HidingAccessLimits accessLimits = (HidingAccessLimits) policy.limits;
-                List<PropertyName> hiddenAttrs = accessLimits.getHiddenProperties();
-                long startTime = System.currentTimeMillis();
-                for (PropertyName hiddenAttr : hiddenAttrs) {
-                    Property hiddenProperty = getProperty(next, hiddenAttr.getPropertyName(), null,
-                            hiddenAttr.getNamespaceContext());
-                    if (hiddenProperty != null) {
-                        hiddenProperty.setValue(null);
-                    }
-                }
-                long endTime = System.currentTimeMillis();
-                if (LOGGER.isLoggable(Level.FINER)) {
-                    LOGGER.log(Level.FINER, "{0} properties were hidden in {1} ms", new Object[] { hiddenAttrs.size(), endTime-startTime });
-                }
-            }
-            ;
+            FeatureUtils.hideFeatureAttributes(next, this.policy.limits);
         }
 
         return next;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see org.geotools.feature.FeatureIterator#close()
+     */
     @Override
     public void close() {
         this.delegate.close();
     }
 
-    <T> T getProperty(Object obj, String attPath, Class<T> target, NamespaceSupport namespaceSupport) {
-        Hints hints = null;
-        if (namespaceSupport != null) {
-            hints = new Hints(PropertyAccessorFactory.NAMESPACE_CONTEXT, namespaceSupport);
-        }
-        PropertyAccessor accessor = new FeaturePropertyAccessorFactory().createPropertyAccessor(obj.getClass(), attPath, target, hints);
-        try {
-            return accessor.get(obj, attPath, target);
-        } catch (Exception e) {
-            LOGGER.log(Level.FINER,
-                  "Could not find working property accessor for attribute (" + attPath
-                          + ") in object (" + obj + ")", e);
-            return null;
-        }
-    }
-
+    /**
+     * @throws UnsupportedOperationException
+     */
+    /*
+     * (non-Javadoc)
+     * @see java.util.Iterator#remove()
+     */
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
