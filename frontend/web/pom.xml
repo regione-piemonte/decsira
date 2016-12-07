@@ -31,11 +31,35 @@
 			<groupId>it.geosolutions.csi.sira</groupId>
 			<artifactId>metadata-services</artifactId>
 			<version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>it.geosolutions.csi.sira</groupId>
 			<artifactId>iride-services</artifactId>
 			<version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjrt</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<!-- ================================================================ -->
 		<!-- GeoStore modules -->
@@ -157,6 +181,8 @@
 							<groupId>it.geosolutions.geostore</groupId>
 							<artifactId>geostore-webapp</artifactId>
 							<excludes>
+                                <exclude>WEB-INF/lib/commons-io-*</exclude>
+                                <exclude>WEB-INF/lib/commons-lang-*</exclude>
 								<exclude>WEB-INF/lib/commons-logging-*</exclude>
 							</excludes>
 						</overlay>
@@ -165,6 +191,7 @@
 							<artifactId>http_proxy</artifactId>
 							<excludes>
 								<exclude>WEB-INF/lib/commons-codec-*</exclude>
+								<exclude>WEB-INF/lib/commons-io-*</exclude>
 								<exclude>WEB-INF/lib/commons-logging-*</exclude>
 								<exclude>WEB-INF/lib/log4j-*</exclude>
 							</excludes>
