@@ -160,7 +160,6 @@
             <artifactId>gs-main</artifactId>
             <version>${gs.version}</version>
         </dependency>
-        <!-- TODO: check if the following dependency is really needed -->
         <dependency>
             <groupId>org.geoserver</groupId>
             <artifactId>gs-main</artifactId>
@@ -291,7 +290,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <!--debug>true</debug-->
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -419,6 +417,7 @@
                             <Application-Name>${project.artifactId}-${project.version}</Application-Name>
                             <Project-Version>${project.version}</Project-Version>
                             <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <Built-By>seancrow</Built-By>
                             <Git-Revision>${build.commit.id}</Git-Revision>
                         </manifestEntries>
                     </archive>

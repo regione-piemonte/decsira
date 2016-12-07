@@ -1,3 +1,21 @@
+/*
+ *  CSI SIRA - Access Manager Security Module ("Rules Engine"), a GeoServer Secure Catalog Resource Access Manager plugin with which specify advanced rules evaluated to decide what the specified user can access.
+ *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 package it.geosolutions.geoserver.sira.security.config;
 
 import static org.apache.commons.lang.StringUtils.isBlank;
@@ -27,11 +45,11 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * Plain Old Java Object (POJO) representing an access rule configuration.
- * 
+ *
  * <p>
  * Should be serialized / deserialized using {@link XStream}.
  * </p>
- * 
+ *
  * <p>
  * A rule is made up of following bits of information:
  * <ul>
@@ -45,7 +63,7 @@ import org.springframework.security.core.GrantedAuthority;
  *   <li><em>hiddenAttributes</em> - Specifies a list of attributes that will be set to {@code null} in the returned features.</li>
  *   <p>
  *   Sample configuration:
- *      
+ *
  *      <pre>
  *&lt;!-- Limit access to layer gsml:GeologicUnit to users with role First_Profile or Second_Profile --&gt;
  *&lt;Rule&gt;
@@ -73,12 +91,15 @@ import org.springframework.security.core.GrantedAuthority;
  *   </p>
  * </ul>
  * </p>
- * 
- * @author Stefano Costa, GeoSolutions
  *
+ * @author Stefano Costa, GeoSolutions
+ * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public class Rule implements Comparable<Rule> {
 
+	/**
+	 * Logger.
+	 */
     private static final Logger LOGGER = Logging.getLogger(Rule.class);
 
     /** Wildcard to match any object. */
@@ -136,11 +157,11 @@ public class Rule implements Comparable<Rule> {
 
     /**
      * Invoked by XStream after deserialization.
-     * 
+     *
      * <p>
      * Takes care of initializing a rule with default values.
      * </p>
-     * 
+     *
      * @return a fully initialized rule object
      */
     private Object readResolve() {
@@ -211,7 +232,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return the roles to which this rule applies
      */
     public Set<String> getRoles() {
@@ -230,7 +251,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return the access mode
      */
     public AccessMode getAccessMode() {
@@ -239,7 +260,7 @@ public class Rule implements Comparable<Rule> {
 
     /**
      * Parses {@link #filter} into a {@link Filter} object.
-     * 
+     *
      * @return the parsed filter
      * @throws CQLException if {@link #filter} does not contain a valid ECQL filter expression
      */
@@ -248,7 +269,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return the list of properties that will be hidden (i.e. set to {@code null})
      */
     public List<PropertyName> getHiddenProperties() {
@@ -265,7 +286,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return the catalog mode
      */
     public CatalogMode getCatalogMode() {
@@ -279,7 +300,7 @@ public class Rule implements Comparable<Rule> {
      * <li><code>accessMode</code>, <code>roles</code>, <code>layer</code> and <code>workspace</code> are set</li>
      * <li><code>filter</code> (if present) is a valid filter expression</li>
      * <li><code>hiddenAttributes</code> (if present) contains no empty or <code>null</code> attributes</li>
-     * 
+     *
      * @return {@code true} if rule is valid, {@code false} otherwise
      */
     public boolean isValid() {
@@ -324,9 +345,9 @@ public class Rule implements Comparable<Rule> {
 
     /**
      * Checks if the rule applies to at least one of the roles granted to the user.
-     * 
+     *
      * @param user the user accessing the resource
-     * @return {@code true} if the rule applies to this user (based on granted roles), {@code false} otherwise 
+     * @return {@code true} if the rule applies to this user (based on granted roles), {@code false} otherwise
      */
     boolean matchRole(Authentication user) {
         if (matchesAnyRole()) {
@@ -348,7 +369,7 @@ public class Rule implements Comparable<Rule> {
 
     /**
      * Checks if the workspace specified in the rule matches that of the resource.
-     * 
+     *
      * @param resourceInfo the resource to be accessed
      * @return {@code true} if workspace matches, {@code false} otherwise
      */
@@ -361,7 +382,7 @@ public class Rule implements Comparable<Rule> {
 
     /**
      * Checks if the layer specified in the rule matches the resource.
-     * 
+     *
      * @param resourceInfo the resource to be accessed
      * @return {@code true} if layer matches, {@code false} otherwise
      */
@@ -373,7 +394,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return {@code true} if rule applies to any role, {@code false} otherwise
      */
     boolean matchesAnyRole() {
@@ -381,7 +402,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return {@code true} if rule applies to any workspace, {@code false} otherwise
      */
     boolean matchesAnyWorkspace() {
@@ -389,7 +410,7 @@ public class Rule implements Comparable<Rule> {
     }
 
     /**
-     * 
+     *
      * @return {@code true} if rule applies to any layer, {@code false} otherwise
      */
     boolean matchesAnyLayer() {

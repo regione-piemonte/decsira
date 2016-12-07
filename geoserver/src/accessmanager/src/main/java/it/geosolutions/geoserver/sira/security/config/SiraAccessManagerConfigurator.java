@@ -1,3 +1,21 @@
+/*
+ *  CSI SIRA - Access Manager Security Module ("Rules Engine"), a GeoServer Secure Catalog Resource Access Manager plugin with which specify advanced rules evaluated to decide what the specified user can access.
+ *  Copyright (C) 2016  Regione Piemonte (www.regione.piemonte.it)
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 package it.geosolutions.geoserver.sira.security.config;
 
 import it.geosolutions.geoserver.sira.security.SiraAccessManager;
@@ -24,14 +42,16 @@ import com.thoughtworks.xstream.XStream;
 
 /**
  * A configurator bean to notify the provided {@link SiraAccessManager} instance of configuration changes.
- * 
- * @author Stefano Costa, GeoSolutions
  *
+ * @author Stefano Costa, GeoSolutions
+ * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public class SiraAccessManagerConfigurator implements ApplicationListener<ContextClosedEvent> {
 
-    private static final Logger LOGGER = Logging
-            .getLogger(SiraAccessManagerConfigurator.class);
+	/**
+	 * Logger.
+	 */
+    private static final Logger LOGGER = Logging.getLogger(SiraAccessManagerConfigurator.class);
 
     /**
      * Configuration file path, relative to $GEOSERVER_DATA_DIR.
@@ -65,7 +85,7 @@ public class SiraAccessManagerConfigurator implements ApplicationListener<Contex
     /**
      * Creates a {@link SiraAcc} instance to manage the provided {@link PluggableAccessManager}, loads the configuration
      * and starts a watcher to be notified of changes to the configuration file.
-     * 
+     *
      * @param accessManager the pluggable access manager to manage
      */
     public SiraAccessManagerConfigurator(SiraAccessManager accessManager, Catalog catalog) {
@@ -81,7 +101,7 @@ public class SiraAccessManagerConfigurator implements ApplicationListener<Contex
 
     /**
      * Loads the configuration from the default location.
-     * 
+     *
      * <p>
      * If no configuration file can be found, uses internal defaults (i.e. allow all access).
      * </p>
@@ -146,7 +166,7 @@ public class SiraAccessManagerConfigurator implements ApplicationListener<Contex
 
     /**
      * Builds and configures the {@link XStream} used for de-serializing the configuration.
-     * 
+     *
      * @return a properly configured {@link XStream} instance
      */
     public static XStream buildXStream() {
