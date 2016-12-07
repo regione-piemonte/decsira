@@ -11,7 +11,7 @@ const {connect} = require('react-redux');
 
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
-const PlatformNumbers = require('../components/PlatformNumbers');
+// const PlatformNumbers = require('../components/PlatformNumbers');
 
 // require('../../assets/css/home.css');
 // require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
@@ -24,6 +24,13 @@ const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('
 const Mosaic = connect((state) => ({
      tiles: state.mosaic.tiles
  }))(require('../components/Mosaic'));
+
+const PlatformNumbers = connect((state) => ({
+      siradecObject: state.platformnumbers.siradecObject,
+      functionObjectMap: state.platformnumbers.functionObjectMap,
+      functionObjectSearch: state.platformnumbers.functionObjectSearch,
+      functionObjectView: state.platformnumbers.functionObjectView
+  }))(require('../components/PlatformNumbers'));
 
 const mapDispatchToPropsLinkMIB = (dispatch) => {
     return {

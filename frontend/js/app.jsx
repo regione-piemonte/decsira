@@ -14,6 +14,7 @@ const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {configureQueryForm, configureTopology/*, configureFeatureGrid*/} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
+const {loadPlatformNumbers} = require('./actions/platformnumbers');
 const {configureExporter} = require('./actions/siraexporter');
 const {
     getSearchCategories
@@ -31,6 +32,7 @@ const appReducers = {
      security: require('./reducers/siraSecurity'),
      mosaic: require('./reducers/mosaic'),
      metadatainfobox: require('./reducers/metadatainfobox'),
+     platformnumbers: require('./reducers/platformnumbers'),
      siraexporter: require('./reducers/siraexporter')
  };
 
@@ -50,6 +52,7 @@ const startApp = () => {
 
     const initialActions = [
          () => loadTiles(),
+         () => loadPlatformNumbers(),
          () => loadMapConfig(configUrl, legacy),
          () => configureQueryForm(ConfigUtils.getConfigProp("query")),
          () => configureTopology(ConfigUtils.getConfigProp("topology")),
