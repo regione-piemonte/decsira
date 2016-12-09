@@ -9,7 +9,6 @@ const axios = require('../../MapStore2/web/client/libs/ajax');
 
 const TOGGLE_NODE = 'TOGGLE_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
-const SEARCH_CATEGORIES_LOADED = 'SEARCH_CATEGORIES_LOADED';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
 
@@ -32,12 +31,6 @@ function selectCategory(category) {
         category
     };
 }
-function serchCategoriesLoaded(categories) {
-    return {
-        type: SEARCH_CATEGORIES_LOADED,
-        categories
-    };
-}
 
 function objectsLoaded(objects, views) {
     return {
@@ -45,31 +38,6 @@ function objectsLoaded(objects, views) {
         objects,
         views
     };
-}
-
-function getSearchCategories(serviceUrl = 'services/metadata/getMosaico?', params = {}) {
-    const url = Object.keys(params).reduce((u, p) => {
-        return `${u}&${p}=${params[p]}`;
-    }, serviceUrl);
-    return (dispatch) => {
-        dispatch(catalogLoading(true));
-        return axios.get(url).then((response) => {
-            if (typeof response.data !== "object" ) {
-                try {
-                    dispatch(serchCategoriesLoaded(JSON.parse(response.data)));
-                }catch (e) {
-                    // dispatch(serchCategoriesLoaded(response.data));
-                }
-            }else {
-                dispatch(serchCategoriesLoaded(response.data));
-            }
-            dispatch(catalogLoading(false));
-        }).catch(() => {
-            // dispatch(configureGridError(e));
-        });
-    };
-
-
 }
 
 function getMetadataView({serviceUrl = 'services/metadata/getMetadataView?', params = {}} = {}) {
@@ -121,11 +89,9 @@ function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?'
 module.exports = {
     TOGGLE_NODE,
     SELECT_CATEGORY,
-    SEARCH_CATEGORIES_LOADED,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     toggleNode,
     selectCategory,
-    getSearchCategories,
     getMetadataObjects
 };

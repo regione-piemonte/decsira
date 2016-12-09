@@ -41,15 +41,16 @@ const Viste = React.createClass({
             onClick={() => this.props.expandFilterPanel(true)}/>)];
 
     },
-    renderVistaTools(expanded) {
+    renderVistaTools() {
         return [(<Glyphicon
             key="addToMap"
             glyph="plus-sign"
-            onClick={()=>this.props.addToMap()}/>),
-        (<Glyphicon
-            key="objects"
-            glyph="list-alt"
-            onClick={()=> this.props.onToggle(this.props.node.id, expanded)}/>)];
+            onClick={()=>this.props.addToMap()}/>) // ,
+        // (<Glyphicon
+        //     key="objects"
+        //     glyph="list-alt"
+        //     onClick={()=> this.props.onToggle(this.props.node.id, expanded)}/>)
+        ];
     },
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;

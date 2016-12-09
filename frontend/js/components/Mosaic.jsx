@@ -11,25 +11,31 @@ const Tile = require('./MosaicTile');
 
 const Mosaic = React.createClass({
     propTypes: {
-        tiles: React.PropTypes.array
+        tiles: React.PropTypes.array,
+        boxStyle: React.PropTypes.object,
+        tileClick: React.PropTypes.func,
+        useLink: React.PropTypes.bool,
+        className: React.PropTypes.string
     },
     getDefaultProps() {
         return {
-            tiles: []
+            tiles: [],
+            className: "container blocchetti"
         };
     },
-
     renderTiles() {
-        return this.props.tiles.map(function(tile) {
-            return (<Tile
-                        {...tile}
+        return this.props.tiles.map((tile) => {
+            return (<Tile key={tile.id}
+                    onClick={this.props.tileClick ? this.props.tileClick.bind(null, tile) : undefined}
+                    boxStyle={this.props.boxStyle}
+                    useLink={this.props.useLink}
+                    {...tile}
                     />);
         });
     },
     render() {
         return (
-
-                <div className="container blocchetti">
+                <div className={this.props.className}>
                   <div className="row">
                     <ul className="list-group categorie">
                         {this.renderTiles()}

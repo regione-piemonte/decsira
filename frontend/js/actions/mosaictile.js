@@ -26,20 +26,21 @@ function loadTilesError(error) {
 	};
 }
 
-function loadTiles() {
+function loadTiles(serviceUrl = 'services/metadata/getMosaico', params = {}) {
+    const url = Object.keys(params).reduce((u, p) => {
+        return `${u}&${p}=${params[p]}`;
+    }, `${serviceUrl}?`);
     return (dispatch) => {
-        return axios.get('services/metadata/getMosaico').then((response) => {
+        return axios.get(url).then((response) => {
             if (typeof response.data === 'object') {
                 dispatch(tilesLoaded(response.data));
             } else {
                 try {
-                    JSON.parse(response.data);
+                    dispatch(JSON.parse(response.data));
                 } catch(e) {
                     dispatch(loadTilesError('Configuration file for tiles broken: ' + e.message));
                 }
-
             }
-
         }).catch((e) => {
             dispatch(loadTilesError(e));
         });
