@@ -36,7 +36,7 @@ function loadTiles(serviceUrl = 'services/metadata/getMosaico', params = {}) {
                 dispatch(tilesLoaded(response.data));
             } else {
                 try {
-                    dispatch(JSON.parse(response.data));
+                    dispatch(tilesLoaded(JSON.parse(response.data)));
                 } catch(e) {
                     dispatch(loadTilesError('Configuration file for tiles broken: ' + e.message));
                 }
