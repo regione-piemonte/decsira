@@ -61,6 +61,19 @@ const tocSelector = createSelector([
         activeFeatureType
     })
 );
+const categorySelector = createSelector([
+        (state) => state.mosaic.tiles || []
+    ], (servertiles) => {
+        const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
+            v.objectNumber += t.objectNumber;
+            v.tematicViewNumber += t.tematicViewNumber;
+            return v;
+        }, {objectNumber: 0, tematicViewNumber: 0});
+        return {
+        tiles: [...servertiles, {id: 999, name: "Search All", icon: "assets/application/conoscenze_ambientali/css/images/via.png", objectNumber, tematicViewNumber}]
+        };
+    }
+);
 
 const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
@@ -69,11 +82,15 @@ const Vista = require('../components/catalog/Vista');
 const Spinner = require('react-spinkit');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
-const SearchCategories = connect((state)=> ({
-    categories: state.siracatalog && state.siracatalog.searchCategories
-}), {
-    onSelect: selectCategory
-})(require('../components/catalog/SearchCategories'));
+// const SearchCategories = connect((state)=> ({
+//     categories: state.siracatalog && state.siracatalog.searchCategories
+// }), {
+//     onSelect: selectCategory
+// })(require('../components/catalog/SearchCategories'));
+const SearchCategories = connect(categorySelector,
+{
+    tileClick: selectCategory
+})(require('../components/Mosaic'));
 
 const LayerTree = React.createClass({
     propTypes: {
@@ -113,12 +130,12 @@ const LayerTree = React.createClass({
     },
     componentWillMount() {
         if (!this.props.nodesLoaded && !this.props.loading) {
-            this.props.getMetadataObjects({params: {category: this.props.category.id}});
+            this.loadMetadata();
         }
     },
     componentWillReceiveProps(nextProps) {
         if (!nextProps.loading && (!nextProps.nodesLoaded || nextProps.category.id !== this.props.category.id )) {
-            this.props.getMetadataObjects({params: {category: nextProps.category.id}});
+            this.loadMetadata({id: nextProps.category.id});
         }
     },
     render() {
@@ -148,13 +165,30 @@ const LayerTree = React.createClass({
               onSearchTextChange={(text) => this.setState({ searchText: text})}
               typeAhead={false}
               searchText={this.state.searchText}
-              onSearch={this.loadMetadata}
+              onSearch={(text) => this.loadMetadata({text})}
               onSearchReset={() => {
                   this.setState({ searchText: ""});
                   this.loadMetadata();
               }}
             />
-             <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories/></Popover>)}>
+             <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories
+                    useLink={false}
+                    className="tilescontainer"
+                    boxStyle={{
+                        cursor: "pointer",
+                        backgroundColor: '#232222',
+                        color: '#0a53a8',
+                        opacity: 1,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center 80%',
+                        width: '150px',
+                        minHeight: '130px',
+                        maxHeight: '130px',
+                        fontSize: '14px',
+                        padding: '0px',
+                        marginBottom: '1px',
+                        paddingTop: '5px'}}
+                    /> </Popover>)}>
                        <Button className="siracatalog-search-selector">
                             <Image style={{width: "30px"}} src={this.props.category.icon}/>
                         </Button>
@@ -168,8 +202,11 @@ const LayerTree = React.createClass({
                 <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
             </div>);
     },
-    loadMetadata(text) {
-        let params = {category: this.props.category.id};
+    loadMetadata({text, id = this.props.category.id} = {}) {
+        let params = {};
+        if (id !== 999) {
+            params.category = id;
+        }
         if (text && text.length > 0) {
             params.text = text;
         }

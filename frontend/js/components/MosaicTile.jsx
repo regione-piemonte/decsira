@@ -16,36 +16,57 @@ const MosaicTile = React.createClass({
         name: React.PropTypes.string,
         objectNumber: React.PropTypes.number,
         tematicViewNumber: React.PropTypes.number,
-        setData: React.PropTypes.func
+        setData: React.PropTypes.func,
+        useLink: React.PropTypes.bool,
+        boxStyle: React.PropTypes.object,
+        onClick: React.PropTypes.func
     },
-
-    render() {
-
-
-        const boxStyle = {
-              backgroundImage: this.props.icon,
-              backgroundColor: '#000',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              paddingTop: '130px'
+    getDefaultProps() {
+        return {
+           useLink: true,
+           boxStyle: {
+                backgroundColor: '#000',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                paddingTop: '130px'
+           }
         };
-
-
+    },
+    renderInfo() {
+        return this.props.useLink ? (
+            <div className="ogg_appl">
+                <span>
+                    <Link to={'/dataset/' + this.props.objectNumber + '/0'} className="list-group-item">
+                        Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
+                    </Link>
+                </span>
+                <span>
+                    <Link to={'/dataset/0/' + this.props.tematicViewNumber} className="list-group-item" >
+                        Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
+                    </Link>
+                </span>
+            </div>
+            ) : (
+            <div className="ogg_appl">
+                <span >
+                    <a className="list-group-item">
+                        Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
+                    </a>
+                </span>
+                <span >
+                    <a className="list-group-item">
+                        Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
+                    </a>
+                </span>
+            </div>
+            );
+    },
+    render() {
+        let bStyle = {backgroundImage: `url(${this.props.icon})`, ...this.props.boxStyle};
         return (
-            <li className="list-group-item col-md-3 col-xs-4 tiles" style={boxStyle}>
+            <li className="list-group-item col-md-3 col-xs-4 tiles" style={bStyle} onClick={this.props.onClick}>
                {this.props.name}
-               <div className="ogg_appl">
-                  <span>
-                      <Link to={'/dataset/' + this.props.objectNumber + '/0'} className="list-group-item">
-                                   Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
-                      </Link>
-                  </span>
-                  <span>
-                          <Link to={'/dataset/0/' + this.props.tematicViewNumber} className="list-group-item" >
-                           Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
-                          </Link>
-                  </span>
-               </div>
+               {this.renderInfo()}
             </li>
 
         );

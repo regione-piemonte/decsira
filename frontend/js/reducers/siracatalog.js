@@ -8,9 +8,9 @@
 const initialState = {};
 const { TOGGLE_NODE,
         SELECT_CATEGORY,
-        SEARCH_CATEGORIES_LOADED,
         METADATA_OBJECTS_VIEWS_LOADED,
         CATALOG_LOADING} = require('../actions/siracatalog');
+const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('node-uuid');
 
@@ -85,8 +85,8 @@ function siracatalog(state = initialState, action) {
         case SELECT_CATEGORY: {
             return assign({}, state, {category: action.category});
         }
-        case SEARCH_CATEGORIES_LOADED: {
-            return assign({}, state, {searchCategories: action.categories, category: action.categories[0]});
+        case TILES_LOADED: {
+            return assign({}, state, { category: [...(action.tiles || [])].shift()});
         }
         case METADATA_OBJECTS_VIEWS_LOADED: {
             // FILTRA LE categorie ed i nodi
