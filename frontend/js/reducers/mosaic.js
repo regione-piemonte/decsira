@@ -1,68 +1,12 @@
-const {TILES_LOADED, TILES_LOAD_ERROR} = require('../actions/mosaictile');
+/**
+ * Copyright 2016, GeoSolutions Sas.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-/*const initialState = {
-    tiles: [
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-           tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-           name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        },
-        {
-            name: "ddddddddddd",
-            icon: "url(assets/application/conoscenze_ambientali/css/images/aria.png)",
-            tematicViewNumber: 2,
-            objectNumber: 3
-        }
-]};*/
+const {TILES_LOADED, TILES_LOAD_ERROR} = require('../actions/mosaictile');
 
 function mosaic(state = {tiles: []}, action) {
     switch (action.type) {
