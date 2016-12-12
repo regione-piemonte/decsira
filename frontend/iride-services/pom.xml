@@ -265,28 +265,6 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>IRIDE service policy-enforcer-base url filtering</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/classes</outputDirectory>
-                            <encoding>UTF-8</encoding>
-                            <resources>
-                                <resource>
-                                    <filtering>true</filtering>
-                                    <directory>src/main/resources</directory>
-                                    <includes>
-                                        <include>**/*.properties</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- sources -->
@@ -382,20 +360,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>demo</id>
-            <properties>
-                <iride.service.policy-enforcer-base.url>http://tst-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase</iride.service.policy-enforcer-base.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>produzione</id>
-            <properties>
-                <iride.service.policy-enforcer-base.url>http://applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase</iride.service.policy-enforcer-base.url>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>
