@@ -23,6 +23,8 @@ import it.csi.sira.frontend.iride.vo.IrideRoleVO;
 import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideRole;
@@ -30,6 +32,7 @@ import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,7 +58,7 @@ import com.google.common.collect.Lists;
  */
 @Controller
 @RequestMapping(method = RequestMethod.GET, value = IrideServiceConstants.MAPPING_IRIDE_SERVICE)
-public class IrideServiceController {
+public final class IrideServiceController {
 
     /**
      * Logger.
@@ -71,6 +74,11 @@ public class IrideServiceController {
      * <code>IRIDE</code> service "policies" enforcer instance.
      */
     private IrideService irideService;
+
+    /**
+     * <code>IRIDE</code> server <code>URL</code>.
+     */
+    private String serverURL;
 
     /**
      * Get the <code>IRIDE</code> service "policies" enforcer instance.
@@ -89,6 +97,37 @@ public class IrideServiceController {
     @Autowired
     public void setIrideService(IrideService irideService) {
         this.irideService = irideService;
+    }
+
+    /**
+     * Get the <code>IRIDE</code> server <code>URL</code>.
+     *
+     * @return the <code>IRIDE</code> server <code>URL</code>
+     */
+    public String getServerURL() {
+        return this.serverURL;
+    }
+
+    /**
+     * Set the <code>IRIDE</code> server <code>URL</code>.
+     *
+     * @param serverURL the <code>IRIDE</code> server <code>URL</code>
+     */
+    @Value("${serverURL}")
+    public void setServerURL(String serverURL) {
+        this.serverURL = serverURL;
+    }
+
+    /**
+     * Executed after dependencies have been injected.
+     *
+     * @throws IOException
+     */
+    @PostConstruct
+    public void init() throws IOException {
+        LOGGER.trace("IRIDE Service endpoint URL: {}", this.getServerURL());
+
+        this.getIrideService().initializeFromConfig(this.getServerURL());
     }
 
     /**
