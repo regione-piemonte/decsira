@@ -40,7 +40,6 @@ import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.slf4j.Logger;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 
 /**
  * <code>IRIDE</code> service implementation.
@@ -113,11 +112,6 @@ public final class IrideServiceImpl implements IrideService {
         Preconditions.checkArgument(StringUtils.isNotBlank(serverUrl), "Server URL must not be an empty string");
 
         this.serverURL = buildServerUrl(serverUrl);
-
-        final Map<String, String> initParams = Maps.newHashMap();
-        initParams.put("serverUrl", this.serverURL);
-
-        LOGGER.trace("IRIDE Service client initialization: {}", initParams);
     }
 
     /**
