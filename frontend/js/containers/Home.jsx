@@ -91,7 +91,7 @@ const Home = () => (
                <div className="row-fluid sb-sx">
                    <div className="container search-home">
                        <div className="row">
-                           <div clclassName="col-md-7 col-xs-12 testo-home">
+                           <div className="col-md-7 col-xs-12 testo-home">
                                <div>
                                  Piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte), che si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Imprese, Regione, Province e ARPA)
                                </div>
