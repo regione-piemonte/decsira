@@ -58,7 +58,6 @@ const MosaicTile = React.createClass({
     },
     render() {
         let bStyle = 'list-group-item col-md-3 col-xs-4 tiles ';
-        //let bStyle = {backgroundImage: `url(${this.props.icon})`, ...this.props.boxStyle};
         return (
             <li className={bStyle + this.props.icon} onClick={this.props.onClick}>
                {this.props.name}
