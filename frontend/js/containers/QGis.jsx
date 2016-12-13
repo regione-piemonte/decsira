@@ -181,7 +181,7 @@ const QGis = React.createClass({
         /*eslint-disable */
         if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
             console.log("VALAMB present", `VALAMB.viewOnMapById('${this.props.featureType}',"${ids}")`);
-            VALAMB.viewOnMapById(`'${this.props.featureType}',"${ids}"`);
+            VALAMB.viewOnMapById(`'${this.props.featureType}'`, `"${ids}"`);
         }else {
             console.log("VALAMB absent", `viewOnMapById('${this.props.featureType}',"${ids}")`);
 

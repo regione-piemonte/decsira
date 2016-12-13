@@ -64,7 +64,7 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
                     /*eslint-disable */
                     if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
                         console.log("VALAMB present", `VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}");`);
-                        VALAMB.viewOnMapById(`'${state.siradec.featureType}',"${ids}"`);
+                        VALAMB.viewOnMapById(`'${state.siradec.featureType}'`, `"${ids}"`);
                     }else {
                         console.log("VALAMB absent", `VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}")`);
 
