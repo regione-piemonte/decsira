@@ -20,7 +20,11 @@ const LinkToMetadataInfoBox = React.createClass({
 
      render() {
          return (
-         <button onClick={this.props.openMetadataInfobox}>
+         <button
+            className="btn btn-primary btn-lg"
+            data-toggle="modal"
+            data-target="#nomeModale"
+            onClick={this.props.openMetadataInfobox}>
             Metadata Info Box
          </button>
      );

@@ -24,12 +24,7 @@ const MosaicTile = React.createClass({
     getDefaultProps() {
         return {
            useLink: true,
-           boxStyle: {
-                backgroundColor: '#000',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                paddingTop: '130px'
-           }
+           boxStyle: { }
         };
     },
     renderInfo() {
@@ -62,9 +57,9 @@ const MosaicTile = React.createClass({
             );
     },
     render() {
-        let bStyle = {backgroundImage: `url(${this.props.icon})`, ...this.props.boxStyle};
+        let bStyle = 'list-group-item col-md-3 col-xs-4 tiles ';
         return (
-            <li className="list-group-item col-md-3 col-xs-4 tiles" style={bStyle} onClick={this.props.onClick}>
+            <li className={bStyle + this.props.icon} onClick={this.props.onClick}>
                {this.props.name}
                {this.renderInfo()}
             </li>
