@@ -9,7 +9,7 @@
 const msLayers = require('../../MapStore2/web/client/reducers/layers');
 const assign = require('object-assign');
 const {isObject} = require('lodash');
-const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE} = require('../../MapStore2/web/client/actions/layers');
+const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('../../MapStore2/web/client/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
 
@@ -77,6 +77,17 @@ function layers(state = [], action) {
             }
             let allLayer = state.flat.find(l => l.id === "selectAll");
             return allLayer ? msLayers(state, { type: "REMOVE_NODE", nodeType: 'layers', node: 'selectAll'}) : msLayers(state, action);
+        }
+        case 'THEMATIC_VIEW_CONFIG_LOADED': {
+            // We exclude background layers and we add the rest
+            const oldLayers = state.flat;
+            if ( action.config && action.config.map && action.config && action.config.map.layers) {
+                return action.config.map.layers.filter((l) => l.group !== 'background' && oldLayers.findIndex((ol) => ol.name === l.name) === -1).reduce((st, layer) => {
+                    return msLayers(st, addLayer(layer));
+                }, state);
+
+            }
+            return state;
         }
         default:
             return msLayers(state, action);

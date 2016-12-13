@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {toggleNode, selectCategory} = require('../actions/siracatalog');
+const {toggleNode, selectCategory, getThematicViewConfig} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
 const {Tabs, Tab, Button, OverlayTrigger, Popover, Image} = require("react-bootstrap");
@@ -78,9 +78,13 @@ const categorySelector = createSelector([
 const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNode');
-const Vista = require('../components/catalog/Vista');
+
 const Spinner = require('react-spinkit');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+
+const Vista = connect( null, {
+    addToMap: getThematicViewConfig
+    })(require('../components/catalog/Vista'));
 
 // const SearchCategories = connect((state)=> ({
 //     categories: state.siracatalog && state.siracatalog.searchCategories

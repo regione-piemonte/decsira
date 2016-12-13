@@ -45,7 +45,7 @@ const Viste = React.createClass({
         return [(<Glyphicon
             key="addToMap"
             glyph="plus-sign"
-            onClick={()=>this.props.addToMap()}/>) // ,
+            onClick={this.loadConfig}/>) // ,
         // (<Glyphicon
         //     key="objects"
         //     glyph="list-alt"
@@ -59,6 +59,14 @@ const Viste = React.createClass({
                 <div className="sira-view-title"><span>{this.props.node.title}</span>{this.renderVistaTools(expanded)}</div>
                 {expanded && this.props.node.nodes ? this.props.node.nodes.map((o)=> (<div className="sira-view-object"><span>{o.title}</span>{this.renderObjectTools()}</div>)) : (<div/>)}
             </div>);
+    },
+    loadConfig() {
+        const v = this.props.node.view;
+        if (v) {
+            let view = v.match(/(config=)(\w+)/).pop();
+            this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
+        }
+
     }
 });
 
