@@ -175,7 +175,7 @@ const LayerTree = React.createClass({
                   this.loadMetadata();
               }}
             />
-             <OverlayTrigger trigger="click" defaultOverlayShown={true} placement="right" overlay={(<Popover id="search-categories"><SearchCategories
+             <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories
                     useLink={false}
                     className="tilescontainer"
                     liClass="list-group-item col-xs-4 tiles searchtile"
