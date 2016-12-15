@@ -46,6 +46,40 @@ const authParams = {
         authkey: "4176ea85-9a9a-42a5-8913-8f6f85813dab"
     }
 };
+const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
+const mapStateToPropsMIB = (state) => {
+    return {
+      show: state.metadatainfobox.show,
+      openLegendPanel: state.metadatainfobox.openLegendPanel,
+      title: state.metadatainfobox.title,
+      text: state.metadatainfobox.text,
+      numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
+      dataProvider: state.metadatainfobox.dataProvider,
+      urlWMS: state.metadatainfobox.urlWMS,
+      urlWFS: state.metadatainfobox.urlWFS,
+      urlLegend: state.metadatainfobox.urlLegend,
+      error: state.metadatainfobox.error
+  };
+};
+
+const mapDispatchToPropsMIB = (dispatch) => {
+    return {
+    loadLegend: (u, actualUrl) => {
+        if (actualUrl && actualUrl.length === 0) {
+            dispatch(loadLegends(u));
+        }
+        dispatch(toggleLegendBox());
+    },
+    closePanel: () => {
+        dispatch(hideBox());
+    }
+  };
+};
+
+const MetadataInfoBox = connect(
+    mapStateToPropsMIB,
+    mapDispatchToPropsMIB
+    )(require('../components/MetadataInfoBox'));
 
 const { changeMousePointer} = require('../../MapStore2/web/client/actions/map');
 
@@ -147,6 +181,14 @@ const Sira = React.createClass({
                         params={{authkey: authParams[this.props.params.profile].authkey}}
                         profile={this.props.params.profile}
                         key="getFeatureInfo"/>
+                    <MetadataInfoBox panelStyle={{
+                        height: "500px",
+                        width: "300px",
+                        zIndex: 100,
+                        left: 400,
+                        top: -128,
+                        position: "absolute",
+                        overflow: "auto"}}/>
                 </div>
             </div>
         );

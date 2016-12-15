@@ -21,6 +21,7 @@ const {
     setActiveFeatureType
 } = require('../actions/siradec');
 
+const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {setGridType} = require('../actions/grid');
 
 const getChildren = function(nodes, node) {
@@ -119,7 +120,9 @@ const LayerTree = React.createClass({
         activeFeatureType: React.PropTypes.string,
         loadFeatureTypeConfig: React.PropTypes.func,
         setActiveFeatureType: React.PropTypes.func,
-        setGridType: React.PropTypes.func
+        setGridType: React.PropTypes.func,
+        showInfoBox: React.PropTypes.func,
+        loadMetadata: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -153,7 +156,8 @@ const LayerTree = React.createClass({
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
-                            groups={this.props.nodes}/>
+                            groups={this.props.nodes}
+                            showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>
                 </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
@@ -223,6 +227,11 @@ const LayerTree = React.createClass({
             }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
+    },
+    showInfoBox() {
+        // Will be removed when clear how to use components, we already have metadata loaded
+        this.props.loadMetadata();
+        this.props.showInfoBox();
     }
 });
 
@@ -233,7 +242,9 @@ const CatalogPlugin = connect(tocSelector, {
     getMetadataObjects,
     loadFeatureTypeConfig,
     setActiveFeatureType,
-    setGridType
+    setGridType,
+    loadMetadata,
+    showInfoBox: showBox
 })(LayerTree);
 
 module.exports = {
