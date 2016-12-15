@@ -15,6 +15,7 @@ const Mosaic = React.createClass({
         boxStyle: React.PropTypes.object,
         tileClick: React.PropTypes.func,
         useLink: React.PropTypes.bool,
+        liClass: React.PropTypes.string,
         className: React.PropTypes.string
     },
     getDefaultProps() {
@@ -29,6 +30,7 @@ const Mosaic = React.createClass({
                     onClick={this.props.tileClick ? this.props.tileClick.bind(null, tile) : undefined}
                     boxStyle={this.props.boxStyle}
                     useLink={this.props.useLink}
+                    liClass={this.props.liClass ? this.props.liClass : undefined}
                     {...tile}
                     />);
         });

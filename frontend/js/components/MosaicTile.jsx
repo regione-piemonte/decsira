@@ -19,12 +19,15 @@ const MosaicTile = React.createClass({
         setData: React.PropTypes.func,
         useLink: React.PropTypes.bool,
         boxStyle: React.PropTypes.object,
-        onClick: React.PropTypes.func
+        onClick: React.PropTypes.func,
+        liClass: React.PropTypes.string.isRequired
     },
     getDefaultProps() {
         return {
-           useLink: true,
-           boxStyle: { }
+            icon: "",
+            useLink: true,
+            boxStyle: { },
+            liClass: "list-group-item col-md-3 col-xs-4 tiles"
         };
     },
     renderInfo() {
@@ -57,9 +60,9 @@ const MosaicTile = React.createClass({
             );
     },
     render() {
-        let bStyle = 'list-group-item col-md-3 col-xs-4 tiles ';
+        let bClass = `${this.props.liClass} ${this.props.icon}`;
         return (
-            <li className={bStyle + this.props.icon} onClick={this.props.onClick}>
+            <li className={bClass} style={this.props.boxStyle} onClick={this.props.onClick}>
                {this.props.name}
                {this.renderInfo()}
             </li>
