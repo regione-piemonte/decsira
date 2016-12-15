@@ -21,7 +21,8 @@ var DefaultNode = React.createClass({
         toggleSiraControl: React.PropTypes.func,
         style: React.PropTypes.object,
         groups: React.PropTypes.array,
-        addToMap: React.PropTypes.func
+        addToMap: React.PropTypes.func,
+        showInfoBox: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -35,10 +36,16 @@ var DefaultNode = React.createClass({
     renderTools() {
         const tools = [
         (<Glyphicon
+                    style={glyphStyle}
+                    key="info"
+                    glyph="info-sign"
+                    onClick={()=>this.props.showInfoBox(this.props.node)}/>),
+        (<Glyphicon
             style={glyphStyle}
             key="addToMap"
             glyph="plus-sign"
-            onClick={()=>this.props.addToMap(this.props.node)}/>)];
+            onClick={()=>this.props.addToMap(this.props.node)}/>)
+        ];
         if ( this.props.node.featureType) {
             tools.push((<Glyphicon
                 style={glyphStyle}
