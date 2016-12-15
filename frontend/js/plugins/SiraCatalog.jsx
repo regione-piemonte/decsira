@@ -11,7 +11,7 @@ const {createSelector} = require('reselect');
 const {toggleNode, selectCategory, getThematicViewConfig} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
-const {Tabs, Tab, Button, OverlayTrigger, Popover, Image} = require("react-bootstrap");
+const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 const {getMetadataObjects} = require('../actions/siracatalog');
 const {
@@ -70,7 +70,7 @@ const categorySelector = createSelector([
             return v;
         }, {objectNumber: 0, tematicViewNumber: 0});
         return {
-        tiles: [...servertiles, {id: 999, name: "Search All", icon: "assets/application/conoscenze_ambientali/css/images/via.png", objectNumber, tematicViewNumber}]
+        tiles: [...servertiles, {id: 999, name: "Search All", icon: "all", objectNumber, tematicViewNumber}]
         };
     }
 );
@@ -181,7 +181,7 @@ const LayerTree = React.createClass({
                     liClass="list-group-item col-xs-4 tiles searchtile"
                     /> </Popover>)}>
                        <Button className="siracatalog-search-selector">
-                            <Image style={{width: "30px"}} src={this.props.category.icon}/>
+                            <div className={this.props.category.icon}/>
                         </Button>
              </OverlayTrigger>
              </div>
