@@ -24,6 +24,10 @@
         <constructor-arg type="java.lang.String" value="AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==" />
     </bean>
 
+    <bean id="irideProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations" value="classpath*:/irideprop.xml" />
+    </bean>
+
     <bean id="role"
           class="org.geoserver.security.iride.entity.IrideRole"
           factory-method="parseRole">

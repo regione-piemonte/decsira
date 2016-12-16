@@ -22,6 +22,9 @@ import it.csi.sira.frontend.iride.vo.IrideRoleVO;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
+
+import javax.annotation.PostConstruct;
 
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
@@ -55,7 +58,7 @@ import com.google.common.collect.Lists;
  */
 @Controller
 @RequestMapping(method = RequestMethod.GET, value = IrideServiceConstants.MAPPING_IRIDE_SERVICE)
-public class IrideServiceController {
+public final class IrideServiceController {
 
     /**
      * Logger.
@@ -71,6 +74,19 @@ public class IrideServiceController {
      * <code>IRIDE</code> service "policies" enforcer instance.
      */
     private IrideService irideService;
+    
+    /**
+     * <code>Properties</code> url of iride service.
+     */
+    private Properties irideProperties = null;
+
+	public Properties getIrideProperties() {
+		return irideProperties;
+	}
+
+	public void setIrideProperties(Properties irideProperties) {
+		this.irideProperties = irideProperties;
+	}
 
     /**
      * Get the <code>IRIDE</code> service "policies" enforcer instance.
@@ -91,6 +107,25 @@ public class IrideServiceController {
         this.irideService = irideService;
     }
 
+     /**
+     * Executed after dependencies have been injected.
+     *
+     * @throws IOException
+     */
+    @PostConstruct
+    public void init() throws IOException {
+        LOGGER.trace("IRIDE Service endpoint URL: {}", irideProperties.getProperty("serverURL"));
+
+        this.getIrideService().initializeFromConfig(irideProperties.getProperty("serverURL"));
+    }
+    
+    @RequestMapping(value = "/testResources", method = RequestMethod.GET)
+    public @ResponseBody String testResources() {
+    	
+    	LOGGER.trace("IRIDE url: ", irideProperties.getProperty("serverURL"));
+    	return "OK ";
+    }
+
     /**
      *
      * @param user
@@ -107,7 +142,7 @@ public class IrideServiceController {
             defaultValue = ""
         ) String user) {
         LOGGER.trace("IRIDE Digital Identity: {}", user);
-
+        
         try {
             final IrideRole[] roles = this.getRolesForUser(user);
 
@@ -120,6 +155,8 @@ public class IrideServiceController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    
 
     /**
      *
