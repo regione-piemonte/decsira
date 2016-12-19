@@ -64,13 +64,13 @@ var DefaultNode = React.createClass({
         let {children, onToggle, ...other } = this.props;
         if (this.props.node.nodes) {
             return (
-            <DefaultGroup node={this.props.node} onToggle={this.props.onToggle}>
+            <DefaultGroup node={this.props.node} animateCollapse={false} onToggle={this.props.onToggle}>
                 <DefaultNode {...this.props}/>
             </DefaultGroup>
                 );
         }
         return (
-            <Node className="toc-default-layer catalog-object" style={this.props.style} type="layer" {...other}>
+            <Node animateCollapse={false} className="toc-default-layer catalog-object" style={this.props.style} type="layer" {...other}>
                 <Title/>
                 {this.renderTools()}
             </Node>

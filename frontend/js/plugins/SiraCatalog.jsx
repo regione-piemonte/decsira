@@ -151,7 +151,7 @@ const LayerTree = React.createClass({
         }
         const objects = (
             <TOC nodes={this.props.nodes}>
-                    <DefaultGroup onToggle={this.props.onToggle}>
+                    <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                     <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
