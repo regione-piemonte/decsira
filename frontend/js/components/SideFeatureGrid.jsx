@@ -39,7 +39,7 @@ module.exports = connect((state) => {
     attributes: activeConfig.attributes || [],
     features: state.grid && state.grid.data || [],
     totalFeatures: state.grid.totalFeatures,
-    map: (state.map && state.map) || (state.config && state.config.map),
+    map: (state.map && state.map.present) || (state.config && state.config.map),
     loadingGrid: state.grid.loadingGrid,
     loadingGridError: state.grid.loadingGridError,
     pagination: (state.queryform.pagination && state.queryform.pagination.maxFeatures) ? true : false,

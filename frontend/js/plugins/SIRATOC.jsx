@@ -109,7 +109,7 @@ const LayerTree = React.createClass({
             <div>
                 <TOC onSort={this.props.onSort} filter={this.getNoBackgroundLayers}
                     nodes={this.props.groups}>
-                    <DefaultGroup onSort={this.props.onSort}
+                    <DefaultGroup animateCollapse={false} onSort={this.props.onSort}
                                   propertiesChangeHandler={this.props.groupPropertiesChangeHandler}
                                   onToggle={this.props.onToggleGroup}
                                   style={this.props.groupStyle}

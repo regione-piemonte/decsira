@@ -7,9 +7,9 @@
  */
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
 
-FilterUtils.toOGCFilterSira = function(ftName, json, version, sortOptions = null, hits = false, format = null) {
+FilterUtils.toOGCFilterSira = function(ftName, json, version, sortOptions = null, hits = false, format = null, nsplaceholder = "fes") {
     let newFilter = this.toOGCFilter(ftName, json, version, sortOptions, hits, format);
-    let undefFilter = `<${this.nsplaceholder}:Filter>undefined</${this.nsplaceholder}:Filter>`;
+    let undefFilter = `<${nsplaceholder}:Filter>undefined</${nsplaceholder}:Filter>`;
     return newFilter.replace(undefFilter, '');
 
 };
@@ -27,9 +27,9 @@ FilterUtils.getOgcAllPropertyValue = function(featureTypeName, attribute) {
                     <wfs:Query typeNames="${featureTypeName}"/>
             </wfs:GetPropertyValue>`;
 };
-FilterUtils.getSLD = function(ftName, json, version) {
-    let filter = this.toOGCFilterSira(ftName, json, version);
-    let sIdx = filter.search( `<${this.nsplaceholder}:Filter>`);
+FilterUtils.getSLD = function(ftName, json, version, nsplaceholder) {
+    let filter = this.toOGCFilterSira(ftName, json, version, nsplaceholder);
+    let sIdx = filter.search( `<${nsplaceholder}:Filter>`);
     if (sIdx !== -1) {
         let eIndx = filter.search( `</wfs:Query>`);
         filter = filter.substr(sIdx, eIndx - sIdx);

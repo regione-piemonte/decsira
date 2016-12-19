@@ -29,7 +29,7 @@ function setFeatures(features) {
 }
 
 function selectAllToggle(featureTypeName, filterObj) {
-    const sldBody = filterObj ? FilterUtils.getSLD(featureTypeName, filterObj, "1.0.0") : undefined;
+    const sldBody = filterObj ? FilterUtils.getSLD(featureTypeName, filterObj, "1.0.0", "ogc") : undefined;
     return {
         type: SELECT_ALL,
         featureTypeName,

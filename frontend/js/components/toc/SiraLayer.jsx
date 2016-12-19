@@ -118,7 +118,7 @@ var DefaultLayer = React.createClass({
     render() {
         let {children, propertiesChangeHandler, onToggle, ...other } = this.props;
         return (
-            <Node className="toc-default-layer" sortableStyle={this.props.sortableStyle} style={this.props.style} type="layer" {...other}>
+            <Node className="toc-default-layer" animateCollapse={false} sortableStyle={this.props.sortableStyle} style={this.props.style} type="layer" {...other}>
                 <Title onClick={this.props.onToggle}/>
                 <InlineSpinner loading={this.props.node.loading}/>
                 {this.renderCollapsible()}
