@@ -22,19 +22,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>it.geosolutions.csi.sira</groupId>
-		<artifactId>sira-root</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>it.geosolutions.csi.sira</groupId>
+        <artifactId>sira-root</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>iride-services</artifactId>
-	<packaging>jar</packaging>
+    <artifactId>iride-services</artifactId>
+    <packaging>jar</packaging>
 
-	<name>CSI SIRA - IRIDE REST Services</name>
+    <name>CSI SIRA - IRIDE REST Services</name>
     <description>REST service to query for IRIDE roles using CSI-Piemonte IRIDE Service</description>
 
-	<url>https://github.com/geosolutions-it/csi-sira/tree/master/frontend/iride-services</url>
+    <url>https://github.com/geosolutions-it/csi-sira/tree/master/frontend/iride-services</url>
     <inceptionYear>2016</inceptionYear>
 
     <organization>
@@ -74,7 +74,7 @@
         </contributor>
     </contributors>
 
-	<properties>
+    <properties>
         <!-- Java Version -->
         <java.version>1.7</java.version>
 
@@ -85,17 +85,21 @@
         <!-- Build -->
         <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
-	</properties>
+        
+        <!-- default iride url -->
+        <iride.service.policy-enforcer-base.url>http://tst-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase</iride.service.policy-enforcer-base.url>
+        
+    </properties>
 
     <repositories>
         <!-- https://maven-repository.com/artifact/org.springframework/spring-test-mvc/1.0.0.M2 -->
-		<repository>
-			<id>spring-milestones</id>
-			<url>http://repo.spring.io/libs-milestone/</url>
-		</repository>
+        <repository>
+            <id>spring-milestones</id>
+            <url>http://repo.spring.io/libs-milestone/</url>
+        </repository>
     </repositories>
 
-	<dependencies>
+    <dependencies>
         <!-- SIRA modules -->
         <dependency>
             <groupId>org.geoserver.security</groupId>
@@ -103,14 +107,14 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-		    <groupId>org.geoserver.security</groupId>
-		    <artifactId>iride-entities</artifactId>
-		    <version>1.0-SNAPSHOT</version>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-entities</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-		    <groupId>org.geoserver.security</groupId>
-		    <artifactId>iride-service-client</artifactId>
-		    <version>1.0-SNAPSHOT</version>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-service-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Spring -->
@@ -124,24 +128,24 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
 
         <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
 
@@ -181,18 +185,18 @@
         </dependency>
 
         <!-- JSON Path -->
-		<dependency>
-		    <groupId>com.jayway.jsonpath</groupId>
-		    <artifactId>json-path</artifactId>
-		    <version>0.8.1</version>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>com.jayway.jsonpath</groupId>
-		    <artifactId>json-path-assert</artifactId>
-		    <version>0.8.1</version>
-		    <scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>0.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path-assert</artifactId>
+            <version>0.8.1</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Spring -->
         <dependency>
@@ -200,12 +204,12 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test-mvc</artifactId>
-		    <version>1.0.0.M2</version>
-		    <scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test-mvc</artifactId>
+            <version>1.0.0.M2</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
@@ -223,15 +227,15 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
         </dependency>
-	</dependencies>
+    </dependencies>
 
     <build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 
         <plugins>
             <!-- compilation -->
@@ -265,6 +269,28 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>IRIDE service policy-enforcer-base url filtering</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes</outputDirectory>
+                            <encoding>UTF-8</encoding>
+                            <resources>
+                                <resource>
+                                    <filtering>true</filtering>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>**/*.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- sources -->
@@ -360,5 +386,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>demo</id>
+            <properties>
+                <iride.service.policy-enforcer-base.url>http://tst-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase</iride.service.policy-enforcer-base.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>produzione</id>
+            <properties>
+                <iride.service.policy-enforcer-base.url>http://applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase</iride.service.policy-enforcer-base.url>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

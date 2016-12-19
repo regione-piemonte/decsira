@@ -14,7 +14,9 @@
 		<property name="metadataManager" ref="metadataManager" />
 	</bean>
 
-    <bean name="/iride/*" class="it.csi.sira.frontend.iride.controller.IrideServiceController" />
+    <bean name="/iride/*" class="it.csi.sira.frontend.iride.controller.IrideServiceController" >
+      <property name="irideProperties" ref="irideProperties" />
+    </bean>
 
     <context:component-scan base-package="it.geosolutions.csi.sira" />
 
