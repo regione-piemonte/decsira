@@ -13,7 +13,15 @@ const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const SELECT_SECTION = 'SELECT_SECTION';
 const ACTIVE_SECTION = 'ACTIVE_SECTION';
 const SELECT_ROWS = 'SELECT_ROWS';
-// const SET_IMPIANTO_MODEL = 'SET_IMPIANTO_MODEL';
+const GENERATE_PDF = 'GENERATE_PDF';
+
+
+function generatePDF(active = true) {
+    return {
+        type: GENERATE_PDF,
+        active
+    };
+}
 
 function configureCard(template, xml) {
     return {
@@ -112,6 +120,7 @@ module.exports = {
     SELECT_SECTION,
     ACTIVE_SECTION,
     SELECT_ROWS,
+    GENERATE_PDF,
     // SET_IMPIANTO_MODEL,
     loadCardTemplate,
     loadCardData,
@@ -119,6 +128,7 @@ module.exports = {
     // loadCardModelConfig,
     selectSection,
     activateSection,
-    selectRows
+    selectRows,
+    generatePDF
     // setSiraImpiantoModel
 };

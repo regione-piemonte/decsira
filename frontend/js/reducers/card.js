@@ -8,12 +8,13 @@
 
 const {
     CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR,
-    SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS // , SET_IMPIANTO_MODEL
+    SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS, GENERATE_PDF // , SET_IMPIANTO_MODEL
 } = require('../actions/card');
 
 const assign = require('object-assign');
 
 const initialState = {
+    generatepdf: false,
     show: false,
     template: null,
     xml: null
@@ -52,6 +53,9 @@ function cardtemplate(state = initialState, action) {
             // let model = assign({}, state.model);
             // model[action.table_id] = action.rows;
             return assign({}, state, {[action.tableId]: action.rows});
+        }
+        case GENERATE_PDF: {
+            return assign({}, state, {generatepdf: action.active});
         }
         /* case SET_IMPIANTO_MODEL: {
             return assign({}, state, {impiantoModel: action.impiantoModel});

@@ -11,12 +11,12 @@ const {isObject} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
-const {Modal} = require('react-bootstrap');
+const {Modal, Button} = require('react-bootstrap');
 const {toggleSiraControl} = require("../../actions/controls");
 const toggleDetail = toggleSiraControl.bind(null, 'detail');
-
+const {generatePDF} = require("../../actions/card");
 const assign = require('object-assign');
-
+const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
 
 const Draggable = require('react-draggable');
@@ -41,7 +41,8 @@ const Card = React.createClass({
         draggable: React.PropTypes.bool,
         // model: React.PropTypes.object,
         // impiantoModel: React.PropTypes.object,
-        toggleDetail: React.PropTypes.func
+        toggleDetail: React.PropTypes.func,
+        generatePDF: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -95,6 +96,8 @@ const Card = React.createClass({
         const Template = (
             <div className="scheda-sira">
                     <TemplateSira template={this.props.card.template} model={model}/>
+                    <Button id="scheda2pdf" onClick={this.props.generatePDF}>PDF</Button>
+                    <SchedaToPDF authParam={authParam}/>
             </div>
             );
         return (this.props.draggable) ? (
@@ -115,6 +118,7 @@ module.exports = connect((state) => {
     };
 }, dispatch => {
     return bindActionCreators({
-        toggleDetail: toggleDetail
+        toggleDetail: toggleDetail,
+        generatePDF: generatePDF.bind(null, true)
     }, dispatch);
 })(Card);
