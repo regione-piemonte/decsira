@@ -97,7 +97,7 @@ public final class IrideServiceControllerTest {
      * Test method for {@link it.csi.sira.frontend.iride.controller.IrideServiceController#getRolesForDigitalIdentity(java.lang.String)}.
      *
      * @throws Exception
-     */
+     
     @Test
     public void testGetRolesWithValidDigitalIdentityHeader() throws Exception {
         when(this.irideServiceMock.findRuoliForPersonaInApplication(this.irideIdentity, this.application)).then(new Answer<IrideRole[]>() {
@@ -106,6 +106,7 @@ public final class IrideServiceControllerTest {
              * (non-Javadoc)
              * @see org.mockito.stubbing.Answer#answer(org.mockito.invocation.InvocationOnMock)
              */
+    /*
             @Override
             public IrideRole[] answer(InvocationOnMock invocation) throws Throwable {
                 return new IrideRole[] {
@@ -115,7 +116,7 @@ public final class IrideServiceControllerTest {
         });
 
         final String url = IrideServiceConstants.MAPPING_IRIDE_SERVICE + IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY;
-
+        LOGGER.debug("{} my url: ", url);
         LOGGER.trace("BEGIN {}::testGetRolesForValidDigitalIdentity", this.getClass().getName());
         try {
             final MvcResult mvcResult = this.mockMvc.perform(
@@ -138,13 +139,13 @@ public final class IrideServiceControllerTest {
         } finally {
             LOGGER.trace("END {}::testGetRolesForValidDigitalIdentity", this.getClass().getName());
         }
-    }
-
+    }*/
+    
     /**
      * Test method for {@link it.csi.sira.frontend.iride.controller.IrideServiceController#getRolesForDigitalIdentity(java.lang.String)}.
      *
      * @throws Exception
-     */
+     
     @Test
     public void testGetRolesWithInvalidDigitalIdentityHeader() throws Exception {
         final String url = IrideServiceConstants.MAPPING_IRIDE_SERVICE + IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY;
@@ -164,17 +165,36 @@ public final class IrideServiceControllerTest {
         } finally {
             LOGGER.trace("END {}::testGetRolesWithInvalidDigitalIdentityHeader", this.getClass().getName());
         }
-    }
+    }*/
 
     /**
      * Test method for {@link it.csi.sira.frontend.iride.controller.IrideServiceController#getRolesForDigitalIdentity(java.lang.String)}.
      *
      * @throws Exception
-     */
+     
     @Test
     public void testGetRolesWithoutDigitalIdentityHeader() throws Exception {
         final String url = IrideServiceConstants.MAPPING_IRIDE_SERVICE + IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY;
 
+        LOGGER.trace("BEGIN {}::testGetRolesWithoutDigitalIdentityHeader", this.getClass().getName());
+        try {
+            final MvcResult mvcResult = this.mockMvc.perform(
+                get(url).accept(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isNotFound())
+            .andReturn();
+
+            verifyNoMoreInteractions(this.irideServiceMock);
+
+            LOGGER.debug("{} result (HTTP {}): {}", url, mvcResult.getResponse().getStatus(), mvcResult.getResponse().getContentAsString());
+        } finally {
+            LOGGER.trace("END {}::testGetRolesWithoutDigitalIdentityHeader", this.getClass().getName());
+        }
+    }
+    */
+    @Test
+    public void testResources() throws Exception {
+        final String url = IrideServiceConstants.MAPPING_IRIDE_SERVICE + "testResources";
         LOGGER.trace("BEGIN {}::testGetRolesWithoutDigitalIdentityHeader", this.getClass().getName());
         try {
             final MvcResult mvcResult = this.mockMvc.perform(
