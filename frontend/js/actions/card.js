@@ -14,7 +14,14 @@ const SELECT_SECTION = 'SELECT_SECTION';
 const ACTIVE_SECTION = 'ACTIVE_SECTION';
 const SELECT_ROWS = 'SELECT_ROWS';
 const GENERATE_PDF = 'GENERATE_PDF';
+const MAP_IMAGE_READY = 'MAP_IMAGE_READY';
 
+function mapImageReady(state) {
+    return {
+        type: MAP_IMAGE_READY,
+        state
+    };
+}
 
 function generatePDF(active = true) {
     return {
@@ -121,6 +128,7 @@ module.exports = {
     ACTIVE_SECTION,
     SELECT_ROWS,
     GENERATE_PDF,
+    MAP_IMAGE_READY,
     // SET_IMPIANTO_MODEL,
     loadCardTemplate,
     loadCardData,
@@ -129,6 +137,7 @@ module.exports = {
     selectSection,
     activateSection,
     selectRows,
-    generatePDF
+    generatePDF,
+    mapImageReady
     // setSiraImpiantoModel
 };
