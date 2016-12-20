@@ -5,9 +5,6 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-// const WMS = require('../../MapStore2/web/client/api/WMS');
-// const {parseUrl} = require('react-bootstrap');
-// const _= require('lodash');
 const xml2js = require('xml2js');
 const urlUtil = require('url');
 const axios = require('../../MapStore2/web/client/libs/ajax');
@@ -76,36 +73,8 @@ function iterate(obj, param) {
 }
 
 /*
-function iterate(obj) {
-    for (var property in obj) {
-        if (obj.hasOwnProperty(property)) { //d
-            if (typeof obj[property] == "object") {
-                iterate(obj[property]);
-            }
-            else {
-                console.log(property + "   " + obj[property]);
-            }
-        }
-    }
-}
-
-var obj = {a:1, b:2, c:3};
-// ex for in (loop fatto per scorrere oggetti)
-for (var prop in obj) {
-  console.log("obj." + prop + " = " + obj[prop]);
-}
-
-// Output:
-// "obj.a = 1"
-// "obj.b = 2"
-// "obj.c = 3"
-*/
-
-
-/*
  * action
  */
-
 function hideBox() {
     return {
         type: HIDE_BOX,
@@ -153,24 +122,6 @@ function loadMetadataError(error) {
         error: error
     };
 }
-
-/*
-function getLayerByCapabilities(url) {
-  return (
-  axios.get(parseUrl(url)).then((response) => {
-      let json;
-      xml2js.parseString(response.data,
-         {explicitArray: false},
-         (ignore, result) => {json = result; });
-     // let layers = [];
-      // iterate(json, layers);
-  }).catch((error) => {
-      dispatch(loadMetadataError(error));
-      // return dispatch(updateNode(layer.id, "id", {capabilities: capabilities || {"error": "no describe Layer found"}}));
-  })
-)
-}
-*/
 
 function addLegendUrl(urls) {
     return {
@@ -230,10 +181,20 @@ function loadLegends(urls) {
     };
 }
 
-function loadMetadata() {
+function loadMetadata(idMetadato) {
     return (dispatch) => {
-        return axios.get('metadata.json').then((response) => {
+        return axios.post('services/metadata/getInfoBox', 'metadato=' + idMetadato, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        }).then((response) => {
+            response.data.showButtonLegend = 'none';
             if (typeof response.data === 'object') {
+                if (response.data && (response.data.urlWMS || response.data.urlWFS)) {
+                    response.data.showButtonLegend = 'block';
+                }else {
+                    response.data.showButtonLegend = 'none';
+                }
                 dispatch(metadataLoaded(response.data));
                 // dispatch(showBox());
             } else {
