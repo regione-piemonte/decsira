@@ -27,6 +27,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 public final class IrideServiceConstants {
 
+	/**
+     * Application name requesting <code>IRIDE</code> service.
+     */
+    public static final String LOGGER = "iride";
+    
     /**
      * Application name requesting <code>IRIDE</code> service.
      */
