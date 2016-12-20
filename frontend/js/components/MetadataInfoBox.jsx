@@ -25,7 +25,6 @@ const MetadataInfoBox = React.createClass({
         dataProvider: React.PropTypes.string,
         urlMetadato: React.PropTypes.string,
         numDatasetObjectCalc: React.PropTypes.number,
-        urlMetadato: React.PropTypes.string,
         urlWMS: React.PropTypes.array,
         urlWFS: React.PropTypes.array,
         urlLegend: React.PropTypes.array,
