@@ -18,20 +18,20 @@
  */
 package it.csi.sira.frontend.iride.controller;
 
+import it.csi.frontend.iride.utils.LogFormatter;
 import it.csi.sira.frontend.iride.vo.IrideRoleVO;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.log4j.Logger;
 import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideRole;
 import org.geoserver.security.iride.service.IrideService;
 import org.geoserver.security.iride.util.logging.LoggerProvider;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,11 +59,8 @@ import com.google.common.collect.Lists;
 @Controller
 @RequestMapping(method = RequestMethod.GET, value = IrideServiceConstants.MAPPING_IRIDE_SERVICE)
 public final class IrideServiceController {
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER = LoggerProvider.getLogger(IrideServiceController.class);
+	
+	private static String className = IrideServiceController.class.getSimpleName();
 
     /**
      * "No roles" empty {@link IrideRole} array.
@@ -114,15 +111,21 @@ public final class IrideServiceController {
      */
     @PostConstruct
     public void init() throws IOException {
-        LOGGER.trace("IRIDE Service endpoint URL: {}", irideProperties.getProperty("serverURL"));
-
+    	
+    	final String methodName = new Object() {
+    	}.getClass().getEnclosingMethod().getName();
+    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
+        
         this.getIrideService().initializeFromConfig(irideProperties.getProperty("serverURL"));
     }
     
     @RequestMapping(value = "/testResources", method = RequestMethod.GET)
     public @ResponseBody boolean testResources() {
     	
-    	LOGGER.trace("IRIDE url: ", irideProperties.getProperty("serverURL"));
+    	final String methodName = new Object() {
+    	}.getClass().getEnclosingMethod().getName();
+    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
+       
     	return true;
     }
 
@@ -133,30 +136,54 @@ public final class IrideServiceController {
      */
     @RequestMapping(
         headers = { IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE },
-        value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY
+        value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY,
+        produces = "application/json"
     )
     @ResponseBody
-    public ResponseEntity<String> getRolesForDigitalIdentity(
+    public ResponseEntity<IrideRole[]> getRolesForDigitalIdentity(
         @RequestHeader(
             value = IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
             defaultValue = ""
         ) String user) {
-        LOGGER.trace("IRIDE Digital Identity: {}", user);
+    	final String methodName = new Object() {
+    	}.getClass().getEnclosingMethod().getName();
+    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
+    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "user: "+user));
+       
         
         try {
             final IrideRole[] roles = this.getRolesForUser(user);
 
-            LOGGER.trace("Got {} role(s) for IRIDE Digital Identity {}", roles.length, user);
-
-            return new ResponseEntity<>(this.toJson(roles), HttpStatus.OK);
-        } catch (IOException e) {
-            LOGGER.error("IRIDE roles retrieval for Digital Identity {} error: {}", user, e.getMessage(), e);
-
+            Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "Got {} role(s) for IRIDE Digital Identity {} "+roles.length));
+                          
+            return new ResponseEntity<>(roles, HttpStatus.OK);
+        } catch (Exception e) {
+            Logger.getLogger(IrideServiceConstants.LOGGER).error(LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "),e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
     
+   @RequestMapping(
+		   value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY, 
+		   method = RequestMethod.GET,
+		   produces = "application/json"
+		   )
+   public @ResponseBody ResponseEntity<IrideRole[]> getRolesForDigitalIdentity() {
+   	final String methodName = new Object() {
+   	}.getClass().getEnclosingMethod().getName();
+   	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN NOT AUTHENTICATED... fake"));
+   	   
+       try {
+           IrideRole[] fakeRoles = new IrideRole[0];
+                    
+           return new ResponseEntity<>(fakeRoles, HttpStatus.OK);
+       } catch (Exception e) {
+           Logger.getLogger(IrideServiceConstants.LOGGER).error(LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "),e);
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+   }
+   
 
     /**
      *
@@ -188,7 +215,7 @@ public final class IrideServiceController {
 
         final String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.toVO(roles));
 
-        LOGGER.trace("Convert IRIDE {} role(s) to JSON: {}", roles.length, json);
+        Logger.getLogger(IrideServiceConstants.LOGGER).debug(LogFormatter.format(className, "toJson", "json: "+json));
 
         return json;
     }
