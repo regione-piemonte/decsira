@@ -15,6 +15,7 @@ const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const MetadataInfoBox = React.createClass({
     propTypes: {
         show: React.PropTypes.string,
+        showButtonLegend: React.PropTypes.string,
         openLegendPanel: React.PropTypes.bool,
         panelTitle: React.PropTypes.string,
         header: React.PropTypes.string,
@@ -22,12 +23,13 @@ const MetadataInfoBox = React.createClass({
         title: React.PropTypes.string,
         text: React.PropTypes.string,
         dataProvider: React.PropTypes.string,
+        urlMetadato: React.PropTypes.string,
         numDatasetObjectCalc: React.PropTypes.number,
         urlMetadato: React.PropTypes.string,
         urlWMS: React.PropTypes.array,
         urlWFS: React.PropTypes.array,
         urlLegend: React.PropTypes.array,
-        error: React.PropTypes.object,
+        error: React.PropTypes.string,
         closePanel: React.PropTypes.func,
         toggleLegendPanel: React.PropTypes.func,
         loadLegend: React.PropTypes.func,
@@ -37,11 +39,13 @@ const MetadataInfoBox = React.createClass({
     getDefaultProps() {
         return {
             show: 'none',
+            showButtonLegend: 'none',
             openLegendPanel: false,
-            panelTitle: "My first panel",
-            error: null,
+            panelTitle: "",
+            error: '',
             title: '',
             text: '',
+            urlMetadato: '',
             urlWMS: [],
             urlWFS: [],
             urlLegend: [],
@@ -109,8 +113,6 @@ const MetadataInfoBox = React.createClass({
         return ('');
     },
 
-// TODO gest errore link wms,wfs, legenda
-// layout url dinamica o relativa
     render() {
         let renderWmsUrl;
         if (this.props.urlWMS) {
@@ -162,11 +164,17 @@ const MetadataInfoBox = React.createClass({
                     <p>{this.props.text}</p>
                     <h4><I18N.Message msgId={"metadataInfoBox.entePA"}/></h4>
                     <p>{this.props.dataProvider}</p>
+                    <h4><I18N.Message msgId={"metadataInfoBox.urlMetadato"}/></h4>
+                    <p>{this.props.urlMetadato}</p>
                     <h4><I18N.Message msgId={"metadataInfoBox.urlWMS"}/></h4>
-                    {renderWmsUrl}
+                    <a className="infobox-metadata-url"
+                      title="url metadato"
+                      href="{renderWmsUrl}" target="_blank" >
+                      {renderWmsUrl}
+                    </a>
                     <h4><I18N.Message msgId={"metadataInfoBox.urlWFS"}/></h4>
                     {renderWfsUrl}
-                    <button onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
+                    <button style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
                     {renderLegendPanel}
               </Panel>
           </Draggable>

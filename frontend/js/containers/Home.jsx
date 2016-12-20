@@ -11,13 +11,6 @@ const {connect} = require('react-redux');
 
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
-// const PlatformNumbers = require('../components/PlatformNumbers');
-
-// require('../../assets/css/home.css');
-// require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
-// require('../../assets/global/css/skin.css');
-// require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
-// require('../../assets/global/css/bootstrap-themes/yeti/bootstrap.css');
 
 const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 
@@ -32,11 +25,12 @@ const PlatformNumbers = connect((state) => ({
       functionObjectView: state.platformnumbers.functionObjectView
   }))(require('../components/PlatformNumbers'));
 
+// todo to delete...
+let idMetadato = 41479;
 const mapDispatchToPropsLinkMIB = (dispatch) => {
     return {
     openMetadataInfobox: () => {
-        // todo forse manca il load...
-        dispatch(loadMetadata());
+        dispatch(loadMetadata(idMetadato));
         dispatch(showBox());
     }
   };
@@ -50,12 +44,14 @@ const LinkToMetadataInfoBox = connect(
 const mapStateToPropsMIB = (state) => {
     return {
       show: state.metadatainfobox.show,
+      showButtonLegend: state.metadatainfobox.showButtonLegend,
       openLegendPanel: state.metadatainfobox.openLegendPanel,
       panelStyle: state.metadatainfobox.panelStyle,
       title: state.metadatainfobox.title,
       text: state.metadatainfobox.text,
       numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
       dataProvider: state.metadatainfobox.dataProvider,
+      urlMetadato: state.metadatainfobox.urlMetadato,
       urlWMS: state.metadatainfobox.urlWMS,
       urlWFS: state.metadatainfobox.urlWFS,
       urlLegend: state.metadatainfobox.urlLegend,

@@ -17,10 +17,11 @@ const {
 
 const initialState = {
   show: 'none',
+  showButtonLegend: 'none',
   data: null,
   openLegendPanel: false,
   urlLegend: [],
-  error: null
+  error: ''
 };
 
 function metadatainfobox(state = initialState, action) {
@@ -34,10 +35,11 @@ function metadatainfobox(state = initialState, action) {
     case LOAD_METADATA: {
         return assign({}, state, {
           title: action.data.title,
+          showButtonLegend: action.data.showButtonLegend ? action.data.showButtonLegend : 'none',
           text: action.data.text,
           dataProvider: action.data.dataProvider,
           numDatasetObjectCalc: action.data.numDatasetObjectCalc,
-          urlMetadato: action.data.urlMetadato,
+          urlMetadato: action.data.urlMetadatoCalc,
           urlWMS: action.data.urlWMS,
           error: ''
         });
