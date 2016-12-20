@@ -1,8 +1,6 @@
 package it.csi.sira.backend.metadata;
 
 import it.csi.sira.backend.metadata.business.MetadataManager;
-
-import it.csi.sira.backend.metadata.exception.MetadataManagerException;
 import it.csi.sira.backend.metadata.utils.Constants;
 import it.csi.sira.backend.metadata.utils.LogFormatter;
 import org.apache.log4j.Logger;
@@ -23,13 +21,15 @@ public class Main {
 	try {
 
 	  metadataManager.updateMetadata();
-	  
+
 	  metadataManager.updateMetadataCounters();
-	  
+
 	  metadataManager.moveOldMetadata();
 
-	} catch (MetadataManagerException e) {
+	} catch (Exception e) {
 	  e.printStackTrace();
+	  logger.info(LogFormatter.format("Main", "main", "ERROR"));
+	  System.exit(1);
 	}
 
 	logger.info(LogFormatter.format("Main", "main", "END"));
