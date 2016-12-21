@@ -8,7 +8,7 @@
 
 const React = require('react');
 const {connect} = require('react-redux');
-const {generatePDF} = require("../../actions/card");
+const {generatePDF, mapImageReady} = require("../../actions/card");
 const TemplateSiraHtml = require('./TemplateSiraHtml');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const assign = require('object-assign');
@@ -17,6 +17,7 @@ const Spinner = require('react-spinkit');
 const SchedaToPDF = React.createClass({
     propTypes: {
            card: React.PropTypes.shape({
+               mapImageReady: React.PropTypes.bool,
                generatepdf: React.PropTypes.bool,
                template: React.PropTypes.oneOfType([
                        React.PropTypes.string,
@@ -28,7 +29,8 @@ const SchedaToPDF = React.createClass({
                        React.PropTypes.string])
            }),
            authParam: React.PropTypes.object,
-           generatePDF: React.PropTypes.func
+           generatePDF: React.PropTypes.func,
+           mapImageReady: React.PropTypes.func
        },
        getDefaultProps() {
            return {
@@ -45,6 +47,14 @@ const SchedaToPDF = React.createClass({
                toggleDetail: () => {}
            };
        },
+       componentWillReceiveProps(nextProps) {
+           if (nextProps.card && nextProps.card.mapImageReady) {
+               this.generatePDF();
+           }
+       },
+       shouldComponentUpdate(nextProps) {
+           return (nextProps.card && !nextProps.card.mapImageReady);
+       },
        renderHtml() {
         const xml = this.props.card.xml;
         const authParam = this.props.authParam;
@@ -58,32 +68,40 @@ const SchedaToPDF = React.createClass({
             return this.renderLoadTemplateException();
         }
         const Template = (
-            <div ref={(el) => { this.generatePDF(el); }} className="scheda-sira-html" style={{"visibility": "hidden"}}>
-                    <TemplateSiraHtml template={this.props.card.template} model={model}/>
+            <div ref={(el) => { this.getRef(el); }} className="scheda-sira-html" style={{"visibility": "hidden"}}>
+                 <TemplateSiraHtml template={this.props.card.template} model={model}/>
             </div>
             );
         return Template;
     },
     renderMask() {
-        return (<div>
-        <div className="schedapdf-spinner">
-            <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
-        </div>
-        {this.renderHtml()}
-        </div>);
+        return (
+            <div>
+                <div className="schedapdf-spinner">
+                        <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                </div>
+                {this.renderHtml()}
+            </div>);
     },
     render() {
         return ( this.props.card && this.props.card.generatepdf && this.props.card.template && this.props.card.xml) ? (
-            <div style={{'position': 'fixed', top: 0, bottom: 0, left: 0, right: 0, zIndex: 1300,
+            <div style={{'position': 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 1300,
                 backgroundColor: "rgba(10, 10, 10, 0.38)"}}>
                 {this.renderMask()}
             </div>) : null;
     },
-    generatePDF(el) {
-        if (el) {
-            const pdf = scheda2pdf(el);
+    getRef(el) {
+        this.el = el ? el : null;
+        if (this.props.card && this.props.card.mapImageReady) {
+            this.generatePDF();
+        }
+    },
+    generatePDF() {
+        if (this.el) {
+            const pdf = scheda2pdf(this.el);
             pdf.save();
-            window.setTimeout(this.props.generatePDF, 2000);
+            this.props.generatePDF();
+            this.props.mapImageReady(false);
         }
     }
 
@@ -94,6 +112,7 @@ module.exports = connect((state) => {
         card: state.cardtemplate || {}
     };
 }, {
-    generatePDF: generatePDF.bind(null, false)
+    generatePDF: generatePDF.bind(null, false),
+    mapImageReady
 })(SchedaToPDF);
 
