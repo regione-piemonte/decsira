@@ -28,6 +28,7 @@ const SchedaToPDF = React.createClass({
                xml: React.PropTypes.oneOfType([
                        React.PropTypes.string])
            }),
+           pdfname: React.PropTypes.string,
            authParam: React.PropTypes.object,
            withMap: React.PropTypes.bool,
            generatePDF: React.PropTypes.func,
@@ -40,6 +41,7 @@ const SchedaToPDF = React.createClass({
                    xml: null,
                    loadingCardTemplateError: null
                },
+               pdfname: 'download.pdf',
                withMap: true,
                authParam: null,
                open: false,
@@ -100,17 +102,28 @@ const SchedaToPDF = React.createClass({
     generatePDF() {
         if (this.el) {
             const pdf = scheda2pdf(this.el);
-            pdf.save();
+            pdf.save(this.resolvePdfName());
             this.props.generatePDF();
             this.props.mapImageReady(false);
         }
+    },
+    resolvePdfName() {
+        let name = this.props.pdfname;
+        (name.match(/\{\{.+?\}\}/g) || []).forEach((placeholder) => {
+            const el = placeholder.replace('{{', '').replace('}}', '');
+            name = name.replace(placeholder, TemplateUtils.getValue(this.props.card.xml, el));
+        });
+        name = name.endsWith(".pdf") ? name : `${name}.pdf`;
+        return name;
     }
 
 });
 
 module.exports = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
-        card: state.cardtemplate || {}
+        card: state.cardtemplate || {},
+        pdfname: activeConfig.card && activeConfig.card.pdfname
     };
 }, {
     generatePDF: generatePDF.bind(null, false),
