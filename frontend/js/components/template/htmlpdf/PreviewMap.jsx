@@ -83,7 +83,7 @@ const PDFMap = React.createClass({
                     "state": "READY"
             }
         };
-        return this.props.layers.length > 0 && this.props.center && this.props.center.coordinates ? (
+        return this.props.layers.length > 0 && this.props.center && this.props.center.coordinates && this.props.withMap ? (
             <div
                 key="hiddenGrabMaps"
                 style={{zIndex: -9999}}>
