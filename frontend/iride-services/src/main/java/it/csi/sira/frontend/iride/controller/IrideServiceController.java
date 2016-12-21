@@ -18,13 +18,17 @@
  */
 package it.csi.sira.frontend.iride.controller;
 
+import it.csi.frontend.iride.utils.CastUtils;
 import it.csi.frontend.iride.utils.LogFormatter;
 import it.csi.sira.frontend.iride.vo.IrideRoleVO;
+import it.csi.sira.frontend.iride.vo.UserPermissionVO;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
+import javax.management.relation.Role;
 
 import org.apache.log4j.Logger;
 import org.geoserver.security.iride.entity.IrideApplication;
@@ -35,6 +39,7 @@ import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -140,7 +145,7 @@ public final class IrideServiceController {
         produces = "application/json"
     )
     @ResponseBody
-    public ResponseEntity<IrideRole[]> getRolesForDigitalIdentity(
+    public ResponseEntity<UserPermissionVO> getRolesForDigitalIdentity(
         @RequestHeader(
             value = IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
             defaultValue = ""
@@ -152,11 +157,11 @@ public final class IrideServiceController {
        
         
         try {
-            final IrideRole[] roles = this.getRolesForUser(user);
-
-            Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "Got {} role(s) for IRIDE Digital Identity {} "+roles.length));
+        	UserPermissionVO userP = this.getUserPermission(user);
+            
+            Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "Got {} role(s) for IRIDE Digital Identity {} "+userP.getRoles().length));
                           
-            return new ResponseEntity<>(roles, HttpStatus.OK);
+            return new ResponseEntity<>(userP, HttpStatus.OK);
         } catch (Exception e) {
             Logger.getLogger(IrideServiceConstants.LOGGER).error(LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "),e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -169,21 +174,53 @@ public final class IrideServiceController {
 		   method = RequestMethod.GET,
 		   produces = "application/json"
 		   )
-   public @ResponseBody ResponseEntity<IrideRole[]> getRolesForDigitalIdentity() {
+   public @ResponseBody ResponseEntity<UserPermissionVO> getRolesForDigitalIdentity() {
    	final String methodName = new Object() {
    	}.getClass().getEnclosingMethod().getName();
    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN NOT AUTHENTICATED... fake"));
    	   
        try {
-           IrideRole[] fakeRoles = new IrideRole[0];
-                    
-           return new ResponseEntity<>(fakeRoles, HttpStatus.OK);
+    	   UserPermissionVO userP = new UserPermissionVO();
+    	                       
+           return new ResponseEntity<>(userP, HttpStatus.OK);
        } catch (Exception e) {
            Logger.getLogger(IrideServiceConstants.LOGGER).error(LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "),e);
            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
        }
    }
    
+   
+   /**
+   *
+   * @param user
+   * @return
+   */
+  private UserPermissionVO getUserPermission(String user) {
+      IrideRole[] roles = NO_ROLES;
+      UserPermissionVO userP = new UserPermissionVO();
+      final String methodName = new Object() {
+	  	}.getClass().getEnclosingMethod().getName();
+	  Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
+  	
+
+      final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(user);
+      Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "irideIdentity: "+irideIdentity));
+      if(irideIdentity != null)
+        Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "getCodFiscale: "+irideIdentity.getCodFiscale()));
+      
+      if (irideIdentity != null) {
+    	  userP.setUserIdentity(CastUtils.getIrideIdentityVOFromIrideIdentity(irideIdentity));
+          
+    	  roles = this.getIrideService().findRuoliForPersonaInApplication(
+              irideIdentity,
+              new IrideApplication(IrideServiceConstants.APPLICATION_NAME)
+          );
+    	  
+    	  userP.setRoles(CastUtils.getRolesVOFromRole(roles));
+      }
+
+      return userP;
+  }
 
     /**
      *
@@ -204,34 +241,5 @@ public final class IrideServiceController {
         return roles;
     }
 
-    /**
-     *
-     * @param roles
-     * @return
-     * @throws JsonProcessingException
-     */
-    private String toJson(IrideRole[] roles) throws JsonProcessingException {
-        final ObjectMapper mapper = new ObjectMapper();
-
-        final String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.toVO(roles));
-
-        Logger.getLogger(IrideServiceConstants.LOGGER).debug(LogFormatter.format(className, "toJson", "json: "+json));
-
-        return json;
-    }
-
-    /**
-     *
-     * @param roles
-     * @return
-     */
-    private IrideRoleVO[] toVO(IrideRole[] roles) {
-        final List<IrideRoleVO> roleVOs = Lists.newArrayList();
-        for (final IrideRole role : roles) {
-            roleVOs.add(new IrideRoleVO(role));
-        }
-
-        return roleVOs.toArray(new IrideRoleVO[roles.length]);
-    }
 
 }

@@ -18,6 +18,8 @@
  */
 package it.csi.sira.frontend.iride.vo;
 
+import java.io.Serializable;
+
 import org.geoserver.security.iride.entity.IrideRole;
 
 /**
@@ -25,7 +27,7 @@ import org.geoserver.security.iride.entity.IrideRole;
  *
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleVO {
+public final class IrideRoleVO implements Serializable{
 
     /**
      * <code>IRIDE</code> Role code.
