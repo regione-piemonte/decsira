@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cb56d4e2d-a544-4407-9aa0-fed06ca25333" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C49322212-dfae-48da-87c1-ca453c775092" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="abitanti_equiv_trattati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="abitantiEquivalentiTrattati" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbcf44ffb-2cdf-4e8f-a440-5c3d2c882cc8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3d141be7-5132-4a66-b63c-f1912cd0b89e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="nomeComune" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd67765c4-a4b2-45eb-b14d-d85eafeb4ffc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9c4c6ec1-46a7-40b8-b7c7-d3354ceeb1e4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="des_tematica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="tematica" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C26d57a3c-afcb-4df5-85c4-70975a3b1e5d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="destipoimp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="desTipologiaImpianto" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca1e8fc23-f35c-4db1-8c51-07c37055b3c0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="email_pec"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="emailPec" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9a7b8041-0d13-4a93-bf98-6ef78f753dc9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C73afb768-19e3-4ca2-b1ce-119e2622450d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12cdbbdb-93f2-4ac5-9430-4ca1a9d60a60" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="idtipoimp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idTipologiaImpianto" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc614f1f0-8ab8-445b-9ca2-72f93982c435" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="ind_agroalim"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="industriaAgroAlimentare" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C72e92e2f-1045-4eb0-b98f-7df0c1212407" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="indirizzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="indirizzo" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfdd93f11-c023-43f8-81c9-dac43f746dc4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="istat_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="istatComune" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C210165e6-b107-4601-a586-1ba61bd57fa2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="istat_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="istatProvincia" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C706d1ba4-7e24-4f9f-9a45-064a3ab99dc9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="modalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="modalitaRicircolo" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbd7c7b1a-ed63-4c27-b59e-255f5a8a3966" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="nome"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="nome" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc2203841-e478-4729-8657-8c820c0dda53" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="perc_prelevata"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="percentualeRicircolo" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C48ed0cad-952d-4a74-a10a-68ef6baeba95" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="desProvincia" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce2edad37-0d27-40b1-9f13-3f7b364bf728" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="provv_attivi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="tipoProvvedimentoAttivo" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C56ee9a1e-3b76-45fa-9afd-6186db916df2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="provv_storici"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="tipoProvvedimentoStorico" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C919f380c-36f9-4bff-b6ed-153259f1b465" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="ricircolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="ricircoloInterno" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ced3c74a4-7c9a-446e-8981-0048e4fab0b9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="vol_anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="volumeAnnuoRicircolo" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C40bdd643-6d1a-4b6c-9470-a186d6f02d5f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="vol_giorno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="volumeGiornoRicircolo" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ce1b8bf10-27c1-4659-a27e-f8dd26457e7e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C248df8a3-4938-4cac-93f0-e648262a3348" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0270f59d-17f1-46d7-82c7-e2fcfb953b21" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="data_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="dataProvvedimento" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C572619ba-980d-47b8-97da-3ff607d18120" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="data_scadenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="dataScadenza" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf29d08fc-4ee8-48bb-a564-62b69459e154" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C73807106-ef51-43f3-839d-6bf5f75f819d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="des_tematica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="desTematica" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C60dc738f-0f48-410a-b5de-b625c6542e3b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="ente_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="desEnteCompetente" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C89113e03-f353-474b-b9b6-ce91c81df890" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="estremi_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="estremiProvvedimento" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf18796fc-e22f-4abc-90e4-b2de611763e6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="fk_autorita_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idEnteCompetente" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C083148ec-fb5b-4780-90d1-692a0b18cfbe" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idAutorizzazioneAmbientale" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdafb4e8f-78ef-4b83-ad38-cc3522344a69" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_tipo_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idTipoProvvedimento" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cacd6e067-5d25-4b30-80b9-41734bc1b52a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="tipo_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="tipoProvvedimento" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C99b6545e-77cb-467c-908a-f551daed0af2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C93f43f0d-2fee-43d9-a397-4c10bfacd1be" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TematicaType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37f79890-1675-4295-88c7-f211bf90a464" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TematicaType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1c9631b6-8acf-44ed-bb67-1bca32c85713" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="descrizione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TematicaType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="descrizione" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdf7631d6-fea3-439c-b6bd-f0a3c5942a8d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TematicaType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idAttivita" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfa2e6b21-897c-4b98-8689-1fb60c18c30a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TematicaType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idIstanza" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0c76ad52-365d-4560-a868-e91ef46413cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_tematica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TematicaType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idTematica" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cf7968050-83c4-4a0f-ab54-c6fb0dd3bf35" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C952e6cf1-e0ea-4678-8cda-0a3082fa32c6" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                        <child name="id_istanza"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_tematica" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                        <child name="id_istanza"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C47bf42a5-d2d5-4aef-aab4-a96c22f90e61" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="id_autorizzamb_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="idAutorizzazioneAmbientaleSede" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>

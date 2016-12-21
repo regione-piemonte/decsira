@@ -1,0 +1,122 @@
+{
+   "featureTypeName":"siraemissioni:Stabilimento",
+   "featureTypeNameLabel":"STABILIMENTI",
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+     "template": "assets/cardTemplate.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "siraemissioni:Stabilimento",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplate.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "xpath": ["siraemissioni:desProvincia/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "xpath": ["siraemissioni:nomeComune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice Sira",
+           "xpath": ["siraemissioni:codiceSira/text()"],
+           "type": 2
+         },
+
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["siraemissioni:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ]
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+           "index": 1,
+           "attribute": "siraemissioni:desProvincia",
+           "label":"Provincia",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:province"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "siraemissioni:nomeComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "sira:comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+		    "dependson":{
+              "field": "siraemissioni:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+
+        {
+           "index": 3,
+           "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:tematica/siraemissioni:Tematica/siraemissioni:idTematica",
+           "label":"Tematica",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "siradec:decsira_d_tematica",
+               "propertyName": "id_tematica,des_tematica"
+             }
+           },
+
+           "valueId":"id_tematica",
+           "valueLabel":"des_tematica"
+        }
+
+     ]
+
+   }
+
+}
