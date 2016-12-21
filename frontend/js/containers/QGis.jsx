@@ -167,7 +167,7 @@ const QGis = React.createClass({
         return (
             <div id="qgis-container" className="mappaSiraDecisionale">
              {this.props.siraControls.grid || (this.state.qGisType === 'list' && this.props.configLoaded && !this.state.loadList) ? this.renderGrid() : this.renderQueryPanel()}
-             <Card draggable={false} authParam={this.props.profile.authParams}/>
+             <Card draggable={false} authParam={this.props.profile.authParams} withMap={false}/>
             </div>
         );
     },

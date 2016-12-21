@@ -256,13 +256,30 @@ button.close.grid-close{
 }
 #qgis-container .scheda-sira .template {
     position: absolute;
-    top: 75px;
+    top: 118px;
     bottom: 0px;
     left: 0px;
     right: 0px;
     max-height: none;
     margin: 0px;
     overflow: auto;
+}
+#card-btn-group {
+   position: absolute;
+   top: -100px;
+   width: 100%;
+   height: 40px;
+   background: white;
+   z-index: 1250;
+   -moz-animation: cssShowBtnScheda 0s ease-in 1s forwards;
+       /* Firefox */
+   -webkit-animation: cssShowBtnScheda 0s ease-in 1s forwards;
+       /* Safari and Chrome */
+   -o-animation: cssShowBtnScheda 0s ease-in 1s forwards;
+       /* Opera */
+   animation: cssShowBtnScheda 0s ease-in s forwards;
+   -webkit-animation-fill-mode: forwards;
+       animation-fill-mode: forwards;
 }
 #qgis-container .featuregrid-container{
     height: 100%;
@@ -288,35 +305,22 @@ button.exporter-close.close {
     font-size: 30px !important;
 }
 #scheda2pdf {
-    position: absolute;
-    z-index: 1250;
     color: #078aa3;
-    top: -50px;
-    right: -50px;
     cursor: pointer;
+    position: absolute;
+    right: 4px;
     font-family: 'Raleway';
     font-size: 14px;
     border-radius: 10px;
-    -moz-animation: cssShowBtnScheda 0s ease-in 1s forwards;
-        /* Firefox */
-    -webkit-animation: cssShowBtnScheda 0s ease-in 1s forwards;
-        /* Safari and Chrome */
-    -o-animation: cssShowBtnScheda 0s ease-in 1s forwards;
-        /* Opera */
-    animation: cssShowBtnScheda 0s ease-in s forwards;
-    -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
     }
 @keyframes cssShowBtnScheda {
     to {
-        top :37px;
-        right: 65px;
+        top :78px;
     }
 }
 @-webkit-keyframes cssShowBtnScheda {
     to {
-        top :37px;
-        right: 65px;
+        top :78px;
     }
 }
 .schedapdf-spinner{

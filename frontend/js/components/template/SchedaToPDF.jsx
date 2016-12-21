@@ -29,6 +29,7 @@ const SchedaToPDF = React.createClass({
                        React.PropTypes.string])
            }),
            authParam: React.PropTypes.object,
+           withMap: React.PropTypes.bool,
            generatePDF: React.PropTypes.func,
            mapImageReady: React.PropTypes.func
        },
@@ -61,7 +62,7 @@ const SchedaToPDF = React.createClass({
         const model = assign({}, this.props.card, {
             authParam: authParam,
             profile: authParam.userName,
-            withMap: false,
+            withMap: this.props.withMap,
             getValue: (element) => TemplateUtils.getValue(xml, element)
         });
         if (this.props.card.loadingCardTemplateError) {
@@ -92,7 +93,7 @@ const SchedaToPDF = React.createClass({
     },
     getRef(el) {
         this.el = el ? el : null;
-        if (this.props.card && this.props.card.mapImageReady) {
+        if (this.props.card && (this.props.card.mapImageReady || !this.props.withMap)) {
             this.generatePDF();
         }
     },

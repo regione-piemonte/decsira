@@ -85,6 +85,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     border: none;
+    margin-top: 30px;
 }
 
 .dialog-error-header{
@@ -503,36 +504,41 @@ button.exporter-close.close {
 }
 
 #scheda2pdf {
-    position: absolute;
-    z-index: 1250;
     color: #078aa3;
-    top: -50px;
-    right: -50px;
     cursor: pointer;
+    position: absolute;
+    right: 4px;
     font-family: 'Raleway';
     font-size: 14px;
     border-radius: 10px;
-    -moz-animation: cssShowBtnScheda 0s ease-in 1s forwards;
-        /* Firefox */
-    -webkit-animation: cssShowBtnScheda 0s ease-in 1s forwards;
-        /* Safari and Chrome */
-    -o-animation: cssShowBtnScheda 0s ease-in 1s forwards;
-        /* Opera */
-    animation: cssShowBtnScheda 0s ease-in s forwards;
-    -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-    }
+}
+
 @keyframes cssShowBtnScheda {
     to {
-        top :41px;
-        right: 15px;
-    }
+            top :78px;
+        }
 }
 @-webkit-keyframes cssShowBtnScheda {
-    to {
-        top :41px;
-        right: 15px;
-    }
+   to {
+           top :78px;
+       }
+}
+#card-btn-group {
+   position: absolute;
+   top: -100px;
+   width: 100%;
+   height: 40px;
+   background: white;
+   z-index: 1250;
+   -moz-animation: cssShowBtnScheda 0s ease-in 1s forwards;
+       /* Firefox */
+   -webkit-animation: cssShowBtnScheda 0s ease-in 1s forwards;
+       /* Safari and Chrome */
+   -o-animation: cssShowBtnScheda 0s ease-in 1s forwards;
+       /* Opera */
+   animation: cssShowBtnScheda 0s ease-in s forwards;
+   -webkit-animation-fill-mode: forwards;
+       animation-fill-mode: forwards;
 }
 .schedapdf-spinner{
     position: absolute;

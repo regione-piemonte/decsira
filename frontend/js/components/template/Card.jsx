@@ -11,7 +11,7 @@ const {isObject} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
-const {Modal, Button} = require('react-bootstrap');
+const {Modal, Button, Glyphicon} = require('react-bootstrap');
 const {toggleSiraControl} = require("../../actions/controls");
 const toggleDetail = toggleSiraControl.bind(null, 'detail');
 const {generatePDF} = require("../../actions/card");
@@ -96,8 +96,12 @@ const Card = React.createClass({
         const Template = (
             <div className="scheda-sira">
                     <TemplateSira template={this.props.card.template} model={model}/>
-                    <Button id="scheda2pdf" onClick={this.props.generatePDF}>PDF</Button>
-                    <SchedaToPDF authParam={authParam}/>
+                    <div id="card-btn-group">
+                    <Button id="scheda2pdf" onClick={this.props.generatePDF}>
+                        <Glyphicon glyph="print"/>
+                    </Button>
+                    </div>
+                    <SchedaToPDF authParam={authParam} withMap={this.props.withMap}/>
             </div>
             );
         return (this.props.draggable) ? (
