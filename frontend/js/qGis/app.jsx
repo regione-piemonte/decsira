@@ -14,6 +14,12 @@ const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const {configureQueryForm} = require('../actions/siradec');
 const {configureExporter} = require('../actions/siraexporter');
 
+const Promise = require('promise-polyfill');
+
+if (!window.Promise) {
+    window.Promise = Promise;
+}
+
 const appReducers = {
     userprofile: require('../reducers/userprofile'),
     siraControls: require('../reducers/controls'),
