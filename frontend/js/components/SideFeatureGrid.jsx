@@ -47,6 +47,7 @@ module.exports = connect((state) => {
     filterFields: state.queryform.filterFields,
     spatialField: state.queryform.spatialField,
     featureTypeName: activeConfig.featureTypeName,
+    nameSpaces: activeConfig.nameSpaces,
     searchUrl: state.queryform.searchUrl,
     dataSourceOptions: state.grid.dataSourceOptions,
     header: state.grid.gridType === 'search' ? "featuregrid.header" : "featuregrid.header_all",

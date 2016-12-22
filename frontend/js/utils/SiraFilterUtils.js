@@ -27,7 +27,7 @@ FilterUtils.getOgcAllPropertyValue = function(featureTypeName, attribute) {
                     <wfs:Query typeNames="${featureTypeName}"/>
             </wfs:GetPropertyValue>`;
 };
-FilterUtils.getSLD = function(ftName, json, version, nsplaceholder) {
+FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) {
     let filter = this.toOGCFilterSira(ftName, json, version, nsplaceholder);
     let sIdx = filter.search( `<${nsplaceholder}:Filter>`);
     if (sIdx !== -1) {
@@ -36,8 +36,9 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder) {
     } else {
         filter = '';
     }
+    const nameSpacesAttr = Object.keys(nameSpaces).map((prefix) => 'xmlns:' + prefix + '="' + nameSpaces[prefix] + '"').join(" ");
     return `<StyledLayerDescriptor version="1.0.0"
-            xmlns:sira="http://www.regione.piemonte.it/ambiente/sira/1.0"
+            ${nameSpacesAttr}
             xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
 };
 

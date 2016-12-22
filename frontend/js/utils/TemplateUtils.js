@@ -10,6 +10,7 @@ const XPath = require('xpath');
 const Dom = require('xmldom').DOMParser;
 
 const parse = require('wellknown');
+const assign = require('object-assign');
 
 const TemplateUtils = {
 
@@ -20,35 +21,42 @@ const TemplateUtils = {
     ARRAY_TYPE: 5,
     GEOMETRY_TYPE: 6,
 
-    nsResolver(wfsVersion="2.0") {
+    nsResolver(wfsVersion="2.0", nameSpaces = {}) {
         switch (wfsVersion) {
             case "1.1.0": {
-                return {
+                return assign({}, nameSpaces, {
                     "wfs": "http://www.opengis.net/wfs",
                     "gml": "http://www.opengis.net/gml",
-                    "sira": "http://www.regione.piemonte.it/ambiente/sira/1.0",
                     "ms": "http://mapserver.gis.umn.edu/mapserver"
-                };
+                });
             }
             case "2.0": {
-                return {
+                return assign({}, nameSpaces, {
                     "wfs": "http://www.opengis.net/wfs/2.0",
-                    "gml": "http://www.opengis.net/gml/3.2",
-                    "sira": "http://www.regione.piemonte.it/ambiente/sira/1.0"
-                };
+                    "gml": "http://www.opengis.net/gml/3.2"
+                });
             }
             default:
-                return {
+                return assign({}, nameSpaces, {
                     "wfs": "http://www.opengis.net/wfs",
-                    "gml": "http://www.opengis.net/gml",
-                    "sira": "http://www.regione.piemonte.it/ambiente/sira/1.0"
-                };
+                    "gml": "http://www.opengis.net/gml"
+                });
         }
+    },
+    getNamespaces(attributes) {
+        const nameSpaces = {};
+        for (let count = 0; count < attributes.length; count++) {
+            const attr = attributes[count];
+            if (attr.prefix === 'xmlns') {
+                nameSpaces[attr.localName] = attr.nodeValue;
+            }
+        }
+        return nameSpaces;
     },
     getModels(data, root, config, wfsVersion="2.0") {
         let doc = new Dom().parseFromString(data);
 
-        let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
+        let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces(doc.documentElement.attributes)));
 
         let rows = select(root, doc);
         return rows.map((row) => {
@@ -90,7 +98,7 @@ const TemplateUtils = {
         }
     },
     getElement(element, doc, wfsVersion="2.0") {
-        let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
+        let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces((doc.documentElement || doc.ownerDocument.documentElement).attributes)));
         let value = "";
         let result;
         const me = this;
@@ -210,7 +218,7 @@ const TemplateUtils = {
         if (typeof element === "object") {
             value = this.getElement(element, doc, wfsVersion);
         } else {
-            let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
+            let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces(doc.documentElement.attributes)));
             let values = [];
             let results = select(element, doc);
             results.forEach((res) => {
@@ -224,7 +232,7 @@ const TemplateUtils = {
     getNumberOfFeatures(data, wfsVersion="2.0") {
         let doc = new Dom().parseFromString(data);
 
-        let select = XPath.useNamespaces(this.nsResolver(wfsVersion));
+        let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces(doc.documentElement.attributes)));
 
         let elements = select("/wfs:ValueCollection/wfs:member", doc);
         return elements.length;

@@ -28,8 +28,8 @@ function setFeatures(features) {
     };
 }
 
-function selectAllToggle(featureTypeName, filterObj) {
-    const sldBody = filterObj ? FilterUtils.getSLD(featureTypeName, filterObj, "1.0.0", "ogc") : undefined;
+function selectAllToggle(featureTypeName, filterObj, ogcVersion, params, wfsUrl, nameSpaces) {
+    const sldBody = filterObj ? FilterUtils.getSLD(featureTypeName, filterObj, "1.0.0", "ogc", nameSpaces) : undefined;
     return {
         type: SELECT_ALL,
         featureTypeName,

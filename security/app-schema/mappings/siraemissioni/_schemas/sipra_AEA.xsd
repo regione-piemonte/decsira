@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:siraemissioni="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0" version="1.0">
+    <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/>
+	
+	
+	<!-- elements -->
+	<!-- qui estendono gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_stabilimento -->
+	<element name="Stabilimento" substitutionGroup="gml:AbstractFeature" type="siraemissioni:StabilimentoType"/>
+	
+	<!-- decsira_t_autorizzazione_amb -->
+	<element name="AutorizzazioneAmbientale" substitutionGroup="gml:AbstractObject" type="siraemissioni:AutorizzazioneAmbientaleType"/>
+	
+	<!-- decsira_t_tematica -->
+	<element name="Tematica" substitutionGroup="gml:AbstractObject" type="siraemissioni:TematicaType"/>
+	
+
+	
+	<!-- types -->
+	<!-- qui estendono gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="StabilimentoType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				    
+					<xs:element minOccurs="1" name="codiceSira" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="nome">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="istatComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="nomeComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					
+					<xs:element minOccurs="1" name="istatProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="desProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="indirizzo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="emailPec">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="industriaAgroAlimentare" type="xs:integer"/>
+					
+					<xs:element minOccurs="0" name="ricircoloInterno" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="modalitaRicircolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="percentualeRicircolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="volumeAnnuoRicircolo" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="volumeGiornoRicircolo" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="idStato" type="xs:integer"/>
+					
+					<xs:element minOccurs="0" name="desStato">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="tipoProvvedimentoAttivo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="tipoProvvedimentoStorico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="tematica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="idTipologiaImpianto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="desTipologiaImpianto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="abitantiEquivalentiTrattati" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="geometria" type="gml:GeometryPropertyType"/>
+					
+					<!-- innesto oggetti piu complessi -->
+					
+					<!-- qui ci vuole un join -->
+					 <xs:element maxOccurs="unbounded" minOccurs="0" name="autorizzazioneAmbientale" type="siraemissioni:AutorizzazioneAmbientalePropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	
+	<complexType name="TematicaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idTematica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idAttivita" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="idIstanza" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="codiceSira" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="descrizione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	
+	<complexType name="AutorizzazioneAmbientaleType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idAutorizzazioneAmbientaleSede">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idAutorizzazioneAmbientale" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="idTipoProvvedimento" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="tipoProvvedimento">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="desTematica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="estremiProvvedimento">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="dataProvvedimento" type="xs:date"/>
+					
+					<xs:element minOccurs="0" name="dataScadenza" type="xs:date"/>
+					
+					<xs:element minOccurs="0" name="idEnteCompetente" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="desEnteCompetente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="codiceSira" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="idStato" type="xs:decimal"/>
+					
+					<xs:element minOccurs="0" name="desStato">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- innesto gli oggetti piu complessi -->
+					
+					<!-- condizione di join mediante id_istanza -->
+					 <xs:element maxOccurs="unbounded" minOccurs="1" name="tematica" type="siraemissioni:TematicaPropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<!-- property types -->
+	
+	
+	<complexType name="AutorizzazioneAmbientalePropertyType">
+        <sequence minOccurs="0">
+            <element ref="siraemissioni:AutorizzazioneAmbientale"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	
+	<complexType name="TematicaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="siraemissioni:Tematica"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	</schema>
