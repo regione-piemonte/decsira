@@ -36,6 +36,7 @@ function configureFeatureType(ft, field, featureType, activate) {
         ftNameLabel: ft.name,
         geometryName: ft.geometryName,
         geometryType: ft.geometryType,
+        nameSpaces: ft.nameSpaces,
         field,
         featureType,
         activate
@@ -195,7 +196,8 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
                         id: config.featureTypeName,
                         name: config.featureTypeNameLabel,
                         geometryName: config.geometryName,
-                        geometryType: config.geometryType
+                        geometryType: config.geometryType,
+                        nameSpaces: config.nameSpaces || {}
                     }, fi, featureType, activate));
             }).catch((e) => dispatch(configureQueryFormError(e)));
             // for (let field in config.query.fields) {

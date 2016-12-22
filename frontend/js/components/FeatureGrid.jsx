@@ -84,7 +84,8 @@ const SiraGrid = React.createClass({
         backToSearch: React.PropTypes.string,
         gridType: React.PropTypes.string,
         setExportParams: React.PropTypes.func,
-        maxFeatures: React.PropTypes.number
+        maxFeatures: React.PropTypes.number,
+        nameSpaces: React.PropTypes.object
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -380,7 +381,7 @@ const SiraGrid = React.createClass({
                 filterFields: [],
                 spatialField: {}
             };
-            this.props.selectAllToggle(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.props.params, this.props.searchUrl);
+            this.props.selectAllToggle(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.props.params, this.props.searchUrl, this.props.nameSpaces);
         } else {
             this.props.selectAllToggle();
         }
