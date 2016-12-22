@@ -22,9 +22,9 @@ public class Main {
 
 	  metadataManager.updateMetadata();
 
-	  metadataManager.updateMetadataCounters();
-
 	  metadataManager.moveOldMetadata();
+
+	  metadataManager.updateMetadataCounters();
 
 	} catch (Exception e) {
 	  e.printStackTrace();
