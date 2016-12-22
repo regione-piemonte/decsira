@@ -2,7 +2,6 @@ package it.csi.sira.backend.metadata.integration.servizi.csw;
 
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdDFontedati;
 
-
 import it.csi.sira.backend.metadata.integration.dto.SipraMtdDTipoFunzione;
 import it.csi.sira.backend.metadata.integration.servizi.csw.dto.CswBoundingBox;
 import it.csi.sira.backend.metadata.integration.servizi.csw.dto.CswRecord;
@@ -41,6 +40,64 @@ public class CswAdapter {
   private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
   private IntegratioManager integratioManager;
+
+  public String getCswRecordID(String xml) throws CswAdapterException {
+	final String methodName = new Object() {
+	}.getClass().getEnclosingMethod().getName();
+
+	String id = null;
+
+	logger.debug(LogFormatter.format(className, methodName, "BEGIN"));
+
+	InputStream xmlStream = new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8));
+
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder builder;
+	Document doc = null;
+
+	try {
+	  builder = factory.newDocumentBuilder();
+	  doc = builder.parse(xmlStream);
+	} catch (ParserConfigurationException e) {
+	  throw new CswAdapterException(e);
+	} catch (SAXException e) {
+	  throw new CswAdapterException(e);
+	} catch (IOException e) {
+	  throw new CswAdapterException(e);
+	}
+
+	NodeList nl = null;
+
+	XPathFactory xPathfactory = XPathFactory.newInstance();
+	XPath xpath = xPathfactory.newXPath();
+	XPathExpression expr;
+	try {
+	  expr = xpath.compile("/GetRecordByIdResponse/SummaryRecord");
+	  nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+	} catch (XPathExpressionException e) {
+	  throw new CswAdapterException(e);
+	}
+
+	for (int i = 0; i < nl.getLength(); i++) {
+
+	  Node node = nl.item(i);
+	  NodeList children = node.getChildNodes();
+
+	  for (int j = 0; j < children.getLength(); j++) {
+
+		Node child = children.item(j);
+
+		if (child.getNodeName().equals("dc:identifier") && child.getFirstChild() != null) {
+		  id = child.getFirstChild().getNodeValue();
+		  break;
+		}
+	  }
+	}
+
+	logger.debug(LogFormatter.format(className, methodName, "END"));
+
+	return id;
+  }
 
   public List<CswRecord> getCswRecords(String xml, SipraMtdDFontedati fonteDati) throws CswAdapterException {
 	final String methodName = new Object() {

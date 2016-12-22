@@ -44,7 +44,6 @@ public class MetadataManager {
   private IntegratioManager integratioManager;
   private CswService cswService = null;
   private CswAdapter cswAdapter = null;
-  private Map<String, CswRecord> validIdentifierMap = new HashMap<String, CswRecord>();
 
   private MetaObject[] getMetadataTematicViews(int idCategory) throws Exception {
 
@@ -347,11 +346,25 @@ public class MetadataManager {
 
 	try {
 
-	  if (!validIdentifierMap.isEmpty()) {
-		for (SipraMtdTMtdCsw csw : cswTable) {
+	  params = new HashMap<String, Object>();
+	  params.put("fl_attiva", "S");
+	  List<SipraMtdDFontedati> elencoFontiDati = integratioManager.getDaoManager().getSipraMtdDFontedatiDAO().findByCriteria(params);
 
-		  if (!validIdentifierMap.containsKey(csw.getDcIdentifier())) {
-			logger.info(LogFormatter.format(className, methodName, "RECORD NON TROVATO: " + csw.getDcIdentifier() + " - ID: " + csw.getIdMetadato()));
+	  for (int fonte = 0; fonte < elencoFontiDati.size(); fonte++) {
+
+		SipraMtdDFontedati fonteDati = elencoFontiDati.get(fonte);
+		cswService.setUrlService(fonteDati.getUrlServizio());
+
+		for (SipraMtdTMtdCsw csw : cswTable) {
+		  
+		  Thread.sleep(100);
+		  
+		  String xml = cswService.getRecordById(csw.getDcIdentifier());
+		  String idCsw = cswAdapter.getCswRecordID(xml);
+
+		  if (idCsw == null) {
+
+			logger.info(LogFormatter.format(className, methodName, "RECORD ID: " + csw.getDcIdentifier() + "(" + csw.getIdMetadato() + ") NON TROVATO SU FONTE " + fonteDati.getDesFontedati()));
 
 			SipraMtdTStoricoMtdCsw cswStorico = integratioManager.getDaoManager().getSipraMtdTStoricoMtdCswDAO().findByPK(csw.getIdMetadato());
 
@@ -395,6 +408,8 @@ public class MetadataManager {
 				}
 			  }
 			}
+		  } else {
+			logger.debug(LogFormatter.format(className, methodName, "RECORD ID: " + csw.getDcIdentifier() + "(" + csw.getIdMetadato() + ") TROVATO SU FONTE " + fonteDati.getDesFontedati()));
 		  }
 		}
 	  }
@@ -478,8 +493,6 @@ public class MetadataManager {
 	Map<String, Object> params = null;
 	String xmlCSW;
 
-	validIdentifierMap.clear();
-
 	updateCategories();
 	cleanKeyWords();
 
@@ -535,11 +548,6 @@ public class MetadataManager {
 		  if (cswValidRecords.size() > 0) {
 			this.saveMetadata(cswValidRecords, fonteDati.getIdFontedati());
 		  }
-
-		  for (CswRecord rcd : cswValidRecords) {
-			validIdentifierMap.put(rcd.getIdentifier(), rcd);
-		  }
-
 		} catch (Exception e) {
 		  e.printStackTrace();
 		  throw new Exception(e);

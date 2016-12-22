@@ -30,6 +30,50 @@ public class CswService {
 	client = new HttpClient();
   }
 
+  // http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/csw?  
+  // service=CSW & 
+  // request=GetRecordById & 
+  // version=2.0.2 & 
+  // id=r_piemon:5851e9e0-965f-4ade-9a89-fb113550ede9
+  
+  public String getRecordById(String id) throws CswServiceException {
+
+	String xml = null;
+
+	GetMethod method = new GetMethod(urlService);
+
+	NameValuePair[] params = new NameValuePair[] { new NameValuePair("version", "2.0.2"), new NameValuePair("request", "GetRecordById"),
+		new NameValuePair("service", "CSW"), new NameValuePair("id", id) };
+
+	method.setQueryString(params);
+
+	try {
+
+	  int statusCode = client.executeMethod(method);
+
+	  if (statusCode != HttpStatus.SC_OK) {
+		throw new CswServiceException("Method failed: " + method.getStatusLine());
+	  }
+
+	  InputStream is = method.getResponseBodyAsStream();
+	  byte[] bytes = IOUtils.toByteArray(is);
+	  xml = new String(bytes, "UTF-8");
+
+	} catch (HttpException e) {
+	  e.printStackTrace();
+	  throw new CswServiceException(e);
+
+	} catch (IOException e) {
+	  e.printStackTrace();
+	  throw new CswServiceException(e);
+
+	} finally {
+	  method.releaseConnection();
+	}
+
+	return xml;
+  }
+
   public String getRecords(String text, int startPosition, int maxRecords) throws CswServiceException {
 	final String methodName = new Object() {
 	}.getClass().getEnclosingMethod().getName();
@@ -98,7 +142,7 @@ public class CswService {
 	  method.releaseConnection();
 	}
 
-	logger.debug(LogFormatter.format(className, methodName, "BEGIN"));
+	logger.debug(LogFormatter.format(className, methodName, "END"));
 
 	return xml;
   }
