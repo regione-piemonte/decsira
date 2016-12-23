@@ -99,7 +99,10 @@
                     id="CerTable"
                     wfsVersion="2.0"
                     dependsOn={{
-                        tableId: "RecuperoRifiuti"
+                        tableId: "RecuperoRifiuti",
+                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio"),
+                        xpath: "sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id",
+                        pdfTitle: "Scheda Rifiuto: {{sira:SchedaRifiuto/sira:nrScheda/text()}}"
                     }}
                     rowSelection={false}
                     columns={[
@@ -134,7 +137,10 @@
                     rowSelection={false}
                     wfsVersion="2.0"
                     dependsOn={{
-                        tableId: "RecuperoRifiuti"
+                        tableId: "RecuperoRifiuti",
+                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio"),
+                        xpath: "sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id",
+                        pdfTitle: "Scheda Rifiuto: {{sira:SchedaRifiuto/sira:nrScheda/text()}}"
                     }}
                     columns={[
                         {

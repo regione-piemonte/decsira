@@ -52,6 +52,22 @@ const SiraTable = React.createClass({
             })}</tr>);
         });
     },
+    renderChildrenTable(columns, features, id, title) {
+        return (
+            <div key={id}>
+            <h5 className="pdf-title">{title}</h5>
+         <table className="pdf-table" >
+            <thead>
+                <tr>
+                {this.renderTableHeader(columns)}
+                </tr>
+            </thead>
+            <tbody>
+                {this.renderTableBody(features, columns)}
+            </tbody>
+        </table>
+        </div>);
+    },
     render() {
         let features;
         let columns = this.props.columns.map((column) => {
@@ -76,12 +92,32 @@ const SiraTable = React.createClass({
                 return f;
             }, this);
         }
-        if (this.props.dependsOn) {
-            features = features.filter(function(feature) {
-                return feature[this.idFieldName] === this.props.card[this.props.dependsOn.tableId];
-            }, this);
-        }
+
         columns = columns.filter((col) => col.hide !== true);
+
+        if (this.props.dependsOn) {
+            const tables = this.props.dependsOn.parentFeatures.reduce((elements, pf) => {
+                const id = TemplateUtils.getElement({xpath: this.props.dependsOn.xpath}, pf, this.props.wfsVersion);
+                const ft = features.filter(function(feature) {
+                    return feature[this.idFieldName] === id;
+                }, this);
+                if (ft.length > 0) {
+                    let title = this.props.dependsOn.pdfTitle;
+                    (title.match(/\{\{.+?\}\}/g) || []).forEach((placeholder) => {
+                        const el = placeholder.replace('{{', '').replace('}}', '');
+                        title = title.replace(placeholder, TemplateUtils.getElement({xpath: el}, pf, this.props.wfsVersion));
+                    });
+                // get parentFeatures
+                    elements.push(this.renderChildrenTable(columns, ft, id, title));
+                }
+                return elements;
+            }, []);
+            if (tables.length > 0) {
+                return (<div>
+                    {tables}
+                    </div>);
+            }
+        }
         return (
             <table className="pdf-table">
                 <thead>
