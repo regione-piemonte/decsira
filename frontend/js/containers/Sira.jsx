@@ -19,7 +19,7 @@ const Header = require('../components/MapHeader');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
-const {setProfile} = require('../actions/userprofile');
+const {setProfile, loadUserIdentity} = require('../actions/userprofile');
 const {configureInlineMap} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
@@ -132,6 +132,8 @@ const Sira = React.createClass({
     propTypes: {
         mode: React.PropTypes.string,
         params: React.PropTypes.object,
+        roles: React.PropTypes.object,
+        userIdentity: React.PropTypes.object,
         loadMapConfig: React.PropTypes.func,
         reset: React.PropTypes.func,
         error: React.PropTypes.object,
@@ -140,6 +142,7 @@ const Sira = React.createClass({
         controls: React.PropTypes.object,
         toggleSiraControl: React.PropTypes.func,
         setProfile: React.PropTypes.func,
+        loadUserIdentity: React.PropTypes.func,
         plugins: React.PropTypes.object,
         viewerParams: React.PropTypes.object,
         configureInlineMap: React.PropTypes.func,
@@ -149,6 +152,7 @@ const Sira = React.createClass({
         return {
             toggleSiraControl: () => {},
             setProfile: () => {},
+            loadUserIdentity: () => {},
             onLoadFeatureTypeConfig: () => {},
             mode: 'desktop',
             viewerParams: {mapType: "openlayers"},
@@ -160,6 +164,7 @@ const Sira = React.createClass({
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        this.props.loadUserIdentity();
     },
     render() {
         return (
@@ -208,5 +213,6 @@ module.exports = connect((state) => {
 }, {
     toggleSiraControl,
     setProfile,
+    loadUserIdentity,
     configureInlineMap
 })(Sira);

@@ -64,13 +64,18 @@ module.exports = {
             host: "mapstore.geo-solutions.it",
             target: "http://mapstore.geo-solutions.it"
         }, {
-            path: new RegExp("/decsiraweb/proxy(.*)"),
+            path: new RegExp("/proxy(.*)"),
             rewrite: rewriteUrl("/decsiraweb/proxy$1"),
             host: "localhost",
             target: "http://localhost:8080"
         }, {
             path: new RegExp("/services/metadata/(.*)"),
             rewrite: rewriteUrl("/decsiraweb/services/metadata/$1"),
+            host: "localhost",
+            target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        }, {
+            path: new RegExp("/services/iride/(.*)"),
+            rewrite: rewriteUrl("/decsiraweb/services/iride/$1"),
             host: "localhost",
             target: "http://tst-sipradecweb.territorio.csi.it:8080/"
         }, {
