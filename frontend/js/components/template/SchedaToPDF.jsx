@@ -14,6 +14,8 @@ const TemplateUtils = require('../../utils/TemplateUtils');
 const assign = require('object-assign');
 const scheda2pdf = require('../../utils/ExportScheda');
 const Spinner = require('react-spinkit');
+const {endsWith} = require('lodash');
+
 const SchedaToPDF = React.createClass({
     propTypes: {
            card: React.PropTypes.shape({
@@ -113,7 +115,7 @@ const SchedaToPDF = React.createClass({
             const el = placeholder.replace('{{', '').replace('}}', '');
             name = name.replace(placeholder, TemplateUtils.getValue(this.props.card.xml, el));
         });
-        name = name.endsWith(".pdf") ? name : `${name}.pdf`;
+        name = endsWith(name, ".pdf") ? name : `${name}.pdf`;
         return name;
     }
 
@@ -129,4 +131,3 @@ module.exports = connect((state) => {
     generatePDF: generatePDF.bind(null, false),
     mapImageReady
 })(SchedaToPDF);
-

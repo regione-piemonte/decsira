@@ -21,6 +21,8 @@ const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {selectFeatures} = require('../actions/featuregrid');
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
 
+const {head} = require('lodash');
+
 const {
     loadFeaturesWithPagination
 } = require('../actions/grid');
@@ -185,7 +187,7 @@ const SiraFeatureGrid = React.createClass({
         return `${params.startRow}_${params.endRow}_${params.sortModel.map((m) => `${m.colId}_${m.sort}` ).join('_')}`;
     },
     getSortAttribute(colId) {
-        let col = this.props.columnsDef.find((c) => colId === `properties.${c.field}`);
+        let col = head(this.props.columnsDef.filter((c) => colId === `properties.${c.field}`));
         return col && col.sortAttribute ? col.sortAttribute : '';
     },
     getSortOptions(params) {
@@ -285,7 +287,7 @@ const SiraFeatureGrid = React.createClass({
         })).filter((c) => c )];
         if (this.sortModel && this.sortModel.length > 0) {
             columns = columns.map((c) => {
-                let model = this.sortModel.find((m) => m.colId === c.field);
+                let model = head(this.sortModel.filter((m) => m.colId === c.field));
                 if ( model ) {
                     c.sort = model.sort;
                 }

@@ -51,7 +51,7 @@ function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, fea
           timeout: 60000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
-            if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+            if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
                 let idFieldName = featuregrid.idFieldName;
                 let features = TemplateUtils.getModels(response.data, featuregrid.grid.root, featuregrid.grid.columns);
                 features = features.map((feature) => {

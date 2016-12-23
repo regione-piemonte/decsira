@@ -29,6 +29,8 @@ const {
 } = require('../actions/grid');
 const {selectAllQgis} = require('../actions/featuregrid');
 
+const {head} = require('lodash');
+
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 const SiraFilterUtils = require('../utils/SiraFilterUtils');
 const authParams = {
@@ -121,7 +123,7 @@ const QGis = React.createClass({
         if (this.state.qGisType === "list" && this.state.loadList && urlQuery.featureTypeIds && props.configLoaded && props.gridConfig && props.featureTypeName) {
             // find id field
             this.setState({loadList: false});
-            let idField = props.gridConfig.grid.columns.find((c) => c.id === true);
+            let idField = head(props.gridConfig.grid.columns.filter((c) => c.id === true));
             let filter = SiraFilterUtils.getFilterByIds(props.featureTypeName, urlQuery.featureTypeIds.split(','), idField, props.pagination);
             props.onQuery(props.searchUrl, filter);
         }

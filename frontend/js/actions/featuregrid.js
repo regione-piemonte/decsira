@@ -55,7 +55,7 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
               headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
             }).then((response) => {
 
-                if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+                if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
                     const idFieldName = featuregrid.idFieldName;
                     const features = TemplateUtils.getModels(response.data, featuregrid.grid.root, featuregrid.grid.columns);
                     let ids = features.map((f) => {
