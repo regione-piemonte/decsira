@@ -12,6 +12,9 @@ const SELECT_CATEGORY = 'SELECT_CATEGORY';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
 const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
+
+const {Promise} = require('es6-promise');
+
 function toggleNode(id, status) {
     return {
         type: TOGGLE_NODE,

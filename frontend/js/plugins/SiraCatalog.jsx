@@ -14,6 +14,8 @@ const assign = require('object-assign');
 const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 const {getMetadataObjects} = require('../actions/siracatalog');
+const {head} = require('lodash');
+
 const {
     // SiraQueryPanel action functions
     expandFilterPanel,
@@ -26,7 +28,7 @@ const {setGridType} = require('../actions/grid');
 
 const getChildren = function(nodes, node) {
     return node.nodes.map((child) => {
-        let newNode = nodes.find((n) => n.id === child);
+        let newNode = head(nodes.filter((n) => n.id === child));
         return newNode.nodes ? assign({expanded: false}, newNode, {nodes: getChildren(nodes, newNode)}) : newNode;
     });
 };

@@ -22,6 +22,8 @@ const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
+const {Promise} = require('es6-promise');
+
 function configureInlineMap(mapconfig) {
     return {
         type: INLINE_MAP_CONFIG,

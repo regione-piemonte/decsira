@@ -107,7 +107,7 @@ function loadFeaturesWithPagination(wfsUrl, data, params, requestId) {
           timeout: 60000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
-            if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+            if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
                 dispatch(configureGridDataWithPagination(response.data, requestId));
             }else {
                 dispatch(configureGridError("GeoServer Exception, query fallita!"));
@@ -154,7 +154,7 @@ function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
           timeout: 120000,
           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
-            if (response.data && !response.data.startsWith("<ows:ExceptionReport")) {
+            if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
                 dispatch(updateTotalFeatures(response.data));
             }else {
                 dispatch(configureGridError("GeoServer Exception, impossibile recuperare numero totale oggetti!"));
