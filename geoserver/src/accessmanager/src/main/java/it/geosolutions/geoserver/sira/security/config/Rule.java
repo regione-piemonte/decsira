@@ -18,30 +18,25 @@
  */
 package it.geosolutions.geoserver.sira.security.config;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
-
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.geoserver.catalog.ResourceInfo;
 import org.geoserver.security.AccessMode;
 import org.geoserver.security.CatalogMode;
-import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.filter.text.cql2.CQLException;
-import org.geotools.filter.text.ecql.ECQL;
 import org.geotools.util.logging.Logging;
 import org.opengis.filter.Filter;
-import org.opengis.filter.FilterFactory2;
-import org.opengis.filter.expression.PropertyName;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Plain Old Java Object (POJO) representing an access rule configuration.
@@ -53,7 +48,7 @@ import org.springframework.security.core.GrantedAuthority;
  * <p>
  * A rule is made up of following bits of information:
  * <ul>
- *   <li><em>priority</em> - Must be a positive integer number, defaults to {@code 0}.</li>
+ *   <li><em>priority</em> - Defines the {@link Rule} priority, the higher the value, the higher the priority. Must be a positive integer number, defaults to {@code 0}.</li>
  *   <li><em>roles</em> <strong>(required)</strong> - Comma-separated list of role names, may be * to match any layer.</li>
  *   <li><em>workspace</em> <strong>(required)</strong> - May be * to match any workspace.</li>
  *   <li><em>layer</em> <strong>(required)</strong> - May be * to match any layer.</li>
@@ -95,42 +90,76 @@ import org.springframework.security.core.GrantedAuthority;
  * @author Stefano Costa, GeoSolutions
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class Rule implements Comparable<Rule> {
+public class Rule implements Comparable<Rule>, ValidatableConfiguration {
 
-	/**
-	 * Logger.
-	 */
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logging.getLogger(Rule.class);
 
-    /** Wildcard to match any object. */
-    public static final String ANY = "*";
-
-    /** Allows all access to anyone. */
+    /**
+     * Allows all access to anyone.
+     */
     public static final Rule ALLOW_ALL = new Rule();
 
-    /** Denies all access. */
+    /**
+     * Denies all access to anyone.
+     */
     public static final Rule DENY_ALL = new Rule();
 
+    /**
+     * Lowest possible {@link Rule} {@link #priority} value.
+     */
+    public static final int LOWEST_PRIORITY = 0;
+
+    /**
+     * Highest possible {@link Rule} {@link #priority} value.
+     */
+    public static final int HIGHEST_PRIORITY = Integer.MAX_VALUE;
+
+    /**
+     * Wildcard to match any object.
+     */
+    public static final String ANY = "*";
+
+    /**
+     * Keyword meaning that access to a filtered layer is <em>always</em> permitted.
+     *
+     * @see #filter
+     */
+    public static final String INCLUDE = "INCLUDE";
+
+    /**
+     * Keyword meaning that access to a filtered layer is <em>never</em> permitted.
+     *
+     * @see #filter
+     */
+    public static final String EXCLUDE = "EXCLUDE";
+
+    /**
+     * Keyword meaning that a {@link Rule} must be <em>skipped</em> altogether.
+     */
+    public static final String IGNORERULE = "IGNORERULE";
+
+    /**
+     * Static initializations.
+     */
     static {
         DENY_ALL.roles = ANY;
         DENY_ALL.workspace = ANY;
         DENY_ALL.layer = ANY;
-        DENY_ALL.accessMode = AccessMode.READ;
-        DENY_ALL.filter = "EXCLUDE";
+        DENY_ALL.accessMode = AccessMode.READ.name();
+        DENY_ALL.filter = EXCLUDE;
 
         ALLOW_ALL.roles = ANY;
         ALLOW_ALL.workspace = ANY;
         ALLOW_ALL.layer = ANY;
-        ALLOW_ALL.accessMode = AccessMode.ADMIN;
+        ALLOW_ALL.accessMode = AccessMode.ADMIN.name();
     }
 
-    public static final int LOWEST_PRIORITY = 0;
-
-    public static final int HIGHEST_PRIORITY = Integer.MAX_VALUE;
+    int index = 0;
 
     int priority = LOWEST_PRIORITY;
-
-    int index = 0;
 
     String roles = null;
 
@@ -138,97 +167,19 @@ public class Rule implements Comparable<Rule> {
 
     String layer = null;
 
-    String filter = "INCLUDE";
-
-    TreeSet<String> hiddenAttributes = new TreeSet<>();
-
-    AccessMode accessMode = null;
+    String accessMode = null;
 
     CatalogMode catalogMode = CatalogMode.HIDE;
 
-    FilterFactory2 filterFactory;
+    String filter = INCLUDE;
 
-    Rule() {
-    }
-
-    Rule(FilterFactory2 filterFactory) {
-        this.filterFactory = filterFactory;
-    }
+    Attributes hiddenAttributes = new Attributes();
 
     /**
-     * Invoked by XStream after deserialization.
-     *
-     * <p>
-     * Takes care of initializing a rule with default values.
-     * </p>
-     *
-     * @return a fully initialized rule object
+     * Constructor.
      */
-    private Object readResolve() {
-        if (hiddenAttributes == null) {
-            hiddenAttributes = new TreeSet<>();
-        }
-        if (catalogMode == null) {
-            catalogMode = CatalogMode.HIDE;
-        }
-        if (filter == null) {
-            filter = "INCLUDE";
-        }
-
-        return this;
-    }
-
-    @Override
-    public int compareTo(Rule otherRule) {
-        if (otherRule == null) {
-            // not-null rule comes first
-            return 1;
-        }
-
-        if (priority < otherRule.priority) {
-            // this has lower priority, so should follow
-            return 1;
-        } else if (priority > otherRule.priority) {
-            // this has higher priority, so should come first
-            return -1;
-        } else {
-            // equal priority, compare index
-            if (this.index < otherRule.index) {
-                return -1;
-            } else if (this.index > otherRule.index) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + index;
-        result = prime * result + priority;
-        return result;
-    }
-
-    /**
-     * Makes natural ordering consistent with equals.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Rule other = (Rule) obj;
-        if (index != other.index)
-            return false;
-        if (priority != other.priority)
-            return false;
-        return true;
+    public Rule() {
+        /* NOP */
     }
 
     /**
@@ -236,14 +187,14 @@ public class Rule implements Comparable<Rule> {
      * @return the roles to which this rule applies
      */
     public Set<String> getRoles() {
-        if (roles == null) {
+        if (this.roles == null) {
             return Collections.emptySet();
         }
 
-        Set<String> roleSet = new HashSet<>();
-        String[] rolesArray = roles.split(",");
-        for (String role: rolesArray) {
-            if (!isBlank(role)) {
+        final Set<String> roleSet = new HashSet<>();
+        final String[] rolesArray = this.roles.split(",");
+        for (final String role: rolesArray) {
+            if (StringUtils.isNotBlank(role)) {
                 roleSet.add(role.trim());
             }
         }
@@ -254,8 +205,8 @@ public class Rule implements Comparable<Rule> {
      *
      * @return the access mode
      */
-    public AccessMode getAccessMode() {
-        return accessMode;
+    public String getAccessMode() {
+        return this.accessMode;
     }
 
     /**
@@ -264,25 +215,17 @@ public class Rule implements Comparable<Rule> {
      * @return the parsed filter
      * @throws CQLException if {@link #filter} does not contain a valid ECQL filter expression
      */
-    public Filter getFilter() throws CQLException {
-        return ECQL.toFilter(filter, filterFactory);
+    public String getFilter() {
+        return this.filter;
     }
 
     /**
+     * Get the attributes descriptor for attributes that will be hidden, either with or without an hiding condition.
      *
-     * @return the list of properties that will be hidden (i.e. set to {@code null})
+     * @return the attributes descriptor for attributes that will be hidden, either with or without an hiding condition
      */
-    public List<PropertyName> getHiddenProperties() {
-        if (filterFactory == null) {
-            filterFactory = CommonFactoryFinder.getFilterFactory2();
-        }
-
-        List<PropertyName> hiddenProperties = new ArrayList<>();
-        for (String hiddenAttribute : hiddenAttributes) {
-            hiddenProperties.add(filterFactory.property(hiddenAttribute));
-        }
-
-        return hiddenProperties;
+    public Attributes getHiddenAttributes() {
+        return this.hiddenAttributes;
     }
 
     /**
@@ -290,7 +233,7 @@ public class Rule implements Comparable<Rule> {
      * @return the catalog mode
      */
     public CatalogMode getCatalogMode() {
-        return catalogMode;
+        return this.catalogMode;
     }
 
     /**
@@ -303,44 +246,12 @@ public class Rule implements Comparable<Rule> {
      *
      * @return {@code true} if rule is valid, {@code false} otherwise
      */
+    @Override
     public boolean isValid() {
-        if (priority < 0) {
-            if (LOGGER.isLoggable(Level.FINE)) {
-                LOGGER.fine("Priority must be a positive integer value, was: " + priority);
-            }
-            return false;
-        }
-
-        if (accessMode == null || isBlank(roles) || isBlank(layer) || isBlank(workspace)) {
-            if (LOGGER.isLoggable(Level.FINE)) {
-                LOGGER.fine("accessMode, roles, layer and workspace must not be empty: " + toString());
-            }
-            return false;
-        }
-
-        if (filter != null) {
-            try {
-                getFilter();
-            } catch (CQLException e) {
-                if (LOGGER.isLoggable(Level.FINE)) {
-                    LOGGER.log(Level.FINE, "Filter cannot be parsed", e);
-                }
-                return false;
-            }
-        }
-
-        if (hiddenAttributes != null) {
-            for (String hiddenAttr : hiddenAttributes) {
-                if (isBlank(hiddenAttr)) {
-                    if (LOGGER.isLoggable(Level.FINE)) {
-                        LOGGER.fine("Hidden attributes must not be blank");
-                    }
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return this.isValidPriority() &&
+               this.isValidFilter() &&
+               ValidationUtils.validateAttributes(this.hiddenAttributes) &&
+               this.isValidAccessModeAndRolesAndLayerAndWorkspace();
     }
 
     /**
@@ -349,21 +260,22 @@ public class Rule implements Comparable<Rule> {
      * @param user the user accessing the resource
      * @return {@code true} if the rule applies to this user (based on granted roles), {@code false} otherwise
      */
-    boolean matchRole(Authentication user) {
-        if (matchesAnyRole()) {
+    public boolean matchRole(Authentication user) {
+        if (this.matchesAnyRole()) {
             return true;
         }
 
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+        final Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
         // should never be null, but you never know...
         if (authorities != null) {
-            for (GrantedAuthority authority: authorities) {
-                String role = authority.getAuthority();
-                if (role != null && getRoles().contains(role)) {
+            for (final GrantedAuthority authority: authorities) {
+                final String role = authority.getAuthority();
+                if (role != null && this.getRoles().contains(role)) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
@@ -373,11 +285,12 @@ public class Rule implements Comparable<Rule> {
      * @param resourceInfo the resource to be accessed
      * @return {@code true} if workspace matches, {@code false} otherwise
      */
-    boolean matchWorkspace(ResourceInfo resourceInfo) {
-        if (matchesAnyWorkspace()) {
+    public boolean matchWorkspace(ResourceInfo resourceInfo) {
+        if (this.matchesAnyWorkspace()) {
             return true;
         }
-        return workspace != null && workspace.equals(resourceInfo.getNamespace().getPrefix());
+
+        return this.workspace != null && this.workspace.equals(resourceInfo.getNamespace().getPrefix());
     }
 
     /**
@@ -386,43 +299,178 @@ public class Rule implements Comparable<Rule> {
      * @param resourceInfo the resource to be accessed
      * @return {@code true} if layer matches, {@code false} otherwise
      */
-    boolean matchLayer(ResourceInfo resourceInfo) {
-        if (matchesAnyLayer()) {
+    public boolean matchLayer(ResourceInfo resourceInfo) {
+        if (this.matchesAnyLayer()) {
             return true;
         }
-        return layer != null && layer.equals(resourceInfo.getName());
+
+        return this.layer != null && this.layer.equals(resourceInfo.getName());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(Rule other) {
+        // not-null rule comes first
+        if (other == null) {
+            return 1;
+        }
+        // quick test
+        if (this == other) {
+            return 0;
+        }
+
+        if (this.priority < other.priority) {
+            // this has lower priority, so should follow
+            return 1;
+        } else if (this.priority > other.priority) {
+            // this has higher priority, so should come first
+            return -1;
+        } else {
+            // equal priority, compare index
+            if (this.index < other.index) {
+                return -1;
+            } else if (this.index > other.index) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.index)
+               .append(this.priority);
+
+        return builder.toHashCode();
+    }
+
+    /**
+     * Makes natural ordering consistent with equals.
+     */
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        final Rule other = (Rule) obj;
+
+        if (index != other.index) {
+            return false;
+        }
+        if (priority != other.priority) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Rule [priority=" + this.priority + ", index=" + this.index + ", roles=" + this.roles
+                + ", workspace=" + this.workspace + ", layer=" + this.layer + ", filter=" + this.filter
+                + ", hiddenAttributes=" + this.hiddenAttributes + ", accessMode=" + this.accessMode
+                + ", catalogMode=" + this.catalogMode + "]";
+    }
+
+    private boolean isValidPriority() {
+        if (this.priority < 0) {
+            LOGGER.log(Level.FINE, "Priority must be a positive integer value, was: {}", this.priority);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidFilter() {
+        if (StringUtils.isBlank(this.filter)) {
+            LOGGER.log(Level.FINE, "Filter must not be empty");
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidAccessModeAndRolesAndLayerAndWorkspace() {
+        if (this.accessMode == null || StringUtils.isBlank(this.roles) || StringUtils.isBlank(this.layer) || StringUtils.isBlank(this.workspace)) {
+            LOGGER.log(Level.FINE, "accessMode, roles, layer and workspace must not be empty: {}", this.toString());
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
      *
      * @return {@code true} if rule applies to any role, {@code false} otherwise
      */
-    boolean matchesAnyRole() {
-        return roles != null && ANY.equals(roles);
+    private boolean matchesAnyRole() {
+        return this.roles != null && ANY.equals(roles);
     }
 
     /**
      *
      * @return {@code true} if rule applies to any workspace, {@code false} otherwise
      */
-    boolean matchesAnyWorkspace() {
-        return workspace != null && ANY.equals(workspace);
+    private boolean matchesAnyWorkspace() {
+        return this.workspace != null && ANY.equals(workspace);
     }
 
     /**
      *
      * @return {@code true} if rule applies to any layer, {@code false} otherwise
      */
-    boolean matchesAnyLayer() {
-        return layer != null && ANY.equals(layer);
+    private boolean matchesAnyLayer() {
+        return this.layer != null && ANY.equals(layer);
     }
 
-    @Override
-    public String toString() {
-        return "Rule [priority=" + priority + ", index=" + index + ", roles=" + roles
-                + ", workspace=" + workspace + ", layer=" + layer + ", filter=" + filter
-                + ", hiddenAttributes=" + hiddenAttributes + ", accessMode=" + accessMode
-                + ", catalogMode=" + catalogMode + "]";
+    /**
+     * Invoked by {@link XStream} after deserialization.
+     *
+     * <p>
+     * Takes care of initializing a rule with default values.
+     * </p>
+     *
+     * @return a fully initialized {@link Rule} object
+     */
+    private Object readResolve() {
+        if (this.hiddenAttributes == null) {
+            this.hiddenAttributes = new Attributes();
+        }
+        if (this.catalogMode == null) {
+            this.catalogMode = CatalogMode.HIDE;
+        }
+        if (this.filter == null) {
+            this.filter = INCLUDE;
+        }
+
+        return this;
     }
 
 }

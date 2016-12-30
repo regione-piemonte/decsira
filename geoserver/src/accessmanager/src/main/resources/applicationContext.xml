@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
-    xmlns:util="http://www.springframework.org/schema/util">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="siraAccessManager" class="it.geosolutions.geoserver.sira.security.SiraAccessManager" />
+    <bean id="siraExpressionEngine"
+          class="it.geosolutions.geoserver.sira.security.util.factory.expression.ExpressionRuleEngineFactoryBean" />
 
-    <bean id="siraAccessManagerConfigurator" class="it.geosolutions.geoserver.sira.security.config.SiraAccessManagerConfigurator"
-        depends-on="catalog">
+    <bean id="siraAccessManager"
+          class="it.geosolutions.geoserver.sira.security.SiraAccessManager"
+          p:expressionRuleEngine-ref="siraExpressionEngine"
+    />
+
+    <bean id="siraAccessManagerConfigurator"
+          class="it.geosolutions.geoserver.sira.security.config.SiraAccessManagerConfigurator"
+          depends-on="catalog">
         <constructor-arg index="0" ref="siraAccessManager" />
         <constructor-arg index="1" ref="catalog" />
     </bean>
 
-    <bean id="complexSecureDataFactory" class="it.geosolutions.geoserver.sira.security.MappingFeatureIteratorSecureFactory" />
+    <bean id="complexSecureDataFactory"
+          class="it.geosolutions.geoserver.sira.security.MappingFeatureIteratorSecureFactory"
+          p:expressionRuleEngine-ref="siraExpressionEngine"
+    />
 
 </beans>

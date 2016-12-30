@@ -18,6 +18,7 @@
  */
 package it.geosolutions.geoserver.sira.security;
 
+import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleEngine;
 import it.geosolutions.geoserver.sira.security.util.FeatureUtils;
 
 import org.geoserver.security.WrapperPolicy;
@@ -25,7 +26,8 @@ import org.geotools.data.complex.IMappingFeatureIterator;
 import org.opengis.feature.Feature;
 
 /**
- * Wraps a {@link IMappingFeatureIterator} and adds additional security checks to it.
+ * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code> specialized {@link IMappingFeatureIterator},
+ * adding additional security checks.
  *
  * <p>
  * More specifically, if the {@code limits} object inside the provided {@code policy} is an instance of {@link HidingAccessLimits}, sets to {@code null} all the
@@ -40,22 +42,30 @@ public class SecuredMappingFeatureIterator implements IMappingFeatureIterator {
     /**
      * {@link Feature}s iterator.
      */
-    private IMappingFeatureIterator delegate;
+    private final IMappingFeatureIterator delegate;
 
     /**
      * {@link WrapperPolicy} instance.
      */
-    private WrapperPolicy policy;
+    private final WrapperPolicy policy;
+
+    /**
+     * <code>CSI</code> <code>SIRA</code>
+     * <code>Access Manager</code> <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     */
+    private final ExpressionRuleEngine expressionRuleEngine;
 
     /**
      * Constructor.
      *
      * @param delegate {@link Feature}s iterator
      * @param policy {@link WrapperPolicy} instance
+     * @param expressionRuleEngine  {@link ExpressionRuleEngine} instance
      */
-    public SecuredMappingFeatureIterator(IMappingFeatureIterator delegate, WrapperPolicy policy) {
+    public SecuredMappingFeatureIterator(IMappingFeatureIterator delegate, WrapperPolicy policy, ExpressionRuleEngine expressionRuleEngine) {
         this.delegate = delegate;
         this.policy = policy;
+        this.expressionRuleEngine = expressionRuleEngine;
     }
 
     /*
@@ -76,7 +86,7 @@ public class SecuredMappingFeatureIterator implements IMappingFeatureIterator {
         final Feature next = this.delegate.next();
         if (next != null) {
             // set to null attributes that should be hidden
-            FeatureUtils.hideFeatureAttributes(next, this.policy.limits);
+            FeatureUtils.hideFeatureAttributes(next, this.policy, this.expressionRuleEngine);
         }
 
         return next;

@@ -18,22 +18,23 @@
  */
 package it.geosolutions.geoserver.sira.security;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import it.geosolutions.geoserver.sira.security.config.Attributes.Choose;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.geoserver.security.CatalogMode;
 import org.geoserver.security.VectorAccessLimits;
-import org.geotools.factory.CommonFactoryFinder;
 import org.opengis.filter.Filter;
-import org.opengis.filter.FilterFactory2;
 import org.opengis.filter.expression.PropertyName;
+import org.springframework.security.core.Authentication;
 
 /**
- * {@link VectorAccessLimits} subclass giving client code the ability to specify a list of properties
- * that should be removed from the retrieved resources (typically feature types).
+ * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code> specialized {@link VectorAccessLimits} subclass
+ * giving client code the ability to specify a list of properties that should be removed
+ * from the retrieved resources (typically feature types).
  *
  * <p>
  * Works in combination with {@link SecuredMappingFeatureIterator}.
@@ -44,17 +45,22 @@ import org.opengis.filter.expression.PropertyName;
  */
 public class HidingAccessLimits extends VectorAccessLimits {
 
-    private static final long serialVersionUID = 7485101131641588345L;
-
-    /**
-     * Filter
-     */
-    private static final FilterFactory2 FF = CommonFactoryFinder.getFilterFactory2(null);
+    private static final long serialVersionUID = 8822794908734200548L;
 
     /**
      * The list of properties that should be removed from the retrieved resources (typically feature types).
      */
-    private transient List<PropertyName> hiddenProperties = new ArrayList<>();
+    private final transient List<PropertyName> hiddenProperties = new ArrayList<>();
+
+    /**
+     * The authentication token giving access to the user requesting the resource under limits.
+     */
+    private final transient Authentication auth;
+
+    /**
+     * Dinamically choosen properties to hide.
+     */
+    private final transient Choose chooseHiddenProperties;
 
     /**
      * Constructor.
@@ -64,9 +70,14 @@ public class HidingAccessLimits extends VectorAccessLimits {
      * @param readFilter
      * @param writeAttributes
      * @param writeFilter
+     * @param auth the authentication token giving access to the user requesting the resource under limits
+     * @param chooseHiddenProperties dinamically choosen properties to hide
      */
-    public HidingAccessLimits(CatalogMode mode, List<PropertyName> readAttributes, Filter readFilter, List<PropertyName> writeAttributes, Filter writeFilter) {
+    public HidingAccessLimits(CatalogMode mode, List<PropertyName> readAttributes, Filter readFilter, List<PropertyName> writeAttributes, Filter writeFilter, Authentication auth, Choose chooseHiddenProperties) {
         super(mode, readAttributes, readFilter, writeAttributes, writeFilter);
+
+        this.auth = auth;
+        this.chooseHiddenProperties = chooseHiddenProperties == null ? new Choose() : chooseHiddenProperties;
     }
 
     /**
@@ -77,6 +88,22 @@ public class HidingAccessLimits extends VectorAccessLimits {
         return this.hiddenProperties;
     }
 
+    /**
+     * Get the authentication token giving access to the user requesting the resource under limits.
+     *
+     * @return the authentication token giving access to the user requesting the resource under limits
+     */
+    public Authentication getAuth() {
+        return this.auth;
+    }
+
+    /**
+     * @return the chooseHiddenProperties
+     */
+    public Choose getChooseHiddenProperties() {
+        return this.chooseHiddenProperties;
+    }
+
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.VectorAccessLimits#hashCode()
@@ -84,9 +111,12 @@ public class HidingAccessLimits extends VectorAccessLimits {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((this.hiddenProperties == null) ? 0 : this.hiddenProperties.hashCode());
-        return result;
+        final HashCodeBuilder builder = new HashCodeBuilder();
+        builder.append(this.hiddenProperties)
+               .append(this.chooseHiddenProperties)
+               .append(this.auth);
+
+        return prime * super.hashCode() + builder.toHashCode();
     }
 
     /*
@@ -98,6 +128,9 @@ public class HidingAccessLimits extends VectorAccessLimits {
         if (this == obj) {
             return true;
         }
+        if (obj == null) {
+            return false;
+        }
         if (! super.equals(obj)) {
             return false;
         }
@@ -106,81 +139,13 @@ public class HidingAccessLimits extends VectorAccessLimits {
         }
 
         final HidingAccessLimits other = (HidingAccessLimits) obj;
-        if (this.hiddenProperties == null) {
-            if (other.hiddenProperties != null) {
-                return false;
-            }
-        } else if (! this.hiddenProperties.equals(other.hiddenProperties)) {
-            return false;
-        }
 
-        return true;
-    }
+        final EqualsBuilder builder = new EqualsBuilder();
+        builder.append(this.hiddenProperties, other.hiddenProperties)
+               .append(this.chooseHiddenProperties, other.chooseHiddenProperties)
+               .append(this.auth, other.auth);
 
-    /**
-     * Deserialization
-     *
-     * @param in
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-
-        this.hiddenProperties = this.readAttributes(in);
-    }
-
-    /**
-     * Serialization
-     *
-     * @param out
-     * @throws IOException
-     */
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.defaultWriteObject();
-
-        this.writeAttributes(this.hiddenProperties, out);
-    }
-
-    /**
-     *
-     * @param attributes
-     * @param oos
-     * @throws IOException
-     */
-    private void writeAttributes(List<PropertyName> attributes, ObjectOutputStream oos) throws IOException {
-        if (attributes == null) {
-            oos.writeInt(-1);
-        } else {
-            oos.writeInt(attributes.size());
-            for (final PropertyName property : attributes) {
-                oos.writeObject(property.getPropertyName());
-                // TODO: write out the namespace support as well
-            }
-        }
-    }
-
-    /**
-     *
-     * @param ois
-     * @return
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    private List<PropertyName> readAttributes(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        final List<PropertyName> properties = new ArrayList<>();
-
-        int size = ois.readInt();
-        if (size > -1) {
-            for (int i = 0; i < size; i++) {
-                String name = (String) ois.readObject();
-
-                properties.add(FF.property(name));
-                // TODO: read out the namespace support as well
-            }
-        }
-
-        return properties;
+        return builder.isEquals();
     }
 
 }

@@ -18,10 +18,12 @@
  */
 package it.geosolutions.geoserver.sira.security;
 
+import it.geosolutions.geoserver.sira.security.config.Attributes.Choose;
 import it.geosolutions.geoserver.sira.security.config.Rule;
 import it.geosolutions.geoserver.sira.security.config.SiraAccessManagerConfiguration;
+import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleEngine;
+import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleHelper;
 
-import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,9 +50,7 @@ import org.geoserver.security.WorkspaceAccessLimits;
 import org.geotools.filter.text.cql2.CQLException;
 import org.geotools.util.logging.Logging;
 import org.opengis.filter.Filter;
-import org.opengis.filter.expression.PropertyName;
 import org.springframework.security.core.Authentication;
-import org.springframework.util.CollectionUtils;
 
 /**
  * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>: a <code>GeoServer</code> <a href="http://docs.geoserver.org/stable/en/user/security/layer.html">Secure Catalog</a> implementation.
@@ -80,6 +80,12 @@ public class SiraAccessManager implements ResourceAccessManager {
      * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code> configuration instance.
      */
     SiraAccessManagerConfiguration configuration;
+
+    /**
+     * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     * <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     */
+    ExpressionRuleEngine expressionRuleEngine;
 
     /**
      * Constructor.
@@ -116,22 +122,49 @@ public class SiraAccessManager implements ResourceAccessManager {
         }
     }
 
+    /**
+     * Get the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     * <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     *
+     * @return the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     *         <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine
+     */
+    public ExpressionRuleEngine getExpressionRuleEngine() {
+        if (this.expressionRuleEngine == null) {
+            /*
+             * NPE-safe: initialize a "default" expression engine, with no root object set and no function(s) registered.
+             * Should never occur.
+             */
+            this.expressionRuleEngine = new ExpressionRuleEngine();
+        }
+
+        return expressionRuleEngine;
+    }
+
+    /**
+     * Set the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     * <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     *
+     * @param expressionRuleEngine the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     *        <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine
+     */
+    public void setExpressionRuleEngine(ExpressionRuleEngine expressionRuleEngine) {
+        this.expressionRuleEngine = expressionRuleEngine;
+    }
+
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.ResourceAccessManager#getAccessLimits(org.springframework.security.core.Authentication, org.geoserver.catalog.WorkspaceInfo)
      */
     @Override
     public WorkspaceAccessLimits getAccessLimits(Authentication user, WorkspaceInfo workspace) {
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Getting access limits for workspace {0}", workspace.getName());
-        }
+        LOGGER.log(Level.FINE, "Getting access limits for workspace {0}", workspace.getName());
         if (this.isAdmin(user)) {
             LOGGER.log(Level.FINE, "Admin level access, returning full rights for workspace {0}", workspace.getName());
 
             return new WorkspaceAccessLimits(DEFAULT_CATALOG_MODE, true, true, true);
         }
 
-        // TODO: workspace access rights are fixed (read-only access)
         return new WorkspaceAccessLimits(DEFAULT_CATALOG_MODE, true, false);
     }
 
@@ -150,9 +183,7 @@ public class SiraAccessManager implements ResourceAccessManager {
      */
     @Override
     public DataAccessLimits getAccessLimits(Authentication user, ResourceInfo resource) {
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Getting access limits for resource {0}", resource.getName());
-        }
+        LOGGER.log(Level.FINE, "Getting access limits for resource {0}", resource.getName());
 
         if (this.isAdmin(user)) {
             // admin can do anything
@@ -161,9 +192,13 @@ public class SiraAccessManager implements ResourceAccessManager {
             return null;
         }
 
-        final Rule bestMatchingRule = this.getConfiguration().findFirstMatchingRuleForResource(user, resource);
+        final Rule firstMatchingRule = ExpressionRuleHelper.findFirstMatchingRule(
+            user, resource,
+            this.getConfiguration(),
+            this.getExpressionRuleEngine()
+        );
 
-        return this.buildResourceAccessLimits(resource, bestMatchingRule);
+        return this.buildResourceAccessLimits(user, resource, firstMatchingRule);
     }
 
     /*
@@ -213,16 +248,16 @@ public class SiraAccessManager implements ResourceAccessManager {
     /**
      * Instantiates the proper data access limits implementation, based on the resource type, and sets access limits according to the provided rule.
      *
+     * @param auth the authentication token provided, giving access to the user requesting the resource
      * @param resource the resource being accessed
      * @param rule the access rule
      * @return data access limits for the specified resource
      * @throws IllegalArgumentException if any error occurs during ECQL Filter parsing, or if the given resource is not of a known type
      */
-    private DataAccessLimits buildResourceAccessLimits(ResourceInfo resource, Rule rule) {
+    private DataAccessLimits buildResourceAccessLimits(Authentication auth, ResourceInfo resource, Rule rule) {
         final Filter accessFilter = this.buildAccessFilter(rule);
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Filter {0} will be applied to resource {1}", new Object[] { accessFilter, resource.getName() });
-        }
+
+        LOGGER.log(Level.FINE, "Filter {0} will be applied to resource {1}", new Object[] { accessFilter, resource.getName() });
 
         // set read / write filters based on access mode
         final Filter[] readWriteFilters = this.buildReadWriteFilter(rule, accessFilter);
@@ -233,16 +268,10 @@ public class SiraAccessManager implements ResourceAccessManager {
         if (resource instanceof CoverageInfo) {
             return new CoverageAccessLimits(rule.getCatalogMode(), readFilter, null, null);
         } else if (resource instanceof FeatureTypeInfo) {
+            final Choose chooseHiddenProperties = rule.getHiddenAttributes().getChoose();
             // TODO: use readAttributes and writeAttributes where possible, which is likely to be more performant
-            final HidingAccessLimits limits = new HidingAccessLimits(rule.getCatalogMode(), null, readFilter, null, writeFilter);
-            final List<PropertyName> hiddenProperties = rule.getHiddenProperties();
-            if (! CollectionUtils.isEmpty(hiddenProperties)) {
-                if (LOGGER.isLoggable(Level.FINE)) {
-                    LOGGER.log(Level.FINE, "Properties {0} will be removed from resource {1}", new Object[] { hiddenProperties, resource.getName() });
-                }
-
-                limits.getHiddenProperties().addAll(hiddenProperties);
-            }
+            final HidingAccessLimits limits = new HidingAccessLimits(rule.getCatalogMode(), null, readFilter, null, writeFilter, auth, chooseHiddenProperties);
+            limits.getHiddenProperties().addAll(this.getExpressionRuleEngine().evaluateHiddenProperties(rule));
 
             return limits;
         } else {
@@ -259,7 +288,7 @@ public class SiraAccessManager implements ResourceAccessManager {
      */
     private Filter buildAccessFilter(Rule rule) {
         try {
-            return rule.getFilter();
+            return this.getExpressionRuleEngine().evaluateFilter(rule);
         } catch (CQLException e) {
             throw new IllegalArgumentException("Failed to parse access filter as ECQL", e);
         }
@@ -274,13 +303,15 @@ public class SiraAccessManager implements ResourceAccessManager {
      * @return the read / write filters based on given access rule mode, as {@link Filter} array
      */
     private Filter[] buildReadWriteFilter(Rule rule, Filter accessFilter) {
+        final AccessMode accessMode = this.getExpressionRuleEngine().evaluateAccessMode(rule);
+
         final Filter[] readWriteFilters = new Filter[2];
-        if (AccessMode.READ == rule.getAccessMode()) {
+        if (AccessMode.READ == accessMode) {
             readWriteFilters[0] = accessFilter;
             readWriteFilters[1] = Filter.EXCLUDE;
         } else if (
-            AccessMode.WRITE == rule.getAccessMode() ||
-            AccessMode.ADMIN == rule.getAccessMode()
+            AccessMode.WRITE == accessMode ||
+            AccessMode.ADMIN == accessMode
         ) {
             readWriteFilters[0] = accessFilter;
             // use access filter also for write filter

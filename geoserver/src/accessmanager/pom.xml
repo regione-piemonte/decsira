@@ -95,7 +95,13 @@
         <spring-security.version>3.1.0.RELEASE</spring-security.version>
 
         <!-- Testing -->
-        <!-- t.b.a. -->
+        <test.exclude.pattern>none</test.exclude.pattern>
+        <test.maxHeapSize>512M</test.maxHeapSize>
+        <test.maxPermSize>128M</test.maxPermSize>
+        <jvm.opts />
+        <java.awt.headless>true</java.awt.headless>
+        <remoteOwsTests>false</remoteOwsTests>
+        <test.allow.failure.ignore>false</test.allow.failure.ignore>
 
         <!-- Build -->
         <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
@@ -183,7 +189,30 @@
             </plugin>
 
             <!-- unit testing -->
-            <!-- t.b.a. -->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>${test.exclude.pattern}</exclude>
+                    </excludes>
+                    <forkMode>once</forkMode>
+                    <argLine>-Xmx${test.maxHeapSize} -XX:MaxPermSize=${test.maxPermSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -DremoteOwsTests=${remoteOwsTests} -Duser.language=EN</argLine>
+                    <printSummary>true</printSummary>
+                    <testFailureIgnore>${test.allow.failure.ignore}</testFailureIgnore>
+                    <systemProperties>
+                        <property>
+                            <name>log4j.configuration</name>
+                            <value>conf/logging.properties</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
 
             <!-- eclipse ide integration -->
             <plugin>
@@ -279,6 +308,18 @@
     <!-- t.b.a. -->
 
     <dependencies>
+        <!-- SIRA modules -->
+        <dependency>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geoserver.security</groupId>
+            <artifactId>iride-entities</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

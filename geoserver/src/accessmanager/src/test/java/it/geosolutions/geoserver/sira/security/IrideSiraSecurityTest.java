@@ -25,29 +25,41 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.geoserver.catalog.Catalog;
 import org.geoserver.catalog.FeatureTypeInfo;
 import org.geoserver.data.test.SystemTestData;
 import org.geoserver.platform.GeoServerExtensions;
+import org.geoserver.security.impl.GeoServerRole;
 import org.geoserver.security.impl.GeoServerUser;
 import org.geoserver.security.iride.entity.IrideIdentity;
+import org.geoserver.security.iride.entity.IrideInfoPersona;
 import org.geoserver.security.iride.util.IrideUserProperties;
 import org.geoserver.test.AbstractAppSchemaTestSupport;
 import org.junit.Test;
-import org.w3c.dom.Document;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 
 /**
  *
- * @author Stefano Costa, GeoSolutions
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class SiraSecurityTest extends AbstractAppSchemaTestSupport {
+public class IrideSiraSecurityTest extends AbstractAppSchemaTestSupport {
 
-    private static final String CONFIG_RESOURCE = "/test-sira-access-manager-config.xml";
+    private static final String CONFIG_RESOURCE = "/test-iride-sira-access-manager-config.xml";
     private static final String CONFIG_FILE_DEST = "sira-access-manager.xml";
+
+    private static final IrideIdentity DEMO_20 = IrideIdentity.parseIrideIdentity("AAAAAA00B77B000F/CSI PIEMONTE/DEMO 20/IPA/20160531113948/2/1IQssTaf4vNMa66qU52m7g==");
+    private static final IrideIdentity DEMO_32 = IrideIdentity.parseIrideIdentity("AAAAAA00A11M000U/CSI PIEMONTE/DEMO 32/IPA/20161027103359/2/uQ4hHIMEEruA6DGThS3EuA==");
+
+    private static final String PA_GEN_DECSIRA  = "PA_GEN_DECSIRA@REG_PMN";
+    private static final String PA_SPEC_DECSIRA = "PA_SPEC_DECSIRA@REG_PMN";
 
     @Test
     public void testSecureDataStore() {
@@ -57,48 +69,11 @@ public class SiraSecurityTest extends AbstractAppSchemaTestSupport {
         FeatureTypeInfo aua = catalog.getFeatureTypeByName("sira:AutorizzazioneUnicaAmbientale");
         assertNull(aua);
 
-        // login as user with role Profilo_A
-        this.login("userA", "test", "Profilo_A");
+        // login as user with role PA_SPEC_DECSIRA
+        this.login("DEMO 20", "PIEMONTE", new String[] { PA_SPEC_DECSIRA }, DEMO_20, new IrideInfoPersona[] {});
 
         aua = catalog.getFeatureTypeByName("sira:AutorizzazioneUnicaAmbientale");
         assertNotNull(aua);
-    }
-
-    /**
-     * Test that query returns correct output for a user with role 'Profilo_A'.
-     */
-    @Test
-    public void testSecureAutorizzazioneUnicaAmbientaleProfiloA() {
-        this.setRequestAuth("userA", "test");
-
-        final Document doc = this.getAsDOM("ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale");
-        LOGGER.info("WFS GetFeature response:\n" + this.prettyString(doc));
-
-        assertXpathCount(2, "//sira:AutorizzazioneUnicaAmbientale", doc);
-        assertXpathCount(2, "//sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa", doc);
-        // should be visible
-        assertXpathCount(2, "//sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento", doc);
-        // should be hidden
-        assertXpathCount(0, "//sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio", doc);
-    }
-
-    /**
-     * Test that query returns correct output for a user with role 'Profilo_B'.
-     */
-    @Test
-    public void testSecureAutorizzazioneUnicaAmbientaleProfiloB() {
-        this.setRequestAuth("userB", "test");
-
-        final Document doc = this.getAsDOM("ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale");
-
-        LOGGER.info("WFS GetFeature response:\n" + this.prettyString(doc));
-
-        assertXpathCount(4, "//sira:AutorizzazioneUnicaAmbientale", doc);
-        assertXpathCount(4, "//sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa", doc);
-        // should be visible
-        assertXpathCount(4, "//sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:nrProvvedimento", doc);
-        // should be visible as well
-        assertXpathCount(4, "//sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio", doc);
     }
 
     /*
@@ -141,15 +116,15 @@ public class SiraSecurityTest extends AbstractAppSchemaTestSupport {
     protected void onSetUp(SystemTestData testData) throws Exception {
         super.onSetUp(testData);
 
-        this.addUser("userA", "test", null, Arrays.asList("Profilo_A"));
-        this.addUser("userB", "test", null, Arrays.asList("Profilo_B"));
+        this.addUser("DEMO 20", "PIEMONTE", null, Arrays.asList(PA_SPEC_DECSIRA));
 
-        final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity("NNRLSN69P26L570X/Aldesino/Innerkofler/IPA/20160531113948/2//VZjBdhZTwU+/7AU0A8HjQ==");
+        final GeoServerUser demo20 = this.getSecurityManager().loadUserGroupService("default").getUserByUsername("DEMO 20");
+        demo20.getProperties().put(IrideUserProperties.IRIDE_IDENTITY, DEMO_20);
 
-        this.addUser("userC", "test", null, Arrays.asList("PA_SPEC_CONS_DECSIRA@REG_PMN", "PA_SPEC_DECSIRA@REG_PMN"));
+        this.addUser("DEMO 32", "PIEMONTE", null, Arrays.asList(PA_GEN_DECSIRA));
 
-        final GeoServerUser userC = this.getSecurityManager().loadUserGroupService("default").getUserByUsername("userC");
-        userC.getProperties().put(IrideUserProperties.IRIDE_IDENTITY, irideIdentity);
+        final GeoServerUser demo32 = this.getSecurityManager().loadUserGroupService("default").getUserByUsername("DEMO 32");
+        demo32.getProperties().put(IrideUserProperties.IRIDE_IDENTITY, DEMO_32);
     }
 
     private void copyConfigurationFile(File dataDirRoot, String configResource) throws IOException {
@@ -167,6 +142,25 @@ public class SiraSecurityTest extends AbstractAppSchemaTestSupport {
             IOUtils.copy(this.getClass().getResourceAsStream(configResource), fos);
         }
         assertTrue(configFile.exists());
+    }
+
+    private void login(String username, String password, String[] roles, IrideIdentity identity, IrideInfoPersona[] infoPersonae) {
+        SecurityContextHolder.setContext(new SecurityContextImpl());
+
+        final Set<GrantedAuthority> authorities = new LinkedHashSet<>();
+        for (final String role : roles) {
+            authorities.add(new GeoServerRole(role));
+        }
+
+        final GeoServerUser user = new GeoServerUser(username);
+        user.setAuthorities(authorities);
+        user.setPassword(password);
+        user.getProperties().put(IrideUserProperties.IRIDE_IDENTITY, identity);
+        user.getProperties().put(IrideUserProperties.INFO_PERSONAE, infoPersonae);
+
+        SecurityContextHolder.getContext().setAuthentication(
+            new UsernamePasswordAuthenticationToken(user, password, authorities)
+        );
     }
 
 }

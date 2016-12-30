@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+    <rules>
+        <Rule>
+            <priority>10</priority>
+            <roles>PA_SPEC_DECSIRA@REG_PMN</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <!--
+                sample expression, showing:
+                 - how to read properties nested within the root object
+                 - how to compare different values with the alphabetic alias of a relational operator ('eq')
+                 - how to match a textual value against a given regular expression ('matches')
+                 - how to connect a pair of sub-expressions with a logical operator ('and')
+                 - how to return a result with a conditional operator ('? ... : ...')
+            -->
+            <accessMode>#{
+                user.properties['irideIdentity'].cognome eq 'DEMO 20' and
+                user.properties['irideIdentity'].nome matches '(?i).*piemonte'
+                    ? 'READ'
+                    : 'IGNORERULE'
+            }</accessMode>
+            <filter>"sira:istanza/sira:IstanzaAutorizzativa/sira:tipoRichiesta/sira:TipoRichiesta/@gml:id" = 'tipo_richiesta.2'</filter>
+            <hiddenAttributes>
+                <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio</attribute>
+            </hiddenAttributes>
+        </Rule>
+        <Rule>
+            <priority>15</priority>
+            <roles>PA_GEN_DECSIRA@REG_PMN</roles>
+            <workspace>sira</workspace>
+            <layer>AutorizzazioneUnicaAmbientale</layer>
+            <!--
+                sample expression, showing:
+                 - how to access a static member/method with the T() operator
+                 - how to access system property programmatically with the @ prefix
+                 - how to mix SpEL expression with literal text
+             -->
+            <accessMode>#{T(java.lang.System).out.println(user.properties['irideIdentity'])}READ</accessMode>
+            <filter>INCLUDE</filter>
+            <hiddenAttributes>
+                <choose>
+                    <when>
+			            <!--
+			                sample expression, showing:
+			                 - how to use a previously registered user defined function
+			                 - how to read properties nested within the root object
+			                 - how to compare different values by calling Java object methods ('startWith()')
+			                 - how to return a valid, albeit simple, ECQL Filter string representation
+			             -->
+                        <filter>#{#if (user.properties['irideIdentity'].cognome.startsWith('DEMO')), 'INCLUDE', 'EXCLUDE'}</filter>
+                        <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio</attribute>
+                    </when>
+                    <otherwise />
+                </choose>
+	            <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</attribute>
+            </hiddenAttributes>
+        </Rule>
+    </rules>
+</Config>

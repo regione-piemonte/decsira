@@ -73,6 +73,7 @@ public final class IridePolicyAuthenticationProviderFactory extends AbstractIrid
         final IridePolicyAuthenticationProvider iridePolicyAuthenticationProvider = new IridePolicyAuthenticationProvider();
         iridePolicyAuthenticationProvider.setUserDetailsService(userGroupService);
         iridePolicyAuthenticationProvider.setIrideService(this.irideService);
+        iridePolicyAuthenticationProvider.setForcePrincipalAsString(false);
 
         return iridePolicyAuthenticationProvider;
     }

@@ -18,45 +18,31 @@
  */
 package it.geosolutions.geoserver.sira.security;
 
-import org.geoserver.test.AbstractAppSchemaMockData;
+import it.geosolutions.geoserver.sira.security.config.ConfigTest;
+import it.geosolutions.geoserver.sira.security.config.ExpressionTest;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  *
- * @author Stefano Costa, GeoSolutions
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class SiraSecurityTestData extends AbstractAppSchemaMockData {
-
-    static final String AUA_FEATURE_TYPE = "AutorizzazioneUnicaAmbientale";
-    static final String ISTANZA_FEATURE_TYPE = "IstanzaAutorizzativa";
-
-    /**
-     * Prefix for sira namespace.
-     */
-    protected static final String SIRA_PREFIX = "sira";
-
-    /**
-     * URI for sira namespace.
-     */
-    protected static final String SIRA_URI = "http://www.regione.piemonte.it/ambiente/sira/1.0";
+@RunWith(Suite.class)
+@SuiteClasses({
+    ConfigTest.class,
+    ExpressionTest.class,
+    SiraSecurityTest.class,
+    IrideSiraSecurityTest.class
+})
+public final class AllTests {
 
     /**
      * Constructor.
      */
-    public SiraSecurityTestData() {
-        this.setSchemaCatalog("sira-catalog.xml");
-    }
-
-    /*
-     *
-     * (non-Javadoc)
-     * @see org.geoserver.test.AbstractAppSchemaMockData#addContent()
-     */
-    @Override
-    protected void addContent() {
-        this.putNamespace(SIRA_PREFIX, SIRA_URI);
-        this.addFeatureType(SIRA_PREFIX, AUA_FEATURE_TYPE, "AUA.xml", "aua.properties", "sira-catalog.xml");
-        this.addFeatureType(SIRA_PREFIX, ISTANZA_FEATURE_TYPE, "Istanza.xml", "istanza.properties", "sira-catalog.xml");
+    private AllTests() {
+        /* NOP */
     }
 
 }
