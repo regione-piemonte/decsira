@@ -19,19 +19,20 @@
 package it.geosolutions.geoserver.sira.security.config;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.geoserver.catalog.ResourceInfo;
 import org.geotools.filter.FilterFactoryImpl;
 import org.geotools.util.logging.Logging;
 import org.opengis.filter.FilterFactory2;
 import org.opengis.filter.expression.PropertyName;
-import org.springframework.security.core.Authentication;
 import org.xml.sax.helpers.NamespaceSupport;
+
+import com.google.common.collect.ImmutableSortedSet;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Plain Old Java Object (POJO) representing an access manager configuration.
@@ -48,26 +49,51 @@ import org.xml.sax.helpers.NamespaceSupport;
  * @author Stefano Costa, GeoSolutions
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public class SiraAccessManagerConfiguration {
+public class SiraAccessManagerConfiguration implements ValidatableConfiguration {
 
-	/**
-	 * Logger.
-	 */
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logging.getLogger(SiraAccessManagerConfiguration.class);
 
-    /** Default rule, applied if no other rule matches. See {@link Rule#DENY_ALL}. */
-    static final Rule DEFAULT_RULE = Rule.DENY_ALL;
+    /**
+     * Default rule, applied if no other rule matches. See {@link Rule#DENY_ALL}.
+     */
+    public static final Rule DEFAULT_RULE = Rule.DENY_ALL;
 
-    /** The filter factory to pass on to rules. */
-    static final NamespaceContextAwareFilterFactory2 FF = new NamespaceContextAwareFilterFactory2();
+    /**
+     * The filter factory to pass on to rules.
+     */
+    public static final NamespaceContextAwareFilterFactory2 FF = new NamespaceContextAwareFilterFactory2();
 
-    /** Collection used to sort rules according to their natural ordering (see {@link Rule}). */
-    TreeSet<Rule> orderedRules = new TreeSet<>();
+    /**
+     * Collection used to sort rules according to their natural ordering (see {@link Rule}).
+     */
+    SortedSet<Rule> orderedRules = new TreeSet<>();
 
-    /** The rules in this configuration. */
+    /**
+     * The rules in this configuration.
+     */
     List<Rule> rules = new ArrayList<>();
 
+    /**
+     * Constructor.
+     */
     SiraAccessManagerConfiguration() {
+        /* NOP */
+    }
+
+    /**
+     * Get the collection used to sort rules according to their natural ordering (see {@link Rule}).
+     * <p>The returned collection is <em>immutable</em>.
+     *
+     * @return the collection used to sort rules according to their natural ordering (see {@link Rule})
+     */
+    public SortedSet<Rule> getOrderedRules() {
+        return this.orderedRules == null
+            // should never be null, but you never know...
+            ? ImmutableSortedSet.<Rule>of()
+            : ImmutableSortedSet.copyOf(this.orderedRules);
     }
 
     /**
@@ -76,51 +102,15 @@ public class SiraAccessManagerConfiguration {
      * @return {@code true} if the configuration is valid, {@code false} otherwise
      */
     public boolean isValid() {
-        for (Rule rule: rules) {
-            if (!rule.isValid()) {
-                if (LOGGER.isLoggable(Level.FINE)) {
-                    LOGGER.fine("Invalid rule found: " + rule);
-                }
+        for (final Rule rule: this.rules) {
+            if (! rule.isValid()) {
+                LOGGER.log(Level.FINE, "Invalid rule found: {0}", rule);
+
                 return false;
             }
         }
+
         return true;
-    }
-
-    /**
-     * Scans the ordered set of available rules and returns the first matching rule.
-     *
-     * <p>If none matches, {@link #DEFAULT_RULE} is returned, which denies all access.</p>
-     *
-     * @param user the user accessing the resource
-     * @param resourceInfo the resource being accessed
-     * @return the best matching security rule
-     */
-    public Rule findFirstMatchingRuleForResource(Authentication user, ResourceInfo resourceInfo) {
-        if (user == null) {
-            // may happen sometimes, especially in test cases
-            return DEFAULT_RULE;
-        }
-        if (resourceInfo == null) {
-            throw new IllegalArgumentException("resourceInfo must not be null");
-        }
-
-        Rule firstMatchingRule = DEFAULT_RULE;
-
-        boolean found = false;
-        Iterator<Rule> ruleIter = orderedRules.iterator();
-        while (ruleIter.hasNext() && !found) {
-            Rule testRule = ruleIter.next();
-            boolean roleMatch = testRule.matchRole(user);
-            boolean workspaceMatch = testRule.matchWorkspace(resourceInfo);
-            boolean layerMatch = testRule.matchLayer(resourceInfo);
-            found = roleMatch && workspaceMatch && layerMatch;
-            if (found) {
-                firstMatchingRule = testRule;
-            }
-        }
-
-        return firstMatchingRule;
     }
 
     /**
@@ -133,7 +123,7 @@ public class SiraAccessManagerConfiguration {
     }
 
     /**
-     * Invoked by XStream after deserialization.
+     * Invoked by {@link XStream} after deserialization.
      *
      * <p>
      * Takes care of initializing rules with the proper filter factory and position in the configuration.
@@ -142,44 +132,63 @@ public class SiraAccessManagerConfiguration {
      * @return a fully initialized configuration object
      */
     private Object readResolve() {
-        for (int i=0; i<rules.size(); i++) {
-            Rule rule = rules.get(i);
-            rule.filterFactory = FF;
+        for (int i = 0; i < this.rules.size(); i++) {
+            final Rule rule = this.rules.get(i);
             rule.index = i;
         }
-        orderedRules = new TreeSet<Rule>(rules);
+        this.orderedRules = new TreeSet<>(this.rules);
 
         return this;
     }
 
     /**
-     * Custom {@link FilterFactory2} implementation that supports injection of a namespace context, in the form of a {@link NamespaceSupport} instance.
+     * Custom {@link FilterFactory2} implementation that supports injection of a namespace context,
+     * in the form of a {@link NamespaceSupport} instance.
      *
      * <p>
      * The namespace context is automatically set in {@link PropertyName} expressions built with this factory.
      * </p>
+     *
+     * @author Stefano Costa, GeoSolutions
+     * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
      */
-    private static class NamespaceContextAwareFilterFactory2 extends FilterFactoryImpl {
+    public static final class NamespaceContextAwareFilterFactory2 extends FilterFactoryImpl {
 
+        /**
+         * The injected namespace context.
+         */
         private NamespaceSupport namespaceContext;
 
+        /**
+         * Constructor.
+         */
         private NamespaceContextAwareFilterFactory2() {
             super();
         }
 
+        /*
+         * (non-Javadoc)
+         * @see org.geotools.filter.FilterFactoryImpl#property(java.lang.String)
+         */
         @Override
         public PropertyName property(String name) {
             // this check avoids infinite recursion when namespaceContext == null
-            if (namespaceContext != null) {
-                return property(name, namespaceContext);
+            if (this.namespaceContext != null) {
+                return this.property(name, this.namespaceContext);
             } else {
                 return super.property(name);
             }
         }
 
+        /**
+         * Set the namespace context.
+         *
+         * @param the namespace context to set
+         */
         private void setNamepaceContext(NamespaceSupport namespaceContext) {
             this.namespaceContext = namespaceContext;
         }
+
     }
 
 }

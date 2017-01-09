@@ -18,14 +18,16 @@
  */
 package it.geosolutions.geoserver.sira.security;
 
+import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleEngine;
+
 import org.geoserver.platform.ExtensionPriority;
 import org.geoserver.security.WrapperPolicy;
 import org.geoserver.security.decorators.SecuredObjectFactory;
 import org.geotools.data.complex.IMappingFeatureIterator;
 
 /**
- * Specialized {@link SecuredObjectFactory} wrapping {@link IMappingFeatureIterator}
- * instances with a {@link SecuredMappingFeatureIterator}.
+ * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code> specialized {@link SecuredObjectFactory},
+ * wrapping {@link IMappingFeatureIterator} instances with a {@link SecuredMappingFeatureIterator}.
  *
  * <p>
  * Mainly useful to secure Application Schema DataStores.
@@ -35,6 +37,42 @@ import org.geotools.data.complex.IMappingFeatureIterator;
  * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 public class MappingFeatureIteratorSecureFactory implements SecuredObjectFactory {
+
+    /**
+     * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     * <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     */
+    private ExpressionRuleEngine expressionRuleEngine;
+
+    /**
+     * Get the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     * <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     *
+     * @return the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     *         <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine
+     */
+    public ExpressionRuleEngine getExpressionRuleEngine() {
+        if (this.expressionRuleEngine == null) {
+            /*
+             * NPE-safe: initialize a "default" expression engine, with no root object set and no function(s) registered.
+             * Should never occur.
+             */
+            this.expressionRuleEngine = new ExpressionRuleEngine();
+        }
+
+        return expressionRuleEngine;
+    }
+
+    /**
+     * Set the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     * <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine.
+     *
+     * @param expressionRuleEngine the <code>CSI</code> <code>SIRA</code> <code>Access Manager</code>
+     *        <a href="http://docs.spring.io/spring/docs/3.1.4.RELEASE/spring-framework-reference/html/expressions.html">Spring Expression Language (SpEL)</a> engine
+     */
+    public void setExpressionRuleEngine(ExpressionRuleEngine expressionRuleEngine) {
+        this.expressionRuleEngine = expressionRuleEngine;
+    }
 
     /*
      * (non-Javadoc)
@@ -65,7 +103,7 @@ public class MappingFeatureIteratorSecureFactory implements SecuredObjectFactory
             throw new IllegalArgumentException("Don't know how to wrap objects of class " + object.getClass());
 
         if (IMappingFeatureIterator.class.isAssignableFrom(clazz)) {
-            return new SecuredMappingFeatureIterator((IMappingFeatureIterator) object, policy);
+            return new SecuredMappingFeatureIterator((IMappingFeatureIterator) object, policy, this.getExpressionRuleEngine());
         }
 
         // all attempts have been made, we don't know how to handle this object

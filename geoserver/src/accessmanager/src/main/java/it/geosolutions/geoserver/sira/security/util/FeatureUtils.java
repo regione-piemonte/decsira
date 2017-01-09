@@ -19,21 +19,33 @@
 package it.geosolutions.geoserver.sira.security.util;
 
 import it.geosolutions.geoserver.sira.security.HidingAccessLimits;
+import it.geosolutions.geoserver.sira.security.config.Attributes.Choose;
+import it.geosolutions.geoserver.sira.security.config.Attributes.Choose.When;
+import it.geosolutions.geoserver.sira.security.config.SiraAccessManagerConfiguration;
+import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleEngine;
+import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleHelper.RootObject;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.geoserver.security.AccessLimits;
+import org.geoserver.security.WrapperPolicy;
 import org.geotools.factory.Hints;
 import org.geotools.filter.expression.FeaturePropertyAccessorFactory;
 import org.geotools.filter.expression.PropertyAccessor;
 import org.geotools.filter.expression.PropertyAccessorFactory;
+import org.geotools.filter.text.cql2.CQLException;
 import org.geotools.util.logging.Logging;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
+import org.opengis.filter.Filter;
 import org.opengis.filter.expression.PropertyName;
 import org.xml.sax.helpers.NamespaceSupport;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * {@link Feature}-related utility class.
@@ -90,36 +102,68 @@ public final class FeatureUtils {
 
     /**
      * Set to {@code null} given {@link Feature} attributes that should be hidden,
-     * if the given limits are of {@link HidingAccessLimits} type.
+     * if the given limits are of {@link HidingAccessLimits} type, as per policy evaluation with the given expression rule engine.
      *
      * @param feature the given {@link Feature}
-     * @param limits hiding access limits
+     * @param policy hiding access policy limits
+     * @param expressionRuleEngine expression rule engine to use for policy evaluation
      */
-    public static void hideFeatureAttributes(Feature feature, AccessLimits limits) {
-        if (limits instanceof HidingAccessLimits) {
-            hideFeatureAttributes(feature, (HidingAccessLimits) limits);
+    public static void hideFeatureAttributes(Feature feature, WrapperPolicy policy, ExpressionRuleEngine expressionRuleEngine) {
+        if (policy.limits instanceof HidingAccessLimits) {
+            final HidingAccessLimits policyLimits = (HidingAccessLimits) policy.limits;
+
+            // build list of attributes to hide: start with the ones to always hide...
+            final Set<PropertyName> hiddenAttributes = Sets.newHashSet(policyLimits.getHiddenProperties());
+
+            //... then continue evaluating choose-when-otherwise conditions, if any
+            expressionRuleEngine.setRootObject(RootObject.Builder.buildRootObject(policyLimits.getAuth()));
+
+            final Choose chooseHiddenProperties = policyLimits.getChooseHiddenProperties();
+            if (chooseHiddenProperties != null) {
+                boolean whenTrue = false;
+                for (final When when : chooseHiddenProperties.getOrderedWhenConditions()) {
+                    try {
+                        final Filter filter = expressionRuleEngine.evaluateFilter(when);
+                        if (filter.evaluate(feature)) {
+                            whenTrue = true;
+                            hiddenAttributes.addAll(toHiddenAttributes(when.getAttributes()));
+
+                            break;
+                        }
+                    } catch (CQLException e) {
+                        // a CQL exception occurs, skip the when condition
+                        LOGGER.log(Level.WARNING, "An error has occured while evaluating When filter {0}: {1}", new Object[] { when.getFilter(), e.getMessage(), e});
+                    }
+                }
+                if (! whenTrue) {
+                    hiddenAttributes.addAll(toHiddenAttributes(chooseHiddenProperties.getOtherwiseCondition().getAttributes()));
+                }
+            }
+
+            long startTime = System.currentTimeMillis();
+
+            for (final PropertyName hiddenAttribute : hiddenAttributes) {
+                hideFeatureAttribute(feature, hiddenAttribute);
+            }
+
+            long endTime = System.currentTimeMillis();
+
+            LOGGER.log(Level.FINER, "{0} properties were hidden in {1} ms", new Object[] { hiddenAttributes.size(), endTime - startTime });
         }
     }
 
     /**
-     * Set to {@code null} given {@link Feature} attributes that should be hidden.
      *
-     * @param feature the given {@link Feature}
-     * @param limits hiding access limits
+     * @param rule
+     * @return
      */
-    public static void hideFeatureAttributes(Feature feature, HidingAccessLimits limits) {
-        final List<PropertyName> hiddenAttributes = limits.getHiddenProperties();
-
-        long startTime = System.currentTimeMillis();
-
-        for (final PropertyName hiddenAttribute : hiddenAttributes) {
-            hideFeatureAttribute(feature, hiddenAttribute);
+    private static List<PropertyName> toHiddenAttributes(Collection<String> attributes) {
+        final List<PropertyName> hiddenProperties = Lists.newArrayList();
+        for (final String defaultHiddenAttribute : attributes) {
+            hiddenProperties.add(SiraAccessManagerConfiguration.FF.property(defaultHiddenAttribute));
         }
 
-        long endTime = System.currentTimeMillis();
-        if (LOGGER.isLoggable(Level.FINER)) {
-            LOGGER.log(Level.FINER, "{0} properties were hidden in {1} ms", new Object[] { hiddenAttributes.size(), endTime - startTime });
-        }
+        return hiddenProperties;
     }
 
     /**

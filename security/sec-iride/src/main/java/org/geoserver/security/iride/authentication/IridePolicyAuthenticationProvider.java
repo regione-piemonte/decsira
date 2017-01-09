@@ -29,6 +29,8 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -85,6 +87,23 @@ public final class IridePolicyAuthenticationProvider extends AbstractUserDetails
     @Override
     public void setIrideService(IrideService irideService) {
         this.irideService = irideService;
+    }
+
+    /**
+     * As soon as authentication attempt return successfully,
+     * erase credentials from any {@link Authentication} part implementing {@link CredentialsContainer} interface.
+     */
+    /*
+     * (non-Javadoc)
+     * @see org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider#authenticate(org.springframework.security.core.Authentication)
+     */
+    @Override
+    public Authentication authenticate(Authentication authentication) {
+        // Parent class only supports UsernamePasswordAuthenticationToken authentication type, therefore it's safe to do a cast here
+        final UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) super.authenticate(authentication);
+        authToken.eraseCredentials();
+
+        return authToken;
     }
 
     /*

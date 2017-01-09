@@ -124,11 +124,12 @@ public class IrideAuthenticationProvider extends GeoServerAuthenticationProvider
     public Authentication authenticate(Authentication authentication, HttpServletRequest request) {
         UsernamePasswordAuthenticationToken auth = null;
         try {
+            // the authentication token credentials have been already removed by the delegate authentication provider
             auth = (UsernamePasswordAuthenticationToken) this.delegateAuthProvider.authenticate(authentication);
         } catch (UsernameNotFoundException | BadCredentialsException | DisabledException e) {
-        	LOGGER.trace(e.getMessage(), e);
+            LOGGER.trace(e.getMessage(), e);
         } catch (AuthenticationException e) {
-        	LOGGER.warn(e.getMessage(), e);
+            LOGGER.warn(e.getMessage(), e);
         }
 
         final Authentication authToken = this.buildAuthenticationToken(auth);

@@ -18,11 +18,14 @@
  */
 package org.geoserver.security.iride;
 
+import java.util.Collection;
 import java.util.Set;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.geoserver.security.impl.GeoServerUser;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideInfoPersona;
+import org.geoserver.security.iride.util.IrideUserProperties;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -34,8 +37,8 @@ import com.google.common.collect.ImmutableSet;
  * <ul>
  *   <li>defines constants for referencing <code>IRIDE</code> <em>User Properties</em>:
  *     <ul>
- *       <li>{@link #USER_PROPERTY_IRIDE_IDENTITY}</li>
- *       <li>{@link #USER_PROPERTY_INFO_PERSONAE}</li>
+ *       <li>{@link IrideUserProperties#IRIDE_IDENTITY}</li>
+ *       <li>{@link IrideUserProperties#INFO_PERSONAE}</li>
  *     </ul>
  *   </li>
  *   <li>specialized <a href="https://en.wikipedia.org/wiki/Mutator_method">accessor/mutator methods</a> to manipulate <code>IRIDE</code> <em>User Properties</em>.
@@ -54,20 +57,6 @@ public final class IrideGeoServerUser extends GeoServerUser {
     private static final long serialVersionUID = 4174436058680260397L;
 
     /**
-     * <code>GeoServer</code> user property for associated {@link IrideIdentity} instance.
-     */
-    public static final String USER_PROPERTY_IRIDE_IDENTITY = "irideIdentity";
-
-    /**
-     * <code>GeoServer</code> user property for associated {@link IrideInfoPersona} instances, if any, expressed as a set.
-     * <p>An empty set property in the case there are no associated {@link IrideInfoPersona} instances.
-     * <p>Whichever the case, the set is <em>immutable</em>.
-     *
-     * @see ImmutableSet
-     */
-    public static final String USER_PROPERTY_INFO_PERSONAE = "irideInfoPersonae";
-
-    /**
      * Constructor.
      *
      * @param username
@@ -76,6 +65,7 @@ public final class IrideGeoServerUser extends GeoServerUser {
         super(username);
     }
 
+    // TODO: check if the check against null is really needed, and keep or remove the method accordingly
     /*
      * (non-Javadoc)
      * @see org.geoserver.security.impl.GeoServerUser#getPassword()
@@ -98,8 +88,8 @@ public final class IrideGeoServerUser extends GeoServerUser {
      */
     public boolean hasIrideIdentity() {
         return
-            this.getProperties().containsKey(USER_PROPERTY_IRIDE_IDENTITY) &&
-            this.getProperties().get(USER_PROPERTY_IRIDE_IDENTITY) instanceof IrideIdentity;
+            this.getProperties().containsKey(IrideUserProperties.IRIDE_IDENTITY) &&
+            this.getProperties().get(IrideUserProperties.IRIDE_IDENTITY) instanceof IrideIdentity;
     }
 
     /**
@@ -108,14 +98,14 @@ public final class IrideGeoServerUser extends GeoServerUser {
      * @return the {@link IrideIdentity} instance associated with this <code>IRIDE</code> specialized {@link GeoServerUser}
      */
     public IrideIdentity getIrideIdentity() {
-        return (IrideIdentity) this.getProperties().get(USER_PROPERTY_IRIDE_IDENTITY);
+        return (IrideIdentity) this.getProperties().get(IrideUserProperties.IRIDE_IDENTITY);
     }
 
     /**
      * Set the {@link IrideIdentity} instance associated with this <code>IRIDE</code> specialized {@link GeoServerUser}.
      */
     public void setIrideIdentity(IrideIdentity irideIdentity) {
-        this.getProperties().put(USER_PROPERTY_IRIDE_IDENTITY, irideIdentity);
+        this.getProperties().put(IrideUserProperties.IRIDE_IDENTITY, irideIdentity);
     }
 
     /**
@@ -128,8 +118,8 @@ public final class IrideGeoServerUser extends GeoServerUser {
     @SuppressWarnings("unchecked")
     public boolean hasInfoPersonae() {
         return
-            this.getProperties().containsKey(USER_PROPERTY_INFO_PERSONAE) &&
-            ! CollectionUtils.isEmpty((Set<IrideInfoPersona>) this.getProperties().get(USER_PROPERTY_INFO_PERSONAE));
+            this.getProperties().containsKey(IrideUserProperties.INFO_PERSONAE) &&
+            ! CollectionUtils.isEmpty((Set<IrideInfoPersona>) this.getProperties().get(IrideUserProperties.INFO_PERSONAE));
     }
 
     /**
@@ -139,14 +129,23 @@ public final class IrideGeoServerUser extends GeoServerUser {
      */
     @SuppressWarnings("unchecked")
     public Set<IrideInfoPersona> getInfoPersonae() {
-        return (Set<IrideInfoPersona>) this.getProperties().get(USER_PROPERTY_INFO_PERSONAE);
+        return (Set<IrideInfoPersona>) this.getProperties().get(IrideUserProperties.INFO_PERSONAE);
     }
 
     /**
-     * Set the {@link IrideInfoPersona} instances associated with this <code>IRIDE</code> specialized {@link GeoServerUser}.
+     * Set the {@link IrideInfoPersona} instances associated with this <code>IRIDE</code> specialized {@link GeoServerUser}
+     * with an <em>immutable</em> {@link Set} derived from the given {@link IrideInfoPersona} {@link Collection}.
      */
-    public void setInfoPersonae(Set<IrideInfoPersona> infoPersonae) {
-        this.getProperties().put(USER_PROPERTY_INFO_PERSONAE, infoPersonae == null ? ImmutableSet.of() : ImmutableSet.copyOf(infoPersonae));
+    public void setInfoPersonae(Collection<IrideInfoPersona> infoPersonae) {
+        this.getProperties().put(IrideUserProperties.INFO_PERSONAE, infoPersonae == null ? ImmutableSet.<IrideInfoPersona>of() : ImmutableSet.copyOf(infoPersonae));
+    }
+
+    /**
+     * Set the {@link IrideInfoPersona} instances associated with this <code>IRIDE</code> specialized {@link GeoServerUser}
+     * with an <em>immutable</em> {@link Set} derived from the given {@link IrideInfoPersona} array.
+     */
+    public void setInfoPersonae(IrideInfoPersona[] infoPersonae) {
+        this.setInfoPersonae(ArrayUtils.isEmpty(infoPersonae) ? ImmutableSet.<IrideInfoPersona>of() : ImmutableSet.copyOf(infoPersonae));
     }
 
     /*
