@@ -47,12 +47,12 @@ const MosaicTile = React.createClass({
             ) : (
             <div className="ogg_appl">
                 <span >
-                    <a className="list-group-item">
+                    <a className="list-group-item" onClick={() => this.props.onClick('objects')}>
                         Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
                     </a>
                 </span>
                 <span >
-                    <a className="list-group-item">
+                    <a className="list-group-item" onClick={() => this.props.onClick('views')}>
                         Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
                     </a>
                 </span>
@@ -62,7 +62,7 @@ const MosaicTile = React.createClass({
     render() {
         let bClass = `${this.props.liClass} ${this.props.icon}`;
         return (
-            <li className={bClass} style={this.props.boxStyle} onClick={this.props.onClick}>
+            <li className={bClass} style={this.props.boxStyle}>
                {this.props.name}
                {this.renderInfo()}
             </li>

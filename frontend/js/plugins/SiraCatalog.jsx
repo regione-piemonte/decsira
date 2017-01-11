@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {toggleNode, selectCategory, getThematicViewConfig} = require('../actions/siracatalog');
+const {toggleNode, selectCategory, getThematicViewConfig, selectSubCategory} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
 const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
@@ -48,11 +48,12 @@ const normalizeObjects = function(nodes) {
 const tocSelector = createSelector([
         (state) => state.siracatalog.nodes || [],
         (state) => state.siracatalog.category,
+        (state) => state.siracatalog.subcat,
         (state) => state.siracatalog,
         (state) => state.siradec && state.siradec.configOggetti,
         (state) => state.userprofile,
         (state) => state.siradec && state.siradec.activeFeatureType
-    ], ( nodes, category, catalog, configOggetti, userprofile, activeFeatureType) => ({
+    ], ( nodes, category, subcat, catalog, configOggetti, userprofile, activeFeatureType) => ({
         views: normalizeViews(catalog.views || []),
         nodes: normalizeCatalog(nodes),
         objects: normalizeObjects(nodes),
@@ -61,7 +62,8 @@ const tocSelector = createSelector([
         loading: catalog.loading,
         configOggetti,
         userprofile,
-        activeFeatureType
+        activeFeatureType,
+        subcat
     })
 );
 const categorySelector = createSelector([
@@ -114,8 +116,11 @@ const LayerTree = React.createClass({
         category: React.PropTypes.shape({
             name: React.PropTypes.string.isRequired,
             id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
-            icon: React.PropTypes.string.isRequired
+            icon: React.PropTypes.string.isRequired,
+            objectNumber: React.PropTypes.number,
+            tematicViewNumber: React.PropTypes.number
         }).isRequired,
+        subcat: React.PropTypes.number,
         configOggetti: React.PropTypes.object,
         authParams: React.PropTypes.object,
         userprofile: React.PropTypes.object,
@@ -124,7 +129,8 @@ const LayerTree = React.createClass({
         setActiveFeatureType: React.PropTypes.func,
         setGridType: React.PropTypes.func,
         showInfoBox: React.PropTypes.func,
-        loadMetadata: React.PropTypes.func
+        loadMetadata: React.PropTypes.func,
+        selectSubCategory: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -191,9 +197,9 @@ const LayerTree = React.createClass({
                         </Button>
              </OverlayTrigger>
              </div>
-            <Tabs className="catalog-tabs" defaultActiveKey={1}>
-                <Tab eventKey={1} title={`Oggetti (${this.props.objects.length})`}>{objects}</Tab>
-                <Tab eventKey={2} title={`Viste Tematiche (${this.props.views ? this.props.views.length : 0})`}>{viste}</Tab>
+            <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
+                <Tab eventKey={'objects'} title={`Oggetti (${this.props.category.objectNumber})`}>{objects}</Tab>
+                <Tab eventKey={'views'} title={`Viste Tematiche (${this.props.category.tematicViewNumber})`}>{viste}</Tab>
             </Tabs>
             {this.props.loading ? (
                 <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
@@ -246,7 +252,8 @@ const CatalogPlugin = connect(tocSelector, {
     setActiveFeatureType,
     setGridType,
     loadMetadata,
-    showInfoBox: showBox
+    showInfoBox: showBox,
+    selectSubCategory
 })(LayerTree);
 
 module.exports = {

@@ -12,6 +12,7 @@ const SELECT_CATEGORY = 'SELECT_CATEGORY';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
 const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
+const SELECT_SUB_CATEGORY = 'SELECT_SUB_CATEGORY';
 
 const {Promise} = require('es6-promise');
 
@@ -28,10 +29,17 @@ function catalogLoading(status) {
         status
     };
 }
-function selectCategory(category) {
+function selectCategory(category, subcat) {
     return {
         type: SELECT_CATEGORY,
-        category
+        category,
+        subcat
+    };
+}
+function selectSubCategory( subcat) {
+    return {
+        type: SELECT_SUB_CATEGORY,
+        subcat
     };
 }
 
@@ -121,8 +129,10 @@ module.exports = {
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     THEMATIC_VIEW_CONFIG_LOADED,
+    SELECT_SUB_CATEGORY,
     toggleNode,
     selectCategory,
     getMetadataObjects,
-    getThematicViewConfig
+    getThematicViewConfig,
+    selectSubCategory
 };
