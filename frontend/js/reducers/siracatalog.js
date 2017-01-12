@@ -9,7 +9,8 @@ const initialState = {};
 const { TOGGLE_NODE,
         SELECT_CATEGORY,
         METADATA_OBJECTS_VIEWS_LOADED,
-        CATALOG_LOADING} = require('../actions/siracatalog');
+        CATALOG_LOADING,
+        SELECT_SUB_CATEGORY} = require('../actions/siracatalog');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('node-uuid');
@@ -83,7 +84,10 @@ function siracatalog(state = initialState, action) {
             return assign({}, state, {loading: action.status});
         }
         case SELECT_CATEGORY: {
-            return assign({}, state, {category: action.category});
+            return assign({}, state, {category: action.category, subcat: action.subcat});
+        }
+        case SELECT_SUB_CATEGORY: {
+            return assign({}, state, {subcat: action.subcat});
         }
         case TILES_LOADED: {
             return assign({}, state, { category: [...(action.tiles || [])].shift()});

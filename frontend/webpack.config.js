@@ -63,32 +63,35 @@ module.exports = {
             rewrite: rewriteUrl("/geostore/rest/$1"),
             host: "mapstore.geo-solutions.it",
             target: "http://mapstore.geo-solutions.it"
-        }, {
+        },
+        {
             path: new RegExp("/proxy(.*)"),
+            rewrite: rewriteUrl("/sira/proxy$1"),
+            host: "sira2.csi.geo-solutions.it",
+            target: "http://sira2.csi.geo-solutions.it"
+        },
+        {
+            path: new RegExp("/services(.*)"),
+            host: "sira.csi.geo-solutions.it",
+            target: "http://sira.csi.geo-solutions.it/sira/"
+        },
+        {
+            path: new RegExp("/decsiraweb/proxy(.*)"),
             rewrite: rewriteUrl("/decsiraweb/proxy$1"),
-            host: "localhost",
-            target: "http://localhost:8080"
+            host: "sira.csi.geo-solutions.it",
+            target: "http://sira.csi.geo-solutions.it"
         }, {
             path: new RegExp("/services/metadata/(.*)"),
             rewrite: rewriteUrl("/decsiraweb/services/metadata/$1"),
             host: "localhost",
             target: "http://tst-sipradecweb.territorio.csi.it:8080/"
         }, {
-            path: new RegExp("/services/iride/(.*)"),
-            rewrite: rewriteUrl("/decsiraweb/services/iride/$1"),
-            host: "localhost",
-            target: "http://tst-sipradecweb.territorio.csi.it:8080/"
-        }, {
-            path: new RegExp("/decsiraweb/services/queryformconfig(.*)"),
-            host: "localhost",
-            target: "http://localhost:8080"
-        }, {
             path: new RegExp("/geoserver/ows(.*)"),
-            host: "localhost",
+            host: "sira2.csi.geo-solutions.it",
             target: "http://sira2.csi.geo-solutions.it"
         }]
     },
 
-    devtool: 'inline-source-map',
+    devtool: 'eval',
     debug: true
 };
