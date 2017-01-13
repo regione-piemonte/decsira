@@ -188,7 +188,6 @@ function loadMetadata(idMetadato) {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         }).then((response) => {
-            response.data.showButtonLegend = 'none';
             if (typeof response.data === 'object') {
                 if (response.data && (response.data.urlWMS || response.data.urlWFS)) {
                     response.data.showButtonLegend = 'block';

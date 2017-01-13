@@ -36,11 +36,6 @@ var DefaultNode = React.createClass({
     renderTools() {
         const tools = [
         (<Glyphicon
-                    style={glyphStyle}
-                    key="info"
-                    glyph="info-sign"
-                    onClick={()=>this.props.showInfoBox(this.props.node)}/>),
-        (<Glyphicon
             style={glyphStyle}
             key="addToMap"
             glyph="plus-sign"
@@ -71,7 +66,7 @@ var DefaultNode = React.createClass({
         }
         return (
             <Node animateCollapse={false} className="toc-default-layer catalog-object" style={this.props.style} type="layer" {...other}>
-                <Title/>
+                <Title onClick={this.props.showInfoBox}/>
                 {this.renderTools()}
             </Node>
         );

@@ -236,9 +236,9 @@ const LayerTree = React.createClass({
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
     },
-    showInfoBox() {
+    showInfoBox(node) {
         // Will be removed when clear how to use components, we already have metadata loaded
-        this.props.loadMetadata();
+        this.props.loadMetadata(node);
         this.props.showInfoBox();
     }
 });
