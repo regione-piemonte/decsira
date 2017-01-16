@@ -23,6 +23,8 @@ const Spinner = require('react-spinkit');
 
 const {hideQueryError} = require('../actions/siradec');
 
+const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+
 const {
     // QueryBuilder action functions
     addGroupField,
@@ -291,9 +293,12 @@ const SideQueryPanel = React.createClass({
                 </div>
             );
     },
-    onQuery: function(url, filter, params) {
+    onQuery: function(url, filterObj, params) {
         this.props.siraActions.onExpandFilterPanel(false);
         this.props.siraActions.setGridType('search');
+        const filter = filterObj.filterType === "OGC" ?
+                FilterUtils.toOGCFilter(filterObj.featureTypeName, filterObj, filterObj.ogcVersion, filterObj.sortOptions, filterObj.hits) :
+                FilterUtils.toCQLFilter(filterObj);
         if (this.props.pagination && (this.props.pagination.startIndex || this.props.pagination.startIndex === 0)) {
             let newFilter = filter.replace("<wfs:GetFeature", "<wfs:GetPropertyValue valueReference='" + this.props.attributes[0].attribute + "' ");
             newFilter = newFilter.replace("</wfs:GetFeature", "</wfs:GetPropertyValue");

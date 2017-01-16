@@ -72,6 +72,7 @@ function layers(state = [], action) {
                     let newLayer = cloneLayer(layer);
                     newLayer.id = "selectAll";
                     newLayer.type = "wmspost";
+                    newLayer.visibility = true;
                     delete newLayer.group;
                     newLayer.params = assign({}, newLayer.params, {SLD_BODY: action.sldBody});
                     return msLayers(state, { type: "ADD_LAYER", layer: newLayer});
