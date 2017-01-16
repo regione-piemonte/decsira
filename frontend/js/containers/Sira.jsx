@@ -58,7 +58,8 @@ const mapStateToPropsMIB = (state) => {
       urlWMS: state.metadatainfobox.urlWMS,
       urlWFS: state.metadatainfobox.urlWFS,
       urlLegend: state.metadatainfobox.urlLegend,
-      error: state.metadatainfobox.error
+      error: state.metadatainfobox.error,
+      showButtonLegend: state.metadatainfobox.showButtonLegend
   };
 };
 

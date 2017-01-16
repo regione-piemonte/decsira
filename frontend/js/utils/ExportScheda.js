@@ -67,7 +67,7 @@ function parseSection(el) {
     // Map should remain in page
     pdfHeight += sectionBeforeSpace;
     if (el.querySelector(".pdf-map")) {
-        if (pdfHeight + imgMapH + 2 + titleAfterSpace + pageBottomMargin > doc.internal.pageSize.height) {
+        if (pdfHeight + imgMapH + 55 + titleAfterSpace + pageBottomMargin > doc.internal.pageSize.height) {
             doc.addPage();
             pdfHeight = pageTopMargin;
         }

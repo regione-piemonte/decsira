@@ -166,11 +166,7 @@ const MetadataInfoBox = React.createClass({
                     <h4><I18N.Message msgId={"metadataInfoBox.urlMetadato"}/></h4>
                     <p>{this.props.urlMetadato}</p>
                     <h4><I18N.Message msgId={"metadataInfoBox.urlWMS"}/></h4>
-                    <a className="infobox-metadata-url"
-                      title="url metadato"
-                      href="{renderWmsUrl}" target="_blank" >
                       {renderWmsUrl}
-                    </a>
                     <h4><I18N.Message msgId={"metadataInfoBox.urlWFS"}/></h4>
                     {renderWfsUrl}
                     <button style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
