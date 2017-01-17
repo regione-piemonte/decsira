@@ -5,17 +5,17 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const FileSaver = require('browser-filesaver');
+const FileSaver = require('file-saver');
 const shpwrite = require('shp-write');
 const JSZip = require('jszip');
 
 
 const ExporterUtils = {
-    exportFeatures: function(outputformat, features, columns, filename = 'export') {
+    exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType) {
         const name = filename.replace(':', "_");
         switch (outputformat) {
             case "csv": {
-                this.exportCSV(features, columns, name);
+                this.exportCSV(features, columns, name, mimeType);
                 break;
             }
             case "shp": {
@@ -23,13 +23,13 @@ const ExporterUtils = {
                 break;
             }
             default:
-                this.exportCSV(features, columns, name);
+                this.exportCSV(features, columns, name, mimeType);
         }
     },
-    exportCSV: function(features, columns, filename) {
+    exportCSV: function(features, columns, filename, mimeType) {
         const csvString = this.convertArrayOfObjectsToCSV(features, columns);
         let file = new Blob([csvString], {
-                    type: "text/csv;charset=utf-8;"
+                    type: mimeType || "text/csv;charset=utf-8;"
                 });
         FileSaver.saveAs(file, `${filename}.csv`);
     },

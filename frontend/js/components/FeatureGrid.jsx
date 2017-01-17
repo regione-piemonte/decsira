@@ -52,6 +52,7 @@ const SiraGrid = React.createClass({
         columnsDef: React.PropTypes.array,
         map: React.PropTypes.object,
         loadingGrid: React.PropTypes.bool,
+        exportCsvMimeType: React.PropTypes.string,
         loadingGridError: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.object
@@ -323,6 +324,7 @@ const SiraGrid = React.createClass({
                         toggleExporter={this.props.toggleSiraControl}
                         searchUrl={this.props.searchUrl}
                         params={this.props.params}
+                        csvMimeType={this.props.exportCsvMimeType}
                     />
                             <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
                                 <Button

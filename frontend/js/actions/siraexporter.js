@@ -38,7 +38,7 @@ function configureExporter(config) {
             config
         };
 }
-function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, featuregrid, filename) {
+function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, featuregrid, filename, mimeType) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     for (let param in params) {
         if (params.hasOwnProperty(param)) {
@@ -89,7 +89,7 @@ function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, fea
                 });
                 dispatch(toggleLoading(false));
                 try {
-                    ExporterUtils.exportFeatures(outputformat, features, columns, filename );
+                    ExporterUtils.exportFeatures(outputformat, features, columns, filename, mimeType);
                 }catch (e) {
                     dispatch(exportError("Errore nel parsing dei dati"));
                 }
