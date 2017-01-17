@@ -49,7 +49,8 @@ module.exports = connect((state) => {
     featureTypeName: activeConfig.featureTypeName,
     searchUrl: state.queryform.searchUrl,
     dataSourceOptions: state.grid.dataSourceOptions,
-    maxFeatures: state.siraexporter.maxFeatures
+    maxFeatures: state.siraexporter.maxFeatures,
+    exportCsvMimeType: "application/octet-stream"
     };
 }, {
     onDetail: loadCardTemplate,

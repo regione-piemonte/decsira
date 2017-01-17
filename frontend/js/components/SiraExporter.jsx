@@ -24,7 +24,8 @@ const SiraExporter = React.createClass({
         loading: React.PropTypes.bool,
         errormsg: React.PropTypes.string,
         csvName: React.PropTypes.string,
-        shpName: React.PropTypes.string
+        shpName: React.PropTypes.string,
+        csvMimeType: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -99,9 +100,9 @@ const SiraExporter = React.createClass({
             name = name.replace(placeholder, ftName);
         });
         if (this.state.type === 'page' && params.features && params.columns) {
-            ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name);
+            ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType);
         }else if (this.state.type === 'all' && params.filter && params.columns) {
-            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name);
+            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType);
         }
     }
 });
