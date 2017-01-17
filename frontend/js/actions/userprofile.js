@@ -11,6 +11,8 @@ const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';
 const SET_USER_IDENTITY = 'LOADED_USER_IDENTITY';
 
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+
 function setProfile(profile, authParams) {
     return {
         type: SET_PROFILE,
@@ -40,9 +42,13 @@ function userIdentityError(err) {
 function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentity') {
     return (dispatch) => {
         return axios.get(serviceUrl).then((response) => {
-            // TODO to remove only for first test
-            response.data = {"roles": [{"code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN"}], "userIdentity": {"codFiscale": "AAAAAA00B77B000F", "nome": "CSI PIEMONTE", "cognome": "DEMO 20", "idProvider": "SISTEMAPIEMONTE"}};
+            // response example
+            // response.data = {"roles": [{"code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN"}], "userIdentity": {"codFiscale": "AAAAAA00B77B000F", "nome": "CSI PIEMONTE", "cognome": "DEMO 20", "idProvider": "SISTEMAPIEMONTE"}};
             if (typeof response.data === 'object') {
+                if (response.data.userIdentity && response.data.roles && response.data.roles.length > 0) {
+                    // there is a logged user, geoserverUrl = secureGeoserverUrl
+                    ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
+                }
                 dispatch(userIdentityLoaded(response.data));
             } else {
                 try {
