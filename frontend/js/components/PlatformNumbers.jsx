@@ -33,9 +33,9 @@ render() {
                     <div className="row">
                         <h3>I numeri della piattaforma</h3>
                         <ul className="list-group numeri">
-                          <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectMap}</span> <span className="sotto_cifra">Oggetti in continuo aggiornamento</span></li>
-                          <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectSearch}<span className="con_cifra">%</span></span> <span className="sotto_cifra">Crescita annuale base&nbsp;dati previsto</span></li>
-                          <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectView}</span> <span className="sotto_cifra">Indicatori ambientali disponibili</span></li>
+                          <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectMap}</span> <span className="sotto_cifra">Mappe visualizzabili</span></li>
+                          <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectSearch}</span> <span className="sotto_cifra">Ricerche di dettaglio disponibili</span></li>
+                          <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectView}</span> <span className="sotto_cifra">Viste tematiche disponibili</span></li>
                         </ul>
                 </div>
             </div>
