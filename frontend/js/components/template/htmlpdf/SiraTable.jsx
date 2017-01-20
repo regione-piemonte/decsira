@@ -13,7 +13,7 @@ const TemplateUtils = require('../../../utils/TemplateUtils');
 
 const assign = require('object-assign');
 const uuid = require('node-uuid');
-
+const {isArray} = require('lodash');
 
 const SiraTable = React.createClass({
     propTypes: {
@@ -96,7 +96,8 @@ const SiraTable = React.createClass({
         columns = columns.filter((col) => col.hide !== true);
 
         if (this.props.dependsOn) {
-            const tables = this.props.dependsOn.parentFeatures.reduce((elements, pf) => {
+            const parentFeatures = isArray(this.props.dependsOn.parentFeatures) ? this.props.dependsOn.parentFeatures : [this.props.dependsOn.parentFeatures];
+            const tables = parentFeatures.reduce((elements, pf) => {
                 const id = TemplateUtils.getElement({xpath: this.props.dependsOn.xpath}, pf, this.props.wfsVersion);
                 const ft = features.filter(function(feature) {
                     return feature[this.idFieldName] === id;
