@@ -13,8 +13,8 @@ import it.csi.sira.backend.metadata.utils.GenericDAO;
 import org.springframework.jdbc.core.RowMapper;
 
 /**
- * SipraMtdTCategoriaAppl DAO implementation 
- * 
+ * SipraMtdTCategoriaAppl DAO implementation
+ *
  * @author Telosys Tools
  *
  */
@@ -27,26 +27,26 @@ public class SipraMtdTCategoriaApplDAOImpl extends GenericDAO<SipraMtdTCategoria
 		super();
 	}
 
-	private final static String QUERY_PRIMARY_KEY = 
+	private final static String QUERY_PRIMARY_KEY =
 		"select * from sipra_mtd_t_categoria_appl where id_categoria_appl = :id_categoria_appl";
-	
-	private final static String QUERY_INSERT = 
+
+	private final static String QUERY_INSERT =
 		"insert into sipra_mtd_t_categoria_appl(id_categoria_appl,fk_padre,livello,des_categoria,url_icona,object_number,view_number) values(:id_categoria_appl,:fk_padre,:livello,:des_categoria,:url_icona,:object_number,:view_number)";
 
-	private final static String QUERY_UPDATE = 
+	private final static String QUERY_UPDATE =
 		"update sipra_mtd_t_categoria_appl set fk_padre = :fk_padre, livello = :livello, des_categoria = :des_categoria, url_icona = :url_icona, object_number = :object_number, view_number = :view_number  where id_categoria_appl = :id_categoria_appl";
 
-	private final static String QUERY_DELETE = 
+	private final static String QUERY_DELETE =
 		"delete from sipra_mtd_t_categoria_appl where  id_categoria_appl = :id_categoria_appl";
 
-	private final static String SQL_COUNT_ALL = 
+	private final static String SQL_COUNT_ALL =
 		"select count(*) from sipra_mtd_t_categoria_appl";
-	
+
 	@Override
 	public String getPrimaryKeySelect() {
-		return QUERY_PRIMARY_KEY;		
+		return QUERY_PRIMARY_KEY;
 	}
-	
+
 	@Override
 	public String getTableName(){
 		return "sipra_mtd_t_categoria_appl";
@@ -54,7 +54,7 @@ public class SipraMtdTCategoriaApplDAOImpl extends GenericDAO<SipraMtdTCategoria
 
 	@Override
 	public String getSqlSelect() {
-		return "select * from sipra_mtd_t_categoria_appl";
+		return "select * from sipra_mtd_t_categoria_appl order by id_categoria_appl";
 	}
 
 	@Override
@@ -80,13 +80,13 @@ public class SipraMtdTCategoriaApplDAOImpl extends GenericDAO<SipraMtdTCategoria
 	public SipraMtdTCategoriaAppl findByPK(Integer idCategoriaAppl) {
 		java.util.Map<String, Object> map = new java.util.HashMap<String, Object>();
 		map.put("id_categoria_appl", idCategoriaAppl);
-		return super.findByPK(map);		
+		return super.findByPK(map);
 	}
 
 	public int deleteByPK(Integer idCategoriaAppl) {
 		java.util.Map<String, Object> map = new java.util.HashMap<String, Object>();
 		map.put("id_categoria_appl", idCategoriaAppl);
-		return super.delete(getSqlDelete(), map);		
+		return super.delete(getSqlDelete(), map);
 	}
 
 	@Override
@@ -165,11 +165,11 @@ public class SipraMtdTCategoriaApplDAOImpl extends GenericDAO<SipraMtdTCategoria
 	 * Specific inner class for 'RowMapper' implementation
 	 */
 	public static class SipraMtdTCategoriaApplRowMapper implements RowMapper<SipraMtdTCategoriaAppl> {
-	
+
 		public SipraMtdTCategoriaApplRowMapper() {
-			
+
 		}
-		
+
 		public SipraMtdTCategoriaAppl mapRow(ResultSet rs, int rowNum) throws SQLException {
 			SipraMtdTCategoriaAppl bean = new SipraMtdTCategoriaAppl();
 			populateBean(rs, bean);

@@ -1,0 +1,597 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='STABILIMENTI' subtitle={[
+            'Nome: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Stabilimento' eventKey='1' expanded={true}>
+        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <LabeledField label='Codice sira' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()")
+            }/>
+        </ProfileWrapper>
+        <LabeledField label='Nome' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()")
+        }/>
+        <LabeledField label='Provincia' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:desProvincia/text()")
+        }/>
+        <LabeledField label='Comune' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nomeComune/text()")
+        }/>
+
+        <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <LabeledField label='Indirizzo' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:indirizzo/text()")
+          }/>
+          <LabeledField label='Email-pec' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:emailPec/text()")
+          }/>
+        </ProfileWrapper>
+
+        <LabeledField label='Industria agro-alimentare' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:industriaAgroAlimentare/text()")
+        }/>
+        </Section>
+
+        <Section header='TIPO ATTIVIT&Agrave; PRODUTTIVA' eventKey='2' expanded={true}>
+            <SiraTable
+                id="TipoAttivitaProduttiva"
+                selectedRow={model.TipoAttivitaProduttiva}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            headerName: 'Codice ateco',
+                            width: 100,
+                            xpath:"siraemissioni:AttivitaProduttiva/siraemissioni:codAteco/text()"
+                        },
+                        {
+                            headerName: 'Descrizione attivita Ateco',
+                            width: 650,
+                            xpath: "siraemissioni:AttivitaProduttiva/siraemissioni:desAteco/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:attivitaProduttiva")}/>
+        </Section>
+
+        <Section header='IMPIANTO DI DEPURAZIONE' eventKey='3' expanded={false}>
+            <LabeledField label='Abitanti equivalenti trattati' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:abitantiEquivalentiTrattati/text()")
+            }/>
+        </Section>
+
+        <Section header='APPROVIGIONAMENTO IDRICO' eventKey='4' expanded={false}>
+
+          <Section header='Prelievi' eventKey='5' expanded={false}>
+          <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+            <SiraTable
+                id="Prelievi"
+                selectedRow={model.Prelievi}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            headerName: 'Tipo prelievo',
+                            width: 260,
+                            xpath:"siraemissioni:PrelievoAcqua/siraemissioni:desTipoPrelievo/text()"
+                        },
+                        {
+                            headerName: 'Denominazione impianto depurazione terzi',
+                            width: 350,
+                            xpath: "siraemissioni:PrelievoAcqua/siraemissioni:denomImpiantoDepurTerzi/text()"
+                        },
+                        {
+                            headerName: 'Gestore impianto depurazione terzi',
+                            width: 350,
+                            xpath: "siraemissioni:PrelievoAcqua/siraemissioni:gestImpiantoDepurTerzi/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:prelievoAcqua")}/>
+             </ProfileWrapper>
+
+             <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+               <SiraTable
+                   id="Prelievi"
+                   selectedRow={model.Prelievi}
+                   wfsVersion="2.0"
+                   rowSelection={false}
+                   columns={
+                       [
+                           {
+                               headerName: 'Tipo prelievo',
+                               width: 600,
+                               xpath:"siraemissioni:PrelievoAcqua/siraemissioni:desTipoPrelievo/text()"
+                           }
+                       ]
+                   }
+                   features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:prelievoAcqua")}/>
+                </ProfileWrapper>
+          </Section>
+
+          <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+            <Section header='Ricircolo' eventKey='6' expanded={false}>
+                <LabeledField label='Ricircolo interno' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:ricircoloInterno/text()")
+                }/>
+                <LabeledField label='Modalita di ricircolo' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:modalitaRicircolo/text()")
+                }/>
+                <LabeledField label='Percentuale ricircolo' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:percentualeRicircolo/text()")
+                }/>
+                <LabeledField label='Volume annuo ricircolo (m3)' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:volumeAnnuoRicircolo/text()")
+                }/>
+                <LabeledField label='Volume giornaliero ricircolo (m3)' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:volumeGiornoRicircolo/text()")
+                }/>
+            </Section>
+          </ProfileWrapper>
+      </Section>
+
+      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+        <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
+            <SiraTable
+                      id="DatiAzienda"
+                      selectedRow={model.DatiAzienda}
+                      wfsVersion="2.0"
+                      rowSelection={false}
+                      columns={
+                          [
+                              {
+                                  headerName: 'Denominazione',
+                                  width: 100,
+                                  xpath:"siraemissioni:Azienda/siraemissioni:denominazione/text()"
+                              },
+                              {
+                                  headerName: 'Codice fiscale',
+                                  width: 50,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:codiceFiscale/text()"
+                              },
+                              {
+                                  headerName: 'Partita IVA',
+                                  width: 50,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:partitaIVA/text()"
+                              },
+                              {
+                                  headerName: 'Provincia',
+                                  width: 100,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:desProvincia/text()"
+                              },
+                              {
+                                  headerName: 'Comune',
+                                  width: 100,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:desComune/text()"
+                              },
+                              {
+                                  headerName: 'Indirizzo',
+                                  width: 100,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:indirizzo/text()"
+                              },
+                              {
+                                  headerName: 'telefono',
+                                  width: 50,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:telefono/text()"
+                              },
+                              {
+                                  headerName: 'Fax',
+                                  width: 50,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:fax/text()"
+                              },
+                              {
+                                  headerName: 'Numero iscrizione CCIAA',
+                                  width: 50,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:numeroCIAA/text()"
+                              },
+                              {
+                                  headerName: 'Anno iscrizione CCIAA',
+                                  width: 50,
+                                  xpath: "siraemissioni:Azienda/siraemissioni:annoCIAA/text()"
+                              }
+                          ]
+                      }
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda")}/>
+
+                    <Section header='Dati titolare/legale rappresentante' eventKey='8' expanded={true}>
+                        <LabeledField label='Cognome' value={
+                          model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:cognomeTitolare/text()")
+                        }/>
+                        <LabeledField label='Nome' value={
+                          model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:nomeTitolare/text()")
+                        }/>
+                    </Section>
+                  </Section>
+              </ProfileWrapper>
+
+
+              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
+                    <SiraTable
+                              id="DatiAzienda"
+                              selectedRow={model.DatiAzienda}
+                              wfsVersion="2.0"
+                              rowSelection={false}
+                              columns={
+                                  [
+                                      {
+                                          headerName: 'Denominazione',
+                                          width: 330,
+                                          xpath:"siraemissioni:Azienda/siraemissioni:denominazione/text()"
+                                      },
+                                      {
+                                          headerName: 'Provincia',
+                                          width: 200,
+                                          xpath: "siraemissioni:Azienda/siraemissioni:desProvincia/text()"
+                                      },
+                                      {
+                                          headerName: 'Comune',
+                                          width: 200,
+                                          xpath: "siraemissioni:Azienda/siraemissioni:desComune/text()"
+                                      }
+                                  ]
+                              }
+                              features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda")}/>
+                          </Section>
+                      </ProfileWrapper>
+
+
+
+              <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='CERTIFICAZIONI AMBIENTALI' eventKey='9' expanded={true}>
+                  <SiraTable
+                      id="CertificazioniAmbientali"
+                      selectedRow={model.CertificazioniAmbientali}
+                      wfsVersion="2.0"
+                      rowSelection={false}
+                      columns={
+                          [
+                              {
+                                  headerName: 'Tipo certificazione',
+                                  width: 350,
+                                  xpath:"siraemissioni:CertificazioneAmbientale/siraemissioni:desTipoCertificazione/text()"
+                              },
+                              {
+                                  headerName: 'Data',
+                                  width: 100,
+                                  xpath: "siraemissioni:CertificazioneAmbientale/siraemissioni:dataRilascio/text()"
+                              },
+                              {
+                                  headerName: 'Ente',
+                                  width: 350,
+                                  xpath: "siraemissioni:CertificazioneAmbientale/siraemissioni:desEnteCompetente/text()"
+                              }
+                          ]
+                      }
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:certificazioneAmbientale")}/>
+                </Section>
+              </ProfileWrapper>
+
+              <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='OGGETTI COLLEGATI' eventKey='10' expanded={true}>
+                  <SiraTable
+                      id="OggettiCollegati"
+                      selectedRow={model.OggettiCollegati}
+                      wfsVersion="2.0"
+                      rowSelection={model.profile === "profilob" ? "single" : false}
+                      columns={
+                          [
+                              {
+                                  hide: true,
+                                  id: true,
+                                  xpath: "siraemissioni:OggettoAssociato/@gml:id"
+                              },
+                              {
+                                  headerName: 'Tipo',
+                                  width: 200,
+                                  xpath:"siraemissioni:OggettoAssociato/siraemissioni:desTipo/text()"
+                              },
+                              {
+                                  headerName: 'Codice',
+                                  width: 100,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:codiceOggetto/text()"
+                              },
+                              {
+                                  headerName: 'Stato',
+                                  width: 100,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:desStato/text()"
+                              },
+                              {
+                                  headerName: 'Comune',
+                                  width: 200,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:desComuneOggetto/text()"
+                              },
+                              {
+                                  headerName: 'Numero provvedimento',
+                                  width: 100,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:numeroAutorizzazione/text()"
+                              },
+                              {
+                                  headerName: 'Data emissione',
+                                  width: 50,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:dataAutorizzazione/text()"
+                              },
+                              {
+                                  headerName: 'Data scadenza',
+                                  width: 50,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:dataScadenza/text()"
+                              }
+                          ]
+                      }
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:oggettoAssociato")}/>
+                </Section>
+              </ProfileWrapper>
+
+              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='OGGETTI COLLEGATI' eventKey='10' expanded={true}>
+                  <SiraTable
+                      id="OggettiCollegati"
+                      selectedRow={model.OggettiCollegati}
+                      wfsVersion="2.0"
+                      rowSelection={model.profile === "profilob" ? "single" : false}
+                      columns={
+                          [
+                              {
+                                  hide: true,
+                                  id: true,
+                                  xpath: "siraemissioni:OggettoAssociato/@gml:id"
+                              },
+                              {
+                                  headerName: 'Tipo',
+                                  width: 300,
+                                  xpath:"siraemissioni:OggettoAssociato/siraemissioni:desTipo/text()"
+                              },
+                              {
+                                  headerName: 'Codice',
+                                  width: 150,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:codiceOggetto/text()"
+                              },
+                              {
+                                  headerName: 'Comune',
+                                  width: 350,
+                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:desComuneOggetto/text()"
+                              }
+                          ]
+                      }
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:oggettoAssociato")}/>
+                </Section>
+              </ProfileWrapper>
+
+              <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
+                <SiraTable
+                    id="Autorizzazioni"
+                    selectedRow={model.Autorizzazioni}
+                    wfsVersion="2.0"
+                    rowSelection={model.profile === "profilob" ? "single" : false}
+                    columns={
+                        [
+                            {
+                                hide: true,
+                                id: true,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                            },
+                            {
+                                headerName: 'Tipo provvedimento',
+                                width: 150,
+                                xpath:"siraemissioni:AutorizzazioneAmbientale/siraemissioni:tipoProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Tematica',
+                                width: 150,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desTematica/text()"
+                            },
+                            {
+                                headerName: 'Numero',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:estremiProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data emissione',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data scadenza',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza/text()"
+                            },
+                            {
+                                headerName: 'Ente competente',
+                                width: 150,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desEnteCompetente/text()"
+                            },
+                            {
+                                headerName: 'Stato',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desStato/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale")}/>
+
+
+                    <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
+                    <SiraTable
+                        id="SottoattivitaEmisiva"
+                        selectedRow={model.SottoattivitaEmisiva}
+                        wfsVersion="2.0"
+                        rowSelection={false}
+                        dependsOn={{
+                            tableId: "Autorizzazioni"
+                        }}
+                        columns={
+                            [
+                              {
+                                    hide: true,
+                                    id: true,
+                                    xpath:"../../siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                },
+                                {
+                                    headerName: 'Descrizione sottoattivita',
+                                    width: 750,
+                                    xpath:"siraemissioni:SottoAttivitaEmissiva/siraemissioni:desSottoAttivitaEmissiva/text()"
+                                }
+                            ]
+                        }
+                        features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:sottoAttivitaEmissiva")}/>
+                    </Section>
+
+
+                    <Section header='Dettaglio delle attrezzature' eventKey='13' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
+                      <SiraTable
+                          id="DettaglioAttrezzature"
+                          selectedRow={model.DettaglioAttrezzature}
+                          wfsVersion="2.0"
+                          dependsOn={{
+                              tableId: "Autorizzazioni"
+                          }}
+                          rowSelection={false}
+                          columns={
+                              [
+                                  {
+                                      hide: true,
+                                      id: true,
+                                      xpath:"../../siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                  },
+                                  {
+                                      headerName: 'Descrizione attrezzatura',
+                                      width: 450,
+                                      xpath:"siraemissioni:DettaglioAttivita/siraemissioni:desDettaglioAttivita/text()"
+                                  },
+                                  {
+                                      headerName: 'Quantita',
+                                      width: 400,
+                                      xpath:"siraemissioni:DettaglioAttivita/siraemissioni:quantita/text()"
+                                  }
+                              ]
+                          }
+                          features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dettaglioAttivita")}/>
+                    </Section>
+                  </Section>
+              </ProfileWrapper>
+
+
+              <ProfileWrapper condition={() =>(model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
+                <SiraTable
+                    id="Autorizzazioni"
+                    selectedRow={model.Autorizzazioni}
+                    wfsVersion="2.0"
+                    rowSelection={model.profile === "profiloa" ? "single" : false}
+                    columns={
+                        [
+                            {
+                                hide: true,
+                                id: true,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                            },
+                            {
+                                headerName: 'Tipo provvedimento',
+                                width: 150,
+                                xpath:"siraemissioni:AutorizzazioneAmbientale/siraemissioni:tipoProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Tematica',
+                                width: 150,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desTematica/text()"
+                            },
+                            {
+                                headerName: 'Numero',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:estremiProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data emissione',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data scadenza',
+                                width: 100,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza/text()"
+                            },
+                            {
+                                headerName: 'Ente competente',
+                                width: 150,
+                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desEnteCompetente/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale")}/>
+
+
+                    <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
+                    <SiraTable
+                        id="SottoattivitaEmisiva"
+                        selectedRow={model.SottoattivitaEmisiva}
+                        wfsVersion="2.0"
+                        rowSelection={false}
+                        dependsOn={{
+                            tableId: "Autorizzazioni"
+                        }}
+                        columns={
+                            [
+                              {
+                                    hide: true,
+                                    id: true,
+                                    xpath:"../../siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                },
+                                {
+                                    headerName: 'Descrizione sottoattivita',
+                                    width: 750,
+                                    xpath:"siraemissioni:SottoAttivitaEmissiva/siraemissioni:desSottoAttivitaEmissiva/text()"
+                                }
+                            ]
+                        }
+                        features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:sottoAttivitaEmissiva")}/>
+                    </Section>
+                    </Section>
+              </ProfileWrapper>
+
+
+              <Section header='IMPIANTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
+                <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                  <LabeledField label='Verifica sorgenti rumorose' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:verificaSorgentiRumorose/siraemissioni:VerificaSorgentiRumorose/siraemissioni:desRumorosita/text()")
+                  }/>
+                </ProfileWrapper>
+              </Section>
+
+              <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='ATTIVIT&Agrave; BASSA RUMOROSIT&Agrave;' eventKey='15' expanded={false}>
+                  <SiraTable
+                      id="AttivitaBassaRumorosita"
+                      selectedRow={model.AttivitaBassaRumorosita}
+                      wfsVersion="2.0"
+                      rowSelection={false}
+                      columns={
+                          [
+                              {
+                                  headerName: 'Tipo attivita',
+                                  width: 800,
+                                  xpath:"siraemissioni:attivitaBassaRumorosita/siraemissioni:AttivitaBassaRumorosita/siraemissioni:desAttivitaBassaRumorosita/text()"
+                              }
+                          ]
+                      }
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento")}/>
+                </Section>
+              </ProfileWrapper>
+
+
+
+
+
+
+
+
+
+    </Panel>
+</Panel>
