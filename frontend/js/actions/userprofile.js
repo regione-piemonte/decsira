@@ -13,8 +13,6 @@ const SET_USER_IDENTITY = 'LOADED_USER_IDENTITY';
 const SHOW_LOGIN_PANEL = 'SHOW_LOGIN_PANEL';
 const HIDE_LOGIN_PANEL = 'HIDE_LOGIN_PANEL';
 
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-
 function showLoginPanel() {
     return {
         type: SHOW_LOGIN_PANEL,
