@@ -78,11 +78,11 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
     )(require('../components/MetadataInfoBox'));
 
+
 const Home = () => (
      <div className="home">
 
        <Header />
-
            <div className="container-fluid">
                <div className="row-fluid sb-sx">
                    <div className="container search-home">
