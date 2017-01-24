@@ -6,21 +6,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 const assign = require("object-assign");
-const {SET_PROFILE, SET_USER_IDENTITY, SET_USER_IDENTITY_ERROR} = require('../actions/userprofile');
+const {SHOW_LOGIN_PANEL, HIDE_LOGIN_PANEL, SET_PROFILE, SET_USER_IDENTITY, SET_USER_IDENTITY_ERROR} = require('../actions/userprofile');
 
 function userprofile(state = {
     profile: null,
     authParams: {}
 }, action) {
     switch (action.type) {
+        case SHOW_LOGIN_PANEL: {
+            return assign({}, state, {showLoginPanel: action.showLoginPanel});
+        }
+        case HIDE_LOGIN_PANEL: {
+            return assign({}, state, {showLoginPanel: action.showLoginPanel});
+        }
         case SET_PROFILE: {
             return assign({}, state, {profile: action.profile, authParams: action.authParams});
         }
         case SET_USER_IDENTITY: {
-            return assign({}, state, {roles: action.roles, userIdentity: action.userIdentity, error: ''});
+            return assign({}, state,
+                {
+                    roles: action.roles,
+                    user: action.user,
+                    error: ''
+                });
         }
         case SET_USER_IDENTITY_ERROR: {
-            return assign({}, state, {roles: '', userIdentity: '', error: action.error});
+            return assign({}, state, {roles: '', user: '', error: action.error});
         }
         default:
             return state;

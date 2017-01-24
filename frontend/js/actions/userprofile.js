@@ -10,8 +10,22 @@ const axios = require('../../MapStore2/web/client/libs/ajax');
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';
 const SET_USER_IDENTITY = 'LOADED_USER_IDENTITY';
+const SHOW_LOGIN_PANEL = 'SHOW_LOGIN_PANEL';
+const HIDE_LOGIN_PANEL = 'HIDE_LOGIN_PANEL';
 
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+function showLoginPanel() {
+    return {
+        type: SHOW_LOGIN_PANEL,
+        showLoginPanel: true
+    };
+}
+
+function hideLoginPanel() {
+    return {
+        type: HIDE_LOGIN_PANEL,
+        showLoginPanel: false
+    };
+}
 
 function setProfile(profile, authParams) {
     return {
@@ -25,7 +39,7 @@ function userIdentityLoaded(data) {
     return {
         type: SET_USER_IDENTITY,
         roles: data.roles,
-        userIdentity: data.userIdentity,
+        user: data.user,
         error: ''
     };
 }
@@ -47,7 +61,17 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
             if (typeof response.data === 'object') {
                 if (response.data.userIdentity && response.data.roles && response.data.roles.length > 0) {
                     // there is a logged user, geoserverUrl = secureGeoserverUrl
-                    ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
+                    // ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
+                }
+                let user = {};
+                if (response.data.userIdentity) {
+                    user = {
+                        name: response.data.userIdentity.nome,
+                        surname: response.data.userIdentity.cognome,
+                        cf: response.data.userIdentity.nome,
+                        idProvider: response.data.userIdentity.idProvider
+                   };
+                    response.data.user = user;
                 }
                 dispatch(userIdentityLoaded(response.data));
             } else {
@@ -67,6 +91,10 @@ module.exports = {
     SET_PROFILE,
     SET_USER_IDENTITY_ERROR,
     SET_USER_IDENTITY,
+    SHOW_LOGIN_PANEL,
+    HIDE_LOGIN_PANEL,
+    showLoginPanel,
+    hideLoginPanel,
     loadUserIdentity,
     userIdentityLoaded,
     userIdentityError,
