@@ -20,13 +20,17 @@ function userprofile(state = {
             return assign({}, state, {showLoginPanel: action.showLoginPanel});
         }
         case SET_PROFILE: {
-            return assign({}, state, {profile: action.profile, authParams: action.authParams});
+            return assign({}, state, {
+                profile: state.profile ? state.profile.concat(action.profile) : action.profile,
+                authParams: action.authParams
+            });
         }
         case SET_USER_IDENTITY: {
             return assign({}, state,
                 {
                     roles: action.roles,
                     user: action.user,
+                    profile: state.profile ? state.profile.concat(action.user.profile) : action.user.profile,
                     error: ''
                 });
         }

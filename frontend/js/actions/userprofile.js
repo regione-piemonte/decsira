@@ -7,6 +7,8 @@
  */
 
 const axios = require('../../MapStore2/web/client/libs/ajax');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';
 const SET_USER_IDENTITY = 'LOADED_USER_IDENTITY';
@@ -61,7 +63,11 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
             if (typeof response.data === 'object') {
                 if (response.data.userIdentity && response.data.roles && response.data.roles.length > 0) {
                     // there is a logged user, geoserverUrl = secureGeoserverUrl
-                    // ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
+                    ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
+                    response.data.profile = [];
+                    Array.from(response.data.roles).forEach(function(val) {
+                        response.data.profile = val.mnemonic;
+                    });
                 }
                 let user = {};
                 if (response.data.userIdentity) {
@@ -69,7 +75,8 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                         name: response.data.userIdentity.nome,
                         surname: response.data.userIdentity.cognome,
                         cf: response.data.userIdentity.nome,
-                        idProvider: response.data.userIdentity.idProvider
+                        idProvider: response.data.userIdentity.idProvider,
+                        profile: response.data.profile
                    };
                     response.data.user = user;
                 }
