@@ -25,13 +25,18 @@ const LoginNav = connect((state) => ({
     renderButtonText: false,
     renderButtonContent: () => {return <Glyphicon glyph="user" />; },
     bsStyle: "primary",
+    showAccountInfo: false,
+    showPasswordChange: false,
+    showLogout: true,
     className: "square-button"
 }), {
       // onShowLogin: setControlProperty.bind(null, "LoginForm", "enabled", true),
       onShowLogin: showLoginPanel,
       onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true),
       onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true),
-      onLogout: logoutWithReload
+      onLogout: () => {
+          window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+      }
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
 
 const LoginPanel = connect((state) => ({
