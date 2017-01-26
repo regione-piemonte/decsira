@@ -14,7 +14,6 @@ const {connect} = require('react-redux');
 // require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
 
 const {Glyphicon} = require('react-bootstrap');
-const {logoutWithReload} = require('../../MapStore2/web/client/actions/security');
 const {setControlProperty} = require('../../MapStore2/web/client/actions/controls');
 const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
