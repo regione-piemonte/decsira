@@ -7,6 +7,36 @@
  */
 
 const React = require('react');
+const {connect} = require('react-redux');
+const {Glyphicon} = require('react-bootstrap');
+const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
+
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+
+const LoginNav = connect((state) => ({
+    user: state.userprofile.user,
+    nav: false,
+    renderButtonText: false,
+    renderButtonContent: () => {return <Glyphicon glyph="user" />; },
+    bsStyle: "primary",
+    showAccountInfo: false,
+    showPasswordChange: false,
+    showLogout: true,
+    className: "square-button"
+}), {
+      onShowLogin: showLoginPanel,
+      onLogout: () => {
+          window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+      }
+})(require('../../MapStore2/web/client/components/security/UserMenu'));
+const LoginPanel = connect((state) => ({
+    showLoginPanel: state.userprofile.showLoginPanel
+}), {
+    onClosePanel: hideLoginPanel,
+    onConfirm: () => {
+        window.location.href = ConfigUtils.getConfigProp('secureDecsirawebUrl');
+    }
+})(require('./LoginPanel'));
 
 const MapHeader = React.createClass({
     propTypes: {
@@ -45,6 +75,8 @@ const MapHeader = React.createClass({
                                                     </label>
                                                 </div>
                                             </div>
+                                            <LoginNav />
+                                            <LoginPanel />
                                             <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
                                                 <button className="pimenu-navbar-toggle" type="button"
                                                     data-toggle="collapse" data-target=".pimenu-navbar-collapse">

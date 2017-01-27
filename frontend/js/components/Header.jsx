@@ -14,7 +14,6 @@ const {connect} = require('react-redux');
 // require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
 
 const {Glyphicon} = require('react-bootstrap');
-const {setControlProperty} = require('../../MapStore2/web/client/actions/controls');
 const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
@@ -29,10 +28,7 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     className: "square-button"
 }), {
-      // onShowLogin: setControlProperty.bind(null, "LoginForm", "enabled", true),
       onShowLogin: showLoginPanel,
-      onShowAccountInfo: setControlProperty.bind(null, "AccountInfo", "enabled", true),
-      onShowChangePassword: setControlProperty.bind(null, "ResetPassword", "enabled", true),
       onLogout: () => {
           window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
       }
