@@ -92,7 +92,7 @@ const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo')
 const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
 const GetFeatureInfo = connect((state) => {
-    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
     siraFeatureTypeName: activeConfig.featureTypeName,
     siraFeatureInfoDetails: state.siradec.configOggetti,
@@ -203,7 +203,7 @@ const Sira = React.createClass({
 });
 
 module.exports = connect((state) => {
-    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         mode: 'desktop',
         loading: !state.config || !state.locale || false,
