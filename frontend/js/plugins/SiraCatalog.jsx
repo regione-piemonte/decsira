@@ -25,6 +25,7 @@ const {
 
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {setGridType} = require('../actions/grid');
+const {loadNodeMapRecords, toggleAddMap, addLayers} = require('../actions/addmap');
 
 const getChildren = function(nodes, node) {
     return node.nodes.map((child) => {
@@ -84,6 +85,18 @@ const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNode');
 
+
+const AddMapModal = connect(({addmap = {}}) => ({
+        error: addmap.error,
+        node: addmap.node,
+        records: addmap.records,
+        loading: addmap.loading,
+        show: addmap.show
+    }), {
+    close: toggleAddMap.bind(null, false),
+    addLayers: addLayers
+})(require('../components/addmap/AddMapModal'));
+
 const Spinner = require('react-spinkit');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
@@ -130,7 +143,9 @@ const LayerTree = React.createClass({
         setGridType: React.PropTypes.func,
         showInfoBox: React.PropTypes.func,
         loadMetadata: React.PropTypes.func,
-        selectSubCategory: React.PropTypes.func
+        selectSubCategory: React.PropTypes.func,
+        loadNodeMapRecords: React.PropTypes.func,
+        toggleAddMap: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -165,6 +180,7 @@ const LayerTree = React.createClass({
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
                             groups={this.props.nodes}
+                            addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>
                 </TOC>);
@@ -203,6 +219,7 @@ const LayerTree = React.createClass({
             </Tabs>
             {this.props.loading ? (
                 <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
+            <AddMapModal/>
             </div>);
     },
     loadMetadata({text, id = this.props.category.id} = {}) {
@@ -240,6 +257,17 @@ const LayerTree = React.createClass({
         // Will be removed when clear how to use components, we already have metadata loaded
         this.props.loadMetadata(node);
         this.props.showInfoBox();
+    },
+    addToMap(node) {
+        if (!node.featureType) {
+            this.props.toggleAddMap(true);
+            this.props.loadNodeMapRecords(node);
+        }
+        // ToDo implement add for featureType
+        /*else {
+
+        }*/
+
     }
 });
 
@@ -253,7 +281,9 @@ const CatalogPlugin = connect(tocSelector, {
     setGridType,
     loadMetadata,
     showInfoBox: showBox,
-    selectSubCategory
+    selectSubCategory,
+    loadNodeMapRecords,
+    toggleAddMap
 })(LayerTree);
 
 module.exports = {

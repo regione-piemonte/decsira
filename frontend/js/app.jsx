@@ -31,7 +31,9 @@ const appReducers = {
      mosaic: require('./reducers/mosaic'),
      metadatainfobox: require('./reducers/metadatainfobox'),
      platformnumbers: require('./reducers/platformnumbers'),
-     siraexporter: require('./reducers/siraexporter')
+     siraexporter: require('./reducers/siraexporter'),
+     addmap: require('./reducers/addmap')
+
  };
 
 const startApp = () => {
