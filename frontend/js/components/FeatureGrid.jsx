@@ -351,7 +351,7 @@ const SiraGrid = React.createClass({
                                     paging={this.props.pagination}
                                     zoom={15}
                                     enableZoomToFeature={this.props.withMap}
-                                    agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true}}
+                                    agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true, overlayNoRowsTemplate: "Nessun risultato trovato"}}
                                     zoomToFeatureAction={this.props.zoomToFeatureAction}
                                     toolbar={{
                                         zoom: this.props.withMap,
@@ -360,6 +360,7 @@ const SiraGrid = React.createClass({
                                         selectAll: true
                                     }}
                                     exportAction={this.exportFeatures}
+
                                     {...gridConf}
                                     />
                             </div>
