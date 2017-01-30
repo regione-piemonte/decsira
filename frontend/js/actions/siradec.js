@@ -169,7 +169,8 @@ function configurationLoading() {
 }
 function loadFeatureTypeConfig(configUrl, params, featureType, activate = false) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const {userprofile} = getState();
         dispatch(configurationLoading());
         return axios.get(url).then((response) => {
             let config = response.data;
@@ -188,7 +189,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
             let serviceUrl = config.query.service.url;
 
             // Configure QueryForm attributes
-            const fields = config.query.fields.map((f) => {
+            const fields = config.query.fields.filter( (field) => !field.profile || field.profile.indexOf(userprofile.profile) !== -1).map((f) => {
                 let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
                 urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
                 return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);

@@ -251,6 +251,7 @@ const SideQueryPanel = React.createClass({
     renderLoadConfigException(loadingError, msg) {
         let exception;
         if (isObject(loadingError)) {
+
             exception = loadingError.status +
                 "(" + loadingError.statusText + ")" +
                 ": " + loadingError.data;
@@ -310,7 +311,7 @@ const SideQueryPanel = React.createClass({
 });
 
 module.exports = connect((state) => {
-    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         // SiraQueryPanel prop
         filterPanelExpanded: state.siradec.filterPanelExpanded,
