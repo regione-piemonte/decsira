@@ -14,7 +14,7 @@ const assign = require('object-assign');
 const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 const {getMetadataObjects} = require('../actions/siracatalog');
-const {head} = require('lodash');
+
 
 const {
     // SiraQueryPanel action functions
@@ -27,47 +27,7 @@ const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {setGridType} = require('../actions/grid');
 const {loadNodeMapRecords, toggleAddMap, addLayers} = require('../actions/addmap');
 
-const getChildren = function(nodes, node) {
-    return node.nodes.map((child) => {
-        let newNode = head(nodes.filter((n) => n.id === child));
-        return newNode.nodes ? assign({expanded: false}, newNode, {nodes: getChildren(nodes, newNode)}) : newNode;
-    });
-};
-const normalizeCatalog = function(nodes) {
-    return nodes.filter( (n) => n.type === "root").map((n) => {
-        return assign({expanded: false}, n, {nodes: getChildren(nodes, n)});
-    });
-};
-const normalizeViews = function(nodes) {
-    return nodes.filter( (n) => n.type === "view").map((n) => {
-        return assign({expanded: false}, n, {nodes: getChildren(nodes, n)});
-    });
-};
-const normalizeObjects = function(nodes) {
-    return nodes.filter( (n) => n.type === "node" && !n.nodes);
-};
-const tocSelector = createSelector([
-        (state) => state.siracatalog.nodes || [],
-        (state) => state.siracatalog.category,
-        (state) => state.siracatalog.subcat,
-        (state) => state.siracatalog,
-        (state) => state.siradec && state.siradec.configOggetti,
-        (state) => state.userprofile,
-        (state) => state.siradec && state.siradec.activeFeatureType
-    ], ( nodes, category, subcat, catalog, configOggetti, userprofile, activeFeatureType) => ({
-        views: normalizeViews(catalog.views || []),
-        nodes: normalizeCatalog(nodes),
-        objects: normalizeObjects(nodes),
-        nodesLoaded: catalog.nodes ? true : false,
-        category,
-        loading: catalog.loading,
-        configOggetti,
-        userprofile,
-        activeFeatureType,
-        subcat
-    })
-);
-const {categorySelector} = require('../selectors/sira');
+const {categorySelector, tocSelector} = require('../selectors/sira');
 
 const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
@@ -138,7 +98,8 @@ const LayerTree = React.createClass({
     },
     getInitialState() {
         return {
-            searchText: ""
+            searchText: "",
+            showCategories: true
         };
     },
     componentWillMount() {
@@ -155,9 +116,11 @@ const LayerTree = React.createClass({
         if (!this.props.nodes) {
             return <div></div>;
         }
+        const {showCategories} = this.state;
         const objects = (
-            <TOC nodes={this.props.nodes}>
-                    <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
+            <TOC nodes={showCategories ? this.props.nodes : this.props.objects}>
+                    { showCategories ?
+                    (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                     <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
@@ -165,7 +128,11 @@ const LayerTree = React.createClass({
                             groups={this.props.nodes}
                             addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>
-                    </DefaultGroup>
+                    </DefaultGroup>) : (<DefaultNode
+                            expandFilterPanel={this.openFilterPanel}
+                            onToggle={this.props.onToggle}
+                            addToMap={this.addToMap}
+                            showInfoBox={this.showInfoBox}/>) }
                 </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             expandFilterPanel={this.props.expandFilterPanel}
@@ -195,6 +162,11 @@ const LayerTree = React.createClass({
                             <div className={this.props.category.icon}/>
                         </Button>
              </OverlayTrigger>
+             </div>
+             <div className="catalog-categories-switch-container">
+             <div className="catalog-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
+                <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+              </div>
              </div>
             <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
                 <Tab eventKey={'objects'} title={`Oggetti (${this.props.category.objectNumber})`}>{objects}</Tab>
