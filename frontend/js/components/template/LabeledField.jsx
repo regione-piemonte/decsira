@@ -7,13 +7,14 @@
  */
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
-
+var {FormattedDate} = require('react-intl');
 const LocaleUtils = require('../../../MapStore2/web/client/utils/LocaleUtils');
 
 const LabeledField = React.createClass({
     propTypes: {
         label: React.PropTypes.string,
-        value: React.PropTypes.any
+        value: React.PropTypes.any,
+        dateFormat: React.PropTypes.object
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -24,6 +25,14 @@ const LabeledField = React.createClass({
             value: null
         };
     },
+    renderDate(value, dateFormat) {
+        const locale = this.context.locale || 'it-IT';
+        const date = new Date(value);
+        return !isNaN(date.getTime()) ? (<FormattedDate locales={locale} value={date} {...dateFormat} />) : (<span/>);
+    },
+    renderValue(value) {
+        return this.props.dateFormat ? this.renderDate(value, this.props.dateFormat) : value;
+    },
     render() {
         return (
             <Grid className="labeled-field" fluid={true}>
@@ -33,7 +42,7 @@ const LabeledField = React.createClass({
                     </Col>
                     <Col className="value-sira" xs={7} sm={7} md={7} lg={7}>
                         {
-                            this.props.value ? this.props.value :
+                            this.props.value ? this.renderValue(this.props.value) :
                                 <span className="labeledfield-no-value">
                                     {LocaleUtils.getMessageById(this.context.messages, "labeledfield.label_value_not_specified")}
                                 </span>

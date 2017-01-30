@@ -7,7 +7,6 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
 const {toggleNode, selectCategory, getThematicViewConfig, selectSubCategory} = require('../actions/siracatalog');
 
 const assign = require('object-assign');

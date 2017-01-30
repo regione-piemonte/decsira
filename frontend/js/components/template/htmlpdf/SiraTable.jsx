@@ -10,6 +10,7 @@ const React = require('react');
 const {connect} = require('react-redux');
 
 const TemplateUtils = require('../../../utils/TemplateUtils');
+var {FormattedDate} = require('react-intl');
 
 const assign = require('object-assign');
 const uuid = require('node-uuid');
@@ -29,6 +30,9 @@ const SiraTable = React.createClass({
         wfsVersion: React.PropTypes.string,
         profile: React.PropTypes.string
     },
+    contextTypes: {
+        locale: React.PropTypes.string
+    },
     getDefaultProps() {
         return {
             id: "SiraTable",
@@ -45,10 +49,15 @@ const SiraTable = React.createClass({
             return (<th key={c.field}>{c.headerName}</th>);
         });
     },
+    renderDate(value, dateFormat) {
+        const locale = this.context.locale || 'it-IT';
+        const date = new Date(value);
+        return !isNaN(date.getTime()) ? (<FormattedDate locales={locale} value={date} {...dateFormat} />) : (<span/>);
+    },
     renderTableBody(features, columns) {
         return features.map((f, idx) => {
             return (<tr key={idx}>{columns.map((c) => {
-                return (<td key={c.field}>{f[c.field]}</td>);
+                return (<td key={c.field}>{c.dateFormat ? this.renderDate(f[c.field], c.dateFormat ) : f[c.field]}</td>);
             })}</tr>);
         });
     },
