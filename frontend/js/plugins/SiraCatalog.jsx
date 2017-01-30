@@ -67,19 +67,7 @@ const tocSelector = createSelector([
         subcat
     })
 );
-const categorySelector = createSelector([
-        (state) => state.mosaic.tiles || []
-    ], (servertiles) => {
-        const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
-            v.objectNumber += t.objectNumber;
-            v.tematicViewNumber += t.tematicViewNumber;
-            return v;
-        }, {objectNumber: 0, tematicViewNumber: 0});
-        return {
-        tiles: [...servertiles, {id: 999, name: "Search All", icon: "all", objectNumber, tematicViewNumber}]
-        };
-    }
-);
+const {categorySelector} = require('../selectors/sira');
 
 const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
@@ -104,11 +92,6 @@ const Vista = connect( null, {
     addToMap: getThematicViewConfig
     })(require('../components/catalog/Vista'));
 
-// const SearchCategories = connect((state)=> ({
-//     categories: state.siracatalog && state.siracatalog.searchCategories
-// }), {
-//     onSelect: selectCategory
-// })(require('../components/catalog/SearchCategories'));
 const SearchCategories = connect(categorySelector,
 {
     tileClick: selectCategory
