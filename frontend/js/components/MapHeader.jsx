@@ -77,12 +77,6 @@ const MapHeader = React.createClass({
                                             </div>
                                             <LoginNav />
                                             <LoginPanel />
-                                            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
-                                                <button className="pimenu-navbar-toggle" type="button"
-                                                    data-toggle="collapse" data-target=".pimenu-navbar-collapse">
-                                                    <i className="fa fa-bars"></i>
-                                                </button>
-                                            </div>
                                         </div>
 
                                         <nav className="pimenu-navbar-collapse collapse">
