@@ -1,0 +1,472 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PUNTI DI EMISSIONE IN ATMOSFERA' subtitle={[
+            'Tipo di emissione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:desTipoEmissione/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Punto di emissione' eventKey='1' expanded={true}>
+        <LabeledField label='Sigla' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:sigla/text()")
+        }/>
+        <LabeledField label='Tipo emissione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:desTipoEmissione/text()")
+        }/>
+        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <LabeledField label='Stato punto di emissione' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:desStato/text()")
+            }/>
+        </ProfileWrapper>
+
+        <LabeledField label='Portata dell&rsquo;aeriforme' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:portataAeriforme_Nm3_h/text()")
+        }/>
+
+        <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <LabeledField label='Durata dell&rsquo;emissione' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:durataEmissione_h_g/text()")
+          }/>
+          <LabeledField label='Frequenza dell&rsquo;emissione' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:frequenzaEmisione/text()")
+          }/>
+          <LabeledField label='Costante/discontinua' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:desCostanteDiscontinua/text()")
+          }/>
+        </ProfileWrapper>
+
+        <LabeledField label='Temperatura dell&rsquo;emissione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:temperaturaEmissione/text()")
+        }/>
+
+        <LabeledField label='Temperatura ambiente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:temperaturaAmbiente/text()")
+        }/>
+
+        <LabeledField label='Indicazioni sul sistema di abbattimento' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:indicazioneSistemaAbbattimento/text()")
+        }/>
+
+        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <LabeledField label='Note' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:note/text()")
+            }/>
+        </ProfileWrapper>
+
+        <LabeledField label='Altezza geometrica dell&rsquo;emissione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:altezza_m/text()")
+        }/>
+
+        <LabeledField label='Diametro o primo lato camino (m)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:diametroPrimoLato/text()")
+        }/>
+
+        <LabeledField label='Secondo lato camino (m)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:secondoLato/text()")
+        }/>
+
+        <LabeledField label='Materiale camino' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:materiale/text()")
+        }/>
+
+
+
+
+        <Section header='DATI STABILIMENTO' eventKey='2' expanded={true}>
+            <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+              <LabeledField label='Codice sira' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()")
+                }/>
+            </ProfileWrapper>
+
+            <LabeledField label='Nome' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nome/text()")
+            }/>
+
+            <LabeledField label='Provincia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:desProvincia/text()")
+            }/>
+
+            <LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nomeComune/text()")
+            }/>
+
+            <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+              <LabeledField label='Indirizzo' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:indirizzo/text()")
+              }/>
+              <LabeledField label='Email-pec' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:emailPec/text()")
+              }/>
+            </ProfileWrapper>
+
+            <Section header='Tipo attivit&agrave; produttiva' eventKey='3' expanded={true}>
+                <SiraTable
+                    id="TipoAttivitaProduttiva"
+                    selectedRow={model.TipoAttivitaProduttiva}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    columns={
+                        [
+                            {
+                                headerName: 'Descrizione attivita Ateco',
+                                width: 700,
+                                xpath: "siraemissioni:AttivitaProduttiva/siraemissioni:desAteco/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:attivitaProduttiva")}/>
+            </Section>
+
+            <Section header='Dati azienda' eventKey='4' expanded={true}>
+                 <LabeledField label='Ragione sociale' value={
+                   model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()")
+                 }/>
+
+                 <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+
+                     <LabeledField label='Codice fiscale' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale/text()")
+                     }/>
+
+                     <LabeledField label='Partita IVA' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA/text()")
+                     }/>
+
+                 </ProfileWrapper>
+
+                 <LabeledField label='Provincia' value={
+                   model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()")
+                 }/>
+
+                 <LabeledField label='Comune' value={
+                   model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()")
+                 }/>
+
+                 <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+
+                     <LabeledField label='Indirizzo' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()")
+                     }/>
+
+                     <LabeledField label='Telefono' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:telefono/text()")
+                     }/>
+
+                     <LabeledField label='Fax' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:fax/text()")
+                     }/>
+
+                     <LabeledField label='Numero iscrizione CCIAA' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:numeroCIAA/text()")
+                     }/>
+
+                     <LabeledField label='Anno iscrizione CCIAA' value={
+                       model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:annoCIAA/text()")
+                     }/>
+
+                  </ProfileWrapper>
+
+                  <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                     <Section header='Dati titolare/legale rappresentante' eventKey='5' expanded={true}>
+                        <LabeledField label='Cognome' value={
+                          model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:cognomeTitolare/text()")
+                        }/>
+                        <LabeledField label='Nome' value={
+                          model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:nomeTitolare/text()")
+                        }/>
+                     </Section>
+                   </ProfileWrapper>
+
+            </Section>
+
+            <Section header='DATI AUTORIZZAZIONE' eventKey='6' expanded={true}>
+                <LabeledField label='Tipo provvedimento' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione/siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:tipoProvvedimento/text()")
+                }/>
+                <LabeledField label='Numero' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione/siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:estremiProvvedimento/text()")
+                }/>
+                <LabeledField label='Data emissione' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione/siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:dataProvvedimento/text()")
+                }/>
+                <LabeledField label='Data scadenza' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione/siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:dataScadenza/text()")
+                }/>
+                <LabeledField label='Ente competente' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione/siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:desEnteCompetente/text()")
+                }/>
+                <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                  <LabeledField label='Stato' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione/siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:desStato/text()")
+                  }/>
+                </ProfileWrapper>
+
+                <Section header='Sottoattivit&agrave; emissiva' eventKey='7' expanded={true}>
+                <SiraTable
+                    id="SottoattivitaEmisivaPuntoEmissione"
+                    selectedRow={model.SottoattivitaEmisivaPuntoEmissione}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    columns={
+                        [
+                            {
+                                headerName: 'Descrizione sottoattivit&agrave;',
+                                width: 650,
+                                xpath:"siraemissioni:SottoAttivitaEmissivaPuntoEmissione/siraemissioni:desSottoAttivitaEmissiva/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione//siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:sottoAttivitaEmissivaPuntoEmissione")}/>
+                </Section>
+                <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                    <Section header='Dettaglio delle attrezzature' eventKey='8' expanded={true}>
+                        <SiraTable
+                            id="DettaglioAttrezzaturePuntoEmissione"
+                            selectedRow={model.DettaglioAttrezzaturePuntoEmissione}
+                            wfsVersion="2.0"
+                            rowSelection={false}
+                            columns={
+                                [
+                                    {
+                                        headerName: 'Descrizione attrezzature',
+                                        width: 500,
+                                        xpath:"siraemissioni:DettaglioAttivitaPuntoEmissione/siraemissioni:desSottoAttivitaEmissiva/text()"
+                                    },
+                                    {
+                                        headerName: 'Quantit&agrave;',
+                                        width: 150,
+                                        xpath:"siraemissioni:DettaglioAttivitaPuntoEmissione/siraemissioni:desSottoAttivitaEmissiva/text()"
+                                    }
+                                ]
+                            }
+                            features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:autorizzazioneAmbientalePuntoEmissione//siraemissioni:AutorizzazioneAmbientalePuntoEmissione/siraemissioni:dettaglioAttivitaPuntoEmissione")}/>
+                    </Section>
+               </ProfileWrapper>
+            </Section>
+        </Section>
+
+
+      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+        <Section header='PROVENIENZE DELL&acute;EMISSIONE' eventKey='9' expanded={true}>
+          <SiraTable
+              id="ProvenienzeEmissione"
+              selectedRow={model.ProvenienzeEmissione}
+              wfsVersion="2.0"
+              rowSelection={false}
+              columns={
+                  [
+                      {
+                          headerName: 'Descrizione della provenienza',
+                          width: 250,
+                          xpath:"siraemissioni:ProvenienzaEmissione/siraemissioni:desProvenienza/text()"
+                      },
+                      {
+                          headerName: 'Impianti/macchine interessati',
+                          width: 250,
+                          xpath: "siraemissioni:ProvenienzaEmissione/siraemissioni:impiantiMacchine/text()"
+                      },
+                      {
+                          headerName: 'Altra provenienza',
+                          width: 250,
+                          xpath: "siraemissioni:ProvenienzaEmissione/siraemissioni:altraProvenienza/text()"
+                      }
+                  ]
+              }
+              features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:provenienzaEmissione")}/>
+        </Section>
+      </ProfileWrapper>
+
+      <ProfileWrapper condition={() => (model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+        <Section header='PROVENIENZE DELL&acute;EMISSIONE' eventKey='10' expanded={true}>
+          <SiraTable
+              id="ProvenienzeEmissione"
+              selectedRow={model.ProvenienzeEmissione}
+              wfsVersion="2.0"
+              rowSelection={false}
+              columns={
+                  [
+                      {
+                          headerName: 'Descrizione della provenienza',
+                          width: 360,
+                          xpath:"siraemissioni:ProvenienzaEmissione/siraemissioni:desProvenienza/text()"
+                      },
+                      {
+                          headerName: 'Altra provenienza',
+                          width: 360,
+                          xpath: "siraemissioni:ProvenienzaEmissione/siraemissioni:altraProvenienza/text()"
+                      }
+                  ]
+              }
+              features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:provenienzaEmissione")}/>
+        </Section>
+      </ProfileWrapper>
+
+
+      <Section header='IMPIANTO DI ABBATTIMENTO' eventKey='11' expanded={true}>
+          <SiraTable
+              id="ImpiantoAbbattimento"
+              selectedRow={model.ImpiantoAbbattimento}
+              wfsVersion="2.0"
+              rowSelection={false}
+              columns={
+                  [
+                      {
+                          headerName: 'Tipo impianto di abbattimento',
+                          width: 710,
+                          xpath:"siraemissioni:ImpiantoDiAbbattimento/siraemissioni:desImpiantoAbbattimento/text()"
+                      }
+                  ]
+              }
+              features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:impiantoDiAbbattimento")}/>
+      </Section>
+
+      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <Section header='INQUINANTI' eventKey='12' expanded={true}>
+              <SiraTable
+                  id="Inquinanti"
+                  selectedRow={model.Inquinanti}
+                  wfsVersion="2.0"
+                  rowSelection={false}
+                  columns={
+                      [
+                          {
+                              headerName: 'Inquinante',
+                              width: 330,
+                              xpath:"siraemissioni:Inquinante/siraemissioni:desInquinante/text()"
+                          },
+                          {
+                              headerName: 'Concentrazione (mg/Nm3)',
+                              width: 200,
+                              xpath:"siraemissioni:Inquinante/siraemissioni:concentrazione_mg_Nm3/text()"
+                          },
+                          {
+                              headerName: 'Flusso di massa (kg/h)',
+                              width: 200,
+                              xpath:"siraemissioni:Inquinante/siraemissioni:flussoDiMassa_kg_h/text()"
+                          }
+                      ]
+                  }
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:inquinante")}/>
+          </Section>
+      </ProfileWrapper>
+
+
+      <ProfileWrapper condition={() => (model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+          <Section header='INQUINANTI' eventKey='13' expanded={true}>
+              <SiraTable
+                  id="Inquinanti"
+                  selectedRow={model.Inquinanti}
+                  wfsVersion="2.0"
+                  rowSelection={false}
+                  columns={
+                      [
+                          {
+                              headerName: 'Inquinante',
+                              width: 710,
+                              xpath:"siraemissioni:Inquinante/siraemissioni:desInquinante/text()"
+                          }
+                      ]
+                  }
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:inquinante")}/>
+          </Section>
+      </ProfileWrapper>
+
+
+      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <Section header='IMPIANTO DI COMBUSTIONE' eventKey='14' expanded={true}>
+              <SiraTable
+                  id="ImpiantoCombustione"
+                  selectedRow={model.ImpiantoCombustione}
+                  wfsVersion="2.0"
+                  rowSelection={false}
+                  columns={
+                      [
+                          {
+                              headerName: 'Sigla impianto',
+                              width: 100,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:sigla/text()"
+                          },
+                          {
+                              headerName: 'Tipologia',
+                              width: 100,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:tipologiaImpianto/text()"
+                          },
+                          {
+                              headerName: 'Potenza singolo focolare (MWt)',
+                              width: 200,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:potenzaSingoloFocolare_MW_t/text()"
+                          },
+                          {
+                              headerName: 'Combustibile',
+                              width: 100,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:desCombustibile/text()"
+                          },
+                          {
+                              headerName: 'Consumo di combustibile',
+                              width: 150,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:consumoDiCombustibile/text()"
+                          },
+                          {
+                              headerName: 'Unit&agrave; di misura',
+                              width: 100,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:unitaDiMisura/text()"
+                          },
+                          {
+                              headerName: 'Sistema di monitoraggio',
+                              width: 150,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:flgSistemaMonitoraggio/text()"
+                          },
+                          {
+                              headerName: 'Tipologia impianto',
+                              width: 150,
+                              xpath:"siraemissioni:ImpiantoDiCombustione/siraemissioni:desTipologiaImpianto/text()"
+                          }
+                      ]
+                  }
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:impiantoDiCombustione")}/>
+          </Section>
+      </ProfileWrapper>
+
+
+      <Section header='MAPPA SINTESI - Punto di emissione' eventKey='15' expanded={true}>
+          <MappaScheda
+              center={
+                  model.getValue({
+                      type: TemplateUtils.GEOMETRY_TYPE,
+                      xpath: "/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:geometria/gml:Point/gml:pos/text()"
+                  })
+              }
+              layers={[
+              {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                  "name": "SfondoCartRif",
+                  "title": "Sfondo Cartografico",
+                  "group": "background",
+                  "visibility": true,
+                  "format": "image/png",
+                  "tiled": true,
+                  "tileSize": 512
+              },
+              {
+                  "type": "wms",
+                  "url": "{geoserverUrl}/wms",
+                  "visibility": true,
+                  "title": "Punto di Emissione Preview",
+                  "name": "siraemissioni:PuntoEmissione",
+                  "group": "Overlays",
+                  "format": "image/png"
+              }
+      ]}
+              authParam={model.authParam}
+              withMap={model.withMap}/>
+      </Section>
+
+
+
+
+      </Section>
+    </Panel>
+</Panel>

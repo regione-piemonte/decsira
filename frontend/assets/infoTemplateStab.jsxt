@@ -1,0 +1,88 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateStab"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+            headerName: 'Codice SIRA',
+            width: 90,
+            xpath: "siraemissioni:codiceSira/text()"
+        }, {
+            headerName: 'Ragione sociale azienda',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()"
+        }, {
+            headerName: 'Provincia',
+            width: 100,
+            "xpath": ["siraemissioni:desProvincia/text()"],
+        }, {
+            headerName: 'Comune',
+            width: 100,
+            xpath: "siraemissioni:nomeComune/text()"
+        }, {
+            headerName: 'Indirizzo',
+            width: 100,
+            xpath: "siraemissioni:indirizzo/text()"
+        }, {
+            headerName: 'Ragione sociale',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()"
+        }, {
+            headerName: 'Codice fiscale azienda',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Partita IVA',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Provincia azienda',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()"
+        }, {
+            headerName: 'Comune azienda',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()"
+        }, {
+            headerName: 'Indirizzo azienda',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Indirizzo azienda',
+            width: 100,
+            xpath: "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Tipo provvedimento attivo',
+            width: 100,
+            xpath: "siraemissioni:tipoProvvedimentoAttivo/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Tipo provvedimento storico',
+            width: 100,
+            xpath: "siraemissioni:tipoProvvedimentoStorico/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        },
+         {
+            headerName: 'Ambito tematico',
+            width: 100,
+            xpath: "siraemissioni:tematica/text()"
+        }, {
+            headerName: 'Abitanti equivalenti trattati del depuratore',
+            width: 100,
+            xpath: "siraemissioni:abitantiEquivalentiTrattati/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/siraemissioni:Stabilimento")}/>
