@@ -27,7 +27,7 @@ describe('Test correctness of the queryform actions', () => {
             } catch(ex) {
                 done(ex);
             }
-        }, () => ({ueserprofile : {}}));
+        }, () => ({ueserprofile: {}}));
     });
 
     it('loads an existing configuration file 2', (done) => {
