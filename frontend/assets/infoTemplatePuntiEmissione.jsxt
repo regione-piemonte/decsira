@@ -1,0 +1,126 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplatePuntiEmissione"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+            headerName: 'Sigla',
+            width: 90,
+            xpath: "siraemissioni:sigla/text()"
+        }, {
+            headerName: 'Tipo emissione',
+            width: 100,
+            xpath: "siraemissioni:desTipoEmissione/text()"
+        },  {
+            headerName: 'Stato punto di emissione',
+            width: 100,
+            xpath: "siraemissioni:desStato/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Codice sira stabilimento',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Denominazione stabilimento',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nome/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Provincia',
+            width: 100,
+            "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:desProvincia/text()"],
+        }, {
+            headerName: 'Comune',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nomeComune/text()"
+        }, {
+            headerName: 'Indirizzo',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:indirizzo/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Ragione sociale',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()"
+        }, {
+            headerName: 'Tipo provvedimento',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:tipoProvvedimento/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Stato del provvedimento',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:desStato/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Numero del provvedimento',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:estremiProvvedimento/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Data provvedimento',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Data scadenza',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Ente competente',
+            width: 100,
+            xpath: "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:desEnteCompetente/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Portata dell&rsquo;aeriforme',
+            width: 100,
+            xpath: "siraemissioni:portataAeriforme_Nm3_h/text()"
+        }, {
+            headerName: 'Durata dell&rsquo;emissione',
+            width: 100,
+            xpath: "siraemissioni:durataEmissione_h_g/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Frequenza dell&rsquo;emissione',
+            width: 100,
+            xpath: "siraemissioni:frequenzaEmisione/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Costante/discontinua',
+            width: 100,
+            xpath: "siraemissioni:desCostanteDiscontinua/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Temperatura dell&rsquo;emissione',
+            width: 100,
+            xpath: "siraemissioni:temperaturaEmissione/text()"
+        }, {
+            headerName: 'Temperatura ambiente',
+            width: 100,
+            xpath: "siraemissioni:temperaturaAmbiente/text()"
+        }, {
+            headerName: 'Altezza geometrica dell&rsquo;emissione',
+            width: 100,
+            xpath: "siraemissioni:altezza_m/text()"
+        }, {
+            headerName: 'Diametro o primo lato camino (m)',
+            width: 100,
+            xpath: "siraemissioni:diametroPrimoLato/text()"
+        }, {
+            headerName: 'Secondo lato camino (m)',
+            width: 100,
+            xpath: "siraemissioni:secondoLato/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/siraemissioni:PuntoEmissione")}/>

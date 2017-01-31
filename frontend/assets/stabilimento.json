@@ -18,7 +18,7 @@
      }
    },
    "featureinfo":{
-     "templateURL": "assets/infoTemplate.jsxt"
+     "templateURL": "assets/infoTemplateStab.jsxt"
    },
    "featuregrid": {
      "grid": {
@@ -34,13 +34,11 @@
          {
            "headerName": "Codice Sira",
            "xpath": ["siraemissioni:codiceSira/text()"],
-           "profiles": ["B"],
            "type": 1
          },
          {
-           "headerName": "Nome stabilimento",
+           "headerName": "Denominazione stabilimento",
            "xpath": ["siraemissioni:nome/text()"],
-           "profiles": ["B"],
            "type": 2
          },
          {
@@ -59,20 +57,20 @@
            "type": 2
          },
          {
-           "headerName": "Denominazione azienda",
+           "headerName": "Ragione sociale azienda",
            "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()"],
            "type": 2
          },
          {
            "headerName": "Codice fiscale azienda",
            "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale/text()"],
-           "profiles": ["B"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Partita IVA",
            "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA/text()"],
-           "profiles": ["B"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -88,19 +86,19 @@
          {
            "headerName": "Indirizzo azienda",
            "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()"],
-           "profiles": ["B"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Tipo provvedimento attivo",
            "xpath": ["siraemissioni:tipoProvvedimentoAttivo/text()"],
-           "profiles": ["B"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Tipo provvedimento storico",
            "xpath": ["siraemissioni:tipoProvvedimentoStorico/text()"],
-           "profiles": ["B"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
