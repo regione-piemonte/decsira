@@ -37,7 +37,7 @@ let defaultConfig = {
     mapquestApiKey: null
 };
 
-var ConfigUtils = {
+const ConfigUtils = {
     defaultSourceType: "gxp_wmssource",
     backgroundGroup: "background",
 
@@ -337,6 +337,12 @@ var ConfigUtils = {
     },
     getConfigProp: function(prop) {
         return defaultConfig[prop];
+    },
+    setConfigProp: function(prop, value) {
+        defaultConfig[prop] = value;
+    },
+    removeConfigProp: function(prop) {
+        delete defaultConfig[prop];
     }
 };
 

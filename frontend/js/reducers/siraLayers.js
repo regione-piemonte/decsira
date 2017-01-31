@@ -92,6 +92,11 @@ function layers(state = [], action) {
             }
             return state;
         }
+        case 'SIRA_ADD_LAYERS': {
+            return action.layers.reduce((tempState, layer) => {
+                return msLayers(tempState, {type: 'ADD_LAYER', layer});
+            }, state );
+        }
         default:
             return msLayers(state, action);
     }

@@ -134,15 +134,17 @@ function siradec(state = initialState, action) {
             });
         }
         case QUERYFORM_CONFIG_LOAD_ERROR: {
-            return {
+            return assign({}, state, {
+                configOggetti: {},
+                activeFeatureType: null,
                 loadingQueryFormConfigError: action.error,
-                fTypeConfigLoading: false
-            };
+                fTypeConfigLoading: false});
         }
         case QUERYFORM_HIDE_ERROR: {
-            return {
-                loadingQueryFormConfigError: null
-            };
+            return assign({}, state, {
+                    loadingQueryFormConfigError: null,
+                    filterPanelExpanded: false
+                });
         }
         default:
             return state;

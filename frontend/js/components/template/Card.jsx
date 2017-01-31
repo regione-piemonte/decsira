@@ -18,6 +18,7 @@ const {generatePDF} = require("../../actions/card");
 const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
+const {getWindowSize} = require('../../../MapStore2/web/client/utils/AgentUtils');
 
 const Draggable = require('react-draggable');
 
@@ -82,6 +83,7 @@ const Card = React.createClass({
         );
     },
     renderCard() {
+        const {maxWidth} = getWindowSize();
         const xml = this.props.card.xml;
         const authParam = this.props.authParam;
         const model = assign({}, this.props.card, {
@@ -105,7 +107,7 @@ const Card = React.createClass({
             </div>
             );
         return (this.props.draggable) ? (
-            <Draggable start={{x: 732, y: 165}} handle=".panel-heading, .panel-heading *">
+            <Draggable start={{x: (maxWidth / 2) - 425, y: 0}} handle=".panel-heading, .panel-heading *">
                 {Template}
             </Draggable>) : Template;
     },

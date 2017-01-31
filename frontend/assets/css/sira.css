@@ -289,8 +289,13 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
 }
 /* Catalog styles */
 .catalog-object {
+    cursor: pointer;
+    border-bottom: 1px solid #dddddd;
+}
+.toc-group-children .catalog-object {
     background-color: rgba(181, 208, 208, 0.2);
     cursor: pointer;
+    border-bottom: 0px;
 }
 .catalog-object .toc-title{
     margin-left: 15px;
@@ -382,7 +387,28 @@ flex: 3 1 80% !important;
     min-width: 100%;
     box-shadow: 1px 2px 4px #A7A7A7;
 }
-
+.catalog-categories-switch-container {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    height: 45px;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+.catalog-categories-switch{
+    display: inline-flex;
+    flex: 1;
+    background-color: #007e4f;
+    color: white;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+.catalog-categories-switch span{
+    text-align: center;
+    width: 100%;
+}
 .catalog-tabs{
     position: relative;
 }
@@ -554,4 +580,76 @@ button.exporter-close.close {
     -moz-transition: none;
     -webkit-transition: none;
     overflow: hidden;
+}
+.sira-add-map{
+    min-width: 550px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+}
+#add-map-modal .modal-title{
+    font-size: 1em;
+}
+#add-map-modal .modal-header{
+    height: 71px;
+    text-overflow:ellipsis;
+}
+#add-map-modal .modal-content{
+    overflow:hidden;
+    height: 500px;
+}
+#add-map-modal .modal-footer{
+    position:absolute;
+    bottom : 0px;
+    right: 0px;
+    left: 0px;
+    height: 71px;
+
+}
+#add-map-modal .modal-body{
+    position:absolute;
+    top:71px;
+    bottom:71px;
+    right: 0px;
+    left:0px;
+    overflow: auto;
+}
+.sira-add-map-body{
+height: auto;
+overflow-y: auto;
+}
+.sira-map-layer.layer{
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.sira-map-layer-children{
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.group-layer-header.group{
+    font-size: 1.3em;
+}
+.group-layer-header.layer{
+    font-size: 1.1em;
+}
+.sira-map-layer .title{
+    margin-left:5px;
+}
+.sira-map-layer .title-cursor{
+    margin-left:5px;
+    cursor: pointer;
+}
+.sira-map-layer .glyphicon {
+    cursor: pointer;
+}
+.addOptions {
+    height: 40px;
+    width: 100%;
+    padding: 2px;
+    margin-bottom: 10px;
+
+}
+#map-store-layers div.toc-default-group  .toc-default-group {
+    border-bottom: 0px;
 }

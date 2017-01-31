@@ -19,7 +19,8 @@ const Header = require('../components/MapHeader');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
-const {setProfile, loadUserIdentity} = require('../actions/userprofile');
+// const {setProfile, loadUserIdentity} = require('../actions/userprofile');
+const {setProfile} = require('../actions/userprofile');
 const {configureInlineMap} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
@@ -91,7 +92,7 @@ const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo')
 const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
 const GetFeatureInfo = connect((state) => {
-    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
     siraFeatureTypeName: activeConfig.featureTypeName,
     siraFeatureInfoDetails: state.siradec.configOggetti,
@@ -143,7 +144,7 @@ const Sira = React.createClass({
         controls: React.PropTypes.object,
         toggleSiraControl: React.PropTypes.func,
         setProfile: React.PropTypes.func,
-        loadUserIdentity: React.PropTypes.func,
+        // loadUserIdentity: React.PropTypes.func,
         plugins: React.PropTypes.object,
         viewerParams: React.PropTypes.object,
         configureInlineMap: React.PropTypes.func,
@@ -153,7 +154,7 @@ const Sira = React.createClass({
         return {
             toggleSiraControl: () => {},
             setProfile: () => {},
-            loadUserIdentity: () => {},
+            // loadUserIdentity: () => {},
             onLoadFeatureTypeConfig: () => {},
             mode: 'desktop',
             viewerParams: {mapType: "openlayers"},
@@ -165,7 +166,7 @@ const Sira = React.createClass({
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
-        this.props.loadUserIdentity();
+        // this.props.loadUserIdentity();
     },
     render() {
         return (
@@ -202,7 +203,7 @@ const Sira = React.createClass({
 });
 
 module.exports = connect((state) => {
-    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         mode: 'desktop',
         loading: !state.config || !state.locale || false,
@@ -214,6 +215,6 @@ module.exports = connect((state) => {
 }, {
     toggleSiraControl,
     setProfile,
-    loadUserIdentity,
+    // loadUserIdentity,
     configureInlineMap
 })(Sira);

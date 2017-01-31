@@ -1,0 +1,371 @@
+{
+   "featureTypeName":"siraemissioni:PuntoEmissione",
+   "featureTypeNameLabel":"PUNTI DI EMISSIONE IN ATMOSFERA",
+   "nameSpaces": {
+     "siraemissioni": "http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"
+   },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+     "template": "assets/cardTemplatePuntiEmissione.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "siraemissioni:PuntoEmissione",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplatePuntiEmissione.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Sigla",
+           "xpath": ["siraemissioni:sigla/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo emissione",
+           "xpath": ["siraemissioni:desTipoEmissione/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice sira stabilimento",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione stabilimento",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nome/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:desProvincia/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nomeComune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Indirizzo",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:indirizzo/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Ragione sociale",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo provvedimento",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:tipoProvvedimento/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato del provvedimento",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:desStato/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Numero del provvedimento",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:estremiProvvedimento/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Data provvedimento",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Data scadenza",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Ente competente",
+           "xpath": ["siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:desEnteCompetente/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato punto di emissione",
+           "xpath": ["siraemissioni:desStato/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata dell&rsquo;aeriforme",
+           "xpath": ["siraemissioni:portataAeriforme_Nm3_h/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Durata dell&rsquo;emissione",
+           "xpath": ["siraemissioni:durataEmissione_h_g/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+         {
+           "headerName": "Frequenza dell&rsquo;emissione",
+           "xpath": ["siraemissioni:frequenzaEmisione/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+         {
+           "headerName": "Costante/discontinua",
+           "xpath": ["siraemissioni:desCostanteDiscontinua/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Temperatura dell&rsquo;emissione",
+           "xpath": ["siraemissioni:temperaturaEmissione/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Temperatura ambiente",
+           "xpath": ["siraemissioni:temperaturaAmbiente/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Altezza geometrica dell&rsquo;emissione",
+           "xpath": ["siraemissioni:altezza_m/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Diametro o primo lato camino (m)",
+           "xpath": ["siraemissioni:diametroPrimoLato/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Secondo lato camino (m)",
+           "xpath": ["siraemissioni:secondoLato/text()"],
+           "type": 1
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["siraemissioni:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ]
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+           "index": 1,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:desProvincia",
+           "label":"Provincia",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:province"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:nomeComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "sira:comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+		    "dependson":{
+              "field": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 3,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:codiceSira",
+           "label":"Codice sira stabilimento",
+           "type":"string"
+        },
+        {
+           "index": 4,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:attivitaProduttiva/siraemissioni:AttivitaProduttiva/siraemissioni:codAteco",
+           "label":"Tipo attivita produttiva",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "siradec:decsira_d_ateco",
+               "propertyName": "id_ateco,des_ateco"
+             }
+           },
+
+           "valueId":"id_ateco",
+           "valueLabel":"des_ateco"
+        },
+        {
+           "index": 5,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione",
+           "label":"Ragione sociale azienda",
+           "type":"string"
+        },
+        {
+           "index": 6,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA",
+           "label":"Partita IVA azienda",
+           "type":"string"
+        },
+        {
+           "index": 7,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale",
+           "label":"Codice fiscale azienda",
+           "type":"string"
+        },
+        {
+           "index": 8,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:idTipoProvvedimento",
+           "label":"Tipo provvedimento",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "siradec:decsira_d_tipo_provvedimento",
+               "propertyName": "id_proc_attivita,provv"
+             }
+           },
+
+           "valueId":"id_proc_attivita",
+           "valueLabel":"provv"
+        },
+        {
+           "index": 9,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento",
+           "label":"Data provvedimento",
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 10,
+           "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza",
+           "label":"Data scadenza",
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 11,
+           "attribute": "siraemissioni:desStato",
+           "label":"Stato punto di emissione",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "siradec:sipra_d_stato",
+               "propertyName": "id_stato,des_stato"
+             }
+           },
+
+           "valueId":"id_stato",
+           "valueLabel":"des_stato"
+        },
+        {
+           "index": 12,
+           "attribute": "siraemissioni:desTipoEmissione",
+           "label":"Tipo emissione",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "siradec:sipra_dt_d_tipo_emissione",
+               "propertyName": "id_tipo_emissione,des_tipo_emissione"
+             }
+           },
+           "valueId":"id_tipo_emissione",
+           "valueLabel":"des_tipo_emissione"
+        },
+        {
+           "index": 13,
+           "attribute": "siraemissioni:impiantoDiAbbattimento/siraemissioni:ImpiantoDiAbbattimento/siraemissioni:desImpiantoAbbattimento",
+           "label":"Tipo impianto di abbattimento",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "siradec:sipra_d_abbattimento",
+               "propertyName": "id_abbattimento,des_abbattimento"
+             }
+           },
+           "valueId":"id_abbattimento",
+           "valueLabel":"des_abbattimento"
+        },
+        {
+           "index": 14,
+           "attribute": "siraemissioni:provenienzaEmissione/siraemissioni:ProvenienzaEmissione/siraemissioni:desProvenienza",
+           "label":"Tipo provenienza",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "siradec:sipra_d_provenienza",
+               "propertyName": "id_provenienza,des_provenienza"
+             }
+           },
+           "valueId":"id_provenienza",
+           "valueLabel":"des_provenienza"
+        },
+        {
+           "index": 15,
+           "attribute": "siraemissioni:inquinante/siraemissioni:Inquinante/siraemissioni:desInquinante",
+           "label":"Inquinante",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "siradec:sipra_dt_d_inquinanti",
+               "propertyName": "id_inquinante,des_inquinante"
+             }
+           },
+           "valueId":"id_inquinante",
+           "valueLabel":"des_inquinante"
+        }
+
+     ]
+
+   }
+
+}

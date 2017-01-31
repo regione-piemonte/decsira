@@ -1,19 +1,17 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='STABILIMENTI' subtitle={[
-            'Nome: ',
+        <DetailTitle title='STABILIMENTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE' subtitle={[
+            'Denominazione: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
         <Section header='DATI GENERALI - Stabilimento' eventKey='1' expanded={true}>
-        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
           <LabeledField label='Codice sira' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()")
             }/>
-        </ProfileWrapper>
-        <LabeledField label='Nome' value={
+        <LabeledField label='Denominazione' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()")
         }/>
         <LabeledField label='Provincia' value={
@@ -36,6 +34,66 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:industriaAgroAlimentare/text()")
         }/>
         </Section>
+
+
+
+        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+          <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
+              <LabeledField label='Ragione sociale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()")
+              }/>
+              <LabeledField label='Codice fiscale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale/text()")
+              }/>
+              <LabeledField label='Partita IVA' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA/text()")
+              }/>
+              <LabeledField label='Provincia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()")
+              }/>
+              <LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()")
+              }/>
+              <LabeledField label='Indirizzo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()")
+              }/>
+              <LabeledField label='Telefono' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:telefono/text()")
+              }/>
+              <LabeledField label='Fax' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:fax/text()")
+              }/>
+              <LabeledField label='Numero iscrizione CCIAA' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:numeroCIAA/text()")
+              }/>
+              <LabeledField label='Anno iscrizione CCIAA' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:annoCIAA/text()")
+              }/>
+
+              <Section header='Dati titolare/legale rappresentante' eventKey='8' expanded={true}>
+                  <LabeledField label='Cognome' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:cognomeTitolare/text()")
+                  }/>
+                  <LabeledField label='Nome' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:nomeTitolare/text()")
+                  }/>
+              </Section>
+          </Section>
+        </ProfileWrapper>
+
+        <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+            <Section header='DATI AZIENDA' eventKey='9' expanded={true}>
+                <LabeledField label='Ragione sociale' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()")
+                }/>
+                <LabeledField label='Provincia' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()")
+                }/>
+                <LabeledField label='Comune' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()")
+                }/>
+           </Section>
+        </ProfileWrapper>
 
         <Section header='TIPO ATTIVIT&Agrave; PRODUTTIVA' eventKey='2' expanded={true}>
             <SiraTable
@@ -97,7 +155,7 @@
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:prelievoAcqua")}/>
              </ProfileWrapper>
 
-             <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+             <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
                <SiraTable
                    id="Prelievi"
                    selectedRow={model.Prelievi}
@@ -137,110 +195,9 @@
           </ProfileWrapper>
       </Section>
 
-      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
-        <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
-            <SiraTable
-                      id="DatiAzienda"
-                      selectedRow={model.DatiAzienda}
-                      wfsVersion="2.0"
-                      rowSelection={false}
-                      columns={
-                          [
-                              {
-                                  headerName: 'Denominazione',
-                                  width: 100,
-                                  xpath:"siraemissioni:Azienda/siraemissioni:denominazione/text()"
-                              },
-                              {
-                                  headerName: 'Codice fiscale',
-                                  width: 50,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:codiceFiscale/text()"
-                              },
-                              {
-                                  headerName: 'Partita IVA',
-                                  width: 50,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:partitaIVA/text()"
-                              },
-                              {
-                                  headerName: 'Provincia',
-                                  width: 100,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:desProvincia/text()"
-                              },
-                              {
-                                  headerName: 'Comune',
-                                  width: 100,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:desComune/text()"
-                              },
-                              {
-                                  headerName: 'Indirizzo',
-                                  width: 100,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:indirizzo/text()"
-                              },
-                              {
-                                  headerName: 'telefono',
-                                  width: 50,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:telefono/text()"
-                              },
-                              {
-                                  headerName: 'Fax',
-                                  width: 50,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:fax/text()"
-                              },
-                              {
-                                  headerName: 'Numero iscrizione CCIAA',
-                                  width: 50,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:numeroCIAA/text()"
-                              },
-                              {
-                                  headerName: 'Anno iscrizione CCIAA',
-                                  width: 50,
-                                  xpath: "siraemissioni:Azienda/siraemissioni:annoCIAA/text()"
-                              }
-                          ]
-                      }
-                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda")}/>
-
-                    <Section header='Dati titolare/legale rappresentante' eventKey='8' expanded={true}>
-                        <LabeledField label='Cognome' value={
-                          model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:cognomeTitolare/text()")
-                        }/>
-                        <LabeledField label='Nome' value={
-                          model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:nomeTitolare/text()")
-                        }/>
-                    </Section>
-                  </Section>
-              </ProfileWrapper>
 
 
-              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
-                <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
-                    <SiraTable
-                              id="DatiAzienda"
-                              selectedRow={model.DatiAzienda}
-                              wfsVersion="2.0"
-                              rowSelection={false}
-                              columns={
-                                  [
-                                      {
-                                          headerName: 'Denominazione',
-                                          width: 330,
-                                          xpath:"siraemissioni:Azienda/siraemissioni:denominazione/text()"
-                                      },
-                                      {
-                                          headerName: 'Provincia',
-                                          width: 200,
-                                          xpath: "siraemissioni:Azienda/siraemissioni:desProvincia/text()"
-                                      },
-                                      {
-                                          headerName: 'Comune',
-                                          width: 200,
-                                          xpath: "siraemissioni:Azienda/siraemissioni:desComune/text()"
-                                      }
-                                  ]
-                              }
-                              features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda")}/>
-                          </Section>
-                      </ProfileWrapper>
+
 
 
 
@@ -329,7 +286,7 @@
                 </Section>
               </ProfileWrapper>
 
-              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
                 <Section header='OGGETTI COLLEGATI' eventKey='10' expanded={true}>
                   <SiraTable
                       id="OggettiCollegati"
@@ -479,7 +436,7 @@
               </ProfileWrapper>
 
 
-              <ProfileWrapper condition={() =>(model.profile === "profiloa") || (model.roles && model.roles.indexOf('GUEST_DECSIRA@REG_PMN')!== -1)}>
+              <ProfileWrapper condition={() =>(model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
                 <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
                 <SiraTable
                     id="Autorizzazioni"
@@ -586,12 +543,39 @@
               </ProfileWrapper>
 
 
-
-
-
-
-
-
+              <Section header='MAPPA SINTESI - Stabilimento' eventKey='16' expanded={true}>
+                  <MappaScheda
+                      center={
+                          model.getValue({
+                              type: TemplateUtils.GEOMETRY_TYPE,
+                              xpath: "/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:geometria/gml:Point/gml:pos/text()"
+                          })
+                      }
+                      layers={[
+                      {
+                          "type": "wms",
+                          "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                          "name": "SfondoCartRif",
+                          "title": "Sfondo Cartografico",
+                          "group": "background",
+                          "visibility": true,
+                          "format": "image/png",
+                          "tiled": true,
+                          "tileSize": 512
+                      },
+                      {
+                          "type": "wms",
+                          "url": "{geoserverUrl}/wms",
+                          "visibility": true,
+                          "title": "Stabilimenti Preview",
+                          "name": "siraemissioni:Stabilimento",
+                          "group": "Overlays",
+                          "format": "image/png"
+                      }
+              ]}
+                      authParam={model.authParam}
+                      withMap={model.withMap}/>
+              </Section>
 
     </Panel>
 </Panel>

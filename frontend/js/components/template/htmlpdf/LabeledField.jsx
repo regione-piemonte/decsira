@@ -6,13 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
+var {FormattedDate} = require('react-intl');
 
 const LocaleUtils = require('../../../../MapStore2/web/client/utils/LocaleUtils');
 
 const LabeledField = React.createClass({
     propTypes: {
         label: React.PropTypes.string,
-        value: React.PropTypes.any
+        value: React.PropTypes.any,
+        dateFormat: React.PropTypes.object
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -22,6 +24,14 @@ const LabeledField = React.createClass({
             label: '',
             value: null
         };
+    },
+    renderDate(value, dateFormat) {
+        const locale = this.context.locale || 'it-IT';
+        const date = new Date(value);
+        return !isNaN(date.getTime()) ? (<FormattedDate locales={locale} value={date} {...dateFormat} />) : (<span/>);
+    },
+    renderValue(value) {
+        return this.props.dateFormat ? this.renderDate(value, this.props.dateFormat) : value;
     },
     render() {
         return (
@@ -42,7 +52,7 @@ const LabeledField = React.createClass({
                         {this.props.label}
                     </td>
                     <td>
-                        {this.props.value ? this.props.value : LocaleUtils.getMessageById(this.context.messages, "labeledfield.label_value_not_specified")}
+                        {this.props.value ? this.renderValue(this.props.value) : LocaleUtils.getMessageById(this.context.messages, "labeledfield.label_value_not_specified")}
                     </td>
                 </tr>
                 </tbody>

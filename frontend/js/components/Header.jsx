@@ -7,10 +7,41 @@
  */
 
 const React = require('react');
+const {connect} = require('react-redux');
 
 // require('../../assets/global/css/skin.css');
 // require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 // require('../../assets/application/conoscenze_ambientali/css/skin-interna.css');
+
+const {Glyphicon} = require('react-bootstrap');
+const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+
+const LoginNav = connect((state) => ({
+    user: state.userprofile.user,
+    nav: false,
+    renderButtonText: false,
+    renderButtonContent: () => {return <Glyphicon glyph="user" />; },
+    bsStyle: "primary",
+    showAccountInfo: false,
+    showPasswordChange: false,
+    showLogout: true,
+    className: "square-button"
+}), {
+      onShowLogin: showLoginPanel,
+      onLogout: () => {
+          window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+      }
+})(require('../../MapStore2/web/client/components/security/UserMenu'));
+
+const LoginPanel = connect((state) => ({
+    showLoginPanel: state.userprofile.showLoginPanel
+}), {
+    onClosePanel: hideLoginPanel,
+    onConfirm: () => {
+        window.location.href = ConfigUtils.getConfigProp('secureDecsirawebUrl');
+    }
+})(require('./LoginPanel'));
 
 const Header = React.createClass({
     render() {
@@ -39,11 +70,13 @@ const Header = React.createClass({
                 <div className="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
                     <h2>Sira</h2>
                 </div>
-                    <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
-                      <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
-                        <i className="fa fa-bars"></i>
-                      </button>
-                    </div>
+                <LoginNav />
+                <LoginPanel />
+                <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
+                  <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
+                    <i className="fa fa-bars"></i>
+                  </button>
+                </div>
                 </div>
 
                 <nav className="pimenu-navbar-collapse collapse">
@@ -52,6 +85,8 @@ const Header = React.createClass({
                     <li className="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
                         </ul>
                 </nav>
+
+
             </div>
         </div>
         </div>

@@ -16,6 +16,7 @@ const {configureQueryForm, configureTopology/*, configureFeatureGrid*/} = requir
 const {loadTiles} = require('./actions/mosaictile');
 const {loadPlatformNumbers} = require('./actions/platformnumbers');
 const {configureExporter} = require('./actions/siraexporter');
+const {loadUserIdentity} = require('./actions/userprofile');
 
 const appReducers = {
      userprofile: require('./reducers/userprofile'),
@@ -30,7 +31,9 @@ const appReducers = {
      mosaic: require('./reducers/mosaic'),
      metadatainfobox: require('./reducers/metadatainfobox'),
      platformnumbers: require('./reducers/platformnumbers'),
-     siraexporter: require('./reducers/siraexporter')
+     siraexporter: require('./reducers/siraexporter'),
+     addmap: require('./reducers/addmap')
+
  };
 
 const startApp = () => {
@@ -48,6 +51,7 @@ const startApp = () => {
     const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
 
     const initialActions = [
+         () => loadUserIdentity(),
          () => loadTiles(),
          () => loadPlatformNumbers(),
          () => loadMapConfig(configUrl, legacy),
