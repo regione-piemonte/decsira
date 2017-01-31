@@ -11,9 +11,9 @@ const {AgGridReact} = require('ag-grid-react');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const {selectRows} = require('../../actions/card');
-
+const GridCellDate = require('../GridCellDate');
 const TemplateUtils = require('../../utils/TemplateUtils');
-
+const {reactCellRendererFactory} = require('ag-grid-react');
 const assign = require('object-assign');
 const uuid = require('node-uuid');
 
@@ -69,28 +69,13 @@ const SiraTable = React.createClass({
     onGridReady(params) {
         this.api = params.api;
     },
-    /*shouldComponentUpdate(nextProps) {
-        let update = typeof nextProps.features === "function";
-
-        if (this.props.dependsOn && nextProps.features && !update) {
-            update = nextProps.features.length !== this.props.features.length;
-            if (!update) {
-                nextProps.features.forEach((feature, index) => {
-                    update = feature.columnNumber !== this.props.features[index].columnNumber;
-                }, this);
-            }
-        }
-
-        return update;
-    },*/
     render() {
         let features;
-
         let columns = this.props.columns.map((column) => {
             if (!column.profiles || (column.profiles && this.props.profile && column.profiles.indexOf(this.props.profile) !== -1)) {
                 let fieldName = !column.field ? uuid.v1() : column.field;
                 this.idFieldName = column.id === true ? fieldName : this.idFieldName;
-                return assign({}, column, {field: fieldName});
+                return assign({}, column, {field: fieldName}, column.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {});
             }
         }, this).filter((c) => c);
 

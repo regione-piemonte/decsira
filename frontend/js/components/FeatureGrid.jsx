@@ -38,6 +38,7 @@ const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const Message = require('../../MapStore2/web/client/components/I18N/Message');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('./GoToDetail');
+const GridCellDate = require('./GridCellDate');
 const Spinner = require('react-spinkit');
 const assign = require('object-assign');
 
@@ -304,7 +305,10 @@ const SiraGrid = React.createClass({
             pinned: true,
             width: 25,
             suppressResize: true
-        }, ...(cols.map((c) => assign({}, {width: defWidth}, c)))];
+        }, ...(cols.map((c) => {
+            return assign({}, {width: defWidth}, c, c.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {});
+        }
+            ))];
         if (this.sortModel && this.sortModel.length > 0) {
             columns = columns.map((c) => {
                 let model = head(this.sortModel.filter((m) => m.colId === c.field));
@@ -347,7 +351,7 @@ const SiraGrid = React.createClass({
                                     paging={this.props.pagination}
                                     zoom={15}
                                     enableZoomToFeature={this.props.withMap}
-                                    agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true}}
+                                    agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true, overlayNoRowsTemplate: "Nessun risultato trovato"}}
                                     zoomToFeatureAction={this.props.zoomToFeatureAction}
                                     toolbar={{
                                         zoom: this.props.withMap,
@@ -356,6 +360,7 @@ const SiraGrid = React.createClass({
                                         selectAll: true
                                     }}
                                     exportAction={this.exportFeatures}
+
                                     {...gridConf}
                                     />
                             </div>
