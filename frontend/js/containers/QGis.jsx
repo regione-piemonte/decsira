@@ -124,7 +124,7 @@ const QGis = React.createClass({
             // find id field
             this.setState({loadList: false});
             let idField = head(props.gridConfig.grid.columns.filter((c) => c.id === true));
-            let filter = SiraFilterUtils.getFilterByIds(props.featureTypeName, urlQuery.featureTypeIds.split(','), idField, props.pagination);
+            let filter = SiraFilterUtils.getFilterByIds(props.featureTypeName, urlQuery.featureTypeIds.split(','), idField);
             props.onQuery(props.searchUrl, filter);
         }
     },
