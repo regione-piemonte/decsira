@@ -15,7 +15,7 @@ const LabeledField = React.createClass({
         label: React.PropTypes.string,
         value: React.PropTypes.any,
         dateFormat: React.PropTypes.object,
-        locale: React.PropTypes.object
+        locale: React.PropTypes.string
     },
     getDefaultProps() {
         return {
