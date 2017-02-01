@@ -14,21 +14,19 @@ const LabeledField = React.createClass({
     propTypes: {
         label: React.PropTypes.string,
         value: React.PropTypes.any,
-        dateFormat: React.PropTypes.object
-    },
-    contextTypes: {
-        messages: React.PropTypes.object
+        dateFormat: React.PropTypes.object,
+        locale: React.PropTypes.object
     },
     getDefaultProps() {
         return {
             label: '',
-            value: null
+            value: null,
+            locale: 'it-IT'
         };
     },
     renderDate(value, dateFormat) {
-        const locale = this.context.locale || 'it-IT';
         const date = new Date(value);
-        return !isNaN(date.getTime()) ? (<FormattedDate locales={locale} value={date} {...dateFormat} />) : (<span/>);
+        return !isNaN(date.getTime()) ? (<FormattedDate locales={this.props.locale} value={date} {...dateFormat} />) : (<span/>);
     },
     renderValue(value) {
         return this.props.dateFormat ? this.renderDate(value, this.props.dateFormat) : value;

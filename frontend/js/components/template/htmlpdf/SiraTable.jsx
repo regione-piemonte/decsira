@@ -49,15 +49,14 @@ const SiraTable = React.createClass({
             return (<th key={c.field}>{c.headerName}</th>);
         });
     },
-    renderDate(value, dateFormat) {
-        const locale = this.context.locale || 'it-IT';
+    renderDate(value, dateFormat, locale) {
         const date = new Date(value);
         return !isNaN(date.getTime()) ? (<FormattedDate locales={locale} value={date} {...dateFormat} />) : (<span/>);
     },
     renderTableBody(features, columns) {
         return features.map((f, idx) => {
             return (<tr key={idx}>{columns.map((c) => {
-                return (<td key={c.field}>{c.dateFormat ? this.renderDate(f[c.field], c.dateFormat ) : f[c.field]}</td>);
+                return (<td key={c.field}>{c.dateFormat ? this.renderDate(f[c.field], c.dateFormat, c.locale || 'it-IT' ) : f[c.field]}</td>);
             })}</tr>);
         });
     },

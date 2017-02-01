@@ -75,7 +75,7 @@ const LayerTree = React.createClass({
             objectNumber: React.PropTypes.number,
             tematicViewNumber: React.PropTypes.number
         }).isRequired,
-        subcat: React.PropTypes.number,
+        subcat: React.PropTypes.string,
         configOggetti: React.PropTypes.object,
         authParams: React.PropTypes.object,
         userprofile: React.PropTypes.object,
