@@ -135,8 +135,6 @@ function siradec(state = initialState, action) {
         }
         case QUERYFORM_CONFIG_LOAD_ERROR: {
             return assign({}, state, {
-                configOggetti: {},
-                activeFeatureType: null,
                 loadingQueryFormConfigError: action.error,
                 fTypeConfigLoading: false});
         }

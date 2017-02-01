@@ -12,6 +12,7 @@ const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const {selectRows} = require('../../actions/card');
 const GridCellDate = require('../GridCellDate');
+const GridCellLink = require('../GridCellLink');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const assign = require('object-assign');
@@ -20,6 +21,11 @@ const uuid = require('node-uuid');
 require("ag-grid/dist/styles/ag-grid.css");
 require("ag-grid/dist/styles/theme-blue.css");
 
+const {loadCardTemplate} = require('../../actions/card');
+const {
+    loadFeatureTypeConfig
+} = require('../../actions/siradec');
+
 const SiraTable = React.createClass({
     propTypes: {
         id: React.PropTypes.string,
@@ -27,6 +33,9 @@ const SiraTable = React.createClass({
         style: React.PropTypes.object,
         columns: React.PropTypes.array,
         dependsOn: React.PropTypes.object,
+        detailsTemplateConfigURL: React.PropTypes.string,
+        configOggetti: React.PropTypes.object,
+        authParams: React.PropTypes.object,
         features: React.PropTypes.oneOfType([
             React.PropTypes.array,
             React.PropTypes.func,
@@ -39,7 +48,9 @@ const SiraTable = React.createClass({
             React.PropTypes.string,
             React.PropTypes.bool
         ]),
-        selectRows: React.PropTypes.func
+        selectRows: React.PropTypes.func,
+        onDetail: React.PropTypes.func,
+        loadFeatureTypeConfig: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -53,8 +64,16 @@ const SiraTable = React.createClass({
             profile: null,
             rowSelection: "single",
             selectedRow: null,
-            selectRows: () => {}
+            selectRows: () => {},
+            onDetail: () => {}
         };
+    },
+    componentWillReceiveProps(nextProps) {
+        if (this.waitingForConfig && nextProps.configOggetti && nextProps.configOggetti[this.waitingForConfig.featureType] && nextProps.configOggetti[this.waitingForConfig.featureType].card) {
+            const params = this.waitingForConfig.params;
+            this.goToDetail(params, nextProps);
+            this.waitingForConfig = null;
+        }
     },
     componentDidUpdate() {
         if (this.api && this.props.selectedRow) {
@@ -75,7 +94,12 @@ const SiraTable = React.createClass({
             if (!column.profiles || (column.profiles && this.props.profile && column.profiles.indexOf(this.props.profile) !== -1)) {
                 let fieldName = !column.field ? uuid.v1() : column.field;
                 this.idFieldName = column.id === true ? fieldName : this.idFieldName;
-                return assign({}, column, {field: fieldName}, column.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {});
+                return assign({},
+                    column,
+                    {field: fieldName},
+                    column.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {},
+                    column.linkToDetail ? {onCellClicked: this.goToDetail, cellRenderer: reactCellRendererFactory(GridCellLink)} : {}
+                );
             }
         }, this).filter((c) => c);
 
@@ -88,6 +112,9 @@ const SiraTable = React.createClass({
                 columns.forEach((column) => {
                     if (column.field) {
                         f[column.field] = TemplateUtils.getElement({xpath: column.xpath}, feature, this.props.wfsVersion);
+                    }
+                    if (column.linkToDetail) {
+                        f.link = TemplateUtils.getElement({xpath: column.linkToDetail.xpath}, feature, this.props.wfsVersion);
                     }
                 });
                 return f;
@@ -118,6 +145,31 @@ const SiraTable = React.createClass({
                     />
             </div>);
     },
+    goToDetail(params, props) {
+        let detailProps = props || this.props;
+        const id = params.data.link;
+        const featureType = params.colDef.linkToDetail.featureType;
+        if (detailProps.configOggetti[featureType]) {
+            const detailsConfig = detailProps.configOggetti[featureType];
+            const templateUrl = params.colDef.linkToDetail.templateUrl ? params.colDef.linkToDetail.templateUrl : (detailsConfig.card.template.default || detailsConfig.card.template);
+            let url;
+            if (id) {
+                url = detailsConfig.card.service.url;
+                Object.keys(detailsConfig.card.service.params).forEach((param) => {
+                    url += `&${param}=${detailsConfig.card.service.params[param]}`;
+                });
+                url = `${url}&FEATUREID=${id}&authkey=${detailProps.authParams.authkey}`;
+            }
+            detailProps.onDetail(templateUrl, url);
+        } else {
+            this.waitingForConfig = {
+                featureType,
+                params
+            };
+            detailProps.loadFeatureTypeConfig(null, {authkey: detailProps.authParams.authkey}, featureType, false);
+        }
+
+    },
     selectRows(params) {
         // this.props.selectRows(this.props.id, (params.selectedRows[0]) ? params.selectedRows[0].id : null);
         if (params.selectedRows[0]) {
@@ -128,10 +180,14 @@ const SiraTable = React.createClass({
 
 module.exports = connect((state) => {
     return {
-        card: state.cardtemplate || {}
+        configOggetti: state.siradec.configOggetti,
+        card: state.cardtemplate || {},
+        authParams: state.userprofile.authParams
     };
 }, dispatch => {
     return bindActionCreators({
-        selectRows: selectRows
+        selectRows: selectRows,
+        onDetail: loadCardTemplate,
+        loadFeatureTypeConfig
     }, dispatch);
 })(SiraTable);
