@@ -90,9 +90,10 @@ function expandFilterPanel(expand) {
     };
 }
 
-function configureQueryFormError(e) {
+function configureQueryFormError(featureType, e) {
     return {
         type: QUERYFORM_CONFIG_LOAD_ERROR,
+        featureType,
         error: e
     };
 }
@@ -143,7 +144,7 @@ function getAttributeValues(ft, field, params, serviceUrl) {
                     try {
                         config = JSON.parse(config);
                     } catch(e) {
-                        dispatch(configureQueryFormError('Configuration broken (' + url + '): ' + e.message));
+                        dispatch(configureQueryFormError(ft, 'Configuration broken (' + url + '): ' + e.message));
                     }
                 }
 
@@ -155,7 +156,7 @@ function getAttributeValues(ft, field, params, serviceUrl) {
                 }
                 dispatch(configureFeatureType(ft, assign({}, field, {values: values})));
             }).catch((e) => {
-                dispatch(configureQueryFormError(e));
+                dispatch(configureQueryFormError(ft, e));
             });
         }
 
@@ -178,7 +179,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
                 try {
                     config = JSON.parse(config);
                 } catch(e) {
-                    dispatch(configureQueryFormError('Configuration file broken (' + url + '): ' + e.message));
+                    dispatch(configureQueryFormError(featureType, 'Configuration file broken (' + url + '): ' + e.message));
                 }
             }
             // Configure the FeatureGrid for WFS results list
@@ -202,7 +203,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
                         geometryType: config.geometryType,
                         nameSpaces: config.nameSpaces || {}
                     }, fi, featureType, activate));
-            }).catch((e) => dispatch(configureQueryFormError(e)));
+            }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
             // for (let field in config.query.fields) {
             //     if (field) {
             //         let f = config.query.fields[field];
@@ -221,7 +222,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
 
 
         }).catch((e) => {
-            dispatch(configureQueryFormError(e));
+            dispatch(configureQueryFormError(featureType, e));
         });
     };
 }
