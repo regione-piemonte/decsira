@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
+const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
 const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
@@ -39,6 +40,7 @@ function configureFeatureType(ft, field, featureType, activate) {
         geometryName: ft.geometryName,
         geometryType: ft.geometryType,
         nameSpaces: ft.nameSpaces,
+        layer: ft.layer,
         field,
         featureType,
         activate
@@ -167,7 +169,8 @@ function configurationLoading() {
         type: FEATURETYPE_CONFIG_LOADING
     };
 }
-function loadFeatureTypeConfig(configUrl, params, featureType, activate = false) {
+
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const {userprofile} = getState();
@@ -180,6 +183,10 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
                 } catch(e) {
                     dispatch(configureQueryFormError('Configuration file broken (' + url + '): ' + e.message));
                 }
+            }
+            const layer = ConfigUtils.setUrlPlaceholders(config.layer);
+            if (addlayer) {
+                dispatch(addLayer(layer));
             }
             // Configure the FeatureGrid for WFS results list
             dispatch(configureFeatureGrid(config.featuregrid, featureType));
@@ -200,7 +207,8 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false)
                         name: config.featureTypeNameLabel,
                         geometryName: config.geometryName,
                         geometryType: config.geometryType,
-                        nameSpaces: config.nameSpaces || {}
+                        nameSpaces: config.nameSpaces || {},
+                        layer: layer
                     }, fi, featureType, activate));
             }).catch((e) => dispatch(configureQueryFormError(e)));
             // for (let field in config.query.fields) {

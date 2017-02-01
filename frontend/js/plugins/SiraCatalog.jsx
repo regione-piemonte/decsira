@@ -13,7 +13,7 @@ const assign = require('object-assign');
 const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 const {getMetadataObjects} = require('../actions/siracatalog');
-
+const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
 const {
     // SiraQueryPanel action functions
@@ -87,7 +87,8 @@ const LayerTree = React.createClass({
         loadMetadata: React.PropTypes.func,
         selectSubCategory: React.PropTypes.func,
         loadNodeMapRecords: React.PropTypes.func,
-        toggleAddMap: React.PropTypes.func
+        toggleAddMap: React.PropTypes.func,
+        addLayer: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -129,7 +130,7 @@ const LayerTree = React.createClass({
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>) : (<DefaultNode
                             expandFilterPanel={this.openFilterPanel}
-                            onToggle={this.props.onToggle}
+                            toggleSiraControl={this.searchAll}
                             addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>) }
                 </TOC>);
@@ -216,11 +217,14 @@ const LayerTree = React.createClass({
         if (!node.featureType) {
             this.props.toggleAddMap(true);
             this.props.loadNodeMapRecords(node);
+        }else if (node.featureType) {
+            const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
+            if (!this.props.configOggetti[featureType]) {
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true, true);
+            }else {
+                this.props.addLayer(this.props.configOggetti[featureType].layer);
+            }
         }
-        // ToDo implement add for featureType
-        /*else {
-
-        }*/
 
     }
 });
@@ -237,7 +241,8 @@ const CatalogPlugin = connect(tocSelector, {
     showInfoBox: showBox,
     selectSubCategory,
     loadNodeMapRecords,
-    toggleAddMap
+    toggleAddMap,
+    addLayer
 })(LayerTree);
 
 module.exports = {
