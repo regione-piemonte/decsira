@@ -10,7 +10,7 @@ module.exports = {
         { path: "/:profile", component: require('./containers/Sira')},
         { path: "/map/:profile", component: require('./containers/Sira')},
         { path: "/new/:profile", component: require('./containers/Home')},
-        { path: "/dataset/:profile/:category", component: require('./containers/Dataset')},
+        { path: "/dataset/:profile/", component: require('./containers/Dataset')},
         { path: "/nomap/:profile", component: require('./containers/NoMap')}
         ],
     pluginsDef: require('./plugins.js'),

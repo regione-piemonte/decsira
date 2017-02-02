@@ -25,7 +25,7 @@ const PlatformNumbers = connect((state) => ({
       functionObjectView: state.platformnumbers.functionObjectView
   }))(require('../components/PlatformNumbers'));
 
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+const SiraSearchBar = require('../components/SiraSearchBar');
 
 
 // todo to delete...
@@ -107,24 +107,15 @@ const Home = React.createClass({
                                  Piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte), che si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Imprese, Regione, Province e ARPA)
                                </div>
                             </div>
-                            <div className="col-md-5 col-xs-12 ricerca-home catalog-search-container">
-                                <SearchBar
-                                    className="home-search"
-                                    placeholder="Cerca oggetti"
-                                    placeholderMsgId=""
-
-                                    onSearchTextChange={(text) => this.setState({ searchText: text})}
-                                    typeAhead={false}
-                                    searchText={this.state.searchText}
+                                <SiraSearchBar
+                                    containerClasses="col-md-5 col-xs-12 ricerca-home catalog-search-container"
+                                    searchClasses="home-search"
+                                    addCategoriesSelector={false}
                                     onSearch={(text) => {
                                         this.props.loadMetadata({text});
-                                        this.context.router.push(`/dataset/${this.props.params.profile}/all`);
-                                    }}
-                                    onSearchReset={() => {
-                                        this.setState({ searchText: ""});
+                                        this.context.router.push(`/dataset/${this.props.params.profile}/`);
                                     }}
                                 />
-                            </div>
                         </div>
                     </div>
                 </div>
