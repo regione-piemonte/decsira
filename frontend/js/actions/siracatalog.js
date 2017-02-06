@@ -13,6 +13,7 @@ const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
 const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
 const SELECT_SUB_CATEGORY = 'SELECT_SUB_CATEGORY';
+const RESET_OBJECT_AND_VIEW = 'RESET_OBJECT_AND_VIEW';
 
 const {Promise} = require('es6-promise');
 
@@ -42,7 +43,11 @@ function selectSubCategory( subcat) {
         subcat
     };
 }
-
+function resetObjectAndView() {
+    return {
+        type: RESET_OBJECT_AND_VIEW
+    };
+}
 function objectsLoaded(objects, views) {
     return {
         type: METADATA_OBJECTS_VIEWS_LOADED,
@@ -130,9 +135,11 @@ module.exports = {
     CATALOG_LOADING,
     THEMATIC_VIEW_CONFIG_LOADED,
     SELECT_SUB_CATEGORY,
+    RESET_OBJECT_AND_VIEW,
     toggleNode,
     selectCategory,
     getMetadataObjects,
     getThematicViewConfig,
-    selectSubCategory
+    selectSubCategory,
+    resetObjectAndView
 };

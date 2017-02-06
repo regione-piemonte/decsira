@@ -7,12 +7,12 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
-const {toggleNode, selectCategory, getThematicViewConfig, selectSubCategory} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
-const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
+const {Tabs, Tab} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
-const {getMetadataObjects} = require('../actions/siracatalog');
+
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
 const {
@@ -26,7 +26,7 @@ const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {setGridType} = require('../actions/grid');
 const {loadNodeMapRecords, toggleAddMap, addLayers} = require('../actions/addmap');
 
-const {categorySelector, tocSelector} = require('../selectors/sira');
+const {tocSelector} = require('../selectors/sira');
 
 const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
@@ -45,16 +45,11 @@ const AddMapModal = connect(({addmap = {}}) => ({
 })(require('../components/addmap/AddMapModal'));
 
 const Spinner = require('react-spinkit');
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+const SiraSearchBar = require('../components/SiraSearchBar');
 
 const Vista = connect( null, {
     addToMap: getThematicViewConfig
-    })(require('../components/catalog/Vista'));
-
-const SearchCategories = connect(categorySelector,
-{
-    tileClick: selectCategory
-})(require('../components/Mosaic'));
+})(require('../components/catalog/Vista'));
 
 const LayerTree = React.createClass({
     propTypes: {
@@ -98,18 +93,17 @@ const LayerTree = React.createClass({
     },
     getInitialState() {
         return {
-            searchText: "",
             showCategories: true
         };
     },
     componentWillMount() {
         if (!this.props.nodesLoaded && !this.props.loading) {
-            this.loadMetadata();
+            this.loadMetadata({category: this.props.category});
         }
     },
     componentWillReceiveProps(nextProps) {
         if (!nextProps.loading && (!nextProps.nodesLoaded || nextProps.category.id !== this.props.category.id )) {
-            this.loadMetadata({id: nextProps.category.id});
+            this.loadMetadata({category: nextProps.category});
         }
     },
     render() {
@@ -141,28 +135,10 @@ const LayerTree = React.createClass({
             onToggle={this.props.onToggle}/>)) : (<div/>);
         return (
             <div id="siracatalog">
-             <div className="catalog-search-container">
-             <SearchBar placeholder="Cerca oggetti" placeholderMsgId=""
-              className="sira-cat-search"
-              onSearchTextChange={(text) => this.setState({ searchText: text})}
-              typeAhead={false}
-              searchText={this.state.searchText}
-              onSearch={(text) => this.loadMetadata({text})}
-              onSearchReset={() => {
-                  this.setState({ searchText: ""});
-                  this.loadMetadata();
-              }}
+            <SiraSearchBar
+                onSearch={this.loadMetadata}
+                onReset={this.loadMetadata}
             />
-             <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories
-                    useLink={false}
-                    className="tilescontainer"
-                    liClass="list-group-item col-xs-4 tiles searchtile"
-                    /> </Popover>)}>
-                       <Button className="siracatalog-search-selector">
-                            <div className={this.props.category.icon}/>
-                        </Button>
-             </OverlayTrigger>
-             </div>
              <div className="catalog-categories-switch-container">
              <div className="catalog-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
                 <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
@@ -177,8 +153,9 @@ const LayerTree = React.createClass({
             <AddMapModal/>
             </div>);
     },
-    loadMetadata({text, id = this.props.category.id} = {}) {
+    loadMetadata({text, category} = {}) {
         let params = {};
+        const {id} = category || {};
         if (id !== 999) {
             params.category = id;
         }
