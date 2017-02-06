@@ -32,7 +32,8 @@ const appReducers = {
      metadatainfobox: require('./reducers/metadatainfobox'),
      platformnumbers: require('./reducers/platformnumbers'),
      siraexporter: require('./reducers/siraexporter'),
-     addmap: require('./reducers/addmap')
+     addmap: require('./reducers/addmap'),
+     cart: require('./reducers/cart')
 
  };
 

@@ -22,6 +22,7 @@ const SIRA_RECORDS_ERROR = 'SIRA_RECORDS_ERROR';
 const SIRA_RECORDS_LOADED = 'SIRA_RECORDS_LOADED';
 const TOGGLE_ADD_MAP_MODAL = 'TOGGLE_ADD_MAP_MODAL';
 const SIRA_ADD_LAYERS = 'SIRA_ADD_LAYERS';
+const SIRA_ADD_LAYERS_IN_CART = 'SIRA_ADD_LAYERS_IN_CART';
 
 function toggleAddMap(status = true) {
     return {
@@ -78,6 +79,14 @@ function addSiraLayers(layers) {
         layers
     };
 }
+
+function addSiraLayersIncart(layers) {
+    return {
+        type: 'SIRA_ADD_LAYERS_IN_CART',
+        layers
+    };
+}
+
 function addLayers(layers, useTitle, useGroup) {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
@@ -89,13 +98,43 @@ function addLayers(layers, useTitle, useGroup) {
     };
 }
 
+function addLayersInCart(layers, useTitle, useGroup) {
+    return (dispatch, getState) => {
+        const node = ((getState()).addmap || {}).node;
+        const layersConfig = layers.map((layer) => AddMapUtils.getLayerConfing(layer, 'EPSG:3857', useTitle, useGroup, {}, node));
+        Promise.all(layersConfig).then((results) => {
+            let cartLayers = getState().cart.layers;
+            let alreadyPresent = false;
+            let resultOk = [];
+            if (results && Object.prototype.toString.call(results) === '[object Array]') {
+                results.map((lay) => {
+                    alreadyPresent = false;
+                    if (cartLayers && cartLayers && Object.prototype.toString.call(cartLayers) === '[object Array]') {
+                        cartLayers.map((el) => {
+                            // if layer is already present don't add it
+                            alreadyPresent = alreadyPresent || (el.title === lay.title);
+                        });
+                        if (!alreadyPresent) {
+                            resultOk.push(lay);
+                        }
+                    }
+                });
+            }
+            dispatch(addSiraLayersIncart(resultOk));
+            dispatch(toggleAddMap(false));
+        }).catch((e) => dispatch(recordsError(e)) );
+    };
+}
+
 module.exports = {
     SIRA_RECORDS_LOADING,
     SIRA_RECORDS_ERROR,
     SIRA_RECORDS_LOADED,
     TOGGLE_ADD_MAP_MODAL,
     SIRA_ADD_LAYERS,
+    SIRA_ADD_LAYERS_IN_CART,
     loadNodeMapRecords,
     toggleAddMap,
-    addLayers
+    addLayers,
+    addLayersInCart
  };
