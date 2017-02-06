@@ -103,23 +103,11 @@ function addLayersInCart(layers, useTitle, useGroup) {
         const node = ((getState()).addmap || {}).node;
         const layersConfig = layers.map((layer) => AddMapUtils.getLayerConfing(layer, 'EPSG:3857', useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
-            let cartLayers = getState().cart.layers;
-            let alreadyPresent = false;
-            let resultOk = [];
-            if (results && Object.prototype.toString.call(results) === '[object Array]') {
-                results.map((lay) => {
-                    alreadyPresent = false;
-                    if (cartLayers && cartLayers && Object.prototype.toString.call(cartLayers) === '[object Array]') {
-                        cartLayers.map((el) => {
-                            // if layer is already present don't add it
-                            alreadyPresent = alreadyPresent || (el.title === lay.title);
-                        });
-                        if (!alreadyPresent) {
-                            resultOk.push(lay);
-                        }
-                    }
-                });
-            }
+            const cartLayers = getState().cart.layers || [];
+            const resultOk = results.reduce((previous, current) => {
+                const alreadyPresent = cartLayers.filter((el) => el.title === current.title).length > 0;
+                return alreadyPresent ? previous : [...previous, current];
+            }, []);
             dispatch(addSiraLayersIncart(resultOk));
             dispatch(toggleAddMap(false));
         }).catch((e) => dispatch(recordsError(e)) );

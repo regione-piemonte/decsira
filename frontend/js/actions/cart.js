@@ -5,7 +5,6 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
 */
-
 const HIDE_PANEL = 'HIDE_PANEL';
 const SHOW_CART_PANEL = 'SHOW_CART_PANEL';
 const ADD_SERVICE_IN_CART = 'ADD_SERVICE_IN_CART';
@@ -43,12 +42,7 @@ function addService(node) {
 function addServiceIncart(node) {
     return (dispatch, getState) => {
         let nodes = getState().cart.wmsservices;
-        let alreadyPresent = false;
-        if (node && nodes && Object.prototype.toString.call(nodes) === '[object Array]') {
-            nodes.map((el) => {
-                alreadyPresent = alreadyPresent || (el.id === node.id);
-            });
-        }
+        const alreadyPresent = nodes.filter((el) => el.id === node.id).length > 0;
         if (!alreadyPresent) dispatch(addService(node));
         else dispatch(addService(null));
     };

@@ -7,12 +7,8 @@
 */
 const assign = require('object-assign');
 
-const {
-  HIDE_PANEL,
-  SHOW_CART_PANEL,
-  ADD_SERVICE_IN_CART,
-  REFRESH_NUMBER_OF_SERVICES
-} = require('../actions/cart');
+const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES} = require('../actions/cart');
+const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
 
 const initialState = {
   showPanel: false,
@@ -33,7 +29,7 @@ function cart(state = initialState, action) {
     case REFRESH_NUMBER_OF_SERVICES: {
         return assign({}, state, {servicesNumber: state.wmsservices.length});
     }
-    case 'SIRA_ADD_LAYERS_IN_CART': {
+    case SIRA_ADD_LAYERS_IN_CART: {
         return assign({}, state,
             {
                 layers: action.layers ? state.layers.concat(action.layers) : state.layers
