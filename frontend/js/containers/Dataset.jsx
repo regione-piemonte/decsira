@@ -82,9 +82,9 @@ const Dataset = React.createClass({
         return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
     },
     renderResults() {
-        const {loading} = this.props;
+        const {loading, objects, views} = this.props;
         const {showCategories} = this.state;
-        const objects = (
+        const tocObjects = (
             <TOC id="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
                     { showCategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
@@ -108,11 +108,11 @@ const Dataset = React.createClass({
                 onSelect={this.props.selectSubCategory}>
                 <Tab
                     eventKey={'objects'}
-                    title={`Oggetti (${this.props.category.objectNumber})`}>
-                    {loading ? this.renderSpinner() : objects}
+                    title={`Oggetti (${objects ? objects.length : 0})`}>
+                    {loading ? this.renderSpinner() : tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
-                    title={`Viste Tematiche (${this.props.category.tematicViewNumber})`}>
+                    title={`Viste Tematiche (${views ? views.length : 0})`}>
                     {loading ? this.renderSpinner() : (<div id="dataset-results-view"> {viste}</div>)}
                 </Tab>
         </Tabs>);
