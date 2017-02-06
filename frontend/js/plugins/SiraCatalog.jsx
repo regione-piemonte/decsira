@@ -111,15 +111,16 @@ const LayerTree = React.createClass({
             return <div></div>;
         }
         const {showCategories} = this.state;
-        const objects = (
-            <TOC nodes={showCategories ? this.props.nodes : this.props.objects}>
+        const {views, objects, nodes} = this.props;
+        const tocObjects = (
+            <TOC nodes={showCategories ? nodes : objects}>
                     { showCategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                     <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
-                            groups={this.props.nodes}
+                            groups={nodes}
                             addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>) : (<DefaultNode
@@ -145,8 +146,8 @@ const LayerTree = React.createClass({
               </div>
              </div>
             <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
-                <Tab eventKey={'objects'} title={`Oggetti (${this.props.category.objectNumber})`}>{objects}</Tab>
-                <Tab eventKey={'views'} title={`Viste Tematiche (${this.props.category.tematicViewNumber})`}>{viste}</Tab>
+                <Tab eventKey={'objects'} title={`Oggetti (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
+                <Tab eventKey={'views'} title={`Viste Tematiche (${views ? views.length : 0})`}>{viste}</Tab>
             </Tabs>
             {this.props.loading ? (
                 <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
