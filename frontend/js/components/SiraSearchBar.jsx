@@ -27,10 +27,11 @@ const SiraSearchBar = React.createClass({
         overlayPlacement: React.PropTypes.string.isRequired,
         serchCatliClasses: React.PropTypes.string.isRequired,
         btnClasses: React.PropTypes.string.isRequired,
+        mosaicContainerClasses: React.PropTypes.string.isRequired,
         category: React.PropTypes.shape({
-            name: React.PropTypes.string.isRequired,
-            id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
-            icon: React.PropTypes.string.isRequired,
+            name: React.PropTypes.string,
+            id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+            icon: React.PropTypes.string,
             objectNumber: React.PropTypes.number,
             tematicViewNumber: React.PropTypes.number
         }).isRequired,
@@ -43,6 +44,7 @@ const SiraSearchBar = React.createClass({
             containerClasses: "catalog-search-container",
             searchClasses: "sira-cat-search",
             addCategoriesSelector: true,
+            mosaicContainerClasses: "tilescontainer",
             serchCatliClasses: "list-group-item col-xs-4 tiles searchtile",
             overlayPlacement: "right",
             btnClasses: "siracatalog-search-selector",
@@ -61,12 +63,12 @@ const SiraSearchBar = React.createClass({
         }
     },
     renderPopover() {
-        const {serchCatliClasses} = this.props;
+        const {serchCatliClasses, mosaicContainerClasses} = this.props;
         return (
             <Popover id="search-categories">
                 <SearchCategories
                     useLink={false}
-                    className="tilescontainer"
+                    className={mosaicContainerClasses}
                     liClass={serchCatliClasses}
                 />
             </Popover>);

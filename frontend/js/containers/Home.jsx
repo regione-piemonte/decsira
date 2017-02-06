@@ -6,14 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-const Debug = require('../../MapStore2/web/client/components/development/Debug');
 const {connect} = require('react-redux');
-
+const {head} = require('lodash');
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
 
 const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
-const {getMetadataObjects} = require('../actions/siracatalog');
+const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
 
@@ -85,7 +84,10 @@ const MetadataInfoBox = connect(
 const Home = React.createClass({
     propTypes: {
         loadMetadata: React.PropTypes.func,
-        params: React.PropTypes.object
+        params: React.PropTypes.object,
+        selectCategory: React.PropTypes.func,
+        allCategory: React.PropTypes.object,
+        resetObjectAndView: React.PropTypes.func
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -111,8 +113,9 @@ const Home = React.createClass({
                                     containerClasses="col-md-5 col-xs-12 ricerca-home catalog-search-container"
                                     searchClasses="home-search"
                                     addCategoriesSelector={false}
-                                    onSearch={(text) => {
-                                        this.props.loadMetadata({text});
+                                    onSearch={({text}) => {
+                                        this.props.selectCategory(this.props.allCategory, 'objects');
+                                        this.props.loadMetadata({params: {text}});
                                         this.context.router.push(`/dataset/${this.props.params.profile}/`);
                                     }}
                                 />
@@ -150,22 +153,30 @@ const Home = React.createClass({
                     </div>
                 </div>
             </div>
-            <Mosaic />
+            <Mosaic useLink={false} tileClick={this.selectCategory} />
             <LinkToMetadataInfoBox />
             <MetadataInfoBox />
             <PlatformNumbers />
             <Footer />
-            <Debug/>
         </div>);
+    },
+    selectCategory(category, subcat) {
+        this.props.resetObjectAndView();
+        this.props.selectCategory(category, subcat);
+        this.context.router.push(`/dataset/${this.props.params.profile}/`);
     }
 });
 
 module.exports = connect((state) => {
+    const {tiles} = categorySelector(state);
     return {
+         allCategory: head(tiles.filter((t) => t.id === 999)),
          error: state.loadingError || (state.locale && state.locale.localeError) || null,
          locale: state.locale && state.locale.locale,
          messages: state.locale && state.locale.messages || {}
      };
 }, {
-    loadMetadata: getMetadataObjects
+    loadMetadata: getMetadataObjects,
+    selectCategory,
+    resetObjectAndView
 })(Home);

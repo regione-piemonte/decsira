@@ -7,12 +7,12 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
-const {toggleNode,getThematicViewConfig, selectSubCategory} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
-const {Tabs, Tab,} = require("react-bootstrap");
+const {Tabs, Tab} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
-const {getMetadataObjects} = require('../actions/siracatalog');
+
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
 const {

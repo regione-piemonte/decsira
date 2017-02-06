@@ -6,20 +6,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-const Debug = require('../../MapStore2/web/client/components/development/Debug');
 const {connect} = require('react-redux');
-const {OverlayTrigger, Popover, Button, Glyphicon} = require('react-bootstrap');
-const {Link} = require('react-router');
-const Footer = require('../components/Footer');
+const {Tabs, Tab} = require('react-bootstrap');
+const Spinner = require('react-spinkit');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory} = require('../actions/siracatalog');
+
+const {tocSelector} = require('../selectors/sira');
+
 const Header = require('../components/Header');
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
-
-const {toggleNode, selectCategory, getThematicViewConfig, selectSubCategory} = require('../actions/siracatalog');
-const {categorySelector, tocSelector} = require('../selectors/sira');
-
 const SiraSearchBar = require('../components/SiraSearchBar');
+const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
+const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+const DefaultNode = require('../components/catalog/DefaultNodeDataset');
+const Footer = require('../components/Footer');
+const Vista = connect( null, {
+    addToMap: getThematicViewConfig
+})(require('../components/catalog/VistaDataset'));
 
-require('../../assets/application/conoscenze_ambientali/css/skin-home.css');
 
 const Dataset = React.createClass({
     propTypes: {
@@ -29,40 +32,130 @@ const Dataset = React.createClass({
             icon: React.PropTypes.string.isRequired,
             objectNumber: React.PropTypes.number,
             tematicViewNumber: React.PropTypes.number
-        }).isRequired
+        }),
+        nodes: React.PropTypes.array,
+        views: React.PropTypes.array,
+        objects: React.PropTypes.array,
+        loading: React.PropTypes.bool,
+        nodesLoaded: React.PropTypes.bool,
+        onToggle: React.PropTypes.func,
+        toggleSiraControl: React.PropTypes.func,
+        expandFilterPanel: React.PropTypes.func,
+        getMetadataObjects: React.PropTypes.func,
+        selectSubCategory: React.PropTypes.func,
+        subcat: React.PropTypes.string,
+        configOggetti: React.PropTypes.object,
+        authParams: React.PropTypes.object,
+        userprofile: React.PropTypes.object
     },
     getInitialState() {
             return {
-                searchText: ""
+                searchText: "",
+                showCategories: false,
+                onToggle: () => {}
             };
+        },
+        componentWillMount() {
+            const {nodesLoaded, loading, category} = this.props;
+            if (!nodesLoaded && !loading && category) {
+                this.loadMetadata({category: category});
+            }
+        },
+        componentWillReceiveProps({nodesLoaded, loading, category}) {
+            if (!loading && (!nodesLoaded || category.id !== this.props.category.id )) {
+                this.loadMetadata({category: category});
+            }
         },
     renderSerchBar() {
         return (
             <SiraSearchBar
-                containerClasses="col-lg-12 col-md-12 col-sm-12 col-xs-12 ricerca-home catalog-search-container"
+                containerClasses="col-lg-12 col-md-12 col-sm-12 col-xs-12 ricerca-home catalog-search-container dataset-search-container"
                 searchClasses="home-search"
                 overlayPlacement="bottom"
-                onSearch={() => {
-                }}
-                onReset={() => {}}
+                mosaicContainerClasses="dataset-mosaic-container"
+                onSearch={this.loadMetadata}
+                onReset={this.loadMetadata}
+
             />);
     },
+    renderSpinner() {
+        return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
+    },
+    renderResults() {
+        const {loading} = this.props;
+        const {showCategories} = this.state;
+        const objects = (
+            <TOC id="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
+                    { showCategories ?
+                    (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
+                        <DefaultNode
+                            onToggle={this.props.onToggle}
+                            groups={this.props.nodes}
+                            />
+                    </DefaultGroup>) : (<DefaultNode
+                            flat={true}
+                            />) }
+                </TOC>);
+        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+            expandFilterPanel={this.props.expandFilterPanel}
+            toggleSiraControl={this.props.toggleSiraControl}
+            node={v}
+            onToggle={this.props.onToggle}/>)) : (<div/>);
+        return (
+            <Tabs
+                className="dataset-tabs"
+                activeKey={this.props.subcat}
+                onSelect={this.props.selectSubCategory}>
+                <Tab
+                    eventKey={'objects'}
+                    title={`Oggetti (${this.props.category.objectNumber})`}>
+                    {loading ? this.renderSpinner() : objects}
+                </Tab>
+                <Tab eventKey={'views'}
+                    title={`Viste Tematiche (${this.props.category.tematicViewNumber})`}>
+                    {loading ? this.renderSpinner() : (<div id="dataset-results-view"> {viste}</div>)}
+                </Tab>
+        </Tabs>);
+    },
     render() {
-        return ( <div className="home">
+        const {category} = this.props;
+        const {showCategories} = this.state;
+        return (
+            <div className="dataset-container home">
+                <div style={{minHeight: '100%', position: 'relative'}}>
                     <Header/>
-                    <div className="container-fluid search-int">
-                        <div className="row-fluid">
-                            <div className="container search-interna">
-                                <div className="row">
-                                    {this.renderSerchBar()}
-                                </div>
-                            </div>
-                        </div>
+                    {this.renderSerchBar()}
+                    <div className="ricerca-home dataset-categories-switch-container">
+                    <div className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
+                       <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+                     </div>
                     </div>
+                    <div className="dataset-results-container">
+                        {category ? this.renderResults() : (<noscript/>)}
+                    </div>
+                    <div className="dataset-footer-container">
                     <Footer/>
-                    <Debug/>
-                </div>);
+                    </div>
+                </div>
+            </div>);
+    },
+    loadMetadata({text, category} = {}) {
+        let params = {};
+        const {id} = category || {};
+        if (id !== 999) {
+            params.category = id;
+        }
+        if (text && text.length > 0) {
+            params.text = text;
+        }
+        if (!this.props.loading) {
+            this.props.getMetadataObjects({params});
+        }
     }
 });
 
-module.exports = connect(tocSelector)(Dataset);
+module.exports = connect(tocSelector, {
+    getMetadataObjects,
+    onToggle: toggleNode,
+    selectSubCategory
+})(Dataset);
