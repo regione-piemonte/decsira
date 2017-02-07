@@ -7,7 +7,7 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 
-const TOGGLE_NODE = 'TOGGLE_NODE';
+const TOGGLE_SIRA_NODE = 'TOGGLE_SIRA_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
@@ -19,7 +19,7 @@ const {Promise} = require('es6-promise');
 
 function toggleNode(id, status) {
     return {
-        type: TOGGLE_NODE,
+        type: TOGGLE_SIRA_NODE,
         id,
         status
     };
@@ -129,7 +129,7 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
     };
 }
 module.exports = {
-    TOGGLE_NODE,
+    TOGGLE_SIRA_NODE,
     SELECT_CATEGORY,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
