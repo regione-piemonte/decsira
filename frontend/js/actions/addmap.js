@@ -90,7 +90,7 @@ function addSiraLayersIncart(layers) {
 function addLayers(layers, useTitle, useGroup) {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
-        const layersConfig = layers.map((layer) => AddMapUtils.getLayerConfing(layer, 'EPSG:3857', useTitle, useGroup, {}, node));
+        const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, 'EPSG:3857', useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
             dispatch(addSiraLayers(results));
             dispatch(toggleAddMap(false));
