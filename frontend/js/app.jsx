@@ -12,7 +12,7 @@ const {connect} = require('react-redux');
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
 
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
-const {configureQueryForm, configureTopology/*, configureFeatureGrid*/} = require('./actions/siradec');
+const {configureQueryForm} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
 const {loadPlatformNumbers} = require('./actions/platformnumbers');
 const {configureExporter} = require('./actions/siraexporter');
@@ -57,7 +57,6 @@ const startApp = () => {
          () => loadPlatformNumbers(),
          () => loadMapConfig(configUrl, legacy),
          () => configureQueryForm(ConfigUtils.getConfigProp("query")),
-         () => configureTopology(ConfigUtils.getConfigProp("topology")),
          () => configureExporter(ConfigUtils.getConfigProp("exporter"))
      ];
 
