@@ -55,8 +55,10 @@ const AddMapUtils = {
                 return acc.concat(assign({}, r, props));
             }
             props.nodetype = 'group';
-            const newGroup = group ? `${group}.${r.Name}` : r.Name;
-            const newGroupTitle = groupTitle ? `${groupTitle}.${r.Title}` : r.Title;
+            const name = (r.Name || "").replace(/\./g, '${dot}');
+            const title = (r.Title || "").replace(/\./g, '${dot}');
+            const newGroup = group ? `${group}.${name}` : name;
+            const newGroupTitle = groupTitle ? `${groupTitle}.${title}` : title;
             props.Layer = this.prepareGroupLayer({records: r.Layer, group: newGroup, groupTitle: newGroupTitle, wmsUrl});
             return acc.concat(assign({}, r, props));
         }, []);
