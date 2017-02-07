@@ -57,7 +57,6 @@ const startApp = () => {
          () => loadPlatformNumbers(),
          () => loadMapConfig(configUrl, legacy),
          () => configureQueryForm(ConfigUtils.getConfigProp("query")),
-         () => configureTopology(ConfigUtils.getConfigProp("topology")),
          () => configureExporter(ConfigUtils.getConfigProp("exporter"))
      ];
 
