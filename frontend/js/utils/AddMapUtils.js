@@ -12,6 +12,15 @@ const urlUtil = require('url');
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 const {Promise} = require('es6-promise');
 
+// Add here default layer config for layer added by sira catalog
+const layerDefaultConfig = {
+    type: "wms",
+    tiled: true,
+    tileSize: 512,
+    visibility: false
+};
+
+
 const isInLayer = function(layers, name) {
     return (isArray(layers) && layers || [layers]).filter((layer) => {
         return layer.Name === name || (layer.Layer && isInLayer(layer.Layer, name));
@@ -91,17 +100,16 @@ const AddMapUtils = {
             }
             const nodeGroup = node.title;
             const group = useTitle ? layer.groupTitle : layer.group;
-            resolve({
-                    type: "wms",
+            resolve(assign({}, {
                     url: layer.url,
-                    visibility: false,
                     name: layer.Name,
                     title: useTitle ? layer.Title : layer.Name,
                     bbox: getWMSBBox(layer),
                     params: params,
                     allowedSRS: allowedSRS,
+                    siraId: node.id,
                     group: useGroup ? group || nodeGroup : nodeGroup
-                });
+                }, layerDefaultConfig));
         });
     }
 };
