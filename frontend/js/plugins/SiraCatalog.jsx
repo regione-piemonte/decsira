@@ -133,7 +133,8 @@ const LayerTree = React.createClass({
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
             node={v}
-            onToggle={this.props.onToggle}/>)) : (<div/>);
+            onToggle={this.props.onToggle}
+            showInfoBox={this.showInfoBox}/>)) : (<div/>);
         return (
             <div id="siracatalog">
             <SiraSearchBar

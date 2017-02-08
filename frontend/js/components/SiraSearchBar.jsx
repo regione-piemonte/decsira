@@ -77,7 +77,7 @@ const SiraSearchBar = React.createClass({
         const {btnClasses, category, overlayPlacement} = this.props;
         return (
             <OverlayTrigger
-                trigger="focus"
+                trigger={["click", "focus"]}
                 placement={overlayPlacement}
                 overlay={this.renderPopover()}>
                 <Button className={btnClasses}>
