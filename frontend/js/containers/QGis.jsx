@@ -162,6 +162,7 @@ const QGis = React.createClass({
                 templateProfile="QGIS"
                 selectFeatures={this.selectFeatures}
                 zoomToFeatureAction={this.zoomToFeature}
+                exporter={false}
                 selectAllToggle={this.props.selectAllToggle && this.state.qGisType !== "list" ? this.props.selectAllToggle : undefined}/>
             );
     },
