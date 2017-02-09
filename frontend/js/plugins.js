@@ -32,8 +32,7 @@ module.exports = {
         ZoomAllPlugin: require('../MapStore2/web/client/plugins/ZoomAll'),
         ToolbarPlugin: require('../MapStore2/web/client/plugins/Toolbar'),
         SettingsPlugin: require('../MapStore2/web/client/plugins/Settings'),
-        InfoPlugin: require('./plugins/InfoPlugin'),
-        TopologyPlugin: require('./plugins/TopologyPlugin')
+        InfoPlugin: require('./plugins/InfoPlugin')
 
     },
     requires: {}

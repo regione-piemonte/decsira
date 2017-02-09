@@ -11,7 +11,7 @@ const {createSelector} = require('reselect');
 const {changeLayerProperties, changeGroupProperties, toggleNode,
        sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('../../MapStore2/web/client/actions/layers');
 const {groupsSelector} = require('../../MapStore2/web/client/selectors/layers');
-
+const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
 
 const Message = require('../../MapStore2/web/client/plugins/locale/Message');
@@ -79,7 +79,9 @@ const LayerTree = React.createClass({
         loadFeatureTypeConfig: React.PropTypes.func,
         setActiveFeatureType: React.PropTypes.func,
         toggleSiraControl: React.PropTypes.func,
-        setGridType: React.PropTypes.func
+        setGridType: React.PropTypes.func,
+        showInfoBox: React.PropTypes.func,
+        loadMetadata: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -114,7 +116,7 @@ const LayerTree = React.createClass({
                                   />);
         const Layer = (<DefaultLayer
                             settingsOptions={this.props.settingsOptions}
-                            onToggle={this.props.onToggleLayer}
+                            onToggle={this.showInfoBox}
                             onSettings={this.props.onSettings}
                             propertiesChangeHandler={this.props.layerPropertiesChangeHandler}
                             hideSettings={this.props.hideSettings}
@@ -157,9 +159,11 @@ const LayerTree = React.createClass({
         }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
+    },
+    showInfoBox(node) {
+        this.props.loadMetadata(node);
+        this.props.showInfoBox();
     }
-
-
 });
 
 const TOCPlugin = connect(tocSelector, {
@@ -177,7 +181,9 @@ const TOCPlugin = connect(tocSelector, {
     loadFeatureTypeConfig,
     setActiveFeatureType,
     toggleSiraControl,
-    setGridType
+    setGridType,
+    loadMetadata,
+    showInfoBox: showBox
 })(LayerTree);
 
 module.exports = {

@@ -43,14 +43,20 @@ const sortObjects = function(a, b) {
     }
     return 0;
 };
-
+const isPresent = function(nodes, node) {
+    return nodes.filter((n) => node.id === n.id).length > 0;
+};
 const normalizeViews = function(nodes) {
-    return nodes.filter( (n) => n.type === "view").map((n) => {
+    return nodes.filter( (n) => n.type === "view").reduce((acc, o) => {
+        return !isPresent(acc, o) ? acc.concat(o) : acc;
+    }, []).map((n) => {
         return assign({expanded: false}, n, {nodes: getChildren(nodes, n)});
     });
 };
 const normalizeObjects = function(nodes) {
-    return nodes.filter( (n) => n.type === "node" && !n.nodes).sort(sortObjects);
+    return nodes.filter( (n) => n.type === "node" && !n.nodes).reduce((acc, o) => {
+        return !isPresent(acc, o) ? acc.concat(o) : acc;
+    }, []).sort(sortObjects);
 };
 
 const tocSelector = createSelector([

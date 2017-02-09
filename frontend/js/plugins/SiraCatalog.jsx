@@ -7,12 +7,12 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
-const {toggleNode, selectCategory, getThematicViewConfig, selectSubCategory} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
-const {Tabs, Tab, Button, OverlayTrigger, Popover} = require("react-bootstrap");
+const {Tabs, Tab} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
-const {getMetadataObjects} = require('../actions/siracatalog');
+
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
 const {
@@ -26,7 +26,7 @@ const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {setGridType} = require('../actions/grid');
 const {loadNodeMapRecords, toggleAddMap, addLayers} = require('../actions/addmap');
 
-const {categorySelector, tocSelector} = require('../selectors/sira');
+const {tocSelector} = require('../selectors/sira');
 
 const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
@@ -45,16 +45,11 @@ const AddMapModal = connect(({addmap = {}}) => ({
 })(require('../components/addmap/AddMapModal'));
 
 const Spinner = require('react-spinkit');
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+const SiraSearchBar = require('../components/SiraSearchBar');
 
 const Vista = connect( null, {
     addToMap: getThematicViewConfig
-    })(require('../components/catalog/Vista'));
-
-const SearchCategories = connect(categorySelector,
-{
-    tileClick: selectCategory
-})(require('../components/Mosaic'));
+})(require('../components/catalog/Vista'));
 
 const LayerTree = React.createClass({
     propTypes: {
@@ -98,18 +93,17 @@ const LayerTree = React.createClass({
     },
     getInitialState() {
         return {
-            searchText: "",
             showCategories: true
         };
     },
     componentWillMount() {
         if (!this.props.nodesLoaded && !this.props.loading) {
-            this.loadMetadata();
+            this.loadMetadata({category: this.props.category});
         }
     },
     componentWillReceiveProps(nextProps) {
         if (!nextProps.loading && (!nextProps.nodesLoaded || nextProps.category.id !== this.props.category.id )) {
-            this.loadMetadata({id: nextProps.category.id});
+            this.loadMetadata({category: nextProps.category});
         }
     },
     render() {
@@ -117,15 +111,16 @@ const LayerTree = React.createClass({
             return <div></div>;
         }
         const {showCategories} = this.state;
-        const objects = (
-            <TOC nodes={showCategories ? this.props.nodes : this.props.objects}>
+        const {views, objects, nodes} = this.props;
+        const tocObjects = (
+            <TOC nodes={showCategories ? nodes : objects}>
                     { showCategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                     <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
-                            groups={this.props.nodes}
+                            groups={nodes}
                             addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>) : (<DefaultNode
@@ -138,47 +133,31 @@ const LayerTree = React.createClass({
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
             node={v}
-            onToggle={this.props.onToggle}/>)) : (<div/>);
+            onToggle={this.props.onToggle}
+            showInfoBox={this.showInfoBox}/>)) : (<div/>);
         return (
             <div id="siracatalog">
-             <div className="catalog-search-container">
-             <SearchBar placeholder="Cerca oggetti" placeholderMsgId=""
-              className="sira-cat-search"
-              onSearchTextChange={(text) => this.setState({ searchText: text})}
-              typeAhead={false}
-              searchText={this.state.searchText}
-              onSearch={(text) => this.loadMetadata({text})}
-              onSearchReset={() => {
-                  this.setState({ searchText: ""});
-                  this.loadMetadata();
-              }}
+            <SiraSearchBar
+                onSearch={this.loadMetadata}
+                onReset={this.loadMetadata}
             />
-             <OverlayTrigger trigger="focus" placement="right" overlay={(<Popover id="search-categories"><SearchCategories
-                    useLink={false}
-                    className="tilescontainer"
-                    liClass="list-group-item col-xs-4 tiles searchtile"
-                    /> </Popover>)}>
-                       <Button className="siracatalog-search-selector">
-                            <div className={this.props.category.icon}/>
-                        </Button>
-             </OverlayTrigger>
-             </div>
              <div className="catalog-categories-switch-container">
              <div className="catalog-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
                 <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
               </div>
              </div>
             <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
-                <Tab eventKey={'objects'} title={`Oggetti (${this.props.category.objectNumber})`}>{objects}</Tab>
-                <Tab eventKey={'views'} title={`Viste Tematiche (${this.props.category.tematicViewNumber})`}>{viste}</Tab>
+                <Tab eventKey={'objects'} title={`Oggetti (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
+                <Tab eventKey={'views'} title={`Viste Tematiche (${views ? views.length : 0})`}>{viste}</Tab>
             </Tabs>
             {this.props.loading ? (
                 <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
             <AddMapModal/>
             </div>);
     },
-    loadMetadata({text, id = this.props.category.id} = {}) {
+    loadMetadata({text, category} = {}) {
         let params = {};
+        const {id} = category || {};
         if (id !== 999) {
             params.category = id;
         }

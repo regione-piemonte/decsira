@@ -7,7 +7,6 @@
  */
 
 const React = require('react');
-// const Message = require('../../components/I18N/Message');
 const {Modal, Button} = require('react-bootstrap');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const LoginPanel = React.createClass({
@@ -35,10 +34,10 @@ const LoginPanel = React.createClass({
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h4><I18N.Message msgId={"LoginPanel.panelMsg"}/></h4>
+                        <h4><I18N.Message msgId={"loginpanel.panelMsg"}/></h4>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.props.onConfirm}><I18N.Message msgId={"LoginPanel.okButton"}/></Button>
+                        <Button onClick={this.props.onConfirm}><I18N.Message msgId={"loginpanel.okButton"}/></Button>
                     </Modal.Footer>
                 </Modal>
             </div>

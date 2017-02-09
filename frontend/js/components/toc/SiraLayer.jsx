@@ -119,13 +119,18 @@ var DefaultLayer = React.createClass({
         let {children, propertiesChangeHandler, onToggle, ...other } = this.props;
         return (
             <Node className="toc-default-layer" animateCollapse={false} sortableStyle={this.props.sortableStyle} style={this.props.style} type="layer" {...other}>
-                <Title onClick={this.props.onToggle}/>
+                <Title onClick={this.showInfoBox}/>
                 <InlineSpinner loading={this.props.node.loading}/>
                 {this.renderCollapsible()}
                 {this.renderTools()}
             </Node>
         );
-    }
+    },
+    showInfoBox() {
+            if (this.props.node && this.props.node.siraId) {
+                this.props.onToggle(this.props.node.siraId);
+            }
+        }
 });
 
 module.exports = DefaultLayer;

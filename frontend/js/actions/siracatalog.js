@@ -7,18 +7,19 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 
-const TOGGLE_NODE = 'TOGGLE_NODE';
+const TOGGLE_SIRA_NODE = 'TOGGLE_SIRA_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
 const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
 const SELECT_SUB_CATEGORY = 'SELECT_SUB_CATEGORY';
+const RESET_OBJECT_AND_VIEW = 'RESET_OBJECT_AND_VIEW';
 
 const {Promise} = require('es6-promise');
 
 function toggleNode(id, status) {
     return {
-        type: TOGGLE_NODE,
+        type: TOGGLE_SIRA_NODE,
         id,
         status
     };
@@ -42,7 +43,11 @@ function selectSubCategory( subcat) {
         subcat
     };
 }
-
+function resetObjectAndView() {
+    return {
+        type: RESET_OBJECT_AND_VIEW
+    };
+}
 function objectsLoaded(objects, views) {
     return {
         type: METADATA_OBJECTS_VIEWS_LOADED,
@@ -124,15 +129,17 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
     };
 }
 module.exports = {
-    TOGGLE_NODE,
+    TOGGLE_SIRA_NODE,
     SELECT_CATEGORY,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     THEMATIC_VIEW_CONFIG_LOADED,
     SELECT_SUB_CATEGORY,
+    RESET_OBJECT_AND_VIEW,
     toggleNode,
     selectCategory,
     getMetadataObjects,
     getThematicViewConfig,
-    selectSubCategory
+    selectSubCategory,
+    resetObjectAndView
 };

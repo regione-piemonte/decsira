@@ -12,6 +12,15 @@ const urlUtil = require('url');
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 const {Promise} = require('es6-promise');
 
+// Add here default layer config for layer added by sira catalog
+const layerDefaultConfig = {
+    type: "wms",
+    tiled: true,
+    tileSize: 512,
+    visibility: false
+};
+
+
 const isInLayer = function(layers, name) {
     return (isArray(layers) && layers || [layers]).filter((layer) => {
         return layer.Name === name || (layer.Layer && isInLayer(layer.Layer, name));
@@ -46,8 +55,10 @@ const AddMapUtils = {
                 return acc.concat(assign({}, r, props));
             }
             props.nodetype = 'group';
-            const newGroup = group ? `${group}.${r.Name}` : r.Name;
-            const newGroupTitle = groupTitle ? `${groupTitle}.${r.Title}` : r.Title;
+            const name = (r.Name || "").replace(/\./g, '${dot}');
+            const title = (r.Title || "").replace(/\./g, '${dot}');
+            const newGroup = group ? `${group}.${name}` : name;
+            const newGroupTitle = groupTitle ? `${groupTitle}.${title}` : title;
             props.Layer = this.prepareGroupLayer({records: r.Layer, group: newGroup, groupTitle: newGroupTitle, wmsUrl});
             return acc.concat(assign({}, r, props));
         }, []);
@@ -64,7 +75,7 @@ const AddMapUtils = {
     },
     setSelectionState: function(nodes, flatLayers, selected) {
         return (isArray(nodes) && nodes || [nodes]).reduce((acc, node) => {
-            acc[node.id] = assign({expanded: false}, flatLayers[node.id] || {}, {selected});
+            acc[node.id] = assign({expanded: true}, flatLayers[node.id] || {}, {selected});
             return node.Layer ? assign({}, acc, this.setSelectionState(node.Layer, flatLayers, selected)) : acc;
         }, {});
     },
@@ -78,7 +89,7 @@ const AddMapUtils = {
             const subGroups = this.normalizeSelection(node.Layer, newFlatLayers);
             const fl = assign({}, newFlatLayers, subGroups);
             const isSelected = this.isSelected(node.Layer, fl);
-            acc[node.id] = assign({expanded: false}, fl[node.id] || {}, {selected: isSelected});
+            acc[node.id] = assign({expanded: true}, fl[node.id] || {}, {selected: isSelected});
             return assign({}, acc, subGroups);
         }, {});
     },
@@ -91,17 +102,16 @@ const AddMapUtils = {
             }
             const nodeGroup = node.title;
             const group = useTitle ? layer.groupTitle : layer.group;
-            resolve({
-                    type: "wms",
+            resolve(assign({}, {
                     url: layer.url,
-                    visibility: false,
                     name: layer.Name,
                     title: useTitle ? layer.Title : layer.Name,
                     bbox: getWMSBBox(layer),
                     params: params,
                     allowedSRS: allowedSRS,
+                    siraId: node.id,
                     group: useGroup ? group || nodeGroup : nodeGroup
-                });
+                }, layerDefaultConfig));
         });
     }
 };

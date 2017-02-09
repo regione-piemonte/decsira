@@ -37,7 +37,7 @@ const GroupLayer = React.createClass({
     },
     render() {
         const {node, useTitle, nodesStatus} = this.props;
-        const {expanded, selected} = nodesStatus[node.id] ? nodesStatus[node.id] : {expanded: false, selected: false};
+        const {expanded, selected} = nodesStatus[node.id] ? nodesStatus[node.id] : {expanded: true, selected: false};
         const label = useTitle ? node.Title : node.Name;
         const titleStyle = node.Layer ? "title-cursor" : "title";
         return (<div className={`sira-map-layer ${node && node.nodetype}`}>
