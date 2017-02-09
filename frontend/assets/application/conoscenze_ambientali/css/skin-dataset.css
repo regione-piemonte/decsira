@@ -5,7 +5,18 @@
 
 .dataset-container {
     overflow: scroll;
-    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -moz-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -ms-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -o-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -webkit-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+}
 .dataset-search-container{
     margin-top: 30px;
 }
@@ -22,114 +33,12 @@
     right: 0px;
     height: 100px;
 }
-#dataset.interna #header-servizio{
-    background:url("images/sfondo_azz_sx.png") repeat-y scroll center top transparent;
-    min-height:55px;
-    height:55px;
-    }
-
-#dataset.interna header.navbar{
-    min-height:55px;
-    margin:0;
-    }
-
-#dataset.interna .spiemonte h1{
-    margin:2px 0;
-    line-height:55px;
-    }
-
-#dataset.interna .spiemonte h1 a{
-    color:#fff;
-    }
-
-#dataset.interna .navbar-header{
-    float:none;
-    }
-
-#dataset.interna .navbar-header h2 {
-    text-indent:-10000px;
-    margin:0;
-}
-
-#dataset.interna .navbar-header .titolo-interna{
-    background:#fff url("images/logo-interna.png") no-repeat scroll 20px center;
-    height:55px;
-    min-height:55px;
-    }
-
-#dataset.interna .navbar-header .titolo-interna a{
-    height:55px;
-    min-height:55px;
-    display:block;
-    }
-
-
-#dataset.interna .navbar-header .map-list{
-    background:#000;
-    border:2px solid #000;
-    border-radius:20px;
-    color:#fff;
-    margin-top:13px;
-}
-
-#dataset.interna .navbar-header .map-list .btn.btn-primary{
-    background:none;
-    border:0;
-    border-radius:20px;
-    padding:2px 6px;
-    font-size:14px;
-    font-weight: bold;
-    text-transform:uppercase;
-}
-
-#dataset.interna .navbar-header .map-list .btn.btn-primary.active{
-    background:#fff;
-    color:#000;
-}
-
-#dataset.interna .navbar-header .map-list .btn.btn-primary span.badge{
-    padding:3px 5px;
-    background:#007e4f;
-    color:#fff;
-}
-
-
-
-
-
-#dataset.interna .navbar-header .menu-righe{
-    padding-right:0;
-    text-align:right;
-    }
-
-#dataset.interna .navbar-header .pimenu-navbar-toggle {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: 0 none;
-    font-size: 32px;
-     line-height: 50px;
-}
-
-#dataset.interna .navbar-header .pimenu-navbar-toggle:focus {
-    background: #000;
-}
-
-#dataset.interna .navbar-header .pimenu-navbar-toggle:focus .fa-bars{
-    color:#FFFFFF;
-}
-
-#dataset.interna .navbar-default{
-    background:none;
-    }
 
 .dataset-tabs .nav-tabs{
     padding-left:30px;
     border-bottom:0;
     /*margin-bottom:1px;*/
     }
-
-
-
-
 
 .dataset-tabs .nav-tabs li{
     margin-right:10px;
@@ -285,13 +194,18 @@
     font-weight: bold;
     margin-bottom: 5px;
 }
-#dataset-toc, #dataset-results-view{
+.dataset-container .tab-content{
     background:#fff;
     border-top:16px solid #007e4f;
     border-radius:10px 10px 0 0;
     padding-bottom:50px;
     padding-top: 20px;
     min-height: 200px;
+}
+#dataset-toc, #dataset-results-view{
+    background:#fff;
+    padding-bottom:50px;
+    padding-top: 20px;
     }
 
 .dataset-categories-switch-container{
@@ -299,8 +213,8 @@
     height: 50px;
     margin-top: 20px;
     margin-bottom: 15px;
-    margin-left: calc(100% * 0.15);
-    margin-right: calc(100% * 0.15);
+    margin-left: calc(50%);
+    margin-right: 20px;
     clear: both;
     text-align: center;
 }
@@ -371,8 +285,6 @@ background-color: rgba(0, 0, 0, .73);
     height: 200px;
     position: relative;
     background-color: white;
-    border-top: 16px solid #007e4f;
-    border-radius-top: 10px
 }
 
 .searchclear.glyphicon.glyphicon-remove:before{
