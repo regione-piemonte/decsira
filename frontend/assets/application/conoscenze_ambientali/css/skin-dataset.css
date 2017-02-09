@@ -235,8 +235,25 @@
     padding-right: 10px;
     border-top: 1px solid black;
     padding-top: 30px;
+    height: 4em;
 }
-#dataset-toc .layer-description{max-width: 80%;display: inline-block;overflow: hidden;text-overflow: ellipsis;text-align: -webkit-auto;text-transform: initial;}
+#dataset-toc .layer-description{
+    max-width: 80%;
+    float: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-height: 1em;
+    max-height: 2em ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: -webkit-auto;
+    text-transform: initial;
+    cursor: pointer;
+}
+#dataset-toc .layer-description .glyphicon.glyphicon-plus-sign{
+    top: -6px;
+}
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object.flat{
     padding: 30px;
 }
@@ -304,15 +321,31 @@
 }
 #dataset-results-view .sira-view-content .sira-view-description{
     min-width: 80%;
+    padding: 0px;
+    float: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-height: 1em;
+    max-height: 2em ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: -webkit-auto;
     text-transform: none;
+    cursor: pointer;
 }
 #dataset-results-view .sira-view-tool{
     max-width: 20%;
     float: right;
+    top: -6px;
+}
+#dataset-results-view .sira-view-tool span{
+    top: -15px;
 }
 #dataset-results-view .sira-view-content {
     border-top: 1px solid black;
     padding-top: 30px;
+    height: 4em;
 }
 .sira-view-tool  span{
     margin-top: 0px !important;
@@ -346,4 +379,10 @@ background-color: rgba(0, 0, 0, .73);
     font-size: x-large;
 }
 
+.dataset-container .panel-heading {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background:#007e4f;
+    border:0;
+}
 

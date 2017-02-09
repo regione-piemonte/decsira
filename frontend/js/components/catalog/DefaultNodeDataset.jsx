@@ -70,13 +70,16 @@ var DefaultNode = React.createClass({
         }
         return (
             <Node animateCollapse={false} className={this.props.flat ? "toc-default-layer catalog-object flat" : "toc-default-layer catalog-object flat"} style={this.props.style} type="layer" {...other}>
-                <Title onClick={this.props.showInfoBox}/>
+                <Title/>
                 <div className="layer-content">
-                <span className="layer-description">{this.props.node.text}</span>
+                <span className="layer-description" onClick={this.showInfoBox}>{this.props.node.text}</span>
                 {this.renderTools()}
                 </div>
             </Node>
         );
+    },
+    showInfoBox() {
+        this.props.showInfoBox(this.props.node.id);
     }
 });
 

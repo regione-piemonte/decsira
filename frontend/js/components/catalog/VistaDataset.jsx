@@ -16,7 +16,8 @@ const Viste = React.createClass({
         expandObjects: React.PropTypes.func,
         onToggle: React.PropTypes.func,
         toggleSiraControl: React.PropTypes.func,
-        expandFilterPanel: React.PropTypes.func
+        expandFilterPanel: React.PropTypes.func,
+        showInfoBox: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -27,7 +28,8 @@ const Viste = React.createClass({
             expandObjects: () => {},
             onToggle: () => {},
             toggleSiraControl: () => {},
-            expandFilterPanel: () => {}
+            expandFilterPanel: () => {},
+            showInfoBox: () => {}
         };
     },
     renderObjectTools() {
@@ -58,7 +60,7 @@ const Viste = React.createClass({
             <div className="sira-view">
                 <div className="sira-view-title"><span>{this.props.node.title}</span>
                     <div className="sira-view-content">
-                        <span className="sira-view-description">{this.props.node.text}</span>
+                        <span className="sira-view-description" onClick={this.showInfoBox}>{this.props.node.text}</span>
                         <div className="sira-view-tool">
                             {this.renderVistaTools(expanded)}
                         </div>
@@ -74,6 +76,9 @@ const Viste = React.createClass({
             this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
         }
 
+    },
+    showInfoBox() {
+        this.props.showInfoBox(this.props.node.id);
     }
 });
 

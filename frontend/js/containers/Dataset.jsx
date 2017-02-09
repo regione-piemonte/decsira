@@ -22,7 +22,42 @@ const Footer = require('../components/Footer');
 const Vista = connect( null, {
     addToMap: getThematicViewConfig
 })(require('../components/catalog/VistaDataset'));
+const {loadMetadata, showBox} = require('../actions/metadatainfobox');
+const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 
+const mapStateToPropsMIB = (state) => {
+    return {
+      show: state.metadatainfobox.show,
+      openLegendPanel: state.metadatainfobox.openLegendPanel,
+      title: state.metadatainfobox.title,
+      text: state.metadatainfobox.text,
+      numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
+      dataProvider: state.metadatainfobox.dataProvider,
+      urlWMS: state.metadatainfobox.urlWMS,
+      urlWFS: state.metadatainfobox.urlWFS,
+      urlLegend: state.metadatainfobox.urlLegend,
+      error: state.metadatainfobox.error,
+      showButtonLegend: state.metadatainfobox.showButtonLegend
+  };
+};
+
+const mapDispatchToPropsMIB = (dispatch) => {
+    return {
+    loadLegend: (u, actualUrl) => {
+        if (actualUrl && actualUrl.length === 0) {
+            dispatch(loadLegends(u));
+        }
+        dispatch(toggleLegendBox());
+    },
+    closePanel: () => {
+        dispatch(hideBox());
+    }
+  };
+};
+const MetadataInfoBox = connect(
+    mapStateToPropsMIB,
+    mapDispatchToPropsMIB
+    )(require('../components/MetadataInfoBox'));
 
 const Dataset = React.createClass({
     propTypes: {
@@ -46,7 +81,9 @@ const Dataset = React.createClass({
         subcat: React.PropTypes.string,
         configOggetti: React.PropTypes.object,
         authParams: React.PropTypes.object,
-        userprofile: React.PropTypes.object
+        userprofile: React.PropTypes.object,
+        loadMetadata: React.PropTypes.func,
+        showInfoBox: React.PropTypes.func
     },
     getInitialState() {
             return {
@@ -57,12 +94,12 @@ const Dataset = React.createClass({
         },
         componentWillMount() {
             const {nodesLoaded, loading, category} = this.props;
-            if (!nodesLoaded && !loading && category) {
+            if (!nodesLoaded && !loading && category && category.id) {
                 this.loadMetadata({category: category});
             }
         },
         componentWillReceiveProps({nodesLoaded, loading, category}) {
-            if (!loading && (!nodesLoaded || category.id !== this.props.category.id )) {
+            if (!loading && category && category.id && (!nodesLoaded || category.id !== this.props.category.id )) {
                 this.loadMetadata({category: category});
             }
         },
@@ -91,16 +128,20 @@ const Dataset = React.createClass({
                         <DefaultNode
                             onToggle={this.props.onToggle}
                             groups={this.props.nodes}
+                            showInfoBox={this.showInfoBox}
                             />
                     </DefaultGroup>) : (<DefaultNode
                             flat={true}
+                            showInfoBox={this.showInfoBox}
                             />) }
                 </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
             node={v}
-            onToggle={this.props.onToggle}/>)) : (<div/>);
+            onToggle={this.props.onToggle}
+            showInfoBox={this.showInfoBox}
+            />)) : (<div/>);
         return (
             <Tabs
                 className="dataset-tabs"
@@ -137,6 +178,14 @@ const Dataset = React.createClass({
                     <Footer/>
                     </div>
                 </div>
+                <MetadataInfoBox panelStyle={{
+                        height: "500px",
+                        width: "400px",
+                        zIndex: 1000,
+                        left: "calc(50% - 250px)",
+                        top: -100,
+                        position: "fixed",
+                        overflow: "auto"}}/>
             </div>);
     },
     loadMetadata({text, category} = {}) {
@@ -151,11 +200,17 @@ const Dataset = React.createClass({
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
         }
+    },
+    showInfoBox(node) {
+        this.props.loadMetadata(node);
+        this.props.showInfoBox();
     }
 });
 
 module.exports = connect(tocSelector, {
     getMetadataObjects,
     onToggle: toggleNode,
-    selectSubCategory
+    selectSubCategory,
+    loadMetadata,
+    showInfoBox: showBox
 })(Dataset);
