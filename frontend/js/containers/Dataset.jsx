@@ -29,7 +29,7 @@ const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultG
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
 const Footer = require('../components/Footer');
 
-const Vista =require('../components/catalog/VistaDataset');
+const Vista = require('../components/catalog/VistaDataset');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 
