@@ -199,9 +199,9 @@ const LayerTree = React.createClass({
         }else if (node.featureType) {
             const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
             if (!this.props.configOggetti[featureType]) {
-                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true, true);
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true, true, node.id);
             }else {
-                this.props.addLayer(this.props.configOggetti[featureType].layer);
+                this.props.addLayer(assign({}, this.props.configOggetti[featureType].layer, {siraId: node.id}));
             }
         }
 
