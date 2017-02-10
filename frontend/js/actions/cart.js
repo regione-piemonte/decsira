@@ -9,7 +9,8 @@ const HIDE_PANEL = 'HIDE_PANEL';
 const SHOW_CART_PANEL = 'SHOW_CART_PANEL';
 const ADD_SERVICE_IN_CART = 'ADD_SERVICE_IN_CART';
 const REFRESH_NUMBER_OF_SERVICES = 'REFRESH_NUMBER_OF_SERVICES';
-
+const SET_CART_SERVICES = 'SET_CART_SERVICES';
+const SET_LAYERS_SERVICES = 'SET_LAYERS_SERVICES';
 
 /*
  * action
@@ -48,13 +49,70 @@ function addServiceIncart(node) {
     };
 }
 
+function setServices(nodes) {
+    return {
+        type: SET_CART_SERVICES,
+        wmsservices: nodes
+    };
+}
+
+function setLayers(layers) {
+    return {
+        type: SET_LAYERS_SERVICES,
+        wmsservices: layers
+    };
+}
+
+function removeLayersFromCart(idNode) {
+    return (dispatch, getState) => {
+        let layers = getState().cart.layers;
+        if (idNode) {
+            layers = layers.filter((el) => el.idNode !== idNode);
+        }
+        dispatch(setLayers(layers));
+    };
+}
+
+function removeServiceFromCart(id) {
+    return (dispatch, getState) => {
+        let nodes = getState().cart.wmsservices;
+        if (id) {
+            nodes = nodes.filter((el) => el.id !== id);
+        }
+        removeLayersFromCart(id);
+        dispatch(setServices(nodes));
+        dispatch(refreshNumberOfServices());
+    };
+}
+
+function prepareDataToMap() {
+    return (dispatch, getState) => {
+        let layers = getState().cart.layers;
+        let jsonLayerString = [];
+        layers.map((layer) => {
+            jsonLayerString.push({... layer});
+        });
+        jsonLayerString = JSON.stringify(jsonLayerString);
+        localStorage.setItem('sira.config.layers', jsonLayerString);
+        dispatch(setServices([]));
+        dispatch(setLayers([]));
+        dispatch(refreshNumberOfServices());
+    };
+}
+
 module.exports = {
     HIDE_PANEL,
     SHOW_CART_PANEL,
     ADD_SERVICE_IN_CART,
     REFRESH_NUMBER_OF_SERVICES,
+    SET_CART_SERVICES,
+    SET_LAYERS_SERVICES,
     showPanel,
     hidePanel,
     addServiceIncart,
-    refreshNumberOfServices
+    refreshNumberOfServices,
+    setServices,
+    removeLayersFromCart,
+    removeServiceFromCart,
+    prepareDataToMap
   };

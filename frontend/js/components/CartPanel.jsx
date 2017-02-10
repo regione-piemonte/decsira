@@ -9,19 +9,25 @@
 const React = require('react');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const Dialog = require('../../MapStore2/web/client/components/misc/Dialog');
+const ConfirmButton = require('../../MapStore2/web/client/components/buttons/ConfirmButton');
 const {Button} = require('react-bootstrap');
+const {Glyphicon} = require('react-bootstrap');
 
 const CartPanel = React.createClass({
      propTypes: {
          showPanel: React.PropTypes.bool,
          wmsservices: React.PropTypes.array,
          layers: React.PropTypes.array,
-         onClosePanel: React.PropTypes.func
+         onClosePanel: React.PropTypes.func,
+         removeService: React.PropTypes.func,
+         goToMap: React.PropTypes.func
      },
      getDefaultProps() {
          return {
              layers: [],
-             onClosePanel: () => {}
+             onClosePanel: () => {},
+             removeService: () => {},
+             goToMap: () => {}
         };
      },
 
@@ -29,26 +35,43 @@ const CartPanel = React.createClass({
          router: React.PropTypes.object
      },
 
-    goToMap() {
-        this.context.router.push("/map.html");
-    },
+     goMap() {
+         this.context.router.replace("/map/B");
+     },
 
-     renderServicesList() {
+    renderServicesList() {
          return this.props.wmsservices.map((service) => {
-             return (<h4>{service.title}</h4>);
+             const rows = [];
+             rows.push(
+             <div className="cart-panel-sevices-list-container">
+                 <h4>{service.title}</h4>
+                 <ConfirmButton key="removelayer"
+                    text={(<Glyphicon glyph="1-close"/>)}
+                    style={{"float": "right", "cursor": "pointer", "marginTop": -45}}
+                    confirming={{text: "Sei sicuro",
+                        style: {"float": "right", cursor: "pointer", marginTop: -35}}}
+                         onConfirm={() => {
+                             this.props.removeService(service.id);
+                         }}
+                    />
+            </div>
+                );
+             return (
+                 rows
+             );
          });
      },
 
      render() {
          return this.props.showPanel ?
              (
-             <Dialog id="decsiraweb-cartpanel">
+             <Dialog style ={{backgroundColor: "white"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
                  <span role="header"><span className="cartpanel-panel-title" ><I18N.Message msgId={"cartpanel.title"}/></span><button className="print-panel-close close" onClick={this.props.onClosePanel}><span>×</span></button></span>
                  <div role="body">
                      {this.renderServicesList()}
                  </div>
-                 <div role="footer">
-                     <Button onClick={this.goToMap} className="cart button-goToMap" bsStyle="primary" >
+                 <div role="footer" >
+                     <Button onClick={() => {this.props.goToMap(); this.goMap(); }} className="cart button-goToMap" bsStyle="primary" >
                          <I18N.Message msgId={"cartpanel.goToMap"}/>
                      </Button>
                  </div>
