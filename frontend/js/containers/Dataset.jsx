@@ -7,11 +7,15 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
+const {createSelector} = require('reselect');
 const {Tabs, Tab} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
-const {toggleNode, getMetadataObjects, selectSubCategory} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory} = require('../actions/siracatalog');
 
+const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
+const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({map, ...toc}));
+
 const {setProfile} = require('../actions/userprofile');
 const {toggleSiraControl} = require('../actions/controls');
 const {
@@ -121,7 +125,9 @@ const Dataset = React.createClass({
         activeFeatureType: React.PropTypes.string,
         loadFeatureTypeConfig: React.PropTypes.func,
         setActiveFeatureType: React.PropTypes.func,
-        setGridType: React.PropTypes.func
+        setGridType: React.PropTypes.func,
+        getThematicViewConfig: React.PropTypes.func,
+        map: React.PropTypes.object
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -142,9 +148,11 @@ const Dataset = React.createClass({
                 this.loadMetadata({category: category});
             }
         },
-        componentWillReceiveProps({nodesLoaded, loading, category}) {
+        componentWillReceiveProps({nodesLoaded, loading, category, map}) {
             if (!loading && category && category.id && (!nodesLoaded || category.id !== this.props.category.id )) {
                 this.loadMetadata({category: category});
+            }else if (!loading && this.props.map !== map) {
+                this.context.router.push(`/${this.props.params.profile}`);
             }
         },
     renderSerchBar() {
@@ -192,6 +200,7 @@ const Dataset = React.createClass({
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             node={v}
             onToggle={this.props.onToggle}
+            addToMap={this.loadThematicView}
             showInfoBox={this.showInfoBox}
             />)) : (<div/>);
         const objEl = [searchSwitch, tocObjects];
@@ -260,7 +269,7 @@ const Dataset = React.createClass({
             this.props.setActiveFeatureType(featureType);
         }
         this.props.expandFilterPanel(status);
-        this.context.router.push(`/full/${this.props.params.profile}/`);
+        this.context.router.push(`/full/${this.props.params.profile}`);
     },
     searchAll(ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
@@ -271,11 +280,14 @@ const Dataset = React.createClass({
             }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
-        this.context.router.push(`/full/${this.props.params.profile}/`);
+        this.context.router.push(`/full/${this.props.params.profile}`);
+    },
+    loadThematicView({serviceUrl, params} = {}) {
+        this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
     }
 });
 
-module.exports = connect(tocSelector, {
+module.exports = connect(datasetSelector, {
     getMetadataObjects,
     onToggle: toggleNode,
     selectSubCategory,
@@ -286,5 +298,6 @@ module.exports = connect(tocSelector, {
     loadFeatureTypeConfig,
     setActiveFeatureType,
     toggleSiraControl,
-    setGridType
+    setGridType,
+    getThematicViewConfig
 })(Dataset);
