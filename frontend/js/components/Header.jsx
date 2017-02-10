@@ -15,7 +15,7 @@ const {
     hideLoginPanel
 } = require('../actions/userprofile');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {showPanel, hidePanel, addServiceIncart, refreshNumberOfServices} = require('../actions/cart');
+const {showPanel, hidePanel, addServiceIncart, refreshNumberOfServices, removeServiceFromCart, prepareDataToMap} = require('../actions/cart');
 const {toggleAddMap, loadNodeMapRecords, addLayersInCart} = require('../actions/addmap');
 
 const LoginNav = connect((state) => ({
@@ -95,6 +95,12 @@ const CartPanel = connect((state) => ({
         return {
         onClosePanel: () => {
             dispatch(hidePanel());
+        },
+        removeService: (id) => {
+            dispatch(removeServiceFromCart(id));
+        },
+        goToMap: () => {
+            dispatch(prepareDataToMap());
         }
     }; })(require('./CartPanel'));
 
@@ -108,11 +114,9 @@ const Cart = connect((state) => ({
     },
     showChooseLayersPanel: () => {
         // charge node in cart
-        dispatch(addServiceIncart(demoNode));
         // use AddMapModal actions ...
         dispatch(toggleAddMap(true));
         dispatch(loadNodeMapRecords(demoNode));
-        dispatch(refreshNumberOfServices());
     },
     // todo remove
     showChooseLayersPanel2: () => {
@@ -138,49 +142,49 @@ const LoginPanel = connect((state) => ({
 const Header = React.createClass({
     render() {
         return (
-        <div id="header-servizio" className="container-fluid">
-        <div className="row-fluid">
-        <div className="container testalino">
-            <div className="row">
+            <div id="header-servizio" className="container-fluid">
+                <div className="row-fluid">
+            <div className="container testalino">
+                <div className="row">
 
-                <div id="portalHeader">
-                    <noscript className="alert_js">
-                    <p>ATTENZIONE! Il browser in uso non supporta le applicazioni Javascript.<br />
-                    Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
-                    potrebbe essere necessario l&acute;utilizzo dei Javascript.</p></noscript>
+                    <div id="portalHeader">
+                        <noscript className="alert_js">
+                        <p>ATTENZIONE! Il browser in uso non supporta le applicazioni Javascript.<br />
+                        Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
+                        potrebbe essere necessario l&acute;utilizzo dei Javascript.</p></noscript>
 
-                    <div className="header" >
-                        <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
+                        <div className="header" >
+                            <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
+                        </div>
+
+                    </div>
+                    <div id="sx">
                     </div>
 
-                </div>
-                <div id="sx">
-                </div>
-
-                <div id="dx">
-                </div>
-                <div className="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                    <h2>Sira</h2>
-                </div>
-                <LoginNav />
-                <LoginPanel />
-                <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
-                  <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
-                    <i className="fa fa-bars"></i>
-                  </button>
-                </div>
-                </div>
-                <Cart />
-                <AddMapModal />
-                <nav className="pimenu-navbar-collapse collapse">
-                        <ul className="nav navbar-nav">
-                    <li className="item-113"><a id="profileALink" href="#">Profilo A</a></li>
-                    <li className="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
-                        </ul>
-                </nav>
+                    <div id="dx">
+                    </div>
+                    <div className="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                        <h2>Sira</h2>
+                    </div>
+                    <LoginNav />
+                    <LoginPanel />
+                    <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
+                      <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
+                        <i className="fa fa-bars"></i>
+                      </button>
+                    </div>
+                    </div>
+                    <Cart />
+                    <AddMapModal />
+                    <nav className="pimenu-navbar-collapse collapse">
+                            <ul className="nav navbar-nav">
+                        <li className="item-113"><a id="profileALink" href="#">Profilo A</a></li>
+                        <li className="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
+                            </ul>
+                    </nav>
 
 
-            </div>
+                </div>
         </div>
         <CartPanel />
         </div>

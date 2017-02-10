@@ -9,7 +9,10 @@ const HIDE_PANEL = 'HIDE_PANEL';
 const SHOW_CART_PANEL = 'SHOW_CART_PANEL';
 const ADD_SERVICE_IN_CART = 'ADD_SERVICE_IN_CART';
 const REFRESH_NUMBER_OF_SERVICES = 'REFRESH_NUMBER_OF_SERVICES';
-
+const SET_CART_SERVICES = 'SET_CART_SERVICES';
+const SET_LAYERS_SERVICES = 'SET_LAYERS_SERVICES';
+const RM_LAYERS_SERVICES = 'RM_LAYERS_SERVICES';
+const RM_SERVICES = 'RM_SERVICES';
 
 /*
  * action
@@ -48,13 +51,71 @@ function addServiceIncart(node) {
     };
 }
 
+function setServices(nodes) {
+    return {
+        type: SET_CART_SERVICES,
+        wmsservices: nodes
+    };
+}
+
+function setLayers(layers) {
+    return {
+        type: SET_LAYERS_SERVICES,
+        wmsservices: layers
+    };
+}
+
+function removeLayersFromCart(idNode) {
+    return {
+        type: RM_LAYERS_SERVICES,
+        idNode: idNode
+    };
+}
+
+function rmServiceFromCart(idService) {
+    return {
+        type: RM_SERVICES,
+        idService: idService
+    };
+}
+
+function removeServiceFromCart(id) {
+    return (dispatch) => {
+        dispatch(rmServiceFromCart(id));
+        dispatch(refreshNumberOfServices());
+    };
+}
+
+function prepareDataToMap() {
+    return (dispatch, getState) => {
+        let layers = getState().cart.layers;
+        let jsonLayerString = [];
+        layers.map((layer) => {
+            jsonLayerString.push({... layer});
+        });
+        jsonLayerString = JSON.stringify(jsonLayerString);
+        localStorage.setItem('sira.config.layers', jsonLayerString);
+        dispatch(setServices([]));
+        dispatch(setLayers([]));
+        dispatch(refreshNumberOfServices());
+    };
+}
+
 module.exports = {
     HIDE_PANEL,
     SHOW_CART_PANEL,
     ADD_SERVICE_IN_CART,
     REFRESH_NUMBER_OF_SERVICES,
+    SET_CART_SERVICES,
+    SET_LAYERS_SERVICES,
+    RM_LAYERS_SERVICES,
+    RM_SERVICES,
     showPanel,
     hidePanel,
     addServiceIncart,
-    refreshNumberOfServices
+    refreshNumberOfServices,
+    setServices,
+    removeLayersFromCart,
+    removeServiceFromCart,
+    prepareDataToMap
   };
