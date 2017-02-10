@@ -11,7 +11,8 @@ module.exports = {
         { path: "/map/:profile", component: require('./containers/Sira')},
         { path: "/new/:profile", component: require('./containers/Home')},
         { path: "/dataset/:profile", component: require('./containers/Dataset')},
-        { path: "/nomap/:profile", component: require('./containers/NoMap')}
+        { path: "/nomap/:profile", component: require('./containers/NoMap')},
+        { path: "/full/:profile", component: require('./containers/FullScreenPanel')}
         ],
     pluginsDef: require('./plugins.js'),
     initialState: {
