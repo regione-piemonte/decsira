@@ -65,7 +65,10 @@ const Viste = React.createClass({
     loadConfig() {
         const v = this.props.node.view;
         if (v) {
-            let view = v.match(/(config=)(\w+)/).pop();
+            let view = v;
+            if (v.match(/(config=)(\w+)/)) {
+                view = v.match(/(config=)(\w+)/).pop();
+            }
             this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
         }
     },
