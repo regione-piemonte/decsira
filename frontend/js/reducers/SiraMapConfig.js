@@ -31,6 +31,12 @@ function mapConfig(state = null, action) {
             }
             return msMapConfig(state, action);
         }
+        case 'THEMATIC_VIEW_CONFIG_MAP': {
+            const layers = action.config.map.layers.concat(CommonLayers);
+            const map = assign({}, action.config.map, {layers: layers});
+            const newAction = {type: 'MAP_CONFIG_LOADED', legacy: false, mapId: false, config: {map}};
+            return msMapConfig(state, newAction);
+        }
         default:
             return msMapConfig(state, action);
     }

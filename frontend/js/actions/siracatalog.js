@@ -14,7 +14,7 @@ const CATALOG_LOADING = 'CATALOG_LOADING';
 const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
 const SELECT_SUB_CATEGORY = 'SELECT_SUB_CATEGORY';
 const RESET_OBJECT_AND_VIEW = 'RESET_OBJECT_AND_VIEW';
-
+const THEMATIC_VIEW_CONFIG_MAP = 'THEMATIC_VIEW_CONFIG_MAP';
 const {Promise} = require('es6-promise');
 
 function toggleNode(id, status) {
@@ -104,7 +104,14 @@ function thematicViewConfigLoaded(data) {
         config: data
     };
 }
-function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObject?', params = {}} = {}) {
+function thematicViewConfigMap(data) {
+    return {
+        type: THEMATIC_VIEW_CONFIG_MAP,
+        config: data
+    };
+}
+
+function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObject?', params = {}, configureMap = false} = {}) {
 
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
@@ -116,12 +123,20 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
             dispatch(catalogLoading(false));
             if (typeof response.data !== "object" ) {
                 try {
-                    dispatch(thematicViewConfigLoaded(JSON.parse(response.data)));
+                    if (configureMap) {
+                        dispatch(thematicViewConfigMap(JSON.parse(response.data)));
+                    }else {
+                        dispatch(thematicViewConfigLoaded(JSON.parse(response.data)));
+                    }
                 }catch (e) {
                     // dispatch(serchCategoriesLoaded(response.data));
                 }
             }else {
-                dispatch(thematicViewConfigLoaded(response.data));
+                if (configureMap) {
+                    dispatch(thematicViewConfigMap(response.data));
+                }else {
+                    dispatch(thematicViewConfigLoaded(response.data));
+                }
             }
         }).catch(() => {
             dispatch(catalogLoading(false));

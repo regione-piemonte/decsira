@@ -171,7 +171,7 @@ function configurationLoading() {
     };
 }
 
-function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false) {
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const {userprofile} = getState();
@@ -187,7 +187,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
             }
             const layer = ConfigUtils.setUrlPlaceholders(config.layer);
             if (addlayer) {
-                dispatch(addLayer(layer));
+                dispatch(addLayer(assign({}, layer, {siraId})));
             }
             // Configure the FeatureGrid for WFS results list
             dispatch(configureFeatureGrid(config.featuregrid, featureType));
