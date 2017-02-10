@@ -91,7 +91,8 @@ const SiraGrid = React.createClass({
         setExportParams: React.PropTypes.func,
         maxFeatures: React.PropTypes.number,
         nameSpaces: React.PropTypes.object,
-        exporter: React.PropTypes.bool.isRequired
+        exporter: React.PropTypes.bool.isRequired,
+        fullScreen: React.PropTypes.bool.isRequired
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -130,6 +131,7 @@ const SiraGrid = React.createClass({
             backToSearch: "featuregrid.backtosearch",
             gridType: "search",
             exporter: true,
+            fullScreen: false,
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -143,7 +145,8 @@ const SiraGrid = React.createClass({
         };
     },
     componentWillMount() {
-        let height = getWindowSize().maxHeight - 110;
+        const hOffset = this.props.fullScreen ? 150 : 181;
+        let height = getWindowSize().maxHeight - hOffset;
         this.setState({width: this.props.initWidth - 30, height});
         if (this.props.pagination && this.props.gridType === 'search') {
             this.dataSource = this.getDataSource(this.props.dataSourceOptions);
@@ -156,8 +159,9 @@ const SiraGrid = React.createClass({
         }
     },
     componentWillReceiveProps(nextProps) {
+        const hOffset = nextProps.fullScreen ? 150 : 181;
         if (nextProps.initWidth !== this.props.initWidth) {
-            let height = getWindowSize().maxHeight - 110;
+            let height = getWindowSize().maxHeight - hOffset;
             this.setState({width: nextProps.initWidth - 30, height});
         }
     },

@@ -166,13 +166,13 @@ const Dataset = React.createClass({
         const {loading, objects, views} = this.props;
         const {showCategories} = this.state;
         const searchSwitch = this.props.nodes.length > 0 ? (
-            <div className="ricerca-home dataset-categories-switch-container">
+            <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
                 <div className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
                     <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
                 </div>
-            </div>) : (<noscript/>);
+            </div>) : (<noscript key="categoriesSearch"/>);
         const tocObjects = (
-            <TOC id="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
+            <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
                     { showCategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
