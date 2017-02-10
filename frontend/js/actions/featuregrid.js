@@ -62,13 +62,19 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
                         return f[idFieldName];
                     }).join(',');
                     /*eslint-disable */
-                    if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
-                        console.log("VALAMB present", `VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}");`);
-                        VALAMB.viewOnMapById(`'${state.siradec.featureType}'`, `"${ids}"`);
+                    if ("undefined" != typeof window.parent && "undefined" != typeof parent.VALAMB && parent.VALAMB.viewOnMapById) {
+                        console.log("prenset.VALAMB present", `present.VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}");`);
+                        parent.VALAMB.viewOnMapById(`'${state.siradec.featureType}'`, `"${ids}"`);
                     }else {
-                        console.log("VALAMB absent", `VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}")`);
-
+                        console.log("parent.VALAMB absent", `parent.VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}")`);
+                        if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
+                            console.log("VALAMB present", `VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}");`);
+                            VALAMB.viewOnMapById(`'${state.siradec.featureType}'`, `"${ids}"`);
+                        }else {
+                            console.log("VALAMB absent", `VALAMB.viewOnMapById('${state.siradec.featureType}',"${ids}")`);
+                        }
                     }
+
                     /*eslint-enable */
                 }
                 dispatch(showLoading(false));

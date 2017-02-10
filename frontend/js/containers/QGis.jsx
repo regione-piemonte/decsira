@@ -182,25 +182,38 @@ const QGis = React.createClass({
             return f.id;
         }).join(',');
         /*eslint-disable */
-        if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
-            console.log("VALAMB present", `VALAMB.viewOnMapById('${this.props.featureType}',"${ids}")`);
-            VALAMB.viewOnMapById(`'${this.props.featureType}'`, `"${ids}"`);
+        if (typeof window.parent !== 'undefined' && typeof parent.VALAMB !== 'undefined' && parent.VALAMB.viewOnMapById) {
+            console.log("parent.VALAMB present", `parent.VALAMB.viewOnMapById('${this.props.featureType}',"${ids}")`);
+            parent.VALAMB.viewOnMapById(`'${this.props.featureType}'`, `"${ids}"`);
         }else {
-            console.log("VALAMB absent", `viewOnMapById('${this.props.featureType}',"${ids}")`);
-
+            console.log("parent.VALAMB absent", `parent.viewOnMapById('${this.props.featureType}',"${ids}")`);
+            if (typeof VALAMB !== 'undefined' && VALAMB.viewOnMapById) {
+                console.log("VALAMB present", `VALAMB.viewOnMapById('${this.props.featureType}',"${ids}")`);
+                VALAMB.viewOnMapById(`'${this.props.featureType}'`, `"${ids}"`);
+            }else {
+                console.log("VALAMB absent", `viewOnMapById('${this.props.featureType}',"${ids}")`);
+            }
         }
+
         /*eslint-enable */
         this.props.selectFeatures(features);
     },
     zoomToFeature(data) {
         let [minX, minY, maxX, maxY] = CoordinatesUtils.getGeoJSONExtent(data.geometry);
         /*eslint-disable */
-        if (VALAMB && VALAMB.zoomOn) {
-            console.log("VALAMB present", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326");`);
-            VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+        if (typeof window.parent !== 'undefined' && typeof parent.VALAMB !== 'undefined' && parent.VALAMB.zoomOn) {
+            console.log("parent.VALAMB present", `parent.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326");`);
+            parent.VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
         }else {
-            console.log("VALAM absent", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+            console.log("parent.VALAMB absent", `parent.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+            if (typeof VALAMB !== 'undefined' && VALAMB.zoomOn) {
+                console.log("VALAMB present", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326");`);
+                VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+            }else {
+                console.log("VALAMB absent", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+            }
         }
+
         /*eslint-enable */
     },
     goToDetail(id, detailsConfig) {
