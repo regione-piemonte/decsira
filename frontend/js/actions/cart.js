@@ -11,6 +11,8 @@ const ADD_SERVICE_IN_CART = 'ADD_SERVICE_IN_CART';
 const REFRESH_NUMBER_OF_SERVICES = 'REFRESH_NUMBER_OF_SERVICES';
 const SET_CART_SERVICES = 'SET_CART_SERVICES';
 const SET_LAYERS_SERVICES = 'SET_LAYERS_SERVICES';
+const RM_LAYERS_SERVICES = 'RM_LAYERS_SERVICES';
+const RM_SERVICES = 'RM_SERVICES';
 
 /*
  * action
@@ -64,23 +66,22 @@ function setLayers(layers) {
 }
 
 function removeLayersFromCart(idNode) {
-    return (dispatch, getState) => {
-        let layers = getState().cart.layers;
-        if (idNode) {
-            layers = layers.filter((el) => el.idNode !== idNode);
-        }
-        dispatch(setLayers(layers));
+    return {
+        type: RM_LAYERS_SERVICES,
+        idNode: idNode
+    };
+}
+
+function rmServiceFromCart(idService) {
+    return {
+        type: RM_SERVICES,
+        idService: idService
     };
 }
 
 function removeServiceFromCart(id) {
-    return (dispatch, getState) => {
-        let nodes = getState().cart.wmsservices;
-        if (id) {
-            nodes = nodes.filter((el) => el.id !== id);
-        }
-        removeLayersFromCart(id);
-        dispatch(setServices(nodes));
+    return (dispatch) => {
+        dispatch(rmServiceFromCart(id));
         dispatch(refreshNumberOfServices());
     };
 }
@@ -107,6 +108,8 @@ module.exports = {
     REFRESH_NUMBER_OF_SERVICES,
     SET_CART_SERVICES,
     SET_LAYERS_SERVICES,
+    RM_LAYERS_SERVICES,
+    RM_SERVICES,
     showPanel,
     hidePanel,
     addServiceIncart,

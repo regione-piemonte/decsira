@@ -110,7 +110,7 @@ function addLayersInCart(layers, useTitle, useGroup) {
                 return alreadyPresent ? previous : [...previous, current];
             }, []);
             if (node.id) {
-                resultOk.map((layer) => {layer.idnode = node.id; });
+                resultOk.forEach((layer) => {layer.idnode = node.id; });
             }
             dispatch(addSiraLayersIncart(resultOk));
             dispatch(toggleAddMap(false));
