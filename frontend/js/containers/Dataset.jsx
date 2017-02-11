@@ -148,10 +148,8 @@ const Dataset = React.createClass({
                 this.loadMetadata({category: category});
             }
         },
-        componentWillReceiveProps({nodesLoaded, loading, category, map}) {
-            if (!loading && category && category.id && (!nodesLoaded || category.id !== this.props.category.id )) {
-                this.loadMetadata({category: category});
-            }else if (!loading && this.props.map !== map) {
+        componentWillReceiveProps({loading, map}) {
+            if (!loading && this.props.map && this.props.map !== map) {
                 this.context.router.push(`/${this.props.params.profile}`);
             }
         },
@@ -164,7 +162,6 @@ const Dataset = React.createClass({
                 mosaicContainerClasses="dataset-mosaic-container"
                 onSearch={this.loadMetadata}
                 onReset={this.loadMetadata}
-
             />);
     },
     renderSpinner() {

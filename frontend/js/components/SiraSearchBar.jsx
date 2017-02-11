@@ -13,11 +13,8 @@ const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
 const {categorySelector} = require('../selectors/sira');
-const {selectCategory} = require('../actions/siracatalog');
-const SearchCategories = connect(categorySelector,
-{
-    tileClick: selectCategory
-})(require('../components/Mosaic'));
+const {selectCategory, searchTextChange} = require('../actions/siracatalog');
+const SearchCategories = connect(categorySelector)(require('../components/Mosaic'));
 
 const SiraSearchBar = React.createClass({
     propTypes: {
@@ -36,7 +33,10 @@ const SiraSearchBar = React.createClass({
             tematicViewNumber: React.PropTypes.number
         }).isRequired,
         onSearch: React.PropTypes.func,
-        onReset: React.PropTypes.func
+        onReset: React.PropTypes.func,
+        searchText: React.PropTypes.string,
+        onTextChange: React.PropTypes.func,
+        tileClick: React.PropTypes.func
 
     },
     getDefaultProps() {
@@ -49,18 +49,10 @@ const SiraSearchBar = React.createClass({
             overlayPlacement: "right",
             btnClasses: "siracatalog-search-selector",
             onSearch: () => {},
-            onReset: () => {}
+            onReset: () => {},
+            onTextChange: () => {},
+            tileClick: () => {}
         };
-    },
-    getInitialState() {
-        return {
-            searchText: ""
-        };
-    },
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.category.id !== this.props.category.id) {
-            this.setState({searchText: ""});
-        }
     },
     renderPopover() {
         const {serchCatliClasses, mosaicContainerClasses} = this.props;
@@ -70,6 +62,7 @@ const SiraSearchBar = React.createClass({
                     useLink={false}
                     className={mosaicContainerClasses}
                     liClass={serchCatliClasses}
+                    tileClick={this.changeCategory}
                 />
             </Popover>);
     },
@@ -77,7 +70,7 @@ const SiraSearchBar = React.createClass({
         const {btnClasses, category, overlayPlacement} = this.props;
         return (
             <OverlayTrigger
-                trigger={["click", "focus"]}
+                trigger={["focus", "click"]}
                 placement={overlayPlacement}
                 overlay={this.renderPopover()}>
                 <Button className={btnClasses}>
@@ -86,25 +79,40 @@ const SiraSearchBar = React.createClass({
              </OverlayTrigger>);
     },
     render() {
-        const {containerClasses, searchClasses, addCategoriesSelector, onSearch, onReset} = this.props;
+        const {containerClasses, searchClasses, addCategoriesSelector, onSearch, onReset, onTextChange, searchText} = this.props;
         return (
         <div className={containerClasses}>
             <SearchBar
                 placeholder="Cerca oggetti"
                 placeholderMsgId=""
                 className={searchClasses}
-                onSearchTextChange={(text) => this.setState({ searchText: text})}
+                onSearchTextChange={onTextChange}
                 typeAhead={false}
-                searchText={this.state.searchText}
+                searchText={searchText}
                 onSearch={(text) => onSearch({text, category: this.props.category})}
                 onSearchReset={() => {
-                    this.setState({ searchText: ""});
+                    onTextChange("");
                     onReset({text: "", category: this.props.category});
                 }}
             />
             {addCategoriesSelector ? this.renderSearchCategories() : (<noscript/>)}
         </div>);
+    },
+    changeCategory(cat) {
+        if (cat.id !== this.props.category.id) {
+            this.props.onSearch({text: "", category: cat});
+            this.props.onTextChange("");
+            this.props.tileClick(cat);
+        }
+
+
     }
 });
 
-module.exports = connect((state) => ( {category: state.siracatalog && state.siracatalog.category || {}}))(SiraSearchBar);
+module.exports = connect((state) => ( {
+    category: state.siracatalog && state.siracatalog.category || {},
+    searchText: state.siracatalog && state.siracatalog.searchText
+    }), {
+    onTextChange: searchTextChange,
+    tileClick: selectCategory
+})(SiraSearchBar);

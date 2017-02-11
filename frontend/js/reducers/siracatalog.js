@@ -11,7 +11,8 @@ const { TOGGLE_SIRA_NODE,
         METADATA_OBJECTS_VIEWS_LOADED,
         CATALOG_LOADING,
         SELECT_SUB_CATEGORY,
-    RESET_OBJECT_AND_VIEW} = require('../actions/siracatalog');
+        RESET_OBJECT_AND_VIEW,
+        SEARCH_TEXT_CHANGE} = require('../actions/siracatalog');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('node-uuid');
@@ -95,6 +96,9 @@ function siracatalog(state = initialState, action) {
         }
         case RESET_OBJECT_AND_VIEW: {
             return assign({}, state, {nodes: null, views: null});
+        }
+        case SEARCH_TEXT_CHANGE: {
+            return assign({}, state, {searchText: action.text});
         }
         case METADATA_OBJECTS_VIEWS_LOADED: {
             // FILTRA LE categorie ed i nodi
