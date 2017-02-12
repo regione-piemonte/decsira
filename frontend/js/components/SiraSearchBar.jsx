@@ -98,11 +98,11 @@ const SiraSearchBar = React.createClass({
             {addCategoriesSelector ? this.renderSearchCategories() : (<noscript/>)}
         </div>);
     },
-    changeCategory(cat) {
+    changeCategory(cat, subcat) {
         if (cat.id !== this.props.category.id) {
             this.props.onSearch({text: "", category: cat});
             this.props.onTextChange("");
-            this.props.tileClick(cat);
+            this.props.tileClick(cat, subcat);
         }
 
 
