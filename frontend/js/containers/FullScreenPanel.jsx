@@ -27,6 +27,7 @@ const Card = require('../components/template/Card');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {setProfile} = require('../actions/userprofile');
 const Spinner = require('react-spinkit');
+const {selectFeatures} = require('../actions/featuregrid');
 
 const {
  loadFeatureTypeConfig,
@@ -86,16 +87,13 @@ const FullScreen = React.createClass({
         }
     },
     componentWillReceiveProps(nextProps) {
-        const {map, filterPanelExpanded, gridExpanded, siraControls} = nextProps;
+        const {map, filterPanelExpanded, siraControls} = nextProps;
         if (this.props.map !== map) {
             if (siraControls.detail) {
                 this.props.toggleSiraControl('detail');
             }
             if (filterPanelExpanded) {
                 this.props.expandFilterPanel(false);
-            }
-            if (gridExpanded) {
-                this.props.toggleSiraControl('grid');
             }
             this.context.router.push(`/${this.props.params.profile}`);
         }
@@ -182,5 +180,6 @@ module.exports = connect((state) => {
     onLoadFeatureTypeConfig: loadFeatureTypeConfig,
     expandFilterPanel,
     toggleSiraControl,
-    changeMapView
+    changeMapView,
+    selectFeatures
 })(FullScreen);
