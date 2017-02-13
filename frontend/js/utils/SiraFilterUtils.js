@@ -28,7 +28,7 @@ FilterUtils.getOgcAllPropertyValue = function(featureTypeName, attribute) {
             </wfs:GetPropertyValue>`;
 };
 FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) {
-    let filter = this.toOGCFilterSira(ftName, json, version, nsplaceholder);
+    let filter = this.toOGCFilterSira(ftName, json, version, null, false, null, nsplaceholder);
     let sIdx = filter.search( `<${nsplaceholder}:Filter>`);
     if (sIdx !== -1) {
         let eIndx = filter.search( `</wfs:Query>`);

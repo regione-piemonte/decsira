@@ -119,7 +119,8 @@ const FullScreen = React.createClass({
                 params={{authkey: this.props.profile.authParams.authkey}}
                 profile={this.props.profile.profile}
                 zoomToFeatureAction={this.zoomToFeature}
-                fullScreen={true}/>
+                fullScreen={true}
+                selectAll={false}/>
         );
     },
     render() {
