@@ -21,6 +21,7 @@ const CoordinateUtils = require('../../MapStore2/web/client/utils/CoordinatesUti
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {connect} = require('react-redux');
 
+const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const SideQueryPanel = require('../components/SideQueryPanel');
 const Card = require('../components/template/Card');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
@@ -56,7 +57,8 @@ const FullScreen = React.createClass({
          fTypeConfigLoading: React.PropTypes.bool,
          changeMapView: React.PropTypes.func,
          srs: React.PropTypes.string,
-         maxZoom: React.PropTypes.number
+         maxZoom: React.PropTypes.number,
+         map: React.PropTypes.object
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -81,6 +83,21 @@ const FullScreen = React.createClass({
         this.setState({width: getWindowSize().maxWidth});
         if (window.addEventListener) {
             window.addEventListener('resize', this.setSize, false);
+        }
+    },
+    componentWillReceiveProps(nextProps) {
+        const {map, filterPanelExpanded, gridExpanded, siraControls} = nextProps;
+        if (this.props.map !== map) {
+            if (siraControls.detail) {
+                this.props.toggleSiraControl('detail');
+            }
+            if (filterPanelExpanded) {
+                this.props.expandFilterPanel(false);
+            }
+            if (gridExpanded) {
+                this.props.toggleSiraControl('grid');
+            }
+            this.context.router.push(`/${this.props.params.profile}`);
         }
     },
     componentWillUnmount() {
@@ -130,9 +147,7 @@ const FullScreen = React.createClass({
         this.context.router.push(`/dataset/${this.props.params.profile}/`);
     },
     zoomToFeature(data) {
-        this.props.toggleSiraControl('grid');
         this.changeMapView([data.geometry]);
-        this.context.router.push(`/${this.props.params.profile}`);
     },
     changeMapView(geometries) {
         let extent = geometries.reduce((prev, next) => {
@@ -159,7 +174,8 @@ module.exports = connect((state) => {
      searchUrl: state.queryform.searchUrl,
      pagination: state.queryform.pagination,
      gridExpanded: state.siraControls.grid,
-     fTypeConfigLoading: state.siradec.fTypeConfigLoading
+     fTypeConfigLoading: state.siradec.fTypeConfigLoading,
+     map: mapSelector(state)
  };
 }, {
     setProfile,
