@@ -38,9 +38,11 @@ function metadatainfobox(state = initialState, action) {
           showButtonLegend: action.data.showButtonLegend ? action.data.showButtonLegend : 'none',
           text: action.data.text,
           dataProvider: action.data.dataProvider,
-          numDatasetObjectCalc: action.data.numDatasetObjectCalc,
           urlMetadato: action.data.urlMetadatoCalc,
+          numDatasetObjectCalc: action.data.numDatasetObjectCalc,
           urlWMS: action.data.urlWMS,
+          urlLegend: [],
+          openLegendPanel: false,
           error: ''
         });
     }
