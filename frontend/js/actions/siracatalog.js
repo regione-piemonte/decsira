@@ -15,8 +15,16 @@ const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
 const SELECT_SUB_CATEGORY = 'SELECT_SUB_CATEGORY';
 const RESET_OBJECT_AND_VIEW = 'RESET_OBJECT_AND_VIEW';
 const THEMATIC_VIEW_CONFIG_MAP = 'THEMATIC_VIEW_CONFIG_MAP';
+const SEARCH_TEXT_CHANGE = 'SEARCH_TEXT_CHANGE';
+
 const {Promise} = require('es6-promise');
 
+function searchTextChange(text) {
+    return {
+        type: SEARCH_TEXT_CHANGE,
+        text
+    };
+}
 function toggleNode(id, status) {
     return {
         type: TOGGLE_SIRA_NODE,
@@ -151,10 +159,12 @@ module.exports = {
     THEMATIC_VIEW_CONFIG_LOADED,
     SELECT_SUB_CATEGORY,
     RESET_OBJECT_AND_VIEW,
+    SEARCH_TEXT_CHANGE,
     toggleNode,
     selectCategory,
     getMetadataObjects,
     getThematicViewConfig,
     selectSubCategory,
-    resetObjectAndView
+    resetObjectAndView,
+    searchTextChange
 };
