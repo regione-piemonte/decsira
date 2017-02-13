@@ -365,7 +365,7 @@ const SiraGrid = React.createClass({
                                         zoom: this.props.withMap,
                                         exporter: this.props.exporter,
                                         toolPanel: true,
-                                        selectAll: this.props.selectAll,
+                                        selectAll: this.props.selectAll
                                     }}
                                     exportAction={this.exportFeatures}
 
