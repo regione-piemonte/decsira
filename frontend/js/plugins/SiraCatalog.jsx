@@ -101,11 +101,6 @@ const LayerTree = React.createClass({
             this.loadMetadata({category: this.props.category});
         }
     },
-    componentWillReceiveProps(nextProps) {
-        if (!nextProps.loading && (!nextProps.nodesLoaded || nextProps.category.id !== this.props.category.id )) {
-            this.loadMetadata({category: nextProps.category});
-        }
-    },
     render() {
         if (!this.props.nodes) {
             return <div></div>;

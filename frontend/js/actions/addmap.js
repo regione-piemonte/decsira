@@ -17,6 +17,7 @@ const API = {
     wms: require('../../MapStore2/web/client/api/WMS')
 };
 const AddMapUtils = require('../utils/AddMapUtils');
+const {addServiceIncart, refreshNumberOfServices} = require('./cart');
 const SIRA_RECORDS_LOADING = 'SIRA_RECORDS_LOADING';
 const SIRA_RECORDS_ERROR = 'SIRA_RECORDS_ERROR';
 const SIRA_RECORDS_LOADED = 'SIRA_RECORDS_LOADED';
@@ -108,8 +109,13 @@ function addLayersInCart(layers, useTitle, useGroup) {
                 const alreadyPresent = cartLayers.filter((el) => el.title === current.title).length > 0;
                 return alreadyPresent ? previous : [...previous, current];
             }, []);
+            if (node.id) {
+                resultOk.forEach((layer) => {layer.idnode = node.id; });
+            }
             dispatch(addSiraLayersIncart(resultOk));
             dispatch(toggleAddMap(false));
+            dispatch(addServiceIncart(node));
+            dispatch(refreshNumberOfServices());
         }).catch((e) => dispatch(recordsError(e)) );
     };
 }

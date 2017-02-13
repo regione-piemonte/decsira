@@ -11,7 +11,13 @@ const {SET_PROFILE} = require('../actions/userprofile');
 function security(state = {user: null, errorCause: null}, action) {
     switch (action.type) {
         case SET_PROFILE: {
-            return assign({}, state, {user: action.authParams.userName, token: action.authParams. authkey});
+            return assign({}, state,
+                {
+                    // user: action.authParams && action.authParams.userName ? action.authParams.userName : '',
+                    // token: action.authParams && action.authParams.authkey ? action.authParams.authkey : ''
+                    user: action.authParams.userName,
+                    token: action.authParams.authkey
+                });
         }
         default:
             return state;

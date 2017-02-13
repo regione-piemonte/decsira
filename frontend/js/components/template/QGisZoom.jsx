@@ -31,11 +31,17 @@ const QGisZoom = React.createClass({
     zoomTo() {
         let [minX, minY, maxX, maxY] = CoordinatesUtils.getGeoJSONExtent(this.props.geometry);
         /*eslint-disable */
-        if (typeof VALAMB !== 'undefined' && VALAMB.zoomOn) {
-            console.log("VALAMB present", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
-            VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+        if (typeof window.parent !== 'undefined' && typeof parent.VALAMB !== 'undefined' && parent.VALAMB.zoomOn) {
+            console.log("parent.VALAMB present", `parent.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+            parent.VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
         }else {
-           console.log("VALAMB absent", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+           console.log("parent.VALAMB absent", `parent.VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+           if (typeof VALAMB !== 'undefined' && VALAMB.zoomOn) {
+               console.log("VALAMB present", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+               VALAMB.zoomOn(`'${minX}'`, `'${minY}'`, `'${maxX}'`, `'${maxY}'`, "EPSG:4326");
+           }else {
+              console.log("VALAMB absent", `VALAMB.zoomOn('${minX}', '${minY}', '${maxX}', '${maxY}', "EPSG:4326")`);
+           }
         }
         /*eslint-enable */
     }

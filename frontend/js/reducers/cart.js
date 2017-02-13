@@ -7,7 +7,7 @@
 */
 const assign = require('object-assign');
 
-const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES} = require('../actions/cart');
+const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES, SET_CART_SERVICES, RM_LAYERS_SERVICES, RM_SERVICES} = require('../actions/cart');
 const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
 
 const initialState = {
@@ -32,7 +32,7 @@ function cart(state = initialState, action) {
     case SIRA_ADD_LAYERS_IN_CART: {
         return assign({}, state,
             {
-                layers: action.layers ? state.layers.concat(action.layers) : state.layers
+                layers: action.layers
             }
         );
     }
@@ -40,6 +40,32 @@ function cart(state = initialState, action) {
         return assign({}, state,
             {
                 wmsservices: action.service ? [...state.wmsservices, action.service] : state.wmsservices
+            }
+        );
+    }case SET_CART_SERVICES: {
+        return assign({}, state,
+            {
+                wmsservices: action.wmsservices ? action.wmsservices : []
+            }
+        );
+    }case RM_LAYERS_SERVICES: {
+        let layersOk = state.cart && state.cart.layers ? state.cart.layers : [];
+        if (action.idNode) {
+            layersOk = layersOk.filter((el) => el.idNode !== action.idNode);
+        }
+        return assign({}, state,
+            {
+                layers: layersOk
+            }
+        );
+    }case RM_SERVICES: {
+        let servicesOk = state.cart && state.cart.wmsservices ? state.cart.wmsservices : [];
+        if (action.idService) {
+            servicesOk = servicesOk.filter((el) => el.id !== action.idService);
+        }
+        return assign({}, state,
+            {
+                layers: servicesOk
             }
         );
     }
