@@ -92,7 +92,8 @@ const SiraGrid = React.createClass({
         maxFeatures: React.PropTypes.number,
         nameSpaces: React.PropTypes.object,
         exporter: React.PropTypes.bool.isRequired,
-        fullScreen: React.PropTypes.bool.isRequired
+        fullScreen: React.PropTypes.bool.isRequired,
+        selectAll: React.PropTypes.bool.isRequired
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -132,6 +133,7 @@ const SiraGrid = React.createClass({
             gridType: "search",
             exporter: true,
             fullScreen: false,
+            selectAll: true,
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -363,7 +365,7 @@ const SiraGrid = React.createClass({
                                         zoom: this.props.withMap,
                                         exporter: this.props.exporter,
                                         toolPanel: true,
-                                        selectAll: true
+                                        selectAll: this.props.selectAll,
                                     }}
                                     exportAction={this.exportFeatures}
 
