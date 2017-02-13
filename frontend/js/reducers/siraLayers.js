@@ -15,6 +15,14 @@ const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_ST
 
 const {head, findIndex} = require('lodash');
 
+const checkSelectLayer = (state) => {
+    if (state.flat && state.flat.length > 1 && (state.flat[state.flat.length - 1]).id !== "gridItems") {
+        const newLayers = state.flat.filter((l) => l.id !== "gridItems").concat(state.flat.filter((l) => l.id === "gridItems" ));
+        return assign({}, state, {flat: newLayers});
+    }
+    return state;
+};
+
 const getAction = (layer, features) => {
     return {
         type: "CHANGE_LAYER_PROPERTIES",
@@ -90,15 +98,15 @@ function layers(state = [], action) {
                 }, state);
 
             }
-            return state;
+            return checkSelectLayer(state);
         }
         case 'SIRA_ADD_LAYERS': {
-            return action.layers.reduce((tempState, layer) => {
+            return checkSelectLayer(action.layers.reduce((tempState, layer) => {
                 return msLayers(tempState, {type: 'ADD_LAYER', layer});
-            }, state );
+            }, state ));
         }
         default:
-            return msLayers(state, action);
+            return checkSelectLayer(msLayers(state, action));
     }
 }
 module.exports = layers;
