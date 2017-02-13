@@ -11,11 +11,9 @@ const {head} = require('lodash');
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
 
-const {showBox, hideBox, loadMetadata, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
-
 
 const PlatformNumbers = connect((state) => ({
       siradecObject: state.platformnumbers.siradecObject,
@@ -25,61 +23,6 @@ const PlatformNumbers = connect((state) => ({
   }))(require('../components/PlatformNumbers'));
 
 const SiraSearchBar = require('../components/SiraSearchBar');
-
-
-// todo to delete...
-let idMetadato = 41479;
-const mapDispatchToPropsLinkMIB = (dispatch) => {
-    return {
-    openMetadataInfobox: () => {
-        dispatch(loadMetadata(idMetadato));
-        dispatch(showBox());
-    }
-  };
-};
-
-const LinkToMetadataInfoBox = connect(
-    null,
-    mapDispatchToPropsLinkMIB
-    )(require('../components/LinkToMetadataInfoBox'));
-
-const mapStateToPropsMIB = (state) => {
-    return {
-      show: state.metadatainfobox.show,
-      showButtonLegend: state.metadatainfobox.showButtonLegend,
-      openLegendPanel: state.metadatainfobox.openLegendPanel,
-      panelStyle: state.metadatainfobox.panelStyle,
-      title: state.metadatainfobox.title,
-      text: state.metadatainfobox.text,
-      numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
-      dataProvider: state.metadatainfobox.dataProvider,
-      urlMetadato: state.metadatainfobox.urlMetadato,
-      urlWMS: state.metadatainfobox.urlWMS,
-      urlWFS: state.metadatainfobox.urlWFS,
-      urlLegend: state.metadatainfobox.urlLegend,
-      error: state.metadatainfobox.error
-  };
-};
-
-const mapDispatchToPropsMIB = (dispatch) => {
-    return {
-    loadLegend: (url, actualUrl) => {
-        if (actualUrl && actualUrl.length === 0) {
-            dispatch(loadLegends(url));
-        }
-        dispatch(toggleLegendBox());
-    },
-    closePanel: () => {
-        dispatch(hideBox());
-    }
-  };
-};
-
-const MetadataInfoBox = connect(
-    mapStateToPropsMIB,
-    mapDispatchToPropsMIB
-    )(require('../components/MetadataInfoBox'));
-
 
 const Home = React.createClass({
     propTypes: {
@@ -154,8 +97,6 @@ const Home = React.createClass({
                 </div>
             </div>
             <Mosaic useLink={false} tileClick={this.selectCategory} />
-            <LinkToMetadataInfoBox />
-            <MetadataInfoBox />
             <PlatformNumbers />
             <Footer />
         </div>);

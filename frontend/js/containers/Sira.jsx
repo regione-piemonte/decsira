@@ -56,6 +56,7 @@ const mapStateToPropsMIB = (state) => {
       text: state.metadatainfobox.text,
       numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
       dataProvider: state.metadatainfobox.dataProvider,
+      urlMetadato: state.metadatainfobox.urlMetadato,
       urlWMS: state.metadatainfobox.urlWMS,
       urlWFS: state.metadatainfobox.urlWFS,
       urlLegend: state.metadatainfobox.urlLegend,
