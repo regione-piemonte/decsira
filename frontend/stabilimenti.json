@@ -2,7 +2,7 @@
   "map": {
     "projection": "EPSG:900913",
     "units": "m",
-    "center": {"x": 907374, "y": 5606503, "crs": "EPSG:3857"},
+    "center": {"x": 1159311.21, "y": 5614758.35, "crs": "EPSG:900913"},
     "zoom": 8,
     "maxExtent": [
       -20037508.34, -20037508.34,
@@ -49,7 +49,7 @@
         "tiled": true,
         "tileSize": 512
       },
-      {
+	     {
         "type": "osm",
         "title": "Open Street Map",
         "name": "mapnik",
@@ -77,8 +77,8 @@
   			"type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-  			"title": "AUA - Impianti di recupero energia e materia",
-  			"name": "sira:AutorizzazioneUnicaAmbientale",
+  			"title": "Stabilimenti soggetti ad autorizzazione ambientale",
+  			"name": "siraemissioni:Stabilimento",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
           "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
@@ -88,102 +88,12 @@
           "geomAttribute": "msGeometry",
           "geometryType": "Polygon"
         },
-            "featureType": "aua",
-                      "group": "Oggetti",
-                      "format": "image/png"
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/vtmonfor/rp-01/cartaforwms/wms_vtmonfor_cartafor",
-        "visibility": false,
-  			"title": "Carta Forestale e altre coperture del territorio",
-  			"name": "CartaForAltre",
-  			"group": "Copertura forestale e altri usi del suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
+		"featureType": "stabilimento",
+        "group": "Oggetti",
+        "format": "image/png"
         },
-        "tileSize": 512
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/vtmonfor/rp-01/cartaforwms/wms_vtmonfor_cartafor",
-        "visibility": false,
-  			"title": "Carta Forestale",
-  			"name": "CartaFor",
-  			"group": "Copertura forestale e altri usi del suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/vtmonfor/rp-01/cartaforwms/wms_vtmonfor_cartafor",
-        "visibility": false,
-  			"title": "Altre coperture del territorio",
-  			"name": "AltreCop",
-  			"group": "Copertura forestale e altri usi del suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/vtmonfor/rp-01/cartaforwms/wms_vtmonfor_cartafor",
-        "visibility": false,
-  			"title": "Superficie Boscata",
-  			"name": "SupBosc",
-  			"group": "Copertura forestale e altri usi del suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/vtmonfor/rp-01/cartaforwms/wms_vtmonfor_cartafor",
-        "visibility": false,
-  			"title": "Filari",
-  			"name": "Filari",
-  			"group": "Copertura forestale e altri usi del suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_cds",
-        "visibility": false,
-  			"title": "2013 - Consumo di suolo per classi di capacità d'uso",
-  			"name": "Indici",
-  			"group": "Consumo di Suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-      {
-  			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_cds",
-        "visibility": false,
-  			"title": "2013 - Consumo di suolo",
-  			"name": "Dati",
-  			"group": "Consumo di Suolo",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-      {
+		
+		  {
   			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
         "visibility": false,
@@ -196,7 +106,7 @@
         },
         "tileSize": 512
   		},
-      {
+		{
   			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
         "visibility": false,
@@ -209,7 +119,7 @@
         },
         "tileSize": 512
   		},
-      {
+		{
   			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
         "visibility": false,
@@ -222,13 +132,52 @@
         },
         "tileSize": 512
   		},
-      {
+		{
   			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
         "visibility": false,
   			"title": "Aree Protette e siti della rete ecologica",
   			"name": "AreeProtette",
   			"group": "Aree Protette e Rete Natura 2000",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
+        "visibility": false,
+  			"title": "Toponomastica Comunale",
+  			"name": "ToponomasticaComunale",
+  			"group": "Limiti amministrativi",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
+        "visibility": false,
+  			"title": "Limiti Comunali",
+  			"name": "LimitiComunali",
+  			"group": "Limiti amministrativi",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
+        "visibility": true,
+  			"title": "Limiti Provinciali",
+  			"name": "LimitiProvinciali",
+  			"group": "Limiti amministrativi",
   			"format": "image/png",
         "legendParams": {
           "sld_version": "1.1.0"
