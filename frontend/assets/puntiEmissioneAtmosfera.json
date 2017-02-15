@@ -26,6 +26,7 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
+    "pdfname": "Punto Emissione_{{/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()}_{/wfs:FeatureCollection/wfs:member/siraemissioni:PuntoEmissione/siraemissioni:sigla/text()}}.pdf",
      "template": "assets/cardTemplatePuntiEmissione.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
@@ -264,6 +265,7 @@
            "index": 3,
            "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:codiceSira",
            "label":"Codice sira stabilimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
@@ -292,18 +294,21 @@
            "index": 6,
            "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA",
            "label":"Partita IVA azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 7,
            "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale",
            "label":"Codice fiscale azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 8,
            "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:idTipoProvvedimento",
            "label":"Tipo provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
 
@@ -320,6 +325,7 @@
            "index": 9,
            "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento",
            "label":"Data provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
            "fieldOptions": {
              "dateFormat": "DD/MM/YYYY"
@@ -329,6 +335,7 @@
            "index": 10,
            "attribute": "siraemissioni:stabilimento/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza",
            "label":"Data scadenza",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
            "fieldOptions": {
              "dateFormat": "DD/MM/YYYY"
@@ -338,6 +345,7 @@
            "index": 11,
            "attribute": "siraemissioni:desStato",
            "label":"Stato punto di emissione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
 
@@ -354,6 +362,7 @@
            "index": 12,
            "attribute": "siraemissioni:desTipoEmissione",
            "label":"Tipo emissione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
              "urlParams": {

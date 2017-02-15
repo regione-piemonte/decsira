@@ -66,7 +66,7 @@
            "suppressSorting": true,
            "sortAttribute": "sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()",
            "xpath": ["sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()"],
-           "profiles": ["B"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -186,6 +186,7 @@
            "valueService": {
              "urlParams": {
                "typeName": "sira:sipra_d_attivita",
+               "cql_filter": "id_attivita=22%20OR%20id_attivita=23",
                "sortBy": "id_attivita+A"
              }
            },
