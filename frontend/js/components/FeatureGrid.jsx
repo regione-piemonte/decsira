@@ -7,7 +7,7 @@ const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 const FilterUtils = require('../utils/SiraFilterUtils');
 
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
-const {getFeaturesAndExport} = require('../actions/siraexporter');
+const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
 
 const {head} = require('lodash');
 
@@ -19,11 +19,12 @@ const SiraExporter = connect((state) => {
         loading: state.siraexporter.loading,
         errormsg: state.siraexporter.errormsg,
         csvName: state.siraexporter.csvName,
-        shpName: state.siraexporter.shpName
-
+        shpName: state.siraexporter.shpName,
+        addFile: state.siraexporter.addFile
     };
 }, {
-    getFeaturesAndExport
+    getFeaturesAndExport,
+    getFileAndExport
 })(require('./SiraExporter'));
 
 const FeatureGrid = connect((state) => {
@@ -49,6 +50,7 @@ const SiraGrid = React.createClass({
         expanded: React.PropTypes.bool,
         header: React.PropTypes.string,
         features: React.PropTypes.oneOfType([ React.PropTypes.array, React.PropTypes.object]),
+        exporterConfig: React.PropTypes.object,
         detailsConfig: React.PropTypes.object,
         columnsDef: React.PropTypes.array,
         map: React.PropTypes.object,
@@ -93,7 +95,9 @@ const SiraGrid = React.createClass({
         nameSpaces: React.PropTypes.object,
         exporter: React.PropTypes.bool.isRequired,
         fullScreen: React.PropTypes.bool.isRequired,
-        selectAll: React.PropTypes.bool.isRequired
+        selectAll: React.PropTypes.bool.isRequired,
+        configureExporter: React.PropTypes.func
+
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -143,7 +147,8 @@ const SiraGrid = React.createClass({
             selectFeatures: () => {},
             onQuery: () => {},
             onConfigureQuery: () => {},
-            cleanError: () => {}
+            cleanError: () => {},
+            configureExporter: () => {}
         };
     },
     componentWillMount() {
@@ -431,15 +436,20 @@ const SiraGrid = React.createClass({
         }
     },
     exportFeatures(api) {
-        this.props.toggleSiraControl("exporter", true);
-        const pagination = this.props.maxFeatures ? {
+        const {exporterConfig, configureExporter, toggleSiraControl, maxFeatures, gridType,
+                groupFields, filterFields, spatialField} = this.props;
+        if ( exporterConfig ) {
+            configureExporter(exporterConfig);
+        }
+        toggleSiraControl("exporter", true);
+        const pagination = (exporterConfig && exporterConfig.maxFeatures || maxFeatures) ? {
             startIndex: 0,
-            maxFeatures: this.props.maxFeatures
+            maxFeatures: exporterConfig && exporterConfig.maxFeatures || maxFeatures
         } : null;
-        let filterObj = this.props.gridType === 'search' ? {
-            groupFields: this.props.groupFields,
-            filterFields: this.props.filterFields.filter((field) => field.value),
-            spatialField: this.props.spatialField,
+        let filterObj = gridType === 'search' ? {
+            groupFields: groupFields,
+            filterFields: filterFields.filter((field) => field.value),
+            spatialField: spatialField,
             pagination
             } : {
             groupFields: [],

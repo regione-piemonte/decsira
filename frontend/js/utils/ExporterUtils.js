@@ -11,29 +11,36 @@ const JSZip = require('jszip');
 
 
 const ExporterUtils = {
-    exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType) {
+    exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd) {
         const name = filename.replace(':', "_");
         switch (outputformat) {
             case "csv": {
-                this.exportCSV(features, columns, name, mimeType);
+                this.exportCSV(features, columns, name, mimeType, fileToAdd);
                 break;
             }
             case "shp": {
-                this.exportShp(features, columns, name);
+                this.exportShp(features, columns, name, fileToAdd);
                 break;
             }
             default:
-                this.exportCSV(features, columns, name, mimeType);
+                this.exportCSV(features, columns, name, mimeType, fileToAdd);
         }
     },
-    exportCSV: function(features, columns, filename, mimeType) {
+    exportCSV: function(features, columns, filename, mimeType, fileToAdd) {
         const csvString = this.convertArrayOfObjectsToCSV(features, columns);
-        let file = new Blob([csvString], {
+        if (fileToAdd) {
+            const zip = new JSZip();
+            zip.file(fileToAdd.name, fileToAdd.content);
+            zip.file(`${filename}.csv`, csvString);
+            zip.generateAsync({ compression: 'STORE', type: 'blob'}).then((blob) => FileSaver.saveAs(blob, `${filename}.zip`));
+        }else {
+            let file = new Blob([csvString], {
                     type: mimeType || "text/csv;charset=utf-8;"
-                });
-        FileSaver.saveAs(file, `${filename}.csv`);
+            });
+            FileSaver.saveAs(file, `${filename}.csv`);
+        }
     },
-    exportShp: function(features, columns, filename) {
+    exportShp: function(features, columns, filename, fileToAdd) {
         const shpString = shpwrite.zip({
             type: 'FeatureCollection',
             features: this.getFeaturesForShp(features, columns)
@@ -46,6 +53,9 @@ const ExporterUtils = {
             }});
         const zip = new JSZip();
         zip.loadAsync(shpString, {base64: true}).then((result) => {
+            if (fileToAdd) {
+                result.file(fileToAdd.name, fileToAdd.content);
+            }
             return result.generateAsync({ compression: 'STORE', type: 'blob'});
         }).then((blob) => FileSaver.saveAs(blob, `${filename}.zip`));
     },

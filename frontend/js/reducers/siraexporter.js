@@ -14,7 +14,8 @@ function siraexporter(state = {
     errormsg: null,
     csvName: "csv",
     shpName: "shp",
-    maxFeatures: 40
+    maxFeatures: 40,
+    addFile: null
 }, action) {
     switch (action.type) {
         case SET_EXPORT_PARAMS: {
