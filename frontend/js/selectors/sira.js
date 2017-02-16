@@ -77,7 +77,8 @@ const tocSelector = createSelector([
         configOggetti,
         userprofile,
         activeFeatureType,
-        subcat
+        subcat,
+        showcategories: catalog.showcategories
     })
 );
 

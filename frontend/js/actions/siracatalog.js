@@ -16,6 +16,7 @@ const SELECT_SUB_CATEGORY = 'SELECT_SUB_CATEGORY';
 const RESET_OBJECT_AND_VIEW = 'RESET_OBJECT_AND_VIEW';
 const THEMATIC_VIEW_CONFIG_MAP = 'THEMATIC_VIEW_CONFIG_MAP';
 const SEARCH_TEXT_CHANGE = 'SEARCH_TEXT_CHANGE';
+const SHOWCATEGORIES = 'SHOWCATEGORIES';
 
 const {Promise} = require('es6-promise');
 
@@ -23,6 +24,12 @@ function searchTextChange(text) {
     return {
         type: SEARCH_TEXT_CHANGE,
         text
+    };
+}
+function toggleCategories(state) {
+    return {
+        type: SHOWCATEGORIES,
+        state
     };
 }
 function toggleNode(id, status) {
@@ -160,11 +167,13 @@ module.exports = {
     SELECT_SUB_CATEGORY,
     RESET_OBJECT_AND_VIEW,
     SEARCH_TEXT_CHANGE,
+    SHOWCATEGORIES,
     toggleNode,
     selectCategory,
     getMetadataObjects,
     getThematicViewConfig,
     selectSubCategory,
     resetObjectAndView,
-    searchTextChange
+    searchTextChange,
+    toggleCategories
 };

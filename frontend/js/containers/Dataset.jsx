@@ -10,7 +10,7 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {Tabs, Tab} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
-const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, toggleCategories} = require('../actions/siracatalog');
 
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
@@ -128,16 +128,22 @@ const Dataset = React.createClass({
         setActiveFeatureType: React.PropTypes.func,
         setGridType: React.PropTypes.func,
         getThematicViewConfig: React.PropTypes.func,
-        map: React.PropTypes.object
+        map: React.PropTypes.object,
+        toggleCategories: React.PropTypes.func,
+        showcategories: React.PropTypes.bool
     },
     contextTypes: {
         router: React.PropTypes.object
+    },
+    getDefaultProps() {
+        return {
+            showcategories: true
+        };
     },
     getInitialState() {
             return {
                 params: {},
                 searchText: "",
-                showCategories: false,
                 onToggle: () => {},
                 setProfile: () => {}
             };
@@ -169,17 +175,16 @@ const Dataset = React.createClass({
         return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
     },
     renderResults() {
-        const {loading, objects, views} = this.props;
-        const {showCategories} = this.state;
+        const {loading, objects, views, showcategories} = this.props;
         const searchSwitch = this.props.nodes.length > 0 ? (
             <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
-                <div className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
-                    <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+                <div className="dataset-categories-switch" onClick={() => this.props.toggleCategories(!showcategories)}>
+                    <span>{showcategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
                 </div>
             </div>) : (<noscript key="categoriesSearch"/>);
         const tocObjects = (
-            <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
-                    { showCategories ?
+            <TOC id="dataset-toc" key="dataset-toc" nodes={showcategories ? this.props.nodes : this.props.objects}>
+                    { showcategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
@@ -250,6 +255,13 @@ const Dataset = React.createClass({
         }
         if (text && text.length > 0) {
             params.text = text;
+            if (this.props.showcategories) {
+                this.props.toggleCategories(!this.props.showcategories);
+            }
+        }else {
+            if (!this.props.showcategories) {
+                this.props.toggleCategories(!this.props.showcategories);
+            }
         }
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
@@ -297,5 +309,6 @@ module.exports = connect(datasetSelector, {
     setActiveFeatureType,
     toggleSiraControl,
     setGridType,
-    getThematicViewConfig
+    getThematicViewConfig,
+    toggleCategories
 })(Dataset);
