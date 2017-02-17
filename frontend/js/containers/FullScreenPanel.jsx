@@ -87,13 +87,16 @@ const FullScreen = React.createClass({
         }
     },
     componentWillReceiveProps(nextProps) {
-        const {map, filterPanelExpanded, siraControls} = nextProps;
+        const {map, filterPanelExpanded, siraControls, gridExpanded} = nextProps;
         if (this.props.map !== map) {
             if (siraControls.detail) {
                 this.props.toggleSiraControl('detail');
             }
             if (filterPanelExpanded) {
                 this.props.expandFilterPanel(false);
+            }
+            if (gridExpanded) {
+                this.props.toggleSiraControl('grid');
             }
             this.context.router.push(`/${this.props.params.profile}`);
         }
@@ -146,7 +149,7 @@ const FullScreen = React.createClass({
         this.context.router.push(`/dataset/${this.props.params.profile}/`);
     },
     zoomToFeature(data) {
-        this.changeMapView([data.geometry]);
+        setTimeout(() => {this.changeMapView([data.geometry]); }, 100);
     },
     changeMapView(geometries) {
         let extent = geometries.reduce((prev, next) => {

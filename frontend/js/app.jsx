@@ -10,7 +10,10 @@ const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
 
 const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
-
+LocaleUtils.setSupportedLocales({
+        "it": {
+            code: "it-IT",
+            description: "Italiano"}});
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {configureQueryForm} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
@@ -65,9 +68,9 @@ const startApp = () => {
          appStore,
          pluginsDef,
          initialActions,
-         appComponent: StandardRouter,
-         printingEnabled: false
+         appComponent: StandardRouter
      };
+
 
     ReactDOM.render(
          <StandardApp {...appConfig}/>,

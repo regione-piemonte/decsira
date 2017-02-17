@@ -12,27 +12,12 @@ const { TOGGLE_SIRA_NODE,
         CATALOG_LOADING,
         SELECT_SUB_CATEGORY,
         RESET_OBJECT_AND_VIEW,
-        SEARCH_TEXT_CHANGE} = require('../actions/siracatalog');
+        SEARCH_TEXT_CHANGE,
+        SHOWCATEGORIES} = require('../actions/siracatalog');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('node-uuid');
 
-// const normalizeFunction = function(functions, parentId, nodes) {
-//     return functions.reduce((ns, func) => {
-//         const nodeId = `${parentId}_${ns.length}`;
-//         let newNode = {id: nodeId, name: nodeId, type: "node", title: func.type, url: func.url, tools: "map"};
-//         if (func.type === "Mappa" && func.url && func.url.length > 2) {
-//             nodes.push(newNode);
-//             ns.push(nodeId);
-//         }else if (func.type === "Cerca") {
-//             newNode.title = "Oggetto";
-//             newNode.tools = "all";
-//             nodes.push(newNode);
-//             ns.push(nodeId);
-//         }
-//         return ns;
-//     }, []);
-// };
 
 const normalizeCategories = function(categories, nodes) {
     return categories.reduce((cats, category) => {
@@ -96,6 +81,9 @@ function siracatalog(state = initialState, action) {
         }
         case RESET_OBJECT_AND_VIEW: {
             return assign({}, state, {nodes: null, views: null});
+        }
+        case SHOWCATEGORIES: {
+            return assign({}, state, {showcategories: action.state});
         }
         case SEARCH_TEXT_CHANGE: {
             return assign({}, state, {searchText: action.text});

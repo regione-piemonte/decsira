@@ -8,21 +8,31 @@
 
 const msLayers = require('../../MapStore2/web/client/reducers/layers');
 const assign = require('object-assign');
-const {isObject} = require('lodash');
+const {isObject, head, findIndex} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('../../MapStore2/web/client/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
 
-const {head, findIndex} = require('lodash');
+const getVector = (state) => {
+    return state.flat ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;
+};
 
-const checkSelectLayer = (state) => {
+const checkSelectLayer = (state, vector) => {
     if (state.flat && state.flat.length > 1 && (state.flat[state.flat.length - 1]).id !== "gridItems") {
-        const newLayers = state.flat.filter((l) => l.id !== "gridItems").concat(state.flat.filter((l) => l.id === "gridItems" ));
+        const newLayers = state.flat.filter((l) => l.id !== "gridItems").concat(getVector(state) || vector).filter((l) => l);
         return assign({}, state, {flat: newLayers});
     }
     return state;
 };
-
+const filterHiddenGroup = (state) => {
+    if (state.groups) {
+        return assign({}, state, {groups: state.groups.filter((g) => g.id !== "hidden")});
+    }
+    return state;
+};
+const checkState = (state, vector) => {
+    return filterHiddenGroup(checkSelectLayer(state, vector));
+};
 const getAction = (layer, features) => {
     return {
         type: "CHANGE_LAYER_PROPERTIES",
@@ -38,6 +48,8 @@ const cloneLayer = (layer) => {
     }, newLayer);
     return newLayer;
 };
+
+
 function layers(state = [], action) {
     switch (action.type) {
         case CHANGE_TOPOLOGY_MAPINFO_STATE:
@@ -96,17 +108,26 @@ function layers(state = [], action) {
                 return action.config.map.layers.filter((l) => l.group !== 'background' && findIndex(oldLayers, (ol) => ol.name === l.name) === -1).reduce((st, layer) => {
                     return msLayers(st, addLayer(layer));
                 }, state);
-
             }
-            return checkSelectLayer(state);
+            return state;
         }
         case 'SIRA_ADD_LAYERS': {
-            return checkSelectLayer(action.layers.reduce((tempState, layer) => {
+            return action.layers.reduce((tempState, layer) => {
                 return msLayers(tempState, {type: 'ADD_LAYER', layer});
-            }, state ));
+            }, state );
         }
         default:
-            return checkSelectLayer(msLayers(state, action));
+            return msLayers(state, action);
     }
 }
-module.exports = layers;
+
+function checkedLayers(state = [], action) {
+    const newState = layers(state, action);
+    if ( newState !== state) {
+        const vector = getVector(state);
+        return checkState(newState, vector);
+    }
+    return newState;
+}
+
+module.exports = checkedLayers;

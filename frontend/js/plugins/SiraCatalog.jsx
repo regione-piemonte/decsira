@@ -7,7 +7,7 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
-const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects, toggleCategories} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
 const {Tabs, Tab} = require("react-bootstrap");
@@ -83,17 +83,15 @@ const LayerTree = React.createClass({
         selectSubCategory: React.PropTypes.func,
         loadNodeMapRecords: React.PropTypes.func,
         toggleAddMap: React.PropTypes.func,
-        addLayer: React.PropTypes.func
+        addLayer: React.PropTypes.func,
+        toggleCategories: React.PropTypes.func,
+        showcategories: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
             loading: false,
-            onToggle: () => {}
-        };
-    },
-    getInitialState() {
-        return {
-            showCategories: true
+            onToggle: () => {},
+            showcategories: true
         };
     },
     componentWillMount() {
@@ -105,11 +103,10 @@ const LayerTree = React.createClass({
         if (!this.props.nodes) {
             return <div></div>;
         }
-        const {showCategories} = this.state;
-        const {views, objects, nodes} = this.props;
+        const {views, objects, nodes, showcategories} = this.props;
         const tocObjects = (
-            <TOC nodes={showCategories ? nodes : objects}>
-                    { showCategories ?
+            <TOC nodes={showcategories ? nodes : objects}>
+                    { showcategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                     <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
@@ -137,8 +134,8 @@ const LayerTree = React.createClass({
                 onReset={this.loadMetadata}
             />
              <div className="catalog-categories-switch-container">
-             <div className="catalog-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
-                <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+             <div className="catalog-categories-switch" onClick={() => this.props.toggleCategories(!showcategories)}>
+                <span>{showcategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
               </div>
              </div>
             <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
@@ -158,6 +155,13 @@ const LayerTree = React.createClass({
         }
         if (text && text.length > 0) {
             params.text = text;
+            if (this.props.showcategories) {
+                this.props.toggleCategories(!this.props.showcategories);
+            }
+        }else {
+            if (!this.props.showcategories) {
+                this.props.toggleCategories(!this.props.showcategories);
+            }
         }
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
@@ -216,7 +220,8 @@ const CatalogPlugin = connect(tocSelector, {
     selectSubCategory,
     loadNodeMapRecords,
     toggleAddMap,
-    addLayer
+    addLayer,
+    toggleCategories
 })(LayerTree);
 
 module.exports = {
