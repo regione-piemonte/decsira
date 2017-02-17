@@ -140,10 +140,18 @@ const LoginPanel = connect((state) => ({
 
 
 const Header = React.createClass({
+    propTypes: {
+        onClickHome: React.PropTypes.func.isRequired
+    },
+    getDefaultProps() {
+        return {
+            onClickHome: () => {}
+        };
+    },
     render() {
         return (
             <div id="header-servizio" className="container-fluid">
-                <div className="row-fluid">
+            <div className="row-fluid">
             <div className="container testalino">
                 <div className="row">
 
@@ -158,23 +166,23 @@ const Header = React.createClass({
                         </div>
 
                     </div>
-                    <div id="sx">
+                    <div className="titoloServizio col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <h2 onClick={this.props.onClickHome}>Sira</h2>
                     </div>
 
-                    <div id="dx">
-                    </div>
-                    <div className="titoloServizio col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                        <h2>Sira</h2>
-                    </div>
+                    <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                     <LoginNav />
                     <LoginPanel />
-                    <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 menu-righe">
+                    </div>
+                    <div className="menu-righe col-lg-1 col-md-1 col-sm-1 col-xs-1">
                       <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
                         <i className="fa fa-bars"></i>
                       </button>
                     </div>
-                    </div>
+                </div>
+                    <div className="cartcontainer">
                     <Cart />
+                    </div>
                     <AddMapModal />
                     <nav className="pimenu-navbar-collapse collapse">
                             <ul className="nav navbar-nav">
