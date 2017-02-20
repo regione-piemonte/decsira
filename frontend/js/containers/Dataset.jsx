@@ -228,7 +228,7 @@ const Dataset = React.createClass({
         return (
             <div className="dataset-container home">
                 <div style={{minHeight: '100%', position: 'relative'}}>
-                    <Header/>
+                    <Header onClickHome={this.goHome}/>
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
@@ -294,6 +294,9 @@ const Dataset = React.createClass({
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
+    },
+    goHome() {
+        this.context.router.push(`/new/${this.props.params.profile}`);
     }
 });
 
