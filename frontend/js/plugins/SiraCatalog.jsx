@@ -155,9 +155,9 @@ const LayerTree = React.createClass({
         }
         if (text && text.length > 0) {
             params.text = text;
-            if (this.props.showcategories) {
+            /*if (this.props.showcategories) {
                 this.props.toggleCategories(!this.props.showcategories);
-            }
+            }*/
         }else {
             if (!this.props.showcategories) {
                 this.props.toggleCategories(!this.props.showcategories);

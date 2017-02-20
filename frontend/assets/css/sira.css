@@ -282,10 +282,20 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
 }
 #mapstore-getfeatureinfo{
     z-index: 1024 !important;
-
+    width: 500px;
+    height: calc(100% - 150px);
 }
 #mapstore-getfeatureinfo .panel-body {
     padding: 15px;
+}
+
+#mapstore-getfeatureinfo > .panel-body {
+    overflow-y: auto;
+    position: absolute;
+    bottom: 0;
+    top: 43px;
+    width: 100%;
+    left: 0;
 }
 /* Catalog styles */
 .catalog-object {
@@ -657,4 +667,8 @@ overflow-y: auto;
 .grid-cell-link {
     text-decoration: underline;
     cursor: pointer;
+}
+
+#mapstore-helptext-panel {
+    right: 150px;
 }
