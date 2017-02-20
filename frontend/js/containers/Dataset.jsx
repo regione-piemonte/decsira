@@ -204,8 +204,7 @@ const Dataset = React.createClass({
             node={v}
             onToggle={this.props.onToggle}
             addToMap={this.loadThematicView}
-            showInfoBox={this.showInfoBox}
-            />)) : (<div/>);
+            showInfoBox={this.showInfoBox}/>)) : <div/>;
         const objEl = [searchSwitch, tocObjects];
         return (
             <Tabs
@@ -255,9 +254,9 @@ const Dataset = React.createClass({
         }
         if (text && text.length > 0) {
             params.text = text;
-            if (this.props.showcategories) {
+            /*if (this.props.showcategories) {
                 this.props.toggleCategories(!this.props.showcategories);
-            }
+            }*/
         }else {
             if (!this.props.showcategories) {
                 this.props.toggleCategories(!this.props.showcategories);
