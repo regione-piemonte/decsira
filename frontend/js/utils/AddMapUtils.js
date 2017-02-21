@@ -51,6 +51,7 @@ const AddMapUtils = {
                 props.group = group;
                 props.groupTitle = groupTitle;
                 props.nodetype = 'layer';
+                props.infoFormat = r.infoFormat;
                 props.url = r.onlineResource && r.onlineResource["xlink:href"] || wmsUrl;
                 return acc.concat(assign({}, r, props));
             }
@@ -110,6 +111,7 @@ const AddMapUtils = {
                     params: params,
                     allowedSRS: allowedSRS,
                     siraId: node.id,
+                    infoFormat: layer.infoFormat,
                     group: useGroup ? group || nodeGroup : nodeGroup
                 }, layerDefaultConfig));
         });

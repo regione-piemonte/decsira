@@ -7,7 +7,7 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-
+const MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
 const urlUtil = require('url');
 const assign = require('object-assign');
 
@@ -28,30 +28,34 @@ const parseUrl = (url) => {
     }));
 };
 
-const flatLayers = (root) => {
+const addParamsToLayers = (root, params = {}) => {
     return root.Layer ? (isArray(root.Layer) && root.Layer || [root.Layer]).reduce((previous, current) => {
-        return previous.concat(flatLayers(current)).concat((current.Layer && (current.Name || current.Title)) ? [current] : []);
-    }, []) : (root.Name && [root] || []);
+        return current.Layer ? previous.concat(assign({}, params, current, {Layer: addParamsToLayers(current, params)})) : previous.concat(assign({}, params, current));
+    }, []) : (root.Name && [assign({}, params, root)] || []);
 };
 const getOnlineResource = (c) => {
     return c.Request && c.Request.GetMap && c.Request.GetMap.DCPType && c.Request.GetMap.DCPType.HTTP && c.Request.GetMap.DCPType.HTTP.Get && c.Request.GetMap.DCPType.HTTP.Get.OnlineResource && c.Request.GetMap.DCPType.HTTP.Get.OnlineResource.$ || undefined;
 };
-const searchAndPaginate = (json, startPosition, maxRecords, text) => {
+const isFormatAvailable = (aF, f) => {
+    return aF.filter((fo) => fo === f).length > 0 || false;
+};
+const getFeatureInfoFormat = (c) => {
+    const formats = MapInfoUtils.getAvailableInfoFormatValues();
+    const layerFormats = c.Request && c.Request.GetFeatureInfo && c.Request.GetFeatureInfo.Format || undefined;
+    return layerFormats ? layerFormats.reduce((acc, f) => {
+        return isFormatAvailable(formats, f) ? acc.concat(f) : acc;
+    }, []) : undefined;
+};
+const searchAndPaginate = (json) => {
     const root = (json.WMS_Capabilities || json.WMT_MS_Capabilities).Capability;
     const onlineResource = getOnlineResource(root);
+    const infoFormat = getFeatureInfoFormat(root);
     const SRSList = (root.Layer && (root.Layer.SRS || root.Layer.CRS)) || [];
-    const layersObj = flatLayers(root);
+    const layersObj = addParamsToLayers(root, {onlineResource, SRS: SRSList, infoFormat});
     const layers = isArray(layersObj) ? layersObj : [layersObj];
-    const filteredLayers = layers
-        .filter((layer) => !text || (layer.Name || "").toLowerCase().indexOf(text.toLowerCase()) !== -1 || (layer.Title && layer.Title.toLowerCase().indexOf(text.toLowerCase()) !== -1) || (layer.Abstract && layer.Abstract.toLowerCase().indexOf(text.toLowerCase()) !== -1));
     return {
-        numberOfRecordsMatched: filteredLayers.length,
-        numberOfRecordsReturned: Math.min(maxRecords, filteredLayers.length),
-        nextRecord: startPosition + Math.min(maxRecords, filteredLayers.length) + 1,
-        service: json.WMS_Capabilities.Service,
-        records: filteredLayers
-            .filter((layer, index) => index >= (startPosition - 1) && index < (startPosition - 1) + maxRecords)
-            .map((layer) => assign({}, layer, {onlineResource, SRS: SRSList}))
+        service: (json.WMS_Capabilities || json.WMT_MS_Capabilities).Service,
+        records: layers
     };
 };
 
