@@ -14,7 +14,7 @@
   */
 const {Promise} = require('es6-promise');
 const API = {
-    wms: require('../../MapStore2/web/client/api/WMS')
+    wms: require('../utils/WMS')
 };
 const AddMapUtils = require('../utils/AddMapUtils');
 const {addServiceIncart, refreshNumberOfServices} = require('./cart');
