@@ -40,7 +40,8 @@ function addmap(state = initialState, action) {
         }
         case TOGGLE_ADD_MAP_MODAL: {
             return assign({}, state, {
-                show: action.status
+                show: action.status,
+                error: null
             });
         }
         case SIRA_RECORDS_LOADED: {
