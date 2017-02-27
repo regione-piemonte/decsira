@@ -27,7 +27,8 @@ const SiraExporter = React.createClass({
         csvName: React.PropTypes.string,
         shpName: React.PropTypes.string,
         addFile: React.PropTypes.string,
-        csvMimeType: React.PropTypes.string
+        csvMimeType: React.PropTypes.string,
+        srs: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -103,12 +104,12 @@ const SiraExporter = React.createClass({
         });
         if (this.state.type === 'page' && params.features && params.columns) {
             if (this.props.addFile) {
-                this.props.getFileAndExport(params.features, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile );
+                this.props.getFileAndExport(params.features, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
             }else {
-                ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType, this.props.addFile);
+                ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
             }
         }else if (this.state.type === 'all' && params.filter && params.columns) {
-            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile);
+            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
         }
     }
 });

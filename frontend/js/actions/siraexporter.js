@@ -90,14 +90,14 @@ function getFeatures(url, filter, featuregrid) {
                        throw new Error("GeoServer Exception, query fallita!");
                    });
 }
-function getFileAndExport(features, columns, outputformat, featuregrid, filename, mimeType, addFile ) {
+function getFileAndExport(features, columns, outputformat, featuregrid, filename, mimeType, addFile, srs) {
     return (dispatch) => {
         dispatch(toggleLoading(true));
         getFile(addFile).then((result) => {
             dispatch(toggleLoading(false));
             const fileToAdd = {name: addFile.split('/').pop(), content: result.data};
             try {
-                ExporterUtils.exportFeatures(outputformat, features, columns, filename, mimeType, fileToAdd);
+                ExporterUtils.exportFeatures(outputformat, features, columns, filename, mimeType, fileToAdd, srs);
             }catch (e) {
                 throw new Error("Errore nel parsing dei dati");
             }
@@ -109,7 +109,7 @@ function getFileAndExport(features, columns, outputformat, featuregrid, filename
     };
 
 }
-function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, featuregrid, filename, mimeType, addFile) {
+function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, featuregrid, filename, mimeType, addFile, srs) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     for (let param in params) {
         if (params.hasOwnProperty(param)) {
@@ -126,7 +126,7 @@ function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, fea
             dispatch(toggleLoading(false));
             const fileToAdd = addFile ? {name: addFile.split('/').pop(), content: results[1].data} : null;
             try {
-                ExporterUtils.exportFeatures(outputformat, results[0], columns, filename, mimeType, fileToAdd);
+                ExporterUtils.exportFeatures(outputformat, results[0], columns, filename, mimeType, fileToAdd, srs);
             }catch (e) {
                 throw new Error("Errore nel parsing dei dati");
             }

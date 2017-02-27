@@ -8,10 +8,11 @@
 const FileSaver = require('file-saver');
 const shpwrite = require('shp-write');
 const JSZip = require('jszip');
-
-
+const ol = require('openlayers');
+const ProWKTDef = require('./ProjWKTDef');
+const {head} = require('lodash');
 const ExporterUtils = {
-    exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd) {
+    exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd, outputSrs = 'EPSG:32632') {
         const name = filename.replace(':', "_");
         switch (outputformat) {
             case "csv": {
@@ -19,7 +20,7 @@ const ExporterUtils = {
                 break;
             }
             case "shp": {
-                this.exportShp(features, columns, name, fileToAdd);
+                this.exportShp(features, columns, name, fileToAdd, outputSrs);
                 break;
             }
             default:
@@ -40,10 +41,18 @@ const ExporterUtils = {
             FileSaver.saveAs(file, `${filename}.csv`);
         }
     },
-    exportShp: function(features, columns, filename, fileToAdd) {
+    exportShp: function(features, columns, filename, fileToAdd, outputSrs) {
+        const format = new ol.format.GeoJSON();
+        let featureCollection = this.getFeaturesForShp(features, columns);
+        if (Array.isArray(featureCollection)) {
+            featureCollection = { "type": "FeatureCollection", features: featureCollection};
+        }
+        const olFeatures = format.readFeatures(featureCollection);
+        olFeatures.map((f) => f.getGeometry().transform('EPSG:4326', outputSrs));
+        const geoObject = format.writeFeaturesObject(olFeatures);
         const shpString = shpwrite.zip({
             type: 'FeatureCollection',
-            features: this.getFeaturesForShp(features, columns)
+            features: geoObject.features
             }, {
             folder: filename,
             types: {
@@ -55,6 +64,10 @@ const ExporterUtils = {
         zip.loadAsync(shpString, {base64: true}).then((result) => {
             if (fileToAdd) {
                 result.file(fileToAdd.name, fileToAdd.content);
+            }
+            if (ProWKTDef[outputSrs]) {
+                const prj = head(zip.file(/\.prj/));
+                result.file(prj.name, ProWKTDef[outputSrs]);
             }
             return result.generateAsync({ compression: 'STORE', type: 'blob'});
         }).then((blob) => FileSaver.saveAs(blob, `${filename}.zip`));
