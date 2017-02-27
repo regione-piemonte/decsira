@@ -13,7 +13,7 @@ const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
 
 const {categorySelector} = require('../selectors/sira');
-const {selectCategory, searchTextChange} = require('../actions/siracatalog');
+const {selectCategory, searchTextChange, selectSubCategory} = require('../actions/siracatalog');
 const SearchCategories = connect(categorySelector)(require('../components/Mosaic'));
 
 const SiraSearchBar = React.createClass({
@@ -36,8 +36,9 @@ const SiraSearchBar = React.createClass({
         onReset: React.PropTypes.func,
         searchText: React.PropTypes.string,
         onTextChange: React.PropTypes.func,
-        tileClick: React.PropTypes.func
-
+        tileClick: React.PropTypes.func,
+        selectSubCategory: React.PropTypes.func,
+        subcat: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -51,7 +52,8 @@ const SiraSearchBar = React.createClass({
             onSearch: () => {},
             onReset: () => {},
             onTextChange: () => {},
-            tileClick: () => {}
+            tileClick: () => {},
+            selectSubCategory: () => {}
         };
     },
     renderPopover() {
@@ -103,6 +105,8 @@ const SiraSearchBar = React.createClass({
             this.props.onSearch({text: "", category: cat});
             this.props.onTextChange("");
             this.props.tileClick(cat, subcat);
+        }else if (this.props.subcat !== subcat) {
+            this.props.selectSubCategory(subcat);
         }
 
 
@@ -111,8 +115,10 @@ const SiraSearchBar = React.createClass({
 
 module.exports = connect((state) => ( {
     category: state.siracatalog && state.siracatalog.category || {},
+    subcat: state.siracatalog && state.siracatalog.subcat,
     searchText: state.siracatalog && state.siracatalog.searchText
     }), {
     onTextChange: searchTextChange,
-    tileClick: selectCategory
+    tileClick: selectCategory,
+    selectSubCategory
 })(SiraSearchBar);
