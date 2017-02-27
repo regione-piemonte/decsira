@@ -11,6 +11,7 @@ const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVI
 const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
 
 const initialState = {
+  // showCart: true,
   showPanel: false,
   showLayersPanel: false,
   servicesNumber: 0,

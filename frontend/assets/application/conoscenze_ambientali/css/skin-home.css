@@ -1,43 +1,199 @@
-.home {
+#container, #map, .fill, .viewer, body, html {
+    height: auto!important;
+    position: relative!important;
+}
+
+body {
     background:url("images/desk2.jpg") no-repeat scroll center top #f2f2f2;
 	/*background-size:100%;*/
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	}
 
-@media (max-width: 767px) {
-.home {
-    background:none;
-	}
-}
 
 div.clear {
 	clear:both;
 	}
 
-body.home-page .container.testalino {
+div.home-page header.navbar{
+	min-height:30px;
+	margin:0;
+	background-color:rgba(0, 126, 79, 0.2);
+	}
+
+div.home-page header.navbar h1{
+	padding:2px 5px;
+	line-height:30px;
+	float:left;
+	background:#0053A8;
+	margin:0;
+	}
+
+div.home-page header.navbar h1 a{
+	color:#fff;
+	}
+
+div.home-page header.navbar h1 a:hover{
+	text-decoration:none;
+	}
+
+div.home-page header.navbar h1 a span{
+	border:1px solid #fff;
+	font-size:20px;
+	padding:0 2px;
+	}
+
+div.home-page .navbar-header{
+	float:none;
+    background:url("images/logo.png") no-repeat scroll center 100px transparent;
+	min-height:200px;
+	}
+
+div.home-page .navbar-header h2 {
+	text-indent:-10000px;
+	margin:2px 0;
+	line-height:30px;
+	color:#0053A8;
+	margin-left:10px;
+	float:left;
+}
+
+div.home-page .navbar-header h2 span{
+	font-weight:normal;
+}
+
+div.home-page .navbar-header .titolo-interna{
+    background:#fff url("images/logo-interna.png") no-repeat scroll 20px center;
+	height:55px;
+	min-height:55px;
+	}
+
+div.home-page .navbar-header .titolo-interna a{
+	height:55px;
+	min-height:55px;
+	display:block;
+	}
+
+
+div.home-page .navbar-header .map-list{
+	background:#000;
+	border:2px solid #000;
+	border-radius:20px;
+	color:#fff;
+	margin-top:3px;
+	float:left;
+}
+
+div.home-page .navbar-header .map-list .btn.btn-primary{
+	background:none;
+	border:0;
+	border-radius:20px;
+	padding:2px 6px;
+	font-size:14px;
+    font-weight: bold;
+	text-transform:uppercase;
+}
+
+div.home-page .navbar-header .map-list .btn.btn-primary.active{
+	background:#fff;
+	color:#000;
+}
+
+div.home-page .navbar-header .map-list .btn.btn-primary span.badge{
+	padding:3px 5px;
+	background:#007e4f;
+	color:#fff;
+}
+
+@media (max-width: 767px) {
+div.home-page .navbar-header .map-list .btn.btn-primary span.label-text{
+	display:none;
+}
+body {
+    background:none;
+	}
+div.home-page .navbar-header{
+    background:none;
+	min-height:auto;
+	}
+div.home-page .navbar-header h2 {
+	text-indent:0px;
+	font-size:1.2em;
+}
+}
+@media (max-width: 500px) {
+div.home-page .navbar-header h1 {
+	display:none;
+}
+div.home-page .navbar-header h2 {
+	font-size:1em;
+}
+}
+
+div.home-page .navbar-header .testalino-sx {
+	padding-left:0;
+}
+
+div.home-page .navbar-header .testalino-dx {
+	padding-right:0;
+}
+
+div.home-page .navbar-header .testalino-dx .pull-right{
+	margin-right:40px;
+}
+
+div.home-page .navbar-header .dropdown {
+    float: left;
+}
+
+div.home-page .navbar-header .btn-login {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    padding: 1px 3px;
+	color:#000;
+}
+
+div.home-page .navbar-header .fa.fa-user-circle-o.fa-2x {
+    font-size: 28px;
+    margin-top: 2px;
+}
+
+div.home-page .navbar-header .dropdown-menu {
+	background:#007E4F;
+}
+
+div.home-page .navbar-header .dropdown-menu a{
+	color:#FFF;
+	font-size:20px;
+}
+
+div.home-page .navbar-header .dropdown-menu a:hover{
+	text-decoration:underline;
+}
+/* div.home-page .container.testalino {
 	position:relative;
 	}
 
-body.home-page .menu-righe{
+div.home-page .menu-righe{
 	padding-right:0;
 	text-align:right;
 	}
 
-body.home-page .pimenu-navbar-toggle {
+div.home-page .pimenu-navbar-toggle {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: 0 none;
     font-size: 32px;
 	line-height:0;
 }
 
-body.home-page .pimenu-navbar-toggle:focus {
+div.home-page .pimenu-navbar-toggle:focus {
     background: #000;
 }
 
-body.home-page .pimenu-navbar-toggle:focus .fa-bars{
+div.home-page .pimenu-navbar-toggle:focus .fa-bars{
 	color:#FFFFFF;
 }
 
-body.home-page .container.testalino nav.pimenu-navbar-collapse {
+div.home-page .container.testalino nav.pimenu-navbar-collapse {
     height: auto;
     position: absolute;
     right: 0;
@@ -45,11 +201,11 @@ body.home-page .container.testalino nav.pimenu-navbar-collapse {
     width: 100%;
 }
 
-body.home-page .navbar-nav > li > a {
+div.home-page .navbar-nav > li > a {
     color: #ffffff;
 }
 
-body.home-page .navbar-nav > li > a:hover, body.home-page .navbar-nav > li > a:focus {
+div.home-page .navbar-nav > li > a:hover, div.home-page .navbar-nav > li > a:focus {
 	background:#272727;
 }
 
@@ -84,7 +240,7 @@ div.header h1 a {
 	height:111px;
 	margin-top:40px;
 	text-indent:-10000px;
-}
+} */
 
 .sb-sx {
     background:url("images/sfondo_bianco_sx.png") repeat-y scroll center top transparent;
@@ -143,11 +299,12 @@ div.header h1 a {
 	vertical-align:middle;
 	height:210px;
 	padding-top:75px;
-
 	}
 
 .search-home .ricerca-home .form-group{
-	width: 100% !important;
+	width: -moz-calc(100% - 60px)!important;
+	width: -webkit-calc(100% - 60px)!important;
+	width: calc(100% - 60px)!important;
 	float:left;
 	}
 
@@ -232,6 +389,10 @@ div.header h1 a {
 	text-transform:uppercase;
 	font-size:26px;
 }
+
+div.seicentopx {
+	height:600px;
+	}
 
 div.blocchetti {
 	margin-bottom:80px;
@@ -404,21 +565,7 @@ ul.categorie li.via:hover {
 	padding-top:40px;
 	transition:.3s;
 	}
-ul.categorie li.all {
-        background:url("images/info.png") no-repeat scroll center 25px #000;
-        opacity:.8;
-        padding-top:100px;
-        text-align:center;
-        color:#fff;
-        margin-bottom:10px;
-        font-size:14px;
-        }
 
-ul.categorie li.all:hover {
-        background-image:none;
-        padding-top:40px;
-        transition:.3s;
-        }
 ul.categorie li.info {
     background:url("images/info.png") no-repeat scroll center 25px #000;
 	opacity:.8;
@@ -466,23 +613,6 @@ ul.categorie li.inspire:hover {
 	padding-top:40px;
 	transition:.5s;
 	}
-
-ul.categorie li.all {
-    background:url("images/info.png") no-repeat scroll center 25px #000;
-    opacity:.8;
-    padding-top:100px;
-    text-align:center;
-    color:#fff;
-    margin-bottom:10px;
-    font-size:14px;
-}
-ul.categorie li.all:hover {
-    background-image:none;
-    padding-top:40px;
-    transition:.5s;
-}
-
-
 ul.categorie li.catalogo-ambientale {
     background:url("images/catalogo-ambientale.png") no-repeat scroll center 25px #000;
 	opacity:.8;
@@ -494,6 +624,21 @@ ul.categorie li.catalogo-ambientale {
 	}
 
 ul.categorie li.catalogo-ambientale:hover {
+    background-image:none;
+	padding-top:40px;
+	transition:.5s;
+	}
+ul.categorie li.all {
+    background:url("images/tutte.png") no-repeat scroll center 25px #000;
+	opacity:.8;
+	padding-top:100px;
+	text-align:center;
+	color:#fff;
+	margin-bottom:10px;
+	font-size:14px;
+	}
+
+ul.categorie li.all:hover {
     background-image:none;
 	padding-top:40px;
 	transition:.5s;
@@ -533,6 +678,7 @@ ul.categorie li span a {
     margin: 10px !important;
     opacity: 1;
     text-transform: uppercase;
+	cursor:pointer;
 }
 
 .items-badge {
@@ -543,6 +689,7 @@ ul.categorie li span a {
     margin: 0 2px;
     min-width: 25px !important;
     padding: 2px 3px;
+	color:#fff;
 }
 
 div.trebox {
@@ -673,4 +820,16 @@ html{
     border: 0 none;
     font-size: 32px;
     line-height: 0;
+}
+
+.search-home .ricerca-home .glyphicon-search::before {
+    color: black;
+    content: "\f002" !important;
+    font-family: FontAwesome !important;
+}
+
+.modal-dialog .btn-default {
+    background-color: #007E4F;
+    border: 0;
+    color: #fff;
 }
