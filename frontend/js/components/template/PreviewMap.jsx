@@ -116,7 +116,7 @@ const PreviewMap = React.createClass({
 
 module.exports = connect((state) => {
     return {
-        map: (state.map && state.map) || (state.config && state.config.map),
+        map: (state.map && state.map && state.map.present) || (state.config && state.config.map),
         activeSections: state.cardtemplate.activeSections || {}
     };
 }, {
