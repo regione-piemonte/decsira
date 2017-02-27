@@ -88,10 +88,10 @@ function addSiraLayersIncart(layers) {
     };
 }
 
-function addLayers(layers, useTitle, useGroup) {
+function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
-        const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, 'EPSG:32632', useTitle, useGroup, {}, node));
+        const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
             dispatch(addSiraLayers(results));
             dispatch(toggleAddMap(false));
@@ -99,10 +99,10 @@ function addLayers(layers, useTitle, useGroup) {
     };
 }
 
-function addLayersInCart(layers, useTitle, useGroup) {
+function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
-        const layersConfig = layers.map((layer) => AddMapUtils.getLayerConfing(layer, 'EPSG:32632', useTitle, useGroup, {}, node));
+        const layersConfig = layers.map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
             const cartLayers = getState().cart.layers || [];
             const resultOk = results.reduce((previous, current) => {
