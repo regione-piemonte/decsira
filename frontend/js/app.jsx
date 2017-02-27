@@ -15,7 +15,7 @@ LocaleUtils.setSupportedLocales({
             code: "it-IT",
             description: "Italiano"}});
 
-require('./utils/UTM32NUtils')();
+require('./utils/ProjUtils')();
 
 const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
 const {configureQueryForm} = require('./actions/siradec');

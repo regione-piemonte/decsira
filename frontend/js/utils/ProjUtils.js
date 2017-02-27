@@ -8,7 +8,7 @@
 const ol = require('openlayers');
 const Proj4js = require('proj4');
 
-module.exports = function addUTM32N() {
+module.exports = function addProjs() {
     Proj4js.defs("EPSG:32632", "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs");
     ol.proj.addProjection(new ol.proj.Projection({
         code: 'EPSG:32632',
