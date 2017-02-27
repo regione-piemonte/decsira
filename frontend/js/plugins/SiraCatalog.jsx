@@ -33,12 +33,13 @@ const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultG
 const DefaultNode = require('../components/catalog/DefaultNode');
 
 
-const AddMapModal = connect(({addmap = {}}) => ({
+const AddMapModal = connect(({addmap = {}, map = {}}) => ({
         error: addmap.error,
         node: addmap.node,
         records: addmap.records,
         loading: addmap.loading,
-        show: addmap.show
+        show: addmap.show,
+        srs: map.present && map.present.projection || 'EPSG:32632'
     }), {
     close: toggleAddMap.bind(null, false),
     addLayers: addLayers
@@ -85,7 +86,8 @@ const LayerTree = React.createClass({
         toggleAddMap: React.PropTypes.func,
         addLayer: React.PropTypes.func,
         toggleCategories: React.PropTypes.func,
-        showcategories: React.PropTypes.bool
+        showcategories: React.PropTypes.bool,
+        srs: React.PropTypes.string
     },
     getDefaultProps() {
         return {
