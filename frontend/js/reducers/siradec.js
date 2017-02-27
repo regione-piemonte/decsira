@@ -68,6 +68,7 @@ function siradec(state = initialState, action) {
                 featureTypeNameLabel: action.ftNameLabel,
                 nameSpaces: action.nameSpaces,
                 layer: action.layer,
+                exporter: action.exporter,
                 queryform
                 });
 

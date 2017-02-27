@@ -32,6 +32,8 @@ module.exports = {
         new NormalModuleReplacementPlugin(/openlayers$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "openlayers")),
         new NormalModuleReplacementPlugin(/proj4$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "proj4")),
         new NormalModuleReplacementPlugin(/ConfigUtils/, path.join(__dirname, "js", "utils", "ConfigUtils.js")),
+        new NormalModuleReplacementPlugin(/map\/openlayers\/Feature/, path.join(__dirname, "js", "Ms2Override", "Feature.jsx")),
+        new NormalModuleReplacementPlugin(/map\/openlayers\/plugins\/VectorLayer/, path.join(__dirname, "js", "Ms2Override", "VectorLayer.jsx")),
         new NoErrorsPlugin()
     ],
     resolve: {

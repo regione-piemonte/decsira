@@ -101,7 +101,7 @@ function getFeatureInfo(wmsBasePath, requestParams, lMetaData, options = {}, top
         info_format: 'application/json',
         x: 0,
         y: 0,
-        exceptions: 'application/json'
+        exceptions: 'application/vnd.ogc.se_xml'
     }, options);
     const param = assign({}, defaultParams, requestParams);
     const reqId = uuid.v1();

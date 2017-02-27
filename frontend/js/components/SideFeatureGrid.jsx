@@ -19,7 +19,7 @@ const {
 
 const {loadCardTemplate} = require('../actions/card');
 const {toggleSiraControl} = require('../actions/controls');
-const {setExportParams} = require('../actions/siraexporter');
+const {setExportParams, configureExporter} = require('../actions/siraexporter');
 
 const {
     // SiraQueryPanel action functions
@@ -53,7 +53,8 @@ module.exports = connect((state) => {
     header: state.grid.gridType === 'search' ? "featuregrid.header" : "featuregrid.header_all",
     backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch",
     gridType: state.grid.gridType,
-    maxFeatures: state.siraexporter.maxFeatures
+    maxFeatures: state.siraexporter.maxFeatures,
+    exporterConfig: activeConfig.exporter
     };
 }, {
     onDetail: loadCardTemplate,
@@ -66,5 +67,6 @@ module.exports = connect((state) => {
     onConfigureQuery: loadGridModelWithPagination,
     cleanError: configureGridError,
     selectAllToggle: selectAllToggle,
-    setExportParams
+    setExportParams,
+    configureExporter
 })(require('./FeatureGrid'));

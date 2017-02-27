@@ -42,7 +42,7 @@ const FilterUtils = require('../../../MapStore2/web/client/utils/FilterUtils');
 const MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
-const {isArray} = require('lodash');
+const {isArray, head} = require('lodash');
 
 const GetFeatureInfo = React.createClass({
     propTypes: {
@@ -151,11 +151,9 @@ const GetFeatureInfo = React.createClass({
             if (newProps.infoType === "getfeatureinfo") {
                 this.props.actions.purgeMapInfoResults();
                 const wmsVisibleLayers = newProps.layers.filter(newProps.layerFilter);
-
                 for (let l = 0; l < wmsVisibleLayers.length; l++) {
                     const layer = wmsVisibleLayers[l];
                     const {url, requestConf, layerMetadata} = this.calculateRequestParameters(layer, bounds, crs, newProps);
-
                     this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams);
 
                     // Load the template if required
@@ -320,7 +318,12 @@ const GetFeatureInfo = React.createClass({
         }
         return null;
     },
+    infoFormat(layerInfoFormat, propsInfoFormat) {
+        const infoFormats = isArray(layerInfoFormat) && layerInfoFormat || [layerInfoFormat];
+        return head(infoFormats.filter((f) => f === propsInfoFormat)) || head(infoFormats);
+    },
     calculateRequestParameters(layer, bounds, crs, newProps) {
+        const infoFormat = layer.infoFormat ? this.infoFormat(layer.infoFormat, newProps.infoFormat) : newProps.infoFormat;
         let requestConf = {
             id: layer.id,
             layers: layer.name,
@@ -336,7 +339,7 @@ const GetFeatureInfo = React.createClass({
                   bounds.maxx + "," +
                   bounds.maxy,
             feature_count: newProps.featureCount,
-            info_format: layer.infoFormat ? layer.infoFormat : newProps.infoFormat
+            info_format: infoFormat
         };
 
         if (newProps.params) {

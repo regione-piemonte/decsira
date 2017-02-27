@@ -87,7 +87,7 @@ const FullScreen = React.createClass({
         }
     },
     componentWillReceiveProps(nextProps) {
-        const {map, filterPanelExpanded, siraControls} = nextProps;
+        const {map, filterPanelExpanded, siraControls, gridExpanded} = nextProps;
         if (this.props.map !== map) {
             if (siraControls.detail) {
                 this.props.toggleSiraControl('detail');
@@ -95,6 +95,10 @@ const FullScreen = React.createClass({
             if (filterPanelExpanded) {
                 this.props.expandFilterPanel(false);
             }
+            if (gridExpanded) {
+                this.props.toggleSiraControl('grid');
+            }
+            this.props.selectFeatures([]);
             this.context.router.push(`/${this.props.params.profile}`);
         }
     },
@@ -146,14 +150,14 @@ const FullScreen = React.createClass({
         this.context.router.push(`/dataset/${this.props.params.profile}/`);
     },
     zoomToFeature(data) {
-        this.changeMapView([data.geometry]);
+        setTimeout(() => {this.changeMapView([data.geometry]); }, 0);
     },
     changeMapView(geometries) {
         let extent = geometries.reduce((prev, next) => {
             return CoordinateUtils.extendExtent(prev, CoordinateUtils.getGeoJSONExtent(next));
         }, CoordinateUtils.getGeoJSONExtent(geometries[0]));
         const center = mapUtils.getCenterForExtent(extent, "4326");
-        this.props.changeMapView(center, 15);
+        this.props.changeMapView(center, 15, null, null, null, this.props.map.projection || "EPSG:3857");
     },
     setSize() {
         this.setState({width: window.innerWidth});

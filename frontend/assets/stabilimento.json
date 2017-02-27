@@ -4,9 +4,29 @@
    "nameSpaces": {
      "siraemissioni": "http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"
    },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Stabilimenti soggetti ad autorizzazione ambientale",
+        "name": "siraemissioni:Stabilimento",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "stabilimento",
+        "group": "Oggetti",
+        "format": "image/png"
+        },
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
+    "pdfname": "Stabilimento_{{/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()}}.pdf",
      "template": "assets/cardTemplateStab.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
@@ -211,18 +231,21 @@
            "index": 6,
            "attribute": "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA",
            "label":"Partita IVA azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 7,
            "attribute": "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale",
            "label":"Codice fiscale azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 8,
            "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:idTipoProvvedimento",
            "label":"Tipo provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
 
@@ -239,6 +262,7 @@
            "index": 9,
            "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento",
            "label":"Data provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
            "fieldOptions": {
              "dateFormat": "DD/MM/YYYY"
@@ -248,6 +272,7 @@
            "index": 10,
            "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza",
            "label":"Data scadenza",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
            "fieldOptions": {
              "dateFormat": "DD/MM/YYYY"
@@ -257,6 +282,7 @@
            "index": 11,
            "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:tematica/siraemissioni:Tematica/siraemissioni:idTematica",
            "label":"Ambito Tematico",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
 
@@ -287,6 +313,7 @@
            "index": 13,
            "attribute": "siraemissioni:idStato",
            "label":"Stato",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
              "urlParams": {

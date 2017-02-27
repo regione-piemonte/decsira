@@ -154,7 +154,7 @@ const Header = React.createClass({
                 <CartPanel />
                 <LoginPanel />
             </div>
-    );
+     );
     }
 });
 

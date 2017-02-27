@@ -10,7 +10,8 @@ module.exports = {
     plugins: {
         MapPlugin: require('../MapStore2/web/client/plugins/Map'),
         MousePositionPlugin: require('../MapStore2/web/client/plugins/MousePosition'),
-        PrintPlugin: require('../MapStore2/web/client/plugins/Print'),
+        UndoPlugin: require('../MapStore2/web/client/plugins/History'),
+        RedoPlugin: require('../MapStore2/web/client/plugins/History'),
         SnapshotPlugin: require('../MapStore2/web/client/plugins/Snapshot'),
         ShapeFilePlugin: require('../MapStore2/web/client/plugins/ShapeFile'),
         MetadataExplorerPlugin: require('../MapStore2/web/client/plugins/MetadataExplorer'),
@@ -32,8 +33,9 @@ module.exports = {
         ZoomAllPlugin: require('../MapStore2/web/client/plugins/ZoomAll'),
         ToolbarPlugin: require('../MapStore2/web/client/plugins/Toolbar'),
         SettingsPlugin: require('../MapStore2/web/client/plugins/Settings'),
+        HelpPlugin: require('../MapStore2/web/client/plugins/Help'),
+        SharePlugin: require('../MapStore2/web/client/plugins/Share'),
         InfoPlugin: require('./plugins/InfoPlugin')
-
     },
     requires: {}
 };

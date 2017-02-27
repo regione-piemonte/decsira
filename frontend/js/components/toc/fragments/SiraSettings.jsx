@@ -49,8 +49,9 @@ const SiraSettings = React.createClass({
             </div>);
     },
     renderLegend() {
+        const renderSTool = this.props.element.featureType ? true : false;
         return (
-            <div key="legend" style={{width: "65%", display: "inline-block"}}>
+            <div key="legend" className={renderSTool ? "sira-toc-legend-with-tools" : "sira-toc-legend"}>
                 <WMSLegend node={this.props.element}/>
             </div>
             );

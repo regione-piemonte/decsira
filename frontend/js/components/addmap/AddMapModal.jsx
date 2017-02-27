@@ -21,7 +21,8 @@ const AddMapModal = React.createClass({
         loading: React.PropTypes.bool,
         show: React.PropTypes.bool,
         close: React.PropTypes.func,
-        addLayers: React.PropTypes.func
+        addLayers: React.PropTypes.func,
+        srs: React.PropTypes.string
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -36,7 +37,8 @@ const AddMapModal = React.createClass({
             loading: false,
             close: () => {},
             addLayers: () => {},
-            node: {}
+            node: {},
+            srs: 'EPSG:32632'
         };
     },
     renderSpinner() {
@@ -96,7 +98,7 @@ const AddMapModal = React.createClass({
             const {useTitle, useGroup} = this.state;
             const selectedLayers = this.traverseRecords(records, flatLayers);
             if (selectedLayers.length > 0) {
-                this.props.addLayers(selectedLayers, useTitle, useGroup);
+                this.props.addLayers(selectedLayers, useTitle, useGroup, this.props.srs);
             }
         }
     }

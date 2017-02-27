@@ -72,8 +72,8 @@ public final class FeatureUtils {
      * @param expression
      * @return
      */
-    public static <T> T getFeatureProperty(Object obj, PropertyName expression) {
-        return getFeatureProperty(obj, expression.getPropertyName(), null, expression.getNamespaceContext());
+    public static Object getFeatureProperty(Object obj, PropertyName expression) {
+        return getFeatureProperty(obj, expression.getPropertyName(), expression.getNamespaceContext());
     }
 
     /**
@@ -84,15 +84,15 @@ public final class FeatureUtils {
      * @param namespaceSupport
      * @return
      */
-    public static <T> T getFeatureProperty(Object obj, String attPath, Class<T> target, NamespaceSupport namespaceSupport) {
+    public static Object getFeatureProperty(Object obj, String attPath, NamespaceSupport namespaceSupport) {
         Hints hints = null;
         if (namespaceSupport != null) {
             hints = new Hints(PropertyAccessorFactory.NAMESPACE_CONTEXT, namespaceSupport);
         }
 
-        final PropertyAccessor accessor = new FeaturePropertyAccessorFactory().createPropertyAccessor(obj.getClass(), attPath, target, hints);
+        final PropertyAccessor accessor = new FeaturePropertyAccessorFactory().createPropertyAccessor(obj.getClass(), attPath, Property.class, hints);
         try {
-            return accessor.get(obj, attPath, target);
+            return accessor.get(obj, attPath, Property.class);
         } catch (Exception e) {
             LOGGER.log(Level.FINER, "Could not find working property accessor for attribute (" + attPath + ") in object (" + obj + ")", e);
 
@@ -173,10 +173,22 @@ public final class FeatureUtils {
      * @param hiddenAttribute attribute that should be hidden
      */
     private static void hideFeatureAttribute(Feature feature, PropertyName hiddenAttribute) {
-        final Property hiddenProperty = getFeatureProperty(feature, hiddenAttribute);
+        final Object hiddenProperty = getFeatureProperty(feature, hiddenAttribute);
+        
         if (hiddenProperty != null) {
-            hiddenProperty.setValue(null);
+        	if(hiddenProperty instanceof List) {
+            	for(Object prop : (List)hiddenProperty) {
+            		hideProperty(prop);
+            	}
+            }
+        	hideProperty(hiddenProperty);
         }
     }
+
+	private static void hideProperty(Object prop) {
+		if(prop instanceof Property) {
+			((Property)prop).setValue(null);
+		}
+	}
 
 }

@@ -23,7 +23,7 @@ module.exports = {
                     expanded: false
                 },
                 drawer: {
-                    enabled: false,
+                    enabled: true,
                     menu: "1"
                 }
             }

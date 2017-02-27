@@ -51,7 +51,8 @@ const AddMapUtils = {
                 props.group = group;
                 props.groupTitle = groupTitle;
                 props.nodetype = 'layer';
-                props.url = wmsUrl;
+                props.infoFormat = r.infoFormat;
+                props.url = r.onlineResource && r.onlineResource["xlink:href"] || wmsUrl;
                 return acc.concat(assign({}, r, props));
             }
             props.nodetype = 'group';
@@ -100,7 +101,7 @@ const AddMapUtils = {
             if (srs > 0 && !CoordinatesUtils.isAllowedSRS(projection, allowedSRS)) {
                 reject(new Error("'catalog.srs_not_allowed"));
             }
-            const nodeGroup = node.title;
+            const nodeGroup = (node.title || "").replace(/\./g, '${dot}');
             const group = useTitle ? layer.groupTitle : layer.group;
             resolve(assign({}, {
                     url: layer.url,
@@ -110,6 +111,7 @@ const AddMapUtils = {
                     params: params,
                     allowedSRS: allowedSRS,
                     siraId: node.id,
+                    infoFormat: layer.infoFormat,
                     group: useGroup ? group || nodeGroup : nodeGroup
                 }, layerDefaultConfig));
         });
