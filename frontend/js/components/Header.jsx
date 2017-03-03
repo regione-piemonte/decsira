@@ -15,7 +15,7 @@ const {
     hideLoginPanel
 } = require('../actions/userprofile');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {showPanel, hidePanel, removeServiceFromCart, prepareDataToMap} = require('../actions/cart');
+const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
 
 const LoginNav = connect((state) => ({
