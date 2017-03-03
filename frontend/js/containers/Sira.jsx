@@ -15,7 +15,7 @@ const {connect} = require('react-redux');
 
 const SidePanel = require('./SidePanel');
 const Card = require('../components/template/Card');
-const Header = require('../components/MapHeader');
+const Header = require('../components/Header');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
@@ -171,8 +171,8 @@ const Sira = React.createClass({
     },
     render() {
         return (
-            <div className="mappaSiraDecisionale">
-                <Header onBack={this.back} onHome={this.goHome}/>
+            <div className="interna">
+                <Header showCart="true" onBack={this.back} onHome={this.goHome}/>
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}

@@ -11,6 +11,7 @@ const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVI
 const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
 
 const initialState = {
+  // showCart: true,
   showPanel: false,
   showLayersPanel: false,
   servicesNumber: 0,
@@ -30,9 +31,13 @@ function cart(state = initialState, action) {
         return assign({}, state, {servicesNumber: state.wmsservices.length});
     }
     case SIRA_ADD_LAYERS_IN_CART: {
+        let layersOk = state.layers ? state.layers : [];
+        if (action.layers) {
+            action.layers.forEach((l) => (layersOk.push(l)));
+        }
         return assign({}, state,
             {
-                layers: action.layers
+                layers: layersOk
             }
         );
     }
@@ -49,7 +54,7 @@ function cart(state = initialState, action) {
             }
         );
     }case RM_LAYERS_SERVICES: {
-        let layersOk = state.cart && state.cart.layers ? state.cart.layers : [];
+        let layersOk = state.layers ? state.layers : [];
         if (action.idNode) {
             layersOk = layersOk.filter((el) => el.idNode !== action.idNode);
         }
@@ -59,13 +64,13 @@ function cart(state = initialState, action) {
             }
         );
     }case RM_SERVICES: {
-        let servicesOk = state.cart && state.cart.wmsservices ? state.cart.wmsservices : [];
+        let servicesOk = state.wmsservices ? state.wmsservices : [];
         if (action.idService) {
             servicesOk = servicesOk.filter((el) => el.id !== action.idService);
         }
         return assign({}, state,
             {
-                layers: servicesOk
+                wmsservices: servicesOk
             }
         );
     }
