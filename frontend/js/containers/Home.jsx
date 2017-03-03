@@ -42,7 +42,8 @@ const Home = React.createClass({
         };
     },
     render() {
-        return (<div className="home">
+        return (
+            <div className="home-page">
             <Header />
             <div className="container-fluid">
                 <div className="row-fluid sb-sx">

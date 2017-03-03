@@ -95,6 +95,7 @@ const authParams = {
     }
  };
 
+const {toggleAddMap, loadNodeMapRecords} = require('../actions/addmap');
 
 const Dataset = React.createClass({
     propTypes: {
@@ -129,6 +130,8 @@ const Dataset = React.createClass({
         setGridType: React.PropTypes.func,
         getThematicViewConfig: React.PropTypes.func,
         map: React.PropTypes.object,
+        toggleAddMap: React.PropTypes.func,
+        loadNodeMapRecords: React.PropTypes.func,
         toggleCategories: React.PropTypes.func,
         showcategories: React.PropTypes.bool
     },
@@ -192,12 +195,14 @@ const Dataset = React.createClass({
                             onToggle={this.props.onToggle}
                             groups={this.props.nodes}
                             showInfoBox={this.showInfoBox}
+                            addToMap={this.addToCart}
                             />
                     </DefaultGroup>) : (<DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
                             flat={true}
                             showInfoBox={this.showInfoBox}
+                            addToMap={this.addToCart}
                             />) }
                 </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
@@ -225,9 +230,9 @@ const Dataset = React.createClass({
     render() {
         const {category} = this.props;
         return (
-            <div className="dataset-container home">
+            <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
-                    <Header onClickHome={this.goHome}/>
+                    <Header showCart="true" />
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
@@ -269,6 +274,12 @@ const Dataset = React.createClass({
     showInfoBox(node) {
         this.props.loadMetadata(node);
         this.props.showInfoBox();
+    },
+    addToCart(node) {
+        // dispatch(toggleAddMap(true));
+        // dispatch(loadNodeMapRecords(demoNode));
+        this.props.toggleAddMap(true);
+        this.props.loadNodeMapRecords(node);
     },
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
@@ -312,5 +323,7 @@ module.exports = connect(datasetSelector, {
     toggleSiraControl,
     setGridType,
     getThematicViewConfig,
+    toggleAddMap: toggleAddMap,
+    loadNodeMapRecords: loadNodeMapRecords,
     toggleCategories
 })(Dataset);
