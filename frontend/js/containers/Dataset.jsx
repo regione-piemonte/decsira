@@ -10,7 +10,7 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {Tabs, Tab} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
-const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, toggleCategories} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory} = require('../actions/siracatalog');
 
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
@@ -95,6 +95,7 @@ const authParams = {
     }
  };
 
+const {toggleAddMap, loadNodeMapRecords} = require('../actions/addmap');
 
 const Dataset = React.createClass({
     propTypes: {
@@ -129,21 +130,17 @@ const Dataset = React.createClass({
         setGridType: React.PropTypes.func,
         getThematicViewConfig: React.PropTypes.func,
         map: React.PropTypes.object,
-        toggleCategories: React.PropTypes.func,
-        showcategories: React.PropTypes.bool
+        toggleAddMap: React.PropTypes.func,
+        loadNodeMapRecords: React.PropTypes.func
     },
     contextTypes: {
         router: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
-            showcategories: true
-        };
     },
     getInitialState() {
             return {
                 params: {},
                 searchText: "",
+                showCategories: false,
                 onToggle: () => {},
                 setProfile: () => {}
             };
@@ -175,16 +172,17 @@ const Dataset = React.createClass({
         return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
     },
     renderResults() {
-        const {loading, objects, views, showcategories} = this.props;
+        const {loading, objects, views} = this.props;
+        const {showCategories} = this.state;
         const searchSwitch = this.props.nodes.length > 0 ? (
             <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
-                <div className="dataset-categories-switch" onClick={() => this.props.toggleCategories(!showcategories)}>
-                    <span>{showcategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+                <div className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
+                    <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
                 </div>
             </div>) : (<noscript key="categoriesSearch"/>);
         const tocObjects = (
-            <TOC id="dataset-toc" key="dataset-toc" nodes={showcategories ? this.props.nodes : this.props.objects}>
-                    { showcategories ?
+            <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
+                    { showCategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
@@ -192,19 +190,22 @@ const Dataset = React.createClass({
                             onToggle={this.props.onToggle}
                             groups={this.props.nodes}
                             showInfoBox={this.showInfoBox}
+                            addToMap={this.addToCart}
                             />
                     </DefaultGroup>) : (<DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
                             flat={true}
                             showInfoBox={this.showInfoBox}
+                            addToMap={this.addToCart}
                             />) }
                 </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             node={v}
             onToggle={this.props.onToggle}
             addToMap={this.loadThematicView}
-            showInfoBox={this.showInfoBox}/>)) : <div/>;
+            showInfoBox={this.showInfoBox}
+            />)) : (<div/>);
         const objEl = [searchSwitch, tocObjects];
         return (
             <Tabs
@@ -225,9 +226,9 @@ const Dataset = React.createClass({
     render() {
         const {category} = this.props;
         return (
-            <div className="dataset-container home">
+            <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
-                    <Header onClickHome={this.goHome}/>
+                    <Header showCart="true" />
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
@@ -254,13 +255,6 @@ const Dataset = React.createClass({
         }
         if (text && text.length > 0) {
             params.text = text;
-            /*if (this.props.showcategories) {
-                this.props.toggleCategories(!this.props.showcategories);
-            }*/
-        }else {
-            if (!this.props.showcategories) {
-                this.props.toggleCategories(!this.props.showcategories);
-            }
         }
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
@@ -269,6 +263,12 @@ const Dataset = React.createClass({
     showInfoBox(node) {
         this.props.loadMetadata(node);
         this.props.showInfoBox();
+    },
+    addToCart(node) {
+        // dispatch(toggleAddMap(true));
+        // dispatch(loadNodeMapRecords(demoNode));
+        this.props.toggleAddMap(true);
+        this.props.loadNodeMapRecords(node);
     },
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
@@ -293,9 +293,6 @@ const Dataset = React.createClass({
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
-    },
-    goHome() {
-        this.context.router.push(`/new/${this.props.params.profile}`);
     }
 });
 
@@ -312,5 +309,6 @@ module.exports = connect(datasetSelector, {
     toggleSiraControl,
     setGridType,
     getThematicViewConfig,
-    toggleCategories
+    toggleAddMap: toggleAddMap,
+    loadNodeMapRecords: loadNodeMapRecords
 })(Dataset);

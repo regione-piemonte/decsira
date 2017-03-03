@@ -8,15 +8,15 @@
 
 const React = require('react');
 const {connect} = require('react-redux');
-
 const {Glyphicon} = require('react-bootstrap');
+
 const {
     showLoginPanel,
     hideLoginPanel
 } = require('../actions/userprofile');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {showPanel, hidePanel, addServiceIncart, refreshNumberOfServices, removeServiceFromCart, prepareDataToMap} = require('../actions/cart');
-const {toggleAddMap, loadNodeMapRecords, addLayersInCart} = require('../actions/addmap');
+const {showPanel, hidePanel, removeServiceFromCart, prepareDataToMap} = require('../actions/cart');
+const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
@@ -27,7 +27,7 @@ const LoginNav = connect((state) => ({
     showAccountInfo: false,
     showPasswordChange: false,
     showLogout: true,
-    className: "square-button"
+    className: "btn btn-default btn-login dropdown-toggle"
 }), {
       onShowLogin: showLoginPanel,
       onLogout: () => {
@@ -35,52 +35,11 @@ const LoginNav = connect((state) => ({
       }
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
 
-// only dev
-const demoNode = {
-    "id": 41297,
-    "functions": [
-        {
-         "type": "Mappa",
-         "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_cds?"
-    }],
-    "layers": [{
-        "id": "41297_0",
-        "name": "41297_0",
-        "type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_cds?"
-    }],
-    "name": 41297,
-    "text": "Dato relativo al Monitoraggio del Consum",
-    "title": "Consumo di suolo (Aggiornamento 2013)",
-    "type": "node"
-};
-
-// only dev
-const demoNode2 = {
-    "id": 41322,
-    "functions": [
-        {
-         "type": "Mappa",
-         "url": "http://geomap.reteunitaria.piemonte.it/ws/esiri/rp-01/siriogc/wms_corpi_idrici_wfd?"
-
-    }],
-    "layers": [{
-        "id": "41322_0",
-        "name": "41322_0",
-        "type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/esiri/rp-01/siriogc/wms_corpi_idrici_wfd?"
-    }],
-    "name": 41322,
-    "text": "Rappresentazione spaziale dei corpi idrici sotterranei (GWB GroundWater Body) che sono costituiti dai sistemi acquiferi superficiali, di fondovalle e profondi  ovvero di volumi di acqua con simili caratteristiche qualitative e quantitative, relativi al territorio di pianura della Regione Piemonte alla scala 1:250.000.",
-    "title": "Corpi idrici sotterranei GWB ai sensi delle Direttive Europee 2000/60/CE (WFD) e 2006/118/CE",
-    "type": "node"
-};
-
 const AddMapModal = connect(({addmap = {}}) => ({
          error: addmap.error,
          records: addmap.records,
          loading: addmap.loading,
-         node: demoNode,
+         // node: demoNode,
          show: addmap.show
     }), {
     close: toggleAddMap.bind(null, false),
@@ -98,34 +57,22 @@ const CartPanel = connect((state) => ({
         },
         removeService: (id) => {
             dispatch(removeServiceFromCart(id));
+            dispatch(removeLayersFromCart(id));
         },
         goToMap: () => {
             dispatch(prepareDataToMap());
+            dispatch(hidePanel());
         }
     }; })(require('./CartPanel'));
 
 const Cart = connect((state) => ({
+    showCart: false,
     servicesNumber: state.cart.servicesNumber
 }),
 (dispatch) => {
     return {
     showCartPanel: () => {
         dispatch(showPanel());
-    },
-    showChooseLayersPanel: () => {
-        // charge node in cart
-        // use AddMapModal actions ...
-        dispatch(toggleAddMap(true));
-        dispatch(loadNodeMapRecords(demoNode));
-    },
-    // todo remove
-    showChooseLayersPanel2: () => {
-        // charge node in cart
-        dispatch(addServiceIncart(demoNode2));
-        // use AddMapModal actions ...
-        dispatch(toggleAddMap(true));
-        dispatch(loadNodeMapRecords(demoNode2));
-        dispatch(refreshNumberOfServices());
     }
 }; })(require('./Cart'));
 
@@ -141,61 +88,73 @@ const LoginPanel = connect((state) => ({
 
 const Header = React.createClass({
     propTypes: {
-        onClickHome: React.PropTypes.func.isRequired
+        showCart: React.PropTypes.bool
     },
+
     getDefaultProps() {
         return {
-            onClickHome: () => {}
-        };
+            showCart: false
+       };
     },
+
+    renderCart() {
+        return this.props.showCart ? <Cart /> : null;
+    },
+
     render() {
         return (
-            <div id="header-servizio" className="container-fluid">
-            <div className="row-fluid">
-            <div className="container testalino">
-                <div className="row">
+            <div className="navbar-header">
+                <header className="navbar">
+                    <div className="row-fluid">
 
-                    <div id="portalHeader">
-                        <noscript className="alert_js">
-                        <p>ATTENZIONE! Il browser in uso non supporta le applicazioni Javascript.<br />
-                        Per usufruire in maniera completa di alcuni servizi presenti in RuparPiemonte,
-                        potrebbe essere necessario l&acute;utilizzo dei Javascript.</p></noscript>
+                        <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 testalino-sx">
+                            <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte"><span>SP</span></a></h1>
+                            <h2><span>Sistema</span> Conoscenze Ambientali</h2>
+                        </div>
 
-                        <div className="header" >
-                            <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte">SP</a></h1>
+                        <div className="col-lg-3 col-md-3 col-sm-4 col-xs-4 testalino-dx">
+                            <div className="pull-right">
+                                {this.renderCart()}
+                                {/* cart }
+                                <div data-toggle="buttons" className="btn-group map-list">
+                                    <label className="btn btn-primary active">
+                                        <input type="radio" checked="" autoComplete="off" id="option1" name="options" >
+                                            <i className="fa fa-list" aria-hidden="true"></i>
+                                            <span className="label-text">Lista</span>
+                                        </input>
+                                    </label>
+                                    <label className="btn btn-primary">
+                                        <input type="radio" autoComplete="off" id="option2" name="options">
+                                            <i className="fa fa-map-o" aria-hidden="true"></i>
+                                            <span className="label-text">Mappa</span>
+                                            <span className="badge">4</span>
+                                        </input>
+                                    </label>
+                                </div>
+                                { cart end */}
+                                <LoginNav />
+                            </div>
+                            <a className="offcanvas-toggle" aria-expanded="false">
+                                <span className="sr-only">Toggle navigation</span>
+                                <i className="fa fa-bars fa-2x"></i>
+                            </a>
+
+                            <div className="collapse navbar-collapse" id="offcanvas-sidebar">
+                                <ul id="menu" className="nav navbar-nav navbar-right">
+                                    <li data-menuanchor="home"><a href="#">Sistema Conoscenze Ambientali</a></li>
+                                    <li data-menuanchor="piemontepay"><a href="#">Credits</a></li>
+                                    <li data-menuanchor="pagamenti"><a href="#">Help</a></li>
+                                </ul>
+                            </div>
+
                         </div>
 
                     </div>
-                    <div className="titoloServizio col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <h2 onClick={this.props.onClickHome}>Sira</h2>
-                    </div>
-
-                    <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                    <LoginNav />
-                    <LoginPanel />
-                    </div>
-                    <div className="menu-righe col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                      <button className="pimenu-navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".pimenu-navbar-collapse">
-                        <i className="fa fa-bars"></i>
-                      </button>
-                    </div>
-                </div>
-                    <div className="cartcontainer">
-                    <Cart />
-                    </div>
-                    <AddMapModal />
-                    <nav className="pimenu-navbar-collapse collapse">
-                            <ul className="nav navbar-nav">
-                        <li className="item-113"><a id="profileALink" href="#">Profilo A</a></li>
-                        <li className="item-125"><a id="profileBLink" href="#">Profilo B</a></li>
-                            </ul>
-                    </nav>
-
-
-                </div>
-        </div>
-        <CartPanel />
-        </div>
+                </header>
+                <AddMapModal />
+                <CartPanel />
+                <LoginPanel />
+            </div>
     );
     }
 });
