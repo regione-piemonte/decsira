@@ -1,9 +1,13 @@
 {
   "map": {
-    "projection": "EPSG:900913",
+    "projection": "EPSG:32632",
     "units": "m",
-    "center": {"x": 1159311.21, "y": 5614758.35, "crs": "EPSG:900913"},
-    "zoom": 8,
+    "center": {"x": 807374, "y": 5606503, "crs": "EPSG:3857"},
+    "zoom": 6,
+    "mapOptions": {
+        "view" : {
+                "extent": [302000, 4800000, 550000, 5000000]}
+            },
     "maxExtent": [
       -20037508.34, -20037508.34,
       20037508.34, 20037508.34
@@ -17,23 +21,13 @@
         "group": "background",
         "visibility": false
       },
-      {
-        "type": "wms",
-        "url": "http://demo.geo-solutions.it/geoserver/geosolutions/wms",
-        "name": "geosolutions:OrtofotoRegione2010",
-        "title": "Ortofoto Piemonte 2009-2011",
-        "group": "background",
-        "visibility": false,
-        "format": "image/jpeg",
-        "tiled": true
-      },
-      {
+	  {
         "type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
         "name": "SfondoCartRifBN",
         "title": "Sfondo Cartografico BN",
         "group": "background",
-        "visibility": false,
+        "visibility": true,
         "format": "image/png",
         "tiled": true,
         "tileSize": 512
@@ -49,29 +43,15 @@
         "tiled": true,
         "tileSize": 512
       },
-	     {
-        "type": "osm",
-        "title": "Open Street Map",
-        "name": "mapnik",
-        "source": "osm",
-        "group": "background",
-        "visibility": true
-      },
       {
-        "type": "google",
-        "title": "Google HYBRID",
-        "name": "HYBRID",
-        "source": "google",
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
+        "name": "OrtofotoRegione2010",
+        "title": "Ortoimmagini Piemonte 2009-2011",
         "group": "background",
-        "visibility": false
-      },
-      {
-        "type": "google",
-        "title": "Google TERRAIN",
-        "name": "TERRAIN",
-        "source": "google",
-        "group": "background",
-        "visibility": false
+        "visibility": false,
+        "format": "image/png",
+        "tiled": true
       },
       {
   			"type": "wms",
@@ -92,7 +72,7 @@
         "group": "Oggetti",
         "format": "image/png"
         },
-		
+
 		  {
   			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",

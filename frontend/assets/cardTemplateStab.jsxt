@@ -3,35 +3,36 @@
     header={(
         <DetailTitle title='STABILIMENTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE' subtitle={[
             'Denominazione: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
             ]} id={model.id}/>
     )}>
+
     <Panel className="template">
         <Section header='DATI GENERALI - Stabilimento' eventKey='1' expanded={true}>
           <LabeledField label='Codice sira' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:codiceSira/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")
             }/>
         <LabeledField label='Denominazione' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
         }/>
         <LabeledField label='Provincia' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:desProvincia/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desProvincia/text()")
         }/>
         <LabeledField label='Comune' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nomeComune/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()")
         }/>
 
         <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
           <LabeledField label='Indirizzo' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:indirizzo/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:indirizzo/text()")
           }/>
           <LabeledField label='Email-pec' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:emailPec/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:emailPec/text()")
           }/>
         </ProfileWrapper>
 
         <LabeledField label='Industria agro-alimentare' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:industriaAgroAlimentare/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:industriaAgroAlimentare/text()")
         }/>
         </Section>
 
@@ -40,42 +41,42 @@
         <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
           <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
               <LabeledField label='Ragione sociale' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()")
               }/>
               <LabeledField label='Codice fiscale' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale/text()")
               }/>
               <LabeledField label='Partita IVA' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA/text()")
               }/>
               <LabeledField label='Provincia' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desProvincia/text()")
               }/>
               <LabeledField label='Comune' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desComune/text()")
               }/>
               <LabeledField label='Indirizzo' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:indirizzo/text()")
               }/>
               <LabeledField label='Telefono' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:telefono/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:telefono/text()")
               }/>
               <LabeledField label='Fax' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:fax/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:fax/text()")
               }/>
               <LabeledField label='Numero iscrizione CCIAA' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:numeroCIAA/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:numeroCIAA/text()")
               }/>
               <LabeledField label='Anno iscrizione CCIAA' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:annoCIAA/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:annoCIAA/text()")
               }/>
 
               <Section header='Dati titolare/legale rappresentante' eventKey='8' expanded={true}>
                   <LabeledField label='Cognome' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:cognomeTitolare/text()")
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:cognomeTitolare/text()")
                   }/>
                   <LabeledField label='Nome' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:nomeTitolare/text()")
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:nomeTitolare/text()")
                   }/>
               </Section>
           </Section>
@@ -84,13 +85,13 @@
         <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
             <Section header='DATI AZIENDA' eventKey='9' expanded={true}>
                 <LabeledField label='Ragione sociale' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()")
                 }/>
                 <LabeledField label='Provincia' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desProvincia/text()")
                 }/>
                 <LabeledField label='Comune' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desComune/text()")
                 }/>
            </Section>
         </ProfileWrapper>
@@ -106,21 +107,21 @@
                         {
                             headerName: 'Codice ateco',
                             width: 100,
-                            xpath:"siraemissioni:AttivitaProduttiva/siraemissioni:codAteco/text()"
+                            xpath:"decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:codAteco/text()"
                         },
                         {
                             headerName: 'Descrizione attivita Ateco',
                             width: 650,
-                            xpath: "siraemissioni:AttivitaProduttiva/siraemissioni:desAteco/text()"
+                            xpath: "decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:desAteco/text()"
                         }
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:attivitaProduttiva")}/>
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:attivitaProduttiva")}/>
         </Section>
 
         <Section header='IMPIANTO DI DEPURAZIONE' eventKey='3' expanded={false}>
             <LabeledField label='Abitanti equivalenti trattati' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:abitantiEquivalentiTrattati/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()")
             }/>
         </Section>
 
@@ -138,21 +139,21 @@
                         {
                             headerName: 'Tipo prelievo',
                             width: 260,
-                            xpath:"siraemissioni:PrelievoAcqua/siraemissioni:desTipoPrelievo/text()"
+                            xpath:"decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:desTipoPrelievo/text()"
                         },
                         {
                             headerName: 'Denominazione impianto depurazione terzi',
                             width: 350,
-                            xpath: "siraemissioni:PrelievoAcqua/siraemissioni:denomImpiantoDepurTerzi/text()"
+                            xpath: "decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:denomImpiantoDepurTerzi/text()"
                         },
                         {
                             headerName: 'Gestore impianto depurazione terzi',
                             width: 350,
-                            xpath: "siraemissioni:PrelievoAcqua/siraemissioni:gestImpiantoDepurTerzi/text()"
+                            xpath: "decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:gestImpiantoDepurTerzi/text()"
                         }
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:prelievoAcqua")}/>
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:prelievoAcqua")}/>
              </ProfileWrapper>
 
              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
@@ -166,30 +167,30 @@
                            {
                                headerName: 'Tipo prelievo',
                                width: 600,
-                               xpath:"siraemissioni:PrelievoAcqua/siraemissioni:desTipoPrelievo/text()"
+                               xpath:"decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:desTipoPrelievo/text()"
                            }
                        ]
                    }
-                   features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:prelievoAcqua")}/>
+                   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:prelievoAcqua")}/>
                 </ProfileWrapper>
           </Section>
 
           <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
             <Section header='Ricircolo' eventKey='6' expanded={false}>
                 <LabeledField label='Ricircolo interno' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:ricircoloInterno/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:ricircoloInterno/text()")
                 }/>
                 <LabeledField label='Modalita di ricircolo' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:modalitaRicircolo/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:modalitaRicircolo/text()")
                 }/>
                 <LabeledField label='Percentuale ricircolo' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:percentualeRicircolo/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:percentualeRicircolo/text()")
                 }/>
                 <LabeledField label='Volume annuo ricircolo (m3)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:volumeAnnuoRicircolo/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:volumeAnnuoRicircolo/text()")
                 }/>
                 <LabeledField label='Volume giornaliero ricircolo (m3)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:volumeGiornoRicircolo/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:volumeGiornoRicircolo/text()")
                 }/>
             </Section>
           </ProfileWrapper>
@@ -213,21 +214,21 @@
                               {
                                   headerName: 'Tipo certificazione',
                                   width: 350,
-                                  xpath:"siraemissioni:CertificazioneAmbientale/siraemissioni:desTipoCertificazione/text()"
+                                  xpath:"decsiraogc_stabilimenti:CertificazioneAmbientale/decsiraogc_stabilimenti:desTipoCertificazione/text()"
                               },
                               {
                                   headerName: 'Data',
                                   width: 100,
-                                  xpath: "siraemissioni:CertificazioneAmbientale/siraemissioni:dataRilascio/text()"
+                                  xpath: "decsiraogc_stabilimenti:CertificazioneAmbientale/decsiraogc_stabilimenti:dataRilascio/text()"
                               },
                               {
                                   headerName: 'Ente',
                                   width: 350,
-                                  xpath: "siraemissioni:CertificazioneAmbientale/siraemissioni:desEnteCompetente/text()"
+                                  xpath: "decsiraogc_stabilimenti:CertificazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
                               }
                           ]
                       }
-                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:certificazioneAmbientale")}/>
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:certificazioneAmbientale")}/>
                 </Section>
               </ProfileWrapper>
 
@@ -243,46 +244,46 @@
                               {
                                   hide: true,
                                   id: true,
-                                  xpath: "siraemissioni:OggettoAssociato/@gml:id"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/@gml:id"
                               },
                               {
                                   headerName: 'Tipo',
                                   width: 200,
-                                  xpath:"siraemissioni:OggettoAssociato/siraemissioni:desTipo/text()"
+                                  xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()"
                               },
                               {
                                   headerName: 'Codice',
                                   width: 100,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:codiceOggetto/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceOggetto/text()"
                               },
                               {
                                   headerName: 'Stato',
                                   width: 100,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:desStato/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desStato/text()"
                               },
                               {
                                   headerName: 'Comune',
                                   width: 200,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:desComuneOggetto/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desComuneOggetto/text()"
                               },
                               {
                                   headerName: 'Numero provvedimento',
                                   width: 100,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:numeroAutorizzazione/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:numeroAutorizzazione/text()"
                               },
                               {
                                   headerName: 'Data emissione',
                                   width: 50,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:dataAutorizzazione/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:dataAutorizzazione/text()"
                               },
                               {
                                   headerName: 'Data scadenza',
                                   width: 50,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:dataScadenza/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:dataScadenza/text()"
                               }
                           ]
                       }
-                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:oggettoAssociato")}/>
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato")}/>
                 </Section>
               </ProfileWrapper>
 
@@ -298,26 +299,26 @@
                               {
                                   hide: true,
                                   id: true,
-                                  xpath: "siraemissioni:OggettoAssociato/@gml:id"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/@gml:id"
                               },
                               {
                                   headerName: 'Tipo',
                                   width: 300,
-                                  xpath:"siraemissioni:OggettoAssociato/siraemissioni:desTipo/text()"
+                                  xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()"
                               },
                               {
                                   headerName: 'Codice',
                                   width: 150,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:codiceOggetto/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceOggetto/text()"
                               },
                               {
                                   headerName: 'Comune',
                                   width: 350,
-                                  xpath: "siraemissioni:OggettoAssociato/siraemissioni:desComuneOggetto/text()"
+                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desComuneOggetto/text()"
                               }
                           ]
                       }
-                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:oggettoAssociato")}/>
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato")}/>
                 </Section>
               </ProfileWrapper>
 
@@ -333,46 +334,46 @@
                             {
                                 hide: true,
                                 id: true,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                             },
                             {
                                 headerName: 'Tipo provvedimento',
                                 width: 150,
-                                xpath:"siraemissioni:AutorizzazioneAmbientale/siraemissioni:tipoProvvedimento/text()"
+                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                             },
                             {
                                 headerName: 'Tematica',
                                 width: 150,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desTematica/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
                             },
                             {
                                 headerName: 'Numero',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:estremiProvvedimento/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:estremiProvvedimento/text()"
                             },
                             {
                                 headerName: 'Data emissione',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
                             },
                             {
                                 headerName: 'Data scadenza',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
                             },
                             {
                                 headerName: 'Ente competente',
                                 width: 150,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desEnteCompetente/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
                             },
                             {
                                 headerName: 'Stato',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desStato/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desStato/text()"
                             }
                         ]
                     }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale")}/>
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
 
 
                     <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
@@ -389,16 +390,16 @@
                               {
                                     hide: true,
                                     id: true,
-                                    xpath:"../../siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                    xpath:"../../decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                                 },
                                 {
                                     headerName: 'Descrizione sottoattivita',
                                     width: 750,
-                                    xpath:"siraemissioni:SottoAttivitaEmissiva/siraemissioni:desSottoAttivitaEmissiva/text()"
+                                    xpath:"decsiraogc_stabilimenti:SottoAttivitaEmissiva/decsiraogc_stabilimenti:desSottoAttivitaEmissiva/text()"
                                 }
                             ]
                         }
-                        features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:sottoAttivitaEmissiva")}/>
+                        features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:sottoAttivitaEmissiva")}/>
                     </Section>
 
 
@@ -416,21 +417,21 @@
                                   {
                                       hide: true,
                                       id: true,
-                                      xpath:"../../siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                      xpath:"../../decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                                   },
                                   {
                                       headerName: 'Descrizione attrezzatura',
                                       width: 450,
-                                      xpath:"siraemissioni:DettaglioAttivita/siraemissioni:desDettaglioAttivita/text()"
+                                      xpath:"decsiraogc_stabilimenti:DettaglioAttivita/decsiraogc_stabilimenti:desDettaglioAttivita/text()"
                                   },
                                   {
                                       headerName: 'Quantita',
                                       width: 400,
-                                      xpath:"siraemissioni:DettaglioAttivita/siraemissioni:quantita/text()"
+                                      xpath:"decsiraogc_stabilimenti:DettaglioAttivita/decsiraogc_stabilimenti:quantita/text()"
                                   }
                               ]
                           }
-                          features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dettaglioAttivita")}/>
+                          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dettaglioAttivita")}/>
                     </Section>
                   </Section>
               </ProfileWrapper>
@@ -448,41 +449,41 @@
                             {
                                 hide: true,
                                 id: true,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                             },
                             {
                                 headerName: 'Tipo provvedimento',
                                 width: 150,
-                                xpath:"siraemissioni:AutorizzazioneAmbientale/siraemissioni:tipoProvvedimento/text()"
+                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                             },
                             {
                                 headerName: 'Tematica',
                                 width: 150,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desTematica/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
                             },
                             {
                                 headerName: 'Numero',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:estremiProvvedimento/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:estremiProvvedimento/text()"
                             },
                             {
                                 headerName: 'Data emissione',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
                             },
                             {
                                 headerName: 'Data scadenza',
                                 width: 100,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
                             },
                             {
                                 headerName: 'Ente competente',
                                 width: 150,
-                                xpath: "siraemissioni:AutorizzazioneAmbientale/siraemissioni:desEnteCompetente/text()"
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
                             }
                         ]
                     }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale")}/>
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
 
 
                     <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
@@ -499,16 +500,16 @@
                               {
                                     hide: true,
                                     id: true,
-                                    xpath:"../../siraemissioni:AutorizzazioneAmbientale/@gml:id"
+                                    xpath:"../../decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                                 },
                                 {
                                     headerName: 'Descrizione sottoattivita',
                                     width: 750,
-                                    xpath:"siraemissioni:SottoAttivitaEmissiva/siraemissioni:desSottoAttivitaEmissiva/text()"
+                                    xpath:"decsiraogc_stabilimenti:SottoAttivitaEmissiva/decsiraogc_stabilimenti:desSottoAttivitaEmissiva/text()"
                                 }
                             ]
                         }
-                        features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:sottoAttivitaEmissiva")}/>
+                        features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:sottoAttivitaEmissiva")}/>
                     </Section>
                     </Section>
               </ProfileWrapper>
@@ -517,7 +518,7 @@
               <Section header='IMPIANTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
                 <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
                   <LabeledField label='Verifica sorgenti rumorose' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:verificaSorgentiRumorose/siraemissioni:VerificaSorgentiRumorose/siraemissioni:desRumorosita/text()")
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:verificaSorgentiRumorose/decsiraogc_stabilimenti:VerificaSorgentiRumorose/decsiraogc_stabilimenti:desRumorosita/text()")
                   }/>
                 </ProfileWrapper>
               </Section>
@@ -534,11 +535,11 @@
                               {
                                   headerName: 'Tipo attivita',
                                   width: 800,
-                                  xpath:"siraemissioni:attivitaBassaRumorosita/siraemissioni:AttivitaBassaRumorosita/siraemissioni:desAttivitaBassaRumorosita/text()"
+                                  xpath:"decsiraogc_stabilimenti:attivitaBassaRumorosita/decsiraogc_stabilimenti:AttivitaBassaRumorosita/decsiraogc_stabilimenti:desAttivitaBassaRumorosita/text()"
                               }
                           ]
                       }
-                      features={model.getValue("/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento")}/>
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento")}/>
                 </Section>
               </ProfileWrapper>
 
@@ -548,7 +549,7 @@
                       center={
                           model.getValue({
                               type: TemplateUtils.GEOMETRY_TYPE,
-                              xpath: "/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:geometria/gml:Point/gml:pos/text()"
+                              xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:geometria/gml:Point/gml:pos/text()"
                           })
                       }
                       layers={[
@@ -568,7 +569,7 @@
                           "url": "{geoserverUrl}/wms",
                           "visibility": true,
                           "title": "Stabilimenti Preview",
-                          "name": "siraemissioni:Stabilimento",
+                          "name": "decsiraogc_stabilimenti:Stabilimento",
                           "group": "Overlays",
                           "format": "image/png"
                       }

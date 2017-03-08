@@ -1,0 +1,527 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='IMPIANTI DI DEPURAZIONE' subtitle={[
+            'Denominazione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:idDepuratore/text()")
+            ]} id={model.id}/>
+    )}>
+
+    <Panel className="template">
+            <Section header='DATI GENERALI - Impianto di depurazione' eventKey='1' expanded={true}>
+              <LabeledField label='Nome impianto di depurazione' value={
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti::nome/text()")
+                }/>
+                <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                    <LabeledField label='Codice regionale impianto di depurazione' value={
+                        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceRegionaleDepuratore/text()")
+                    }/>
+                    <LabeledField label='Codice europeo impianto di depurazione' value={
+                        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceEuropeoDepuratore/text()")
+                    }/>
+                </ProfileWrapper>
+
+                <LabeledField label='Provincia' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desProvincia/text()")
+                }/>
+                <LabeledField label='Comune' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nomeComune/text()")
+                }/>
+
+                <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                  <LabeledField label='Codice sira impianto di depurazione' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceSira/text()")
+                  }/>
+                  <LabeledField label='Indirizzo' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:indirizzo/text()")
+                  }/>
+                  <LabeledField label='Email-pec' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:emailPec/text()")
+                  }/>
+                  <LabeledField label='ATO' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desAto/text()")
+                  }/>
+                  <LabeledField label='capacit&agrave; organica di progetto (a.e.)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:capacitaOrganicaProgetto/text()")
+                  }/>
+                  <LabeledField label='Abitanti residenti' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiResidenti/text()")
+                  }/>
+                  <LabeledField label='Abitanti fluttuanti' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiFluttuanti/text()")
+                  }/>
+                  <LabeledField label='Carico da insediamenti industriali (a.e.)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiEquivalentiIndustriali/text()")
+                  }/>
+                  <LabeledField label='Abitanti equivalenti da trattamento rifiuti liquidi' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiEquivalentiRifiutiLiquidi/text()")
+                  }/>
+                  <LabeledField label='Abitanti equivalenti trattati' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()")
+                  }/>
+                  <LabeledField label='Portata media annua (mc)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:portataMediaAnnua/text()")
+                  }/>
+                </ProfileWrapper>
+
+                <LabeledField label='Riceve acque meteoriche' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:riceveAcqueMeteoriche/text()")
+                }/>
+
+                <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                  <LabeledField label='% acque reflue trattate riutilizate (% del V trattato)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:percAcqueRiutilizzate/text()")
+                  }/>
+                </ProfileWrapper>
+                <LabeledField label='Classificazione pubblica fognatura' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:classificazionePubblicaFognatura/text()")
+                }/>
+                <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                  <LabeledField label='Declassato a minore di 2.000 a.e.' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:declassatoMinoreDuemila/text()")
+                  }/>
+                  <LabeledField label='Numero determinazione declassamento' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:numDetermDeclassamento/text()")
+                  }/>
+                  <LabeledField label='Data determinazione declassamento' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:dataDetermDeclassamento/text()")
+                  }/>
+                  <LabeledField label='Produzione tal quale fanghi (t/anno)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneTalQualeFanghi/text()")
+                  }/>
+                  <LabeledField label='Percentuale di secco fango' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:perc_secco_fango/text()")
+                  }/>
+                  <LabeledField label='Produzione fanghi (tonnellate di secco / anno)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneFanghiSeccoAnno/text()")
+                  }/>
+                </ProfileWrapper>
+                <LabeledField label='Riutilizzo in agricoltura' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:riutilizzoInAgricoltura/text()")
+                }/>
+                <LabeledField label='Riutilizzo in industria' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:riutilizzoInIndustria/text()")
+                }/>
+                <LabeledField label='Altro riutilizzo ' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:altroRiutilizzo/text()")
+                }/>
+                <LabeledField label='Dettaglio altro riutilizzo ' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:dettaglioAltroRiutilizzo/text()")
+                }/>
+            </Section>
+
+            <Section header='DATI AZIENDA' eventKey='2' expanded={true}>
+             <LabeledField label='Denominazione gestore' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:ragioneSocialeAzienda/text()")
+             }/>
+
+             <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+               <LabeledField label='Codice fiscale' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceFiscaleAzienda/text()")
+               }/>
+               <LabeledField label='Partita IVA' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:partitaIvaAzienda/text()")
+               }/>
+             </ProfileWrapper>
+
+             <LabeledField label='Provincia' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desProvinciaAzienda/text()")
+             }/>
+             <LabeledField label='Comune' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desComuneAzienda/text()")
+             }/>
+
+             <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+               <LabeledField label='Indirizzo' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:indirizzoAzienda/text()")
+               }/>
+               <LabeledField label='Telefono' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:telefonoAzienda/text()")
+               }/>
+               <LabeledField label='Fax' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:faxAzienda/text()")
+               }/>
+               <LabeledField label='Numero iscrizione CCIAA' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:numeroCIAAAzienda/text()")
+               }/>
+               <LabeledField label='Anno iscrizione CCIAA' value={
+                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:annoCIAAAzienda/text()")
+               }/>
+             </ProfileWrapper>
+
+             <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+               <Section header='Dati titolare/legale rappresentante' eventKey='3' expanded={true}>
+                   <LabeledField label='Cognome' value={
+                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:cognomeTitolare/text()")
+                   }/>
+                   <LabeledField label='Nome' value={
+                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nomeTitolare/text()")
+                   }/>
+               </Section>
+             </ProfileWrapper>
+         </Section>
+
+         <Section header='BACINO DI UTENZA' eventKey='4' expanded={true}>
+           <SiraTable
+               id="ComuneServito"
+               selectedRow={model.ComuneServito}
+               wfsVersion="2.0"
+               rowSelection={false}
+               columns={
+                   [
+                       {
+                           headerName: 'Comune',
+                           width: 360,
+                           xpath:"decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeComune/text()"
+                       },
+                       {
+                           headerName: 'Localit&agrave;',
+                           width: 360,
+                           xpath: "decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeLocalita/text()"
+                       }
+                   ]
+               }
+               features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:comuneServito")}/>
+       </Section>
+
+       <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+           <Section header='REFLUI INDUSTRIALI RECAPITATI NEL DEPURATORE' eventKey='5' expanded={false}>
+             <SiraTable
+                 id="RefluoIndustrialeRecapitato"
+                 selectedRow={model.RefluoIndustrialeRecapitato}
+                 wfsVersion="2.0"
+                 rowSelection={false}
+                 columns={
+                     [
+                         {
+                             headerName: 'Ragione sociale',
+                             width: 360,
+                             xpath:"decsiraogc_stabilimenti:RefluoIndustrialeRecapitato/decsiraogc_stabilimenti:ragioneSociale/text()"
+                         },
+                         {
+                             headerName: 'Portata giornaliera (mc)',
+                             width: 360,
+                             xpath: "decsiraogc_stabilimenti:RefluoIndustrialeRecapitato/decsiraogc_stabilimenti:portataGiornaliera/text()"
+                         }
+                     ]
+                 }
+                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:refluoIndustrialeRecapitato")}/>
+
+
+                 <Section header='Sostanze recapitate' eventKey='6' expanded={true}>
+                   <SiraTable
+                       id="SostanzaRecapitataRefluiIndustriali"
+                       selectedRow={model.SostanzaRecapitataRefluiIndustriali}
+                       wfsVersion="2.0"
+                       rowSelection={false}
+                       columns={
+                           [
+                               {
+                                   headerName: 'Sostanza',
+                                   width: 300,
+                                   xpath:"decsiraogc_stabilimenti:SostanzaRecapitataRefluiIndustriali/decsiraogc_stabilimenti:desSostanza/text()"
+                               },
+                               {
+                                   headerName: 'Altra sostanza',
+                                   width: 300,
+                                   xpath: "decsiraogc_stabilimenti:SostanzaRecapitataRefluiIndustriali/decsiraogc_stabilimenti:desAltraSostanza/text()"
+                               },
+                               {
+                                   headerName: 'Concentrazione autorizzata (mg/l)',
+                                   width: 100,
+                                   xpath: "decsiraogc_stabilimenti:SostanzaRecapitataRefluiIndustriali/decsiraogc_stabilimenti:concentrazioneAutorizzata/text()"
+                               }
+                           ]
+                       }
+                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:sostanzaRecapitataRefluiIndustriali")}/>
+                 </Section>
+         </Section>
+     </ProfileWrapper>
+
+     <Section header='TIPO TRATTAMENTO ACQUE REFLUE' eventKey='7' expanded={true}>
+         <LabeledField label='Tipologia trattamento' value={
+           model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desTipologiaTrattamento/text()")
+         }/>
+         <LabeledField label='Chiariflocculazione' value={
+           model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:chiariflocculazione/text()")
+         }/>
+     </Section>
+
+     <Section header='TRATTAMENTI PI&Ugrave; AVANZATI' eventKey='8' expanded={false}>
+            <SiraTable
+                id="TrattamentoAvanzato"
+                selectedRow={model.TrattamentoAvanzato}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            headerName: 'Tipo trattamento avanzato',
+                            width: 750,
+                            xpath:"decsiraogc_stabilimenti:TrattamentoAvanzato/decsiraogc_stabilimenti:desTrattamento/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:trattamentoAvanzato")}/>
+        </Section>
+
+        <Section header='FILTRAZIONE FINALE' eventKey='9' expanded={false}>
+               <SiraTable
+                   id="TipoFiltrazioneFinale"
+                   selectedRow={model.TipoFiltrazioneFinale}
+                   wfsVersion="2.0"
+                   rowSelection={false}
+                   columns={
+                       [
+                           {
+                               headerName: 'Tipo filtrazione finale',
+                               width: 750,
+                               xpath:"decsiraogc_stabilimenti:TipoFiltrazioneFinale/decsiraogc_stabilimenti:desFiltrazioneFinale/text()"
+                           }
+                       ]
+                   }
+                   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:tipoFiltrazioneFinale")}/>
+           </Section>
+
+           <Section header='DISINFEZIONE' eventKey='10' expanded={false}>
+                  <SiraTable
+                      id="TipoDisinfezione"
+                      selectedRow={model.TipoDisinfezione}
+                      wfsVersion="2.0"
+                      rowSelection={false}
+                      columns={
+                          [
+                              {
+                                  headerName: 'Tipo disinfezione',
+                                  width: 750,
+                                  xpath:"decsiraogc_stabilimenti:TipoDisinfezione/decsiraogc_stabilimenti:desTipoDisinfezione/text()"
+                              }
+                          ]
+                      }
+                      features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:tipoDisinfezione")}/>
+              </Section>
+
+              <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <Section header='PRODUZIONE FANGHI' eventKey='11' expanded={true}>
+                    <LabeledField label='Produzione tal quale fanghi (t/anno)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneTalQualeFanghi/text()")
+                    }/>
+                    <LabeledField label='Produzione fanghi (tonnellate di secco/anno)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneFanghiSeccoAnno/text()")
+                    }/>
+                </Section>
+              </ProfileWrapper>
+
+              <Section header='TIPI TRATTAMENTO FANGHI' eventKey='12' expanded={true}>
+                     <SiraTable
+                         id="TrattamentoFanghi"
+                         selectedRow={model.TrattamentoFanghi}
+                         wfsVersion="2.0"
+                         rowSelection={false}
+                         columns={
+                             [
+                                 {
+                                     headerName: 'Tipo trattamento',
+                                     width: 750,
+                                     xpath:"decsiraogc_stabilimenti:TrattamentoFanghi/decsiraogc_stabilimenti:desTrattamentoFanghi/text()"
+                                 }
+                             ]
+                         }
+                         features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:trattamentoFanghi")}/>
+
+
+                         <Section header='Destinazione fanghi' eventKey='13' expanded={false}>
+                          <SiraTable
+                              id="DestinazioneFanghi"
+                              selectedRow={model.DestinazioneFanghi}
+                              wfsVersion="2.0"
+                              rowSelection={false}
+                              columns={
+                                  [
+                                      {
+                                          headerName: 'Regione',
+                                          width: 200,
+                                          xpath:"decsiraogc_stabilimenti:DestinazioneFanghi/decsiraogc_stabilimenti:desRegione/text()"
+                                      },
+                                      {
+                                          headerName: 'Comune',
+                                          width: 200,
+                                          xpath: "decsiraogc_stabilimenti:DestinazioneFanghi/decsiraogc_stabilimenti:desComune/text()"
+                                      },
+                                      {
+                                          headerName: 'Nome Azienda/Impianto',
+                                          width: 350,
+                                          xpath: "decsiraogc_stabilimenti:DestinazioneFanghi/decsiraogc_stabilimenti:nomeAziendaStabilimento/text()"
+                                      }
+                                  ]
+                              }
+                              features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:destinazioneFanghi")}/>
+                      </Section>
+                 </Section>
+
+                 <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                     <Section header='OGGETTI COLLEGATI' eventKey='14' expanded={true}>
+                        <SiraTable
+                            id="OggettoAssociatoDepuratore"
+                            selectedRow={model.OggettoAssociatoDepuratore}
+                            wfsVersion="2.0"
+                            rowSelection={false}
+                            columns={
+                                [
+                                    {
+                                        headerName: 'Tipo',
+                                        width: 100,
+                                        xpath:"decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desTipo/text()"
+                                    },
+                                    {
+                                        headerName: 'Codice',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:codiceOggetto/text()"
+                                    },
+                                    {
+                                        headerName: 'Stato',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desStato/text()"
+                                    },
+                                    {
+                                        headerName: 'Comune',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desComuneOggetto/text()"
+                                    },
+                                    {
+                                        headerName: 'Numero provvedimento',
+                                        width: 150,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:numeroAutorizzazione/text()"
+                                    },
+                                    {
+                                        headerName: 'Data emissione',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:dataAutorizzazione/text()"
+                                    },
+                                    {
+                                        headerName: 'Data scadenza',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:dataScadenza/text()"
+                                    }
+                                ]
+                            }
+                            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:oggettoAssociatoDepuratore")}/>
+                     </Section>
+                 </ProfileWrapper>
+
+                 <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+                     <Section header='OGGETTI COLLEGATI' eventKey='14' expanded={true}>
+                        <SiraTable
+                            id="OggettoAssociatoDepuratore"
+                            selectedRow={model.OggettoAssociatoDepuratore}
+                            wfsVersion="2.0"
+                            rowSelection={false}
+                            columns={
+                                [
+                                    {
+                                        headerName: 'Tipo',
+                                        width: 200,
+                                        xpath:"decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desTipo/text()"
+                                    },
+                                    {
+                                        headerName: 'Codice',
+                                        width: 200,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:codiceOggetto/text()"
+                                    },
+                                    {
+                                        headerName: 'Comune',
+                                        width: 300,
+                                        xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desComuneOggetto/text()"
+                                    }
+                                ]
+                            }
+                            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:oggettoAssociatoDepuratore")}/>
+                     </Section>
+                 </ProfileWrapper>
+
+                 <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                     <Section header='AUTORIZZAZIONI' eventKey='15' expanded={true}>
+                        <SiraTable
+                            id="AutorizzazioneAmbientaleDepuratore"
+                            selectedRow={model.AutorizzazioneAmbientaleDepuratore}
+                            wfsVersion="2.0"
+                            rowSelection={false}
+                            columns={
+                                [
+                                    {
+                                        headerName: 'Tipo provvedimento',
+                                        width: 160,
+                                        xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:tipoProvvedimento/text()"
+                                    },
+                                    {
+                                        headerName: 'Numero',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:estremiProvvedimento/text()"
+                                    },
+                                    {
+                                        headerName: 'Data emissione',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataProvvedimento/text()"
+                                    },
+                                    {
+                                        headerName: 'Data scadenza',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataScadenza/text()"
+                                    },
+                                    {
+                                        headerName: 'Ente competente',
+                                        width: 150,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desEnteCompetente/text()"
+                                    },
+                                    {
+                                        headerName: 'Stato',
+                                        width: 100,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desStato/text()"
+                                    }
+                                ]
+                            }
+                            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore")}/>
+                     </Section>
+                 </ProfileWrapper>
+
+                 <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+                     <Section header='AUTORIZZAZIONI' eventKey='15' expanded={true}>
+                        <SiraTable
+                            id="AutorizzazioneAmbientaleDepuratore"
+                            selectedRow={model.AutorizzazioneAmbientaleDepuratore}
+                            wfsVersion="2.0"
+                            rowSelection={false}
+                            columns={
+                                [
+                                    {
+                                        headerName: 'Tipo provvedimento',
+                                        width: 200,
+                                        xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:tipoProvvedimento/text()"
+                                    },
+                                    {
+                                        headerName: 'Numero',
+                                        width: 120,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:estremiProvvedimento/text()"
+                                    },
+                                    {
+                                        headerName: 'Data emissione',
+                                        width: 120,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataProvvedimento/text()"
+                                    },
+                                    {
+                                        headerName: 'Data scadenza',
+                                        width: 120,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataScadenza/text()"
+                                    },
+                                    {
+                                        headerName: 'Ente competente',
+                                        width: 150,
+                                        xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desEnteCompetente/text()"
+                                    }
+                                ]
+                            }
+                            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore")}/>
+                     </Section>
+                 </ProfileWrapper>
+    </Panel>
+</Panel>
