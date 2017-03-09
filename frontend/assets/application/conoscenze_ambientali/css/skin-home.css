@@ -1,9 +1,13 @@
-#container, #map, .fill, .viewer, body, html {
+body.body_home #container, body.body_home .fill, body.body_home body {
     height: auto!important;
     position: relative!important;
 }
 
 body {
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
+
+div.home-page {
     background:url("images/desk2.jpg") no-repeat scroll center top #f2f2f2;
 	/*background-size:100%;*/
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -311,7 +315,7 @@ div.header h1 a {
 .search-home .ricerca-home .form-group input{
 	width:100%;
 	height:60px;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 	font-weight:bold;
 	letter-spacing:-1px;
 	}
@@ -592,6 +596,12 @@ ul.categorie li.monitoraggio {
 	font-size:14px;
 	}
 
+ul.categorie li.monitoraggio:hover {
+    background-image:none;
+	padding-top:40px;
+	transition:.3s;
+	}
+
 ul.categorie li.i:hover {
     background-image:none;
 	padding-top:40px;
@@ -807,10 +817,6 @@ div.trebox div.tags a.tag_grande{
 
 
 /*INTEGRAZIONE*/
-html{
-	position:relative!important;
-	}
-
 .home div.header{
 	margin-top:0;
 	}
@@ -832,4 +838,18 @@ html{
     background-color: #007E4F;
     border: 0;
     color: #fff;
+}
+.home-page .dataset-search-container {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.home-page .siracatalog-search-selector {
+    background-color: #007e4f  !important;
+	box-shadow: none;
+	border:0;
+}
+.home-page .catalog-search-container .MapSearchBar .input-group {
+    border: 1px solid #ddd;
+    box-shadow: none!important;
+	border-radius:0;
 }
