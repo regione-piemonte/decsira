@@ -1,15 +1,15 @@
 {
-   "featureTypeName":"siraemissioni:Stabilimento",
+   "featureTypeName":"decsiraogc_stabilimenti:Stabilimento",
    "featureTypeNameLabel":"STABILIMENTI",
    "nameSpaces": {
-     "siraemissioni": "http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"
+     "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"
    },
    "layer": {
         "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
         "title": "Stabilimenti soggetti ad autorizzazione ambientale",
-        "name": "siraemissioni:Stabilimento",
+        "name": "decsiraogc_stabilimenti:Stabilimento",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
             "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
@@ -26,12 +26,12 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Stabilimento_{{/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento/siraemissioni:nome/text()}}.pdf",
+    "pdfname": "Stabilimento_{{/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()}}.pdf",
      "template": "assets/cardTemplateStab.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
        "params": {
-         "typeName": "siraemissioni:Stabilimento",
+         "typeName": "decsiraogc_stabilimenti:Stabilimento",
          "version": "2.0",
          "srsName": "EPSG:4326"
        }
@@ -42,7 +42,7 @@
    },
    "featuregrid": {
      "grid": {
-       "root": "/wfs:FeatureCollection/wfs:member/siraemissioni:Stabilimento",
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento",
        "columns": [
          {
            "hide": true,
@@ -54,102 +54,102 @@
          {
            "headerName": "Codice Sira",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:codiceSira/text()"],
+           "xpath": ["decsiraogc_stabilimenti:codiceSira/text()"],
            "type": 1
          },
          {
            "headerName": "Denominazione stabilimento",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:nome/text()"],
+           "xpath": ["decsiraogc_stabilimenti:nome/text()"],
            "type": 2
          },
          {
            "headerName": "Provincia",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:desProvincia/text()"],
+           "xpath": ["decsiraogc_stabilimenti:desProvincia/text()"],
            "type": 2
          },
          {
            "headerName": "Comune",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:nomeComune/text()"],
+           "xpath": ["decsiraogc_stabilimenti:nomeComune/text()"],
            "type": 2
          },
          {
            "headerName": "Indirizzo",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:indirizzo/text()"],
+           "xpath": ["decsiraogc_stabilimenti:indirizzo/text()"],
            "type": 2
          },
          {
            "headerName": "Ragione sociale azienda",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione/text()"],
+           "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()"],
            "type": 2
          },
          {
            "headerName": "Codice fiscale azienda",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale/text()"],
+           "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Partita IVA",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA/text()"],
+           "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Provincia azienda",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desProvincia/text()"],
+           "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desProvincia/text()"],
            "type": 2
          },
          {
            "headerName": "Comune azienda",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:desComune/text()"],
+           "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desComune/text()"],
            "type": 2
          },
          {
            "headerName": "Indirizzo azienda",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:indirizzo/text()"],
+           "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:indirizzo/text()"],
            "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Tipo provvedimento attivo",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:tipoProvvedimentoAttivo/text()"],
+           "xpath": ["decsiraogc_stabilimenti:tipoProvvedimentoAttivo/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Tipo provvedimento storico",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:tipoProvvedimentoStorico/text()"],
+           "xpath": ["decsiraogc_stabilimenti:tipoProvvedimentoStorico/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Ambito tematico",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:tematica/text()"],
+           "xpath": ["decsiraogc_stabilimenti:tematica/text()"],
            "type": 2
          },
          {
            "headerName": "Abitanti equivalenti trattati del depuratore",
            "suppressSorting": true,
-           "xpath": ["siraemissioni:abitantiEquivalentiTrattati/text()"],
+           "xpath": ["decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()"],
            "type": 2
          },
          {
            "hide": true,
            "headerName": "Geometry",
-           "xpath": ["siraemissioni:geometria/gml:Point/gml:pos/text()"],
+           "xpath": ["decsiraogc_stabilimenti:geometria/gml:Point/gml:pos/text()"],
            "type": 6
          }
        ]
@@ -166,7 +166,7 @@
      "fields":[
         {
            "index": 1,
-           "attribute": "siraemissioni:desProvincia",
+           "attribute": "decsiraogc_stabilimenti:desProvincia",
            "label":"Provincia",
            "type":"list",
            "valueService": {
@@ -179,7 +179,7 @@
         },
         {
            "index": 2,
-           "attribute": "siraemissioni:nomeComune",
+           "attribute": "decsiraogc_stabilimenti:nomeComune",
            "label":"Comune",
            "type":"list",
            "valueService": {
@@ -194,20 +194,20 @@
            "valueId":"toponimo",
            "valueLabel":"toponimo",
 		    "dependson":{
-              "field": "siraemissioni:desProvincia",
+              "field": "decsiraogc_stabilimenti:desProvincia",
               "from": "sigla",
               "to": "sigla_provincia"
            }
         },
         {
            "index": 3,
-           "attribute": "siraemissioni:codiceSira",
+           "attribute": "decsiraogc_stabilimenti:codiceSira",
            "label":"Codice sira",
            "type":"string"
         },
         {
            "index": 4,
-           "attribute": "siraemissioni:attivitaProduttiva/siraemissioni:AttivitaProduttiva/siraemissioni:codAteco",
+           "attribute": "decsiraogc_stabilimenti:attivitaProduttiva/decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:codAteco",
            "label":"Tipo attivita produttiva",
            "type":"list",
            "valueService": {
@@ -223,27 +223,27 @@
         },
         {
            "index": 5,
-           "attribute": "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:denominazione",
+           "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione",
            "label":"Ragione sociale azienda",
            "type":"string"
         },
         {
            "index": 6,
-           "attribute": "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:partitaIVA",
+           "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA",
            "label":"Partita IVA azienda",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 7,
-           "attribute": "siraemissioni:azienda/siraemissioni:Azienda/siraemissioni:codiceFiscale",
+           "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale",
            "label":"Codice fiscale azienda",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 8,
-           "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:idTipoProvvedimento",
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idTipoProvvedimento",
            "label":"Tipo provvedimento",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
@@ -260,7 +260,7 @@
         },
         {
            "index": 9,
-           "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataProvvedimento",
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento",
            "label":"Data provvedimento",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
@@ -270,7 +270,7 @@
         },
         {
            "index": 10,
-           "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:dataScadenza",
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza",
            "label":"Data scadenza",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
@@ -280,7 +280,7 @@
         },
         {
            "index": 11,
-           "attribute": "siraemissioni:autorizzazioneAmbientale/siraemissioni:AutorizzazioneAmbientale/siraemissioni:tematica/siraemissioni:Tematica/siraemissioni:idTematica",
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tematica/decsiraogc_stabilimenti:Tematica/decsiraogc_stabilimenti:idTematica",
            "label":"Ambito Tematico",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
@@ -297,7 +297,7 @@
         },
         {
            "index": 12,
-           "attribute": "siraemissioni:idTipologiaImpianto",
+           "attribute": "decsiraogc_stabilimenti:idTipologiaImpianto",
            "label":"Tipologia impianto",
            "type":"list",
            "valueService": {
@@ -311,7 +311,7 @@
         },
         {
            "index": 13,
-           "attribute": "siraemissioni:idStato",
+           "attribute": "decsiraogc_stabilimenti:idStato",
            "label":"Stato",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",

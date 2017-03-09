@@ -1,0 +1,367 @@
+{
+   "featureTypeName":"decsiraogc_stabilimenti:ImpiantoDiDepurazione",
+   "featureTypeNameLabel":"IMPIANTO DI DEPURAZIONE",
+   "nameSpaces": {
+     "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Impianti di depurazione",
+        "name": "decsiraogc_stabilimenti:ImpiantoDiDepurazione",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "impiantiDepurazione",
+        "group": "Oggetti",
+        "format": "image/png"
+        },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Depuratore_{{/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:idDepuratore/text()}}.pdf",
+     "template": "assets/cardTemplateImpiantoDepurazione.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_stabilimenti:ImpiantoDiDepurazione",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateImpiantoDepurazione.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
+		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione impianto di depurazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:nome/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice sira impianto di depurazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:codiceSira/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+         {
+           "headerName": "Codice regionale impianto di depurazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:codiceRegionaleDepuratore/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice europeo impianto di depurazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:codiceEuropeoDepuratore/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desProvincia/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:nomeComune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "ATO",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desAto/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo provvedimento attivo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:tipoProvvedimentoAttivo/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo provvedimento storico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:tipoProvvedimentoStorico/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Capacita organica di progetto (a.e.)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:capacitaOrganicaProgetto/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+         {
+           "headerName": "Abitanti residenti",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:abitantiResidenti/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		     {
+           "headerName": "Abitanti fluttuanti",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:abitantiFluttuanti/text()"],
+		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		      {
+           "headerName": "Carico da insediamenti industriali (a.e.)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:abitantiEquivalentiIndustriali/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		     {
+           "headerName": "Abitanti equivalenti da trattamento rifiuti liquidi",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:abitantiEquivalentiRifiutiLiquidi/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		     {
+           "headerName": "Abitanti equivalenti trattati",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		     {
+           "headerName": "Portata media annua (mc)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:portataMediaAnnua/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		     {
+           "headerName": "Classificazione pubblica fognatura",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:classificazionePubblicaFognatura/text()"],
+           "type": 2
+         },
+		     {
+           "headerName": "Produzione tal quale fanghi (t/anno)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:produzioneTalQualeFanghi/text()"],
+		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 1
+         },
+		     {
+           "headerName": "Tipologia di trattamento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desTipologiaTrattamento/text()"],
+           "type": 2
+         },
+		     {
+           "headerName": "Trattamento più avanzati",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:trattamentiAvanzati/text()"],
+           "type": 2
+         },
+		     {
+           "headerName": "Tipo di disinfezione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:tipiDisinfezione/text()"],
+           "type": 2
+         },
+		     {
+           "headerName": "Tipo di filtrazione finale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:tipiFiltrazioneFinale/text()"],
+           "type": 2
+         },
+		     {
+           "headerName": "Chiariflocculazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:chiariflocculazione/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["siraemissioni:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ]
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+          "index": 1,
+          "attribute": "decsiraogc_stabilimenti:idStato",
+          "label":"Stato",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "siradec:sipra_d_stato",
+              "propertyName": "id_stato,des_stato"
+            }
+          },
+          "valueId":"id_stato",
+          "valueLabel":"des_stato"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_stabilimenti:desProvincia",
+           "label":"Provincia",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:province"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 3,
+           "attribute": "decsiraogc_stabilimenti:nomeComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "sira:comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+		         "dependson":{
+              "field": "decsiraogc_stabilimenti:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 4,
+           "attribute": "decsiraogc_stabilimenti:codiceSira",
+           "label":"Codice sira",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_stabilimenti:codiceRegionaleDepuratore",
+           "label":"Codice regionale impianto di depurazione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 6,
+           "attribute": "decsiraogc_stabilimenti:codiceEuropeoDepuratore",
+           "label":"Codice europeo impianto di depurazione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 7,
+           "attribute": "decsiraogc_stabilimenti:comuneServito/decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeComune",
+           "label":"Comune servito",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "sira:comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+            "field": "decsiraogc_stabilimenti:desProvincia",
+            "from": "sigla",
+            "to": "sigla_provincia"
+         }
+        },
+        {
+           "index": 8,
+           "attribute": "decsiraogc_stabilimenti:denominazione",
+           "label":"Denominazione gestore",
+           "type":"string"
+        },
+        {
+           "index": 9,
+           "attribute": "decsiraogc_stabilimenti:nome",
+           "label":"Denominazione impianto di depurazione",
+           "type":"string"
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_stabilimenti:capacitaOrganicaProgetto",
+           "label":"Capacit&agrave; organica di progetto (a.e.)",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 12,
+           "attribute": "decsiraogc_stabilimenti:abitantiEquivalentiTrattati",
+           "label":"Abitanti equivalenti trattati",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 13,
+           "attribute": "decsiraogc_stabilimenti:abitantiEquivalentiIndustriali",
+           "label":"Carico da insediamenti industriali (a.e.)",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 14,
+           "attribute": "decsiraogc_stabilimenti:produzioneTalQualeFanghi",
+           "label":"Produzione fanghi",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        }
+
+     ]
+
+   }
+
+}

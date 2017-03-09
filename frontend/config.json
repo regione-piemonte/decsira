@@ -21,23 +21,13 @@
         "group": "background",
         "visibility": false
       },
-      {
-        "type": "wms",
-        "url": "http://demo.geo-solutions.it/geoserver/geosolutions/wms",
-        "name": "geosolutions:OrtofotoRegione2010",
-        "title": "Ortofoto Piemonte 2009-2011",
-        "group": "background",
-        "visibility": true,
-        "format": "image/jpeg",
-        "tiled": true
-      },
-      {
+	  {
         "type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
         "name": "SfondoCartRifBN",
         "title": "Sfondo Cartografico BN",
         "group": "background",
-        "visibility": false,
+        "visibility": true,
         "format": "image/png",
         "tiled": true,
         "tileSize": 512
@@ -52,6 +42,16 @@
         "format": "image/png",
         "tiled": true,
         "tileSize": 512
+      },
+       {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
+        "name": "OrtofotoRegione2010",
+        "title": "Ortoimmagini Piemonte 2009-2011",
+        "group": "background",
+        "visibility": false,
+        "format": "image/png",
+        "tiled": true
       },
       {
   			"type": "wms",
@@ -77,7 +77,7 @@
            "url": "{geoserverUrl}/wms",
            "visibility": true,
     		 "title": "Stabilimenti soggetti ad autorizzazione ambientale",
-    		 "name": "siraemissioni:Stabilimento",
+    		 "name": "decsiraogc_stabilimenti:Stabilimento",
            "infoFormat": "application/vnd.ogc.gml/3.1.1",
            "topologyConfig": {
              "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
@@ -96,7 +96,7 @@
              "url": "{geoserverUrl}/wms",
              "visibility": true,
            "title": "Punti di emissione in atmosfera",
-           "name": "siraemissioni:PuntoEmissione",
+           "name": "decsiraogc_emissioni:PuntoEmissione",
              "infoFormat": "application/vnd.ogc.gml/3.1.1",
              "topologyConfig": {
                "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
@@ -109,6 +109,25 @@
                 "featureType": "puntiEmissioneAtmosfera",
             "group": "Oggetti",
             "format": "image/png"
-          }]
+          },
+          {
+        		 "type": "wms",
+               "url": "{geoserverUrl}/wms",
+               "visibility": true,
+        		 "title": "Impianti di depurazione",
+        		 "name": "decsiraogc_stabilimenti:ImpiantoDiDepurazione",
+               "infoFormat": "application/vnd.ogc.gml/3.1.1",
+               "topologyConfig": {
+                 "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+                 "wfsVersion": "1.1.0",
+                 "layerName": "ZONES_IPR",
+                 "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+                 "geomAttribute": "msGeometry",
+                 "geometryType": "Polygon"
+               },
+               "featureType": "impiantiDepurazione",
+        			"group": "Oggetti",
+        			"format": "image/png"
+        		}]
   }
 }
