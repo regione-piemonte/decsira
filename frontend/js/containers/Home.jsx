@@ -40,6 +40,9 @@ const Home = React.createClass({
             searchText: ""
         };
     },
+    componentDidMount() {
+        document.body.className = "body_home";
+    },
     render() {
         return (
             <div className="home-page">
@@ -63,19 +66,6 @@ const Home = React.createClass({
                                         this.context.router.push(`/dataset/${this.props.params.profile}/`);
                                     }}
                                 />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="container-fluid">
-                <div className="row-fluid sb-dx">
-                    <div className="container news-home">
-                        <div className="row">
-                            <div className="col-md-12 testo-news">
-                                <p className="data-news">7 aprile 2016</p>
-                                <h3 className="titolo-news">Nuova risorsa Disponibile</h3>
-                                <p>&Egrave; disponibile questa nuova risorsa "Impianti autorizzati a recupero di energia e materia" <a href="#" data-toggle="modal" data-target="#modalNews">Continua</a></p>
-                            </div>
                         </div>
                     </div>
                 </div>

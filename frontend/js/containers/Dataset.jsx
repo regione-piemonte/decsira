@@ -36,6 +36,7 @@ const Footer = require('../components/Footer');
 const Vista = require('../components/catalog/VistaDataset');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
+const {toggleAddMap, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
 
 const mapStateToPropsMIB = (state) => {
     return {
@@ -94,9 +95,6 @@ const authParams = {
          authkey: "4176ea85-9a9a-42a5-8913-8f6f85813dab"
     }
  };
-
-const {toggleAddMap, loadNodeMapRecords} = require('../actions/addmap');
-
 const Dataset = React.createClass({
     propTypes: {
         category: React.PropTypes.shape({
@@ -131,7 +129,8 @@ const Dataset = React.createClass({
         getThematicViewConfig: React.PropTypes.func,
         map: React.PropTypes.object,
         toggleAddMap: React.PropTypes.func,
-        loadNodeMapRecords: React.PropTypes.func
+        loadNodeMapRecords: React.PropTypes.func,
+        addLayersInCart: React.PropTypes.func
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -151,6 +150,9 @@ const Dataset = React.createClass({
             if (!nodesLoaded && !loading && category && category.id) {
                 this.loadMetadata({category: category});
             }
+        },
+        componentDidMount() {
+            document.body.className = "body_dataset";
         },
         componentWillReceiveProps({loading, map}) {
             if (!loading && this.props.map && this.props.map !== map) {
@@ -265,10 +267,19 @@ const Dataset = React.createClass({
         this.props.showInfoBox();
     },
     addToCart(node) {
-        // dispatch(toggleAddMap(true));
-        // dispatch(loadNodeMapRecords(demoNode));
-        this.props.toggleAddMap(true);
-        this.props.loadNodeMapRecords(node);
+        if ( !node.featureType) {
+            this.props.toggleAddMap(true);
+            this.props.loadNodeMapRecords(node);
+        }else if (node.featureType) {
+            const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
+            if (!this.props.configOggetti[featureType]) {
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true, true, node.id);
+            }else {
+                let layers = [];
+                layers.push(this.props.configOggetti[featureType].layer);
+                this.props.addLayersInCart(layers, node);
+            }
+        }
     },
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
@@ -310,5 +321,6 @@ module.exports = connect(datasetSelector, {
     setGridType,
     getThematicViewConfig,
     toggleAddMap: toggleAddMap,
-    loadNodeMapRecords: loadNodeMapRecords
+    loadNodeMapRecords: loadNodeMapRecords,
+    addLayersInCart: addFeatureTypeLayerInCart
 })(Dataset);

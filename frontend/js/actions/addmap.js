@@ -120,6 +120,14 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     };
 }
 
+function addFeatureTypeLayerInCart(layer, node) {
+    return (dispatch) => {
+        dispatch(addSiraLayersIncart(layer));
+        dispatch(addServiceIncart(node));
+        dispatch(refreshNumberOfServices());
+    };
+}
+
 module.exports = {
     SIRA_RECORDS_LOADING,
     SIRA_RECORDS_ERROR,
@@ -130,5 +138,6 @@ module.exports = {
     loadNodeMapRecords,
     toggleAddMap,
     addLayers,
-    addLayersInCart
+    addLayersInCart,
+    addFeatureTypeLayerInCart
  };
