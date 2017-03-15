@@ -163,18 +163,16 @@ const Sira = React.createClass({
         };
     },
     componentWillMount() {
+        document.body.className = "body_map";
         if (urlQuery.map) {
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
         this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
         // this.props.loadUserIdentity();
     },
-    componentDidMount() {
-        document.body.className = "body_map";
-    },
     render() {
         return (
-            <div className="interna">
+            <div>
                 <Header showCart="true" onBack={this.back} onHome={this.goHome}/>
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>

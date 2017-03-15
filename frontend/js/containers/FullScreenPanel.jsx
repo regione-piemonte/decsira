@@ -86,6 +86,9 @@ const FullScreen = React.createClass({
             window.addEventListener('resize', this.setSize, false);
         }
     },
+    componentDidMount() {
+        document.body.className = "body_map";
+    },
     componentWillReceiveProps(nextProps) {
         const {map, filterPanelExpanded, siraControls, gridExpanded} = nextProps;
         if (this.props.map !== map) {

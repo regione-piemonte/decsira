@@ -86,15 +86,17 @@ function removeServiceFromCart(id) {
     };
 }
 
+function addSiraLayers(layers) {
+    return {
+        type: 'SIRA_ADD_LAYERS',
+        layers
+    };
+}
+
 function prepareDataToMap() {
     return (dispatch, getState) => {
         let layers = getState().cart.layers;
-        let jsonLayerString = [];
-        layers.map((layer) => {
-            jsonLayerString.push({... layer});
-        });
-        jsonLayerString = JSON.stringify(jsonLayerString);
-        localStorage.setItem('sira.config.layers', jsonLayerString);
+        dispatch(addSiraLayers(layers));
         dispatch(setServices([]));
         dispatch(setLayers([]));
         dispatch(refreshNumberOfServices());
@@ -117,5 +119,6 @@ module.exports = {
     setServices,
     removeLayersFromCart,
     removeServiceFromCart,
-    prepareDataToMap
+    prepareDataToMap,
+    addSiraLayers
   };
