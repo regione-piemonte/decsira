@@ -70,7 +70,9 @@ const NoMap = React.createClass({
         };
     },
     componentWillMount() {
-        this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        if (this.props.params.profile) {
+            this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        }
     },
     componentDidMount() {
         if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {

@@ -86,7 +86,7 @@ const PreviewMap = React.createClass({
                     {
                         this.props.layers.map((layer, index) =>
                             <Layer key={layer.title || layer.name} position={index} type={layer.type}
-                                options={assign({}, this.fillUrl(layer), {params: {authkey: this.props.authParam.authkey}})}/>
+                                options={assign({}, this.fillUrl(layer), {params: {authkey: this.props.authParam && this.props.authParam.authkey ? this.props.authParam.authkey : ''}})}/>
                         )
                     }
                 </PMap>

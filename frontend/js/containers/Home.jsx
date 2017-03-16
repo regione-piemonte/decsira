@@ -63,7 +63,11 @@ const Home = React.createClass({
                                     onSearch={({text}) => {
                                         this.props.selectCategory(this.props.allCategory, 'objects');
                                         this.props.loadMetadata({params: {text}});
-                                        this.context.router.push(`/dataset/${this.props.params.profile}/`);
+                                        if (this.props.params.profile) {
+                                            this.context.router.push('/dataset/${this.props.params.profile}/');
+                                        }else {
+                                            this.context.router.push('/dataset/');
+                                        }
                                     }}
                                 />
                         </div>
@@ -95,7 +99,11 @@ const Home = React.createClass({
     selectCategory(category, subcat) {
         this.props.resetObjectAndView();
         this.props.selectCategory(category, subcat);
-        this.context.router.push(`/dataset/${this.props.params.profile}/`);
+        if (this.props.params.profile) {
+            this.context.router.push('/dataset/${this.props.params.profile}/');
+        }else {
+            this.context.router.push('/dataset/');
+        }
     }
 });
 

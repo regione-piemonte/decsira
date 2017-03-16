@@ -102,7 +102,11 @@ const FullScreen = React.createClass({
                 this.props.toggleSiraControl('grid');
             }
             this.props.selectFeatures([]);
-            this.context.router.push(`/${this.props.params.profile}`);
+            if (this.props.params.profile) {
+                this.context.router.push('/map/${this.props.params.profile}');
+            }else {
+                this.context.router.push('/map/');
+            }
         }
     },
     componentWillUnmount() {
