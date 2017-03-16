@@ -151,6 +151,9 @@ const Sira = React.createClass({
         configureInlineMap: React.PropTypes.func,
         configLoaded: React.PropTypes.bool
     },
+    contextTypes: {
+        router: React.PropTypes.object
+    },
     getDefaultProps() {
         return {
             toggleSiraControl: () => {},
@@ -167,13 +170,15 @@ const Sira = React.createClass({
         if (urlQuery.map) {
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
-        this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        if (this.props.params.profile) {
+            this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        }
         // this.props.loadUserIdentity();
     },
     render() {
         return (
             <div>
-                <Header showCart="true" onBack={this.back} onHome={this.goHome}/>
+                <Header goToDataset={this.goToDataset} showCart="true" cartListaStyle="btn btn-primary" cartMappaStyle="btn btn-primary active" onBack={this.back} onHome={this.goHome}/>
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
@@ -187,7 +192,7 @@ const Sira = React.createClass({
                     <Card authParam={authParams[this.props.params.profile]}/>
                     <GetFeatureInfo
                         display={"accordion"}
-                        params={{authkey: authParams[this.props.params.profile].authkey}}
+                        params={{authkey: this.props.params.profile ? authParams[this.props.params.profile].authkey : ''}}
                         profile={this.props.params.profile}
                         key="getFeatureInfo"/>
                     <MetadataInfoBox panelStyle={{
@@ -201,6 +206,9 @@ const Sira = React.createClass({
                 </div>
             </div>
         );
+    },
+    goToDataset() {
+        this.context.router.push('/dataset/');
     }
 });
 

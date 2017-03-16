@@ -7,11 +7,14 @@
  */
 module.exports = {
     pages: [
-        { path: "/:profile", component: require('./containers/Sira')},
-        { path: "/map/:profile", component: require('./containers/Sira')},
-        { path: "/new/:profile", component: require('./containers/Home')},
+        { path: "/", component: require('./containers/Home')},
+        { path: "/dataset/", component: require('./containers/Dataset')},
         { path: "/dataset/:profile", component: require('./containers/Dataset')},
+        { path: "/map/", component: require('./containers/Sira')},
+        { path: "/map/:profile", component: require('./containers/Sira')},
+        { path: "/nomap/", component: require('./containers/NoMap')},
         { path: "/nomap/:profile", component: require('./containers/NoMap')},
+        { path: "/full/", component: require('./containers/FullScreenPanel')},
         { path: "/full/:profile", component: require('./containers/FullScreenPanel')}
         ],
     pluginsDef: require('./plugins.js'),

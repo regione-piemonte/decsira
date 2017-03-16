@@ -172,7 +172,7 @@ const LayerTree = React.createClass({
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         }else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
@@ -181,7 +181,7 @@ const LayerTree = React.createClass({
     searchAll(ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
             }else if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
@@ -200,7 +200,7 @@ const LayerTree = React.createClass({
         }else if (node.featureType) {
             const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
             if (!this.props.configOggetti[featureType]) {
-                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true, true, node.id);
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, true, node.id);
             }else {
                 this.props.addLayer(assign({}, this.props.configOggetti[featureType].layer, {siraId: node.id}));
             }

@@ -146,7 +146,10 @@ const Dataset = React.createClass({
         },
         componentWillMount() {
             const {nodesLoaded, loading, category} = this.props;
-            this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+            if (this.props.params.profile) {
+                this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+            }
+            // this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
             if (!nodesLoaded && !loading && category && category.id) {
                 this.loadMetadata({category: category});
             }
@@ -156,7 +159,12 @@ const Dataset = React.createClass({
         },
         componentWillReceiveProps({loading, map}) {
             if (!loading && this.props.map && this.props.map !== map) {
-                this.context.router.push(`/${this.props.params.profile}`);
+                if (this.props.params.profile) {
+                    this.context.router.push('/map/${this.props.params.profile}/');
+                }else {
+                    this.context.router.push('/map/');
+                }
+                // this.context.router.push(`/${this.props.params.profile}`);
             }
         },
     renderSerchBar() {
@@ -273,7 +281,7 @@ const Dataset = React.createClass({
         }else if (node.featureType) {
             const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
             if (!this.props.configOggetti[featureType]) {
-                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true, true, node.id);
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, true, node.id);
             }else {
                 let layers = [];
                 layers.push(this.props.configOggetti[featureType].layer);
@@ -284,23 +292,33 @@ const Dataset = React.createClass({
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         }else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
         this.props.expandFilterPanel(status);
-        this.context.router.push(`/full/${this.props.params.profile}`);
+        if (this.props.params.profile) {
+            this.context.router.push('/full/${this.props.params.profile}/');
+        }else {
+            this.context.router.push('/full/');
+        }
+        // this.context.router.push(`/full/${this.props.params.profile}`);
     },
     searchAll(ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
             }else if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
-        this.context.router.push(`/full/${this.props.params.profile}`);
+        if (this.props.params.profile) {
+            this.context.router.push('/full/${this.props.params.profile}/');
+        }else {
+            this.context.router.push('/full/');
+        }
+        // this.context.router.push(`/full/${this.props.params.profile}`);
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});

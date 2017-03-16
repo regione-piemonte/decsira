@@ -88,17 +88,25 @@ const LoginPanel = connect((state) => ({
 
 const Header = React.createClass({
     propTypes: {
-        showCart: React.PropTypes.bool
+        showCart: React.PropTypes.bool,
+        cartMappaStyle: React.PropTypes.string,
+        cartListaStyle: React.PropTypes.string,
+        goToDataset: React.PropTypes.func
     },
 
     getDefaultProps() {
         return {
-            showCart: false
+            cartMappaStyle: 'btn btn-primary',
+            cartListaStyle: 'btn btn-primary active',
+            showCart: false,
+            goToDataset: () => {}
        };
     },
 
     renderCart() {
-        return this.props.showCart ? <Cart /> : null;
+        const lStyle = this.props.cartListaStyle;
+        const mStyle = this.props.cartMappaStyle;
+        return this.props.showCart ? <Cart onListaClick={this.props.goToDataset} listaStyle={lStyle} mappaStyle={mStyle}/> : null;
     },
 
     render() {
