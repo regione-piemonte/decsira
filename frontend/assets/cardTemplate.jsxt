@@ -43,11 +43,16 @@
 
         <Section header='OGGETTI AUTORIZZATI' eventKey='3' expanded={true}>
             <ul key='factorylist' className={"list-style-type:circle"}>
-            <li>
-            <LinkScheda
-                linkTitle={"Impianto Autorizzato " + model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()") }
-                detailsTemplateConfigURL={"assets/impiantoAutorizzato.jsxt"}/>
-            </li>
+
+            {model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()").map((link) => {
+              return (<li><LinkScheda
+                  params={{codiceSira: link}}
+                  linkTitle={"Impianto Autorizzato " + link }
+                  detailsTemplateConfigURL={"assets/impiantoAutorizzato.jsxt"}/>
+              </li>
+              );
+            })}
+
             </ul>
         </Section>
         <Section header='RIEPILOGO RECUPERO RIFIUTI' eventKey='2' expanded={true}>
