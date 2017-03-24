@@ -44,7 +44,7 @@
         <Section header='OGGETTI AUTORIZZATI' eventKey='3' expanded={true}>
             <ul key='factorylist' className={"list-style-type:circle"}>
 
-            {model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()").map((link) => {
+            {model.getList("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:impianto/sira:Sede/sira:codiceSira/text()").map((link) => {
               return (<li><LinkScheda
                   params={{codiceSira: link}}
                   linkTitle={"Impianto Autorizzato " + link }

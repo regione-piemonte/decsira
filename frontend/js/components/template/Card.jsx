@@ -90,7 +90,8 @@ const Card = React.createClass({
             authParam: authParam,
             profile: authParam ? authParam.userName : '',
             withMap: this.props.withMap,
-            getValue: (element) => TemplateUtils.getValue(xml, element)
+            getValue: (element) => TemplateUtils.getValue(xml, element),
+            getList: (element) => TemplateUtils.getList(xml, element)
         });
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();

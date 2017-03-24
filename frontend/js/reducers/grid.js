@@ -179,7 +179,12 @@ function grid(state = initialState, action) {
                 loadingGrid: false
                 };
         }
-        case 'FEATURETYPE_CONFIG_LOADED':
+        case 'FEATURETYPE_CONFIG_LOADED': {
+            if (action.activate) {
+                return assign({}, state, initialState);
+            }
+            return state;
+        }
         case 'SET_ACTIVE_FEATURE_TYPE': {
             return assign({}, state, initialState);
         }
