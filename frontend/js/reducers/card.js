@@ -29,12 +29,14 @@ function cardtemplate(state = initialState, action) {
             return assign({}, state, {
                 template: action.template,
                 xml: action.xml || state.xml,
-                activeSections: null
+                activeSections: null,
+                params: action.params
             });
         }
         case CARD_TEMPLATE_LOAD_ERROR: {
             return assign({}, state, {
-                loadingCardTemplateError: action.error
+                loadingCardTemplateError: action.error,
+                params: {}
             });
         }
         case SELECT_SECTION: {

@@ -28,7 +28,8 @@ const LinkScheda = React.createClass({
         templateProfile: React.PropTypes.string,
         loadFeatureTypeConfig: React.PropTypes.func,
         toggleDetail: React.PropTypes.func,
-        loadCardTemplate: React.PropTypes.func
+        loadCardTemplate: React.PropTypes.func,
+        params: React.PropTypes.object
     },
     getDefaultProps() {
         return {
@@ -36,6 +37,7 @@ const LinkScheda = React.createClass({
             btProps: {},
             linkTitle: 'Link',
             templateProfile: 'default',
+            params: {},
             toggleDetail: () => {},
             loadCardModelConfig: () => {},
             activateSection: () => {}
@@ -80,7 +82,7 @@ const LinkScheda = React.createClass({
             });
             url = `${url}&FEATUREID=${this.props.id}&authkey=${this.props.authParams.authkey}`;
         }
-        this.props.loadCardTemplate(templateUrl, url);
+        this.props.loadCardTemplate(templateUrl, url, this.props.params);
         if (!this.props.open) {
             this.props.toggleDetail();
         }
