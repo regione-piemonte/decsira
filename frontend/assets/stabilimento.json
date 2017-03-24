@@ -26,16 +26,16 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Stabilimento_{{/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()}}.pdf",
-     "template": "assets/cardTemplateStab.jsxt",
-     "service": {
-       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
-       "params": {
-         "typeName": "decsiraogc_stabilimenti:Stabilimento",
-         "version": "2.0",
-         "srsName": "EPSG:4326"
-       }
-     }
+        "pdfname": "Scheda_Stabilimento_{{/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()}}.pdf",
+        "template": "assets/cardTemplateStab.jsxt",
+        "service": {
+             "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+                "params": {
+                   "typeName": "decsiraogc_stabilimenti:Stabilimento",
+                    "version": "2.0",
+                    "srsName": "EPSG:4326"
+                }
+          }
    },
    "featureinfo":{
      "templateURL": "assets/infoTemplateStab.jsxt"
@@ -171,7 +171,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "sira:province"
+               "typeName": "decsiraogc_decodif:sipra_t_province"
              }
            },
            "valueId":"toponimo",
@@ -185,7 +185,7 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "sira:comuni",
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
                "propertyName": "id_comune,sigla_provincia,toponimo",
                "sortBy": "toponimo+A"
              }
@@ -213,7 +213,7 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "siradec:decsira_d_ateco",
+               "typeName": "decsiraogc_decodif:decsira_d_ateco",
                "propertyName": "id_ateco,des_ateco"
              }
            },
@@ -250,7 +250,7 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "siradec:decsira_d_tipo_provvedimento",
+               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
                "propertyName": "id_proc_attivita,provv"
              }
            },
@@ -287,8 +287,9 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "siradec:decsira_d_tematica",
-               "propertyName": "id_tematica,des_tematica"
+               "typeName": "decsiraogc_decodif:decsira_d_tematica",
+               "propertyName": "id_tematica,des_tematica",
+                "sortBy": "des_tematica+A"
              }
            },
 
@@ -302,7 +303,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "siradec:sipra_dt_d_tipo_sede",
+               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_sede",
                "propertyName": "id_tipo_sede,des_tipo_sede"
              }
            },
@@ -317,7 +318,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "siradec:sipra_d_stato",
+               "typeName": "decsiraogc_decodif:sipra_d_stato",
                "propertyName": "id_stato,des_stato"
              }
            },

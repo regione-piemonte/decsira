@@ -69,7 +69,7 @@ module.exports = {
             path: new RegExp("/proxy(.*)"),
             rewrite: rewriteUrl("/decsiraweb/proxy$1"),
             host: "localhost",
-            target: "http://localhost:8080"
+            target: "http://tst-sipradecweb.territorio.csi.it:8080/"
         }, {
             path: new RegExp("/services/metadata/(.*)"),
             rewrite: rewriteUrl("/decsiraweb/services/metadata/$1"),
@@ -83,11 +83,11 @@ module.exports = {
         }, {
             path: new RegExp("/decsiraweb/services/queryformconfig(.*)"),
             host: "localhost",
-            target: "http://localhost:8080"
+            target: "http://tst-sipradecweb.territorio.csi.it:8080/"
         }, {
             path: new RegExp("/geoserver/ows(.*)"),
             host: "localhost",
-            target: "http://sira2.csi.geo-solutions.it"
+            target: "http://tst-sipradecweb.territorio.csi.it:8080/"
         }]
     },
 

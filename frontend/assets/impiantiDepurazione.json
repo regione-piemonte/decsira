@@ -26,7 +26,7 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Depuratore_{{/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:idDepuratore/text()}}.pdf",
+    "pdfname": "Scheda_ImpiantoDiDepurazione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nome/text()}}.pdf",
      "template": "assets/cardTemplateImpiantoDepurazione.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
@@ -59,7 +59,7 @@
            "type": 2
          },
          {
-           "headerName": "Denominazione impianto di depurazione",
+           "headerName": "Nome impianto di depurazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nome/text()"],
            "type": 2
@@ -101,6 +101,27 @@
            "headerName": "ATO",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:desAto/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione gestore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:ragioneSocialeAzienda/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Partita iva azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:partitaIvaAzienda/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice fiscale azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:codiceFiscaleAzienda/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
@@ -213,7 +234,7 @@
          {
            "hide": true,
            "headerName": "Geometry",
-           "xpath": ["siraemissioni:geometria/gml:Point/gml:pos/text()"],
+           "xpath": ["decsiraogc_stabilimenti:geometria/gml:Point/gml:pos/text()"],
            "type": 6
          }
        ]
@@ -250,7 +271,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "sira:province"
+               "typeName": "decsiraogc_decodif:sipra_t_province"
              }
            },
            "valueId":"toponimo",
@@ -264,8 +285,8 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "sira:comuni",
-               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "istat,sigla_provincia,toponimo",
                "sortBy": "toponimo+A"
              }
            },
@@ -306,8 +327,8 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "sira:comuni",
-               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "istat,sigla_provincia,toponimo",
                "sortBy": "toponimo+A"
              }
            },
@@ -332,9 +353,24 @@
            "type":"string"
         },
         {
+          "index": 10,
+          "attribute": "decsiraogc_stabilimenti:idAto",
+          "label":"ATO",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_ato",
+              "propertyName": "id_ato,denominazione"
+            }
+          },
+          "valueId":"id_ato",
+          "valueLabel":"denominazione"
+        },
+        {
            "index": 11,
            "attribute": "decsiraogc_stabilimenti:capacitaOrganicaProgetto",
-           "label":"Capacit&agrave; organica di progetto (a.e.)",
+           "label":"Capacità organica di progetto (a.e.)",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
@@ -343,7 +379,7 @@
            "attribute": "decsiraogc_stabilimenti:abitantiEquivalentiTrattati",
            "label":"Abitanti equivalenti trattati",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"string"
+           "type":"number"
         },
         {
            "index": 13,
@@ -357,6 +393,119 @@
            "attribute": "decsiraogc_stabilimenti:produzioneTalQualeFanghi",
            "label":"Produzione fanghi",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+          "index": 15,
+          "attribute": "decsiraogc_stabilimenti:tipoProvvedimento",
+          "label":"Tipo autorizzazione",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+              "propertyName": "id_proc_attivita,provv"
+            }
+          },
+          "valueId":"id_proc_attivita",
+          "valueLabel":"provv"
+        },
+        {
+           "index": 16,
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataProvvedimento",
+           "label":"Data provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 17,
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataScadenza",
+           "label":"Data scadenza",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+          "index": 18,
+          "attribute": "decsiraogc_stabilimenti:idTipologiaTrattamento",
+          "label":"Tipologia di trattamento",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_trattamento_dep",
+              "cql_filter": "flg_principale=1",
+              "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale"
+            }
+          },
+          "valueId":"id_trattamento_dep",
+          "valueLabel":"des_trattamento_dep"
+        },
+        {
+          "index": 19,
+          "attribute": "decsiraogc_stabilimenti:idTipologiaTrattamento",
+          "label":"Trattamenti piu avanzati",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_trattamento_dep",
+              "cql_filter": "flg_principale=0",
+              "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale"
+            }
+          },
+          "valueId":"id_trattamento_dep",
+          "valueLabel":"des_trattamento_dep"
+        },
+        {
+          "index": 20,
+          "attribute": "decsiraogc_stabilimenti:tipoDisinfezione/decsiraogc_stabilimenti:TipoDisinfezione/decsiraogc_stabilimenti:idTipoDisinfezione",
+          "label":"Tipo di disinfezione",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_disinfezione",
+              "propertyName": "id_tipo_disinfezione,des_tipo_disinfezione"
+            }
+          },
+          "valueId":"id_tipo_disinfezione",
+          "valueLabel":"des_tipo_disinfezione"
+        },
+        {
+           "index": 21,
+           "attribute": "decsiraogc_stabilimenti:oggettoAssociatoDepuratore/decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:codiceOggetto",
+           "label":"Codice scarico",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+          "index": 22,
+          "attribute": "decsiraogc_stabilimenti:oggettoAssociatoDepuratore/decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:idTipoRecettore",
+          "label":"Tipo recettore",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_recettore",
+              "propertyName": "id_tipo_recettore,des_tipo_recettore"
+            }
+          },
+          "valueId":"id_tipo_recettore",
+          "valueLabel":"des_tipo_recettore"
+        },
+        {
+           "index": 23,
+           "attribute": "decsiraogc_stabilimenti:oggettoAssociatoDepuratore/decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:codiceRecettore",
+           "label":"Codice recettore",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 24,
+           "attribute": "decsiraogc_stabilimenti:oggettoAssociatoDepuratore/decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:denominazioneRecettore",
+           "label":"Denominazione recettore",
            "type":"string"
         }
 
