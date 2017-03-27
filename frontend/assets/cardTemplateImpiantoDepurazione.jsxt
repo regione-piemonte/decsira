@@ -2,15 +2,15 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='IMPIANTI DI DEPURAZIONE' subtitle={[
-            'Denominazione: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:idDepuratore/text()")
+            'Nome impianto di depurazione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nome/text()")
             ]} id={model.id}/>
     )}>
 
     <Panel className="template">
             <Section header='DATI GENERALI - Impianto di depurazione' eventKey='1' expanded={true}>
               <LabeledField label='Nome impianto di depurazione' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti::nome/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nome/text()")
                 }/>
                 <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
                     <LabeledField label='Codice regionale impianto di depurazione' value={
@@ -83,7 +83,8 @@
                   <LabeledField label='Numero determinazione declassamento' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:numDetermDeclassamento/text()")
                   }/>
-                  <LabeledField label='Data determinazione declassamento' value={
+
+                  <LabeledField label='Data determinazione declassamento' dateFormat='DD/MM/YYYY'  value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:dataDetermDeclassamento/text()")
                   }/>
                   <LabeledField label='Produzione tal quale fanghi (t/anno)' value={
@@ -396,11 +397,13 @@
                                     {
                                         headerName: 'Data emissione',
                                         width: 100,
+                                        dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                         xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:dataAutorizzazione/text()"
                                     },
                                     {
                                         headerName: 'Data scadenza',
                                         width: 100,
+                                        dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                         xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:dataScadenza/text()"
                                     }
                                 ]
@@ -461,11 +464,13 @@
                                     {
                                         headerName: 'Data emissione',
                                         width: 100,
+                                        dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataProvvedimento/text()"
                                     },
                                     {
                                         headerName: 'Data scadenza',
                                         width: 100,
+                                        dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataScadenza/text()"
                                     },
                                     {
@@ -506,11 +511,13 @@
                                     {
                                         headerName: 'Data emissione',
                                         width: 120,
+                                        dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataProvvedimento/text()"
                                     },
                                     {
                                         headerName: 'Data scadenza',
                                         width: 120,
+                                        dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:dataScadenza/text()"
                                     },
                                     {
@@ -523,5 +530,39 @@
                             features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore")}/>
                      </Section>
                  </ProfileWrapper>
+
+                 <Section header='MAPPA SINTESI - Impianto di depurazione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='16' expanded={true}>
+                     <MappaScheda
+                         center={
+                             model.getValue({
+                                 type: TemplateUtils.GEOMETRY_TYPE,
+                                 xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:geometria/gml:Point/gml:pos/text()"
+                             })
+                         }
+                         layers={[
+                             {
+                                 "type": "wms",
+                                 "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                                 "name": "SfondoCartRif",
+                                 "title": "Sfondo Cartografico",
+                                 "group": "background",
+                                 "visibility": true,
+                                 "format": "image/png",
+                                 "tiled": true,
+                                 "tileSize": 512
+                             },
+                             {
+                                 "type": "wms",
+                                 "url": "{geoserverUrl}/wms",
+                                 "visibility": true,
+                                 "title": "Impianti depurazione Preview",
+                                 "name": "decsiraogc_stabilimenti:ImpiantoDiDepurazione",
+                                 "group": "Overlays",
+                                 "format": "image/png"
+                             }
+                        ]}
+                         authParam={model.authParam}
+                         withMap={model.withMap}/>
+                 </Section>
     </Panel>
 </Panel>

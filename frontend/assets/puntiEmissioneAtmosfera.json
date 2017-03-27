@@ -2,7 +2,8 @@
    "featureTypeName":"decsiraogc_emissioni:PuntoEmissione",
    "featureTypeNameLabel":"PUNTI DI EMISSIONE IN ATMOSFERA",
    "nameSpaces": {
-     "decsiraogc_emissioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_emissioni/1.0"
+     "decsiraogc_emissioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_emissioni/1.0",
+     "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"
    },
    "layer": {
         "type": "wms",
@@ -26,7 +27,7 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Punto Emissione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()}_{/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:sigla/text()}}.pdf",
+    "pdfname": "Scheda_PuntoDiEmissione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:sigla/text()}}.pdf",
      "template": "assets/cardTemplatePuntiEmissione.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
@@ -343,7 +344,7 @@
         },
         {
            "index": 11,
-           "attribute": "decsiraogc_emissioni:desStato",
+           "attribute": "decsiraogc_emissioni:idStato",
            "label":"Stato punto di emissione",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
@@ -360,7 +361,7 @@
         },
         {
            "index": 12,
-           "attribute": "decsiraogc_emissioni:desTipoEmissione",
+           "attribute": "decsiraogc_emissioni:idTipoEmissione",
            "label":"Tipo emissione",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
@@ -389,7 +390,7 @@
         },
         {
            "index": 14,
-           "attribute": "decsiraogc_emissioni:provenienzaEmissione/decsiraogc_emissioni:ProvenienzaEmissione/decsiraogc_emissioni:desProvenienza",
+           "attribute": "decsiraogc_emissioni:provenienzaEmissione/decsiraogc_emissioni:ProvenienzaEmissione/decsiraogc_emissioni:idProvenienza",
            "label":"Tipo provenienza",
            "type":"list",
            "valueService": {
@@ -403,7 +404,7 @@
         },
         {
            "index": 15,
-           "attribute": "decsiraogc_emissioni:inquinante/decsiraogc_emissioni:Inquinante/decsiraogc_emissioni:desInquinante",
+           "attribute": "decsiraogc_emissioni:inquinante/decsiraogc_emissioni:Inquinante/decsiraogc_emissioni:idInquinante",
            "label":"Inquinante",
            "type":"list",
            "valueService": {

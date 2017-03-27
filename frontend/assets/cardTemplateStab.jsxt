@@ -219,6 +219,7 @@
                               {
                                   headerName: 'Data',
                                   width: 100,
+                                  dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                   xpath: "decsiraogc_stabilimenti:CertificazioneAmbientale/decsiraogc_stabilimenti:dataRilascio/text()"
                               },
                               {
@@ -238,7 +239,7 @@
                       id="OggettiCollegati"
                       selectedRow={model.OggettiCollegati}
                       wfsVersion="2.0"
-                      rowSelection={model.profile === "profilob" ? "single" : false}
+                      rowSelection={((model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)) ? "single" : false}
                       columns={
                           [
                               {
@@ -247,9 +248,9 @@
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/@gml:id"
                               },
                               {
-                                  headerName: 'Tipo',
-                                  width: 200,
-                                  xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()"
+                                    headerName: 'Tipo',
+                                    width: 200,
+                                    xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()"
                               },
                               {
                                   headerName: 'Codice',
@@ -274,11 +275,13 @@
                               {
                                   headerName: 'Data emissione',
                                   width: 50,
+                                  dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:dataAutorizzazione/text()"
                               },
                               {
                                   headerName: 'Data scadenza',
                                   width: 50,
+                                  dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:dataScadenza/text()"
                               }
                           ]
@@ -293,7 +296,7 @@
                       id="OggettiCollegati"
                       selectedRow={model.OggettiCollegati}
                       wfsVersion="2.0"
-                      rowSelection={model.profile === "profilob" ? "single" : false}
+                      rowSelection={((model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)) ? "single" : false}
                       columns={
                           [
                               {
@@ -322,19 +325,37 @@
                 </Section>
               </ProfileWrapper>
 
+              <Section header='OGGETTI COLLEGATI' eventKey='3' expanded={true}>
+                  <ul key='factorylist' className={"list-style-type:circle"}>
+                  <li>
+                  <LinkScheda
+                      linkTitle={"Punto Emissione " + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato/decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()")}
+                      detailsTemplateConfigURL={"assets/cardTemplatePuntiEmissione.jsxt"}
+                      featureType={"puntiEmissioneAtmosfera"}
+                      id={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_stabilimenti:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato/decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()")}
+                     />
+                  </li>
+                  </ul>
+              </Section>
+
               <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
                 <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
                 <SiraTable
                     id="Autorizzazioni"
                     selectedRow={model.Autorizzazioni}
                     wfsVersion="2.0"
-                    rowSelection={model.profile === "profilob" ? "single" : false}
+                    rowSelection={((model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)) ? "single" : false}
                     columns={
                         [
                             {
                                 hide: true,
                                 id: true,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
+                            },
+                            {
+                                headerName: 'Identificativo autorizzazione',
+                                width: 50,
+                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
                             },
                             {
                                 headerName: 'Tipo provvedimento',
@@ -354,11 +375,13 @@
                             {
                                 headerName: 'Data emissione',
                                 width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
                             },
                             {
                                 headerName: 'Data scadenza',
                                 width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
                             },
                             {
@@ -383,7 +406,10 @@
                         wfsVersion="2.0"
                         rowSelection={false}
                         dependsOn={{
-                            tableId: "Autorizzazioni"
+                            tableId: "Autorizzazioni",
+                            parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale"),
+                            xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id",
+                            pdfTitle: "Identificativo autorizzativo: {{decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()}}"
                         }}
                         columns={
                             [
@@ -409,7 +435,10 @@
                           selectedRow={model.DettaglioAttrezzature}
                           wfsVersion="2.0"
                           dependsOn={{
-                              tableId: "Autorizzazioni"
+                              tableId: "Autorizzazioni",
+                              parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale"),
+                              xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id",
+                              pdfTitle: "Identificativo autorizzativo: {{decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()}}"
                           }}
                           rowSelection={false}
                           columns={
@@ -443,13 +472,18 @@
                     id="Autorizzazioni"
                     selectedRow={model.Autorizzazioni}
                     wfsVersion="2.0"
-                    rowSelection={model.profile === "profiloa" ? "single" : false}
+                    rowSelection={((model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)) ? "single" : false}
                     columns={
                         [
                             {
                                 hide: true,
                                 id: true,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
+                            },
+                            {
+                                headerName: 'Identificativo autorizzativo',
+                                width: 50,
+                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
                             },
                             {
                                 headerName: 'Tipo provvedimento',
@@ -469,11 +503,13 @@
                             {
                                 headerName: 'Data emissione',
                                 width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
                             },
                             {
                                 headerName: 'Data scadenza',
                                 width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
                             },
                             {
@@ -493,7 +529,10 @@
                         wfsVersion="2.0"
                         rowSelection={false}
                         dependsOn={{
-                            tableId: "Autorizzazioni"
+                            tableId: "Autorizzazioni",
+                            parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale"),
+                            xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id",
+                            pdfTitle: "Identificativo autorizzativo: {{decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()}}"
                         }}
                         columns={
                             [
@@ -515,7 +554,7 @@
               </ProfileWrapper>
 
 
-              <Section header='IMPIANTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
+              <Section header='IMPATTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
                 <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
                   <LabeledField label='Verifica sorgenti rumorose' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:verificaSorgentiRumorose/decsiraogc_stabilimenti:VerificaSorgentiRumorose/decsiraogc_stabilimenti:desRumorosita/text()")
@@ -544,7 +583,7 @@
               </ProfileWrapper>
 
 
-              <Section header='MAPPA SINTESI - Stabilimento' eventKey='16' expanded={true}>
+              <Section header='MAPPA SINTESI - Stabilimento su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='16' expanded={true}>
                   <MappaScheda
                       center={
                           model.getValue({
@@ -578,5 +617,16 @@
                       withMap={model.withMap}/>
               </Section>
 
+
+              <Section header='METADATO' eventKey='7'>
+                  <LinkToPage
+                      txt="Visualizza la scheda del metadato"
+                      url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+                      params={{
+                          id: 6471,
+                          currTab: 'rndt'
+                      }}
+                  />
+              </Section>
     </Panel>
 </Panel>

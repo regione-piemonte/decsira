@@ -188,10 +188,10 @@
                 <LabeledField label='Numero' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:estremiProvvedimento/text()")
                 }/>
-                <LabeledField label='Data emissione' value={
+                <LabeledField label='Data emissione' dateFormat='DD/MM/YYYY'  value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:dataProvvedimento/text()")
                 }/>
-                <LabeledField label='Data scadenza' value={
+                <LabeledField label='Data scadenza' dateFormat='DD/MM/YYYY' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:dataScadenza/text()")
                 }/>
                 <LabeledField label='Ente competente' value={
@@ -430,7 +430,7 @@
       </ProfileWrapper>
 
 
-      <Section header='MAPPA SINTESI - Punto di emissione' eventKey='15' expanded={true}>
+      <Section header='MAPPA SINTESI - Punto di emissione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='15' expanded={true}>
           <MappaScheda
               center={
                   model.getValue({
@@ -464,6 +464,16 @@
               withMap={model.withMap}/>
       </Section>
 
+      <Section header='METADATO' eventKey='7'>
+          <LinkToPage
+              txt="Visualizza la scheda del metadato"
+              url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+              params={{
+                  id: 6502,
+                  currTab: 'rndt'
+              }}
+          />
+      </Section>
 
 
 
