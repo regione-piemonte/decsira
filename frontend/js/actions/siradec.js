@@ -22,6 +22,7 @@ const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 
 const {Promise} = require('es6-promise');
 
@@ -172,7 +173,7 @@ function configurationLoading() {
     };
 }
 
-function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId) {
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const {userprofile} = getState();
@@ -189,6 +190,12 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
             const layer = ConfigUtils.setUrlPlaceholders(config.layer);
             if (addlayer) {
                 dispatch(addLayer(assign({}, layer, {siraId})));
+            }
+            // add layer in cart
+            if (addCartlayer) {
+                let layers = [];
+                if (layer) layers.push(layer);
+                dispatch(addFeatureTypeLayerInCart(layers, node));
             }
             // Configure the FeatureGrid for WFS results list
             dispatch(configureFeatureGrid(config.featuregrid, featureType));
