@@ -2,7 +2,7 @@
     "geoStoreUrl": "rest/geostore",
     "geoserverUrl": "${url.geoserver}/geoserver",
     "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
-   	"secureDecsirawebUrl": "${url.secure.decsiraweb}",
+  	"secureDecsirawebUrl": "${url.secure.decsiraweb}",
     "decsirawebUrl": "${url.decsiraweb}",
     "useAuthenticationRules": true,
     "authenticationRules": [
@@ -58,7 +58,8 @@
                 "override": {
                     "DrawerMenu": {
                         "buttonConfig": {
-                            "buttonClassName": "square-button no-border"
+                            "buttonClassName": "square-button no-border",
+                            "tooltip": "backgroundSwither.tooltip"
                         },
                         "glyph": "1-map",
                         "position": 3
@@ -77,7 +78,8 @@
                 "override": {
                     "DrawerMenu": {
                         "buttonConfig": {
-                            "buttonClassName": "square-button no-border"
+                            "buttonClassName": "square-button no-border",
+                            "tooltip": "messages.Measurement_tooltip"
                         },
                         "glyph": "1-stilo",
                         "position": 4
@@ -107,7 +109,8 @@
                     "DrawerMenu": {
                         "glyph": "1-layer",
                         "buttonConfig": {
-                          "buttonClassName": "square-button no-border"
+                          "buttonClassName": "square-button no-border",
+                          "tooltip": "toc.tooltip"
                       }
                   }
               }
@@ -117,7 +120,8 @@
                 "override": {
                     "DrawerMenu": {
                         "buttonConfig": {
-                          "buttonClassName": "square-button no-border"
+                          "buttonClassName": "square-button no-border",
+                          "tooltip": "catalog.tooltip"
                       }
                   }
               }
@@ -240,6 +244,11 @@
             },
             {
                 "name":"Info",
+                "override": {
+                    "Toolbar": {
+                        "alwaysVisible": true
+                    }
+                },
                 "hide": true
             },
             {

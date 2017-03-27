@@ -133,6 +133,9 @@ public abstract class GenericDAO<T> {
 				}
 			}
 
+			if(getTableName().equals("sipra_mtd_t_categoria_appl")){
+				query += " ORDER BY Ordine ";
+			}
 			return template.query(query, params, getRowMapper());
 		}
 		catch (EmptyResultDataAccessException e) {

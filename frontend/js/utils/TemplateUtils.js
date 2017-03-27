@@ -12,6 +12,8 @@ const Dom = require('xmldom').DOMParser;
 const parse = require('wellknown');
 const assign = require('object-assign');
 
+const {isArray} = require('lodash');
+
 const TemplateUtils = {
 
     NUMBER_TYPE: 1,
@@ -228,6 +230,13 @@ const TemplateUtils = {
         }
 
         return value;
+    },
+    getList(xml, element, wfsVersion) {
+        const result = TemplateUtils.getValue(xml, element, wfsVersion);
+        if (!isArray(result)) {
+            return [result];
+        }
+        return result;
     },
     getNumberOfFeatures(data, wfsVersion="2.0") {
         let doc = new Dom().parseFromString(data);

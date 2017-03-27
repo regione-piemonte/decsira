@@ -17,7 +17,7 @@ const API = {
     wms: require('../utils/WMS')
 };
 const AddMapUtils = require('../utils/AddMapUtils');
-const {addServiceIncart, refreshNumberOfServices} = require('./cart');
+const {addServiceIncart, refreshNumberOfServices, addSiraLayers} = require('./cart');
 const SIRA_RECORDS_LOADING = 'SIRA_RECORDS_LOADING';
 const SIRA_RECORDS_ERROR = 'SIRA_RECORDS_ERROR';
 const SIRA_RECORDS_LOADED = 'SIRA_RECORDS_LOADED';
@@ -74,12 +74,6 @@ function loadNodeMapRecords(node, params) {
         });
     };
 }
-function addSiraLayers(layers) {
-    return {
-        type: 'SIRA_ADD_LAYERS',
-        layers
-    };
-}
 
 function addSiraLayersIncart(layers) {
     return {
@@ -120,6 +114,14 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     };
 }
 
+function addFeatureTypeLayerInCart(layer, node) {
+    return (dispatch) => {
+        dispatch(addSiraLayersIncart(layer));
+        dispatch(addServiceIncart(node));
+        dispatch(refreshNumberOfServices());
+    };
+}
+
 module.exports = {
     SIRA_RECORDS_LOADING,
     SIRA_RECORDS_ERROR,
@@ -130,5 +132,6 @@ module.exports = {
     loadNodeMapRecords,
     toggleAddMap,
     addLayers,
-    addLayersInCart
+    addLayersInCart,
+    addFeatureTypeLayerInCart
  };

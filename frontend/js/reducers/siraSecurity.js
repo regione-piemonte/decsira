@@ -15,8 +15,8 @@ function security(state = {user: null, errorCause: null}, action) {
                 {
                     // user: action.authParams && action.authParams.userName ? action.authParams.userName : '',
                     // token: action.authParams && action.authParams.authkey ? action.authParams.authkey : ''
-                    user: action.authParams.userName,
-                    token: action.authParams.authkey
+                    user: action.authParams ? action.authParams.userName : '',
+                    token: action.authParams ? action.authParams.authkey : ''
                 });
         }
         default:

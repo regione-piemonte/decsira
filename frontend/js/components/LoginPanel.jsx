@@ -31,7 +31,7 @@ const LoginPanel = React.createClass({
                 <Modal
                     show= {this.props.showLoginPanel}>
                     <Modal.Header closeButton onClick={this.props.onClosePanel}>
-                        <Modal.Title>Modal heading</Modal.Title>
+                        <Modal.Title>Login</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h4><I18N.Message msgId={"loginpanel.panelMsg"}/></h4>

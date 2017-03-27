@@ -36,7 +36,7 @@ const CartPanel = React.createClass({
      },
 
      goMap() {
-         this.context.router.replace("/map/B");
+         this.context.router.replace("/map/");
      },
 
     renderServicesList() {

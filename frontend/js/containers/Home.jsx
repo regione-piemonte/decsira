@@ -11,7 +11,7 @@ const {head} = require('lodash');
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
 
-const {getMetadataObjects, selectCategory, resetObjectAndView, toggleCategories} = require('../actions/siracatalog');
+const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
 
@@ -29,7 +29,6 @@ const Home = React.createClass({
         loadMetadata: React.PropTypes.func,
         params: React.PropTypes.object,
         selectCategory: React.PropTypes.func,
-        toggleCategories: React.PropTypes.func,
         allCategory: React.PropTypes.object,
         resetObjectAndView: React.PropTypes.func
     },
@@ -41,8 +40,12 @@ const Home = React.createClass({
             searchText: ""
         };
     },
+    componentDidMount() {
+        document.body.className = "body_home";
+    },
     render() {
-        return (<div className="home">
+        return (
+            <div className="home-page">
             <Header />
             <div className="container-fluid">
                 <div className="row-fluid sb-sx">
@@ -58,25 +61,15 @@ const Home = React.createClass({
                                     searchClasses="home-search"
                                     addCategoriesSelector={false}
                                     onSearch={({text}) => {
-                                        this.props.toggleCategories(false);
                                         this.props.selectCategory(this.props.allCategory, 'objects');
                                         this.props.loadMetadata({params: {text}});
-                                        this.context.router.push(`/dataset/${this.props.params.profile}/`);
+                                        if (this.props.params.profile) {
+                                            this.context.router.push('/dataset/${this.props.params.profile}/');
+                                        }else {
+                                            this.context.router.push('/dataset/');
+                                        }
                                     }}
                                 />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="container-fluid">
-                <div className="row-fluid sb-dx">
-                    <div className="container news-home">
-                        <div className="row">
-                            <div className="col-md-12 testo-news">
-                                <p className="data-news">7 aprile 2016</p>
-                                <h3 className="titolo-news">Nuova risorsa Disponibile</h3>
-                                <p>&Egrave; disponibile questa nuova risorsa "Impianti autorizzati a recupero di energia e materia" <a href="#" data-toggle="modal" data-target="#modalNews">Continua</a></p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,9 +98,12 @@ const Home = React.createClass({
     },
     selectCategory(category, subcat) {
         this.props.resetObjectAndView();
-        this.props.toggleCategories(true);
         this.props.selectCategory(category, subcat);
-        this.context.router.push(`/dataset/${this.props.params.profile}/`);
+        if (this.props.params.profile) {
+            this.context.router.push('/dataset/${this.props.params.profile}/');
+        }else {
+            this.context.router.push('/dataset/');
+        }
     }
 });
 
@@ -122,6 +118,5 @@ module.exports = connect((state) => {
 }, {
     loadMetadata: getMetadataObjects,
     selectCategory,
-    resetObjectAndView,
-    toggleCategories
+    resetObjectAndView
 })(Home);

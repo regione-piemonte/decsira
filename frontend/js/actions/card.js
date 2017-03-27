@@ -30,11 +30,12 @@ function generatePDF(active = true) {
     };
 }
 
-function configureCard(template, xml) {
+function configureCard(template, xml, params) {
     return {
         type: CARD_TEMPLATE_LOADED,
-        template: template,
-        xml: xml
+        template,
+        xml,
+        params
     };
 }
 
@@ -60,12 +61,12 @@ function activateSection(section) {
     };
 }
 
-function loadCardData(template, wfsUrl) {
+function loadCardData(template, wfsUrl, params={}) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     return (dispatch) => {
         return axios.get(url).then((response) => {
             // let model = TemplateUtils.getModel(response.data, modelConfig);
-            dispatch(configureCard(template, response.data));
+            dispatch(configureCard(template, response.data, params));
         }).catch((e) => {
             dispatch(configureCardError(e));
         });
@@ -90,15 +91,15 @@ function loadCardData(template, wfsUrl) {
     };
 }*/
 
-function loadCardTemplate(templateConfigURL, wfsUrl) {
+function loadCardTemplate(templateConfigURL, wfsUrl, params = {}) {
     return (dispatch) => {
         return axios.get(templateConfigURL).then((response) => {
             let template = response.data;
             if (wfsUrl) {
-                dispatch(loadCardData(template, wfsUrl));
+                dispatch(loadCardData(template, wfsUrl, params));
                 // dispatch(loadCardModelConfig(template, modelConfigURL, wfsUrl));
             } else {
-                dispatch(configureCard(template));
+                dispatch(configureCard(template, null, params));
             }
         }).catch((e) => {
             dispatch(configureCardError(e));

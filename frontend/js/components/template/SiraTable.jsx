@@ -166,7 +166,7 @@ const SiraTable = React.createClass({
                 featureType,
                 params
             };
-            detailProps.loadFeatureTypeConfig(null, {authkey: detailProps.authParams.authkey}, featureType, false);
+            detailProps.loadFeatureTypeConfig(null, {authkey: detailProps.authParams.authkey ? detailProps.authParams.authkey : ''}, featureType, false);
         }
 
     },

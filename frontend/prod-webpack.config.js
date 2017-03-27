@@ -16,6 +16,8 @@ webpackConfig.plugins = [
     new NormalModuleReplacementPlugin(/leaflet$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "leaflet")),
     new NormalModuleReplacementPlugin(/openlayers$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "openlayers")),
     new NormalModuleReplacementPlugin(/proj4$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "proj4")),
+    new NormalModuleReplacementPlugin(/map\/openlayers\/Feature/, path.join(__dirname, "js", "Ms2Override", "Feature.jsx")),
+    new NormalModuleReplacementPlugin(/map\/openlayers\/plugins\/VectorLayer/, path.join(__dirname, "js", "Ms2Override", "VectorLayer.jsx")),
     new UglifyJsPlugin({
         compress: {warnings: false},
         mangle: true
