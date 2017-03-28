@@ -65,7 +65,7 @@ const CartPanel = React.createClass({
      render() {
          return this.props.showPanel ?
              (
-             <Dialog style ={{backgroundColor: "white"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
+             <Dialog style ={{position: "absolute", right: "100px", backgroundColor: "white", width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
                  <span role="header"><span className="cartpanel-panel-title" ><I18N.Message msgId={"cartpanel.title"}/></span><button className="print-panel-close close" onClick={this.props.onClosePanel}><span>×</span></button></span>
                  <div role="body">
                      {this.renderServicesList()}

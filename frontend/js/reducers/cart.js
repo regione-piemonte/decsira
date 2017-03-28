@@ -7,7 +7,7 @@
 */
 const assign = require('object-assign');
 
-const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES, SET_CART_SERVICES, RM_LAYERS_SERVICES, RM_SERVICES} = require('../actions/cart');
+const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES, SET_CART_SERVICES, EMPTY_CART, RM_SERVICES} = require('../actions/cart');
 const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
 
 const initialState = {
@@ -53,14 +53,12 @@ function cart(state = initialState, action) {
                 wmsservices: action.wmsservices ? action.wmsservices : []
             }
         );
-    }case RM_LAYERS_SERVICES: {
-        let layersOk = state.layers ? state.layers : [];
-        if (action.idNode) {
-            layersOk = layersOk.filter((el) => el.idNode !== action.idNode);
-        }
+    }case EMPTY_CART: {
         return assign({}, state,
             {
-                layers: layersOk
+                wmsservices: [],
+                layers: [],
+                servicesNumber: 0
             }
         );
     }case RM_SERVICES: {
