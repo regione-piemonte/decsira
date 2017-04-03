@@ -37,6 +37,7 @@ const Card = React.createClass({
                     React.PropTypes.string])
         }),
         authParam: React.PropTypes.object,
+        profile: React.PropTypes.array,
         open: React.PropTypes.bool,
         withMap: React.PropTypes.bool,
         draggable: React.PropTypes.bool,
@@ -56,6 +57,7 @@ const Card = React.createClass({
             authParam: null,
             open: false,
             draggable: true,
+            profile: [],
             // model: {},
             toggleDetail: () => {}
         };
@@ -86,9 +88,10 @@ const Card = React.createClass({
         const {maxWidth} = getWindowSize();
         const xml = this.props.card.xml;
         const authParam = this.props.authParam;
+        const profile = this.props.profile;
         const model = assign({}, this.props.card, {
             authParam: authParam,
-            profile: authParam ? authParam.userName : '',
+            profile: profile,
             withMap: this.props.withMap,
             getValue: (element) => TemplateUtils.getValue(xml, element),
             getList: (element) => TemplateUtils.getList(xml, element)

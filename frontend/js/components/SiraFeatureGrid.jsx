@@ -20,7 +20,7 @@ const {bindActionCreators} = require('redux');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {selectFeatures} = require('../actions/featuregrid');
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
-
+const {verifyProfiles} = require('../utils/TemplateUtils');
 const {head} = require('lodash');
 
 const {
@@ -281,7 +281,8 @@ const SiraFeatureGrid = React.createClass({
             width: 25,
             suppressResize: true
         }, ...(this.props.columnsDef.map((column) => {
-            if (!column.profiles || (column.profiles && column.profiles.indexOf(this.props.profile) !== -1)) {
+            // if (!column.profiles || (column.profiles && column.profiles.indexOf(this.props.profile) !== -1)) {
+            if (verifyProfiles(column.profiles, this.props.profile)) {
                 return assign({}, column, {field: "properties." + column.field});
             }
         })).filter((c) => c )];

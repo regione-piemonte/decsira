@@ -238,7 +238,7 @@ const Dataset = React.createClass({
         return (
             <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
-                    <Header showCart="true" />
+                    <Header showCart="true" goToHome={this.goToHome}/>
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
@@ -322,6 +322,9 @@ const Dataset = React.createClass({
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
+    },
+    goToHome() {
+        this.context.router.push('/');
     }
 });
 
