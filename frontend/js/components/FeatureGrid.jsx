@@ -10,6 +10,7 @@ const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
 
 const {head} = require('lodash');
+const {verifyProfiles} = require('../utils/TemplateUtils');
 
 const SiraExporter = connect((state) => {
     return {
@@ -302,7 +303,8 @@ const SiraGrid = React.createClass({
         }
 
         const cols = this.props.columnsDef.map((column) => {
-            if (!column.profiles || (column.profiles && column.profiles.indexOf(this.props.profile) !== -1)) {
+            // if (!column.profiles || (column.profiles && column.profiles.indexOf(this.props.profile) !== -1)) {
+            if (verifyProfiles(column.profiles, this.props.profile)) {
                 return assign({}, column, {field: "properties." + column.field});
             }
         }).filter((c) => c);

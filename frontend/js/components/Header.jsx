@@ -91,7 +91,8 @@ const Header = React.createClass({
         showCart: React.PropTypes.bool,
         cartMappaStyle: React.PropTypes.string,
         cartListaStyle: React.PropTypes.string,
-        goToDataset: React.PropTypes.func
+        goToDataset: React.PropTypes.func,
+        goToHome: React.PropTypes.func
     },
 
     getDefaultProps() {
@@ -99,7 +100,8 @@ const Header = React.createClass({
             cartMappaStyle: 'btn btn-primary',
             cartListaStyle: 'btn btn-primary active',
             showCart: false,
-            goToDataset: () => {}
+            goToDataset: () => {},
+            goToHome: () => {}
        };
     },
 
@@ -117,29 +119,12 @@ const Header = React.createClass({
 
                         <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 testalino-sx">
                             <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte"><span>SP</span></a></h1>
-                            <h2><span>Sistema</span> Conoscenze Ambientali</h2>
+                            <h2><a onClick={this.props.goToHome} href="#" title="Home page Sistemapiemonte"><span>Sistema</span> Conoscenze Ambientali</a></h2>
                         </div>
 
                         <div className="col-lg-3 col-md-3 col-sm-4 col-xs-4 testalino-dx">
                             <div className="pull-right">
                                 {this.renderCart()}
-                                {/* cart }
-                                <div data-toggle="buttons" className="btn-group map-list">
-                                    <label className="btn btn-primary active">
-                                        <input type="radio" checked="" autoComplete="off" id="option1" name="options" >
-                                            <i className="fa fa-list" aria-hidden="true"></i>
-                                            <span className="label-text">Lista</span>
-                                        </input>
-                                    </label>
-                                    <label className="btn btn-primary">
-                                        <input type="radio" autoComplete="off" id="option2" name="options">
-                                            <i className="fa fa-map-o" aria-hidden="true"></i>
-                                            <span className="label-text">Mappa</span>
-                                            <span className="badge">4</span>
-                                        </input>
-                                    </label>
-                                </div>
-                                { cart end */}
                                 <LoginNav />
                             </div>
                             <a className="offcanvas-toggle" aria-expanded="false">

@@ -136,7 +136,7 @@ const Sira = React.createClass({
         mode: React.PropTypes.string,
         params: React.PropTypes.object,
         roles: React.PropTypes.object,
-        userIdentity: React.PropTypes.object,
+        profile: React.PropTypes.object,
         loadMapConfig: React.PropTypes.func,
         reset: React.PropTypes.func,
         error: React.PropTypes.object,
@@ -170,30 +170,38 @@ const Sira = React.createClass({
         if (urlQuery.map) {
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
-        if (this.props.params.profile) {
-            this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
-        }
+        // if (this.props.params.profile) {
+        //    this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        // }
         // this.props.loadUserIdentity();
     },
     render() {
         return (
             <div>
-                <Header goToDataset={this.goToDataset} showCart="true" cartListaStyle="btn btn-primary" cartMappaStyle="btn btn-primary active" onBack={this.back} onHome={this.goHome}/>
+                <Header
+                    goToDataset={this.goToDataset}
+                    goToHome={this.goToHome}
+                    showCart="true"
+                    cartListaStyle="btn btn-primary"
+                    cartMappaStyle="btn btn-primary active"
+                    onBack={this.back}
+                    />
+
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
                     <div className="info">Profile: {this.props.params.profile}</div>
-                    <SidePanel auth={authParams[this.props.params.profile]} profile={this.props.params.profile}/>
+                    <SidePanel auth={authParams[this.props.params.profile]} profile={this.props.profile.profile}/>
                     <MapViewer
                     plugins={this.props.plugins}
                     params={this.props.viewerParams}
                     />
-                    <Card authParam={authParams[this.props.params.profile]}/>
+                    <Card profile={this.props.profile.profile} authParam={authParams[this.props.params.profile]}/>
                     <GetFeatureInfo
                         display={"accordion"}
                         params={{authkey: this.props.params.profile ? authParams[this.props.params.profile].authkey : ''}}
-                        profile={this.props.params.profile}
+                        profile={this.props.profile.profile}
                         key="getFeatureInfo"/>
                     <MetadataInfoBox panelStyle={{
                         height: "500px",
@@ -209,12 +217,16 @@ const Sira = React.createClass({
     },
     goToDataset() {
         this.context.router.push('/dataset/');
+    },
+    goToHome() {
+        this.context.router.push('/');
     }
 });
 
 module.exports = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
+        profile: state.userprofile,
         mode: 'desktop',
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,

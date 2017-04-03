@@ -79,7 +79,8 @@ const SiraTable = React.createClass({
     render() {
         let features;
         let columns = this.props.columns.map((column) => {
-            if (!column.profiles || (column.profiles && this.props.profile && column.profiles.indexOf(this.props.profile) !== -1)) {
+            // if (!column.profiles || (column.profiles && this.props.profile && column.profiles.indexOf(this.props.profile) !== -1)) {
+            if (TemplateUtils.verifyProfiles(column.profiles, this.props.profile)) {
                 let fieldName = !column.field ? uuid.v1() : column.field;
                 this.idFieldName = column.id === true ? fieldName : this.idFieldName;
                 return assign({}, column, {field: fieldName});

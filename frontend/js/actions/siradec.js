@@ -23,7 +23,7 @@ const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
-
+const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
 
 function configureInlineMap(mapconfig) {
@@ -204,8 +204,10 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
 
             let serviceUrl = config.query.service.url;
 
-            // Configure QueryForm attributes
-            const fields = config.query.fields.filter( (field) => !field.profile || field.profile.indexOf(userprofile.profile) !== -1).map((f) => {
+            const fields = config.query.fields.filter(
+                // (field) => !field.profile || field.profile.indexOf(userprofile.profile) !== -1
+                (field) => verifyProfiles(field.profile, userprofile.profile)
+            ).map((f) => {
                 let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
                 urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
                 return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);

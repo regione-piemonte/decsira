@@ -245,7 +245,18 @@ const TemplateUtils = {
 
         let elements = select("/wfs:ValueCollection/wfs:member", doc);
         return elements.length;
-    }
-};
+    },
 
+    verifyProfiles(fieldProfiles, userProfiles) {
+     let check = false;
+     if (!fieldProfiles || fieldProfiles.length === 0) return true;
+     if (!userProfiles || userProfiles.length === 0) return false;
+     userProfiles.forEach((val) => {
+         if (userProfiles.filter((profile) => profile === val).length > 0) {
+             check = true;
+         }});
+     return check;
+ }
+
+};
 module.exports = TemplateUtils;
