@@ -1,0 +1,492 @@
+{
+   "featureTypeName":"decsiraogc_scarichi:PuntoScaricoIndustriale",
+   "featureTypeNameLabel":"PUNTI DI SCARICO INDUSTRIALE",
+   "nameSpaces": {
+     "decsiraogc_scarichi": "http://www.regione.piemonte.it/ambiente/decsiraogc_scarichi/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Punti di scarico industriale",
+        "name": "decsiraogc_scarichi:PuntoScaricoIndustriale",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "puntiScaricoIndustriale",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_PuntoScaricoIndustriale_{{/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:idPuntoScaricoIndustriale/text()}}.pdf",
+     "template": "assets/cardTemplatePuntiScaricoIndustriale.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_scarichi:PuntoScaricoIndustriale",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateScaricoIndustriale.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desProvincia/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desComune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice regionale scarico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:codiceRegionaleScarico/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice sira stabilimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:stabilimentoSemplice/decsiraogc_scarichi:StabilimentoSemplice/decsiraogc_scarichi:codiceSira/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Nome stabilimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:stabilimentoSemplice/decsiraogc_scarichi:StabilimentoSemplice/decsiraogc_scarichi:nome/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Ragione sociale azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:denominazione/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:tipoProvvedimento/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Numero autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:estremiProvvedimento/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Data autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:dataProvvedimento/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Data scadenza",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:dataScadenza/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato punto di scarico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desStato/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo recettore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desTipoRecettore/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice recettore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:codiceRecettore/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione recettore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:denominazioneRecettore/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Origine scarico industriale",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_scarichi:originiPuntoScarico/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Frequenza scarico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desFrequenza/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Volume annuo (m3)",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_scarichi:volumeAnnuo/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Presenza sostanze tab. 3/A all.5 d.lgs.152/2006",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_scarichi:presenzaSostanzeTab3A/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Presenza sostanze tab. 1/A, 1/B, 2/B, 5 d.lgs.152/2006",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_scarichi:presenzaSostanzeTabn/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Sostanza tab. 3/A all.5 d.lgs.152/2006",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_scarichi:elencoSostanzeTab3A/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Sostanza tab. 1/A, 1/B, 2/B, 5 d.lgs.152/2006",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_scarichi:elencoSostanzeTabn/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_scarichi:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ]
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_scarichi:codiceRegionaleScarico",
+            "label":"Codice regionale scarico",
+            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+         {
+            "index": 2,
+            "attribute": "decsiraogc_scarichi:desProvincia",
+            "label":"Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 3,
+           "attribute": "decsiraogc_scarichi:desComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+              "field": "decsiraogc_stabilimenti:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 4,
+           "attribute": "decsiraogc_scarichi:desTipoRecettore",
+           "label":"Recettore",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_recettore",
+               "propertyName": "id_tipo_recettore,des_tipo_recettore",
+                "sortBy": "des_tipo_recettore+A"
+             }
+           },
+           "valueId":"id_tipo_recettore",
+           "valueLabel":"des_tipo_recettore"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_scarichi:codiceRecettore",
+           "label":"Codice recettore",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 6,
+           "attribute": "decsiraogc_scarichi:denominazioneRecettore",
+           "label":"Denominazione recettore",
+           "type":"string"
+        },
+        {
+           "index": 7,
+           "attribute": "decsiraogc_scarichi:codiceSira",
+           "label":"Codice sira stabilimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 8,
+           "attribute": "decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:denominazione",
+           "label":"Ragione sociale azienda",
+           "type":"string"
+        },
+        {
+           "index": 9,
+           "attribute": "decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:partitaIVA",
+           "label":"Partita IVA azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 10,
+           "attribute": "decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:codiceFiscale",
+           "label":"Codice fiscale azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_scarichi:stabilimentoSemplice/decsiraogc_scarichi:StabilimentoSemplice/decsiraogc_scarichi:industriaAgroAlimentare",
+           "label":"Industria agro-alimentare",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"list",
+           "values": [
+             {"value":"si","name":"SI"},
+             {"value":"no","name":"NO"}
+           ],
+           "valueId":"value",
+           "valueLabel":"name"
+        },
+        {
+           "index": 12,
+           "attribute": "decsiraogc_scarichi:attivitaProduttivaScaricoIndustriale/decsiraogc_scarichi:AttivitaProduttivaScaricoIndustriale/decsiraogc_scarichi:desAteco",
+           "label":"Attivita produttiva",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_ateco",
+               "propertyName": "id_ateco,des_ateco",
+                "sortBy": "des_ateco+A"
+             }
+           },
+           "valueId":"id_ateco",
+           "valueLabel":"des_ateco"
+        },
+        {
+           "index": 13,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:idTipoProvvedimento",
+           "label":"Tipo autorizzazione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+               "propertyName": "id_proc_attivita,provv",
+                "sortBy": "provv+A"
+             }
+           },
+           "valueId":"id_proc_attivita",
+           "valueLabel":"provv"
+        },
+        {
+           "index": 14,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:dataProvvedimento",
+           "label":"Data autorizzazione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 15,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi::dataScadenza",
+           "label":"Data scadenza",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 16,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:idTipoProvvedimento",
+           "label":"Stato punto di scarico",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_d_stato",
+               "propertyName": "id_stato,des_stato",
+                "sortBy": "des_stato+A"
+             }
+           },
+           "valueId":"id_stato",
+           "valueLabel":"des_stato"
+        },
+        {
+           "index": 17,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:idTipoProvvedimento",
+           "label":"Origine scarico industriale",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_dt_d_origine",
+               "propertyName": "id_origine,des_origine",
+                "sortBy": "des_origine+A"
+             }
+           },
+           "valueId":"id_origine",
+           "valueLabel":"des_origine"
+        },
+        {
+           "index": 18,
+           "attribute": "decsiraogc_scarichi:volumeAnnuo",
+           "label":"Volume annuo dello scarico (mc)",
+           "type":"number"
+        },
+        {
+           "index": 19,
+           "attribute": "decsiraogc_scarichi:presenzaSostanzeTab3A",
+           "label":"Presenza sostanze tab. 3/A all.5 d.lgs.152/2006",
+           "type":"list",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "values": [
+             {"value":"si","name":"SI"},
+             {"value":"no","name":"NO"}
+           ],
+           "valueId":"value",
+           "valueLabel":"name"
+        },
+        {
+           "index": 20,
+           "attribute": "decsiraogc_scarichi:presenzaSostanzeTabn",
+           "label":"Presenza sostanze tab. 1/A, 1/B, 2/B, 5 d.lgs.152/2006",
+           "type":"list",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "values": [
+             {"value":"si","name":"SI"},
+             {"value":"no","name":"NO"}
+           ],
+           "valueId":"value",
+           "valueLabel":"name"
+        },
+        {
+          "index": 21,
+          "attribute": "decsiraogc_scarichi:sostanzaTab3AIndustriale/decsiraogc_scarichi:SostanzaTab3AIndustriale/decsiraogc_scarichi:idSostanzaTab3A",
+          "label":"Sostanza tab. 3/A all.5 d.lgs.152/2006",
+          "type":"list",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "valueService": {
+
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_sost_tab3a",
+              "propertyName": "id_sostanza,des_sostanza",
+               "sortBy": "des_sostanza+A"
+            }
+          },
+          "valueId":"id_sostanza",
+          "valueLabel":"des_sostanza"
+       },
+       {
+          "index": 22,
+          "attribute": "decsiraogc_scarichi:sostanzaTabnIndustrial/decsiraogc_scarichi:SostanzaTabnIndustrial/decsiraogc_scarichi:idSostanzaTabn",
+          "label":"Sostanza tab. 1/A, 1/B, 2/B, 5 d.lgs.152/2006",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_sost_tabn",
+              "propertyName": "id_sostanza,des_sostanza",
+               "sortBy": "des_sostanza+A"
+            }
+          },
+          "valueId":"id_sostanza",
+          "valueLabel":"des_sostanza"
+       },
+       {
+          "index": 23,
+          "attribute": "decsiraogc_scarichi:misuratorePortata",
+          "label":"Misuratore di portata",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "values": [
+            {"value":"si","name":"SI"},
+            {"value":"no","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       }
+     ]
+
+   }
+
+}
