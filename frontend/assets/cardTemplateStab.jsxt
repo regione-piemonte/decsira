@@ -22,14 +22,16 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()")
         }/>
 
-        <ProfileWrapper condition={() =>  (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+
+<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+
           <LabeledField label='Indirizzo' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:indirizzo/text()")
           }/>
+</ProfileWrapper>
           <LabeledField label='Email-pec' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:emailPec/text()")
           }/>
-        </ProfileWrapper>
 
         <LabeledField label='Industria agro-alimentare' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:industriaAgroAlimentare/text()")
@@ -126,7 +128,8 @@
         <Section header='APPROVIGIONAMENTO IDRICO' eventKey='4' expanded={false}>
 
           <Section header='Prelievi' eventKey='5' expanded={false}>
-           <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+
+          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
             <SiraTable
                 id="Prelievi"
                 selectedRow={model.Prelievi}
@@ -174,7 +177,6 @@
           </Section>
 
           <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-           <SiraTable
             <Section header='Ricircolo' eventKey='6' expanded={false}>
                 <LabeledField label='Ricircolo interno' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:ricircoloInterno/text()")
@@ -196,9 +198,8 @@
       </Section>
 
 
-
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-               <SiraTable
+
                 <Section header='CERTIFICAZIONI AMBIENTALI' eventKey='9' expanded={true}>
                   <SiraTable
                       id="CertificazioniAmbientali"
@@ -230,13 +231,14 @@
               </ProfileWrapper>
 
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-               <SiraTable
+
+
                 <Section header='OGGETTI COLLEGATI' eventKey='10' expanded={true}>
                   <SiraTable
                       id="OggettiCollegati"
                       selectedRow={model.OggettiCollegati}
                       wfsVersion="2.0"
-                      rowSelection={((model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )) ? "single" : false}
+                      rowSelection={(model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 ) ? "single" : false}
                       columns={
                           [
                               {

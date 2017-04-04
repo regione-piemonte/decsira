@@ -66,7 +66,9 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                     ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
                     response.data.profile = [];
                     Array.from(response.data.roles).forEach(function(val) {
-                        response.data.profile = val.mnemonic;
+                        if (val && val.mnemonic) {
+                            response.data.profile.push(val.mnemonic);
+                        }
                     });
                 }
                 let user = {};

@@ -22,7 +22,8 @@ const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-
+const {addFeatureTypeLayerInCart} = require('../actions/addmap');
+const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
 
 function configureInlineMap(mapconfig) {
@@ -172,7 +173,7 @@ function configurationLoading() {
     };
 }
 
-function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId) {
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const {userprofile} = getState();
@@ -190,6 +191,12 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
             if (addlayer) {
                 dispatch(addLayer(assign({}, layer, {siraId})));
             }
+            // add layer in cart
+            if (addCartlayer) {
+                let layers = [];
+                if (layer) layers.push(layer);
+                dispatch(addFeatureTypeLayerInCart(layers, node));
+            }
             // Configure the FeatureGrid for WFS results list
             dispatch(configureFeatureGrid(config.featuregrid, featureType));
             dispatch(configureFeatureInfo(config.featureinfo, featureType));
@@ -197,8 +204,10 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
 
             let serviceUrl = config.query.service.url;
 
-            // Configure QueryForm attributes
-            const fields = config.query.fields.filter( (field) => !field.profile || field.profile.indexOf(userprofile.profile) !== -1).map((f) => {
+            const fields = config.query.fields.filter(
+                // (field) => !field.profile || field.profile.indexOf(userprofile.profile) !== -1
+                (field) => verifyProfiles(field.profile, userprofile.profile)
+            ).map((f) => {
                 let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
                 urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
                 return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);

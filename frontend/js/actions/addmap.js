@@ -75,10 +75,24 @@ function loadNodeMapRecords(node, params) {
     };
 }
 
-function addSiraLayersIncart(layers) {
+function addSiraLayersIncartInt(layers) {
     return {
         type: 'SIRA_ADD_LAYERS_IN_CART',
         layers
+    };
+}
+
+function addSiraLayersIncart(layers) {
+    return (dispatch, getState) => {
+        let inCartLayers = getState().cart.layers;
+        let layersOk = [];
+        let alreadyPresent = false;
+        layers.forEach((lay) => {
+            alreadyPresent = inCartLayers.filter((el) => el.name === lay.name).length > 0;
+            if (!alreadyPresent)layersOk.push(lay);
+            alreadyPresent = false;
+        });
+        dispatch(addSiraLayersIncartInt(layersOk));
     };
 }
 
@@ -114,9 +128,9 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     };
 }
 
-function addFeatureTypeLayerInCart(layer, node) {
+function addFeatureTypeLayerInCart(layers, node) {
     return (dispatch) => {
-        dispatch(addSiraLayersIncart(layer));
+        dispatch(addSiraLayersIncart(layers));
         dispatch(addServiceIncart(node));
         dispatch(refreshNumberOfServices());
     };

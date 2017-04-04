@@ -10,7 +10,7 @@ const SHOW_CART_PANEL = 'SHOW_CART_PANEL';
 const ADD_SERVICE_IN_CART = 'ADD_SERVICE_IN_CART';
 const REFRESH_NUMBER_OF_SERVICES = 'REFRESH_NUMBER_OF_SERVICES';
 const SET_CART_SERVICES = 'SET_CART_SERVICES';
-const SET_LAYERS_SERVICES = 'SET_LAYERS_SERVICES';
+const EMPTY_CART = 'EMPTY_CART';
 const RM_LAYERS_SERVICES = 'RM_LAYERS_SERVICES';
 const RM_SERVICES = 'RM_SERVICES';
 
@@ -58,13 +58,6 @@ function setServices(nodes) {
     };
 }
 
-function setLayers(layers) {
-    return {
-        type: SET_LAYERS_SERVICES,
-        wmsservices: layers
-    };
-}
-
 function removeLayersFromCart(idNode) {
     return {
         type: RM_LAYERS_SERVICES,
@@ -93,13 +86,19 @@ function addSiraLayers(layers) {
     };
 }
 
+function emptyCart() {
+    return {
+        type: 'EMPTY_CART',
+        layers: [],
+        wmsservices: []
+    };
+}
+
 function prepareDataToMap() {
     return (dispatch, getState) => {
         let layers = getState().cart.layers;
         dispatch(addSiraLayers(layers));
-        dispatch(setServices([]));
-        dispatch(setLayers([]));
-        dispatch(refreshNumberOfServices());
+        dispatch(emptyCart());
     };
 }
 
@@ -109,7 +108,7 @@ module.exports = {
     ADD_SERVICE_IN_CART,
     REFRESH_NUMBER_OF_SERVICES,
     SET_CART_SERVICES,
-    SET_LAYERS_SERVICES,
+    EMPTY_CART,
     RM_LAYERS_SERVICES,
     RM_SERVICES,
     showPanel,
@@ -120,5 +119,6 @@ module.exports = {
     removeLayersFromCart,
     removeServiceFromCart,
     prepareDataToMap,
-    addSiraLayers
+    addSiraLayers,
+    emptyCart
   };

@@ -238,7 +238,7 @@ const Dataset = React.createClass({
         return (
             <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
-                    <Header showCart="true" />
+                    <Header showCart="true" goToHome={this.goToHome}/>
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
@@ -281,8 +281,8 @@ const Dataset = React.createClass({
         }else if (node.featureType) {
             const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
             if (!this.props.configOggetti[featureType]) {
-                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, true, node.id);
-            }else {
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, node.id, true, node);
+            } else {
                 let layers = [];
                 layers.push(this.props.configOggetti[featureType].layer);
                 this.props.addLayersInCart(layers, node);
@@ -297,7 +297,7 @@ const Dataset = React.createClass({
             this.props.setActiveFeatureType(featureType);
         }
         this.props.expandFilterPanel(status);
-        if (this.props.params.profile) {
+        if (undefined !== this.props.params.profile) {
             this.context.router.push('/full/${this.props.params.profile}/');
         }else {
             this.context.router.push('/full/');
@@ -313,7 +313,7 @@ const Dataset = React.createClass({
             }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
-        if (this.props.params.profile) {
+        if (undefined !== this.props.params.profile) {
             this.context.router.push('/full/${this.props.params.profile}/');
         }else {
             this.context.router.push('/full/');
@@ -322,6 +322,9 @@ const Dataset = React.createClass({
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
+    },
+    goToHome() {
+        this.context.router.push('/');
     }
 });
 

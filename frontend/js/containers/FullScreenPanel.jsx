@@ -118,7 +118,8 @@ const FullScreen = React.createClass({
         return (
             <SideQueryPanel
                 withMap={false}
-                params={{authkey: this.props.profile.authParams.authkey}}
+                // authkey: (this.props.profile.authParams && this.props.profile.authParams.authkey) ? this.props.profile.authParams.authkey : '')
+                params={{authkey: this.props.profile.authParams && this.props.profile.authParams.authkey ? this.props.profile.authParams.authkey : ''}}
                 toggleControl={this.toggleControl}/>
             );
     },
@@ -127,7 +128,7 @@ const FullScreen = React.createClass({
             <SideFeatureGrid
                 initWidth={this.state.width}
                 withMap={true}
-                params={{authkey: this.props.profile.authParams.authkey}}
+                params={{authkey: this.props.profile.authParams && this.props.profile.authParams.authkey ? this.props.profile.authParams.authkey : ''}}
                 profile={this.props.profile.profile}
                 zoomToFeatureAction={this.zoomToFeature}
                 fullScreen={true}
@@ -148,13 +149,17 @@ const FullScreen = React.createClass({
         return (
             <div id="fullscreen-container" className="mappaSiraDecisionale">
                 {comp}
-                <Card draggable={false} authParam={profile.authParams} withMap={true}/>
+                <Card draggable={false} profile ={profile.profile} authParam={profile.authParams} withMap={true}/>
             </div>
         );
     },
     toggleControl() {
         this.props.expandFilterPanel(false);
-        this.context.router.push(`/dataset/${this.props.params.profile}/`);
+        if (this.props.params.profile) {
+            this.context.router.push(`/dataset/${this.props.params.profile}/`);
+        }else {
+            this.context.router.push('/dataset/');
+        }
     },
     zoomToFeature(data) {
         setTimeout(() => {this.changeMapView([data.geometry]); }, 0);
