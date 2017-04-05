@@ -249,10 +249,15 @@ const TemplateUtils = {
 
     verifyProfiles(fieldProfiles, userProfiles) {
      let check = false;
+     let userProfilesOk = userProfiles;
+     if (userProfilesOk && userProfilesOk !== '[object Array]') {
+         userProfilesOk = [];
+         userProfilesOk.push(userProfiles);
+     }
      if (!fieldProfiles || fieldProfiles.length === 0) return true;
-     if (!userProfiles || userProfiles.length === 0) return false;
-     userProfiles.forEach((val) => {
-         if (userProfiles.filter((profile) => profile === val).length > 0) {
+     if (!userProfilesOk || userProfilesOk.length === 0) return false;
+     userProfilesOk.forEach((val) => {
+         if (userProfilesOk.filter((profile) => profile === val).length > 0) {
              check = true;
          }});
      return check;
