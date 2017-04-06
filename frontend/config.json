@@ -6,7 +6,7 @@
     "zoom": 6,
     "mapOptions": {
         "view" : {
-                "extent": [302000, 4800000, 550000, 5000000]}
+                "extent": [302000, 4800000, 630000, 5200000]}
             },
     "maxExtent": [
       -20037508.34, -20037508.34,
@@ -52,82 +52,7 @@
         "visibility": false,
         "format": "image/png",
         "tiled": true
-      },
-      {
-  			"type": "wms",
-        "url": "{geoserverUrl}/wms",
-        "visibility": true,
-  			"title": "AUA - Impianti di recupero energia e materia",
-  			"name": "sira:AutorizzazioneUnicaAmbientale",
-        "infoFormat": "application/vnd.ogc.gml/3.1.1",
-        "topologyConfig": {
-          "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
-          "wfsVersion": "1.1.0",
-          "layerName": "ZONES_IPR",
-          "layerTitle": "Zonizzazione qualita' dell'aria vigente",
-          "geomAttribute": "msGeometry",
-          "geometryType": "Polygon"
-        },
-            "featureType": "aua",
-  			"group": "Oggetti",
-  			"format": "image/png"
-  		},
-  		{
-    		 "type": "wms",
-           "url": "{geoserverUrl}/wms",
-           "visibility": true,
-    		 "title": "Stabilimenti soggetti ad autorizzazione ambientale",
-    		 "name": "decsiraogc_stabilimenti:Stabilimento",
-           "infoFormat": "application/vnd.ogc.gml/3.1.1",
-           "topologyConfig": {
-             "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
-             "wfsVersion": "1.1.0",
-             "layerName": "ZONES_IPR",
-             "layerTitle": "Zonizzazione qualita' dell'aria vigente",
-             "geomAttribute": "msGeometry",
-             "geometryType": "Polygon"
-           },
-           "featureType": "stabilimento",
-    			"group": "Oggetti",
-    			"format": "image/png"
-    		},
-        {
-           "type": "wms",
-             "url": "{geoserverUrl}/wms",
-             "visibility": true,
-           "title": "Punti di emissione in atmosfera",
-           "name": "decsiraogc_emissioni:PuntoEmissione",
-             "infoFormat": "application/vnd.ogc.gml/3.1.1",
-             "topologyConfig": {
-               "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
-               "wfsVersion": "1.1.0",
-               "layerName": "ZONES_IPR",
-               "layerTitle": "Zonizzazione qualita' dell'aria vigente",
-               "geomAttribute": "msGeometry",
-               "geometryType": "Polygon"
-             },
-                "featureType": "puntiEmissioneAtmosfera",
-            "group": "Oggetti",
-            "format": "image/png"
-          },
-          {
-        		 "type": "wms",
-               "url": "{geoserverUrl}/wms",
-               "visibility": true,
-        		 "title": "Impianti di depurazione",
-        		 "name": "decsiraogc_stabilimenti:ImpiantoDiDepurazione",
-               "infoFormat": "application/vnd.ogc.gml/3.1.1",
-               "topologyConfig": {
-                 "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
-                 "wfsVersion": "1.1.0",
-                 "layerName": "ZONES_IPR",
-                 "layerTitle": "Zonizzazione qualita' dell'aria vigente",
-                 "geomAttribute": "msGeometry",
-                 "geometryType": "Polygon"
-               },
-               "featureType": "impiantiDepurazione",
-        			"group": "Oggetti",
-        			"format": "image/png"
-        		}]
+      }
+      ]
   }
 }

@@ -20,7 +20,7 @@
     />
     <Panel className="template">
         <Section header='DATI GENERALI - Provvedimento' eventKey='1' expanded={true}>
-            <ProfileWrapper condition={() => model.profile === "profilob"}>
+            <ProfileWrapper condition={() => (model && model.profile) && (model.profile.indexOf('B') > -1 )}>
                 <LabeledField label='Codice Fiscale (P.IVA)' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale/text()")
                 }/>
@@ -61,7 +61,7 @@
                 selectedRow={model.RecuperoRifiuti}
                 wfsVersion="2.0"
                 style={{height: "300px", width: "100%"}}
-                rowSelection={model.profile === "profilob" ? "single" : false}
+                rowSelection={ (model.profile.indexOf('B') > -1) ? "single" : false}
                 columns={
                     [
                         {
@@ -93,7 +93,7 @@
                 }
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio")}/>
         </Section>
-        <ProfileWrapper condition={() => model.profile === "profilob"}>
+        <ProfileWrapper condition={() => (model && model.profile) && (model.profile.indexOf('B') > -1 )}>
             <Section header='DETTAGLIO RECUPERO RIFIUTI - CODIFICHE CER' eventKey='4' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
                 <SiraTable
                     id="CerTable"
@@ -130,7 +130,7 @@
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:rifiuto/sira:Rifiuto/sira:dettaglio/sira:SchedaRifiuto/sira:codiceCER")}/>
             </Section>
         </ProfileWrapper>
-        <ProfileWrapper condition={() => model.profile === "profilob"}>
+        <ProfileWrapper condition={() => (model && model.profile) && (model.profile.indexOf('B') > -1 )}>
             <Section header='DETTAGLIO RECUPERO RIFIUTI - OPERAZIONI DI RECUPERO' eventKey='5' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
                 <SiraTable
                     id="CerTable"

@@ -50,6 +50,7 @@ module.exports = connect((state) => {
     searchUrl: state.queryform.searchUrl,
     dataSourceOptions: state.grid.dataSourceOptions,
     maxFeatures: state.siraexporter.maxFeatures,
+    profile: state.userprofile.profile,
     exportCsvMimeType: "application/octet-stream"
     };
 }, {
