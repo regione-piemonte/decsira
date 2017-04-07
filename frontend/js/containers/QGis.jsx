@@ -102,11 +102,16 @@ const QGis = React.createClass({
         window.onresize = () => {
             this.setState({width: window.innerWidth});
         };
-        let profile = this.props.params.profile ? this.props.params.profile : urlQuery.profile;
+        // profile is array with max length = 1
+        let profile = [];
+        profile = (this.props.params && this.props.params.profile) ? this.props.params.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
     },
     componentDidMount() {
-        let profile = this.props.params.profile ? this.props.params.profile : urlQuery.profile;
+        // profile is array with max length = 1
+        let profile = [];
+        profile = (this.props.params && this.props.params.profile) ? this.props.params.profile : new Array(urlQuery.profile);
+        this.props.setProfile(profile, authParams[profile]);
         if (!this.props.configLoaded && this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(
                 `assets/${this.props.featureType}.json`, {authkey: authParams[profile].authkey}, this.props.featureType, true);
@@ -170,7 +175,7 @@ const QGis = React.createClass({
         return (
             <div id="qgis-container" className="mappaSiraDecisionale">
              {this.props.siraControls.grid || (this.state.qGisType === 'list' && this.props.configLoaded && !this.state.loadList) ? this.renderGrid() : this.renderQueryPanel()}
-             <Card draggable={false} authParam={this.props.profile.authParams} withMap={false}/>
+             <Card profile={this.props.profile.profile} draggable={false} authParam={this.props.profile.authParams} withMap={false}/>
             </div>
         );
     },
