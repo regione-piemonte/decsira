@@ -128,6 +128,25 @@
                "featureType": "impiantiDepurazione",
         			"group": "Oggetti",
         			"format": "image/png"
-        		}]
+        		},
+            {
+          		 "type": "wms",
+                 "url": "{geoserverUrl}/wms",
+                 "visibility": true,
+          		 "title": "Punti di scarico industriale",
+          		 "name": "decsiraogc_scarichi:PuntoScaricoIndustriale",
+                 "infoFormat": "application/vnd.ogc.gml/3.1.1",
+                 "topologyConfig": {
+                   "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+                   "wfsVersion": "1.1.0",
+                   "layerName": "ZONES_IPR",
+                   "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+                   "geomAttribute": "msGeometry",
+                   "geometryType": "Polygon"
+                 },
+                 "featureType": "puntiScaricoIndustriale",
+          			"group": "Oggetti",
+          			"format": "image/png"
+          		}]
   }
 }
