@@ -14,7 +14,7 @@
         <LabeledField label='Tipo emissione' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:desTipoEmissione/text()")
         }/>
-        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
           <LabeledField label='Stato punto di emissione' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:desStato/text()")
             }/>
@@ -24,7 +24,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:portataAeriforme_Nm3_h/text()")
         }/>
 
-        <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+        <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
           <LabeledField label='Durata dell&rsquo;emissione' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:durataEmissione_h_g/text()")
           }/>
@@ -48,7 +48,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:indicazioneSistemaAbbattimento/text()")
         }/>
 
-        <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
           <LabeledField label='Note' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:note/text()")
             }/>
@@ -74,7 +74,7 @@
 
 
         <Section header='DATI STABILIMENTO' eventKey='2' expanded={true}>
-            <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
               <LabeledField label='Codice sira' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")
                 }/>
@@ -92,7 +92,7 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()")
             }/>
 
-            <ProfileWrapper condition={() =>   (model.profile === "profilob") || (model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+            <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
               <LabeledField label='Indirizzo' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:indirizzo/text()")
               }/>
@@ -124,7 +124,7 @@
                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_emissioni:Stabilimento/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:denominazione/text()")
                  }/>
 
-                 <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                 <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
 
                      <LabeledField label='Codice fiscale' value={
                        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale/text()")
@@ -144,7 +144,7 @@
                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desComune/text()")
                  }/>
 
-                 <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                 <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
 
                      <LabeledField label='Indirizzo' value={
                        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:indirizzo/text()")
@@ -168,7 +168,7 @@
 
                   </ProfileWrapper>
 
-                  <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                  <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
                      <Section header='Dati titolare/legale rappresentante' eventKey='5' expanded={true}>
                         <LabeledField label='Cognome' value={
                           model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:cognomeTitolare/text()")
@@ -197,7 +197,7 @@
                 <LabeledField label='Ente competente' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:desEnteCompetente/text()")
                 }/>
-                <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
                   <LabeledField label='Stato' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:desStato/text()")
                   }/>
@@ -220,7 +220,7 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:sottoAttivitaEmissivaPuntoEmissione")}/>
                 </Section>
-                <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
                     <Section header='Dettaglio delle attrezzature' eventKey='8' expanded={true}>
                         <SiraTable
                             id="DettaglioAttrezzaturePuntoEmissione"
@@ -248,7 +248,7 @@
         </Section>
 
 
-      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+      <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
         <Section header='PROVENIENZE DELL&acute;EMISSIONE' eventKey='9' expanded={true}>
           <SiraTable
               id="ProvenienzeEmissione"
@@ -322,7 +322,7 @@
               features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:impiantoDiAbbattimento")}/>
       </Section>
 
-      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+      <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
           <Section header='INQUINANTI' eventKey='12' expanded={true}>
               <SiraTable
                   id="Inquinanti"
@@ -374,7 +374,7 @@
       </ProfileWrapper>
 
 
-      <ProfileWrapper condition={() => (model.profile === "profilob") || ( model.roles && model.roles.indexOf('PA_GEN_DECSIRA@REG_PMN')!== -1)}>
+      <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
           <Section header='IMPIANTO DI COMBUSTIONE' eventKey='14' expanded={true}>
               <SiraTable
                   id="ImpiantoCombustione"
