@@ -60,7 +60,7 @@
                 id="RecuperoRifiuti"
                 selectedRow={model.RecuperoRifiuti}
                 wfsVersion="2.0"
-                rowSelection={ (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN') > -1) ? "single" : false}
+                rowSelection={ (model && model.profile) && (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN') > -1) ? "single" : false}
                 columns={
                     [
                         {

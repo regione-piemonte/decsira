@@ -30,6 +30,7 @@ const SchedaToPDF = React.createClass({
                xml: React.PropTypes.oneOfType([
                        React.PropTypes.string])
            }),
+           profile: React.PropTypes.array,
            pdfname: React.PropTypes.string,
            authParam: React.PropTypes.object,
            withMap: React.PropTypes.bool,
@@ -44,6 +45,7 @@ const SchedaToPDF = React.createClass({
                    loadingCardTemplateError: null
                },
                pdfname: 'download.pdf',
+               profile: [],
                withMap: true,
                authParam: null,
                open: false,
@@ -63,9 +65,10 @@ const SchedaToPDF = React.createClass({
        renderHtml() {
         const xml = this.props.card.xml;
         const authParam = this.props.authParam;
+        const profile = this.props.profile;
         const model = assign({}, this.props.card, {
             authParam: authParam,
-            profile: authParam.userName,
+            profile: profile,
             withMap: this.props.withMap,
             getValue: (element) => TemplateUtils.getValue(xml, element)
         });
