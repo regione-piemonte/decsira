@@ -119,7 +119,7 @@ const Header = React.createClass({
 
                         <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 testalino-sx">
                             <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte"><span>SP</span></a></h1>
-                            <h2><a onClick={this.props.goToHome} href="#" title="Home page Sistemapiemonte"><span>Sistema</span> Conoscenze Ambientali</a></h2>
+                            <h2><a onClick={this.props.goToHome} href="#" title="Home page Sistema Conoscenze Ambientali"><span>Sistema</span> Conoscenze Ambientali</a></h2>
                         </div>
 
                         <div className="col-lg-3 col-md-3 col-sm-4 col-xs-4 testalino-dx">

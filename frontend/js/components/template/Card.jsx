@@ -107,7 +107,7 @@ const Card = React.createClass({
                         <Glyphicon glyph="print"/>
                     </Button>
                     </div>
-                    <SchedaToPDF authParam={authParam} withMap={this.props.withMap}/>
+                    <SchedaToPDF profile={this.props.profile} authParam={authParam} withMap={this.props.withMap}/>
             </div>
             );
         return (this.props.draggable) ? (

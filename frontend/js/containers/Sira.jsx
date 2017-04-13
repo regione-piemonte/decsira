@@ -191,7 +191,6 @@ const Sira = React.createClass({
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
-                    <div className="info">Profile: {this.props.params.profile}</div>
                     <SidePanel auth={authParams[this.props.params.profile]} profile={this.props.profile.profile}/>
                     <MapViewer
                     plugins={this.props.plugins}
