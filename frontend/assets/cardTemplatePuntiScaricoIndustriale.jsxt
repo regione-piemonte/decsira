@@ -4,16 +4,16 @@
         <DetailTitle title='PUNTI DI SCARICO INDUSTRIALE' subtitle={[
             'Denominazione Stabilimento: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:stabilimentoSemplice/decsiraogc_scarichi:StabilimentoSemplice/decsiraogc_scarichi:nome/text()"),
-            'del provvedimento: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:tipoProvvedimento/text()")
+            ' Codice regionale scarico: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:codiceRegionaleScarico/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
         <Section header='DATI GENERALI - punto di scarico industriale' eventKey='1' expanded={true}>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-                <LabeledField label='Codice regionale scarico' value={
+            <LabeledField label='Codice regionale scarico' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:codiceRegionaleScarico/text()")
-                }/>
+            }/>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
                 <LabeledField label='Stato punto di scarico' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:desStato/text()")
                 }/>
@@ -101,7 +101,7 @@
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:stabilimentoSemplice/decsiraogc_scarichi:StabilimentoSemplice/decsiraogc_scarichi:codiceSira/text()")
                 }/>
             </ProfileWrapper>
-            <LabeledField label='Nome' value={
+            <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:stabilimentoSemplice/decsiraogc_scarichi:StabilimentoSemplice/decsiraogc_scarichi:nome/text()")
             }/>
             <LabeledField label='Provincia' value={
@@ -257,7 +257,7 @@
                             </Section>
                         </ProfileWrapper>
 
-                        <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+                        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('ROLE_ANONYMOUS')) > -1 || (model.profile.indexOf('profiloa')) > -1 )}>
                             <Section header='Prelievi' eventKey='10' expanded={true}>
                                 <SiraTable
                                   id="Prelievi"
@@ -299,29 +299,72 @@
             </Section>
         </Section>
 
-        <Section header='ALTRI STABILIMENTI CHE RECAPITANO NELLO SCARICO' eventKey='12' expanded={false}>
-            <LabeledField label='Ragione sociale' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento/decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:ragioneSociale/text()")
-            }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-                <LabeledField label='Codice fiscale/partita iva' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento/decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:codiceFiscalePartitaIva/text()")
-                }/>
-                <LabeledField label='Indirizzo' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento/decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:indirizzo/text()")
-                }/>
-                <LabeledField label='Codice sira stabilimento' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento/decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:codiceSira/text()")
-                }/>
-                <LabeledField label='Portata (m3/s)' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento/decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:portata/text()")
-                }/>
-            </ProfileWrapper>
-        </Section>
+
+
+
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <Section header='ALTRI STABILIMENTI CHE RECAPITANO NELLO SCARICO' eventKey='12' expanded={false}>
+                <SiraTable
+                  id="AltriStabilimenti"
+                  selectedRow={model.AltriStabilimenti}
+                  wfsVersion="2.0"
+                  rowSelection={false}
+                  columns={
+                      [
+                          {
+                              headerName: 'Ragione sociale',
+                              width: 250,
+                              xpath:"decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:ragioneSociale/text()"
+                          },
+                          {
+                              headerName: 'Codice fiscale/partita iva',
+                              width: 250,
+                              xpath: "decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:codiceFiscalePartitaIva/text()"
+                          },
+                          {
+                              headerName: 'Indirizzo',
+                              width: 250,
+                              xpath: "decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:indirizzo/text()"
+                          },
+                          {
+                              headerName: 'Codice sira stabilimento',
+                              width: 200,
+                              xpath: "decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:codiceSira/text()"
+                          },
+                          {
+                              headerName: 'Portata (m3/s)',
+                              width: 200,
+                              xpath: "decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:portata/text()"
+                          }
+                      ]
+                  }
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento")}/>
+            </Section>
+        </ProfileWrapper>
+
+        <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+            <Section header='ALTRI STABILIMENTI CHE RECAPITANO NELLO SCARICO' eventKey='13' expanded={false}>
+                <SiraTable
+                  id="AltriStabilimenti"
+                  selectedRow={model.AltriStabilimenti}
+                  wfsVersion="2.0"
+                  rowSelection={false}
+                  columns={
+                      [
+                          {
+                              headerName: 'Ragione sociale',
+                              width: 700,
+                              xpath:"decsiraogc_scarichi:AltroStabilimento/decsiraogc_scarichi:ragioneSociale/text()"
+                          }
+                      ]
+                  }
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:altroStabilimento")}/>
+            </Section>
+        </ProfileWrapper>
 
 
        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-           <Section header='TIPO ORIGINE SCARICO' eventKey='13' expanded={false}>
+           <Section header='TIPO ORIGINE SCARICO' eventKey='14' expanded={false}>
                <SiraTable
                  id="OrigineScarico"
                  selectedRow={model.OrigineScarico}
@@ -356,7 +399,7 @@
        </ProfileWrapper>
 
        <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
-            <Section header='TIPO ORIGINE SCARICO' eventKey='14' expanded={false}>
+            <Section header='TIPO ORIGINE SCARICO' eventKey='15' expanded={false}>
                 <SiraTable
                   id="OrigineScarico"
                   selectedRow={model.OrigineScarico}
@@ -376,7 +419,7 @@
         </ProfileWrapper>
 
         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-            <Section header='SISTEMI CONTROLLO PARAMETRI ANALITICI' eventKey='15' expanded={false}>
+            <Section header='SISTEMI CONTROLLO PARAMETRI ANALITICI' eventKey='16' expanded={false}>
                 <SiraTable
                   id="ControlloParametriAnalitici"
                   selectedRow={model.ControlloParametriAnalitici}
@@ -416,7 +459,7 @@
         </ProfileWrapper>
 
         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-            <Section header='SOSTANZE TAB.3/A ALL.5 D.LGS.152/2006' eventKey='16' expanded={false}>
+            <Section header='SOSTANZE TAB.3/A ALL.5 D.LGS.152/2006' eventKey='17' expanded={false}>
                 <SiraTable
                   id="SostanzeTab3n"
                   selectedRow={model.SostanzeTab3n}
@@ -456,7 +499,7 @@
         </ProfileWrapper>
 
         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-            <Section header='SOSTANZE TAB.1/A,1/B,2/B, 5 D.LGS.152/2006' eventKey='17' expanded={false}>
+            <Section header='SOSTANZE TAB.1/A,1/B,2/B, 5 D.LGS.152/2006' eventKey='18' expanded={false}>
                 <SiraTable
                   id="SostanzeTab3n"
                   selectedRow={model.SostanzeTab3n}
@@ -511,7 +554,7 @@
         </ProfileWrapper>
 
         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-            <Section header='TIPI DI TRATTAMENTO DEPURATIVO' eventKey='18' expanded={false}>
+            <Section header='TIPI DI TRATTAMENTO DEPURATIVO' eventKey='19' expanded={false}>
                 <SiraTable
                   id="SostanzeTab3n"
                   selectedRow={model.SostanzeTab3n}
@@ -536,7 +579,7 @@
         </ProfileWrapper>
 
         <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
-            <Section header='TIPI DI TRATTAMENTO DEPURATIVO' eventKey='19' expanded={false}>
+            <Section header='TIPI DI TRATTAMENTO DEPURATIVO' eventKey='20' expanded={false}>
                 <SiraTable
                   id="SostanzeTab3n"
                   selectedRow={model.SostanzeTab3n}
@@ -555,7 +598,7 @@
             </Section>
         </ProfileWrapper>
 
-        <Section header='MAPPA SINTESI - Punto di scarico industriale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='20' expanded={true}>
+        <Section header='MAPPA SINTESI - Punto di scarico industriale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='21' expanded={true}>
             <MappaScheda
                 center={
                     model.getValue({
@@ -587,10 +630,7 @@
         </Section>
 
 
-
-
-
-        <Section header='METADATO' eventKey='21' expanded={true}>
+        <Section header='METADATO' eventKey='22' expanded={true}>
             <LinkToPage
                 txt="Visualizza la scheda del metadato"
                 url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"

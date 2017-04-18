@@ -2,8 +2,10 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='STABILIMENTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE' subtitle={[
-            'Denominazione: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
+            'Denominazione stabilimento: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()"),
+            ' Comune: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()")
             ]} id={model.id}/>
     )}>
 
@@ -325,59 +327,6 @@
               </ProfileWrapper>
 
 
-
-              <Section header='OGGETTI COLLEGATI francesca' eventKey='10' expanded={true}>
-                <SiraTable
-                    id="OggettiCollegati"
-                    selectedRow={model.OggettiCollegati}
-                    wfsVersion="2.0"
-                    rowSelection={((model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)) ? "single" : false}
-                    columns={
-                        [
-                            {
-                                hide: true,
-                                id: true,
-                                xpath: "decsiraogc_stabilimenti:OggettoAssociato/@gml:id"
-                            },
-                            {
-                                headerName: 'Tipo',
-                                width: 300,
-                                xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()",
-                                linkToDetail:{
-                                   featureType: 'puntiEmissioneAtmosfera',
-                                   xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()"
-                                }
-                            },
-                             {
-                                 headerName: 'Codice',
-                                 width: 150,
-                                 xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceOggetto/text()"
-                             },
-                            {
-                                headerName: 'Comune',
-                                width: 350,
-                                xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desComuneOggetto/text()"
-                            }
-                        ]
-                    }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato")}/>
-              </Section>
-
-              <Section header='OGGETTI COLLEGATI' eventKey='3' expanded={true}>
-                  <ul key='factorylist' className={"list-style-type:circle"}>
-                  {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato/decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()").map((link) => {
-                    return (<li><LinkScheda
-                        linkTitle={"Punto Emissione " + link }
-                        detailsTemplateConfigURL={"assets/cardTemplatePuntiEmissione.jsxt"}
-                         featureType={"puntiEmissioneAtmosfera"}
-                         id={link}
-                        />
-                    </li>
-                    );
-                  })}
-                  </ul>
-              </Section>
-
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
                 <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
                 <SiraTable
@@ -438,7 +387,9 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
 
-
+                    <Section header='' eventKey='99' expanded={false}>
+                    </Section>
+                    
                     <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
                     <SiraTable
                         id="SottoattivitaEmisiva"

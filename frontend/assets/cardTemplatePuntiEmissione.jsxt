@@ -2,6 +2,8 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='PUNTI DI EMISSIONE IN ATMOSFERA' subtitle={[
+            'Denominazione : ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()"),
             'Sigla: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:sigla/text()")
             ]} id={model.id}/>
@@ -80,7 +82,7 @@
                 }/>
             </ProfileWrapper>
 
-            <LabeledField label='Nome' value={
+            <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
             }/>
 

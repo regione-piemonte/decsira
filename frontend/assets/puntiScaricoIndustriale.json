@@ -64,6 +64,13 @@
            "type": 2
          },
          {
+           "headerName": "Stato punto di scarico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desStato/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
            "headerName": "Codice regionale scarico",
            "suppressSorting": true,
            "xpath": ["decsiraogc_scarichi:codiceRegionaleScarico/text()"],
@@ -109,6 +116,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:dataProvvedimento/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
          {
@@ -116,13 +124,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:dataScadenza/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
-         },
-         {
-           "headerName": "Stato punto di scarico",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_scarichi:desStato/text()"],
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
          {
@@ -254,7 +256,7 @@
         {
            "index": 4,
            "attribute": "decsiraogc_scarichi:desTipoRecettore",
-           "label":"Recettore",
+           "label":" Tipo recettore",
            "type":"list",
            "valueService": {
 
@@ -323,14 +325,14 @@
         {
            "index": 12,
            "attribute": "decsiraogc_scarichi:attivitaProduttivaScaricoIndustriale/decsiraogc_scarichi:AttivitaProduttivaScaricoIndustriale/decsiraogc_scarichi:desAteco",
-           "label":"Attivita produttiva",
+           "label":"Tipo attivita produttiva",
            "type":"list",
            "valueService": {
 
              "urlParams": {
                "typeName": "decsiraogc_decodif:decsira_d_ateco",
                "propertyName": "id_ateco,des_ateco",
-                "sortBy": "des_ateco+A"
+                "sortBy": "id_ateco+A"
              }
            },
            "valueId":"id_ateco",
@@ -365,7 +367,7 @@
         },
         {
            "index": 15,
-           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi::dataScadenza",
+           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:dataScadenza",
            "label":"Data scadenza",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"date",
@@ -375,7 +377,7 @@
         },
         {
            "index": 16,
-           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:idTipoProvvedimento",
+           "attribute": "decsiraogc_scarichi:desStato",
            "label":"Stato punto di scarico",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
@@ -392,7 +394,7 @@
         },
         {
            "index": 17,
-           "attribute": "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:idTipoProvvedimento",
+           "attribute": "decsiraogc_scarichi:origineScaricoIndustriale/decsiraogc_scarichi:OrigineScaricoIndustriale/decsiraogc_scarichi:desOrigine",
            "label":"Origine scarico industriale",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
@@ -458,7 +460,7 @@
        },
        {
           "index": 22,
-          "attribute": "decsiraogc_scarichi:sostanzaTabnIndustrial/decsiraogc_scarichi:SostanzaTabnIndustrial/decsiraogc_scarichi:idSostanzaTabn",
+          "attribute": "decsiraogc_scarichi:sostanzaTabnIndustriale/decsiraogc_scarichi:SostanzaTabnIndustriale/decsiraogc_scarichi:idSostanzaTabn",
           "label":"Sostanza tab. 1/A, 1/B, 2/B, 5 d.lgs.152/2006",
           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",

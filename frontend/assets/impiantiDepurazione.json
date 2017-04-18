@@ -52,13 +52,6 @@
            "type": 2
          },
          {
-           "headerName": "Stato",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
-		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
-         },
-         {
            "headerName": "Nome impianto di depurazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nome/text()"],
@@ -98,6 +91,13 @@
            "type": 2
          },
          {
+           "headerName": "Stato impianto depurazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
+		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
            "headerName": "ATO",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:desAto/text()"],
@@ -108,7 +108,6 @@
            "headerName": "Denominazione gestore",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:ragioneSocialeAzienda/text()"],
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -257,7 +256,7 @@
           "type":"list",
           "valueService": {
             "urlParams": {
-              "typeName": "siradec:sipra_d_stato",
+              "typeName": "decsiraogc_decodif:sipra_d_stato",
               "propertyName": "id_stato,des_stato"
             }
           },
@@ -304,7 +303,7 @@
            "attribute": "decsiraogc_stabilimenti:codiceSira",
            "label":"Codice sira",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"string"
+           "type":"number"
         },
         {
            "index": 5,
@@ -386,7 +385,7 @@
            "attribute": "decsiraogc_stabilimenti:abitantiEquivalentiIndustriali",
            "label":"Carico da insediamenti industriali (a.e.)",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"string"
+           "type":"number"
         },
         {
            "index": 14,
