@@ -12,7 +12,7 @@
               <LabeledField label='Nome impianto di depurazione' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nome/text()")
                 }/>
-                <ProfileWrapper condition={() =>  (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() =>  (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                     <LabeledField label='Codice regionale impianto di depurazione' value={
                         model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceRegionaleDepuratore/text()")
                     }/>
@@ -28,7 +28,7 @@
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:nomeComune/text()")
                 }/>
 
-                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                   <LabeledField label='Codice sira impianto di depurazione' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceSira/text()")
                   }/>
@@ -68,7 +68,7 @@
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:riceveAcqueMeteoriche/text()")
                 }/>
 
-                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                   <LabeledField label='% acque reflue trattate riutilizate (% del V trattato)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:percAcqueRiutilizzate/text()")
                   }/>
@@ -76,7 +76,7 @@
                 <LabeledField label='Classificazione pubblica fognatura' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:classificazionePubblicaFognatura/text()")
                 }/>
-                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                   <LabeledField label='Declassato a minore di 2.000 a.e.' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:declassatoMinoreDuemila/text()")
                   }/>
@@ -116,7 +116,7 @@
                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:ragioneSocialeAzienda/text()")
              }/>
 
-             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                <LabeledField label='Codice fiscale' value={
                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceFiscaleAzienda/text()")
                }/>
@@ -132,7 +132,7 @@
                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desComuneAzienda/text()")
              }/>
 
-             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                <LabeledField label='Indirizzo' value={
                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:indirizzoAzienda/text()")
                }/>
@@ -150,7 +150,7 @@
                }/>
              </ProfileWrapper>
 
-             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                <Section header='Dati titolare/legale rappresentante' eventKey='3' expanded={true}>
                    <LabeledField label='Cognome' value={
                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:cognomeTitolare/text()")
@@ -172,12 +172,12 @@
                    [
                        {
                            headerName: 'Comune',
-                           width: 360,
+                           width: 300,
                            xpath:"decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeComune/text()"
                        },
                        {
                            headerName: 'Localit&agrave;',
-                           width: 360,
+                           width: 440,
                            xpath: "decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeLocalita/text()"
                        }
                    ]
@@ -185,7 +185,7 @@
                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:comuneServito")}/>
        </Section>
 
-       <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+       <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
            <Section header='REFLUI INDUSTRIALI RECAPITATI NEL DEPURATORE' eventKey='5' expanded={false}>
              <SiraTable
                  id="RefluoIndustrialeRecapitato"
@@ -196,18 +196,20 @@
                      [
                          {
                              headerName: 'Ragione sociale',
-                             width: 360,
+                             width: 490,
                              xpath:"decsiraogc_stabilimenti:RefluoIndustrialeRecapitato/decsiraogc_stabilimenti:ragioneSociale/text()"
                          },
                          {
                              headerName: 'Portata giornaliera (mc)',
-                             width: 360,
+                             width: 250,
                              xpath: "decsiraogc_stabilimenti:RefluoIndustrialeRecapitato/decsiraogc_stabilimenti:portataGiornaliera/text()"
                          }
                      ]
                  }
                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:refluoIndustrialeRecapitato")}/>
 
+                 <Section header='' eventKey='99' expanded={true}>
+                 </Section>
 
                  <Section header='Sostanze recapitate' eventKey='6' expanded={true}>
                    <SiraTable
@@ -219,17 +221,17 @@
                            [
                                {
                                    headerName: 'Sostanza',
-                                   width: 300,
+                                   width: 255,
                                    xpath:"decsiraogc_stabilimenti:SostanzaRecapitataRefluiIndustriali/decsiraogc_stabilimenti:desSostanza/text()"
                                },
                                {
                                    headerName: 'Altra sostanza',
-                                   width: 300,
+                                   width: 255,
                                    xpath: "decsiraogc_stabilimenti:SostanzaRecapitataRefluiIndustriali/decsiraogc_stabilimenti:desAltraSostanza/text()"
                                },
                                {
                                    headerName: 'Concentrazione autorizzata (mg/l)',
-                                   width: 100,
+                                   width: 200,
                                    xpath: "decsiraogc_stabilimenti:SostanzaRecapitataRefluiIndustriali/decsiraogc_stabilimenti:concentrazioneAutorizzata/text()"
                                }
                            ]
@@ -302,7 +304,7 @@
                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:tipoDisinfezione")}/>
               </Section>
 
-              <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+              <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='PRODUZIONE FANGHI' eventKey='11' expanded={true}>
                     <LabeledField label='Produzione tal quale fanghi (t/anno)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneTalQualeFanghi/text()")
@@ -323,13 +325,15 @@
                              [
                                  {
                                      headerName: 'Tipo trattamento',
-                                     width: 750,
+                                     width: 740,
                                      xpath:"decsiraogc_stabilimenti:TrattamentoFanghi/decsiraogc_stabilimenti:desTrattamentoFanghi/text()"
                                  }
                              ]
                          }
                          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:trattamentoFanghi")}/>
 
+                         <Section header='' eventKey='13' expanded={true}>
+                         </Section>
 
                          <Section header='Destinazione fanghi' eventKey='13' expanded={false}>
                           <SiraTable
@@ -341,7 +345,7 @@
                                   [
                                       {
                                           headerName: 'Regione',
-                                          width: 200,
+                                          width: 150,
                                           xpath:"decsiraogc_stabilimenti:DestinazioneFanghi/decsiraogc_stabilimenti:desRegione/text()"
                                       },
                                       {
@@ -351,7 +355,7 @@
                                       },
                                       {
                                           headerName: 'Nome Azienda/Impianto',
-                                          width: 350,
+                                          width: 360,
                                           xpath: "decsiraogc_stabilimenti:DestinazioneFanghi/decsiraogc_stabilimenti:nomeAziendaStabilimento/text()"
                                       }
                                   ]
@@ -360,7 +364,7 @@
                       </Section>
                  </Section>
 
-                 <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                 <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                      <Section header='OGGETTI COLLEGATI' eventKey='14' expanded={true}>
                         <SiraTable
                             id="OggettoAssociatoDepuratore"
@@ -371,7 +375,7 @@
                                 [
                                     {
                                         headerName: 'Tipo',
-                                        width: 100,
+                                        width: 150,
                                         xpath:"decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desTipo/text()"
                                     },
                                     {
@@ -412,7 +416,7 @@
                      </Section>
                  </ProfileWrapper>
 
-                 <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+                 <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
                      <Section header='OGGETTI COLLEGATI' eventKey='14' expanded={true}>
                         <SiraTable
                             id="OggettoAssociatoDepuratore"
@@ -433,7 +437,7 @@
                                     },
                                     {
                                         headerName: 'Comune',
-                                        width: 300,
+                                        width: 340,
                                         xpath: "decsiraogc_stabilimenti:OggettoAssociatoDepuratore/decsiraogc_stabilimenti:desComuneOggetto/text()"
                                     }
                                 ]
@@ -442,7 +446,7 @@
                      </Section>
                  </ProfileWrapper>
 
-                 <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                 <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                      <Section header='AUTORIZZAZIONI' eventKey='15' expanded={true}>
                         <SiraTable
                             id="AutorizzazioneAmbientaleDepuratore"
@@ -489,7 +493,7 @@
                      </Section>
                  </ProfileWrapper>
 
-                 <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+                 <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
                      <Section header='AUTORIZZAZIONI' eventKey='15' expanded={true}>
                         <SiraTable
                             id="AutorizzazioneAmbientaleDepuratore"
@@ -500,7 +504,7 @@
                                 [
                                     {
                                         headerName: 'Tipo provvedimento',
-                                        width: 200,
+                                        width: 230,
                                         xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                                     },
                                     {
@@ -563,6 +567,16 @@
                         ]}
                          authParam={model.authParam}
                          withMap={model.withMap}/>
+                 </Section>
+                 <Section header='METADATO' eventKey='17' expanded={true}>
+                     <LinkToPage
+                         txt="Visualizza la scheda del metadato"
+                         url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+                         params={{
+                             id: 6151,
+                             currTab: 'rndt'
+                         }}
+                     />
                  </Section>
     </Panel>
 </Panel>

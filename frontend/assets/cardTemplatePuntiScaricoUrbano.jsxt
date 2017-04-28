@@ -11,7 +11,7 @@
             <LabeledField label='Codice regionale scarico' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:codiceRegionaleScarico/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Codice provinciale scarico' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:codiceProvincialeScarico/text()")
                 }/>
@@ -25,7 +25,7 @@
             <LabeledField label='Comune di ubicazione scarico' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:desComune/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Tipo autorizzazione' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:tipoProvvedimento/text()")
                 }/>
@@ -42,7 +42,7 @@
             <LabeledField label='Ente competente autorizzazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:desEnteCompetente/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Stato autorizzazione' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:desStato/text()")
                 }/>
@@ -65,7 +65,7 @@
             <LabeledField label='Tipo recettore' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:desTipoRecettore/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Codice recettore' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:codiceRecettore/text()")
                 }/>
@@ -73,7 +73,7 @@
             <LabeledField label='Denominazione recettore' value={
                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:denominazioneRecettore/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Distanza dal corso d&rsquo;acqua più vicino (m)' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:distanzaCorsoAcqua/text()")
                 }/>
@@ -101,7 +101,7 @@
             }/>
         </Section>
 
-        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
             <Section header='SISTEMI CONTROLLO PARAMETRI ANALITICI' eventKey='3' expanded={false}>
                 <SiraTable
                     id="ParametriAnalitici"
@@ -126,14 +126,14 @@
                                 xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrb/decsiraogc_scarichi:desUnitaMisura/text()"
                             },
                             {
-                                headerName: 'Annotazioni',
-                                width: 300,
-                                xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrb/decsiraogc_scarichi:annotazioni/text()"
+                                headerName: 'Sistema di misura',
+                                width: 120,
+                                xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrb/decsiraogc_scarichi:sistemaMisura/text()"
                             },
                             {
-                                headerName: 'Sistema di misura',
-                                width: 200,
-                                xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrb/decsiraogc_scarichi:sistemaMisura/text()"
+                                headerName: 'Annotazioni',
+                                width: 250,
+                                xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrb/decsiraogc_scarichi:annotazioni/text()"
                             }
                         ]
                     }
@@ -180,7 +180,7 @@
                         },
                         {
                             headerName: "Concentrazione media (mg/l)",
-                            width: 170,
+                            width: 180,
                             xpath: "decsiraogc_scarichi:SostanzaTabnUrbano/decsiraogc_scarichi:concentrazioneMedia/text()"
                         },
                         {
@@ -211,7 +211,7 @@
             <LabeledField label='Comune' value={
                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:nomeComune/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Codice sira impianto di depurazione' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:codiceSira/text()")
                 }/>
@@ -249,7 +249,7 @@
             <LabeledField label='Riceve acque meteoriche' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:riceveAcqueMeteoriche/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='% acque reflue trattate riutilizate (% del V trattato)' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:percAcqueRiutilizzate/text()")
                 }/>
@@ -257,7 +257,7 @@
             <LabeledField label='Classificazione pubblica fognatura' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:classificazionePubblicaFognatura/text()")
             }/>
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <LabeledField label='Declassato a minore di 2.000 a.e.' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:declassatoMinoreDuemila/text()")
                 }/>
@@ -295,7 +295,7 @@
                 <LabeledField label='Denominazione gestore' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:denominazione/text()")
                 }/>
-                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                     <LabeledField label='Codice fiscale' value={
                         model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:codiceFiscale/text()")
                     }/>
@@ -309,7 +309,7 @@
                 <LabeledField label='Comune' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:desComune/text()")
                 }/>
-                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                     <LabeledField label='Indirizzo' value={
                         model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:indirizzo/text()")
                     }/>
@@ -326,7 +326,7 @@
                         model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:annoCIAA/text()")
                     }/>
                 </ProfileWrapper>
-                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                     <Section header='Dati titolare/legale rappresentante' eventKey='7' expanded={true}>
                         <LabeledField label='Cognome' value={
                             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:azienda/decsiraogc_scarichi:Azienda/decsiraogc_scarichi:cognomeTitolare/text()")
@@ -353,7 +353,7 @@
                             },
                             {
                                 headerName: 'Localit&agrave;',
-                                width: 450,
+                                width: 410,
                                 xpath: "decsiraogc_scarichi:ComuneServitoScaricoUrb/decsiraogc_scarichi:nomeLocalita/text()"
                             }
                         ]
@@ -361,7 +361,7 @@
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoUrbano/decsiraogc_scarichi:comuneServitoScaricoUrb")}/>
                 </Section>
 
-                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                     <Section header='Reflui industriali recapitati nel depuratore' eventKey='9' expanded={false}>
                         <SiraTable
                             id="RefluiIndustriali"
@@ -372,12 +372,12 @@
                                 [
                                     {
                                         headerName: 'Ragione sociale',
-                                        width: 300,
+                                        width: 500,
                                         xpath:"decsiraogc_scarichi:RefluoIndRecapitatoScaricoUrb/decsiraogc_scarichi:ragioneSociale/text()"
                                     },
                                     {
                                         headerName: 'Portata giornaliera (mc)',
-                                        width: 450,
+                                        width: 210,
                                         xpath: "decsiraogc_scarichi:RefluoIndRecapitatoScaricoUrb/decsiraogc_scarichi:portataGiornaliera/text()"
                                     }
                                 ]
@@ -397,17 +397,17 @@
                                         [
                                             {
                                                 headerName: 'Sostanza',
-                                                width: 100,
+                                                width: 150,
                                                 xpath:"decsiraogc_scarichi:SostanzaRecRefluiIndScarico/decsiraogc_scarichi:desSostanza/text()"
                                             },
                                             {
                                                 headerName: 'Altra sostanza',
-                                                width: 150,
+                                                width: 200,
                                                 xpath: "decsiraogc_scarichi:SostanzaRecRefluiIndScarico/decsiraogc_scarichi:desAltraSostanza/text()"
                                             },
                                             {
                                                 headerName: 'Concentrazione autorizzata (mg/l)',
-                                                width: 450,
+                                                width: 330,
                                                 xpath: "decsiraogc_scarichi:SostanzaRecRefluiIndScarico/decsiraogc_scarichi:concentrazioneAutorizzata/text()"
                                             }
                                         ]
@@ -436,7 +436,7 @@
                                 [
                                     {
                                         headerName: 'Tipo trattamento avanzato',
-                                        width: 700,
+                                        width: 710,
                                         xpath:"decsiraogc_scarichi:TrattamentoAvanzatoScaricoUrb/decsiraogc_scarichi:desTrattamento/text()"
                                     }
                                 ]
@@ -454,7 +454,7 @@
                                 [
                                     {
                                         headerName: 'Tipo filtrazione finale',
-                                        width: 700,
+                                        width: 710,
                                         xpath:"decsiraogc_scarichi:TipoFiltrazioneFinaleScaricoUrb/decsiraogc_scarichi:desFiltrazioneFinale/text()"
                                     }
                                 ]
@@ -472,7 +472,7 @@
                                 [
                                     {
                                         headerName: 'Tipo disinfezione',
-                                        width: 700,
+                                        width: 710,
                                         xpath:"decsiraogc_scarichi:TipoDisinfezioneScaricoUrb/decsiraogc_scarichi:desTipoDisinfezione/text()"
                                     }
                                 ]
@@ -499,7 +499,7 @@
                                 [
                                     {
                                         headerName: 'Tipo trattamento',
-                                        width: 700,
+                                        width: 710,
                                         xpath:"decsiraogc_scarichi:TrattamentoFanghiScaricoUrb/decsiraogc_scarichi:desTrattamentoFanghi/text()"
                                     }
                                 ]
@@ -524,12 +524,12 @@
                                             },
                                             {
                                                 headerName: 'Comune',
-                                                width: 200,
+                                                width: 160,
                                                 xpath:"decsiraogc_scarichi:DestinazioneFanghiScaricoUrb/decsiraogc_scarichi:desComune/text()"
                                             },
                                             {
                                                 headerName: 'Nome azienda/impianto',
-                                                width: 400,
+                                                width: 420,
                                                 xpath:"decsiraogc_scarichi:DestinazioneFanghiScaricoUrb/decsiraogc_scarichi:nomeAziendaStabilimento/text()"
                                             }
                                         ]

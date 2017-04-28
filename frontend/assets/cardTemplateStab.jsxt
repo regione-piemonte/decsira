@@ -25,7 +25,7 @@
         }/>
 
 
-<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 
           <LabeledField label='Indirizzo' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:indirizzo/text()")
@@ -40,7 +40,7 @@
         }/>
         </Section>
 
-        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1  )}>
           <Section header='DATI AZIENDA' eventKey='7' expanded={true}>
               <LabeledField label='Ragione sociale' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()")
@@ -84,7 +84,7 @@
           </Section>
         </ProfileWrapper>
 
-        <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+        <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
             <Section header='DATI AZIENDA' eventKey='9' expanded={true}>
                 <LabeledField label='Ragione sociale' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()")
@@ -113,7 +113,7 @@
                         },
                         {
                             headerName: 'Descrizione attivita Ateco',
-                            width: 650,
+                            width: 641,
                             xpath: "decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:desAteco/text()"
                         }
                     ]
@@ -128,10 +128,8 @@
         </Section>
 
         <Section header='APPROVIGIONAMENTO IDRICO' eventKey='4' expanded={false}>
-
           <Section header='Prelievi' eventKey='5' expanded={false}>
-
-          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
             <SiraTable
                 id="Prelievi"
                 selectedRow={model.Prelievi}
@@ -141,17 +139,17 @@
                     [
                         {
                             headerName: 'Tipo prelievo',
-                            width: 260,
+                            width: 162,
                             xpath:"decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:desTipoPrelievo/text()"
                         },
                         {
                             headerName: 'Denominazione impianto depurazione terzi',
-                            width: 350,
+                            width: 280,
                             xpath: "decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:denomImpiantoDepurTerzi/text()"
                         },
                         {
                             headerName: 'Gestore impianto depurazione terzi',
-                            width: 350,
+                            width: 270,
                             xpath: "decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:gestImpiantoDepurTerzi/text()"
                         }
                     ]
@@ -159,7 +157,7 @@
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:prelievoAcqua")}/>
              </ProfileWrapper>
 
-             <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+             <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
                <SiraTable
                    id="Prelievi"
                    selectedRow={model.Prelievi}
@@ -169,7 +167,7 @@
                        [
                            {
                                headerName: 'Tipo prelievo',
-                               width: 600,
+                               width: 712,
                                xpath:"decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:desTipoPrelievo/text()"
                            }
                        ]
@@ -178,7 +176,7 @@
                 </ProfileWrapper>
           </Section>
 
-          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
             <Section header='Ricircolo' eventKey='6' expanded={false}>
                 <LabeledField label='Ricircolo interno' value={
                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:ricircoloInterno/text()")
@@ -200,8 +198,7 @@
       </Section>
 
 
-              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-
+              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='CERTIFICAZIONI AMBIENTALI' eventKey='9' expanded={true}>
                   <SiraTable
                       id="CertificazioniAmbientali"
@@ -212,7 +209,7 @@
                           [
                               {
                                   headerName: 'Tipo certificazione',
-                                  width: 350,
+                                  width: 351,
                                   xpath:"decsiraogc_stabilimenti:CertificazioneAmbientale/decsiraogc_stabilimenti:desTipoCertificazione/text()"
                               },
                               {
@@ -223,7 +220,7 @@
                               },
                               {
                                   headerName: 'Ente',
-                                  width: 350,
+                                  width: 290,
                                   xpath: "decsiraogc_stabilimenti:CertificazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
                               }
                           ]
@@ -232,22 +229,15 @@
                 </Section>
               </ProfileWrapper>
 
-              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-
-
+              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='OGGETTI COLLEGATI' eventKey='10' expanded={true}>
                   <SiraTable
                       id="OggettiCollegati"
                       selectedRow={model.OggettiCollegati}
                       wfsVersion="2.0"
-                      rowSelection={(model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 ) ? "single" : false}
+                      rowSelection={false}
                       columns={
                           [
-                              {
-                                  hide: true,
-                                  id: true,
-                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/@gml:id"
-                              },
                               {
                                     headerName: 'Tipo',
                                     width: 200,
@@ -270,18 +260,18 @@
                               },
                               {
                                   headerName: 'Numero provvedimento',
-                                  width: 100,
+                                  width: 150,
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:numeroAutorizzazione/text()"
                               },
                               {
                                   headerName: 'Data emissione',
-                                  width: 50,
+                                  width: 100,
                                   dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:dataAutorizzazione/text()"
                               },
                               {
                                   headerName: 'Data scadenza',
-                                  width: 50,
+                                  width: 100,
                                   dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:dataScadenza/text()"
                               }
@@ -291,33 +281,28 @@
                 </Section>
               </ProfileWrapper>
 
-              <ProfileWrapper condition={() => (model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+              <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
                 <Section header='OGGETTI COLLEGATI' eventKey='10' expanded={true}>
                   <SiraTable
                       id="OggettiCollegati"
                       selectedRow={model.OggettiCollegati}
                       wfsVersion="2.0"
-                      rowSelection={((model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)) ? "single" : false}
+                      rowSelection={false}
                       columns={
                           [
                               {
-                                  hide: true,
-                                  id: true,
-                                  xpath: "decsiraogc_stabilimenti:OggettoAssociato/@gml:id"
-                              },
-                              {
                                   headerName: 'Tipo',
-                                  width: 300,
+                                  width: 261,
                                   xpath:"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()"
                               },
                                {
                                    headerName: 'Codice',
-                                   width: 150,
+                                   width: 110,
                                    xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceOggetto/text()"
                                },
                               {
                                   headerName: 'Comune',
-                                  width: 350,
+                                  width: 370,
                                   xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desComuneOggetto/text()"
                               }
                           ]
@@ -327,13 +312,13 @@
               </ProfileWrapper>
 
 
-              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
                 <SiraTable
                     id="Autorizzazioni"
                     selectedRow={model.Autorizzazioni}
                     wfsVersion="2.0"
-                    rowSelection={((model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )) ? "single" : false}
+                    rowSelection={((model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )) ? "single" : false}
                     columns={
                         [
                             {
@@ -343,17 +328,17 @@
                             },
                             {
                                 headerName: 'Identificativo autorizzazione',
-                                width: 50,
+                                width: 170,
                                 xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
                             },
                             {
                                 headerName: 'Tipo provvedimento',
-                                width: 150,
+                                width: 250,
                                 xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                             },
                             {
                                 headerName: 'Tematica',
-                                width: 150,
+                                width: 250,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
                             },
                             {
@@ -389,7 +374,7 @@
 
                     <Section header='' eventKey='99' expanded={false}>
                     </Section>
-                    
+
                     <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
                     <SiraTable
                         id="SottoattivitaEmisiva"
@@ -411,7 +396,7 @@
                                 },
                                 {
                                     headerName: 'Descrizione sottoattivita',
-                                    width: 750,
+                                    width: 712,
                                     xpath:"decsiraogc_stabilimenti:SottoAttivitaEmissiva/decsiraogc_stabilimenti:desSottoAttivitaEmissiva/text()"
                                 }
                             ]
@@ -441,12 +426,12 @@
                                   },
                                   {
                                       headerName: 'Descrizione attrezzatura',
-                                      width: 450,
+                                      width: 500,
                                       xpath:"decsiraogc_stabilimenti:DettaglioAttivita/decsiraogc_stabilimenti:desDettaglioAttivita/text()"
                                   },
                                   {
                                       headerName: 'Quantita',
-                                      width: 400,
+                                      width: 211,
                                       xpath:"decsiraogc_stabilimenti:DettaglioAttivita/decsiraogc_stabilimenti:quantita/text()"
                                   }
                               ]
@@ -457,13 +442,13 @@
               </ProfileWrapper>
 
 
-              <ProfileWrapper condition={() =>(model.profile === "profiloa") || (model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)}>
+              <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
                 <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
                 <SiraTable
                     id="Autorizzazioni"
                     selectedRow={model.Autorizzazioni}
                     wfsVersion="2.0"
-                    rowSelection={((model.profile === "profiloa") || ( model.roles && model.roles.indexOf('ROLE_ANONYMOUS')!== -1)) ? "single" : false}
+                    rowSelection={((model) && (!model.profile || model.profile.length == 0)) ? "single" : false}
                     columns={
                         [
                             {
@@ -478,12 +463,12 @@
                             },
                             {
                                 headerName: 'Tipo provvedimento',
-                                width: 150,
+                                width: 290,
                                 xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                             },
                             {
                                 headerName: 'Tematica',
-                                width: 150,
+                                width: 250,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
                             },
                             {
@@ -512,6 +497,8 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
 
+                    <Section header='' eventKey='999' expanded={true}>
+                    </Section>
 
                     <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
                     <SiraTable
@@ -534,7 +521,7 @@
                                 },
                                 {
                                     headerName: 'Descrizione sottoattivita',
-                                    width: 750,
+                                    width: 712,
                                     xpath:"decsiraogc_stabilimenti:SottoAttivitaEmissiva/decsiraogc_stabilimenti:desSottoAttivitaEmissiva/text()"
                                 }
                             ]
@@ -544,16 +531,16 @@
                     </Section>
               </ProfileWrapper>
 
+              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+                  <Section header='IMPATTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
+                      <LabeledField label='Verifica sorgenti rumorose' value={
+                        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:verificaSorgentiRumorose/decsiraogc_stabilimenti:VerificaSorgentiRumorose/decsiraogc_stabilimenti:desRumorosita/text()")
+                      }/>
 
-              <Section header='IMPATTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
-                <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
-                  <LabeledField label='Verifica sorgenti rumorose' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:verificaSorgentiRumorose/decsiraogc_stabilimenti:VerificaSorgentiRumorose/decsiraogc_stabilimenti:desRumorosita/text()")
-                  }/>
-                </ProfileWrapper>
-              </Section>
+                  </Section>
+              </ProfileWrapper>
 
-              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 || (model.profile.indexOf('profilob')) > -1 )}>
+              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='ATTIVIT&Agrave; BASSA RUMOROSIT&Agrave;' eventKey='15' expanded={false}>
                   <SiraTable
                       id="AttivitaBassaRumorosita"
@@ -564,7 +551,7 @@
                           [
                               {
                                   headerName: 'Tipo attivita',
-                                  width: 800,
+                                  width: 741,
                                   xpath:"decsiraogc_stabilimenti:attivitaBassaRumorosita/decsiraogc_stabilimenti:AttivitaBassaRumorosita/decsiraogc_stabilimenti:desAttivitaBassaRumorosita/text()"
                               }
                           ]
