@@ -129,6 +129,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:dataProvvedimento/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
          {
@@ -136,6 +137,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:dataScadenza/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
          {
@@ -234,7 +236,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "sira:province"
+               "typeName": "decsiraogc_decodif:sipra_t_province"
              }
            },
            "valueId":"toponimo",
@@ -248,7 +250,7 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "sira:comuni",
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
                "propertyName": "id_comune,sigla_provincia,toponimo",
                "sortBy": "toponimo+A"
              }
@@ -277,8 +279,9 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "siradec:decsira_d_ateco",
-               "propertyName": "id_ateco,des_ateco"
+               "typeName": "decsiraogc_decodif:decsira_d_ateco",
+               "propertyName": "id_ateco,des_ateco",
+               "sortBy": "id_ateco+A"
              }
            },
 
@@ -314,7 +317,7 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "siradec:decsira_d_tipo_provvedimento",
+               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
                "propertyName": "id_proc_attivita,provv"
              }
            },
@@ -351,7 +354,7 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "siradec:sipra_d_stato",
+               "typeName": "decsiraogc_decodif:sipra_d_stato",
                "propertyName": "id_stato,des_stato"
              }
            },
@@ -367,7 +370,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "siradec:sipra_dt_d_tipo_emissione",
+               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_emissione",
                "propertyName": "id_tipo_emissione,des_tipo_emissione"
              }
            },
@@ -381,7 +384,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "siradec:sipra_d_abbattimento",
+               "typeName": "decsiraogc_decodif:sipra_d_abbattimento",
                "propertyName": "id_abbattimento,des_abbattimento"
              }
            },
@@ -395,7 +398,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "siradec:sipra_d_provenienza",
+               "typeName": "decsiraogc_decodif:sipra_d_provenienza",
                "propertyName": "id_provenienza,des_provenienza"
              }
            },
@@ -409,7 +412,7 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "siradec:sipra_dt_d_inquinanti",
+               "typeName": "decsiraogc_decodif:sipra_dt_d_inquinanti",
                "propertyName": "id_inquinante,des_inquinante"
              }
            },

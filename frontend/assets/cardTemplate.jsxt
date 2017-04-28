@@ -103,7 +103,7 @@
                         xpath: "sira:SchedaRifiuto/sira:tipoRifiuto/sira:TipoRifiuto/@gml:id",
                         pdfTitle: "Scheda Rifiuto: {{sira:SchedaRifiuto/sira:nrScheda/text()}}"
                     }}
-                    rowSelection={false}
+                    rowSelection={(model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN') > -1) ? "single" : false}
                     columns={[
                         {
                             hide: true,
