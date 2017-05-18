@@ -47,12 +47,6 @@ const Cart = React.createClass({
             </div>
         );
      }
-     // todo no good sull'onchange metto la funzione
-     // ma sono sulla mappa quindi se attivo questo
-     // pezzo della select
-     // goDataset() {
-    //     this.context.router.push('/dataset/');
-     // }
 
  });
 module.exports = Cart;
