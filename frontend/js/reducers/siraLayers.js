@@ -12,6 +12,7 @@ const {isObject, head, findIndex} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('../../MapStore2/web/client/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const getVector = (state) => {
     return state.flat ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;
@@ -106,7 +107,7 @@ function layers(state = [], action) {
             const oldLayers = state.flat;
             if ( action.config && action.config.map && action.config && action.config.map.layers) {
                 return action.config.map.layers.filter((l) => l.group !== 'background' && findIndex(oldLayers, (ol) => ol.name === l.name) === -1).reduce((st, layer) => {
-                    return msLayers(st, addLayer(layer));
+                    return msLayers(st, addLayer(ConfigUtils.setUrlPlaceholders(layer)));
                 }, state);
             }
             return state;
