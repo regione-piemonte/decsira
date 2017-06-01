@@ -15,7 +15,7 @@
  <packaging>pom</packaging>
  <version>2.8.x-SIRA-SNAPSHOT</version>
  <name>GeoServer</name>
-
+ 
  <scm>
   <connection>scm:git:git://github.com/geoserver/geoserver.git</connection>
   <developerConnection>scm:git:[fetch=]git://github.com/geoserver/geoserver.git[push=]git@github.com:geoserver/geoserver.git</developerConnection>
@@ -1376,7 +1376,7 @@
     </executions>
    </plugin>
    
-   <!-- zip base data dir -->
+   <!-- base data dir zip-->
    <plugin>
     <artifactId>maven-antrun-plugin</artifactId>
     <executions>
@@ -1388,8 +1388,8 @@
       </goals>
       <configuration>
        <tasks>
-	    <delete file="${basedir}/../target/gs_data_dir.zip" failonerror="false" />
-	    <zip destfile="${basedir}/../target/gs_data_dir.zip">   
+	    <delete file="${basedir}/../target/gs_data_dir-${data_dir_base.version}.zip" failonerror="false" />
+	    <zip destfile="${basedir}/../target/gs_data_dir-${data_dir_base.version}.zip">   
 	     <zipfileset dir="${basedir}/../target/" includes="**/**" />
         </zip>
         <delete dir="${basedir}/../target/gs_data_dir" failonerror="false" />
@@ -1398,8 +1398,8 @@
      </execution>
     </executions>
    </plugin>
-        
-
+   
+  
    <!-- code coverage -->
    <plugin>
     <groupId>org.codehaus.mojo</groupId>
@@ -1702,6 +1702,7 @@
   <hibernate-spatial-h2-version>1.1.1</hibernate-spatial-h2-version>
   <git.commit.useNative>false</git.commit.useNative>
   <git.commit.runOnlyOnce>true</git.commit.runOnlyOnce>
+  <data_dir_base.version>1.0.0</data_dir_base.version>
  </properties>
 
  <profiles>
