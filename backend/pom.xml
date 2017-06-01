@@ -13,6 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<security_data_dir.version>1.0.0</security_data_dir.version>
     </properties>
 
     <dependencies>
@@ -118,7 +119,8 @@
                     </goals>
                         <configuration>
                             <tasks>
-                                <zip destfile="${basedir}/target/gs_data_dir.zip">
+							    <delete file="${basedir}/target/gs_security_data_dir-${security_data_dir.version}.zip" failonerror="false" />
+                                <zip destfile="${basedir}/target/gs_security_data_dir-${security_data_dir.version}.zip">
                                     <zipfileset dir="${basedir}/target/gs_data_dir" includes="**/**" />
                                 </zip>
                                 <delete dir="${basedir}/target/gs_data_dir" failonerror="false" />
