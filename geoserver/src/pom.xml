@@ -15,7 +15,7 @@
  <packaging>pom</packaging>
  <version>2.8.x-SIRA-SNAPSHOT</version>
  <name>GeoServer</name>
-
+ 
  <scm>
   <connection>scm:git:git://github.com/geoserver/geoserver.git</connection>
   <developerConnection>scm:git:[fetch=]git://github.com/geoserver/geoserver.git[push=]git@github.com:geoserver/geoserver.git</developerConnection>
@@ -1205,7 +1205,7 @@
   <resources>
    <resource>
     <directory>${basedir}/src/main/java</directory>
-    <includes>
+	<includes>
      <include>**/*.txt</include>
      <include>**/*.sql</include>
      <include>**/*.html</include>
@@ -1348,7 +1348,58 @@
      <outputDirectory>${project.build.directory}/release</outputDirectory>
     </configuration>
    </plugin>
-
+   
+  <!-- copy base data dir -->
+   <plugin>
+    <artifactId>maven-resources-plugin</artifactId>
+    <executions>
+     <execution>
+     <id>Copy GeoServer base datadir</id>
+     <phase>process-resources</phase>
+     <goals>
+      <goal>copy-resources</goal>
+     </goals>
+     <configuration>
+      <outputDirectory>${basedir}/../target/gs_data_dir</outputDirectory>
+      <encoding>UTF-8</encoding>
+      <resources>
+       <resource>
+        <filtering>true</filtering>
+        <directory>${basedir}/../data/minimal/</directory>
+        <includes>
+         <include>**/*</include>
+        </includes>
+       </resource>
+      </resources>
+     </configuration>
+     </execution>
+    </executions>
+   </plugin>
+   
+   <!-- base data dir zip-->
+   <plugin>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <executions>
+     <execution>
+      <id>Zip GeoServer base datadir</id>
+      <phase>package</phase>
+      <goals>
+       <goal>run</goal>
+      </goals>
+      <configuration>
+       <tasks>
+	    <delete file="${basedir}/../target/gs_data_dir-${data_dir_base.version}.zip" failonerror="false" />
+	    <zip destfile="${basedir}/../target/gs_data_dir-${data_dir_base.version}.zip">   
+	     <zipfileset dir="${basedir}/../target/" includes="**/**" />
+        </zip>
+        <delete dir="${basedir}/../target/gs_data_dir" failonerror="false" />
+       </tasks>
+      </configuration>
+     </execution>
+    </executions>
+   </plugin>
+   
+  
    <!-- code coverage -->
    <plugin>
     <groupId>org.codehaus.mojo</groupId>
@@ -1651,6 +1702,7 @@
   <hibernate-spatial-h2-version>1.1.1</hibernate-spatial-h2-version>
   <git.commit.useNative>false</git.commit.useNative>
   <git.commit.runOnlyOnce>true</git.commit.runOnlyOnce>
+  <data_dir_base.version>1.0.0</data_dir_base.version>
  </properties>
 
  <profiles>
