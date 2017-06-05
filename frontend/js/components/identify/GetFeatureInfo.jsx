@@ -305,11 +305,7 @@ const GetFeatureInfo = React.createClass({
         );
     },
     render() {
-        const renderInfoTypeCheck = this.props.infoType === "getfeatureinfo" ?
-            this.props.htmlRequests.length !== 0 && this.props.detailsConfig /*&& this.props.modelConfig*/ :
-            this.props.htmlRequests.length !== 0;
-
-        if (renderInfoTypeCheck) {
+        if (this.props.htmlRequests.length !== 0) {
             return this.props.draggable ? (
                 <Draggable handle=".handle_infopanel, .handle_infopanel *">
                     {this.renderContent()}
