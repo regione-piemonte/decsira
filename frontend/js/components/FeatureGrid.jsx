@@ -21,7 +21,7 @@ const SiraExporter = connect((state) => {
         errormsg: state.siraexporter.errormsg,
         csvName: state.siraexporter.csvName,
         shpName: state.siraexporter.shpName,
-        addFile: state.siraexporter.addFile
+        addFile: (state.grid && state.grid.featuregrid && state.grid.featuregrid.grid && state.grid.featuregrid.grid.exporter && state.grid.featuregrid.grid.exporter.addFile) || state.siraexporter.addFile
     };
 }, {
     getFeaturesAndExport,

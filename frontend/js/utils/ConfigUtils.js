@@ -58,7 +58,7 @@ const ConfigUtils = {
     replaceDeployPlaceHolders(cfg) {
         return Object.keys(cfg).reduce((previous, current) => {
             return assign(previous, {
-                [current]: cfg[current] && cfg[current].replace ? cfg[current].replace('${url.geoserver}', 'http://tst-gisserver.territorio.csi.it') : cfg[current]
+                [current]: cfg[current] && cfg[current].replace ? cfg[current].replace('${url.geoserver}', 'http://localhost:8080') : cfg[current]
             });
         }, {});
     },
