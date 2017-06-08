@@ -1,17 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>it.geosolutions.csi.sira</groupId>
-        <artifactId>sira-root</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <artifactId>ogc-services</artifactId>
-	<packaging>jar</packaging>
-    <name>CSI SIRA - OGC Services</name>
-    <url>http://www.csipiemonte.it/</url>
 
-    <properties>
+    <groupId>it.geosolutions.csi.sira</groupId>
+    <artifactId>decsira-app_schema-data</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+	<url>http://www.csipiemonte.it/</url>
+    <name>CSI SIRA - app-schema data mappings</name>
+	
+	<properties>
         <ui.version>1.0.0</ui.version>
     </properties>
 	
@@ -19,6 +19,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.0</version>
                 <executions>
                     <execution>
                         <id>Copy files</id>
@@ -27,12 +28,12 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/ws</outputDirectory>
+                            <outputDirectory>${basedir}/target/data</outputDirectory>
                             <encoding>UTF-8</encoding>
                             <resources>
                                 <resource>
                                     <filtering>true</filtering>
-                                    <directory>${basedir}/src</directory>
+                                    <directory>${basedir}/mappings</directory>
                                     <includes>
                                         <include>**/*.*</include>
                                     </includes>
@@ -53,11 +54,10 @@
                     </goals>
                         <configuration>
                             <tasks>
-							    <delete file="${basedir}/target/gs_siradec_workspaces-${ui.version}.zip" failonerror="false" />
-                                <zip destfile="${basedir}/target/gs_siradec_workspaces-${ui.version}.zip">
-                                    <zipfileset dir="${basedir}/target/ws" includes="**/**" />
+							    <delete file="${basedir}/target/decsira-app_schema-data-${ui.version}.zip" failonerror="false" />
+                                <zip destfile="${basedir}/target/decsira-app_schema-data-${ui.version}.zip">
+                                    <zipfileset dir="${basedir}/target/data" includes="**/**" />
                                 </zip>
-                                
                             </tasks>
                         </configuration>
                     </execution>
