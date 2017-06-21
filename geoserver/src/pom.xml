@@ -1366,7 +1366,7 @@
       <goal>copy-resources</goal>
      </goals>
      <configuration>
-      <outputDirectory>${basedir}/../target/gs_data_dir</outputDirectory>
+      <outputDirectory>${basedir}/../target/gs_data_dir-${data_dir_base.version}</outputDirectory>
       <encoding>UTF-8</encoding>
       <resources>
        <resource>
@@ -1398,7 +1398,7 @@
 	    <zip destfile="${basedir}/../target/gs_data_dir-${data_dir_base.version}.zip">   
 	     <zipfileset dir="${basedir}/../target/" includes="**/**" />
         </zip>
-        <delete dir="${basedir}/../target/gs_data_dir" failonerror="false" />
+        <delete dir="${basedir}/../target/gs_data_dir-gs_data_dir-${data_dir_base.version}" failonerror="false" />
        </tasks>
       </configuration>
      </execution>
