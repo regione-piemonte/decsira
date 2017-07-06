@@ -13,6 +13,12 @@
 	
 	<properties>
         <ui.version>1.0.0</ui.version>
+		<db.port>5432</db.port>
+		<db.password>mypass</db.password>
+		<db.schema>decsira</db.schema>
+		<db.host>tst-territorio-vdb06.territorio.csi.it</db.host>
+		<db.name>DBSIRASVIL</db.name>
+		<db.user>decsira</db.user>
     </properties>
 	
 	<build>
@@ -65,5 +71,20 @@
             </plugin>
         </plugins>
     </build>
+	
+	<profiles>
+		<profile>
+			<id>produzione</id>
+			<properties>
+				 <ui.version>1.0.0</ui.version>
+				 <db.port>5432</db.port>
+				 <db.password>pippo</db.password>
+				 <db.schema>decsira</db.schema>
+		         <db.host>prd-territorio-vdb02.territorio.csi.it</db.host>
+		         <db.name>DBSIRA</db.name>
+		         <db.user>gwc</db.user>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
