@@ -23,11 +23,11 @@
                 </Parameter>
                 <Parameter>
                     <name>port</name>
-                    <value>5432</value>
+                    <value>${db.port}</value>
                 </Parameter>
                 <Parameter>
                     <name>passwd</name>
-                    <value>mypass</value>
+                    <value>${db.password}</value>
                 </Parameter>
                 <Parameter>
                     <name>dbtype</name>
@@ -47,7 +47,7 @@
                 </Parameter>
                 <Parameter>
                     <name>schema</name>
-                    <value>decsira</value>
+                    <value>${db.schema}</value>
                 </Parameter>
                 <Parameter>
                     <name>create database</name>
@@ -71,7 +71,7 @@
                 </Parameter>
                 <Parameter>
                     <name>host</name>
-                    <value>tst-territorio-vdb06.territorio.csi.it</value>
+                    <value>${db.host}</value>
                 </Parameter>
                 <Parameter>
                     <name>validate connections</name>
@@ -83,7 +83,7 @@
                 </Parameter>
                 <Parameter>
                     <name>database</name>
-                    <value>DBSIRASVIL</value>
+                    <value>${db.name}</value>
                 </Parameter>
                 <Parameter>
                     <name>Support on the fly geometry simplification</name>
@@ -115,7 +115,7 @@
                 </Parameter>
                 <Parameter>
                     <name>user</name>
-                    <value>decsira</value>
+                    <value>${db.user}</value>
                 </Parameter>
             </parameters>
         </DataStore>
@@ -509,6 +509,30 @@
                     </idExpression>
                 </AttributeMapping>
                 <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:denominazioneRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>denominazione_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desTipoRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_tipo_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idTipoRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_tipo_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
                     <targetAttribute>FEATURE_LINK[1]</targetAttribute>
                     <sourceExpression>
                         <OCQL>codice_sira</OCQL>
@@ -792,6 +816,102 @@
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:ragioneSocialeAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>rag_sociale_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:partitaIvaAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>partita_iva_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceFiscaleAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_fiscale_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:fkL2</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>fk_l2</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:istatProvinciaAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>istat_provincia_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desProvinciaAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_provincia_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:istatComuneAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>istat_comune_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desComuneAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_comune_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:indirizzoAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>indirizzo_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:faxAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>fax_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:numeroIscrizioneCCIAAAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>numero_ciaa_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:annoIscrizioneCCIAAAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>anno_ciaa</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:cognomeTitolare</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>cognome_titolare</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:nomeTitolare</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>nome_titolare</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:telefonoAzienda</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>telefono_azienda</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idIstanza</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
                     <targetAttribute>decsiraogc_stabilimenti:comuneServito</targetAttribute>
                     <sourceExpression>
                         <OCQL>id_depuratore</OCQL>
@@ -849,6 +969,187 @@
                     <targetAttribute>FEATURE_LINK[1]</targetAttribute>
                     <sourceExpression>
                         <OCQL>id_depuratore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:oggettoAssociatoDepuratore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_sira</OCQL>
+                        <linkElement>decsiraogc_stabilimenti:OggettoAssociatoDepuratore</linkElement>
+                        <linkField>FEATURE_LINK[1]</linkField>
+                    </sourceExpression>
+                    <isMultiple>true</isMultiple>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
+                        <linkElement>decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore</linkElement>
+                        <linkField>FEATURE_LINK[1]</linkField>
+                    </sourceExpression>
+                    <isMultiple>true</isMultiple>
+                </AttributeMapping>
+            </attributeMappings>
+        </FeatureTypeMapping>
+        <FeatureTypeMapping>
+            <sourceDataStore>dataStore</sourceDataStore>
+            <sourceType>decsira_geo_oggetto_associato</sourceType>
+            <targetElement>decsiraogc_stabilimenti:OggettoAssociatoDepuratore</targetElement>
+            <attributeMappings>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceAssoluto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>cod_assoluto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceSira</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_sira</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceSiraAltriStabilimenti</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codici_sira_altri_stab</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:dataAutorizzazione</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_emissione</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:dataScadenza</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_scadenza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:denominazioneRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>denominazione_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desComuneOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_comune</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desStato</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_stato</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desTipo</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_tipo_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desTipoRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_tipo_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idAutorita</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>fk_autorita_competente</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idAutorizzazione</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>fk_istanza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:geometria</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>geometria</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idStato</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_stato</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idTipoRecettore</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_tipo_recettore</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:identificativo</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>identificativo</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:istatComuneStabilimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>istat_comune_sede</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:istatProvinciaStabilimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>istat_prov_sede</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:nomeWFS</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>nome_wfs</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idTipo</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>tipo_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:numeroAutorizzazione</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>estremi_atto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:OggettoAssociatoDepuratore</targetAttribute>
+                    <idExpression>
+                        <OCQL>identificativo</OCQL>
+                    </idExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_sira</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
             </attributeMappings>

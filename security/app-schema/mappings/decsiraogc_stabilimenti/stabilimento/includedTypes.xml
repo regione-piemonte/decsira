@@ -21,11 +21,11 @@
                 </Parameter>
                 <Parameter>
                     <name>port</name>
-                    <value>5432</value>
+                    <value>${db.port}</value>
                 </Parameter>
                 <Parameter>
                     <name>passwd</name>
-                    <value>mypass</value>
+                    <value>${db.password}</value>
                 </Parameter>
                 <Parameter>
                     <name>dbtype</name>
@@ -45,7 +45,7 @@
                 </Parameter>
                 <Parameter>
                     <name>schema</name>
-                    <value>decsira</value>
+                    <value>${db.schema}</value>
                 </Parameter>
                 <Parameter>
                     <name>create database</name>
@@ -69,7 +69,7 @@
                 </Parameter>
                 <Parameter>
                     <name>host</name>
-                    <value>tst-territorio-vdb06.territorio.csi.it</value>
+                    <value>${db.host}</value>
                 </Parameter>
                 <Parameter>
                     <name>validate connections</name>
@@ -81,7 +81,7 @@
                 </Parameter>
                 <Parameter>
                     <name>database</name>
-                    <value>DBSIRASVIL</value>
+                    <value>${db.name}</value>
                 </Parameter>
                 <Parameter>
                     <name>Support on the fly geometry simplification</name>
@@ -113,7 +113,7 @@
                 </Parameter>
                 <Parameter>
                     <name>user</name>
-                    <value>decsira</value>
+                    <value>${db.user}</value>
                 </Parameter>
             </parameters>
         </DataStore>
@@ -1228,6 +1228,97 @@
                     <targetAttribute>FEATURE_LINK[1]</targetAttribute>
                     <sourceExpression>
                         <OCQL>fk_tratt_fango</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+            </attributeMappings>
+        </FeatureTypeMapping>
+        <FeatureTypeMapping>
+            <sourceDataStore>dataStore</sourceDataStore>
+            <sourceType>decsira_t_autorizzazione_amb</sourceType>
+            <targetElement>decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore</targetElement>
+            <attributeMappings>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:codiceSira</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_sira</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:dataProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:dataScadenza</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_scadenza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desStato</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_stato</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:desEnteCompetente</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>ente_competente</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:estremiProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>estremi_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idEnteCompetente</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>fk_autorita_competente</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idAutorizzazioneAmbientaleSede</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_autorizzamb_sede</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idAutorizzazioneAmbientale</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idStato</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_stato</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:idTipoProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_tipo_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:tipoProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>tipo_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore</targetAttribute>
+                    <idExpression>
+                        <OCQL>id_autorizzamb_sede</OCQL>
+                    </idExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
             </attributeMappings>
