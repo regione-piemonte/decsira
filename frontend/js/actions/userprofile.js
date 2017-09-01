@@ -63,7 +63,7 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
             if (typeof response.data === 'object') {
                 if (response.data.userIdentity && response.data.roles && response.data.roles.length > 0) {
                     // there is a logged user, geoserverUrl = secureGeoserverUrl
-                    ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
+                     ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
                     response.data.profile = [];
                     Array.from(response.data.roles).forEach(function(val) {
                         if (val && val.mnemonic) {
