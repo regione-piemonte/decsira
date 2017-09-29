@@ -1,40 +1,85 @@
 <wms>
   <id>wms</id>
   <enabled>true</enabled>
-  <name>My GeoServer WMS</name>
-  <title>My GeoServer WMS</title>
+  <name>WMS</name>
+  <title>Sistema Conoscenze Ambientali - Regione Piemonte</title>
   <maintainer>http://geoserver.org/comm</maintainer>
-  <abstrct>
-This is a description of your Web Map Server.
-     </abstrct>
+  <abstrct>WMS prodotti nell&apos;ambito del Sistema Conoscenze Ambientali della Regione Piemonte.</abstrct>
   <accessConstraints>NONE</accessConstraints>
   <fees>NONE</fees>
   <versions>
     <org.geotools.util.Version>
       <version>1.1.1</version>
     </org.geotools.util.Version>
+    <org.geotools.util.Version>
+      <version>1.3.0</version>
+    </org.geotools.util.Version>
   </versions>
   <keywords>
     <string>WFS</string>
     <string>WMS</string>
     <string>GEOSERVER</string>
+    <string>Autorizzazioni Ambientali\@language=it\;</string>
   </keywords>
+  <metadataLink/>
   <citeCompliant>false</citeCompliant>
-  <onlineResource>http://geoserver.org</onlineResource>
+  <onlineResource>http://geoserver.sourceforge.net/html/index.php</onlineResource>
   <schemaBaseURL>http://schemas.opengis.net</schemaBaseURL>
   <verbose>false</verbose>
   <metadata>
+    <entry key="jpegCompression">25</entry>
+    <entry key="pngCompression">25</entry>
+    <entry key="advancedProjectionHandling">true</entry>
+    <entry key="framesDelay">1000</entry>
+    <entry key="kmlSuperoverlayMode">auto</entry>
+    <entry key="kmlReflectorMode">refresh</entry>
     <entry key="svgAntiAlias">true</entry>
+    <entry key="kmlKmscore">40</entry>
+    <entry key="kmlPlacemark">false</entry>
+    <entry key="kmlAttr">true</entry>
+    <entry key="maxAllowedFrames">2147483647</entry>
+    <entry key="mapWrapping">true</entry>
+    <entry key="scalehintMapunitsPixel">false</entry>
+    <entry key="loopContinuously">false</entry>
     <entry key="svgRenderer">Batik</entry>
   </metadata>
-  <watermark class="org.geoserver.wms.WatermarkInfoImpl">
+  <srs>
+    <string>32632</string>
+    <string>32633</string>
+    <string>23032</string>
+    <string>3064</string>
+    <string>4326</string>
+    <string>4258</string>
+    <string>3035</string>
+    <string>3034</string>
+    <string>3044</string>
+    <string>3045</string>
+    <string>3004</string>
+    <string>3003</string>
+    <string>23033</string>
+    <string>3065</string>
+    <string>32634</string>
+    <string>4806</string>
+    <string>4265</string>
+    <string>4230</string>
+    <string>4670</string>
+    <string>4267</string>
+    <string>4269</string>
+    <string>900913</string>
+    <string>25832</string>
+    <string>3857</string>
+  </srs>
+  <bboxForEachCRS>true</bboxForEachCRS>
+  <watermark>
     <enabled>false</enabled>
     <position>BOT_RIGHT</position>
     <transparency>0</transparency>
   </watermark>
   <interpolation>Nearest</interpolation>
+  <getFeatureInfoMimeTypeCheckingEnabled>false</getFeatureInfoMimeTypeCheckingEnabled>
+  <getMapMimeTypeCheckingEnabled>false</getMapMimeTypeCheckingEnabled>
   <maxBuffer>25</maxBuffer>
-  <maxRequestMemory>0</maxRequestMemory>
-  <maxRenderingTime>0</maxRenderingTime>
-  <maxRenderingErrors>0</maxRenderingErrors>
+  <maxRequestMemory>32768</maxRequestMemory>
+  <maxRenderingTime>5</maxRenderingTime>
+  <maxRenderingErrors>50</maxRenderingErrors>
 </wms>
