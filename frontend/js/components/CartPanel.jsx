@@ -44,7 +44,7 @@ const CartPanel = React.createClass({
              const rows = [];
              rows.push(
              <div className="cart-panel-sevices-list-container">
-                 <h4>{service.title}</h4>
+                 <h4 className="cart-panel-sevices-list-element">{service.title}</h4>
                  <ConfirmButton key="removelayer"
                     text={(<Glyphicon glyph="1-close"/>)}
                     style={{"float": "right", "cursor": "pointer", "marginTop": -45}}

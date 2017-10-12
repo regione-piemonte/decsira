@@ -44,10 +44,12 @@ const Viste = React.createClass({
 
     },
     renderVistaTools() {
-        return [(<Glyphicon
-            key="addToMap"
-            glyph="plus-sign"
-            onClick={this.loadConfig}/>) // ,
+        return [(
+                <Glyphicon
+                key="addToMap"
+                glyph="plus-sign"
+                onClick={this.loadConfig}/>
+        ) // ,
         // (<Glyphicon
         //     key="objects"
         //     glyph="list-alt"

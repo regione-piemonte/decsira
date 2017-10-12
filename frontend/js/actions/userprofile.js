@@ -74,7 +74,7 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                 let user = {};
                 if (response.data.userIdentity) {
                     user = {
-                        name: response.data.userIdentity.nome,
+                        name: response.data.userIdentity.nome + " " + response.data.userIdentity.cognome,
                         surname: response.data.userIdentity.cognome,
                         cf: response.data.userIdentity.nome,
                         idProvider: response.data.userIdentity.idProvider,
