@@ -14,9 +14,16 @@ const {
     showLoginPanel,
     hideLoginPanel
 } = require('../actions/userprofile');
+
+const SiraConfigUtils = require('../utils/ConfigUtils');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
+
+const exit = function() {
+    SiraConfigUtils.delAuthFromBrowser();
+    window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+};
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
@@ -31,7 +38,8 @@ const LoginNav = connect((state) => ({
 }), {
       onShowLogin: showLoginPanel,
       onLogout: () => {
-          window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+          // window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+          exit();
       }
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
 

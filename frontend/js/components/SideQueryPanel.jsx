@@ -11,8 +11,7 @@ const {isObject} = require('lodash');
 
 // include application component
 const QueryBuilder = require('../../MapStore2/web/client/components/data/query/QueryBuilder');
-const {Panel, Glyphicon, Modal} = require('react-bootstrap');
-
+const {Panel, Glyphicon, Modal, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const {bindActionCreators} = require('redux');
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
@@ -176,6 +175,7 @@ const SideQueryPanel = React.createClass({
     },
     renderHeader() {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
+        let tooltip = <Tooltip id="header_tp">Chiudi Ricerca di dettaglio</Tooltip>;
         let heading;
         if (this.props.collapsible) {
             heading = this.props.filterPanelExpanded ? (
@@ -188,6 +188,7 @@ const SideQueryPanel = React.createClass({
             ) : (
                 <span>
                     <span style={{paddingLeft: "15px"}}>{header}</span>
+
                     <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
                         <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
                     </button>
@@ -197,9 +198,11 @@ const SideQueryPanel = React.createClass({
             heading = (
                 <span>
                     <span style={{paddingLeft: "15px"}}>{header}</span>
-                    <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
-                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
-                    </button>
+                    <OverlayTrigger key={"header_tp_over"} rootClose placement="left" overlay={tooltip}>
+                        <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
+                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
+                        </button>
+                    </OverlayTrigger>
                 </span>
             );
         }

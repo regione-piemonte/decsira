@@ -9,7 +9,7 @@
 var React = require('react');
 var Node = require('../../../MapStore2/web/client/components/TOC/Node');
 var Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
-const {Glyphicon} = require('react-bootstrap');
+const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../../../MapStore2/web/client/components/TOC/DefaultGroup');
 const glyphStyle = {"float": "right", cursor: 'pointer'};
 var DefaultNode = React.createClass({
@@ -34,24 +34,35 @@ var DefaultNode = React.createClass({
         };
     },
     renderTools() {
+        let tooltipSira = <Tooltip id="tpm-search-details">Ricerca di dettaglio</Tooltip>;
+        let tooltipMap = <Tooltip id="tpm-add-map">Carica in Mappa</Tooltip>;
+        let tooltipList = <Tooltip id="tpm-list-obj">Elenco di Oggetti</Tooltip>;
         const tools = [
-        (<Glyphicon
+        (<OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
+            <Glyphicon
             style={glyphStyle}
             key="addToMap"
             glyph="plus-sign"
-            onClick={()=>this.props.addToMap(this.props.node)}/>)
+            onClick={()=>this.props.addToMap(this.props.node)}/>
+        </OverlayTrigger>)
         ];
         if ( this.props.node.featureType) {
-            tools.push((<Glyphicon
-                style={glyphStyle}
-                key="toggle-featuregrid"
-                glyph="th"
-                onClick={() => this.props.toggleSiraControl(this.props.node.featureType)}/>));
-            tools.push((<Glyphicon
-                style={glyphStyle}
-                key="toggle-query"
-                glyph="search"
-                onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>));
+            tools.push((
+                <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
+                        <Glyphicon
+                        style={glyphStyle}
+                        key="toggle-featuregrid"
+                        glyph="th"
+                        onClick={() => this.props.toggleSiraControl(this.props.node.featureType)}/>
+                </OverlayTrigger>));
+            tools.push((
+                <OverlayTrigger key={"list-ltp"} rootClose placement="left" overlay={tooltipSira}>
+                    <Glyphicon
+                    style={glyphStyle}
+                    key="toggle-query"
+                    glyph="search"
+                    onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
+                </OverlayTrigger>));
         }
         return tools;
     },

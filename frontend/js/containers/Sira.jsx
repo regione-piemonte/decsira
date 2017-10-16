@@ -182,8 +182,8 @@ const Sira = React.createClass({
                     goToDataset={this.goToDataset}
                     goToHome={this.goToHome}
                     showCart="false"
-                    cartListaStyle="btn btn-primary active"
-                    cartMappaStyle="btn btn-primary"
+                    cartListaStyle="btn btn-primary"
+                    cartMappaStyle="btn btn-primary active"
                     onBack={this.back}
                     />
 
