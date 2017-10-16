@@ -1,0 +1,80 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateImpiantoRifiutiAUAnoAUA"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        },{
+             headerName: 'Tipo provvedimento attivo',
+             width: 90,
+             xpath: "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:tipoProvvedimento/text()"
+        }, {
+             headerName: 'Codice sira stabilimento',
+             width: 90,
+             xpath: "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSira/text()",
+             "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        },{
+             headerName: 'Provincia',
+             width: 90,
+             xpath: "decsiraogc_rifiuti:desProvincia/text()"
+        }, {
+             headerName: 'Comune',
+             width: 100,
+             xpath: "decsiraogc_rifiuti:desComune/text()"
+        }, {
+             headerName: 'Ragione sociale azienda',
+             width: 100,
+             xpath : "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione/text()"
+        }, {
+            headerName: 'Partita IVA azienda',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:partitaIVA/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Codice fiscale azienda',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Tipologia impiantistica',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:tipoImpiantoRifiuto/decsiraogc_rifiuti:TipoImpiantoRifiuto/decsiraogc_rifiuti:desTipoImpiantoRifiuto/text()"
+        }, {
+            headerName: 'Operazioni di recupero',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:elencoOperazioniRecupero/text()"
+        }, {
+            headerName: 'Numero provvedimento / iscrizione',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:estremiProvvedimento/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Data provvedimento / iscrizione',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataProvvedimento/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Data scadenza provvedimento / iscrizione',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataScadenza/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Stato',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:desStato/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Impianto di interesse nazionale',
+            width: 100,
+            xpath: "decsiraogc_rifiuti:interesseNazionale/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA")}/>
