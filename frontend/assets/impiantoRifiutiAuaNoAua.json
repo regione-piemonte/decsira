@@ -1,0 +1,419 @@
+{
+   "featureTypeName":"decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
+   "featureTypeNameLabel":"IMPIANTO DI RIFIUTI CON A.U.A. E SENZA A.U.A.",
+   "nameSpaces": {
+     "decsiraogc_rifiuti": "http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Impianto di rifiuti A.U.A. e non A.U.A.",
+        "name": "decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "impiantoRifiutiAuaNoAua",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_ImpiantoRifiutiAUAnoAUA_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:idTipologiaImpianto/text()}}.pdf",
+     "template": "assets/cardTemplateImpiantoRifiutoAUAnoAUA.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateImpiantoRifiutiAUAnoAUA.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo provvedimento attivo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:tipoProvvedimento/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice sira stabilimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSira/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:desProvincia/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:desComune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Ragione sociale azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Partita IVA azienda",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:partitaIVA/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice fiscale azienda",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipologia impiantistica",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:tipoImpiantoRifiuto/decsiraogc_rifiuti:TipoImpiantoRifiuto/decsiraogc_rifiuti:desTipoImpiantoRifiuto/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Operazioni di recupero",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:elencoOperazioniRecupero/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Numero provvedimento / iscrizione",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:estremiProvvedimento/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Data provvedimento / iscrizione",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataProvvedimento/text()"],
+           "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Data scadenza provvedimento / iscrizione",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataScadenza/text()"],
+           "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Stato",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:desStato/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Impianto di interesse nazionale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rifiuti:interesseNazionale/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_rifiuti:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":"assets/licenza/Impianti_Recupero_Rifiuti_AUA_Comunicaz_licenzaCC25BY.pdf"
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_rifiuti:desProvincia",
+            "label":"Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_rifiuti:desComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+              "field": "decsiraogc_rifiuti:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 3,
+           "attribute": "decsiraogc_rifiuti:codiceSira",
+           "label":"Codice sira",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"number"
+        },
+        {
+          "index": 4,
+          "attribute": "decsiraogc_rifiuti:attivitaProdutImpRifiuti/decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:codAteco",
+          "label":"Tipo attivita produttiva",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_ateco",
+              "propertyName": "id_ateco,des_ateco"
+            }
+          },
+          "valueId":"id_ateco",
+          "valueLabel":"des_ateco"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione",
+           "label":"Ragione sociale azienda",
+           "type":"string"
+        },
+        {
+           "index": 6,
+           "attribute": "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:partitaIVA",
+           "label":"Partita IVA azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 7,
+           "attribute": "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale",
+           "label":"Codice fiscale azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+          "index": 8,
+          "attribute": "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUAdecsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:idTipoProvvedimento",
+          "label":"Tipo provvedimento",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+              "propertyName": "id_proc_attivita,provv",
+               "cql_filter": "id_proc_attivita=18%20OR%20id_proc_attivita=19%20OR%20id_proc_attivita=9"
+            }
+          },
+          "valueId":"id_proc_attivita",
+          "valueLabel":"provv"
+        },
+        {
+           "index": 9,
+           "attribute": "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataProvvedimento",
+           "label":"Data provvedimento / iscrizione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 10,
+           "attribute": "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataScadenza",
+           "label":"Data scadenza / iscrizione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:estremiProvvedimento",
+           "label":"Numero provvedimento / iscrizione",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+          "index": 12,
+          "attribute": "decsiraogc_rifiuti:tipoImpiantoRifiuto/decsiraogc_rifiuti:TipoImpiantoRifiuto/decsiraogc_rifiuti:idTipoImpiantoRifiuto",
+          "label":"Tipologia impiantistica",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_impianto",
+              "propertyName": "id_tipo_impianto,des_tipo_impianto"
+            }
+          },
+          "valueId":"id_tipo_impianto",
+          "valueLabel":"des_tipo_impianto"
+        },
+        {
+           "index": 13,
+           "attribute": "decsiraogc_rifiuti:rifiutoPericoloso",
+           "label":"Gestisce rifiuti pericolosi",
+           "type":"list",
+           "values": [
+             {"value":"si","name":"SI"},
+             {"value":"no","name":"NO"}
+           ],
+           "valueId":"value",
+           "valueLabel":"name"
+        },
+        {
+          "index": 14,
+          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idTipoRecupero",
+          "label":"Tipo di recupero",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_recupero",
+              "propertyName": "id_tipo_recupero,des_tipo_recupero"
+            }
+          },
+          "valueId":"id_tipo_recupero",
+          "valueLabel":"des_tipo_recupero"
+        },
+        {
+          "index": 15,
+          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idTipoRecupero",
+          "label":"Tipologia del rifiuto",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_tipo_rifiuto",
+              "propertyName": "id_tipo_rifiuto,label"
+            }
+          },
+          "valueId":"id_tipo_rifiuto",
+          "valueLabel":"label"
+        },
+        {
+          "index": 16,
+          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:idOperazRecupero",
+          "label":"Operazione di recupero",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_operaz_recupero",
+              "propertyName": "id_operaz_recupero,label"
+            }
+          },
+          "valueId":"id_operaz_recupero",
+          "valueLabel":"label"
+        },
+        {
+          "index": 17,
+          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:codiciCER/decsiraogc_rifiuti:CodiciCER/decsiraogc_rifiuti:famigliaCER",
+          "label":"Famiglia CER",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_codice_cer_famiglia",
+              "propertyName": "codice_cer_fam,label"
+            }
+          },
+          "valueId":"codice_cer_fam",
+          "valueLabel":"label"
+        },
+        {
+          "index": 18,
+          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:codiciCER/decsiraogc_rifiuti:CodiciCER/decsiraogc_rifiuti:codiceCER",
+          "label":"Codice CER",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_codice_cer",
+              "propertyName": "codice_cer,codice_cer_famiglia,label"
+            }
+          },
+          "valueId":"codice_cer",
+          "valueLabel":"label",
+          "dependson":{
+             "field": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:codiciCER/decsiraogc_rifiuti:CodiciCER/decsiraogc_rifiuti:famigliaCER",
+             "from": "codice_cer_fam",
+             "to": "codice_cer_famiglia"
+          }
+        },
+        {
+          "index": 19,
+          "attribute": "decsiraogc_rifiuti:idStato",
+          "label":"Stato",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_d_stato",
+              "propertyName": "id_stato,des_stato"
+            }
+          },
+          "valueId":"id_stato",
+          "valueLabel":"des_stato"
+        },
+        {
+           "index": 20,
+           "attribute": "decsiraogc_rifiuti:interesseNazionale",
+           "label":"Impianto di interesse nazionale",
+           "type":"list",
+           "values": [
+             {"value":"si","name":"SI"},
+             {"value":"no","name":"NO"}
+           ],
+           "valueId":"value",
+           "valueLabel":"name"
+        }
+     ]
+
+   }
+
+}
