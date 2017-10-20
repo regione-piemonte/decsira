@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_waste_en="http://www.regione.piemonte.it/ambiente/decsiraogc_waste_en/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_waste_en/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_impianto_rifiuti_aua_noaua  id= id_rifiuto_generico-->
+	<element name="WastePlant" substitutionGroup="gml:AbstractFeature" type="decsiraogc_waste_en:WastePlantType"/>
+	
+	<!-- decsira_geo_stabilimento id= codice_sira -->
+	<element name="DataPlant" substitutionGroup="gml:AbstractObject" type="decsiraogc_waste_en:DataPlantType"/>
+	
+	<!-- decsira_t_azienda  id= id_azienda -->
+	<element name="DataCompany" substitutionGroup="gml:AbstractObject" type="decsiraogc_waste_en:DataCompanyType"/>
+	
+	<!-- decsira_t_autorizzazione_amb_efficace id= id_autorizzamb_sede -->
+	<element name="AuthorizationWaste" substitutionGroup="gml:AbstractObject" type="decsiraogc_waste_en:AuthorizationWasteType"/>
+	
+	<!-- decsira_t_istanza_operaz_recupero_rifiuti  id= identificativo -->
+	<element name="RecoveryOperationWaste" substitutionGroup="gml:AbstractObject" type="decsiraogc_waste_en:RecoveryOperationWasteType"/>
+	
+	<!-- decsira_t_istanza_cer_rifiuti  id= identificativo -->
+	<element name="Ewc" substitutionGroup="gml:AbstractObject" type="decsiraogc_waste_en:EwcType"/>
+	
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="WastePlantType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+					<xs:element minOccurs="1" name="uuidWaste">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="idWasteManagementPlant">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="geometry" type="gml:GeometryPropertyType"/>
+					<xs:element minOccurs="1" name="idRequestAuthorization" type="xs:decimal"/>
+					<xs:element minOccurs="1" name="uuidRegionalPlant" type="xs:decimal"/>
+					<xs:element minOccurs="1" name="manageHazardousWaste">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="1" minOccurs="0" name="dataPlant" type="decsiraogc_waste_en:DataPlantPropertyType"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="dataCompany" type="decsiraogc_waste_en:DataCompanyPropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="1" name="authorizationWaste" type="decsiraogc_waste_en:AuthorizationWastePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="recoveryOperationWaste" type="decsiraogc_waste_en:RecoveryOperationWastePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ewc" type="decsiraogc_waste_en:EwcPropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="DataPlantType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="uuidRegionalPlant" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="registredPlantName">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="uuidMunicipality">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="municipalityName">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="uuidDistrict">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="districtName">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="address">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	
+	<complexType name="DataCompanyType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="idCompany">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="companyName">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="companyAddress">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="municipalityName">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="districtName">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="uuidRegionalCompany" type="xs:decimal"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="AuthorizationWasteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="idAuthorizationLocation">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="idRequestAuthorization" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="desResponsibleOrganization">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="uuidRegional" type="xs:decimal"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	
+	<complexType name="EwcType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="uuid">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="idRequestAuthorization" type="xs:decimal"/>
+					<xs:element minOccurs="1" name="ewc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="8"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="desEwc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="RecoveryOperationWasteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="uuid">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="idRecoveryOperation" type="xs:integer"/>
+					<xs:element minOccurs="1" name="idRequestAuthorization" type="xs:decimal"/>
+					<xs:element minOccurs="1" name="codRecoveryOperation">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="desRecoveryOperation">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+
+	
+	<!-- property types -->
+	<complexType name="DataPlantPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_waste_en:DataPlant"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="DataCompanyPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_waste_en:DataCompany"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+		
+	
+	<complexType name="AuthorizationWastePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_waste_en:AuthorizationWaste"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+
+	<complexType name="EwcPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_waste_en:Ewc"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="RecoveryOperationWastePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_waste_en:RecoveryOperationWaste"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	
+</schema>
