@@ -162,11 +162,6 @@
                       xpath:"decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()"
                   },
                   {
-                      headerName: 'Rifiuti pericolosi',
-                      width: 100,
-                      xpath: "decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:rifiutoPericoloso/text()"
-                  },
-                  {
                       headerName: 'Tipo di recupero',
                       width: 150,
                       xpath: "decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:desTipoRecupero/text()"
@@ -267,6 +262,11 @@
                               xpath:"../../decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/@gml:id"
                           },
                           {
+                              headerName: 'Codifica di recupero',
+                              width: 100,
+                              xpath:"decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:codOperazRecupero/text()"
+                          },
+                          {
                               headerName: 'Operazione di recupero',
                               width: 500,
                               xpath:"decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:desOperazRecupero/text()"
@@ -300,7 +300,7 @@
     </Section>
 
 
-    <Section header='MAPPA SINTESI - Impianti di Recupero Rifiuti autorizzati con A.U.A. e con procedura semplificata (non A.U.A.) su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='11' expanded={true}>
+    <Section header='MAPPA SINTESI - Impianti Recupero Rifiuti autorizzati su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='11' expanded={true}>
         <MappaScheda
             center={
                 model.getValue({
@@ -324,7 +324,7 @@
                     "type": "wms",
                     "url": "{geoserverUrl}/wms",
                     "visibility": true,
-                    "title": "Impianti di Recupero Rifiuti Preview",
+                    "title": "Impianti Recupero Rifiuti Preview",
                     "name": "decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
                     "group": "Overlays",
                     "format": "image/png"
