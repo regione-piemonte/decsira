@@ -17,6 +17,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<component.name>decsirabatch</component.name>
 		<component.version>1.0.0</component.version>
+		<db.host>tst-territorio-vdb06.territorio.csi.it</db.host>
+		<db.name>DBSIRASVIL</db.name>
+		<db.user>decsira</db.user>
+		<db.password>mypass</db.password>
 	</properties>
 
 	<build>
@@ -68,6 +72,10 @@
 			<resource>
 				<directory>src/main/resources/spring</directory>
 				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources/conf</directory>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 	</build>
@@ -150,5 +158,18 @@
 			<version>9.1-901-1.jdbc4</version>			
 		</dependency>						
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>produzione</id>
+			<properties>
+				 <ui.version>1.0.0</ui.version>
+		         <db.host>prd-territorio-vdb02.territorio.csi.it</db.host>
+		         <db.name>DBSIRA</db.name>
+		         <db.user>decsira</db.user>
+				 <db.password>pippo</db.password>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
