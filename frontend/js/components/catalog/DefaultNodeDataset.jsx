@@ -52,7 +52,7 @@ var DefaultNode = React.createClass({
         ];
         if ( this.props.node.featureType) {
             tools.push((
-              <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipSira}>
+              <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
               <Glyphicon
                 style={glyphStyle}
                 key="toggle-featuregrid"
@@ -60,7 +60,7 @@ var DefaultNode = React.createClass({
                 onClick={() => this.props.toggleSiraControl(this.props.node.featureType)}/>
               </OverlayTrigger>));
             tools.push((
-              <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipList}>
+              <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipSira}>
               <Glyphicon
                 style={glyphStyle}
                 key="toggle-query"
