@@ -13,7 +13,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<security_data_dir.version>1.0.0</security_data_dir.version>
+		<security_data_dir.version>1.0.1</security_data_dir.version>
+		<iride.service.policy-enforcer-base.url>http://tst-applogic-nmsf2e.csi.it/pep_wsfad_nmsf_policy/services/PolicyEnforcerBase</iride.service.policy-enforcer-base.url>
     </properties>
 
     <dependencies>
@@ -98,6 +99,11 @@
                                     <directory>${basedir}/gs_data_dir</directory>
                                     <includes>
                                         <include>**/*.xml</include>
+										<include>**/*.swo</include>
+										<include>**/*.swp</include>
+										<include>**/*.properties</include>
+										<include>**/*.digest</include>
+										<include>**/*.jceks</include>
                                     </includes>
                                     <excludes>
                                       <exclude>workspaces/**</exclude>

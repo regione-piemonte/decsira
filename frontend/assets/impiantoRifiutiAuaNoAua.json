@@ -214,7 +214,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_ateco",
-              "propertyName": "id_ateco,des_ateco"
+              "propertyName": "id_ateco,des_ateco",
+               "sortBy": "id_ateco+A"
             }
           },
           "valueId":"id_ateco",
@@ -242,7 +243,7 @@
         },
         {
           "index": 8,
-          "attribute": "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUAdecsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:idTipoProvvedimento",
+          "attribute": "decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:idTipoProvvedimento",
           "label":"Tipo provvedimento",
           "type":"list",
           "valueService": {
@@ -325,14 +326,15 @@
         },
         {
           "index": 15,
-          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idTipoRecupero",
+          "attribute": "decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idTipoRifiuto",
           "label":"Tipologia del rifiuto",
           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_tipo_rifiuto",
-              "propertyName": "id_tipo_rifiuto,label"
+              "propertyName": "id_tipo_rifiuto,label",
+               "sortBy": "id_tipo_rifiuto+A"
             }
           },
           "valueId":"id_tipo_rifiuto",
@@ -346,7 +348,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_operaz_recupero",
-              "propertyName": "id_operaz_recupero,label"
+              "propertyName": "id_operaz_recupero,label,ordinamento",
+              "sortBy": "ordinamento+A"
             }
           },
           "valueId":"id_operaz_recupero",
@@ -360,7 +363,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_codice_cer_famiglia",
-              "propertyName": "codice_cer_fam,label"
+              "propertyName": "codice_cer_fam,label,ordinamento",
+              "sortBy": "ordinamento+A"
             }
           },
           "valueId":"codice_cer_fam",
@@ -374,7 +378,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_codice_cer",
-              "propertyName": "codice_cer,codice_cer_famiglia,label"
+              "propertyName": "codice_cer,codice_cer_famiglia,label,ordinamento",
+              "sortBy": "ordinamento+A"
             }
           },
           "valueId":"codice_cer",
