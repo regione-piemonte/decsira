@@ -41,7 +41,7 @@
                   <LabeledField label='ATO' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desAto/text()")
                   }/>
-                  <LabeledField label='capacit&agrave; organica di progetto (a.e.)' value={
+                  <LabeledField label='capacita organica di progetto (a.e.)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:capacitaOrganicaProgetto/text()")
                   }/>
                   <LabeledField label='Abitanti residenti' value={
@@ -176,7 +176,7 @@
                            xpath:"decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeComune/text()"
                        },
                        {
-                           headerName: 'Localit&agrave;',
+                           headerName: 'Localita',
                            width: 440,
                            xpath: "decsiraogc_stabilimenti:ComuneServito/decsiraogc_stabilimenti:nomeLocalita/text()"
                        }
@@ -241,16 +241,16 @@
          </Section>
      </ProfileWrapper>
 
-     <Section header='TIPO TRATTAMENTO ACQUE REFLUE' eventKey='7' expanded={true}>
-         <LabeledField label='Tipologia trattamento' value={
-           model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desTipologiaTrattamento/text()")
-         }/>
+     <Section header='TRATTAMENTO ACQUE REFLUE' eventKey='7' expanded={true}>
          <LabeledField label='Chiariflocculazione' value={
            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:chiariflocculazione/text()")
          }/>
-     </Section>
+         <LabeledField label='Tipologia trattamento' value={
+           model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desTipologiaTrattamento/text()")
+         }/>
 
-     <Section header='TRATTAMENTI PI&Ugrave; AVANZATI' eventKey='8' expanded={false}>
+
+     <Section header=' ' eventKey='8' expanded={true}>
             <SiraTable
                 id="TrattamentoAvanzato"
                 selectedRow={model.TrattamentoAvanzato}
@@ -268,7 +268,7 @@
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:trattamentoAvanzato")}/>
         </Section>
 
-        <Section header='FILTRAZIONE FINALE' eventKey='9' expanded={false}>
+        <Section header=' ' eventKey='9' expanded={true}>
                <SiraTable
                    id="TipoFiltrazioneFinale"
                    selectedRow={model.TipoFiltrazioneFinale}
@@ -277,7 +277,7 @@
                    columns={
                        [
                            {
-                               headerName: 'Tipo filtrazione finale',
+                               headerName: 'Filtrazione finale',
                                width: 750,
                                xpath:"decsiraogc_stabilimenti:TipoFiltrazioneFinale/decsiraogc_stabilimenti:desFiltrazioneFinale/text()"
                            }
@@ -286,7 +286,7 @@
                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:tipoFiltrazioneFinale")}/>
            </Section>
 
-           <Section header='DISINFEZIONE' eventKey='10' expanded={false}>
+           <Section header=' ' eventKey='10' expanded={true}>
                   <SiraTable
                       id="TipoDisinfezione"
                       selectedRow={model.TipoDisinfezione}
@@ -295,7 +295,7 @@
                       columns={
                           [
                               {
-                                  headerName: 'Tipo disinfezione',
+                                  headerName: 'Disinfezione',
                                   width: 750,
                                   xpath:"decsiraogc_stabilimenti:TipoDisinfezione/decsiraogc_stabilimenti:desTipoDisinfezione/text()"
                               }
@@ -303,19 +303,20 @@
                       }
                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:tipoDisinfezione")}/>
               </Section>
+            </Section>
 
-              <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-                <Section header='PRODUZIONE FANGHI' eventKey='11' expanded={true}>
+
+                <Section header='FANGHI' eventKey='11' expanded={true}>
+                    <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                     <LabeledField label='Produzione tal quale fanghi (t/anno)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneTalQualeFanghi/text()")
                     }/>
                     <LabeledField label='Produzione fanghi (tonnellate di secco/anno)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneFanghiSeccoAnno/text()")
                     }/>
-                </Section>
-              </ProfileWrapper>
+                    </ProfileWrapper>
 
-              <Section header='TIPI TRATTAMENTO FANGHI' eventKey='12' expanded={true}>
+              <Section header=' ' eventKey='12' expanded={true}>
                      <SiraTable
                          id="TrattamentoFanghi"
                          selectedRow={model.TrattamentoFanghi}
@@ -324,7 +325,7 @@
                          columns={
                              [
                                  {
-                                     headerName: 'Tipo trattamento',
+                                     headerName: 'Trattamento',
                                      width: 740,
                                      xpath:"decsiraogc_stabilimenti:TrattamentoFanghi/decsiraogc_stabilimenti:desTrattamentoFanghi/text()"
                                  }
@@ -335,7 +336,7 @@
                          <Section header='' eventKey='13' expanded={true}>
                          </Section>
 
-                         <Section header='Destinazione fanghi' eventKey='13' expanded={false}>
+                         <Section header='Destinazione fanghi fuori regione' eventKey='13' expanded={false}>
                           <SiraTable
                               id="DestinazioneFanghi"
                               selectedRow={model.DestinazioneFanghi}
@@ -363,6 +364,7 @@
                               features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:destinazioneFanghi")}/>
                       </Section>
                  </Section>
+            </Section>
 
                  <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                      <Section header='OGGETTI COLLEGATI' eventKey='14' expanded={true}>
@@ -483,7 +485,7 @@
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desEnteCompetente/text()"
                                     },
                                     {
-                                        headerName: 'Stato',
+                                        headerName: 'Stato autorizzazione',
                                         width: 100,
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desStato/text()"
                                     }
@@ -535,7 +537,7 @@
                      </Section>
                  </ProfileWrapper>
 
-                 <Section header='MAPPA SINTESI - Impianto di depurazione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='16' expanded={true}>
+                 <Section header='MAPPA SINTESI - Impianto di depurazione su sfondo BDTRE (Banca Dati Terr. di Riferimento Enti)' eventKey='16' expanded={true}>
                      <MappaScheda
                          center={
                              model.getValue({
@@ -573,7 +575,7 @@
                          txt="Visualizza la scheda del metadato"
                          url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
                          params={{
-                             id: 6151,
+                             id: 6513,
                              currTab: 'rndt'
                          }}
                      />

@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
-   "featureTypeNameLabel":"IMPIANTO DI RIFIUTI CON A.U.A. E SENZA A.U.A.",
+   "featureTypeNameLabel":"IMPIANTI RECUPERO RIFIUTI AUA E PROCEDURA SEMPLIFICATA",
    "nameSpaces": {
      "decsiraogc_rifiuti": "http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti/1.0"
    },
@@ -26,7 +26,7 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Scheda_ImpiantoRifiutiAUAnoAUA_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:idTipologiaImpianto/text()}}.pdf",
+    "pdfname": "Scheda_ImpiantoRifiutiAUAnoAUA_Comune_di_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:nomeComune/text()}}.pdf",
      "template": "assets/cardTemplateImpiantoRifiutoAUAnoAUA.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
@@ -99,7 +99,7 @@
          {
            "headerName": "Tipologia impiantistica",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_rifiuti:tipoImpiantoRifiuto/decsiraogc_rifiuti:TipoImpiantoRifiuto/decsiraogc_rifiuti:desTipoImpiantoRifiuto/text()"],
+           "xpath": ["decsiraogc_rifiuti:elencoTipologiaImpRifiuto/text()"],
            "type": 2
          },
          {
@@ -291,7 +291,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_impianto",
-              "propertyName": "id_tipo_impianto,des_tipo_impianto"
+              "propertyName": "id_tipo_impianto,des_tipo_impianto,ordinamento",
+               "sortBy": "ordinamento+A"
             }
           },
           "valueId":"id_tipo_impianto",
