@@ -1,7 +1,7 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='IMPIANTI RECUPERO RIFIUTI (AUA) E RECUPERO RIFIUTI IN PROCEDURA SEMPLIFICATA ' subtitle={[
+        <DetailTitle title='IMPIANTI RECUPERO RIFIUTI AUA E PROCEDURA SEMPLIFICATA' subtitle={[
             'Comune di ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:nomeComune/text()")
             ]} id={model.id}/>
@@ -187,7 +187,7 @@
               tableId: "RecuperoRifiuti",
               parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA"),
               xpath: "decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/@gml:id",
-              pdfTitle: "Identificativo rifiuto: {{decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()}}"
+              pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()}}"
           }}
           columns={
               [
@@ -222,7 +222,7 @@
               tableId: "RecuperoRifiuti",
               parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA"),
               xpath: "decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/@gml:id",
-              pdfTitle: "Identificativo rifiuto: {{decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()}}"
+              pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()}}"
           }}
           columns={
               [
@@ -252,7 +252,7 @@
                       tableId: "RecuperoRifiuti",
                       parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA"),
                       xpath: "decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/@gml:id",
-                      pdfTitle: "Identificativo rifiuto: {{decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()}}"
+                      pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()}}"
                   }}
                   columns={
                       [
