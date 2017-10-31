@@ -1,0 +1,285 @@
+{
+  "map": {
+    "projection": "EPSG:32632",
+    "units": "m",
+    "center": {"x": 807374, "y": 5606503, "crs": "EPSG:3857"},
+    "zoom": 6,
+    "mapOptions": {
+        "view" : {
+                "extent": [302000, 4850000, 620000, 5160000]}
+            },
+    "maxExtent": [
+      -20037508.34, -20037508.34,
+      20037508.34, 20037508.34
+    ],
+    "layers":[
+      {
+        "type": "ol",
+        "title": "None",
+        "name": "None",
+        "source": "ol",
+        "group": "background",
+        "visibility": false
+      },
+	  {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
+        "name": "SfondoCartRifBN",
+        "title": "Sfondo Cartografico BN",
+        "group": "background",
+        "visibility": true,
+        "format": "image/png",
+        "tiled": true,
+        "tileSize": 512
+      },
+      {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+        "name": "SfondoCartRif",
+        "title": "Sfondo Cartografico a colori",
+        "group": "background",
+        "visibility": false,
+        "format": "image/png",
+        "tiled": true,
+        "tileSize": 512
+      },
+      {
+        "type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
+        "name": "OrtofotoRegione2010",
+        "title": "Ortoimmagini Piemonte 2009-2011",
+        "group": "background",
+        "visibility": false,
+        "format": "image/png",
+        "tiled": true
+      },
+	  {
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
+        "visibility": false,
+  			"title": "SIC - Siti di Importanza Comunitaria",
+  			"name": "SIC",
+  			"group": "Aree Protette e Rete Natura 2000",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
+        "visibility": false,
+  			"title": "SIR - Siti di Importanza Regionale",
+  			"name": "SIR",
+  			"group": "Aree Protette e Rete Natura 2000",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
+        "visibility": false,
+  			"title": "ZPS - Zone di Protezione Speciale",
+  			"name": "ZPS",
+  			"group": "Aree Protette e Rete Natura 2000",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
+        "visibility": false,
+  			"title": "Aree Protette e siti della rete ecologica",
+  			"name": "AreeProtette",
+  			"group": "Aree Protette e Rete Natura 2000",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://webgis.arpa.piemonte.it/ags101free/services/rifiuti/discariche_attive/MapServer/WMSServer",
+        "visibility": false,
+  			"title": "Discariche attive e in post gestione",
+  			"name": "Discariche attive e in post gestione",
+  			"group": "Arpa Piemonte - Discariche attive e in post gestione",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://webgis.arpa.piemonte.it/ags101free/services/rifiuti/discariche_attive/MapServer/WMSServer",
+        "visibility": false,
+  			"title": "Perimetrazione tecnica",
+  			"name": "Perimetrazione tecnica",
+  			"group": "Arpa Piemonte - Discariche attive e in post gestione",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://webgis.arpa.piemonte.it/ags101free/services/rifiuti/discariche_attive/MapServer/WMSServer",
+        "visibility": false,
+  			"title": "Sistemi di monitoraggio",
+  			"name": "Sistemi di monitoraggio",
+  			"group": "Arpa Piemonte - Discariche attive e in post gestione",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
+        "visibility": false,
+  			"title": "Rifiuti - Compostaggio",
+  			"name": "Compostaggio",
+  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
+        "visibility": false,
+  			"title": "Rifiuti - Digestione anaerobica",
+  			"name": "DigestioneAnaerobica",
+  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
+        "visibility": false,
+  			"title": "Rifiuti - Trattamento Meccanico Biologico",
+  			"name": "TMB",
+  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
+        "visibility": false,
+  			"title": "Rifiuti - Incenerimento/Coincenerimento",
+  			"name": "Incenerimento-Coincenerimento",
+  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+        {
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
+        "visibility": false,
+  			"title": "Rifiuti - Discarica",
+  			"name": "Discarica",
+  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
+        "visibility": false,
+  			"title": "Rifiuti - Tutti gli impianti autorizzati",
+  			"name": "RifiutiImpianti",
+  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
+        "visibility": false,
+  			"title": "Toponomastica Comunale",
+  			"name": "ToponomasticaComunale",
+  			"group": "Limiti amministrativi",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
+        "visibility": false,
+  			"title": "Limiti Comunali",
+  			"name": "LimitiComunali",
+  			"group": "Limiti amministrativi",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
+        "visibility": true,
+  			"title": "Limiti Provinciali",
+  			"name": "LimitiProvinciali",
+  			"group": "Limiti amministrativi",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+  			"title": "Impianti Recupero Rifiuti autorizzati con A.U.A. o procedura semplificata (comunicazioni non A.U.A.)",
+  			"name": "decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+          "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+          "wfsVersion": "1.1.0",
+          "layerName": "ZONES_IPR",
+          "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+          "geomAttribute": "msGeometry",
+          "geometryType": "Polygon"
+        },
+            "featureType": "impiantoRifiutiAuaNoAua",
+                      "group": "Oggetti",
+                      "format": "image/png"
+  		}
+    ]
+  }
+}
