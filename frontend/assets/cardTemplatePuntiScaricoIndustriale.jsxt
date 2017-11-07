@@ -418,7 +418,7 @@
             </Section>
         </ProfileWrapper>
 
-        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
             <Section header='SISTEMI CONTROLLO PARAMETRI ANALITICI' eventKey='16' expanded={false}>
                 <SiraTable
                   id="ControlloParametriAnalitici"
@@ -430,33 +430,33 @@
                           {
                               headerName: 'Parametro',
                               width: 150,
-                              xpath:"decsiraogc_scarichi:ControlloParametriAnalitici/decsiraogc_scarichi:desParametro/text()"
+                              xpath:"decsiraogc_scarichi:ControlloParamAnalPuntoScaricoInd/decsiraogc_scarichi:desParametro/text()"
                           },
                           {
                               headerName: 'Limite inferiore quantificazione',
                               width: 250,
-                              xpath: "decsiraogc_scarichi:ControlloParametriAnalitici/decsiraogc_scarichi:limiteInferioreQuantificazione/text()"
+                              xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoInd/decsiraogc_scarichi:limiteInferioreQuantificazione/text()"
                           },
                           {
                               headerName: 'Unità di misura',
                               width: 250,
-                              xpath: "decsiraogc_scarichi:ControlloParametriAnalitici/decsiraogc_scarichi:desUnitaMisura/text()"
+                              xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoInd/decsiraogc_scarichi:desUnitaMisura/text()"
                           },
                           {
                               headerName: 'Sistema di misura',
                               width: 250,
-                              xpath: "decsiraogc_scarichi:ControlloParametriAnalitici/decsiraogc_scarichi:sistemaMisura/text()"
+                              xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoInd/decsiraogc_scarichi:sistemaMisura/text()"
                           },
                           {
                               headerName: 'Annotazioni',
                               width: 250,
-                              xpath: "decsiraogc_scarichi:ControlloParametriAnalitici/decsiraogc_scarichi:annotazioni/text()"
+                              xpath: "decsiraogc_scarichi:ControlloParamAnalPuntoScaricoInd/decsiraogc_scarichi:annotazioni/text()"
                           }
                       ]
                   }
-                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:controlloParametriAnalitici")}/>
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:PuntoScaricoIndustriale/decsiraogc_scarichi:controlloParamAnalPuntoScaricoInd")}/>
             </Section>
-        </ProfileWrapper>
+            </ProfileWrapper>
 
         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
             <Section header='SOSTANZE TAB.3/A ALL.5 D.LGS.152/2006' eventKey='17' expanded={false}>

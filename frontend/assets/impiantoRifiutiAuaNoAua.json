@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
-   "featureTypeNameLabel":"IMPIANTI RECUPERO RIFIUTI AUA E PROCEDURA SEMPLIFICATA",
+   "featureTypeNameLabel":"IMPIANTI RECUPERO RIFIUTI AUA O PROCEDURA SEMPLIFICATA (NON AUA)",
    "nameSpaces": {
      "decsiraogc_rifiuti": "http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti/1.0"
    },
@@ -8,7 +8,7 @@
         "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "Impianto di rifiuti A.U.A. e non A.U.A.",
+        "title": "Impianti recupero rifiuti AUA o procedura semplificata (non AUA)",
         "name": "decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
@@ -61,7 +61,6 @@
            "headerName": "Codice sira stabilimento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSira/text()"],
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -112,14 +111,14 @@
            "headerName": "Numero provvedimento / iscrizione",
            "suppressSorting": true,
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:estremiProvvedimento/text()"],
+           "xpath": ["decsiraogc_rifiuti:numeroProvveIscrizione/text()"],
            "type": 2
          },
          {
            "headerName": "Data provvedimento / iscrizione",
            "suppressSorting": true,
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataProvvedimento/text()"],
+           "xpath": ["decsiraogc_rifiuti:dataProvvIscrizione/text()"],
            "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
@@ -127,7 +126,7 @@
            "headerName": "Data scadenza provvedimento / iscrizione",
            "suppressSorting": true,
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:dataScadenza/text()"],
+           "xpath": ["decsiraogc_rifiuti:dataScadenza/text()"],
            "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
@@ -135,13 +134,7 @@
            "headerName": "Stato",
            "suppressSorting": true,
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:desStato/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Impianto di interesse nazionale",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_rifiuti:interesseNazionale/text()"],
+           "xpath": ["decsiraogc_rifiuti:desStato/text()"],
            "type": 2
          },
          {
@@ -203,7 +196,6 @@
            "index": 3,
            "attribute": "decsiraogc_rifiuti:codiceSira",
            "label":"Codice sira",
-           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"number"
         },
         {
@@ -292,6 +284,7 @@
             "urlParams": {
               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_impianto",
               "propertyName": "id_tipo_impianto,des_tipo_impianto,ordinamento",
+               "cql_filter": "id_tipo_impianto=1%20OR%20id_tipo_impianto=6%20OR%20id_tipo_impianto=7%20OR%20id_tipo_impianto=8%20OR%20id_tipo_impianto=9",
                "sortBy": "ordinamento+A"
             }
           },
@@ -395,31 +388,19 @@
           "index": 19,
           "attribute": "decsiraogc_rifiuti:idStato",
           "label":"Stato",
-          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:sipra_d_stato",
-              "propertyName": "id_stato,des_stato"
+              "propertyName": "id_stato,des_stato",
+              "cql_filter": "id_stato=100%20OR%20id_stato=101%20OR%20id_stato=102%20OR%20id_stato=103%20OR%20id_stato=999",
+              "sortBy": "id_stato+A"
             }
           },
           "valueId":"id_stato",
           "valueLabel":"des_stato"
-        },
-        {
-           "index": 20,
-           "attribute": "decsiraogc_rifiuti:interesseNazionale",
-           "label":"Impianto di interesse nazionale",
-           "type":"list",
-           "values": [
-             {"value":"si","name":"SI"},
-             {"value":"no","name":"NO"}
-           ],
-           "valueId":"value",
-           "valueLabel":"name"
         }
      ]
-
    }
-
 }
