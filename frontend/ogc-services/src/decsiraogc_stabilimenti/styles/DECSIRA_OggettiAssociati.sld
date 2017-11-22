@@ -7,31 +7,27 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- a Named Layer is the basic building block of an SLD document -->
   <NamedLayer>
-    <Name>default_triangolo</Name>
+    <Name>default_point</Name>
     <UserStyle>
     <!-- Styles can have names, titles and abstracts -->
-      <Title>Default Triangolo</Title>
-      <Abstract>Triangolo</Abstract>
+      <Title>Default Point</Title>
+      <Abstract>A sample style that draws a point</Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Name>Single symbol</Name>
-          <Title>Stabilimenti</Title>
-	      <MaxScaleDenominator>500000</MaxScaleDenominator>  
+          <Name>rule1</Name>
+          <Title>Oggetto Associato</Title>
+          <Abstract>A 6 pixel square with a blue fill and no stroke</Abstract>
             <PointSymbolizer>
               <Graphic>
                 <Mark>
-                  <WellKnownName>triangle</WellKnownName>
+                  <WellKnownName>square</WellKnownName>
                   <Fill>
-                    <CssParameter name="fill">#3aa8e6</CssParameter>
+                    <CssParameter name="fill">#00ffed</CssParameter>
                   </Fill>
-                  <Stroke>
-                    <CssParameter name="stroke">#000000</CssParameter>
-                    <CssParameter name="stroke-width">1</CssParameter>                                      
-                  </Stroke>
                 </Mark>
-              <Size>12</Size>
+              <Size>6</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>
