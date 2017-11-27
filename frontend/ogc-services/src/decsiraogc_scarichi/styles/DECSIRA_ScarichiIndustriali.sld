@@ -7,28 +7,28 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- a Named Layer is the basic building block of an SLD document -->
   <NamedLayer>
-    <Name>cerchio</Name>
+    <Name>default_circle</Name>
     <UserStyle>
     <!-- Styles can have names, titles and abstracts -->
-      <Title>Default Quadrati a punti</Title>
-      <Abstract>A sample style that draws a point quadrati</Abstract>
+      <Title>Default Cerchio</Title>
+      <Abstract>Cerchio</Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Name>rule1</Name>
-          <Title>Impianti Recupero Rifiuti A.U.A. e Comunicazioni (non A.U.A.)</Title>
-          <Abstract>Impianti Recupero Rifiuti A.U.A. e Comunicazioni (non A.U.A.)</Abstract>
-           <PointSymbolizer>
+          <Name>Punti di scarico industriali autorizzati</Name>
+          <Title>Punti di scarico industriali autorizzati</Title>
+            <PointSymbolizer>
               <Graphic>
                 <Mark>
                   <WellKnownName>circle</WellKnownName>
                   <Fill>
-                    <CssParameter name="fill">#7d00cc</CssParameter>
+                    <CssParameter name="fill">#ffffff</CssParameter>
                   </Fill>
                   <Stroke>
-                    <CssParameter name="stroke">#000000</CssParameter>
-                    <CssParameter name="stroke-width">1</CssParameter>                                                   </Stroke>
+                    <CssParameter name="stroke">#5500ff</CssParameter>
+                    <CssParameter name="stroke-width">1</CssParameter>
+                  </Stroke>
                 </Mark>
               <Size>7</Size>
             </Graphic>

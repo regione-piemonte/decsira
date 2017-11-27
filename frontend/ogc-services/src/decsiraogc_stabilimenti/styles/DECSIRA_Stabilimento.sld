@@ -7,30 +7,31 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- a Named Layer is the basic building block of an SLD document -->
   <NamedLayer>
-    <Name>default_circle</Name>
+    <Name>default_triangolo</Name>
     <UserStyle>
     <!-- Styles can have names, titles and abstracts -->
-      <Title>Default Cerchio</Title>
-      <Abstract>Cerchio</Abstract>
+      <Title>Default Triangolo</Title>
+      <Abstract>Triangolo</Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Name>Punti Scarico Industriali autorizzati</Name>
-          <Title>Punti Scarico Industriali autorizzati</Title>
+          <Name>Single symbol</Name>
+          <Title>Stabilimenti soggetti ad autorizzazione ambientale</Title>
+	      <MaxScaleDenominator>500000</MaxScaleDenominator>  
             <PointSymbolizer>
               <Graphic>
                 <Mark>
-                  <WellKnownName>circle</WellKnownName>
+                  <WellKnownName>triangle</WellKnownName>
                   <Fill>
-                    <CssParameter name="fill">#ffffff</CssParameter>
+                    <CssParameter name="fill">#3aa8e6</CssParameter>
                   </Fill>
                   <Stroke>
-                    <CssParameter name="stroke">#5500ff</CssParameter>
-                    <CssParameter name="stroke-width">1</CssParameter>
+                    <CssParameter name="stroke">#000000</CssParameter>
+                    <CssParameter name="stroke-width">1</CssParameter>                                      
                   </Stroke>
                 </Mark>
-              <Size>7</Size>
+              <Size>12</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>

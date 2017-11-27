@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd">
   <NamedLayer>
 
-    <Name>Impianti di depurazione autorizzati</Name>
+    <Name> impianti di depurazione delle acque reflue urbane</Name>
 
     <UserStyle>
       <Name>Concentric Circle</Name>
