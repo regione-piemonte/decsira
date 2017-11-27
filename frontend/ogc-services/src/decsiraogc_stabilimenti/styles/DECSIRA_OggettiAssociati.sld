@@ -7,11 +7,11 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- a Named Layer is the basic building block of an SLD document -->
   <NamedLayer>
-    <Name>default_point</Name>
+    <Name>default_square</Name>
     <UserStyle>
     <!-- Styles can have names, titles and abstracts -->
       <Title>Default Point</Title>
-      <Abstract>A sample style that draws a point</Abstract>
+      <Abstract>A sample style that draws a square</Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>

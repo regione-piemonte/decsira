@@ -17,7 +17,7 @@
       <FeatureTypeStyle>
         <Rule>
           <Name>Single symbol</Name>
-          <Title>Stabilimenti</Title>
+          <Title>Stabilimenti soggetti ad autorizzazione ambientale</Title>
 	      <MaxScaleDenominator>500000</MaxScaleDenominator>  
             <PointSymbolizer>
               <Graphic>

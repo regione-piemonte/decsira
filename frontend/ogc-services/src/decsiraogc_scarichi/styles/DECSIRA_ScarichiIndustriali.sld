@@ -16,8 +16,8 @@
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Name>Punti Scarico Industriali autorizzati</Name>
-          <Title>Punti Scarico Industriali autorizzati</Title>
+          <Name>Punti di scarico industriali autorizzati</Name>
+          <Title>Punti di scarico industriali autorizzati</Title>
             <PointSymbolizer>
               <Graphic>
                 <Mark>

@@ -17,18 +17,20 @@
       <FeatureTypeStyle>
         <Rule>
           <Name>rule1</Name>
-          <Title>Impianti Recupero Rifiuti A.U.A. e Comunicazioni (non A.U.A.)</Title>
-          <Abstract>Impianti Recupero Rifiuti A.U.A. e Comunicazioni (non A.U.A.)</Abstract>
-           <PointSymbolizer>
+          <Title>Punti di emissione in atmosfera autorizzati</Title>
+          <Abstract>Punti di emissione in atmosfera autorizzati</Abstract>
+          <MaxScaleDenominator>250000</MaxScaleDenominator>
+            <PointSymbolizer>
               <Graphic>
                 <Mark>
                   <WellKnownName>circle</WellKnownName>
                   <Fill>
-                    <CssParameter name="fill">#7d00cc</CssParameter>
+                    <CssParameter name="fill">#bbdc00</CssParameter>
                   </Fill>
                   <Stroke>
                     <CssParameter name="stroke">#000000</CssParameter>
-                    <CssParameter name="stroke-width">1</CssParameter>                                                   </Stroke>
+                    <CssParameter name="stroke-width">1</CssParameter>                                      
+                  </Stroke>
                 </Mark>
               <Size>7</Size>
             </Graphic>
