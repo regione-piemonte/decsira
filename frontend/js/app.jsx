@@ -39,8 +39,8 @@ const appReducers = {
      platformnumbers: require('./reducers/platformnumbers'),
      siraexporter: require('./reducers/siraexporter'),
      addmap: require('./reducers/addmap'),
-     cart: require('./reducers/cart')
-
+     cart: require('./reducers/cart'),
+     header: require('./reducers/header')
  };
 
 const startApp = () => {

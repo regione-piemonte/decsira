@@ -19,11 +19,52 @@ const SiraConfigUtils = require('../utils/ConfigUtils');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
+const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
 
 const exit = function() {
     SiraConfigUtils.delAuthFromBrowser();
     window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
 };
+const SistemaConoscenzeAmbientaliBox = connect((state) => ({
+    show: state.header.showSistemaConoscenzeAmbientaliBox
+}), (dispatch) => {
+    return {
+      closePanel: () => {
+          dispatch(showHideRightConoscenzaAmbBox());
+      }
+  };
+})(require('./SistemaConoscenzeAmbientaliBox'));
+
+const Credits = connect((state) => ({
+    show: state.header.showCreditsBox
+}), (dispatch) => {
+    return {
+      closePanel: () => {
+          dispatch(showHideCreditsBox());
+      }
+  };
+})(require('./Credits'));
+
+const RightMenu = connect((state) => ({
+    open: state.header.showRightMenu
+}), (dispatch) => {
+    return {
+      clickOnIconButton: () => {
+          dispatch(showHideRightMenu());
+      },
+      clickOnHelp: () => {
+          let helpUrl = ConfigUtils.getConfigProp('decsiraHelpUrl');
+          window.open(helpUrl, '_blank');
+      },
+      clickOnSistemaCA: () => {
+          dispatch(showHideRightConoscenzaAmbBox());
+      },
+      clickOnCredits: () => {
+          dispatch(showHideCreditsBox());
+      }
+  };
+})(require('./RightMenu'));
+
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
@@ -122,6 +163,8 @@ const Header = React.createClass({
     render() {
         return (
             <div className="navbar-header">
+                <SistemaConoscenzeAmbientaliBox />
+                <Credits />
                 <header className="navbar">
                     <div className="row-fluid">
 
@@ -135,19 +178,7 @@ const Header = React.createClass({
                                 {this.renderCart()}
                                 <LoginNav />
                             </div>
-                            <a className="offcanvas-toggle" aria-expanded="false">
-                                <span className="sr-only">Toggle navigation</span>
-                                <i className="fa fa-bars fa-2x"></i>
-                            </a>
-
-                            <div className="collapse navbar-collapse" id="offcanvas-sidebar">
-                                <ul id="menu" className="nav navbar-nav navbar-right">
-                                    <li data-menuanchor="home"><a href="#">Sistema Conoscenze Ambientali</a></li>
-                                    <li data-menuanchor="piemontepay"><a href="#">Credits</a></li>
-                                    <li data-menuanchor="pagamenti"><a href="#">Help</a></li>
-                                </ul>
-                            </div>
-
+                            <RightMenu />
                         </div>
 
                     </div>

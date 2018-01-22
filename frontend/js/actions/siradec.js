@@ -277,5 +277,4 @@ module.exports = {
     hideQueryError,
     configureInlineMap,
     setActiveFeatureType
-
 };
