@@ -527,8 +527,12 @@ public class MetadataManager {
 	if (text != null && !text.equals("")) {
 
 	  params.put("id_categoria", idCategory);
-	  params.put("text", "%" + text.trim() + "%");
-
+	  text = text.trim();
+	  text = text.replace(' ', '%');
+	  text = "%"+text+"%";
+	  params.put("text", text);
+	  Logger.getLogger(Constants.LOGGER).debug(LogFormatter.format(className, methodName, "text after replace: " + text));
+	  
 	  query = integratioManager.getQueries().getProperty("GET_METADATA_OBJECTS_BY_ID_CATEDORIA_AND_TEXT");
 
 	} else {
