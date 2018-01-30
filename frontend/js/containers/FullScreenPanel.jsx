@@ -128,9 +128,11 @@ const FullScreen = React.createClass({
             <SideFeatureGrid
                 initWidth={this.state.width}
                 withMap={true}
+                modeBackToDataset={true}
                 params={{authkey: this.props.profile.authParams && this.props.profile.authParams.authkey ? this.props.profile.authParams.authkey : ''}}
                 profile={this.props.profile.profile}
                 zoomToFeatureAction={this.zoomToFeature}
+                backToDataset={this.toggleControl}
                 fullScreen={true}
                 selectAll={false}/>
         );
@@ -162,7 +164,9 @@ const FullScreen = React.createClass({
         }
     },
     zoomToFeature(data) {
-        setTimeout(() => {this.changeMapView([data.geometry]); }, 0);
+        // old version I use caution, I do not delete ...
+        // setTimeout(() => {this.changeMapView([data.geometry]); }, 0);
+        this.changeMapView([data.geometry]);
     },
     changeMapView(geometries) {
         let extent = geometries.reduce((prev, next) => {
