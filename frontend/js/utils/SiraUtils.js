@@ -1,5 +1,8 @@
 const url = require('url');
 const {endsWith} = require('lodash');
+const axios = require('../../MapStore2/web/client/libs/ajax');
+const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+
 
 module.exports = {
     goToMapPage(center, zoom) {
@@ -12,5 +15,20 @@ module.exports = {
             window.open(`map.html?${currentUrl.hash}`, '_blank');
            // window.location.href = `map.html?${query}${currentUrl.hash}`;
         }
+    },
+
+    logOutService(serviceUrl = ConfigUtils.getConfigProp('logOutService')) {
+        return () => {
+            return axios.get(serviceUrl).then((response) => {
+                /*eslint-disable */
+                console.log("response " + response);
+                /*eslint-enable */
+            }).catch((e) => {
+                /*eslint-disable */
+                console.log("error " + e);
+                /*eslint-enable */
+            });
+        };
     }
+
 };

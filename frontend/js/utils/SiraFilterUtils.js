@@ -7,10 +7,17 @@
  */
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
 
+function getWSNameByFeatureName(ftName = "") {
+    if (ftName === "" ) return "";
+    return ftName.split(':')[0];
+}
+
 FilterUtils.toOGCFilterSira = function(ftName, json, version, sortOptions = null, hits = false, format = null, nsplaceholder = "fes") {
     let newFilter = this.toOGCFilter(ftName, json, version, sortOptions, hits, format);
     let undefFilter = `<${nsplaceholder}:Filter>undefined</${nsplaceholder}:Filter>`;
-    return newFilter.replace(undefFilter, '');
+    newFilter = newFilter.replace(undefFilter, '');
+    newFilter = nsplaceholder === "ogc" ? newFilter.replace("<ogc:PropertyName>geometria</ogc:PropertyName>", "<ogc:PropertyName>" + getWSNameByFeatureName(ftName) + ":geometria</ogc:PropertyName>") : newFilter;
+    return newFilter;
 
 };
 FilterUtils.toCQLFilterSira = function(json) {
@@ -51,4 +58,5 @@ FilterUtils.getFilterByIds = function(ftName, ids, idField, pagination) {
     };
     return this.toOGCFilter(ftName, filterObj, "2.0");
 };
+
 module.exports = FilterUtils;

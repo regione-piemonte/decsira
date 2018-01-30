@@ -74,6 +74,8 @@ const SiraGrid = React.createClass({
         selectFeatures: React.PropTypes.func,
         totalFeatures: React.PropTypes.number,
         pagination: React.PropTypes.bool,
+        modeBackToDataset: React.PropTypes.bool,
+        backToDataset: React.PropTypes.func,
         filterFields: React.PropTypes.array,
         groupFields: React.PropTypes.array,
         spatialField: React.PropTypes.object,
@@ -111,6 +113,7 @@ const SiraGrid = React.createClass({
             open: true,
             detailOpen: true,
             loadingGrid: false,
+            modeBackToDataset: false,
             loadingGridError: null,
             attributes: [],
             profile: null,
@@ -199,6 +202,9 @@ const SiraGrid = React.createClass({
         this.props.toggleSiraControl('grid');
         if (filter) {
             this.props.onExpandFilterPanel(true);
+        }
+        if (this.props.modeBackToDataset && !filter) {
+            this.props.backToDataset();
         }
     },
     onResize(event, resize) {
