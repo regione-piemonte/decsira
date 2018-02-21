@@ -68,11 +68,6 @@
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:riceveAcqueMeteoriche/text()")
                 }/>
 
-                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-                  <LabeledField label='% acque reflue trattate riutilizate (% del V trattato)' value={
-                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:percAcqueRiutilizzate/text()")
-                  }/>
-                </ProfileWrapper>
                 <LabeledField label='Classificazione pubblica fognatura' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:classificazionePubblicaFognatura/text()")
                 }/>
@@ -95,6 +90,15 @@
                   }/>
                   <LabeledField label='Produzione fanghi (tonnellate di secco / anno)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:produzioneFanghiSeccoAnno/text()")
+                  }/>
+                </ProfileWrapper>
+
+            </Section>
+
+            <Section header='RIUTILIZZO DETTAGLIO' eventKey='18' expanded={false}>
+                <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+                  <LabeledField label='% acque reflue trattate riutilizate (% del V trattato)' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:percAcqueRiutilizzate/text()")
                   }/>
                 </ProfileWrapper>
                 <LabeledField label='Riutilizzo in agricoltura' value={

@@ -52,7 +52,7 @@
            "type": 2
          },
          {
-           "headerName": "Nome impianto di depurazione",
+           "headerName": "Denominazione impianto di depurazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nome/text()"],
            "type": 2
@@ -91,7 +91,7 @@
            "type": 2
          },
          {
-           "headerName": "Stato impianto depurazione",
+           "headerName": "Stato",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
 		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
@@ -139,7 +139,7 @@
            "type": 2
          },
          {
-           "headerName": "Capacita organica di progetto (a.e.)",
+           "headerName": "Capacita' organica di progetto (a.e.)",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:capacitaOrganicaProgetto/text()"],
 		       "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
@@ -207,7 +207,7 @@
            "type": 2
          },
 		     {
-           "headerName": "Trattamento più avanzati",
+           "headerName": "Trattamento piu' avanzati",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:trattamentiAvanzati/text()"],
            "type": 2
@@ -273,7 +273,8 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_t_province"
+               "typeName": "decsiraogc_decodif:sipra_t_province",
+                "sortBy": "toponimo+A"
              }
            },
            "valueId":"toponimo",
@@ -304,7 +305,7 @@
         {
            "index": 4,
            "attribute": "decsiraogc_stabilimenti:codiceSira",
-           "label":"Codice sira",
+           "label":"Codice sira stabilimento",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"number"
         },
@@ -374,7 +375,7 @@
            "attribute": "decsiraogc_stabilimenti:capacitaOrganicaProgetto",
            "label":"Capacità organica di progetto (a.e.)",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"string"
+           "type":"number"
         },
         {
            "index": 12,
