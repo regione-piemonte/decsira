@@ -1,0 +1,214 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateSitiContaminati"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+          }, {
+             headerName: 'Provincia',
+             width: 90,
+             xpath: "decsiraogc_siticontaminati:provincia/text()"
+           }, {
+             headerName: 'Comune',
+             width: 100,
+             xpath: "decsiraogc_siticontaminati:comune/text()"
+           }, {
+             headerName: 'Denominazione sito',
+             width: 100,
+             xpath: "decsiraogc_siticontaminati:denominazione/text()",
+             "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+           }, {
+             headerName: 'Codice regionale sito',
+             width: 100,
+             xpath: "decsiraogc_siticontaminati:codice/text()"
+           }, {
+            headerName: 'Riferimento normativo attivazione procedimento',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:attivazProcedimento/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Modifica riferimento normativo procedimento',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:statoProcedim/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Tipo attivita produttiva',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:tipoAttivita/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Interventi',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:interventi/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Messa in sicurezza emergenza',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:flgMise/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+             headerName: 'Data comunicazione messa in sicurezza emergenza',
+             width: 100,
+             xpath: "decsiraogc_siticontaminati:dataMise/text()",
+             "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+           }, {
+            headerName: 'Procedura semplificata',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:procSempl/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Presentazione o approvazione piano per procedure semplificate',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:pianoProcSempl/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Iter concluso',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:concluso/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Approvazione piano di caratterizzazione',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:pianoCaratt/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Presentazione Analisi di Rischio',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:presentazAdr/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          },  {
+            headerName: 'Approvazione Analisi di Rischio',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:approvazAdr/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+            headerName: 'Presentazione progetto preliminare',
+            width: 100,
+            xpath: "decsiraogc_siticontaminati:approvazPreliminare/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+             headerName: 'Tipo progetto di bonifica approvato',
+             width: 100,
+             xpath: "decsiraogc_siticontaminati:approvazProgetto/text()",
+             "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+          }, {
+             headerName: 'Comunicazione data inizio lavori',
+             width: 100,
+             xpath: "decsiraogc_siticontaminati:dataInizioLavori/text()",
+             "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+           }, {
+              headerName: 'Certificazioni',
+              width: 100,
+              xpath: "decsiraogc_siticontaminati:certificazione/text()",
+              "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+           }, {
+               headerName: 'Tipo finanziamento',
+               width: 100,
+               xpath: "decsiraogc_siticontaminati:tipoFinanziamento/text()",
+               "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+               headerName: 'Data svincolo garanzie finanziarie',
+               width: 100,
+               xpath: "decsiraogc_siticontaminati:dataSvincolo/text()",
+               "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+           }, {
+                headerName: 'Sito attivo',
+                width: 100,
+                xpath: "decsiraogc_siticontaminati:attivo/text()",
+                "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+                 headerName: 'Sito concluso',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:concluso/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+                headerName: 'A - Potenzialmente contaminato',
+                width: 100,
+                xpath: "decsiraogc_siticontaminati:A/text()",
+                "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+           }, {
+               headerName: 'B - Sito con sola indagine preliminare',
+               width: 100,
+               xpath: "decsiraogc_siticontaminati:B/text()",
+               "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+                headerName: 'C1 - Iter giunto al Piano di Caratterizzazione',
+                width: 100,
+                xpath: "decsiraogc_siticontaminati:C1/text()",
+                "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+               headerName: 'C2 - Iter giunto al Progetto Preliminare',
+               width: 100,
+               xpath: "decsiraogc_siticontaminati:C2/text()",
+               "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+                headerName: 'C3 - Iter giunto al Progetto Definitivo',
+                width: 100,
+                xpath: "decsiraogc_siticontaminati:C3/text()",
+                "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+            }, {
+                 headerName: 'D1 - Iter giunto AdR',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:D1/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                headerName: 'D2 - Iter giunto al Progetto Operativo',
+                width: 100,
+                xpath: "decsiraogc_siticontaminati:D2/text()",
+                "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'D3 - Iter giunto al Progetto per procedure semplificate',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:D3/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'E - Bonificato con certificazione ambientale',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:E/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'F - Bonificato con criteri antecedenti al D.M. 471/99',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:F/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName:'G - Bonificato/intervento concluso',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:G/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'I - Intervento non necessario',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:I/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'J - Intervento non necessario a seguito AdR',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:J/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'K - Contaminato accertato',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:K/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'L - Intervento di MISE avviato',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:L/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }, {
+                 headerName: 'M - Intervento di bonifica avviato',
+                 width: 100,
+                 xpath: "decsiraogc_siticontaminati:M/text()",
+                 "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+             }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_siticontaminati:AnagrafeSitiContaminati")}/>

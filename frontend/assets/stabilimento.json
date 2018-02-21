@@ -52,7 +52,7 @@
            "type": 2
          },
          {
-           "headerName": "Codice Sira",
+           "headerName": "Codice Sira Stabilimento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:codiceSira/text()"],
            "type": 1
@@ -174,7 +174,8 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_t_province"
+               "typeName": "decsiraogc_decodif:sipra_t_province",
+               "sortBy": "toponimo+A"
              }
            },
            "valueId":"toponimo",
@@ -205,7 +206,7 @@
         {
            "index": 3,
            "attribute": "decsiraogc_stabilimenti:codiceSira",
-           "label":"Codice sira",
+           "label":"Codice sira stabilimento",
            "type":"string"
         },
         {
@@ -308,7 +309,8 @@
            "valueService": {
              "urlParams": {
                "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_sede",
-               "propertyName": "id_tipo_sede,des_tipo_sede"
+               "propertyName": "id_tipo_sede,des_tipo_sede,ordinamento",
+                "sortBy": "ordinamento+A"
              }
            },
            "valueId":"id_tipo_sede",

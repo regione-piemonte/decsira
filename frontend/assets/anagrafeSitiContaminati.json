@@ -1,0 +1,595 @@
+{
+   "featureTypeName":"decsiraogc_siticontaminati:AnagrafeSitiContaminati",
+   "featureTypeNameLabel":"ANAGRAFE SITI CONTAMINATI",
+   "nameSpaces": {
+     "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_siticontaminati/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Anagrafe siti contaminati",
+        "name": "decsiraogc_siticontaminati:AnagrafeSitiContaminati",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "anagrafeSitiContaminati",
+        "group": "Oggetti",
+        "format": "image/png"
+        },
+    "geometryName": "geometria",
+    "geometryType": "Point",
+    "card": {
+       "pdfname": "Scheda_SitoContaminato_{{/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:denominazione/text()}}.pdf",
+       "template": "assets/cardTemplateSitiContaminati.jsxt",
+       "service": {
+         "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+         "params": {
+          "typeName": "decsiraogc_siticontaminati:AnagrafeSitiContaminati",
+          "version": "2.0",
+          "srsName": "EPSG:4326"
+        }
+      }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateSitiContaminati.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:provincia/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:comune/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione sito",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:denominazione/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice regionale sito",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:codice/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Riferimento normativo attivazione procedimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:attivazProcedimento/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Modifica riferimento normativo procedimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:statoProcedim/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo attivita produttiva",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:tipoAttivita/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Interventi",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:interventi/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Messa in sicurezza d'emergenza",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:flgMise/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Data comunicazione messa in sicurezza d'emergenza",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:dataMise/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+            "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Procedura semplificata",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:procSempl/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Presentazione o approvazione piano per procedure semplificate",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:pianoProcSempl/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Iter concluso",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:concluso/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Approvazione piano di caratterizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:pianoCaratt/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Presentazione Analisi di Rischio",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:presentazAdr/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Approvazione Analisi di Rischio",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:approvazAdr/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Presentazione progetto preliminare",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:approvazPreliminare/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo progetto di bonifica approvato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:approvazProgetto/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Comunicazione data inizio lavori",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:dataInizioLavori/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+            "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Certificazioni",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:certificazione/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Tipo finanziamento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:tipoFinanziamento/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Data svincolo garanzie finanziarie",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:dataSvincolo/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+            "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Sito attivo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:attivo/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Sito concluso",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:concluso/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "A - Potenzialmente contaminato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:A/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "B - Sito con sola indagine preliminare",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:B/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "C1 - Iter giunto al Piano di Caratterizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:C1/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "C2 - Iter giunto al Progetto Preliminare",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:C2/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "C3 - Iter giunto al Progetto Definitivo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:C3/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "D1 - Iter giunto all'AdR",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:D1/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "D2 - Iter giunto al Progetto Operativo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:D2/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "D3 - Iter giunto al Progetto per procedure semplificate",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:D3/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "E - Bonificato con certificazione ambientale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:E/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "F - Bonificato con criteri antecedenti al D.M. 471/99",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:F/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "G - Bonificato/intervento concluso",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:G/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "I - Intervento non necessario",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:I/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "J - Intervento non necessario a seguito AdR",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:J/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "K - Contaminato accertato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:K/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "L - Intervento di MISE avviato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:L/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "M - Intervento di bonifica avviato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:M/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_siticontaminati:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":"assets/licenza/ASCO_Anagrafe_Siti Contaminati_licenzaCC25BY.pdf"
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+       {
+          "index": 1,
+          "attribute": "decsiraogc_siticontaminati:provincia",
+          "label":"Provincia",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_t_province",
+               "sortBy": "toponimo+A"
+            }
+          },
+          "valueId":"toponimo",
+          "valueLabel":"toponimo"
+       },
+       {
+          "index": 2,
+          "attribute": "decsiraogc_siticontaminati:codiceIstat",
+          "label":"Comune",
+          "type":"list",
+          "valueService": {
+
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:sipra_t_comuni",
+              "propertyName": "id_comune,sigla_provincia,toponimo,istat",
+              "sortBy": "toponimo+A"
+            }
+          },
+          "valueId":"istat",
+          "valueLabel":"toponimo",
+          "dependson":{
+             "field": "decsiraogc_stabilimenti:desProvincia",
+             "from": "sigla",
+             "to": "sigla_provincia"
+          }
+       },
+       {
+          "index": 3,
+          "attribute": "decsiraogc_siticontaminati:denominazione",
+          "label":"Denominazione sito",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"string"
+       },
+       {
+          "index": 4,
+          "attribute": "decsiraogc_siticontaminati:idSito",
+          "label":"Codice regionale sito",
+          "type":"string"
+       },
+       {
+          "index": 5,
+          "attribute": "decsiraogc_siticontaminati:tipoAttivita",
+          "label":"Tipo attività produttiva",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_natura_att",
+              "propertyName": "id_natura_attivita,natura_attivita",
+              "sortBy": "natura_attivita+A"
+            }
+          },
+          "valueId":"id_natura_attivita",
+          "valueLabel":"natura_attivita"
+       },
+       {
+          "index": 6,
+          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:matrice",
+          "label":"Matrice contaminata",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_matrici",
+              "propertyName": "id_matrice,matrice",
+              "sortBy": "matrice+A"
+            }
+          },
+          "valueId":"id_matrice",
+          "valueLabel":"matrice"
+       },
+       {
+          "index": 7,
+          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:classSost",
+          "label":"Tipo sostanza",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_tipo_sostanze",
+              "propertyName": "id_tipo_sostanza,tipo_sostanza",
+              "sortBy": "tipo_sostanza+A"
+            }
+          },
+          "valueId":"tipo_sostanza",
+          "valueLabel":"tipo_sostanza"
+       },
+       {
+          "index": 8,
+          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:sostanza",
+          "label":"Sostanza",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_sostanze",
+              "propertyName": "id_sostanza,sostanza",
+              "sortBy": "id_sostanza+A"
+            }
+          },
+          "valueId":"sostanza",
+          "valueLabel":"sostanza"
+       },
+       {
+          "index": 9,
+          "attribute": "decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idTipoIntervento",
+          "label":"Tipo intervento",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_tipo_interv",
+              "propertyName": "id_tipo_interv,intervento",
+              "sortBy": "intervento+A"
+            }
+          },
+          "valueId":"id_tipo_interv",
+          "valueLabel":"intervento"
+       },
+       {
+          "index": 10,
+          "attribute": "decsiraogc_siticontaminati:concluso",
+          "label":"Iter amministrativo concluso",
+          "type":"list",
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 11,
+          "attribute": "decsiraogc_siticontaminati:A",
+          "label":"Sito potenzialmente contaminato",
+          "type":"list",
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 12,
+          "attribute": "decsiraogc_siticontaminati:G",
+          "label":"Sito bonificato/intervento concluso",
+          "type":"list",
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 13,
+          "attribute": "decsiraogc_siticontaminati:I",
+          "label":"Intervento non necessario",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 14,
+          "attribute": "decsiraogc_siticontaminati:J",
+          "label":"Intervento non necessario a seguito AdR",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 15,
+          "attribute": "decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti/decsiraogc_siticontaminati:idCausa",
+          "label":"Sorgente inquinamento rifiuti",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_cause",
+              "propertyName": "id_causa,causa",
+              "cql_filter": "id_causa=3",
+              "sortBy": "id_causa+A"
+            }
+          },
+          "valueId":"id_causa",
+          "valueLabel":"causa"
+       },
+       {
+          "index": 16,
+          "attribute": "decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:idCausa",
+          "label":"Sorgente inquinamento altre cause",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_cause",
+              "propertyName": "id_causa,causa",
+              "cql_filter": "id_causa=2%20OR%20id_causa=4%20OR%20id_causa=5",
+              "sortBy": "id_causa+A"
+            }
+          },
+          "valueId":"id_causa",
+          "valueLabel":"causa"
+       },
+       {
+          "index": 17,
+          "attribute": "decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:tecnologia",
+          "label":"Tecnologia utilizzata",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:asco_d_tecnologie",
+              "propertyName": "id_tecnologia,tecnologia",
+              "sortBy": "tecnologia+A"
+            }
+          },
+          "valueId":"tecnologia",
+          "valueLabel":"tecnologia"
+       }
+     ]
+
+   }
+
+}
