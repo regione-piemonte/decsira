@@ -37,6 +37,8 @@ const {
 const {toggleSiraControl} = require('../actions/controls');
 require('../../assets/css/fullscreen.css');
 
+const {addLayer} = require('../../MapStore2/web/client/actions/layers');
+
 const FullScreen = React.createClass({
     propTypes: {
          params: React.PropTypes.object,
@@ -57,9 +59,12 @@ const FullScreen = React.createClass({
          gridExpanded: React.PropTypes.bool,
          fTypeConfigLoading: React.PropTypes.bool,
          changeMapView: React.PropTypes.func,
+         addLayer: React.PropTypes.func,
          srs: React.PropTypes.string,
          maxZoom: React.PropTypes.number,
-         map: React.PropTypes.object
+         map: React.PropTypes.object,
+         siraActiveConfig: React.PropTypes.object,
+         layers: React.PropTypes.array
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -166,6 +171,11 @@ const FullScreen = React.createClass({
     zoomToFeature(data) {
         // old version I use caution, I do not delete ...
         // setTimeout(() => {this.changeMapView([data.geometry]); }, 0);
+        // check if the layer is already present
+        // this isn't the perfect place for this check but i can't modify the ms2 source ...
+        if (this.props.layers.filter((l) => l.name === this.props.siraActiveConfig.layer.name ).length <= 0) {
+            this.props.addLayer(this.props.siraActiveConfig.layer);
+        }
         this.changeMapView([data.geometry]);
     },
     changeMapView(geometries) {
@@ -189,16 +199,19 @@ module.exports = connect((state) => {
      siraControls: state.siraControls,
      detailsConfig: activeConfig && activeConfig.card,
      gridConfig: activeConfig && activeConfig.featuregrid,
-     featureTypeName: activeConfig && activeConfig.featureTypeName,
+     featureType: activeConfig && activeConfig.featureTypeName,
      searchUrl: state.queryform.searchUrl,
      pagination: state.queryform.pagination,
      gridExpanded: state.siraControls.grid,
      fTypeConfigLoading: state.siradec.fTypeConfigLoading,
-     map: mapSelector(state)
+     map: mapSelector(state),
+     siraActiveConfig: activeConfig,
+     layers: state.layers.flat
  };
 }, {
     setProfile,
     onLoadFeatureTypeConfig: loadFeatureTypeConfig,
+    addLayer: addLayer,
     expandFilterPanel,
     toggleSiraControl,
     changeMapView,

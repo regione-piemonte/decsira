@@ -88,6 +88,10 @@ module.exports = {
             path: new RegExp("/geoserver/ows(.*)"),
             host: "localhost",
             target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        }, {
+            path: new RegExp("/territoriosliv1sisp/(.*)"),
+            host: "localhost",
+            target: "https://tst-conoscenzaambientale.sistemapiemonte.it/"
         }]
     },
 

@@ -21,10 +21,6 @@ const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepar
 const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
 
-// const exit = function() {
-//    SiraConfigUtils.delAuthFromBrowser();
-//    window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
-// };
 const SistemaConoscenzeAmbientaliBox = connect((state) => ({
     show: state.header.showSistemaConoscenzeAmbientaliBox
 }), (dispatch) => {
@@ -65,7 +61,6 @@ const RightMenu = connect((state) => ({
   };
 })(require('./RightMenu'));
 
-
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
     nav: false,
@@ -76,12 +71,14 @@ const LoginNav = connect((state) => ({
     showPasswordChange: false,
     showLogout: true,
     className: "btn btn-default btn-login dropdown-toggle"
-}), {
+}), () => {
+    return {
       onShowLogin: showLoginPanel,
       onLogout: () => {
-          SiraUtils.logOutService();
-          window.open = ConfigUtils.getConfigProp('logOutUrl');
+          SiraUtils.sendLogOut();
+          window.location.href = ConfigUtils.getConfigProp('decsiraHelpUrl');
       }
+  };
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
 
 const AddMapModal = connect(({addmap = {}}) => ({

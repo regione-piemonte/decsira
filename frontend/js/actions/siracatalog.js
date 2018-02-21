@@ -17,6 +17,7 @@ const RESET_OBJECT_AND_VIEW = 'RESET_OBJECT_AND_VIEW';
 const THEMATIC_VIEW_CONFIG_MAP = 'THEMATIC_VIEW_CONFIG_MAP';
 const SEARCH_TEXT_CHANGE = 'SEARCH_TEXT_CHANGE';
 const SHOWCATEGORIES = 'SHOWCATEGORIES';
+const SET_NODE_IN_USE = 'SET_NODE_IN_USE';
 
 const {Promise} = require('es6-promise');
 
@@ -37,6 +38,12 @@ function toggleNode(id, status) {
         type: TOGGLE_SIRA_NODE,
         id,
         status
+    };
+}
+function setNodeInUse(node) {
+    return {
+        type: SET_NODE_IN_USE,
+        node
     };
 }
 function catalogLoading(status) {
@@ -168,6 +175,7 @@ module.exports = {
     RESET_OBJECT_AND_VIEW,
     SEARCH_TEXT_CHANGE,
     SHOWCATEGORIES,
+    SET_NODE_IN_USE,
     toggleNode,
     selectCategory,
     getMetadataObjects,
@@ -175,5 +183,6 @@ module.exports = {
     selectSubCategory,
     resetObjectAndView,
     searchTextChange,
-    toggleCategories
+    toggleCategories,
+    setNodeInUse
 };

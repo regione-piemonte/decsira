@@ -15,6 +15,7 @@ const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
 const {expandFilterPanel} = require('../actions/siradec');
 const Resizable = require('react-resizable').Resizable;
 const Spinner = require('react-spinkit');
+const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 require('../../assets/css/sira.css');
 
 const SidePanel = React.createClass({
@@ -24,9 +25,12 @@ const SidePanel = React.createClass({
         auth: React.PropTypes.object,
         profile: React.PropTypes.string,
         changeMapStyle: React.PropTypes.func,
+        addLayer: React.PropTypes.func,
         withMap: React.PropTypes.bool.isRequired,
         expandFilterPanel: React.PropTypes.func.isRequired,
-        fTypeConfigLoading: React.PropTypes.bool.isRequired
+        fTypeConfigLoading: React.PropTypes.bool.isRequired,
+        layers: React.PropTypes.array,
+        siraActiveConfig: React.PropTypes.object
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -83,6 +87,7 @@ const SidePanel = React.createClass({
             withMap={this.props.withMap}
             initWidth={this.state.width}
             params={this.props.auth}
+            zoomToFeatureAction={this.zoomToFeature}
             profile={this.props.profile}/>);
     },
     renderLoading() {
@@ -148,16 +153,24 @@ const SidePanel = React.createClass({
             </Sidebar>
 
             );
+    },
+    zoomToFeature() {
+        if (this.props.layers.filter((l) => l.name === this.props.siraActiveConfig.layer.name ).length <= 0) {
+            this.props.addLayer(this.props.siraActiveConfig.layer);
+        }
     }
 });
 module.exports = connect((state) => {
+    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         gridExpanded: state.siraControls.grid,
-        fTypeConfigLoading: state.siradec.fTypeConfigLoading
+        fTypeConfigLoading: state.siradec.fTypeConfigLoading,
+        siraActiveConfig: activeConfig,
+        layers: state.layers.flat
     };
 }, {
     changeMapStyle,
-    expandFilterPanel
+    expandFilterPanel,
+    addLayer: addLayer
 })(SidePanel);
-

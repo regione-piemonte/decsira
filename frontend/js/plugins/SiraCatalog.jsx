@@ -7,7 +7,7 @@
  */
 const React = require('react');
 const {connect} = require('react-redux');
-const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects, toggleCategories} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects, toggleCategories, setNodeInUse} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
 const {Tabs, Tab} = require("react-bootstrap");
@@ -64,6 +64,7 @@ const LayerTree = React.createClass({
         toggleSiraControl: React.PropTypes.func,
         expandFilterPanel: React.PropTypes.func,
         getMetadataObjects: React.PropTypes.func,
+        setNodeInUse: React.PropTypes.func,
         category: React.PropTypes.shape({
             name: React.PropTypes.string.isRequired,
             id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
@@ -178,14 +179,15 @@ const LayerTree = React.createClass({
         }
         this.props.expandFilterPanel(status);
     },
-    searchAll(ftType) {
-        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+    searchAll(node) {
+        const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
             }else if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
         this.props.setGridType('all_results');
+        this.props.setNodeInUse(node);
         this.props.toggleSiraControl('grid', true);
     },
     showInfoBox(node) {
@@ -219,6 +221,7 @@ const CatalogPlugin = connect(tocSelector, {
     setGridType,
     loadMetadata,
     showInfoBox: showBox,
+    setNodeInUse: setNodeInUse,
     selectSubCategory,
     loadNodeMapRecords,
     toggleAddMap,

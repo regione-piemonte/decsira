@@ -13,7 +13,8 @@ const { TOGGLE_SIRA_NODE,
         SELECT_SUB_CATEGORY,
         RESET_OBJECT_AND_VIEW,
         SEARCH_TEXT_CHANGE,
-        SHOWCATEGORIES} = require('../actions/siracatalog');
+        SHOWCATEGORIES,
+        SET_NODE_IN_USE} = require('../actions/siracatalog');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('node-uuid');
@@ -87,6 +88,9 @@ function siracatalog(state = initialState, action) {
         }
         case SEARCH_TEXT_CHANGE: {
             return assign({}, state, {searchText: action.text});
+        }
+        case SET_NODE_IN_USE: {
+            return assign({}, state, {nodeUsed: action.node});
         }
         case METADATA_OBJECTS_VIEWS_LOADED: {
             // FILTRA LE categorie ed i nodi
