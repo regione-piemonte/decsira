@@ -50,8 +50,8 @@ const SistemaConoscenzeAmbientaliBox = React.createClass({
                       </span>}>
                       <h3>Presentazione</h3>
                       <p>
-                          Il Sistema Conoscenze Ambientali &egrave; una piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte).<br />
-                          Si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Regione, Province e ARPA) e nasce allo scopo di supportare lo sviluppo delle conoscenze ambientali per le attivit&agrave; di: governo e pianificazione partecipata; promozione della competitivit&agrave; del territorio; sensibilizzazione e coinvolgimento (empowerment); accessibilit&agrave; alle informazioni pubbliche.
+                          Il Sistema Conoscenze Ambientali è una piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte).
+                          Si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Regione, Province e ARPA) e nasce allo scopo di supportare lo sviluppo delle conoscenze ambientali per le attività di: governo e pianificazione partecipata; promozione della competitività del territorio; sensibilizzazione e coinvolgimento (empowerment); accessibilità alle informazioni pubbliche.
                       </p>
                       <p>
                           Il sistema &egrave; rivolto a fruitori pubblici e privati diversi:
@@ -66,8 +66,10 @@ const SistemaConoscenzeAmbientaliBox = React.createClass({
                       </p>
                       <p>
                           Per ogni dato viene resa disponibile:<br />
-                          la descrizione sintetica del singolodato/ dataset e vista tematica;<br />
-                          la scheda metadati pubblicata sul Geoportale dell&rsquo;ente fornitore e/o distributore del dato (servizio CSW);<br />
+                          <ul>
+                              <li>la descrizione sintetica del singolodato/ dataset e vista tematica;</li>
+                              <li>la scheda metadati pubblicata sul Geoportale dell&rsquo;ente fornitore e/o distributore del dato (servizio CSW);</li>
+                          </ul>
                           con le specifiche funzioni di consultazione quali:
                       </p>
                       <ul>
@@ -75,10 +77,8 @@ const SistemaConoscenzeAmbientaliBox = React.createClass({
                           <li>consultazione di informazioni di dettaglio sui dataset basate su ricerche alfanumeriche e/o geografiche sui dati che restituiscono viste di tipo reportistico e singole schede di dettaglio sugli oggetti (servizi WFS di tipo complex feature)</li>
                           <li>I dati della vista report - dati di sintesi - sono esportabili in formato csv e/o&nbsp; Shapefile ESRI;</li>
                           <li>la scheda di dettaglio &egrave; esportabile in formato pdf</li>
-                          </ul>
-                      <p>
-                          Tutti i dati messi a disposizione nella piattaforma sono esposti e/o usano servizi di interoperabilit&agrave; standard OGC (Open Spatial Consortium) come previsto dalla Direttiva INSPIRE.
-                      </p>
+                          <li>Tutti i dati messi a disposizione nella piattaforma sono esposti e/o usano servizi di interoperabilità standard OGC (Open Spatial Consortium) come previsto dalla Direttiva INSPIRE.</li>
+                      </ul>
                 </Panel>
               </Draggable>
             </div>

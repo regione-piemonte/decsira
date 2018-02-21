@@ -10,7 +10,7 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {Tabs, Tab} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
-const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
@@ -130,7 +130,8 @@ const Dataset = React.createClass({
         map: React.PropTypes.object,
         toggleAddMap: React.PropTypes.func,
         loadNodeMapRecords: React.PropTypes.func,
-        addLayersInCart: React.PropTypes.func
+        addLayersInCart: React.PropTypes.func,
+        setNodeInUse: React.PropTypes.func
     },
     contextTypes: {
         router: React.PropTypes.object
@@ -304,8 +305,8 @@ const Dataset = React.createClass({
         }
         // this.context.router.push(`/full/${this.props.params.profile}`);
     },
-    searchAll(ftType) {
-        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+    searchAll(node) {
+        const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
             }else if (this.props.activeFeatureType !== featureType) {
@@ -313,6 +314,7 @@ const Dataset = React.createClass({
             }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
+        this.props.setNodeInUse(node);
         if (undefined !== this.props.params.profile) {
             this.context.router.push('/full/${this.props.params.profile}/');
         }else {
@@ -343,5 +345,6 @@ module.exports = connect(datasetSelector, {
     getThematicViewConfig,
     toggleAddMap: toggleAddMap,
     loadNodeMapRecords: loadNodeMapRecords,
-    addLayersInCart: addFeatureTypeLayerInCart
+    addLayersInCart: addFeatureTypeLayerInCart,
+    setNodeInUse: setNodeInUse
 })(Dataset);

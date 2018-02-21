@@ -17,18 +17,15 @@ module.exports = {
         }
     },
 
-    logOutService(serviceUrl = ConfigUtils.getConfigProp('logOutService')) {
-        return () => {
-            return axios.get(serviceUrl).then((response) => {
-                /*eslint-disable */
-                console.log("response " + response);
-                /*eslint-enable */
-            }).catch((e) => {
-                /*eslint-disable */
-                console.log("error " + e);
-                /*eslint-enable */
-            });
-        };
+    sendLogOut: function() {
+        let murl = ConfigUtils.getConfigProp('logOutService');
+        return axios.get(murl).then(response => {
+            let myData;
+            if (typeof response.data === 'object') {
+                myData = response.data;
+            }
+            return myData;
+        });
     }
 
 };
