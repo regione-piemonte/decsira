@@ -6,7 +6,6 @@
 		<artifactId>sira-root</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<!-- <artifactId>sira-batch</artifactId> -->
 	<artifactId>decsirabatch</artifactId>
 
 	<packaging>jar</packaging>
@@ -17,10 +16,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<component.name>decsirabatch</component.name>
 		<component.version>1.0.0</component.version>
-		<db.host>tst-territorio-vdb06.territorio.csi.it</db.host>
+		<db.host>@@CONNECTION_URL@@</db.host>
 		<db.name>DBSIRASVIL</db.name>
-		<db.user>decsira</db.user>
-		<db.password>mypass</db.password>
+		<db.user>@@DB_USER@@</db.user>
+		<db.password>@@DB_PWD@@</db.password>
 	</properties>
 
 	<build>
@@ -164,10 +163,10 @@
 			<id>produzione</id>
 			<properties>
 				 <ui.version>1.0.0</ui.version>
-		         <db.host>prd-territorio-vdb02.territorio.csi.it</db.host>
+		         <db.host>@@CONNECTION_URL@@</db.host>
 		         <db.name>DBSIRA</db.name>
-		         <db.user>decsira</db.user>
-				 <db.password>pippo</db.password>
+		         <db.user>@@DB_USER@@</db.user>
+				 <db.password>@@DB_PWD@@</db.password>
 			</properties>
 		</profile>
 	</profiles>
