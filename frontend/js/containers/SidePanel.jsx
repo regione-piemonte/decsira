@@ -8,6 +8,10 @@
 
 const React = require('react');
 const {connect} = require('react-redux');
+const CoordinateUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const mapUtils = require('../../MapStore2/web/client/utils/MapUtils');
+const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const Sidebar = require('react-sidebar').default;
 const SideQueryPanel = require('../components/SideQueryPanel');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
@@ -25,12 +29,14 @@ const SidePanel = React.createClass({
         auth: React.PropTypes.object,
         profile: React.PropTypes.string,
         changeMapStyle: React.PropTypes.func,
+        changeMapView: React.PropTypes.func,
         addLayer: React.PropTypes.func,
         withMap: React.PropTypes.bool.isRequired,
         expandFilterPanel: React.PropTypes.func.isRequired,
         fTypeConfigLoading: React.PropTypes.bool.isRequired,
         layers: React.PropTypes.array,
-        siraActiveConfig: React.PropTypes.object
+        siraActiveConfig: React.PropTypes.object,
+        map: React.PropTypes.object
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -48,7 +54,8 @@ const SidePanel = React.createClass({
             withMap: true,
             fTypeConfigLoading: true,
             expandFilterPanel: () => {},
-            changeMapStyle: () => {}
+            changeMapStyle: () => {},
+            changeMapView: () => {}
         };
     },
     componentDidMount() {
@@ -154,10 +161,18 @@ const SidePanel = React.createClass({
 
             );
     },
-    zoomToFeature() {
+    zoomToFeature(data) {
         if (this.props.layers.filter((l) => l.name === this.props.siraActiveConfig.layer.name ).length <= 0) {
             this.props.addLayer(this.props.siraActiveConfig.layer);
         }
+        this.changeMapView([data.geometry]);
+    },
+    changeMapView(geometries) {
+        let extent = geometries.reduce((prev, next) => {
+            return CoordinateUtils.extendExtent(prev, CoordinateUtils.getGeoJSONExtent(next));
+        }, CoordinateUtils.getGeoJSONExtent(geometries[0]));
+        const center = mapUtils.getCenterForExtent(extent, "4326");
+        this.props.changeMapView(center, 15, null, null, null, this.props.map.projection || "EPSG:3857");
     }
 });
 module.exports = connect((state) => {
@@ -167,10 +182,12 @@ module.exports = connect((state) => {
         gridExpanded: state.siraControls.grid,
         fTypeConfigLoading: state.siradec.fTypeConfigLoading,
         siraActiveConfig: activeConfig,
-        layers: state.layers.flat
+        layers: state.layers.flat,
+        map: mapSelector(state)
     };
 }, {
     changeMapStyle,
     expandFilterPanel,
-    addLayer: addLayer
+    addLayer: addLayer,
+    changeMapView: changeMapView
 })(SidePanel);
