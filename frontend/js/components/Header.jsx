@@ -71,14 +71,14 @@ const LoginNav = connect((state) => ({
     showPasswordChange: false,
     showLogout: true,
     className: "btn btn-default btn-login dropdown-toggle"
-}), () => {
-    return {
+}), {
       onShowLogin: showLoginPanel,
       onLogout: () => {
-          SiraUtils.sendLogOut();
-          window.location.href = ConfigUtils.getConfigProp('decsiraHelpUrl');
+          let logOutTAb = window.open(ConfigUtils.getConfigProp('logOutService'), '_blank');
+          SiraUtils.sleep(5000);
+          logOutTAb.close();
+          window.location.href = ConfigUtils.getConfigProp('logOutUrl');
       }
-  };
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
 
 const AddMapModal = connect(({addmap = {}}) => ({
