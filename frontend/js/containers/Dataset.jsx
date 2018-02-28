@@ -250,7 +250,7 @@ const Dataset = React.createClass({
                 </div>
                 <MetadataInfoBox panelStyle={{
                         height: "500px",
-                        width: "400px",
+                        width: "650px",
                         zIndex: 1000,
                         left: "calc(50% - 250px)",
                         top: -100,

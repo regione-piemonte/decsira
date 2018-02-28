@@ -59,7 +59,7 @@ const MetadataInfoBox = React.createClass({
             loadLegend: () => {},
             panelStyle: {
                       height: "500px",
-                      width: "300px",
+                      width: "450px",
                       zIndex: 100,
                       position: "absolute",
                       overflow: "auto"
@@ -123,7 +123,7 @@ const MetadataInfoBox = React.createClass({
               <a className="infobox-service-url"
                 title="wms" key={'wms_' + index}
                 href={val} target="_blank" >
-                {val}
+                <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"}/>
               </a>
               )
             );
@@ -136,7 +136,7 @@ const MetadataInfoBox = React.createClass({
               <a className="infobox-service-url"
                 title="wfs" key={'wfs_' + index}
                 href={val} target="_blank" >
-                {val}
+                 <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"}/>
               </a>
           ));
         }
@@ -174,7 +174,7 @@ const MetadataInfoBox = React.createClass({
                     <a className="infobox-metadata-url"
                       title="metadato"
                       href={this.props.urlMetadato} target="_blank" >
-                      {this.props.urlMetadato}
+                      <I18N.Message msgId={"metadataInfoBox.link_to_metadata"}/>
                     </a>
                     {renderWmsUrl}
                     {renderWfsUrl}
