@@ -6,6 +6,7 @@
 		<artifactId>sira-root</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
+	<!-- <artifactId>sira-batch</artifactId> -->
 	<artifactId>decsirabatch</artifactId>
 
 	<packaging>jar</packaging>
@@ -16,10 +17,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<component.name>decsirabatch</component.name>
 		<component.version>1.0.0</component.version>
-		<db.host>@@CONNECTION_URL@@</db.host>
-		<db.name>DBSIRASVIL</db.name>
-		<db.user>@@DB_USER@@</db.user>
-		<db.password>@@DB_PWD@@</db.password>
 	</properties>
 
 	<build>
@@ -71,10 +68,6 @@
 			<resource>
 				<directory>src/main/resources/spring</directory>
 				<filtering>false</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/resources/conf</directory>
-				<filtering>true</filtering>
 			</resource>
 		</resources>
 	</build>
@@ -157,18 +150,5 @@
 			<version>9.1-901-1.jdbc4</version>			
 		</dependency>						
 	</dependencies>
-	
-	<profiles>
-		<profile>
-			<id>produzione</id>
-			<properties>
-				 <ui.version>1.0.0</ui.version>
-		         <db.host>@@CONNECTION_URL@@</db.host>
-		         <db.name>DBSIRA</db.name>
-		         <db.user>@@DB_USER@@</db.user>
-				 <db.password>@@DB_PWD@@</db.password>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>
