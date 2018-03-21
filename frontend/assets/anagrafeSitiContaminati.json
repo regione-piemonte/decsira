@@ -2,7 +2,7 @@
    "featureTypeName":"decsiraogc_siticontaminati:AnagrafeSitiContaminati",
    "featureTypeNameLabel":"ANAGRAFE SITI CONTAMINATI",
    "nameSpaces": {
-     "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_siticontaminati/1.0"
+     "decsiraogc_siticontaminati": "http://www.regione.piemonte.it/ambiente/decsiraogc_siticontaminati/1.0"
    },
    "layer": {
         "type": "wms",
@@ -101,7 +101,6 @@
            "headerName": "Interventi",
            "suppressSorting": true,
            "xpath": ["decsiraogc_siticontaminati:interventi/text()"],
-           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -163,6 +162,13 @@
          },
          {
            "headerName": "Presentazione progetto preliminare",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_siticontaminati:presentazPreliminare/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Approvazione progetto preliminare",
            "suppressSorting": true,
            "xpath": ["decsiraogc_siticontaminati:approvazPreliminare/text()"],
            "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
@@ -382,7 +388,7 @@
           "valueId":"istat",
           "valueLabel":"toponimo",
           "dependson":{
-             "field": "decsiraogc_stabilimenti:desProvincia",
+             "field": "decsiraogc_decodif:desProvincia",
              "from": "sigla",
              "to": "sigla_provincia"
           }
@@ -396,21 +402,21 @@
        },
        {
           "index": 4,
-          "attribute": "decsiraogc_siticontaminati:idSito",
+          "attribute": "decsiraogc_siticontaminati:codice",
           "label":"Codice regionale sito",
           "type":"string"
        },
        {
           "index": 5,
-          "attribute": "decsiraogc_siticontaminati:tipoAttivita",
+          "attribute": "decsiraogc_siticontaminati:idTipoAttivita",
           "label":"Tipo attività produttiva",
           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:asco_d_natura_att",
-              "propertyName": "id_natura_attivita,natura_attivita",
-              "sortBy": "natura_attivita+A"
+              "propertyName": "id_natura_attivita,natura_attivita,id_order",
+              "sortBy": "id_order+A"
             }
           },
           "valueId":"id_natura_attivita",
@@ -418,14 +424,14 @@
        },
        {
           "index": 6,
-          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:matrice",
+          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idTipoMatrice",
           "label":"Matrice contaminata",
           "type":"list",
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:asco_d_matrici",
-              "propertyName": "id_matrice,matrice",
-              "sortBy": "matrice+A"
+              "propertyName": "id_matrice,matrice,id_order",
+              "sortBy": "id_order+A"
             }
           },
           "valueId":"id_matrice",
@@ -433,7 +439,7 @@
        },
        {
           "index": 7,
-          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:classSost",
+          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:fkPadre",
           "label":"Tipo sostanza",
           "type":"list",
           "valueService": {
@@ -448,7 +454,7 @@
        },
        {
           "index": 8,
-          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:sostanza",
+          "attribute": "decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:idSostanza",
           "label":"Sostanza",
           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
@@ -465,7 +471,7 @@
        {
           "index": 9,
           "attribute": "decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idTipoIntervento",
-          "label":"Tipo intervento",
+          "label":"Tipologia intervento",
           "type":"list",
           "valueService": {
             "urlParams": {
@@ -493,6 +499,7 @@
           "index": 11,
           "attribute": "decsiraogc_siticontaminati:A",
           "label":"Sito potenzialmente contaminato",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "values": [
             {"value":"SI","name":"SI"},
