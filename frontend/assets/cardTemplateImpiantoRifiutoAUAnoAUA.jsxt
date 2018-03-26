@@ -125,6 +125,7 @@
                     </ProfileWrapper>
 				</Section>
 			</Section>
+        </Section>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
               <Section header='DATI TECNICI - Impianti di Recupero Rifiuti' eventKey='6' expanded={true}>
@@ -155,7 +156,7 @@
                   },
                   {
                       headerName: 'N. scheda rifiuti',
-                      width: 70,
+                      width: 90,
                       xpath:"decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:idSchedaRifiuto/text()"
                   },
                   {
@@ -165,13 +166,13 @@
                   },
                   {
                       headerName: 'Tipo di recupero',
-                      width: 150,
+                      width: 230,
                       xpath: "decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:desTipoRecupero/text()"
                   }
               ]
           }
           features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA")}/>
-      </Section>
+
 
       <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
           <Section header='Operazioni di recupero' eventKey='10' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
@@ -293,7 +294,6 @@
           features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:attivitaRecuperoRifiuti")}/>
       </Section>
     </Section>
-
 
     <Section header='MAPPA SINTESI - Impianti Recupero Rifiuti AUA o procedura semplificata (non AUA) su sfondo BDTRE' eventKey='11' expanded={true}>
         <MappaScheda

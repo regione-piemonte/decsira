@@ -185,6 +185,7 @@
             <workspace>decsiraogc_stabilimenti</workspace>
             <layer>Stabilimento</layer>
             <accessMode>READ</accessMode>
+			<filter>"decsiraogc_stabilimenti:desStato" = 'ATTIVO'</filter>
 			<hiddenAttributes>
 			  <attribute>decsiraogc_stabilimenti:tipoProvvedimentoAttivo</attribute>
 			  <attribute>decsiraogc_stabilimenti:tipoProvvedimentoStorico</attribute>
@@ -242,7 +243,6 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_stabilimenti:desStato" = 'ATTIVO'</filter>
 		<hiddenAttributes>
-			  <attribute>decsiraogc_stabilimenti:codiceSira</attribute>
 			  <attribute>decsiraogc_stabilimenti:codiceRegionaleDepuratore</attribute>
 			  <attribute>decsiraogc_stabilimenti:codiceEuropeoDepuratore</attribute>
 			  <attribute>decsiraogc_stabilimenti:desStato</attribute>
@@ -253,7 +253,6 @@
 			  <attribute>decsiraogc_stabilimenti:produzioneTalQualeFanghi</attribute>
 			  <attribute>decsiraogc_stabilimenti:desAto</attribute>
 			  <attribute>decsiraogc_stabilimenti:idAto</attribute>
-			  <attribute>decsiraogc_stabilimenti:ragioneSocialeAzienda</attribute>
 			  <attribute>decsiraogc_stabilimenti:partitaIvaAzienda</attribute>
 			  <attribute>decsiraogc_stabilimenti:codiceFiscaleAzienda</attribute>
 			  <attribute>decsiraogc_stabilimenti:tipoProvvedimentoAttivo</attribute>
@@ -386,5 +385,248 @@
 			  <attribute>decsiraogc_waste_en:ewc/decsiraogc_waste_en:Ewc/decsiraogc_waste_en:idRequestAuthorization</attribute>
 		</hiddenAttributes>	
     </Rule>
+	 <Rule>
+		<priority>110</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_siticontaminati</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	 <Rule>
+		<priority>111</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_siticontaminati</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>112</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_siticontaminati</workspace>
+		<layer>AnagrafeSitiContaminati</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_siticontaminati:pubb" = '1'</filter>
+		<hiddenAttributes>
+			  <attribute>decsiraogc_siticontaminati:idSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:attivazProcedimento</attribute>
+			  <attribute>decsiraogc_siticontaminati:statoProcedim</attribute>
+			  <attribute>decsiraogc_siticontaminati:idTipoAttivita</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoAttivita</attribute>
+			  <attribute>decsiraogc_siticontaminati:flgMise</attribute>
+			  <attribute>decsiraogc_siticontaminati:dataMise</attribute>
+			  <attribute>decsiraogc_siticontaminati:procSempl</attribute>
+			  <attribute>decsiraogc_siticontaminati:pianoProcSempl</attribute>
+			  <attribute>decsiraogc_siticontaminati:concluso</attribute>
+			  <attribute>decsiraogc_siticontaminati:pianoCaratt</attribute>
+			  <attribute>decsiraogc_siticontaminati:presentazAdr</attribute>
+			  <attribute>decsiraogc_siticontaminati:approvazAdr</attribute>
+			  <attribute>decsiraogc_siticontaminati:presentazPreliminare</attribute>
+			  <attribute>decsiraogc_siticontaminati:approvazPreliminare</attribute>
+			  <attribute>decsiraogc_siticontaminati:approvazProgetto</attribute>
+			  <attribute>decsiraogc_siticontaminati:dataInizioLavori</attribute>
+			  <attribute>decsiraogc_siticontaminati:certificazione</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoFinanziamento</attribute>
+			  <attribute>decsiraogc_siticontaminati:dataSvincolo</attribute>
+			  <attribute>decsiraogc_siticontaminati:attivo</attribute>
+			  <attribute>decsiraogc_siticontaminati:concluso</attribute>
+			  <attribute>decsiraogc_siticontaminati:indirizzo</attribute>
+			  <attribute>decsiraogc_siticontaminati:importanzaSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:dataAttivProcedim</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggAttivProcedim</attribute>
+			  <attribute>decsiraogc_siticontaminati:motivoIns</attribute>
+			  <attribute>decsiraogc_siticontaminati:procSempl</attribute>
+			  <attribute>decsiraogc_siticontaminati:dataModifStatoProcedim</attribute>
+			  <attribute>decsiraogc_siticontaminati:supContStimata</attribute>
+			  <attribute>decsiraogc_siticontaminati:supContAccertata</attribute>
+			  <attribute>decsiraogc_siticontaminati:destVigente</attribute>
+			  <attribute>decsiraogc_siticontaminati:destProgetto</attribute>
+			  <attribute>decsiraogc_siticontaminati:statoAttivita</attribute>
+			  <attribute>decsiraogc_siticontaminati:idTipoAttivita</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoAttivita</attribute>
+			  <attribute>decsiraogc_siticontaminati:istatAttivita</attribute>
+			  <attribute>decsiraogc_siticontaminati:noteEventiInq</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggiacenzaFalda</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoFalda</attribute>
+			  <attribute>decsiraogc_siticontaminati:presenzaPozzi</attribute>
+			  <attribute>decsiraogc_siticontaminati:usoPozzi</attribute>
+			  <attribute>decsiraogc_siticontaminati:accessoAutor</attribute>
+			  <attribute>decsiraogc_siticontaminati:accessoNoAutor</attribute>
+			  <attribute>decsiraogc_siticontaminati:noteUltCaratt</attribute>
+			  <attribute>decsiraogc_siticontaminati:sanzioni</attribute>
+			  <attribute>decsiraogc_siticontaminati:via</attribute>
+			  <attribute>decsiraogc_siticontaminati:proroghe</attribute>
+			  <attribute>decsiraogc_siticontaminati:interruzioni</attribute>
+			  <attribute>decsiraogc_siticontaminati:A</attribute>
+			  <attribute>decsiraogc_siticontaminati:B</attribute>
+			  <attribute>decsiraogc_siticontaminati:C1</attribute>
+			  <attribute>decsiraogc_siticontaminati:C2</attribute>
+			  <attribute>decsiraogc_siticontaminati:C3</attribute>
+			  <attribute>decsiraogc_siticontaminati:D1</attribute>
+			  <attribute>decsiraogc_siticontaminati:D2</attribute>
+			  <attribute>decsiraogc_siticontaminati:D3</attribute>
+			  <attribute>decsiraogc_siticontaminati:E</attribute>
+			  <attribute>decsiraogc_siticontaminati:F</attribute>
+			  <attribute>decsiraogc_siticontaminati:G</attribute>
+			  <attribute>decsiraogc_siticontaminati:I</attribute>
+			  <attribute>decsiraogc_siticontaminati:J</attribute>
+			  <attribute>decsiraogc_siticontaminati:K</attribute>
+			  <attribute>decsiraogc_siticontaminati:L</attribute>
+			  <attribute>decsiraogc_siticontaminati:M</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:idSoggRuoloSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:idSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:idRuolo</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:ruolo</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:idSoggetto</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:tipoSoggetto</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:denominazione</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:pIva</attribute>
+			  <attribute>decsiraogc_siticontaminati:soggettiSito/decsiraogc_siticontaminati:SoggettiSito/decsiraogc_siticontaminati:indirizzo</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:idSitoparticella</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:idSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:idParticella</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:comune</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:particella</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:foglio</attribute> 
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:destVigente</attribute> 
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:destProgetto</attribute>	
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:tipoArea</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:supContStimata</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:id</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:idParticella</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:idRuolo</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:ruolo</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:idSoggetto</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:denominazione</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:pIva</attribute>
+			   <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:codiceFiscale</attribute>
+			  <attribute>decsiraogc_siticontaminati:particelleCatastali/decsiraogc_siticontaminati:ParticelleCatastali/decsiraogc_siticontaminati:soggettiParticella/decsiraogc_siticontaminati:SoggettiParticella/decsiraogc_siticontaminati:indirizzo</attribute>	
+			  <attribute>decsiraogc_siticontaminati:tipoAttRifiuti/decsiraogc_siticontaminati:TipoAttRifiuti/decsiraogc_siticontaminati:idSitoTipoattrif</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoAttRifiuti/decsiraogc_siticontaminati:TipoAttRifiuti/decsiraogc_siticontaminati:fkSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoAttRifiuti/decsiraogc_siticontaminati:TipoAttRifiuti/decsiraogc_siticontaminati:idTipoattrif</attribute>
+			  <attribute>decsiraogc_siticontaminati:tipoAttRifiuti/decsiraogc_siticontaminati:TipoAttRifiuti/decsiraogc_siticontaminati:tipoattRifiuti</attribute>
+			  <attribute>decsiraogc_siticontaminati:sitiCollegati/decsiraogc_siticontaminati:SitiCollegati/decsiraogc_siticontaminati:idSito1sito2</attribute>
+			  <attribute>decsiraogc_siticontaminati:sitiCollegati/decsiraogc_siticontaminati:SitiCollegati/decsiraogc_siticontaminati:idSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:sitiCollegati/decsiraogc_siticontaminati:SitiCollegati/decsiraogc_siticontaminati:idSitoColleg</attribute>
+			  <attribute>decsiraogc_siticontaminati:sitiCollegati/decsiraogc_siticontaminati:SitiCollegati/decsiraogc_siticontaminati:denomCollegato</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idTipoIntervento</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idIntervento</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:intervento</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:docRif</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:mise</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:carattMise</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:durataIntervento</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:fasi</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:numFasi</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:note</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:idTecnologia</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:fkIntervento</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:tecnologia</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:matrice</attribute>
+			  <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:tipoTecn</attribute>
+              <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:volumePrg</attribute>
+              <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:volumeEff</attribute>
+              <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:flgConcentrResidue</attribute>
+              <attribute>decsiraogc_siticontaminati:interventiSito/decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:tecnologieIntervento/decsiraogc_siticontaminati:TecnologieIntervento/decsiraogc_siticontaminati:notaTecnologia</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idSito</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idTipoMatrice</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:faseAccertr</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:tipoRilevatore</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:denominazione</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:pIva</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:indirizzo</attribute>
+              <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:note</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:idMatriceSost</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:idMatriceContam</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:idMatriceContam</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:sostanza</attribute>
+			  <attribute>decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti/decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:fkPadre</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti/decsiraogc_siticontaminati:idSito</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti/decsiraogc_siticontaminati:idEvento</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti/decsiraogc_siticontaminati:idCausa</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti/decsiraogc_siticontaminati:dettaglioEvento</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti/decsiraogc_siticontaminati:dettaglioEvento</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti//decsiraogc_siticontaminati:inquiRifiuti/decsiraogc_siticontaminati:InquiRifiuti/decsiraogc_siticontaminati:fkEvento</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti//decsiraogc_siticontaminati:inquiRifiuti/decsiraogc_siticontaminati:InquiRifiuti/decsiraogc_siticontaminati:idEventoRifiuto</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti//decsiraogc_siticontaminati:inquiRifiuti/decsiraogc_siticontaminati:InquiRifiuti/decsiraogc_siticontaminati:idTipoRifiuto</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti//decsiraogc_siticontaminati:inquiRifiuti/decsiraogc_siticontaminati:InquiRifiuti/decsiraogc_siticontaminati:tipoRifiuto</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiRifiuti/decsiraogc_siticontaminati:SorgentiInquiRifiuti//decsiraogc_siticontaminati:inquiRifiuti/decsiraogc_siticontaminati:InquiRifiuti/decsiraogc_siticontaminati:tipoAbbandono</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:idEvento</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:idEventoCausa</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:idSito</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:idCausa</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:tipoAcertamento</attribute>
+			 <attribute>decsiraogc_siticontaminati:sorgentiInquiAltre/decsiraogc_siticontaminati:SorgentiInquiAltre/decsiraogc_siticontaminati:dettaglioEvento</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:idAtto</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:fkSito</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:dataAtto</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:fkDecTipoatto</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:atto</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:tipoSoggetto</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:denominazione</attribute>
+			 <attribute>decsiraogc_siticontaminati:istruttoriaSito/decsiraogc_siticontaminati:IstruttoriaSito/decsiraogc_siticontaminati:indirizzo</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:idAtto</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:fkSito</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:dataAtto</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:atto</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:tipoSoggetto</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:denominazione</attribute>
+			 <attribute>decsiraogc_siticontaminati:inizioConclLavori/decsiraogc_siticontaminati:InizioConclLavori/decsiraogc_siticontaminati:indirizzo</attribute>
+			 <attribute>decsiraogc_siticontaminati:subaree/decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:fkSito</attribute>
+			 <attribute>decsiraogc_siticontaminati:subaree/decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:idSubarea</attribute>
+			 <attribute>decsiraogc_siticontaminati:subaree/decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:usoAut</attribute>
+			 <attribute>decsiraogc_siticontaminati:subaree/decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:superficie</attribute>
+			 <attribute>decsiraogc_siticontaminati:subaree/decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:costoIntervento</attribute>
+			 <attribute>decsiraogc_siticontaminati:subaree/decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:note</attribute>
+			 <attribute>decsiraogc_siticontaminati:controlliMonitoraggi/decsiraogc_siticontaminati:ControlliMonitoraggi/decsiraogc_siticontaminati:idControllo</attribute>
+			 <attribute>decsiraogc_siticontaminati:controlliMonitoraggi/decsiraogc_siticontaminati:ControlliMonitoraggi/decsiraogc_siticontaminati:idSito</attribute>
+			 <attribute>decsiraogc_siticontaminati:controlliMonitoraggi/decsiraogc_siticontaminati:ControlliMonitoraggi/decsiraogc_siticontaminati:tipoControllo</attribute>
+			 <attribute>decsiraogc_siticontaminati:controlliMonitoraggi/decsiraogc_siticontaminati:ControlliMonitoraggi/decsiraogc_siticontaminati:matrice</attribute>
+			 <attribute>decsiraogc_siticontaminati:controlliMonitoraggi/decsiraogc_siticontaminati:ControlliMonitoraggi/decsiraogc_siticontaminati:periodicita</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:totaleFinanziato</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:idSito</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:idFinanziamento</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:numTotaleFinanziato</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:dataTotaleFinanziato</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:costoEffettivo</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:numCostoEffettivo</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:dataCostoEffettivo</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:idl6</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:idFinanziamento</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:idSoggetto</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:tipoSoggettoFinanz</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:denominazione</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:indirizzo</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:percFinanz</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:codiceFiscale</attribute>
+			<attribute>decsiraogc_siticontaminati:finanziamenti/decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:finanzSoggetti/decsiraogc_siticontaminati:FinanzSoggetti/decsiraogc_siticontaminati:pIva</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:idSito</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:idFinanziamento</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:tipoSoggettoFideius</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:soggettoFideius</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:indirizzoFideius</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:entitaGaranzia</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:tipoSoggettoContr</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:soggContraente</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:pIvasoggContraente</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:capitaleAssicurato</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:indirizzoContraente</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:numAccettGaranzie</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:dataAccettGaranzie</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:percGaranzia</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:numSvincolo</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:dataSvincolo</attribute>
+			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:note</attribute>
+		</hiddenAttributes>	
+    </Rule>
+	<Rule>
+		<priority>113</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_scarichi</workspace>
+		<layer>PuntoScaricoIndustriale</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_scarichi:desStato" = 'ATTIVO'</filter>
+	 </Rule>
     </rules>
 </Config>
