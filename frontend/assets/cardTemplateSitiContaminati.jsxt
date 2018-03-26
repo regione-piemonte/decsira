@@ -9,7 +9,8 @@
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-        <Section header='DATI GENERALI - Sito' eventKey='1' expanded={true}>
+        <Section header='DATI GENERALI - Sito contaminato' eventKey='1' expanded={true}>
+
             <LabeledField label='Codice regionale sito' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:codice/text()")
             }/>
@@ -310,6 +311,198 @@
                </Section>
            </ProfileWrapper>
 
+
+
+           <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+               <Section header='Matrici contaminate' eventKey='11' expanded={false}>
+                   <SiraTable
+                       id="MatriciContaminate"
+                       selectedRow={model.MatriciContaminate}
+                       wfsVersion="2.0"
+                       rowSelection={"single"}
+                       columns={
+                           [
+                              {
+                                    hide: true,
+                                    id: true,
+                                    xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
+                               },
+                               {
+                                   headerName: 'Id_Matrice',
+                                   width: 80,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()"
+                               },
+                               {
+                                   headerName: 'Matrice ambientale',
+                                   width: 150,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:matrice/text()"
+                               },
+                               {
+                                   headerName: 'Fase di accertamento',
+                                   width: 200,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:faseAccertr/text()"
+                               },
+                               {
+                                   headerName: 'Tipo soggetto rilevatore',
+                                   width: 150,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:tipoRilevatore/text()"
+                               },
+                               {
+                                   headerName: 'Denominazione soggetto rilevatore',
+                                   width: 150,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:denominazione/text()"
+                               },
+                               {
+                                   headerName: 'Codice fiscale soggetto rilevatore',
+                                   width: 120,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:codiceFiscale/text()"
+                               },
+                               {
+                                   headerName: 'Partita IVA soggetto rilevatore',
+                                   width: 120,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:pIva/text()"
+                               },
+                               {
+                                   headerName: 'Recapito soggetto rilevatore',
+                                   width: 150,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:indirizzo/text()"
+                               },
+                               {
+                                   headerName: 'Note',
+                                   width: 250,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:note/text()"
+                               }
+                           ]
+                       }
+                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate")}/>
+
+                       <Section header=' ' eventKey='108' expanded={false}>
+                       </Section>
+
+                       <Section header='Sostanze inquinanti rilevate' eventKey='12' expanded={( model.MatriciContaminate !== undefined && model.MatriciContaminate !== null ) ? true: false}>
+                         <SiraTable
+                             id="SostanzeContaminati"
+                             selectedRow={model.SostanzeContaminati}
+                             wfsVersion="2.0"
+                             rowSelection={false}
+                             dependsOn={{
+                                 tableId: "MatriciContaminate",
+                                 parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate"),
+                                 xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id",
+                                 pdfTitle: "Id_Matrice: {{decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()}}"
+                             }}
+                             columns={
+                                 [
+                                   {
+                                         hide: true,
+                                         id: true,
+                                         xpath:"../../decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
+                                     },
+                                     {
+                                         headerName: 'Tipo sostanza',
+                                         width: 300,
+                                         xpath:"decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:classSost/text()"
+                                     },
+                                     {
+                                         headerName: 'Sostanza',
+                                         width: 410,
+                                         xpath:"decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:sostanza/text()"
+                                     }
+
+                                 ]
+                             }
+                             features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti")}/>
+                         </Section>
+               </Section>
+           </ProfileWrapper>
+
+
+
+           <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
+               <Section header='Matrici contaminate' eventKey='11' expanded={false}>
+                   <SiraTable
+                       id="MatriciContaminate"
+                       selectedRow={model.MatriciContaminate}
+                       wfsVersion="2.0"
+                       rowSelection={"single"}
+                       columns={
+                           [
+                              {
+                                    hide: true,
+                                    id: true,
+                                    xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
+                               },
+                               {
+                                   headerName: 'Id_Matrice',
+                                   width: 150,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()"
+                               },
+                               {
+                                   headerName: 'Matrice ambientale',
+                                   width: 530,
+                                   xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:matrice/text()"
+                               }
+                           ]
+                       }
+                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate")}/>
+
+                       <Section header=' ' eventKey='108' expanded={false}>
+                       </Section>
+
+                       <Section header='Sostanze inquinanti rilevate' eventKey='12' expanded={( model.MatriciContaminate !== undefined && model.MatriciContaminate !== null ) ? true: false}>
+                         <SiraTable
+                             id="SostanzeContaminati"
+                             selectedRow={model.SostanzeContaminati}
+                             wfsVersion="2.0"
+                             rowSelection={false}
+                             dependsOn={{
+                                 tableId: "MatriciContaminate",
+                                 parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate"),
+                                 xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id",
+                                 pdfTitle: "Id_Matrice: {{decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()}}"
+                             }}
+                             columns={
+                                 [
+                                   {
+                                         hide: true,
+                                         id: true,
+                                         xpath:"../../decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
+                                     },
+                                     {
+                                         headerName: 'Tipo sostanza',
+                                         width: 690,
+                                         xpath:"decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:classSost/text()"
+                                     }
+
+                                 ]
+                             }
+                             features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti")}/>
+                         </Section>
+               </Section>
+           </ProfileWrapper>
+
+
+            <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
+               <Section header='Interventi sul sito' eventKey='22' expanded={true}>
+                   <SiraTable
+                       id="InterventiSulSito"
+                       selectedRow={model.InterventiSulSito}
+                       wfsVersion="2.0"
+                       rowSelection={false}
+                       columns={
+                           [
+                               {
+                                   headerName: 'Tipologia intervento',
+                                   width: 720,
+                                   xpath:"decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:intervento/text()"
+                               }
+                           ]
+                       }
+                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:interventiSito")}/>
+                    </Section>
+            </ProfileWrapper>
+
+
            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                <Section header='Interventi sul sito' eventKey='9' expanded={true}>
                    <SiraTable
@@ -435,173 +628,12 @@
            </ProfileWrapper>
 
 
-             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-                 <Section header='Matrici contaminate' eventKey='11' expanded={false}>
-                     <SiraTable
-                         id="MatriciContaminate"
-                         selectedRow={model.MatriciContaminate}
-                         wfsVersion="2.0"
-                         rowSelection={"single"}
-                         columns={
-                             [
-                                {
-                                      hide: true,
-                                      id: true,
-                                      xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
-                                 },
-                                 {
-                                     headerName: 'Id_Matrice',
-                                     width: 80,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()"
-                                 },
-                                 {
-                                     headerName: 'Matrice ambientale',
-                                     width: 150,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:matrice/text()"
-                                 },
-                                 {
-                                     headerName: 'Fase di accertamento',
-                                     width: 200,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:faseAccertr/text()"
-                                 },
-                                 {
-                                     headerName: 'Tipo soggetto rilevatore',
-                                     width: 150,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:tipoRilevatore/text()"
-                                 },
-                                 {
-                                     headerName: 'Denominazione soggetto rilevatore',
-                                     width: 150,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:denominazione/text()"
-                                 },
-                                 {
-                                     headerName: 'Codice fiscale soggetto rilevatore',
-                                     width: 120,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:codiceFiscale/text()"
-                                 },
-                                 {
-                                     headerName: 'Partita IVA soggetto rilevatore',
-                                     width: 120,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:pIva/text()"
-                                 },
-                                 {
-                                     headerName: 'Recapito soggetto rilevatore',
-                                     width: 150,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:indirizzo/text()"
-                                 },
-                                 {
-                                     headerName: 'Note',
-                                     width: 250,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:note/text()"
-                                 }
-                             ]
-                         }
-                         features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate")}/>
-
-                         <Section header=' ' eventKey='108' expanded={false}>
-                         </Section>
-
-                         <Section header='Sostanze inquinanti rilevate' eventKey='12' expanded={( model.MatriciContaminate !== undefined && model.MatriciContaminate !== null ) ? true: false}>
-                           <SiraTable
-                               id="SostanzeContaminati"
-                               selectedRow={model.SostanzeContaminati}
-                               wfsVersion="2.0"
-                               rowSelection={false}
-                               dependsOn={{
-                                   tableId: "MatriciContaminate",
-                                   parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate"),
-                                   xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id",
-                                   pdfTitle: "Id_Matrice: {{decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()}}"
-                               }}
-                               columns={
-                                   [
-                                     {
-                                           hide: true,
-                                           id: true,
-                                           xpath:"../../decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
-                                       },
-                                       {
-                                           headerName: 'Tipo sostanza',
-                                           width: 300,
-                                           xpath:"decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:classSost/text()"
-                                       },
-                                       {
-                                           headerName: 'Sostanza',
-                                           width: 410,
-                                           xpath:"decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:sostanza/text()"
-                                       }
-
-                                   ]
-                               }
-                               features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti")}/>
-                           </Section>
-                 </Section>
-             </ProfileWrapper>
 
 
 
-             <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
-                 <Section header='Matrici contaminate' eventKey='11' expanded={false}>
-                     <SiraTable
-                         id="MatriciContaminate"
-                         selectedRow={model.MatriciContaminate}
-                         wfsVersion="2.0"
-                         rowSelection={"single"}
-                         columns={
-                             [
-                                {
-                                      hide: true,
-                                      id: true,
-                                      xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
-                                 },
-                                 {
-                                     headerName: 'Id_Matrice',
-                                     width: 150,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()"
-                                 },
-                                 {
-                                     headerName: 'Matrice ambientale',
-                                     width: 530,
-                                     xpath:"decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:matrice/text()"
-                                 }
-                             ]
-                         }
-                         features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate")}/>
 
-                         <Section header=' ' eventKey='108' expanded={false}>
-                         </Section>
 
-                         <Section header='Sostanze inquinanti rilevate' eventKey='12' expanded={( model.MatriciContaminate !== undefined && model.MatriciContaminate !== null ) ? true: false}>
-                           <SiraTable
-                               id="SostanzeContaminati"
-                               selectedRow={model.SostanzeContaminati}
-                               wfsVersion="2.0"
-                               rowSelection={false}
-                               dependsOn={{
-                                   tableId: "MatriciContaminate",
-                                   parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate"),
-                                   xpath: "decsiraogc_siticontaminati:MatriciContaminate/@gml:id",
-                                   pdfTitle: "Id_Matrice: {{decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:idMatriceContam/text()}}"
-                               }}
-                               columns={
-                                   [
-                                     {
-                                           hide: true,
-                                           id: true,
-                                           xpath:"../../decsiraogc_siticontaminati:MatriciContaminate/@gml:id"
-                                       },
-                                       {
-                                           headerName: 'Tipo sostanza',
-                                           width: 690,
-                                           xpath:"decsiraogc_siticontaminati:SostanzeContaminanti/decsiraogc_siticontaminati:classSost/text()"
-                                       }
 
-                                   ]
-                               }
-                               features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:matriciContaminate/decsiraogc_siticontaminati:MatriciContaminate/decsiraogc_siticontaminati:sostanzeContaminanti")}/>
-                           </Section>
-                 </Section>
-             </ProfileWrapper>
 
 
 
@@ -754,7 +786,7 @@
                      <LabeledField label='Stima soggiacenza falda dal pianocampagna (m)' value={
                          model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:soggiacenzaFalda/text()")
                      }/>
-                     <LabeledField label='Tipologoa di falda' value={
+                     <LabeledField label='Tipologia di falda' value={
                          model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:tipoFalda/text()")
                      }/>
                      <LabeledField label='Presenza di pozzi nelle immediate vicinanze' value={
@@ -882,6 +914,11 @@
                                            xpath:"decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:costoIntervento/text()"
                                        },
                                        {
+                                           headerName: 'Uso autorizzato subarea',
+                                           width: 180,
+                                           xpath:"decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:usoAut/text()"
+                                       },
+                                       {
                                            headerName: 'Nota',
                                            width: 200,
                                            xpath:"decsiraogc_siticontaminati:Subaree/decsiraogc_siticontaminati:note/text()"
@@ -960,7 +997,7 @@
                                           xpath:"decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:idFinanziamento/text()"
                                       },
                                      {
-                                         headerName: 'Totale importo finanziario (euro)',
+                                         headerName: 'Totale importo finanziato (euro)',
                                          width: 250,
                                          xpath:"decsiraogc_siticontaminati:Finanziamenti/decsiraogc_siticontaminati:totaleFinanziato/text()"
                                      },

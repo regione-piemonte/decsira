@@ -25,13 +25,13 @@ const Footer = React.createClass({
                 <div className="custom footerCsi row-fluid">
                     <div className="container">
                         <div className="row">
-                            <div className="span6 col-sm-6 footer-sx">
+                            <div className="col-md-4 footer-sx">
                                 <a href=""><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
                             </div>
-                            <div className="span6 col-md-4 text-center">
+                            <div className="col-md-4 text-center">
                                 <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy">Cookie policy</a>
                             </div>
-                            <div className="span6 col-sm-6 footer-dx">
+                            <div className="col-md-4 footer-dx">
                                 <a href="http://www.sistemapiemonte.it"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/sistemapiemonte.png" /></a>
                             </div>
                         </div>

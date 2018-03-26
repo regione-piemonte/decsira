@@ -225,7 +225,7 @@ const SideQueryPanel = React.createClass({
     renderQueryPanel() {
         return (
 
-                <Panel className={this.props.withMap ? "querypanel-container side-querypanel" : "querypanel-container side-querypanel hideSpatialFilter" } collapsible={this.props.collapsible} expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
+                <Panel className={this.props.withMap ? "querypanel-container side-querypanel widthclass" : "querypanel-container side-querypanel hideSpatialFilter widthclass" } collapsible={this.props.collapsible} expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
                     {this.renderDatasetHeader()}
                     <QueryBuilder
                         params={this.props.params}

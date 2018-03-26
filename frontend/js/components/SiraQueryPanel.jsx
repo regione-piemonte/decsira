@@ -207,7 +207,7 @@ const SiraQueryPanel = React.createClass({
     renderQueryPanel() {
         return (
             <Draggable start={{x: 760, y: 55}} handle=".handle_querypanel,.handle_querypanel *">
-                <Panel className="querypanel-container" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
+                <Panel className="querypanel-container widthclass" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
                     {this.renderDatasetHeader()}
                     <QueryBuilder
                         params={this.props.params}
