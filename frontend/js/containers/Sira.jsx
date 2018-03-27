@@ -204,7 +204,7 @@ const Sira = React.createClass({
                         key="getFeatureInfo"/>
                     <MetadataInfoBox panelStyle={{
                         height: "500px",
-                        width: "300px",
+                        width: "650px",
                         zIndex: 100,
                         left: 400,
                         top: -128,
