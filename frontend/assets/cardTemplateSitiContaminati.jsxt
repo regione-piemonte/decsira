@@ -517,6 +517,11 @@
                                     xpath: "decsiraogc_siticontaminati:InterventiSito/@gml:id"
                                },
                                {
+                                   headerName: 'Id_Tipologia',
+                                   width: 120,
+                                   xpath:"decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idIntervento/text()"
+                               },
+                               {
                                    headerName: 'Tipologia intervento',
                                    width: 150,
                                    xpath:"decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:intervento/text()"
@@ -573,7 +578,7 @@
                                  tableId: "InterventiSulSito",
                                  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_siticontaminati:AnagrafeSitiContaminati/decsiraogc_siticontaminati:interventiSito"),
                                  xpath: "decsiraogc_siticontaminati:InterventiSito/@gml:id",
-                                 pdfTitle: "Numero Scheda Intervento: {{decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idIntervento/text()}}"
+                                 pdfTitle: "Id_Tipologia: {{decsiraogc_siticontaminati:InterventiSito/decsiraogc_siticontaminati:idIntervento/text()}}"
                              }}
                              columns={
                                  [
