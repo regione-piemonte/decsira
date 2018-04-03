@@ -23,14 +23,14 @@
                 <Mark>
                   <WellKnownName>circle</WellKnownName>
                   <Fill>
-                    <CssParameter name="fill">#ffffff</CssParameter>
+                    <CssParameter name="fill">#5400ff</CssParameter>
                   </Fill>
                   <Stroke>
-                    <CssParameter name="stroke">#5500ff</CssParameter>
-                    <CssParameter name="stroke-width">1</CssParameter>
+                    <CssParameter name="stroke">#29007c</CssParameter>
+                    <CssParameter name="stroke-width">2</CssParameter>
                   </Stroke>
                 </Mark>
-              <Size>7</Size>
+              <Size>9</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>
