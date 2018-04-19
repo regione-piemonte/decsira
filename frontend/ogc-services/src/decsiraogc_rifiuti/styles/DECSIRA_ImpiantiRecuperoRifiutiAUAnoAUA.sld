@@ -40,7 +40,7 @@
                     <CssParameter name="stroke">#000000</CssParameter>
                     <CssParameter name="stroke-width">1</CssParameter>                                                   </Stroke>
                 </Mark>
-              <Size>9</Size>
+              <Size>7</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>
@@ -68,7 +68,7 @@
                     <CssParameter name="stroke-width">1</CssParameter>         
              	  </Stroke>
                 </Mark>
-              <Size>9</Size>
+              <Size>7</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>
