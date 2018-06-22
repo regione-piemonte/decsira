@@ -74,6 +74,7 @@ const LinkScheda = React.createClass({
         // Solo configurazione è un drill up and down come in authorizedObject
         const detailsConfig = this.props.configOggetti[this.props.featureType] || this.props.configOggetti[this.props.activeFeatureType];
         const templateUrl = this.props.detailsTemplateConfigURL ? this.props.detailsTemplateConfigURL : this.getTempleteUrl(detailsConfig.card);
+        let cqlFilter = this.props.params.cql_filter;
         let url;
         if (this.props.id) {
             url = detailsConfig.card.service.url;
@@ -81,6 +82,12 @@ const LinkScheda = React.createClass({
                 url += `&${param}=${detailsConfig.card.service.params[param]}`;
             });
             url = `${url}&FEATUREID=${this.props.id}&authkey=${this.props.authParams.authkey}`;
+        } else if (cqlFilter) {
+            url = detailsConfig.card.service.url;
+            Object.keys(detailsConfig.card.service.params).forEach((param) => {
+                url += `&${param}=${detailsConfig.card.service.params[param]}`;
+            });
+            url += "&cql_filter=" + cqlFilter;
         }
         this.props.loadCardTemplate(templateUrl, url, this.props.params);
         if (!this.props.open) {
