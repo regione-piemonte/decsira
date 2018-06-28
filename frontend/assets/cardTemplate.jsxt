@@ -8,6 +8,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/sira:AutorizzazioneUnicaAmbientale/sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio/text()")
             ]} id={model.id}/>
     )}>
+	
     <Panel className="template">
         <Section header='DATI GENERALI - Provvedimento' eventKey='1' expanded={true}>
             <ProfileWrapper condition={() => (model && model.profile) && (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN') > -1 )}>
@@ -41,6 +42,7 @@
             <LabeledField label='Note'/>
         </Section>
 
+		
         <Section header='OGGETTI AUTORIZZATI' eventKey='3' expanded={true}>
             <ul key='factorylist' className={"list-style-type:circle"}>
 
