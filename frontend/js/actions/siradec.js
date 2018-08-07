@@ -194,7 +194,10 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
             // add layer in cart
             if (addCartlayer) {
                 let layers = [];
-                if (layer) layers.push(layer);
+                if (layer) {
+                    layer.siraId = siraId;
+                    layers.push(layer);
+                }
                 dispatch(addFeatureTypeLayerInCart(layers, node));
             }
             // Configure the FeatureGrid for WFS results list
