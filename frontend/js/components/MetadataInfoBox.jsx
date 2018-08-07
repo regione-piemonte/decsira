@@ -120,11 +120,13 @@ const MetadataInfoBox = React.createClass({
             renderWmsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWMS"}/></h4>);
             this.props.urlWMS.map((val, index) =>
             renderWmsUrl.push(
-              <a className="infobox-service-url"
-                title="wms" key={'wms_' + index}
-                href={val} target="_blank" >
-                <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"}/>
-              </a>
+              <p>
+                  <a className="infobox-service-url"
+                    title="wms" key={'wms_' + index}
+                    href={val} target="_blank" >
+                    <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"}/>
+                  </a>
+              </p>
               )
             );
         }

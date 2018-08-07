@@ -15,7 +15,7 @@ const {
     hideLoginPanel
 } = require('../actions/userprofile');
 
-const SiraUtils = require('../utils/SiraUtils');
+// const SiraUtils = require('../utils/SiraUtils');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
@@ -73,11 +73,9 @@ const LoginNav = connect((state) => ({
     className: "btn btn-default btn-login dropdown-toggle"
 }), {
       onShowLogin: showLoginPanel,
-      onLogout: () => {
-          let logOutTAb = window.open(ConfigUtils.getConfigProp('logOutService'), '_blank');
-          SiraUtils.sleep(5000);
-          logOutTAb.close();
-          window.location.href = ConfigUtils.getConfigProp('logOutUrl');
+      onLogout: (e) => {
+          e.preventDefault();
+          window.location.href = ConfigUtils.getConfigProp('logOutService');
       }
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
 
