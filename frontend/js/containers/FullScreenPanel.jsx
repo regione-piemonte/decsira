@@ -156,7 +156,7 @@ const FullScreen = React.createClass({
         return (
             <div id="fullscreen-container" className="mappaSiraDecisionale">
                 {comp}
-                <Card draggable={false} profile ={profile.profile} authParam={profile.authParams} withMap={true}/>
+                <Card draggable={true} profile ={profile.profile} authParam={profile.authParams} withMap={true}/>
             </div>
         );
     },
