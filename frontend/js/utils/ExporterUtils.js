@@ -84,7 +84,9 @@ const ExporterUtils = {
         }else {
             stringValue = '';
         }
-        return stringValue.replace(/"/g, "\"\"");
+        stringValue = stringValue.replace(/"/g, "\"\"");
+        stringValue = (stringValue.indexOf(",") > -1) ? "\"" + stringValue + "\"" : stringValue;
+        return stringValue;
     },
     convertArrayOfObjectsToCSV: function(features, columns, columnDelimiter = ',', lineDelimiter = '\r\n') {
         if (features === null || !features.length) {
