@@ -1,0 +1,301 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='Detail form / Configurazione Scheda di dettaglio'
+        	subtitle={['']}
+			/>
+    )}>
+
+    <Panel className="template">
+
+                <Section header='DATI GENERALI - Discarica' eventKey='1' expanded={false}>
+          
+                    <LabeledField label='Tipo provvedimento' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:tipoProvvedimento/text()")
+          }/>
+
+          <LabeledField label='Numero provvedimento finale' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:numeroProvvedimento/text()")
+          }/>
+
+          <LabeledField label='Data provvedimento finale' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:dataProvvedimento/text()")
+          }/>
+
+          <LabeledField label='Data scadenza provvedimento finale' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:dataScadenza/text()")
+          }/>
+
+          <LabeledField label='Rifiuto pericoloso' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:rifiutoPericoloso/text()")
+          }/>
+
+          <LabeledField label='Stato' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:desStato/text()")
+          }/>
+
+
+
+        </Section>
+
+        <Section header='DATI STABILIMENTO' eventKey='2' expanded={false}>
+          
+                    <LabeledField label='Codice sira stabilimento' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:codiceSIRA/text()")
+          }/>
+
+          <LabeledField label='Provincia' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:desProvincia/text()")
+          }/>
+
+          <LabeledField label='Comune' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:desComune/text()")
+          }/>
+
+          <LabeledField label='Indirizzo' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:indirizzo/text()")
+          }/>
+
+          <LabeledField label='Email-pec' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:emailPec/text()")
+          }/>
+
+        <Section header='Tipo attività produttiva (ISTAT 1991)' eventKey='3' expanded={false}>
+
+          <SiraTable
+                id="AttivitaProduttiva"
+                selectedRow={model.AttivitaProduttiva}
+                wfsVersion="2.0"
+                rowSelection={false}
+                
+                columns={
+                    [
+                        						{
+                            hide: true,
+                            id: true,
+                            xpath: "decsiraogc_imp_rif_disc_aia208_en:AttivitaProdutImpRifiuti/@gml:id"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Codice Ateco',
+                            width: 200.0,
+                            xpath:"decsiraogc_imp_rif_disc_aia208_en:AttivitaProdutImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:codAteco/text()"
+                        }
+
+,
+                        {
+                            hide: false,
+                            headerName: 'Attività Ateco',
+                            width: 510.0,
+                            xpath:"decsiraogc_imp_rif_disc_aia208_en:AttivitaProdutImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:desAteco/text()"
+                        }
+
+
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:AttivitaProdutImpRifiuti")}
+                
+          />
+                
+
+        </Section>
+          
+        <Section header='Dati azienda' eventKey='4' expanded={false}>
+          
+                    <LabeledField label='Ragione sociale' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:denominazione/text()")
+          }/>
+
+          <LabeledField label='Codice fiscale azienda / Partita IVA azienda' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:codiceFiscale/text()")
+          }/>
+
+          <LabeledField label='Provincia' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:desProvincia/text()")
+          }/>
+
+          <LabeledField label='Comune' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:desComune/text()")
+          }/>
+
+          <LabeledField label='Indirizzo' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:indirizzo/text()")
+          }/>
+
+          <LabeledField label='Telefono' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:telefono/text()")
+          }/>
+
+          <LabeledField label='Fax' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:fax/text()")
+          }/>
+
+          <LabeledField label='Numero iscrizione CCIAA' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:numeroCIAA/text()")
+          }/>
+
+          <LabeledField label='Anno iscrizione CCIAA' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:annoCIAA/text()")
+          }/>
+
+        <Section header='Dati titolare/legale rappresentante' eventKey='5' expanded={false}>
+          
+                    <LabeledField label='Cognome' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:cognomeTitolare/text()")
+          }/>
+
+          <LabeledField label='Nome' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:nomeTitolare/text()")
+          }/>
+
+
+
+        </Section>
+
+
+
+        </Section>
+
+
+
+        </Section>
+
+        <Section header='DATI DETTAGLIO - Dati tecnici Discarica' eventKey='6' expanded={false}>
+          
+                    <LabeledField label='Categoria discarica ai sensi del Dlgs 13 gen. 2003, n. 36' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:CategoriaDiscarica/text()")
+          }/>
+
+          <LabeledField label='Tipo di rifiuto smaltito' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:tipoRifiutoSmaltito /text()")
+          }/>
+
+          <LabeledField label='Capacità totale (mc)' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:capacitaTotaleMc/text()")
+          }/>
+
+          <LabeledField label='Volumetria autorizzata (mc)' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:capacitaAutorizzataMc /text()")
+          }/>
+
+          <LabeledField label='Potenzialità annua (Mg/a)' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:potenzialitaAnnua/text()")
+          }/>
+
+          <LabeledField label='Biogas recuperato' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:biogasRecuperato/text()")
+          }/>
+
+          <LabeledField label='Soggetto gestore diverso da discarica' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:soggettoDiversoPerBiogas/text()")
+          }/>
+
+          <LabeledField label='Nome gestore impianto biogas quando diverso da gestore discarica' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:nomeSoggDiversoPerBiogas/text()")
+          }/>
+
+        <Section header='codice EER' eventKey='7' expanded={false}>
+
+          <SiraTable
+                id="StabilimentoSemplice"
+                selectedRow={model.StabilimentoSemplice}
+                wfsVersion="2.0"
+                rowSelection={false}
+                
+                columns={
+                    [
+                        						{
+                            hide: true,
+                            id: true,
+                            xpath: "decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/@gml:id"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Descrizione codice EER',
+                            width: 100,
+                            xpath:"decsiraogc_imp_rif_disc_aia208_en:LineaCodiciCER/decsiraogc_imp_rif_disc_aia208_en:codice CER/text()"
+                        }
+
+
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice")}
+                
+          />
+                
+
+        </Section>
+          
+
+
+        </Section>
+
+        <Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE DEI RIFIUTI' eventKey='8' expanded={false}>
+
+          <SiraTable
+                id="StabilimentoSemplice"
+                selectedRow={model.StabilimentoSemplice}
+                wfsVersion="2.0"
+                rowSelection={false}
+                
+                columns={
+                    [
+                        						{
+                            hide: true,
+                            id: true,
+                            xpath: "decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/@gml:id"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Codice sira stabilimento',
+                            width: 100,
+                            xpath:"decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:codiceSIRA/text()"
+                        }
+
+
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice")}
+                
+          />
+                
+
+        </Section>
+          
+        <Section header='Impianto Rifiuti DiscaricaAIA 208' eventKey='9' expanded={false}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:geometry/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+					          "type": "osm",
+					          "title": "Open Street Map",
+					          "name": "mapnik",
+	                          "source": "osm",
+					          "group": "background",
+	                          "visibility": true
+				          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Impianto Rifiuti Discarica AIA208",
+	                          "name": "decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+	              
+        </Section>
+	              
+
+
+    </Panel>
+        
+</Panel>
