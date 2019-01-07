@@ -1,0 +1,250 @@
+{
+   "featureTypeName":"decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208",
+   "featureTypeNameLabel":"IMPIANTI RIFIUTI DISCARICA AIA208",
+   "nameSpaces": {
+     "decsiraogc_imp_rif_disc_aia208_en": "http://www.regione.piemonte.it/ambiente/decsiraogc_imp_rif_disc_aia208_en/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Impianti rifiuti generico",
+        "name": "decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "impiantoRifiutiDiscaricaAIA208",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_ImpiantoRifiutiDiscaricaAIA208_Codice_SIRA_{{/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:codiceSira/text()}}.pdf",
+     "template": "assets/cardTemplateImpiantoRifiutiDiscaricaAIA208.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateImpiantoRifiutiDiscaricaAIA208.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_imp_rif_disc_aia208_en:ImpiantoRifiutiDiscaricaAIA208",
+       "columns": [
+               {
+  "hide" : true,
+  "id" : true,
+  "headerName" : "Id",
+  "xpath" : [ "@gml:id" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "Codice sira stabilimento",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:codiceSIRA/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "Provincia",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:desProvincia/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "Comune",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:stabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:StabilimentoSemplice/decsiraogc_imp_rif_disc_aia208_en:decComune/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "Ragione sociale azienda",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:denominazione/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "Codice fiscale azienda / partita IVA azienda",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:partitaIva/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "Operazioni di smaltimento",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:ElencoOperazioniSmaltimento/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "numero provvedimento finale",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:numeroProvveIscrizione /text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "data provvedimento finale",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:dataProvvIscrizione/text()" ],
+  "type" : 2
+}, {
+  "suppressSorting" : true,
+  "headerName" : "data scadenza provvedimento finale",
+  "xpath" : [ "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:dataScadenza/text()" ],
+  "type" : 2
+}       ,
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_imp_rif_disc_aia208_en:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":"assets/licenza/Impianti_Recupero_Rifiuti_AUA_Comunicaz_licenzaCC25BY.pdf"
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+                   {
+  "index" : 1,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:codiceSira",
+  "label" : "Codice sira stabilimento",
+  "type" : "numeric"
+}, {
+  "index" : 2,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:attivitaProdutImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AttivitaProdutImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:codAteco",
+  "label" : "Tipo attività produttiva (ISTAT 1991)",
+  "type" : "list",
+  "valueId" : "des_ateco",
+  "valueService" : {
+    "urlParams" : {
+      "typeName" : "decsiraogc_decodif:decsira_d_ateco",
+      "propertyName" : "des_ateco"
+    }
+  },
+  "valueLabel" : "des_ateco"
+}, {
+  "index" : 3,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:denominazione",
+  "label" : "Ragione sociale azienda",
+  "type" : "string"
+}, {
+  "index" : 4,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:azienda/decsiraogc_imp_rif_disc_aia208_en:Azienda/decsiraogc_imp_rif_disc_aia208_en:codiceFiscale",
+  "label" : "Codice fiscale azienda / partita IVA azienda",
+  "type" : "string"
+}, {
+  "index" : 5,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:IdStato",
+  "label" : "Stato ",
+  "type" : "list",
+  "valueId" : "id_stato",
+  "valueService" : {
+    "urlParams" : {
+      "typeName" : "decsiraogc_decodif:sipra_d_stato",
+      "propertyName" : "des_stato",
+      "cql_filter" : "id_stato=100%20OR%20id_stato=101%20OR%20id_stato=102%20OR%20id_stato=103"
+    }
+  },
+  "valueLabel" : "des_stato"
+}, {
+  "index" : 6,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:idTipoProvvedimento",
+  "label" : "Tipo provvedimento",
+  "type" : "list",
+  "valueId" : "id_proc_attivita",
+  "valueService" : {
+    "urlParams" : {
+      "typeName" : "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+      "propertyName" : "provv"
+    }
+  },
+  "valueLabel" : "provv"
+}, {
+  "index" : 7,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:estremiProvvedimento",
+  "label" : "Numero provvedimento finale",
+  "type" : "string"
+}, {
+  "index" : 8,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:dataProvvedimento",
+  "label" : "Data provvedimento finale",
+  "type" : "data",
+  "fieldOptions" : {
+    "dateFormat" : "DD/MM/YYYY"
+  }
+}, {
+  "index" : 9,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:autorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:AutorizAmbImpRifiuti/decsiraogc_imp_rif_disc_aia208_en:dataScadenza",
+  "label" : "Data scadenza provvedimento finale",
+  "type" : "data",
+  "fieldOptions" : {
+    "dateFormat" : "DD/MM/YYYY"
+  }
+},  {
+  "index" : 10,
+  "attribute" : "null:IdOperazSmalt",
+  "label" : "Operazione di smaltimento",
+  "type" : "list",
+  "valueId" : "id_op_smaltimento",
+  "valueService" : {
+    "urlParams" : {
+      "typeName" : "decsiraogc_decodif:sipra_dt_d_op_smaltimento",
+      "propertyName" : "id_op_smaltimento"
+    }
+  },
+  "valueLabel" : "id_op_smaltimento"
+}, {
+  "index" : 11,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:lineaCodiciCER/decsiraogc_imp_rif_disc_aia208_en:LineaCodiciCER/decsiraogc_imp_rif_disc_aia208_en:CodiceCERFamiglia",
+  "label" : "Famiglia codice EER",
+  "type" : "list",
+  "valueId" : "ordinamento",
+  "valueService" : {
+    "urlParams" : {
+      "typeName" : "decsiraogc_decodif:decsira_d_codice_cer_famiglia",
+      "propertyName" : "ordinamento"
+    }
+  },
+  "valueLabel" : "ordinamento"
+}, {
+  "index" : 12,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:lineaCodiciCER/decsiraogc_imp_rif_disc_aia208_en:LineaCodiciCER/decsiraogc_imp_rif_disc_aia208_en:CodiceCER",
+  "label" : "Codice EER ",
+  "type" : "list",
+  "valueId" : "ordinamento",
+  "valueService" : {
+    "urlParams" : {
+      "typeName" : "decsiraogc_decodif:decsira_d_codice_cer",
+      "propertyName" : "ordinamento"
+    }
+  },
+  "dependson" : {
+    "field" : "null:null"
+  },
+  "valueLabel" : "ordinamento"
+}, {
+  "index" : 13,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:rifiutoPericoloso",
+  "label" : "Gestisce rifiuti pericolosi",
+  "type" : "string"
+}, {
+  "index" : 14,
+  "attribute" : "decsiraogc_imp_rif_disc_aia208_en:flg_interesse_nazionale",
+  "label" : "impianto di interesse di nazionale - Verificato non è da far vedere 02/08/2018"
+}    
+     ]
+   }
+}
