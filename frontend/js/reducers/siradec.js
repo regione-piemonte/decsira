@@ -7,6 +7,7 @@
  */
 
 const {
+    WAITING_FOR_CONFIG,
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
@@ -28,6 +29,7 @@ const urlQuery = url.parse(window.location.href, true).query;
 const uuid = require('node-uuid');
 
 const initialState = {
+    waitingForConfig: null,
     filterPanelExpanded: false,
     configOggetti: {
     },
@@ -41,6 +43,9 @@ const initialState = {
 
 function siradec(state = initialState, action) {
     switch (action.type) {
+        case WAITING_FOR_CONFIG: {
+            return assign({}, state, {waitingForConfig: action.wfc});
+        }
         case INLINE_MAP_CONFIG: {
             return assign({}, state, {inlineMapConfig: action.mapconfig});
         }
