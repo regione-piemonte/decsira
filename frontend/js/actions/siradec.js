@@ -8,6 +8,7 @@
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
+const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
 const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
@@ -25,6 +26,13 @@ const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
+
+function setWaitingForConfig(wfc) {
+    return {
+        type: WAITING_FOR_CONFIG,
+        wfc
+    };
+}
 
 function configureInlineMap(mapconfig) {
     return {
@@ -256,6 +264,7 @@ function setActiveFeatureType(featureType) {
 }
 
 module.exports = {
+    WAITING_FOR_CONFIG,
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
@@ -268,6 +277,7 @@ module.exports = {
     INLINE_MAP_CONFIG,
     SET_ACTIVE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
+    setWaitingForConfig,
     configureTopology,
     configureFeatureGrid,
     configureCard,
