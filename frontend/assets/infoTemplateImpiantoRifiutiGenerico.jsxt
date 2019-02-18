@@ -6,62 +6,62 @@
     onCellClicked={props.onCellClicked}
     profile={model.profile}
     columns={[
-           {
-  "id" : true,
-  "headerName" : '',
-  "xpath" : "@gml:id",
-  "width" : 30,
-  "cellRenderer" : reactCellRendererFactory(GoToDetail)
-}, {
-  "headerName" : "Stato ",
-  "xpath" : "decsiraogc_rifiuti:desStato/text()",
-  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-  "width" : 100
-}, {
-  "headerName" : "Tipo provvedimento",
-  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:tipoProvvedimento/text()",
-  "width" : 100
-}, {
-  "headerName" : "Codice sira stabilimento",
-  "xpath" : "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSIRA/text()",
-  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-  "width" : 100
-}, {
-  "headerName" : "Provincia",
-  "xpath" : "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:desProvincia/text()",
-  "width" : 100
-}, {
-  "headerName" : "Comune",
-  "xpath" : "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:nomeComune/text",
-  "width" : 100
-}, {
-  "headerName" : "Ragione sociale azienda",
-  "xpath" : "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione/text()",
-  "width" : 100
-}, {
-  "headerName" : "Codice fiscale azienda / partita IVA azienda",
-  "xpath" : "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale/text()",
-  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-  "width" : 100
-}, {
-  "headerName" : "Tipologia impiantistica",
-  "xpath" : "decsiraogc_rifiuti:elencoTipologiaImpRifiuto/text()",
-  "width" : 100
-}, {
-  "headerName" : "Numero provvedimento finale",
-  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:estremiProvvedimento/text()",
-  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-  "width" : 100
-}, {
-  "headerName" : "Data provvedimento finale",
-  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataProvvedimento/text()",
-  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-  "width" : 100
-}, {
-  "headerName" : "Data scadenza provvedimento finale",
-  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataScadenza/text()",
-  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-  "width" : 100
-}   
+        {
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Stato ",
+		  "xpath" : "decsiraogc_rifiuti:desStato/text()",
+		  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		  "width" : 100
+		}, {
+		  "headerName" : "Tipo provvedimento",
+		  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:tipoProvvedimento/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Codice SIRA stabilimento",
+		  "xpath" : "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSIRA/text()",
+		  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		  "width" : 90
+		}, {
+		  "headerName" : "Provincia",
+		  "xpath" : "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:desProvincia/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Comune",
+		  "xpath" : "decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:nomeComune/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Ragione sociale azienda",
+		  "xpath" : "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione/text()",
+		  "width" : 130
+		}, {
+		  "headerName" : "Codice fiscale azienda / partita IVA azienda",
+		  "xpath" : "decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale/text()",
+		  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		  "width" : 90
+		}, {
+		  "headerName" : "Tipologia impiantistica",
+		  "xpath" : "decsiraogc_rifiuti:elencoTipologiaImpRifiuto/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Numero provvedimento finale",
+		  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:estremiProvvedimento/text()",
+		  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		  "width" : 90
+		}, {
+		  "headerName" : "Data provvedimento finale",
+		  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataProvvedimento/text()",
+		  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		  "width" : 90
+		}, {
+		  "headerName" : "Data scadenza provvedimento finale",
+		  "xpath" : "decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataScadenza/text()",
+		  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		  "width" : 90
+		} 
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_rifiuti:ImpiantoRifiutiGenerico")}/>
