@@ -5,47 +5,46 @@
             'Codice SIRA stabilimento: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSIRA/text()"),
             ' - Stato Istanza: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:desStato/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:desStato/text()")
             ]} id={model.id}/>
     )}>
 
     <Panel className="template">
 
-        <Section header='DATI GENERALI - Impianti Gestione Rifiuti' eventKey='1' expanded={false}>
-
-         <LabeledField label='Tipo provvedimento' value={
+    <Section header='DATI GENERALI - Impianti Gestione Rifiuti' eventKey='1' expanded={true}>
+          
+          <LabeledField label='Tipo provvedimento' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:tipoProvvedimento/text()")
           }/>
 
-          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+		  <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 			  <LabeledField label='Numero provvedimento finale' value={
-				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:estremiProvvedProv/text()")
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:estremiProvvedimento/text()")
 			  }/>
 
-			  <LabeledField label='Date provvedimento finale' dateFormat='DD/MM/YYYY' value={
-				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataRilascioProvvedProv/text()")
+			  <LabeledField label='Date provvedimento finale' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataProvvedimento/text()")
 			  }/>
 
-			  <LabeledField label='Date scadenza provvedimento finale' dateFormat='DD/MM/YYYY' value={
+			  <LabeledField label='Date scadenza provvedimento finale' value={
 				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataScadenza/text()")
 			  }/>
-	      </ProfileWrapper>
+		  </ProfileWrapper>
 
           <LabeledField label='Rifiuto pericoloso' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:rifiutoPericoloso/text()")
           }/>
-
-          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+	      <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 			  <LabeledField label='Stato' value={
 				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:desStato/text()")
 			  }/>
-          </ProfileWrapper>
+		  </ProfileWrapper>
 
         </Section>
 
-        <Section header='DATI STABILIMENTO' eventKey='2' expanded={false}>
-
-                    <LabeledField label='Codice sira stabilimento' value={
+        <Section header='DATI STABILIMENTO' eventKey='2' expanded={true}>
+          
+         <LabeledField label='Codice sira stabilimento' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSIRA/text()")
           }/>
 
@@ -56,8 +55,8 @@
           <LabeledField label='Comune' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:nomeComune/text()")
           }/>
-
-		   <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+		  
+		  <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 			  <LabeledField label='Indirizzo' value={
 				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:indirizzo/text()")
 			  }/>
@@ -65,16 +64,16 @@
 			  <LabeledField label='Email-pec' value={
 				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:emailPec/text()")
 			  }/>
-          </ProfileWrapper>
+		  </ProfileWrapper>
 
-        <Section header='Tipo attività produttiva (ISTAT 1991)' eventKey='3' expanded={true}>
+        <Section header='Tipo attivit&agrave;  produttiva (ISTAT 1991)' eventKey='3' expanded={true}>
 
           <SiraTable
                 id="AttivitaProduttiva"
                 selectedRow={model.AttivitaProduttiva}
                 wfsVersion="2.0"
                 rowSelection={false}
-
+                
                 columns={
                     [
                         						{
@@ -85,38 +84,37 @@
                         {
                             hide: false,
                             headerName: 'Codice Ateco',
-                            width: 200.0,
+                            width: 200,
                             xpath:"decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:codAteco/text()"
-                        }
-
-,
+                        },
                         {
                             hide: false,
-                            headerName: 'Attività Ateco',
-                            width: 510.0,
+                            headerName: 'Attivit&agrave;  Ateco',
+                            width: 510,
                             xpath:"decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:desAteco/text()"
                         }
-
 
                     ]
                 }
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:attivitaProduttiva")}
-
+                
           />
-
+                
 
         </Section>
-
+          
         <Section header='Dati azienda' eventKey='4' expanded={true}>
-
-        <LabeledField label='Ragione sociale' value={
+          
+         <LabeledField label='Ragione sociale' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione/text()")
           }/>
+		  
 		  <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 			  <LabeledField label='Codice fiscale azienda / Partita IVA azienda' value={
 				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale/text()")
 			  }/>
-		  </ProfileWrapper>
+          </ProfileWrapper>
+		  
           <LabeledField label='Provincia' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:desProvincia/text()")
           }/>
@@ -145,19 +143,19 @@
 				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:annoCIAA/text()")
 			  }/>
 
-				<Section header='Dati titolare/legale rappresentante' eventKey='5' expanded={true}>
+			<Section header='Dati titolare / Legale rappresentante' eventKey='5' expanded={true}>
+			  
+						<LabeledField label='Cognome' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:cognomeTitolare/text()")
+			  }/>
 
-							<LabeledField label='Cognome' value={
-					  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:cognomeTitolare/text()")
-				  }/>
+			  <LabeledField label='Nome' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:nomeTitolare/text()")
+			  }/>
 
-				  <LabeledField label='Nome' value={
-					  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:nomeTitolare/text()")
-				  }/>
+			</Section>
+        </ProfileWrapper>
 
-				</Section>
-
-	        </ProfileWrapper>
 
         </Section>
 
@@ -172,7 +170,7 @@
                 selectedRow={model.OggettoAssociatoStringa}
                 wfsVersion="2.0"
                 rowSelection={false}
-
+                
                 columns={
                     [
                         						{
@@ -183,63 +181,35 @@
                         {
                             hide: true,
                             headerName: 'idAutorizzazioneAmbientale',
-                            width: 200,
+                            width: 100,
                             xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:idAutorizzazione/text()"
-                        }
-
-,
-                        {
-                            hide: false,
-                            headerName: 'Tipo Impianto',
-                            width: 520,
-                            xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:desTipo/text()"
-                        }
-
-,
-                        {
-                            hide: false,
-                            headerName: 'Stato',
-                            width: 220,
-                            xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:desStato/text()"
-                        }
-
-,
-                        {
-                            hide: false,
-                            headerName: 'codice univoco',
-                            width: 100,
-                            xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:idOggetto/text()"
-                        }
-
-,
-                        {
-                            hide: false,
-                            headerName: 'nomeWFS',
-                            width: 100,
-                            xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:nomeWfs/text()"
                         },
                         {
                             hide: false,
-                            headerName: 'diego',
-                            width: 300,
-                            linkToDetail: {
+                            headerName: 'Tipo Impianto',
+                            width: 460,
+							linkToDetail: {
                                 featureType: (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:oggettoAssociatoStringa/decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:nomeWfs/text()")).split("#")[0],
                                 xpath: null,
                                 cqlFilter: (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:oggettoAssociatoStringa/decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:nomeWfs/text()")).split("#")[1]+"='"+(model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:oggettoAssociatoStringa/decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:idOggetto/text()"))+"'"
                             },
                             xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:desTipo/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Stato',
+                            width: 280,
+                            xpath:"decsiraogc_rifiuti:OggettoAssociatoStringa/decsiraogc_rifiuti:desStato/text()"
                         }
-
-
                     ]
                 }
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiGenerico/decsiraogc_rifiuti:oggettoAssociatoStringa")}
-
+                
           />
-
+                
 
         </Section>
-
+          
         <Section header='Impianto Rifiuti Generico' eventKey='7' expanded={true}>
 	      <MappaScheda
 	              center={
@@ -269,12 +239,12 @@
 	              ]}
 	              authParam={model.authParam}
 	              withMap={model.withMap}/>
-
+	              
         </Section>
-
+	              
         <Section header='METADATO' eventKey='8' expanded={true}>
-
-           <LinkToPage
+          
+          <LinkToPage
             txt="Visualizza la scheda del metadato"
             url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
             params={{
@@ -286,9 +256,7 @@
         </Section>
 
 
-       <Section header=' ' eventKey='6' expanded={true}>
-      </Section>
 
     </Panel>
-
+        
 </Panel>
