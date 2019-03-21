@@ -292,21 +292,14 @@
     </Section>
 	
 	<Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE DEI RIFIUTI' eventKey='10' expanded={false}>
-      <SiraTable
-          id="SchedaSinteticaRifiutiAUA"
-          selectedRow={model.SchedaSinteticaRifiutiAUA}
-          wfsVersion="2.0"
-          rowSelection={false}
-          columns={
-              [
-                  {
-                      headerName: 'Codice sira stabilimento',
-                      width: 700,
-                      xpath:"decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSira/text()"
-                  }
-              ]
-          }
-          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:stabilimentoSemplice")}/>
+       <LinkScheda
+              params={{
+                  cql_filter: "decsiraogc_rifiuti:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti:identificativoRifiutoGenerico/text()")+"'"
+              }}
+              featureType="impiantoRifiutiGenerico"
+              linkTitle="Vai a scheda impianto di gestione rifiuti"
+              detailsTemplateConfigURL=""
+          />
       </Section>
 
 
