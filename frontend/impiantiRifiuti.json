@@ -211,19 +211,6 @@
   		},
 		{
   			"type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/ambpat/rp-01/rifwmspub/wms_impianti_rifiuti_autoriz",
-        "visibility": false,
-  			"title": "Rifiuti - Tutti gli impianti autorizzati",
-  			"name": "RifiutiImpianti",
-  			"group": "Impianti autorizzati al recupero e/o smaltimento di rifiuti",
-  			"format": "image/png",
-        "legendParams": {
-          "sld_version": "1.1.0"
-        },
-        "tileSize": 512
-  		},
-		{
-  			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimslimammwms/wms_limitiAmm",
         "visibility": false,
   			"title": "Toponomastica Comunale",
@@ -265,20 +252,45 @@
   			"type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-  			"title": "Impianti Recupero Rifiuti autorizzati con A.U.A. o procedura semplificata (comunicazioni non A.U.A.)",
+  			"title": "Impianti Recupero Rifiuti autorizzati con AUA o Comunicazioni fuori AUA",
   			"name": "decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUA",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
-        "topologyConfig": {
-          "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
-          "wfsVersion": "1.1.0",
-          "layerName": "ZONES_IPR",
-          "layerTitle": "Zonizzazione qualita' dell'aria vigente",
-          "geomAttribute": "msGeometry",
-          "geometryType": "Polygon"
-        },
-            "featureType": "impiantoRifiutiAuaNoAua",
-                      "group": "Oggetti",
-                      "format": "image/png"
+        "featureType": "impiantoRifiutiAuaNoAua",
+        "group": "Oggetti",
+        "format": "image/png"
+  		},
+		{
+  			"type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+  			"title": "Discariche rifiuti - AIA o ex art. 208 D.Lgs. 152/2006",
+  			"name": "decsiraogc_rifiuti:ImpiantoRifiutiDiscaricaAIA208",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "impiantoRifiutiDiscaricaAIA208",
+        "group": "Oggetti",
+        "format": "image/png"
+  		},
+		{
+  			"type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+  			"title": "Impianti Recupero e Smaltimento rifiuti AIA. o ex art. 208 D.Lgs. 152/2006",
+  			"name": "decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "impiantoRifiutiSmaltimAIA208",
+        "group": "Oggetti",
+        "format": "image/png"
+  		},
+		{
+  			"type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+  			"title": "Impianti di gestione dei rifiuti - AUA, Comunicazioni fuori AUA , AIA, Ex Art 208 DLgs 152/2006",
+  			"name": "decsiraogc_rifiuti:ImpiantoRifiutiGenerico",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "impiantoRifiutiGenerico",
+        "group": "Oggetti",
+        "format": "image/png"
   		}
     ]
   }

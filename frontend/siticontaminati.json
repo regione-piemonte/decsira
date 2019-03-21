@@ -53,6 +53,45 @@
         "format": "image/png",
         "tiled": true
       },
+	  {
+  			"type": "wms",
+        "url": "http://gisserver.territorio.csi.it/geoserver/decsiraogc_areeprotezione_pta/wms",
+        "visibility": false,
+  			"title": "Aree Ricarica Acquiferi Profondi",
+  			"name": "AreeRicaricaAcquiferiProfondi",
+  			"group": "Aree di Ricarica degli Acquiferi Profondi Piano di Tutela delle Acque 2007",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  	   },
+	   {
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/agrigeo/rp-01/carpedwms/wms_carped",
+        "visibility": false,
+  			"title": "Capacita' d'uso dei suoli 1:250.000",
+  			"name": "CapUsoSuoli",
+  			"group": "Carta dei suoli e carte derivate",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
+        "url": "http://geomap.reteunitaria.piemonte.it/ws/agrigeo/rp-01/carsuowms/wms_carsuo",
+        "visibility": false,
+  			"title": "Capacita' d'uso dei suoli 1:50000",
+  			"name": "CapacitaUsoSuoli",
+  			"group": "Carta dei suoli e carte derivate",
+  			"format": "image/png",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
         {
   			"type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1",
@@ -148,10 +187,10 @@
   			"type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-  			"title": "Stabilimenti soggetti ad autorizzazione ambientale",
-  			"name": "decsiraogc_stabilimenti:Stabilimento",
+  			"title": "Anagrafe Siti Contaminati",
+  			"name": "decsiraogc_siticontaminati:AnagrafeSitiContaminati",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
-        "featureType": "stabilimento",
+        "featureType": "anagrafeSitiContaminati",
         "group": "Oggetti",
         "format": "image/png"
         }
