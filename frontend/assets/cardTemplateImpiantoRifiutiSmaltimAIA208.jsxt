@@ -81,7 +81,7 @@
 
             </ProfileWrapper>
 
-        <Section header='Tipo attivit&#224; produttiva (ISTAT 1991)' eventKey='3' expanded={true}>
+        <Section header='Tipo attivita produttiva (ISTAT 1991)' eventKey='3' expanded={true}>
 
           <SiraTable
                 id="AttivitaProduttiva"
@@ -104,7 +104,7 @@
                         },
                         {
                             hide: false,
-                            headerName: 'Attivit&#224; Ateco',
+                            headerName: 'Attivita Ateco',
                             width: 600,
                             xpath:"decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:desAteco/text()"
                         }
@@ -209,15 +209,15 @@
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:numeroLineeImpianto/text()")
           }/>
 
-          <LabeledField label='Capacit&#224; massima in stoccaggio/ messa in riserva totale impianto (Mg)' value={
+          <LabeledField label='Capacita massima in stoccaggio/ messa in riserva totale impianto (Mg)' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:capacitaSmaltT/text()")
           }/>
 
-          <LabeledField label='Capacit&#224; massima in stoccaggio/ messa in riserva totale impianto (mc)' value={
+          <LabeledField label='Capacita massima in stoccaggio/ messa in riserva totale impianto (mc)' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:capacitaSmaltMc/text()")
           }/>
 
-          <LabeledField label='Potenzialit&#224; autorizzata (Mg/anno)' value={
+          <LabeledField label='Potenzialita autorizzata (Mg/anno)' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:potenzialitaAutorizzata/text()")
           }/>
 
@@ -301,13 +301,13 @@
                         },
                         {
                             hide: false,
-                            headerName: 'Potenzialit&#224; (Mg/a)',
+                            headerName: 'Potenzialita (Mg/a)',
                             width: 150,
                             xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:quantitaAutorizT/text()"
                         },
                         {
                             hide: false,
-                            headerName: 'Capacit&#224; max di stoccaggio (Mg/mc)',
+                            headerName: 'Capacita max di stoccaggio (Mg/mc)',
                             width: 150,
                             xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:quantitaAutorizMc/text()"
                         }
