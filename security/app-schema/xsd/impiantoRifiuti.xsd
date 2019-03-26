@@ -3,8 +3,8 @@
     xmlns="http://www.w3.org/2001/XMLSchema"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:gml="http://www.opengis.net/gml/3.2"
-	xmlns:decsiraogc_rifiuti="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti/1.0"
-    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti/1.0"
+	xmlns:decsiraogc_rifiuti_aua="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_aua/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_aua/1.0"
     elementFormDefault="qualified" attributeFormDefault="unqualified">
 	
 	<import namespace="http://www.opengis.net/gml/3.2" 
@@ -14,35 +14,35 @@
 	<!-- qui estendono gml:AbstractObject o gml:AbstractFeature -->
 	
 	<!-- decsira_geo_impianto_rifiuti_aua_noaua  id= id_rifiuto_generico-->
-	<element name="ImpiantoRifiutiAUAnoAUA" type="decsiraogc_rifiuti:ImpiantoRifiutiAUAnoAUAType" substitutionGroup="gml:AbstractFeature" />
+	<element name="ImpiantoRifiutiAUAnoAUA" type="decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUAType" substitutionGroup="gml:AbstractFeature" />
 	
 	<!-- decsira_geo_stabilimento id= codice_sira -->
-	<element name="StabilimentoSemplice" type="decsiraogc_rifiuti:StabilimentoSempliceType" substitutionGroup="gml:AbstractObject" />
+	<element name="StabilimentoSemplice" type="decsiraogc_rifiuti_aua:StabilimentoSempliceType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_azienda  id= id_azienda -->
-	<element name="Azienda" type="decsiraogc_rifiuti:AziendaType" substitutionGroup="gml:AbstractObject" />
+	<element name="Azienda" type="decsiraogc_rifiuti_aua:AziendaType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_autorizzazione_amb id= id_autorizzamb_sede -->
-	<element name="AutorizAmbImpRifiutiAUAnoAUA" type="decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUAType" substitutionGroup="gml:AbstractObject" />
+	<element name="AutorizAmbImpRifiutiAUAnoAUA" type="decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUAType" substitutionGroup="gml:AbstractObject" />
 	
 	
 	<!-- decsira_t_TipoImpianto_Rifiuti id= identificativo -->
-	<element name="TipoImpiantoRifiuto" type="decsiraogc_rifiuti:TipoImpiantoRifiutoType" substitutionGroup="gml:AbstractObject" />
+	<element name="TipoImpiantoRifiuto" type="decsiraogc_rifiuti_aua:TipoImpiantoRifiutoType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_scheda_autorizzate_AUA_noAUA id= id_scheda_rifiuto -->
-	<element name="SchedaAutorizzateAUAnoAUA" type="decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUAType" substitutionGroup="gml:AbstractObject" />
+	<element name="SchedaAutorizzateAUAnoAUA" type="decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUAType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_codici_CER id= identificavo -->
-	<element name="CodiciCER" type="decsiraogc_rifiuti:CodiciCERType" substitutionGroup="gml:AbstractObject" />
+	<element name="CodiciCER" type="decsiraogc_rifiuti_aua:CodiciCERType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_attivita_recupero_rifiuti_AUA_noAUA id= identificativo -->
-	<element name="AttivitaRecuperoRifiuti" type="decsiraogc_rifiuti:AttivitaRecuperoRifiutiType" substitutionGroup="gml:AbstractObject" />
+	<element name="AttivitaRecuperoRifiuti" type="decsiraogc_rifiuti_aua:AttivitaRecuperoRifiutiType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_attivita_recupero_rifiuti_AUA_noAUA id= identificativo -->
-	<element name="OperazioniRecuperoRifiutiAUAnoAUA" type="decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUAType" substitutionGroup="gml:AbstractObject" />
+	<element name="OperazioniRecuperoRifiutiAUAnoAUA" type="decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUAType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_stabilimento_ateco  id= codice_sira -->
-	<element name="AttivitaProdutImpRifiuti" type="decsiraogc_rifiuti:AttivitaProdutImpRifiutiType" substitutionGroup="gml:AbstractObject" />
+	<element name="AttivitaProdutImpRifiuti" type="decsiraogc_rifiuti_aua:AttivitaProdutImpRifiutiType" substitutionGroup="gml:AbstractObject" />
 	<!-- types -->
 	<!-- qui estendono gml:AbstractGMLType o gml:AbstractFeatureType -->
 	
@@ -161,17 +161,17 @@
 				
 					<!-- oggetti innestati -->
 
-					<xs:element name="stabilimentoSemplice" type="decsiraogc_rifiuti:StabilimentoSemplicePropertyType" minOccurs="0" maxOccurs="1" />
+					<xs:element name="stabilimentoSemplice" type="decsiraogc_rifiuti_aua:StabilimentoSemplicePropertyType" minOccurs="0" maxOccurs="1" />
 
-					<xs:element name="azienda" type="decsiraogc_rifiuti:AziendaPropertyType" minOccurs="0" maxOccurs="1" />
+					<xs:element name="azienda" type="decsiraogc_rifiuti_aua:AziendaPropertyType" minOccurs="0" maxOccurs="1" />
 					
-					<xs:element name="autorizAmbImpRifiutiAUAnoAUA" type="decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUAPropertyType" minOccurs="1" maxOccurs="unbounded" />
+					<xs:element name="autorizAmbImpRifiutiAUAnoAUA" type="decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUAPropertyType" minOccurs="1" maxOccurs="unbounded" />
 					
-					<xs:element name="tipoImpiantoRifiuto" type="decsiraogc_rifiuti:TipoImpiantoRifiutoPropertyType" minOccurs="1" maxOccurs="unbounded" />
+					<xs:element name="tipoImpiantoRifiuto" type="decsiraogc_rifiuti_aua:TipoImpiantoRifiutoPropertyType" minOccurs="1" maxOccurs="unbounded" />
 					
-					<xs:element name="schedaAutorizzateAUAnoAUA" type="decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUAPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="schedaAutorizzateAUAnoAUA" type="decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUAPropertyType" minOccurs="0" maxOccurs="unbounded" />
 					
-					<xs:element name="attivitaProdutImpRifiuti" type="decsiraogc_rifiuti:AttivitaProdutImpRifiutiPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="attivitaProdutImpRifiuti" type="decsiraogc_rifiuti_aua:AttivitaProdutImpRifiutiPropertyType" minOccurs="0" maxOccurs="unbounded" />
                 </sequence>
             </extension>
         </complexContent>
@@ -320,13 +320,7 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element name="codiceFiscale" minOccurs="0">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:maxLength value="16" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
+					<xs:element name="codiceFiscale" minOccurs="0" maxOccurs="1" />
 					<xs:element name="partitaIVA" minOccurs="0">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
@@ -563,11 +557,11 @@
                     </xs:element>
 					
 					<!-- innesto oggetti -->
-					<xs:element name="codiciCER" type="decsiraogc_rifiuti:CodiciCERPropertyType" minOccurs="1" maxOccurs="unbounded" />
+					<xs:element name="codiciCER" type="decsiraogc_rifiuti_aua:CodiciCERPropertyType" minOccurs="1" maxOccurs="unbounded" />
 					
-					<xs:element name="attivitaRecuperoRifiuti" type="decsiraogc_rifiuti:AttivitaRecuperoRifiutiPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="attivitaRecuperoRifiuti" type="decsiraogc_rifiuti_aua:AttivitaRecuperoRifiutiPropertyType" minOccurs="0" maxOccurs="unbounded" />
 					
-					<xs:element name="operazioniRecuperoRifiutiAUAnoAUA" type="decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUAPropertyType" minOccurs="1" maxOccurs="unbounded" />
+					<xs:element name="operazioniRecuperoRifiutiAUAnoAUA" type="decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUAPropertyType" minOccurs="1" maxOccurs="unbounded" />
 					
                 </sequence>
             </extension>
@@ -749,7 +743,7 @@
 	<!-- property types -->
 	<complexType name="StabilimentoSemplicePropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:StabilimentoSemplice" />
+            <element ref="decsiraogc_rifiuti_aua:StabilimentoSemplice" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -757,7 +751,7 @@
 	
 	<complexType name="AziendaPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:Azienda" />
+            <element ref="decsiraogc_rifiuti_aua:Azienda" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -766,7 +760,7 @@
 	
 	<complexType name="AutorizAmbImpRifiutiAUAnoAUAPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA" />
+            <element ref="decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -775,7 +769,7 @@
 	
 	<complexType name="TipoImpiantoRifiutoPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:TipoImpiantoRifiuto" />
+            <element ref="decsiraogc_rifiuti_aua:TipoImpiantoRifiuto" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -783,7 +777,7 @@
 	
 	<complexType name="SchedaAutorizzateAUAnoAUAPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA" />
+            <element ref="decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -791,7 +785,7 @@
 	
 	<complexType name="CodiciCERPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:CodiciCER" />
+            <element ref="decsiraogc_rifiuti_aua:CodiciCER" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -799,7 +793,7 @@
 	
 	<complexType name="TipoImpiantoRifiutoSchedaPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:TipoImpiantoRifiutoScheda" />
+            <element ref="decsiraogc_rifiuti_aua:TipoImpiantoRifiutoScheda" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -807,7 +801,7 @@
 	
 	<complexType name="AttivitaRecuperoRifiutiPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:AttivitaRecuperoRifiuti" />
+            <element ref="decsiraogc_rifiuti_aua:AttivitaRecuperoRifiuti" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -815,7 +809,7 @@
 	
 	<complexType name="OperazioniRecuperoRifiutiAUAnoAUAPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA" />
+            <element ref="decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
@@ -823,7 +817,7 @@
 	
 	<complexType name="AttivitaProdutImpRifiutiPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_rifiuti:AttivitaProdutImpRifiuti" />
+            <element ref="decsiraogc_rifiuti_aua:AttivitaProdutImpRifiuti" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />

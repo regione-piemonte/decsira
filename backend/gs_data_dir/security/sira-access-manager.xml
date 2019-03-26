@@ -112,38 +112,58 @@
             <roles>Profilo_B</roles>
             <workspace>sira</workspace>
             <layer>AutorizzazioneUnicaAmbientale</layer>
-	    <accessMode>READ</accessMode>
+			<accessMode>READ</accessMode>
      </Rule>
 	 <Rule>
 		<priority>16</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	 <Rule>
-		<priority>17</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_waste_en</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
     <Rule>
-               <priority>18</priority>
-               <roles>*</roles>
-               <workspace>decsiraogc_areeprotezione_pta</workspace>
-               <layer>*</layer>
-               <accessMode>READ</accessMode>
+	   <priority>17</priority>
+	   <roles>*</roles>
+	   <workspace>decsiraogc_areeprotezione_pta</workspace>
+	   <layer>*</layer>
+	   <accessMode>READ</accessMode>
     </Rule>
     <Rule>
-                <priority>19</priority>
-                <roles>ROLE_ANONIMOUS</roles>
-                <workspace>decsiraogc_areeprotezione_pta</workspace>
-                <layer>*</layer>
-                <accessMode>READ</accessMode>
+		<priority>18</priority>
+		<roles>ROLE_ANONIMOUS</roles>
+		<workspace>decsiraogc_areeprotezione_pta</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
     </Rule>
-
 	 <Rule>
+		<priority>19</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>20</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>21</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>22</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
 		<priority>100</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_emissioni</workspace>
@@ -321,53 +341,7 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
 	 </Rule>
-	 <Rule>
-		<priority>106</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>107</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti</workspace>
-		<layer>ImpiantoRifiutiAUAnoAUA</layer>
-		<accessMode>READ</accessMode>
-		<hiddenAttributes>
-			  <attribute>decsiraogc_rifiuti:codiceSira</attribute>
-			  <attribute>decsiraogc_rifiuti:numeroProvveIscrizione</attribute>
-			  <attribute>decsiraogc_rifiuti:dataProvvIscrizione</attribute>
-			  <attribute>decsiraogc_rifiuti:dataScadenza</attribute>
-			  <attribute>decsiraogc_rifiuti:idStato</attribute>
-			  <attribute>decsiraogc_rifiuti:desStato</attribute>
-			  <attribute>decsiraogc_rifiuti:quantitaInviataTotaleRecupero</attribute>
-			  <attribute>decsiraogc_rifiuti:capacitaMaxStocct</attribute>
-			  <attribute>decsiraogc_rifiuti:capacitaMaxStoccMc</attribute>
-			  <attribute>decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:indirizzo</attribute>
-			   <attribute>decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:emailPec</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceSira</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:partitaIVA</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:indirizzo</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:telefono</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:fax</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:numeroCIAA</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:annoCIAA</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:cognomeTitolare</attribute>
-			  <attribute>decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:nomeTitolare</attribute>
-			  <attribute>decsiraogc_rifiuti:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti:codiceSira</attribute>
-			  <attribute>decsiraogc_rifiuti:attivitaProdutImpRifiuti/decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:codiceSira</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:identificativoUnivoco</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:idSchedaRifuto</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:idOperazRecupero</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:desOperazRecupero</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:messRiservaQtaMaxGestTanno</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:messRiservaQtaMaxStoccT</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:messRiservaQtaMaxStoccMc</attribute>
-			  <attribute>decsiraogc_rifiuti:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti:qtaMaxRecupero</attribute>
-		</hiddenAttributes>		  
-    </Rule>
+	
 	<Rule>
 		<priority>108</priority>
 		<roles>ROLE_ANONYMOUS</roles>
@@ -668,5 +642,165 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_scarichi:desStato" = 'ATTIVO'</filter>
 	 </Rule>
+	 <Rule>
+		<priority>114</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>118</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>ImpiantoRifiutiAUAnoAUA</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_aua:idStato" = '101' OR "decsiraogc_rifiuti_aua:idStato" = '102'</filter>
+		<hiddenAttributes>
+		      <attribute>decsiraogc_rifiuti_aua:idStato</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:desStato</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:numeroProvveIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:dataProvvIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:quantitaInviataTotaleRecupero</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:capacitaMaxStocct</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:capacitaMaxStoccMc</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:indirizzo</attribute>
+			   <attribute>decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:emailPec</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:codiceFiscale</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:partitaIVA</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:indirizzo</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:telefono</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:fax</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:numeroCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:annoCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:cognomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:nomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataProvvedimento</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:estremiProvvedimento</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idOperazRecupero</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:codOperazRecupero</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desOperazRecupero</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxGestTanno</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxStoccT</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxStoccMc</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:qtaMaxRecupero</attribute>
+			  <attribute>decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:codiciCER/decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:idSchedaRifiuto</attribute>
+		</hiddenAttributes>		  
+    </Rule>
+	<Rule>
+		<priority>115</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>119</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_discarica:idStato" = '101' OR "decsiraogc_rifiuti_discarica:idStato" = '102'</filter>
+		<hiddenAttributes>
+			  <attribute>decsiraogc_rifiuti_discarica:desStato</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:numeroProvveIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:dataProvvIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:codCategoriaDiscaricaLR</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:categoriaDiscaricaLR</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:capacitaTotaleMc</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:capacitaAutorizzataMc </attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:potenzialitaAnnua</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:biogasRecuperato</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:soggettoDiversoPerBiogas</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:nomeSoggDiversoPerBiogas</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:quantitaInviataTotaleRecupero</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:stabilimentoSemplice/decsiraogc_rifiuti_discarica:StabilimentoSemplice/decsiraogc_rifiuti_discarica:indirizzo</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:stabilimentoSemplice/decsiraogc_rifiuti_discarica:StabilimentoSemplice/decsiraogc_rifiuti_discarica:emailPec</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:codiceFiscale</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:partitaIVA</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:indirizzo</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:telefono</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:fax</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:numeroCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:annoCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:cognomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:azienda/decsiraogc_rifiuti_discarica:Azienda/decsiraogc_rifiuti_discarica:nomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:dataProvvedimento</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:estremiProvvedimento</attribute>
+		</hiddenAttributes>		  
+    </Rule>
+	<Rule>
+		<priority>116</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>120</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_smaltimento:idStato" = '101' OR "decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter>
+		<hiddenAttributes>
+			  <attribute>decsiraogc_rifiuti_smaltimento:desStato</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:numeroProvveIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:dataProvvIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:indirizzo</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:emailPec</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:codiceFiscale</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:partitaIVA</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:indirizzo</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:telefono</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:fax</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:numeroCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:annoCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:cognomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:nomeTitolare</attribute>
+			   <attribute>decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:numeroProvveIscrizione</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:dataProvvedimento</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:estremiProvvedimento</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:operRecuperoCER</attribute>
+			  <attribute>decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:operSmaltimCER</attribute>
+		</hiddenAttributes>		  
+    </Rule>
+	<Rule>
+		<priority>117</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>121</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>ImpiantoRifiutiGenerico</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_generici:idStato" = '101' OR "decsiraogc_rifiuti_generici:idStato" = '102'</filter>
+		<hiddenAttributes>
+			  <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:indirizzo</attribute>
+			   <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:emailPec</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:codiceFiscale</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:partitaIVA</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:indirizzo</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:telefono</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:fax</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:numeroCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:annoCIAA</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:cognomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:nomeTitolare</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:dataProvvedimento</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:dataScadenza</attribute>
+			  <attribute>decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:estremiProvvedimento</attribute>
+		</hiddenAttributes>		  
+    </Rule>
     </rules>
 </Config>
