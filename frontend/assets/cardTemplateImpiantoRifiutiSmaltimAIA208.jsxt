@@ -3,9 +3,9 @@
     header={(
             <DetailTitle title='IMPIANTI SMALTIMENTO RIFIUTI AIA o Ex Art. 208 D.Lgs 152/2006' subtitle={[
             'Codice SIRA stabilimento: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSIRA/text()"),
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:codiceSIRA/text()"),
             ' - Stato Istanza: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:desStato/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:desStato/text()")
             ]} id={model.id}/>
     )}>
 
@@ -14,37 +14,37 @@
                 <Section header='DATI GENERALI - Impianto Smaltimento' eventKey='1' expanded={true}>
           
                     <LabeledField label='Tipo provvedimento' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:tipoProvvedimento/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:tipoProvvedimento/text()")
           }/>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Numero provvedimento finale' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:estremiProvvedimento/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:estremiProvvedimento/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Data provvedimento finale' dateFormat='DD/MM/YYYY' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataProvvedimento/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:dataProvvedimento/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Data scadenza provvedimento finale' dateFormat='DD/MM/YYYY' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:autorizAmbImpRifiuti/decsiraogc_rifiuti:AutorizAmbImpRifiuti/decsiraogc_rifiuti:dataScadenza/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:dataScadenza/text()")
           }/>
 
             </ProfileWrapper>
 
           <LabeledField label='Rifiuto pericoloso' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:rifiutoPericoloso/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:rifiutoPericoloso/text()")
           }/>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Stato' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:desStato/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:desStato/text()")
           }/>
 
             </ProfileWrapper>
@@ -56,27 +56,27 @@
         <Section header='DATI STABILIMENTO' eventKey='2' expanded={true}>
           
                     <LabeledField label='Codice SIRA stabilimento' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:codiceSIRA/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:codiceSIRA/text()")
           }/>
 
           <LabeledField label='Provincia' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:desProvincia/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:desProvincia/text()")
           }/>
 
           <LabeledField label='Comune' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:nomeComune/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:nomeComune/text()")
           }/>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Indirizzo' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:indirizzo/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:indirizzo/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Email-pec' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:stabilimentoSemplice/decsiraogc_rifiuti:StabilimentoSemplice/decsiraogc_rifiuti:emailPec/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:emailPec/text()")
           }/>
 
             </ProfileWrapper>
@@ -94,25 +94,25 @@
                         {
                             hide: true,
                             id: true,
-                            xpath: "decsiraogc_rifiuti:AttivitaProdutImpRifiuti/@gml:id"
+                            xpath: "decsiraogc_rifiuti_smaltimento:AttivitaProdutImpRifiuti/@gml:id"
                         },
                         {
                             hide: false,
                             headerName: 'Codice Ateco',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:codAteco/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:AttivitaProdutImpRifiuti/decsiraogc_rifiuti_smaltimento:codAteco/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Attivita Ateco',
                             width: 600,
-                            xpath:"decsiraogc_rifiuti:AttivitaProdutImpRifiuti/decsiraogc_rifiuti:desAteco/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:AttivitaProdutImpRifiuti/decsiraogc_rifiuti_smaltimento:desAteco/text()"
                         }
 
 
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:attivitaProduttiva")}
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:attivitaProdutImpRifiuti")}
                 
           />
                 
@@ -122,55 +122,55 @@
         <Section header='Dati azienda' eventKey='4' expanded={true}>
           
                     <LabeledField label='Ragione sociale' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:denominazione/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:denominazione/text()")
           }/>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Codice fiscale azienda / Partita IVA azienda' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:codiceFiscale/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:codiceFiscale/text()")
           }/>
 
             </ProfileWrapper>
 
           <LabeledField label='Provincia' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:desProvincia/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:desProvincia/text()")
           }/>
 
           <LabeledField label='Comune' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:desComune/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:desComune/text()")
           }/>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Indirizzo' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:indirizzo/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:indirizzo/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Telefono' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:telefono/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:telefono/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Fax' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:fax/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:fax/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Numero iscrizione CCIAA' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:numeroCIAA/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:numeroCIAA/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Anno iscrizione CCIAA' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:annoCIAA/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:annoCIAA/text()")
           }/>
 
             </ProfileWrapper>
@@ -179,14 +179,14 @@
           
                       <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Cognome' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:cognomeTitolare/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:cognomeTitolare/text()")
           }/>
 
             </ProfileWrapper>
 
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                           <LabeledField label='Nome' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:azienda/decsiraogc_rifiuti:Azienda/decsiraogc_rifiuti:nomeTitolare/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:nomeTitolare/text()")
           }/>
 
             </ProfileWrapper>
@@ -206,23 +206,23 @@
         <Section header='DATI DETTAGLIO - Dati tecnici e generali Impianto di Recupero e Smaltimento Rifiuti' eventKey='6' expanded={true}>
           
                     <LabeledField label='Numero di linee impiantistiche' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:numeroLineeImpianto/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:numeroLineeImpianto/text()")
           }/>
 
           <LabeledField label='Capacita massima in stoccaggio/ messa in riserva totale impianto (Mg)' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:capacitaSmaltT/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:capacitaSmaltT/text()")
           }/>
 
           <LabeledField label='Capacita massima in stoccaggio/ messa in riserva totale impianto (mc)' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:capacitaSmaltMc/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:capacitaSmaltMc/text()")
           }/>
 
           <LabeledField label='Potenzialita autorizzata (Mg/anno)' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:potenzialitaAutorizzata/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:potenzialitaAutorizzata/text()")
           }/>
 
           <LabeledField label='Tipologia impiantistica' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:elencoTipologiaImpiantisticaRifiuto/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:elencoTipologiaImpiantisticaRifiuto/text()")
           }/>
 		  
 		  
@@ -238,29 +238,29 @@
                         {
                             hide: true,
                             id: true,
-                            xpath: "../../decsiraogc_rifiuti:LineaImpRecSmaltAIA208/@gml:id"
+                            xpath: "../../decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id"
                         },
                         {
                             hide: true,
                             headerName: 'Id Linea',
                             width: 100,
-                            xpath:"decsiraogc_rifiuti:LineaCodiciCER/decsiraogc_rifiuti:codLinea/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:codLinea/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Codice EER',
                             width: 100,
-                            xpath:"decsiraogc_rifiuti:LineaCodiciCER/decsiraogc_rifiuti:codiceCER/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:codiceCER/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Descrizione codice EER',
                             width: 600,
-                            xpath:"decsiraogc_rifiuti:LineaCodiciCER/decsiraogc_rifiuti:desCER/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:desCER/text()"
                         }
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:lineaCodiciCER")}
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaCodiciCER")}
                 
           />
                 
@@ -279,41 +279,41 @@
                         {
                             hide: true,
                             id: true,
-                            xpath: "decsiraogc_rifiuti:LineaImpRecSmaltAIA208/@gml:id"
+                            xpath: "decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id"
                         },
                         {
                             hide: false,
                             headerName: 'Id Linea',
                             width: 90,
-                            xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:idLineaImpiantistica/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:idLineaImpiantistica/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Tipologia impiantistica',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:tipologImpiant/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:tipologImpiant/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Descrizione per Altro recupero/smaltimento',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:desAltraTipologImpiant/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:desAltraTipologImpiant/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Potenzialita (Mg/a)',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:quantitaAutorizT/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:quantitaAutorizT/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Capacita max di stoccaggio (Mg/mc)',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:quantitaAutorizMc/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:quantitaAutorizMc/text()"
                         }
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:lineaImpRecSmaltAIA208")}
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208")}
                 
           />
 		  
@@ -326,8 +326,8 @@
                 rowSelection={false}
                 dependsOn={{
                         tableId: "LineaImpRecSmaltAIA208",
-                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:lineaImpRecSmaltAIA208"),
-                        xpath: "decsiraogc_rifiuti:LineaImpRecSmaltAIA208/@gml:id",
+                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208"),
+                        xpath: "decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id",
                         pdfTitle: "Operazione di recupero "
                     }}
 
@@ -336,29 +336,29 @@
                         {
                             hide: true,
                             id: true,
-                            xpath: "../../decsiraogc_rifiuti:LineaImpRecSmaltAIA208/@gml:id"
+                            xpath: "../../decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id"
                         },
                         {
                             hide: true,
                             headerName: 'Id Linea',
                             width: 100,
-                            xpath:"decsiraogc_rifiuti:OperazRecRifiutiAIA208/decsiraogc_rifiuti:identificativoLinea/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:OperazRecRifiutiAIA208/decsiraogc_rifiuti_smaltimento:identificativoLinea/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Codifica operazione',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:OperazRecRifiutiAIA208/decsiraogc_rifiuti:codOperazRec/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:OperazRecRifiutiAIA208/decsiraogc_rifiuti_smaltimento:codOperazRec/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Operazione di recupero',
                             width: 550,
-                            xpath:"decsiraogc_rifiuti:OperazRecRifiutiAIA208/decsiraogc_rifiuti:desOperazRec/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:OperazRecRifiutiAIA208/decsiraogc_rifiuti_smaltimento:desOperazRec/text()"
                         }
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:lineaImpRecSmaltAIA208/decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:operazRecRifiutiAIA208")}  
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:operazRecRifiutiAIA208")}  
           />
                 
 
@@ -373,8 +373,8 @@
                 rowSelection={false}
                  dependsOn={{
                         tableId: "LineaImpRecSmaltAIA208",
-                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:lineaImpRecSmaltAIA208"),
-                        xpath: "decsiraogc_rifiuti:LineaImpRecSmaltAIA208/@gml:id",
+                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208"),
+                        xpath: "decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id",
                         pdfTitle: "Operazione di smaltimento "
                     }}
                 columns={
@@ -382,29 +382,29 @@
                         {
                             hide: true,
                             id: true,
-                            xpath: "../../decsiraogc_rifiuti:LineaImpRecSmaltAIA208/@gml:id"
+                            xpath: "../../decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id"
                         },
                         {
                             hide: true,
                             headerName: 'Id Linea',
                             width: 100,
-                            xpath:"decsiraogc_rifiuti:OperazSmaltRifiutiAIA208/decsiraogc_rifiuti:identificativoLinea/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:OperazSmaltRifiutiAIA208/decsiraogc_rifiuti_smaltimento:identificativoLinea/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Codifica operazione',
                             width: 150,
-                            xpath:"decsiraogc_rifiuti:OperazSmaltRifiutiAIA208/decsiraogc_rifiuti:codOperazSmalt/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:OperazSmaltRifiutiAIA208/decsiraogc_rifiuti_smaltimento:codOperazSmalt/text()"
                         },
                         {
                             hide: false,
                             headerName: 'Operazione di smaltimento',
                             width: 550,
-                            xpath:"decsiraogc_rifiuti:OperazSmaltRifiutiAIA208/decsiraogc_rifiuti:desOperazSmalt/text()"
+                            xpath:"decsiraogc_rifiuti_smaltimento:OperazSmaltRifiutiAIA208/decsiraogc_rifiuti_smaltimento:desOperazSmalt/text()"
                         }
                     ]
                 }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:lineaImpRecSmaltAIA208/decsiraogc_rifiuti:LineaImpRecSmaltAIA208/decsiraogc_rifiuti:operazSmaltRifiutiAIA208")}
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/decsiraogc_rifiuti_smaltimento:operazSmaltRifiutiAIA208")}
                 
           />
                 
@@ -418,7 +418,7 @@
         <Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE RIFIUTI' eventKey='11' expanded={true}>
 			 <LinkScheda
 				  params={{
-					  cql_filter: "decsiraogc_rifiuti:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:identificativoRifiutoGenerico/text()")+"'"
+					  cql_filter: "decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico/text()")+"'"
 				  }}
 				  featureType="impiantoRifiutiGenerico"
 				  linkTitle="Vai a scheda impianto di gestione rifiuti"
@@ -431,7 +431,7 @@
 	              center={
 	                      model.getValue({
 	                          type: TemplateUtils.GEOMETRY_TYPE,
-	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti:geometria/gml:Point/gml:pos/text()"
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:geometria/gml:Point/gml:pos/text()"
 	                      })
 	              }
 	              layers={[
@@ -451,7 +451,7 @@
 	                          "url": "{geoserverUrl}/wms",
 	                          "visibility": true,
 	                          "title": "Anteprima Impianto Rifiuti Smaltimento AIA208",
-	                          "name": "decsiraogc_rifiuti:ImpiantoRifiutiSmaltimAIA208",
+	                          "name": "decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208",
 	                          "group": "Overlays",
 	                          "format": "image/png"
 	                      }
