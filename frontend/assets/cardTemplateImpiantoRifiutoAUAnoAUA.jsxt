@@ -1,7 +1,7 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='IMPIANTI RECUPERO RIFIUTI AUA O PROCEDURA SEMPLIFICATA (NON AUA)' subtitle={[
+        <DetailTitle title='IMPIANTI RECUPERO RIFIUTI AUA O PROCEDURA SEMPLIFICATA (FUORI AUA)' subtitle={[
             'Codice SIRA stabilimento: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:codiceSira/text()")
             ]} id={model.id}/>
@@ -24,14 +24,31 @@
     			<LabeledField label='Data scadenza provvedimento finale AUA'  dateFormat='DD/MM/YYYY' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataScadenza/text()")
                 }/>
+				
+				<LabeledField label='Numero iscrizione registro provinciale' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:numeroProvveIscrizione/text()")
+                }/>
+                <LabeledField label='Data  iscrizione registro provinciale'  dateFormat='DD/MM/YYYY' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataProvvIscrizione/text()")
+                }/>
+    			<LabeledField label='Data scadenza iscrizione registro provinciale'  dateFormat='DD/MM/YYYY' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataScadenza/text()")
+                }/>
+			 </ProfileWrapper>
+				
+				
+		<LabeledField label='Rifiuto pericoloso' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:rifiutoPericoloso/text()")
+				}/>
+
+				
+
+		   <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
     			<LabeledField label='Stato' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desStato/text()")
                 }/>
             </ProfileWrapper>
-			<LabeledField label='Rifiuto pericoloso' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:rifiutoPericoloso/text()")
-            }/>
-
+			
 
 			<Section header='DATI STABILIMENTO' eventKey='2' expanded={true}>
   				<LabeledField label='Codice SIRA stabilimento' value={
