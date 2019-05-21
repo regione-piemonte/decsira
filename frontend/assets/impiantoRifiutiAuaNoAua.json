@@ -55,7 +55,7 @@
            "headerName": "Stato",
            "suppressSorting": true,
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desStato/text()"],
+           "xpath": ["decsiraogc_rifiuti_aua:desStato/text()"],
 		   "width" : 100,
            "type": 2
          },
@@ -267,7 +267,8 @@
             "urlParams": {
               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_impianto",
               "propertyName": "id_tipo_impianto,des_tipo_impianto,ordinamento",
-			   "sortBy": "ordinamento+A"
+              "cql_filter": "id_tipo_impianto=1%20OR%20id_tipo_impianto=2%20OR%20id_tipo_impianto=3%20OR%20id_tipo_impianto=4%20OR%20id_tipo_impianto=5%20OR%20id_tipo_impianto=6%20OR%20id_tipo_impianto=7%20OR%20id_tipo_impianto=9%20OR%20id_tipo_impianto=11",
+			        "sortBy": "ordinamento+A"
               
             }
           },
@@ -284,7 +285,7 @@
              "urlParams": {
                "typeName": "decsiraogc_decodif:decsira_d_stato",
                "propertyName": "id_stato,des_stato",
-               "cql_filter": "id_stato=100%20OR%20id_stato=101%20OR%20id_stato=102%20OR%20id_stato=103",
+               "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=103",
                "sortBy": "ordinamento+A"
              }
            },

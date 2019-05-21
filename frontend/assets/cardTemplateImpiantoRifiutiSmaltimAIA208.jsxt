@@ -226,46 +226,7 @@
           }/>
 		  
 		  
-		  <Section header='Codice EER' eventKey='10' expanded={true}>
-
-          <SiraTable
-                id="CodiceCer"
-                selectedRow={model.CodiceCer}
-                wfsVersion="2.0"
-                rowSelection={false}
-                columns={
-                    [
-                        {
-                            hide: true,
-                            id: true,
-                            xpath: "../../decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id"
-                        },
-                        {
-                            hide: true,
-                            headerName: 'Id Linea',
-                            width: 100,
-                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:codLinea/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Codice EER',
-                            width: 100,
-                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:codiceCER/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Descrizione codice EER',
-                            width: 600,
-                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:desCER/text()"
-                        }
-                    ]
-                }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaCodiciCER")}
-                
-          />
-                
-
-        </Section>
+		 
 
         <Section header='Linea impiantistica' eventKey='7' expanded={true}>
 
@@ -273,7 +234,7 @@
                 id="LineaImpRecSmaltAIA208"
                 selectedRow={model.LineaImpRecSmaltAIA208}
                 wfsVersion="2.0"
-                rowSelection={"single"}
+                rowSelection={false}
                 columns={
                     [
                         {
@@ -316,22 +277,19 @@
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208")}
                 
           />
+
+
+          <Section header='' eventKey='8' expanded={true}>
+          </Section>
 		  
-          <Section header='Operazione di recupero' eventKey='8' expanded={(model.LineaImpRecSmaltAIA208 !== undefined && model.LineaImpRecSmaltAIA208 !== null ) ? true: false}>
+          <Section header='Operazione di recupero' eventKey='8' expanded={true}>
 
           <SiraTable
                 id="OperazRecRifiutiAIA208"
                 selectedRow={model.OperazRecRifiutiAIA208}
                 wfsVersion="2.0"
                 rowSelection={false}
-                dependsOn={{
-                        tableId: "LineaImpRecSmaltAIA208",
-                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208"),
-                        xpath: "decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id",
-                        pdfTitle: "Operazione di recupero "
-                    }}
-
-					columns={
+					       columns={
                     [
                         {
                             hide: true,
@@ -363,20 +321,56 @@
                 
 
         </Section>
+
+
+         <Section header='Codice EER' eventKey='10' expanded={true}>
+
+          <SiraTable
+                id="CodiceCer"
+                selectedRow={model.CodiceCer}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            hide: true,
+                            id: true,
+                            xpath: "../../decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id"
+                        },
+                        {
+                            hide: true,
+                            headerName: 'Id Linea',
+                            width: 100,
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:codLinea/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Codice EER',
+                            width: 100,
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:codiceCER/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Descrizione codice EER',
+                            width: 600,
+                            xpath:"decsiraogc_rifiuti_smaltimento:LineaCodiciCER/decsiraogc_rifiuti_smaltimento:desCER/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaCodiciCER")}
+                
+          />
+                
+
+        </Section>
           
-        <Section header='Operazione di smaltimento' eventKey='9' expanded={(model.LineaImpRecSmaltAIA208 !== undefined && model.LineaImpRecSmaltAIA208 !== null ) ? true: false}>
+        <Section header='Operazione di smaltimento' eventKey='9' expanded={true}>
 
           <SiraTable
                 id="OperazSmaltRifiutiAIA208"
                 selectedRow={model.OperazSmaltRifiutiAIA208}
                 wfsVersion="2.0"
                 rowSelection={false}
-                 dependsOn={{
-                        tableId: "LineaImpRecSmaltAIA208",
-                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:lineaImpRecSmaltAIA208"),
-                        xpath: "decsiraogc_rifiuti_smaltimento:LineaImpRecSmaltAIA208/@gml:id",
-                        pdfTitle: "Operazione di smaltimento "
-                    }}
                 columns={
                     [
                         {

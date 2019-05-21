@@ -26,7 +26,7 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Scheda_ImpiantoRifiutiDiscaricaAIA208_Codice_SIRA_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_discarica:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_rifiuti_discarica:stabilimentoSemplice/decsiraogc_rifiuti_discarica:StabilimentoSemplice/decsiraogc_rifiuti_discarica:codiceSira/text()}}.pdf",
+    "pdfname": "Scheda_ImpiantoRifiutiDiscaricaAIA208_Codice_SIRA_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_discarica:ImpiantoRifiutiDiscaricaAIA208/decsiraogc_rifiuti_discarica:stabilimentoSemplice/decsiraogc_rifiuti_discarica:StabilimentoSemplice/decsiraogc_rifiuti_discarica:codiceSIRA/text()}}.pdf",
      "template": "assets/cardTemplateImpiantoRifiutiDiscaricaAIA208.jsxt",
      "service": {
        "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
@@ -95,12 +95,6 @@
 			  "type" : 2,
 			  "width" : 90,
 			  "profiles" : ["PA_GEN_DECSIRA@REG_PMN" ]
-			}, {
-			  "suppressSorting" : true,
-			  "headerName" : "Operazioni di smaltimento",
-			  "xpath" : [ "decsiraogc_rifiuti_discarica:elencoOperazioniSmaltimento/text()" ],
-			  "type" : 2,
-			  "width" : 200
 			}, {
 			  "suppressSorting" : true,
 			  "headerName" : "Numero provvedimento finale",
@@ -219,7 +213,7 @@
 				  "typeName" : "decsiraogc_decodif:decsira_d_stato",
 				  "propertyName" : "id_stato,des_stato",
 				  "sortBy" : "ordinamento+A",
-				  "cql_filter" : "id_stato=100%20OR%20id_stato=101%20OR%20id_stato=102%20OR%20id_stato=103"
+				  "cql_filter" : "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=103"
 				}
 			  },
 			  "profile" : ["PA_GEN_DECSIRA@REG_PMN" ],
@@ -234,6 +228,7 @@
 				"urlParams" : {
 				  "typeName" : "decsiraogc_decodif:decsira_d_tipo_provvedimento",
 				  "propertyName" : "id_proc_attivita,provv",
+				  "cql_filter" : "id_proc_attivita=110%20OR%20id_proc_attivita=111",
 				  "sortBy" : "id_proc_attivita+A"
 				}
 			  },
@@ -271,11 +266,12 @@
 			  "valueService" : {
 				"urlParams" : {
 				  "typeName" : "decsiraogc_decodif:decsira_d_op_smaltimento",
-				  "propertyName" : "id_op_smaltimento,des_op_smaltimento",
+				  "propertyName" : "id_op_smaltimento,des_op_smaltimento,label",
+				  "cql_filter" : "id_op_smaltimento=1%20OR%20id_op_smaltimento=5",
 				  "sortBy" : "ordinamento+A"
 				}
 			  },
-			  "valueLabel" : "des_op_smaltimento"
+			  "valueLabel" : "label"
 			}, {
 			  "index" : 13,
 			  "attribute" : "decsiraogc_rifiuti_discarica:lineaCodiciCER/decsiraogc_rifiuti_discarica:LineaCodiciCER/decsiraogc_rifiuti_discarica:famigliaCER",
