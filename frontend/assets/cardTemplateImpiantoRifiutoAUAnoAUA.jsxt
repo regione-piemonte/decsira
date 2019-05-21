@@ -3,7 +3,9 @@
     header={(
         <DetailTitle title='IMPIANTI RECUPERO RIFIUTI AUA O PROCEDURA SEMPLIFICATA (FUORI AUA)' subtitle={[
             'Codice SIRA stabilimento: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:codiceSira/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:codiceSira/text()"),
+            ' - Stato Istanza: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desStato/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
@@ -185,9 +187,10 @@
               ]
           }
           features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA")}/>
-      </Section>
 
-      <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+
+
+         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
           <Section header='Operazioni di recupero' eventKey='10' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
               <SiraTable
                   id="AttivitaRecuperoRifiuti"
@@ -307,8 +310,12 @@
           features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:attivitaRecuperoRifiuti")}/>
       </Section>
     </Section>
+
+      </Section>
+
+     
 	
-	<Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE DEI RIFIUTI' eventKey='10' expanded={false}>
+	<Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE DEI RIFIUTI' eventKey='10' expanded={true}>
        <LinkScheda
               params={{
                   cql_filter: "decsiraogc_rifiuti_generici:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:identificativoRifiutoGenerico/text()")+"'"
