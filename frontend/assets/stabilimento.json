@@ -55,52 +55,59 @@
            "headerName": "Codice Sira Stabilimento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:codiceSira/text()"],
-           "type": 1
+           "type": 1,
+           "width" : 90
          },
          {
            "headerName": "Denominazione stabilimento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nome/text()"],
-           "type": 2
+           "type": 2,
+           "width" : 100
          },
          {
            "headerName": "Provincia",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:desProvincia/text()"],
-           "type": 2
+           "type": 2,
+           "width" : 120
          },
          {
            "headerName": "Comune",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nomeComune/text()"],
-           "type": 2
+           "type": 2,
+           "width" : 150
          },
          {
            "headerName": "Indirizzo",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:indirizzo/text()"],
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
+           "type": 2,
+           "width" : 120
          },
          {
            "headerName": "Ragione sociale azienda",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()"],
-           "type": 2
+           "type": 2,
+           "width" : 150
          },
          {
            "headerName": "Codice fiscale azienda",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
+           "type": 2,
+           "width" : 100
          },
          {
            "headerName": "Partita IVA",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
+           "type": 2,
+           "width" : 100
          },
          {
            "headerName": "Provincia azienda",
@@ -112,40 +119,46 @@
            "headerName": "Comune azienda",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desComune/text()"],
-           "type": 2
+           "type": 2,
+           "width" : 120
          },
          {
            "headerName": "Indirizzo azienda",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:indirizzo/text()"],
            "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
+           "type": 2,
+            "width" : 120
          },
          {
            "headerName": "Tipo provvedimento attivo",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:tipoProvvedimentoAttivo/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
+           "type": 2,
+            "width" : 150
          },
          {
            "headerName": "Tipo provvedimento storico",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:tipoProvvedimentoStorico/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
+           "type": 2,
+            "width" : 120
          },
          {
-           "headerName": "Attivita",
+           "headerName": "Ambito tematico",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:tematica/text()"],
-           "type": 2
+           "type": 2,
+            "width" : 180
          },
          {
            "headerName": "Abitanti equivalenti trattati del depuratore",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_stabilimenti:impiantoDiDepurazione/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()"],
-           "type": 2
+           "xpath": ["decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()"],
+           "type": 2,
+            "width" : 80
          },
          {
            "hide": true,
@@ -287,7 +300,7 @@
         {
            "index": 11,
            "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tematica/decsiraogc_stabilimenti:Tematica/decsiraogc_stabilimenti:idTematica",
-           "label":"Attivita",
+           "label":"Ambito Tematico",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
