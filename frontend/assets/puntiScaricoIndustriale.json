@@ -374,6 +374,7 @@
              "urlParams": {
                "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
                "propertyName": "id_proc_attivita,provv",
+                "cql_filter": "id_proc_attivita=9%20OR%20id_proc_attivita=99",
                 "sortBy": "provv+A"
              }
            },
@@ -409,9 +410,10 @@
            "valueService": {
 
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_d_stato",
-               "propertyName": "id_stato,des_stato",
-                "sortBy": "des_stato+A"
+               "typeName": "decsiraogc_decodif:decsira_d_stato",
+               "propertyName": "id_stato,des_stato,ordinamento",
+               "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=103",
+                "sortBy": "ordinamento+A"
              }
            },
            "valueId":"id_stato",
