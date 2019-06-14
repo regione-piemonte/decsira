@@ -4372,4 +4372,20 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdd49644a-f032-46c3-989c-57dfcbebe393" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRASVIL:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/siraemissioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>

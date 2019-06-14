@@ -197,7 +197,7 @@
 					<xs:element name="lunghezzaTrincea" type="xs:decimal" minOccurs="0" />
 					<xs:element name="areaTrincea" type="xs:decimal" minOccurs="0" />
 					
-					<xs:element name="autorizzAmbientalePuntoScaricoInd" type="decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoIndPropertyType" minOccurs="0" maxOccurs="1" />
+					<xs:element name="autorizzAmbientalePuntoScaricoInd" type="decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoIndPropertyType" minOccurs="0" maxOccurs="unbounded" />
 					
 					<xs:element name="attivitaProduttivaScaricoIndustriale" type="decsiraogc_scarichi:AttivitaProduttivaScaricoIndustrialePropertyType" minOccurs="0" maxOccurs="unbounded" />
 					
@@ -264,12 +264,20 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
+					<xs:element name="idAttivita" type="xs:integer" minOccurs="0" />
 					<xs:element name="codiceSira" type="xs:decimal" minOccurs="1" />
 					<xs:element name="idStato" type="xs:decimal" minOccurs="0" />
 					<xs:element name="desStato" minOccurs="0">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="desTematica" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
