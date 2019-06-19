@@ -50,11 +50,11 @@
 <!-- Recupero di Rifiuti in procedura semplificata (non AUA)    -->      
 	  <Rule>
 	    <Name>R2</Name>
-         <Title> Recupero di Rifiuti in procedura semplificata (fuori AUA)</Title>
+         <Title> Recupero di Rifiuti in procedura semplificata (fuori A.U.A.)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:tipoProvvedimento</ogc:PropertyName>
-              <ogc:Literal>Recupero di Rifiuti in procedura semplificata (non AUA) ai sensi degli artt. 214 e 216 del D.Lgs. 152/06</ogc:Literal>
+              <ogc:Literal>Recupero di Rifiuti in procedura semplificata (fuori A.U.A.) ai sensi degli artt. 214 e 216 del D.Lgs. 152/06</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           
