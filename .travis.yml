@@ -1,10 +1,13 @@
 language: node_js
 node_js:
   - 4
+  dist: xenial
+  sudo: required
+  services:
+  - xvfb
 script: cd frontend && npm install && npm run travis
 before_install:
-	services:
-	- xvfb
+	- export DISPLAY=:99.0
     - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
     - npm -v
 branches:
