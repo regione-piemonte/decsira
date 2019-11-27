@@ -1,0 +1,702 @@
+{
+  "featureTypeName": "decsiraogc_controlli_scarichi_urbani:ControlliScarichiUrbani",
+  "featureTypeNameLabel": "Controllo Scarichi Acque Reflue",
+  "nameSpaces": {
+    "decsiraogc_controlli_scarichi_urbani": "http://www.regione.piemonte.it/ambiente/decsira/1.0",
+    "decsiraogc_decodif": "http://www.regione.piemonte.it/ambiente/decodif/1.0"
+  },
+  "layer": {
+    "type": "wms",
+    "url": "{geoserverUrl}/wms",
+    "visibility": true,
+    "title": "Controllo Scarichi Acque Reflue",
+    "name": "decsiraogc_controlli_scarichi_urbani:ControlliScarichiUrbani",
+    "infoFormat": "application/vnd.ogc.gml/3.1.1",
+    "topologyConfig": {
+      "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+      "wfsVersion": "1.1.0",
+      "layerName": "ZONES_IPR",
+      "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+      "geomAttribute": "msGeometry",
+      "geometryType": "Polygon"
+    },
+    "featureType": "scarichi",
+    "group": "Oggetti",
+    "format": "image/png"
+  },
+  "geometryName": "decsiraogc_controlli_scarichi_urbani:geometria",
+  "geometryType": "Point",
+  "featureinfo": {
+    "templateURL": "assets/infoTemplateControlliScarichiUrbani.jsxt"
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_controlli_scarichi_urbani:ControlliScarichiUrbani",
+      "columns": [
+        {
+          "hide":true,
+          "headerName": "Geometry",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:geometria/gml:Point/gml:pos/text()"
+          ],
+          "suppressSorting": true,
+          "type": 6
+        },
+        {
+          "hide": true,
+          "headerName": "Ragione sociale Gestore impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:rag_sociale_azienda/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Codice Fiscale Gestore impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:codice_fiscale_azienda/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Denominazione impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:denominazione_dep/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Comune impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:comune_dep/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Provincia impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:provincia_dep/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Indirizzo impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:indirizzo_dep/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice SIRA stabilimento",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:codice_sira/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice Regionale impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:codice_regionale_imp/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice Europeo impianto di depurazione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:codice_europeo_imp/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice impianto anagrafica ARPA GAU",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:arpa_code_entity_imp/text()"
+          ],
+          "profiles": ["G"],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Capacità organica di progetto (a.e.)",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:capacita_org_progetto/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "hide": true,
+          "headerName": "Abitanti equivalenti trattati",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:abitanti_equiv_trattati/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "hide": true,
+          "headerName": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 1",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab1/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 2",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab2/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 3",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab3/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Riferimenti estremi autorizzativi ARPA GAU",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:arpa_descrizione_autoriz/text()"
+          ],
+          "profiles": ["G"],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice Regionale Scarico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:cod_regionale_scarico/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice Europeo Scarico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:cod_europeo_scarico/text()"
+          ],
+          "profiles": ["G"],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice Scarico anangrafica ARPA GAU",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:arpa_code_entity_scarico/text()"
+          ],
+          "profiles": ["G"],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Comune Scarico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:comune_scarico/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Provincia Scarico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:provincia_scarico/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Coord X UTM32 Scarico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:coord_utm_x_scarico/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "hide": true,
+          "headerName": "Coord Y UTM32 Scarico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:coord_utm_y_scarico/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "hide": true,
+          "headerName": "Tipologia Punto controllo",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:tipologia_punto_controllo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Descrizione Punto controllo",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:descrizione_punto_controllo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Numero campione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:numero_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Data campione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:data_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Anno campione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:anno_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 5
+        },
+        {
+          "hide": true,
+          "headerName": "Semestre campione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:semestre_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 5
+        },
+        {
+          "hide": true,
+          "headerName": "Descrizione campione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:descrizione_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Numero Rapporto di Prova",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:numero_rapp_di_prova/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Note Rapporto di Prova",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:note_rapp_di_prova/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Parametro",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:des_parametro/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice CAS",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:cas/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Modalità di espressione riultato analitico",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:modalita_espressione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Unità di misura",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:unita_di_misura/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Operatore",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:operatore/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Valore misurato",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:valore_base_number/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "hide": true,
+          "headerName": "Valore misurato (testo)",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:valore_base/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Limite di Rilevabilità (LCL)",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:limite_rilevabilita_lcl/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Incertezza Misura",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:incertezza_misura"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Codice Metodo",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:codice_metodo"
+          ],
+          "profiles": ["G"],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Descrizione Metodo",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:descrizione_metodo"
+          ],
+          "profiles": ["G"],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "hide": true,
+          "headerName": "Fonte Campione",
+          "xpath": [
+            "decsiraogc_controlli_scarichi_urbani:fonte_campione"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        }
+      ]
+    }
+  },
+  "query": {
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields": [
+      {
+        "index": 1,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:provincia_scarico",
+        "label": "Provincia Scarico",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:sipra_t_province",
+            "propertyName": "toponimo",
+            "sortBy": "toponimo+A"
+          }
+        },
+        "valueId": "toponimo",
+        "valueLabel": "toponimo"
+      },
+      {
+        "index": 2,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:comune_scarico",
+        "label": "Comune Scarico",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:sipra_t_comuni",
+            "propertyName": "toponimo,sigla_provincia",
+            "sortBy": "toponimo+A"
+          }
+        },
+        "valueId": "toponimo",
+        "valueLabel": "toponimo",
+        "dependson": {
+          "field": "decsiraogc_decodif:sipra_t_province/decsiraogc_decodif:sigla",
+          "from": "sigla",
+          "to": "sigla_provincia"
+        }
+      },
+      {
+        "index": 3,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:rag_sociale_azienda",
+        "label": "Ragione sociale Gestore impianto di depurazione",
+        "type": "string"
+      },
+      {
+        "index": 4,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:codice_fiscale_azienda",
+        "label": "Codice Fiscale Gestore impianto di depurazione",
+        "type": "string"
+      },
+      {
+        "index": 5,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:denominazione_dep",
+        "label": "Denominazione impianto di depurazione",
+        "type": "string"
+      },
+      {
+        "index": 6,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:codice_sira",
+        "label": "Codice SIRA stabilimento",
+        "type": "number"
+      },
+      {
+        "index": 7,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:codice_regionale_imp",
+        "label": "Codice Regionale Impianto di depurazione",
+        "type": "string"
+      },
+      {
+        "index": 8,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:codice_europeo_imp",
+        "label": "Codice Europeo Impianto di depurazione",
+        "type": "string"
+      },
+      {
+        "index": 9,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:capacita_org_progetto",
+        "label": "Capacita organica di progetto (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 10,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:abitanti_equiv_trattati",
+        "label": "Abitanti equivalenti trattati",
+        "type": "number"
+      },
+      {
+        "index": 11,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab1",
+        "label": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 1",
+        "type": "list",
+        "values": [
+          {
+            "value": "si",
+            "name": "SI"
+          },
+          {
+            "value": "no",
+            "name": "NO"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 12,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab2",
+        "label": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 2",
+        "type": "list",
+        "values": [
+          {
+            "value": "si",
+            "name": "SI"
+          },
+          {
+            "value": "no",
+            "name": "NO"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 13,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab3",
+        "label": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 3",
+        "type": "list",
+        "values": [
+          {
+            "value": "si",
+            "name": "SI"
+          },
+          {
+            "value": "no",
+            "name": "NO"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 14,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:cod_regionale_scarico",
+        "label": "Codice Regionale Scarico ",
+        "type": "string"
+      },
+      {
+        "index": 15,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:tipologia_punto_controllo",
+        "label": "Tipologia Punto controllo",
+        "type": "list",
+        "values": [
+          {
+            "value": "ENTRATA",
+            "name": "ENTRATA"
+          },
+          {
+            "value": "USCITA",
+            "name": "USCITA"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 16,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:numero_campione",
+        "label": "Numero campione",
+        "type": "string"
+      },
+      {
+        "index": 17,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:data_campione",
+        "label": "Data campione",
+        "type": "date"
+      },
+      {
+        "index": 18,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:anno_campione",
+        "label": "Anno campione",
+        "type": "list",
+        "values": [
+          {
+            "value": "2016",
+            "name": "2016"
+          },
+          {
+            "value": "2017",
+            "name": "2017"
+          },
+          {
+            "value": "2018",
+            "name": "2018"
+          },
+          {
+            "value": "2019",
+            "name": "2019"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 19,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:semestre_campione",
+        "label": "Semestre campione",
+        "type": "list",
+        "values": [
+          {
+            "value": "I",
+            "name": "I SEMESTRE"
+          },
+          {
+            "value": "II",
+            "name": "II SEMESTRE"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 20,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:numero_rapp_di_prova",
+        "label": "Numero Rapporto di Prova",
+        "type": "string"
+      },
+      {
+        "index": 21,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:des_parametro",
+        "label": "Parametro",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_param_controlli_scaurb",
+            "propertyName": "decsiraogc_decodif:des_parametro",
+            "sortBy": "des_parametro+A"
+          }
+        },
+        "valueId": "des_parametro",
+        "valueLabel": "des_parametro"
+      },
+      {
+        "index": 22,
+        "attribute": "decsiraogc_controlli_scarichi_urbani:valore_base_number",
+        "label": "Valore misurato",
+        "type": "number"
+      }
+    ]
+  }
+}
