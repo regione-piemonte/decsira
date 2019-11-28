@@ -163,6 +163,13 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
+    <Rule>
+		<priority>23</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	<Rule>
 		<priority>100</priority>
 		<roles>ROLE_ANONYMOUS</roles>
@@ -856,5 +863,21 @@
 			  <attribute>decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:estremiProvvedimento</attribute>
 		</hiddenAttributes>		  
     </Rule>
+    <Rule>
+		<priority>123</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
+		<layer>ControlliScarichiUrbani</layer>
+		<accessMode>READ</accessMode>
+		<filter>exclude</filter>
+		<hiddenAttributes>
+			<attribute>decsiraogc_controlli_scarichi_urbani:arpa_code_entity_imp</attribute>
+			<attribute>decsiraogc_controlli_scarichi_urbani:arpa_descrizione_autoriz</attribute>
+			<attribute>decsiraogc_controlli_scarichi_urbani:cod_europeo_scarico</attribute>
+			<attribute>decsiraogc_controlli_scarichi_urbani:arpa_code_entity_scarico</attribute>
+			<attribute>decsiraogc_controlli_scarichi_urbani:codice_metodo</attribute>
+			<attribute>decsiraogc_controlli_scarichi_urbani:descrizione_metodo</attribute>
+		</hiddenAttributes>
+   </Rule>
     </rules>
 </Config>
