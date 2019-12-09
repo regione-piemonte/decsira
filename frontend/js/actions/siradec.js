@@ -21,6 +21,7 @@ const CARD_CONFIG_LOADED = 'CARD_CONFIG_LOADED';
 const INLINE_MAP_CONFIG = 'INLINE_MAP_CONFIG';
 const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
+const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
@@ -115,6 +116,7 @@ function hideQueryError() {
         type: QUERYFORM_HIDE_ERROR
     };
 }
+
 function getAttributeValuesPromise(field, params, serviceUrl) {
     if (serviceUrl) {
         let {url} = ConfigUtils.setUrlPlaceholders({url: serviceUrl});
@@ -181,79 +183,102 @@ function configurationLoading() {
     };
 }
 
+function isUserAuthorized(profiles = [], userprofile) {
+    if ( profiles.length > 0 ) {
+        return profiles.filter(p => p === userprofile).length > 0;
+    }
+    return true;
+}
+
+function userNotAuthorized(feature) {
+    return {
+        type: USER_NOT_AUTHORIZED,
+        feature
+    };
+}
+
 function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const {userprofile} = getState();
-        dispatch(configurationLoading());
-        return axios.get(url).then((response) => {
-            let config = response.data;
-            if (typeof config !== "object") {
-                try {
-                    config = JSON.parse(config);
-                } catch(e) {
-                    dispatch(configureQueryFormError(featureType, 'Configuration file broken (' + url + '): ' + e.message));
+        const unAuthorized = getState().siradec.notAuthorized;
+        if (unAuthorized && unAuthorized.filter(f => f === featureType).length > 0) {
+            dispatch(userNotAuthorized(featureType));
+            dispatch(expandFilterPanel(false));
+        } else {
+            dispatch(configurationLoading());
+            return axios.get(url).then((response) => {
+                let config = response.data;
+                if (typeof config !== "object") {
+                    try {
+                        config = JSON.parse(config);
+                    } catch(e) {
+                        dispatch(configureQueryFormError(featureType, 'Configuration file broken (' + url + '): ' + e.message));
+                    }
                 }
-            }
-            const layer = ConfigUtils.setUrlPlaceholders(config.layer);
-            if (addlayer) {
-                dispatch(addLayer(assign({}, layer, {siraId})));
-            }
-            // add layer in cart
-            if (addCartlayer) {
-                let layers = [];
-                if (layer) {
-                    layer.siraId = siraId;
-                    layers.push(layer);
+                if (!isUserAuthorized(config.profiles, userprofile.profile)) {
+                    dispatch(userNotAuthorized(config.featureTypeName));
+                    dispatch(expandFilterPanel(false));
+                } else {
+                    const layer = ConfigUtils.setUrlPlaceholders(config.layer);
+                    if (addlayer) {
+                        dispatch(addLayer(assign({}, layer, {siraId})));
+                    }
+                    // add layer in cart
+                    if (addCartlayer) {
+                        let layers = [];
+                        if (layer) {
+                            layer.siraId = siraId;
+                            layers.push(layer);
+                        }
+                        dispatch(addFeatureTypeLayerInCart(layers, node));
+                    }
+                    // Configure the FeatureGrid for WFS results list
+                    dispatch(configureFeatureGrid(config.featuregrid, featureType));
+                    dispatch(configureFeatureInfo(config.featureinfo, featureType));
+                    dispatch(configureCard(config.card, featureType));
+
+                    let serviceUrl = config.query.service.url;
+
+                    const fields = config.query.fields.filter(
+                        (field) => verifyProfiles(field.profile, userprofile.profile)
+                    ).map((f) => {
+                        let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
+                        urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
+                        return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
+                    });
+                    Promise.all(fields).then((fi) => {
+                        dispatch(configureFeatureType({
+                                id: config.featureTypeName,
+                                name: config.featureTypeNameLabel,
+                                geometryName: config.geometryName,
+                                geometryType: config.geometryType,
+                                nameSpaces: config.nameSpaces || {},
+                                layer: layer,
+                                exporter: config.exporter
+                            }, fi, featureType, activate));
+                    }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
+                    // for (let field in config.query.fields) {
+                    //     if (field) {
+                    //         let f = config.query.fields[field];
+
+                    //         let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
+                    //         urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
+                    //         //getAttributeValuesPromise()
+                    //         dispatch(getAttributeValues({
+                    //             id: config.featureTypeName,
+                    //             name: config.featureTypeNameLabel,
+                    //             geometryName: config.geometryName,
+                    //             geometryType: config.geometryType
+                    //         }, f, urlParams, f.valueService && f.valueService.urlParams ? serviceUrl : null));
+                    //     }
+                    // }
                 }
-                dispatch(addFeatureTypeLayerInCart(layers, node));
-            }
-            // Configure the FeatureGrid for WFS results list
-            dispatch(configureFeatureGrid(config.featuregrid, featureType));
-            dispatch(configureFeatureInfo(config.featureinfo, featureType));
-            dispatch(configureCard(config.card, featureType));
 
-            let serviceUrl = config.query.service.url;
-
-            const fields = config.query.fields.filter(
-                // (field) => !field.profile || field.profile.indexOf(userprofile.profile) !== -1
-                (field) => verifyProfiles(field.profile, userprofile.profile)
-            ).map((f) => {
-                let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
-                urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
-                return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
+            }).catch((e) => {
+                dispatch(configureQueryFormError(featureType, e));
             });
-            Promise.all(fields).then((fi) => {
-                dispatch(configureFeatureType({
-                        id: config.featureTypeName,
-                        name: config.featureTypeNameLabel,
-                        geometryName: config.geometryName,
-                        geometryType: config.geometryType,
-                        nameSpaces: config.nameSpaces || {},
-                        layer: layer,
-                        exporter: config.exporter
-                    }, fi, featureType, activate));
-            }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
-            // for (let field in config.query.fields) {
-            //     if (field) {
-            //         let f = config.query.fields[field];
-
-            //         let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
-            //         urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
-            //         //getAttributeValuesPromise()
-            //         dispatch(getAttributeValues({
-            //             id: config.featureTypeName,
-            //             name: config.featureTypeNameLabel,
-            //             geometryName: config.geometryName,
-            //             geometryType: config.geometryType
-            //         }, f, urlParams, f.valueService && f.valueService.urlParams ? serviceUrl : null));
-            //     }
-            // }
-
-
-        }).catch((e) => {
-            dispatch(configureQueryFormError(featureType, e));
-        });
+        }
     };
 }
 function setActiveFeatureType(featureType) {
@@ -277,6 +302,7 @@ module.exports = {
     INLINE_MAP_CONFIG,
     SET_ACTIVE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
+    USER_NOT_AUTHORIZED,
     setWaitingForConfig,
     configureTopology,
     configureFeatureGrid,

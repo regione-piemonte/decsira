@@ -10,7 +10,7 @@ const {connect} = require('react-redux');
 const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects, toggleCategories, setNodeInUse} = require('../actions/siracatalog');
 
 const assign = require('object-assign');
-const {Tabs, Tab} = require("react-bootstrap");
+const {Tabs, Tab, Alert} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
@@ -74,6 +74,7 @@ const LayerTree = React.createClass({
         }).isRequired,
         subcat: React.PropTypes.string,
         configOggetti: React.PropTypes.object,
+        notAuthorized: React.PropTypes.bool,
         authParams: React.PropTypes.object,
         userprofile: React.PropTypes.object,
         activeFeatureType: React.PropTypes.string,
@@ -102,6 +103,16 @@ const LayerTree = React.createClass({
             this.loadMetadata({category: this.props.category});
         }
     },
+    renderUnauthorized() {
+        return (
+        <Alert bsStyle="danger" dismissible >
+              <button className="close" onClick= {() => this.props.setActiveFeatureType(null)} data-dismiss="danger" aria-label="Close">
+                 <span aria-hidden="true" color="#A9A9A9;">&times;</span>
+              </button>
+            Non si dispone delle autorizzazioni necessarie per accedere a questo dato
+        </Alert>
+        );
+    },
     render() {
         if (!this.props.nodes) {
             return <div></div>;
@@ -123,7 +134,7 @@ const LayerTree = React.createClass({
                             toggleSiraControl={this.searchAll}
                             addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>) }
-                </TOC>);
+            </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
@@ -145,6 +156,7 @@ const LayerTree = React.createClass({
                 <Tab eventKey={'objects'} title={`Oggetti (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
                 <Tab eventKey={'views'} title={`Viste Tematiche (${views ? views.length : 0})`}>{viste}</Tab>
             </Tabs>
+            {this.props.notAuthorized && this.renderUnauthorized()}
             {this.props.loading ? (
                 <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
             <AddMapModal/>
@@ -172,9 +184,10 @@ const LayerTree = React.createClass({
     },
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
-        }else if (this.props.activeFeatureType !== featureType) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
+        } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
         this.props.expandFilterPanel(status);
@@ -183,9 +196,9 @@ const LayerTree = React.createClass({
         const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
-            }else if (this.props.activeFeatureType !== featureType) {
-                this.props.setActiveFeatureType(featureType);
-            }
+        }else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
         this.props.setGridType('all_results');
         this.props.setNodeInUse(node);
         this.props.toggleSiraControl('grid', true);
