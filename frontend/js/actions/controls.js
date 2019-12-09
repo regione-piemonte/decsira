@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const TOGGLE_SIRA_CONTROL = 'TOGGLE_SIRA_CONTROL';
+const SET_SIRA_CONTROL = 'SET_SIRA_CONTROL';
 
 function toggleSiraControl(control) {
     return {
@@ -14,4 +15,12 @@ function toggleSiraControl(control) {
     };
 }
 
-module.exports = {TOGGLE_SIRA_CONTROL, toggleSiraControl};
+function setSiraControl(control, status) {
+    return {
+        type: SET_SIRA_CONTROL,
+        control,
+        status
+    };
+}
+
+module.exports = { TOGGLE_SIRA_CONTROL, SET_SIRA_CONTROL, toggleSiraControl, setSiraControl};

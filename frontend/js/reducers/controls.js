@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const {TOGGLE_SIRA_CONTROL} = require('../actions/controls');
+const {TOGGLE_SIRA_CONTROL, SET_SIRA_CONTROL} = require('../actions/controls');
 const {GRID_MODEL_LOADED, SHOW_LOADING, CREATE_GRID_DATA_SOURCE} = require('../actions/grid');
 const assign = require('object-assign');
 
@@ -21,6 +21,11 @@ function controls(state = initialState, action) {
         case TOGGLE_SIRA_CONTROL: {
             return assign({}, state, {
                 [action.control]: !state[action.control]
+            });
+        }
+        case SET_SIRA_CONTROL: {
+            return assign({}, state, {
+                [action.control]: action.status
             });
         }
         case CREATE_GRID_DATA_SOURCE:
