@@ -1,0 +1,304 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='MONITORAGGIO IMPIANTI DI DEPURAZIONE' subtitle={[
+            'Denominazione depuratore: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:nomeDepuratore/text()"),
+            ' Codice SIRA stabilimento: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceSira/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Impianto di depurazione' eventKey='1' expanded={true}>
+            <LabeledField label='Nome impianto di depurazione' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:nomeDepuratore/text()")
+            }/>
+            <LabeledField label='Codice Regionale depuratore' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceRegionaleDepuratore/text()")
+            }/>
+            <LabeledField label='Codice Europeo depuratore' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceEuropeoDepuratore/text()")
+            }/>
+            <LabeledField label='Provincia' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desProvincia/text()")
+            }/>
+            <LabeledField label='Comune' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:nomeComune/text()")
+            }/>
+            <LabeledField label='Codice SIRA stabilimento' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceSira/text()")
+            }/>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+                <LabeledField label='Stato Autorizzazione' value={
+                        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desStato/text()")
+                }/>
+            </ProfileWrapper>
+            <LabeledField label='Denominazione gestore' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:ragioneSocialeAzienda/text()")
+            }/>
+            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+                <LabeledField label='Codice fiscale azienda / Partita IVA azienda' value={
+                      model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceFiscaleAzienda/text()")
+                }/>
+            </ProfileWrapper>
+        </Section>
+
+
+        <Section header='CONSULTA SCHEDA DETTAGLIO IMPIANTO DI DEPURAZIONE' eventKey='2' expanded={true}>
+         <LinkScheda
+            params={{
+              cql_filter: "decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceSira='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceSira/text()")+"'"
+            }}
+            featureType="impiantiDepurazione"
+            linkTitle="Vai a scheda Impianto depurazione"
+            detailsTemplateConfigURL=""
+         />
+        </Section>
+
+
+        <Section header='DATI DETTAGLIO - Impianto di Depurazione' eventKey='3' expanded={true}>
+            <LabeledField label='Autorità di Ambito Territoriale Ottimale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desAto/text()")
+            }/>
+            <LabeledField label='Trattamento Depurativo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desTipologiaTrattamento/text()")
+            }/>
+            <LabeledField label='Trattamento Depurativo piu avanzato' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desTrattamPiuAvanz/text()")
+            }/>
+            <LabeledField label='Capacita organica di progetto (A.E.)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()")
+            }/>
+            <LabeledField label='Abitanti Equivalenti Trattati' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()")
+            }/>
+            <LabeledField label='Produzione fanghi (tonnellate di secco / anno)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:produzioneFanghiSeccoAnno/text()")
+            }/>
+            <LabeledField label='Tipo di disinfezione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:tipiDisinfezione/text()")
+            }/>
+            <LabeledField label='Tipo di filtrazione finale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:tipiFiltrazioneFinale/text()")
+            }/>
+            <LabeledField label='Chiariflocculazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:chiariflocculazione/text()")
+            }/>
+
+        </Section>
+
+        <Section header='MONITORAGGIO DEPURATORE  - Dati Dimensionali' eventKey='4' expanded={true}>
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+            <SiraTable
+                id="DatiDimensionali"
+                selectedRow={model.DatiDimensionali}
+                wfsVersion="2.0"
+                rowSelection={"single"}
+                columns={
+                    [
+                        {
+                            hide: true,
+                            id: true,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/@gml:id"
+                        },
+                        {
+                            headerName: 'IdMonit',
+                            width: 100,
+                            xpath:"decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:identificativo/text()"
+                        },
+                        {
+                            headerName: 'Monitoraggio Validato',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione/text()"
+                        },
+                        {
+                            headerName: 'Anno Monitoraggio',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:annoMonitoraggio/text()"
+                        },
+                        {
+                            headerName: 'Tipologia di trattamento',
+                            width: 150,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:desTrattamentoMonit/text()"
+                        },
+                        {
+                            headerName: 'Capacita organica di progetto (A.E.)',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"
+                        },
+                        {
+                            headerName: 'Abitanti residenti (A.E.)',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiResidenti/text()"
+                        },
+                        {
+                            headerName: 'Abitanti fluttuanti (A.E.)',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiFluttuanti/text()"
+                        },
+                        {
+                            headerName: 'Abitanti equivalenti industriali (A.E.)',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivalentiIndustriali/text()"
+                        },
+                        {
+                            headerName: 'Abitanti equivalenti da trattamento rifiuti liquidi (A.E.)',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivalentiRifiutiLiquidi/text()"
+                        },
+                        {
+                            headerName: 'Abitanti Equivalenti Trattati',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()"
+                        },
+                        {
+                            headerName: 'Portata media annua attuale  (mc/anno)',
+                            width: 100,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:portataMediaAnnua/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:monitoraggioDatiDimens")}/>
+            </ProfileWrapper>
+
+            <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
+              <SiraTable
+                  id="DatiDimensionali"
+                  selectedRow={model.DatiDimensionali}
+                  wfsVersion="2.0"
+                  rowSelection={"single"}
+                  columns={
+                      [
+                          {
+                              hide: true,
+                              id: true,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/@gml:id"
+                          },
+                          {
+                              headerName: 'IdMonit',
+                              width: 80,
+                              xpath:"decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:identificativo/text()"
+                          },
+                          {
+                              headerName: 'Anno Monitoraggio',
+                              width: 100,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:annoMonitoraggio/text()"
+                          },
+                          {
+                              headerName: 'Tipologia di trattamento',
+                              width: 170,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:desTrattamentoMonit/text()"
+                          },
+                          {
+                              headerName: 'Capacita organica di progetto (A.E.)',
+                              width: 120,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"
+                          },
+                          {
+                              headerName: 'Abitanti Equivalenti Trattati',
+                              width: 120,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()"
+                          },
+                          {
+                              headerName: 'Portata media annua attuale  (mc/anno)',
+                              width: 120,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:portataMediaAnnua/text()"
+                          }
+                      ]
+                  }
+                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:monitoraggioDatiDimens")}/>
+            </ProfileWrapper>
+
+            <Section header='' eventKey='5' expanded={true}>
+            </Section>
+            <Section header=' Bacino Utenza Monitoraggio' eventKey='5' expanded={( model.DatiDimensionali !== undefined && model.DatiDimensionali !== null ) ? true: false}>
+                <SiraTable
+                    id="BacinoUtenzaMonitoraggio"
+                    selectedRow={model.BacinoUtenzaMonitoraggio}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    dependsOn={{
+                        tableId: "DatiDimensionali",
+                        parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:monitoraggioDatiDimens"),
+                        xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/@gml:id",
+                        pdfTitle: "Id Monitoraggio: {{decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:identificativo/text()}}"
+                    }}
+                    columns={
+                        [
+                          {
+                                hide: true,
+                                id: true,
+                                xpath:"../../decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/@gml:id"
+                            },
+                            {
+                                headerName: 'Comune',
+                                width: 240,
+                                xpath:"decsiraogc_monitor_depuratori:ComuneServitoMonitoraggio/decsiraogc_monitor_depuratori:nomeComune/text()"
+                            },
+                            {
+                                headerName: 'Localita',
+                                width: 240,
+                                xpath:"decsiraogc_monitor_depuratori:ComuneServitoMonitoraggio/decsiraogc_monitor_depuratori:nomeLocalita/text()"
+                            },
+                            {
+                                headerName: 'Anno monitoraggio',
+                                width: 210,
+                                xpath:"decsiraogc_monitor_depuratori:ComuneServitoMonitoraggio/decsiraogc_monitor_depuratori:annoMonitoraggio/text()"
+                            }
+
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:monitoraggioDatiDimens/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:comuneServitoMonitoraggio")}/>
+                </Section>
+              </Section>
+
+
+
+
+        <Section header='MAPPA SINTESI -  Monitoraggio Impianti Depurazione su sfondo BDTRE (Banca Dati Terr. Riferimento Enti)' eventKey='7' expanded={true}>
+            <MappaScheda
+                center={
+                    model.getValue({
+                        type: TemplateUtils.GEOMETRY_TYPE,
+                        xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:geometria/gml:Point/gml:pos/text()"
+                    })
+                }
+                layers={[
+                {
+                    "type": "wms",
+                    "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                    "name": "SfondoCartRif",
+                    "title": "Sfondo Cartografico",
+                    "group": "background",
+                    "visibility": true,
+                    "format": "image/png",
+                    "tiled": true,
+                    "tileSize": 512
+                },
+                {
+                    "type": "wms",
+                    "url": "{geoserverUrl}/wms",
+                    "visibility": true,
+                    "title": "Monitoraggio Depuratori Preview",
+                    "name": "decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
+                    "group": "Overlays",
+                    "format": "image/png"
+                }
+        ]}
+                authParam={model.authParam}
+                withMap={model.withMap}/>
+        </Section>
+
+
+        <Section header='METADATO' eventKey='8' expanded={true}>
+            <LinkToPage
+                txt="Visualizza la scheda del metadato"
+                url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+                params={{
+                    id: 7087,
+                    currTab: 'rndt'
+                }}
+            />
+        </Section>
+    </Panel>
+</Panel>

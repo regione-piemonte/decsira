@@ -1,0 +1,366 @@
+{
+   "featureTypeName":"decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
+   "featureTypeNameLabel":"Monitoraggio Impianti Depurazione con abitanti equivalenti > 2000",
+   "nameSpaces": {
+     "decsiraogc_monitor_depuratori": "http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Monitoraggio Impianti Depurazione con abitanti equivalenti > 2000",
+        "name": "decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "monitoraggioDepuratori",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_MonitoraggioDepuratore_{{/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:idMonitoraggio/text()}}.pdf",
+     "template": "assets/cardTemplateMonitoraggioDepuratori.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateMonitoraggioDepuratori.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato Autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:desStato/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+            "width" : 120
+         },
+         {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:desProvincia/text()"],
+           "type": 2,
+            "width" : 100
+         },
+         {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:nomeComune/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Codice regionale depuratore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:codiceRegionaleDepuratore/text()"],
+           "type": 2,
+           "width" : 100
+         },
+         {
+           "headerName": "Codice europeo depuratore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:codiceEuropeoDepuratore/text()"],
+           "type": 2,
+           "width" : 100
+         },
+         {
+           "headerName": "Denominazione impianto di depurazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:nomeDepuratore/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Codice SIRA stabilimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:codiceSira/text()"],
+           "type": 2,
+           "width" : 90
+         },
+         {
+           "headerName": "Denominazione azienda / gestore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:ragioneSocialeAzienda/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Codice fiscale / Patita IVA azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:codiceFiscaleAzienda/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 120
+         },
+         {
+           "headerName": "Autorità di Ambito Territoriale Ottimale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:desAto/text()"],
+           "type": 2,
+           "width" : 120
+         },
+         {
+           "headerName": "Capacita organica di progetto (A.E.)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"],
+           "type": 2,
+           "width" : 100
+         },
+         {
+           "headerName": "Abitanti Equivalenti trattati",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()"],
+           "type": 2,
+           "width" : 100
+         },
+         {
+           "headerName": "Tipologia di trattamento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:desTipologiaTrattamento/text()"],
+           "type": 2,
+           "width" : 120
+         },
+         {
+           "headerName": "Tipologia per trattamento piu avanzato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:desTrattamPiuAvanz/text()"],
+           "type": 2,
+           "width" : 120
+         },
+         {
+           "headerName": "Produzione fanghi (tonnellate di secco / anno)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:produzioneFanghiSeccoAnno/text()"],
+           "type": 2,
+           "width" : 100
+         },
+         {
+           "headerName": "Tipo di disinfezione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:tipiDisinfezione/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Tipo di filtrazione finale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:tipiFiltrazioneFinale /text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Chiariflocculazione ",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:chiariflocculazione/text()"],
+           "type": 1,
+           "width" : 100
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_monitor_depuratori:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_monitor_depuratori:desProvincia",
+            "label":"Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_monitor_depuratori:nomeComune",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+              "field": "decsiraogc_monitor_depuratori:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+            "index": 3,
+            "attribute": "decsiraogc_monitor_depuratori:codiceRegionaleDepuratore",
+            "label":"Codice regionale depuratore",
+            "type":"string"
+         },
+        {
+           "index": 4,
+           "attribute": "decsiraogc_monitor_depuratori:codiceEuropeoDepuratore",
+           "label":"Codice europeo depuratore",
+           "type":"string"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_monitor_depuratori:nomeDepuratore",
+           "label":"Denominazione impianto di depurazione",
+           "type":"string"
+        },
+        {
+           "index": 6,
+           "attribute": "decsiraogc_monitor_depuratori:codiceSira",
+           "label":"Codice SIRA stabilimento",
+           "type":"string"
+        },
+        {
+           "index": 7,
+           "attribute": "decsiraogc_monitor_depuratori:ragioneSocialeAzienda",
+           "label":"Denominazione azienda / gestore",
+           "type":"string"
+        },
+        {
+           "index": 8,
+           "attribute": "decsiraogc_monitor_depuratori:codiceFiscaleAzienda",
+           "label":"Codice fiscale / Partita IVA azienda",
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 9,
+           "attribute": "decsiraogc_monitor_depuratori:desAto",
+           "label":"Autorità di Ambito Territoriale Ottimale",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_ato",
+               "propertyName": "id_ato,denominazione,ordinamento",
+                "sortBy": "ordinamento+A"
+             }
+           },
+           "valueId":"id_ato",
+           "valueLabel":"denominazione"
+        },
+        {
+           "index": 10,
+           "attribute": "decsiraogc_monitor_depuratori:capacitaOrganicaProgetto",
+           "label":"Capacita organica di progetto (a.e.)",
+           "type":"string"
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_monitor_depuratori:desTipologiaTrattamento",
+           "label":"Tipologia di trattamento ",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_dt_d_trattamento_dep",
+               "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale",
+               "cql_filter": "flg_principale=1",
+               "sortBy": "id_trattamento_dep+A"
+             }
+           },
+           "valueId":"id_trattamento_dep",
+           "valueLabel":"des_trattamento_dep"
+        },
+        {
+           "index": 12,
+           "attribute": "decsiraogc_monitor_depuratori:desTrattamPiuAvanz",
+           "label":"Tipologia per trattamento piu avanzato",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_dt_d_trattamento_dep",
+               "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale",
+                "cql_filter": "flg_principale=0",
+                "sortBy": "id_trattamento_dep+A"
+             }
+           },
+           "valueId":"id_trattamento_dep",
+           "valueLabel":"des_trattamento_dep"
+        },
+        {
+           "index": 13,
+           "attribute": "decsiraogc_monitor_depuratori:produzioneFanghiSeccoAnno",
+           "label":"Produzione fanghi (tonnellate di secco / anno)",
+           "type":"number"
+        },
+        {
+           "index": 14,
+           "attribute": "decsiraogc_monitor_depuratori:chiariflocculazione",
+           "label":"Chiariflocculazione ",
+           "type":"list",
+           "values": [
+             {"value":"si","name":"SI"},
+             {"value":"no","name":"NO"}
+           ],
+           "valueId":"value",
+           "valueLabel":"name"
+        },
+        {
+          "index": 15,
+          "attribute": "decsiraogc_monitor_depuratori:annoMonitoraggio",
+          "label":"Anno monitoraggio",
+          "type":"list",
+          "valueService": {
+
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_anno_monit_depuratore",
+              "propertyName": "id_anno",
+               "sortBy": "id_anno+A"
+            }
+          },
+          "valueId":"id_anno",
+          "valueLabel":"id_anno"
+       }
+     ]
+
+   }
+
+}
