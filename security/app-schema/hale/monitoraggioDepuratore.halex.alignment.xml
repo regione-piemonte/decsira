@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cd75eccf3-f7ea-45ab-a595-231c8920ac31" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C93065545-1eac-4fe1-a984-fad5126ccd55" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="annoMonitoraggio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9588df0c-7256-4ce6-8f39-2ee1ba646ed1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceSiraMonit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2b71ed26-548d-401a-a119-5f18993e73c7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bacino_monit"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idBacinoMonit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C673d5c09-db71-4295-8ff1-fd35908bd83b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idComuneServito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C25896d3a-3853-4331-b31a-d34e81214721" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_localita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idLocalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C266f1473-afed-43e3-ad75-738294e7ef85" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb872c32a-9f37-4bd0-963c-af2af0e8496a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="nomeComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c2cc898-a039-4f65-aafd-97c0b7a562ed" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_localita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="nomeLocalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C4b35a256-3178-4ba9-8d87-680d7bca7485" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6aa43ecf-8107-48a7-9d00-a46c94b82a70" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="abitanti_equiv_rif_liq"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="abitantiEquivRifiutiLiquidi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C682e5859-9471-4326-8c9a-e3d18d33a113" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="abitanti_equiv_trattati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="abitantiEquivTrattati" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd978a483-e51d-47e9-a8f4-211315a3d616" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="abitanti_fluttuanti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="abitantiFluttuanti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C86b3c8d7-55f3-4739-a80a-f69fd1863cbe" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="abitanti_residenti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="abitantiResidenti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C709a6eaf-d4ab-4b81-bdd5-da8167f3e938" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="annoMonitoraggio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b22df7f-4859-4652-a7be-89e48353d45a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="capacita_org_progetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="capacitaOrganicaProgetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccd4b2037-b361-4f59-932f-e9b986183ac5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_regionale_imp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceRegionaleDepMonit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9b155452-cc95-4a48-8d49-bf83d3135f2f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceSiraMonit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C46a6a054-75ea-4b92-b1cf-c5928d394c12" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_trattamento_dep"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="desTrattamentoMonit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8a6a840d-fa71-41a6-8e69-747debe4a966" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_trattamento_dep"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idTrattamentoMonit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce3a5f683-aec5-459d-a3f7-97412dac0554" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_media_annua"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="portataMediaAnnua" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6967ed88-d2a9-46ac-8db0-f804ab8114ab" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C05f207d9-a396-49af-b980-f14091eee549" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc84d876f-4119-45e8-8e83-dc65cbb33435" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="abitanti_equiv_industriali"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="abitantiEquivIndustriali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cb45c4a28-a158-4d99-89a4-92f75f75a020" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccc8a0030-2d81-4d32-a321-6634f67e7730" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="perc_secco_fango"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="percentSeccoFango" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cde4a692e-d181-48a0-893e-d6671aac2b55" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_validazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="flagValidazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2933128d-a3e1-41a1-929e-4038a6bb215e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fanghi_prod_ton_secco"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="fanghiProdTonSecco" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C911f2734-dc5a-465b-92b4-15f42bfea03e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fanghi_prod_ta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="fanghiProdTa" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C652034b8-6460-48ac-8b9f-29ce0c7aa29f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idMonitoraggio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Cb21d4be0-69ff-4c58-a38f-21d63be7a381" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_monitoraggio.{id_monitoraggio}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbf5dfc60-c072-4f6b-8293-c670a59b9c67" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce9602019-2017-448b-b7a7-71a120a904d9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="nomeDepuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C27e811c4-a24b-425a-8ab3-3e490920909a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0424988f-7f1a-4a59-aa5f-47c891484745" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C859a0936-60b9-44d9-9e22-e83c8d9d20e5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="istatComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C57a4a5d8-37a3-4c56-9e84-0979fb1e9943" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="nomeComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b3d19bc-2902-49a7-9da9-56ad2549681e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="istatProvincia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfc357b80-1b7e-4a3d-bc79-146359d590db" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="desProvincia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5f20441e-eb81-4112-bb5f-df8b0d0c1b1f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_regionale_imp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceRegionaleDepuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C766d3985-1373-4570-8cb2-0f41629e921f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_fiscale_azienda"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceFiscaleAzienda" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd46ea9eb-dff9-46be-a0ba-5bbeeb4f966a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_europeo_imp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="codiceEuropeoDepuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca5a29a09-0852-4984-95d7-709881466c4d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="capacita_org_progetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="capacitaOrganicaProgetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C386d1850-4ffd-44ec-b0e6-fa442d326143" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="abitanti_equiv_trattati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="abitantiEquivalentiTrattati" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C60c6e432-e2a5-416c-b73e-03d4a168732c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_ato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="desAto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3876e89e-0e55-4b9f-b46a-ccf8df53769b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fanghi_prod_ton_secco_anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="produzioneFanghiSeccoAnno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C78756506-4460-41ae-97e6-03cc1bc579f2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_chiariflocculazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="chiariflocculazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6ee42e80-a575-4510-81a5-23479d688bd2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C543596d0-4e3d-445b-83ad-4edae7d39353" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_ato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idAto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd6e14cde-88f2-4410-92d2-58a0b908fb68" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_trattamento_principale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="idTipologiaTrattamento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4feaeda3-d939-46a5-a91f-30a3f8b4e914" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="rag_sociale_azienda"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="ragioneSocialeAzienda" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C20724865-e296-4bcc-bc9e-cc87a6d749f4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipi_disinfezione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="tipiDisinfezione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C98cc0c36-0791-48b1-a5ee-895374ef7187" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipi_filtrfinale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="tipiFiltrazioneFinale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C69fb2009-bcfe-4659-a23c-555a83508ca9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="trattamenti_avanzati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="desTrattamPiuAvanzato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C771d655d-4920-4236-b53e-c8e97cf8b66e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="trattamento_principale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="desTipologiaTrattamento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C26e230a5-7538-4980-a85f-a8670afdee82" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MonitoraggioDatiDimensType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="identificativo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="identificativo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cf76779f4-cf64-4a25-baaf-caf4f8b022f9" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MonitoraggioDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_monitoraggio_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_monitoraggio_datidimens" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="codice_sira_monitoraggio"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Ca5d29866-85df-499f-b1dc-b5d9812f032a" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_comune_servito_monitoraggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bacino_monit"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComuneServitoMonitoraggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_monitor_depuratori/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_bacino_monit.{id_bacino_monit}" name="pattern"/>
+    </cell>
+</alignment>

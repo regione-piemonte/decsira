@@ -1,0 +1,97 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateMonitoraggioDepuratori"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Stato Autorizzazione',
+             width: 120,
+             "profiles" : [ "PA_GEN_DECSIRA@REG_PMN" ],
+             xpath: "decsiraogc_monitor_depuratori:desStato/text()"
+        },{
+             headerName: 'Provincia',
+             width: 100,
+             xpath: "decsiraogc_monitor_depuratori:desProvincia/text()"
+        }, {
+             headerName: 'Comune',
+             width: 150,
+             xpath: "decsiraogc_monitor_depuratori:nomeComune/text()"
+        }, {
+             headerName: 'Codice regionale depuratore',
+             width: 100,
+             xpath : "decsiraogc_monitor_depuratori:codiceRegionaleDepuratore/text()"
+        }, {
+            headerName: 'Codice europeo depuratore',
+            width: 100,
+            xpath: "decsiraogc_monitor_depuratori:codiceEuropeoDepuratore/text()"
+        }, {
+            headerName: 'Denominazione impianto di depurazione',
+            width: 150,
+            xpath: "decsiraogc_monitor_depuratori:nomeDepuratore/text()"
+        }, {
+            headerName: 'Codice SIRA stabilimento',
+            width: 90,
+            xpath: "decsiraogc_monitor_depuratori:codiceSira/text()"
+        }, {
+            headerName: 'Tipo autorizzazione',
+            width: 100,
+            xpath: "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:tipoProvvedimento/text()",
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Denominazione azienda / gestore',
+            width: 150,
+            xpath: "decsiraogc_monitor_depuratori:ragioneSocialeAzienda/text()"
+        }, {
+            headerName: 'Codice fiscale / Patita IVA azienda',
+            width: 120,
+            "profiles" : [ "PA_GEN_DECSIRA@REG_PMN" ],
+            xpath: "decsiraogc_monitor_depuratori:codiceFiscaleAzienda/text()"
+        }, {
+            headerName: 'Autorità di Ambito Territoriale Ottimale',
+            width: 120,
+            xpath: "decsiraogc_monitor_depuratori:desAto/text()"
+        }, {
+            headerName: 'Capacita organica di progetto (A.E.)',
+            width: 100,
+            xpath: "decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"
+        }, {
+            headerName: 'Abitanti Equivalenti trattati',
+            width: 100,
+            xpath: "decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()"
+        }, {
+            headerName: 'Tipologia di trattamento',
+            width: 120,
+            xpath: "decsiraogc_monitor_depuratori:desTipologiaTrattamento/text()"
+        }, {
+            headerName: 'Tipologia per trattamento piu avanzato',
+            width: 120,
+            xpath: "decsiraogc_monitor_depuratori:desTrattamPiuAvanz/text()"
+        },
+         {
+            headerName: 'Produzione fanghi (tonnellate di secco / anno)',
+            width: 100,
+            xpath: "decsiraogc_monitor_depuratori:produzioneFanghiSeccoAnno/text()"
+          }, {
+            headerName: 'Tipo di disinfezione',
+            width: 150,
+            xpath: "decsiraogc_monitor_depuratori:tipiDisinfezione/text()"
+          }, {
+            headerName: 'Tipo di filtrazione finale',
+            width: 150,
+            xpath: "decsiraogc_monitor_depuratori:tipiFiltrazioneFinale /text()"
+          }, {
+             headerName: 'Chiariflocculazione',
+             width: 100,
+             xpath: "decsiraogc_monitor_depuratori:chiariflocculazione/text()"
+         }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_monitor_depuratori:MonitoraggioDepuratore")}/>
