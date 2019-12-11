@@ -19,7 +19,8 @@ const {
     QUERYFORM_HIDE_ERROR,
     INLINE_MAP_CONFIG,
     SET_ACTIVE_FEATURE_TYPE,
-    FEATURETYPE_CONFIG_LOADING
+    FEATURETYPE_CONFIG_LOADING,
+    USER_NOT_AUTHORIZED
 } = require('../actions/siradec');
 
 const assign = require('object-assign');
@@ -38,11 +39,15 @@ const initialState = {
     featureType: urlQuery.featureType || 'aua',
     activeFeatureType: null,
     inlineMapConfig: null,
-    fTypeConfigLoading: false
+    fTypeConfigLoading: false,
+    notAuthorized: []
 };
 
 function siradec(state = initialState, action) {
     switch (action.type) {
+        case USER_NOT_AUTHORIZED: {
+            return assign({}, state, {notAuthorized: [...state.notAuthorized, action.feature], activeFeatureType: action.feature});
+        }
         case WAITING_FOR_CONFIG: {
             return assign({}, state, {waitingForConfig: action.wfc});
         }
@@ -74,7 +79,8 @@ function siradec(state = initialState, action) {
                 nameSpaces: action.nameSpaces,
                 layer: action.layer,
                 exporter: action.exporter,
-                queryform
+                queryform,
+                authorized: action.authorized
                 });
 
             if (newConf.featuregrid) {
@@ -148,7 +154,8 @@ function siradec(state = initialState, action) {
         case QUERYFORM_HIDE_ERROR: {
             return assign({}, state, {
                     loadingQueryFormConfigError: null,
-                    filterPanelExpanded: false
+                    filterPanelExpanded: false,
+                    authorized: false
                 });
         }
         default:

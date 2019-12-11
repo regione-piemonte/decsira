@@ -71,7 +71,9 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                         }
                     });
                 }
-                let user = {};
+                let user = {
+                    profile: []
+                };
                 if (response.data.userIdentity) {
                     user = {
                         name: response.data.userIdentity.nome + " " + response.data.userIdentity.cognome,
@@ -80,8 +82,8 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                         idProvider: response.data.userIdentity.idProvider,
                         profile: response.data.profile
                    };
-                    response.data.user = user;
                 }
+                response.data.user = user;
                 dispatch(userIdentityLoaded(response.data));
             } else {
                 try {

@@ -1,0 +1,137 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateScaricoIndustriale"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+             headerName: 'Ragione sociale Gestore Impianto di depurazione',
+             width: 150,
+             xpath: "decsiraogc_controlli_scarichi_urbani:rag_sociale_azienda/text()"
+        }, {
+             headerName: 'Codice Fiscale Gestore Impianto di depurazione',
+             width: 120,
+             xpath: "decsiraogc_controlli_scarichi_urbani:codice_fiscale_azienda/text()"
+        }, {
+             headerName: 'Denominazione Impianto di depurazione',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath : "decsiraogc_controlli_scarichi_urbani:denominazione_dep/text()"
+        }, {
+            headerName: 'Indirizzo Impianto di depurazione',
+            width: 150,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:indirizzo_dep/text()"
+        }, {
+            headerName: 'Codice SIRA stabilimento',
+            width: 90,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:codice_sira/text()"
+        }, {
+            headerName: 'Codice Regionale Impianto di depurazione',
+            width: 100,
+            xpath: "decsiraogc_controlli_scarichi_urbani:codice_regionale_imp/text()"
+        }, {
+            headerName: 'Codice Europeo Impianto di depurazione',
+            width: 100,
+            xpath: "decsiraogc_controlli_scarichi_urbani:codice_europeo_imp/text()",
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Capacita organica di progetto (a.e.)',
+            width: 120,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:capacita_org_progetto/text()"
+        }, {
+            headerName: 'Abitanti equivalenti trattati',
+            width: 120,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:abitanti_equiv_trattati/text()"
+        }, {
+            headerName: 'Codice Regionale Scarico ',
+            width: 100,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:cod_regionale_scarico/text()"
+        }, {
+            headerName: 'Comune Scarico',
+            width: 120,
+            xpath: "decsiraogc_controlli_scarichi_urbani:comune_scarico/text()",
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Provincia Scarico',
+            width: 100,
+            xpath: "decsiraogc_controlli_scarichi_urbani:provincia_ scarico/text()",
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Numero campione',
+            width: 80,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:numero_campione/text()"
+        }, {
+            headerName: 'Data campione',
+            width: 100,
+            xpath: "decsiraogc_controlli_scarichi_urbani:data_campione/text()"
+        },
+         {
+            headerName: 'Anno campione',
+            width: 100,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:anno_campione/text()"
+          }, {
+            headerName: 'Semestre campione',
+            width: 100,
+            xpath: "decsiraogc_controlli_scarichi_urbani:semestre_campione/text()"
+          }, {
+            headerName: 'Descrizione campione',
+            width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_controlli_scarichi_urbani:descrizione_campione/text()"
+          }, {
+             headerName: 'Parametro',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:des_parametro/text()"
+         }, {
+             headerName: 'Codice CAS',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:cas/text()"
+         },{
+             headerName: 'Modalità di espressione risultato analitico',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:modalita_espressione/text()"
+          },{
+             headerName: 'Unità di misura',
+             width: 100,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:unita_di_misura/text()"
+         }, {
+             headerName: 'Operatore',
+             width: 80,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:operatore/text()"
+         },{
+             headerName: 'Valore misurato',
+             width: 100,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:valore_base_number/text()"
+          },{
+             headerName: 'Valore misurato (testo)',
+             width: 100,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:valore_base/text()"
+         },{
+             headerName: 'Limite di Rilevabilita (LCL)',
+             width: 80,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:limite_rilevabilita_lcl/text()"
+         },{
+             headerName: 'Fonte campione',
+             width: 80,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_controlli_scarichi_urbani:fonte_campione/text()"
+         }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_controlli_scarichi_urbani:ControlliScarichiUrbani")}/>
