@@ -85,7 +85,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_monitor_depuratori:codiceEuropeoDepuratore/text()"],
            "type": 2,
-           "width" : 100
+           "width" : 150
          },
          {
            "headerName": "Denominazione impianto di depurazione",
@@ -121,7 +121,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_monitor_depuratori:desAto/text()"],
            "type": 2,
-           "width" : 120
+           "width" : 150
          },
          {
            "headerName": "Capacita organica di progetto (A.E.)",
@@ -147,7 +147,7 @@
          {
            "headerName": "Tipologia per trattamento piu avanzato",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_monitor_depuratori:desTrattamPiuAvanz/text()"],
+           "xpath": ["decsiraogc_monitor_depuratori:desTrattamPiuAvanzato/text()"],
            "type": 2,
            "width" : 120
          },
@@ -236,45 +236,61 @@
            }
         },
         {
-            "index": 3,
+          "index": 3,
+          "attribute": "decsiraogc_monitor_depuratori:monitoraggioDatiDimens/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:annoMonitoraggio",
+          "label":"Anno monitoraggio",
+          "type":"list",
+          "valueService": {
+
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_anno_monit_depuratore",
+              "propertyName": "id_anno",
+               "sortBy": "id_anno+A"
+            }
+          },
+          "valueId":"id_anno",
+          "valueLabel":"id_anno"
+        },
+        {
+            "index": 4,
             "attribute": "decsiraogc_monitor_depuratori:codiceRegionaleDepuratore",
             "label":"Codice regionale depuratore",
             "type":"string"
          },
         {
-           "index": 4,
+           "index": 5,
            "attribute": "decsiraogc_monitor_depuratori:codiceEuropeoDepuratore",
            "label":"Codice europeo depuratore",
            "type":"string"
         },
         {
-           "index": 5,
+           "index": 6,
            "attribute": "decsiraogc_monitor_depuratori:nomeDepuratore",
            "label":"Denominazione impianto di depurazione",
            "type":"string"
         },
         {
-           "index": 6,
+           "index": 7,
            "attribute": "decsiraogc_monitor_depuratori:codiceSira",
-           "label":"Codice SIRA stabilimento",
+           "label":"Codice SIRA",
            "type":"string"
         },
         {
-           "index": 7,
+           "index": 8,
            "attribute": "decsiraogc_monitor_depuratori:ragioneSocialeAzienda",
            "label":"Denominazione azienda / gestore",
            "type":"string"
         },
         {
-           "index": 8,
+           "index": 9,
            "attribute": "decsiraogc_monitor_depuratori:codiceFiscaleAzienda",
            "label":"Codice fiscale / Partita IVA azienda",
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
-           "index": 9,
-           "attribute": "decsiraogc_monitor_depuratori:desAto",
+           "index": 10,
+           "attribute": "decsiraogc_monitor_depuratori:idAto",
            "label":"Autorità di Ambito Territoriale Ottimale",
            "type":"list",
            "valueService": {
@@ -288,14 +304,14 @@
            "valueLabel":"denominazione"
         },
         {
-           "index": 10,
+           "index": 11,
            "attribute": "decsiraogc_monitor_depuratori:capacitaOrganicaProgetto",
            "label":"Capacita organica di progetto (a.e.)",
-           "type":"string"
+           "type":"number"
         },
         {
-           "index": 11,
-           "attribute": "decsiraogc_monitor_depuratori:desTipologiaTrattamento",
+           "index": 12,
+           "attribute": "decsiraogc_monitor_depuratori:idTipologiaTrattamento",
            "label":"Tipologia di trattamento ",
            "type":"list",
            "valueService": {
@@ -304,22 +320,6 @@
                "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale",
                "cql_filter": "flg_principale=1",
                "sortBy": "id_trattamento_dep+A"
-             }
-           },
-           "valueId":"id_trattamento_dep",
-           "valueLabel":"des_trattamento_dep"
-        },
-        {
-           "index": 12,
-           "attribute": "decsiraogc_monitor_depuratori:desTrattamPiuAvanz",
-           "label":"Tipologia per trattamento piu avanzato",
-           "type":"list",
-           "valueService": {
-             "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_dt_d_trattamento_dep",
-               "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale",
-                "cql_filter": "flg_principale=0",
-                "sortBy": "id_trattamento_dep+A"
              }
            },
            "valueId":"id_trattamento_dep",
@@ -342,23 +342,8 @@
            ],
            "valueId":"value",
            "valueLabel":"name"
-        },
-        {
-          "index": 15,
-          "attribute": "decsiraogc_monitor_depuratori:annoMonitoraggio",
-          "label":"Anno monitoraggio",
-          "type":"list",
-          "valueService": {
+        }
 
-            "urlParams": {
-              "typeName": "decsiraogc_decodif:decsira_d_anno_monit_depuratore",
-              "propertyName": "id_anno",
-               "sortBy": "id_anno+A"
-            }
-          },
-          "valueId":"id_anno",
-          "valueLabel":"id_anno"
-       }
      ]
 
    }
