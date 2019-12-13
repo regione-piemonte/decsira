@@ -163,10 +163,17 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-    <Rule>
+	<Rule>
 		<priority>23</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>24</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_monitor_depuratori</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
@@ -863,7 +870,7 @@
 			  <attribute>decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:estremiProvvedimento</attribute>
 		</hiddenAttributes>		  
     </Rule>
-    <Rule>
+	 <Rule>
 		<priority>123</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
@@ -879,5 +886,27 @@
 			<attribute>decsiraogc_controlli_scarichi_urbani:descrizione_metodo</attribute>
 		</hiddenAttributes>
    </Rule>
+	<Rule>
+		<priority>124</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_monitor_depuratori</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>125</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_monitor_depuratori</workspace>
+		<layer>MonitoraggioDepuratore</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_monitor_depuratori:monitoraggioDatiDimens/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione" = '1'</filter>
+		<hiddenAttributes>
+			  <attribute>decsiraogc_monitor_depuratori:codiceFiscaleAzienda</attribute>
+			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiResidenti</attribute>
+			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiFluttuanti</attribute>
+			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivIndustriali</attribute>
+			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivRifiutiLiquidi</attribute>
+		</hiddenAttributes>		  
+    </Rule>
     </rules>
 </Config>
