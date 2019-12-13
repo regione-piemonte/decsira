@@ -25,7 +25,7 @@
             <LabeledField label='Comune' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:nomeComune/text()")
             }/>
-            <LabeledField label='Codice SIRA stabilimento' value={
+            <LabeledField label='Codice SIRA' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceSira/text()")
             }/>
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
@@ -43,20 +43,7 @@
             </ProfileWrapper>
         </Section>
 
-
-        <Section header='CONSULTA SCHEDA DETTAGLIO IMPIANTO DI DEPURAZIONE' eventKey='2' expanded={true}>
-         <LinkScheda
-            params={{
-              cql_filter: "decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceSira='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceSira/text()")+"'"
-            }}
-            featureType="impiantiDepurazione"
-            linkTitle="Vai a scheda Impianto depurazione"
-            detailsTemplateConfigURL=""
-         />
-        </Section>
-
-
-        <Section header='DATI DETTAGLIO - Impianto di Depurazione' eventKey='3' expanded={true}>
+        <Section header='DATI DETTAGLIO SINTETICI - Impianto di Depurazione' eventKey='3' expanded={false}>
             <LabeledField label='Autorità di Ambito Territoriale Ottimale' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desAto/text()")
             }/>
@@ -66,7 +53,7 @@
             <LabeledField label='Trattamento Depurativo piu avanzato' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desTrattamPiuAvanz/text()")
             }/>
-            <LabeledField label='Capacita organica di progetto (A.E.)' value={
+            <LabeledField label='Capacita organica di progetto (a.e.)' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()")
             }/>
             <LabeledField label='Abitanti Equivalenti Trattati' value={
@@ -85,6 +72,17 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:chiariflocculazione/text()")
             }/>
 
+        </Section>
+
+        <Section header='CONSULTA SCHEDA DETTAGLIO IMPIANTO DI DEPURAZIONE' eventKey='2' expanded={true}>
+         <LinkScheda
+            params={{
+              cql_filter: "decsiraogc_stabilimenti:codiceSira='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:codiceSira/text()")+"'"
+            }}
+            featureType="impiantiDepurazione"
+            linkTitle="Vai a scheda Impianto depurazione"
+            detailsTemplateConfigURL=""
+         />
         </Section>
 
         <Section header='MONITORAGGIO DEPURATORE  - Dati Dimensionali' eventKey='4' expanded={true}>
@@ -122,27 +120,27 @@
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:desTrattamentoMonit/text()"
                         },
                         {
-                            headerName: 'Capacita organica di progetto (A.E.)',
+                            headerName: 'Capacita organica di progetto (a.e.)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"
                         },
                         {
-                            headerName: 'Abitanti residenti (A.E.)',
+                            headerName: 'Abitanti residenti (a.e.)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiResidenti/text()"
                         },
                         {
-                            headerName: 'Abitanti fluttuanti (A.E.)',
+                            headerName: 'Abitanti fluttuanti (a.e.)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiFluttuanti/text()"
                         },
                         {
-                            headerName: 'Abitanti equivalenti industriali (A.E.)',
+                            headerName: 'Abitanti equivalenti industriali (a.e.)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivalentiIndustriali/text()"
                         },
                         {
-                            headerName: 'Abitanti equivalenti da trattamento rifiuti liquidi (A.E.)',
+                            headerName: 'Abitanti equivalenti da trattamento rifiuti liquidi (a.e.)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivalentiRifiutiLiquidi/text()"
                         },
@@ -190,7 +188,7 @@
                               xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:desTrattamentoMonit/text()"
                           },
                           {
-                              headerName: 'Capacita organica di progetto (A.E.)',
+                              headerName: 'Capacita organica di progetto (a.e.)',
                               width: 120,
                               xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"
                           },
@@ -232,20 +230,14 @@
                             },
                             {
                                 headerName: 'Comune',
-                                width: 240,
+                                width: 345,
                                 xpath:"decsiraogc_monitor_depuratori:ComuneServitoMonitoraggio/decsiraogc_monitor_depuratori:nomeComune/text()"
                             },
                             {
                                 headerName: 'Localita',
-                                width: 240,
+                                width: 345,
                                 xpath:"decsiraogc_monitor_depuratori:ComuneServitoMonitoraggio/decsiraogc_monitor_depuratori:nomeLocalita/text()"
-                            },
-                            {
-                                headerName: 'Anno monitoraggio',
-                                width: 210,
-                                xpath:"decsiraogc_monitor_depuratori:ComuneServitoMonitoraggio/decsiraogc_monitor_depuratori:annoMonitoraggio/text()"
                             }
-
                         ]
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:monitoraggioDatiDimens/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:comuneServitoMonitoraggio")}/>
