@@ -342,8 +342,15 @@ const Dataset = React.createClass({
                 }
             });
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
-        }else if (this.props.activeFeatureType !== featureType) {
-            this.props.setActiveFeatureType(featureType);
+        } else {
+            if (this.props.activeFeatureType !== featureType) {
+                this.props.setActiveFeatureType(featureType);
+            }
+            if (this.props.params.profile) {
+                this.context.router.push('/full/${this.props.params.profile}/');
+            } else {
+                this.context.router.push('/full/');
+            }
         }
         this.props.expandFilterPanel(status);
     },
@@ -359,9 +366,19 @@ const Dataset = React.createClass({
                 }
             });
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
-            }else if (this.props.activeFeatureType !== featureType) {
+        } else {
+            if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
+            this.props.setGridType('all_results');
+            this.props.toggleSiraControl('grid', true);
+            this.props.setNodeInUse(node);
+            if (this.props.params.profile) {
+                this.context.router.push('/full/${this.props.params.profile}/');
+            } else {
+                this.context.router.push('/full/');
+            }
+        }
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
