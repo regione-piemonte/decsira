@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {Tabs, Tab} = require('react-bootstrap');
+const {Tabs, Tab, Alert} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 
@@ -108,6 +108,7 @@ const Dataset = React.createClass({
         views: React.PropTypes.array,
         objects: React.PropTypes.array,
         loading: React.PropTypes.bool,
+        notAuthorized: React.PropTypes.bool,
         nodesLoaded: React.PropTypes.bool,
         onToggle: React.PropTypes.func,
         toggleSiraControl: React.PropTypes.func,
@@ -142,7 +143,11 @@ const Dataset = React.createClass({
                 searchText: "",
                 showCategories: false,
                 onToggle: () => {},
-                setProfile: () => {}
+                setProfile: () => {},
+                waitingForConfig: {
+                    feature: null,
+                    redirect: null
+                }
             };
         },
         componentWillMount() {
@@ -158,7 +163,7 @@ const Dataset = React.createClass({
         componentDidMount() {
             document.body.className = "body_dataset";
         },
-        componentWillReceiveProps({loading, map}) {
+        componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
             if (!loading && this.props.map && this.props.map !== map) {
                 if (this.props.params.profile) {
                     this.context.router.push('/map/${this.props.params.profile}/');
@@ -166,6 +171,31 @@ const Dataset = React.createClass({
                     this.context.router.push('/map/');
                 }
                 // this.context.router.push(`/${this.props.params.profile}`);
+            }
+            if (!this.props.notAuthorized && notAuthorized && this.state.waitingForConfig.feature) {
+                this.setState({
+                    waitingForConfig: {
+                        feature: null,
+                        redirect: null
+                    } });
+            }
+            if (this.state.waitingForConfig.feature && configOggetti[this.state.waitingForConfig.feature]) {
+                if (this.state.waitingForConfig.type === 'grid') {
+                    this.props.setGridType('all_results');
+                    this.props.toggleSiraControl('grid', true);
+                    this.props.setNodeInUse(this.state.waitingForConfig.node);
+                }
+                this.setState({
+                    waitingForConfig: {
+                        feature: null,
+                        redirect: null
+                    }
+                });
+                if (this.props.params.profile) {
+                    this.context.router.push(this.state.waitingForConfig.redirect + '${this.props.params.profile}/');
+                } else {
+                    this.context.router.push(this.state.waitingForConfig.redirect);
+                }
             }
         },
     renderSerchBar() {
@@ -181,6 +211,16 @@ const Dataset = React.createClass({
     },
     renderSpinner() {
         return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
+    },
+    renderUnauthorized() {
+        return (
+            <Alert bsStyle="danger" dismissible >
+                <button className="close" onClick={() => this.props.setActiveFeatureType(null)} data-dismiss="danger" aria-label="Close">
+                    <span aria-hidden="true" color="#A9A9A9;">&times;</span>
+                </button>
+                Non si dispone delle autorizzazioni necessarie per accedere a questo dato
+        </Alert>
+        );
     },
     renderResults() {
         const {loading, objects, views} = this.props;
@@ -243,6 +283,7 @@ const Dataset = React.createClass({
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
+                        {this.props.notAuthorized && this.renderUnauthorized()}
                     </div>
                     <div className="dataset-footer-container">
                     <Footer/>
@@ -293,34 +334,34 @@ const Dataset = React.createClass({
     openFilterPanel(status, ftType) {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
+            this.setState({
+                waitingForConfig: {
+                    redirect: '/full/',
+                    feature: featureType,
+                    type: 'query'
+                }
+            });
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         }else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
         this.props.expandFilterPanel(status);
-        if (undefined !== this.props.params.profile) {
-            this.context.router.push('/full/${this.props.params.profile}/');
-        }else {
-            this.context.router.push('/full/');
-        }
-        // this.context.router.push(`/full/${this.props.params.profile}`);
     },
     searchAll(node) {
         const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
+            this.setState({
+                waitingForConfig: {
+                    redirect: '/full/',
+                    feature: featureType,
+                    type: 'grid',
+                    node
+                }
+            });
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
             }else if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
-        this.props.setGridType('all_results');
-        this.props.toggleSiraControl('grid', true);
-        this.props.setNodeInUse(node);
-        if (undefined !== this.props.params.profile) {
-            this.context.router.push('/full/${this.props.params.profile}/');
-        }else {
-            this.context.router.push('/full/');
-        }
-        // this.context.router.push(`/full/${this.props.params.profile}`);
     },
     loadThematicView({serviceUrl, params} = {}) {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
