@@ -324,6 +324,7 @@ const SiraGrid = React.createClass({
             suppressSorting: true,
             suppressMenu: true,
             pinned: true,
+            hide: this.props.detailsConfig.service ? false : true,
             width: 25,
             suppressResize: true
         }, ...(cols.map((c) => {
