@@ -9,7 +9,7 @@ const FilterUtils = require('../utils/SiraFilterUtils');
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
 
-const {head} = require('lodash');
+const { head, isEqual } = require('lodash');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 
 const SiraExporter = connect((state) => {
@@ -178,7 +178,7 @@ const SiraGrid = React.createClass({
     },
     shouldComponentUpdate(nextProps) {
         return Object.keys(this.props).reduce((prev, prop) => {
-            if ( !prev && (prop !== 'map' && this.props[prop] !== nextProps[prop])) {
+            if ( !prev && (prop !== 'map' && !isEqual(this.props[prop], nextProps[prop]))) {
                 return true;
             }
             return prev;
