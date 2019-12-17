@@ -43,7 +43,7 @@
             </ProfileWrapper>
         </Section>
 
-        <Section header='DATI DETTAGLIO SINTETICI - Impianto di Depurazione' eventKey='3' expanded={false}>
+        <Section header='DATI TECNICI SINTETICI - Impianto di Depurazione' eventKey='3' expanded={false}>
             <LabeledField label='Autorità di Ambito Territoriale Ottimale' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:desAto/text()")
             }/>
@@ -153,6 +153,11 @@
                             headerName: 'Portata media annua attuale  (mc/anno)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:portataMediaAnnua/text()"
+                        },
+                        {
+                            headerName: 'Monitoraggio a fini WFD -Water Framework Directive',
+                            width: 200,
+                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione/text()"
                         }
                     ]
                 }
@@ -201,6 +206,11 @@
                               headerName: 'Portata media annua attuale  (mc/anno)',
                               width: 120,
                               xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:portataMediaAnnua/text()"
+                          },
+                          {
+                              headerName: 'Monitoraggio a fini WFD -Water Framework Directive',
+                              width: 200,
+                              xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione/text()"
                           }
                       ]
                   }
