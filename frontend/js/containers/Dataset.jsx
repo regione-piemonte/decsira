@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {Tabs, Tab, Alert} = require('react-bootstrap');
+const { Tabs, Tab, Modal} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 
@@ -213,13 +213,16 @@ const Dataset = React.createClass({
         return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
     },
     renderUnauthorized() {
-        return (
-            <Alert bsStyle="danger" dismissible >
-                <button className="close" onClick={() => this.props.setActiveFeatureType(null)} data-dismiss="danger" aria-label="Close">
-                    <span aria-hidden="true" color="#A9A9A9;">&times;</span>
-                </button>
-                Non si dispone delle autorizzazioni necessarie per accedere a questo dato
-        </Alert>
+        return (<Modal show={true} bsSize="small" onHide={() => this.props.setActiveFeatureType(null)}>
+            <Modal.Header className="dialog-error-header-side" closeButton>
+                <Modal.Title>Errore</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="mapstore-error">Non si dispone delle autorizzazioni necessarie per accedere a questo dato</div>
+            </Modal.Body>
+            <Modal.Footer>
+            </Modal.Footer>
+        </Modal>
         );
     },
     renderResults() {
