@@ -41,7 +41,7 @@
                   <LabeledField label='ATO' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:desAto/text()")
                   }/>
-                  <LabeledField label='Capacita organica di progetto (a.e.)' value={
+                  <LabeledField label='capacita organica di progetto (a.e.)' value={
                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:capacitaOrganicaProgetto/text()")
                   }/>
                   <LabeledField label='Abitanti residenti' value={
@@ -164,6 +164,17 @@
                    }/>
                </Section>
              </ProfileWrapper>
+         </Section>
+
+         <Section header='CONSULTA SCHEDA MONITORAGGIO DEPURATORE' eventKey='2' expanded={false}>
+          <LinkScheda
+             params={{
+               cql_filter: "decsiraogc_monitor_depuratori:codiceSira='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:codiceSira/text()")+"'"
+             }}
+             featureType="monitoraggioDepuratori"
+             linkTitle="Vai a scheda Monitoraggio depuratore"
+             detailsTemplateConfigURL=""
+          />
          </Section>
 
          <Section header='BACINO DI UTENZA' eventKey='4' expanded={true}>
@@ -463,7 +474,7 @@
                                 [
                                     {
                                         headerName: 'Tipo provvedimento',
-                                        width: 200,
+                                        width: 160,
                                         xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                                     },
                                     {
@@ -485,12 +496,12 @@
                                     },
                                     {
                                         headerName: 'Ente competente',
-                                        width: 200,
+                                        width: 150,
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desEnteCompetente/text()"
                                     },
                                     {
                                         headerName: 'Stato autorizzazione',
-                                        width: 250,
+                                        width: 100,
                                         xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:desStato/text()"
                                     }
                                 ]
