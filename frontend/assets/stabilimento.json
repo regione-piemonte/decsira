@@ -59,6 +59,13 @@
            "width" : 90
          },
          {
+           "headerName": "Stato sede operativa",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
+           "type": 1,
+           "width" : 90
+         },
+         {
            "headerName": "Denominazione stabilimento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nome/text()"],
@@ -225,6 +232,36 @@
         },
         {
            "index": 4,
+           "attribute": "decsiraogc_stabilimenti:idStato",
+           "label":"Stato sede operativa",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_d_stato",
+               "cql_filter": "id_stato=101%20OR%20id_stato=199",
+               "propertyName": "id_stato,des_stato"
+             }
+           },
+           "valueId":"id_stato",
+           "valueLabel":"des_stato"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_stabilimenti:idTipologiaImpianto",
+           "label":"Tipologia impianto",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_sede",
+               "propertyName": "id_tipo_sede,des_tipo_sede,ordinamento",
+                "sortBy": "ordinamento+A"
+             }
+           },
+           "valueId":"id_tipo_sede",
+           "valueLabel":"des_tipo_sede"
+        },
+        {
+           "index": 6,
            "attribute": "decsiraogc_stabilimenti:attivitaProduttiva/decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:codAteco",
            "label":"Tipo attivita produttiva",
            "type":"list",
@@ -241,66 +278,29 @@
            "valueLabel":"des_ateco"
         },
         {
-           "index": 5,
+           "index": 7,
            "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione",
            "label":"Ragione sociale azienda",
            "type":"string"
         },
         {
-           "index": 6,
-           "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA",
-           "label":"Partita IVA azienda",
-           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"string"
-        },
-        {
-           "index": 7,
+           "index": 8,
            "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale",
            "label":"Codice fiscale azienda",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
-           "index": 8,
-           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idTipoProvvedimento",
-           "label":"Tipo provvedimento",
-           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"list",
-           "valueService": {
-
-             "urlParams": {
-               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
-               "propertyName": "id_proc_attivita,provv"
-             }
-           },
-
-           "valueId":"id_proc_attivita",
-           "valueLabel":"provv"
-        },
-        {
            "index": 9,
-           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento",
-           "label":"Data provvedimento",
+           "attribute": "decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA",
+           "label":"Partita IVA azienda",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"date",
-           "fieldOptions": {
-             "dateFormat": "DD/MM/YYYY"
-           }
+           "type":"string"
         },
         {
            "index": 10,
-           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza",
-           "label":"Data scadenza",
-           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type":"date",
-           "fieldOptions": {
-             "dateFormat": "DD/MM/YYYY"
-           }
-        },
-        {
-           "index": 11,
            "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tematica/decsiraogc_stabilimenti:Tematica/decsiraogc_stabilimenti:idTematica",
-           "label":"Ambito Tematico",
+           "label":"Ambito tematico autorizzazione",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
@@ -316,34 +316,43 @@
            "valueLabel":"des_tematica"
         },
         {
-           "index": 12,
-           "attribute": "decsiraogc_stabilimenti:idTipologiaImpianto",
-           "label":"Tipologia impianto",
-           "type":"list",
-           "valueService": {
-             "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_sede",
-               "propertyName": "id_tipo_sede,des_tipo_sede,ordinamento",
-                "sortBy": "ordinamento+A"
-             }
-           },
-           "valueId":"id_tipo_sede",
-           "valueLabel":"des_tipo_sede"
-        },
-        {
-           "index": 13,
-           "attribute": "decsiraogc_stabilimenti:idStato",
-           "label":"Stato",
+           "index": 11,
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento",
+           "label":"Tipo provvedimento",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
+
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_d_stato",
-               "propertyName": "id_stato,des_stato"
+               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+               "propertyName": "id_proc_attivita,provv",
+               "cql_filter": "id_proc_attivita=23%20OR%20id_proc_attivita=9%20OR%20id_proc_attivita=18%20OR%20id_proc_attivita=99%20OR%20id_proc_attivita=110%20OR%20id_proc_attivita=111",
+                "sortBy": "provv+A"
              }
            },
-           "valueId":"id_stato",
-           "valueLabel":"des_stato"
+
+           "valueId":"provv",
+           "valueLabel":"provv"
+        },
+        {
+           "index": 12,
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento",
+           "label":"Data provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 13,
+           "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza",
+           "label":"Data scadenza",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
         }
 
      ]

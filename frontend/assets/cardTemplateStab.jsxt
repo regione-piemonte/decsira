@@ -123,79 +123,19 @@
 
         <Section header='IMPIANTO DI DEPURAZIONE' eventKey='3' expanded={false}>
             <LabeledField label='Abitanti equivalenti trattati' value={
-              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:impiantoDiDepurazione/decsiraogc_stabilimenti:ImpiantoDiDepurazione/decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()")
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:abitantiEquivalentiTrattati/text()")
             }/>
+            <LinkScheda
+              params={{
+              cql_filter: "decsiraogc_stabilimenti:codiceSira='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")+"'"
+              }}
+              featureType="impiantiDepurazione"
+              linkTitle="Vai a scheda Impianto di Depurazione"
+              detailsTemplateConfigURL=""
+            />
         </Section>
 
-        <Section header='APPROVIGIONAMENTO IDRICO' eventKey='4' expanded={false}>
-          <Section header='Prelievi' eventKey='5' expanded={false}>
-          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-            <SiraTable
-                id="Prelievi"
-                selectedRow={model.Prelievi}
-                wfsVersion="2.0"
-                rowSelection={false}
-                columns={
-                    [
-                        {
-                            headerName: 'Tipo prelievo',
-                            width: 162,
-                            xpath:"decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:desTipoPrelievo/text()"
-                        },
-                        {
-                            headerName: 'Denominazione impianto depurazione terzi',
-                            width: 280,
-                            xpath: "decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:denomImpiantoDepurTerzi/text()"
-                        },
-                        {
-                            headerName: 'Gestore impianto depurazione terzi',
-                            width: 270,
-                            xpath: "decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:gestImpiantoDepurTerzi/text()"
-                        }
-                    ]
-                }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:prelievoAcqua")}/>
-             </ProfileWrapper>
-
-             <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
-               <SiraTable
-                   id="Prelievi"
-                   selectedRow={model.Prelievi}
-                   wfsVersion="2.0"
-                   rowSelection={false}
-                   columns={
-                       [
-                           {
-                               headerName: 'Tipo prelievo',
-                               width: 712,
-                               xpath:"decsiraogc_stabilimenti:PrelievoAcqua/decsiraogc_stabilimenti:desTipoPrelievo/text()"
-                           }
-                       ]
-                   }
-                   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:prelievoAcqua")}/>
-                </ProfileWrapper>
-          </Section>
-
-          <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-            <Section header='Ricircolo' eventKey='6' expanded={false}>
-                <LabeledField label='Ricircolo interno' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:ricircoloInterno/text()")
-                }/>
-                <LabeledField label='Modalita di ricircolo' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:modalitaRicircolo/text()")
-                }/>
-                <LabeledField label='Percentuale ricircolo' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:percentualeRicircolo/text()")
-                }/>
-                <LabeledField label='Volume annuo ricircolo (m3)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:volumeAnnuoRicircolo/text()")
-                }/>
-                <LabeledField label='Volume giornaliero ricircolo (m3)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:volumeGiornoRicircolo/text()")
-                }/>
-            </Section>
-          </ProfileWrapper>
-      </Section>
+      
 
 
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
@@ -227,6 +167,120 @@
                       }
                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:certificazioneAmbientale")}/>
                 </Section>
+              </ProfileWrapper>
+
+
+
+
+              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+                <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
+                <SiraTable
+                    id="Autorizzazioni"
+                    selectedRow={model.Autorizzazioni}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    columns={
+                        [
+                            {
+                                hide: true,
+                                id: true,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
+                            },
+                            {
+                                headerName: 'Tipo provvedimento',
+                                width: 250,
+                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Tematica',
+                                width: 250,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
+                            },
+                            {
+                                headerName: 'Numero',
+                                width: 100,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:estremiProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data emissione',
+                                width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data scadenza',
+                                width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
+                            },
+                            {
+                                headerName: 'Ente competente',
+                                width: 150,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
+                            },
+                            {
+                                headerName: 'Stato',
+                                width: 100,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desStato/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
+                  </Section>
+                  </ProfileWrapper>
+
+
+
+              <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
+                <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
+                <SiraTable
+                    id="Autorizzazioni"
+                    selectedRow={model.Autorizzazioni}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    columns={
+                        [
+                            {
+                                hide: true,
+                                id: true,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
+                            },
+                            {
+                                headerName: 'Tipo provvedimento',
+                                width: 290,
+                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Tematica',
+                                width: 250,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
+                            },
+                            {
+                                headerName: 'Numero',
+                                width: 100,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:estremiProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data emissione',
+                                width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
+                            },
+                            {
+                                headerName: 'Data scadenza',
+                                width: 100,
+                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
+                            },
+                            {
+                                headerName: 'Ente competente',
+                                width: 150,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
+                    </Section>
               </ProfileWrapper>
 
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
@@ -308,229 +362,11 @@
                           ]
                       }
                       features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato")}/>
-
                 </Section>
               </ProfileWrapper>
 
 
-              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-                <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
-                <SiraTable
-                    id="Autorizzazioni"
-                    selectedRow={model.Autorizzazioni}
-                    wfsVersion="2.0"
-                    rowSelection={((model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )) ? "single" : false}
-                    columns={
-                        [
-                            {
-                                hide: true,
-                                id: true,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
-                            },
-                            {
-                                headerName: 'Identificativo autorizzazione',
-                                width: 170,
-                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
-                            },
-                            {
-                                headerName: 'Tipo provvedimento',
-                                width: 250,
-                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
-                            },
-                            {
-                                headerName: 'Tematica',
-                                width: 250,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
-                            },
-                            {
-                                headerName: 'Numero',
-                                width: 100,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:estremiProvvedimento/text()"
-                            },
-                            {
-                                headerName: 'Data emissione',
-                                width: 100,
-                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
-                            },
-                            {
-                                headerName: 'Data scadenza',
-                                width: 100,
-                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
-                            },
-                            {
-                                headerName: 'Ente competente',
-                                width: 150,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
-                            },
-                            {
-                                headerName: 'Stato',
-                                width: 100,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desStato/text()"
-                            }
-                        ]
-                    }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
 
-                    <Section header='' eventKey='99' expanded={false}>
-                    </Section>
-
-                    <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
-                    <SiraTable
-                        id="SottoattivitaEmisiva"
-                        selectedRow={model.SottoattivitaEmisiva}
-                        wfsVersion="2.0"
-                        rowSelection={false}
-                        dependsOn={{
-                            tableId: "Autorizzazioni",
-                            parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale"),
-                            xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id",
-                            pdfTitle: "Identificativo autorizzativo: {{decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()}}"
-                        }}
-                        columns={
-                            [
-                              {
-                                    hide: true,
-                                    id: true,
-                                    xpath:"../../decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
-                                },
-                                {
-                                    headerName: 'Descrizione sottoattivita',
-                                    width: 712,
-                                    xpath:"decsiraogc_stabilimenti:SottoAttivitaEmissiva/decsiraogc_stabilimenti:desSottoAttivitaEmissiva/text()"
-                                }
-                            ]
-                        }
-                        features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:sottoAttivitaEmissiva")}/>
-                    </Section>
-
-
-                    <Section header='Dettaglio delle attrezzature' eventKey='13' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
-                      <SiraTable
-                          id="DettaglioAttrezzature"
-                          selectedRow={model.DettaglioAttrezzature}
-                          wfsVersion="2.0"
-                          dependsOn={{
-                              tableId: "Autorizzazioni",
-                              parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale"),
-                              xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id",
-                              pdfTitle: "Identificativo autorizzativo: {{decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()}}"
-                          }}
-                          rowSelection={false}
-                          columns={
-                              [
-                                  {
-                                      hide: true,
-                                      id: true,
-                                      xpath:"../../decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
-                                  },
-                                  {
-                                      headerName: 'Descrizione attrezzatura',
-                                      width: 500,
-                                      xpath:"decsiraogc_stabilimenti:DettaglioAttivita/decsiraogc_stabilimenti:desDettaglioAttivita/text()"
-                                  },
-                                  {
-                                      headerName: 'Quantita',
-                                      width: 211,
-                                      xpath:"decsiraogc_stabilimenti:DettaglioAttivita/decsiraogc_stabilimenti:quantita/text()"
-                                  }
-                              ]
-                          }
-                          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dettaglioAttivita")}/>
-                    </Section>
-                  </Section>
-              </ProfileWrapper>
-
-
-              <ProfileWrapper condition={() => (model) && (!model.profile || model.profile.length == 0)}>
-                <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
-                <SiraTable
-                    id="Autorizzazioni"
-                    selectedRow={model.Autorizzazioni}
-                    wfsVersion="2.0"
-                    rowSelection={((model) && (!model.profile || model.profile.length == 0)) ? "single" : false}
-                    columns={
-                        [
-                            {
-                                hide: true,
-                                id: true,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
-                            },
-                            {
-                                headerName: 'Identificativo autorizzativo',
-                                width: 50,
-                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
-                            },
-                            {
-                                headerName: 'Tipo provvedimento',
-                                width: 290,
-                                xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
-                            },
-                            {
-                                headerName: 'Tematica',
-                                width: 250,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
-                            },
-                            {
-                                headerName: 'Numero',
-                                width: 100,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:estremiProvvedimento/text()"
-                            },
-                            {
-                                headerName: 'Data emissione',
-                                width: 100,
-                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataProvvedimento/text()"
-                            },
-                            {
-                                headerName: 'Data scadenza',
-                                width: 100,
-                                dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:dataScadenza/text()"
-                            },
-                            {
-                                headerName: 'Ente competente',
-                                width: 150,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
-                            }
-                        ]
-                    }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
-
-                    <Section header='' eventKey='999' expanded={true}>
-                    </Section>
-
-                    <Section header='Sottoattivit&agrave; emissiva' eventKey='12' expanded={( model.Autorizzazioni !== undefined && model.Autorizzazioni !== null ) ? true: false}>
-                    <SiraTable
-                        id="SottoattivitaEmisiva"
-                        selectedRow={model.SottoattivitaEmisiva}
-                        wfsVersion="2.0"
-                        rowSelection={false}
-                        dependsOn={{
-                            tableId: "Autorizzazioni",
-                            parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale"),
-                            xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id",
-                            pdfTitle: "Identificativo autorizzativo: {{decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()}}"
-                        }}
-                        columns={
-                            [
-                              {
-                                    hide: true,
-                                    id: true,
-                                    xpath:"../../decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
-                                },
-                                {
-                                    headerName: 'Descrizione sottoattivita',
-                                    width: 712,
-                                    xpath:"decsiraogc_stabilimenti:SottoAttivitaEmissiva/decsiraogc_stabilimenti:desSottoAttivitaEmissiva/text()"
-                                }
-                            ]
-                        }
-                        features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale/decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:sottoAttivitaEmissiva")}/>
-                    </Section>
-                    </Section>
-              </ProfileWrapper>
 
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                   <Section header='IMPATTO ACUSTICO - Verifica sorgenti rumorose' eventKey='14' expanded={false}>
@@ -595,6 +431,7 @@
                       authParam={model.authParam}
                       withMap={model.withMap}/>
               </Section>
+
 
               <Section header='METADATO' eventKey='7' expanded={true}>
                   <LinkToPage
