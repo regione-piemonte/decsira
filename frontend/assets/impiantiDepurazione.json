@@ -52,6 +52,14 @@
            "type": 2
          },
          {
+           "headerName": "Stato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
+		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+            "width" : 120
+         },
+         {
            "headerName": "Denominazione impianto di depurazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_stabilimenti:nome/text()"],
@@ -95,14 +103,6 @@
            "xpath": ["decsiraogc_stabilimenti:nomeComune/text()"],
            "type": 2,
             "width" : 150
-         },
-         {
-           "headerName": "Stato",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_stabilimenti:desStato/text()"],
-		         "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2,
-            "width" : 120
          },
          {
            "headerName": "ATO",
@@ -282,11 +282,12 @@
           "index": 1,
           "attribute": "decsiraogc_stabilimenti:idStato",
           "label":"Stato",
-          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "valueService": {
             "urlParams": {
-              "typeName": "decsiraogc_decodif:sipra_d_stato",
+              "typeName": "decsiraogc_decodif:decsira_d_stato",
+              "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=103",
               "propertyName": "id_stato,des_stato"
             }
           },
@@ -427,17 +428,18 @@
         },
         {
           "index": 15,
-          "attribute": "decsiraogc_stabilimenti:tipoProvvedimento",
+          "attribute": "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:tipoProvvedimento",
           "label":"Tipo autorizzazione",
           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+              "cql_filter": "id_proc_attivita=9%20OR%20id_proc_attivita=99",
               "propertyName": "id_proc_attivita,provv"
             }
           },
-          "valueId":"id_proc_attivita",
+          "valueId":"provv",
           "valueLabel":"provv"
         },
         {
@@ -477,7 +479,7 @@
         },
         {
           "index": 19,
-          "attribute": "decsiraogc_stabilimenti:idTipologiaTrattamento",
+          "attribute": "decsiraogc_stabilimenti:trattamentiAvanzati",
           "label":"Trattamenti piu avanzati",
           "type":"list",
           "valueService": {
@@ -487,7 +489,7 @@
               "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale"
             }
           },
-          "valueId":"id_trattamento_dep",
+          "valueId":"des_trattamento_dep",
           "valueLabel":"des_trattamento_dep"
         },
         {
