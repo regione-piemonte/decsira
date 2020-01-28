@@ -17,6 +17,9 @@
         <LabeledField label='Denominazione' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
         }/>
+        <LabeledField label='Stato sede operativa' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desStato/text()")
+        }/>
         <LabeledField label='Provincia' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desProvincia/text()")
         }/>
@@ -135,8 +138,6 @@
             />
         </Section>
 
-      
-
 
               <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='CERTIFICAZIONI AMBIENTALI' eventKey='9' expanded={true}>
@@ -169,10 +170,7 @@
                 </Section>
               </ProfileWrapper>
 
-
-
-
-              <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                 <Section header='AUTORIZZAZIONI' eventKey='11' expanded={true}>
                 <SiraTable
                     id="Autorizzazioni"
@@ -187,12 +185,22 @@
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                             },
                             {
+                                headerName: 'Identificativo autorizzazione',
+                                width: 120,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
+                            },
+                            {
+                                headerName: 'Stato',
+                                width: 150,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desStato/text()"
+                            },
+                            {
                                 headerName: 'Tipo provvedimento',
                                 width: 250,
                                 xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                             },
                             {
-                                headerName: 'Tematica',
+                                headerName: 'Ambito tematico',
                                 width: 250,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
                             },
@@ -217,17 +225,13 @@
                                 headerName: 'Ente competente',
                                 width: 150,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desEnteCompetente/text()"
-                            },
-                            {
-                                headerName: 'Stato',
-                                width: 100,
-                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desStato/text()"
                             }
+
                         ]
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:autorizzazioneAmbientale")}/>
                   </Section>
-                  </ProfileWrapper>
+                    </ProfileWrapper>
 
 
 
@@ -246,12 +250,17 @@
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/@gml:id"
                             },
                             {
+                                headerName: 'Identificativo autorizzazione',
+                                width: 120,
+                                xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:idAutorizzazioneAmbientale/text()"
+                            },
+                            {
                                 headerName: 'Tipo provvedimento',
                                 width: 290,
                                 xpath:"decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:tipoProvvedimento/text()"
                             },
                             {
-                                headerName: 'Tematica',
+                                headerName: 'Ambito tematico',
                                 width: 250,
                                 xpath: "decsiraogc_stabilimenti:AutorizzazioneAmbientale/decsiraogc_stabilimenti:desTematica/text()"
                             },
