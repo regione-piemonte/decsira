@@ -85,6 +85,9 @@
          />
         </Section>
 
+
+
+
         <Section header='MONITORAGGIO DEPURATORE  - Dati Dimensionali' eventKey='4' expanded={true}>
         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
             <SiraTable
@@ -153,11 +156,6 @@
                             headerName: 'Portata media annua attuale  (mc/anno)',
                             width: 100,
                             xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:portataMediaAnnua/text()"
-                        },
-                        {
-                            headerName: 'Monitoraggio a fini WFD -Water Framework Directive',
-                            width: 200,
-                            xpath: "decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione/text()"
                         }
                     ]
                 }
@@ -212,8 +210,9 @@
                   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_depuratori:MonitoraggioDepuratore/decsiraogc_monitor_depuratori:monitoraggioDatiDimens")}/>
             </ProfileWrapper>
 
-            <Section header='' eventKey='5' expanded={true}>
-            </Section>
+            <Section header='' eventKey='5' expanded={false}>
+                        </Section>
+
             <Section header=' Bacino Utenza Monitoraggio' eventKey='5' expanded={( model.DatiDimensionali !== undefined && model.DatiDimensionali !== null ) ? true: false}>
                 <SiraTable
                     id="BacinoUtenzaMonitoraggio"
