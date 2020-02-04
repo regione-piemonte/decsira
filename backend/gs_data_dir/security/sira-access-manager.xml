@@ -178,6 +178,13 @@
 		<accessMode>READ</accessMode>
     </Rule>
 	<Rule>
+		<priority>25</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_monitor_datidimens</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
 		<priority>100</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_emissioni</workspace>
@@ -908,5 +915,21 @@
 			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivRifiutiLiquidi</attribute>
 		</hiddenAttributes>		  
     </Rule>
+	<Rule>
+		<priority>126</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_monitor_datidimens</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>127</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_monitor_datidimens</workspace>
+		<layer>DepMonitorDatiDimens</layer>
+		<accessMode>READ</accessMode>
+		<filter>"flg_validazione" = 'si'</filter>  
+    </Rule>
+	
     </rules>
 </Config>

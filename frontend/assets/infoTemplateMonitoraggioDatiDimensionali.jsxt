@@ -1,0 +1,89 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateMonitoraggioDatiDimensionali"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+             headerName: 'Anno monitoraggio',
+             width: 100,
+             xpath: "decsiraogc_monitor_datidimens:codice_sira_monitoraggio/text()"
+        }, {
+             headerName: 'Provincia',
+             width: 100,
+             xpath: "decsiraogc_monitor_datidimens:provincia/text()"
+        }, {
+             headerName: 'Comune',
+             width: 150,
+             xpath : "decsiraogc_monitor_datidimens:nome_comune/text()"
+        }, {
+            headerName: 'Monitoraggio attuazione Direttiva 91/271/CEE',
+            width: 100,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_monitor_datidimens:flg_validazion/text()"
+        }, {
+            headerName: 'Codice regionale depuratore',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:codice_regionale_imp/text()"
+        }, {
+            headerName: 'Codice europeo depuratore',
+            width: 150,
+            xpath: "decsiraogc_monitor_datidimens:codice_europeo_imp/text()"
+        }, {
+            headerName: 'Denominazione impianto di depurazione',
+            width: 150,
+            xpath: "decsiraogc_monitor_datidimens:denominazione/text()"
+        }, {
+            headerName: 'Codice SIRA',
+            width: 90,
+            xpath: "decsiraogc_monitor_datidimens:codice_sira_monitoraggio/text()"
+        }, {
+            headerName: 'Denominazione azienda / gestore',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:rag_sociale_azienda/text()"
+        }, {
+            headerName: 'Codice fiscale / Partita IVA azienda',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:codice_fiscale_azienda/text()"
+        }, {
+            headerName: 'Autorita di Ambito Territoriale Ottimale',
+            width: 150,
+            xpath: "decsiraogc_monitor_datidimens:des_ato/text()"
+        }, {
+            headerName: 'Tipologia di trattamento',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:id_trattamento_dep/text()"
+        }, {
+            headerName: 'Capacita organica di progetto (a.e.)',
+            width: 120,
+            xpath: "decsiraogc_monitor_datidimens:capacita_org_progetto/text()"
+        }, {
+            headerName: 'Carico totale Trattato (a.e.)',
+            width: 120,
+            xpath: "decsiraogc_monitor_datidimens:abitanti_equiv_trattati/text()"
+        }, {
+            headerName: 'Abitanti residenti (a.e.)',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:abitanti_residenti/text()"
+          }, {
+            headerName: 'Abitanti fluttuanti (a.e.)',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:abitanti_fluttuanti/text()"
+          }, {
+            headerName: 'Abitanti equivalenti industriali (a.e.)',
+            width: 100,
+            xpath: "decsiraogc_monitor_datidimens:abitanti_equiv_industriali/text()"
+          }, {
+             headerName: 'Abitanti equivalenti da trattamento rifiuti liquidi (a.e.)',
+             width: 100,
+             xpath: "decsiraogc_monitor_datidimens:abitanti_equiv_rif_liq/text()"
+         },{
+             headerName: 'Portata media annua attuale  (mc/anno)',
+             width: 120,
+             xpath: "decsiraogc_monitor_datidimens:portata_media_annua/text()"
+         }
+		
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_monitor_datidimens:DepMonitorDatiDimens")}/>

@@ -1,0 +1,402 @@
+{
+  "featureTypeName": "decsiraogc_monitor_datidimens:DepMonitorDatiDimens",
+  "featureTypeNameLabel": "Monitoraggio Dati dimensionali Depuratori",
+  "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+  "nameSpaces": {
+    "decsiraogc_monitor_datidimens": "http://www.regione.piemonte.it/ambiente/decsira/1.0",
+    "decsiraogc_decodif": "http://www.regione.piemonte.it/ambiente/decodif/1.0"
+  },
+  "layer": {
+    "type": "wms",
+    "url": "{geoserverUrl}/wms",
+    "visibility": true,
+    "title": "Monitoraggio Dati Dimensionali Impianti Depurazione con abitanti equivalenti > 2000",
+    "name": "decsiraogc_monitor_datidimens:DepMonitorDatiDimens",
+    "infoFormat": "application/vnd.ogc.gml/3.1.1",
+    "featureType": "monitoraggioDatiDimensionali",
+    "group": "Oggetti",
+    "format": "image/png"
+  },
+  "geometryName": "decsiraogc_monitor_datidimens:geometria",
+  "geometryType": "Point",
+  "featureinfo": {
+    "templateURL": "assets/infoTemplateMonitoraggioDatiDimensionali.jsxt"
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_monitor_datidimens:DepMonitorDatiDimens",
+      "columns": [
+        {
+          "hide":true,
+          "headerName": "Geometry",
+          "xpath": [
+            "decsiraogc_monitor_datidimens:geometria/gml:Point/gml:pos/text()"
+          ],
+          "suppressSorting": true,
+          "type": 6
+        },
+        {
+          "headerName": "Anno monitoraggio",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:anno_monitoraggio/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Provincia",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:provincia/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Comune",
+          "width":150,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:nome_comune/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Monitoraggio attuazione Direttiva 91/271/CEE",
+          "width":100,
+          "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "xpath": [
+            "decsiraogc_monitor_datidimens:flg_validazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Codice regionale depuratore",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:codice_regionale_imp/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Codice europeo depuratore",
+          "width":150,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:codice_europeo_imp/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Denominazione impianto di depurazione",
+          "width":150,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:denominazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Codice SIRA",
+          "width":90,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:codice_sira_monitoraggio/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Denominazione azienda / gestore",
+          "width":150,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:rag_sociale_azienda/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Codice fiscale / Partita IVA azienda",
+          "width":150,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:codice_fiscale_azienda/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Autorità di Ambito Territoriale Ottimale",
+          "width":150,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:des_ato/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipologia di trattamento",
+          "width":120,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:id_trattamento_dep/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Capacità organica di progetto (a.e.)",
+          "width":120,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:capacita_org_progetto/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Carico totale Trattato (a.e.)",
+          "width":120,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:abitanti_equiv_trattati/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Abitanti residenti (a.e.)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:abitanti_residenti/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Abitanti fluttuanti (a.e.)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:abitanti_fluttuanti/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Abitanti equivalenti industriali (a.e.)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:abitanti_equiv_industriali/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Abitanti equivalenti da trattamento rifiuti liquidi (a.e.)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:abitanti_equiv_rif_liq/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Portata media annua attuale  (mc/anno)",
+          "width":120,
+          "xpath": [
+            "decsiraogc_monitor_datidimens:portata_media_annua/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        }
+      ]
+    }
+  },
+  "query": {
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields": [
+      {
+         "index": 1,
+         "attribute": "anno_monitoraggio",
+         "label":"Anno monitoraggio",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_anno_monit_depuratore",
+             "propertyName": "id_anno"
+           }
+         },
+         "valueId":"id_anno",
+         "valueLabel":"id_anno"
+      },
+      {
+         "index": 2,
+         "attribute": "provincia",
+         "label":"Provincia",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:sipra_t_province",
+             "sortBy": "toponimo+A"
+           }
+         },
+         "valueId":"toponimo",
+         "valueLabel":"toponimo"
+      },
+      {
+         "index": 3,
+         "attribute": "nome_comune",
+         "label":"Comune",
+         "type":"list",
+         "valueService": {
+
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:sipra_t_comuni",
+             "propertyName": "id_comune,sigla_provincia,toponimo",
+             "sortBy": "toponimo+A"
+           }
+         },
+
+         "valueId":"toponimo",
+         "valueLabel":"toponimo",
+         "dependson":{
+            "field": "provincia",
+            "from": "sigla",
+            "to": "sigla_provincia"
+         }
+      },
+      {
+        "index": 4,
+        "attribute": "flg_validazione",
+        "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+        "label": "Monitoraggio attuazione Direttiva 91/271/CEE",
+        "type": "list",
+        "values": [
+          {
+            "value": "si",
+            "name": "SI"
+          },
+          {
+            "value": "no",
+            "name": "NO"
+          }
+        ],
+        "valueId": "value",
+        "valueLabel": "name"
+      },
+      {
+        "index": 5,
+        "attribute": "codice_regionale_imp",
+        "label": "Codice Regionale depuratore",
+        "type": "string"
+      },
+      {
+        "index": 6,
+        "attribute": "codice_europeo_imp",
+        "label": "Codice europeo depuratore",
+        "type": "string"
+      },
+      {
+        "index": 7,
+        "attribute": "denominazione",
+        "label": "Denominazione impianto di depurazione",
+        "type": "string"
+      },
+      {
+        "index": 8,
+        "attribute": "codice_sira_monitoraggio",
+        "label": "Codice SIRA",
+        "type": "number"
+      },
+      {
+        "index": 9,
+        "attribute": "rag_sociale_azienda",
+        "label": "Denominazione azienda / gestore",
+        "type": "string"
+      },
+      {
+        "index": 10,
+        "attribute": "codice_fiscale_azienda",
+        "label": "Codice fiscale / Partita IVA azienda",
+        "type": "string"
+      },
+      {
+        "index": 11,
+        "attribute": "id_ato",
+        "label": "Autorità di Ambito Territoriale Ottimale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_ato",
+            "propertyName": "id_ato,denominazione,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "id_ato",
+        "valueLabel": "denominazione"
+      },
+      {
+        "index": 12,
+        "attribute": "id_trattamento_dep",
+        "label": "Tipologia di trattamento ",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:sipra_dt_d_trattamento_dep",
+            "propertyName": "id_trattamento_dep,des_trattamento_dep,flg_principale",
+            "cql_filter": "flg_principale=1",
+            "sortBy": "id_trattamento_dep+A"
+          }
+        },
+        "valueId": "id_trattamento_dep",
+        "valueLabel": "des_trattamento_dep"
+      },
+      {
+        "index": 13,
+        "attribute": "capacita_org_progetto",
+        "label": "Capacita organica di progetto (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 14,
+        "attribute": "abitanti_equiv_trattati",
+        "label": "Carico totale Trattato (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 15,
+        "attribute": "abitanti_residenti",
+        "label": "Abitanti residenti (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 16,
+        "attribute": "abitanti_fluttuanti",
+        "label": "Abitanti fluttuanti (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 17,
+        "attribute": "abitanti_equiv_industriali",
+        "label": "Abitanti equivalenti industriali (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 18,
+        "attribute": "abitanti_equiv_rif_liq",
+        "label": "Abitanti equivalenti da trattamento rifiuti liquidi (a.e.)",
+        "type": "number"
+      },
+      {
+        "index": 19,
+        "attribute": "portata_media_annua",
+        "label": "Portata media annua attuale  (mc/anno)",
+        "type": "number"
+      }
+    ]
+  }
+}
