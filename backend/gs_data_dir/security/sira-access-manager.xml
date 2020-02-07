@@ -185,6 +185,39 @@
 		<accessMode>READ</accessMode>
     </Rule>
 	<Rule>
+		<priority>26</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter>
+    </Rule>
+	<Rule>
+		<priority>27</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>ImpiantoRifiutiAUAnoAUA</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idAttivita" = '22' OR "decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idAttivita" = '23'</filter>
+    </Rule>
+	<Rule>
+		<priority>28</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:idAttivita" = '101'</filter>
+    </Rule>
+	<Rule>
+		<priority>29</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>ImpiantoRifiutiGenerico</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '22' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '23'
+		 OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '100' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '101'</filter>
+    </Rule>
+	<Rule>
 		<priority>100</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_emissioni</workspace>
@@ -730,7 +763,7 @@
 		<workspace>decsiraogc_rifiuti_aua</workspace>
 		<layer>ImpiantoRifiutiAUAnoAUA</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_aua:idStato" = '102'</filter>
+		<filter>"decsiraogc_rifiuti_aua:idStato" = '101' OR "decsiraogc_rifiuti_aua:idStato" = '102'</filter>
 		<hiddenAttributes>
 		      <attribute>decsiraogc_rifiuti_aua:idStato</attribute>
 			  <attribute>decsiraogc_rifiuti_aua:desStato</attribute>
@@ -777,7 +810,7 @@
 		<workspace>decsiraogc_rifiuti_discarica</workspace>
 		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_discarica:idStato" = '102'</filter>
+		<filter>"decsiraogc_rifiuti_discarica:idStato" = '102' OR "decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_discarica:desStato</attribute>
 			  <attribute>decsiraogc_rifiuti_discarica:numeroProvveIscrizione</attribute>
@@ -821,7 +854,7 @@
 		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
 		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter>
+		<filter>"decsiraogc_rifiuti_smaltimento:idStato" = '101' OR "decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_smaltimento:desStato</attribute>
 			  <attribute>decsiraogc_rifiuti_smaltimento:numeroProvveIscrizione</attribute>
@@ -853,13 +886,14 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
+	
 	<Rule>
 		<priority>121</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_rifiuti_generici</workspace>
 		<layer>ImpiantoRifiutiGenerico</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_generici:idStato" = '102'</filter>
+		<filter>"decsiraogc_rifiuti_generici:idStato" = '102' OR "decsiraogc_rifiuti_generici:idStato" = '102'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:indirizzo</attribute>
 			   <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:emailPec</attribute>
@@ -906,7 +940,7 @@
 		<workspace>decsiraogc_monitor_depuratori</workspace>
 		<layer>MonitoraggioDepuratore</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_monitor_depuratori:monitoraggioDatiDimens/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione" = '1'</filter>
+		<filter>"decsiraogc_monitor_depuratori:monitoraggioDatiDimens/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:flagValidazione" = 'si'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_monitor_depuratori:codiceFiscaleAzienda</attribute>
 			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiResidenti</attribute>

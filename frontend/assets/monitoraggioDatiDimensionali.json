@@ -1,6 +1,6 @@
 {
   "featureTypeName": "decsiraogc_monitor_datidimens:DepMonitorDatiDimens",
-  "featureTypeNameLabel": "Monitoraggio Dati dimensionali Depuratori",
+  "featureTypeNameLabel": "Monitoraggio Dati Dimensionali impianti di depurazione acque reflue urbane > 2000 a.e. (semplificato)",
   "nameSpaces": {
     "decsiraogc_monitor_datidimens": "http://www.regione.piemonte.it/ambiente/decsira/1.0",
     "decsiraogc_decodif": "http://www.regione.piemonte.it/ambiente/decodif/1.0"
@@ -9,7 +9,7 @@
     "type": "wms",
     "url": "{geoserverUrl}/wms",
     "visibility": true,
-    "title": "Monitoraggio Dati Dimensionali Impianti Depurazione con abitanti equivalenti > 2000",
+    "title": "Monitoraggio Dati Dimensionali impianti di depurazione acque reflue urbane > 2000 a.e. (semplificato)",
     "name": "decsiraogc_monitor_datidimens:DepMonitorDatiDimens",
     "infoFormat": "application/vnd.ogc.gml/3.1.1",
     "featureType": "monitoraggioDatiDimensionali",
@@ -138,7 +138,7 @@
           "headerName": "Tipologia di trattamento",
           "width":120,
           "xpath": [
-            "decsiraogc_monitor_datidimens:id_trattamento_dep/text()"
+            "decsiraogc_monitor_datidimens:des_trattamento_dep/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -202,6 +202,36 @@
           "width":120,
           "xpath": [
             "decsiraogc_monitor_datidimens:portata_media_annua/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Produzione Fanghi tal quale  (tonnellate / anno)",
+          "width":150,
+          "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "xpath": [
+            "decsiraogc_monitor_datidimens:fanghi_prod_ta/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Percentuale di secco del fango tal quale in uscita dall'impianto (%)",
+          "width":150,
+          "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "xpath": [
+            "decsiraogc_monitor_datidimens:perc_secco_fango/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Produzione fanghi (tonnellate di secco / anno)",
+          "width":150,
+          "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "xpath": [
+            "decsiraogc_monitor_datidimens:fanghi_prod_ton_secco/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -394,6 +424,13 @@
         "index": 19,
         "attribute": "portata_media_annua",
         "label": "Portata media annua attuale  (mc/anno)",
+        "type": "number"
+      },
+      {
+        "index": 20,
+        "attribute": "fanghi_prod_ton_secco",
+        "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+        "label": "Produzione fanghi (tonnellate di secco / anno)",
         "type": "number"
       }
     ]

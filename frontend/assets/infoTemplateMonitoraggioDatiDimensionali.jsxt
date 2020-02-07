@@ -9,7 +9,7 @@
         {
              headerName: 'Anno monitoraggio',
              width: 100,
-             xpath: "decsiraogc_monitor_datidimens:codice_sira_monitoraggio/text()"
+             xpath: "decsiraogc_monitor_datidimens:anno_monitoraggio/text()"
         }, {
              headerName: 'Provincia',
              width: 100,
@@ -80,10 +80,28 @@
              width: 100,
              xpath: "decsiraogc_monitor_datidimens:abitanti_equiv_rif_liq/text()"
          },{
-             headerName: 'Portata media annua attuale  (mc/anno)',
+             headerName: 'Portata media annua attuale (mc/anno)',
              width: 120,
              xpath: "decsiraogc_monitor_datidimens:portata_media_annua/text()"
+         },
+         {
+             headerName: 'Produzione Fanghi tal quale (tonnellate / anno)',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_monitor_datidimens:fanghi_prod_ta/text()"
+         },
+         {
+             headerName: 'Percentuale di secco del fango tal quale in uscita impianto (%)',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_monitor_datidimens:perc_secco_fango/text()"
+         },
+         {
+             headerName: 'Produzione fanghi (tonnellate di secco / anno)',
+             width: 150,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_monitor_datidimens:fanghi_prod_ton_secco/text()"
          }
-		
+
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_monitor_datidimens:DepMonitorDatiDimens")}/>
