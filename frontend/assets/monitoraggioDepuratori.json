@@ -124,20 +124,6 @@
            "width" : 150
          },
          {
-           "headerName": "Capacita organica di progetto (a.e.)",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"],
-           "type": 2,
-           "width" : 100
-         },
-         {
-           "headerName": "Abitanti Equivalenti trattati",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()"],
-           "type": 2,
-           "width" : 100
-         },
-         {
            "headerName": "Tipologia di trattamento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_monitor_depuratori:desTipologiaTrattamento/text()"],
@@ -150,6 +136,20 @@
            "xpath": ["decsiraogc_monitor_depuratori:desTrattamPiuAvanzato/text()"],
            "type": 2,
            "width" : 120
+         },
+         {
+           "headerName": "Capacita organica di progetto (a.e.)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:capacitaOrganicaProgetto/text()"],
+           "type": 2,
+           "width" : 100
+         },
+         {
+           "headerName": "Carico totale Trattato (a.e.)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati/text()"],
+           "type": 2,
+           "width" : 100
          },
          {
            "headerName": "Produzione fanghi (tonnellate di secco / anno)",
@@ -177,7 +177,7 @@
            "headerName": "Chiariflocculazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_monitor_depuratori:chiariflocculazione/text()"],
-           "type": 1,
+           "type": 2,
            "width" : 100
          },
          {
@@ -305,12 +305,6 @@
            "valueLabel":"denominazione"
         },
         {
-           "index": 11,
-           "attribute": "decsiraogc_monitor_depuratori:capacitaOrganicaProgetto",
-           "label":"Capacita organica di progetto (a.e.)",
-           "type":"number"
-        },
-        {
            "index": 12,
            "attribute": "decsiraogc_monitor_depuratori:idTipologiaTrattamento",
            "label":"Tipologia di trattamento ",
@@ -325,6 +319,18 @@
            },
            "valueId":"id_trattamento_dep",
            "valueLabel":"des_trattamento_dep"
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_monitor_depuratori:capacitaOrganicaProgetto",
+           "label":"Capacita organica di progetto (a.e.)",
+           "type":"number"
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_monitor_depuratori:abitantiEquivalentiTrattati",
+           "label":"Carico totale Trattato (a.e.)",
+           "type":"number"
         },
         {
            "index": 13,
