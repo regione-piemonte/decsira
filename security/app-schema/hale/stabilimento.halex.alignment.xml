@@ -5740,4 +5740,36 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5869d631-ae51-4d84-a87c-a5be8df19005" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idAttivita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca9582a4e-159c-4bdb-b818-487e72aeea7f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizzazioneAmbientaleDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idAttivita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>

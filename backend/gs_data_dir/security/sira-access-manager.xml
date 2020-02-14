@@ -217,6 +217,15 @@
 		<filter>"decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '22' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '23'
 		 OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '100' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '101'</filter>
     </Rule>
+	
+	<Rule>
+		<priority>30</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_scarichi</workspace>
+		<layer>PuntoScaricoUrbano</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:idAttivita" = '31' </filter>
+	 </Rule>
 	<Rule>
 		<priority>100</priority>
 		<roles>ROLE_ANONYMOUS</roles>
@@ -328,7 +337,7 @@
 		<workspace>decsiraogc_stabilimenti</workspace>
 		<layer>ImpiantoDiDepurazione</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_stabilimenti:idStato" = '102'</filter>
+		<filter>"decsiraogc_stabilimenti:idStato" = '102' OR "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:idAttivita" = '16' OR "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:idAttivita" = '31'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_stabilimenti:codiceRegionaleDepuratore</attribute>
 			  <attribute>decsiraogc_stabilimenti:codiceEuropeoDepuratore</attribute>
@@ -391,7 +400,38 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
 	 </Rule>
-	
+	<Rule>
+		<priority>106</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_scarichi</workspace>
+		<layer>PuntoScaricoUrbano</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_scarichi:idStato" = '102' </filter>
+		<hiddenAttributes>
+		<attribute>decsiraogc_scarichi:idStato</attribute>
+		<attribute>decsiraogc_scarichi:desStato</attribute>
+		<attribute>decsiraogc_scarichi:codiceProvincialeScarico</attribute>
+		<attribute>decsiraogc_scarichi:codiceEuropeoScarico</attribute>
+		<attribute>decsiraogc_scarichi:codiceRegionaleScarico</attribute>
+		<attribute>decsiraogc_scarichi:codiceRecettore</attribute>
+		<attribute>decsiraogc_scarichi:desModalitaDispersione</attribute>
+		<attribute>decsiraogc_scarichi:portataMedia</attribute>
+		<attribute>decsiraogc_scarichi:volumeAnnuo</attribute>
+		<attribute>decsiraogc_scarichi:presenzaSostanzeTabn</attribute>
+		<attribute>decsiraogc_scarichi:elencoSostanzeTabn</attribute>
+		<attribute>decsiraogc_scarichi:misuratorePortata</attribute>
+		<attribute>decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:codiceSira</attribute>
+		<attribute>decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:nome</attribute>
+		<attribute>decsiraogc_scarichi:impiantoDiDepurazioneSemplice/decsiraogc_scarichi:ImpiantoDiDepurazioneSemplice/decsiraogc_scarichi:codiceRegionaleDepuratore</attribute>
+		<attribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:idTipoProvvedimento</attribute>
+		<attribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:tipoProvvedimento</attribute>
+		<attribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:dataProvvedimento</attribute>
+		<attribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:estremiProvvedimento</attribute>
+		<attribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:dataScadenza</attribute>
+		<attribute>decsiraogc_scarichi:sostanzaTabnUrbano/decsiraogc_scarichi:SostanzaTabnUrbano/decsiraogc_scarichi:idSostanzaTabn</attribute>
+		<attribute>decsiraogc_scarichi:sostanzaTabnUrbano/decsiraogc_scarichi:SostanzaTabnUrbano/decsiraogc_scarichi:desSostanzaTabn</attribute>
+		</hiddenAttributes>	
+	 </Rule>
 	<Rule>
 		<priority>108</priority>
 		<roles>ROLE_ANONYMOUS</roles>
@@ -691,7 +731,7 @@
 		<workspace>decsiraogc_scarichi</workspace>
 		<layer>PuntoScaricoIndustriale</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_scarichi:idStato" = '102'</filter>
+		<filter>"decsiraogc_scarichi:idStato" = '102' OR "decsiraogc_scarichi:autorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoInd/decsiraogc_scarichi:idAttivita" = '16'</filter>
 		<hiddenAttributes>
 		    <attribute>decsiraogc_scarichi:idStato</attribute>
 			<attribute>decsiraogc_scarichi:desStato</attribute>
