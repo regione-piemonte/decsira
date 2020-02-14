@@ -221,6 +221,18 @@
            "type": 2
          },
          {
+           "headerName": "Coordinata UTM X",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:coordinateX/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Coordinata UTM Y",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:coordinateY/text()"],
+           "type": 2
+         },
+         {
            "hide": true,
            "headerName": "Geometry",
            "xpath": ["decsiraogc_scarichi:geometria/gml:Point/gml:pos/text()"],
@@ -243,27 +255,6 @@
      "fields":[
          {
             "index": 1,
-            "attribute": "decsiraogc_scarichi:codiceRegionaleScarico",
-            "label":"Codice regionale scarico",
-            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-            "type":"string"
-         },
-         {
-            "index": 2,
-            "attribute": "decsiraogc_scarichi:codiceProvincialeScarico",
-            "label":"Codice provinciale scarico",
-            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-            "type":"string"
-         },
-         {
-            "index": 3,
-            "attribute": "decsiraogc_scarichi:codiceEuropeoScarico",
-            "label":"Codice europeo scarico",
-            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
-            "type":"string"
-         },
-         {
-            "index": 4,
             "attribute": "decsiraogc_scarichi:desProvincia",
             "label":"Provincia",
             "type":"list",
@@ -277,7 +268,7 @@
            "valueLabel":"toponimo"
         },
         {
-           "index": 5,
+           "index": 2,
            "attribute": "decsiraogc_scarichi:desComune",
            "label":"Comune",
            "type":"list",
@@ -298,7 +289,7 @@
            }
          },
          {
-            "index": 6,
+            "index": 3,
             "attribute": "decsiraogc_scarichi:idStato",
             "label":"Stato punto di scarico",
             "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
@@ -315,6 +306,26 @@
             "valueLabel":"des_stato"
          },
          {
+            "index": 4,
+            "attribute": "decsiraogc_scarichi:codiceRegionaleScarico",
+            "label":"Codice regionale scarico",
+            "type":"string"
+         },
+         {
+            "index": 5,
+            "attribute": "decsiraogc_scarichi:codiceProvincialeScarico",
+            "label":"Codice provinciale scarico",
+            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+         {
+            "index": 6,
+            "attribute": "decsiraogc_scarichi:codiceEuropeoScarico",
+            "label":"Codice europeo scarico",
+            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+         {
             "index": 7,
             "attribute": "decsiraogc_scarichi:idTipoRecettore",
             "label":"Tipo recettore",
@@ -324,6 +335,7 @@
               "urlParams": {
                 "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_recettore",
                 "propertyName": "id_tipo_recettore,des_tipo_recettore",
+                 "cql_filter": "id_tipo_recettore=2%20OR%20id_tipo_recettore=3",
                  "sortBy": "des_tipo_recettore+A"
               }
             },
@@ -380,6 +392,7 @@
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
                 "propertyName": "id_proc_attivita,provv",
+                 "cql_filter": "id_proc_attivita=9%20OR%20id_proc_attivita=99",
                  "sortBy": "provv+A"
               }
             },
