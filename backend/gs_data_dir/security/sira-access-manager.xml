@@ -1,5 +1,6 @@
 <Config>
     <rules>
+	<!-- da 1 a 99 tutti i ruoli, workspace, tutti i layers -->
 	<Rule>
 		<priority>1</priority>
 		<roles>*</roles>
@@ -63,8 +64,270 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
+	 <Rule>
+           <priority>10</priority>
+           <roles>*</roles>
+           <workspace>decsiraogc_scarichi</workspace>
+           <layer>*</layer>
+           <accessMode>READ</accessMode>
+     </Rule>
+	 <Rule>
+		<priority>11</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_waste_en</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+    <Rule>
+	   <priority>12</priority>
+	   <roles>*</roles>
+	   <workspace>decsiraogc_areeprotezione_pta</workspace>
+	   <layer>*</layer>
+	   <accessMode>READ</accessMode>
+    </Rule>
+	 <Rule>
+		<priority>13</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	<Rule>
-		<priority>10</priority>
+		<priority>14</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>15</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>16</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>17</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>18</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_monitor_depuratori</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>19</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_monitor_datidimens</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	 <Rule>
+		<priority>20</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_siticontaminati</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- da 100 a 299 tutti i ruoli, workspace, layer -->
+	<Rule>
+		<priority>100</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter>
+    </Rule>
+	<Rule>
+		<priority>101</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>ImpiantoRifiutiAUAnoAUA</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idAttivita" = '22' OR "decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idAttivita" = '23'</filter>
+    </Rule>
+	<Rule>
+		<priority>102</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:idAttivita" = '101'</filter>
+    </Rule>
+	<Rule>
+		<priority>103</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>ImpiantoRifiutiGenerico</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '22' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '23'
+		 OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '100' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '101'</filter>
+    </Rule>
+	<Rule>
+		<priority>104</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_scarichi</workspace>
+		<layer>PuntoScaricoUrbano</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:idAttivita" = '31' </filter>
+	 </Rule>
+	 <Rule>
+		<priority>105</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_scarichi</workspace>
+		<layer>PuntoScaricoIndustriale</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:idAttivita" = '16' </filter>
+	</Rule>
+	<Rule>
+		<priority>106</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_stabilimenti</workspace>
+		<layer>ImpiantoDiDepurazione</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:idAttivita" = '16' OR "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:idAttivita" = '31'</filter>
+	</Rule>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- da 300 a 599 ruolo, workspace, tutti i layers -->
+	 <Rule>
+            <priority>300</priority>
+            <roles>Profilo_B</roles>
+            <workspace>decsiraogc_emissioni</workspace>
+            <layer>*</layer>
+            <accessMode>READ</accessMode>
+     </Rule>
+	 <Rule>
+           <priority>301</priority>
+           <roles>Profilo_A</roles>
+           <workspace>decsiraogc_emissioni</workspace>
+           <layer>*</layer>
+           <accessMode>READ</accessMode>
+     </Rule>
+    <Rule>
+		<priority>302</priority>
+		<roles>ROLE_ANONIMOUS</roles>
+		<workspace>decsiraogc_areeprotezione_pta</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>303</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_stabilimenti</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
+	<Rule>
+		<priority>304</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_scarichi</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+	 </Rule>
+	<Rule>
+		<priority>305</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_waste_en</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	 <Rule>
+		<priority>306</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_siticontaminati</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	 <Rule>
+		<priority>307</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_aua</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>308</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_discarica</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>309</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>310</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_generici</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>311</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_monitor_depuratori</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>312</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_monitor_datidimens</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- da 600 a 999 ruolo, workspace, layer, hiddenAttributes -->
+	<Rule>
+		<priority>600</priority>
 		<roles>Profilo_A</roles>
 		<workspace>sira</workspace>
 		<layer>AutorizzazioneUnicaAmbientale</layer>
@@ -76,158 +339,14 @@
 		</hiddenAttributes>
      </Rule>
 	 <Rule>
-            <priority>11</priority>
-            <roles>Profilo_B</roles>
-            <workspace>decsiraogc_emissioni</workspace>
-            <layer>*</layer>
-            <accessMode>READ</accessMode>
-     </Rule>
-	 <Rule>
-           <priority>12</priority>
-           <roles>Profilo_A</roles>
-           <workspace>decsiraogc_emissioni</workspace>
-           <layer>*</layer>
-           <accessMode>READ</accessMode>
-     </Rule>
-	 <Rule>
-           <priority>13</priority>
-           <roles>*</roles>
-           <workspace>decsiraogc_scarichi</workspace>
-           <layer>*</layer>
-           <accessMode>READ</accessMode>
-     </Rule>
-	 <Rule>
-            <priority>14</priority>
-            <roles>ROLE_ANONYMOUS</roles>
-            <workspace>sira</workspace>
-            <layer>AutorizzazioneUnicaAmbientale</layer>
-	    <accessMode>READ</accessMode>
-	    <filter>"sira:attivita/sira:Attivita/sira:descrizione" = 'Recupero di rifiuti non pericolosi'</filter>
-            <hiddenAttributes>
-                <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</attribute>
-            </hiddenAttributes>
-     </Rule>
-	 <Rule>
-            <priority>15</priority>
+            <priority>601</priority>
             <roles>Profilo_B</roles>
             <workspace>sira</workspace>
             <layer>AutorizzazioneUnicaAmbientale</layer>
 			<accessMode>READ</accessMode>
      </Rule>
-	 <Rule>
-		<priority>16</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_waste_en</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-    <Rule>
-	   <priority>17</priority>
-	   <roles>*</roles>
-	   <workspace>decsiraogc_areeprotezione_pta</workspace>
-	   <layer>*</layer>
-	   <accessMode>READ</accessMode>
-    </Rule>
-    <Rule>
-		<priority>18</priority>
-		<roles>ROLE_ANONIMOUS</roles>
-		<workspace>decsiraogc_areeprotezione_pta</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	 <Rule>
-		<priority>19</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_aua</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
 	<Rule>
-		<priority>20</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_discarica</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>21</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>22</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_generici</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>23</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>24</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_monitor_depuratori</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>25</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_monitor_datidimens</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>26</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_discarica</workspace>
-		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
-		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter>
-    </Rule>
-	<Rule>
-		<priority>27</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_aua</workspace>
-		<layer>ImpiantoRifiutiAUAnoAUA</layer>
-		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idAttivita" = '22' OR "decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:idAttivita" = '23'</filter>
-    </Rule>
-	<Rule>
-		<priority>28</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
-		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
-		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:idAttivita" = '101'</filter>
-    </Rule>
-	<Rule>
-		<priority>29</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_rifiuti_generici</workspace>
-		<layer>ImpiantoRifiutiGenerico</layer>
-		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '22' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '23'
-		 OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '100' OR "decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:idAttivita" = '101'</filter>
-    </Rule>
-	
-	<Rule>
-		<priority>30</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_scarichi</workspace>
-		<layer>PuntoScaricoUrbano</layer>
-		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb/decsiraogc_scarichi:idAttivita" = '31' </filter>
-	 </Rule>
-	<Rule>
-		<priority>100</priority>
+		<priority>602</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_emissioni</workspace>
 		<layer>PuntoEmissione</layer>
@@ -270,15 +389,8 @@
 		  <attribute>decsiraogc_emissioni:impiantoDiCombustione/decsiraogc_emissioni:ImpiantoDiCombustione/decsiraogc_emissioni:desTipologiaImpianto</attribute>
 	     </hiddenAttributes>
        </Rule>
-	    <Rule>
-			<priority>101</priority>
-			<roles>ROLE_ANONYMOUS</roles>
-			<workspace>decsiraogc_stabilimenti</workspace>
-			<layer>*</layer>
-			<accessMode>READ</accessMode>
-		</Rule>
-		 <Rule>
-            <priority>102</priority>
+	   <Rule>
+            <priority>603</priority>
             <roles>ROLE_ANONYMOUS</roles>
             <workspace>decsiraogc_stabilimenti</workspace>
             <layer>Stabilimento</layer>
@@ -319,25 +431,13 @@
              <attribute>decsiraogc_stabilimenti:attivitaBassaRumorosita/decsiraogc_stabilimenti:AttivitaBassaRumorosita/decsiraogc_stabilimenti:desAttivitaBassaRumorosita</attribute>
           </hiddenAttributes>
         </Rule>
-        <Rule>
-           <priority>103</priority>
-           <roles>ROLE_ANONYMOUS</roles>
-           <workspace>sira</workspace>
-           <layer>AutorizzazioneUnicaAmbientale</layer>
-           <accessMode>READ</accessMode>
-           <filter>"sira:attivita/sira:Attivita/sira:descrizione" = 'Recupero di rifiuti non pericolosi'</filter>
-           <hiddenAttributes>
-              <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:codiceFiscale</attribute>
-       	      <attribute>sira:istanza/sira:IstanzaAutorizzativa/sira:dataRilascio</attribute>
-           </hiddenAttributes>
-       </Rule>
-	<Rule>
-		<priority>104</priority>
+		<Rule>
+		<priority>604</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_stabilimenti</workspace>
 		<layer>ImpiantoDiDepurazione</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_stabilimenti:idStato" = '102' OR "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:idAttivita" = '16' OR "decsiraogc_stabilimenti:autorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratore/decsiraogc_stabilimenti:idAttivita" = '31'</filter>
+		<filter>"decsiraogc_stabilimenti:idStato" = '102'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_stabilimenti:codiceRegionaleDepuratore</attribute>
 			  <attribute>decsiraogc_stabilimenti:codiceEuropeoDepuratore</attribute>
@@ -394,14 +494,7 @@
         </hiddenAttributes>
     </Rule>
 	<Rule>
-		<priority>105</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_scarichi</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-	 </Rule>
-	<Rule>
-		<priority>106</priority>
+		<priority>605</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_scarichi</workspace>
 		<layer>PuntoScaricoUrbano</layer>
@@ -412,7 +505,6 @@
 		<attribute>decsiraogc_scarichi:desStato</attribute>
 		<attribute>decsiraogc_scarichi:codiceProvincialeScarico</attribute>
 		<attribute>decsiraogc_scarichi:codiceEuropeoScarico</attribute>
-		<attribute>decsiraogc_scarichi:codiceRegionaleScarico</attribute>
 		<attribute>decsiraogc_scarichi:codiceRecettore</attribute>
 		<attribute>decsiraogc_scarichi:desModalitaDispersione</attribute>
 		<attribute>decsiraogc_scarichi:portataMedia</attribute>
@@ -433,14 +525,7 @@
 		</hiddenAttributes>	
 	 </Rule>
 	<Rule>
-		<priority>108</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_waste_en</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>109</priority>
+		<priority>606</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_waste_en</workspace>
 		<layer>WastePlant</layer>
@@ -464,22 +549,8 @@
 			  <attribute>decsiraogc_waste_en:ewc/decsiraogc_waste_en:Ewc/decsiraogc_waste_en:idRequestAuthorization</attribute>
 		</hiddenAttributes>	
     </Rule>
-	 <Rule>
-		<priority>110</priority>
-		<roles>*</roles>
-		<workspace>decsiraogc_siticontaminati</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	 <Rule>
-		<priority>111</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_siticontaminati</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
 	<Rule>
-		<priority>112</priority>
+		<priority>607</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_siticontaminati</workspace>
 		<layer>AnagrafeSitiContaminati</layer>
@@ -724,9 +795,8 @@
 			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:note</attribute>
 		</hiddenAttributes>	
     </Rule>
-	
 	<Rule>
-		<priority>113</priority>
+		<priority>608</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_scarichi</workspace>
 		<layer>PuntoScaricoIndustriale</layer>
@@ -789,16 +859,8 @@
 			<attribute>decsiraogc_scarichi:trattamentoDepurativoFinale/decsiraogc_scarichi:TrattamentoDepurativoFinale/decsiraogc_scarichi:altroTrattamento</attribute>
 		</hiddenAttributes>	
 	 </Rule>
-	 
-	 <Rule>
-		<priority>114</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti_aua</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
 	<Rule>
-		<priority>118</priority>
+		<priority>609</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_rifiuti_aua</workspace>
 		<layer>ImpiantoRifiutiAUAnoAUA</layer>
@@ -838,14 +900,7 @@
 		</hiddenAttributes>		  
     </Rule>
 	<Rule>
-		<priority>115</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti_discarica</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>119</priority>
+		<priority>610</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_rifiuti_discarica</workspace>
 		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
@@ -882,14 +937,7 @@
 		</hiddenAttributes>		  
     </Rule>
 	<Rule>
-		<priority>116</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>120</priority>
+		<priority>611</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
 		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
@@ -920,15 +968,7 @@
 		</hiddenAttributes>		  
     </Rule>
 	<Rule>
-		<priority>117</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti_generici</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	
-	<Rule>
-		<priority>121</priority>
+		<priority>612</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_rifiuti_generici</workspace>
 		<layer>ImpiantoRifiutiGenerico</layer>
@@ -952,7 +992,7 @@
 		</hiddenAttributes>		  
     </Rule>
 	 <Rule>
-		<priority>123</priority>
+		<priority>613</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_controlli_scarichi_urbani</workspace>
 		<layer>ControlliScarichiUrbani</layer>
@@ -968,14 +1008,7 @@
 		</hiddenAttributes>
    </Rule>
 	<Rule>
-		<priority>124</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_monitor_depuratori</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>125</priority>
+		<priority>614</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_monitor_depuratori</workspace>
 		<layer>MonitoraggioDepuratore</layer>
@@ -990,14 +1023,7 @@
 		</hiddenAttributes>		  
     </Rule>
 	<Rule>
-		<priority>126</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_monitor_datidimens</workspace>
-		<layer>*</layer>
-		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
-		<priority>127</priority>
+		<priority>615</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_monitor_datidimens</workspace>
 		<layer>DepMonitorDatiDimens</layer>
