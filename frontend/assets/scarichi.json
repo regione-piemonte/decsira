@@ -59,7 +59,7 @@
           "headerName": "Denominazione impianto di depurazione",
           "width":150,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:denominazione_dep/text()"
+            "decsiraogc_controlli_scarichi_urbani:denominazione/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -128,7 +128,7 @@
           "headerName": "Codice impianto anagrafica ARPA GAU",
           "width":120,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:arpa_code_entity_imp/text()"
+            "decsiraogc_controlli_scarichi_urbani:arpa_imp_code_entity/text()"
           ],
           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "suppressSorting": true,
@@ -146,7 +146,7 @@
         },
         {
           "hide": true,
-          "headerName": "Abitanti equivalenti trattati",
+          "headerName": "Carico totale Trattato (a.e.)",
           "width":120,
           "xpath": [
             "decsiraogc_controlli_scarichi_urbani:abitanti_equiv_trattati/text()"
@@ -159,7 +159,7 @@
           "headerName": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 1",
           "width":120,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab1/text()"
+            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152all5tab1/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -169,7 +169,7 @@
           "headerName": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 2",
           "width":120,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab2/text()"
+            "decsiraogc_controlli_scarichi_urbani:llimiti_dlgs152all5tab2/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -179,7 +179,7 @@
           "headerName": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 3",
           "width":120,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152_all5_tab3/text()"
+            "decsiraogc_controlli_scarichi_urbani:limiti_dlgs152all5tab3/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -250,7 +250,7 @@
           "headerName": "Coord X UTM32 Scarico",
           "width":50,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:coord_utm_x_scarico/text()"
+            "decsiraogc_controlli_scarichi_urbani:coord_x/text()"
           ],
           "suppressSorting": true,
           "type": 1
@@ -260,7 +260,7 @@
           "headerName": "Coord Y UTM32 Scarico",
           "width":50,
           "xpath": [
-            "decsiraogc_controlli_scarichi_urbani:coord_utm_y_scarico/text()"
+            "decsiraogc_controlli_scarichi_urbani:coord_y/text()"
           ],
           "suppressSorting": true,
           "type": 1
@@ -529,7 +529,7 @@
       },
       {
         "index": 5,
-        "attribute": "denominazione_dep",
+        "attribute": "denominazione",
         "label": "Denominazione impianto di depurazione",
         "type": "string"
       },
@@ -560,12 +560,12 @@
       {
         "index": 10,
         "attribute": "abitanti_equiv_trattati",
-        "label": "Abitanti equivalenti trattati",
+        "label": "Carico totale Trattato (a.e.)",
         "type": "number"
       },
       {
         "index": 11,
-        "attribute": "limiti_dlgs152_all5_tab1",
+        "attribute": "limiti_dlgs152all5tab1",
         "label": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 1",
         "type": "list",
         "values": [
@@ -583,7 +583,7 @@
       },
       {
         "index": 12,
-        "attribute": "limiti_dlgs152_all5_tab2",
+        "attribute": "limiti_dlgs152all5tab2",
         "label": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 2",
         "type": "list",
         "values": [
@@ -601,7 +601,7 @@
       },
       {
         "index": 13,
-        "attribute": "limiti_dlgs152_all5_tab3",
+        "attribute": "limiti_dlgs152all5tab3",
         "label": "Limiti definiti D.lgs.152/2006, Allegato 5 Tabella 3",
         "type": "list",
         "values": [
@@ -661,7 +661,7 @@
         "attribute": "anno_campione",
         "label": "Anno campione",
         "type": "list",
-         "valueService": {
+        "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_anni_controlli_scaurb",
             "propertyName": "id_anno"

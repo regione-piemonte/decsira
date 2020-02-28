@@ -184,13 +184,35 @@
         "tileSize": 512
   		},
         {
+    			"type": "wms",
+          "url": "{geoserverUrl}/wms",
+          "visibility": true,
+    			"title": "Monitoraggio Dati dimensionali degli Impianti Depurazione con abitanti equivalenti > 2000",
+    			"name": "decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
+          "infoFormat": "application/vnd.ogc.gml/3.1.1",
+          "featureType": "monitoraggioDepuratori",
+          "group": "Oggetti",
+          "format": "image/png"
+        },
+        {
   			"type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-  			"title": "Punti di scarico industriali soggetti ad autorizzazione ambientale",
+  			"title": "Punti di scarico industriali",
   			"name": "decsiraogc_scarichi:PuntoScaricoIndustriale",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "featureType": "puntiScaricoIndustriale",
+        "group": "Oggetti",
+        "format": "image/png"
+      },
+	   {
+  			"type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+  			"title": "Punti di scarico acque reflue urbane",
+  			"name": "decsiraogc_scarichi:PuntoScaricoUrbano",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "puntiScaricoUrbano",
         "group": "Oggetti",
         "format": "image/png"
       },
@@ -204,18 +226,7 @@
         "featureType": "impiantiDepurazione",
         "group": "Oggetti",
         "format": "image/png"
-      },
-      {
-    			"type": "wms",
-          "url": "{geoserverUrl}/wms",
-          "visibility": true,
-    			"title": "Monitoraggio Impianti Depurazione con abitanti equivalenti > 2000",
-    			"name": "decsiraogc_monitor_depuratori:MonitoraggioDepuratore",
-          "infoFormat": "application/vnd.ogc.gml/3.1.1",
-          "featureType": "monitoraggioDepuratori",
-          "group": "Oggetti",
-          "format": "image/png"
-        }
+      }
     ]
   }
 }
