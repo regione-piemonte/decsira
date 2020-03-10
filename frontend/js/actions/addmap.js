@@ -101,7 +101,7 @@ function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632') {
         const node = ((getState()).addmap || {}).node;
         const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
-            const mapLayers = getState().layers.flat || [];            
+            const mapLayers = getState().layers.flat || [];
             const resultOk = results.reduce((previous, current) => {
                 const alreadyPresent = mapLayers.filter((el) => el.title === current.title).length > 0;
                 return alreadyPresent ? previous : [...previous, current];

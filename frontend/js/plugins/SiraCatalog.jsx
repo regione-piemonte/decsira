@@ -216,15 +216,15 @@ const LayerTree = React.createClass({
             this.props.loadNodeMapRecords(node);
         }else if (node.featureType) {
             const mapLayers = SiraUtils.getLayersFlat();
-            if (!mapLayers.some(layer => layer.siraId == node.id)) {
-                //mapLayers NON contiene già un nodo con lo stesso id
+            if (!mapLayers.some(layer => layer.siraId === node.id)) {
+                // mapLayers NON contiene già un nodo con lo stesso id
                 const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
                 if (!this.props.configOggetti[featureType]) {
                     this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, true, node.id);
-                }else {                
+                } else {
                     this.props.addLayer(assign({}, this.props.configOggetti[featureType].layer, {siraId: node.id}));
                 }
-            }            
+            }
         }
     }
 });
