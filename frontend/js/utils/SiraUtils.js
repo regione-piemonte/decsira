@@ -35,6 +35,14 @@ module.exports = {
             }
             return myData;
         });
+    },
+
+    setStore: function(store) {
+        this.store = store;
+    },
+
+    getLayersFlat() {
+        return this.store.getState().layers.flat;
     }
 
 };

@@ -48,6 +48,7 @@ const {CHANGE_BROWSER_PROPERTIES} = require('../../MapStore2/web/client/actions/
 const {persistStore, autoRehydrate} = require('redux-persist');
 
 const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
+const SiraUtils = require('../utils/SiraUtils');
 
 module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins, storeOpts) => {
     const allReducers = combineReducers(plugins, {
@@ -91,5 +92,6 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         store = DebugUtils.createDebugStore(rootReducer, defaultState);
     }
     SecurityUtils.setStore(store);
+    SiraUtils.setStore(store);
     return store;
 };
