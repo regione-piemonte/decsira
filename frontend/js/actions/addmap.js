@@ -96,19 +96,24 @@ function addSiraLayersIncart(layers) {
     };
 }
 
+function checkLayersInMap(getState, results, node) {
+    const mapLayers = getState().layers.flat || [];
+    const resultOk = results.reduce((previous, current) => {
+        const alreadyPresent = mapLayers.filter((el) => el.title === current.title).length > 0;
+        return alreadyPresent ? previous : [...previous, current];
+    }, []);
+    if (node.id) {
+        resultOk.forEach((layer) => { layer.idnode = node.id; });
+    }
+    return resultOk;
+}
+
 function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
         const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
-            const mapLayers = getState().layers.flat || [];
-            const resultOk = results.reduce((previous, current) => {
-                const alreadyPresent = mapLayers.filter((el) => el.title === current.title).length > 0;
-                return alreadyPresent ? previous : [...previous, current];
-            }, []);
-            if (node.id) {
-                resultOk.forEach((layer) => {layer.idnode = node.id; });
-            }
+            const resultOk = checkLayersInMap(getState, results, node);
             dispatch(addSiraLayers(resultOk));
             dispatch(toggleAddMap(false));
         }).catch((e) => dispatch(recordsError(e)) );
@@ -120,14 +125,7 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
         const node = ((getState()).addmap || {}).node;
         const layersConfig = layers.map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
-            const cartLayers = getState().cart.layers || [];
-            const resultOk = results.reduce((previous, current) => {
-                const alreadyPresent = cartLayers.filter((el) => el.title === current.title).length > 0;
-                return alreadyPresent ? previous : [...previous, current];
-            }, []);
-            if (node.id) {
-                resultOk.forEach((layer) => {layer.idnode = node.id; });
-            }
+            const resultOk = checkLayersInMap(getState, results, node);
             dispatch(addSiraLayersIncart(resultOk));
             dispatch(toggleAddMap(false));
             dispatch(addServiceIncart(node));
