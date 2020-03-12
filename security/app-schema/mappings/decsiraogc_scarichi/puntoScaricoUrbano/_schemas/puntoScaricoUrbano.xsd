@@ -190,8 +190,10 @@
                         </xs:simpleType>
                     </xs:element>
 					
+					<xs:element minOccurs="0" name="coordinateX" type="xs:integer"/>
+					<xs:element minOccurs="0" name="coordinateY" type="xs:integer"/>
 
-					<xs:element maxOccurs="1" minOccurs="0" name="autorizzAmbientalePuntoScaricoUrb" type="decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrbPropertyType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="autorizzAmbientalePuntoScaricoUrb" type="decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrbPropertyType"/>
 
 					<xs:element maxOccurs="unbounded" minOccurs="0" name="controlloParamAnalPuntoScaricoUrb" type="decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrbPropertyType"/>
 					
@@ -258,6 +260,7 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
+					<xs:element minOccurs="0" name="idAttivita" type="xs:decimal"/>
 					<xs:element minOccurs="1" name="codiceSira" type="xs:decimal"/>
 					<xs:element minOccurs="0" name="idStato" type="xs:decimal"/>
 					<xs:element minOccurs="0" name="desStato">

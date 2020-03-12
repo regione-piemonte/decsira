@@ -132,6 +132,15 @@
             <targetElement>decsiraogc_scarichi:PuntoScaricoUrbano</targetElement>
             <attributeMappings>
                 <AttributeMapping>
+                    <targetAttribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
+                        <linkElement>decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb</linkElement>
+                        <linkField>FEATURE_LINK[1]</linkField>
+                    </sourceExpression>
+                    <isMultiple>true</isMultiple>
+                </AttributeMapping>
+                <AttributeMapping>
                     <targetAttribute>decsiraogc_scarichi:altezzaPozzo</targetAttribute>
                     <sourceExpression>
                         <OCQL>altezza_pozzo</OCQL>
@@ -172,13 +181,6 @@
                     <sourceExpression>
                         <OCQL>codice_sira</OCQL>
                     </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_scarichi:comuneServitoScaricoUrb</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>comune_scarico</OCQL>
-                    </sourceExpression>
-                    <isMultiple>true</isMultiple>
                 </AttributeMapping>
                 <AttributeMapping>
                     <targetAttribute>decsiraogc_scarichi:geometria</targetAttribute>
@@ -343,11 +345,21 @@
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>decsiraogc_scarichi:autorizzAmbientalePuntoScaricoUrb</targetAttribute>
+                    <targetAttribute>decsiraogc_scarichi:coordinateX</targetAttribute>
                     <sourceExpression>
-                        <OCQL>id_istanza</OCQL>
-                        <linkElement>decsiraogc_scarichi:AutorizzAmbientalePuntoScaricoUrb</linkElement>
-                        <linkField>FEATURE_LINK[1]</linkField>
+                        <OCQL>coord_x</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_scarichi:coordinateY</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>coord_y</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_scarichi:desComune</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>comune_scarico</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
@@ -364,6 +376,15 @@
                     <sourceExpression>
                         <OCQL>id_scarico_urbano</OCQL>
                         <linkElement>decsiraogc_scarichi:ControlloParamAnalPuntoScaricoUrb</linkElement>
+                        <linkField>FEATURE_LINK[1]</linkField>
+                    </sourceExpression>
+                    <isMultiple>true</isMultiple>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_scarichi:comuneServitoScaricoUrb</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_depuratore</OCQL>
+                        <linkElement>decsiraogc_scarichi:ComuneServitoScaricoUrb</linkElement>
                         <linkField>FEATURE_LINK[1]</linkField>
                     </sourceExpression>
                     <isMultiple>true</isMultiple>
