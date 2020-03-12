@@ -610,7 +610,13 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element name="idOggetto" type="xs:decimal" minOccurs="1" />
+					<xs:element name="idOggetto" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 					<xs:element name="idTipo" type="xs:decimal" minOccurs="1" />
 					<xs:element name="desTipo" minOccurs="1">
                         <xs:simpleType>
@@ -1431,7 +1437,13 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element name="idOggetto" type="xs:decimal" minOccurs="1" />
+					<xs:element name="idOggetto" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 					<xs:element name="idTipo" type="xs:decimal" minOccurs="1" />
 					<xs:element name="desTipo" minOccurs="1">
                         <xs:simpleType>
