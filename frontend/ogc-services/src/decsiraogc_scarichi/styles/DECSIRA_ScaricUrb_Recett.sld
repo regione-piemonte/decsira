@@ -31,7 +31,7 @@
               <ogc:Literal>acque superficiali</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
-    <!--      <MaxScaleDenominator>500000</MaxScaleDenominator>  -->      
+      <MaxScaleDenominator>1000000</MaxScaleDenominator>    
           <PointSymbolizer>
             <Graphic>
               <Mark>
@@ -44,7 +44,7 @@
 				   <CssParameter name="stroke-width">0.5</CssParameter>
                 </Stroke>
               </Mark>
-              <Size>10.5</Size>
+              <Size>9.5</Size>
             </Graphic>
           </PointSymbolizer>
 		  <PointSymbolizer>
@@ -58,7 +58,7 @@
                   <CssParameter name="stroke">#000000</CssParameter>
                 </Stroke>
               </Mark>
-              <Size>6.5</Size>
+              <Size>5.5</Size>
             </Graphic>
           </PointSymbolizer>
 	   </Rule>
@@ -74,20 +74,20 @@
               <ogc:Literal>suolo-strati superficiali del sottosuolo</ogc:Literal>
             </ogc:PropertyIsEqualTo>
            </ogc:Filter>
-           <!--      <MaxScaleDenominator>500000</MaxScaleDenominator>  -->      
+           <MaxScaleDenominator>1000000</MaxScaleDenominator>  
   <PointSymbolizer>
             <Graphic>
               <Mark>
                 <WellKnownName>circle</WellKnownName>
                 <Fill>
-				  <CssParameter name="fill">#ffffff</CssParameter>
+				  <CssParameter name="fill">#ff0000</CssParameter>
                 </Fill>
                 <Stroke>
                    <CssParameter name="stroke">#000000</CssParameter>
 				   <CssParameter name="stroke-width">0.5</CssParameter>
                 </Stroke>
               </Mark>
-              <Size>10.5</Size>
+              <Size>9.5</Size>
             </Graphic>
           </PointSymbolizer>
 		  <PointSymbolizer>
@@ -95,44 +95,58 @@
               <Mark>
                 <WellKnownName>circle</WellKnownName>
                 <Fill>
-                  <CssParameter name="fill">#ffffff</CssParameter>
+                  <CssParameter name="fill">#ff0000</CssParameter>
                 </Fill>
                 <Stroke>
                   <CssParameter name="stroke">#000000</CssParameter>
                 </Stroke>
               </Mark>
-              <Size>6.5</Size>
+              <Size>5.5</Size>
             </Graphic>
           </PointSymbolizer>        
 		 </Rule> 
 		 
 		 
-		<!-- recettore non indicato is null  -->      
+		<!-- recettore non indicato IS NULL colore GRIGIO FISSO  -->      
 	  <Rule>
 	    <Name>R3</Name>
-         <Title> Non disponibile</Title>
+         <Title> Recapito non disponibile</Title>
           <ogc:Filter>
               <ogc:PropertyIsNull>
                 <ogc:PropertyName>decsiraogc_scarichi:desTipoRecettore</ogc:PropertyName>
               </ogc:PropertyIsNull>
             </ogc:Filter>
-    <!--      <MaxScaleDenominator>500000</MaxScaleDenominator>  -->      
-          <PointSymbolizer>
+           <MaxScaleDenominator>1000000</MaxScaleDenominator>     
+			<PointSymbolizer>
+				<Graphic>
+				<Mark>
+					<WellKnownName>circle</WellKnownName>
+					<Fill>
+						<CssParameter name="fill">#bdbdbd</CssParameter>
+					</Fill>
+                <Stroke>
+                   <CssParameter name="stroke">#000000</CssParameter>
+				   <CssParameter name="stroke-width">0.5</CssParameter>
+                </Stroke>
+              </Mark>
+              <Size>9.5</Size>
+            </Graphic>
+          </PointSymbolizer>
+		  <PointSymbolizer>
             <Graphic>
-                <Mark>
-                  <WellKnownName>circle</WellKnownName>
-                  <Fill>
-                    <CssParameter name="fill">#ffbf00</CssParameter>
-                  </Fill>
-                  <Stroke>
-                    <CssParameter name="stroke">#000000</CssParameter>
-                    <CssParameter name="stroke-width">0.5</CssParameter>
-                   </Stroke>
-                </Mark>
-              <Size>8</Size>
-          </Graphic>
-        </PointSymbolizer>
-       </Rule>	 
+              <Mark>
+                <WellKnownName>circle</WellKnownName>
+                <Fill>
+                  <CssParameter name="fill">#bdbdbd</CssParameter>
+                </Fill>
+                <Stroke>
+                  <CssParameter name="stroke">#000000</CssParameter>
+                </Stroke>
+              </Mark>
+              <Size>5.5</Size>
+            </Graphic>
+          </PointSymbolizer>        
+       </Rule>
     </FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
