@@ -1485,20 +1485,6 @@
         </target>
         <parameter value="id_cert_amb.{id_cert_amb}" name="pattern"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.retype" id="C88a50818-121f-4a41-9c05-050aa4d98699" priority="normal">
-        <source>
-            <class>
-                <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
-            </class>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd9086fa5-f188-4320-8fb7-56600c9a67e1" priority="normal">
         <source>
             <property>
@@ -4192,43 +4178,6 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.join" id="C2c53a459-162c-4a43-8cf2-650cd09feb72" priority="normal">
-        <source name="types">
-            <class>
-                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <source name="types">
-            <class>
-                <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
-            </class>
-        </target>
-        <complexParameter name="join">
-            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
-                <class>
-                    <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <class>
-                    <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <jp:condition>
-                    <property>
-                        <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="codice_sira"/>
-                    </property>
-                    <property>
-                        <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="codice_sira"/>
-                    </property>
-                </jp:condition>
-            </jp:join-parameter>
-        </complexParameter>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.join" id="Cf8b2da07-1d45-4027-85bf-c83721ae4a84" priority="normal">
         <source name="types">
             <class>
@@ -5014,20 +4963,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ce8c8f827-c51b-4fcc-ab5c-8cc0c7aa3040" priority="normal">
-        <source>
-            <class>
-                <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
-            </class>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="C68b7bf70-64ae-43e6-999c-06a155cb879f" priority="normal">
         <source>
             <property>
@@ -5650,43 +5585,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.join" id="Ca24dfacb-2a0a-44cb-a49e-6ded9bd0900d" priority="normal">
-        <source name="types">
-            <class>
-                <type name="decsira_geo_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <source name="types">
-            <class>
-                <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="ImpiantoDiDepurazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
-            </class>
-        </target>
-        <complexParameter name="join">
-            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
-                <class>
-                    <type name="decsira_geo_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <class>
-                    <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <jp:condition>
-                    <property>
-                        <type name="decsira_geo_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="codice_sira"/>
-                    </property>
-                    <property>
-                        <type name="decsira_geo_oggetto_associato" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="codice_sira"/>
-                    </property>
-                </jp:condition>
-            </jp:join-parameter>
-        </complexParameter>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="C3d5e076a-edb4-4282-bab4-857832ceb43e" priority="normal">
         <source>
             <property>
@@ -5767,6 +5665,940 @@
             <property>
                 <type name="AutorizzazioneAmbientaleDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
                 <child name="idAttivita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C88a50818-121f-4a41-9c05-050aa4d98699" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C2c53a459-162c-4a43-8cf2-650cd09feb72" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="StabilimentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_stabilimento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                    <property>
+                        <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c398f68-857b-494a-9fdf-26559f753585" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_assoluto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceAssoluto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb1215596-e193-4838-9139-c54096f01092" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C00115e4f-c873-4889-bc4e-a64257419a3b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C51def78f-7d63-4a44-b44d-7dfb06758ea8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caa4cb525-f014-496c-b06f-8c4aa3e513b0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codici_sira_altri_stab"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceSiraAltriStabilimenti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7395807b-e46a-4880-8a53-6d1295ab6a45" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_scadenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="dataScadenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C38dc3ce0-5d14-4632-9331-e6a4af3e8f36" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_emissione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="dataAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8e3d1008-299a-4be4-9f36-f44cf710dc86" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="denominazioneRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca7f6e994-28e4-4115-8cd7-84cf43597ef5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desComuneOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb64da276-ee26-4988-9763-0535ce5ae9e7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7005d026-6134-4b9b-b54b-711d836dfe4d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desTipo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C33f495b3-7eac-41f2-b7e1-2ca7409a344d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desTipoRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8618fb1c-6eed-47d3-9186-b1ac391da9cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="estremi_atto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="estremiAtto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc8be43f6-a71d-4d84-b65c-8da449df2a9f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_autorita_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idAutorita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb435a8bf-8be3-4793-bdf6-3e9918994961" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd6075b04-ec66-415d-9f95-dce08a027de0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfb151693-5150-4b89-ad7c-86e912dd3e69" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C638ce903-a45f-4524-8132-33225bfd5f3f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd83ea092-c2bb-4e5b-bce2-05cd04ccb765" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idTipoRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C62ded9bf-4037-4429-852c-4eab6bf7566d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idTipo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5e37bbd5-b4be-4332-a681-900e8b0f4033" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="istatComuneStabilimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca142a86f-7d18-4ad8-b992-ba3a402a3d32" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_prov_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="istatProvinciaStabilimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8c527b68-07bd-4ebd-89d3-6706cee15af5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6d61e168-4253-40a1-b53e-96259d5edffb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ce8c8f827-c51b-4fcc-ab5c-8cc0c7aa3040" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Ca24dfacb-2a0a-44cb-a49e-6ded9bd0900d" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="ImpiantoDiDepurazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_depuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                    <property>
+                        <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="codice_sira"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5bd2081d-da86-4933-9dc9-d1d199a6156f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_assoluto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceAssoluto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b29531f-7b73-4f77-a485-c3cd98e482ea" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C240728ad-a169-4d5d-b428-52ade14e304d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C73b77f40-f6c4-41d7-bd43-1b637f12d2de" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2b8f45be-f48c-461b-9bf0-55c7ff43caba" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codici_sira_altri_stab"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="codiceSiraAltriStabilimenti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C196518a3-4266-4e39-9c28-b31dc2da5f5e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_emissione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="dataAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C06a215a3-591c-417e-924a-da08130b783e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_scadenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="dataScadenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd78a5bf2-45f6-4bbd-87a1-892e97357b34" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="denominazioneRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc4a6d0cf-aebe-44af-8d58-a8a474db541e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desComuneOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccb362bf3-f1b5-4091-88ae-76a0be381a0b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf0e17872-b20f-43c2-9941-81f6c8dfc552" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desTipo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C85524174-1231-42d7-b6a6-f7a56ae9b3ca" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="desTipoRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce5a39fee-a043-4570-adf8-8daa493ee6ba" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="estremi_atto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="estremiAtto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7e2d85d3-747d-4fac-8948-907a8cf8cb4b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_autorita_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idAutorita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caf0a1b98-36c9-42dd-a9d5-bb5da42c4d2c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8b69b824-42a4-4b09-89cd-4197237b9f87" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C53abe6cf-2119-4a1c-9ecc-e35ae3caa1c9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C727cef99-a528-4dd1-b9d9-871fd2673041" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b396329-73d7-4694-a920-d19e79dfb2c2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idTipo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce174da2d-cd65-463b-a227-7f49532ce6cb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_recettore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="idTipoRecettore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4c8eb27d-fb8f-4f1d-a3d9-f6bba361bf55" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd0c66f1e-cc6f-4c0a-a36a-770119a81138" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="istatComuneStabilimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C21e9c0a5-86d9-4874-b406-221583f4ad51" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_prov_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="istatProvinciaStabilimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0a80cd8d-566b-4dea-943a-fd160e5452d9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd753c59c-1dfa-4b49-8950-bb8445b38162" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="estremi_atto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="numeroAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb41275c6-af73-43c6-808e-15ee989658e1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDepuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C78964f08-029a-403f-bcb1-24d0b2d9fc2e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="estremi_atto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="numeroAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C58752808-6e27-4663-b4ed-88f29ee6872b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_oggetto_associato_string" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
             </property>
         </target>
         <parameter value="false" name="ignoreNamespaces"/>
