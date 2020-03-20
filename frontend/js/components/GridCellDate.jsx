@@ -17,7 +17,8 @@ const GridCellDate = React.createClass({
     },
     render() {
         const locale = this.props.params.colDef.locale || this.context.locale || 'it-IT';
-        const date = this.props.params.value !== null ? new Date(this.props.params.value) : null;
+        const value = this.props.params.value !== null && this.props.params.value !== undefined && this.props.params.value.indexOf('Z') !== -1 ? this.props.params.value.replace('Z', '') : this.props.params.value;
+        const date = value !== null ? new Date(value) : null;
         return date !== null && !isNaN(date.getTime()) ? (<FormattedDate locales={locale} value={date} {...this.props.params.colDef.dateFormat} />) : (<noscript/>);
     }
 });
