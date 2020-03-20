@@ -14,13 +14,14 @@ const TemplateSira = require('./TemplateSira');
 const {Modal, Button, Glyphicon} = require('react-bootstrap');
 const {toggleSiraControl} = require("../../actions/controls");
 const toggleDetail = toggleSiraControl.bind(null, 'detail');
-const {generatePDF} = require("../../actions/card");
+const {generatePDF, renderTree} = require("../../actions/card");
 const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const {getWindowSize} = require('../../../MapStore2/web/client/utils/AgentUtils');
 
 const Draggable = require('react-draggable');
+const SiraTree = require('../../components/SiraTree');
 
 require("./card.css");
 
@@ -44,7 +45,8 @@ const Card = React.createClass({
         // model: React.PropTypes.object,
         // impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func,
-        generatePDF: React.PropTypes.func
+        generatePDF: React.PropTypes.func,
+        renderTree: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -106,14 +108,24 @@ const Card = React.createClass({
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
+                    <Button id="treeIcon" onClick={this.props.renderTree}>
+                        <Glyphicon glyph="link"/>
+                    </Button>
                     </div>
                     <SchedaToPDF profile={this.props.profile} authParam={authParam} withMap={this.props.withMap}/>
             </div>
             );
         return (this.props.draggable) ? (
+            <div>
             <Draggable start={{x: (maxWidth / 2) - 425, y: 0}} handle=".panel-heading, .panel-heading *">
                 {Template}
-            </Draggable>) : Template;
+            </Draggable>
+            <SiraTree/>
+            </div>) :
+            <div>
+                {Template}
+                <SiraTree/>
+            </div>;
     },
     render() {
         return (this.props.open) ? this.renderCard() : null;
@@ -129,6 +141,7 @@ module.exports = connect((state) => {
 }, dispatch => {
     return bindActionCreators({
         toggleDetail: toggleDetail,
-        generatePDF: generatePDF.bind(null, true)
+        generatePDF: generatePDF.bind(null, true),
+        renderTree: renderTree
     }, dispatch);
 })(Card);
