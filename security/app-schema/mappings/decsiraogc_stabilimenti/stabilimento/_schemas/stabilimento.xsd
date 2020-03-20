@@ -275,6 +275,7 @@
                     </xs:element>
 					
 					<xs:element minOccurs="1" name="idAutorizzazioneAmbientale" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="idAttivita" type="xs:decimal"/>
 					
 					<xs:element minOccurs="1" name="idTipoProvvedimento" type="xs:decimal"/>
 					
@@ -601,7 +602,13 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element minOccurs="1" name="idOggetto" type="xs:decimal"/>
+					<xs:element minOccurs="1" name="idOggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 					<xs:element minOccurs="1" name="idTipo" type="xs:decimal"/>
 					<xs:element minOccurs="1" name="desTipo">
                         <xs:simpleType>
@@ -1422,7 +1429,13 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element minOccurs="1" name="idOggetto" type="xs:decimal"/>
+					<xs:element minOccurs="1" name="idOggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 					<xs:element minOccurs="1" name="idTipo" type="xs:decimal"/>
 					<xs:element minOccurs="1" name="desTipo">
                         <xs:simpleType>
@@ -1552,6 +1565,7 @@
 					<xs:element minOccurs="1" name="idAutorizzazioneAmbientale" type="xs:decimal"/>
 					
 					<xs:element minOccurs="1" name="idTipoProvvedimento" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="idAttivita" type="xs:decimal"/>
 					
 					<xs:element minOccurs="1" name="tipoProvvedimento">
                         <xs:simpleType>

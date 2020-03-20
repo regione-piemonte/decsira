@@ -16,8 +16,8 @@
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Name>Monitoraggio Annuale Depuratori</Name>
-          <Title>Monitoraggio Annuale Depuratori</Title>
+          <Name>Monitoraggio Annuale Dati Dimensionali depuratori</Name>
+          <Title>Monitoraggio Annuale Dati Dimensionali depuratori</Title>
             <PointSymbolizer>
               <Graphic>
                 <Mark>
@@ -26,11 +26,11 @@
                     <CssParameter name="fill">#</CssParameter>
                   </Fill>
                   <Stroke>
-                    <CssParameter name="stroke">#2f0f96</CssParameter>
-                    <CssParameter name="stroke-width">2.5</CssParameter>
+                    <CssParameter name="stroke">#942f74</CssParameter>
+                    <CssParameter name="stroke-width">4</CssParameter>                 
                    </Stroke>
                 </Mark>
-              <Size>12</Size>
+              <Size>14</Size>
           </Graphic>
           </PointSymbolizer>
         </Rule>
