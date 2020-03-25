@@ -7,7 +7,7 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {loadTree, closeTree} = require('./siraTree');
+const {configureTree, openTree, closeTree} = require('./siraTree');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
@@ -67,6 +67,7 @@ function loadCardData(template, wfsUrl, params={}) {
     return (dispatch) => {
         return axios.get(url).then((response) => {
             // let model = TemplateUtils.getModel(response.data, modelConfig);
+            dispatch(configureTree(response.data));
             dispatch(configureCard(template, response.data, params));
         }).catch((e) => {
             dispatch(configureCardError(e));
@@ -117,26 +118,9 @@ function selectRows(tableId, rows) {
     };
 }
 
-function loadDataForTree() {
-    const treeData = [
-        {title: "Scarichi non IPCC", key: "0", children: [
-            {title: "Codice Scarico Regionale: NO045008 - Numero provvedimento: 3162", key: "0-0"},
-            {title: "Codice Scarico Regionale: NO045008 - Numero provvedimento: 4285", key: "0-1"}
-        ]},
-        {title: "Rifiuto non pericoloso", key: "1", children: [
-            {title: "Codice sira: 701 - Numero provvedimento: 62-003", key: "1-0"}
-        ]},
-        {title: "Impianto Smaltimento Rifiuti", key: "2", children: [
-            {title: "Codice sira: 701 - Numero provvedimento: 3236", key: "2-0"}
-        ]}
-    ];
-    return treeData;
-}
-
 function renderTree() {
     return (dispatch) => {
-        const treeData = loadDataForTree();
-        dispatch(loadTree(treeData));
+        dispatch(openTree());
     };
 }
 

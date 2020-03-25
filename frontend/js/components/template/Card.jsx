@@ -101,6 +101,9 @@ const Card = React.createClass({
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
+
+        const treeDisabled = TemplateUtils.isTreeDisabled(xml);
+
         const Template = (
             <div className="scheda-sira">
                     <TemplateSira template={this.props.card.template} model={model}/>
@@ -108,7 +111,7 @@ const Card = React.createClass({
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
-                    <Button id="treeIcon" onClick={this.props.renderTree}>
+                    <Button id="treeIcon" onClick={this.props.renderTree} disabled={treeDisabled}>
                         <Glyphicon glyph="link"/>
                     </Button>
                     </div>
@@ -117,10 +120,10 @@ const Card = React.createClass({
             );
         return (this.props.draggable) ? (
             <div>
-            <Draggable start={{x: (maxWidth / 2) - 425, y: 0}} handle=".panel-heading, .panel-heading *">
-                {Template}
-            </Draggable>
-            <SiraTree/>
+                <Draggable start={{x: (maxWidth / 2) - 425, y: 0}} handle=".panel-heading, .panel-heading *">
+                    {Template}
+                </Draggable>
+                <SiraTree/>
             </div>) :
             <div>
                 {Template}
