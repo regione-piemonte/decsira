@@ -64,7 +64,6 @@ function loadDataForTree(xmlData) {
         }
         return tmpArray;
     }, []);
-    console.log(treeData);
 
     return treeData;
 }
