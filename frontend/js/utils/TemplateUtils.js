@@ -248,20 +248,29 @@ const TemplateUtils = {
     },
 
     verifyProfiles(fieldProfiles, userProfiles) {
-     let check = false;
-     let userProfilesOk = userProfiles;
-     if (userProfilesOk && !isArray(userProfilesOk)) {
-         userProfilesOk = [];
-         userProfilesOk.push(userProfiles);
-     }
-     if (!fieldProfiles || fieldProfiles.length === 0) return true;
-     if (!userProfilesOk || userProfilesOk.length === 0) return false;
-     fieldProfiles.forEach((val) => {
-         if (userProfilesOk.filter((profile) => profile === val).length > 0) {
-             check = true;
-         }});
-     return check;
- }
+        let check = false;
+        let userProfilesOk = userProfiles;
+        if (userProfilesOk && !isArray(userProfilesOk)) {
+            userProfilesOk = [];
+            userProfilesOk.push(userProfiles);
+        }
+        if (!fieldProfiles || fieldProfiles.length === 0) return true;
+        if (!userProfilesOk || userProfilesOk.length === 0) return false;
+        fieldProfiles.forEach((val) => {
+            if (userProfilesOk.filter((profile) => profile === val).length > 0) {
+                check = true;
+            }});
+        return check;
+    },
+
+    isTreeDisabled(xml) {
+        if (xml) {
+            let stabilimento = this.getValue(xml, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento");
+            let ret = stabilimento ? false : true;
+            return ret;
+        }
+        return true;
+    }
 
 };
 module.exports = TemplateUtils;

@@ -7,6 +7,7 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const {configureTree, openTree, closeTree} = require('./siraTree');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
@@ -66,6 +67,7 @@ function loadCardData(template, wfsUrl, params={}) {
     return (dispatch) => {
         return axios.get(url).then((response) => {
             // let model = TemplateUtils.getModel(response.data, modelConfig);
+            dispatch(configureTree(response.data));
             dispatch(configureCard(template, response.data, params));
         }).catch((e) => {
             dispatch(configureCardError(e));
@@ -93,6 +95,7 @@ function loadCardData(template, wfsUrl, params={}) {
 
 function loadCardTemplate(templateConfigURL, wfsUrl, params = {}) {
     return (dispatch) => {
+        dispatch(closeTree());
         return axios.get(templateConfigURL).then((response) => {
             let template = response.data;
             if (wfsUrl) {
@@ -112,6 +115,18 @@ function selectRows(tableId, rows) {
         type: SELECT_ROWS,
         tableId: tableId,
         rows: rows
+    };
+}
+
+function renderTree() {
+    return (dispatch) => {
+        dispatch(openTree());
+    };
+}
+
+function hideTree() {
+    return (dispatch) => {
+        dispatch(closeTree());
     };
 }
 
@@ -139,6 +154,8 @@ module.exports = {
     activateSection,
     selectRows,
     generatePDF,
-    mapImageReady
+    mapImageReady,
+    renderTree,
+    hideTree
     // setSiraImpiantoModel
 };

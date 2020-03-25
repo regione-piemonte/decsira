@@ -40,7 +40,8 @@ const appReducers = {
      siraexporter: require('./reducers/siraexporter'),
      addmap: require('./reducers/addmap'),
      cart: require('./reducers/cart'),
-     header: require('./reducers/header')
+     header: require('./reducers/header'),
+     siraTree: require('./reducers/siraTree')
  };
 
 const startApp = () => {
