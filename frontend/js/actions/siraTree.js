@@ -23,9 +23,7 @@ function getChildData(id, oggetto, keyCount) {
     }
 
     let nomeWfs = TemplateUtils.getElement({xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:nomeWFS/text()"}, oggetto);
-    console.log(nomeWfs);
     let idOggetto = TemplateUtils.getElement({xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()"}, oggetto);
-    console.log(idOggetto);
 
     return {
         title: title,

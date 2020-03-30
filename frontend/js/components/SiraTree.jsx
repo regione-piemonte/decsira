@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-const { Panel, Grid, Row, Col} = require('react-bootstrap');
+const { Panel, Grid, Row, Col, Glyphicon} = require('react-bootstrap');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const {closeTree} = require("../actions/siraTree");
@@ -55,11 +55,7 @@ const SiraTree = React.createClass({
             this.onSelect(null, info);
         }
     },
-    onExpand(expandedKeys) {
-        console.log('onExpand', expandedKeys, arguments);
-    },
     onSelect(selectedKeys, info) {
-        console.log('selected', selectedKeys, info);
         let selectedData = null;
         const children = this.props.treeData.map(item => item.children);
         children.forEach(item => {
@@ -68,26 +64,26 @@ const SiraTree = React.createClass({
                 selectedData = found;
             }
         });
-        console.log(selectedData);
-
-        const cqlFilter = selectedData.linkToDetail.cqlFilter;
-        const featureType = selectedData.linkToDetail.featureType.indexOf(":") > 1 ? selectedData.linkToDetail.featureType.split(":")[1] : selectedData.linkToDetail.featureType;
-        if (this.props.configOggetti[featureType]) {
-            const detailsConfig = this.props.configOggetti[featureType];
-            const templateUrl = selectedData.linkToDetail.templateUrl ? selectedData.linkToDetail.templateUrl : (detailsConfig.card.template.default || detailsConfig.card.template);
-            let url = detailsConfig.card.service.url;
-            Object.keys(detailsConfig.card.service.params).forEach((param) => {
-                url += `&${param}=${detailsConfig.card.service.params[param]}`;
-            });
-            url = url += "&cql_filter=" + cqlFilter;
-            this.props.onDetail(templateUrl, url);
-        } else {
-            let waitingForConfig = {
-                featureType,
-                info
-            };
-            this.props.setWaitingForConfig(waitingForConfig);
-            this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false);
+        if (selectedData) {
+            const cqlFilter = selectedData.linkToDetail.cqlFilter;
+            const featureType = selectedData.linkToDetail.featureType.indexOf(":") > 1 ? selectedData.linkToDetail.featureType.split(":")[1] : selectedData.linkToDetail.featureType;
+            if (this.props.configOggetti[featureType]) {
+                const detailsConfig = this.props.configOggetti[featureType];
+                const templateUrl = selectedData.linkToDetail.templateUrl ? selectedData.linkToDetail.templateUrl : (detailsConfig.card.template.default || detailsConfig.card.template);
+                let url = detailsConfig.card.service.url;
+                Object.keys(detailsConfig.card.service.params).forEach((param) => {
+                    url += `&${param}=${detailsConfig.card.service.params[param]}`;
+                });
+                url = url += "&cql_filter=" + cqlFilter;
+                this.props.onDetail(templateUrl, url);
+            } else {
+                let waitingForConfig = {
+                    featureType,
+                    info
+                };
+                this.props.setWaitingForConfig(waitingForConfig);
+                this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false);
+            }
         }
     },
     render() {
@@ -111,7 +107,10 @@ const SiraTree = React.createClass({
                       header={
                             <Grid className="detail-title" fluid={true}>
                                 <Row>
-                                    <Col xs={11} sm={11} md={11} lg={11}>
+                                    <Col xs={1} sm={1} md={1} lg={1}>
+                                        <Glyphicon id="treeIcon" glyph="link"/>
+                                    </Col>
+                                    <Col xs={10} sm={10} md={10} lg={10}>
                                         <h4>{this.props.title}<br/><small>{this.props.subtitle}</small></h4>
                                     </Col>
                                     <Col xs={1} sm={1} md={1} lg={1}>
@@ -123,8 +122,7 @@ const SiraTree = React.createClass({
                         <Tree showLine
                             showIcon={false}
                             defaultExpandedKeys={this.props.defaultExpandedKeys}
-                            onSelect={this.onSelect}
-                            onExpand={this.onExpand}>
+                            onSelect={this.onSelect}>
                             {treeNodes}
                         </Tree>
                   </Panel>

@@ -114,7 +114,7 @@ const Card = React.createClass({
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
-                    <Button id="treeIcon" onClick={this.renderTree} style={{display: treeDisabled ? 'none' : 'block'}}>
+                    <Button id="treeButton" onClick={this.renderTree} style={{display: treeDisabled ? 'none' : 'block'}}>
                         <Glyphicon glyph="link"/>
                     </Button>
                     </div>

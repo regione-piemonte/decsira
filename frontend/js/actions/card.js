@@ -7,7 +7,7 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const {configureTree, closeTree} = require('./siraTree');
+const { configureTree } = require('./siraTree');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
