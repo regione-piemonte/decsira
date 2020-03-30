@@ -1,10 +1,14 @@
 import React, {PropTypes} from 'react';
-const { Panel, Grid, Row, Col} = require('react-bootstrap');
+const { Panel, Grid, Row, Col, Glyphicon} = require('react-bootstrap');
 const {connect} = require('react-redux');
+const {bindActionCreators} = require('redux');
 const {closeTree} = require("../actions/siraTree");
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 import Tree, {TreeNode} from 'rc-tree';
 import './SiraTree.less';
+
+const {loadCardTemplate} = require('../actions/card');
+const {loadFeatureTypeConfig, setWaitingForConfig} = require('../actions/siradec');
 
 const Draggable = require('react-draggable');
 
@@ -16,7 +20,13 @@ const SiraTree = React.createClass({
         subtitle: React.PropTypes.string,
         show: React.PropTypes.string,
         panelStyle: React.PropTypes.object,
-        closePanel: React.PropTypes.func
+        configOggetti: React.PropTypes.object,
+        waitingForConfig: React.PropTypes.object,
+        authParams: React.PropTypes.object,
+        closePanel: React.PropTypes.func,
+        onDetail: React.PropTypes.func,
+        loadFeatureTypeConfig: React.PropTypes.func,
+        setWaitingForConfig: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -32,15 +42,49 @@ const SiraTree = React.createClass({
                 position: "absolute",
                 overflow: "auto"
             },
-            closePanel: () => {}
+            waitingForConfig: null,
+            closePanel: () => {},
+            onDetail: () => {},
+            setWaitingForConfig: () => {}
         };
     },
-    onExpand(expandedKeys) {
-        console.log('onExpand', expandedKeys, arguments);
+    componentWillMount() {
+        if (this.props.waitingForConfig && this.props.waitingForConfig.info) {
+            const info = this.props.waitingForConfig.info;
+            this.props.setWaitingForConfig(null);
+            this.onSelect(null, info);
+        }
     },
     onSelect(selectedKeys, info) {
-        console.log('selected', selectedKeys, info);
-        this.selKey = info.node.props.eventKey;
+        let selectedData = null;
+        const children = this.props.treeData.map(item => item.children);
+        children.forEach(item => {
+            let found = item.find(obj => obj.key === info.node.props.eventKey);
+            if (found) {
+                selectedData = found;
+            }
+        });
+        if (selectedData) {
+            const cqlFilter = selectedData.linkToDetail.cqlFilter;
+            const featureType = selectedData.linkToDetail.featureType.indexOf(":") > 1 ? selectedData.linkToDetail.featureType.split(":")[1] : selectedData.linkToDetail.featureType;
+            if (this.props.configOggetti[featureType]) {
+                const detailsConfig = this.props.configOggetti[featureType];
+                const templateUrl = selectedData.linkToDetail.templateUrl ? selectedData.linkToDetail.templateUrl : (detailsConfig.card.template.default || detailsConfig.card.template);
+                let url = detailsConfig.card.service.url;
+                Object.keys(detailsConfig.card.service.params).forEach((param) => {
+                    url += `&${param}=${detailsConfig.card.service.params[param]}`;
+                });
+                url = url += "&cql_filter=" + cqlFilter;
+                this.props.onDetail(templateUrl, url);
+            } else {
+                let waitingForConfig = {
+                    featureType,
+                    info
+                };
+                this.props.setWaitingForConfig(waitingForConfig);
+                this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false);
+            }
+        }
     },
     render() {
         const {maxWidth} = getWindowSize();
@@ -63,7 +107,10 @@ const SiraTree = React.createClass({
                       header={
                             <Grid className="detail-title" fluid={true}>
                                 <Row>
-                                    <Col xs={11} sm={11} md={11} lg={11}>
+                                    <Col xs={1} sm={1} md={1} lg={1}>
+                                        <Glyphicon id="treeIcon" glyph="link"/>
+                                    </Col>
+                                    <Col xs={10} sm={10} md={10} lg={10}>
                                         <h4>{this.props.title}<br/><small>{this.props.subtitle}</small></h4>
                                     </Col>
                                     <Col xs={1} sm={1} md={1} lg={1}>
@@ -75,8 +122,7 @@ const SiraTree = React.createClass({
                         <Tree showLine
                             showIcon={false}
                             defaultExpandedKeys={this.props.defaultExpandedKeys}
-                            onSelect={this.onSelect}
-                            onExpand={this.onExpand}>
+                            onSelect={this.onSelect}>
                             {treeNodes}
                         </Tree>
                   </Panel>
@@ -85,16 +131,23 @@ const SiraTree = React.createClass({
     }
   });
 
-module.exports = connect((state) => ({
-    treeData: state.siraTree.treeData,
-    title: state.siraTree.title,
-    subtitle: state.siraTree.subtitle,
-    show: state.siraTree.show,
-    defaultExpandedKeys: state.siraTree.defaultExpandedKeys
-}), (dispatch) => {
+module.exports = connect((state) => {
     return {
-        closePanel: () => {
-            dispatch(closeTree());
-        }
-  };
+        treeData: state.siraTree.treeData,
+        title: state.siraTree.title,
+        subtitle: state.siraTree.subtitle,
+        show: state.siraTree.show,
+        defaultExpandedKeys: state.siraTree.defaultExpandedKeys,
+        card: state.cardtemplate || {},
+        configOggetti: state.siradec.configOggetti,
+        authParams: state.userprofile.authParams,
+        waitingForConfig: state.siradec.waitingForConfig
+    };
+}, dispatch => {
+    return bindActionCreators({
+        closePanel: closeTree,
+        onDetail: loadCardTemplate,
+        setWaitingForConfig: setWaitingForConfig,
+        loadFeatureTypeConfig
+    }, dispatch);
 })(SiraTree);

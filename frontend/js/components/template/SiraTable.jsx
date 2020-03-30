@@ -71,7 +71,7 @@ const SiraTable = React.createClass({
         };
     },
     componentWillMount() {
-        if (this.props.waitingForConfig) {
+        if (this.props.waitingForConfig && this.props.waitingForConfig.params) {
             const params = this.props.waitingForConfig.params;
             this.props.setWaitingForConfig(null);
             this.goToDetail(params);

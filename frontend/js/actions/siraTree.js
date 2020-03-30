@@ -21,9 +21,18 @@ function getChildData(id, oggetto, keyCount) {
         default:
             break;
     }
+
+    let nomeWfs = TemplateUtils.getElement({xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:nomeWFS/text()"}, oggetto);
+    let idOggetto = TemplateUtils.getElement({xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()"}, oggetto);
+
     return {
         title: title,
-        key: keyCount + '-' + (childCount++)
+        key: keyCount + '-' + (childCount++),
+        linkToDetail: {
+            featureType: nomeWfs.split("#")[0],
+            xpath: null,
+            cqlFilter: nomeWfs.split("#")[1] + "='" + idOggetto + "'"
+        }
     };
 }
 
@@ -65,6 +74,7 @@ function loadDataForTree(xmlData) {
         return tmpArray;
     }, []);
 
+    console.log(treeData);
     return treeData;
 }
 
@@ -72,6 +82,7 @@ function configureTree(xmlData) {
     let treeData = [];
     let title = '';
     let subtitle = '';
+    let show = 'none';
     let defaultExpandedKeys = [];
     if (!TemplateUtils.isTreeDisabled(xmlData)) {
         treeData = loadDataForTree(xmlData);
@@ -79,9 +90,11 @@ function configureTree(xmlData) {
         title = 'STABILIMENTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE';
         subtitle = 'Denominazione stabilimento: ' + TemplateUtils.getValue(xmlData, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
             + ' ' + 'Comune: ' + TemplateUtils.getValue(xmlData, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()");
+        show = 'block';
     }
     return {
         type: TREE_LOADED,
+        show,
         treeData,
         defaultExpandedKeys,
         title,
