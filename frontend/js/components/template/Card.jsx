@@ -86,6 +86,9 @@ const Card = React.createClass({
             </Modal>
         );
     },
+    renderTree() {
+        this.props.renderTree(this.props.card.xml);
+    },
     renderCard() {
         const {maxWidth} = getWindowSize();
         const xml = this.props.card.xml;
@@ -111,7 +114,7 @@ const Card = React.createClass({
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
-                    <Button id="treeIcon" onClick={this.props.renderTree} disabled={treeDisabled}>
+                    <Button id="treeIcon" onClick={this.renderTree} style={{display: treeDisabled ? 'none' : 'block'}}>
                         <Glyphicon glyph="link"/>
                     </Button>
                     </div>

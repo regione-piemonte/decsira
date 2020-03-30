@@ -20,7 +20,7 @@ function siraTree(state = initialState, action) {
                 title: action.title,
                 subtitle: action.subtitle,
                 defaultExpandedKeys: action.defaultExpandedKeys,
-                show: 'none'
+                show: action.show
             });
         }
         case TREE_LOAD_ERROR: {
