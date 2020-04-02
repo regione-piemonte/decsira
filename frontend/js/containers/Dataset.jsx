@@ -299,7 +299,8 @@ const Dataset = React.createClass({
                         left: "calc(50% - 250px)",
                         top: -100,
                         position: "fixed",
-                        overflow: "auto"}}/>
+                        marginBottom: "0px",
+                        boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
             </div>);
     },
     loadMetadata({text, category} = {}) {

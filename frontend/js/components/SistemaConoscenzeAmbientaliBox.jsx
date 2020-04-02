@@ -10,11 +10,11 @@ const React = require('react');
 const {Panel} = require('react-bootstrap');
 const Draggable = require('react-draggable');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 
 const SistemaConoscenzeAmbientaliBox = React.createClass({
     propTypes: {
         title: React.PropTypes.string,
-        panelStyle: React.PropTypes.object,
         show: React.PropTypes.string,
         closePanel: React.PropTypes.func
     },
@@ -23,24 +23,17 @@ const SistemaConoscenzeAmbientaliBox = React.createClass({
         return {
             title: 'title',
             show: 'none',
-            panelStyle: {
-                      height: "500px",
-                      width: "550px",
-                      zIndex: 100,
-                      position: "absolute",
-                      overflow: "auto"
-                  },
             closePanel: () => {}
         };
     },
 
     render() {
+        const {maxWidth, maxHeight} = getWindowSize();
         return (
-          <div className="infobox-container" style={{display: this.props.show}}>
-          <Draggable start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-              <Panel
-                  className = "infobox-content toolbar-panel modal-dialog-container react-draggable"
-                  style={this.props.panelStyle}
+          <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+          <div className="scheda-credits" style={{display: this.props.show}}>
+                <Panel
+                  className = "info-header panel panel-primary"
                   header={
                       <span>
                           <span className="snapshot-panel-title">
@@ -48,6 +41,7 @@ const SistemaConoscenzeAmbientaliBox = React.createClass({
                           </span>
                           <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
                       </span>}>
+                    <Panel className="credits-content infobox-content">
                       <h3>Presentazione</h3>
                       <p>
                           Il Sistema Conoscenze Ambientali è una piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte).
@@ -79,9 +73,10 @@ const SistemaConoscenzeAmbientaliBox = React.createClass({
                           <li>la scheda di dettaglio &egrave; esportabile in formato pdf</li>
                           <li>Tutti i dati messi a disposizione nella piattaforma sono esposti e/o usano servizi di interoperabilità standard OGC (Open Spatial Consortium) come previsto dalla Direttiva INSPIRE.</li>
                       </ul>
+                    </Panel>
                 </Panel>
-              </Draggable>
             </div>
+            </Draggable>
           );
     }
 });
