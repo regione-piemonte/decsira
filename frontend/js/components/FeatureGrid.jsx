@@ -41,6 +41,7 @@ const Message = require('../../MapStore2/web/client/components/I18N/Message');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('./GoToDetail');
 const GridCellDate = require('./GridCellDate');
+const GridCellNumber = require('./GridCellNumber');
 const Spinner = require('react-spinkit');
 const assign = require('object-assign');
 
@@ -328,7 +329,13 @@ const SiraGrid = React.createClass({
             width: 25,
             suppressResize: true
         }, ...(cols.map((c) => {
-            return assign({}, {width: defWidth}, c, c.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {});
+            let renderer = c.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {};
+            renderer = c.type === 1 ? {cellRenderer: reactCellRendererFactory(GridCellNumber)} : renderer;
+            return assign({}, {
+                width: defWidth},
+                c,
+                renderer
+                );
         }
             ))];
         if (this.sortModel && this.sortModel.length > 0) {
