@@ -8,7 +8,7 @@
 
 const React = require('react');
 const {Tooltip, OverlayTrigger, Row, Col} = require("react-bootstrap");
-const LocaleUtils = require('../../../utils/LocaleUtils');
+const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const numberLocalizer = require('react-widgets/lib/localizers/simple-number');
 numberLocalizer();
 const {NumberPicker} = require('react-widgets');
