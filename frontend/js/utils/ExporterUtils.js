@@ -11,6 +11,7 @@ const JSZip = require('jszip');
 const ol = require('openlayers');
 const ProWKTDef = require('./ProjWKTDef');
 const {head} = require('lodash');
+const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const ExporterUtils = {
     exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd, outputSrs = 'EPSG:32632') {
         const name = filename.replace(':', "_");
@@ -72,6 +73,18 @@ const ExporterUtils = {
             return result.generateAsync({ compression: 'STORE', type: 'blob'});
         }).then((blob) => FileSaver.saveAs(blob, `${filename}.zip`));
     },
+    formatNumber(value) {
+        if (value === null || value === undefined) {
+            return '';
+        }
+        let ret;
+        if (typeof value === 'number') {
+            ret = new Intl.NumberFormat(LocaleUtils.getSupportedLocales().it).format(value);
+        } else {
+            ret = value;
+        }
+        return ret;
+    },
     cvsEscape: function(value) {
         if (value === null || value === undefined) {
             return '';
@@ -99,7 +112,9 @@ const ExporterUtils = {
         const ids = columns.map((c) => c.field.replace('properties.', ''));
         features.reduce(( res, ft) => {
             res.push(ids.map((id) => {
-                return this.cvsEscape(ft.properties[id]);
+                let ret = this.formatNumber(ft.properties[id]);
+                ret = this.cvsEscape(ret);
+                return ret;
             }).join(columnDelimiter));
             return res;
         }, result);

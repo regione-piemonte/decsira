@@ -87,7 +87,7 @@ const SiraTree = React.createClass({
         }
     },
     render() {
-        const {maxWidth} = getWindowSize();
+        const {maxWidth, maxHeight} = getWindowSize();
         const loop = (data) => {
             return data.map((item) => {
                 if (item.children) {
@@ -99,11 +99,10 @@ const SiraTree = React.createClass({
         const treeNodes = loop(this.props.treeData);
 
         return (
-            <div className="infobox-container" style={{display: this.props.show}}>
-              <Draggable start={{x: (maxWidth / 2) - 300, y: 100}} handle=".panel-heading, .panel-heading *">
+            <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: (maxWidth / 2) - 300, y: 100}} handle=".panel-heading, .panel-heading *">
+            <div className="scheda-tree" style={{display: this.props.show}}>
                   <Panel
-                      className = "infobox-content toolbar-panel modal-dialog-container react-draggable"
-                      style={this.props.panelStyle}
+                      className = "info-header panel panel-primary"
                       header={
                             <Grid className="detail-title" fluid={true}>
                                 <Row>
@@ -119,15 +118,17 @@ const SiraTree = React.createClass({
                                 </Row>
                             </Grid>
                         }>
+                    <Panel className="tree-content infobox-content">
                         <Tree showLine
                             showIcon={false}
                             defaultExpandedKeys={this.props.defaultExpandedKeys}
                             onSelect={this.onSelect}>
                             {treeNodes}
                         </Tree>
+                    </Panel>
                   </Panel>
-            </Draggable>
-            </div>);
+            </div>
+            </Draggable>);
     }
   });
 

@@ -10,11 +10,11 @@ const React = require('react');
 const {Panel} = require('react-bootstrap');
 const Draggable = require('react-draggable');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 
 const Credits = React.createClass({
     propTypes: {
         title: React.PropTypes.string,
-        panelStyle: React.PropTypes.object,
         show: React.PropTypes.string,
         closePanel: React.PropTypes.func
     },
@@ -23,24 +23,17 @@ const Credits = React.createClass({
         return {
             title: 'title',
             show: 'none',
-            panelStyle: {
-                      height: "500px",
-                      width: "550px",
-                      zIndex: 100,
-                      position: "absolute",
-                      overflow: "auto"
-                  },
             closePanel: () => {}
         };
     },
 
     render() {
+        const {maxWidth, maxHeight} = getWindowSize();
         return (
-          <div className="infobox-container" style={{display: this.props.show}}>
-              <Draggable start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+            <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+            <div className="scheda-credits" style={{display: this.props.show}}>
                   <Panel
-                      className = "infobox-content toolbar-panel modal-dialog-container react-draggable"
-                      style={this.props.panelStyle}
+                      className="info-header panel panel-primary"
                       header={
                           <span>
                               <span className="snapshot-panel-title">
@@ -48,6 +41,7 @@ const Credits = React.createClass({
                               </span>
                               <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
                           </span>}>
+                        <Panel className="credits-content infobox-content">
                           <h3>Credits</h3>
                           <p>Il Sistema Conoscenze Ambientali, realizzato  da CSI Piemonte per  conto  di  Regione  Piemonte, utilizza il seguente software open source <a href="https://mapstore.geo-solutions.it/mapstore/" target="_blank"> Mapstore2</a>.</p>
                           <h3>Copyright</h3>
@@ -60,9 +54,10 @@ const Credits = React.createClass({
                           <p>In nessun caso Regione Piemonte potrà essere ritenuta responsabile dei danni di qualsiasi natura causati direttamente o indirettamente dall'accesso al Sistema Conoscenze Ambientali, dall'utilizzo degli strumenti interattivi, dall'incapacità o impossibilità di accedervi, dall'utilizzo off-line dei contenuti scaricati. Regione Piemonte si riserva il diritto di modificare i contenuti del sito (testi, immagini, dataset, geoservizi, ...) e delle note legali in qualsiasi momento e senza alcun preavviso. Nonostante si presti grande attenzione all’esattezza delle informazioni pubblicate su questo sito, fedeltà, esattezza, attualità, affidabilità e completezza dei contenuti restano responsabilità dei titolari indicati nei metadati. L’utente si impegna a non abusare del servizio offerto ed a rinunciare ad un suo utilizzo per pratiche illegali.</p>
                           <h3>Segnalazione di Errori</h3>
                           <p>Errori o malfunzionamenti del Sistema Conoscenze Ambientali possono essere segnalati a <a href="mailto:redazione@html.it">assistenza.sira@regione.piemonte.it</a> .</p>
+                        </Panel>
                   </Panel>
+            </div>
             </Draggable>
-        </div>
           );
     }
 });

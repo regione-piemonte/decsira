@@ -117,7 +117,7 @@ const MetadataInfoBox = React.createClass({
     render() {
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
-            renderWmsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWMS"}/></h4>);
+            renderWmsUrl.push(<h4><b><I18N.Message msgId={"metadataInfoBox.urlWMS"}/></b></h4>);
             this.props.urlWMS.map((val, index) =>
             renderWmsUrl.push(
               <p>
@@ -155,36 +155,37 @@ const MetadataInfoBox = React.createClass({
         }
 
         return (
-          <div className="infobox-container" style={{display: this.props.show}}>
-          <Draggable start={{x: 30, y: 180}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-              <Panel
-                  className = "infobox-content toolbar-panel modal-dialog-container react-draggable"
-                  style={this.props.panelStyle}
-                  header={
-                      <span>
-                          <span className="snapshot-panel-title">
-                              <I18N.Message msgId={"metadataInfoBox.panelTitle"}/>
-                          </span>
-                          <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
-                      </span>}>
-                    {this.renderError()}
-                    <h4>{this.props.title}</h4>
-                    <p>{this.props.text}</p>
-                    <h4><I18N.Message msgId={"metadataInfoBox.entePA"}/></h4>
-                    <p>{this.props.dataProvider}</p>
-                    <h4><I18N.Message msgId={"metadataInfoBox.urlMetadato"}/></h4>
-                    <a className="infobox-metadata-url"
-                      title="metadato"
-                      href={this.props.urlMetadato} target="_blank" >
-                      <I18N.Message msgId={"metadataInfoBox.link_to_metadata"}/>
-                    </a>
-                    {renderWmsUrl}
-                    {renderWfsUrl}
-                    <button style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
-                    {renderLegendPanel}
+          <Draggable bounds="parent" start={{x: 30, y: 180}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+          <div className="scheda-info" style={{display: this.props.show}}>
+            <Panel
+              className="info-header panel panel-primary"
+              header={
+                <span>
+                  <span className="snapshot-panel-title">
+                    <I18N.Message msgId={"metadataInfoBox.panelTitle"}/>
+                  </span>
+                  <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
+                </span>}>
+              <Panel className="info-content infobox-content">
+                {this.renderError()}
+                <h4><b>{this.props.title}</b></h4>
+                <p>{this.props.text}</p>
+                <h4><b><I18N.Message msgId={"metadataInfoBox.entePA"}/></b></h4>
+                <p>{this.props.dataProvider}</p>
+                <h4><b><I18N.Message msgId={"metadataInfoBox.urlMetadato"}/></b></h4>
+                <a className="infobox-metadata-url"
+                title="metadato"
+                href={this.props.urlMetadato} target="_blank" >
+                <I18N.Message msgId={"metadataInfoBox.link_to_metadata"}/>
+                </a>
+                {renderWmsUrl}
+                {renderWfsUrl}
+                <button style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
+                {renderLegendPanel}
               </Panel>
+            </Panel>
+          </div>
           </Draggable>
-        </div>
         );
     }
 });

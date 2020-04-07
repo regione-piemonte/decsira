@@ -34,13 +34,13 @@ const makeGetCapabilitiesUrl = (url) => {
 const makeGetLegendUrl = (url, layer) => {
     const parsed = urlUtil.parse(url, true);
     return urlUtil.format(assign({}, parsed, {search: null}, {
-        query: assign({
+        query: assign(parsed.query, {
             service: "WMS",
             version: "1.1.0",
             request: "GetLegendGraphic",
             format: "image/png",
             layer: layer
-        }, parsed.query)
+        })
     }));
 };
 

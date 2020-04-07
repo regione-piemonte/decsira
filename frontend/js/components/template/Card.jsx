@@ -90,7 +90,7 @@ const Card = React.createClass({
         this.props.renderTree(this.props.card.xml);
     },
     renderCard() {
-        const {maxWidth} = getWindowSize();
+        const {maxWidth, maxHeight} = getWindowSize();
         const xml = this.props.card.xml;
         const authParam = this.props.authParam;
         const profile = this.props.profile;
@@ -123,7 +123,7 @@ const Card = React.createClass({
             );
         return (this.props.draggable) ? (
             <div>
-                <Draggable start={{x: (maxWidth / 2) - 425, y: 0}} handle=".panel-heading, .panel-heading *">
+                <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: (maxWidth / 2) - 425, y: 0}} handle=".panel-heading, .panel-heading *">
                     {Template}
                 </Draggable>
                 <SiraTree/>
