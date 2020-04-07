@@ -157,6 +157,12 @@
                  "buttonStyle":"primary"
               }
            },
+		   {
+			   "name": "Search",
+			   "cfg": {
+				 "withToggle": ["max-width: 768px", "min-width: 768px"]
+			   }
+		   },
             {
                 "name": "Toolbar",
                 "id": "NavigationBar",
@@ -278,7 +284,10 @@
                 }
         ]
 },
-"proxyUrl": "proxy/?url=",
+"proxyUrl": {
+  "url": "proxy/?url=",
+  "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org"]
+},
 "query": {
     "attributePanelExpanded": true,
     "filterFields": [
