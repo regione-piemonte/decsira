@@ -1,7 +1,7 @@
 .mapbody {
     position: absolute;
     top: 32px;
-    bottom: 0;
+    bottom: 10px;
     width: 100%;
 }
 #map, .fill {
@@ -618,6 +618,9 @@ button.exporter-close.close {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 
 }
+.modal-open .modal {
+    overflow: hidden;
+}
 #add-map-modal .modal-title{
     font-size: 1em;
 }
@@ -627,7 +630,7 @@ button.exporter-close.close {
 }
 #add-map-modal .modal-content{
     overflow:hidden;
-    height: 500px;
+    height: 475px;
 }
 #add-map-modal .modal-footer{
     position:absolute;
@@ -644,6 +647,7 @@ button.exporter-close.close {
     right: 0px;
     left:0px;
     overflow: auto;
+	max-height: calc(100vh - 295px);
 }
 .sira-add-map-body{
 height: auto;
@@ -769,3 +773,18 @@ overflow-y: auto;
 	margin-bottom: 0px;
 }
 
+.navbar-header {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.viewer, #map {
+	margin-top: 10px;
+}
+
+div.ol-scale-line.ol-unselectable {
+    bottom: 14px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
