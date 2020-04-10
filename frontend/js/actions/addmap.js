@@ -87,12 +87,21 @@ function addSiraLayersIncart(layers) {
         let inCartLayers = getState().cart.layers;
         let layersOk = [];
         let alreadyPresent = false;
+        // controllo i layers già presenti in cart
         layers.forEach((lay) => {
             alreadyPresent = inCartLayers.filter((el) => el.name === lay.name).length > 0;
             if (!alreadyPresent)layersOk.push(lay);
             alreadyPresent = false;
         });
-        dispatch(addSiraLayersIncartInt(layersOk));
+        // controllo i layers già presenti in mappa
+        const mapLayers = getState().layers.flat || [];
+        let layersToAdd = [];
+        layersOk.forEach((lay) => {
+            alreadyPresent = mapLayers.filter((el) => el.name === lay.name).length > 0;
+            if (!alreadyPresent)layersToAdd.push(lay);
+            alreadyPresent = false;
+        });
+        dispatch(addSiraLayersIncartInt(layersToAdd));
     };
 }
 
