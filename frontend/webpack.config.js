@@ -35,6 +35,7 @@ module.exports = {
         new NormalModuleReplacementPlugin(/map\/openlayers\/Feature/, path.join(__dirname, "js", "Ms2Override", "Feature.jsx")),
         new NormalModuleReplacementPlugin(/VectorLayer/, path.join(__dirname, "js", "Ms2Override", "VectorLayer.jsx")),
 		new NormalModuleReplacementPlugin(/NumberField/, path.join(__dirname, "js", "Ms2Override", "NumberField.jsx")),
+		new NormalModuleReplacementPlugin(/SpatialFilter/, path.join(__dirname, "js", "Ms2Override", "SpatialFilter.jsx")),
         new NoErrorsPlugin()
     ],
     resolve: {
