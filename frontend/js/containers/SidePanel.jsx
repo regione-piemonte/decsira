@@ -43,8 +43,8 @@ const SidePanel = React.createClass({
     },
     getInitialState: function() {
         return {
-            width: 600,
-            boxwidth: 600
+            width: 660,
+            boxwidth: 660
         };
     },
     getDefaultProps() {
@@ -140,6 +140,7 @@ const SidePanel = React.createClass({
                 sidebar={this.props.fTypeConfigLoading ? this.renderLoading() : this.renderContent()}
                 styles={{
                         sidebar: {
+                            top: 10,
                             backgroundColor: 'white',
                             zIndex: 1024,
                             width: this.state.boxwidth,

@@ -36,7 +36,7 @@ const Footer = require('../components/Footer');
 const Vista = require('../components/catalog/VistaDataset');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
-const {toggleAddMap, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
+const {toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
 
 const mapStateToPropsMIB = (state) => {
     return {
@@ -72,6 +72,17 @@ const MetadataInfoBox = connect(
     mapStateToPropsMIB,
     mapDispatchToPropsMIB
     )(require('../components/MetadataInfoBox'));
+
+const AddMapModal = connect(({addmap = {}}) => ({
+    error: addmap.error,
+    records: addmap.records,
+    loading: addmap.loading,
+    // node: demoNode,
+    show: addmap.show
+   }), {
+   close: toggleAddMap.bind(null, false),
+   addLayers: addLayersInCart
+})(require('../components/addmap/AddMapModal'));
 
 const authParams = {
     admin: {
@@ -301,6 +312,7 @@ const Dataset = React.createClass({
                         position: "fixed",
                         marginBottom: "0px",
                         boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
+                <AddMapModal />
             </div>);
     },
     loadMetadata({text, category} = {}) {

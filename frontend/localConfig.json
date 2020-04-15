@@ -157,6 +157,12 @@
                  "buttonStyle":"primary"
               }
            },
+		   {
+			   "name": "Search",
+			   "cfg": {
+				 "withToggle": true
+			   }
+		   },
             {
                 "name": "Toolbar",
                 "id": "NavigationBar",
@@ -278,7 +284,10 @@
                 }
         ]
 },
-"proxyUrl": "proxy/?url=",
+"proxyUrl": {
+  "url": "proxy/?url=",
+  "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org"]
+},
 "query": {
     "attributePanelExpanded": true,
     "filterFields": [

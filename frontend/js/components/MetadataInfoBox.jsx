@@ -155,7 +155,7 @@ const MetadataInfoBox = React.createClass({
         }
 
         return (
-          <Draggable bounds="parent" start={{x: 30, y: 180}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+          <Draggable bounds="parent" start={{x: 0, y: 300}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
           <div className="scheda-info" style={{display: this.props.show}}>
             <Panel
               className="info-header panel panel-primary"

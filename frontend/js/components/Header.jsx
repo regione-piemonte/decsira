@@ -18,7 +18,6 @@ const {
 // const SiraUtils = require('../utils/SiraUtils');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
-const {toggleAddMap, addLayersInCart} = require('../actions/addmap');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
 
 const SistemaConoscenzeAmbientaliBox = connect((state) => ({
@@ -78,17 +77,6 @@ const LoginNav = connect((state) => ({
           window.location.href = ConfigUtils.getConfigProp('logOutService');
       }
 })(require('../../MapStore2/web/client/components/security/UserMenu'));
-
-const AddMapModal = connect(({addmap = {}}) => ({
-         error: addmap.error,
-         records: addmap.records,
-         loading: addmap.loading,
-         // node: demoNode,
-         show: addmap.show
-    }), {
-    close: toggleAddMap.bind(null, false),
-    addLayers: addLayersInCart
-})(require('../components/addmap/AddMapModal'));
 
 const CartPanel = connect((state) => ({
         showPanel: state.cart.showPanel,
@@ -178,7 +166,6 @@ const Header = React.createClass({
 
                     </div>
                 </header>
-                <AddMapModal />
                 <CartPanel />
                 <LoginPanel />
             </div>
