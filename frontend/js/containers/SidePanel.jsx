@@ -140,7 +140,6 @@ const SidePanel = React.createClass({
                 sidebar={this.props.fTypeConfigLoading ? this.renderLoading() : this.renderContent()}
                 styles={{
                         sidebar: {
-                            top: 10,
                             backgroundColor: 'white',
                             zIndex: 1024,
                             width: this.state.boxwidth,

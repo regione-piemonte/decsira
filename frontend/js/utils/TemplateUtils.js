@@ -100,6 +100,9 @@ const TemplateUtils = {
         }
     },
     getElement(element, doc, wfsVersion="2.0") {
+        if (doc === undefined) {
+            return "";
+        }
         let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces((doc.documentElement || doc.ownerDocument.documentElement).attributes)));
         let value = "";
         let result;

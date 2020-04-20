@@ -23,17 +23,6 @@ const categorySelector = createSelector([
         };
     }
 );
-const getChildren = function(nodes, node) {
-    return node.nodes.map((child) => {
-        let newNode = head(nodes.filter((n) => n.id === child));
-        return newNode.nodes ? assign({expanded: false}, newNode, {nodes: getChildren(nodes, newNode)}) : newNode;
-    });
-};
-const normalizeCatalog = function(nodes) {
-    return nodes.filter( (n) => n.type === "root").map((n) => {
-        return assign({expanded: false}, n, {nodes: getChildren(nodes, n)});
-    });
-};
 const sortObjects = function(a, b) {
     if (a.title < b.title) {
         return -1;
@@ -45,6 +34,17 @@ const sortObjects = function(a, b) {
 };
 const isPresent = function(nodes, node) {
     return nodes.filter((n) => node.id === n.id).length > 0;
+};
+const getChildren = function(nodes, node) {
+    return node.nodes.map((child) => {
+        let newNode = head(nodes.filter((n) => n.id === child));
+        return newNode.nodes ? assign({expanded: false}, newNode, {nodes: getChildren(nodes, newNode).sort(sortObjects)}) : newNode;
+    });
+};
+const normalizeCatalog = function(nodes) {
+    return nodes.filter( (n) => n.type === "root").map((n) => {
+        return assign({expanded: false}, n, {nodes: getChildren(nodes, n).sort(sortObjects)});
+    });
 };
 const normalizeViews = function(nodes) {
     return nodes.filter( (n) => n.type === "view").reduce((acc, o) => {

@@ -85,6 +85,19 @@ const ExporterUtils = {
         }
         return ret;
     },
+    formatDate(value) {
+        if (value === null || value === undefined) {
+            return '';
+        }
+        let ret;
+        if (typeof value === 'string') {
+            const regex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))Z/;
+            ret = value.match(regex) ? value.replace('Z', '') : value;
+        } else {
+            ret = value;
+        }
+        return ret;
+    },
     cvsEscape: function(value) {
         if (value === null || value === undefined) {
             return '';
@@ -113,6 +126,7 @@ const ExporterUtils = {
         features.reduce(( res, ft) => {
             res.push(ids.map((id) => {
                 let ret = this.formatNumber(ft.properties[id]);
+                ret = this.formatDate(ret);
                 ret = this.cvsEscape(ret);
                 return ret;
             }).join(columnDelimiter));
