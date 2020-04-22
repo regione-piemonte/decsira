@@ -36,19 +36,19 @@ function getChildData(id, oggetto, keyCount) {
     };
 }
 
-function getDefaultExpandedKeys(treeData) {
-    let expandedKeys = [];
-    expandedKeys.push(...treeData.map(item => item.key));
-    const children = treeData.map(item => item.children);
-    children.forEach(item => {
-        expandedKeys.push(...item.map(child => child.key));
-    });
-    return expandedKeys;
-}
-
-function loadDataForTree(xmlData) {
-    let treeDataFlat = [];
+function loadDataForTree(dataDesc, xmlData) {
     let keyCount = 0;
+    // Definisco la radice del tree, il dato di partenza
+    let treeDataWithRoot = [{
+        title: dataDesc,
+        key: '' + keyCount++,
+        linkToDetail: {
+            featureType: 'stabilimento',
+            featureId: 'codice_sira.' + TemplateUtils.getValue(xmlData, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")
+        }
+    }];
+
+    let treeDataFlat = [];
     const oggetti = TemplateUtils.getList(xmlData, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato");
     oggetti.forEach(oggetto => {
         let id = TemplateUtils.getElement({xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()"}, oggetto);
@@ -74,8 +74,11 @@ function loadDataForTree(xmlData) {
         return tmpArray;
     }, []);
 
-    console.log(treeData);
-    return treeData;
+    // Aggiungo il treeDat alla radice del tree
+    treeDataWithRoot[0].children = treeData;
+
+    console.log(treeDataWithRoot);
+    return treeDataWithRoot;
 }
 
 function configureTree(xmlData) {
@@ -83,20 +86,17 @@ function configureTree(xmlData) {
     let title = '';
     let subtitle = '';
     let show = 'none';
-    let defaultExpandedKeys = [];
     if (!TemplateUtils.isTreeDisabled(xmlData)) {
-        treeData = loadDataForTree(xmlData);
-        defaultExpandedKeys = getDefaultExpandedKeys(treeData);
         title = 'STABILIMENTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE';
         subtitle = 'Denominazione stabilimento: ' + TemplateUtils.getValue(xmlData, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
             + ' ' + 'Comune: ' + TemplateUtils.getValue(xmlData, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()");
         show = 'block';
+        treeData = loadDataForTree(subtitle, xmlData);
     }
     return {
         type: TREE_LOADED,
         show,
         treeData,
-        defaultExpandedKeys,
         title,
         subtitle
     };

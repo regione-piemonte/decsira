@@ -15,7 +15,6 @@ const Draggable = require('react-draggable');
 const SiraTree = React.createClass({
     propTypes: {
         treeData: PropTypes.array,
-        defaultExpandedKeys: PropTypes.array,
         title: React.PropTypes.string,
         subtitle: React.PropTypes.string,
         show: React.PropTypes.string,
@@ -31,7 +30,6 @@ const SiraTree = React.createClass({
     getDefaultProps() {
         return {
             treeData: [],
-            defaultExpandedKeys: [],
             title: '',
             subtitle: '',
             show: 'none',
@@ -56,38 +54,44 @@ const SiraTree = React.createClass({
         }
     },
     onSelect(selectedKeys, info) {
-        let selectedData = null;
-        const children = this.props.treeData.map(item => item.children);
-        children.forEach(item => {
-            let found = item.find(obj => obj.key === info.node.props.eventKey);
-            if (found) {
-                selectedData = found;
-            }
-        });
-        if (selectedData) {
-            const cqlFilter = selectedData.linkToDetail.cqlFilter;
-            const featureType = selectedData.linkToDetail.featureType.indexOf(":") > 1 ? selectedData.linkToDetail.featureType.split(":")[1] : selectedData.linkToDetail.featureType;
-            if (this.props.configOggetti[featureType]) {
+        let selectedData = this.searchKey(this.props.treeData, info.node.props.eventKey);
+        if (selectedData && selectedData.linkToDetail) {
+            if (selectedData.linkToDetail.featureId) {
+                const featureType = selectedData.linkToDetail.featureType;
                 const detailsConfig = this.props.configOggetti[featureType];
-                const templateUrl = selectedData.linkToDetail.templateUrl ? selectedData.linkToDetail.templateUrl : (detailsConfig.card.template.default || detailsConfig.card.template);
+                const templateUrl = detailsConfig.card.template.default || detailsConfig.card.template;
                 let url = detailsConfig.card.service.url;
                 Object.keys(detailsConfig.card.service.params).forEach((param) => {
                     url += `&${param}=${detailsConfig.card.service.params[param]}`;
                 });
-                url = url += "&cql_filter=" + cqlFilter;
+                url = url += "&FEATUREID=" + selectedData.linkToDetail.featureId;
                 this.props.onDetail(templateUrl, url);
             } else {
-                let waitingForConfig = {
-                    featureType,
-                    info
-                };
-                this.props.setWaitingForConfig(waitingForConfig);
-                this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false);
+                const cqlFilter = selectedData.linkToDetail.cqlFilter;
+                const featureType = selectedData.linkToDetail.featureType.indexOf(":") > 1 ? selectedData.linkToDetail.featureType.split(":")[1] : selectedData.linkToDetail.featureType;
+                if (this.props.configOggetti[featureType]) {
+                    const detailsConfig = this.props.configOggetti[featureType];
+                    const templateUrl = selectedData.linkToDetail.templateUrl ? selectedData.linkToDetail.templateUrl : (detailsConfig.card.template.default || detailsConfig.card.template);
+                    let url = detailsConfig.card.service.url;
+                    Object.keys(detailsConfig.card.service.params).forEach((param) => {
+                        url += `&${param}=${detailsConfig.card.service.params[param]}`;
+                    });
+                    url = url += "&cql_filter=" + cqlFilter;
+                    this.props.onDetail(templateUrl, url);
+                } else {
+                    let waitingForConfig = {
+                        featureType,
+                        info
+                    };
+                    this.props.setWaitingForConfig(waitingForConfig);
+                    this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false);
+                }
             }
         }
     },
     render() {
         const {maxWidth, maxHeight} = getWindowSize();
+
         const loop = (data) => {
             return data.map((item) => {
                 if (item.children) {
@@ -97,6 +101,21 @@ const SiraTree = React.createClass({
             });
         };
         const treeNodes = loop(this.props.treeData);
+
+        const getKeys = (data) => {
+            return data.reduce(function(acc, o) {
+                let ret = acc;
+                if (o.key) {
+                    ret.push(o.key);
+                }
+                if (o.children) {
+                    ret = ret.concat(getKeys(o.children));
+                }
+                return ret;
+            }, []);
+        };
+        const expandedKeys = getKeys(this.props.treeData);
+        console.log(expandedKeys);
 
         return (
             <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: (maxWidth / 2) - 300, y: 100}} handle=".panel-heading, .panel-heading *">
@@ -121,7 +140,7 @@ const SiraTree = React.createClass({
                     <Panel className="tree-content infobox-content">
                         <Tree showLine
                             showIcon={false}
-                            defaultExpandedKeys={this.props.defaultExpandedKeys}
+                            defaultExpandedKeys={expandedKeys}
                             onSelect={this.onSelect}>
                             {treeNodes}
                         </Tree>
@@ -129,6 +148,25 @@ const SiraTree = React.createClass({
                   </Panel>
             </div>
             </Draggable>);
+    },
+    searchKey(data, key) {
+        let selectedData;
+        if (data[0].key === key) {
+            selectedData = data[0];
+        } else {
+            const children = data.map(item => item.children);
+            if (children) {
+                children.forEach(item => {
+                    let found = item.find(obj => obj.key === key);
+                    if (found) {
+                        selectedData = found;
+                    } else {
+                        selectedData = this.searchKey(item, key);
+                    }
+                });
+            }
+        }
+        return selectedData;
     }
   });
 
@@ -138,7 +176,6 @@ module.exports = connect((state) => {
         title: state.siraTree.title,
         subtitle: state.siraTree.subtitle,
         show: state.siraTree.show,
-        defaultExpandedKeys: state.siraTree.defaultExpandedKeys,
         card: state.cardtemplate || {},
         configOggetti: state.siradec.configOggetti,
         authParams: state.userprofile.authParams,

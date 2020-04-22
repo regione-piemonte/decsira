@@ -6,7 +6,6 @@ const assign = require('object-assign');
 
 const initialState = {
     treeData: [],
-    defaultExpandedKeys: [],
     title: '',
     subtitle: '',
     show: 'none'
@@ -19,7 +18,6 @@ function siraTree(state = initialState, action) {
                 treeData: action.treeData,
                 title: action.title,
                 subtitle: action.subtitle,
-                defaultExpandedKeys: action.defaultExpandedKeys,
                 show: action.show
             });
         }
