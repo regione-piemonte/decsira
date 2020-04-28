@@ -116,9 +116,9 @@ function selectRows(tableId, rows) {
     };
 }
 
-function renderTree(xml) {
+function renderTree(xml, treeTemplate) {
     return (dispatch) => {
-        dispatch(configureTree(xml));
+        dispatch(configureTree(xml, treeTemplate));
     };
 }
 

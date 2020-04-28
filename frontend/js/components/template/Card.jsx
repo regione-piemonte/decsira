@@ -21,7 +21,7 @@ const TemplateUtils = require('../../utils/TemplateUtils');
 const {getWindowSize} = require('../../../MapStore2/web/client/utils/AgentUtils');
 
 const Draggable = require('react-draggable');
-const SiraTree = require('../../components/SiraTree');
+const SiraTree = require('../tree/SiraTree');
 
 require("./card.css");
 
@@ -46,7 +46,8 @@ const Card = React.createClass({
         // impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func,
         generatePDF: React.PropTypes.func,
-        renderTree: React.PropTypes.func
+        renderTree: React.PropTypes.func,
+        treeTemplate: React.PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -87,7 +88,7 @@ const Card = React.createClass({
         );
     },
     renderTree() {
-        this.props.renderTree(this.props.card.xml);
+        this.props.renderTree(this.props.card.xml, this.props.treeTemplate);
     },
     renderCard() {
         const {maxWidth, maxHeight} = getWindowSize();
@@ -105,7 +106,7 @@ const Card = React.createClass({
             return this.renderLoadTemplateException();
         }
 
-        const treeDisabled = TemplateUtils.isTreeDisabled(xml);
+        const treeEnabled = this.props.treeTemplate ? true : false;
 
         const Template = (
             <div className="scheda-sira">
@@ -114,7 +115,7 @@ const Card = React.createClass({
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
-                    <Button id="treeButton" onClick={this.renderTree} style={{display: treeDisabled ? 'none' : 'block'}}>
+                    <Button id="treeButton" onClick={this.renderTree} style={{display: treeEnabled ? 'block' : 'none'}}>
                         <Glyphicon glyph="link"/>
                     </Button>
                     </div>
@@ -139,10 +140,12 @@ const Card = React.createClass({
 });
 
 module.exports = connect((state) => {
+    const cardConfig = state.siradec.configOggetti[state.siradec.treeFeatureType] || {};
     return {
         // impiantoModel: state.cardtemplate.impiantoModel,
         card: state.cardtemplate || {},
-        open: state.siraControls.detail
+        open: state.siraControls.detail,
+        treeTemplate: cardConfig && cardConfig.card ? cardConfig.card.treeTemplate : undefined
     };
 }, dispatch => {
     return bindActionCreators({

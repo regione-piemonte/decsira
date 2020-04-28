@@ -1,0 +1,77 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='STABILIMENTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE' subtitle={[
+            'Denominazione stabilimento: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()"),
+            ' Comune: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'stabilimento'
+			featureId = {'codice_sira.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")}
+			rootTitle = {
+				'Denominazione stabilimento: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()") +
+				' - Codice Sira: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato")}
+			groups = {[
+			  {
+				groupName: "Scarichi non IPPC",
+				groupId: {
+					xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()",
+					value: "1"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice Scarico: ', " - Numero provvedimento: "],					
+					descriptionValues: ["decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceOggetto/text()",
+										"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:estremiAtto/text()"],
+					linkToDetail: {
+						featureType: "puntiScaricoIndustriale",
+						cqlFilter: "decsiraogc_scarichi:idPuntoScaricoIndustriale",
+						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()",
+					}
+				}
+			  },
+			  {
+				groupName: "Impianto recupero rifiuti non pericolosi",
+				groupId: {
+					xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()",
+					value: "8"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice Sira: ', " - Numero provvedimento: "],					
+					descriptionValues: ["decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceSira/text()",
+										"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:estremiAtto/text()"],
+					linkToDetail: {
+						featureType: "impiantoRifiutiAuaNoAua",
+						cqlFilter: "decsiraogc_rifiuti_aua:identificativoRifiutoGenerico",
+						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()",
+					}
+				}
+			  },
+			  {
+				groupName: "Impianto smaltimento rifiuti",
+				groupId: {
+					xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()",
+					value: "15"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice Sira: ', " - Numero provvedimento: "],					
+					descriptionValues: ["decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceSira/text()",
+										"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:estremiAtto/text()"],
+					linkToDetail: {
+						featureType: "impiantoRifiutiSmaltimAIA208",
+						cqlFilter: "decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico",
+						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()",
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

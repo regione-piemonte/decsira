@@ -21,6 +21,7 @@ const TOPOLOGY_CONFIG_LOADED = 'TOPOLOGY_CONFIG_LOADED';
 const CARD_CONFIG_LOADED = 'CARD_CONFIG_LOADED';
 const INLINE_MAP_CONFIG = 'INLINE_MAP_CONFIG';
 const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
+const SET_TREE_FEATURE_TYPE = 'SET_TREE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
@@ -286,6 +287,12 @@ function setActiveFeatureType(featureType) {
         featureType
     };
 }
+function setTreeFeatureType(featureType) {
+    return {
+        type: SET_TREE_FEATURE_TYPE,
+        featureType
+    };
+}
 
 module.exports = {
     WAITING_FOR_CONFIG,
@@ -300,6 +307,7 @@ module.exports = {
     CARD_CONFIG_LOADED,
     INLINE_MAP_CONFIG,
     SET_ACTIVE_FEATURE_TYPE,
+    SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED,
     setWaitingForConfig,
@@ -314,5 +322,6 @@ module.exports = {
     getAttributeValues,
     hideQueryError,
     configureInlineMap,
-    setActiveFeatureType
+    setActiveFeatureType,
+    setTreeFeatureType
 };
