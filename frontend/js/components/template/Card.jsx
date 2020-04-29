@@ -14,7 +14,8 @@ const TemplateSira = require('./TemplateSira');
 const {Modal, Button, Glyphicon} = require('react-bootstrap');
 const {toggleSiraControl} = require("../../actions/controls");
 const toggleDetail = toggleSiraControl.bind(null, 'detail');
-const {generatePDF, renderTree} = require("../../actions/card");
+const {generatePDF} = require("../../actions/card");
+const {configureTree} = require("../../actions/siraTree");
 const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
@@ -46,7 +47,7 @@ const Card = React.createClass({
         // impiantoModel: React.PropTypes.object,
         toggleDetail: React.PropTypes.func,
         generatePDF: React.PropTypes.func,
-        renderTree: React.PropTypes.func,
+        configureTree: React.PropTypes.func,
         treeTemplate: React.PropTypes.string
     },
     getDefaultProps() {
@@ -88,7 +89,7 @@ const Card = React.createClass({
         );
     },
     renderTree() {
-        this.props.renderTree(this.props.card.xml, this.props.treeTemplate);
+        this.props.configureTree(this.props.card.xml, this.props.treeTemplate);
     },
     renderCard() {
         const {maxWidth, maxHeight} = getWindowSize();
@@ -106,8 +107,6 @@ const Card = React.createClass({
             return this.renderLoadTemplateException();
         }
 
-        const treeEnabled = this.props.treeTemplate ? true : false;
-
         const Template = (
             <div className="scheda-sira">
                     <TemplateSira template={this.props.card.template} model={model}/>
@@ -115,7 +114,7 @@ const Card = React.createClass({
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
-                    <Button id="treeButton" onClick={this.renderTree} style={{display: treeEnabled ? 'block' : 'none'}}>
+                    <Button id="treeButton" onClick={this.renderTree} style={{display: this.props.treeTemplate ? 'block' : 'none'}}>
                         <Glyphicon glyph="link"/>
                     </Button>
                     </div>
@@ -140,7 +139,8 @@ const Card = React.createClass({
 });
 
 module.exports = connect((state) => {
-    const cardConfig = state.siradec.configOggetti[state.siradec.treeFeatureType] || {};
+    const featureType = state.siradec.treeFeatureType || state.siradec.activeFeatureType;
+    const cardConfig = state.siradec.configOggetti[featureType] || {};
     return {
         // impiantoModel: state.cardtemplate.impiantoModel,
         card: state.cardtemplate || {},
@@ -151,6 +151,6 @@ module.exports = connect((state) => {
     return bindActionCreators({
         toggleDetail: toggleDetail,
         generatePDF: generatePDF.bind(null, true),
-        renderTree: renderTree
+        configureTree
     }, dispatch);
 })(Card);

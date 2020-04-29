@@ -4,9 +4,8 @@ const {bindActionCreators} = require('redux');
 import Tree, {TreeNode} from 'rc-tree';
 const TemplateUtils = require('../../utils/TemplateUtils');
 import './SiraTree.less';
-const {treeDataLoaded} = require('../../actions/siraTree');
 const {loadCardTemplate} = require('../../actions/card');
-const {loadFeatureTypeConfig, setWaitingForConfig, setActiveFeatureType, setTreeFeatureType} = require('../../actions/siradec');
+const {loadFeatureTypeConfig, setWaitingForConfig, setTreeFeatureType} = require('../../actions/siradec');
 
 const TreeData = React.createClass({
     propTypes: {
@@ -22,9 +21,7 @@ const TreeData = React.createClass({
         loadCardTemplate: React.PropTypes.func,
         loadFeatureTypeConfig: React.PropTypes.func,
         setWaitingForConfig: React.PropTypes.func,
-        setActiveFeatureType: React.PropTypes.func,
-        setTreeFeatureType: React.PropTypes.func,
-        treeDataLoaded: React.PropTypes.func
+        setTreeFeatureType: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -33,17 +30,14 @@ const TreeData = React.createClass({
             waitingForConfig: null,
             onDetail: () => {},
             setWaitingForConfig: () => {},
-            setActiveFeatureType: () => {},
-            setTreeFeatureType: () => {},
-            treeDataLoaded: () => {}
+            setTreeFeatureType: () => {}
         };
     },
     getInitialState() {
         return {treeData: []};
     },
     componentWillMount() {
-        const treeData = this.loadDataForTree(this.props);
-        this.state.treeData = treeData;
+        this.state.treeData = this.loadDataForTree(this.props);
         if (this.props.waitingForConfig && this.props.waitingForConfig.info) {
             const info = this.props.waitingForConfig.info;
             this.props.setWaitingForConfig(null);
@@ -51,8 +45,7 @@ const TreeData = React.createClass({
         }
     },
     componentWillReceiveProps(newProps) {
-        const treeData = this.loadDataForTree(newProps);
-        this.state.treeData = treeData;
+        this.state.treeData = this.loadDataForTree(newProps);
     },
     onSelect(selectedKeys, info) {
         let selectedData = this.searchKey(this.state.treeData[0], info.node.props.eventKey);
@@ -131,7 +124,6 @@ const TreeData = React.createClass({
             }, []);
         };
         const expandedKeys = getKeys(this.state.treeData);
-        console.log(expandedKeys);
 
         return (
             <Tree showLine
@@ -208,16 +200,13 @@ module.exports = connect((state) => {
     return {
         configOggetti: state.siradec.configOggetti,
         authParams: state.userprofile.authParams,
-        waitingForConfig: state.siradec.waitingForConfig,
-        treeData: state.siraTree.treeData
+        waitingForConfig: state.siradec.waitingForConfig
     };
 }, dispatch => {
     return bindActionCreators({
         loadCardTemplate,
         setWaitingForConfig,
         loadFeatureTypeConfig,
-        setActiveFeatureType,
-        setTreeFeatureType,
-        treeDataLoaded
+        setTreeFeatureType
     }, dispatch);
 })(TreeData);

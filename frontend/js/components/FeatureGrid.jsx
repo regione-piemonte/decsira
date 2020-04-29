@@ -1,6 +1,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {isObject} = require('lodash');
+const {bindActionCreators} = require('redux');
 
 const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 
@@ -8,7 +9,8 @@ const FilterUtils = require('../utils/SiraFilterUtils');
 
 const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
 const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
-
+const {setTreeFeatureType} = require('../actions/siradec');
+const {closeTree} = require('../actions/siraTree');
 const { head, isEqual } = require('lodash');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 
@@ -100,8 +102,9 @@ const SiraGrid = React.createClass({
         exporter: React.PropTypes.bool.isRequired,
         fullScreen: React.PropTypes.bool.isRequired,
         selectAll: React.PropTypes.bool.isRequired,
-        configureExporter: React.PropTypes.func
-
+        configureExporter: React.PropTypes.func,
+        setTreeFeatureType: React.PropTypes.func,
+        closeTree: React.PropTypes.func
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -432,6 +435,9 @@ const SiraGrid = React.createClass({
         this.props.selectFeatures(features);
     },
     goToDetail(params) {
+        this.props.setTreeFeatureType(undefined);
+        this.props.closeTree();
+
         let url = this.props.detailsConfig.service.url;
         let urlParams = this.props.detailsConfig.service.params;
         for (let param in urlParams) {
@@ -487,3 +493,10 @@ const SiraGrid = React.createClass({
 });
 
 module.exports = SiraGrid;
+
+module.exports = connect(null, dispatch => {
+    return bindActionCreators({
+        setTreeFeatureType,
+        closeTree
+    }, dispatch);
+})(SiraGrid);

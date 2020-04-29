@@ -57,7 +57,7 @@ function siradec(state = initialState, action) {
             return assign({}, state, {inlineMapConfig: action.mapconfig});
         }
         case SET_ACTIVE_FEATURE_TYPE: {
-            return assign({}, state, {activeFeatureType: action.featureType, treeFeatureType: action.featureType});
+            return assign({}, state, {activeFeatureType: action.featureType});
         }
         case SET_TREE_FEATURE_TYPE: {
             return assign({}, state, {treeFeatureType: action.featureType});
@@ -97,7 +97,6 @@ function siradec(state = initialState, action) {
                 return assign({}, state, {
                                 configOggetti: configOggetti,
                                 activeFeatureType: action.featureType,
-                                treeFeatureType: action.featureType,
                                 fTypeConfigLoading: false
                             });
             }

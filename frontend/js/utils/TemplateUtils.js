@@ -264,16 +264,6 @@ const TemplateUtils = {
                 check = true;
             }});
         return check;
-    },
-
-    isTreeDisabled(xml) {
-        if (xml) {
-            let stabilimento = this.getValue(xml, "/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento");
-            let ret = stabilimento ? false : true;
-            return ret;
-        }
-        return true;
     }
-
 };
 module.exports = TemplateUtils;
