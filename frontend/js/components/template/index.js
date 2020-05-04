@@ -14,8 +14,8 @@ const LinkScheda = require("./LinkScheda");
 const AuthorizedObject = require("./AuthorizedObject");
 const AdempimentiAmbientali = require("./AdempimentiAmbientali");
 const SiraTable = require("./SiraTable");
-
-
+const TreeTitle = require("../tree/TreeTitle");
+const TreeData = require("../tree/TreeData");
 const TemplateUtils = require('../../utils/TemplateUtils');
 const ProfileWrapper = require('./ProfileWrapper');
 const QGisZoom = require('./QGisZoom')

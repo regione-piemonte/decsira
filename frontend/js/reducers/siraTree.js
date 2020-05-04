@@ -1,14 +1,11 @@
 const {
-    TREE_LOADED, TREE_LOAD_ERROR, OPEN_TREE, CLOSE_TREE
+    TREE_LOADED, TREE_LOAD_ERROR, CLOSE_TREE
 } = require('../actions/siraTree');
 
 const assign = require('object-assign');
 
 const initialState = {
-    treeData: [],
-    defaultExpandedKeys: [],
-    title: '',
-    subtitle: '',
+    card: undefined,
     show: 'none'
 };
 
@@ -16,10 +13,7 @@ function siraTree(state = initialState, action) {
     switch (action.type) {
         case TREE_LOADED: {
             return assign({}, state, {
-                treeData: action.treeData,
-                title: action.title,
-                subtitle: action.subtitle,
-                defaultExpandedKeys: action.defaultExpandedKeys,
+                card: action.card,
                 show: action.show
             });
         }
@@ -27,11 +21,6 @@ function siraTree(state = initialState, action) {
             return assign({}, state, {
                 loadingTreeError: action.error,
                 show: 'none'
-            });
-        }
-        case OPEN_TREE: {
-            return assign({}, state, {
-                show: 'block'
             });
         }
         case CLOSE_TREE: {

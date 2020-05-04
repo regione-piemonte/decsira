@@ -7,7 +7,6 @@
  */
 const axios = require('../../MapStore2/web/client/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const { configureTree } = require('./siraTree');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
@@ -116,12 +115,6 @@ function selectRows(tableId, rows) {
     };
 }
 
-function renderTree(xml) {
-    return (dispatch) => {
-        dispatch(configureTree(xml));
-    };
-}
-
 /*function setSiraImpiantoModel(impiantoModel) {
     return {
         type: SET_IMPIANTO_MODEL,
@@ -146,7 +139,6 @@ module.exports = {
     activateSection,
     selectRows,
     generatePDF,
-    mapImageReady,
-    renderTree
+    mapImageReady
     // setSiraImpiantoModel
 };

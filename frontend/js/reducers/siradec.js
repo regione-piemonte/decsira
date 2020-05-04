@@ -19,6 +19,7 @@ const {
     QUERYFORM_HIDE_ERROR,
     INLINE_MAP_CONFIG,
     SET_ACTIVE_FEATURE_TYPE,
+    SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED
 } = require('../actions/siradec');
@@ -38,6 +39,7 @@ const initialState = {
     loadingQueryFormConfigError: null,
     featureType: urlQuery.featureType || 'aua',
     activeFeatureType: null,
+    treeFeatureType: null,
     inlineMapConfig: null,
     fTypeConfigLoading: false,
     notAuthorized: []
@@ -56,6 +58,9 @@ function siradec(state = initialState, action) {
         }
         case SET_ACTIVE_FEATURE_TYPE: {
             return assign({}, state, {activeFeatureType: action.featureType});
+        }
+        case SET_TREE_FEATURE_TYPE: {
+            return assign({}, state, {treeFeatureType: action.featureType});
         }
         case FEATURETYPE_CONFIG_LOADING: {
             return assign({}, state, {fTypeConfigLoading: true});
