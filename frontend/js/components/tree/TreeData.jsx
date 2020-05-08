@@ -5,6 +5,7 @@ import Tree, {TreeNode} from 'rc-tree';
 const TemplateUtils = require('../../utils/TemplateUtils');
 import './SiraTree.less';
 const {loadCardTemplate} = require('../../actions/card');
+const {treeDataLoaded, treeDataLoading} = require('../../actions/treeData');
 const {loadFeatureTypeConfig, setWaitingForConfig, setTreeFeatureType} = require('../../actions/siradec');
 
 const TreeData = React.createClass({
@@ -21,7 +22,10 @@ const TreeData = React.createClass({
         loadCardTemplate: React.PropTypes.func,
         loadFeatureTypeConfig: React.PropTypes.func,
         setWaitingForConfig: React.PropTypes.func,
-        setTreeFeatureType: React.PropTypes.func
+        setTreeFeatureType: React.PropTypes.func,
+        loading: React.PropTypes.bool,
+        treeDataLoaded: React.PropTypes.func,
+        treeDataLoading: React.PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -30,14 +34,17 @@ const TreeData = React.createClass({
             waitingForConfig: null,
             onDetail: () => {},
             setWaitingForConfig: () => {},
-            setTreeFeatureType: () => {}
+            setTreeFeatureType: () => {},
+            treeDataLoaded: () => {},
+            treeDataLoading: () => {}
         };
     },
-    getInitialState() {
-        return {treeData: []};
-    },
     componentWillMount() {
-        this.state.treeData = this.loadDataForTree(this.props);
+        if (this.props.treeData === null || this.props.treeData === undefined) {
+            this.loadDataForTree(this.props);
+        } else {
+            this.props.treeDataLoading(false);
+        }
         if (this.props.waitingForConfig && this.props.waitingForConfig.info) {
             const info = this.props.waitingForConfig.info;
             this.props.setWaitingForConfig(null);
@@ -45,10 +52,14 @@ const TreeData = React.createClass({
         }
     },
     componentWillReceiveProps(newProps) {
-        this.state.treeData = this.loadDataForTree(newProps);
+        if (this.props.featureId !== newProps.featureId) {
+            this.loadDataForTree(newProps);
+        } else {
+            this.props.treeDataLoading(false);
+        }
     },
     onSelect(selectedKeys, info) {
-        let selectedData = this.searchKey(this.state.treeData[0], info.node.props.eventKey);
+        let selectedData = this.searchKey(this.props.treeData[0], info.node.props.eventKey);
         if (selectedData && selectedData.linkToDetail) {
             if (selectedData.linkToDetail.featureId) {
                 const featureType = selectedData.linkToDetail.featureType;
@@ -101,6 +112,10 @@ const TreeData = React.createClass({
         };
     },
     render() {
+        if (this.props.loading) {
+            return (<img src={'assets/img/tree/loading.gif'}/>);
+        }
+
         const loop = (data) => {
             return data.map((item) => {
                 if (item.children) {
@@ -109,7 +124,7 @@ const TreeData = React.createClass({
                 return <TreeNode title={item.title} key={item.key} />;
             });
         };
-        const treeNodes = loop(this.state.treeData);
+        const treeNodes = this.props.treeData ? loop(this.props.treeData) : [];
 
         const getKeys = (data) => {
             return data.reduce(function(acc, o) {
@@ -123,7 +138,7 @@ const TreeData = React.createClass({
                 return ret;
             }, []);
         };
-        const expandedKeys = getKeys(this.state.treeData);
+        const expandedKeys = this.props.treeData ? getKeys(this.props.treeData) : [];
 
         return (
             <Tree showLine
@@ -178,9 +193,7 @@ const TreeData = React.createClass({
 
         // Aggiungo il treeData alla radice del tree
         treeDataWithRoot[0].children = treeData;
-        console.log(treeDataWithRoot);
-
-        return treeDataWithRoot;
+        this.props.treeDataLoaded(treeDataWithRoot);
     },
     searchKey(element, key) {
         if (element.key === key) {
@@ -194,10 +207,12 @@ const TreeData = React.createClass({
         }
         return null;
     }
-  });
+});
 
 module.exports = connect((state) => {
     return {
+        loading: state.treeData.loading,
+        treeData: state.treeData.treeData,
         configOggetti: state.siradec.configOggetti,
         authParams: state.userprofile.authParams,
         waitingForConfig: state.siradec.waitingForConfig
@@ -207,6 +222,8 @@ module.exports = connect((state) => {
         loadCardTemplate,
         setWaitingForConfig,
         loadFeatureTypeConfig,
-        setTreeFeatureType
+        setTreeFeatureType,
+        treeDataLoaded,
+        treeDataLoading
     }, dispatch);
 })(TreeData);

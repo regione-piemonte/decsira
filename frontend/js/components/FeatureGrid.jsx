@@ -104,7 +104,9 @@ const SiraGrid = React.createClass({
         selectAll: React.PropTypes.bool.isRequired,
         configureExporter: React.PropTypes.func,
         setTreeFeatureType: React.PropTypes.func,
-        closeTree: React.PropTypes.func
+        closeTree: React.PropTypes.func,
+        datasetHeader: React.PropTypes.string,
+        featureTypeNameLabel: React.PropTypes.string
     },
     contextTypes: {
         messages: React.PropTypes.object
@@ -123,6 +125,7 @@ const SiraGrid = React.createClass({
             profile: null,
             expanded: true,
             header: "featuregrid.header",
+            datasetHeader: "queryform.form.dataset_header",
             features: [],
             featureTypeName: null,
             ogcVersion: "2.0",
@@ -146,6 +149,7 @@ const SiraGrid = React.createClass({
             exporter: true,
             fullScreen: false,
             selectAll: true,
+            featureTypeNameLabel: null,
             onDetail: () => {},
             onShowDetail: () => {},
             toggleSiraControl: () => {},
@@ -304,6 +308,15 @@ const SiraGrid = React.createClass({
             </Modal>
         );
     },
+    renderDatasetHeader() {
+        const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
+        return (
+            <div className="dhContainer">
+                <label>{datasetHeader}</label>
+                <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+            </div>
+        );
+    },
     render() {
         let loadingError = this.props.loadingGridError;
         if (loadingError) {
@@ -362,6 +375,7 @@ const SiraGrid = React.createClass({
                         params={this.props.params}
                         csvMimeType={this.props.exportCsvMimeType}
                     />
+                    {this.renderDatasetHeader()}
                             <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
                                 <Button
                                     className="back-to-query"
@@ -369,7 +383,10 @@ const SiraGrid = React.createClass({
                                     onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
                                 </Button>
                                 <h5>Risultati - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
-
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "column"
+                                }}>
                                 <FeatureGrid
                                     changeMapView={this.props.changeMapView}
                                     srs="EPSG:4326"
@@ -395,6 +412,7 @@ const SiraGrid = React.createClass({
 
                                     {...gridConf}
                                     />
+                                    </div>
                             </div>
                             {this.props.loadingGrid ? (<div style={{height: "300px", width: this.state.width}}>
                                 <div style={{
@@ -492,9 +510,12 @@ const SiraGrid = React.createClass({
     }
 });
 
-module.exports = SiraGrid;
-
-module.exports = connect(null, dispatch => {
+module.exports = connect((state) => {
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    return {
+        featureTypeNameLabel: activeConfig.featureTypeNameLabel
+    };
+}, dispatch => {
     return bindActionCreators({
         setTreeFeatureType,
         closeTree
