@@ -1,4 +1,5 @@
 const axios = require('../../MapStore2/web/client/libs/ajax');
+const {treeDataLoading} = require('../actions/treeData');
 
 const TREE_LOADED = 'TREE_LOADED';
 const TREE_LOAD_ERROR = 'TREE_LOAD_ERROR';
@@ -19,6 +20,7 @@ function configureTree(xmlData, treeTemplate) {
     return (dispatch) => {
         return axios.get(treeTemplate).then((response) => {
             let template = response.data;
+            dispatch(treeDataLoading(true));
             dispatch(treeLoaded(xmlData, template));
         });
     };
