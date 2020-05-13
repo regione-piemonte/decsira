@@ -1,0 +1,257 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='VALUTAZIONI IMPATTO AMBIENTALE' subtitle={[
+            'Codice pratica: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:codiceFase/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+    <Section header='DETTAGLIO PROGETTO' eventKey='1' expanded={true}>
+        <LabeledField label='Autorita competente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:autoritCompetente/text()")
+        }/>
+
+        <LabeledField label='Gestore Sito Rete Natura 2000 ( Valutazione Incidenza)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:gestoreNatura2000/text()")
+        }/>
+        <LabeledField label='Codice Pratica' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:codiceFase/text()")
+        }/>
+        <LabeledField label='Titolo Progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:titoloProgetto/text()")
+        }/>
+
+        <LabeledField label='Descrizione Progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:descrizioneProgetto/text()")
+        }/>
+        <LabeledField label='Categoria Progettuale' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:listaCategorie/text()")
+        }/>
+        <LabeledField label='Tipo Procedura' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desTipoProgetto/text()")
+        }/>
+        <LabeledField label='Valutazione incidenza' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgValutIncidenza/text()")
+        }/>
+        <LabeledField label='Stato Progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgStatoProceduraProgetto/text()")
+        }/>
+        <LabeledField label='Provincia' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:listaProvinceProg/text()")
+        }/>
+        <LabeledField label='Comuni' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:listaComuniProg/text()")
+        }/>
+        <LabeledField label='Località' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:localitaProgetto/text()")
+        }/>
+        <LabeledField label='Data Presentazione progetto' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataProtIstanza/text()")
+        }/>
+        <LabeledField label='Data Ultima modifica progetto' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataUltimaModifProg/text()")
+        }/>
+        <LabeledField label='Data Ultima modifica opera' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataUltimaModificaOpera/text()")
+        }/>
+        <LabeledField label='Infrastruttura strategia (ex legge 443/2001)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgOperaLeggeObiettivo/text()")
+        }/>
+        <LabeledField label='Opera esistente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgNuovaOpera/text()")
+        }/>
+        <LabeledField label='Progetto Multifase' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgMultiFase/text()")
+        }/>
+        <LabeledField label='Esito progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desEsitoProg/text()")
+        }/>
+        <LabeledField label='Note progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:noteProg/text()")
+        }/>
+    </Section>
+
+
+    <Section header='DETTAGLIO FASE PROCEDIMENTO' eventKey='2' expanded={true}>
+        <LabeledField label='Tipologia Procedimento' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desTipologiaFase/text()")
+        }/>
+        <LabeledField label='Anno di registro' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:annoRegistro/text()")
+        }/>
+        <LabeledField label='Numero di registro' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:numRegistro/text()")
+        }/>
+        <LabeledField label='Data scadenza invio osservazioni' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:scadenzaOsservazPub/text()")
+        }/>
+    </Section>
+
+    <Section header='SEZIONE ISTRUTTORIA ' eventKey='3' expanded={true}>
+        <LabeledField label='Termine del procedimento'  dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:scadenzaOsservazPub/text()")
+        }/>
+        <LabeledField label='Stato del procedimento' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgStatoProceduraFase/text()")
+        }/>
+        <LabeledField label='Esito' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desEsitoFase/text()")
+        }/>
+        <LabeledField label='Note procedimento' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:noteVia/text()")
+        }/>
+    </Section>
+
+    <Section header='SOGGETTI PROPONENTI' eventKey='4' expanded={true}>
+        <SiraTable
+            id="SoggettiProponenti"
+            selectedRow={model.SoggettiProponenti}
+            wfsVersion="2.0"
+            rowSelection={false}
+            columns={
+                [
+                    {
+                        headerName: 'Denominazione',
+                        width: 150,
+                        xpath:"decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropDenominazione/text()"
+                    },
+                    {
+                        headerName: 'Tipo Soggetto',
+                        width: 100,
+                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropTipo/text()"
+                    },
+                    {
+                        headerName: 'Partita Iva',
+                        width: 90,
+                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropPartitaIva/text()"
+                    },
+                    {
+                        headerName: 'Codice Fiscale',
+                        width: 100,
+                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropCodiceFiscale/text()"
+                    },
+                    {
+                        headerName: 'Indirizzo',
+                        width: 150,
+                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropIndirizzo/text()"
+                    },
+                    {
+                        headerName: 'Comune',
+                        width: 100,
+                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropComune/text()"
+                    },
+                    {
+                        headerName: 'Provincia',
+                        width: 80,
+                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropProvincia/text()"
+                    }
+                ]
+            }
+            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:soggettoProponente")}/>
+    </Section>
+
+    <Section header='ORGANO TECNICO ' eventKey='5' expanded={true}>
+        <LabeledField label='Unità Organizzativa responsabile istruttoria' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:denomDirezioneRespOrgTec/text()")
+        }/>
+        <LabeledField label='Responsabile del procedimento' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:responsProcedimentoOrgTec/text()")
+        }/>
+        <LabeledField label='Responsabile del nucleo tecnico ' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:rappresentanteNucleoOrgTec/text()")
+        }/>
+    </Section>
+
+    <Section header='AREE PARCO' eventKey='6' expanded={true}>
+        <SiraTable
+            id="AreeParco"
+            selectedRow={model.AreeParco}
+            wfsVersion="2.0"
+            rowSelection={false}
+            columns={
+                [
+                    {
+                        headerName: 'Denominazione Area Parco',
+                        width: 740,
+                        xpath:"decsiraogc_sivia:AreaProtetta/decsiraogc_sivia:desAreaParco/text()"
+                    }
+                ]
+            }
+            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:areaProtetta")}/>
+        </Section>
+
+        <Section header='SITI RETE NATURA 2000' eventKey='7' expanded={true}>
+            <SiraTable
+                id="SitiReteNatura"
+                selectedRow={model.SitiReteNatura}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            headerName: 'Denominazione Sito Rete Natura 2000',
+                            width: 250,
+                            xpath:"decsiraogc_sivia:SitoNatura/decsiraogc_sivia:desSito/text()"
+                        },
+                        {
+                            headerName: 'Tipologia Sito Rete Natura 2000',
+                            width: 246,
+                            xpath:"decsiraogc_sivia:SitoNatura/decsiraogc_sivia:flgTipo/text()"
+                        },
+                        {
+                            headerName: 'Codice europeo Sito Rete Natura 2000',
+                            width: 245,
+                            xpath:"decsiraogc_sivia:SitoNatura/decsiraogc_sivia:codiceSito/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:sitoNatura")}/>
+            </Section>
+
+        <Section header='MAPPA SINTESI - VIA procedimenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='8' expanded={true}>
+            <MappaScheda
+                center={
+                    model.getValue({
+                        type: TemplateUtils.GEOMETRY_TYPE,
+                        xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:geometria/gml:Polygon /gml:exterior/gml:LinearRing/gml:posList/text()"
+                    })
+                }
+                layers={[
+                {
+                    "type": "wms",
+                    "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                    "name": "SfondoCartRif",
+                    "title": "Sfondo Cartografico",
+                    "group": "background",
+                    "visibility": true,
+                    "format": "image/png",
+                    "tiled": true,
+                    "tileSize": 512
+                },
+                {
+                    "type": "wms",
+                    "url": "{geoserverUrl}/wms",
+                    "visibility": true,
+                    "title": "Valutazione impatto ambientale Preview",
+                    "name": "decsiraogc_sivia:FaseProcedura",
+                    "group": "Overlays",
+                    "format": "image/png"
+                }
+        ]}
+                authParam={model.authParam}
+                withMap={model.withMap}/>
+        </Section>
+
+        <Section header='METADATO' eventKey='9' expanded={true}>
+            <LinkToPage
+                txt="Visualizza la scheda del metadato"
+                url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+                params={{
+                    id: 4494,
+                    currTab: 'rndt'
+                }}
+            />
+        </Section>
+    </Panel>
+</Panel>
