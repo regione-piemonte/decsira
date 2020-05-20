@@ -102,12 +102,22 @@ const TreeData = React.createClass({
         group.groupElement.descriptionLabels.forEach((label, index) => {
             title = title + label + TemplateUtils.getElement({xpath: group.groupElement.descriptionValues[index]}, object);
         });
+        let featureType;
+        let cqlFilter;
+        let nomeWFS = TemplateUtils.getElement({xpath: group.groupElement.linkToDetail.nomeWFS}, object);
+        if (nomeWFS !== undefined && nomeWFS !== null) {
+            featureType = nomeWFS.split('#')[0];
+            cqlFilter = nomeWFS.split('#')[1] + "='" + TemplateUtils.getElement({xpath: group.groupElement.linkToDetail.xpath}, object) + "'";
+        } else {
+            featureType = group.groupElement.linkToDetail.featureType;
+            cqlFilter = group.groupElement.linkToDetail.cqlFilter + "='" + TemplateUtils.getElement({xpath: group.groupElement.linkToDetail.xpath}, object) + "'";
+        }
         return {
             title: title,
             key: keyCount + '-' + (childCount++),
             linkToDetail: {
-                featureType: group.groupElement.linkToDetail.featureType,
-                cqlFilter: group.groupElement.linkToDetail.cqlFilter + "='" + TemplateUtils.getElement({xpath: group.groupElement.linkToDetail.xpath}, object) + "'"
+                featureType: featureType,
+                cqlFilter: cqlFilter
             }
         };
     },
@@ -166,9 +176,10 @@ const TreeData = React.createClass({
         groups.forEach(group => {
             objects.forEach(object => {
                 let id = TemplateUtils.getElement({xpath: group.groupId.xpath}, object);
+                let name = TemplateUtils.getElement({xpath: group.groupName}, object);
                 if (group.groupId.value === id) {
                     const data = {
-                        title: group.groupName,
+                        title: name,
                         id: id,
                         key: '' + keyCount,
                         children: [this.getChildData(group, object, keyCount++)]

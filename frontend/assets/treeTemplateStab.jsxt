@@ -21,7 +21,7 @@
 			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:oggettoAssociato")}
 			groups = {[
 			  {
-				groupName: "Scarichi non IPPC",
+				groupName: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()",
 				groupId: {
 					xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()",
 					value: "1"
@@ -31,14 +31,13 @@
 					descriptionValues: ["decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceOggetto/text()",
 										"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:estremiAtto/text()"],
 					linkToDetail: {
-						featureType: "puntiScaricoIndustriale",
-						cqlFilter: "decsiraogc_scarichi:idPuntoScaricoIndustriale",
-						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()",
+						nomeWFS: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:nomeWFS/text()",	
+						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()"
 					}
 				}
 			  },
 			  {
-				groupName: "Impianto recupero rifiuti non pericolosi",
+				groupName: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()",
 				groupId: {
 					xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()",
 					value: "8"
@@ -48,14 +47,13 @@
 					descriptionValues: ["decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceSira/text()",
 										"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:estremiAtto/text()"],
 					linkToDetail: {
-						featureType: "impiantoRifiutiAuaNoAua",
-						cqlFilter: "decsiraogc_rifiuti_aua:identificativoRifiutoGenerico",
-						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()",
+						nomeWFS: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:nomeWFS/text()",	
+						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()"
 					}
 				}
 			  },
 			  {
-				groupName: "Impianto smaltimento rifiuti",
+				groupName: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:desTipo/text()",
 				groupId: {
 					xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idTipo/text()",
 					value: "15"
@@ -65,9 +63,8 @@
 					descriptionValues: ["decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:codiceSira/text()",
 										"decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:estremiAtto/text()"],
 					linkToDetail: {
-						featureType: "impiantoRifiutiSmaltimAIA208",
-						cqlFilter: "decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico",
-						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()",
+						nomeWFS: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:nomeWFS/text()",
+						xpath: "decsiraogc_stabilimenti:OggettoAssociato/decsiraogc_stabilimenti:idOggetto/text()"
 					}
 				}
 			  }
