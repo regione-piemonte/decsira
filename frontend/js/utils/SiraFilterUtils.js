@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+const SiraUtils = require('./SiraUtils');
 
 function getWSNameByFeatureName(ftName = "") {
     if (ftName === "" ) return "";
@@ -43,10 +44,32 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) 
     } else {
         filter = '';
     }
+    // let configName = ftName.indexOf(":") > -1 ? ftName.split(":")[1] : ftName;
+    let ppp = SiraUtils.getConfigByfeatureTypeName(ftName);
+    //let geometryType = (configName && SiraUtils.getConfigOggetti()[configName]) ? SiraUtils.getConfigOggetti()[configName].geometryType : SiraUtils.getConfigOggetti()[ftName].geometryType;
+    let geometryType = SiraUtils.getConfigByfeatureTypeName(ftName).geometryType;
     const nameSpacesAttr = Object.keys(nameSpaces).map((prefix) => 'xmlns:' + prefix + '="' + nameSpaces[prefix] + '"').join(" ");
-    return `<StyledLayerDescriptor version="1.0.0"
-            ${nameSpacesAttr}
-            xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
+    let result;
+    switch(geometryType) {
+        case "Point": {
+            result = `<StyledLayerDescriptor version="1.0.0"
+                    ${nameSpacesAttr}
+                    xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
+            break;
+        }
+        case "Polygon": {
+            result = `<StyledLayerDescriptor version="1.0.0"
+                    ${nameSpacesAttr}
+                    xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">#0000FF</CssParameter><CssParameter name="stroke">#0000FF</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
+            break;
+        }
+        default:
+            result = "";
+    }
+    return result;
+    // return `<StyledLayerDescriptor version="1.0.0"
+    //        ${nameSpacesAttr}
+    //        xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
 };
 
 FilterUtils.getFilterByIds = function(ftName, ids, idField, pagination) {
