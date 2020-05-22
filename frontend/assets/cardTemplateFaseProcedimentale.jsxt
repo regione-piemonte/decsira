@@ -2,7 +2,7 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='VALUTAZIONI IMPATTO AMBIENTALE' subtitle={[
-            'Codice pratica: ',
+            'Codice procedimento: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:codiceFase/text()")
             ]} id={model.id}/>
     )}>
@@ -12,10 +12,10 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:autoritCompetente/text()")
         }/>
 
-        <LabeledField label='Gestore Sito Rete Natura 2000 ( Valutazione Incidenza)' value={
+        <LabeledField label='Gestore Sito Rete Natura 2000' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:gestoreNatura2000/text()")
         }/>
-        <LabeledField label='Codice Pratica' value={
+        <LabeledField label='Codice procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:codiceFase/text()")
         }/>
         <LabeledField label='Titolo Progetto' value={
@@ -25,16 +25,16 @@
         <LabeledField label='Descrizione Progetto' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:descrizioneProgetto/text()")
         }/>
-        <LabeledField label='Categoria Progettuale' value={
+        <LabeledField label='Categoria Progettuale L.R. 40/1998' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:listaCategorie/text()")
         }/>
-        <LabeledField label='Tipo Procedura' value={
+        <LabeledField label='Tipo procedura progetto' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desTipoProgetto/text()")
         }/>
         <LabeledField label='Valutazione incidenza' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgValutIncidenza/text()")
         }/>
-        <LabeledField label='Stato Progetto' value={
+        <LabeledField label='Stato procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgStatoProceduraProgetto/text()")
         }/>
         <LabeledField label='Provincia' value={
@@ -46,56 +46,63 @@
         <LabeledField label='Località' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:localitaProgetto/text()")
         }/>
-        <LabeledField label='Data Presentazione progetto' dateFormat='DD/MM/YYYY' value={
+        <LabeledField label='Data Presentazione istanza' dateFormat='DD/MM/YYYY' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataProtIstanza/text()")
         }/>
-        <LabeledField label='Data Ultima modifica progetto' dateFormat='DD/MM/YYYY' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataUltimaModifProg/text()")
-        }/>
-        <LabeledField label='Data Ultima modifica opera' dateFormat='DD/MM/YYYY' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataUltimaModificaOpera/text()")
-        }/>
-        <LabeledField label='Infrastruttura strategia (ex legge 443/2001)' value={
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+          <LabeledField label='Data Ultima modifica progetto' dateFormat='DD/MM/YYYY' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataUltimaModifProg/text()")
+          }/>
+          <LabeledField label='Data Ultima modifica opera' dateFormat='DD/MM/YYYY' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataUltimaModificaOpera/text()")
+          }/>
+        </ProfileWrapper>
+        <LabeledField label='Infrastruttura strategica (ex legge 443/2001)' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgOperaLeggeObiettivo/text()")
         }/>
-        <LabeledField label='Opera esistente' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgNuovaOpera/text()")
-        }/>
-        <LabeledField label='Progetto Multifase' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgMultiFase/text()")
-        }/>
-        <LabeledField label='Esito progetto' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desEsitoProg/text()")
-        }/>
+
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+          <LabeledField label='Opera esistente' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgNuovaOpera/text()")
+          }/>
+        </ProfileWrapper>
+
         <LabeledField label='Note progetto' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:noteProg/text()")
         }/>
+
+        <Section header='DETTAGLIO CATEGORIA PROGETTUALE' eventKey='2' expanded={true}>
+            <LabeledField label='Categoria Vigente' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:categoriaProgetto/decsiraogc_sivia:CategoriaProgetto/decsiraogc_sivia:idCategoria/text()")
+            }/>
+            <LabeledField label='Categoria Originaria' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:categoriaProgetto/decsiraogc_sivia:CategoriaProgetto/decsiraogc_sivia:idCatOriginale/text()")
+            }/>
+            <LabeledField label='Descrizione Categoria Vigente' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:categoriaProgetto/decsiraogc_sivia:CategoriaProgetto/decsiraogc_sivia:desCategoria/text()")
+            }/>
+        </Section>
+
     </Section>
 
 
-    <Section header='DETTAGLIO FASE PROCEDIMENTO' eventKey='2' expanded={true}>
+    <Section header='DETTAGLIO PROCEDIMENTO' eventKey='3' expanded={true}>
         <LabeledField label='Tipologia Procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desTipologiaFase/text()")
         }/>
-        <LabeledField label='Anno di registro' value={
+        <LabeledField label='Anno istanza' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:annoRegistro/text()")
-        }/>
-        <LabeledField label='Numero di registro' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:numRegistro/text()")
         }/>
         <LabeledField label='Data scadenza invio osservazioni' dateFormat='DD/MM/YYYY' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:scadenzaOsservazPub/text()")
         }/>
     </Section>
 
-    <Section header='SEZIONE ISTRUTTORIA ' eventKey='3' expanded={true}>
-        <LabeledField label='Termine del procedimento'  dateFormat='DD/MM/YYYY' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:scadenzaOsservazPub/text()")
+    <Section header='SEZIONE ISTRUTTORIA ' eventKey='4' expanded={true}>
+        <LabeledField label='Termine procedimento'  dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:scadenzaTermini/text()")
         }/>
-        <LabeledField label='Stato del procedimento' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgStatoProceduraFase/text()")
-        }/>
-        <LabeledField label='Esito' value={
+        <LabeledField label='Esito procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desEsitoFase/text()")
         }/>
         <LabeledField label='Note procedimento' value={
@@ -103,7 +110,7 @@
         }/>
     </Section>
 
-    <Section header='SOGGETTI PROPONENTI' eventKey='4' expanded={true}>
+    <Section header='SOGGETTI PROPONENTI' eventKey='5' expanded={true}>
         <SiraTable
             id="SoggettiProponenti"
             selectedRow={model.SoggettiProponenti}
@@ -151,19 +158,27 @@
             features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:soggettoProponente")}/>
     </Section>
 
-    <Section header='ORGANO TECNICO ' eventKey='5' expanded={true}>
-        <LabeledField label='Unità Organizzativa responsabile istruttoria' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:denomDirezioneRespOrgTec/text()")
-        }/>
+    <Section header='ORGANO TECNICO ' eventKey='6' expanded={true}>
+
+       <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+          <LabeledField label='Unità Organizzativa responsabile istruttoria' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:denomDirezioneRespOrgTec/text()")
+          }/>
+        </ProfileWrapper>
+
         <LabeledField label='Responsabile del procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:responsProcedimentoOrgTec/text()")
         }/>
-        <LabeledField label='Responsabile del nucleo tecnico ' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:rappresentanteNucleoOrgTec/text()")
-        }/>
+
+        <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+          <LabeledField label='Responsabile del nucleo tecnico ' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:rappresentanteNucleoOrgTec/text()")
+          }/>
+        </ProfileWrapper>
+
     </Section>
 
-    <Section header='AREE PARCO' eventKey='6' expanded={true}>
+    <Section header='AREE PARCO' eventKey='7' expanded={true}>
         <SiraTable
             id="AreeParco"
             selectedRow={model.AreeParco}
@@ -181,7 +196,7 @@
             features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:areaProtetta")}/>
         </Section>
 
-        <Section header='SITI RETE NATURA 2000' eventKey='7' expanded={true}>
+        <Section header='SITI RETE NATURA 2000' eventKey='8' expanded={true}>
             <SiraTable
                 id="SitiReteNatura"
                 selectedRow={model.SitiReteNatura}
@@ -209,7 +224,7 @@
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:sitoNatura")}/>
             </Section>
 
-        <Section header='MAPPA SINTESI - VIA procedimenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='8' expanded={true}>
+        <Section header='MAPPA SINTESI - VIA procedimenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='9' expanded={true}>
             <MappaScheda
                 center={
                     model.getValue({
@@ -243,7 +258,7 @@
                 withMap={model.withMap}/>
         </Section>
 
-        <Section header='METADATO' eventKey='9' expanded={true}>
+        <Section header='METADATO' eventKey='10' expanded={true}>
             <LinkToPage
                 txt="Visualizza la scheda del metadato"
                 url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
