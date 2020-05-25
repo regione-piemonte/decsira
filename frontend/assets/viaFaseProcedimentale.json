@@ -52,23 +52,23 @@
            "type": 2
          },
          {
-           "headerName": "Codice Pratica",
+           "headerName": "Codice procedimento",
            "suppressSorting": true,
-           "width":100,
+           "width":120,
            "xpath": ["decsiraogc_sivia:codiceFase/text()"],
            "type": 2
          },
          {
-           "headerName": "Titolo Progetto",
+           "headerName": "Titolo progetto",
            "suppressSorting": true,
            "width":300,
            "xpath": ["decsiraogc_sivia:titoloProgetto/text()"],
            "type": 2
          },
          {
-           "headerName": "Categoria Progetto",
+           "headerName": "Categoria progetto",
            "suppressSorting": true,
-           "width":100,
+           "width":150,
            "xpath": ["decsiraogc_sivia:listaCategorie/text()"],
            "type": 2
          },
@@ -87,7 +87,7 @@
            "type": 2
          },
          {
-           "headerName": "Stato Progetto",
+           "headerName": "Stato procedimento",
            "suppressSorting": true,
            "width":130,
            "xpath": ["decsiraogc_sivia:flagStatoProgetto/text()"],
@@ -101,21 +101,22 @@
            "type": 2
          },
          {
-           "headerName": "Gestore Sito Rete Natura 2000 ( Valutazione Incidenza)",
-           "suppressSorting": true,
-           "width":100,
-           "xpath": ["decsiraogc_sivia:listaGestori/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Progetto Tipo Procedura",
+           "headerName": "Tipo procedura progetto",
            "suppressSorting": true,
            "width":150,
            "xpath": ["decsiraogc_sivia:desTipoProgetto/text()"],
            "type": 2
          },
          {
-           "headerName": "Infrastruttura strategia (ex legge 443/2001)",
+           "headerName": "Tipologia procedimento ",
+           "suppressSorting": true,
+           "width":160,
+           "xpath": ["decsiraogc_sivia:desTipologiaFase/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Infrastruttura strategica (ex legge 443/2001)",
            "suppressSorting": true,
            "width":100,
            "xpath": ["decsiraogc_sivia:flgOperaLeggeObiettivo/text()"],
@@ -124,29 +125,9 @@
          {
            "headerName": "Progetto su Opera esistente",
            "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "width":100,
            "xpath": ["decsiraogc_sivia:flgNuovaOpera/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Progetto Multifase",
-           "suppressSorting": true,
-           "width":100,
-           "xpath": ["decsiraogc_sivia:flgMultiFase/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Procedimento Stato",
-           "suppressSorting": true,
-           "width":80,
-           "xpath": ["decsiraogc_sivia:flgStatoProceduraProgetto/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Procedimento Tipologia",
-           "suppressSorting": true,
-           "width":160,
-           "xpath": ["decsiraogc_sivia:desTipologiaFase/text()"],
            "type": 2
          },
          {
@@ -157,21 +138,7 @@
            "type": 2
          },
          {
-           "headerName": "Anno di registro",
-           "suppressSorting": true,
-           "width":80,
-           "xpath": ["decsiraogc_sivia:annoRegistro/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Numero di registro",
-           "suppressSorting": true,
-           "width":80,
-           "xpath": ["decsiraogc_sivia:numRegistro/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Data Presentazione (procollo)",
+           "headerName": "Data presentazione istanza",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_sivia:dataProtIstanza/text()"],
@@ -179,24 +146,25 @@
            "type": 2
          },
          {
-           "headerName": "Organo Tecnico Unita' Organizzativa responsabile istruttoria",
-           "suppressSorting": true,
-           "width":150,
-           "xpath": ["decsiraogc_sivia:denomDirezioneRespOrgTec/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Organo Tecnico Rappresentante nucleo",
-           "suppressSorting": true,
-           "width":150,
-           "xpath": ["decsiraogc_sivia:rappresentanteNucleoOrgTec/text()"],
-           "type": 2
-         },
-         {
            "headerName": "Valutazione incidenza",
            "suppressSorting": true,
            "width":100,
            "xpath": ["decsiraogc_sivia:flgValutIncidenza/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Gestore Sito Rete Natura 2000",
+           "suppressSorting": true,
+           "width":150,
+           "xpath": ["decsiraogc_sivia:gestoreNatura2000/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Organo Tecnico Unita' Organizzativa responsabile istruttoria",
+           "suppressSorting": true,
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "width":150,
+           "xpath": ["decsiraogc_sivia:denomDirezioneRespOrgTec/text()"],
            "type": 2
          },
          {
@@ -224,7 +192,7 @@
          {
             "index": 1,
             "attribute": "decsiraogc_sivia:localizzazione/decsiraogc_sivia:Localizzazione/decsiraogc_sivia:desProvincia",
-            "label":"Provincia Localizzazione opera",
+            "label":"Provincia",
             "type":"list",
             "valueService": {
               "urlParams": {
@@ -238,7 +206,7 @@
         {
            "index": 2,
            "attribute": "decsiraogc_sivia:localizzazione/decsiraogc_sivia:Localizzazione/decsiraogc_sivia:desComune",
-           "label":"Comune Localizzazione opera",
+           "label":"Comune",
            "type":"list",
            "valueService": {
 
@@ -298,31 +266,15 @@
        },
        {
           "index": 6,
-          "attribute": "decsiraogc_sivia:gestoreNatura2000",
-          "label":"Gestore Sito Rete Natura 2000 ( Valutazione Incidenza)",
-          "type":"list",
-          "valueService": {
-
-            "urlParams": {
-              "typeName": "decsiraogc_decodif:decsira_d_sivia_gestori_natura_2000",
-              "propertyName": "id_gestore,denominazione",
-               "sortBy": "denominazione+A"
-            }
-          },
-
-          "valueId":"denominazione",
-          "valueLabel":"denominazione"
-       },
-       {
-          "index": 7,
           "attribute": "decsiraogc_sivia:desTipoProgetto",
-          "label":"Tipo Procedura Progetto",
+          "label":"Tipo Procedura progetto",
           "type":"list",
           "valueService": {
 
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_sivia_progetto_tipo",
               "propertyName": "id_tipo_progetto,des_tipo_progetto,des_tipo_ente,ordinamento",
+               "cql_filter": "id_tipo_progetto=1%20OR%20id_tipo_progetto=2%20OR%20id_tipo_progetto=3%20OR%20id_tipo_progetto=4",
                "sortBy": "ordinamento+A"
             }
           },
@@ -331,57 +283,7 @@
           "valueLabel":"des_tipo_progetto"
        },
        {
-          "index": 8,
-          "attribute": "decsiraogc_sivia:flagStatoProgetto",
-          "label":"Stato Progetto",
-          "type":"list",
-          "values": [
-            {"value":"IN CORSO","name":"IN CORSO"},
-            {"value":"CONCLUSA","name":"CONCLUSO"},
-            {"value":"INTERROTTA","name":"INTERROTTO"},
-            {"value":"SOSPESO","name":"SOSPESO"}
-          ],
-          "valueId":"value",
-          "valueLabel":"name"
-       },
-       {
-          "index": 9,
-          "attribute": "decsiraogc_sivia:flgOperaLeggeObiettivo",
-          "label":"Infrastruttura strategia (ex legge 443/2001)",
-          "type":"list",
-          "values": [
-            {"value":"SI","name":"SI"},
-            {"value":"NO","name":"NO"}
-          ],
-          "valueId":"value",
-          "valueLabel":"name"
-       },
-       {
-          "index": 10,
-          "attribute": "decsiraogc_sivia:flgNuovaOpera",
-          "label":"Progetto su Opera esistente",
-          "type":"list",
-          "values": [
-            {"value":"SI","name":"SI"},
-            {"value":"NO","name":"NO"}
-          ],
-          "valueId":"value",
-          "valueLabel":"name"
-       },
-       {
-          "index": 11,
-          "attribute": "decsiraogc_sivia:flgMultiFase",
-          "label":"Progetto Multifase",
-          "type":"list",
-          "values": [
-            {"value":"S","name":"SI"},
-            {"value":"N","name":"NO"}
-          ],
-          "valueId":"value",
-          "valueLabel":"name"
-       },
-       {
-          "index": 12,
+          "index": 7,
           "attribute": "decsiraogc_sivia:desTipologiaFase",
           "label":"Tipologia procedimento",
           "type":"list",
@@ -398,7 +300,52 @@
           "valueLabel":"des_fase_skvia"
        },
        {
-          "index": 13,
+          "index": 8,
+          "attribute": "decsiraogc_sivia:codiceFase",
+          "label":"Codice procedimento",
+          "type":"string"
+       },
+       {
+          "index": 9,
+          "attribute": "decsiraogc_sivia:flagStatoProgetto",
+          "label":"Stato procedimento",
+          "type":"list",
+          "values": [
+            {"value":"IN CORSO","name":"IN CORSO"},
+            {"value":"CONCLUSA","name":"CONCLUSO"},
+            {"value":"INTERROTTA","name":"INTERROTTO"},
+            {"value":"SOSPESO","name":"SOSPESO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 10,
+          "attribute": "decsiraogc_sivia:flgOperaLeggeObiettivo",
+          "label":"Infrastruttura strategica (ex legge 443/2001)",
+          "type":"list",
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 11,
+          "attribute": "decsiraogc_sivia:flgNuovaOpera",
+          "label":"Progetto su Opera esistente",
+          "type":"list",
+          "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+          "values": [
+            {"value":"SI","name":"SI"},
+            {"value":"NO","name":"NO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 12,
           "attribute": "decsiraogc_sivia:desEsitoFase",
           "label":"Esito procedimento",
           "type":"list",
@@ -415,9 +362,9 @@
           "valueLabel":"des_esito"
        },
        {
-          "index": 14,
+          "index": 13,
           "attribute": "decsiraogc_sivia:annoRegistro",
-          "label":"Anno di registro",
+          "label":"Anno istanza",
           "type":"list",
           "valueService": {
 
@@ -432,33 +379,21 @@
           "valueLabel":"anno"
        },
        {
-          "index": 15,
-          "attribute": "decsiraogc_sivia:numRegistro",
-          "label":"Numero di registro",
-          "type":"string"
-      },
+          "index": 14,
+          "attribute": "decsiraogc_sivia:dataProtIstanza",
+          "label":"Data Presentazione istanza",
+          "type":"date",
+          "fieldOptions": {
+            "dateFormat": "DD/MM/YYYY"
+          }
+       },
       {
-         "index": 16,
-         "attribute": "decsiraogc_sivia:codiceFase",
-         "label":"Codice Pratica",
-         "type":"string"
-     },
-     {
-        "index": 17,
-        "attribute": "decsiraogc_sivia:dataProtIstanza",
-        "label":"Data Presentazione (procollo)",
-        "type":"date",
-        "fieldOptions": {
-          "dateFormat": "DD/MM/YYYY"
-        }
-     },
-     {
-        "index": 18,
+        "index": 15,
         "attribute": "decsiraogc_sivia:denomDirezioneRespOrgTec",
         "label":"Organo Tecnico Unita' Organizzativa responsabile istruttoria",
         "type":"list",
+        "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
         "valueService": {
-
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_sivia_orga_tec_dir_serv",
             "propertyName": "den_dir_ser_resp",
@@ -470,24 +405,7 @@
         "valueLabel":"den_dir_ser_resp"
      },
      {
-        "index": 19,
-        "attribute": "decsiraogc_sivia:rappresentanteNucleoOrgTec",
-        "label":"Organo Tecnico Rappresentante nucleo",
-        "type":"list",
-        "valueService": {
-
-          "urlParams": {
-            "typeName": "decsiraogc_decodif:decsira_d_sivia_rappr_nucleo_orgtec",
-            "propertyName": "rappresentante_nucleo",
-             "sortBy": "rappresentante_nucleo+A"
-          }
-        },
-
-        "valueId":"rappresentante_nucleo",
-        "valueLabel":"rappresentante_nucleo"
-     },
-     {
-        "index": 20,
+        "index": 16,
         "attribute": "decsiraogc_sivia:flgValutIncidenza",
         "label":"Valutazione incidenza",
         "type":"list",
@@ -499,7 +417,24 @@
         "valueLabel":"name"
      },
      {
-        "index": 21,
+        "index": 17,
+        "attribute": "decsiraogc_sivia:gestoreNatura2000",
+        "label":"Gestore Sito Rete Natura 2000",
+        "type":"list",
+        "valueService": {
+
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_sivia_gestori_natura_2000",
+            "propertyName": "id_gestore,denominazione",
+             "sortBy": "denominazione+A"
+          }
+        },
+
+        "valueId":"denominazione",
+        "valueLabel":"denominazione"
+     },
+     {
+        "index": 18,
         "attribute": "decsiraogc_sivia:areaProtetta/decsiraogc_sivia:AreaProtetta/decsiraogc_sivia:desAreaParco",
         "label":"Denominazione Area Parco",
         "type":"list",
@@ -516,7 +451,7 @@
         "valueLabel":"des_area"
      },
      {
-        "index": 22,
+        "index": 19,
         "attribute": "decsiraogc_sivia:sitoNatura/decsiraogc_sivia:SitoNatura/decsiraogc_sivia:desSito",
         "label":"Denominazione Sito Rete Natura 2000",
         "type":"list",
@@ -533,7 +468,7 @@
         "valueLabel":"desc_sito"
      },
      {
-        "index": 23,
+        "index": 20,
         "attribute": "decsiraogc_sivia:sitoNatura/decsiraogc_sivia:SitoNatura/decsiraogc_sivia:flgTipo",
         "label":"Tipologia Sito Rete Natura 2000",
         "type":"list",
@@ -546,7 +481,7 @@
         "valueLabel":"name"
       },
       {
-         "index": 24,
+         "index": 21,
          "attribute": "decsiraogc_sivia:sitoNatura/decsiraogc_sivia:SitoNatura/decsiraogc_sivia:codiceSito",
          "label":"Codice europeo Sito Rete Natura 2000",
          "type":"string"
