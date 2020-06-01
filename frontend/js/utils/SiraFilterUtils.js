@@ -45,12 +45,11 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) 
         filter = '';
     }
     // let configName = ftName.indexOf(":") > -1 ? ftName.split(":")[1] : ftName;
-    let ppp = SiraUtils.getConfigByfeatureTypeName(ftName);
-    //let geometryType = (configName && SiraUtils.getConfigOggetti()[configName]) ? SiraUtils.getConfigOggetti()[configName].geometryType : SiraUtils.getConfigOggetti()[ftName].geometryType;
+    // let geometryType = (configName && SiraUtils.getConfigOggetti()[configName]) ? SiraUtils.getConfigOggetti()[configName].geometryType : SiraUtils.getConfigOggetti()[ftName].geometryType;
     let geometryType = SiraUtils.getConfigByfeatureTypeName(ftName).geometryType;
     const nameSpacesAttr = Object.keys(nameSpaces).map((prefix) => 'xmlns:' + prefix + '="' + nameSpaces[prefix] + '"').join(" ");
     let result;
-    switch(geometryType) {
+    switch (geometryType) {
         case "Point": {
             result = `<StyledLayerDescriptor version="1.0.0"
                     ${nameSpacesAttr}

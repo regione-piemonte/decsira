@@ -42,14 +42,11 @@ module.exports = {
     },
 
     getConfigByfeatureTypeName: function(ftype) {
-      let keys = Object.keys(this.getConfigOggetti());
-      let config = this.getConfigOggetti();
-      let c;
-      for (let key in config) {
-        if (config.hasOwnProperty(key) && config[key].featureTypeName == ftype) return config[key];
-      }
+        let config = this.getConfigOggetti();
+        for (let key in config) {
+            if (config.hasOwnProperty(key) && config[key].featureTypeName === ftype) return config[key];
+        }
     },
-    
 
     getConfigOggetti: function() {
         return this.store.getState().siradec.configOggetti;
