@@ -24,7 +24,7 @@ describe('Test correctness of the queryform actions', () => {
             try {
                 expect(e).toExist();
                 done();
-            } catch(ex) {
+            } catch (ex) {
                 done(ex);
             }
         }, () => ({ueserprofile: {}}));
@@ -46,13 +46,13 @@ describe('Test correctness of the queryform actions', () => {
                 expect(e).toExist();
                 expect(e.type).toBe(FEATURETYPE_CONFIG_LOADED);
                 done();
-            } catch(ex) {
+            } catch (ex) {
                 done(ex);
             }
         });
     });
 
-    /*it('loads a broken configuration file 1', (done) => {
+    /* it('loads a broken configuration file 1', (done) => {
         loadQueryFormConfig('base/js/test-resources/testQueryFormConfig.broken.json')((e) => {
             try {
                 expect(e).toExist();
@@ -80,7 +80,7 @@ describe('Test correctness of the queryform actions', () => {
                 expect(e).toExist();
                 expect(e.type).toBe(QUERYFORM_CONFIG_LOAD_ERROR);
                 done();
-            } catch(ex) {
+            } catch (ex) {
                 done(ex);
             }
         });

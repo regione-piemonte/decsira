@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,34 +8,31 @@
  */
 const React = require('react');
 
-const LinkToMetadataInfoBox = React.createClass({
-     propTypes: {
-         openMetadataInfobox: React.PropTypes.func
-     },
+class LinkToMetadataInfoBox extends React.Component {
+    static propTypes = {
+        openMetadataInfobox: PropTypes.func
+    };
 
-     getDefaultProps() {
-         return {
-             openMetadataInfobox: () => {}
-         };
-     },
+    static defaultProps = {
+        openMetadataInfobox: () => {}
+    };
 
-     render() {
-         return (
-         <button
-            className="btn btn-primary btn-lg"
-            data-toggle="modal"
-            data-target="#nomeModale"
-            onClick={this.props.openMetadataInfobox}>
-            Metadata Info Box
-         </button>
-     );
-     }
+    render() {
+        return (
+            <button
+                className="btn btn-primary btn-lg"
+                data-toggle="modal"
+                data-target="#nomeModale"
+                onClick={this.props.openMetadataInfobox}>
+           Metadata Info Box
+            </button>
+        );
+    }
 
-// openInfoBox() {
-//    this.props.loadMetadataInfo();
-//    this.props.openMetadataInfobox();
-// }
-
-});
+    // openInfoBox() {
+    //    this.props.loadMetadataInfo();
+    //    this.props.openMetadataInfobox();
+    // }
+}
 
 module.exports = LinkToMetadataInfoBox;

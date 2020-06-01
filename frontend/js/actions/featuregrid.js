@@ -38,6 +38,7 @@ function selectAllToggle(featureTypeName, filterObj, ogcVersion, params, wfsUrl,
 }
 
 function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
+    // eslint-disable-next-line consistent-return
     return (dispatch, getState) => {
         if (featureTypeName) {
             let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
@@ -51,8 +52,8 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
             let state = getState();
             const featuregrid = state.grid && state.grid.featuregrid;
             return axios.post(url, filter, {
-              timeout: 60000,
-              headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+                timeout: 60000,
+                headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
             }).then((response) => {
 
                 if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
@@ -75,7 +76,7 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
                         }
                     }
 
-                    /*eslint-enable */
+                    /* eslint-enable */
                 }
                 dispatch(showLoading(false));
             });

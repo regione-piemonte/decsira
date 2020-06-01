@@ -7,8 +7,10 @@
  */
 /*eslint-disable*/
 const React = require('react');
-/*eslint-enable*/
-const QGisZoom = React.createClass( {
+
+/* eslint-enable*/
+class QGisZoom extends React.Component {
     render() {return null; }
-});
+}
+
 module.exports = QGisZoom;

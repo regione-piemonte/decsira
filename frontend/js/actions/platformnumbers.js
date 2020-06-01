@@ -14,19 +14,19 @@ const PLATFORM_NUMBER_ERROR = 'PLATFORM_NUMBER_ERROR';
 
 function platformNumbersLoaded(data) {
     return {
-		type: PLATFORM_NUMBER_LOADED,
-		functionObjectMap: data.functionObjectMap,
+        type: PLATFORM_NUMBER_LOADED,
+        functionObjectMap: data.functionObjectMap,
         functionObjectSearch: data.functionObjectSearch,
         functionObjectView: data.functionObjectView,
         siradecObject: data.siradecObject
-	};
+    };
 }
 
 function platformNumbersError(error) {
     return {
-		type: PLATFORM_NUMBER_ERROR,
-		error
-	};
+        type: PLATFORM_NUMBER_ERROR,
+        error
+    };
 }
 
 function loadPlatformNumbers() {
@@ -37,7 +37,7 @@ function loadPlatformNumbers() {
             } else {
                 try {
                     JSON.parse(response.data);
-                } catch(e) {
+                } catch (e) {
                     dispatch(platformNumbersError('Service for platfomrNumbers is broken: ' + e.message));
                 }
 
@@ -51,8 +51,8 @@ function loadPlatformNumbers() {
 
 
 module.exports = {
-		LOAD_PLATFORM_NUMBER,
-		PLATFORM_NUMBER_LOADED,
-		PLATFORM_NUMBER_ERROR,
-		loadPlatformNumbers
+    LOAD_PLATFORM_NUMBER,
+    PLATFORM_NUMBER_LOADED,
+    PLATFORM_NUMBER_ERROR,
+    loadPlatformNumbers
 };

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -40,38 +41,38 @@ const {toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInC
 
 const mapStateToPropsMIB = (state) => {
     return {
-      show: state.metadatainfobox.show,
-      openLegendPanel: state.metadatainfobox.openLegendPanel,
-      title: state.metadatainfobox.title,
-      text: state.metadatainfobox.text,
-      numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
-      dataProvider: state.metadatainfobox.dataProvider,
-      urlMetadato: state.metadatainfobox.urlMetadato,
-      urlWMS: state.metadatainfobox.urlWMS,
-      urlWFS: state.metadatainfobox.urlWFS,
-      urlLegend: state.metadatainfobox.urlLegend,
-      error: state.metadatainfobox.error,
-      showButtonLegend: state.metadatainfobox.showButtonLegend
-  };
+        show: state.metadatainfobox.show,
+        openLegendPanel: state.metadatainfobox.openLegendPanel,
+        title: state.metadatainfobox.title,
+        text: state.metadatainfobox.text,
+        numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
+        dataProvider: state.metadatainfobox.dataProvider,
+        urlMetadato: state.metadatainfobox.urlMetadato,
+        urlWMS: state.metadatainfobox.urlWMS,
+        urlWFS: state.metadatainfobox.urlWFS,
+        urlLegend: state.metadatainfobox.urlLegend,
+        error: state.metadatainfobox.error,
+        showButtonLegend: state.metadatainfobox.showButtonLegend
+    };
 };
 
 const mapDispatchToPropsMIB = (dispatch) => {
     return {
-    loadLegend: (u, actualUrl) => {
-        if (actualUrl && actualUrl.length === 0) {
-            dispatch(loadLegends(u));
+        loadLegend: (u, actualUrl) => {
+            if (actualUrl && actualUrl.length === 0) {
+                dispatch(loadLegends(u));
+            }
+            dispatch(toggleLegendBox());
+        },
+        closePanel: () => {
+            dispatch(hideBox());
         }
-        dispatch(toggleLegendBox());
-    },
-    closePanel: () => {
-        dispatch(hideBox());
-    }
-  };
+    };
 };
 const MetadataInfoBox = connect(
     mapStateToPropsMIB,
     mapDispatchToPropsMIB
-    )(require('../components/MetadataInfoBox'));
+)(require('../components/MetadataInfoBox'));
 
 const AddMapModal = connect(({addmap = {}}) => ({
     error: addmap.error,
@@ -79,137 +80,142 @@ const AddMapModal = connect(({addmap = {}}) => ({
     loading: addmap.loading,
     // node: demoNode,
     show: addmap.show
-   }), {
-   close: toggleAddMap.bind(null, false),
-   addLayers: addLayersInCart
+}), {
+    close: toggleAddMap.bind(null, false),
+    addLayers: addLayersInCart
 })(require('../components/addmap/AddMapModal'));
 
 const authParams = {
     admin: {
-         userName: "admin",
-         authkey: "84279da9-f0b9-4e45-ac97-48413a48e33f"
+        userName: "admin",
+        authkey: "84279da9-f0b9-4e45-ac97-48413a48e33f"
     },
     A: {
-         userName: "profiloa",
-         authkey: "59ccadf2-963e-448c-bc9a-b3a5e8ed20d7"
+        userName: "profiloa",
+        authkey: "59ccadf2-963e-448c-bc9a-b3a5e8ed20d7"
     },
     B: {
-         userName: "profilob",
-         authkey: "d6e5f5a5-2d26-43aa-8af3-13f8dcc0d03c"
+        userName: "profilob",
+        authkey: "d6e5f5a5-2d26-43aa-8af3-13f8dcc0d03c"
     },
     C: {
-         userName: "profiloc",
-         authkey: "0505bb64-21b6-436c-86f9-9c1280f15a6c"
+        userName: "profiloc",
+        authkey: "0505bb64-21b6-436c-86f9-9c1280f15a6c"
     },
     D: {
-         userName: "profilod",
-         authkey: "4176ea85-9a9a-42a5-8913-8f6f85813dab"
+        userName: "profilod",
+        authkey: "4176ea85-9a9a-42a5-8913-8f6f85813dab"
     }
- };
-const Dataset = React.createClass({
-    propTypes: {
-        category: React.PropTypes.shape({
-            name: React.PropTypes.string.isRequired,
-            id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
-            icon: React.PropTypes.string.isRequired,
-            objectNumber: React.PropTypes.number,
-            tematicViewNumber: React.PropTypes.number
+};
+
+class Dataset extends React.Component {
+    static propTypes = {
+        category: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+            icon: PropTypes.string.isRequired,
+            objectNumber: PropTypes.number,
+            tematicViewNumber: PropTypes.number
         }),
-        nodes: React.PropTypes.array,
-        views: React.PropTypes.array,
-        objects: React.PropTypes.array,
-        loading: React.PropTypes.bool,
-        notAuthorized: React.PropTypes.bool,
-        nodesLoaded: React.PropTypes.bool,
-        onToggle: React.PropTypes.func,
-        toggleSiraControl: React.PropTypes.func,
-        expandFilterPanel: React.PropTypes.func,
-        getMetadataObjects: React.PropTypes.func,
-        selectSubCategory: React.PropTypes.func,
-        subcat: React.PropTypes.string,
-        configOggetti: React.PropTypes.object,
-        authParams: React.PropTypes.object,
-        userprofile: React.PropTypes.object,
-        loadMetadata: React.PropTypes.func,
-        showInfoBox: React.PropTypes.func,
-        setProfile: React.PropTypes.func,
-        params: React.PropTypes.object,
-        activeFeatureType: React.PropTypes.string,
-        loadFeatureTypeConfig: React.PropTypes.func,
-        setActiveFeatureType: React.PropTypes.func,
-        setGridType: React.PropTypes.func,
-        getThematicViewConfig: React.PropTypes.func,
-        map: React.PropTypes.object,
-        toggleAddMap: React.PropTypes.func,
-        loadNodeMapRecords: React.PropTypes.func,
-        addLayersInCart: React.PropTypes.func,
-        setNodeInUse: React.PropTypes.func
-    },
-    contextTypes: {
-        router: React.PropTypes.object
-    },
-    getInitialState() {
-            return {
-                params: {},
-                searchText: "",
-                showCategories: false,
-                onToggle: () => {},
-                setProfile: () => {},
+        nodes: PropTypes.array,
+        views: PropTypes.array,
+        objects: PropTypes.array,
+        loading: PropTypes.bool,
+        notAuthorized: PropTypes.bool,
+        nodesLoaded: PropTypes.bool,
+        onToggle: PropTypes.func,
+        toggleSiraControl: PropTypes.func,
+        expandFilterPanel: PropTypes.func,
+        getMetadataObjects: PropTypes.func,
+        selectSubCategory: PropTypes.func,
+        subcat: PropTypes.string,
+        configOggetti: PropTypes.object,
+        authParams: PropTypes.object,
+        userprofile: PropTypes.object,
+        loadMetadata: PropTypes.func,
+        showInfoBox: PropTypes.func,
+        setProfile: PropTypes.func,
+        params: PropTypes.object,
+        activeFeatureType: PropTypes.string,
+        loadFeatureTypeConfig: PropTypes.func,
+        setActiveFeatureType: PropTypes.func,
+        setGridType: PropTypes.func,
+        getThematicViewConfig: PropTypes.func,
+        map: PropTypes.object,
+        toggleAddMap: PropTypes.func,
+        loadNodeMapRecords: PropTypes.func,
+        addLayersInCart: PropTypes.func,
+        setNodeInUse: PropTypes.func
+    };
+
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
+    state = {
+        params: {},
+        searchText: "",
+        showCategories: false,
+        onToggle: () => {},
+        setProfile: () => {},
+        waitingForConfig: {
+            feature: null,
+            redirect: null
+        }
+    };
+
+    componentWillMount() {
+        const {nodesLoaded, loading, category} = this.props;
+        if (this.props?.params?.profile) {
+            this.props.setProfile(this.props?.params?.profile, authParams[this.props?.params?.profile]);
+        }
+        // this.props.setProfile(this.props?.params?.profile, authParams[this.props?.params?.profile]);
+        if (!nodesLoaded && !loading && category && category.id) {
+            this.loadMetadata({category: category});
+        }
+    }
+
+    componentDidMount() {
+        document.body.className = "body_dataset";
+    }
+
+    componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
+        if (!loading && this.props.map && this.props.map !== map) {
+            if (this.props?.params?.profile) {
+                this.context.router.history.push('/map/${this.props.params.profile}/');
+            } else {
+                this.context.router.history.push('/map/');
+            }
+            // this.context.router.history.push(`/${this.props.params.profile}`);
+        }
+        if (!this.props.notAuthorized && notAuthorized && this.state.waitingForConfig.feature) {
+            this.setState({
+                waitingForConfig: {
+                    feature: null,
+                    redirect: null
+                } });
+        }
+        if (this.state.waitingForConfig.feature && configOggetti[this.state.waitingForConfig.feature]) {
+            if (this.state.waitingForConfig.type === 'grid') {
+                this.props.setGridType('all_results');
+                this.props.toggleSiraControl('grid', true);
+                this.props.setNodeInUse(this.state.waitingForConfig.node);
+            }
+            this.setState({
                 waitingForConfig: {
                     feature: null,
                     redirect: null
                 }
-            };
-        },
-        componentWillMount() {
-            const {nodesLoaded, loading, category} = this.props;
-            if (this.props.params.profile) {
-                this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+            });
+            if (this.props?.params?.profile) {
+                this.context.router.history.push(this.state.waitingForConfig.redirect + '${this.props.params.profile}/');
+            } else {
+                this.context.router.history.push(this.state.waitingForConfig.redirect);
             }
-            // this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
-            if (!nodesLoaded && !loading && category && category.id) {
-                this.loadMetadata({category: category});
-            }
-        },
-        componentDidMount() {
-            document.body.className = "body_dataset";
-        },
-        componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
-            if (!loading && this.props.map && this.props.map !== map) {
-                if (this.props.params.profile) {
-                    this.context.router.push('/map/${this.props.params.profile}/');
-                }else {
-                    this.context.router.push('/map/');
-                }
-                // this.context.router.push(`/${this.props.params.profile}`);
-            }
-            if (!this.props.notAuthorized && notAuthorized && this.state.waitingForConfig.feature) {
-                this.setState({
-                    waitingForConfig: {
-                        feature: null,
-                        redirect: null
-                    } });
-            }
-            if (this.state.waitingForConfig.feature && configOggetti[this.state.waitingForConfig.feature]) {
-                if (this.state.waitingForConfig.type === 'grid') {
-                    this.props.setGridType('all_results');
-                    this.props.toggleSiraControl('grid', true);
-                    this.props.setNodeInUse(this.state.waitingForConfig.node);
-                }
-                this.setState({
-                    waitingForConfig: {
-                        feature: null,
-                        redirect: null
-                    }
-                });
-                if (this.props.params.profile) {
-                    this.context.router.push(this.state.waitingForConfig.redirect + '${this.props.params.profile}/');
-                } else {
-                    this.context.router.push(this.state.waitingForConfig.redirect);
-                }
-            }
-        },
-    renderSerchBar() {
+        }
+    }
+
+    renderSerchBar = () => {
         return (
             <SiraSearchBar
                 containerClasses="col-lg-12 col-md-12 col-sm-12 col-xs-12 ricerca-home catalog-search-container dataset-search-container"
@@ -219,12 +225,14 @@ const Dataset = React.createClass({
                 onSearch={this.loadMetadata}
                 onReset={this.loadMetadata}
             />);
-    },
-    renderSpinner() {
+    };
+
+    renderSpinner = () => {
         return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
-    },
-    renderUnauthorized() {
-        return (<Modal show={true} bsSize="small" onHide={() => this.props.setActiveFeatureType(null)}>
+    };
+
+    renderUnauthorized = () => {
+        return (<Modal show bsSize="small" onHide={() => this.props.setActiveFeatureType(null)}>
             <Modal.Header className="dialog-error-header-side" closeButton>
                 <Modal.Title>Errore</Modal.Title>
             </Modal.Header>
@@ -235,8 +243,9 @@ const Dataset = React.createClass({
             </Modal.Footer>
         </Modal>
         );
-    },
-    renderResults() {
+    };
+
+    renderResults = () => {
         const {loading, objects, views} = this.props;
         const {showCategories} = this.state;
         const searchSwitch = this.props.nodes.length > 0 ? (
@@ -247,7 +256,7 @@ const Dataset = React.createClass({
             </div>) : (<noscript key="categoriesSearch"/>);
         const tocObjects = (
             <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
-                    { showCategories ?
+                { showCategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
@@ -256,21 +265,21 @@ const Dataset = React.createClass({
                             groups={this.props.nodes}
                             showInfoBox={this.showInfoBox}
                             addToMap={this.addToCart}
-                            />
+                        />
                     </DefaultGroup>) : (<DefaultNode
-                            expandFilterPanel={this.openFilterPanel}
-                            toggleSiraControl={this.searchAll}
-                            flat={true}
-                            showInfoBox={this.showInfoBox}
-                            addToMap={this.addToCart}
-                            />) }
-                </TOC>);
+                        expandFilterPanel={this.openFilterPanel}
+                        toggleSiraControl={this.searchAll}
+                        flat
+                        showInfoBox={this.showInfoBox}
+                        addToMap={this.addToCart}
+                    />) }
+            </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             node={v}
             onToggle={this.props.onToggle}
             addToMap={this.loadThematicView}
             showInfoBox={this.showInfoBox}
-            />)) : (<div/>);
+        />)) : (<div/>);
         const objEl = [searchSwitch, tocObjects];
         return (
             <Tabs
@@ -286,8 +295,9 @@ const Dataset = React.createClass({
                     title={`Viste Tematiche (${views ? views.length : 0})`}>
                     {loading ? this.renderSpinner() : (<div id="dataset-results-view"> {viste}</div>)}
                 </Tab>
-        </Tabs>);
-    },
+            </Tabs>);
+    };
+
     render() {
         const {category} = this.props;
         return (
@@ -300,22 +310,23 @@ const Dataset = React.createClass({
                         {this.props.notAuthorized && this.renderUnauthorized()}
                     </div>
                     <div className="dataset-footer-container">
-                    <Footer/>
+                        <Footer/>
                     </div>
                 </div>
                 <MetadataInfoBox panelStyle={{
-                        height: "500px",
-                        width: "650px",
-                        zIndex: 1000,
-                        left: "calc(50% - 250px)",
-                        top: -100,
-                        position: "fixed",
-                        marginBottom: "0px",
-                        boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
+                    height: "500px",
+                    width: "650px",
+                    zIndex: 1000,
+                    left: "calc(50% - 250px)",
+                    top: -100,
+                    position: "fixed",
+                    marginBottom: "0px",
+                    boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
                 <AddMapModal />
             </div>);
-    },
-    loadMetadata({text, category} = {}) {
+    }
+
+    loadMetadata = ({text, category} = {}) => {
         let params = {};
         const {id} = category || {};
         if (id !== 999) {
@@ -327,16 +338,18 @@ const Dataset = React.createClass({
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
         }
-    },
-    showInfoBox(node) {
+    };
+
+    showInfoBox = (node) => {
         this.props.loadMetadata(node);
         this.props.showInfoBox();
-    },
-    addToCart(node) {
+    };
+
+    addToCart = (node) => {
         if ( !node.featureType) {
             this.props.toggleAddMap(true);
             this.props.loadNodeMapRecords(node);
-        }else if (node.featureType) {
+        } else if (node.featureType) {
             const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
             if (!this.props.configOggetti[featureType]) {
                 this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, node.id, true, node);
@@ -346,8 +359,9 @@ const Dataset = React.createClass({
                 this.props.addLayersInCart(layers, node);
             }
         }
-    },
-    openFilterPanel(status, ftType) {
+    };
+
+    openFilterPanel = (status, ftType) => {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.setState({
@@ -362,15 +376,16 @@ const Dataset = React.createClass({
             if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
-            if (this.props.params.profile) {
-                this.context.router.push('/full/${this.props.params.profile}/');
+            if (this.props?.params?.profile) {
+                this.context.router.history.push('/full/${this.props.params.profile}/');
             } else {
-                this.context.router.push('/full/');
+                this.context.router.history.push('/full/');
             }
         }
         this.props.expandFilterPanel(status);
-    },
-    searchAll(node) {
+    };
+
+    searchAll = (node) => {
         const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.setState({
@@ -389,20 +404,22 @@ const Dataset = React.createClass({
             this.props.setGridType('all_results');
             this.props.toggleSiraControl('grid', true);
             this.props.setNodeInUse(node);
-            if (this.props.params.profile) {
-                this.context.router.push('/full/${this.props.params.profile}/');
+            if (this.props?.params?.profile) {
+                this.context.router.history.push('/full/${this.props.params.profile}/');
             } else {
-                this.context.router.push('/full/');
+                this.context.router.history.push('/full/');
             }
         }
-    },
-    loadThematicView({serviceUrl, params} = {}) {
+    };
+
+    loadThematicView = ({serviceUrl, params} = {}) => {
         this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
-    },
-    goToHome() {
-        this.context.router.push('/');
-    }
-});
+    };
+
+    goToHome = () => {
+        this.context.router.history.push('/');
+    };
+}
 
 module.exports = connect(datasetSelector, {
     getMetadataObjects,

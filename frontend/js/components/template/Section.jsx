@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -12,22 +13,22 @@ const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const {selectSection} = require('../../actions/card');
 
-const Section = React.createClass({
-    propTypes: {
-        eventKey: React.PropTypes.string,
-        activeSections: React.PropTypes.object,
-        selectSection: React.PropTypes.func,
-        header: React.PropTypes.string,
-        expanded: React.PropTypes.bool
-    },
-    getDefaultProps() {
-        return {
-            activeSections: {},
-            selectSection: () => {},
-            expanded: false
-        };
-    },
-    renderHeader() {
+class Section extends React.Component {
+    static propTypes = {
+        eventKey: PropTypes.string,
+        activeSections: PropTypes.object,
+        selectSection: PropTypes.func,
+        header: PropTypes.string,
+        expanded: PropTypes.bool
+    };
+
+    static defaultProps = {
+        activeSections: {},
+        selectSection: () => {},
+        expanded: false
+    };
+
+    renderHeader = () => {
         let isActive = this.isActive();
         return (
             <span className="sectionHader">
@@ -35,15 +36,17 @@ const Section = React.createClass({
                 <button onClick={this.props.selectSection.bind(null, this.props.eventKey, (isActive) ? false : true )} className="close"><Glyphicon glyph={(isActive) ? "glyphicon glyphicon-collapse-down" : "glyphicon glyphicon-expand"}/></button>
             </span>
         );
-    },
+    };
+
     render() {
         return (
             <Panel collapsible header={this.renderHeader()} expanded={this.isActive()}>
                 {this.props.children}
             </Panel>
         );
-    },
-    isActive() {
+    }
+
+    isActive = () => {
         let active = false;
         if (this.props.activeSections.hasOwnProperty(this.props.eventKey)) {
             active = this.props.activeSections[this.props.eventKey];
@@ -51,8 +54,8 @@ const Section = React.createClass({
             active = this.props.expanded;
         }
         return active;
-    }
-});
+    };
+}
 
 module.exports = connect((state) => {
     return {

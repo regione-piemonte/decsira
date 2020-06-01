@@ -40,17 +40,19 @@ const map = mapConfigHistory(require('../../MapStore2/web/client/reducers/map'))
 const layers = require('../reducers/siraLayers');
 const mapConfig = require('../reducers/SiraMapConfig');
 
-const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils');
+const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils').default;
 const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
 
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
 const {CHANGE_BROWSER_PROPERTIES} = require('../../MapStore2/web/client/actions/browser');
-const {persistStore, autoRehydrate} = require('redux-persist');
+// const {persistStore, autoRehydrate} = require('redux-persist');
 
 const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
 const SiraUtils = require('../utils/SiraUtils');
 
-module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins, storeOpts) => {
+module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins,
+    // storeOpts
+) => {
     const allReducers = combineReducers(plugins, {
         ...appReducers,
         browser: require('../../MapStore2/web/client/reducers/browser'),
@@ -78,19 +80,20 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         }
         if (action && ((action.type === 'FEATURETYPE_CONFIG_LOADED' && action.activate) || action.type === 'SET_ACTIVE_FEATURE_TYPE') && newState.siradec.configOggetti[action.featureType]) {
             const configOggetti = newState.siradec.configOggetti[action.featureType];
-        //     // Devi assegnare a queryform e grid i valori che hai in     siradec.configOggetti.featureType
+            //     // Devi assegnare a queryform e grid i valori che hai in     siradec.configOggetti.featureType
             const newGrid = assign({}, newState.grid, {featuregrid: configOggetti.featuregrid});
             newState = assign({}, newState, {queryform: configOggetti.queryform, grid: newGrid});
         }
         return newState;
     };
     let store;
-    if (storeOpts && storeOpts.persist) {
-        store = DebugUtils.createDebugStore(rootReducer, defaultState, [], autoRehydrate());
-        persistStore(store, storeOpts.persist, storeOpts.onPersist);
-    } else {
-        store = DebugUtils.createDebugStore(rootReducer, defaultState);
-    }
+    // TODO CHECK
+    // if (storeOpts && storeOpts.persist) {
+    //     store = DebugUtils.createDebugStore(rootReducer, defaultState, [], autoRehydrate());
+    //     persistStore(store, storeOpts.persist, storeOpts.onPersist);
+    // } else {
+    store = DebugUtils.createDebugStore(rootReducer, defaultState);
+    // }
     SecurityUtils.setStore(store);
     SiraUtils.setStore(store);
     return store;

@@ -6,22 +6,22 @@ const grid = (state) => state && state.grid;
 const featureGrid = (state) => state && state.siradec && state.siradec.configOggetti[state.siradec.activeFeatureType].featuregrid || {};
 
 const gridSelector = createSelector([grid, featureGrid],
-     (gridS, featureGridS) => ({
-    grid: assign({}, gridS, {featuregrid: featureGridS})
-}));
+    (gridS, featureGridS) => ({
+        grid: assign({}, gridS, {featuregrid: featureGridS})
+    }));
 
 const categorySelector = createSelector([
-        (state) => state.mosaic && state.mosaic.tiles || []
-    ], (servertiles) => {
-        const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
-            v.objectNumber += t.objectNumber;
-            v.tematicViewNumber += t.tematicViewNumber;
-            return v;
-        }, {objectNumber: 0, tematicViewNumber: 0});
-        return {
+    (state) => state.mosaic && state.mosaic.tiles || []
+], (servertiles) => {
+    const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
+        v.objectNumber += t.objectNumber;
+        v.tematicViewNumber += t.tematicViewNumber;
+        return v;
+    }, {objectNumber: 0, tematicViewNumber: 0});
+    return {
         tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}]
-        };
-    }
+    };
+}
 );
 const sortObjects = function(a, b) {
     if (a.title < b.title) {
@@ -60,28 +60,28 @@ const normalizeObjects = function(nodes) {
 };
 
 const tocSelector = createSelector([
-        (state) => state.siracatalog.nodes || [],
-        (state) => state.siracatalog.category,
-        (state) => state.siracatalog.subcat,
-        (state) => state.siracatalog,
-        (state) => state.siradec && state.siradec.configOggetti,
-        (state) => state.siradec && state.siradec.notAuthorized && state.siradec.notAuthorized.filter(f => f === state.siradec.activeFeatureType).length > 0,
-        (state) => state.userprofile,
-        (state) => state.siradec && state.siradec.activeFeatureType
-    ], ( nodes, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
-        views: normalizeViews(catalog.views || []),
-        nodes: normalizeCatalog(nodes),
-        objects: normalizeObjects(nodes),
-        nodesLoaded: catalog.nodes ? true : false,
-        category,
-        loading: catalog.loading,
-        configOggetti,
-        notAuthorized,
-        userprofile,
-        activeFeatureType,
-        subcat,
-        showcategories: catalog.showcategories
-    })
+    (state) => state.siracatalog.nodes || [],
+    (state) => state.siracatalog.category,
+    (state) => state.siracatalog.subcat,
+    (state) => state.siracatalog,
+    (state) => state.siradec && state.siradec.configOggetti,
+    (state) => state.siradec && state.siradec.notAuthorized && state.siradec.notAuthorized.filter(f => f === state.siradec.activeFeatureType).length > 0,
+    (state) => state.userprofile,
+    (state) => state.siradec && state.siradec.activeFeatureType
+], ( nodes, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
+    views: normalizeViews(catalog.views || []),
+    nodes: normalizeCatalog(nodes),
+    objects: normalizeObjects(nodes),
+    nodesLoaded: catalog.nodes ? true : false,
+    category,
+    loading: catalog.loading,
+    configOggetti,
+    notAuthorized,
+    userprofile,
+    activeFeatureType,
+    subcat,
+    showcategories: catalog.showcategories
+})
 );
 
 module.exports = {

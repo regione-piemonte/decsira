@@ -8,7 +8,7 @@
 
 const assign = require('object-assign');
 const axios = require('axios');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 
 const LOAD_FEATURE_INFO = 'LOAD_FEATURE_INFO';
 const ERROR_FEATURE_INFO = 'ERROR_FEATURE_INFO';
@@ -255,8 +255,8 @@ function loadGetFeatureInfoConfig(layerId, featureType, params) {
 function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter) {
     return (dispatch) => {
         return axios.post(topologyConfig.wfsUrl, filter, {
-          timeout: 60000,
-          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+            timeout: 60000,
+            headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             let infoTopologyResponse = response.data;
             const columns = (modelConfig.columns || []).map((column) => {
@@ -271,10 +271,10 @@ function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter
                 "totalFeatures": features.length,
                 "features": [],
                 "crs": {
-                   "type": "name",
-                   "properties": {
-                      "name": "urn:ogc:def:crs:EPSG::4326"
-                   }
+                    "type": "name",
+                    "properties": {
+                        "name": "urn:ogc:def:crs:EPSG::4326"
+                    }
                 }
             };
 
@@ -322,7 +322,7 @@ function loadInfoTopologyConfig(layerId, topologyConfig, modelConfig, filter, in
         dispatch(loadFeatureInfo(infoParams.reqId, infoParams.response, infoParams.requestParams, infoParams.lMetaData));
         dispatch(loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter));
 
-        /*return axios.get(topologyConfig.topologyModelURL).then((response) => {
+        /* return axios.get(topologyConfig.topologyModelURL).then((response) => {
             let modelConfig = response.data;
             if (typeof modelConfig !== "object") {
                 try {

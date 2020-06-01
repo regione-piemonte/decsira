@@ -36,8 +36,11 @@ const startApp = () => {
 
     const StandardRouter = connect((state) => ({
         locale: state.locale || {},
-        pages
-    }))(require('../../MapStore2/web/client/components/app/StandardRouter'));
+        pages,
+        themeCfg: {
+            theme: "sira"
+        }
+    }))(require('../../MapStore2/web/client/components/app/StandardRouter').default);
 
     const appStore = require('../stores/store').bind(null, initialState, appReducers);
     const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
@@ -66,6 +69,6 @@ const startApp = () => {
 if (!global.Intl ) {
     // Ensure Intl is loaded, then call the given callback
     LocaleUtils.ensureIntl(startApp);
-}else {
+} else {
     startApp();
 }

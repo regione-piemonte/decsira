@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -9,21 +10,19 @@
 const React = require('react');
 const {Modal, Button} = require('react-bootstrap');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
-const LoginPanel = React.createClass({
 
-    propTypes: {
-        showLoginPanel: React.PropTypes.bool,
-        onClosePanel: React.PropTypes.func,
-        onConfirm: React.PropTypes.func
-    },
+class LoginPanel extends React.Component {
+    static propTypes = {
+        showLoginPanel: PropTypes.bool,
+        onClosePanel: PropTypes.func,
+        onConfirm: PropTypes.func
+    };
 
-    getDefaultProps() {
-        return {
-            showLoginPanel: false,
-            onClosePanel: () => {},
-            onConfirm: () => {}
-        };
-    },
+    static defaultProps = {
+        showLoginPanel: false,
+        onClosePanel: () => {},
+        onConfirm: () => {}
+    };
 
     render() {
         return (
@@ -43,7 +42,6 @@ const LoginPanel = React.createClass({
             </div>
         );
     }
-
-});
+}
 
 module.exports = LoginPanel;

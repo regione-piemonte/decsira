@@ -18,25 +18,25 @@ const initialState = {
 
 function controls(state = initialState, action) {
     switch (action.type) {
-        case TOGGLE_SIRA_CONTROL: {
-            return assign({}, state, {
-                [action.control]: !state[action.control]
-            });
-        }
-        case SET_SIRA_CONTROL: {
-            return assign({}, state, {
-                [action.control]: action.status
-            });
-        }
-        case CREATE_GRID_DATA_SOURCE:
-        case GRID_MODEL_LOADED:
-        case SHOW_LOADING: {
-            return assign({}, state, {
-                grid: true
-            });
-        }
-        default:
-            return state;
+    case TOGGLE_SIRA_CONTROL: {
+        return assign({}, state, {
+            [action.control]: !state[action.control]
+        });
+    }
+    case SET_SIRA_CONTROL: {
+        return assign({}, state, {
+            [action.control]: action.status
+        });
+    }
+    case CREATE_GRID_DATA_SOURCE:
+    case GRID_MODEL_LOADED:
+    case SHOW_LOADING: {
+        return assign({}, state, {
+            grid: true
+        });
+    }
+    default:
+        return state;
     }
 }
 

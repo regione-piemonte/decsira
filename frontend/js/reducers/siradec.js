@@ -28,7 +28,7 @@ const assign = require('object-assign');
 
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 
 const initialState = {
     waitingForConfig: null,
@@ -47,125 +47,123 @@ const initialState = {
 
 function siradec(state = initialState, action) {
     switch (action.type) {
-        case USER_NOT_AUTHORIZED: {
-            return assign({}, state, {notAuthorized: [...state.notAuthorized, action.feature], activeFeatureType: action.feature});
-        }
-        case WAITING_FOR_CONFIG: {
-            return assign({}, state, {waitingForConfig: action.wfc});
-        }
-        case INLINE_MAP_CONFIG: {
-            return assign({}, state, {inlineMapConfig: action.mapconfig});
-        }
-        case SET_ACTIVE_FEATURE_TYPE: {
-            return assign({}, state, {activeFeatureType: action.featureType});
-        }
-        case SET_TREE_FEATURE_TYPE: {
-            return assign({}, state, {treeFeatureType: action.featureType});
-        }
-        case FEATURETYPE_CONFIG_LOADING: {
-            return assign({}, state, {fTypeConfigLoading: true});
-        }
-        case FEATURETYPE_CONFIG_LOADED: {
-            let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
+    case USER_NOT_AUTHORIZED: {
+        return assign({}, state, {notAuthorized: [...state.notAuthorized, action.feature], activeFeatureType: action.feature});
+    }
+    case WAITING_FOR_CONFIG: {
+        return assign({}, state, {waitingForConfig: action.wfc});
+    }
+    case INLINE_MAP_CONFIG: {
+        return assign({}, state, {inlineMapConfig: action.mapconfig});
+    }
+    case SET_ACTIVE_FEATURE_TYPE: {
+        return assign({}, state, {activeFeatureType: action.featureType});
+    }
+    case SET_TREE_FEATURE_TYPE: {
+        return assign({}, state, {treeFeatureType: action.featureType});
+    }
+    case FEATURETYPE_CONFIG_LOADING: {
+        return assign({}, state, {fTypeConfigLoading: true});
+    }
+    case FEATURETYPE_CONFIG_LOADED: {
+        let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
 
-            // Sorting the attributes by the given index in configuration
-            attributes.sort((attA, attB) => {
-                if (attA.index && attB.index) {
-                    return attA.index - attB.index;
-                }
-            });
+        // Sorting the attributes by the given index in configuration
+        attributes.sort((attA, attB) => {
+            return attA.index && attB.index && attA.index - attB.index;
+        });
 
-            const queryform = assign({}, state.queryform, {geometryName: action.geometryName, spatialField: assign({}, state.queryform.spatialField, {attribute: action.geometryName})});
+        const queryform = assign({}, state.queryform, {geometryName: action.geometryName, spatialField: assign({}, state.queryform.spatialField, {attribute: action.geometryName})});
 
-            let newConf = assign({}, state.configOggetti[action.featureType], {
-                attributes: attributes,
-                featureTypeName: action.ftName,
-                featureTypeNameLabel: action.ftNameLabel,
-                nameSpaces: action.nameSpaces,
-                layer: action.layer,
-                exporter: action.exporter,
-                geometryType: action.geometryType || 'Point',
-                queryform,
-                authorized: action.authorized
-                });
+        let newConf = assign({}, state.configOggetti[action.featureType], {
+            attributes: attributes,
+            featureTypeName: action.ftName,
+            featureTypeNameLabel: action.ftNameLabel,
+            nameSpaces: action.nameSpaces,
+            layer: action.layer,
+            exporter: action.exporter,
+            geometryType: action.geometryType || 'Point',
+            queryform,
+            authorized: action.authorized
+        });
 
-            if (newConf.featuregrid) {
-                const featuregrid = assign({}, newConf.featuregrid, {geometryType: action.geometryType, grid: assign({}, newConf.featuregrid.grid, {geometryType: action.geometryType})});
-                newConf = assign({}, newConf, {featuregrid: featuregrid});
-            }
-            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
-            if (action.activate) {
-                return assign({}, state, {
-                                configOggetti: configOggetti,
-                                activeFeatureType: action.featureType,
-                                fTypeConfigLoading: false
-                            });
-            }
-            return assign({}, state, {
-                            configOggetti: configOggetti,
-                            fTypeConfigLoading: false
-                        });
+        if (newConf.featuregrid) {
+            const featuregrid = assign({}, newConf.featuregrid, {geometryType: action.geometryType, grid: assign({}, newConf.featuregrid.grid, {geometryType: action.geometryType})});
+            newConf = assign({}, newConf, {featuregrid: featuregrid});
         }
-        case QUERYFORM_CONFIG_LOADED: {
+        let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
+        if (action.activate) {
             return assign({}, state, {
-                queryform: action.config
+                configOggetti: configOggetti,
+                activeFeatureType: action.featureType,
+                fTypeConfigLoading: false
             });
         }
-        case FEATUREGRID_CONFIG_LOADED: {
-            let featureGrid = action.config;
-            let idFieldName;
-            if (featureGrid.grid.columns) {
-                featureGrid.grid.columns.forEach((column) => {
-                    let fieldName = !column.field ? uuid.v1() : column.field;
-                    idFieldName = column.id === true ? fieldName : idFieldName;
-                    column.field = fieldName;
-                });
-            }
-            featureGrid.idFieldName = idFieldName;
-            let newConf = assign({}, state.configOggetti[action.featureType], {featuregrid: featureGrid});
-            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
-            return assign({}, state, {
-                configOggetti: configOggetti
+        return assign({}, state, {
+            configOggetti: configOggetti,
+            fTypeConfigLoading: false
+        });
+    }
+    case QUERYFORM_CONFIG_LOADED: {
+        return assign({}, state, {
+            queryform: action.config
+        });
+    }
+    case FEATUREGRID_CONFIG_LOADED: {
+        let featureGrid = action.config;
+        let idFieldName;
+        if (featureGrid.grid.columns) {
+            featureGrid.grid.columns.forEach((column) => {
+                let fieldName = !column.field ? uuid.v1() : column.field;
+                idFieldName = column.id === true ? fieldName : idFieldName;
+                column.field = fieldName;
             });
         }
-        case FEATUREINFO_CONFIG_LOADED: {
-            let newConf = assign({}, state.configOggetti[action.featureType], {featureinfo: action.config});
-            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
-            return assign({}, state, {
-                configOggetti: configOggetti
-            });
-        }
-        case CARD_CONFIG_LOADED: {
-            let newConf = assign({}, state.configOggetti[action.featureType], {card: action.config});
-            let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
-            return assign({}, state, {
-                configOggetti: configOggetti
-            });
-        }
-        case TOPOLOGY_CONFIG_LOADED: {
-            return assign({}, state, {
-                topology: action.config
-            });
-        }
-        case EXPAND_FILTER_PANEL: {
-            return assign({}, state, {
-                filterPanelExpanded: action.expand
-            });
-        }
-        case QUERYFORM_CONFIG_LOAD_ERROR: {
-            return assign({}, state, {
-                loadingQueryFormConfigError: action.error,
-                fTypeConfigLoading: false});
-        }
-        case QUERYFORM_HIDE_ERROR: {
-            return assign({}, state, {
-                    loadingQueryFormConfigError: null,
-                    filterPanelExpanded: false,
-                    authorized: false
-                });
-        }
-        default:
-            return state;
+        featureGrid.idFieldName = idFieldName;
+        let newConf = assign({}, state.configOggetti[action.featureType], {featuregrid: featureGrid});
+        let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
+        return assign({}, state, {
+            configOggetti: configOggetti
+        });
+    }
+    case FEATUREINFO_CONFIG_LOADED: {
+        let newConf = assign({}, state.configOggetti[action.featureType], {featureinfo: action.config});
+        let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
+        return assign({}, state, {
+            configOggetti: configOggetti
+        });
+    }
+    case CARD_CONFIG_LOADED: {
+        let newConf = assign({}, state.configOggetti[action.featureType], {card: action.config});
+        let configOggetti = assign({}, state.configOggetti, {[action.featureType]: newConf} );
+        return assign({}, state, {
+            configOggetti: configOggetti
+        });
+    }
+    case TOPOLOGY_CONFIG_LOADED: {
+        return assign({}, state, {
+            topology: action.config
+        });
+    }
+    case EXPAND_FILTER_PANEL: {
+        return assign({}, state, {
+            filterPanelExpanded: action.expand
+        });
+    }
+    case QUERYFORM_CONFIG_LOAD_ERROR: {
+        return assign({}, state, {
+            loadingQueryFormConfigError: action.error,
+            fTypeConfigLoading: false});
+    }
+    case QUERYFORM_HIDE_ERROR: {
+        return assign({}, state, {
+            loadingQueryFormConfigError: null,
+            filterPanelExpanded: false,
+            authorized: false
+        });
+    }
+    default:
+        return state;
     }
 }
 

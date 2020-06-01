@@ -15,19 +15,19 @@ function featuregrid(state = {
     selectAll: false
 }, action) {
     switch (action.type) {
-        case CHANGE_TOPOLOGY_MAPINFO_STATE:
-        case CHANGE_MAPINFO_STATE: {
-            return assign({}, state, {features: [], select: []});
-        }
-        case SELECT_FEATURES:
-            return assign({}, state, {select: action.features});
-        case SET_FEATURES:
-        case CONFIGURE_INFO_TOPOLOGY:
-            return assign({}, state, {features: action.features || action.infoTopologyResponse.features});
-        case SELECT_ALL:
-            return assign({}, state, {selectAll: (action.sldBody && action.featureTypeName) ? true : false});
-        default:
-            return state;
+    case CHANGE_TOPOLOGY_MAPINFO_STATE:
+    case CHANGE_MAPINFO_STATE: {
+        return assign({}, state, {features: [], select: []});
+    }
+    case SELECT_FEATURES:
+        return assign({}, state, {select: action.features});
+    case SET_FEATURES:
+    case CONFIGURE_INFO_TOPOLOGY:
+        return assign({}, state, {features: action.features || action.infoTopologyResponse.features});
+    case SELECT_ALL:
+        return assign({}, state, {selectAll: (action.sldBody && action.featureTypeName) ? true : false});
+    default:
+        return state;
     }
 }
 

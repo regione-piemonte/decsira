@@ -12,7 +12,7 @@ const expect = require('expect');
 const store = require('../../../stores/store')(undefined, {
     siradec: require('../../../reducers/siradec'),
     cardtemplate: require('../../../reducers/card')
-    }, {} );
+}, {} );
 const Section = require('../Section');
 
 describe('Section tests', () => {
@@ -27,12 +27,13 @@ describe('Section tests', () => {
         setTimeout(done);
     });
 
+    // TODO
     it('Test Section rendering default', () => {
         let comp = ReactDOM.render(<Section eventKey="1" store={store}/>, document.getElementById("container"));
         expect(comp).toExist();
     });
     it('Test Section rendering expanded', () => {
-        let comp = ReactDOM.render(<Section eventKey="1" store={store} expanded={true} header="TEST"/>, document.getElementById("container"));
+        let comp = ReactDOM.render(<Section eventKey="1" store={store} expanded header="TEST"/>, document.getElementById("container"));
         expect(comp).toExist();
     });
 });

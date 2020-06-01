@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -10,30 +11,30 @@ const React = require('react');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 
-const {loadCardTemplate/*, setSiraImpiantoModel*/} = require('../../actions/card');
+const {loadCardTemplate/* , setSiraImpiantoModel*/} = require('../../actions/card');
 
-const AuthorizedObject = React.createClass({
-    propTypes: {
-        list: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array
+class AuthorizedObject extends React.Component {
+    static propTypes = {
+        list: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array
         ]),
-        listTitle: React.PropTypes.string,
-        detailsTemplateConfigURL: React.PropTypes.string,
-        actions: React.PropTypes.shape({
-            drillDown: React.PropTypes.func/*,
+        listTitle: PropTypes.string,
+        detailsTemplateConfigURL: PropTypes.string,
+        actions: PropTypes.shape({
+            drillDown: PropTypes.func/* ,
             setSiraImpiantoModel: React.PropTypes.func*/
         })
-    },
-    getDefaultProps() {
-        return {
-            list: [],
-            listTitle: "",
-            actions: {
-                drillDown: () => {}
-            }
-        };
-    },
+    };
+
+    static defaultProps = {
+        list: [],
+        listTitle: "",
+        actions: {
+            drillDown: () => {}
+        }
+    };
+
     render() {
         return (
             <div>
@@ -50,12 +51,13 @@ const AuthorizedObject = React.createClass({
                 </ul>
             </div>
         );
-    },
-    drillDown() {
+    }
+
+    drillDown = () => {
         // this.props.actions.setSiraImpiantoModel(element);
         this.props.actions.drillDown(this.props.detailsTemplateConfigURL);
-    }
-});
+    };
+}
 
 module.exports = connect(null, dispatch => {
     return {

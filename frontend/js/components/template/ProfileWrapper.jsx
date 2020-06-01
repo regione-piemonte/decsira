@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,18 +9,18 @@
 
 const React = require('react');
 
-const ProfileWrapper = React.createClass({
-    propTypes: {
-        condition: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            condition: () => { return true; }
-        };
-    },
+class ProfileWrapper extends React.Component {
+    static propTypes = {
+        condition: PropTypes.func
+    };
+
+    static defaultProps = {
+        condition: () => { return true; }
+    };
+
     render() {
         return this.props.condition() ? <div>{this.props.children}</div> : <div/>;
     }
-});
+}
 
 module.exports = ProfileWrapper;

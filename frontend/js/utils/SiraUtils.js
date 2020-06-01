@@ -13,7 +13,7 @@ module.exports = {
         } else {
             localStorage.setItem("sira.config.map", JSON.stringify({zoom, center}));
             window.open(`map.html?${currentUrl.hash}`, '_blank');
-           // window.location.href = `map.html?${query}${currentUrl.hash}`;
+            // window.location.href = `map.html?${query}${currentUrl.hash}`;
         }
     },
 
@@ -46,8 +46,8 @@ module.exports = {
         for (let key in config) {
             if (config.hasOwnProperty(key) && config[key].featureTypeName === ftype) return config[key];
         }
+        return null;
     },
-
 
     getConfigOggetti: function() {
         return this.store.getState().siradec.configOggetti;

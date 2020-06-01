@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -63,114 +64,115 @@ const {
     loadGridModelWithPagination
 } = require('../actions/grid');
 
-const SiraQueryPanel = React.createClass({
-    propTypes: {
+class SiraQueryPanel extends React.Component {
+    static propTypes = {
 
         // Sira Query Panel props
-        removeButtonIcon: React.PropTypes.string,
-        filterPanelExpanded: React.PropTypes.bool,
-        loadingQueryFormConfigError: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.object
+        removeButtonIcon: PropTypes.string,
+        filterPanelExpanded: PropTypes.bool,
+        loadingQueryFormConfigError: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object
         ]),
-        header: React.PropTypes.string,
-        datasetHeader: React.PropTypes.string,
-        featureTypeName: React.PropTypes.string,
-        featureTypeNameLabel: React.PropTypes.string,
-        siraActions: React.PropTypes.object,
+        header: PropTypes.string,
+        datasetHeader: PropTypes.string,
+        featureTypeName: PropTypes.string,
+        featureTypeNameLabel: PropTypes.string,
+        siraActions: PropTypes.object,
 
         // QueryBuilder props
-        params: React.PropTypes.object,
-        featureTypeConfigUrl: React.PropTypes.string,
-        useMapProjection: React.PropTypes.bool,
-        attributes: React.PropTypes.array,
-        filterFields: React.PropTypes.array,
-        groupLevels: React.PropTypes.number,
-        groupFields: React.PropTypes.array,
-        spatialField: React.PropTypes.object,
-        showDetailsPanel: React.PropTypes.bool,
-        toolbarEnabled: React.PropTypes.bool,
-        searchUrl: React.PropTypes.string,
-        showGeneratedFilter: React.PropTypes.oneOfType([
-            React.PropTypes.bool,
-            React.PropTypes.string
+        params: PropTypes.object,
+        featureTypeConfigUrl: PropTypes.string,
+        useMapProjection: PropTypes.bool,
+        attributes: PropTypes.array,
+        filterFields: PropTypes.array,
+        groupLevels: PropTypes.number,
+        groupFields: PropTypes.array,
+        spatialField: PropTypes.object,
+        showDetailsPanel: PropTypes.bool,
+        toolbarEnabled: PropTypes.bool,
+        searchUrl: PropTypes.string,
+        showGeneratedFilter: PropTypes.oneOfType([
+            PropTypes.bool,
+            PropTypes.string
         ]),
-        attributePanelExpanded: React.PropTypes.bool,
-        spatialPanelExpanded: React.PropTypes.bool,
-        queryFormActions: React.PropTypes.object,
-        pagination: React.PropTypes.object,
-        sortOptions: React.PropTypes.object,
-        hits: React.PropTypes.bool
-    },
-    contextTypes: {
-        messages: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
+        attributePanelExpanded: PropTypes.bool,
+        spatialPanelExpanded: PropTypes.bool,
+        queryFormActions: PropTypes.object,
+        pagination: PropTypes.object,
+        sortOptions: PropTypes.object,
+        hits: PropTypes.bool
+    };
 
-            // Sira Query Panel default props
-            removeButtonIcon: "glyphicon glyphicon-remove",
-            filterPanelExpanded: true,
-            loadingQueryFormConfigError: null,
-            header: "queryform.form.header",
-            datasetHeader: "queryform.form.dataset_header",
-            featureTypeName: null,
-            featureTypeNameLabel: null,
-            siraActions: {
-                onExpandFilterPanel: () => {}
+    static contextTypes = {
+        messages: PropTypes.object
+    };
+
+    static defaultProps = {
+
+        // Sira Query Panel default props
+        removeButtonIcon: "glyphicon glyphicon-remove",
+        filterPanelExpanded: true,
+        loadingQueryFormConfigError: null,
+        header: "queryform.form.header",
+        datasetHeader: "queryform.form.dataset_header",
+        featureTypeName: null,
+        featureTypeNameLabel: null,
+        siraActions: {
+            onExpandFilterPanel: () => {}
+        },
+
+        // QueryBuilder default props
+        params: {},
+        featureTypeConfigUrl: null,
+        useMapProjection: true,
+        attributes: [],
+        groupLevels: 1,
+        groupFields: [],
+        filterFields: [],
+        spatialField: {},
+        attributePanelExpanded: true,
+        spatialPanelExpanded: true,
+        showDetailsPanel: false,
+        toolbarEnabled: true,
+        searchUrl: "",
+        showGeneratedFilter: false,
+        pagination: null,
+        sortOptions: null,
+        hits: false,
+        queryFormActions: {
+            attributeFilterActions: {
+                onAddGroupField: () => {},
+                onAddFilterField: () => {},
+                onRemoveFilterField: () => {},
+                onUpdateFilterField: () => {},
+                onUpdateExceptionField: () => {},
+                onUpdateLogicCombo: () => {},
+                onRemoveGroupField: () => {},
+                onChangeCascadingValue: () => {},
+                onExpandAttributeFilterPanel: () => {},
+                onLoadFeatureTypeConfig: () => {}
             },
-
-            // QueryBuilder default props
-            params: {},
-            featureTypeConfigUrl: null,
-            useMapProjection: true,
-            attributes: [],
-            groupLevels: 1,
-            groupFields: [],
-            filterFields: [],
-            spatialField: {},
-            attributePanelExpanded: true,
-            spatialPanelExpanded: true,
-            showDetailsPanel: false,
-            toolbarEnabled: true,
-            searchUrl: "",
-            showGeneratedFilter: false,
-            pagination: null,
-            sortOptions: null,
-            hits: false,
-            queryFormActions: {
-                attributeFilterActions: {
-                    onAddGroupField: () => {},
-                    onAddFilterField: () => {},
-                    onRemoveFilterField: () => {},
-                    onUpdateFilterField: () => {},
-                    onUpdateExceptionField: () => {},
-                    onUpdateLogicCombo: () => {},
-                    onRemoveGroupField: () => {},
-                    onChangeCascadingValue: () => {},
-                    onExpandAttributeFilterPanel: () => {},
-                    onLoadFeatureTypeConfig: () => {}
-                },
-                spatialFilterActions: {
-                    onExpandSpatialFilterPanel: () => {},
-                    onSelectSpatiaslMethod: () => {},
-                    onSelectSpatialOperation: () => {},
-                    onChangeDrawingStatus: () => {},
-                    onRemoveSpatialSelection: () => {},
-                    onShowSpatialSelectionDetails: () => {},
-                    onEndDrawing: () => {},
-                    onChangeDwithinValue: () => {}
-                },
-                queryToolbarActions: {
-                    onQuery: () => {},
-                    onReset: () => {},
-                    onQueryPagination: () => {},
-                    onChangeDrawingStatus: () => {}
-                }
+            spatialFilterActions: {
+                onExpandSpatialFilterPanel: () => {},
+                onSelectSpatiaslMethod: () => {},
+                onSelectSpatialOperation: () => {},
+                onChangeDrawingStatus: () => {},
+                onRemoveSpatialSelection: () => {},
+                onShowSpatialSelectionDetails: () => {},
+                onEndDrawing: () => {},
+                onChangeDwithinValue: () => {}
+            },
+            queryToolbarActions: {
+                onQuery: () => {},
+                onReset: () => {},
+                onQueryPagination: () => {},
+                onChangeDrawingStatus: () => {}
             }
-        };
-    },
-    renderHeader() {
+        }
+    };
+
+    renderHeader = () => {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
 
         const heading = this.props.filterPanelExpanded ? (
@@ -194,8 +196,9 @@ const SiraQueryPanel = React.createClass({
                 {heading}
             </div>
         );
-    },
-    renderDatasetHeader() {
+    };
+
+    renderDatasetHeader = () => {
         const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
         return (
             <div className="dhContainer">
@@ -203,8 +206,9 @@ const SiraQueryPanel = React.createClass({
                 <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
             </div>
         );
-    },
-    renderQueryPanel() {
+    };
+
+    renderQueryPanel = () => {
         return (
             <Draggable start={{x: 760, y: 55}} handle=".handle_querypanel,.handle_querypanel *">
                 <Panel className="querypanel-container widthclass" collapsible expanded={this.props.filterPanelExpanded} header={this.renderHeader()} bsStyle="primary">
@@ -229,12 +233,13 @@ const SiraQueryPanel = React.createClass({
                         attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
                         spatialFilterActions={this.props.queryFormActions.spatialFilterActions}
                         queryToolbarActions={assign({}, this.props.queryFormActions.queryToolbarActions, {onQuery: this.onQuery})}
-                        />
+                    />
                 </Panel>
             </Draggable>
         );
-    },
-    renderLoadConfigException(loadingError, msg) {
+    };
+
+    renderLoadConfigException = (loadingError, msg) => {
         let exception;
         if (isObject(loadingError)) {
             exception = loadingError.status +
@@ -256,7 +261,8 @@ const SiraQueryPanel = React.createClass({
                 </Modal.Footer>
             </Modal>
         );
-    },
+    };
+
     render() {
         let loadingError = this.props.loadingQueryFormConfigError;
         if (loadingError) {
@@ -278,18 +284,19 @@ const SiraQueryPanel = React.createClass({
                     <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                 </div>
             );
-    },
-    onQuery: function(url, filter, params) {
+    }
+
+    onQuery = (url, filter, params) => {
         this.props.siraActions.onExpandFilterPanel(false);
         if (this.props.pagination && (this.props.pagination.startIndex || this.props.pagination.startIndex === 0)) {
             let newFilter = filter.replace("<wfs:GetFeature", "<wfs:GetPropertyValue valueReference='" + this.props.attributes[0].attribute + "' ");
             newFilter = newFilter.replace("</wfs:GetFeature", "</wfs:GetPropertyValue");
             this.props.queryFormActions.queryToolbarActions.onQueryPagination(url, newFilter, params, this.props.pagination);
-        }else {
+        } else {
             this.props.queryFormActions.queryToolbarActions.onQuery(url, filter, params);
         }
-    }
-});
+    };
+}
 
 module.exports = connect((state) => {
     return {

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -16,67 +17,68 @@ const GridCellLink = require('../GridCellLink');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const assign = require('object-assign');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 
-require("ag-grid/dist/styles/ag-grid.css");
-require("ag-grid/dist/styles/theme-blue.css");
+require("ag-grid-community/dist/styles/ag-grid.css");
+// require("ag-grid-community/dist/styles/theme-blue.css"); //TODO
 
 const {loadCardTemplate} = require('../../actions/card');
 const {loadFeatureTypeConfig, setWaitingForConfig} = require('../../actions/siradec');
 
-const SiraTable = React.createClass({
-    propTypes: {
-        id: React.PropTypes.string,
-        card: React.PropTypes.object,
-        style: React.PropTypes.object,
-        columns: React.PropTypes.array,
-        dependsOn: React.PropTypes.object,
-        detailsTemplateConfigURL: React.PropTypes.string,
-        configOggetti: React.PropTypes.object,
-        authParams: React.PropTypes.object,
-        features: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.func,
-            React.PropTypes.object
+class SiraTable extends React.Component {
+    static propTypes = {
+        id: PropTypes.string,
+        card: PropTypes.object,
+        style: PropTypes.object,
+        columns: PropTypes.array,
+        dependsOn: PropTypes.object,
+        detailsTemplateConfigURL: PropTypes.string,
+        configOggetti: PropTypes.object,
+        authParams: PropTypes.object,
+        features: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.func,
+            PropTypes.object
         ]),
-        selectedRow: React.PropTypes.string,
-        wfsVersion: React.PropTypes.string,
-        profile: React.PropTypes.string,
-        rowSelection: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.bool
+        selectedRow: PropTypes.string,
+        wfsVersion: PropTypes.string,
+        profile: PropTypes.string,
+        rowSelection: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.bool
         ]),
-        waitingForConfig: React.PropTypes.object,
-        selectRows: React.PropTypes.func,
-        onDetail: React.PropTypes.func,
-        loadFeatureTypeConfig: React.PropTypes.func,
-        setWaitingForConfig: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            id: "SiraTable",
-            style: {height: "200px", width: "100%"},
-            features: [],
-            wfsVersion: null,
-            card: null,
-            dependsOn: null,
-            columns: [],
-            profile: null,
-            rowSelection: "single",
-            selectedRow: null,
-            waitingForConfig: null,
-            selectRows: () => {},
-            onDetail: () => {},
-            setWaitingForConfig: () => {}
-        };
-    },
+        waitingForConfig: PropTypes.object,
+        selectRows: PropTypes.func,
+        onDetail: PropTypes.func,
+        loadFeatureTypeConfig: PropTypes.func,
+        setWaitingForConfig: PropTypes.func
+    };
+
+    static defaultProps = {
+        id: "SiraTable",
+        style: {height: "200px", width: "100%"},
+        features: [],
+        wfsVersion: null,
+        card: null,
+        dependsOn: null,
+        columns: [],
+        profile: null,
+        rowSelection: "single",
+        selectedRow: null,
+        waitingForConfig: null,
+        selectRows: () => {},
+        onDetail: () => {},
+        setWaitingForConfig: () => {}
+    };
+
     componentWillMount() {
         if (this.props.waitingForConfig && this.props.waitingForConfig.params) {
             const params = this.props.waitingForConfig.params;
             this.props.setWaitingForConfig(null);
             this.goToDetail(params);
         }
-    },
+    }
+
     // componentWillReceiveProps(nextProps) {
     //    if (this.props.waitingForConfig && nextProps.configOggetti && nextProps.configOggetti[this.waitingForConfig.featureType] && nextProps.configOggetti[this.props.waitingForConfig.featureType].card) {
     //        const params = this.props.waitingForConfig.params;
@@ -93,10 +95,12 @@ const SiraTable = React.createClass({
                 }
             });
         }
-    },
-    onGridReady(params) {
+    }
+
+    onGridReady = (params) => {
         this.api = params.api;
-    },
+    };
+
     render() {
         let features;
         let columns = this.props.columns.map((column) => {
@@ -111,6 +115,7 @@ const SiraTable = React.createClass({
                     column.linkToDetail ? {onCellClicked: this.goToDetail, cellRenderer: reactCellRendererFactory(GridCellLink)} : {}
                 );
             }
+            return null;
         }, this).filter((c) => c);
 
         if (typeof this.props.features === 'function') {
@@ -142,7 +147,7 @@ const SiraTable = React.createClass({
                 <AgGridReact
                     rowData={features}
                     onSelectionChanged={this.selectRows}
-                    enableColResize={true}
+                    enableColResize
                     columnDefs={
                         this.props.rowSelection === "single" ? [{
                             checkboxSelection: true,
@@ -152,10 +157,11 @@ const SiraTable = React.createClass({
                     }
                     onGridReady={this.onGridReady}
                     {...this.props}
-                    />
+                />
             </div>);
-    },
-    goToDetail(params, props) {
+    }
+
+    goToDetail = (params, props) => {
         let detailProps = props || this.props;
         const id = params.data.link;
         const cqlFilter = params.colDef.linkToDetail.cqlFilter;
@@ -170,7 +176,7 @@ const SiraTable = React.createClass({
                     url += `&${param}=${detailsConfig.card.service.params[param]}`;
                 });
                 url = url += "&cql_filter=" + cqlFilter;
-            }else if (id) {
+            } else if (id) {
                 url = detailsConfig.card.service.url;
                 Object.keys(detailsConfig.card.service.params).forEach((param) => {
                     url += `&${param}=${detailsConfig.card.service.params[param]}`;
@@ -187,14 +193,15 @@ const SiraTable = React.createClass({
             detailProps.loadFeatureTypeConfig(null, {authkey: detailProps.authParams.authkey ? detailProps.authParams.authkey : ''}, featureType, false);
         }
 
-    },
-    selectRows(params) {
+    };
+
+    selectRows = (params) => {
         // this.props.selectRows(this.props.id, (params.selectedRows[0]) ? params.selectedRows[0].id : null);
         if (params.selectedRows[0]) {
             this.props.selectRows(this.props.id, params.selectedRows[0].id || params.selectedRows[0][this.idFieldName]);
         }
-    }
-});
+    };
+}
 
 module.exports = connect((state) => {
     return {

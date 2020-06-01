@@ -25,50 +25,50 @@ const initialState = {
 
 function cardtemplate(state = initialState, action) {
     switch (action.type) {
-        case CARD_TEMPLATE_LOADED: {
-            return assign({}, state, {
-                template: action.template,
-                xml: action.xml || state.xml,
-                activeSections: null,
-                params: action.params
-            });
-        }
-        case CARD_TEMPLATE_LOAD_ERROR: {
-            return assign({}, state, {
-                loadingCardTemplateError: action.error,
-                params: {}
-            });
-        }
-        case SELECT_SECTION: {
-            const newSections = assign({}, state.activeSections);
-            newSections[action.section] = action.active;
-            return assign({}, state, {
-                activeSections: newSections
-            });
-        }
-        case ACTIVE_SECTION: {
-            let newSections = {};
-            newSections[action.section] = true;
-            return assign({}, state, {
-                activeSections: newSections
-            });
-        }
-        case SELECT_ROWS: {
-            // let model = assign({}, state.model);
-            // model[action.table_id] = action.rows;
-            return assign({}, state, {[action.tableId]: action.rows});
-        }
-        case GENERATE_PDF: {
-            return assign({}, state, {generatepdf: action.active});
-        }
-        case MAP_IMAGE_READY: {
-            return assign({}, state, {mapImageReady: action.state});
-        }
-        /* case SET_IMPIANTO_MODEL: {
+    case CARD_TEMPLATE_LOADED: {
+        return assign({}, state, {
+            template: action.template,
+            xml: action.xml || state.xml,
+            activeSections: null,
+            params: action.params
+        });
+    }
+    case CARD_TEMPLATE_LOAD_ERROR: {
+        return assign({}, state, {
+            loadingCardTemplateError: action.error,
+            params: {}
+        });
+    }
+    case SELECT_SECTION: {
+        const newSections = assign({}, state.activeSections);
+        newSections[action.section] = action.active;
+        return assign({}, state, {
+            activeSections: newSections
+        });
+    }
+    case ACTIVE_SECTION: {
+        let newSections = {};
+        newSections[action.section] = true;
+        return assign({}, state, {
+            activeSections: newSections
+        });
+    }
+    case SELECT_ROWS: {
+        // let model = assign({}, state.model);
+        // model[action.table_id] = action.rows;
+        return assign({}, state, {[action.tableId]: action.rows});
+    }
+    case GENERATE_PDF: {
+        return assign({}, state, {generatepdf: action.active});
+    }
+    case MAP_IMAGE_READY: {
+        return assign({}, state, {mapImageReady: action.state});
+    }
+    /* case SET_IMPIANTO_MODEL: {
             return assign({}, state, {impiantoModel: action.impiantoModel});
         } */
-        default:
-            return state;
+    default:
+        return state;
     }
 }
 
