@@ -70,7 +70,7 @@ public class SiraSecurityTest extends AbstractAppSchemaTestSupport {
     @Test
     public void testSecureAutorizzazioneUnicaAmbientaleProfiloA() {
         this.setRequestAuth("userA", "test");
-
+        final Catalog catalog = this.getCatalog();
         final Document doc = this.getAsDOM("ows?service=WFS&version=1.1.0&request=GetFeature&typeName=sira:AutorizzazioneUnicaAmbientale");
         LOGGER.info("WFS GetFeature response:\n" + this.prettyString(doc));
 
