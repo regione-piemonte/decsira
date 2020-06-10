@@ -72,11 +72,11 @@
 
     <properties>
         <!-- Java Version -->
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
 
         <!-- Dependencies -->
-        <spring.version>3.1.4.RELEASE</spring.version>
-        <spring-security.version>3.1.0.RELEASE</spring-security.version>
+        <spring.version>5.1.13.RELEASE</spring.version>
+        <spring.security.version>5.1.8.RELEASE</spring.security.version>
         <slf4j.version>1.6.4</slf4j.version>
 
         <!-- Testing -->
@@ -94,21 +94,6 @@
     </properties>
 
     <repositories>
-        <repository>
-            <id>boundless</id>
-            <name>Boundless Maven Repository</name>
-            <url>http://repo.boundlessgeo.com/main</url>
-            <!-- contains snapshot and release (including third-party-dependences) -->
-            <!-- Restlet maven Repository (http://maven.restlet.org) -->
-            <!-- ucar (https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases) -->
-            <!-- geosolutions (http://maven.geo-solutions.it/) -->
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
 
         <repository>
             <id>osgeo</id>
@@ -157,7 +142,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>17.0</version>
+            <version>27.0-jre</version>
         </dependency>
 
         <!-- LOGGING -->
@@ -178,7 +163,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
             <exclusions>
                 <exclusion>
                     <artifactId>hamcrest-core</artifactId>
@@ -211,17 +196,17 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>${spring-security.version}</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>${spring-security.version}</version>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>${spring-security.version}</version>
+            <version>${spring.security.version}</version>
         </dependency>
     </dependencies>
 

@@ -18,7 +18,7 @@
 
     <bean id="siraAccessManagerConfigurator"
           class="it.geosolutions.geoserver.sira.security.config.SiraAccessManagerConfigurator"
-          depends-on="catalog">
+          depends-on="catalog" lazy-init="false">
         <constructor-arg index="0" ref="siraAccessManager" />
         <constructor-arg index="1" ref="catalog" />
     </bean>

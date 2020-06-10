@@ -32,11 +32,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.geoserver.security.WrapperPolicy;
-import org.geotools.factory.Hints;
-import org.geotools.filter.expression.FeaturePropertyAccessorFactory;
+import org.geotools.data.complex.expression.FeaturePropertyAccessorFactory;
 import org.geotools.filter.expression.PropertyAccessor;
 import org.geotools.filter.expression.PropertyAccessorFactory;
 import org.geotools.filter.text.cql2.CQLException;
+import org.geotools.util.factory.Hints;
 import org.geotools.util.logging.Logging;
 import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
