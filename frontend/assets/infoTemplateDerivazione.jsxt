@@ -1,0 +1,78 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateDerivazione"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Numero classificazione pratica',
+             width: 90,
+             xpath: "decsiraogc_derivazioni:classificazionePraticaDeriv/text()"
+        }, {
+             headerName: 'Codice rilievo',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:codiceRilievoDeriv/text()"
+        }, {
+             headerName: 'Codice utenza',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:codiceUtenza/text()"
+        }, {
+             headerName: 'Denominazione titolare',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"
+        }, {
+            headerName: 'Specie derivazione',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:desTipoDeriv/text()"
+        }, {
+            headerName: 'Uso promiscuo',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:flgUsoPromiscuo/text()"
+        }, {
+            headerName: 'Uso energetico',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:flgUsoEnergetico/text()"
+        }, {
+            headerName: 'Uso potabile',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:flgUsoPotabile/text()"
+        }, {
+            headerName: 'Stato Derivazione',
+            width: 100,
+            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_derivazioni:desStatoDeriv/text()"
+        }, {
+             headerName: 'Autorita competente',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:desAutoritaCompetente/text()"
+        }, {
+            headerName: 'Data scadenza concessione',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:dataScadenzaEffettiva/text()"
+        }, {
+            headerName: 'Data decorrenza concessione',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"
+        }, {
+            headerName: 'Codice fiscale titolare/ Partita IVA azienda',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv/text()"
+        }, {
+            headerName: 'Portata massima concessa (l/s)',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:portataMaxDeriv/text()"
+        }, {
+            headerName: 'Volume massimo concesso (m3)',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:volumeMaxDeriv/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_derivazioni:Derivazione")}/>
