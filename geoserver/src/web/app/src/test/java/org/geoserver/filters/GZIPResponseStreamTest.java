@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -50,19 +51,26 @@ public class GZIPResponseStreamTest  {
         return results;
     }
 
+
     private static class CapturingByteOutputStream extends ServletOutputStream {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-        public void write(int b){
+        public void write(int b) {
             bos.write(b);
         }
 
-        public byte[] toByteArray(){
+        public byte[] toByteArray() {
             return bos.toByteArray();
         }
+
+        public boolean isReady() {
+            return true;
+        }
+
+        public void setWriteListener(WriteListener writeListener) {}
     }
 
-    private static class ByteStreamCapturingHttpServletResponse 
+    private static class ByteStreamCapturingHttpServletResponse
         extends HttpServletResponseWrapper {
             CapturingByteOutputStream myOutputStream;
 
@@ -74,7 +82,7 @@ public class GZIPResponseStreamTest  {
 
 
             public ServletOutputStream getOutputStream() throws IOException {
-                if (myOutputStream == null) 
+                if (myOutputStream == null)
                     myOutputStream = new CapturingByteOutputStream();
                 return myOutputStream;
             }
