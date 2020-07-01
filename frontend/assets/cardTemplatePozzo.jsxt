@@ -1,0 +1,134 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PRESE DA POZZI' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceROCPozzo/text()"),
+            ' - codice rilievo: ',
+             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceRilievoPozzo/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI -  Pozzo' eventKey='1' expanded={true}>
+            <LabeledField label='Codice ROC l.r. 22/99' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceROCPozzo/text()")
+            }/>
+
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceRilievoPozzo/text()")
+            }/>
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:denominazionePozzo/text()")
+            }/>
+            <LabeledField label='Profondità' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:profonditaPozzo/text()")
+            }/>
+
+            <LabeledField label='Quota del Piano Campagna s.l.m. (m)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:quotaPCPozzo/text()")
+            }/>
+
+        </Section>
+
+        <Section header='DATI Strutturali' eventKey='2' expanded={true}>
+            <LabeledField label='Data di costruzione' dateFormat='DD/MM/YYYY' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:dataCostruzionePozzo/text()")
+            }/>
+
+        </Section>
+
+        <Section header='Tratti di colonna interessati dalla presenza di filtri' eventKey='3' expanded={true}>
+
+          <SiraTable
+                id="FiltroPozzi"
+                selectedRow={model.FiltroPozzi}
+                wfsVersion="2.0"
+                rowSelection={false}
+
+                columns={
+                    [
+                        {
+                            hide: true,
+                            id: true,
+                            xpath: "decsiraogc_operecaptazione:FiltroPozzo/@gml:id"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Tipologia di filtro',
+                            width: 170,
+                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desTipoFiltro/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Apertura (mm)',
+                            width: 120,
+                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:aperturaFiltro/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Profondità da (m)',
+                            width: 140,
+                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaDaFiltro/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Profondità a (m)',
+                            width: 140,
+                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaAFiltro/text()"
+                        },
+                        {
+                            hide: false,
+                            headerName: 'Origine del dato',
+                            width: 150,
+                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desOrigineDatoFiltro/text()"
+                        }
+
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:filtroPozzo")}
+
+          />
+
+
+        </Section>
+
+        <Section header='MAPPA SINTESI - Prese da pozzi su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='4' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:geom_pozzo/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Prese da pozzi",
+	                          "name": "decsiraogc_operecaptazione:Pozzo",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+
+
+
+    </Panel>
+</Panel>

@@ -1,0 +1,105 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='CONCESSIONI DI DERIVAZIONI DI ACQUA PUBBLICA' subtitle={[
+            'Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:codiceRilievoDeriv/text()"),
+            ' Titolare: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'derivazione'
+			featureId = {'id_derivazione.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:idDerivazione/text()")}
+			rootTitle = {
+				'Codice rilievo: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:codiceRilievoDeriv/text()") +
+				' - Pratica: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:classificazionePraticaDeriv/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:oggettoAssociatoDerivazione")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRilDerColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+				{
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "6"
+				},
+				groupElement: {
+					descriptionLabels: ['codice ROC: ', " -  codice rilievo: "],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRocCaptColl/text()",
+					"decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+				{
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "23"
+				},
+				groupElement: {
+					descriptionLabels: ['codice ROC: ', " -  codice rilievo: "],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRocCaptColl/text()",
+					"decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+				{
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "24"
+				},
+				groupElement: {
+					descriptionLabels: ['codice ROC: ', " -  codice rilievo: "],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRocCaptColl/text()",
+					"decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+				},
+				{
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "23"
+				},
+				groupElement: {
+					descriptionLabels: ['codice ROC: ', " -  codice rilievo: "],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRocCaptColl/text()",
+					"decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+				}
+			]}
+		/>
+	</Panel>
+</Panel>
