@@ -141,7 +141,34 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	
+	<Rule>
+		<priority>21</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_sivia</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>22</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_sivia_geo</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>23</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_derivazioni</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>24</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_operecaptazione</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
 	
 	
@@ -312,6 +339,13 @@
 		<priority>312</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_monitor_datidimens</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>313</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_sivia</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
@@ -1031,6 +1065,20 @@
 		<filter>"flg_validazione" = 'si'</filter>  
 		<hiddenAttributes>
 		 <attribute>decsiraogc_monitor_datidimens:flg_validazione</attribute>
+		</hiddenAttributes>	
+    </Rule>
+	<Rule>
+		<priority>616</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_sivia</workspace>
+		<layer>FaseProcedura</layer>
+		<accessMode>READ</accessMode>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_sivia:dataUltimaModifProg</attribute>
+		 <attribute>decsiraogc_sivia:dataUltimaModificaOpera</attribute>
+		 <attribute>decsiraogc_sivia:flgNuovaOpera</attribute>
+		 <attribute>decsiraogc_sivia:denomDirezioneRespOrgTec</attribute>
+		 <attribute>decsiraogc_sivia:rappresentanteNucleoOrgTec</attribute>
 		</hiddenAttributes>	
     </Rule>
 	

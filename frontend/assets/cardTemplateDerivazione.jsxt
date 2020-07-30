@@ -1,0 +1,81 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='CONCESSIONI DI DERIVAZIONI DI ACQUA PUBBLICA' subtitle={[
+            'Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:codiceRilievoDeriv/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI -  Derivazione' eventKey='1' expanded={true}>
+            <LabeledField label='Codice rilievo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:codiceRilievoDeriv/text()")
+            }/>
+
+            <LabeledField label='Codice utenza' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:codiceUtenza/text()")
+            }/>
+            <LabeledField label='Classificazione pratica' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:classificazionePraticaDeriv/text()")
+            }/>
+            <LabeledField label='Tipo derivazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desTipoDeriv/text()")
+            }/>
+
+            <LabeledField label='Stato derivazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desStatoDeriv/text()")
+            }/>
+
+            <LabeledField label='Titolare concessione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Uso promiscuo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgUsoPromiscuo/text()")
+            }/>
+
+        </Section>
+
+        <Section header='DATI TITOLARE' eventKey='2' expanded={false}>
+            <LabeledField label='Tipologia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:desTipoSoggetto/text()")
+            }/>
+
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Codice fiscale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Partita IVA' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:pivaTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Provincia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:provinciaTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:comuneTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Indirizzo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:indirizzoTitDeriv/text()")
+            }/>
+
+            <LabeledField label='Telefono' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:telefonoTitDeriv/text()")
+            }/>
+        </Section>
+
+
+
+
+
+
+
+
+    </Panel>
+</Panel>

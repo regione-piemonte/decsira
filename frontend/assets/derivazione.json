@@ -1,0 +1,331 @@
+{
+   "featureTypeName":"decsiraogc_derivazioni:Derivazione",
+   "featureTypeNameLabel":"Concessioni di derivazione di acqua pubblica",
+   "nameSpaces": {
+     "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Concessioni di derivazione di acqua pubblica",
+        "name": "decsiraogc_derivazioni:Derivazione",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "derivazione",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_Derivazione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:idDerivazione/text()}}.pdf",
+     "template": "assets/cardTemplateDerivazione.jsxt",
+     "treeTemplate": "assets/treeTemplateDeriv.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_derivazioni:Derivazione",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateDerivazione.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Numero classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:classificazionePraticaDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice rilievo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:codiceRilievoDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice utenza",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:codiceUtenza/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione titolare",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Specie derivazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desTipoDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Uso promiscuo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:flgUsoPromiscuo/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Uso energetico",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:flgUsoEnergetico/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Uso potabile",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:flgUsoPotabile/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato Derivazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desStatoDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Autorita competente",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desAutoritaCompetente/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Data scadenza concessione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:dataScadenzaEffettiva/text()"],
+           "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Data decorrenza concessione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"],
+            "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+         {
+           "headerName": "Codice fiscale titolare/ Partita IVA azienda",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata massima concessa (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:portataMaxDeriv/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Volume massimo concesso (m3)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:volumeMaxDeriv/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_derivazioni:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_derivazioni:desStatoDeriv",
+            "label":"Stato Derivazione",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_deriv",
+                "propertyName": "id_stato,des_stato,ordinamento",
+                "cql_filter": "id_stato=5%20OR%20id_stato=9%20OR%20id_stato=99",
+                "sortBy": "ordinamento+A"
+             }
+           },
+           "valueId":"des_stato",
+           "valueLabel":"des_stato"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+           "label":"Codice rilievo",
+           "type":"string"
+        },
+         {
+            "index": 3,
+            "attribute": "decsiraogc_derivazioni:desTipoDeriv",
+            "label":"Specie della derivazione",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_deriv",
+                "propertyName": "id_tipo_deriv,des_tipo_deriv",
+                 "sortBy": "id_tipo_deriv+A"
+              }
+            },
+            "valueId":"des_tipo_deriv",
+            "valueLabel":"des_tipo_deriv"
+         },
+         {
+            "index": 4,
+            "attribute": "decsiraogc_derivazioni:fkAutoritaCompetente",
+            "label":"Ente competente",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_pa_competente_deriv",
+                "propertyName": "id_direzione,descr_direzione",
+                 "sortBy": "descr_direzione+A"
+              }
+            },
+            "valueId":"id_direzione",
+            "valueLabel":"descr_direzione"
+         },
+         {
+            "index": 5,
+            "attribute": "decsiraogc_derivazioni:dataScadenzaEffettiva",
+            "label":"Data scadenza concessione",
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+         },
+         {
+            "index": 6,
+            "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv",
+            "label":"Denominazione titolare",
+            "type":"string"
+         },
+         {
+            "index": 7,
+            "attribute": "decsiraogc_derivazioni:portataMaxDeriv",
+            "label":"Portata massima concessa (l/s)",
+            "type":"number"
+         },
+         {
+            "index": 8,
+            "attribute": "decsiraogc_derivazioni:flgUsoPromiscuo",
+            "label":"Uso promiscuo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+              {"value":"N.D.","name":"N.D."},
+              {"value":"Non Determinato","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 9,
+            "attribute": "decsiraogc_derivazioni:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 10,
+            "attribute": "decsiraogc_derivazioni:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 11,
+            "attribute": "decsiraogc_derivazioni:dataDecorrenzaConcessione",
+            "label":"Data decorrenza concessione",
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+         },
+         {
+            "index": 12,
+            "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv",
+            "label":"Codice fiscale titolare/ Partita IVA azienda",
+            "type":"string"
+         },
+         {
+            "index": 13,
+            "attribute": "decsiraogc_derivazioni:codiceUtenza",
+            "label":"Codice utenza",
+            "type":"string"
+         },
+         {
+            "index": 14,
+            "attribute": "decsiraogc_derivazioni:classificazionePraticaDeriv",
+            "label":"Numero classificazione pratica",
+            "type":"string"
+         },
+         {
+            "index": 15,
+            "attribute": "decsiraogc_derivazioni:volumeMaxDeriv",
+            "label":"Volume massimo concesso (m3)",
+            "type":"number"
+         }
+     ]
+
+   }
+
+}

@@ -1,0 +1,137 @@
+{
+   "featureTypeName":"decsiraogc_operecaptazione:Pozzo",
+   "featureTypeNameLabel":"Pozzi di derivazione",
+   "nameSpaces": {
+     "decsiraogc_operecaptazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Pozzi di derivazione",
+        "name": "decsiraogc_operecaptazione:Pozzo",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "pozzo",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geom_pozzo",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_Pozzo_{{/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:idDerivazione/text()}}.pdf",
+     "template": "assets/cardTemplatePozzo.jsxt",
+     "treeTemplate": "assets/treeTemplatePozzo.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_operecaptazione:Pozzo",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplatePozzo.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice ROC",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:codiceROCPozzo/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice rilievo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:codiceRilievoPozzo/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Denominazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:denominazionePozzo/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Quota piano di campagna",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:quotaPCPozzo/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Profondita",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:profonditaPozzo/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_operecaptazione:geom_pozzo/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_operecaptazione:desStatoPozzo",
+            "label":"Stato Pozzo",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato",
+                "propertyName": "id_stato,des_stato",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102",
+                "sortBy": "des_stato+A"
+             }
+           },
+           "valueId":"des_stato",
+           "valueLabel":"des_stato"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_operecaptazione:codiceRilievoPozzo",
+           "label":"Codice rilievo",
+           "type":"string"
+        }
+     ]
+
+   }
+
+}
