@@ -6,22 +6,22 @@
     onCellClicked={props.onCellClicked}
     profile={model.profile}
     columns={[
-				 {
+		{
 		  "id" : true,
 		  "headerName" : '',
 		  "xpath" : "@gml:id",
 		  "width" : 30,
 		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
 		}, {
-		  "headerName" : "Codice procedimento",
+		  "headerName" : "Codice Procedimento",
 		  "xpath" : "decsiraogc_sivia:codiceFase/text()",
 		  "width" : 120
 		}, {
 		  "headerName" : "Titolo Progetto",
 		  "xpath" : "decsiraogc_sivia:titoloProgetto/text()",
-		  "width" : 400
+		  "width" : 300
 		}, {
-		  "headerName" : "Categoria Progetto",
+		  "headerName" : "Categoria progettuale",
 		  "xpath" : "decsiraogc_sivia:listaCategorie/text()",
 		  "width" : 150
 		}, {
@@ -33,7 +33,7 @@
 		  "xpath" : "decsiraogc_sivia:listaComuniProg/text()",
 		  "width" : 200
 		}, {
-		  "headerName" : "Stato procedimento",
+		  "headerName" : "Stato Progetto",
 		  "xpath" : "decsiraogc_sivia:flagStatoProgetto/text()",
 		  "width" : 130
 		}, {
@@ -41,17 +41,42 @@
 		  "xpath" : "decsiraogc_sivia:autoritCompetente/text()",
 		  "width" : 150
 		}, {
-		  "headerName" : "Tipo Procedura progetto",
+		  "headerName" : "Tipo Procedura",
 		  "xpath" : "decsiraogc_sivia:desTipoProgetto/text()",
 		  "width" : 150
 		}, {
-		  "headerName" : "Tipologia procedimento",
-		  "xpath" : "decsiraogc_sivia:desTipologiaFase/text()",
-		  "width" : 160
+          "headerName": "Fase procedimento",
+          "xpath": "decsiraogc_sivia:desTipologiaFase/text()",
+		  "width":160
+        }, {
+		  "headerName" : "Infrastruttura strategia (ex legge 443/2001)",
+		  "xpath" : "decsiraogc_sivia:flgOperaLeggeObiettivo/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Modifica Opera esistente",
+		  "xpath" : "decsiraogc_sivia:flgNuovaOpera/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Esito procedimento",
+		  "xpath" : "decsiraogc_sivia:desEsitoFase/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Data Presentazione istanza",
+		  "xpath" : "decsiraogc_sivia:dataProtIstanza/text()",
+		  "dateFormat": "DD/MM/YYYY",
+		  "width" : 120
 		}, {
 		  "headerName" : "Valutazione incidenza",
 		  "xpath" : "decsiraogc_sivia:flgValutIncidenza/text()",
 		  "width" : 100
-	 	}
+		}, {
+           "headerName": "Gestore Sito Rete Natura 2000",
+           "xpath": "decsiraogc_sivia:gestoreNatura2000/text()",
+           "width":150
+        }, {
+		  "headerName" : "Unita' Organizzativa responsabile istruttoria",
+		  "xpath" : "decsiraogc_sivia:denomDirezioneRespOrgTec/text()",
+		  "width" : 150
+		}
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_sivia:FaseProcedura")}/>
