@@ -8,20 +8,20 @@
 
 const assign = require('object-assign');
 const {
-  HIDE_BOX, SHOW_BOX,
-  LOAD_METADATA,
-  LOAD_METADATA_ERROR,
-  TOGGLE_LEGEND_PANEL,
-  ADD_URL_LEGEND
+    HIDE_BOX, SHOW_BOX,
+    LOAD_METADATA,
+    LOAD_METADATA_ERROR,
+    TOGGLE_LEGEND_PANEL,
+    ADD_URL_LEGEND
 } = require('../actions/metadatainfobox');
 
 const initialState = {
-  show: 'none',
-  showButtonLegend: 'none',
-  data: null,
-  openLegendPanel: false,
-  urlLegend: [],
-  error: ''
+    show: 'none',
+    showButtonLegend: 'none',
+    data: null,
+    openLegendPanel: false,
+    urlLegend: [],
+    error: ''
 };
 
 function metadatainfobox(state = initialState, action) {
@@ -34,16 +34,16 @@ function metadatainfobox(state = initialState, action) {
     }
     case LOAD_METADATA: {
         return assign({}, state, {
-          title: action.data.title,
-          showButtonLegend: action.data.showButtonLegend ? action.data.showButtonLegend : 'none',
-          text: action.data.text,
-          dataProvider: action.data.dataProvider,
-          urlMetadato: action.data.urlMetadatoCalc,
-          numDatasetObjectCalc: action.data.numDatasetObjectCalc,
-          urlWMS: action.data.urlWMS,
-          urlLegend: [],
-          openLegendPanel: false,
-          error: ''
+            title: action.data.title,
+            showButtonLegend: action.data.showButtonLegend ? action.data.showButtonLegend : 'none',
+            text: action.data.text,
+            dataProvider: action.data.dataProvider,
+            urlMetadato: action.data.urlMetadatoCalc,
+            numDatasetObjectCalc: action.data.numDatasetObjectCalc,
+            urlWMS: action.data.urlWMS,
+            urlLegend: [],
+            openLegendPanel: false,
+            error: ''
         });
     }
     case LOAD_METADATA_ERROR: {

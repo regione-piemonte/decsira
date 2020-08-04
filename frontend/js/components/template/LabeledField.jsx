@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -10,30 +11,32 @@ const {Grid, Row, Col} = require('react-bootstrap');
 var {FormattedDate} = require('react-intl');
 const LocaleUtils = require('../../../MapStore2/web/client/utils/LocaleUtils');
 
-const LabeledField = React.createClass({
-    propTypes: {
-        label: React.PropTypes.string,
-        value: React.PropTypes.any,
-        dateFormat: React.PropTypes.object,
-        locale: React.PropTypes.string
-    },
-    getDefaultProps() {
-        return {
-            label: '',
-            value: null,
-            locale: 'it-IT'
-        };
-    },
-    renderDate(value, dateFormat) {
+class LabeledField extends React.Component {
+    static propTypes = {
+        label: PropTypes.string,
+        value: PropTypes.any,
+        dateFormat: PropTypes.object,
+        locale: PropTypes.string
+    };
+
+    static defaultProps = {
+        label: '',
+        value: null,
+        locale: 'it-IT'
+    };
+
+    renderDate = (value, dateFormat) => {
         const date = new Date(value);
         return !isNaN(date.getTime()) ? (<FormattedDate locales={this.props.locale} value={date} {...dateFormat} />) : (<span/>);
-    },
-    renderValue(value) {
+    };
+
+    renderValue = (value) => {
         return this.props.dateFormat ? this.renderDate(value, this.props.dateFormat) : value;
-    },
+    };
+
     render() {
         return (
-            <Grid className="labeled-field" fluid={true}>
+            <Grid className="labeled-field" fluid>
                 <Row>
                     <Col className="label-sira" xs={5} sm={5} md={5} lg={5}>
                         {this.props.label}
@@ -50,6 +53,6 @@ const LabeledField = React.createClass({
             </Grid>
         );
     }
-});
+}
 
 module.exports = LabeledField;

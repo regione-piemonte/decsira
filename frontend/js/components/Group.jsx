@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -12,31 +13,31 @@ var GroupTitle = require('../../MapStore2/web/client/components/TOC/fragments/Gr
 var GroupChildren = require('../../MapStore2/web/client/components/TOC/fragments/GroupChildren');
 var VisibilityCheck = require('../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
 
-var Group = React.createClass({
-    propTypes: {
-        node: React.PropTypes.object,
-        expanded: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        onToggle: React.PropTypes.func,
-        onSort: React.PropTypes.func,
-        onRemove: React.PropTypes.func,
-        onSettings: React.PropTypes.func,
-        propertiesChangeHandler: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            node: {},
-            onToggle: () => {},
-            onRemove: () => {},
-            onSettings: () => {},
-            propertiesChangeHandler: () => {},
-            expanded: true,
-            style: {
-                marginBottom: "16px",
-                cursor: "pointer"
-            }
-        };
-    },
+class Group extends React.Component {
+    static propTypes = {
+        node: PropTypes.object,
+        expanded: PropTypes.bool,
+        style: PropTypes.object,
+        onToggle: PropTypes.func,
+        onSort: PropTypes.func,
+        onRemove: PropTypes.func,
+        onSettings: PropTypes.func,
+        propertiesChangeHandler: PropTypes.func
+    };
+
+    static defaultProps = {
+        node: {},
+        onToggle: () => {},
+        onRemove: () => {},
+        onSettings: () => {},
+        propertiesChangeHandler: () => {},
+        expanded: true,
+        style: {
+            marginBottom: "16px",
+            cursor: "pointer"
+        }
+    };
+
     render() {
         let {children, onToggle, ...other } = this.props;
         let visibilityStyle = {
@@ -55,6 +56,6 @@ var Group = React.createClass({
             </Node>
         );
     }
-});
+}
 
 module.exports = Group;

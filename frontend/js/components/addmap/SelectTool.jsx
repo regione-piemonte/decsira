@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -9,25 +10,26 @@
 const React = require('react');
 const {Glyphicon} = require('react-bootstrap');
 
-const SelectTool = React.createClass({
-    propTypes: {
-        selected: React.PropTypes.bool,
-        toggleSelect: React.PropTypes.func
-    },
-    contextTypes: {
-        messages: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
-            selected: false,
-            toggleSelect: () => {}
-        };
-    },
+class SelectTool extends React.Component {
+    static propTypes = {
+        selected: PropTypes.bool,
+        toggleSelect: PropTypes.func
+    };
+
+    static contextTypes = {
+        messages: PropTypes.object
+    };
+
+    static defaultProps = {
+        selected: false,
+        toggleSelect: () => {}
+    };
+
     render() {
         const {selected} = this.props;
         return (
             <Glyphicon onClick={() => this.props.toggleSelect(!selected)} glyph={selected ? "check" : "unchecked"}/>);
     }
-});
+}
 
 module.exports = SelectTool;

@@ -53,72 +53,72 @@ const cloneLayer = (layer) => {
 
 function layers(state = [], action) {
     switch (action.type) {
-        case CHANGE_TOPOLOGY_MAPINFO_STATE:
-        case CHANGE_MAPINFO_STATE: {
-            let tmpState = msLayers(state, getAction("gridItems", []) );
-            return msLayers(tmpState, getAction("topologyItems", []));
-        }
-        case SELECT_FEATURES:
-            return msLayers(state, getAction("gridItems", action.features) );
-        case SET_FEATURES:
-        case CONFIGURE_INFO_TOPOLOGY:
-            return msLayers(state, getAction("topologyItems", action.features || action.infoTopologyResponse.features));
-        case SHOW_SETTINGS: {
-            return msLayers(msLayers(state, {
-                    type: TOGGLE_NODE,
-                    node: action.node,
-                    nodeType: "layers",
-                    status: true}), action);
+    case CHANGE_TOPOLOGY_MAPINFO_STATE:
+    case CHANGE_MAPINFO_STATE: {
+        let tmpState = msLayers(state, getAction("gridItems", []) );
+        return msLayers(tmpState, getAction("topologyItems", []));
+    }
+    case SELECT_FEATURES:
+        return msLayers(state, getAction("gridItems", action.features) );
+    case SET_FEATURES:
+    case CONFIGURE_INFO_TOPOLOGY:
+        return msLayers(state, getAction("topologyItems", action.features || action.infoTopologyResponse.features));
+    case SHOW_SETTINGS: {
+        return msLayers(msLayers(state, {
+            type: TOGGLE_NODE,
+            node: action.node,
+            nodeType: "layers",
+            status: true}), action);
 
-        }
-        case HIDE_SETTINGS: {
-            return msLayers(msLayers(state, {
-                    type: 'TOGGLE_NODE',
-                    node: action.node,
-                    nodeType: "layers",
-                    status: false}), action);
-        }
-        case SELECT_ALL: {
-            if (action.sldBody && action.featureTypeName) {
-                let layer = head(state.flat.filter(l => l.name === `${action.featureTypeName}`));
-                if (layer) {
-                    let allLayer = head(state.flat.filter(l => l.id === "selectAll"));
-                    if (allLayer) {
-                        let params = {params: {...allLayer.params, SLD_BODY: action.sldBody}};
-                        return msLayers(state, { type: "CHANGE_LAYER_PROPERTIES",
-                                                layer: allLayer.id,
-                                                newProperties: params
-                                            });
-                    }
-                    let newLayer = cloneLayer(layer);
-                    newLayer.id = "selectAll";
-                    newLayer.type = "wmspost";
-                    newLayer.visibility = true;
-                    delete newLayer.group;
-                    newLayer.params = assign({}, newLayer.params, {SLD_BODY: action.sldBody});
-                    return msLayers(state, { type: "ADD_LAYER", layer: newLayer});
+    }
+    case HIDE_SETTINGS: {
+        return msLayers(msLayers(state, {
+            type: 'TOGGLE_NODE',
+            node: action.node,
+            nodeType: "layers",
+            status: false}), action);
+    }
+    case SELECT_ALL: {
+        if (action.sldBody && action.featureTypeName) {
+            let layer = head(state.flat.filter(l => l.name === `${action.featureTypeName}`));
+            if (layer) {
+                let allLayer = head(state.flat.filter(l => l.id === "selectAll"));
+                if (allLayer) {
+                    let params = {params: {...allLayer.params, SLD_BODY: action.sldBody}};
+                    return msLayers(state, { type: "CHANGE_LAYER_PROPERTIES",
+                        layer: allLayer.id,
+                        newProperties: params
+                    });
                 }
+                let newLayer = cloneLayer(layer);
+                newLayer.id = "selectAll";
+                newLayer.type = "wmspost";
+                newLayer.visibility = true;
+                delete newLayer.group;
+                newLayer.params = assign({}, newLayer.params, {SLD_BODY: action.sldBody});
+                return msLayers(state, { type: "ADD_LAYER", layer: newLayer});
             }
-            let allLayer = head(state.flat.filter(l => l.id === "selectAll"));
-            return allLayer ? msLayers(state, { type: "REMOVE_NODE", nodeType: 'layers', node: 'selectAll'}) : msLayers(state, action);
         }
-        case 'THEMATIC_VIEW_CONFIG_LOADED': {
-            // We exclude background layers and we add the rest
-            const oldLayers = state.flat;
-            if ( action.config && action.config.map && action.config && action.config.map.layers) {
-                return action.config.map.layers.filter((l) => l.group !== 'background' && findIndex(oldLayers, (ol) => ol.name === l.name) === -1).reduce((st, layer) => {
-                    return msLayers(st, addLayer(ConfigUtils.setUrlPlaceholders(layer)));
-                }, state);
-            }
-            return state;
+        let allLayer = head(state.flat.filter(l => l.id === "selectAll"));
+        return allLayer ? msLayers(state, { type: "REMOVE_NODE", nodeType: 'layers', node: 'selectAll'}) : msLayers(state, action);
+    }
+    case 'THEMATIC_VIEW_CONFIG_LOADED': {
+        // We exclude background layers and we add the rest
+        const oldLayers = state.flat;
+        if ( action.config && action.config.map && action.config && action.config.map.layers) {
+            return action.config.map.layers.filter((l) => l.group !== 'background' && findIndex(oldLayers, (ol) => ol.name === l.name) === -1).reduce((st, layer) => {
+                return msLayers(st, addLayer(ConfigUtils.setUrlPlaceholders(layer)));
+            }, state);
         }
-        case 'SIRA_ADD_LAYERS': {
-            return action.layers.reduce((tempState, layer) => {
-                return msLayers(tempState, {type: 'ADD_LAYER', layer});
-            }, state );
-        }
-        default:
-            return msLayers(state, action);
+        return state;
+    }
+    case 'SIRA_ADD_LAYERS': {
+        return action.layers.reduce((tempState, layer) => {
+            return msLayers(tempState, {type: 'ADD_LAYER', layer});
+        }, state );
+    }
+    default:
+        return msLayers(state, action);
     }
 }
 

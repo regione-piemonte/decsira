@@ -8,7 +8,7 @@ const LabeledField = require("./LabeledField");
 const LinkToPage = require ('../../../MapStore2/web/client/components/misc/LinkToPage');
 const {reactCellRendererFactory} = require('ag-grid-react');
 const GoToDetail = require('../GoToDetail');
-const ZoomToRenderer = require ('../../../MapStore2/web/client/components/data/featuregrid/ZoomToFeatureRenderer');
+// const ZoomToRenderer = require ('../../../MapStore2/web/client/components/data/featuregrid/ZoomToFeatureRenderer'); //TODO
 const MappaScheda = require("./PreviewMap");
 const LinkScheda = require("./LinkScheda");
 const AuthorizedObject = require("./AuthorizedObject");
@@ -26,5 +26,5 @@ const renderSira = function(comp, props) {
     return eval(comp);
 };
 
-/*eslint-enable */
+/* eslint-enable */
 module.exports = renderSira;

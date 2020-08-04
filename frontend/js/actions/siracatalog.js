@@ -86,12 +86,13 @@ function getMetadataView({serviceUrl = 'services/metadata/getMetadataView?', par
         if (typeof response.data !== "object" ) {
             try {
                 return JSON.parse(response.data);
-            } catch(e) {
+            } catch (e) {
                 Promise.reject(`Configuration broken (${url}): ${ e.message}`);
             }
-        }else {
+        } else {
             return response.data;
         }
+        return null;
     });
 }
 
@@ -109,10 +110,10 @@ function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?'
                 if (typeof response.data !== "object" ) {
                     try {
                         dispatch(objectsLoaded(JSON.parse(response.data), result));
-                    }catch (e) {
+                    } catch (e) {
                     // dispatch(serchCategoriesLoaded(response.data));
                     }
-                }else {
+                } else {
                     dispatch(objectsLoaded(response.data, result));
                 }
             });
@@ -147,16 +148,16 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
                 try {
                     if (configureMap) {
                         dispatch(thematicViewConfigMap(JSON.parse(response.data)));
-                    }else {
+                    } else {
                         dispatch(thematicViewConfigLoaded(JSON.parse(response.data)));
                     }
-                }catch (e) {
+                } catch (e) {
                     // dispatch(serchCategoriesLoaded(response.data));
                 }
-            }else {
+            } else {
                 if (configureMap) {
                     dispatch(thematicViewConfigMap(response.data));
-                }else {
+                } else {
                     dispatch(thematicViewConfigLoaded(response.data));
                 }
             }

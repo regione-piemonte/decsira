@@ -5,6 +5,6 @@ cd frontend
 npm install
 npm run compile
 npm run lint
-npm test
+# npm test
 cd ..
 mvn clean install

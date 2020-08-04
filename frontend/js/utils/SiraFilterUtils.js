@@ -26,14 +26,14 @@ FilterUtils.toCQLFilterSira = function(json) {
     return filter === "(undefined)" ? "(INCLUDE)" : filter;
 };
 FilterUtils.getOgcAllPropertyValue = function(featureTypeName, attribute) {
-    return `<wfs:GetPropertyValue service="WFS" valueReference='${attribute}'
-                version="2.0" xmlns:fes="http://www.opengis.net/fes/2.0"
-                xmlns:gml="http://www.opengis.net/gml/3.2"
-                xmlns:wfs="http://www.opengis.net/wfs/2.0"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd">
-                    <wfs:Query typeNames="${featureTypeName}"/>
-            </wfs:GetPropertyValue>`;
+    return "<wfs:GetPropertyValue service='WFS' valueReference='" + attribute + '"'
+                + "version='2.0' xmlns:fes='http://www.opengis.net/fes/2.0'"
+                + "xmlns:gml='http://www.opengis.net/gml/3.2'"
+                + "xmlns:wfs='http://www.opengis.net/wfs/2.0'"
+                + "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'"
+                + "xsi:schemaLocation='http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd'>"
+                +  "<wfs:Query typeNames='" + featureTypeName + "'/>"
+            + "</wfs:GetPropertyValue>";
 };
 FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) {
     let filter = this.toOGCFilterSira(ftName, json, version, null, false, null, nsplaceholder);
@@ -44,24 +44,26 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) 
     } else {
         filter = '';
     }
+    // let configName = ftName.indexOf(":") > -1 ? ftName.split(":")[1] : ftName;
+    // let geometryType = (configName && SiraUtils.getConfigOggetti()[configName]) ? SiraUtils.getConfigOggetti()[configName].geometryType : SiraUtils.getConfigOggetti()[ftName].geometryType;
     let geometryType = SiraUtils.getConfigByfeatureTypeName(ftName).geometryType;
     const nameSpacesAttr = Object.keys(nameSpaces).map((prefix) => 'xmlns:' + prefix + '="' + nameSpaces[prefix] + '"').join(" ");
     let result;
     switch (geometryType) {
-        case "Point": {
-            result = `<StyledLayerDescriptor version="1.0.0"
+    case "Point": {
+        result = `<StyledLayerDescriptor version="1.0.0"
                     ${nameSpacesAttr}
                     xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">#0000FF</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
-            break;
-        }
-        case "Polygon": {
-            result = `<StyledLayerDescriptor version="1.0.0"
+        break;
+    }
+    case "Polygon": {
+        result = `<StyledLayerDescriptor version="1.0.0"
                     ${nameSpacesAttr}
                     xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">#0000FF</CssParameter><CssParameter name="stroke">#0000FF</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
-            break;
-        }
-        default:
-            result = "";
+        break;
+    }
+    default:
+        result = "";
     }
     return result;
     // return `<StyledLayerDescriptor version="1.0.0"
@@ -71,10 +73,10 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces) 
 
 FilterUtils.getFilterByIds = function(ftName, ids, idField, pagination) {
     let filterObj = {
-    groupFields: [{id: 1, index: 0, logic: "OR"}],
-    filterFields: ids.map((id) => ({ attribute: idField.xpath[0], groupId: 1, operator: "=", value: id, type: 'string'})),
-    spatialField: {},
-    pagination
+        groupFields: [{id: 1, index: 0, logic: "OR"}],
+        filterFields: ids.map((id) => ({ attribute: idField.xpath[0], groupId: 1, operator: "=", value: id, type: 'string'})),
+        spatialField: {},
+        pagination
     };
     return this.toOGCFilter(ftName, filterObj, "2.0");
 };

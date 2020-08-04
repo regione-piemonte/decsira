@@ -8,12 +8,12 @@
 const React = require('react');
 const img = require('./images/detail.png');
 
-const GoToDetail = React.createClass({
+class GoToDetail extends React.Component {
     render() {
         return (
             <img src={img} width={16}/>
         );
     }
-});
+}
 
 module.exports = GoToDetail;

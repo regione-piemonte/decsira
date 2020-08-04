@@ -23,35 +23,35 @@ const initialState = {
 
 function addmap(state = initialState, action) {
     switch (action.type) {
-        case SIRA_RECORDS_LOADING: {
-            return action.status ? assign({}, state, {
-                records: [],
-                node: action.node,
-                loading: action.status,
-                error: null
-            }) : assign({}, state, {
-                loading: action.status});
-        }
-        case SIRA_RECORDS_ERROR: {
-            return assign({}, state, {
-                error: action.error,
-                records: []
-            });
-        }
-        case TOGGLE_ADD_MAP_MODAL: {
-            return assign({}, state, {
-                show: action.status,
-                error: null
-            });
-        }
-        case SIRA_RECORDS_LOADED: {
-            return assign({}, state, {
-                    node: action.node,
-                    records: action.result
-                });
-        }
-        default:
-            return state;
+    case SIRA_RECORDS_LOADING: {
+        return action.status ? assign({}, state, {
+            records: [],
+            node: action.node,
+            loading: action.status,
+            error: null
+        }) : assign({}, state, {
+            loading: action.status});
+    }
+    case SIRA_RECORDS_ERROR: {
+        return assign({}, state, {
+            error: action.error,
+            records: []
+        });
+    }
+    case TOGGLE_ADD_MAP_MODAL: {
+        return assign({}, state, {
+            show: action.status,
+            error: null
+        });
+    }
+    case SIRA_RECORDS_LOADED: {
+        return assign({}, state, {
+            node: action.node,
+            records: action.result
+        });
+    }
+    default:
+        return state;
     }
 }
 module.exports = addmap;

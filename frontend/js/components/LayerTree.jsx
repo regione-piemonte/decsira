@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -14,30 +15,31 @@ var DefaultLayer = require('../../MapStore2/web/client/components/TOC/DefaultLay
 
 var icon = require('./images/layers.png');
 
-var LayerTree = React.createClass({
-    propTypes: {
-        id: React.PropTypes.number,
-        buttonContent: React.PropTypes.node,
-        groups: React.PropTypes.array,
-        groupStyle: React.PropTypes.object,
-        propertiesChangeHandler: React.PropTypes.func,
-        changeGroupProperties: React.PropTypes.func,
-        onToggleGroup: React.PropTypes.func,
-        onToggleLayer: React.PropTypes.func,
-        onSort: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            buttonContent: <img src={icon}/>,
-            propertiesChangeHandler: () => {},
-            changeGroupProperties: () => {},
-            onToggleGroup: () => {},
-            onToggleLayer: () => {}
-        };
-    },
-    getNoBackgroundLayers(group) {
+class LayerTree extends React.Component {
+    static propTypes = {
+        id: PropTypes.number,
+        buttonContent: PropTypes.node,
+        groups: PropTypes.array,
+        groupStyle: PropTypes.object,
+        propertiesChangeHandler: PropTypes.func,
+        changeGroupProperties: PropTypes.func,
+        onToggleGroup: PropTypes.func,
+        onToggleLayer: PropTypes.func,
+        onSort: PropTypes.func
+    };
+
+    static defaultProps = {
+        buttonContent: <img src={icon}/>,
+        propertiesChangeHandler: () => {},
+        changeGroupProperties: () => {},
+        onToggleGroup: () => {},
+        onToggleLayer: () => {}
+    };
+
+    getNoBackgroundLayers = (group) => {
         return group.name !== 'background';
-    },
+    };
+
     render() {
         if (!this.props.groups) {
             return <div></div>;
@@ -52,12 +54,12 @@ var LayerTree = React.createClass({
                         <DefaultLayer
                             onToggle={this.props.onToggleLayer}
                             propertiesChangeHandler={this.props.propertiesChangeHandler}
-                            />
+                        />
                     </DefaultGroup>
                 </TOC>
             </div>
         );
     }
-});
+}
 
 module.exports = LayerTree;

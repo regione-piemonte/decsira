@@ -50,16 +50,16 @@ const siraInitialState = {
 
 function queryform(state, action) {
     switch (action.type) {
-        // case 'QUERYFORM_CONFIG_LOADED': {
-        //     return {...action.config};
-        // }
-        // case 'FEATURETYPE_CONFIG_LOADED': {
-        //     return {...state, spatialField: {...state.spatialField, attribute: action.geometryName}};
-        // }
-        case 'QUERY_FORM_RESET': {
-            return assign({}, state, siraInitialState);
-        }
-        default: return msQueryFrom(state, action);
+    // case 'QUERYFORM_CONFIG_LOADED': {
+    //     return {...action.config};
+    // }
+    // case 'FEATURETYPE_CONFIG_LOADED': {
+    //     return {...state, spatialField: {...state.spatialField, attribute: action.geometryName}};
+    // }
+    case 'QUERY_FORM_RESET': {
+        return assign({}, state, siraInitialState);
+    }
+    default: return msQueryFrom(state, action);
     }
 }
 

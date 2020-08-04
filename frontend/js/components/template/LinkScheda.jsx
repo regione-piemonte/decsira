@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -13,64 +14,68 @@ const {toggleSiraControl} = require('../../actions/controls');
 const {
     loadFeatureTypeConfig
 } = require('../../actions/siradec');
-const LinkScheda = React.createClass({
-    propTypes: {
-        id: React.PropTypes.string,
-        linkTitle: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
-        btProps: React.PropTypes.object,
-        card: React.PropTypes.object,
-        open: React.PropTypes.bool,
-        detailsTemplateConfigURL: React.PropTypes.string,
-        featureType: React.PropTypes.string,
-        activeFeatureType: React.PropTypes.string,
-        configOggetti: React.PropTypes.object,
-        authParams: React.PropTypes.object,
-        templateProfile: React.PropTypes.string,
-        loadFeatureTypeConfig: React.PropTypes.func,
-        toggleDetail: React.PropTypes.func,
-        loadCardTemplate: React.PropTypes.func,
-        params: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
-            id: null,
-            btProps: {},
-            linkTitle: 'Link',
-            templateProfile: 'default',
-            params: {},
-            toggleDetail: () => {},
-            loadCardModelConfig: () => {},
-            activateSection: () => {}
-        };
-    },
-    getInitialState() {
-        return {
-            linkDisabled: false
-        };
-    },
+
+class LinkScheda extends React.Component {
+    static propTypes = {
+        id: PropTypes.string,
+        linkTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        btProps: PropTypes.object,
+        card: PropTypes.object,
+        open: PropTypes.bool,
+        detailsTemplateConfigURL: PropTypes.string,
+        featureType: PropTypes.string,
+        activeFeatureType: PropTypes.string,
+        configOggetti: PropTypes.object,
+        authParams: PropTypes.object,
+        templateProfile: PropTypes.string,
+        loadFeatureTypeConfig: PropTypes.func,
+        toggleDetail: PropTypes.func,
+        loadCardTemplate: PropTypes.func,
+        params: PropTypes.object
+    };
+
+    static defaultProps = {
+        id: null,
+        btProps: {},
+        linkTitle: 'Link',
+        templateProfile: 'default',
+        params: {},
+        toggleDetail: () => {},
+        loadCardModelConfig: () => {},
+        activateSection: () => {}
+    };
+
+    state = {
+        linkDisabled: false
+    };
+
     componentWillMount() {
         // Se non passano un detailsTemplateConfigUrl e mi passano la featureType ma non ho la configuraziine caricata, devo disabilitare il link e caricare le configurazioni
         if (this.props.featureType && !this.props.configOggetti[this.props.featureType]) {
             this.setState({linkDisabled: true});
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.authParams.authkey ? this.props.authParams.authkey : ''}, this.props.featureType, false);
         }
-    },
+    }
+
     componentWillReceiveProps(nextProps) {
         if (this.state.linkDisabled && nextProps.featureType && nextProps.configOggetti[nextProps.featureType]) {
             this.setState({linkDisabled: false});
         }
-    },
-    getTempleteUrl(detailsConfig) {
+    }
+
+    getTempleteUrl = (detailsConfig) => {
         return typeof detailsConfig.template === "string" ? detailsConfig.template : detailsConfig.template[this.props.templateProfile];
-    },
+    };
+
     render() {
         return (
             <Button bsStyle="link" onClick={this.btnClick} {...this.props.btProps} disabled={this.state.linkDisabled}>
                 {this.props.linkTitle}
             </Button>
         );
-    },
-    btnClick() {
+    }
+
+    btnClick = () => {
         // Solo configurazione è un drill up and down come in authorizedObject
         const detailsConfig = this.props.configOggetti[this.props.featureType] || this.props.configOggetti[this.props.activeFeatureType];
         const templateUrl = this.props.detailsTemplateConfigURL ? this.props.detailsTemplateConfigURL : this.getTempleteUrl(detailsConfig.card);
@@ -93,8 +98,8 @@ const LinkScheda = React.createClass({
         if (!this.props.open) {
             this.props.toggleDetail();
         }
-    }
-});
+    };
+}
 
 module.exports = connect((state) => {
 
@@ -106,7 +111,7 @@ module.exports = connect((state) => {
         authParams: state.userprofile.authParams
     };
 }, {
-        toggleDetail: toggleSiraControl,
-        loadCardTemplate,
-        loadFeatureTypeConfig
-    })(LinkScheda);
+    toggleDetail: toggleSiraControl,
+    loadCardTemplate,
+    loadFeatureTypeConfig
+})(LinkScheda);

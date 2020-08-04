@@ -1,44 +1,45 @@
-import React from 'react';
+const React = require('react');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
-import Tree, {TreeNode} from 'rc-tree';
+const PropTypes = require('prop-types');
+const  {Tree, TreeNode} = require('rc-tree');
 const TemplateUtils = require('../../utils/TemplateUtils');
-import './SiraTree.less';
+require('./SiraTree.less');
 const {loadCardTemplate} = require('../../actions/card');
 const {treeDataLoaded, treeDataLoading} = require('../../actions/treeData');
 const {loadFeatureTypeConfig, setWaitingForConfig, setTreeFeatureType} = require('../../actions/siradec');
 
-const TreeData = React.createClass({
-    propTypes: {
-        featureType: React.PropTypes.string,
-        featureId: React.PropTypes.string,
-        rootTitle: React.PropTypes.string,
-        objects: React.PropTypes.array,
-        groups: React.PropTypes.array,
-        treeData: React.PropTypes.array,
-        configOggetti: React.PropTypes.object,
-        waitingForConfig: React.PropTypes.object,
-        authParams: React.PropTypes.object,
-        loadCardTemplate: React.PropTypes.func,
-        loadFeatureTypeConfig: React.PropTypes.func,
-        setWaitingForConfig: React.PropTypes.func,
-        setTreeFeatureType: React.PropTypes.func,
-        loading: React.PropTypes.bool,
-        treeDataLoaded: React.PropTypes.func,
-        treeDataLoading: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            objects: [],
-            groups: [],
-            waitingForConfig: null,
-            onDetail: () => {},
-            setWaitingForConfig: () => {},
-            setTreeFeatureType: () => {},
-            treeDataLoaded: () => {},
-            treeDataLoading: () => {}
-        };
-    },
+class TreeData extends React.Component {
+    static propTypes = {
+        featureType: PropTypes.string,
+        featureId: PropTypes.string,
+        rootTitle: PropTypes.string,
+        objects: PropTypes.array,
+        groups: PropTypes.array,
+        treeData: PropTypes.array,
+        configOggetti: PropTypes.object,
+        waitingForConfig: PropTypes.object,
+        authParams: PropTypes.object,
+        loadCardTemplate: PropTypes.func,
+        loadFeatureTypeConfig: PropTypes.func,
+        setWaitingForConfig: PropTypes.func,
+        setTreeFeatureType: PropTypes.func,
+        loading: PropTypes.bool,
+        treeDataLoaded: PropTypes.func,
+        treeDataLoading: PropTypes.func
+    };
+
+    static defaultProps = {
+        objects: [],
+        groups: [],
+        waitingForConfig: null,
+        onDetail: () => {},
+        setWaitingForConfig: () => {},
+        setTreeFeatureType: () => {},
+        treeDataLoaded: () => {},
+        treeDataLoading: () => {}
+    };
+
     componentWillMount() {
         if (this.props.treeData === null || this.props.treeData === undefined) {
             this.loadDataForTree(this.props);
@@ -50,15 +51,17 @@ const TreeData = React.createClass({
             this.props.setWaitingForConfig(null);
             this.onSelect(null, info);
         }
-    },
+    }
+
     componentWillReceiveProps(newProps) {
         if (this.props.featureId !== newProps.featureId) {
             this.loadDataForTree(newProps);
         } else {
             this.props.treeDataLoading(false);
         }
-    },
-    onSelect(selectedKeys, info) {
+    }
+
+    onSelect = (selectedKeys, info) => {
         let selectedData = this.searchKey(this.props.treeData[0], info.node.props.eventKey);
         if (selectedData && selectedData.linkToDetail) {
             if (selectedData.linkToDetail.featureId) {
@@ -95,8 +98,9 @@ const TreeData = React.createClass({
                 }
             }
         }
-    },
-    getChildData(group, object, keyCount) {
+    };
+
+    getChildData = (group, object, keyCount) => {
         let childCount = 0;
         let title = '';
         group.groupElement.descriptionLabels.forEach((label, index) => {
@@ -120,7 +124,8 @@ const TreeData = React.createClass({
                 cqlFilter: cqlFilter
             }
         };
-    },
+    };
+
     render() {
         if (this.props.loading) {
             return (<img src={'assets/img/tree/loading.gif'}/>);
@@ -157,8 +162,9 @@ const TreeData = React.createClass({
                 onSelect={this.onSelect}>
                 {treeNodes}
             </Tree>);
-    },
-    loadDataForTree(props) {
+    }
+
+    loadDataForTree = (props) => {
         let keyCount = 0;
         // Definisco la radice del tree, il dato di partenza
         let treeDataWithRoot = [{
@@ -205,8 +211,9 @@ const TreeData = React.createClass({
         // Aggiungo il treeData alla radice del tree
         treeDataWithRoot[0].children = treeData;
         this.props.treeDataLoaded(treeDataWithRoot);
-    },
-    searchKey(element, key) {
+    };
+
+    searchKey = (element, key) => {
         if (element.key === key) {
             return element;
         } else if (element.children !== undefined && element.children !== null) {
@@ -217,8 +224,8 @@ const TreeData = React.createClass({
             return result;
         }
         return null;
-    }
-});
+    };
+}
 
 module.exports = connect((state) => {
     return {

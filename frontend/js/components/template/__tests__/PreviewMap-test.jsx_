@@ -12,7 +12,7 @@ const expect = require('expect');
 const store = require('../../../stores/store')(undefined, {
     siradec: require('../../../reducers/siradec'),
     cardtemplate: require('../../../reducers/card')
-    }, {} );
+}, {} );
 const PreviewMap = require('../PreviewMap');
 
 describe('PreviewMap tests', () => {
@@ -27,6 +27,7 @@ describe('PreviewMap tests', () => {
         setTimeout(done);
     });
 
+    // TODO - Modify to latest mapstore standard
     it('Test PreviewMap rendering default empty map', () => {
         let comp = ReactDOM.render(<PreviewMap center={{type: "Point", coordinates: [7.288747410652236, 44.800614935398094]}} store={store}/>, document.getElementById("container"));
         store.dispatch({type: "CHANGE_MAP_CRS", crs: "EPSG:900913"});

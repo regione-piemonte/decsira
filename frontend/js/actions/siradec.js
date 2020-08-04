@@ -133,7 +133,7 @@ function getAttributeValuesPromise(field, params, serviceUrl) {
             if (typeof config !== "object") {
                 try {
                     config = JSON.parse(config);
-                } catch(e) {
+                } catch (e) {
                     Promise.reject(`Configuration broken (${url}): ${ e.message}`);
                 }
             }
@@ -141,9 +141,11 @@ function getAttributeValuesPromise(field, params, serviceUrl) {
             return assign({}, field, {values: values});
         });
     }
+    return {};
 }
 
 function getAttributeValues(ft, field, params, serviceUrl) {
+    // eslint-disable-next-line consistent-return
     return (dispatch) => {
         if (serviceUrl) {
             let {url} = ConfigUtils.setUrlPlaceholders({url: serviceUrl});
@@ -159,7 +161,7 @@ function getAttributeValues(ft, field, params, serviceUrl) {
                 if (typeof config !== "object") {
                     try {
                         config = JSON.parse(config);
-                    } catch(e) {
+                    } catch (e) {
                         dispatch(configureQueryFormError(ft, 'Configuration broken (' + url + '): ' + e.message));
                     }
                 }
@@ -212,7 +214,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
             if (typeof config !== "object") {
                 try {
                     config = JSON.parse(config);
-                } catch(e) {
+                } catch (e) {
                     dispatch(configureQueryFormError(featureType, 'Configuration file broken (' + url + '): ' + e.message));
                 }
             }
@@ -250,14 +252,14 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 });
                 Promise.all(fields).then((fi) => {
                     dispatch(configureFeatureType({
-                            id: config.featureTypeName,
-                            name: config.featureTypeNameLabel,
-                            geometryName: config.geometryName,
-                            geometryType: config.geometryType,
-                            nameSpaces: config.nameSpaces || {},
-                            layer: layer,
-                            exporter: config.exporter
-                        }, fi, featureType, activate));
+                        id: config.featureTypeName,
+                        name: config.featureTypeNameLabel,
+                        geometryName: config.geometryName,
+                        geometryType: config.geometryType,
+                        nameSpaces: config.nameSpaces || {},
+                        layer: layer,
+                        exporter: config.exporter
+                    }, fi, featureType, activate));
                 }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
                 // for (let field in config.query.fields) {
                 //     if (field) {

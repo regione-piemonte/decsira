@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -12,44 +13,45 @@ var Title = require('../../../MapStore2/web/client/components/TOC/fragments/Titl
 const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../../../MapStore2/web/client/components/TOC/DefaultGroup');
 const glyphStyle = {"float": "right", cursor: 'pointer'};
-var DefaultNode = React.createClass({
-    propTypes: {
-        node: React.PropTypes.object,
-        settings: React.PropTypes.object,
-        expandFilterPanel: React.PropTypes.func,
-        onToggle: React.PropTypes.func,
-        toggleSiraControl: React.PropTypes.func,
-        style: React.PropTypes.object,
-        groups: React.PropTypes.array,
-        addToMap: React.PropTypes.func,
-        showInfoBox: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            style: {},
-            expandFilterPanel: () => {},
-            onToggle: () => {},
-            toggleSiraControl: () => {},
-            addToMap: () => {}
-        };
-    },
-    renderTools() {
+
+class DefaultNode extends React.Component {
+    static propTypes = {
+        node: PropTypes.object,
+        settings: PropTypes.object,
+        expandFilterPanel: PropTypes.func,
+        onToggle: PropTypes.func,
+        toggleSiraControl: PropTypes.func,
+        style: PropTypes.object,
+        groups: PropTypes.array,
+        addToMap: PropTypes.func,
+        showInfoBox: PropTypes.func
+    };
+
+    static defaultProps = {
+        style: {},
+        expandFilterPanel: () => {},
+        onToggle: () => {},
+        toggleSiraControl: () => {},
+        addToMap: () => {}
+    };
+
+    renderTools = () => {
         let tooltipSira = <Tooltip id="tpm-search-details">Ricerca di dettaglio</Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map">Carica in Mappa</Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj">Elenco di Oggetti</Tooltip>;
         const tools = [
-        (<OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
-            <Glyphicon
-            style={glyphStyle}
-            key="addToMap"
-            glyph="plus-sign"
-            onClick={()=>this.props.addToMap(this.props.node)}/>
-        </OverlayTrigger>)
+            (<OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
+                <Glyphicon
+                    style={glyphStyle}
+                    key="addToMap"
+                    glyph="plus-sign"
+                    onClick={()=>this.props.addToMap(this.props.node)}/>
+            </OverlayTrigger>)
         ];
         if ( this.props.node.featureType) {
             tools.push((
                 <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
-                        <Glyphicon
+                    <Glyphicon
                         style={glyphStyle}
                         key="toggle-featuregrid"
                         glyph="th"
@@ -58,22 +60,23 @@ var DefaultNode = React.createClass({
             tools.push((
                 <OverlayTrigger key={"list-ltp"} rootClose placement="left" overlay={tooltipSira}>
                     <Glyphicon
-                    style={glyphStyle}
-                    key="toggle-query"
-                    glyph="search"
-                    onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
+                        style={glyphStyle}
+                        key="toggle-query"
+                        glyph="search"
+                        onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
                 </OverlayTrigger>));
         }
         return tools;
-    },
+    };
+
     render() {
         let {children, onToggle, ...other } = this.props;
         if (this.props.node.nodes) {
             return (
-            <DefaultGroup node={this.props.node} animateCollapse={false} onToggle={this.props.onToggle}>
-                <DefaultNode {...this.props}/>
-            </DefaultGroup>
-                );
+                <DefaultGroup node={this.props.node} animateCollapse={false} onToggle={this.props.onToggle}>
+                    <DefaultNode {...this.props}/>
+                </DefaultGroup>
+            );
         }
         return (
             <Node animateCollapse={false} className="toc-default-layer catalog-object" style={this.props.style} type="layer" {...other}>
@@ -82,6 +85,6 @@ var DefaultNode = React.createClass({
             </Node>
         );
     }
-});
+}
 
 module.exports = DefaultNode;

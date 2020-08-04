@@ -9,8 +9,8 @@ const React = require('react');
 const ModalDialog = require('react-bootstrap/lib/ModalDialog');
 const Draggable = require('react-draggable');
 
-module.exports = React.createClass({
+module.exports = class extends React.Component {
     render() {
         return <Draggable handle=".modal-title, .modal-header"><ModalDialog {...this.props} id="add-map-modal"/></Draggable>;
     }
-});
+};

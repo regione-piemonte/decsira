@@ -12,9 +12,10 @@ const Template = require('../../../MapStore2/web/client/components/data/template
 // The referene should be available in eval scope. Needs to disable eslint
 const renderSira = require("./index");
 
-const TemplateSira = React.createClass({
+class TemplateSira extends React.Component {
     render() {
         return (<Template {...this.props} renderContent={renderSira}/>);
     }
-});
+}
+
 module.exports = TemplateSira;

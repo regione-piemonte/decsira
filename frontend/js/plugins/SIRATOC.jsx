@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -9,7 +10,7 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {changeLayerProperties, changeGroupProperties, toggleNode,
-       sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('../../MapStore2/web/client/actions/layers');
+    sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('../../MapStore2/web/client/actions/layers');
 const {groupsSelector} = require('../../MapStore2/web/client/selectors/layers');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
@@ -50,90 +51,91 @@ const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/D
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
 const DefaultLayer = require('../components/toc/SiraLayer');
 
-const LayerTree = React.createClass({
-    propTypes: {
-        id: React.PropTypes.number,
-        buttonContent: React.PropTypes.node,
-        groups: React.PropTypes.array,
-        settings: React.PropTypes.object,
-        groupStyle: React.PropTypes.object,
-        groupPropertiesChangeHandler: React.PropTypes.func,
-        layerPropertiesChangeHandler: React.PropTypes.func,
-        onToggleGroup: React.PropTypes.func,
-        onToggleLayer: React.PropTypes.func,
-        onSort: React.PropTypes.func,
-        onSettings: React.PropTypes.func,
-        hideSettings: React.PropTypes.func,
-        updateSettings: React.PropTypes.func,
-        updateNode: React.PropTypes.func,
-        removeNode: React.PropTypes.func,
-        activateLegendTool: React.PropTypes.bool,
-        activateSettingsTool: React.PropTypes.bool,
-        visibilityCheckType: React.PropTypes.string,
-        settingsOptions: React.PropTypes.object,
-        configOggetti: React.PropTypes.object,
-        authParams: React.PropTypes.object,
-        userprofile: React.PropTypes.object,
-        activeFeatureType: React.PropTypes.string,
-        expandFilterPanel: React.PropTypes.func,
-        loadFeatureTypeConfig: React.PropTypes.func,
-        setActiveFeatureType: React.PropTypes.func,
-        toggleSiraControl: React.PropTypes.func,
-        setGridType: React.PropTypes.func,
-        showInfoBox: React.PropTypes.func,
-        loadMetadata: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            groupPropertiesChangeHandler: () => {},
-            layerPropertiesChangeHandler: () => {},
-            onToggleGroup: () => {},
-            onToggleLayer: () => {},
-            onSettings: () => {},
-            updateNode: () => {},
-            removeNode: () => {},
-            activateLegendTool: true,
-            activateSettingsTool: true,
-            visibilityCheckType: "checkbox",
-            settingsOptions: {},
-            configOggetti: {},
-            expandFilterPanel: () => {}
-        };
-    },
-    getNoBackgroundLayers(group) {
+class LayerTree extends React.Component {
+    static propTypes = {
+        id: PropTypes.number,
+        buttonContent: PropTypes.node,
+        groups: PropTypes.array,
+        settings: PropTypes.object,
+        groupStyle: PropTypes.object,
+        groupPropertiesChangeHandler: PropTypes.func,
+        layerPropertiesChangeHandler: PropTypes.func,
+        onToggleGroup: PropTypes.func,
+        onToggleLayer: PropTypes.func,
+        onSort: PropTypes.func,
+        onSettings: PropTypes.func,
+        hideSettings: PropTypes.func,
+        updateSettings: PropTypes.func,
+        updateNode: PropTypes.func,
+        removeNode: PropTypes.func,
+        activateLegendTool: PropTypes.bool,
+        activateSettingsTool: PropTypes.bool,
+        visibilityCheckType: PropTypes.string,
+        settingsOptions: PropTypes.object,
+        configOggetti: PropTypes.object,
+        authParams: PropTypes.object,
+        userprofile: PropTypes.object,
+        activeFeatureType: PropTypes.string,
+        expandFilterPanel: PropTypes.func,
+        loadFeatureTypeConfig: PropTypes.func,
+        setActiveFeatureType: PropTypes.func,
+        toggleSiraControl: PropTypes.func,
+        setGridType: PropTypes.func,
+        showInfoBox: PropTypes.func,
+        loadMetadata: PropTypes.func
+    };
+
+    static defaultProps = {
+        groupPropertiesChangeHandler: () => {},
+        layerPropertiesChangeHandler: () => {},
+        onToggleGroup: () => {},
+        onToggleLayer: () => {},
+        onSettings: () => {},
+        updateNode: () => {},
+        removeNode: () => {},
+        activateLegendTool: true,
+        activateSettingsTool: true,
+        visibilityCheckType: "checkbox",
+        settingsOptions: {},
+        configOggetti: {},
+        expandFilterPanel: () => {}
+    };
+
+    getNoBackgroundLayers = (group) => {
         return (group.name !== 'background' && group.name !== 'hidden');
-    },
+    };
+
     render() {
         if (!this.props.groups) {
             return <div></div>;
         }
         const Group = ( <DefaultGroup animateCollapse={false} onSort={this.props.onSort}
-                                  propertiesChangeHandler={this.props.groupPropertiesChangeHandler}
-                                  onToggle={this.props.onToggleGroup}
-                                  style={this.props.groupStyle}
-                                  groupVisibilityCheckbox={true}
-                                  visibilityCheckType={this.props.visibilityCheckType}
-                                  />);
+            propertiesChangeHandler={this.props.groupPropertiesChangeHandler}
+            onToggle={this.props.onToggleGroup}
+            style={this.props.groupStyle}
+            groupVisibilityCheckbox
+            visibilityCheckType={this.props.visibilityCheckType}
+        />);
         const Layer = (<DefaultLayer
-                            settingsOptions={this.props.settingsOptions}
-                            onToggle={this.showInfoBox}
-                            onSettings={this.props.onSettings}
-                            propertiesChangeHandler={this.props.layerPropertiesChangeHandler}
-                            hideSettings={this.props.hideSettings}
-                            settings={this.props.settings}
-                            updateSettings={this.props.updateSettings}
-                            updateNode={this.props.updateNode}
-                            removeNode={this.props.removeNode}
-                            visibilityCheckType={this.props.visibilityCheckType}
-                            activateLegendTool={this.props.activateLegendTool}
-                            activateSettingsTool={this.props.activateSettingsTool}
-                            settingsText={<Message msgId="layerProperties.windowTitle"/>}
-                            opacityText={<Message msgId="opacity"/>}
-                            saveText={<Message msgId="save"/>}
-                            closeText={<Message msgId="close"/>}
-                            groups={this.props.groups}
-                            expandFilterPanel={this.openFilterPanel}
-                            searchAll={this.searchAll}/>);
+            settingsOptions={this.props.settingsOptions}
+            onToggle={this.showInfoBox}
+            onSettings={this.props.onSettings}
+            propertiesChangeHandler={this.props.layerPropertiesChangeHandler}
+            hideSettings={this.props.hideSettings}
+            settings={this.props.settings}
+            updateSettings={this.props.updateSettings}
+            updateNode={this.props.updateNode}
+            removeNode={this.props.removeNode}
+            visibilityCheckType={this.props.visibilityCheckType}
+            activateLegendTool={this.props.activateLegendTool}
+            activateSettingsTool={this.props.activateSettingsTool}
+            settingsText={<Message msgId="layerProperties.windowTitle"/>}
+            opacityText={<Message msgId="opacity"/>}
+            saveText={<Message msgId="save"/>}
+            closeText={<Message msgId="close"/>}
+            groups={this.props.groups}
+            expandFilterPanel={this.openFilterPanel}
+            searchAll={this.searchAll}/>);
         return (
             <div>
                 <TOC onSort={this.props.onSort} filter={this.getNoBackgroundLayers}
@@ -142,29 +144,32 @@ const LayerTree = React.createClass({
                 </TOC>
             </div>
         );
-    },
-    openFilterPanel(status, featureType) {
+    }
+
+    openFilterPanel = (status, featureType) => {
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
-        }else if (this.props.activeFeatureType !== featureType) {
+        } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
         this.props.expandFilterPanel(status);
-    },
-    searchAll(featureType) {
+    };
+
+    searchAll = (featureType) => {
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
-        }else if (this.props.activeFeatureType !== featureType) {
+        } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
-    },
-    showInfoBox(node) {
+    };
+
+    showInfoBox = (node) => {
         this.props.loadMetadata(node);
         this.props.showInfoBox();
-    }
-});
+    };
+}
 
 const TOCPlugin = connect(tocSelector, {
     groupPropertiesChangeHandler: changeGroupProperties,

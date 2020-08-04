@@ -14,25 +14,25 @@ const {
 } = require('../actions/header');
 
 const initialState = {
-  showRightMenu: false,
-  showSistemaConoscenzeAmbientaliBox: 'none',
-  showCreditsBox: 'none'
+    showRightMenu: false,
+    showSistemaConoscenzeAmbientaliBox: 'none',
+    showCreditsBox: 'none'
 };
 
 function header(state = initialState, action) {
     switch (action.type) {
-        case SHOW_HIDE_RIGHT_MENU: {
-            return assign({}, state,
-                {showRightMenu: !state.showRightMenu});
-        }case SHOW_HIDE_CONOSCENZA_AMB_BOX: {
-            return assign({}, state,
-                {showSistemaConoscenzeAmbientaliBox: state.showSistemaConoscenzeAmbientaliBox === 'none' ? 'block' : 'none'});
-        }case SHOW_HIDE_CREDITS_BOX: {
-            return assign({}, state,
-                {showCreditsBox: state.showCreditsBox === 'none' ? 'block' : 'none'});
-        }
-        default:
-            return state;
+    case SHOW_HIDE_RIGHT_MENU: {
+        return assign({}, state,
+            {showRightMenu: !state.showRightMenu});
+    } case SHOW_HIDE_CONOSCENZA_AMB_BOX: {
+        return assign({}, state,
+            {showSistemaConoscenzeAmbientaliBox: state.showSistemaConoscenzeAmbientaliBox === 'none' ? 'block' : 'none'});
+    } case SHOW_HIDE_CREDITS_BOX: {
+        return assign({}, state,
+            {showCreditsBox: state.showCreditsBox === 'none' ? 'block' : 'none'});
+    }
+    default:
+        return state;
     }
 }
 

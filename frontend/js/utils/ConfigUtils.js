@@ -272,33 +272,33 @@ const ConfigUtils = {
         (window.DocumentTouch && document instanceof window.DocumentTouch));
 
         return {
-        ie: ie,
-        ie11: ie11,
-        ielt9: ielt9,
-        webkit: webkit,
-        gecko: gecko && !webkit && !window.opera && !ie,
+            ie: ie,
+            ie11: ie11,
+            ielt9: ielt9,
+            webkit: webkit,
+            gecko: gecko && !webkit && !window.opera && !ie,
 
-        android: android,
-        android23: android23,
+            android: android,
+            android23: android23,
 
-        chrome: chrome,
+            chrome: chrome,
 
-        ie3d: ie3d,
-        webkit3d: webkit3d,
-        gecko3d: gecko3d,
-        opera3d: opera3d,
-        any3d: any3d,
+            ie3d: ie3d,
+            webkit3d: webkit3d,
+            gecko3d: gecko3d,
+            opera3d: opera3d,
+            any3d: any3d,
 
-        mobile: mobile,
-        mobileWebkit: mobile && webkit,
-        mobileWebkit3d: mobile && webkit3d,
-        mobileOpera: mobile && window.opera,
+            mobile: mobile,
+            mobileWebkit: mobile && webkit,
+            mobileWebkit3d: mobile && webkit3d,
+            mobileOpera: mobile && window.opera,
 
-        touch: touch,
-        msPointer: msPointer,
-        pointer: pointer,
+            touch: touch,
+            msPointer: msPointer,
+            pointer: pointer,
 
-        retina: retina
+            retina: retina
         };
     },
     setApiKeys: function(layer) {
@@ -348,7 +348,7 @@ const ConfigUtils = {
         if (document.cookie.length > 0) {
             /*eslint-disable */
             console.log("cookie " + document.cookie);
-            /*eslint-enable */
+            /* eslint-enable */
             document.cookie = "";
         }
     }

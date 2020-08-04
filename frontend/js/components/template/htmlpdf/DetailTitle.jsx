@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,23 +8,23 @@
  */
 const React = require('react');
 
-const DetailTitle = React.createClass({
-    propTypes: {
-        title: React.PropTypes.string,
-        subtitle: React.PropTypes.array
-    },
-    getDefaultProps() {
-        return {
-            title: '',
-            subtitle: ''
-        };
-    },
+class DetailTitle extends React.Component {
+    static propTypes = {
+        title: PropTypes.string,
+        subtitle: PropTypes.array
+    };
+
+    static defaultProps = {
+        title: '',
+        subtitle: ''
+    };
+
     render() {
         let subtitle = this.props.subtitle.join(" ");
         return (
             <h3 className="pdf-title">{this.props.title}<br/><small>{subtitle}</small></h3>
         );
     }
-});
+}
 
 module.exports = DetailTitle;

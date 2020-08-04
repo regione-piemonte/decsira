@@ -7,7 +7,7 @@
  */
 
 var Layers = require('../../MapStore2/web/client/utils/openlayers/Layers');
-var ol = require('openlayers');
+var ol = require('ol');
 var objectAssign = require('object-assign');
 const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
 
@@ -61,15 +61,15 @@ function postTileLoadFunction(queryParameters, imageTile, src) {
    </ogc:GetMap>`;
     axios.post(newSrc, request, {
         timeout: 60000,
-           responseType: 'blob',
-           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
-        }).then((response) => {
-            let image = imageTile.getImage();
-            image.onload = function() {
-                window.URL.revokeObjectURL(image.src); // Clean up after yourself.
-            };
-            image.src = window.URL.createObjectURL(response.data);
-        });
+        responseType: 'blob',
+        headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+    }).then((response) => {
+        let image = imageTile.getImage();
+        image.onload = function() {
+            window.URL.revokeObjectURL(image.src); // Clean up after yourself.
+        };
+        image.src = window.URL.createObjectURL(response.data);
+    });
 }
 Layers.registerType('wmspost', {
     create: (options) => {
@@ -92,9 +92,9 @@ Layers.registerType('wmspost', {
             visible: options.visibility !== false,
             zIndex: options.zIndex,
             source: new ol.source.TileWMS({
-              urls: urls,
-              params: queryParameters,
-              tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)})
+                urls: urls,
+                params: queryParameters,
+                tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)})
         });
     },
     update: (layer, newOptions, oldOptions) => {
