@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -10,53 +11,53 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar');
+const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar').default;
 
 const {categorySelector} = require('../selectors/sira');
 const {selectCategory, searchTextChange, selectSubCategory} = require('../actions/siracatalog');
 const SearchCategories = connect(categorySelector)(require('../components/Mosaic'));
 
-const SiraSearchBar = React.createClass({
-    propTypes: {
-        containerClasses: React.PropTypes.string.isRequired,
-        searchClasses: React.PropTypes.string.isRequired,
-        addCategoriesSelector: React.PropTypes.bool.isRequired,
-        overlayPlacement: React.PropTypes.string.isRequired,
-        serchCatliClasses: React.PropTypes.string.isRequired,
-        btnClasses: React.PropTypes.string.isRequired,
-        mosaicContainerClasses: React.PropTypes.string.isRequired,
-        category: React.PropTypes.shape({
-            name: React.PropTypes.string,
-            id: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-            icon: React.PropTypes.string,
-            objectNumber: React.PropTypes.number,
-            tematicViewNumber: React.PropTypes.number
+class SiraSearchBar extends React.Component {
+    static propTypes = {
+        containerClasses: PropTypes.string.isRequired,
+        searchClasses: PropTypes.string.isRequired,
+        addCategoriesSelector: PropTypes.bool.isRequired,
+        overlayPlacement: PropTypes.string.isRequired,
+        serchCatliClasses: PropTypes.string.isRequired,
+        btnClasses: PropTypes.string.isRequired,
+        mosaicContainerClasses: PropTypes.string.isRequired,
+        category: PropTypes.shape({
+            name: PropTypes.string,
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+            icon: PropTypes.string,
+            objectNumber: PropTypes.number,
+            tematicViewNumber: PropTypes.number
         }).isRequired,
-        onSearch: React.PropTypes.func,
-        onReset: React.PropTypes.func,
-        searchText: React.PropTypes.string,
-        onTextChange: React.PropTypes.func,
-        tileClick: React.PropTypes.func,
-        selectSubCategory: React.PropTypes.func,
-        subcat: React.PropTypes.string
-    },
-    getDefaultProps() {
-        return {
-            containerClasses: "catalog-search-container",
-            searchClasses: "sira-cat-search",
-            addCategoriesSelector: true,
-            mosaicContainerClasses: "tilescontainer",
-            serchCatliClasses: "list-group-item col-xs-4 tiles searchtile",
-            overlayPlacement: "right",
-            btnClasses: "siracatalog-search-selector",
-            onSearch: () => {},
-            onReset: () => {},
-            onTextChange: () => {},
-            tileClick: () => {},
-            selectSubCategory: () => {}
-        };
-    },
-    renderPopover() {
+        onSearch: PropTypes.func,
+        onReset: PropTypes.func,
+        searchText: PropTypes.string,
+        onTextChange: PropTypes.func,
+        tileClick: PropTypes.func,
+        selectSubCategory: PropTypes.func,
+        subcat: PropTypes.string
+    };
+
+    static defaultProps = {
+        containerClasses: "catalog-search-container",
+        searchClasses: "sira-cat-search",
+        addCategoriesSelector: true,
+        mosaicContainerClasses: "tilescontainer",
+        serchCatliClasses: "list-group-item col-xs-4 tiles searchtile",
+        overlayPlacement: "right",
+        btnClasses: "siracatalog-search-selector",
+        onSearch: () => {},
+        onReset: () => {},
+        onTextChange: () => {},
+        tileClick: () => {},
+        selectSubCategory: () => {}
+    };
+
+    renderPopover = () => {
         const {serchCatliClasses, mosaicContainerClasses} = this.props;
         return (
             <Popover id="search-categories">
@@ -67,8 +68,9 @@ const SiraSearchBar = React.createClass({
                     tileClick={this.changeCategory}
                 />
             </Popover>);
-    },
-    renderSearchCategories() {
+    };
+
+    renderSearchCategories = () => {
         const {btnClasses, category, overlayPlacement} = this.props;
         return (
             <OverlayTrigger
@@ -78,46 +80,49 @@ const SiraSearchBar = React.createClass({
                 <Button className={btnClasses}>
                     <div className={category && category.icon}/>
                 </Button>
-             </OverlayTrigger>);
-    },
+            </OverlayTrigger>);
+    };
+
     render() {
         const {containerClasses, searchClasses, addCategoriesSelector, onSearch, onReset, onTextChange, searchText} = this.props;
         return (
-        <div className={containerClasses}>
-            <SearchBar
-                placeholder="Cerca oggetti"
-                placeholderMsgId=""
-                className={searchClasses}
-                onSearchTextChange={onTextChange}
-                typeAhead={false}
-                searchText={searchText}
-                onSearch={(text) => onSearch({text, category: this.props.category})}
-                onSearchReset={() => {
-                    onTextChange("");
-                    onReset({text: "", category: this.props.category});
-                }}
-            />
-            {addCategoriesSelector ? this.renderSearchCategories() : (<noscript/>)}
-        </div>);
-    },
-    changeCategory(cat, subcat) {
+            <div className={containerClasses}>
+                <SearchBar
+                    placeholder="Cerca oggetti"
+                    placeholderMsgId=""
+                    className={searchClasses}
+                    onSearchTextChange={onTextChange}
+                    typeAhead={false}
+                    searchText={searchText}
+                    showOptions={false}
+                    onSearch={(text) => onSearch({text, category: this.props.category})}
+                    onSearchReset={() => {
+                        onTextChange("");
+                        onReset({text: "", category: this.props.category});
+                    }}
+                />
+                {addCategoriesSelector ? this.renderSearchCategories() : (<noscript/>)}
+            </div>);
+    }
+
+    changeCategory = (cat, subcat) => {
         if (cat.id !== this.props.category.id) {
             this.props.onSearch({text: "", category: cat});
             this.props.onTextChange("");
             this.props.tileClick(cat, subcat);
-        }else if (this.props.subcat !== subcat) {
+        } else if (this.props.subcat !== subcat) {
             this.props.selectSubCategory(subcat);
         }
 
 
-    }
-});
+    };
+}
 
 module.exports = connect((state) => ( {
     category: state.siracatalog && state.siracatalog.category || {},
     subcat: state.siracatalog && state.siracatalog.subcat,
     searchText: state.siracatalog && state.siracatalog.searchText
-    }), {
+}), {
     onTextChange: searchTextChange,
     tileClick: selectCategory,
     selectSubCategory

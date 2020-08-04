@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -12,26 +13,26 @@ const {connect} = require('react-redux');
 
 const {loadCardTemplate} = require('../../actions/card');
 
-const AdempimentiAmbientali = React.createClass({
-    propTypes: {
+class AdempimentiAmbientali extends React.Component {
+    static propTypes = {
         // profile: React.PropTypes.string,
-        codiceSira: React.PropTypes.string,
-        listTitle: React.PropTypes.string,
-        numAuth: React.PropTypes.string,
-        dataAuth: React.PropTypes.string,
-        activity: React.PropTypes.string,
-        detailsTemplateConfigURL: React.PropTypes.string,
-        actions: React.PropTypes.shape({
-            drillUp: React.PropTypes.func
+        codiceSira: PropTypes.string,
+        listTitle: PropTypes.string,
+        numAuth: PropTypes.string,
+        dataAuth: PropTypes.string,
+        activity: PropTypes.string,
+        detailsTemplateConfigURL: PropTypes.string,
+        actions: PropTypes.shape({
+            drillUp: PropTypes.func
         })
-    },
-    getDefaultProps() {
-        return {
-            actions: {
-                drillUp: () => {}
-            }
-        };
-    },
+    };
+
+    static defaultProps = {
+        actions: {
+            drillUp: () => {}
+        }
+    };
+
     render() {
         return (
             <div>
@@ -41,11 +42,12 @@ const AdempimentiAmbientali = React.createClass({
                 </ul>
             </div>
         );
-    },
-    drillUp() {
-        this.props.actions.drillUp(this.props.detailsTemplateConfigURL);
     }
-});
+
+    drillUp = () => {
+        this.props.actions.drillUp(this.props.detailsTemplateConfigURL);
+    };
+}
 
 module.exports = connect(() => {
     return {

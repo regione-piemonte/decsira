@@ -19,20 +19,20 @@ function siraexporter(state = {
     srs: 'EPSG:4326'
 }, action) {
     switch (action.type) {
-        case SET_EXPORT_PARAMS: {
-            return assign({}, state, {params: action.params, errormsg: null});
-        }
-        case EXPORT_LOADING: {
-            return assign({}, state, {loading: action.loading});
-        }
-        case EXPORT_ERROR: {
-            return assign({}, state, {errormsg: action.error, loading: false});
-        }
-        case CONFIGURE_EXPORTER: {
-            return assign({}, state, action.config);
-        }
-        default:
-            return state;
+    case SET_EXPORT_PARAMS: {
+        return assign({}, state, {params: action.params, errormsg: null});
+    }
+    case EXPORT_LOADING: {
+        return assign({}, state, {loading: action.loading});
+    }
+    case EXPORT_ERROR: {
+        return assign({}, state, {errormsg: action.error, loading: false});
+    }
+    case CONFIGURE_EXPORTER: {
+        return assign({}, state, action.config);
+    }
+    default:
+        return state;
     }
 }
 

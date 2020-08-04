@@ -54,7 +54,7 @@ function loadGridModel(wfsUrl, params) {
     });
 
     return (dispatch) => {
-        return axios.get(wfsUrl).then((response) => {
+        return axios.get(url).then((response) => { // TODO CHECK
             dispatch(configureGridData(response.data));
         }).catch((e) => {
             dispatch(configureGridError(e));
@@ -74,8 +74,8 @@ function loadGridModelWithFilter(wfsUrl, data, params, add = false) {
         dispatch(showLoading(true));
 
         return axios.post(url, data, {
-          timeout: 60000,
-          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+            timeout: 60000,
+            headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             dispatch(configureGridData(response.data, add));
         }).catch((e) => {
@@ -104,12 +104,12 @@ function loadFeaturesWithPagination(wfsUrl, data, params, requestId) {
         dispatch(showLoading(true));
 
         return axios.post(url, data, {
-          timeout: 60000,
-          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+            timeout: 60000,
+            headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
                 dispatch(configureGridDataWithPagination(response.data, requestId));
-            }else {
+            } else {
                 dispatch(configureGridError("GeoServer Exception, query fallita!"));
             }
         }).catch(() => {
@@ -151,12 +151,12 @@ function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
     return (dispatch) => {
         dispatch(createGridDataSource(pagination));
         return axios.post(url, data, {
-          timeout: 120000,
-          headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+            timeout: 120000,
+            headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
                 dispatch(updateTotalFeatures(response.data));
-            }else {
+            } else {
                 dispatch(configureGridError("GeoServer Exception, impossibile recuperare numero totale oggetti!"));
             }
         }).catch(() => {

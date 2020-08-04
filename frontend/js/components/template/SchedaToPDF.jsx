@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -16,53 +17,55 @@ const scheda2pdf = require('../../utils/ExportScheda');
 const Spinner = require('react-spinkit');
 const {endsWith} = require('lodash');
 
-const SchedaToPDF = React.createClass({
-    propTypes: {
-           card: React.PropTypes.shape({
-               mapImageReady: React.PropTypes.bool,
-               generatepdf: React.PropTypes.bool,
-               template: React.PropTypes.oneOfType([
-                       React.PropTypes.string,
-                       React.PropTypes.func]),
-               loadingCardTemplateError: React.PropTypes.oneOfType([
-                       React.PropTypes.string,
-                       React.PropTypes.object]),
-               xml: React.PropTypes.oneOfType([
-                       React.PropTypes.string])
-           }),
-           profile: React.PropTypes.array,
-           pdfname: React.PropTypes.string,
-           authParam: React.PropTypes.object,
-           withMap: React.PropTypes.bool,
-           generatePDF: React.PropTypes.func,
-           mapImageReady: React.PropTypes.func
-       },
-       getDefaultProps() {
-           return {
-               card: {
-                   template: "",
-                   xml: null,
-                   loadingCardTemplateError: null
-               },
-               pdfname: 'download.pdf',
-               profile: [],
-               withMap: true,
-               authParam: null,
-               open: false,
-               draggable: true,
-               // model: {},
-               toggleDetail: () => {}
-           };
-       },
-       componentWillReceiveProps(nextProps) {
-           if (nextProps.card && nextProps.card.mapImageReady) {
-               this.generatePDF();
-           }
-       },
-       shouldComponentUpdate(nextProps) {
-           return (nextProps.card && !nextProps.card.mapImageReady);
-       },
-       renderHtml() {
+class SchedaToPDF extends React.Component {
+    static propTypes = {
+        card: PropTypes.shape({
+            mapImageReady: PropTypes.bool,
+            generatepdf: PropTypes.bool,
+            template: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.func]),
+            loadingCardTemplateError: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.object]),
+            xml: PropTypes.oneOfType([
+                PropTypes.string])
+        }),
+        profile: PropTypes.array,
+        pdfname: PropTypes.string,
+        authParam: PropTypes.object,
+        withMap: PropTypes.bool,
+        generatePDF: PropTypes.func,
+        mapImageReady: PropTypes.func
+    };
+
+    static defaultProps = {
+        card: {
+            template: "",
+            xml: null,
+            loadingCardTemplateError: null
+        },
+        pdfname: 'download.pdf',
+        profile: [],
+        withMap: true,
+        authParam: null,
+        open: false,
+        draggable: true,
+        // model: {},
+        toggleDetail: () => {}
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.card && nextProps.card.mapImageReady) {
+            this.generatePDF();
+        }
+    }
+
+    shouldComponentUpdate(nextProps) {
+        return (nextProps.card && !nextProps.card.mapImageReady);
+    }
+
+    renderHtml = () => {
         const xml = this.props.card.xml;
         const authParam = this.props.authParam;
         const profile = this.props.profile;
@@ -77,42 +80,47 @@ const SchedaToPDF = React.createClass({
         }
         const Template = (
             <div ref={(el) => { this.getRef(el); }} className="scheda-sira-html" style={{"visibility": "hidden"}}>
-                 <TemplateSiraHtml template={this.props.card.template} model={model}/>
+                <TemplateSiraHtml template={this.props.card.template} model={model}/>
             </div>
-            );
+        );
         return Template;
-    },
-    renderMask() {
+    };
+
+    renderMask = () => {
         return (
             <div>
                 <div className="schedapdf-spinner">
-                        <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                    <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                 </div>
                 {this.renderHtml()}
             </div>);
-    },
+    };
+
     render() {
         return ( this.props.card && this.props.card.generatepdf && this.props.card.template && this.props.card.xml) ? (
             <div style={{'position': 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 1300,
                 backgroundColor: "rgba(10, 10, 10, 0.38)"}}>
                 {this.renderMask()}
             </div>) : null;
-    },
-    getRef(el) {
+    }
+
+    getRef = (el) => {
         this.el = el ? el : null;
         if (this.props.card && (this.props.card.mapImageReady || !this.props.withMap)) {
             this.generatePDF();
         }
-    },
-    generatePDF() {
+    };
+
+    generatePDF = () => {
         if (this.el) {
             const pdf = scheda2pdf(this.el);
             pdf.save(this.resolvePdfName());
             this.props.generatePDF();
             this.props.mapImageReady(false);
         }
-    },
-    resolvePdfName() {
+    };
+
+    resolvePdfName = () => {
         let name = this.props.pdfname;
         (name.match(/\{\{.+?\}\}/g) || []).forEach((placeholder) => {
             const el = placeholder.replace('{{', '').replace('}}', '');
@@ -120,9 +128,8 @@ const SchedaToPDF = React.createClass({
         });
         name = endsWith(name, ".pdf") ? name : `${name}.pdf`;
         return name;
-    }
-
-});
+    };
+}
 
 module.exports = connect((state) => {
     const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};

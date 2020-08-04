@@ -27,13 +27,13 @@ describe('Test correctness of the card template actions', () => {
                 expect(e).toExist();
                 expect(e).withArgs('templateConfigURL', 'modelConfigURL', 'wfsUrl');
                 done();
-            } catch(ex) {
+            } catch (ex) {
                 done(ex);
             }
         });
     });
 
-    /*it('loads an existing template file 2', (done) => {
+    /* it('loads an existing template file 2', (done) => {
         const template = "<Panel header={(<DetailTitle title='Autorizzazione Unica Ambientale (AUA ) - Recupero rifiuti' subtitle={['N°', model.numauth, 'del', model.dataauth]} id={model.id}/>)}>Scheda</Panel>";
 
         loadCardModelConfig(template, 'base/js/test-resources/testCardModelConfig.json', '')((e) => {
@@ -55,7 +55,7 @@ describe('Test correctness of the card template actions', () => {
                 expect(e).toExist();
                 expect(e.type).toBe(CARD_TEMPLATE_LOADED);
                 done();
-            } catch(ex) {
+            } catch (ex) {
                 done(ex);
             }
         });
@@ -67,7 +67,7 @@ describe('Test correctness of the card template actions', () => {
                 expect(e).toExist();
                 expect(e.type).toBe(CARD_TEMPLATE_LOAD_ERROR);
                 done();
-            } catch(ex) {
+            } catch (ex) {
                 done(ex);
             }
         });

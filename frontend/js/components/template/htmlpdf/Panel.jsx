@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,18 +8,22 @@
  */
 const React = require('react');
 
-const Panel = React.createClass({
-    propTypes: {
-        header: React.PropTypes.node
-    },
-    getDefaultProps() {
-    },
-    renderHeader() {
+class Panel extends React.Component {
+    static propTypes = {
+        header: PropTypes.node
+    };
+
+    static defaultProps = (function() {
+    }());
+
+    renderHeader = () => {
         return React.isValidElement(this.props.header) ? this.props.header : (<h3 className="pdf-title">{this.props.header}</h3>);
-    },
-    renderBody() {
+    };
+
+    renderBody = () => {
         return this.props.children ? this.props.children : null;
-    },
+    };
+
     render() {
         return this.props.children ? (
             <div className="pdf-panel">
@@ -27,6 +32,6 @@ const Panel = React.createClass({
             </div>
         ) : null;
     }
-});
+}
 
 module.exports = Panel;

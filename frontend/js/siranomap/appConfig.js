@@ -8,9 +8,10 @@
 module.exports = {
     pages: [
         { path: "/:profile", component: require('../containers/NoMap')}
-        ],
+    ],
     pluginsDef: {plugins: {}},
     initialState: {
+        mousePosition: {enabled: false},
         defaultState: {
             controls: {
                 toolbar: {
@@ -24,5 +25,8 @@ module.exports = {
             mousePosition: {enabled: true, crs: "EPSG:4326", showCenter: true}
         }
     },
+    // themeCfg: {
+    //     theme: "sira"
+    // },
     storeOpts: {}
 };

@@ -23,12 +23,12 @@ const ADD_URL_LEGEND = 'ADD_URL_LEGEND';
 const makeGetCapabilitiesUrl = (url) => {
     const parsed = urlUtil.parse(url, true);
     return urlUtil.format(assign({}, parsed, {search: null}, {
-         query: assign({
-             service: "WMS",
-             version: "1.3.0",
-             request: "GetCapabilities"
-         }, parsed.query)
-     }));
+        query: assign({
+            service: "WMS",
+            version: "1.3.0",
+            request: "GetCapabilities"
+        }, parsed.query)
+    }));
 };
 
 const makeGetLegendUrl = (url, layer) => {
@@ -62,7 +62,7 @@ function iterate(obj, param) {
                         for (let i = 0; i < obj[property].length; i++) {
                             obj[property][i].isLayer = true;
                         }
-                    }else {
+                    } else {
                         obj[property].isLayer = true;
                     }
                 }
@@ -97,15 +97,15 @@ function toggleLegendBox() {
 
 function legendLoaded() {
     return {
-      type: LEGEND_LOADED
-  };
+        type: LEGEND_LOADED
+    };
 }
 
 function legendLoadedError(error) {
     return {
-      type: LEGEND_LOADED_ERROR,
-      errorLoadLegend: error
-  };
+        type: LEGEND_LOADED_ERROR,
+        errorLoadLegend: error
+    };
 }
 
 
@@ -147,7 +147,7 @@ function loadLegend(url) {
             let tmpUrls = [];
             if (json && json.WMS_Capabilities && json.WMS_Capabilities.Service) {
                 infoLegend.serviceTitle = json.WMS_Capabilities.Service.Title;
-            }else {
+            } else {
                 infoLegend.serviceTitle = "";
             }
             for (let i = 0; i < layers.length; i++) {
@@ -162,7 +162,7 @@ function loadLegend(url) {
             }
             if (tmpUrls) {
                 infoLegend.urls = tmpUrls;
-            }else {
+            } else {
                 infoLegend.urls = [];
             }
             infoLegends.push(infoLegend);
@@ -191,7 +191,7 @@ function loadMetadata(idMetadato) {
             if (typeof response.data === 'object') {
                 if (response.data && (response.data.urlWMS || response.data.urlWFS)) {
                     response.data.showButtonLegend = 'block';
-                }else {
+                } else {
                     response.data.showButtonLegend = 'none';
                 }
                 dispatch(metadataLoaded(response.data));
@@ -199,7 +199,7 @@ function loadMetadata(idMetadato) {
             } else {
                 try {
                     JSON.parse(response.data);
-                } catch(e) {
+                } catch (e) {
                     dispatch(loadMetadataError('Configuration file for tiles broken: ' + e.message));
                 }
             }
@@ -227,4 +227,4 @@ module.exports = {
     legendLoadedError,
     loadLegend,
     loadLegends
-  };
+};

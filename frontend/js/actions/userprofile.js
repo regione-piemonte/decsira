@@ -81,14 +81,14 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                         cf: response.data.userIdentity.nome,
                         idProvider: response.data.userIdentity.idProvider,
                         profile: response.data.profile
-                   };
+                    };
                 }
                 response.data.user = user;
                 dispatch(userIdentityLoaded(response.data));
             } else {
                 try {
                     dispatch(userIdentityLoaded(JSON.parse(response.data)));
-                } catch(e) {
+                } catch (e) {
                     dispatch(userIdentityError('Error in getRolesForDigitalIdentity: ' + e.message));
                 }
             }
