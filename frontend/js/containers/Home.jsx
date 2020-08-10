@@ -28,7 +28,9 @@ const SiraSearchBar = require('../components/SiraSearchBar');
 class Home extends React.Component {
     static propTypes = {
         loadMetadata: PropTypes.func,
-        params: PropTypes.object,
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
         selectCategory: PropTypes.func,
         allCategory: PropTypes.object,
         resetObjectAndView: PropTypes.func
@@ -60,13 +62,13 @@ class Home extends React.Component {
                                     </div>
                                 </div>
                                 <SiraSearchBar
-                                    containerClasses="col-md-5 col-xs-12 ricerca-home catalog-search-container"
+                                    containerClasses="col-md-5 col-xs-12 ricerca-home catalog-search-container sira-ms2"
                                     searchClasses="home-search"
                                     addCategoriesSelector={false}
                                     onSearch={({text}) => {
                                         this.props.selectCategory(this.props.allCategory, 'objects');
                                         this.props.loadMetadata({params: {text}});
-                                        if (this.props?.params?.profile) {
+                                        if (this.props?.match?.params?.profile) {
                                             this.context.router.history.push('/dataset/${this.props.params.profile}/');
                                         } else {
                                             this.context.router.history.push('/dataset/');
@@ -103,7 +105,7 @@ class Home extends React.Component {
     selectCategory = (category, subcat) => {
         this.props.resetObjectAndView();
         this.props.selectCategory(category, subcat);
-        if (this.props?.params?.profile) {
+        if (this.props?.match?.params?.profile) {
             this.context.router.history.push('/dataset/${this.props.params.profile}/');
         } else {
             this.context.router.history.push('/dataset/');

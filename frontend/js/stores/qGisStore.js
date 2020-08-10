@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils');
+const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils').default;
 const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
-
-const {persistStore, autoRehydrate} = require('redux-persist');
+const {connectRouter} = require( 'connected-react-router');
+const history  = require( '../../MapStore2/web/client/stores/History').default;
 
 const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
 const assign = require('object-assign');
@@ -18,7 +18,8 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         ...appReducers,
         browser: require('../../MapStore2/web/client/reducers/browser'),
         locale: require('../../MapStore2/web/client/reducers/locale'),
-        controls: require('../../MapStore2/web/client/reducers/controls')
+        controls: require('../../MapStore2/web/client/reducers/controls'),
+        router: connectRouter(history)
     });
     const defaultState = initialState.defaultState;
 
@@ -35,12 +36,12 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         return newState;
     };
     let store;
-    if (storeOpts && storeOpts.persist) {
-        store = DebugUtils.createDebugStore(rootReducer, defaultState, [], autoRehydrate());
-        persistStore(store, storeOpts.persist, storeOpts.onPersist);
-    } else {
-        store = DebugUtils.createDebugStore(rootReducer, defaultState);
-    }
+    // if (storeOpts && storeOpts.persist) {
+    //     store = DebugUtils.createDebugStore(rootReducer(history), defaultState, [], autoRehydrate());
+    //     persistStore(store, storeOpts.persist, storeOpts.onPersist);
+    // } else {
+    store = DebugUtils.createDebugStore(rootReducer, defaultState);
+    // }
     SecurityUtils.setStore(store);
     return store;
 };

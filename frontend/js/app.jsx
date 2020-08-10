@@ -28,7 +28,6 @@ const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
  * ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', './translations']);
  */
 ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', '../translations']);
-ConfigUtils.setConfigProp('themePrefix', 'ms2');
 
 /**
  * Use a custom plugins configuration file with:

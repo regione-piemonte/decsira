@@ -7,11 +7,11 @@ var PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Node = require('../../MapStore2/web/client/components/TOC/Node');
-var GroupTitle = require('../../MapStore2/web/client/components/TOC/fragments/GroupTitle');
-var GroupChildren = require('../../MapStore2/web/client/components/TOC/fragments/GroupChildren');
-var VisibilityCheck = require('../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
+const React = require('react');
+const Node = require('../../MapStore2/web/client/components/TOC/Node');
+const GroupTitle = require('../../MapStore2/web/client/components/TOC/fragments/GroupTitle');
+const GroupChildren = require('../../MapStore2/web/client/components/TOC/fragments/GroupChildren');
+const VisibilityCheck = require('../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
 
 class Group extends React.Component {
     static propTypes = {

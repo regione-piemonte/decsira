@@ -67,7 +67,9 @@ const {selectFeatures} = require('../actions/featuregrid');
 
 class QGis extends React.Component {
     static propTypes = {
-        params: PropTypes.object,
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
         featureType: PropTypes.string,
         error: PropTypes.object,
         setProfile: PropTypes.func,
@@ -105,18 +107,18 @@ class QGis extends React.Component {
         };
         // profile is array with max length = 1
         let profile = [];
-        profile = (this.props.params && this.props?.params?.profile) ? this.props?.params?.profile : new Array(urlQuery.profile);
+        profile = (this.props.params && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
     }
 
     componentDidMount() {
         // profile is array with max length = 1
         let profile = [];
-        profile = (this.props.params && this.props?.params?.profile) ? this.props?.params?.profile : new Array(urlQuery.profile);
+        profile = (this.props.params && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
         if (!this.props.configLoaded && this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(
-                `assets/${this.props.featureType}.json`, {authkey: authParams[profile].authkey}, this.props.featureType, true);
+                `assets/${this.props.featureType}.json`, {authkey: authParams[profile]?.authkey}, this.props.featureType, true);
         }
     }
 
@@ -153,7 +155,7 @@ class QGis extends React.Component {
     renderQueryPanel = () => {
         return this.state.qGisType === "detail" || this.state.qGisType === "list" ? (
             <div className="qgis-spinner">
-                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
             </div>
         ) : (
             <SideQueryPanel
@@ -245,7 +247,7 @@ class QGis extends React.Component {
         this.props.loadCardTemplate(
             templateUrl,
             // this.props.detailsConfig.cardModelConfigUrl,
-            `${url}&FEATUREID=${id}${(this.props.profile.authParams.authkey ? "&authkey=" + this.props.profile.authParams.authkey : "")}`
+            `${url}&FEATUREID=${id}${(this.props?.profile?.authParams?.authkey ? "&authkey=" + this.props?.profile?.authParams?.authkey : "")}`
         );
     };
 }
