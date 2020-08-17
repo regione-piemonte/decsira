@@ -103,7 +103,6 @@ module.exports = {
         SharePlugin: require('../MapStore2/web/client/plugins/Share'),
         SnapshotPlugin: require('../MapStore2/web/client/plugins/Snapshot'),
         StyleEditorPlugin: require('../MapStore2/web/client/plugins/StyleEditor'),
-        TOCItemsSettingsPlugin: require('../MapStore2/web/client/plugins/TOCItemsSettings').default,
         ThematicLayerPlugin: require('../MapStore2/web/client/plugins/ThematicLayer'),
         ThemeSwitcherPlugin: require('../MapStore2/web/client/plugins/ThemeSwitcher'),
         TimelinePlugin: require('../MapStore2/web/client/plugins/Timeline'),

@@ -590,7 +590,7 @@ button.exporter-close.close {
        /* Safari and Chrome */
    -o-animation: cssShowBtnScheda 0s ease-in 1s forwards;
        /* Opera */
-   animation: cssShowBtnScheda 0s ease-in s forwards;
+   animation: cssShowBtnScheda 0s ease-in 1s forwards;
    -webkit-animation-fill-mode: forwards;
        animation-fill-mode: forwards;
 }
@@ -707,7 +707,7 @@ overflow-y: auto;
 
 .scheda-info {
     z-index: 1025;
-    top: -200px;
+    top: 100px;
     left: calc(50% - 250px);
     width: 650px;
     min-height: 450px;
@@ -715,6 +715,7 @@ overflow-y: auto;
     overflow-x:hidden;
 	box-shadow: 0 0 5px 1px rgba(94,94,94,1);
 	margin-bottom: 0px;
+    background-color: #FFFFFF;
 }
 
 .info-header {
@@ -788,4 +789,69 @@ overflow-y: auto;
 }
 .featuregrid-container .ftheader {
     color: #017f4f;
+}
+
+.toc-group-title {
+    background: rgb(240,240,240);
+    padding: 4px;
+    borderRadius: 4px;
+}
+.toc-default-group .visibility-check{
+    float: left;
+    margin-right: 2px;
+    margin-top: 5px;
+    margin-left: 2px;
+}
+.toc-group-children {
+    margin-left: 15px;
+}
+
+.Sortable {
+    position: relative;
+    display: block;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.SortableItem {
+    /*cursor: -webkit-grab; cursor:-moz-grab; cursor: grab;*/
+}
+
+.SortableItem.is-dragging {
+    cursor: move;
+    position: absolute;
+    z-index: 1688;
+    background-color: rgba(218, 218, 218, 0.8);;
+    border: 1px dashed #8E8E8E;
+    border-radius: 5px;
+    box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.28);
+}
+
+.SortableItem.is-placeholder {
+    border: 1px dashed #8E8E8E;
+    border-radius: 5px;
+}
+
+.SortableItem.is-undraggable {
+    cursor: not-allowed;
+}
+
+.TOC-Node-enter, .TOC-Node-leave {
+    transition: all 250ms ease-out;
+    -o-transition: all 250ms ease-out;
+    -moz-transition: all 250ms ease-out;
+    -webkit-transition: all 250ms ease-out;
+    overflow: hidden;
+}
+.TOC-Node-enter,.TOC-Node-leave.TOC-Node-leave-active {
+    opacity: 0;
+    transform: scale(1, 0);
+    transform-origin: top;
+}
+.TOC-Node-leave, .TOC-Node-enter.TOC-Node-enter-active {
+    opacity: 1;
+    transform: scale(1, 1);
+    transform-origin: top;
 }

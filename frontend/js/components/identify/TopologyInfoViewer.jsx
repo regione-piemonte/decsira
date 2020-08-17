@@ -117,7 +117,7 @@ class TopologyInfoViewer extends React.Component {
                         width: "60px",
                         top: "50%",
                         left: "40%"}}>
-                        <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                        <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
                     </div>
                 </div>
             );

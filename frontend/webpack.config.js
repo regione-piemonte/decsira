@@ -1,5 +1,6 @@
 const path = require('path');
 const extractThemesPlugin = require('./MapStore2/build/themes.js').extractThemesPlugin;
+const themeEntries = require('./MapStore2/build/themes.js').themeEntries;
 const assign = require('object-assign');
 
 module.exports = assign({}, require('./MapStore2/build/buildConfig')(
@@ -8,9 +9,7 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
         siranomap: path.join(__dirname, "js", "siranomap", "app"),
         qgis: path.join(__dirname, "js", "qGis", "app")
     },
-    {
-        "themes/sira": path.join(__dirname, "assets", "themes", "sira", "theme.less")
-    },
+    themeEntries,
     {
         base: __dirname,
         dist: path.join(__dirname, "dist"),
@@ -20,7 +19,7 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
     extractThemesPlugin,
     false,
     "/dist/",
-    null,
+    '.sira-ms2',
     null,
     {
         '@mapstore': path.resolve(__dirname, 'MapStore2/web/client'),
@@ -33,31 +32,37 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
         target: "http://mapstore.geo-solutions.it"
     }, {
         path: '/proxy',
-        pathRewrite: {'^/proxy': '/decsiraweb/proxy'},
-        host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it/"
+        target: "http://decsira-dev.geo-solutions.it/decsiraweb",
+        secure: false,
+        headers: {
+            host: "decsira-dev.geo-solutions.it"
+        },
+        changeOrigin: true
     }, {
         path: '/services/metadata',
-        pathRewrite: {'^/services/metadata': '/decsiraweb/services/metadata/'},
+        pathRewrite: {'^/services/metadata': '/decsiraweb/services/metadata'},
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it/"
+        target: "http://decsira-dev.geo-solutions.it"
     }, {
         path: '/services/iride',
-        pathRewrite: {'^/services/iride': '/decsiraweb/services/iride/'},
+        pathRewrite: {'^/services/iride': '/decsiraweb/services/iride'},
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it/"
+        target: "http://decsira-dev.geo-solutions.it"
     }, {
         path: '/decsiraweb/services/queryformconfig',
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it/"
+        target: "http://decsira-dev.geo-solutions.it"
     }, {
         path: '/geoserver/ows',
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it/"
+        target: "http://decsira-dev.geo-solutions.it",
+        headers: {
+            host: 'decsira-dev.geo-solutions.it'
+        }
     }, {
         path: '/territoriosliv1sisp',
         host: "localhost",
-        target: "https://tst-conoscenzaambientale.sistemapiemonte.it/"
+        target: "https://tst-conoscenzaambientale.sistemapiemonte.it"
     }]
 )
 );
