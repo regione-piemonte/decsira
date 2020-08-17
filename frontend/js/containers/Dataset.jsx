@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,9 +7,11 @@ const PropTypes = require('prop-types');
  */
 const React = require('react');
 const {connect} = require('react-redux');
+const PropTypes = require('prop-types');
 const {createSelector} = require('reselect');
 const { Tabs, Tab, Modal} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
+
 const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
@@ -29,7 +30,7 @@ const {setGridType} = require('../actions/grid');
 
 const Header = require('../components/Header');
 const SiraSearchBar = require('../components/SiraSearchBar');
-const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
+const TOC = require('../components/catalog/TOC');
 const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
 const Footer = require('../components/Footer');
@@ -135,7 +136,9 @@ class Dataset extends React.Component {
         loadMetadata: PropTypes.func,
         showInfoBox: PropTypes.func,
         setProfile: PropTypes.func,
-        params: PropTypes.object,
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
         activeFeatureType: PropTypes.string,
         loadFeatureTypeConfig: PropTypes.func,
         setActiveFeatureType: PropTypes.func,
@@ -166,22 +169,22 @@ class Dataset extends React.Component {
 
     componentWillMount() {
         const {nodesLoaded, loading, category} = this.props;
-        if (this.props?.params?.profile) {
-            this.props.setProfile(this.props?.params?.profile, authParams[this.props?.params?.profile]);
+        if (this.props?.match?.params?.profile) {
+            this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
-        // this.props.setProfile(this.props?.params?.profile, authParams[this.props?.params?.profile]);
+        // this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         if (!nodesLoaded && !loading && category && category.id) {
             this.loadMetadata({category: category});
         }
     }
 
     componentDidMount() {
-        document.body.className = "body_dataset";
+        document.body.className = "body_dataset sira-ms2";
     }
 
     componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
         if (!loading && this.props.map && this.props.map !== map) {
-            if (this.props?.params?.profile) {
+            if (this.props?.match?.params?.profile) {
                 this.context.router.history.push('/map/${this.props.params.profile}/');
             } else {
                 this.context.router.history.push('/map/');
@@ -207,7 +210,7 @@ class Dataset extends React.Component {
                     redirect: null
                 }
             });
-            if (this.props?.params?.profile) {
+            if (this.props?.match?.params?.profile) {
                 this.context.router.history.push(this.state.waitingForConfig.redirect + '${this.props.params.profile}/');
             } else {
                 this.context.router.history.push(this.state.waitingForConfig.redirect);
@@ -228,7 +231,7 @@ class Dataset extends React.Component {
     };
 
     renderSpinner = () => {
-        return (<div className="loading-container"><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
+        return (<div className="loading-container"><Spinner name={"three-bounce"} style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} noFadeIn/></div>);
     };
 
     renderUnauthorized = () => {
@@ -254,32 +257,34 @@ class Dataset extends React.Component {
                     <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
                 </div>
             </div>) : (<noscript key="categoriesSearch"/>);
+        const nodes = this.updateNodes(this.props.nodes);
         const tocObjects = (
-            <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? this.props.nodes : this.props.objects}>
+            <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? nodes : this.props.objects}>
                 { showCategories ?
-                    (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
+                    <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
-                            groups={this.props.nodes}
+                            node={nodes}
                             showInfoBox={this.showInfoBox}
                             addToMap={this.addToCart}
                         />
-                    </DefaultGroup>) : (<DefaultNode
+                    </DefaultGroup> :
+                    <DefaultNode
                         expandFilterPanel={this.openFilterPanel}
                         toggleSiraControl={this.searchAll}
                         flat
                         showInfoBox={this.showInfoBox}
                         addToMap={this.addToCart}
-                    />) }
+                    /> }
             </TOC>);
         const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
             node={v}
             onToggle={this.props.onToggle}
             addToMap={this.loadThematicView}
             showInfoBox={this.showInfoBox}
-        />)) : (<div/>);
+        />)) : <div/>;
         const objEl = [searchSwitch, tocObjects];
         return (
             <Tabs
@@ -376,7 +381,7 @@ class Dataset extends React.Component {
             if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
             }
-            if (this.props?.params?.profile) {
+            if (this.props?.match?.params?.profile) {
                 this.context.router.history.push('/full/${this.props.params.profile}/');
             } else {
                 this.context.router.history.push('/full/');
@@ -404,7 +409,7 @@ class Dataset extends React.Component {
             this.props.setGridType('all_results');
             this.props.toggleSiraControl('grid', true);
             this.props.setNodeInUse(node);
-            if (this.props?.params?.profile) {
+            if (this.props?.match?.params?.profile) {
                 this.context.router.history.push('/full/${this.props.params.profile}/');
             } else {
                 this.context.router.history.push('/full/');
@@ -418,6 +423,17 @@ class Dataset extends React.Component {
 
     goToHome = () => {
         this.context.router.history.push('/');
+    };
+
+    updateNodes = (nodes) => {
+        return nodes.map(node=> {
+            node.showComponent = true;
+            node.hide = false;
+            if (node.nodes) {
+                node.nodes = this.updateNodes(node.nodes);
+            }
+            return node;
+        });
     };
 }
 

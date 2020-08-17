@@ -135,7 +135,9 @@ MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 class Sira extends React.Component {
     static propTypes = {
         mode: PropTypes.string,
-        params: PropTypes.object,
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
         roles: PropTypes.object,
         profile: PropTypes.object,
         loadMapConfig: PropTypes.func,
@@ -168,7 +170,7 @@ class Sira extends React.Component {
     };
 
     componentWillMount() {
-        document.body.className = "body_map ms2";
+        document.body.className = "body_map sira-ms2";
         if (urlQuery.map) {
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
@@ -179,6 +181,7 @@ class Sira extends React.Component {
     }
 
     render() {
+        console.log("this.props.plugins", this.props.plugins);
         return (
             <div>
                 <Header
@@ -194,15 +197,15 @@ class Sira extends React.Component {
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
-                    <SidePanel auth={authParams[this.props?.params?.profile]} profile={this.props.profile.profile}/>
+                    <SidePanel auth={authParams[this.props?.match?.params?.profile]} profile={this.props.profile.profile}/>
                     <MapViewer
                         plugins={this.props.plugins}
                         params={this.props.viewerParams}
                     />
-                    <Card profile={this.props.profile.profile} authParam={authParams[this.props?.params?.profile]}/>
+                    <Card profile={this.props.profile.profile} authParam={authParams[this.props?.match?.params?.profile]}/>
                     <GetFeatureInfo
                         display={"accordion"}
-                        params={{authkey: this.props?.params?.profile ? authParams[this.props?.params?.profile].authkey : ''}}
+                        params={{authkey: this.props?.match?.params?.profile ? authParams[this.props?.match?.params?.profile].authkey : ''}}
                         profile={this.props.profile.profile}
                         key="getFeatureInfo"/>
                     <MetadataInfoBox panelStyle={{

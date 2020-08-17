@@ -30,6 +30,7 @@ const appReducers = {
 
 const startApp = () => {
     const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+    ConfigUtils.setConfigProp('translationsPath', ['../MapStore2/web/client/translations', '../translations']);
     const StandardApp = require('../../MapStore2/web/client/components/app/StandardApp');
 
     const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');

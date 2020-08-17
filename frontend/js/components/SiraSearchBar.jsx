@@ -9,13 +9,14 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {connect} = require('react-redux');
+const {createSelector} = require('reselect');
 const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 
 const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar').default;
 
 const {categorySelector} = require('../selectors/sira');
 const {selectCategory, searchTextChange, selectSubCategory} = require('../actions/siracatalog');
-const SearchCategories = connect(categorySelector)(require('../components/Mosaic'));
+const SearchCategories = require('../components/Mosaic');
 
 class SiraSearchBar extends React.Component {
     static propTypes = {
@@ -39,7 +40,8 @@ class SiraSearchBar extends React.Component {
         onTextChange: PropTypes.func,
         tileClick: PropTypes.func,
         selectSubCategory: PropTypes.func,
-        subcat: PropTypes.string
+        subcat: PropTypes.string,
+        tiles: PropTypes.array
     };
 
     static defaultProps = {
@@ -58,11 +60,12 @@ class SiraSearchBar extends React.Component {
     };
 
     renderPopover = () => {
-        const {serchCatliClasses, mosaicContainerClasses} = this.props;
+        const {serchCatliClasses, mosaicContainerClasses, tiles = []} = this.props;
         return (
             <Popover id="search-categories">
                 <SearchCategories
                     useLink={false}
+                    tiles={tiles}
                     className={mosaicContainerClasses}
                     liClass={serchCatliClasses}
                     tileClick={this.changeCategory}
@@ -118,11 +121,15 @@ class SiraSearchBar extends React.Component {
     };
 }
 
-module.exports = connect((state) => ( {
+
+module.exports = connect(createSelector([categorySelector, (state) => ({
     category: state.siracatalog && state.siracatalog.category || {},
     subcat: state.siracatalog && state.siracatalog.subcat,
     searchText: state.siracatalog && state.siracatalog.searchText
-}), {
+})], (category, state)=>({
+    tiles: category.tiles,
+    ...state
+})), {
     onTextChange: searchTextChange,
     tileClick: selectCategory,
     selectSubCategory

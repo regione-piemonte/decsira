@@ -11,22 +11,10 @@ module.exports = {
     ],
     pluginsDef: {plugins: {}},
     initialState: {
-        mousePosition: {enabled: false},
-        defaultState: {
-            controls: {
-                toolbar: {
-                    active: null,
-                    expanded: false
-                }
-            }
-        },
         mobile: {
             mapInfo: {enabled: true, infoFormat: 'text/html' },
             mousePosition: {enabled: true, crs: "EPSG:4326", showCenter: true}
         }
     },
-    // themeCfg: {
-    //     theme: "sira"
-    // },
     storeOpts: {}
 };

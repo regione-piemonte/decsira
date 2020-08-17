@@ -39,7 +39,6 @@ module.exports = {
         { path: "/full/", component: require('./containers/FullScreenPanel')},
         { path: "/full/:profile", component: require('./containers/FullScreenPanel')}
     ],
-    pluginsDef: require('./plugins.js'),
     initialState: {
         defaultState: {
             mousePosition: {enabled: false},
@@ -93,9 +92,7 @@ module.exports = {
         }
     },
     appReducers,
-    themeCfg: {
-        theme: "sira"
-    },
-    storeOpts: {
-    }
+    storeOpts: {persist: {
+        whitelist: ['security']
+    }}
 };

@@ -42,7 +42,8 @@ const mapConfig = require('../reducers/SiraMapConfig');
 
 const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils').default;
 const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
-
+const history = require('../../MapStore2/web/client/stores/History').default;
+const { connectRouter } = require('connected-react-router');
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
 const {CHANGE_BROWSER_PROPERTIES} = require('../../MapStore2/web/client/actions/browser');
 // const {persistStore, autoRehydrate} = require('redux-persist');
@@ -62,7 +63,8 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         mosaic: require('../reducers/mosaic'),
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
-        layers: () => {return null; }
+        layers: () => {return null; },
+        router: connectRouter(history)
     });
     const defaultState = initialState.defaultState;
     const mobileOverride = initialState.mobile;

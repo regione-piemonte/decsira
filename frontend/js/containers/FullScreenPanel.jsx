@@ -42,7 +42,9 @@ const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 
 class FullScreen extends React.Component {
     static propTypes = {
-        params: PropTypes.object,
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
         featureType: PropTypes.string,
         error: PropTypes.object,
         filterPanelExpanded: PropTypes.bool,
@@ -94,7 +96,7 @@ class FullScreen extends React.Component {
     }
 
     componentDidMount() {
-        document.body.className = "body_map";
+        document.body.className = "body_map sira-ms2";
     }
 
     componentWillReceiveProps(nextProps) {
@@ -110,7 +112,7 @@ class FullScreen extends React.Component {
                 this.props.toggleSiraControl('grid');
             }
             this.props.selectFeatures([]);
-            if (this.props?.params?.profile) {
+            if (this.props?.match?.params?.profile) {
                 this.context.router.history.push('/map/${this.props.params.profile}');
             } else {
                 this.context.router.history.push('/map/');
@@ -152,7 +154,7 @@ class FullScreen extends React.Component {
     render() {
         const {gridExpanded, profile, fTypeConfigLoading} = this.props;
         if (fTypeConfigLoading) {
-            return (<div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
+            return (<div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} name="three-bounce" noFadeIn/></div>);
         }
         let comp;
         if (gridExpanded) {
@@ -170,8 +172,8 @@ class FullScreen extends React.Component {
 
     toggleControl = () => {
         this.props.expandFilterPanel(false);
-        if (this.props?.params?.profile) {
-            this.context.router.history.push(`/dataset/${this.props.params.profile}/`);
+        if (this.props?.match?.params?.profile) {
+            this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);
         } else {
             this.context.router.history.push('/dataset/');
         }

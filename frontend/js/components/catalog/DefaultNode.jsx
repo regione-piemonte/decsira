@@ -7,9 +7,9 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Node = require('../../../MapStore2/web/client/components/TOC/Node');
-var Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
+const React = require('react');
+const Node = require('../../../MapStore2/web/client/components/TOC/Node');
+const Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
 const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../../../MapStore2/web/client/components/TOC/DefaultGroup');
 const glyphStyle = {"float": "right", cursor: 'pointer'};

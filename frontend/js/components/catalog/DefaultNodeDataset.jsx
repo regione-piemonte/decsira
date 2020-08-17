@@ -7,9 +7,9 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Node = require('../../../MapStore2/web/client/components/TOC/Node');
-var Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
+const React = require('react');
+const Node = require('../../../MapStore2/web/client/components/TOC/Node');
+const Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
 const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../../../MapStore2/web/client/components/TOC/DefaultGroup');
 const glyphStyle = {"float": "right", cursor: 'pointer'};
@@ -31,6 +31,8 @@ class DefaultNode extends React.Component {
     static defaultProps = {
         style: {},
         flat: false,
+        node: {},
+        groups: [],
         expandFilterPanel: () => {},
         onToggle: () => {},
         toggleSiraControl: () => {},
@@ -47,7 +49,7 @@ class DefaultNode extends React.Component {
                     <Glyphicon
                         style={glyphStyle}
                         key="addToMap"
-                        glyph="plus-sign"
+                        glyph="1-map"
                         onClick={()=>this.props.addToMap(this.props.node)}/>
                 </OverlayTrigger>
             )
@@ -85,7 +87,7 @@ class DefaultNode extends React.Component {
             );
         }
         return (
-            <Node animateCollapse={false} className={this.props.flat ? "toc-default-layer catalog-object flat" : "toc-default-layer catalog-object flat"} style={this.props.style} type="layer" {...other}>
+            <Node animateCollapse={false} className={"toc-default-layer catalog-object flat"} style={this.props.style} type="layer" {...other}>
                 <Title/>
                 <div className="layer-content">
                     <span className="layer-description" onClick={this.showInfoBox}>{this.props.node.text}</span>
