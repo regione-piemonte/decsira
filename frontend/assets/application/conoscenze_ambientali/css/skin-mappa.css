@@ -245,6 +245,11 @@
 #mapstore-navbar-container .dropdown-toggle, #mapstore-navbar-container .square-button {
     border-left: 1px solid #01603c;
 }
+#mapstore-drawermenu #mapstore-layers .toc-default-layer {
+    padding: 10px 0;
+    margin-top: 0;
+    box-shadow: none;
+}
 #mapstore-drawermenu #mapstore-layers .toc-default-layer .glyphicon {
     color: #333;
 }
@@ -253,6 +258,7 @@
 }
 #mapstore-drawermenu #mapstore-layers .toc-group-title {
     background: #eee none repeat scroll 0 0;
+    padding: 12px;
 }
 #sira-layer-settings .noUi-handle {
     background: #007e4f none repeat scroll 0 0;
@@ -273,8 +279,19 @@
     border: medium none;
     box-shadow: none;
 }
+#mapstore-drawermenu .nav-body {
+    overflow: auto !important;
+}
+#mapstore-drawermenu .navButtons .btn.square-button{
+    height: 45px;
+    width: 45px;
+    border-radius: 0;
+    padding: 0;
+    transition: all 100ms ease-in 0s;
+}
+
 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon {
-    font-size: 30px;
+    font-size: 24px;
 }
 .square-button .glyphicon {
     font-size: 30px;
@@ -518,8 +535,27 @@ header.navbar h1 a span {
 /*.ol-scale-line.ol-unselectable {*/
 /*    background-color: #017f4f !important;*/
 /*}*/
+
+#siratoc-layers .group-expanded .toc-layer-tool.visibility-check {
+    margin-top: 0;
+}
+#siratoc-layers .toc-group-title {
+    padding: 12px;
+}
+#siratoc-layers .toc-default-group .toc-group-children {
+    margin-left: 15px;
+}
+#siratoc-layers .toc-default-layer {
+    padding: 8px;
+    box-shadow: none;
+}
+#siracatalog .glyphicon-plus-sign:before{
+    content: "\F1DF";
+}
+
 #viewer .siracatalog-search-selector {
-    background-color: #017f4f;
+    background-color: #017f4f !important;
+    height: 50px;
 }
 #viewer .navbar-dx .dropdown-menu .dropdown-header, .navbar-home .dropdown-menu .dropdown-header {
     background-color: #017f4f!important;

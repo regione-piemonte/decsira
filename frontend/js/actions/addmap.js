@@ -17,7 +17,7 @@ const API = {
     wms: require('../utils/WMS')
 };
 const AddMapUtils = require('../utils/AddMapUtils');
-const {addServiceIncart, refreshNumberOfServices, addSiraLayers} = require('./cart');
+const {addServiceIncart, refreshNumberOfServices, addSiraLayers, updateSiraState} = require('./cart');
 const SIRA_RECORDS_LOADING = 'SIRA_RECORDS_LOADING';
 const SIRA_RECORDS_ERROR = 'SIRA_RECORDS_ERROR';
 const SIRA_RECORDS_LOADED = 'SIRA_RECORDS_LOADED';
@@ -117,12 +117,14 @@ function checkLayersInMap(getState, results, node) {
     return resultOk;
 }
 
-function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632') {
+function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632', layersms) {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
+        console.log("layersms", layersms);
         const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
             const resultOk = checkLayersInMap(getState, results, node);
+            dispatch(updateSiraState(layersms));
             dispatch(addSiraLayers(resultOk));
             dispatch(toggleAddMap(false));
         }).catch((e) => dispatch(recordsError(e)) );

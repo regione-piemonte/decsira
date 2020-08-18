@@ -9,9 +9,11 @@ var PropTypes = require('prop-types');
 
 var React = require('react');
 
-var TOC = require('../../MapStore2/web/client/components/TOC/TOC');
+// var TOC = require('../../MapStore2/web/client/components/TOC/TOC');
+var TOC = require('../components/catalog/TOC/TOC');
 var DefaultGroup = require('./Group');
-var DefaultLayer = require('../../MapStore2/web/client/components/TOC/DefaultLayer');
+// var DefaultLayer = require('../../MapStore2/web/client/components/TOC/DefaultLayer');
+var DefaultLayer = require('../components/catalog/TOC/DefaultLayer');
 
 var icon = require('./images/layers.png');
 

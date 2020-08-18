@@ -1,13 +1,13 @@
 {
-    "geoStoreUrl": "rest/geostore",
-    "geoserverUrl": "${url.geoserver}/geoserver",
-    "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
-  	"secureDecsirawebUrl": "${url.secure.decsiraweb}",
-    "decsirawebUrl": "${url.decsiraweb}",
-    "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
-    "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
-    "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
-    "useAuthenticationRules": true,
+  "geoStoreUrl": "rest/geostore",
+  "geoserverUrl": "http://decsira-dev.geo-solutions.it:8080/geoserver",
+  "secureGeoserverUrl": "http://decsira-dev.geo-solutions.it:8080/geoserver",
+  "secureDecsirawebUrl": "http://decsira-dev.geo-solutions.it:8082/decsiraweb/map.html",
+  "decsirawebUrl": "http://decsira-dev.geo-solutions.it:8082/decsiraweb/map.html",
+  "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
+  "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
+  "logOutService": "https://tst-conoscenzaambientale.sistemapiemonte.it/territoriosliv1sisp/Shibboleth.sso/Logout",
+  "useAuthenticationRules": true,
 
   "mailingList": "https://groups.google.com/forum/#!forum/mapstore-users",
   "printUrl": "pdf/info.json",
@@ -72,82 +72,6 @@
       },
       "maptype": {
         "mapType": "{context.mode === 'desktop' ? 'openlayers' : 'leaflet'}"
-      },
-      "catalog": {
-        "default": {
-          "newService": {
-            "url": "",
-            "type": "wms",
-            "title": "",
-            "isNew": true,
-            "autoload": false
-          },
-          "selectedService": "gs_stable_csw",
-          "services": {
-            "gs_stable_csw": {
-              "url": "https://gs-stable.geo-solutions.it/geoserver/csw",
-              "type": "csw",
-              "title": "GeoSolutions GeoServer CSW",
-              "autoload": true
-            },
-            "gs_stable_wms": {
-              "url": "https://gs-stable.geo-solutions.it/geoserver/wms",
-              "type": "wms",
-              "title": "GeoSolutions GeoServer WMS",
-              "autoload": false
-            },
-            "gs_stable_wmts": {
-              "url": "https://gs-stable.geo-solutions.it/geoserver/gwc/service/wmts",
-              "type": "wmts",
-              "title": "GeoSolutions GeoServer WMTS",
-              "autoload": false
-            }
-          },
-          "staticServices": {
-            "default_map_backgrounds": {
-              "type": "backgrounds",
-              "title": "defaultMapBackgroundsServiceTitle",
-              "autoload": true,
-              "backgrounds": [{
-                "type": "osm",
-                "title": "Open Street Map",
-                "name": "mapnik",
-                "source": "osm",
-                "group": "background"
-              }, {
-                "type": "tileprovider",
-                "title": "NASAGIBS Night 2012",
-                "provider": "NASAGIBS.ViirsEarthAtNight2012",
-                "name": "Night2012",
-                "source": "nasagibs",
-                "group": "background"
-              }, {
-                "type": "tileprovider",
-                "title": "OpenTopoMap",
-                "provider": "OpenTopoMap",
-                "name": "OpenTopoMap",
-                "source": "OpenTopoMap",
-                "group": "background"
-              }, {
-                "format": "image/jpeg",
-                "group": "background",
-                "name": "s2cloudless:s2cloudless",
-                "opacity": 1,
-                "title": "Sentinel 2 Cloudless",
-                "type": "wms",
-                "url": "https://1maps.geo-solutions.it/geoserver/wms",
-                "source": "s2cloudless",
-                "singleTile": false
-              }, {
-                "source": "ol",
-                "group": "background",
-                "title": "Empty Background",
-                "fixed": true,
-                "type": "empty"
-              }]
-            }
-          }
-        }
       },
       "locales": {
         "supportedLocales": {
@@ -375,18 +299,26 @@
       }, "Home", {
         "name": "TOC",
         "cfg": {
-          "activateMetedataTool": false,
-          "activateMapTitle": false,
-          "activateSortLayer": false,
-          "activateLayerFilterTool": false,
-          "activateQueryTool": false
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
+            }
+          }
         }
       }, "AddGroup", {
-        "name": "TOCItemsSettings",
-        "cfg": {
-          "width": 300
-        }
-      }, {
         "name": "Tutorial",
         "cfg": {
           "preset": "default_mobile_tutorial"
@@ -432,7 +364,81 @@
       },
       "FeedbackMask"
     ],
-    "desktop": [ "Details",
+    "desktop": [
+      {
+        "cfg": {
+          "columnProperties": {
+            "md": 12,
+            "sm": 12,
+            "xs": 12
+          },
+          "fluid": true
+        },
+        "name": "BackgroundSwitcher",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "backgroundSwither.tooltip"
+            },
+            "glyph": "1-map",
+            "position": 3
+          }
+        }
+      },{
+        "name": "TOC",
+        "cfg": {
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
+            }
+          }
+        }
+      },
+      {
+        "name": "Catalog",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "catalog.tooltip"
+            }
+          }
+        }
+      },
+      {
+        "name":"MetadataExplorer",
+        "cfg":{
+          "showGetCapLinks":false,
+          "addAuthentication":false,
+          "wrap":true,
+          "wrapWithPanel":false,
+          "closeGlyph":"1-close"
+        }
+      },
+      {
+        "name":"Snapshot",
+        "cfg":{
+          "wrap":true,
+          "wrapWithPanel":false,
+          "closeGlyph":"1-close",
+          "buttonStyle":"primary"
+        }
+      },
+    "Details",
       {
         "name": "Map",
         "cfg": {
@@ -511,20 +517,28 @@
       }, {
         "name": "TOC",
         "cfg": {
-          "activateMetedataTool": false,
-          "layerOptions": {
-            "legendOptions": {
-              "WMSLegendOptions": "forceLabels:on",
-              "scaleDependent": true,
-              "legendWidth": 12,
-              "legendHeight": 12
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
             }
           }
         }
       },
       "FilterLayer",
       "AddGroup",
-      "TOCItemsSettings",
       "Tutorial", "MapFooter", {
         "name": "Measure",
         "cfg": {
@@ -695,12 +709,25 @@
     }, {
       "name": "TOC",
       "cfg": {
-        "activateMapTitle": false,
-        "activateSettingsTool": false,
-        "activateMetedataTool": false,
-        "activateRemoveLayer": false
+        "visibilityCheckType": "glyph",
+        "settingsOptions": {
+          "includeCloseButton": false,
+          "closeGlyph": "1-close",
+          "asModal": false,
+          "buttonSize": "small"
+        },
+        "activateSettingsTool": true,
+        "activateLegendTool": true
+      },
+      "override": {
+        "DrawerMenu": {
+          "glyph": "1-layer",
+          "buttonConfig": {
+            "buttonClassName": "square-button no-border",
+            "tooltip": "toc.tooltip"
+          }
+        }
       }
-
     }, "AddGroup", "MapFooter", {
       "name": "Settings",
       "cfg": {

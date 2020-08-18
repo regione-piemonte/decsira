@@ -50,7 +50,7 @@ class Viste extends React.Component {
         return [(
             <Glyphicon
                 key="addToMap"
-                glyph="plus-sign"
+                glyph="1-map"
                 onClick={this.loadConfig}/>
         ) // ,
         // (<Glyphicon

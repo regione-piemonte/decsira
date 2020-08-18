@@ -29,8 +29,10 @@ const {loadNodeMapRecords, toggleAddMap, addLayers} = require('../actions/addmap
 
 const {tocSelector} = require('../selectors/sira');
 
-const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
-const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+// const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
+const TOC = require('../components/catalog/TOC');
+// const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+const DefaultGroup = require('../components/catalog/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNode');
 
 const SiraUtils = require('../utils/SiraUtils');

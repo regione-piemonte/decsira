@@ -325,7 +325,8 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
    content: "\33";
 }
 #siracatalog .toc-group-children {
-    margin-left: 0px !important;
+    margin-left: 0;
+    margin-right: 0;
 }
 #siracatalog .toc-default-group {
     padding: 0px !important;
@@ -388,6 +389,16 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
     flex-direction: row;
     height: 60px;
 }
+#siracatalog .catalog-search-container .MapSearchBar .input-group{
+    border-radius: 0;
+}
+#siracatalog .MapSearchBar .input-group .searchInput {
+    min-height: 48px;
+}
+#siracatalog .MapSearchBar .input-group .search-toolbar-options{
+    padding-top: 10px;
+}
+
 .catalog-search-container .MapSearchBar {
 position: relative;
 left: 0px !important;
@@ -488,10 +499,14 @@ flex: 3 1 80% !important;
 }
 #mapstore-drawermenu .nav-menu {
     max-width: 500px;
+    min-width: 400px;
 }
 
 .toc-default-layer .toc-title {
     max-width: 230px;
+    white-space: unset;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #SiraExporter .modal-body{
     padding-top: 0px;

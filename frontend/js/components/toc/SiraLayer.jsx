@@ -8,12 +8,12 @@ const PropTypes = require('prop-types');
  */
 
 var React = require('react');
-var Node = require('../../../MapStore2/web/client/components/TOC/Node');
-var VisibilityCheck = require('../../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
-var Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
+var Node = require('../catalog/TOC/Node');
+var VisibilityCheck = require('../catalog/TOC/fragments/VisibilityCheck');
+var Title = require('../catalog/TOC/fragments/Title');
 var InlineSpinner = require('../../../MapStore2/web/client/components/misc/spinners/InlineSpinner/InlineSpinner');
 
-const LayersTool = require('../../../MapStore2/web/client/components/TOC/fragments/LayersTool');
+const LayersTool = require('../catalog/TOC/fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
 const ConfirmButton = require('../../../MapStore2/web/client/components/buttons/ConfirmButton');
 const {Glyphicon} = require('react-bootstrap');

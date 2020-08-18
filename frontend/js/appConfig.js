@@ -24,7 +24,9 @@ const appReducers = {
     cart: require('./reducers/cart'),
     header: require('./reducers/header'),
     siraTree: require('./reducers/siraTree'),
-    treeData: require('./reducers/treeData')
+    treeData: require('./reducers/treeData'),
+    // layers: (state, action) => require('./reducers/siraLayers')(require('./reducers/siraLayers').initialState, action)
+    layers: require('./reducers/siraLayers')
 };
 
 module.exports = {

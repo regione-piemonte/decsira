@@ -15,7 +15,7 @@ const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_ST
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const getVector = (state) => {
-    return state.flat ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;
+    return state?.flat?.length > 0 ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;
 };
 
 const checkSelectLayer = (state, vector) => {
@@ -50,8 +50,661 @@ const cloneLayer = (layer) => {
     return newLayer;
 };
 
+const initialState = {
+    flat: [
+        {
+            type: 'ol',
+            title: 'None',
+            name: 'None',
+            source: 'ol',
+            group: 'background',
+            visibility: false,
+            id: 'None__0'
+        },
+        {
+            type: 'wms',
+            url: 'http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn',
+            name: 'SfondoCartRifBN',
+            title: 'Sfondo Cartografico BN',
+            group: 'background',
+            visibility: true,
+            format: 'image/png',
+            tiled: true,
+            tileSize: 512,
+            id: 'SfondoCartRifBN__1',
+            loading: false,
+            loadingError: false
+        },
+        {
+            type: 'wms',
+            url: 'http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif',
+            name: 'SfondoCartRif',
+            title: 'Sfondo Cartografico a colori',
+            group: 'background',
+            visibility: false,
+            format: 'image/png',
+            tiled: true,
+            tileSize: 512,
+            id: 'SfondoCartRif__2'
+        },
+        {
+            type: 'wms',
+            url: 'http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010',
+            name: 'OrtofotoRegione2010',
+            title: 'Ortoimmagini Piemonte 2009-2011',
+            group: 'background',
+            visibility: false,
+            format: 'image/png',
+            tiled: true,
+            id: 'OrtofotoRegione2010__3'
+        },
+        {
+            url: 'http://localhost/ags101free/services/acqua/Bacini_idrografici/MapServer/WmsServer?',
+            name: 'Bacini primo livello',
+            title: 'Bacini primo livello',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 654,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 654,
+            id: 'Bacini primo livello__5'
+        },
+        {
+            url: 'http://localhost/ags101free/services/acqua/Bacini_idrografici/MapServer/WmsServer?',
+            name: 'Bacini secondo livello',
+            title: 'Bacini secondo livello',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 654,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 654,
+            id: 'Bacini secondo livello__5'
+        },
+        {
+            url: 'http://localhost/ags101free/services/acqua/Bacini_idrografici/MapServer/WmsServer?',
+            name: 'Bacini terzo livello',
+            title: 'Bacini terzo livello',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 654,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 654,
+            id: 'Bacini terzo livello__6'
+        },
+        {
+            url: 'http://localhost/ags101free/services/Radioattivita/misure_radiometriche_nelle_acque/MapServer/WmsServer?',
+            name: 'Misure radiometriche nelle acque - Uranio 238 - Bq/kg',
+            title: 'Misure radiometriche nelle acque - Uranio 238 - Bq/kg',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 673,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 673,
+            id: 'Misure radiometriche nelle acque - Uranio 238 - Bq/kg__7'
+        },
+        {
+            url: 'http://localhost/ags101free/services/Radioattivita/misure_radiometriche_nelle_acque/MapServer/WmsServer?',
+            name: 'Misure radiometriche nelle acque - Uranio 234 - Bq/kg',
+            title: 'Misure radiometriche nelle acque - Uranio 234 - Bq/kg',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 673,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 673,
+            id: 'Misure radiometriche nelle acque - Uranio 234 - Bq/kg__8'
+        },
+        {
+            url: 'http://localhost/ags101free/services/Radioattivita/misure_radiometriche_nelle_acque/MapServer/WmsServer?',
+            name: 'Misure radiometriche nelle acque - Trizio - Bq/kg',
+            title: 'Misure radiometriche nelle acque - Trizio - Bq/kg',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 673,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 673,
+            id: 'Misure radiometriche nelle acque - Trizio - Bq/kg__9'
+        },
+        {
+            url: 'http://localhost/ags101free/services/Radioattivita/misure_radiometriche_nelle_acque/MapServer/WmsServer?',
+            name: 'Misure radiometriche nelle acque - Radon - Bq/kg',
+            title: 'Misure radiometriche nelle acque - Radon - Bq/kg',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 673,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 673,
+            id: 'Misure radiometriche nelle acque - Radon - Bq/kg__10'
+        },
+        {
+            url: 'http://localhost/ags101free/services/Radioattivita/misure_radiometriche_nelle_acque/MapServer/WmsServer?',
+            name: 'Misure radiometriche nelle acque - Beta - Bq/kg',
+            title: 'Misure radiometriche nelle acque - Beta - Bq/kg',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 673,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: false,
+            idnode: 673,
+            id: 'Misure radiometriche nelle acque - Beta - Bq/kg__11'
+        },
+        {
+            url: 'http://localhost/ags101free/services/Radioattivita/misure_radiometriche_nelle_acque/MapServer/WmsServer?',
+            name: 'Misure radiometriche nelle acque - Alfa - Bq/kg',
+            title: 'Misure radiometriche nelle acque - Alfa - Bq/kg',
+            bbox: {
+                crs: '4326',
+                bounds: {
+                    minx: -180,
+                    maxx: 180,
+                    miny: -90,
+                    maxy: 90
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'CRS:84': true,
+                'EPSG:4326': true,
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:102092': true,
+                'EPSG:3003': true,
+                'EPSG:102091': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:3857': true,
+                'EPSG:102100': true
+            },
+            siraId: 673,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Layers',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: true,
+            idnode: 673,
+            id: 'Misure radiometriche nelle acque - Alfa - Bq/kg__12',
+            loading: false,
+            loadingError: 'Error'
+        },
+        {
+            url: 'https://geomap.reteunitaria.piemonte.it/ws/esiri/rp-01/siriogc/wms_corpi_idrici_wfd?language=ita&',
+            name: 'AcquiferiProfondiStatChim',
+            title: 'Corpi idrici WFD acquiferi profondi - Stato Chimico 2009-2011',
+            bbox: {
+                crs: 'EPSG:32632',
+                bounds: {
+                    minx: '290748',
+                    miny: '4.86138e+06',
+                    maxx: '536649',
+                    maxy: '5.16517e+06'
+                }
+            },
+            params: {},
+            allowedSRS: {
+                'EPSG:32632': true,
+                'EPSG:32633': true,
+                'EPSG:23032': true,
+                'EPSG:3064': true,
+                'EPSG:4326': true,
+                'EPSG:4258': true,
+                'EPSG:3035': true,
+                'EPSG:3034': true,
+                'EPSG:3044': true,
+                'EPSG:3045': true,
+                'EPSG:3004': true,
+                'EPSG:3003': true,
+                'EPSG:23033': true,
+                'EPSG:3065': true,
+                'EPSG:32634': true,
+                'EPSG:4806': true,
+                'EPSG:4265': true,
+                'EPSG:4230': true,
+                'EPSG:4670': true,
+                'EPSG:4267': true,
+                'EPSG:4269': true,
+                'EPSG:900913': true,
+                'EPSG:25832': true,
+                'EPSG:3857': true
+            },
+            siraId: 146,
+            infoFormat: [
+                'text/html',
+                'text/plain'
+            ],
+            group: 'Corpi idrici WFD 2000/60/CE Triennio 2009-2011',
+            type: 'wms',
+            tiled: true,
+            tileSize: 512,
+            visibility: true,
+            idnode: 146,
+            id: 'AcquiferiProfondiStatChim__13',
+            loading: false,
+            loadingError: false
+        },
+        {
+            type: 'vector',
+            position: 1,
+            queryable: false,
+            visibility: true,
+            name: 'Selected Feature',
+            id: 'gridItems',
+            group: 'hidden',
+            style: {
+                type: 'Point',
+                radius: 10,
+                stroke: {
+                    width: 3,
+                    color: 'blue'
+                },
+                fill: {
+                    color: 'blue'
+                }
+            },
+            features: []
+        }
+    ],
+    groups: [
+        {
+            id: 'Corpi idrici WFD 2000/60/CE Triennio 2009-2011',
+            title: 'Corpi idrici WFD 2000/60/CE Triennio 2009-2011',
+            name: 'Corpi idrici WFD 2000/60/CE Triennio 2009-2011',
+            nodes: [
+                'AcquiferiProfondiStatChim__13'
+            ],
+            expanded: false
+        },
+        {
+            id: 'Layers',
+            title: 'Layers',
+            name: 'Layers',
+            nodes: [
+                'Misure radiometriche nelle acque - Alfa - Bq/kg__12',
+                'Misure radiometriche nelle acque - Beta - Bq/kg__11',
+                'Misure radiometriche nelle acque - Radon - Bq/kg__10',
+                'Misure radiometriche nelle acque - Trizio - Bq/kg__9',
+                'Misure radiometriche nelle acque - Uranio 234 - Bq/kg__8',
+                'Misure radiometriche nelle acque - Uranio 238 - Bq/kg__7',
+                'Bacini terzo livello__6',
+                'Bacini secondo livello__5',
+                'Bacini primo livello__5'
+            ],
+            expanded: false
+        }
+    ]
+};
+
 
 function layers(state = [], action) {
+    console.log("siraLayers.js");
     switch (action.type) {
     case CHANGE_TOPOLOGY_MAPINFO_STATE:
     case CHANGE_MAPINFO_STATE: {
@@ -112,23 +765,29 @@ function layers(state = [], action) {
         }
         return state;
     }
+    case 'UPDATE_SIRA_LAYER_STATE': {
+        return action.state;
+    }
     case 'SIRA_ADD_LAYERS': {
-        return action.layers.reduce((tempState, layer) => {
-            return msLayers(tempState, {type: 'ADD_LAYER', layer});
-        }, state );
+        // return msLayers(tempState, {type: 'ADD_LAYER', layer});
+        console.log("action.layers", action);
+        // const layersms = action.msLayers;
+        return action.layers.reduce((layersms, layer) => {
+            return msLayers(layersms, {type: 'ADD_LAYER', layer});
+        }, state);
     }
     default:
         return msLayers(state, action);
     }
 }
 
-function checkedLayers(state = [], action) {
-    const newState = layers(state, action);
-    if ( newState !== state) {
-        const vector = getVector(state);
-        return checkState(newState, vector);
-    }
-    return newState;
-}
+// function checkedLayers(state = [], action) {
+//     const newState = layers(state, action);
+//     if ( newState !== state) {
+//         const vector = getVector(state);
+//         return checkState(newState, vector);
+//     }
+//     return newState;
+// }
 
-module.exports = checkedLayers;
+module.exports = layers;

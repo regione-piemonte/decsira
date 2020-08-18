@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -79,10 +80,18 @@ function removeServiceFromCart(id) {
     };
 }
 
-function addSiraLayers(layers) {
+function addSiraLayers(layers, msLayers) {
     return {
         type: 'SIRA_ADD_LAYERS',
-        layers
+        layers,
+        msLayers
+    };
+}
+
+function updateSiraState(state) {
+    return {
+        type: 'UPDATE_SIRA_LAYER_STATE',
+        state
     };
 }
 
@@ -120,5 +129,6 @@ module.exports = {
     removeServiceFromCart,
     prepareDataToMap,
     addSiraLayers,
-    emptyCart
+    emptyCart,
+    updateSiraState
 };

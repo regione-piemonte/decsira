@@ -31,7 +31,8 @@ const {setGridType} = require('../actions/grid');
 const Header = require('../components/Header');
 const SiraSearchBar = require('../components/SiraSearchBar');
 const TOC = require('../components/catalog/TOC');
-const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+// const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+const DefaultGroup = require('../components/catalog/TOC/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
 const Footer = require('../components/Footer');
 

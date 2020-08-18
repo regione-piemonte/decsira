@@ -49,7 +49,7 @@ class Viste extends React.Component {
     renderVistaTools = () => {
         return [(<Glyphicon
             key="addToMap"
-            glyph="plus-sign"
+            glyph="1-map"
             onClick={this.loadConfig}/>) // ,
         // (<Glyphicon
         //     key="objects"
