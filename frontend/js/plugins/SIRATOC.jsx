@@ -31,8 +31,7 @@ const {setGridType} = require('../actions/grid');
 const tocSelector = createSelector(
     [
         (state) => state.controls && state.controls.toolbar && state.controls.toolbar.active === 'toc',
-        // groupsSelector,
-        (state) => state?.siraLayers?.groups?.length && groupsSelector(state?.siraLayers?.groups) || [],
+        groupsSelector,
         (state) => state.layers.settings || {expanded: false, options: {opacity: 1}},
         (state) => state.siradec && state.siradec.configOggetti,
         (state) => state.userprofile,
@@ -110,15 +109,9 @@ class LayerTree extends React.Component {
     };
 
     render() {
-        let groups = [{"id": "Layers", "title": "Layers", "name": "Layers", "nodes": [{"url": "http://localhost/ags101free/services/acqua/Bacini_idrografici/MapServer/WmsServer?", "name": "Bacini primo livello", "title": "Bacini primo livello", "bbox": {"crs": "4326", "bounds": {"minx": -180, "maxx": 180, "miny": -90, "maxy": 90}}, "params": {}, "allowedSRS": {"CRS:84": true, "EPSG:4326": true, "EPSG:32632": true, "EPSG:32633": true, "EPSG:23032": true, "EPSG:3064": true, "EPSG:4258": true, "EPSG:3035": true, "EPSG:3034": true, "EPSG:3044": true, "EPSG:3045": true, "EPSG:3004": true, "EPSG:102092": true, "EPSG:3003": true, "EPSG:102091": true, "EPSG:23033": true, "EPSG:3065": true, "EPSG:32634": true, "EPSG:4806": true, "EPSG:4265": true, "EPSG:4230": true, "EPSG:4670": true, "EPSG:4267": true, "EPSG:4269": true, "EPSG:3857": true, "EPSG:102100": true}, "siraId": 654, "infoFormat": ["text/html", "text/plain"], "group": "Layers", "type": "wms", "tiled": true, "tileSize": 512, "visibility": false, "idnode": 654, "id": "Bacini primo livello__6", "expanded": false}, {"url": "http://localhost/ags101free/services/acqua/Bacini_idrografici/MapServer/WmsServer?", "name": "Bacini secondo livello", "title": "Bacini secondo livello", "bbox": {"crs": "4326", "bounds": {"minx": -180, "maxx": 180, "miny": -90, "maxy": 90}}, "params": {}, "allowedSRS": {"CRS:84": true, "EPSG:4326": true, "EPSG:32632": true, "EPSG:32633": true, "EPSG:23032": true, "EPSG:3064": true, "EPSG:4258": true, "EPSG:3035": true, "EPSG:3034": true, "EPSG:3044": true, "EPSG:3045": true, "EPSG:3004": true, "EPSG:102092": true, "EPSG:3003": true, "EPSG:102091": true, "EPSG:23033": true, "EPSG:3065": true, "EPSG:32634": true, "EPSG:4806": true, "EPSG:4265": true, "EPSG:4230": true, "EPSG:4670": true, "EPSG:4267": true, "EPSG:4269": true, "EPSG:3857": true, "EPSG:102100": true}, "siraId": 654, "infoFormat": ["text/html", "text/plain"], "group": "Layers", "type": "wms", "tiled": true, "tileSize": 512, "visibility": false, "idnode": 654, "id": "Bacini secondo livello__5", "expanded": false}, {"url": "http://localhost/ags101free/services/acqua/Bacini_idrografici/MapServer/WmsServer?", "name": "Bacini terzo livello", "title": "Bacini terzo livello", "bbox": {"crs": "4326", "bounds": {"minx": -180, "maxx": 180, "miny": -90, "maxy": 90}}, "params": {}, "allowedSRS": {"CRS:84": true, "EPSG:4326": true, "EPSG:32632": true, "EPSG:32633": true, "EPSG:23032": true, "EPSG:3064": true, "EPSG:4258": true, "EPSG:3035": true, "EPSG:3034": true, "EPSG:3044": true, "EPSG:3045": true, "EPSG:3004": true, "EPSG:102092": true, "EPSG:3003": true, "EPSG:102091": true, "EPSG:23033": true, "EPSG:3065": true, "EPSG:32634": true, "EPSG:4806": true, "EPSG:4265": true, "EPSG:4230": true, "EPSG:4670": true, "EPSG:4267": true, "EPSG:4269": true, "EPSG:3857": true, "EPSG:102100": true}, "siraId": 654, "infoFormat": ["text/html", "text/plain"], "group": "Layers", "type": "wms", "tiled": true, "tileSize": 512, "visibility": false, "idnode": 654, "id": "Bacini terzo livello__5", "expanded": false}], "expanded": true, "visibility": false}];
-        console.log("this.props.groups", this.props.groups);
-        // if (!this.props.groups) {
-        //     return <div></div>;
-        // }
-        if (this.props.groups?.length) {
-            groups = this.props.groups;
+        if (!this.props.groups) {
+            return <div></div>;
         }
-        // const nodes = this.updateNodes(this.props.groups);
         const Group = ( <DefaultGroup animateCollapse={false} onSort={this.props.onSort}
             propertiesChangeHandler={this.props.groupPropertiesChangeHandler}
             onToggle={this.props.onToggleGroup}
@@ -143,14 +136,14 @@ class LayerTree extends React.Component {
             opacityText={<Message msgId="opacity"/>}
             saveText={<Message msgId="save"/>}
             closeText={<Message msgId="close"/>}
-            groups={groups}
+            groups={this.props.groups}
             expandFilterPanel={this.openFilterPanel}
             searchAll={this.searchAll}/>);
 
         return (
             <div>
                 <TOC id={"siratoc-layers"} onSort={this.props.onSort} filter={this.getNoBackgroundLayers}
-                    nodes={groups}>
+                    nodes={this.props.groups}>
                     <DefaultLayerOrGroup groupElement={Group} layerElement={Layer}/>
                 </TOC>
             </div>

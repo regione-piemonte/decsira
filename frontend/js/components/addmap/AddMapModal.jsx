@@ -13,9 +13,6 @@ const {Modal, Button} = require('react-bootstrap');
 const DraggableModalDialog = require('./DraggableModalDialog');
 const LayersTree = require('./LayersTree');
 const Spinner = require('react-spinkit');
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {layersSelector, groupsSelector} = require('../../../MapStore2/web/client/selectors/layers');
 
 class AddMapModal extends React.Component {
     static propTypes = {
@@ -26,9 +23,7 @@ class AddMapModal extends React.Component {
         show: PropTypes.bool,
         close: PropTypes.func,
         addLayers: PropTypes.func,
-        srs: PropTypes.string,
-        layers: PropTypes.array,
-        groups: PropTypes.array
+        srs: PropTypes.string
     };
 
     static contextTypes = {
@@ -113,13 +108,10 @@ class AddMapModal extends React.Component {
             const {useTitle, useGroup} = this.state;
             const selectedLayers = this.traverseRecords(records, flatLayers);
             if (selectedLayers.length > 0) {
-                this.props.addLayers(selectedLayers, useTitle, useGroup, this.props.srs, {flat: [...this.props.layers], groups: [...this.props.groups]});
+                this.props.addLayers(selectedLayers, useTitle, useGroup, this.props.srs);
             }
         }
     };
 }
-const selector = createSelector([layersSelector, groupsSelector], (layers, groups) => ({
-    layers,
-    groups
-}));
-module.exports = connect(selector, {})(AddMapModal);
+
+module.exports = AddMapModal;

@@ -6,71 +6,73 @@
  * LICENSE file in the root directory of this source tree.
  */
 const assign = require('object-assign');
-
-/*
-const allReducers = combineReducers({
-	mosaic: require('../reducers/mosaic'),
-    userprofile: require('../reducers/userprofile'),
-    mapInfo: require('../reducers/mapInfo'),
-    search: require('../../MapStore2/web/client/reducers/search'),
-    browser: require('../../MapStore2/web/client/reducers/browser'),
-    locale: require('../../MapStore2/web/client/reducers/locale'),
-    draw: require('../../MapStore2/web/client/reducers/draw'),
-    siraControls: require('../reducers/controls'),
-    controls: require('../../MapStore2/web/client/reducers/controls'),
-    locate: require('../../MapStore2/web/client/reducers/locate'),
-    measurement: require('../../MapStore2/web/client/reducers/measurement'),
-    routing: routeReducer,
-    queryform: queryform,
-    siradec: siradec,
-    map: () => {return null; },
-    layers: () => {return null; },
-    mapInitialConfig: () => {return null; },
-    cardtemplate: require('../reducers/card'),
-    featuregrid: require('../reducers/featuregrid'),
-    grid: grid
-});
-
-*/
 const {mapConfigHistory, createHistory} = require('../../MapStore2/web/client/utils/MapHistoryUtils');
 
-
 const map = mapConfigHistory(require('../../MapStore2/web/client/reducers/map'));
+
+const {createEpicMiddleware} = require('redux-observable');
+
+const ListenerEnhancer = require('@carnesen/redux-add-action-listener-enhancer').default;
+
+const { routerMiddleware, connectRouter } = require('connected-react-router');
+
+const layersEpics = require('../../MapStore2/web/client/epics/layers');
+const controlsEpics = require('../../MapStore2/web/client/epics/controls');
+const configEpics = require('../../MapStore2/web/client/epics/config');
+const timeManagerEpics = require('../../MapStore2/web/client/epics/dimension');
+const {persistMiddleware, persistEpic} = require('../../MapStore2/web/client/utils/StateUtils');
+
+const standardEpics = {
+    ...layersEpics,
+    ...controlsEpics,
+    ...timeManagerEpics,
+    ...configEpics
+};
+
 
 const layers = require('../reducers/siraLayers');
 const mapConfig = require('../reducers/SiraMapConfig');
 
 const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils').default;
-const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
-const history = require('../../MapStore2/web/client/stores/History').default;
-const { connectRouter } = require('connected-react-router');
+const {combineEpics, combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
 const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
 const {CHANGE_BROWSER_PROPERTIES} = require('../../MapStore2/web/client/actions/browser');
-// const {persistStore, autoRehydrate} = require('redux-persist');
 
 const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
 const SiraUtils = require('../utils/SiraUtils');
 
-module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins,
-    // storeOpts
-) => {
+module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
+    const history = storeOpts.noRouter ? null : require('../../MapStore2/web/client/stores/History').default;
     const allReducers = combineReducers(plugins, {
         ...appReducers,
         browser: require('../../MapStore2/web/client/reducers/browser'),
         locale: require('../../MapStore2/web/client/reducers/locale'),
         controls: require('../../MapStore2/web/client/reducers/controls'),
         help: require('../../MapStore2/web/client/reducers/help'),
+        maptype: require('../../MapStore2/web/client/reducers/maptype'),
+        maps: require('../../MapStore2/web/client/reducers/maps'),
+        maplayout: require('../../MapStore2/web/client/reducers/maplayout'),
+        version: require('../../MapStore2/web/client/reducers/version'),
+        mapPopups: require('../../MapStore2/web/client/reducers/mapPopups').default,
         mosaic: require('../reducers/mosaic'),
+        localConfig: require('../../MapStore2/web/client/reducers/localConfig'),
+        // locales: () => {return null; },
+        theme: require('../../MapStore2/web/client/reducers/theme').default,
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
+        mapConfigRawData: () => null,
         layers: () => {return null; },
-        router: connectRouter(history)
+        router: storeOpts.noRouter ? undefined : connectRouter(history)
     });
-    const defaultState = initialState.defaultState;
-    const mobileOverride = initialState.mobile;
+    const rootEpic = persistEpic(combineEpics(plugins, {...standardEpics, ...appEpics}));
+    const optsState = storeOpts.initialState || {defaultState: {}, mobile: {}};
+    const defaultState = assign({}, initialState.defaultState, optsState.defaultState);
+    const mobileOverride = assign({}, initialState.mobile, optsState.mobile);
+    const epicMiddleware = persistMiddleware(createEpicMiddleware(rootEpic));
 
     const rootReducer = (state, action) => {
         let mapState = createHistory(LayersUtils.splitMapAndLayers(mapConfig(state, action)));
+        console.log("mapState", mapState.map);
         let newState = {
             ...allReducers(state, action),
             map: mapState && mapState.map ? map(mapState.map, action) : null,
@@ -89,13 +91,41 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         return newState;
     };
     let store;
-    // TODO CHECK
-    // if (storeOpts && storeOpts.persist) {
-    //     store = DebugUtils.createDebugStore(rootReducer, defaultState, [], autoRehydrate());
-    //     persistStore(store, storeOpts.persist, storeOpts.onPersist);
-    // } else {
-    store = DebugUtils.createDebugStore(rootReducer, defaultState);
-    // }
+    let enhancer;
+    if (storeOpts && storeOpts.notify !== false) {
+        enhancer = ListenerEnhancer;
+    }
+    if (storeOpts && storeOpts.persist) {
+        storeOpts.persist.whitelist.forEach((fragment) => {
+            const fragmentState = localStorage.getItem('mapstore2.persist.' + fragment);
+            if (fragmentState) {
+                defaultState[fragment] = JSON.parse(fragmentState);
+            }
+        });
+        if (storeOpts.onPersist) {
+            setTimeout(() => {storeOpts.onPersist(); }, 0);
+        }
+    }
+
+    let middlewares = [epicMiddleware];
+    if (!storeOpts.noRouter) {
+        const reduxRouterMiddleware = routerMiddleware(history);
+        middlewares = [...middlewares, reduxRouterMiddleware];
+    }
+
+    store = DebugUtils.createDebugStore(rootReducer, defaultState, middlewares, enhancer);
+    if (storeOpts && storeOpts.persist) {
+        const persisted = {};
+        store.subscribe(() => {
+            storeOpts.persist.whitelist.forEach((fragment) => {
+                const fragmentState = store.getState()[fragment];
+                if (fragmentState && persisted[fragment] !== fragmentState) {
+                    persisted[fragment] = fragmentState;
+                    localStorage.setItem('mapstore2.persist.' + fragment, JSON.stringify(fragmentState));
+                }
+            });
+        });
+    }
     SecurityUtils.setStore(store);
     SiraUtils.setStore(store);
     return store;

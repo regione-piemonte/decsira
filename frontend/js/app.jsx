@@ -38,12 +38,61 @@ const initialActions = [
     () => loadVersion()
 ];
 
-const appConfig = require('./appConfig');
-const plugins = require('./plugins');
+// const appConfig = require('./appConfig');
+// const plugins = require('./plugins');
 
-require('../MapStore2/web/client/product/main')(appConfig, plugins,
-    (cfg) => ({
-        ...cfg,
-        initialActions
+const React = require('react');
+const ReactDOM = require('react-dom');
+const {connect} = require('react-redux');
+const {createSelector} = require('reselect');
+//
+const startApp = () => {
+    const StandardApp = require('../MapStore2/web/client/components/app/StandardApp');
+    const {updateMapLayoutEpic} = require('../MapStore2/web/client/epics/maplayout');
+    const {versionSelector} = require('../MapStore2/web/client/selectors/version');
+
+
+    const {pages, pluginsDef, initialState, storeOpts, appReducers} = require('./appConfig');
+
+    const routerSelector = createSelector(state => state.locale, state=>versionSelector(state), (locale, version) => ({
+        locale: locale || {},
+        version,
+        // themeCfg: {
+        //     theme: "sira"
+        // },
+        pages
     }));
+
+    const StandardRouter = connect(routerSelector)(require('../MapStore2/web/client/components/app/StandardRouter').default);
+
+    const appStore = require('./stores/store').bind(null, initialState, appReducers, {updateMapLayoutEpic});
+
+    const appConfig = {
+        storeOpts,
+        appStore,
+        pluginsDef,
+        initialActions,
+        appComponent: StandardRouter,
+        mode: "desktop"
+    };
+
+
+    ReactDOM.render(
+        <StandardApp {...appConfig}/>,
+        document.getElementById('container')
+    );
+};
+
+if (!global.Intl ) {
+    // Ensure Intl is loaded, then call the given callback
+    LocaleUtils.ensureIntl(startApp);
+} else {
+    startApp();
+}
+
+// require('../MapStore2/web/client/product/main')(appConfig, plugins,
+//     (cfg) => ({
+//         ...cfg,
+//         initialActions
+//     }));
 

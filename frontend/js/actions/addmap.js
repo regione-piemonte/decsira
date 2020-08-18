@@ -117,14 +117,12 @@ function checkLayersInMap(getState, results, node) {
     return resultOk;
 }
 
-function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632', layersms) {
+function addLayers(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     return (dispatch, getState) => {
         const node = ((getState()).addmap || {}).node;
-        console.log("layersms", layersms);
         const layersConfig = layers.slice().reverse().map((layer) => AddMapUtils.getLayerConfing(layer, srs, useTitle, useGroup, {}, node));
         Promise.all(layersConfig).then((results) => {
             const resultOk = checkLayersInMap(getState, results, node);
-            dispatch(updateSiraState(layersms));
             dispatch(addSiraLayers(resultOk));
             dispatch(toggleAddMap(false));
         }).catch((e) => dispatch(recordsError(e)) );

@@ -24,9 +24,8 @@ const appReducers = {
     cart: require('./reducers/cart'),
     header: require('./reducers/header'),
     siraTree: require('./reducers/siraTree'),
-    treeData: require('./reducers/treeData'),
-    // layers: (state, action) => require('./reducers/siraLayers')(require('./reducers/siraLayers').initialState, action)
-    layers: require('./reducers/siraLayers')
+    treeData: require('./reducers/treeData')
+    // layers: require('./reducers/siraLayers')
 };
 
 module.exports = {
@@ -41,6 +40,7 @@ module.exports = {
         { path: "/full/", component: require('./containers/FullScreenPanel')},
         { path: "/full/:profile", component: require('./containers/FullScreenPanel')}
     ],
+    pluginsDef: require('./plugins'),
     initialState: {
         defaultState: {
             mousePosition: {enabled: false},
@@ -94,7 +94,5 @@ module.exports = {
         }
     },
     appReducers,
-    storeOpts: {persist: {
-        whitelist: ['security']
-    }}
+    storeOpts: {}
 };

@@ -80,18 +80,10 @@ function removeServiceFromCart(id) {
     };
 }
 
-function addSiraLayers(layers, msLayers) {
+function addSiraLayers(layers) {
     return {
         type: 'SIRA_ADD_LAYERS',
-        layers,
-        msLayers
-    };
-}
-
-function updateSiraState(state) {
-    return {
-        type: 'UPDATE_SIRA_LAYER_STATE',
-        state
+        layers
     };
 }
 
@@ -129,6 +121,5 @@ module.exports = {
     removeServiceFromCart,
     prepareDataToMap,
     addSiraLayers,
-    emptyCart,
-    updateSiraState
+    emptyCart
 };
