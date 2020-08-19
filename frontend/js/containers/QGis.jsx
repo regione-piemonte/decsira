@@ -155,7 +155,7 @@ class QGis extends React.Component {
     renderQueryPanel = () => {
         return this.state.qGisType === "detail" || this.state.qGisType === "list" ? (
             <div className="qgis-spinner">
-                <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
             </div>
         ) : (
             <SideQueryPanel

@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,11 +6,12 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Node = require('./Node');
-var GroupTitle = require('./fragments/GroupTitle');
-var GroupChildren = require('./fragments/GroupChildren');
+const React = require('react');
+const Node = require('./Node');
+const GroupTitle = require('./fragments/GroupTitle');
+const GroupChildren = require('./fragments/GroupChildren');
 const VisibilityCheck = require('./fragments/VisibilityCheck');
+const PropTypes = require('prop-types');
 
 class DefaultGroup extends React.Component {
     static propTypes = {
@@ -40,7 +40,6 @@ class DefaultGroup extends React.Component {
 
     render() {
         let {children, onToggle, ...other } = this.props;
-        console.log("node", this.props.node);
         return (
             <Node className="toc-default-group" sortableStyle={this.props.sortableStyle} style={this.props.style} type="group" {...other}>
                 { this.props.groupVisibilityCheckbox &&

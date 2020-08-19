@@ -46,12 +46,9 @@ const tocSelector = createSelector(
     })
 );
 
-// const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
-const TOC = require('../components/catalog/TOC');
-// const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/DefaultLayerOrGroup');
-const DefaultLayerOrGroup = require('../components/catalog/TOC/DefaultLayerOrGroup');
-// const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
-const DefaultGroup = require('../components/catalog/TOC/DefaultGroup');
+const TOC = require('../components/toc/TOC');
+const DefaultLayerOrGroup = require('../components/toc/DefaultLayerOrGroup');
+const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultLayer = require('../components/toc/SiraLayer');
 
 class LayerTree extends React.Component {
@@ -172,17 +169,6 @@ class LayerTree extends React.Component {
     showInfoBox = (node) => {
         this.props.loadMetadata(node);
         this.props.showInfoBox();
-    };
-
-    updateNodes = (nodes) => {
-        return nodes.map(node=> {
-            node.showComponent = true;
-            node.hide = false;
-            if (node.nodes) {
-                node.nodes = this.updateNodes(node.nodes);
-            }
-            return node;
-        });
     };
 }
 

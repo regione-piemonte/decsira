@@ -50,11 +50,7 @@ class Viste extends React.Component {
         return [(<Glyphicon
             key="addToMap"
             glyph="1-map"
-            onClick={this.loadConfig}/>) // ,
-        // (<Glyphicon
-        //     key="objects"
-        //     glyph="list-alt"
-        //     onClick={()=> this.props.onToggle(this.props.node.id, expanded)}/>)
+            onClick={this.loadConfig}/>)
         ];
     };
 

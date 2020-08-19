@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -9,6 +8,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {Glyphicon} = require('react-bootstrap');
+const PropTypes = require('prop-types');
 
 class Viste extends React.Component {
     static propTypes = {
@@ -52,12 +52,7 @@ class Viste extends React.Component {
                 key="addToMap"
                 glyph="1-map"
                 onClick={this.loadConfig}/>
-        ) // ,
-        // (<Glyphicon
-        //     key="objects"
-        //     glyph="list-alt"
-        //     onClick={()=> this.props.onToggle(this.props.node.id, expanded)}/>)
-        ];
+        )];
     };
 
     render() {

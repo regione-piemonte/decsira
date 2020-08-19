@@ -8,13 +8,10 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-// const Node = require('../../../MapStore2/web/client/components/TOC/Node');
-const Node = require('../catalog/TOC/Node');
-// const Title = require('../../../MapStore2/web/client/components/TOC/fragments/Title');
-const Title = require('../catalog/TOC/fragments/Title');
+const Node = require('../toc/Node');
+const Title = require('../toc/fragments/Title');
 const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
-// const DefaultGroup = require('../../../MapStore2/web/client/components/TOC/DefaultGroup');
-const DefaultGroup = require('../catalog/TOC/DefaultGroup');
+const DefaultGroup = require('../toc/DefaultGroup');
 const glyphStyle = {"float": "right", cursor: 'pointer'};
 
 class DefaultNode extends React.Component {

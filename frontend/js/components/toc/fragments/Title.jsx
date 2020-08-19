@@ -1,4 +1,3 @@
-var PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,28 +6,26 @@ var PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var {Glyphicon} = require('react-bootstrap');
+const React = require('react');
+require("./css/toctitle.css");
+const PropTypes = require('prop-types');
 
-class StatusIcon extends React.Component {
+class Title extends React.Component {
     static propTypes = {
         node: PropTypes.object,
         onClick: PropTypes.func
     };
 
-    static inheritedPropTypes = ['node', 'expanded'];
+    static inheritedPropTypes = ['node'];
 
     static defaultProps = {
-        node: null,
         onClick: () => {}
     };
 
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : true;
-        return (
-            <Glyphicon style={{marginRight: "8px"}} glyph={expanded ? "folder-open" : "folder-close"} />
-        );
+        return (<span className="toc-title" onClick={() => this.props.onClick(this.props.node.id || this.props.node.name, expanded)}>{this.props.node.title || this.props.node.name}</span>);
     }
 }
 
-module.exports = StatusIcon;
+module.exports = Title;

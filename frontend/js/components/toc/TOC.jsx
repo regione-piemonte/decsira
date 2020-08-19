@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
  *
@@ -8,14 +8,14 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
+require('./css/toc.css');
 
 class TOC extends React.Component {
     static propTypes = {
         filter: PropTypes.func,
         nodes: PropTypes.array,
         id: PropTypes.string,
-        onSort: PropTypes.func,
-        onError: PropTypes.func
+        onSort: PropTypes.func
     };
 
     static defaultProps = {
@@ -29,24 +29,25 @@ class TOC extends React.Component {
         let content = [];
         const filteredNodes = this.props.nodes.filter(this.props.filter);
         if (this.props.children) {
+            let i = 0;
             content = filteredNodes.map((node) => React.cloneElement(this.props.children, {
                 node: node,
-                parentNodeId: 'root',
-                onSort: this.props.onSort,
-                onError: this.props.onError,
-                key: node.name || node.id || 'default',
-                isDraggable: !!this.props.onSort && !(node.nodes && node.name === 'Default')
+                sortData: i++,
+                key: node.name || 'default',
+                isDraggable: !!this.props.onSort
             }));
         }
         if (this.props.onSort) {
             return (
-                <div id={this.props.id} className="mapstore-layers-container">
-                    {content}
-                </div>
+                <div id={this.props.id}>{content}</div>
             );
         }
-        return <div id={this.props.id} className="mapstore-layers-container">{content}</div>;
+        return <div id={this.props.id}>{content}</div>;
     }
+
+    handleSort = (reorder) => {
+        this.props.onSort('root', reorder);
+    };
 }
 
 module.exports = TOC;

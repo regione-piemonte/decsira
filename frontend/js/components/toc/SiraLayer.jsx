@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +6,14 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Node = require('../catalog/TOC/Node');
-var VisibilityCheck = require('../catalog/TOC/fragments/VisibilityCheck');
-var Title = require('../catalog/TOC/fragments/Title');
-var InlineSpinner = require('../../../MapStore2/web/client/components/misc/spinners/InlineSpinner/InlineSpinner');
+const React = require('react');
+const Node = require('./Node');
+const VisibilityCheck = require('./fragments/VisibilityCheck');
+const Title = require('./fragments/Title');
+const InlineSpinner = require('../../../MapStore2/web/client/components/misc/spinners/InlineSpinner/InlineSpinner');
+const PropTypes = require('prop-types');
 
-const LayersTool = require('../catalog/TOC/fragments/LayersTool');
+const LayersTool = require('./fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
 const ConfirmButton = require('../../../MapStore2/web/client/components/buttons/ConfirmButton');
 const {Glyphicon} = require('react-bootstrap');
@@ -81,7 +81,7 @@ class DefaultLayer extends React.Component {
         tools.push(
             <ConfirmButton key="removelayer"
                 text={(<Glyphicon glyph="1-close"/>)}
-                style={{"float": "right", cursor: "pointer", backgroundColor: "transparent", marginRight: 3, padding: 0, outline: "none"}}
+                style={{"float": "right", cursor: "pointer", borderColor: 'unset', backgroundColor: "transparent", marginRight: 3, padding: 0, outline: "none"}}
                 confirming={{text: "Sei sicuro",
                     style: {"float": "right", cursor: "pointer", marginTop: -5}}}
                 onConfirm={() => {

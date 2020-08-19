@@ -29,7 +29,6 @@ const standardEpics = {
     ...configEpics
 };
 
-
 const layers = require('../reducers/siraLayers');
 const mapConfig = require('../reducers/SiraMapConfig');
 
@@ -72,7 +71,6 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
 
     const rootReducer = (state, action) => {
         let mapState = createHistory(LayersUtils.splitMapAndLayers(mapConfig(state, action)));
-        console.log("mapState", mapState.map);
         let newState = {
             ...allReducers(state, action),
             map: mapState && mapState.map ? map(mapState.map, action) : null,

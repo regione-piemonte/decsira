@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -9,6 +8,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 require('./css/groupchildren.css');
+const PropTypes = require('prop-types');
 
 class GroupChildren extends React.Component {
     static propTypes = {

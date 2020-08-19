@@ -29,10 +29,8 @@ const {loadNodeMapRecords, toggleAddMap, addLayers} = require('../actions/addmap
 
 const {tocSelector} = require('../selectors/sira');
 
-// const TOC = require('../../MapStore2/web/client/components/TOC/TOC');
-const TOC = require('../components/catalog/TOC');
-// const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
-const DefaultGroup = require('../components/catalog/TOC/DefaultGroup');
+const TOC = require('../components/toc/TOC');
+const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNode');
 
 const SiraUtils = require('../utils/SiraUtils');
@@ -165,7 +163,7 @@ class LayerTree extends React.Component {
                 </Tabs>
                 {this.props.notAuthorized && this.renderUnauthorized()}
                 {this.props.loading ? (
-                    <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} name="three-bounce" noFadeIn/></div>) : null}
+                    <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>) : null}
                 <AddMapModal/>
             </div>);
     }

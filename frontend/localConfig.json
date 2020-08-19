@@ -1,12 +1,12 @@
 {
   "geoStoreUrl": "rest/geostore",
-  "geoserverUrl": "http://decsira-dev.geo-solutions.it:8080/geoserver",
-  "secureGeoserverUrl": "http://decsira-dev.geo-solutions.it:8080/geoserver",
-  "secureDecsirawebUrl": "http://decsira-dev.geo-solutions.it:8082/decsiraweb/map.html",
-  "decsirawebUrl": "http://decsira-dev.geo-solutions.it:8082/decsiraweb/map.html",
+  "geoserverUrl": "${url.geoserver}/geoserver",
+  "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
+  "secureDecsirawebUrl": "${url.secure.decsiraweb}",
+  "decsirawebUrl": "${url.decsiraweb}",
   "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
   "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
-  "logOutService": "https://tst-conoscenzaambientale.sistemapiemonte.it/territoriosliv1sisp/Shibboleth.sso/Logout",
+  "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
   "useAuthenticationRules": true,
 
   "mailingList": "https://groups.google.com/forum/#!forum/mapstore-users",
@@ -318,6 +318,16 @@
             }
           }
         }
+      },{
+        "name": "Catalog",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "catalog.tooltip"
+            }
+          }
+        }
       }, "AddGroup", {
         "name": "Tutorial",
         "cfg": {
@@ -366,26 +376,6 @@
     ],
     "desktop": [
       {
-        "cfg": {
-          "columnProperties": {
-            "md": 12,
-            "sm": 12,
-            "xs": 12
-          },
-          "fluid": true
-        },
-        "name": "BackgroundSwitcher",
-        "override": {
-          "DrawerMenu": {
-            "buttonConfig": {
-              "buttonClassName": "square-button no-border",
-              "tooltip": "backgroundSwither.tooltip"
-            },
-            "glyph": "1-map",
-            "position": 3
-          }
-        }
-      },{
         "name": "TOC",
         "cfg": {
           "visibilityCheckType": "glyph",
@@ -419,16 +409,7 @@
           }
         }
       },
-      {
-        "name":"MetadataExplorer",
-        "cfg":{
-          "showGetCapLinks":false,
-          "addAuthentication":false,
-          "wrap":true,
-          "wrapWithPanel":false,
-          "closeGlyph":"1-close"
-        }
-      },
+
       {
         "name":"Snapshot",
         "cfg":{
@@ -514,28 +495,6 @@
             {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
           ]
         }
-      }, {
-        "name": "TOC",
-        "cfg": {
-          "visibilityCheckType": "glyph",
-          "settingsOptions": {
-            "includeCloseButton": false,
-            "closeGlyph": "1-close",
-            "asModal": false,
-            "buttonSize": "small"
-          },
-          "activateSettingsTool": true,
-          "activateLegendTool": true
-        },
-        "override": {
-          "DrawerMenu": {
-            "glyph": "1-layer",
-            "buttonConfig": {
-              "buttonClassName": "square-button no-border",
-              "tooltip": "toc.tooltip"
-            }
-          }
-        }
       },
       "FilterLayer",
       "AddGroup",
@@ -550,11 +509,6 @@
         "name": "MapExport"
       }, {
         "name": "Settings",
-        "cfg": {
-          "wrap": true
-        }
-      }, {
-        "name": "MetadataExplorer",
         "cfg": {
           "wrap": true
         }
@@ -632,7 +586,7 @@
           "declineUrl" : "http://www.google.com"
         }
       },
-      "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
+      "OmniBar", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
       "WidgetsTray",
       "Timeline",
       "Playback",
@@ -728,6 +682,16 @@
           }
         }
       }
+    },{
+      "name": "Catalog",
+      "override": {
+        "DrawerMenu": {
+          "buttonConfig": {
+            "buttonClassName": "square-button no-border",
+            "tooltip": "catalog.tooltip"
+          }
+        }
+      }
     }, "AddGroup", "MapFooter", {
       "name": "Settings",
       "cfg": {
@@ -773,20 +737,11 @@
       "cfg": {
         "enableContextManager": true
       }
-    }, "Login","Language", "NavMenu", "Attribution", "ScrollTop", "Notifications"],
+    },"Language", "NavMenu", "Attribution", "ScrollTop", "Notifications"],
     "maps": ["HomeDescription", "Fork", "MapSearch", "CreateNewMap", "FeaturedMaps", "ContentTabs",
 
       {
         "name": "Maps",
-        "cfg": {
-          "mapsOptions": {
-            "start": 0,
-            "limit": 12
-          },
-          "fluid": true
-        }
-      }, {
-        "name": "Dashboards",
         "cfg": {
           "mapsOptions": {
             "start": 0,
@@ -828,7 +783,7 @@
         "containerPosition": "header",
         "className": "navbar shadow navbar-home"
       }
-    }, "Login", "Language", "NavMenu", "DashboardSave", "DashboardSaveAs", "Attribution", "Home", {
+    }, "Language", "NavMenu", "Attribution", "Home", {
       "name": "Share",
       "cfg": {
         "embedPanel": false,
@@ -836,17 +791,6 @@
       }
     },
       {
-        "name": "DashboardEditor",
-        "cfg": {
-          "catalog": {
-            "url": "https://gs-stable.geo-solutions.it/geoserver/csw",
-            "type": "csw",
-            "title": "GeoSolutions GeoServer CSW",
-            "autoload": true
-          },
-          "containerPosition": "columns"
-        }
-      }, {
         "name": "QueryPanel",
         "cfg": {
           "toolsOptions": {

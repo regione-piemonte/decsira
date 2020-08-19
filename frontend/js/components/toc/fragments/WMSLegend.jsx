@@ -6,29 +6,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Legend = require('./legend/Legend');
+const React = require('react');
+const Legend = require('./legend/Legend');
+const PropTypes = require('prop-types');
 
-var WMSLegend = React.createClass({
-    propTypes: {
-        node: React.PropTypes.object,
-        showOnlyIfVisible: React.PropTypes.bool
-    },
-    getDefaultProps() {
-        return {
-            showOnlyIfVisible: false
-        };
-    },
+class WMSLegend extends React.Component {
+    static propTypes = {
+        node: PropTypes.object,
+        showOnlyIfVisible: PropTypes.bool
+    };
+
+    static defaultProps = {
+        showOnlyIfVisible: false
+    };
+
     render() {
         let node = this.props.node || {};
         if (this.canShow(node) && node.type === "wms" && node.group !== "background") {
             return <div style={{marginLeft: "15px"}}><Legend layer={node}/></div>;
         }
         return null;
-    },
-    canShow(node) {
-        return node.visibility || !this.props.showOnlyIfVisible;
     }
-});
+
+    canShow = (node) => {
+        return node.visibility || !this.props.showOnlyIfVisible;
+    };
+}
 
 module.exports = WMSLegend;

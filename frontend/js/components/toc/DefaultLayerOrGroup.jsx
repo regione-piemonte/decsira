@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -6,7 +5,8 @@ const PropTypes = require('prop-types');
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var React = require('react');
+const React = require('react');
+const PropTypes = require('prop-types');
 
 class DefaultLayerOrGroup extends React.Component {
     static propTypes = {

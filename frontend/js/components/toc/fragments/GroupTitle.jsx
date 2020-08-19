@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -10,6 +9,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const StatusIcon = require('./StatusIcon');
 require("./css/grouptitle.css");
+const PropTypes = require('prop-types');
 
 class GroupTitle extends React.Component {
     static propTypes = {
@@ -22,9 +22,7 @@ class GroupTitle extends React.Component {
 
     static defaultProps = {
         onClick: () => {},
-        style: {
-
-        }
+        style: {}
     };
 
     render() {
