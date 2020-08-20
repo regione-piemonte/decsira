@@ -47,7 +47,7 @@ const tocSelector = createSelector(
 );
 
 const TOC = require('../components/toc/TOC');
-const DefaultLayerOrGroup = require('../components/toc/DefaultLayerOrGroup');
+const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/DefaultLayerOrGroup');
 const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultLayer = require('../components/toc/SiraLayer');
 

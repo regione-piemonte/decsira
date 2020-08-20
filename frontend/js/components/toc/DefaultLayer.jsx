@@ -1,6 +1,5 @@
-const PropTypes = require('prop-types');
 /**
- * Copyright 2015, GeoSolutions Sas.
+ * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -16,6 +15,7 @@ const WMSLegend = require('./fragments/WMSLegend');
 const ConfirmModal = require('../../../MapStore2/web/client/components/maps/modals/ConfirmModal');
 const LayersTool = require('./fragments/LayersTool');
 const Message = require('../../../MapStore2/web/client/components/I18N/Message');
+const PropTypes = require('prop-types');
 
 class DefaultLayer extends React.Component {
     static propTypes = {

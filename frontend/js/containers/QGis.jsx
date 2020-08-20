@@ -107,14 +107,14 @@ class QGis extends React.Component {
         };
         // profile is array with max length = 1
         let profile = [];
-        profile = (this.props.params && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
+        profile = (this.props?.match?.params?.profile && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
     }
 
     componentDidMount() {
         // profile is array with max length = 1
         let profile = [];
-        profile = (this.props.params && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
+        profile = (this.props?.match?.params?.profile && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
         if (!this.props.configLoaded && this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(

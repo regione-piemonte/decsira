@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, GeoSolutions Sas.
+ * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -11,10 +11,30 @@ const createReactClass = require('create-react-class');
 const assign = require('object-assign');
 const {CSSTransitionGroup} = require('react-transition-group');
 const PropTypes = require('prop-types');
+const cx = require('classnames');
 
+const SortableMixin = assign(require('./sortable/SortableItem'), {
+    renderWithSortable: function(item) {
+        var classNames = cx(assign({
+            'SortableItem': true,
+            'is-dragging': this.props._isDragging,
+            'is-undraggable': !this.props.isDraggable,
+            'is-placeholder': this.props._isPlaceholder
+        }), item.props.className || {});
+        return React.cloneElement(
+            this.props._isPlaceholder && this.getPlaceholderContent && Object.prototype.toString.call(this.getPlaceholderContent) === '[object Function]'
+                ? this.getPlaceholderContent() : item, {
+                className: classNames,
+                style: assign({}, item.props.style, this.props.sortableStyle),
+                key: this.props.sortableIndex,
+                onMouseDown: this.handleSortableItemMouseDown,
+                onMouseUp: this.handleSortableItemMouseUp
+            });
+    }
+});
 const Node = createReactClass({
     displayName: 'Node',
-
+    mixins: [SortableMixin],
     propTypes: {
         node: PropTypes.object,
         style: PropTypes.object,
@@ -58,10 +78,11 @@ const Node = createReactClass({
         if (this.props.animateCollapse) {
             collapsible = <CSSTransitionGroup transitionName="TOC-Node" transitionEnterTimeout={250} transitionLeaveTimeout={250}>{collapsible}</CSSTransitionGroup>;
         }
-        return (<div key={this.props.node.name} className={(expanded ? prefix + "-expanded" : prefix + "-collapsed") + " " + this.props.className} style={this.props.node.dummy ? {padding: 0} : nodeStyle} >
+        let content = (<div key={this.props.node.name} className={(expanded ? prefix + "-expanded" : prefix + "-collapsed") + " " + this.props.className} style={nodeStyle} >
             {this.renderChildren((child) => child && child.props.position !== 'collapsible')}
             {collapsible}
         </div>);
+        return this.props.isDraggable ? this.renderWithSortable(content) : content;
     }
 });
 

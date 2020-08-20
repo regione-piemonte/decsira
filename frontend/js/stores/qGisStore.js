@@ -13,7 +13,7 @@ const history  = require( '../../MapStore2/web/client/stores/History').default;
 
 const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
 const assign = require('object-assign');
-module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins, storeOpts) => {
+module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins) => {
     const allReducers = combineReducers(plugins, {
         ...appReducers,
         browser: require('../../MapStore2/web/client/reducers/browser'),
@@ -36,12 +36,7 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         return newState;
     };
     let store;
-    // if (storeOpts && storeOpts.persist) {
-    //     store = DebugUtils.createDebugStore(rootReducer(history), defaultState, [], autoRehydrate());
-    //     persistStore(store, storeOpts.persist, storeOpts.onPersist);
-    // } else {
     store = DebugUtils.createDebugStore(rootReducer, defaultState);
-    // }
     SecurityUtils.setStore(store);
     return store;
 };

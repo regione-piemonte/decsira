@@ -7,6 +7,7 @@
  */
 
 const React = require('react');
+const Sortable = require('../sortable/Sortable');
 require('./css/groupchildren.css');
 const PropTypes = require('prop-types');
 
@@ -40,7 +41,11 @@ class GroupChildren extends React.Component {
         }
         if (this.props.onSort) {
             return (
-                <div className="toc-group-children" >{content}</div>
+                <div className="toc-group-children" >
+                    <Sortable minDragDistance={5} onSort={this.handleSort}>
+                        {content}
+                    </Sortable>
+                </div>
             );
         }
         return (

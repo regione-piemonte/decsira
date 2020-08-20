@@ -1,5 +1,5 @@
 /**
- * Copyright 2015, GeoSolutions Sas.
+ * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -7,8 +7,9 @@
  */
 
 const React = require('react');
-const PropTypes = require('prop-types');
+const Sortable = require('./sortable/Sortable');
 require('./css/toc.css');
+const PropTypes = require('prop-types');
 
 class TOC extends React.Component {
     static propTypes = {
@@ -39,7 +40,11 @@ class TOC extends React.Component {
         }
         if (this.props.onSort) {
             return (
-                <div id={this.props.id}>{content}</div>
+                <div id={this.props.id}>
+                    <Sortable onSort={this.handleSort}>
+                        {content}
+                    </Sortable>
+                </div>
             );
         }
         return <div id={this.props.id}>{content}</div>;

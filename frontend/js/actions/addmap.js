@@ -1,11 +1,4 @@
 /**
- * Copyright 2017, GeoSolutions Sas.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- */
-/**
   * Copyright 2016, GeoSolutions Sas.
   * All rights reserved.
   *
@@ -17,7 +10,7 @@ const API = {
     wms: require('../utils/WMS')
 };
 const AddMapUtils = require('../utils/AddMapUtils');
-const {addServiceIncart, refreshNumberOfServices, addSiraLayers, updateSiraState} = require('./cart');
+const {addServiceIncart, refreshNumberOfServices, addSiraLayers} = require('./cart');
 const SIRA_RECORDS_LOADING = 'SIRA_RECORDS_LOADING';
 const SIRA_RECORDS_ERROR = 'SIRA_RECORDS_ERROR';
 const SIRA_RECORDS_LOADED = 'SIRA_RECORDS_LOADED';

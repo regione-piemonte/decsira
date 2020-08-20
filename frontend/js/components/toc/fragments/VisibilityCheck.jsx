@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -11,6 +10,7 @@ const React = require('react');
 const {isFunction} = require('lodash');
 const LayersTool = require('./LayersTool');
 require("./css/visibilitycheck.css");
+const PropTypes = require('prop-types');
 
 class VisibilityCheck extends React.Component {
     static propTypes = {
