@@ -5,8 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const {addLayer} = require('../../MapStore2/web/client/actions/layers');
+const axios = require('@mapstore/libs/ajax');
+const {addLayer} = require('@mapstore/actions/layers');
 const {setSiraControl} = require('./controls');
 
 const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
@@ -25,7 +25,7 @@ const SET_TREE_FEATURE_TYPE = 'SET_TREE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');

@@ -90,7 +90,7 @@ class SchedaToPDF extends React.Component {
         return (
             <div>
                 <div className="schedapdf-spinner">
-                    <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                    <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                 </div>
                 {this.renderHtml()}
             </div>);

@@ -60,6 +60,11 @@
     text-decoration:none;
 }
 
+.modal-header{
+    background-color: #007e4f;
+    color: #ffffff;
+}
+
 .dhContainer{
     background-color: #F5F5F5;
     padding: 2px;
@@ -319,13 +324,14 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
     margin-top:10px;
 }
 #siracatalog .glyphicon-folder-open:before {
-   content: "\31";
+   content: "\F15A";
 }
 #siracatalog .glyphicon-folder-close:before {
-   content: "\33";
+   content: "\F15C";
 }
 #siracatalog .toc-group-children {
-    margin-left: 0px !important;
+    margin-left: 0;
+    margin-right: 0;
 }
 #siracatalog .toc-default-group {
     padding: 0px !important;
@@ -388,6 +394,16 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
     flex-direction: row;
     height: 60px;
 }
+#siracatalog .catalog-search-container .MapSearchBar .input-group{
+    border-radius: 0;
+}
+#siracatalog .MapSearchBar .input-group .searchInput {
+    min-height: 48px;
+}
+#siracatalog .MapSearchBar .input-group .search-toolbar-options{
+    padding-top: 10px;
+}
+
 .catalog-search-container .MapSearchBar {
 position: relative;
 left: 0px !important;
@@ -486,12 +502,12 @@ flex: 3 1 80% !important;
     top: 20px;
     font-size: 10px;
 }
-#mapstore-drawermenu .nav-menu {
-    max-width: 500px;
-}
 
 .toc-default-layer .toc-title {
-    max-width: 230px;
+    max-width: 150px;
+    white-space: unset;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #SiraExporter .modal-body{
     padding-top: 0px;

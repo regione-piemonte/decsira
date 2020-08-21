@@ -36,12 +36,12 @@ const FeatureGrid = connect((state) => {
         select: state.featuregrid && state.featuregrid.select || [],
         selectAllActive: state.featuregrid && state.featuregrid.selectAll
     };
-})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+})(require('../components/identify/featuregrid/FeatureGrid'));
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const Message = require('../../MapStore2/web/client/components/I18N/Message');
-const {reactCellRendererFactory} = require('../../MapStore2/web/client/components/style/ColorMapGridComponents/ReactCellRendererFactoryParams');
+const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 const GridCellDate = require('./GridCellDate');
 const GridCellNumber = require('./GridCellNumber');
@@ -434,7 +434,7 @@ class SiraGrid extends React.Component {
                             width: "60px",
                             top: "50%",
                             left: "45%"}}>
-                            <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                            <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                         </div>
                     </div>) : null}
 

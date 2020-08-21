@@ -111,7 +111,7 @@ class SidePanel extends React.Component {
                 width: "60px",
                 top: "50%",
                 left: "45%"}}>
-                <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
             </div>
         );
     };

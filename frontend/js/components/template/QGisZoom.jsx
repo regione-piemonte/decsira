@@ -7,9 +7,9 @@
  */
 const React = require('react');
 const PropTypes = require('prop-types');
-const CoordinatesUtils = require('../../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {Button} = require("react-bootstrap");
-// const img = require('../../../MapStore2/web/client/components/data/featuregrid/images/magnifier.png'); // TODO
+const img = require('../../../assets/img/magnifier.png'); // TODO
 class QGisZoom extends React.Component {
     static propTypes = {
         geometry: PropTypes.object,
@@ -26,7 +26,7 @@ class QGisZoom extends React.Component {
     render() {
         return this.props.geometry ? (
             <Button onClick={this.zoomTo} style={this.props.style}>
-                {/* <img src={""} width={16} alt={""}/>*/}
+                <img src={img} width={16}/>
             </Button>
         ) : null;
     }

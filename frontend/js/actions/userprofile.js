@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const axios = require('@mapstore/libs/ajax');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';

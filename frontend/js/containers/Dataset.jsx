@@ -30,8 +30,8 @@ const {setGridType} = require('../actions/grid');
 
 const Header = require('../components/Header');
 const SiraSearchBar = require('../components/SiraSearchBar');
-const TOC = require('../components/catalog/TOC');
-const DefaultGroup = require('../../MapStore2/web/client/components/TOC/DefaultGroup');
+const TOC = require('../components/toc/TOC');
+const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
 const Footer = require('../components/Footer');
 
@@ -231,7 +231,7 @@ class Dataset extends React.Component {
     };
 
     renderSpinner = () => {
-        return (<div className="loading-container"><Spinner name={"three-bounce"} style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} noFadeIn/></div>);
+        return (<div className="loading-container"><Spinner spinnerName={"three-bounce"} style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} noFadeIn/></div>);
     };
 
     renderUnauthorized = () => {

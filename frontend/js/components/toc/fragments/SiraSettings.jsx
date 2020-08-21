@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -11,11 +10,11 @@ const React = require('react');
 
 const Slider = require('react-nouislider');
 const {Label, Glyphicon} = require('react-bootstrap');
-const WMSLegend = require('../../../../MapStore2/web/client/components/TOC/fragments/WMSLegend');
+const WMSLegend = require('./WMSLegend');
 const assign = require('object-assign');
+const PropTypes = require('prop-types');
 
-
-require('./SiraSettings.css');
+require('./css/SiraSettings.css');
 const glyphStyle = {"float": "right", marginTop: 12, cursor: 'pointer'};
 
 class SiraSettings extends React.Component {
@@ -52,7 +51,7 @@ class SiraSettings extends React.Component {
     };
 
     renderLegend = () => {
-        const renderSTool = this.props.element.featureType ? true : false;
+        const renderSTool = !!this.props.element.featureType;
         return (
             <div key="legend" className={renderSTool ? "sira-toc-legend-with-tools" : "sira-toc-legend"}>
                 <WMSLegend node={this.props.element}/>
@@ -71,7 +70,7 @@ class SiraSettings extends React.Component {
 
     render() {
         const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && this.props.element.type === "wms";
-        const renderSTool = this.props.element.featureType ? true : false;
+        const renderSTool = !!this.props.element.featureType;
         const renderLegendTool = this.props.element.type !== "vector";
         return (<div id="sira-layer-settings">
             {renderLeg ? this.renderLegend() : this.renderOpacity()}

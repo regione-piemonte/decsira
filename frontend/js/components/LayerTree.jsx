@@ -1,4 +1,3 @@
-var PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -7,13 +6,13 @@ var PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
+const React = require('react');
 
-var TOC = require('../../MapStore2/web/client/components/TOC/TOC');
-var DefaultGroup = require('./Group');
-var DefaultLayer = require('../../MapStore2/web/client/components/TOC/DefaultLayer');
-
-var icon = require('./images/layers.png');
+const TOC = require('./toc/TOC');
+const DefaultGroup = require('./Group');
+const DefaultLayer = require('./toc/DefaultLayer');
+const PropTypes = require('prop-types');
+const icon = require('./images/layers.png');
 
 class LayerTree extends React.Component {
     static propTypes = {

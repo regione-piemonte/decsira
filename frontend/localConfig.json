@@ -1,13 +1,13 @@
 {
-    "geoStoreUrl": "rest/geostore",
-    "geoserverUrl": "${url.geoserver}/geoserver",
-    "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
-  	"secureDecsirawebUrl": "${url.secure.decsiraweb}",
-    "decsirawebUrl": "${url.decsiraweb}",
-    "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
-    "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
-    "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
-    "useAuthenticationRules": true,
+  "geoStoreUrl": "rest/geostore",
+  "geoserverUrl": "${url.geoserver}/geoserver",
+  "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
+  "secureDecsirawebUrl": "${url.secure.decsiraweb}",
+  "decsirawebUrl": "${url.decsiraweb}",
+  "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
+  "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
+  "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
+  "useAuthenticationRules": true,
 
   "mailingList": "https://groups.google.com/forum/#!forum/mapstore-users",
   "printUrl": "pdf/info.json",
@@ -72,82 +72,6 @@
       },
       "maptype": {
         "mapType": "{context.mode === 'desktop' ? 'openlayers' : 'leaflet'}"
-      },
-      "catalog": {
-        "default": {
-          "newService": {
-            "url": "",
-            "type": "wms",
-            "title": "",
-            "isNew": true,
-            "autoload": false
-          },
-          "selectedService": "gs_stable_csw",
-          "services": {
-            "gs_stable_csw": {
-              "url": "https://gs-stable.geo-solutions.it/geoserver/csw",
-              "type": "csw",
-              "title": "GeoSolutions GeoServer CSW",
-              "autoload": true
-            },
-            "gs_stable_wms": {
-              "url": "https://gs-stable.geo-solutions.it/geoserver/wms",
-              "type": "wms",
-              "title": "GeoSolutions GeoServer WMS",
-              "autoload": false
-            },
-            "gs_stable_wmts": {
-              "url": "https://gs-stable.geo-solutions.it/geoserver/gwc/service/wmts",
-              "type": "wmts",
-              "title": "GeoSolutions GeoServer WMTS",
-              "autoload": false
-            }
-          },
-          "staticServices": {
-            "default_map_backgrounds": {
-              "type": "backgrounds",
-              "title": "defaultMapBackgroundsServiceTitle",
-              "autoload": true,
-              "backgrounds": [{
-                "type": "osm",
-                "title": "Open Street Map",
-                "name": "mapnik",
-                "source": "osm",
-                "group": "background"
-              }, {
-                "type": "tileprovider",
-                "title": "NASAGIBS Night 2012",
-                "provider": "NASAGIBS.ViirsEarthAtNight2012",
-                "name": "Night2012",
-                "source": "nasagibs",
-                "group": "background"
-              }, {
-                "type": "tileprovider",
-                "title": "OpenTopoMap",
-                "provider": "OpenTopoMap",
-                "name": "OpenTopoMap",
-                "source": "OpenTopoMap",
-                "group": "background"
-              }, {
-                "format": "image/jpeg",
-                "group": "background",
-                "name": "s2cloudless:s2cloudless",
-                "opacity": 1,
-                "title": "Sentinel 2 Cloudless",
-                "type": "wms",
-                "url": "https://1maps.geo-solutions.it/geoserver/wms",
-                "source": "s2cloudless",
-                "singleTile": false
-              }, {
-                "source": "ol",
-                "group": "background",
-                "title": "Empty Background",
-                "fixed": true,
-                "type": "empty"
-              }]
-            }
-          }
-        }
       },
       "locales": {
         "supportedLocales": {
@@ -354,17 +278,13 @@
         }
       },
       {
-        "name": "Identify",
-        "showIn": ["Settings"],
-        "cfg": {
-          "showFullscreen": true,
-          "position": "bottom",
-          "size": 0.5,
-          "fluid": true,
-          "viewerOptions": {
-            "container": "{context.ReactSwipe}"
+        "name":"Info",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
           }
-        }
+        },
+        "hide": true
       }, {
         "name": "Locate",
         "override": {
@@ -375,18 +295,36 @@
       }, "Home", {
         "name": "TOC",
         "cfg": {
-          "activateMetedataTool": false,
-          "activateMapTitle": false,
-          "activateSortLayer": false,
-          "activateLayerFilterTool": false,
-          "activateQueryTool": false
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
+            }
+          }
+        }
+      },{
+        "name": "Catalog",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "catalog.tooltip"
+            }
+          }
         }
       }, "AddGroup", {
-        "name": "TOCItemsSettings",
-        "cfg": {
-          "width": 300
-        }
-      }, {
         "name": "Tutorial",
         "cfg": {
           "preset": "default_mobile_tutorial"
@@ -432,7 +370,52 @@
       },
       "FeedbackMask"
     ],
-    "desktop": [ "Details",
+    "desktop": [
+      {
+        "name": "TOC",
+        "cfg": {
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
+            }
+          }
+        }
+      },
+      {
+        "name": "Catalog",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "catalog.tooltip"
+            }
+          }
+        }
+      },
+
+      {
+        "name":"Snapshot",
+        "cfg":{
+          "wrap":true,
+          "wrapWithPanel":false,
+          "closeGlyph":"1-close",
+          "buttonStyle":"primary"
+        }
+      },
+    "Details",
       {
         "name": "Map",
         "cfg": {
@@ -469,19 +452,13 @@
         }
       },
       {
-        "name": "Identify",
-        "cfg": {
-          "showHighlightFeatureButton": true,
-          "viewerOptions": {
-            "container": "{context.ReactSwipe}"
-          },
-          "showEdit": true
-        },
+        "name":"Info",
         "override": {
           "Toolbar": {
-            "position": 11
+            "alwaysVisible": true
           }
-        }
+        },
+        "hide": true
       },
       {
         "name": "Locate",
@@ -508,23 +485,9 @@
             {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
           ]
         }
-      }, {
-        "name": "TOC",
-        "cfg": {
-          "activateMetedataTool": false,
-          "layerOptions": {
-            "legendOptions": {
-              "WMSLegendOptions": "forceLabels:on",
-              "scaleDependent": true,
-              "legendWidth": 12,
-              "legendHeight": 12
-            }
-          }
-        }
       },
       "FilterLayer",
       "AddGroup",
-      "TOCItemsSettings",
       "Tutorial", "MapFooter", {
         "name": "Measure",
         "cfg": {
@@ -536,11 +499,6 @@
         "name": "MapExport"
       }, {
         "name": "Settings",
-        "cfg": {
-          "wrap": true
-        }
-      }, {
-        "name": "MetadataExplorer",
         "cfg": {
           "wrap": true
         }
@@ -618,7 +576,7 @@
           "declineUrl" : "http://www.google.com"
         }
       },
-      "OmniBar", "Login", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
+      "OmniBar", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
       "WidgetsTray",
       "Timeline",
       "Playback",
@@ -668,23 +626,20 @@
         }
       }
     }, {
-      "name": "Identify",
-      "cfg": {
-        "showFullscreen": true,
-        "position": "bottom",
-        "size": 0.5,
-        "fluid": true,
-        "viewerOptions": {
-          "container": "{context.ReactSwipe}"
-        }
-      }
-    }, {
       "name": "ZoomAll",
       "override": {
         "Toolbar": {
           "alwaysVisible": true
         }
       }
+    },{
+      "name":"Info",
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": true
+        }
+      },
+      "hide": true
     }, {
       "name": "Locate",
       "override": {
@@ -695,12 +650,35 @@
     }, {
       "name": "TOC",
       "cfg": {
-        "activateMapTitle": false,
-        "activateSettingsTool": false,
-        "activateMetedataTool": false,
-        "activateRemoveLayer": false
+        "visibilityCheckType": "glyph",
+        "settingsOptions": {
+          "includeCloseButton": false,
+          "closeGlyph": "1-close",
+          "asModal": false,
+          "buttonSize": "small"
+        },
+        "activateSettingsTool": true,
+        "activateLegendTool": true
+      },
+      "override": {
+        "DrawerMenu": {
+          "glyph": "1-layer",
+          "buttonConfig": {
+            "buttonClassName": "square-button no-border",
+            "tooltip": "toc.tooltip"
+          }
+        }
       }
-
+    },{
+      "name": "Catalog",
+      "override": {
+        "DrawerMenu": {
+          "buttonConfig": {
+            "buttonClassName": "square-button no-border",
+            "tooltip": "catalog.tooltip"
+          }
+        }
+      }
     }, "AddGroup", "MapFooter", {
       "name": "Settings",
       "cfg": {
@@ -746,20 +724,11 @@
       "cfg": {
         "enableContextManager": true
       }
-    }, "Login","Language", "NavMenu", "Attribution", "ScrollTop", "Notifications"],
+    },"Language", "NavMenu", "Attribution", "ScrollTop", "Notifications"],
     "maps": ["HomeDescription", "Fork", "MapSearch", "CreateNewMap", "FeaturedMaps", "ContentTabs",
 
       {
         "name": "Maps",
-        "cfg": {
-          "mapsOptions": {
-            "start": 0,
-            "limit": 12
-          },
-          "fluid": true
-        }
-      }, {
-        "name": "Dashboards",
         "cfg": {
           "mapsOptions": {
             "start": 0,
@@ -801,7 +770,7 @@
         "containerPosition": "header",
         "className": "navbar shadow navbar-home"
       }
-    }, "Login", "Language", "NavMenu", "DashboardSave", "DashboardSaveAs", "Attribution", "Home", {
+    }, "Language", "NavMenu", "Attribution", "Home", {
       "name": "Share",
       "cfg": {
         "embedPanel": false,
@@ -809,17 +778,6 @@
       }
     },
       {
-        "name": "DashboardEditor",
-        "cfg": {
-          "catalog": {
-            "url": "https://gs-stable.geo-solutions.it/geoserver/csw",
-            "type": "csw",
-            "title": "GeoSolutions GeoServer CSW",
-            "autoload": true
-          },
-          "containerPosition": "columns"
-        }
-      }, {
         "name": "QueryPanel",
         "cfg": {
           "toolsOptions": {

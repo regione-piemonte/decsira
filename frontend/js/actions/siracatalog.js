@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 
 const TOGGLE_SIRA_NODE = 'TOGGLE_SIRA_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
