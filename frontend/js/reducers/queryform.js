@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const msQueryFrom = require('../../MapStore2/web/client/reducers/queryform');
+const msQueryFrom = require('@mapstore/reducers/queryform');
 const assign = require('object-assign');
 
 const siraInitialState = {

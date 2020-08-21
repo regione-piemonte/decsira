@@ -14,7 +14,7 @@ const assign = require('object-assign');
 const {Tabs, Tab, Alert} = require("react-bootstrap");
 const {toggleSiraControl} = require('../actions/controls');
 
-const {addLayer} = require('../../MapStore2/web/client/actions/layers');
+const {addLayer} = require('@mapstore/actions/layers');
 
 const {
     // SiraQueryPanel action functions

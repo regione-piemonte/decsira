@@ -278,17 +278,13 @@
         }
       },
       {
-        "name": "Identify",
-        "showIn": ["Settings"],
-        "cfg": {
-          "showFullscreen": true,
-          "position": "bottom",
-          "size": 0.5,
-          "fluid": true,
-          "viewerOptions": {
-            "container": "{context.ReactSwipe}"
+        "name":"Info",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
           }
-        }
+        },
+        "hide": true
       }, {
         "name": "Locate",
         "override": {
@@ -456,19 +452,13 @@
         }
       },
       {
-        "name": "Identify",
-        "cfg": {
-          "showHighlightFeatureButton": true,
-          "viewerOptions": {
-            "container": "{context.ReactSwipe}"
-          },
-          "showEdit": true
-        },
+        "name":"Info",
         "override": {
           "Toolbar": {
-            "position": 11
+            "alwaysVisible": true
           }
-        }
+        },
+        "hide": true
       },
       {
         "name": "Locate",
@@ -636,23 +626,20 @@
         }
       }
     }, {
-      "name": "Identify",
-      "cfg": {
-        "showFullscreen": true,
-        "position": "bottom",
-        "size": 0.5,
-        "fluid": true,
-        "viewerOptions": {
-          "container": "{context.ReactSwipe}"
-        }
-      }
-    }, {
       "name": "ZoomAll",
       "override": {
         "Toolbar": {
           "alwaysVisible": true
         }
       }
+    },{
+      "name":"Info",
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": true
+        }
+      },
+      "hide": true
     }, {
       "name": "Locate",
       "override": {

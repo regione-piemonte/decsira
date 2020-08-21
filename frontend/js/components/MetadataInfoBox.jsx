@@ -8,8 +8,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
-const {Image} = require('react-bootstrap');
-const Panel = require('react-bootstrap/lib/Panel');
+const {Image, Panel} = require('react-bootstrap');
 const Draggable = require('react-draggable');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 
@@ -154,16 +153,16 @@ class MetadataInfoBox extends React.Component {
         return (
             <Draggable bounds="parent" start={{x: 0, y: 300}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
                 <div className="scheda-info" style={{display: this.props.show}}>
-                    <Panel className="info-header panel panel-primary">
-                        <Panel.Heading>
+                    <Panel
+                        className="info-header panel panel-primary"
+                        header={
                             <span>
                                 <span className="snapshot-panel-title">
                                     <I18N.Message msgId={"metadataInfoBox.panelTitle"}/>
                                 </span>
                                 <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
-                            </span>
-                        </Panel.Heading>
-                        <Panel.Body className="info-content infobox-content">
+                            </span>}>
+                        <Panel className="info-content infobox-content">
                             {this.renderError()}
                             <h4><b>{this.props.title}</b></h4>
                             <p>{this.props.text}</p>
@@ -179,7 +178,7 @@ class MetadataInfoBox extends React.Component {
                             {renderWfsUrl}
                             <button style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
                             {renderLegendPanel}
-                        </Panel.Body>
+                        </Panel>
                     </Panel>
                 </div>
             </Draggable>

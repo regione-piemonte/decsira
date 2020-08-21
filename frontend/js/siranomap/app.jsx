@@ -9,9 +9,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
 
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
-const {loadMapConfig} = require('../../MapStore2/web/client/actions/config');
+const {loadMapConfig} = require('@mapstore/actions/config');
 const {configureQueryForm} = require('../actions/siradec');
 const {configureExporter} = require('../actions/siraexporter');
 
@@ -23,15 +23,15 @@ const appReducers = {
     grid: require('../reducers/grid'),
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
-    draw: require('../../MapStore2/web/client/reducers/draw'),
+    draw: require('@mapstore/reducers/draw'),
     security: require('../reducers/siraSecurity'),
     siraexporter: require('../reducers/siraexporter')
 };
 
 const startApp = () => {
-    const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+    const ConfigUtils = require('@mapstore/utils/ConfigUtils');
     ConfigUtils.setConfigProp('translationsPath', ['../MapStore2/web/client/translations', '../translations']);
-    const StandardApp = require('../../MapStore2/web/client/components/app/StandardApp');
+    const StandardApp = require('@mapstore/components/app/StandardApp');
 
     const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');
 
@@ -41,7 +41,7 @@ const startApp = () => {
         themeCfg: {
             theme: "sira"
         }
-    }))(require('../../MapStore2/web/client/components/app/StandardRouter').default);
+    }))(require('@mapstore/components/app/StandardRouter').default);
 
     const appStore = require('../stores/store').bind(null, initialState, appReducers);
     const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');

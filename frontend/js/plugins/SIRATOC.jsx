@@ -10,15 +10,15 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {changeLayerProperties, changeGroupProperties, toggleNode,
-    sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('../../MapStore2/web/client/actions/layers');
-const {groupsSelector} = require('../../MapStore2/web/client/selectors/layers');
+    sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('@mapstore/actions/layers');
+const {groupsSelector} = require('@mapstore/selectors/layers');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
-const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
+const LayersUtils = require('@mapstore/utils/LayersUtils');
 
-const Message = require('../../MapStore2/web/client/plugins/locale/Message');
+const Message = require('@mapstore/plugins/locale/Message');
 const assign = require('object-assign');
 
-const layersIcon = require('../../MapStore2/web/client/plugins/toolbar/assets/img/layers.png');
+const layersIcon = require('@mapstore/plugins/toolbar/assets/img/layers.png');
 const {
     // SiraQueryPanel action functions
     expandFilterPanel,
@@ -47,7 +47,7 @@ const tocSelector = createSelector(
 );
 
 const TOC = require('../components/toc/TOC');
-const DefaultLayerOrGroup = require('../../MapStore2/web/client/components/TOC/DefaultLayerOrGroup');
+const DefaultLayerOrGroup = require('@mapstore/components/TOC/DefaultLayerOrGroup');
 const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultLayer = require('../components/toc/SiraLayer');
 

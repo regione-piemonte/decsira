@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 LocaleUtils.setSupportedLocales({
     "it": {
         code: "it-IT",
@@ -14,19 +14,19 @@ LocaleUtils.setSupportedLocales({
 
 require('./utils/ProjUtils')();
 
-const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
+const {loadMapConfig} = require('@mapstore/actions/config');
 const {configureQueryForm} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
 const {loadPlatformNumbers} = require('./actions/platformnumbers');
 const {configureExporter} = require('./actions/siraexporter');
 const {loadUserIdentity} = require('./actions/userprofile');
 
-const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', '../translations']);
 ConfigUtils.setLocalConfigurationFile('localConfig.json');
 
 const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
-const {loadVersion} = require('../MapStore2/web/client/actions/version');
+const {loadVersion} = require('@mapstore/actions/version');
 
 const initialActions = [
     () => loadUserIdentity(),
@@ -47,9 +47,9 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 //
 const startApp = () => {
-    const StandardApp = require('../MapStore2/web/client/components/app/StandardApp');
-    const {updateMapLayoutEpic} = require('../MapStore2/web/client/epics/maplayout');
-    const {versionSelector} = require('../MapStore2/web/client/selectors/version');
+    const StandardApp = require('@mapstore/components/app/StandardApp');
+    const {updateMapLayoutEpic} = require('@mapstore/epics/maplayout');
+    const {versionSelector} = require('@mapstore/selectors/version');
 
 
     const {pages, pluginsDef, initialState, storeOpts, appReducers} = require('./appConfig');
@@ -63,7 +63,7 @@ const startApp = () => {
         pages
     }));
 
-    const StandardRouter = connect(routerSelector)(require('../MapStore2/web/client/components/app/StandardRouter').default);
+    const StandardRouter = connect(routerSelector)(require('@mapstore/components/app/StandardRouter').default);
 
     const appStore = require('./stores/store').bind(null, initialState, appReducers, {updateMapLayoutEpic});
 

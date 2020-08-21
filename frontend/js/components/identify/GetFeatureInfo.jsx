@@ -225,10 +225,10 @@ class GetFeatureInfo extends React.Component {
 
         if ((newProps.infoEnabled && !this.props.infoEnabled) ||
             (newProps.topologyInfoEnabled && !this.props.topologyInfoEnabled)) {
-            // this.props.actions.changeMousePointer('pointer');
+            this.props.actions.changeMousePointer('pointer');
         } else if ((!newProps.infoEnabled && this.props.infoEnabled) ||
             (!newProps.topologyInfoEnabled && this.props.topologyInfoEnabled)) {
-            // this.props.actions.changeMousePointer('auto');
+            this.props.actions.changeMousePointer('auto');
             this.props.actions.hideMapinfoMarker();
             this.props.actions.purgeMapInfoResults();
         }
@@ -243,6 +243,7 @@ class GetFeatureInfo extends React.Component {
         let component;
 
         if (this.props.infoType === "getfeatureinfo") {
+
             component = (
                 <GetFeatureInfoViewer
                     missingRequests={missingRequests}
@@ -297,6 +298,7 @@ class GetFeatureInfo extends React.Component {
 
     renderContent = () => {
         let missingRequests = this.props.htmlRequests.length - this.props.htmlResponses.length;
+        console.log("missingRequests", missingRequests);
         return (
             <Panel
                 defaultExpanded

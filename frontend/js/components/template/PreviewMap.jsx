@@ -8,16 +8,16 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const mapType = "openlayers";
-const CoordinatesUtils = require('../../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const PMap = require('../../../MapStore2/web/client/components/map/' + mapType + '/Map');
 const Layer = require('../../../MapStore2/web/client/components/map/' + mapType + '/Layer');
 require('../../../MapStore2/web/client/components/map/' + mapType + '/plugins/index');
-const {changeMapView} = require('../../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 const {Button} = require("react-bootstrap");
-// const img = require('../../../MapStore2/web/client/components/data/featuregrid/images/magnifier.png');
+const img = require('../../../assets/img/magnifier.png');
 const assign = require('object-assign');
 const PropTypes = require('prop-types');
-const ConfigUtils = require('../../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {goToMapPage} = require('../../utils/SiraUtils');
 
 class PreviewMap extends React.Component {
@@ -93,7 +93,7 @@ class PreviewMap extends React.Component {
                         }
                     </PMap>
                     <Button onClick={this.changeMapView} style={{position: "relative", top: "-" + this.props.style.height, 'float': "right", margin: "2px"}}>
-                        {/* <img src={img} width={16}/>*/}
+                        <img src={img} width={16}/>
                     </Button>
                 </div>
             ) : <span/>;

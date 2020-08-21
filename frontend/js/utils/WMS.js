@@ -5,9 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-const MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+const axios = require('@mapstore/libs/ajax');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+const MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 const urlUtil = require('url');
 const assign = require('object-assign');
 
@@ -71,7 +71,7 @@ const Api = {
         }));
         return new Promise((resolve) => {
             require.ensure(['../../MapStore2/web/client/utils/ogc/WMS'], () => {
-                const {unmarshaller} = require('../../MapStore2/web/client/utils/ogc/WMS');
+                const {unmarshaller} = require('@mapstore/utils/ogc/WMS');
                 resolve(axios.get(parseUrl(getCapabilitiesUrl)).then((response) => {
                     let json = unmarshaller.unmarshalString(response.data);
                     return json && json.value;
@@ -91,7 +91,7 @@ const Api = {
         }));
         return new Promise((resolve) => {
             require.ensure(['../../MapStore2/web/client/utils/ogc/WMS'], () => {
-                const {unmarshaller} = require('../../MapStore2/web/client/utils/ogc/WMS');
+                const {unmarshaller} = require('@mapstore/utils/ogc/WMS');
                 resolve(axios.get(parseUrl(describeLayerUrl)).then((response) => {
                     let json = unmarshaller.unmarshalString(response.data);
                     return json && json.value && json.value.layerDescription && json.value.layerDescription[0];

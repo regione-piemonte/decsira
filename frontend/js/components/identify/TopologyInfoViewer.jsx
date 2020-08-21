@@ -35,7 +35,7 @@ const FeatureGrid = connect((state) => {
         selectFeatures: selectFeatures,
         changeMapView: changeMapView
     }, dispatch);
-})(require('../../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+})(require('../identify/featuregrid/FeatureGrid'));
 
 const Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
 

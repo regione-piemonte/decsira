@@ -9,7 +9,7 @@ const assign = require('object-assign');
 
 const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES, SET_CART_SERVICES, EMPTY_CART, RM_SERVICES, RM_LAYERS_SERVICES} = require('../actions/cart');
 const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
-const msLayers = require('../../MapStore2/web/client/reducers/layers');
+const msLayers = require('@mapstore/reducers/layers');
 const initialState = {
     // showCart: true,
     showPanel: false,

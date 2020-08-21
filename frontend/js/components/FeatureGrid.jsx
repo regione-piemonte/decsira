@@ -36,12 +36,12 @@ const FeatureGrid = connect((state) => {
         select: state.featuregrid && state.featuregrid.select || [],
         selectAllActive: state.featuregrid && state.featuregrid.selectAll
     };
-})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+})(require('../components/identify/featuregrid/FeatureGrid'));
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const Message = require('../../MapStore2/web/client/components/I18N/Message');
-const reactCellRendererFactory = require('../../MapStore2/web/client/components/style/ColorMapGridComponents/ReactCellRendererFactoryParams');
+const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 const GridCellDate = require('./GridCellDate');
 const GridCellNumber = require('./GridCellNumber');
