@@ -15,7 +15,7 @@ const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_ST
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const getVector = (state) => {
-    return state.flat ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;
+    return state?.flat?.length > 0 ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;
 };
 
 const checkSelectLayer = (state, vector) => {
@@ -49,7 +49,6 @@ const cloneLayer = (layer) => {
     }, newLayer);
     return newLayer;
 };
-
 
 function layers(state = [], action) {
     switch (action.type) {
@@ -113,9 +112,9 @@ function layers(state = [], action) {
         return state;
     }
     case 'SIRA_ADD_LAYERS': {
-        return action.layers.reduce((tempState, layer) => {
-            return msLayers(tempState, {type: 'ADD_LAYER', layer});
-        }, state );
+        return action.layers.reduce((layersms, layer) => {
+            return msLayers(layersms, {type: 'ADD_LAYER', layer});
+        }, state);
     }
     default:
         return msLayers(state, action);

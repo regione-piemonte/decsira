@@ -12,7 +12,7 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 
-const SearchBar = require('../../MapStore2/web/client/components/mapcontrols/search/SearchBar').default;
+const SearchBar = require('@mapstore/components/mapcontrols/search/SearchBar').default;
 
 const {categorySelector} = require('../selectors/sira');
 const {selectCategory, searchTextChange, selectSubCategory} = require('../actions/siracatalog');

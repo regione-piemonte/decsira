@@ -20,8 +20,7 @@ const Header = require('../components/Header');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
-// const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {setProfile} = require('../actions/userprofile');
+const {setProfile, loadUserIdentity} = require('../actions/userprofile');
 const {configureInlineMap} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
@@ -148,7 +147,7 @@ class Sira extends React.Component {
         controls: PropTypes.object,
         toggleSiraControl: PropTypes.func,
         setProfile: PropTypes.func,
-        // loadUserIdentity: React.PropTypes.func,
+        loadUserIdentity: PropTypes.func,
         plugins: PropTypes.object,
         viewerParams: PropTypes.object,
         configureInlineMap: PropTypes.func,
@@ -162,7 +161,7 @@ class Sira extends React.Component {
     static defaultProps = {
         toggleSiraControl: () => {},
         setProfile: () => {},
-        // loadUserIdentity: () => {},
+        loadUserIdentity: () => {},
         onLoadFeatureTypeConfig: () => {},
         mode: 'desktop',
         viewerParams: {mapType: "openlayers"},
@@ -174,14 +173,13 @@ class Sira extends React.Component {
         if (urlQuery.map) {
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
-        // if (this.props.params.profile) {
-        //    this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
-        // }
-        // this.props.loadUserIdentity();
+        if (this.props?.match?.params?.profile) {
+            this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
+        }
+        this.props.loadUserIdentity();
     }
 
     render() {
-        console.log("this.props.plugins", this.props.plugins);
         return (
             <div>
                 <Header
@@ -237,13 +235,13 @@ module.exports = connect((state) => {
         mode: 'desktop',
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
-        // card: state.cardtemplate,
+        card: state.cardtemplate,
         controls: state.siraControls,
-        configLoaded: activeConfig && activeConfig.card ? true : false
+        configLoaded: !!(activeConfig && activeConfig.card)
     };
 }, {
     toggleSiraControl,
     setProfile,
-    // loadUserIdentity,
+    loadUserIdentity,
     configureInlineMap
 })(Sira);

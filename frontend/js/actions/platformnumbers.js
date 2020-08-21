@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 
 const LOAD_PLATFORM_NUMBER = 'LOAD_PLATFORM_NUMBER';
 const PLATFORM_NUMBER_LOADED = 'PLATFORM_NUMBER_LOADED';

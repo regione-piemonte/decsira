@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {Tooltip} = require('react-bootstrap');
-const Message = require('../../MapStore2/web/client/plugins/locale/Message');
+const Message = require('../../MapStore2/web/client/components/I18N/Message');
 const {changeMapInfoFormat} = require('../../MapStore2/web/client/actions/mapInfo');
 const assign = require('object-assign');
 const {changeMapInfoState} = require('../actions/mapInfo');
@@ -26,7 +26,7 @@ const InfoPlugin = connect((state) => ({
     tooltip: <Tooltip id="InfoTooltip"><Message msgId="info.tooltip"/></Tooltip>,
     glyphicon: "map-marker",
     defaultStyle: "primary",
-    pressedStyle: "success",
+    pressedStyle: "success active",
     btnConfig: {"className": "square-button"},
     tooltipPlace: "left"
 }), {

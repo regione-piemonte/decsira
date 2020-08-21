@@ -18,6 +18,82 @@
 	z-index:1000;
 }
 
+#mapstore-scalebox {
+    position: unset !important;
+    margin: 0 !important;
+}
+
+#viewer .btn-primary {
+    background-color: #017f4f;
+    color: white;
+}
+
+#navigationBar .btn-success.active{
+    background-color: #078aa3;
+}
+
+#viewer .mapToolbar{
+    right: 0 !important;
+}
+
+#viewer .search-toolbar-options .btn-group button {
+    background-color: #ffffff;
+    color: #017f4f;
+    border: unset !important;
+}
+
+#viewer .modal-header{
+    background-color: #007e4f;
+    color: #ffffff;
+}
+
+#viewer .ms2-loading {
+    background-color: #007e4f!important;
+}
+
+#viewer .btn-default{
+    background-color: #ffffff;
+    color: #017f4f;
+}
+
+#viewer .rw-i {
+    color: #017f4f !important;
+}
+
+#mapstore-drawermenu .navHeader > .glyphicon{
+    font-size: 22px;
+}
+
+#mapstore-drawermenu .navButtons .btn-default {
+    color: #017f4f;
+    background-color: #ffffff;
+    border: unset;
+}
+
+#mapstore-drawermenu .drawer-menu-head-toc.panel-title{
+    margin-left: 8px;
+}
+
+#mapstore-drawermenu .drawer-menu-head-catalog.panel-title{
+    margin-left: 8px;
+}
+
+#mapstore-drawermenu .navButtons .btn-default:hover{
+    color: #017f4f;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+#mapstore-drawermenu .navButtons .btn-primary {
+    color: #ffffff;
+    background-color: #017f4f;
+}
+
+#mapstore-drawermenu .navButtons .btn-primary:hover {
+    background-color: #01603c;
+    color: #ffffff;
+}
+
 .mappaSiraDecisionale {
     background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
     background-image: -moz-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
@@ -245,6 +321,11 @@
 #mapstore-navbar-container .dropdown-toggle, #mapstore-navbar-container .square-button {
     border-left: 1px solid #01603c;
 }
+#mapstore-drawermenu #mapstore-layers .toc-default-layer {
+    padding: 10px 0;
+    margin-top: 0;
+    box-shadow: none;
+}
 #mapstore-drawermenu #mapstore-layers .toc-default-layer .glyphicon {
     color: #333;
 }
@@ -253,6 +334,7 @@
 }
 #mapstore-drawermenu #mapstore-layers .toc-group-title {
     background: #eee none repeat scroll 0 0;
+    padding: 12px;
 }
 #sira-layer-settings .noUi-handle {
     background: #007e4f none repeat scroll 0 0;
@@ -273,8 +355,19 @@
     border: medium none;
     box-shadow: none;
 }
+#mapstore-drawermenu .nav-body {
+    overflow: auto !important;
+}
+#mapstore-drawermenu .navButtons .btn.square-button{
+    height: 45px;
+    width: 45px;
+    border-radius: 0;
+    padding: 0;
+    transition: all 100ms ease-in 0s;
+}
+
 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon {
-    font-size: 30px;
+    font-size: 24px;
 }
 .square-button .glyphicon {
     font-size: 30px;
@@ -518,8 +611,48 @@ header.navbar h1 a span {
 /*.ol-scale-line.ol-unselectable {*/
 /*    background-color: #017f4f !important;*/
 /*}*/
+
+#siratoc-layers .group-expanded .toc-layer-tool.visibility-check {
+    margin-top: 0;
+}
+#siratoc-layers .group-expanded .Sortable {
+    max-height: none;
+    overflow: unset;
+}
+#siratoc-layers .toc-group-title {
+    padding: 12px;
+}
+#siratoc-layers .toc-default-group .toc-group-children {
+    margin-left: 15px;
+}
+#siratoc-layers .toc-default-layer {
+    padding: 8px;
+    box-shadow: none;
+}
+#sira-layer-settings .label-default {
+    background-color: #007E4F;
+}
+#sira-layer-settings .noUi-target {
+    background-color: #007E4F;
+}
+#sira-layer-settings .noUi-handle.noUi-handle-lower::before {
+    background-color: #007E4F;
+    color: #007E4F;
+}
+#sira-layer-settings .noUi-handle.noUi-handle-lower::after {
+    background-color: #007E4F;
+    color: #007E4F;
+}
+#siratoc-layers .glyphicon {
+    color: #007E4F;
+}
+#siracatalog .glyphicon-plus-sign:before{
+    content: "\F1DF";
+}
+
 #viewer .siracatalog-search-selector {
-    background-color: #017f4f;
+    background-color: #017f4f !important;
+    height: 50px;
 }
 #viewer .navbar-dx .dropdown-menu .dropdown-header, .navbar-home .dropdown-menu .dropdown-header {
     background-color: #017f4f!important;
@@ -585,6 +718,7 @@ header.navbar h1 a span {
 	background:#017f4f;
 	color:#fff;
 	border-radius:0;
+    padding: 8px;
 }
 #mapstore-getfeatureinfo .ag-blue .ag-header, #mapstore-getfeatureinfo .ag-blue .ag-no-scrolls .ag-header-container{
 	background:#009E61;

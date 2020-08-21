@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
 var {FormattedDate} = require('react-intl');
-const LocaleUtils = require('../../../MapStore2/web/client/utils/LocaleUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 class LabeledField extends React.Component {
     static propTypes = {

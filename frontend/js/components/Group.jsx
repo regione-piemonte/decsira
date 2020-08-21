@@ -1,4 +1,3 @@
-var PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -9,9 +8,10 @@ var PropTypes = require('prop-types');
 
 const React = require('react');
 const Node = require('../../MapStore2/web/client/components/TOC/Node');
-const GroupTitle = require('../../MapStore2/web/client/components/TOC/fragments/GroupTitle');
-const GroupChildren = require('../../MapStore2/web/client/components/TOC/fragments/GroupChildren');
-const VisibilityCheck = require('../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
+const GroupTitle = require('frontend/js/components/toc/fragments/GroupTitle');
+const GroupChildren = require('frontend/js/components/toc/fragments/GroupChildren');
+const VisibilityCheck = require('frontend/js/components/toc/fragments/VisibilityCheck');
+const PropTypes = require('prop-types');
 
 class Group extends React.Component {
     static propTypes = {

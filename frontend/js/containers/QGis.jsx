@@ -107,14 +107,14 @@ class QGis extends React.Component {
         };
         // profile is array with max length = 1
         let profile = [];
-        profile = (this.props.params && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
+        profile = (this.props?.match?.params?.profile && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
     }
 
     componentDidMount() {
         // profile is array with max length = 1
         let profile = [];
-        profile = (this.props.params && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
+        profile = (this.props?.match?.params?.profile && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
         this.props.setProfile(profile, authParams[profile]);
         if (!this.props.configLoaded && this.props.featureType) {
             this.props.onLoadFeatureTypeConfig(
@@ -155,7 +155,7 @@ class QGis extends React.Component {
     renderQueryPanel = () => {
         return this.state.qGisType === "detail" || this.state.qGisType === "list" ? (
             <div className="qgis-spinner">
-                <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
             </div>
         ) : (
             <SideQueryPanel

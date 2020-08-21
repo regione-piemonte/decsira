@@ -35,7 +35,7 @@ const FeatureGrid = connect((state) => {
         selectFeatures: selectFeatures,
         changeMapView: changeMapView
     }, dispatch);
-})(require('../../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+})(require('../identify/featuregrid/FeatureGrid'));
 
 const Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
 
@@ -117,7 +117,7 @@ class TopologyInfoViewer extends React.Component {
                         width: "60px",
                         top: "50%",
                         left: "40%"}}>
-                        <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                        <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                     </div>
                 </div>
             );

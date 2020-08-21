@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const LocaleUtils = require('../MapStore2/web/client/utils/LocaleUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 LocaleUtils.setSupportedLocales({
     "it": {
         code: "it-IT",
@@ -14,46 +14,19 @@ LocaleUtils.setSupportedLocales({
 
 require('./utils/ProjUtils')();
 
-const {loadMapConfig} = require('../MapStore2/web/client/actions/config');
+const {loadMapConfig} = require('@mapstore/actions/config');
 const {configureQueryForm} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
 const {loadPlatformNumbers} = require('./actions/platformnumbers');
 const {configureExporter} = require('./actions/siraexporter');
 const {loadUserIdentity} = require('./actions/userprofile');
 
-const ConfigUtils = require('../MapStore2/web/client/utils/ConfigUtils');
-/**
- * Add custom (overriding) translations with:
- *
- * ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', './translations']);
- */
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', '../translations']);
-
-/**
- * Use a custom plugins configuration file with:
- *
- * ConfigUtils.setLocalConfigurationFile('localConfig.json');
- */
 ConfigUtils.setLocalConfigurationFile('localConfig.json');
 
-/**
- * Use a custom application configuration file with:
- *
- * const appConfig = require('./appConfig');
- *
- * Or override the application configuration file with (e.g. only one page with a mapviewer):
- *
- * const appConfig = assign({}, require('../MapStore2/web/client/product/appConfig'), {
- *     pages: [{
- *         name: "mapviewer",
- *         path: "/",
- *         component: require('../MapStore2/web/client/product/pages/MapViewer')
- *     }]
- * });
- */
-
 const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
-const {loadVersion} = require('../MapStore2/web/client/actions/version');
+const {loadVersion} = require('@mapstore/actions/version');
 
 const initialActions = [
     () => loadUserIdentity(),
@@ -65,19 +38,61 @@ const initialActions = [
     () => loadVersion()
 ];
 
-const appConfig = {
-    ...require('./appConfig')
+// const appConfig = require('./appConfig');
+// const plugins = require('./plugins');
+
+const React = require('react');
+const ReactDOM = require('react-dom');
+const {connect} = require('react-redux');
+const {createSelector} = require('reselect');
+//
+const startApp = () => {
+    const StandardApp = require('@mapstore/components/app/StandardApp');
+    const {updateMapLayoutEpic} = require('@mapstore/epics/maplayout');
+    const {versionSelector} = require('@mapstore/selectors/version');
+
+
+    const {pages, pluginsDef, initialState, storeOpts, appReducers} = require('./appConfig');
+
+    const routerSelector = createSelector(state => state.locale, state=>versionSelector(state), (locale, version) => ({
+        locale: locale || {},
+        version,
+        // themeCfg: {
+        //     theme: "sira"
+        // },
+        pages
+    }));
+
+    const StandardRouter = connect(routerSelector)(require('@mapstore/components/app/StandardRouter').default);
+
+    const appStore = require('./stores/store').bind(null, initialState, appReducers, {updateMapLayoutEpic});
+
+    const appConfig = {
+        storeOpts,
+        appStore,
+        pluginsDef,
+        initialActions,
+        appComponent: StandardRouter,
+        mode: "desktop"
+    };
+
+
+    ReactDOM.render(
+        <StandardApp {...appConfig}/>,
+        document.getElementById('container')
+    );
 };
 
-/**
- * Define a custom list of plugins with:
- *
- */
-const plugins = require('./plugins');
+if (!global.Intl ) {
+    // Ensure Intl is loaded, then call the given callback
+    LocaleUtils.ensureIntl(startApp);
+} else {
+    startApp();
+}
 
-require('../MapStore2/web/client/product/main')(appConfig, plugins,
-    (cfg) => ({
-        ...cfg,
-        initialActions
-    }));
+// require('../MapStore2/web/client/product/main')(appConfig, plugins,
+//     (cfg) => ({
+//         ...cfg,
+//         initialActions
+//     }));
 

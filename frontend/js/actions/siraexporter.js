@@ -5,8 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const axios = require('@mapstore/libs/ajax');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const ExporterUtils = require('../utils/ExporterUtils');
 const TemplateUtils = require('../utils/TemplateUtils');
 const SET_EXPORT_PARAMS = 'SET_EXPORT_PARAMS';

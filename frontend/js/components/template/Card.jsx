@@ -20,7 +20,7 @@ const {configureTree} = require("../../actions/siraTree");
 const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
-const {getWindowSize} = require('../../../MapStore2/web/client/utils/AgentUtils');
+const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;

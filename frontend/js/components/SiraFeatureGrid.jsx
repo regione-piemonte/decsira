@@ -36,13 +36,13 @@ const FeatureGrid = connect((state) => {
     return bindActionCreators({
         selectFeatures: selectFeatures
     }, dispatch);
-})(require('../../MapStore2/web/client/components/data/featuregrid/FeatureGrid'));
+})(require('../components/identify/featuregrid/FeatureGrid'));
 
 const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
 const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
 const Message = require('../../MapStore2/web/client/components/I18N/Message');
 
-const {reactCellRendererFactory} = require('ag-grid-react');
+const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 
 const {loadCardTemplate} = require('../actions/card');
@@ -263,7 +263,7 @@ class SiraFeatureGrid extends React.Component {
         }
 
         return (
-            <Modal show={loadingError ? true : false} bsSize="small">
+            <Modal show={!!loadingError} bsSize="small">
                 <Modal.Header>
                     <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
                 </Modal.Header>
@@ -349,7 +349,7 @@ class SiraFeatureGrid extends React.Component {
                                 width: "60px",
                                 top: "50%",
                                 left: "45%"}}>
-                                <Spinner style={{width: "60px"}} name="three-bounce" noFadeIn/>
+                                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
                             </div>
                         </div>) : null}
                     </Panel>

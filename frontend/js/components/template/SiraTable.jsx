@@ -15,7 +15,7 @@ const {selectRows} = require('../../actions/card');
 const GridCellDate = require('../GridCellDate');
 const GridCellLink = require('../GridCellLink');
 const TemplateUtils = require('../../utils/TemplateUtils');
-const {reactCellRendererFactory} = require('ag-grid-react');
+const {reactCellRendererFactory} = require('../identify/featuregrid/ReactCellRendererFactory');
 const assign = require('object-assign');
 const uuid = require('uuid');
 

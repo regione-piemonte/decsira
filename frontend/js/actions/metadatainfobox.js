@@ -7,7 +7,7 @@
  */
 const xml2js = require('xml2js');
 const urlUtil = require('url');
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 const assign = require('object-assign');
 
 const HIDE_BOX = 'HIDE_BOX';

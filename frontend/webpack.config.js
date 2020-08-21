@@ -32,12 +32,9 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
         target: "http://mapstore.geo-solutions.it"
     }, {
         path: '/proxy',
-        target: "http://decsira-dev.geo-solutions.it/decsiraweb",
-        secure: false,
-        headers: {
-            host: "decsira-dev.geo-solutions.it"
-        },
-        changeOrigin: true
+        pathRewrite: {'^/proxy': '/decsiraweb/proxy'},
+        host: "localhost",
+        target: "http://decsira-dev.geo-solutions.it/"
     }, {
         path: '/services/metadata',
         pathRewrite: {'^/services/metadata': '/decsiraweb/services/metadata'},
@@ -55,10 +52,7 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
     }, {
         path: '/geoserver/ows',
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it",
-        headers: {
-            host: 'decsira-dev.geo-solutions.it'
-        }
+        target: "http://decsira-dev.geo-solutions.it"
     }, {
         path: '/territoriosliv1sisp',
         host: "localhost",

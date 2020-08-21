@@ -154,7 +154,7 @@ class FullScreen extends React.Component {
     render() {
         const {gridExpanded, profile, fTypeConfigLoading} = this.props;
         if (fTypeConfigLoading) {
-            return (<div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} name="three-bounce" noFadeIn/></div>);
+            return (<div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, backgoroundColor: "rgba(125,125,125,.5)"}}><Spinner style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} spinnerName="three-bounce" noFadeIn/></div>);
         }
         let comp;
         if (gridExpanded) {
