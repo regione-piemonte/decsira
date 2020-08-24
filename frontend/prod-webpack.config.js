@@ -19,5 +19,10 @@ module.exports = require('./MapStore2/build/buildConfig')(
     extractThemesPlugin,
     true,
     "/csi-sira/dist/",
-    '.sira-ms2'
+    '.sira-ms2',
+    null,
+    {
+        '@mapstore': path.resolve(__dirname, 'MapStore2/web/client'),
+        '@js': path.resolve(__dirname, 'js')
+    }
 );
