@@ -22,7 +22,7 @@ const {configureExporter} = require('./actions/siraexporter');
 const {loadUserIdentity} = require('./actions/userprofile');
 
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
-ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', '../translations']);
+ConfigUtils.setConfigProp('translationsPath', ['MapStore2/web/client/translations', 'translations']);
 ConfigUtils.setLocalConfigurationFile('localConfig.json');
 
 const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
