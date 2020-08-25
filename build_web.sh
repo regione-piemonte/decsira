@@ -7,4 +7,4 @@ npm run compile
 npm run lint
 # npm test
 cd ..
-mvn clean install -Pweb
+mvn clean install -Pweb,demo
