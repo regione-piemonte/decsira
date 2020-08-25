@@ -26,12 +26,12 @@ FilterUtils.toCQLFilterSira = function(json) {
     return filter === "(undefined)" ? "(INCLUDE)" : filter;
 };
 FilterUtils.getOgcAllPropertyValue = function(featureTypeName, attribute) {
-    return "<wfs:GetPropertyValue service='WFS' valueReference='" + attribute + '"'
-                + "version='2.0' xmlns:fes='http://www.opengis.net/fes/2.0'"
-                + "xmlns:gml='http://www.opengis.net/gml/3.2'"
-                + "xmlns:wfs='http://www.opengis.net/wfs/2.0'"
-                + "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'"
-                + "xsi:schemaLocation='http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd'>"
+    return "<wfs:GetPropertyValue service='WFS' valueReference='" + attribute + "'"
+                + " version='2.0' xmlns:fes='http://www.opengis.net/fes/2.0' "
+                + " xmlns:gml='http://www.opengis.net/gml/3.2' "
+                + " xmlns:wfs='http://www.opengis.net/wfs/2.0' "
+                + " xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
+                + " xsi:schemaLocation='http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd'>"
                 +  "<wfs:Query typeNames='" + featureTypeName + "'/>"
             + "</wfs:GetPropertyValue>";
 };
