@@ -8,7 +8,7 @@
 
 const {connect} = require('react-redux');
 
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 const {selectFeatures, selectAllToggle} = require('../actions/featuregrid');
 
 const {
@@ -42,7 +42,7 @@ module.exports = connect((state) => {
         map: (state.map && state.map.present) || (state.config && state.config.map),
         loadingGrid: state.grid.loadingGrid,
         loadingGridError: state.grid.loadingGridError,
-        pagination: (state.queryform.pagination && state.queryform.pagination.maxFeatures) ? true : false,
+        pagination: !!(state.queryform.pagination && state.queryform.pagination.maxFeatures),
         groupFields: state.queryform.groupFields,
         filterFields: state.queryform.filterFields,
         spatialField: state.queryform.spatialField,

@@ -38,14 +38,11 @@ const initialActions = [
     () => loadVersion()
 ];
 
-// const appConfig = require('./appConfig');
-// const plugins = require('./plugins');
-
 const React = require('react');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-//
+
 const startApp = () => {
     const StandardApp = require('@mapstore/components/app/StandardApp');
     const {updateMapLayoutEpic} = require('@mapstore/epics/maplayout');
@@ -57,9 +54,6 @@ const startApp = () => {
     const routerSelector = createSelector(state => state.locale, state=>versionSelector(state), (locale, version) => ({
         locale: locale || {},
         version,
-        // themeCfg: {
-        //     theme: "sira"
-        // },
         pages
     }));
 
@@ -84,15 +78,7 @@ const startApp = () => {
 };
 
 if (!global.Intl ) {
-    // Ensure Intl is loaded, then call the given callback
     LocaleUtils.ensureIntl(startApp);
 } else {
     startApp();
 }
-
-// require('../MapStore2/web/client/product/main')(appConfig, plugins,
-//     (cfg) => ({
-//         ...cfg,
-//         initialActions
-//     }));
-

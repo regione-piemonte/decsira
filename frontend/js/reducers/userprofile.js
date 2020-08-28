@@ -9,7 +9,7 @@ const assign = require("object-assign");
 const {SHOW_LOGIN_PANEL, HIDE_LOGIN_PANEL, SET_PROFILE, SET_USER_IDENTITY, SET_USER_IDENTITY_ERROR} = require('../actions/userprofile');
 
 function userprofile(state = {
-    profile: null,
+    profile: [],
     authParams: {}
 }, action) {
     switch (action.type) {

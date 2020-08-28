@@ -9,13 +9,13 @@ const PropTypes = require('prop-types');
 const React = require('react');
 
 const {Row, Col, Panel, Button, Glyphicon, Input} = require('react-bootstrap');
-const ComboField = require('../../MapStore2/web/client/components/data/query/ComboField');
-const GeometryDetails = require('../../MapStore2/web/client/components/data/query/GeometryDetails');
+const ComboField = require('@mapstore/components/data/query/ComboField');
+const GeometryDetails = require('@mapstore/components/data/query/GeometryDetails');
 
-const ZoneField = require('../../MapStore2/web/client/components/data/query/ZoneField');
+const ZoneField = require('@mapstore/components/data/query/ZoneField');
 
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class SpatialFilter extends React.Component {
     static propTypes = {

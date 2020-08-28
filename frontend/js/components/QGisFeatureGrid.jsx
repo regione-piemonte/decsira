@@ -8,7 +8,7 @@
 
 const {connect} = require('react-redux');
 
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 
 
 const {

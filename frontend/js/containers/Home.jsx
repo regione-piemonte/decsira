@@ -69,7 +69,7 @@ class Home extends React.Component {
                                         this.props.selectCategory(this.props.allCategory, 'objects');
                                         this.props.loadMetadata({params: {text}});
                                         if (this.props?.match?.params?.profile) {
-                                            this.context.router.history.push('/dataset/${this.props.params.profile}/');
+                                            this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);
                                         } else {
                                             this.context.router.history.push('/dataset/');
                                         }
@@ -106,7 +106,7 @@ class Home extends React.Component {
         this.props.resetObjectAndView();
         this.props.selectCategory(category, subcat);
         if (this.props?.match?.params?.profile) {
-            this.context.router.history.push('/dataset/${this.props.params.profile}/');
+            this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);
         } else {
             this.context.router.history.push('/dataset/');
         }

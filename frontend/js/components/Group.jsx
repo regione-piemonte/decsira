@@ -7,7 +7,7 @@
  */
 
 const React = require('react');
-const Node = require('../../MapStore2/web/client/components/TOC/Node');
+const Node = require('@mapstore/components/TOC/Node');
 const GroupTitle = require('frontend/js/components/toc/fragments/GroupTitle');
 const GroupChildren = require('frontend/js/components/toc/fragments/GroupChildren');
 const VisibilityCheck = require('frontend/js/components/toc/fragments/VisibilityCheck');

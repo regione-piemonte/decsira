@@ -9,7 +9,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
 
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const {configureQueryForm} = require('../actions/siradec');
 const {configureExporter} = require('../actions/siraexporter');
@@ -110,15 +110,15 @@ const appReducers = {
 };
 
 const startApp = () => {
-    const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-    const StandardApp = require('../../MapStore2/web/client/components/app/StandardApp');
+    const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+    const StandardApp = require('@mapstore/components/app/StandardApp');
 
     const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');
 
     const StandardRouter = connect((state) => ({
         locale: state.locale || {},
         pages
-    }))(require('../../MapStore2/web/client/components/app/StandardRouter').default);
+    }))(require('@mapstore/components/app/StandardRouter').default);
 
     const appStore = require('../stores/qGisStore').bind(null, initialState, appReducers);
 

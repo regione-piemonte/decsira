@@ -12,7 +12,7 @@ const {Button, Glyphicon} = require('react-bootstrap');
 const {expandFilterPanel} = require('../actions/siradec');
 
 require('../../assets/css/sira.css');
-require('../../MapStore2/web/client/product/assets/css/viewer.css');
+require('@mapstore/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
 

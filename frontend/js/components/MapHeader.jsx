@@ -12,7 +12,7 @@ const {connect} = require('react-redux');
 const {Glyphicon} = require('react-bootstrap');
 const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
 
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
@@ -29,7 +29,7 @@ const LoginNav = connect((state) => ({
     onLogout: () => {
         window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
     }
-})(require('../../MapStore2/web/client/components/security/UserMenu'));
+})(require('@mapstore/components/security/UserMenu'));
 const LoginPanel = connect((state) => ({
     showLoginPanel: state.userprofile.showLoginPanel
 }), {

@@ -10,8 +10,8 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {Panel} = require('react-bootstrap');
 const Draggable = require('react-draggable');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
-const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
+const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 
 class Credits extends React.Component {
     static propTypes = {

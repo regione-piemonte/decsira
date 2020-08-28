@@ -11,18 +11,18 @@ const React = require('react');
 const {Alert, Accordion, Panel, Glyphicon} = require('react-bootstrap');
 const ReactSwipe = require('react-swipe');
 
-const FeatureInfoUtils = require('../../../MapStore2/web/client/utils/FeatureInfoUtils');
+const FeatureInfoUtils = require('@mapstore/utils/FeatureInfoUtils');
 
-const MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
+const MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
-const I18N = require('../../../MapStore2/web/client/components/I18N/I18N');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 const TemplateUtils = require('../../utils/TemplateUtils');
 
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
-const {changeMapView} = require('../../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 const {selectFeatures} = require('../../actions/featuregrid');
 
 const FeatureGrid = connect((state) => {
@@ -37,7 +37,7 @@ const FeatureGrid = connect((state) => {
     }, dispatch);
 })(require('../identify/featuregrid/FeatureGrid'));
 
-const Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
+const Spinner = require('@mapstore/components/misc/spinners/BasicSpinner/BasicSpinner');
 
 class TopologyInfoViewer extends React.Component {
     static propTypes = {

@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 // const {Button, Glyphicon} = require('react-bootstrap');
 
-const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
+const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 
 require('../../assets/css/qgis.css');
 // require('../../MapStore2/web/client/product/assets/css/viewer.css');

@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var Layers = require('../../MapStore2/web/client/utils/openlayers/Layers');
-var markerIcon = require('../../MapStore2/web/client/components/map/openlayers/img/marker-icon.png');
-var markerShadow = require('../../MapStore2/web/client/components/map/openlayers/img/marker-shadow.png');
+var Layers = require('@mapstore/utils/openlayers/Layers');
+var markerIcon = require('@mapstore/components/map/openlayers/img/marker-icon.png');
+var markerShadow = require('@mapstore/components/map/openlayers/img/marker-shadow.png');
 var ol = require('openlayers');
 
 const assign = require('object-assign');

@@ -10,11 +10,11 @@ const React = require('react');
 const Node = require('./Node');
 const VisibilityCheck = require('./fragments/VisibilityCheck');
 const Title = require('./fragments/Title');
-const InlineSpinner = require('../../../MapStore2/web/client/components/misc/spinners/InlineSpinner/InlineSpinner');
+const InlineSpinner = require('@mapstore/components/misc/spinners/InlineSpinner/InlineSpinner');
 const WMSLegend = require('./fragments/WMSLegend');
-const ConfirmModal = require('../../../MapStore2/web/client/components/maps/modals/ConfirmModal');
+const ConfirmModal = require('@mapstore/components/maps/modals/ConfirmModal');
 const LayersTool = require('./fragments/LayersTool');
-const Message = require('../../../MapStore2/web/client/components/I18N/Message');
+const Message = require('@mapstore/components/I18N/Message');
 const PropTypes = require('prop-types');
 
 class DefaultLayer extends React.Component {
