@@ -8,6 +8,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
+const {createSelector} = require('reselect');
 
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
@@ -97,35 +98,40 @@ if (!Array.from) {
     }());
 }
 
-const appReducers = {
-    userprofile: require('../reducers/userprofile'),
-    siraControls: require('../reducers/controls'),
-    queryform: require('../reducers/queryform'),
-    siradec: require('../reducers/siradec'),
-    grid: require('../reducers/grid'),
-    cardtemplate: require('../reducers/card'),
-    featuregrid: require('../reducers/featuregrid'),
-    security: require('../reducers/siraSecurity'),
-    siraexporter: require('../reducers/siraexporter')
-};
+LocaleUtils.setSupportedLocales({
+    "it": {
+        code: "it-IT",
+        description: "Italiano"}});
+
+require('../utils/ProjUtils')();
+
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+ConfigUtils.setConfigProp('translationsPath', ['MapStore2/web/client/translations', 'translations']);
+ConfigUtils.setLocalConfigurationFile('localConfig.json');
+
+const {loadVersion} = require('@mapstore/actions/version');
+
+const initialActions = [
+    () => configureQueryForm(ConfigUtils.getConfigProp("query")),
+    () => configureExporter(ConfigUtils.getConfigProp("exporter")),
+    () => loadVersion()
+];
 
 const startApp = () => {
-    const ConfigUtils = require('@mapstore/utils/ConfigUtils');
     const StandardApp = require('@mapstore/components/app/StandardApp');
+    const {versionSelector} = require('@mapstore/selectors/version');
 
-    const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');
+    const {pages, pluginsDef, initialState, storeOpts, appReducers} = require('./appConfig');
 
-    const StandardRouter = connect((state) => ({
-        locale: state.locale || {},
+    const routerSelector = createSelector(state => state.locale, state=>versionSelector(state), (locale, version) => ({
+        locale: locale || {},
+        version,
         pages
-    }))(require('@mapstore/components/app/StandardRouter').default);
+    }));
+
+    const StandardRouter = connect(routerSelector)(require('@mapstore/components/app/StandardRouter').default);
 
     const appStore = require('../stores/qGisStore').bind(null, initialState, appReducers);
-
-    const initialActions = [
-        ()=> configureQueryForm(ConfigUtils.getConfigProp("query")),
-        () => configureExporter(ConfigUtils.getConfigProp("exporter"))
-    ];
 
     const appConfig = {
         storeOpts,

@@ -37,7 +37,8 @@ class SidePanel extends React.Component {
         fTypeConfigLoading: PropTypes.bool.isRequired,
         layers: PropTypes.array,
         siraActiveConfig: PropTypes.object,
-        map: PropTypes.object
+        map: PropTypes.object,
+        hideSpatialFilter: PropTypes.bool
     };
 
     static contextTypes = {
@@ -89,6 +90,7 @@ class SidePanel extends React.Component {
 
     renderQueryPanel = () => {
         return (<SideQueryPanel
+            hideSpatialFilter
             withMap={this.props.withMap}
             params={this.props.auth}
             toggleControl={this.props.expandFilterPanel.bind(null, false)}

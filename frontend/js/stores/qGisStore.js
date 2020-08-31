@@ -19,6 +19,7 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         browser: require('../../MapStore2/web/client/reducers/browser'),
         locale: require('../../MapStore2/web/client/reducers/locale'),
         controls: require('../../MapStore2/web/client/reducers/controls'),
+        version: require('@mapstore/reducers/version'),
         router: connectRouter(history)
     });
     const defaultState = initialState.defaultState;

@@ -100,7 +100,7 @@
     background-image: -ms-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
     background-image: -o-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
     background-image: -webkit-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    /*background-image: -webkit-gradient(linear, top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);*/
 	/*background-size:100%;*/
 	}
 
@@ -737,87 +737,144 @@ header.navbar h1 a span {
     color: white;
     background-color: #017f4f;
 }
-/*
-.mapbody {
-    position: relative!important;
-    top: 0!important;
-	min-height:620px!important;
+
+.mapbody .btn-default{
+    color: #017f4f;
+    border-color: #017f4f;
 }
-#viewer #map {
-	width:100%!important;
+.mapbody .btn-default:hover{
+    color: #017f4f;
+    border-color: #017f4f;
+}
+.mapbody .featuregrid-container{
+    width: 100%;
 }
 
-#viewer #drawer-menu-button {
-    position: absolute!important;
-    top: 0!important;
-}
-#viewer .btn-primary {
-    background-color: #017f4f!important;
-}
-#viewer .btn-default {
-    color: #017f4f;
-}
-#viewer .siracatalog-search-selector {
+.mapbody .panel-primary > .panel-heading{
     background-color: #017f4f;
+    border-color: #017f4f;
 }
-#viewer .navbar-dx .dropdown-menu .dropdown-header, .navbar-home .dropdown-menu .dropdown-header {
-    background-color: #017f4f!important;
+
+.mapbody .panel-primary > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #017f4f;
 }
-#viewer .dropdown-menu .glyphicon {
-    color: #017f4f;
-}
-#mapstore-drawermenu #mapstore-layers .toc-group-title .glyphicon-folder-open, #mapstore-drawermenu #mapstore-layers .toc-group-title .glyphicon-folder-close {
-    color: #017f4f;
-}
-#mapstore-drawermenu #mapstore-layers .toc-default-layer .glyphicon {
-    color: #017f4f;
-}
-#mapstore-drawermenu #mapstore-layers .visibility-check.glyphicon.visibility-check.checked {
-    color: #017f4f;
-}
-#mapstore-drawermenu .panel-default > .panel-heading {
-    color: #017f4f;
-}
-.ol-custom-overviewmap button {
-    background-color: #017f4f !important;
-}
-.ol-scale-line.ol-unselectable {
-    background-color: #017f4f !important;
-}
-.react-resizable .querypanel{
-	height: auto;
-    min-width: 300px;
-    overflow-x: hidden;
-    overflow-y: auto;
+
+.side-querypanel .mapstore-query-builder{
+    position: relative;
 }
 .side-querypanel {
     position: relative !important;
 }
-.side-querypanel .panel-heading {
+
+#query-form-panel.mapstore-query-builder {
+    position: inherit;
+}
+#query-form-panel .mapstore-switch-panel {
+    padding: 0;
+}
+#query-form-panel .mapstore-switch-panel .panel-heading {
     background-color: #017f4f;
-    border-color: #078aa3;
+}
+#query-form-panel .logicHeader .btn-group{
+    flex: 1;
+}
+
+.mapstore-query-builder .ms2-border-layout-body{
+    min-height: 400px;
+}
+
+.sira-ms2 .panel-primary > .panel-heading {
+    background-color: #017f4f;
     color: #ffffff;
+    border-color: #017f4f;
 }
-.side-querypanel .panel-title .glyphicon-triangle-left::before {
-    content: "\f137" !important;
-    font-family: FontAwesome !important;
+
+.sira-ms2 .btn-default {
+    color: #017f4f;
+    border-color: #017f4f;
 }
-.side-querypanel .panel-title .glyphicon-collapse-down::before {
-    content: "\f078" !important;
-    font-family: FontAwesome !important;
+
+.sira-ms2 .btn-primary:hover {
+    color: #017f4f;
+    background-color: #e6e6e6;
+    border-color: #adadad;
 }
-.side-querypanel .panel-title .glyphicon-expand::before {
-    content: "\f053" !important;
-    font-family: FontAwesome !important;
+
+.sira-ms2 .btn-default:hover {
+    color: #017f4f;
+    background-color: #e6e6e6;
+    border-color: #adadad;
 }
-.side-querypanel .panel-body .dhContainer {
+
+.side-querypanel .mapstore-switch-panel .inline-form{
+    width: 100%;
+    padding: 10px;
+}
+.side-querypanel .btn-primary {
+    background-color: #017f4f;
+    color: #ffffff;
+    border-color: #017f4f;
+}
+
+.side-querypanel .btn-primary:hover {
+    color: #017f4f;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.side-querypanel #query-form-panel button:disabled {
+    color: #ffffff;
+    background-color: #e0e0e0 !important;
+}
+.side-querypanel .rw-list-option:hover{
+    color: #ffffff !important;
+    background-color: #017f4f !important;
+}
+
+.side-querypanel .rw-widget{
+    color: #017f4f !important;
+    border: 1px solid #017f4f !important;
+}
+.side-querypanel .rw-state-focus {
+    color: #017f4f !important;
+    border: 1px solid #017f4f !important;
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel .panel-title{
+    margin-bottom: 6px;
+    margin-top: -12px;
+    font-size: 16px;
+    color: inherit;
+    padding: 10px;
+}
+#query-form-panel .container-fluid.query-toolbar{
+    margin-top: 10px;
+    height: 45px
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel .filter-field-row{
+    display: flex;
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel .filter-field-row .filter-field-attribute{
+    flex: 1
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel .filter-field-row .filter-field-value{
+    flex: 1
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel .filter-field-row .filter-field-tools{
+    flex: 1
+}
+
+#fullscreen-container, .side-querypanel .mapstore-switch-panel  .mapstore-switch-btn input:checked + .m-slider{
+    background-color: #ffffff;
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel .mapstore-switch-btn .m-slider:before {
+    background-color: #017f4f;
+}
+#fullscreen-container, .side-querypanel .mapstore-switch-panel.sira-ms2 .mapstore-switch-btn .m-slider{
+    background-color: #ffffff;
+}
+#fullscreen-container, #qgis-container .featuregrid-container .dhContainer{
     border: 1px solid #017f4f;
+    border-radius: 0;
 }
-.side-querypanel .panel-body .dhContainer .ftheader {
+#fullscreen-container, #qgis-container .featuregrid-container .ftheader{
     color: #017f4f;
 }
-.side-querypanel .panel-body .querypanel-container #reset, .side-querypanel .panel-body .querypanel-container #reset:hover {
-    background-color: #ebebeb;
-	color:#000000;
-}
-*/
