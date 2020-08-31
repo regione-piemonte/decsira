@@ -218,7 +218,7 @@ class FeatureGrid extends React.Component {
                 flexDirection: "column",
                 height: "100%"
             }}>
-                <div fluid={false} style={this.props.style} className="ag-fresh">
+                <div fluid={false} style={this.props.style} className="ag-blue">
                     <AgGridReact
                         virtualPaging={this.props.virtualPaging}
                         columnDefs={this.setColumnDefs()}
