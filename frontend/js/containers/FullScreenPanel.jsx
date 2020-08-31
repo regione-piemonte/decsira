@@ -16,13 +16,13 @@ const PropTypes = require('prop-types');
 const React = require('react');
 // const {Button, Glyphicon} = require('react-bootstrap');
 
-const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
-const mapUtils = require('../../MapStore2/web/client/utils/MapUtils');
-const CoordinateUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {getWindowSize} = require('@mapstore/utils/AgentUtils');
+const mapUtils = require('@mapstore/utils/MapUtils');
+const CoordinateUtils = require('@mapstore/utils/CoordinatesUtils');
+const {changeMapView} = require('@mapstore/actions/map');
 const {connect} = require('react-redux');
 
-const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
+const {mapSelector} = require('@mapstore/selectors/map');
 const SideQueryPanel = require('../components/SideQueryPanel');
 const Card = require('../components/template/Card');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
@@ -38,7 +38,7 @@ const {
 const {toggleSiraControl} = require('../actions/controls');
 require('../../assets/css/fullscreen.css');
 
-const {addLayer} = require('../../MapStore2/web/client/actions/layers');
+const {addLayer} = require('@mapstore/actions/layers');
 
 class FullScreen extends React.Component {
     static propTypes = {
@@ -113,7 +113,7 @@ class FullScreen extends React.Component {
             }
             this.props.selectFeatures([]);
             if (this.props?.match?.params?.profile) {
-                this.context.router.history.push('/map/${this.props.params.profile}');
+                this.context.router.history.push(`/map/${this.props.match.params.profile}`);
             } else {
                 this.context.router.history.push('/map/');
             }
@@ -131,7 +131,7 @@ class FullScreen extends React.Component {
             <SideQueryPanel
                 withMap={false}
                 // authkey: (this.props.profile.authParams && this.props.profile.authParams.authkey) ? this.props.profile.authParams.authkey : '')
-                params={{authkey: this.props.profile.authParams && this.props.profile.authParams.authkey ? this.props.profile.authParams.authkey : ''}}
+                params={{authkey: this.props?.profile?.authParams?.authkey || ''}}
                 toggleControl={this.toggleControl}/>
         );
     };
@@ -142,7 +142,7 @@ class FullScreen extends React.Component {
                 initWidth={this.state.width}
                 withMap
                 modeBackToDataset
-                params={{authkey: this.props.profile.authParams && this.props.profile.authParams.authkey ? this.props.profile.authParams.authkey : ''}}
+                params={{authkey: this.props?.profile?.authParams?.authkey || ''}}
                 profile={this.props.profile.profile}
                 zoomToFeatureAction={this.zoomToFeature}
                 backToDataset={this.toggleControl}

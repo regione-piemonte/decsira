@@ -11,19 +11,19 @@ const {connect} = require('react-redux');
 const {isObject} = require('lodash');
 
 // include application component
-const QueryBuilder = require('../../MapStore2/web/client/components/data/query/QueryBuilder');
+const QueryBuilder = require('@mapstore/components/data/query/QueryBuilder');
 const {Panel, Glyphicon, Modal, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const {bindActionCreators} = require('redux');
 
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 const assign = require('object-assign');
 const Spinner = require('react-spinkit');
 
 const {hideQueryError} = require('../actions/siradec');
 
-const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+const FilterUtils = require('@mapstore/utils/FilterUtils');
 
 const {
     // QueryBuilder action functions
@@ -43,7 +43,7 @@ const {
     showSpatialSelectionDetails,
     reset,
     changeDwithinValue
-} = require('../../MapStore2/web/client/actions/queryform');
+} = require('@mapstore/actions/queryform');
 
 const {
     // SiraQueryPanel action functions
@@ -54,7 +54,7 @@ const {
 const {
     changeDrawingStatus,
     endDrawing
-} = require('../../MapStore2/web/client/actions/draw');
+} = require('@mapstore/actions/draw');
 
 const {
     loadGridModelWithFilter,

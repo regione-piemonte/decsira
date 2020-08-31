@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {Tooltip} = require('react-bootstrap');
-const Message = require('../../MapStore2/web/client/plugins/locale/Message');
+const Message = require('@mapstore/plugins/locale/Message');
 
 const assign = require('object-assign');
 const {changeTopologyMapInfoState} = require('../actions/mapInfo');
@@ -25,7 +25,7 @@ const TopologyInfo = connect((state) => ({
     tooltipPlace: "left"
 }), {
     onClick: changeTopologyMapInfoState
-})(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
+})(require('@mapstore/components/buttons/ToggleButton'));
 
 module.exports = {
     TopologyPlugin: assign(TopologyInfo, {

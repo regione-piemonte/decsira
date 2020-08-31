@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {getWindowSize} from '../../../MapStore2/web/client/utils/AgentUtils';
+import {getWindowSize} from '@mapstore/utils/AgentUtils';
 import TemplateSira from '../template/TemplateSira';
 import TemplateUtils from '../../utils/TemplateUtils';
 import assign from 'object-assign';

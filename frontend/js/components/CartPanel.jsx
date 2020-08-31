@@ -8,9 +8,9 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
-const Dialog = require('../../MapStore2/web/client/components/misc/Dialog');
-const ConfirmButton = require('../../MapStore2/web/client/components/buttons/ConfirmButton');
+const I18N = require('@mapstore/components/I18N/I18N');
+const Dialog = require('@mapstore/components/misc/Dialog');
+const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
 const {Button} = require('react-bootstrap');
 const {Glyphicon} = require('react-bootstrap');
 

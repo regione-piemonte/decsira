@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 const FilterUtils = require('../utils/SiraFilterUtils');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const TemplateUtils = require('../utils/TemplateUtils');
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 const {showLoading} = require('./grid');
 const SELECT_FEATURES = 'SELECT_FEATURES';
 const SET_FEATURES = 'SET_FEATURES';

@@ -11,7 +11,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {isArray} = require('lodash');
 
-const SecurityUtils = require('../../../../../MapStore2/web/client/utils/SecurityUtils');
+const SecurityUtils = require('@mapstore/utils/SecurityUtils');
 
 const assign = require('object-assign');
 

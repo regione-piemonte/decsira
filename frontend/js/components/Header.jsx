@@ -17,7 +17,7 @@ const {
 } = require('../actions/userprofile');
 
 // const SiraUtils = require('../utils/SiraUtils');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
 
@@ -77,7 +77,7 @@ const LoginNav = connect((state) => ({
         e.preventDefault();
         window.location.href = ConfigUtils.getConfigProp('logOutService');
     }
-})(require('../../MapStore2/web/client/components/security/UserMenu'));
+})(require('@mapstore/components/security/UserMenu'));
 
 const CartPanel = connect((state) => ({
     showPanel: state.cart.showPanel,

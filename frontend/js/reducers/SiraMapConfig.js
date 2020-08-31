@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const msMapConfig = require('../../MapStore2/web/client/reducers/config');
+const msMapConfig = require('@mapstore/reducers/config');
 const CommonLayers = require('../../siraCommonLayers.json');
 const assign = require('object-assign');
 

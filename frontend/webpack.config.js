@@ -18,7 +18,7 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
     },
     extractThemesPlugin,
     false,
-    "/dist/",
+    "dist/",
     '.sira-ms2',
     null,
     {

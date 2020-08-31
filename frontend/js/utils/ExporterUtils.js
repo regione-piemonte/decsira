@@ -11,7 +11,7 @@ const JSZip = require('jszip');
 const ol = require('ol');
 const ProWKTDef = require('./ProjWKTDef');
 const {head} = require('lodash');
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const ExporterUtils = {
     exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd, outputSrs = 'EPSG:32632') {
         const name = filename.replace(':', "_");

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils').default;
+const DebugUtils = require('@mapstore/utils/DebugUtils').default;
 const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
 const {connectRouter} = require( 'connected-react-router');
 const history  = require( '../../MapStore2/web/client/stores/History').default;

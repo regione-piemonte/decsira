@@ -10,9 +10,9 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {Alert, Accordion, Panel, Glyphicon} = require('react-bootstrap');
 const ReactSwipe = require('react-swipe');
-const JSONFeatureInfoViewer = require('../../../MapStore2/web/client/components/data/identify/viewers/JSONViewer');
-const HTMLFeatureInfoViewer = require('../../../MapStore2/web/client/components/data/identify/viewers/HTMLViewer');
-const TEXTFeatureInfoViewer = require('../../../MapStore2/web/client/components/data/identify/viewers/TextViewer');
+const JSONFeatureInfoViewer = require('@mapstore/components/data/identify/viewers/JSONViewer');
+const HTMLFeatureInfoViewer = require('@mapstore/components/data/identify/viewers/HTMLViewer');
+const TEXTFeatureInfoViewer = require('@mapstore/components/data/identify/viewers/TextViewer');
 
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
@@ -32,12 +32,12 @@ const GMLFeatureInfoViewer = connect((state) => ({
     };
 })(require('./viewers/GMLViewer'));
 
-const FeatureInfoUtils = require('../../../MapStore2/web/client/utils/FeatureInfoUtils');
+const FeatureInfoUtils = require('@mapstore/utils/FeatureInfoUtils');
 
-const MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
+const MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
-const I18N = require('../../../MapStore2/web/client/components/I18N/I18N');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class GetFeatureInfoViewer extends React.Component {
     static propTypes = {

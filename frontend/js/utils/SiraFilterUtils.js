@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+const FilterUtils = require('@mapstore/utils/FilterUtils');
 const SiraUtils = require('./SiraUtils');
 
 function getWSNameByFeatureName(ftName = "") {

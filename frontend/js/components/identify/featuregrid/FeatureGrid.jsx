@@ -13,13 +13,13 @@ const {keys, isEqual, isFunction} = require('lodash');
 const {ButtonToolbar, Button, Glyphicon} = require('react-bootstrap');
 const assign = require("object-assign");
 
-const mapUtils = require('../../../../MapStore2/web/client/utils/MapUtils');
-const configUtils = require('../../../../MapStore2/web/client/utils/ConfigUtils');
-const CoordinateUtils = require('../../../../MapStore2/web/client/utils/CoordinatesUtils');
+const mapUtils = require('@mapstore/utils/MapUtils');
+const configUtils = require('@mapstore/utils/ConfigUtils');
+const CoordinateUtils = require('@mapstore/utils/CoordinatesUtils');
 const ZoomToFeature = require("./ZoomToFeature");
 
-const I18N = require('../../../../MapStore2/web/client/components/I18N/I18N');
-const LocaleUtils = require('../../../../MapStore2/web/client/utils/LocaleUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {reactCellRendererFactory} = require('./ReactCellRendererFactory');
 
 require("ag-grid-community/dist/styles/ag-grid.css");
@@ -218,7 +218,7 @@ class FeatureGrid extends React.Component {
                 flexDirection: "column",
                 height: "100%"
             }}>
-                <div fluid={false} style={this.props.style} className="ag-fresh">
+                <div fluid={false} style={this.props.style} className="ag-blue">
                     <AgGridReact
                         virtualPaging={this.props.virtualPaging}
                         columnDefs={this.setColumnDefs()}

@@ -8,6 +8,12 @@
   "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
   "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
   "useAuthenticationRules": true,
+  "authenticationRules": [
+    {
+      "urlPattern": ".*geoserver.*",
+      "method": "authkey"
+    }
+  ],
 
   "mailingList": "https://groups.google.com/forum/#!forum/mapstore-users",
   "printUrl": "pdf/info.json",
@@ -16,6 +22,7 @@
   "initialMapFilter": "",
   "ignoreMobileCss": false,
   "loadAfterTheme": true,
+  "mapLayout": {"left": {"sm": 400, "md": 500, "lg": 600}, "right": {"md": 658}, "bottom": {"sm": 30}},
   "defaultMapOptions": {
     "cesium": {
       "flyTo": true,
@@ -29,18 +36,7 @@
   "localizedLayerStyles": {
     "name": "mapstore_language"
   },
-  "authenticationRules": [{
-    "urlPattern": ".*geostore.*",
-    "method": "bearer"
-  }, {
-    "urlPattern": ".*rest/config.*",
-    "method": "bearer"
-  },
-    {
-      "urlPattern": "http(s)?\\:\\/\\/gs-stable\\.geo-solutions\\.it\\/geoserver/.*",
-      "authkeyParamName": "authkey",
-      "method": "authkey"
-    }],
+
   "monitorState": [
     {"name": "router", "path": "router.location.pathname"},
     {"name": "browser", "path": "browser"},
@@ -62,14 +58,6 @@
   ],
   "initialState": {
     "defaultState": {
-      "annotations": {
-        "config": {
-          "multiGeometry": true,
-          "validationErrors": {}
-        },
-        "format": "decimal",
-        "defaultTextAnnotation": "New"
-      },
       "maptype": {
         "mapType": "{context.mode === 'desktop' ? 'openlayers' : 'leaflet'}"
       },
@@ -326,20 +314,20 @@
           }
         }
       }, "AddGroup", {
-        "name": "Tutorial",
-        "cfg": {
-          "preset": "default_mobile_tutorial"
-        }
-      }, {
         "name": "Settings",
         "cfg": {
+          "wrapWithPanel": false,
+          "closeGlyph": "1-close",
+          "overrideSettings": {
+            "history": false
+          },
           "wrap": true
         }
       }, {
         "name": "Search",
         "cfg": {
           "showOptions": false,
-          "withToggle": ["max-width: 768px", "min-width: 768px"]
+          "withToggle": true
         }
       }, {
         "name": "Toolbar",
@@ -354,15 +342,8 @@
             "alwaysVisible": true
           }
         }
-      }, {
-        "name": "FullScreen",
-        "override": {
-          "Toolbar": {
-            "alwaysVisible": false
-          }
-        }
       }, "Login",
-      "OmniBar", "BurgerMenu", "Expander", "GlobeViewSwitcher", {
+      "OmniBar", "BurgerMenu", "Expander", {
         "name": "Cookie",
         "cfg": {
           "externalCookieUrl" : "",
@@ -406,7 +387,16 @@
           }
         }
       },
-
+      {
+        "name":"MetadataExplorer",
+        "cfg":{
+          "showGetCapLinks":false,
+          "addAuthentication":false,
+          "wrap":true,
+          "wrapWithPanel":false,
+          "closeGlyph":"1-close"
+        }
+      },
       {
         "name":"Snapshot",
         "cfg":{
@@ -442,16 +432,14 @@
             }
           }
         }
-      }, "AutoMapUpdate", "HelpLink", "DrawerMenu", "Version", "Notifications", "BackgroundSelector", "Annotations",
-      {
-        "name": "Share",
+      }, "AutoMapUpdate", "HelpLink", {
+        "name": "DrawerMenu",
         "cfg": {
-          "advancedSettings": {
-            "bbox": true,
-            "centerAndZoom": true
+          "menuOptions": {
+            "width": 400
           }
         }
-      },
+      }, "Version", "Notifications", "BackgroundSelector",
       {
         "name":"Info",
         "override": {
@@ -489,7 +477,7 @@
       },
       "FilterLayer",
       "AddGroup",
-      "Tutorial", "MapFooter", {
+      "MapFooter", {
         "name": "Measure",
         "cfg": {
           "defaultOptions": {
@@ -501,20 +489,24 @@
       }, {
         "name": "Settings",
         "cfg": {
+          "wrapWithPanel": false,
+          "closeGlyph": "1-close",
+          "overrideSettings": {
+            "history": false
+          },
           "wrap": true
         }
-      }, {
-        "name": "About",
-        "showIn": ["BurgerMenu"]
-      }
-    , {
+      },
+      {
         "name": "MousePosition",
         "cfg": {
           "editCRS": true,
           "showLabels": true,
           "showToggle": true,
           "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"],
-          "additionalCRS": {}
+          "additionalCRS": {
+              "EPSG:32632": { "label": "EPSG:32632" }
+          }
         }
       }, {
         "name": "CRSSelector",
@@ -533,7 +525,7 @@
       }, {
         "name": "Search",
         "cfg": {
-          "withToggle": ["max-width: 768px", "min-width: 768px"]
+          "withToggle": true
         }
       }, {
         "name": "Toolbar",
@@ -546,7 +538,7 @@
         "name":"ZoomAll",
         "override": {
           "Toolbar": {
-            "alwaysVisible": true
+            "alwaysVisible": false
           }
         }
       }, {
@@ -577,7 +569,7 @@
           "declineUrl" : "http://www.google.com"
         }
       },
-      "OmniBar", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "FullScreen", "GlobeViewSwitcher", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
+      "OmniBar", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
       "WidgetsTray",
       "Timeline",
       "Playback",
@@ -630,7 +622,7 @@
       "name": "ZoomAll",
       "override": {
         "Toolbar": {
-          "alwaysVisible": true
+          "alwaysVisible": false
         }
       }
     },{
@@ -683,13 +675,18 @@
     }, "AddGroup", "MapFooter", {
       "name": "Settings",
       "cfg": {
+        "wrapWithPanel": false,
+        "closeGlyph": "1-close",
+        "overrideSettings": {
+          "history": false
+        },
         "wrap": true
       }
     }, {
       "name": "Search",
       "cfg": {
         "showOptions": false,
-        "withToggle": ["max-width: 768px", "min-width: 768px"]
+        "withToggle": true
       }
     }, {
       "name": "Toolbar",
@@ -771,13 +768,7 @@
         "containerPosition": "header",
         "className": "navbar shadow navbar-home"
       }
-    }, "Language", "NavMenu", "Attribution", "Home", {
-      "name": "Share",
-      "cfg": {
-        "embedPanel": false,
-        "advancedSettings": false
-      }
-    },
+    }, "Language", "NavMenu", "Attribution", "Home",
       {
         "name": "QueryPanel",
         "cfg": {
@@ -787,78 +778,13 @@
           },
           "containerPosition": "columns"
         }
-      }, "BurgerMenu", "Dashboard", "Notifications", {
-        "name": "Tutorial",
-        "cfg": {
-          "allowClicksThruHole": false,
-          "containerPosition": "header",
-          "preset": "dashboard_tutorial"
-        }
-      },
+      }, "BurgerMenu", "Dashboard", "Notifications",
       {
         "name": "FeedbackMask",
         "cfg": {
           "containerPosition": "header"
         }
       }],
-    "geostory": [
-      {
-        "name": "OmniBar",
-        "cfg": {
-          "containerPosition": "header",
-          "className": "navbar shadow navbar-home"
-        }
-      },
-      {
-        "name": "Tutorial",
-        "cfg": {
-          "allowClicksThruHole": false,
-          "containerPosition": "header",
-          "preset": "geostory_view_tutorial"
-        }
-      },
-      "Login",
-      "BurgerMenu",
-      "Language",
-      "NavMenu",
-      "Attribution",
-      "Home",
-      "GeoStory",
-      "GeoStorySave",
-      "GeoStorySaveAs",
-      "MapEditor",
-      "MediaEditor",
-      {
-        "name": "GeoStoryEditor",
-        "cfg": {
-          "disablePluginIf": "{!!(state('browser') && state('browser').mobile)}",
-          "containerPosition": "columns"
-        }
-      },
-      {
-        "name": "GeoStoryNavigation",
-        "cfg": {
-          "containerPosition": "header"
-        }
-      },
-      "Notifications",
-      {
-        "name": "FeedbackMask",
-        "cfg": {
-          "containerPosition": "header"
-        }
-      },
-      {
-        "name": "Share",
-        "cfg": {
-          "embedPanel": false,
-          "advancedSettings": {
-            "homeButton": true,
-            "sectionId": true
-          }
-        }
-      }
-    ],
     "context-creator": [
       {
         "name": "OmniBar",

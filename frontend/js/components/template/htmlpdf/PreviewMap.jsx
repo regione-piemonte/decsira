@@ -9,12 +9,12 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {connect} = require('react-redux');
 const mapType = "openlayers";
-const CoordinatesUtils = require('../../../../MapStore2/web/client/utils/CoordinatesUtils');
-const SnapshotSupport = require('../../../../MapStore2/web/client/components/mapcontrols/Snapshot/SnapshotSupport')(mapType);
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
+const SnapshotSupport = require('@mapstore/components/mapcontrols/Snapshot/SnapshotSupport')(mapType);
 const {mapImageReady} = require('../../../actions/card');
 const assign = require('object-assign');
 
-const ConfigUtils = require('../../../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 class PDFMap extends React.Component {
     static propTypes = {

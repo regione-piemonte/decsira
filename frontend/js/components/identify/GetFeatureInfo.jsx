@@ -14,7 +14,7 @@ const {Glyphicon, Panel} = require('react-bootstrap');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 
-const {setFeatures} = require('../../../MapStore2/web/client/actions/featuregrid');
+const {setFeatures} = require('@mapstore/actions/featuregrid');
 
 const TopologyInfoViewer = connect((state) => ({
     // modelConfig: state.mapInfo.modelConfig,
@@ -34,13 +34,13 @@ const GetFeatureInfoViewer = require('./GetFeatureInfoViewer');
 
 const Draggable = require('react-draggable');
 
-const I18N = require('../../../MapStore2/web/client/components/I18N/I18N');
-const Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
+const I18N = require('@mapstore/components/I18N/I18N');
+const Spinner = require('@mapstore/components/misc/spinners/BasicSpinner/BasicSpinner');
 
-const CoordinatesUtils = require('../../../MapStore2/web/client/utils/CoordinatesUtils');
-const FilterUtils = require('../../../MapStore2/web/client/utils/FilterUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
+const FilterUtils = require('@mapstore/utils/FilterUtils');
 
-const MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
+const MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
 const {isArray, head} = require('lodash');
@@ -298,7 +298,6 @@ class GetFeatureInfo extends React.Component {
 
     renderContent = () => {
         let missingRequests = this.props.htmlRequests.length - this.props.htmlResponses.length;
-        console.log("missingRequests", missingRequests);
         return (
             <Panel
                 defaultExpanded
@@ -328,7 +327,7 @@ class GetFeatureInfo extends React.Component {
     };
 
     calculateRequestParameters = (layer, bounds, crs, newProps) => {
-        const infoFormat = layer.infoFormat ? this.infoFormat(layer.infoFormat, newProps.infoFormat) : newProps.infoFormat;
+        const infoFormat = newProps.infoFormat || layer.infoFormat && this.infoFormat(layer.infoFormat, newProps.infoFormat);
         let requestConf = {
             id: layer.id,
             layers: layer.name,
