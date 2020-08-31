@@ -32,7 +32,7 @@ const CONFIGURE_INFO_TOPOLOGY = 'CONFIGURE_INFO_TOPOLOGY';
 const SET_MODEL_CONFIG = 'SET_MODEL_CONFIG';
 
 const TemplateUtils = require('../utils/TemplateUtils');
-const {parseXMLResponse} = require('../../MapStore2/web/client/utils/FeatureInfoUtils');
+const {parseXMLResponse} = require('@mapstore/utils/FeatureInfoUtils');
 const {loadFeatureTypeConfig} = require('./siradec');
 /**
  * Private

@@ -10,7 +10,7 @@ const React = require('react');
 
 
 require('../../assets/css/sira.css');
-require('../../MapStore2/web/client/product/assets/css/viewer.css');
+require('@mapstore/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
 
@@ -84,11 +84,12 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
 
-const { changeMousePointer} = require('../../MapStore2/web/client/actions/map');
+const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
 
-const MapViewer = require('../../MapStore2/web/client/containers/MapViewer');
+const MapViewer = require('@mapstore/containers/MapViewer');
 
 const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../actions/mapInfo');
+const {toggleControl} = require('@mapstore/actions/controls');
 const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
 const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
@@ -127,7 +128,7 @@ const GetFeatureInfo = connect((state) => {
     };
 })(require('../components/identify/GetFeatureInfo'));
 
-let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+let MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
@@ -151,7 +152,10 @@ class Sira extends React.Component {
         plugins: PropTypes.object,
         viewerParams: PropTypes.object,
         configureInlineMap: PropTypes.func,
-        configLoaded: PropTypes.bool
+        configLoaded: PropTypes.bool,
+        registerEventListener: PropTypes.func,
+        toggleControl: PropTypes.func,
+        mapConfigLoaded: PropTypes.bool
     };
 
     static contextTypes = {
@@ -177,6 +181,18 @@ class Sira extends React.Component {
             this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
         this.props.loadUserIdentity();
+    }
+
+    componentDidMount() {
+        if (this.props.mapConfigLoaded) {
+            this.props.registerEventListener('mousemove', 'mouseposition');
+            this.props.toggleControl('drawer');
+        }
+
+    }
+
+    componentWillUnmount() {
+        // this.props.unRegisterEventListener('mousemove', 'mouseposition');
     }
 
     render() {
@@ -237,11 +253,15 @@ module.exports = connect((state) => {
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         card: state.cardtemplate,
         controls: state.siraControls,
-        configLoaded: !!(activeConfig && activeConfig.card)
+        configLoaded: !!(activeConfig && activeConfig.card),
+        mapConfigLoaded: state?.map?.present || false
     };
 }, {
     toggleSiraControl,
     setProfile,
     loadUserIdentity,
-    configureInlineMap
+    configureInlineMap,
+    registerEventListener,
+    unRegisterEventListener,
+    toggleControl
 })(Sira);

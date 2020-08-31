@@ -10,12 +10,12 @@ const React = require('react');
 const Node = require('./Node');
 const VisibilityCheck = require('./fragments/VisibilityCheck');
 const Title = require('./fragments/Title');
-const InlineSpinner = require('../../../MapStore2/web/client/components/misc/spinners/InlineSpinner/InlineSpinner');
+const InlineSpinner = require('@mapstore/components/misc/spinners/InlineSpinner/InlineSpinner');
 const PropTypes = require('prop-types');
 
 const LayersTool = require('./fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
-const ConfirmButton = require('../../../MapStore2/web/client/components/buttons/ConfirmButton');
+const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
 const {Glyphicon} = require('react-bootstrap');
 
 class DefaultLayer extends React.Component {

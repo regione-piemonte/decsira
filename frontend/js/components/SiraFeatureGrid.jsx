@@ -18,9 +18,9 @@ const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 const {Resizable} = require('react-resizable');
 
 const {bindActionCreators} = require('redux');
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 const {selectFeatures} = require('../actions/featuregrid');
-const FilterUtils = require('../../MapStore2/web/client/utils/FilterUtils');
+const FilterUtils = require('@mapstore/utils/FilterUtils');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {head} = require('lodash');
 
@@ -38,9 +38,9 @@ const FeatureGrid = connect((state) => {
     }, dispatch);
 })(require('../components/identify/featuregrid/FeatureGrid'));
 
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
-const Message = require('../../MapStore2/web/client/components/I18N/Message');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
+const Message = require('@mapstore/components/I18N/Message');
 
 const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
 const GoToDetail = require('./GoToDetail');

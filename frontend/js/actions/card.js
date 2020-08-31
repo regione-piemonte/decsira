@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';

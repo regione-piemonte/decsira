@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var Layers = require('../../MapStore2/web/client/utils/openlayers/Layers');
+var Layers = require('@mapstore/utils/openlayers/Layers');
 var ol = require('ol');
 var objectAssign = require('object-assign');
-const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 
 const {isArray} = require('lodash');
-const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const SecurityUtils = require('@mapstore/utils/SecurityUtils');
+const axios = require('@mapstore/libs/ajax');
 const urllib = require('url');
 
 

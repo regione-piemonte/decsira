@@ -9,7 +9,7 @@ const assign = require('object-assign');
 const {isArray, memoize} = require('lodash');
 const uuid = require('uuid');
 const urlUtil = require('url');
-const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {Promise} = require('es6-promise');
 
 // Add here default layer config for layer added by sira catalog

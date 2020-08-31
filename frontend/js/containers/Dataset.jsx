@@ -172,7 +172,6 @@ class Dataset extends React.Component {
         if (this.props?.match?.params?.profile) {
             this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
-        // this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         if (!nodesLoaded && !loading && category && category.id) {
             this.loadMetadata({category: category});
         }
@@ -185,7 +184,7 @@ class Dataset extends React.Component {
     componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
         if (!loading && this.props.map && this.props.map !== map) {
             if (this.props?.match?.params?.profile) {
-                this.context.router.history.push('/map/${this.props.params.profile}/');
+                this.context.router.history.push(`/map/${this.props.match.params.profile}/`);
             } else {
                 this.context.router.history.push('/map/');
             }
@@ -211,7 +210,7 @@ class Dataset extends React.Component {
                 }
             });
             if (this.props?.match?.params?.profile) {
-                this.context.router.history.push(this.state.waitingForConfig.redirect + '${this.props.params.profile}/');
+                this.context.router.history.push(this.state.waitingForConfig.redirect + `${this.props.match.params.profile}/`);
             } else {
                 this.context.router.history.push(this.state.waitingForConfig.redirect);
             }
@@ -382,7 +381,7 @@ class Dataset extends React.Component {
                 this.props.setActiveFeatureType(featureType);
             }
             if (this.props?.match?.params?.profile) {
-                this.context.router.history.push('/full/${this.props.params.profile}/');
+                this.context.router.history.push(`/full/${this.props.match.params.profile}/`);
             } else {
                 this.context.router.history.push('/full/');
             }
@@ -410,7 +409,7 @@ class Dataset extends React.Component {
             this.props.toggleSiraControl('grid', true);
             this.props.setNodeInUse(node);
             if (this.props?.match?.params?.profile) {
-                this.context.router.history.push('/full/${this.props.params.profile}/');
+                this.context.router.history.push(`/full/${this.props.match.params.profile}/`);
             } else {
                 this.context.router.history.push('/full/');
             }

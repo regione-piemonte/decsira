@@ -8,7 +8,7 @@ const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 
 const FilterUtils = require('../utils/SiraFilterUtils');
 
-const {getWindowSize} = require('../../MapStore2/web/client/utils/AgentUtils');
+const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
 const {setTreeFeatureType} = require('../actions/siradec');
 const {closeTree} = require('../actions/siraTree');
@@ -38,9 +38,9 @@ const FeatureGrid = connect((state) => {
     };
 })(require('../components/identify/featuregrid/FeatureGrid'));
 
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
-const Message = require('../../MapStore2/web/client/components/I18N/Message');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
+const Message = require('@mapstore/components/I18N/Message');
 const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 const GridCellDate = require('./GridCellDate');
@@ -355,7 +355,7 @@ class SiraGrid extends React.Component {
             suppressSorting: true,
             suppressMenu: true,
             pinned: true,
-            hide: this.props.detailsConfig.service ? false : true,
+            hide: !this.props.detailsConfig.service,
             width: 25,
             suppressResize: true
         }, ...(cols.map((c) => {

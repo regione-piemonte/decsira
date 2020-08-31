@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const msLayers = require('../../MapStore2/web/client/reducers/layers');
+const msLayers = require('@mapstore/reducers/layers');
 const assign = require('object-assign');
 const {isObject, head, findIndex} = require('lodash');
-const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('../../MapStore2/web/client/actions/layers');
+const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('@mapstore/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const getVector = (state) => {
     return state?.flat?.length > 0 ? head(state.flat.filter((l) => l.id === "gridItems" )) : undefined;

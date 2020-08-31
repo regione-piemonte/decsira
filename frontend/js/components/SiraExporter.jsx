@@ -8,7 +8,7 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const Dialog = require('../../MapStore2/web/client/components/misc/Dialog.jsx');
+const Dialog = require('@mapstore/components/misc/Dialog.jsx');
 const Select = require('react-select');
 const {Button, Glyphicon, Alert} = require('react-bootstrap');
 const ExporterUtils = require('../utils/ExporterUtils');

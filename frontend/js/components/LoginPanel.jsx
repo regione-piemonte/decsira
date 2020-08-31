@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {Modal, Button} = require('react-bootstrap');
-const I18N = require('../../MapStore2/web/client/components/I18N/I18N');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class LoginPanel extends React.Component {
     static propTypes = {

@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {connect} = require('react-redux');
-const CoordinateUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinateUtils = require('@mapstore/utils/CoordinatesUtils');
 const mapUtils = require('../../MapStore2/web/client/utils/MapUtils');
 const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');

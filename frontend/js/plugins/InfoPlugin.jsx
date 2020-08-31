@@ -8,7 +8,7 @@
 const React = require('react');
 const {connect} = require('react-redux');
 const {Tooltip} = require('react-bootstrap');
-const Message = require('../../MapStore2/web/client/components/I18N/Message');
+const Message = require('@mapstore/components/I18N/Message');
 const {changeMapInfoFormat} = require('../../MapStore2/web/client/actions/mapInfo');
 const assign = require('object-assign');
 const {changeMapInfoState} = require('../actions/mapInfo');
@@ -16,7 +16,7 @@ const FeatureInfoFormatSelector = connect((state) => ({
     infoFormat: state.mapInfo && state.mapInfo.infoFormat
 }), {
     onInfoFormatChange: changeMapInfoFormat
-})(require("../../MapStore2/web/client/components/misc/FeatureInfoFormatSelector").default);
+})(require("@mapstore/components/misc/FeatureInfoFormatSelector").default);
 
 const InfoPlugin = connect((state) => ({
     id: "mapInfoButton",
@@ -31,7 +31,7 @@ const InfoPlugin = connect((state) => ({
     tooltipPlace: "left"
 }), {
     onClick: changeMapInfoState
-})(require('../../MapStore2/web/client/components/buttons/ToggleButton'));
+})(require('@mapstore/components/buttons/ToggleButton'));
 
 module.exports = {
     InfoPlugin: assign(InfoPlugin, {
@@ -44,9 +44,8 @@ module.exports = {
         Settings: {
             tool: <FeatureInfoFormatSelector
                 key="featureinfoformat"
-                inputProps={{
-                    label: <Message msgId="infoFormatLbl" />
-                }}/>,
+                label={<Message msgId="infoFormatLbl" />
+                }/>,
             position: 3
         }
     }),

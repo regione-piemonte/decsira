@@ -1,7 +1,7 @@
 const url = require('url');
 const {endsWith} = require('lodash');
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const axios = require('@mapstore/libs/ajax');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 
 module.exports = {

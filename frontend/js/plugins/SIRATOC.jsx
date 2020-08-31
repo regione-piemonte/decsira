@@ -14,7 +14,6 @@ const {changeLayerProperties, changeGroupProperties, toggleNode,
 const {groupsSelector} = require('@mapstore/selectors/layers');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const LayersUtils = require('@mapstore/utils/LayersUtils');
-
 const Message = require('@mapstore/plugins/locale/Message');
 const assign = require('object-assign');
 
@@ -107,7 +106,7 @@ class LayerTree extends React.Component {
 
     render() {
         if (!this.props.groups) {
-            return <div></div>;
+            return <div/>;
         }
         const Group = ( <DefaultGroup animateCollapse={false} onSort={this.props.onSort}
             propertiesChangeHandler={this.props.groupPropertiesChangeHandler}

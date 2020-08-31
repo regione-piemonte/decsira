@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 const assign = require('object-assign');
-const {mapConfigHistory, createHistory} = require('../../MapStore2/web/client/utils/MapHistoryUtils');
+const {mapConfigHistory, createHistory} = require('@mapstore/utils/MapHistoryUtils');
 
-const map = mapConfigHistory(require('../../MapStore2/web/client/reducers/map'));
+const map = mapConfigHistory(require('@mapstore/reducers/map'));
 
 const {createEpicMiddleware} = require('redux-observable');
 
@@ -16,11 +16,11 @@ const ListenerEnhancer = require('@carnesen/redux-add-action-listener-enhancer')
 
 const { routerMiddleware, connectRouter } = require('connected-react-router');
 
-const layersEpics = require('../../MapStore2/web/client/epics/layers');
-const controlsEpics = require('../../MapStore2/web/client/epics/controls');
-const configEpics = require('../../MapStore2/web/client/epics/config');
-const timeManagerEpics = require('../../MapStore2/web/client/epics/dimension');
-const {persistMiddleware, persistEpic} = require('../../MapStore2/web/client/utils/StateUtils');
+const layersEpics = require('@mapstore/epics/layers');
+const controlsEpics = require('@mapstore/epics/controls');
+const configEpics = require('@mapstore/epics/config');
+const timeManagerEpics = require('@mapstore/epics/dimension');
+const {persistMiddleware, persistEpic} = require('@mapstore/utils/StateUtils');
 
 const standardEpics = {
     ...layersEpics,
@@ -32,31 +32,31 @@ const standardEpics = {
 const layers = require('../reducers/siraLayers');
 const mapConfig = require('../reducers/SiraMapConfig');
 
-const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils').default;
-const {combineEpics, combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
-const LayersUtils = require('../../MapStore2/web/client/utils/LayersUtils');
-const {CHANGE_BROWSER_PROPERTIES} = require('../../MapStore2/web/client/actions/browser');
+const DebugUtils = require('@mapstore/utils/DebugUtils').default;
+const {combineEpics, combineReducers} = require('@mapstore/utils/PluginsUtils');
+const LayersUtils = require('@mapstore/utils/LayersUtils');
+const {CHANGE_BROWSER_PROPERTIES} = require('@mapstore/actions/browser');
 
-const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
+const SecurityUtils = require('@mapstore/utils/SecurityUtils');
 const SiraUtils = require('../utils/SiraUtils');
 
 module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, appEpics = {}, plugins = {}, storeOpts = {}) => {
-    const history = storeOpts.noRouter ? null : require('../../MapStore2/web/client/stores/History').default;
+    const history = storeOpts.noRouter ? null : require('@mapstore/stores/History').default;
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        browser: require('../../MapStore2/web/client/reducers/browser'),
-        locale: require('../../MapStore2/web/client/reducers/locale'),
-        controls: require('../../MapStore2/web/client/reducers/controls'),
-        help: require('../../MapStore2/web/client/reducers/help'),
-        maptype: require('../../MapStore2/web/client/reducers/maptype'),
-        maps: require('../../MapStore2/web/client/reducers/maps'),
-        maplayout: require('../../MapStore2/web/client/reducers/maplayout'),
-        version: require('../../MapStore2/web/client/reducers/version'),
-        mapPopups: require('../../MapStore2/web/client/reducers/mapPopups').default,
+        browser: require('@mapstore/reducers/browser'),
+        locale: require('@mapstore/reducers/locale'),
+        controls: require('@mapstore/reducers/controls'),
+        help: require('@mapstore/reducers/help'),
+        maptype: require('@mapstore/reducers/maptype'),
+        maps: require('@mapstore/reducers/maps'),
+        maplayout: require('@mapstore/reducers/maplayout'),
+        version: require('@mapstore/reducers/version'),
+        mapPopups: require('@mapstore/reducers/mapPopups').default,
         mosaic: require('../reducers/mosaic'),
-        localConfig: require('../../MapStore2/web/client/reducers/localConfig'),
-        // locales: () => {return null; },
-        theme: require('../../MapStore2/web/client/reducers/theme').default,
+        localConfig: require('@mapstore/reducers/localConfig'),
+        locales: () => {return null; },
+        theme: require('@mapstore/reducers/theme').default,
         map: () => {return null; },
         mapInitialConfig: () => {return null; },
         mapConfigRawData: () => null,

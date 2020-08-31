@@ -25,7 +25,6 @@ const appReducers = {
     header: require('./reducers/header'),
     siraTree: require('./reducers/siraTree'),
     treeData: require('./reducers/treeData')
-    // layers: require('./reducers/siraLayers')
 };
 
 module.exports = {
@@ -43,7 +42,7 @@ module.exports = {
     pluginsDef: require('./plugins'),
     initialState: {
         defaultState: {
-            mousePosition: {enabled: false},
+            mousePosition: {enabled: false, crs: "EPSG:32632"},
             controls: {
                 help: {
                     enabled: false
@@ -86,7 +85,7 @@ module.exports = {
                 format: "wms",
                 "supportedFormats": [{"name": "wms", "label": "WMS"}, {"name": "csw", "label": "CSW"}]
             },
-            mapInfo: {enabled: true, infoFormat: 'application/json' }
+            mapInfo: {enabled: true, infoFormat: 'text/plain' }
         },
         mobile: {
             mapInfo: {enabled: true, infoFormat: 'application/json' },
