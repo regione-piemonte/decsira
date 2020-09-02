@@ -41,7 +41,7 @@ const FeatureGrid = connect((state) => {
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const I18N = require('@mapstore/components/I18N/I18N');
 const Message = require('@mapstore/components/I18N/Message');
-const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
+const {reactCellRendererFactory} = require('../components/identify/featuregrid/CellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 const GridCellDate = require('./GridCellDate');
 const GridCellNumber = require('./GridCellNumber');
@@ -306,7 +306,7 @@ class SiraGrid extends React.Component {
         }
 
         return (
-            <Modal show={loadingError ? true : false} bsSize="small" onHide={() => {
+            <Modal show={!!loadingError} bsSize="small" onHide={() => {
                 this.props.cleanError(false);
                 // this.onGridClose(true);
             }}>
