@@ -16,21 +16,6 @@ import * as DOM from 'react-dom-factories';
  * Custom Data grid using AgGrid
  */
 export default class DataGrid extends React.Component {
-    render() {
-        return DOM.div({
-            style: {height: '100%'}
-        });
-    }
-
-    componentDidMount() {
-        var domNode = ReactDOM.findDOMNode(this);
-        this.gridOptions = AgGrid.ComponentUtil.copyAttributesToGridOptions(this.props.gridOptions, this.props);
-        // eslint-disable-next-line no-new
-        new AgGrid.Grid(domNode, this.gridOptions);
-
-        this.api = this.gridOptions.api;
-        this.columnApi = this.gridOptions.columnApi;
-    }
 
     getCallbackForEvent = (eventName) => {
         if (!eventName || eventName.length < 2) {
@@ -41,20 +26,30 @@ export default class DataGrid extends React.Component {
     };
 
     globalEventListener = (eventName, event) => {
-        var callbackMethodName = this.getCallbackForEvent(eventName);
-        var callbackFromProps = this.props[callbackMethodName];
+        const callbackMethodName = this.getCallbackForEvent(eventName);
+        const callbackFromProps = this.props[callbackMethodName];
         if (callbackFromProps) {
             callbackFromProps(event);
         }
 
     };
 
+    componentDidMount() {
+        let domNode = ReactDOM.findDOMNode(this);
+        this.gridOptions = AgGrid.ComponentUtil.copyAttributesToGridOptions(this.props.gridOptions, this.props);
+        // eslint-disable-next-line no-new
+        new AgGrid.Grid(domNode, this.gridOptions);
+
+        this.api = this.gridOptions.api;
+        this.columnApi = this.gridOptions.columnApi;
+    }
+
     shouldComponentUpdate() {
         return false;
     }
 
     componentWillReceiveProps(nextProps) {
-        var changes = {};
+        let changes = {};
         AgGrid.ComponentUtil.ALL_PROPERTIES.forEach( (propKey)=> {
             if (this.props[propKey] !== nextProps[propKey]) {
                 changes[propKey] = {
@@ -77,6 +72,12 @@ export default class DataGrid extends React.Component {
 
     componentWillUnmount() {
         this.api.destroy();
+    }
+
+    render() {
+        return DOM.div({
+            style: {height: '100%'}
+        });
     }
 
 }

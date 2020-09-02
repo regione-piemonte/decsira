@@ -90,7 +90,7 @@ class SidePanel extends React.Component {
 
     renderQueryPanel = () => {
         return (<SideQueryPanel
-            hideSpatialFilter
+            hideSpatialFilter={this.props.hideSpatialFilter}
             withMap={this.props.withMap}
             params={this.props.auth}
             toggleControl={this.props.expandFilterPanel.bind(null, false)}

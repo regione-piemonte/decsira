@@ -2,8 +2,6 @@ const path = require('path');
 const extractThemesPlugin = require('./MapStore2/build/themes.js').extractThemesPlugin;
 const themeEntries = require('./MapStore2/build/themes.js').themeEntries;
 const assign = require('object-assign');
-var DefinePlugin = require("webpack/lib/DefinePlugin");
-var NormalModuleReplacementPlugin = require("webpack/lib/NormalModuleReplacementPlugin");
 
 module.exports = assign({}, require('./MapStore2/build/buildConfig')(
     {
@@ -22,13 +20,6 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
     false,
     "dist/",
     '.sira-ms2',
-    [new DefinePlugin({
-        "__DEVTOOLS__": true
-    }),
-    new NormalModuleReplacementPlugin(/VectorLayer/, path.join(__dirname, "js", "Ms2Override", "VectorLayer.jsx")),
-    new NormalModuleReplacementPlugin(/NumberField/, path.join(__dirname, "js", "Ms2Override", "NumberField.jsx")),
-    new NormalModuleReplacementPlugin(/SpatialFilter/, path.join(__dirname, "js", "Ms2Override", "SpatialFilter.jsx"))
-    ],
     {
         '@mapstore': path.resolve(__dirname, 'MapStore2/web/client'),
         '@js': path.resolve(__dirname, 'js')
