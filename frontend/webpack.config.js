@@ -20,6 +20,7 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
     false,
     "dist/",
     '.sira-ms2',
+    null,
     {
         '@mapstore': path.resolve(__dirname, 'MapStore2/web/client'),
         '@js': path.resolve(__dirname, 'js')
