@@ -115,10 +115,11 @@
            "type": 2
          },
 		 {
-           "headerName": "Infrastruttura strategia (ex legge 443/2001)",
+           "headerName": "Infrastruttura strategica (ex legge 443/2001)",
            "suppressSorting": true,
            "width":100,
            "xpath": ["decsiraogc_sivia:flgOperaLeggeObiettivo/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -126,6 +127,7 @@
            "suppressSorting": true,
            "width":100,
            "xpath": ["decsiraogc_sivia:flgNuovaOpera/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
 		 {
@@ -255,7 +257,7 @@
              }
            },
            "valueId":"cat_new",
-           "valueLabel":"cat_new"
+           "valueLabel":"id_cat_skvia"
        },
        {
           "index": 6,
@@ -265,6 +267,7 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_sivia_progetto_tipo",
+			  "cql_filter": "id_tipo_progetto=1%20OR%20id_tipo_progetto=2%20OR%20id_tipo_progetto=3%20OR%20id_tipo_progetto=4",
               "propertyName": "id_tipo_progetto,des_tipo_progetto,des_tipo_ente,ordinamento",
                "sortBy": "ordinamento+A"
             }
@@ -313,7 +316,8 @@
        {
           "index": 10,
           "attribute": "decsiraogc_sivia:flgOperaLeggeObiettivo",
-          "label":"Infrastruttura strategia (ex legge 443/2001)",
+          "label":"Infrastruttura strategica (ex legge 443/2001)",
+		  "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "values": [
             {"value":"SI","name":"SI"},
@@ -326,6 +330,7 @@
           "index": 11,
           "attribute": "decsiraogc_sivia:flgNuovaOpera",
           "label":"Modifica Opera esistente",
+		  "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
           "type":"list",
           "values": [
             {"value":"SI","name":"SI"},
