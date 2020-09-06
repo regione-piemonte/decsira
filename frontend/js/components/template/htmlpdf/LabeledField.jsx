@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -7,9 +6,10 @@ const PropTypes = require('prop-types');
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-var {FormattedDate} = require('react-intl');
+const {FormattedDate} = require('react-intl');
+const PropTypes = require('prop-types');
 
-const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const Message = require('@mapstore/components/I18N/Message');
 
 class LabeledField extends React.Component {
     static propTypes = {
@@ -53,7 +53,8 @@ class LabeledField extends React.Component {
                             {this.props.label}
                         </td>
                         <td>
-                            {this.props.value ? this.renderValue(this.props.value) : LocaleUtils.getMessageById(this.context.messages, "labeledfield.label_value_not_specified")}
+                            {this.props.value ? this.renderValue(this.props.value) :
+                                <Message msgId={"labeledfield.label_value_not_specified"}/>}
                         </td>
                     </tr>
                 </tbody>
