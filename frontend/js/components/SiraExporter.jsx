@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,8 +7,9 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const Dialog = require('@mapstore/components/misc/Dialog.jsx');
-const Select = require('react-select');
+const PropTypes = require('prop-types');
+const Dialog = require('@mapstore/components/misc/Dialog');
+const Select = require('react-select').default;
 const {Button, Glyphicon, Alert} = require('react-bootstrap');
 const ExporterUtils = require('../utils/ExporterUtils');
 require('react-select/dist/react-select.css');
@@ -52,12 +52,11 @@ class SiraExporter extends React.Component {
     };
 
     renderSelectors = () => {
-        const heigth = this.state.outputformat === 'shp' ? "260px" : "150px";
+        const height = this.state.outputformat === 'shp' ? "260px" : "150px";
         return (
-            <div role="body" style={{height: heigth, display: "flex",
+            <div role="body" style={{height, display: "flex",
                 flexDirection: "column", justifyContent: "space-between"}}>
                 <Select
-                    name="outputformat"
                     clearable={false}
                     value={this.state.outputformat}
                     options={[
@@ -65,8 +64,8 @@ class SiraExporter extends React.Component {
                         { value: 'shp', label: 'Shape file' }]}
                     onChange={(val) => this.setState({outputformat: val.value})}
                 />
+
                 <Select
-                    name="type"
                     clearable={false}
                     value={this.state.type}
                     options={[
@@ -85,16 +84,17 @@ class SiraExporter extends React.Component {
         return this.props.show ? (<Dialog
             id="SiraExporter"
             modal
+            draggable
             maskLoading={this.props.loading}
             start={{x: 0, y: 0}}
-            style={{position: "fixed", display: "block", zIndex: 1030, width: "100%", height: "100%"}}
+            style={{position: "fixed", display: "block", top: "calc(50% - 20px)", left: 100, width: 400, zIndex: 1030}}
             onClickOut={this.props.toggleExporter.bind(null, 'exporter')}
         >
             <span role="header">
                 <span>Export Data</span>
                 <button onClick={this.props.toggleExporter.bind(null, 'exporter')} className="exporter-close close"><Glyphicon glyph="1-close"/></button>
             </span>
-            <div role="header"></div>
+            <div role="header"/>
             {this.props.errormsg ? this.renderError() : this.renderSelectors()}
         </Dialog>) : null;
     }

@@ -42,7 +42,7 @@ const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const I18N = require('@mapstore/components/I18N/I18N');
 const Message = require('@mapstore/components/I18N/Message');
 
-const {reactCellRendererFactory} = require('../components/identify/featuregrid/ReactCellRendererFactory');
+const {reactCellRendererFactory} = require('../components/identify/featuregrid/CellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 
 const {loadCardTemplate} = require('../actions/card');

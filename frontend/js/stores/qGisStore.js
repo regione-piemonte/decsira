@@ -7,18 +7,19 @@
  */
 
 const DebugUtils = require('@mapstore/utils/DebugUtils').default;
-const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
+const {combineReducers} = require('@mapstore/utils/PluginsUtils');
 const {connectRouter} = require( 'connected-react-router');
-const history  = require( '../../MapStore2/web/client/stores/History').default;
+const history  = require( '@mapstore/stores/History').default;
 
-const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
+const SecurityUtils = require('@mapstore/utils/SecurityUtils');
 const assign = require('object-assign');
 module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins) => {
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        browser: require('../../MapStore2/web/client/reducers/browser'),
-        locale: require('../../MapStore2/web/client/reducers/locale'),
-        controls: require('../../MapStore2/web/client/reducers/controls'),
+        browser: require('@mapstore/reducers/browser'),
+        locale: require('@mapstore/reducers/locale'),
+        controls: require('@mapstore/reducers/controls'),
+        version: require('@mapstore/reducers/version'),
         router: connectRouter(history)
     });
     const defaultState = initialState.defaultState;

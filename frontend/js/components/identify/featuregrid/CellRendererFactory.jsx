@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 export const reactCellRendererFactory = (reactComponent) => {
     return (params) => {
         params.eParentOfValue.addElementAttachedListener( (eCell) => {
