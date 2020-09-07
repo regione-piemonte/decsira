@@ -96,12 +96,15 @@ class SideQueryPanel extends React.Component {
         ]),
         attributePanelExpanded: PropTypes.bool,
         spatialPanelExpanded: PropTypes.bool,
+        spatialMethodOptions: PropTypes.array,
+        spatialOperations: PropTypes.array,
         queryFormActions: PropTypes.object,
         pagination: PropTypes.object,
         sortOptions: PropTypes.object,
         hits: PropTypes.bool,
         withMap: PropTypes.bool.isRequired,
         collapsible: PropTypes.bool,
+        hideSpatialFilter: PropTypes.bool,
         toggleControl: PropTypes.func
     };
 
@@ -143,6 +146,18 @@ class SideQueryPanel extends React.Component {
         withMap: true,
         collapsible: false,
         toggleControl: () => {},
+        spatialMethodOptions: [
+            {id: "BBOX", name: "queryform.spatialfilter.methods.box"},
+            {id: "Circle", name: "queryform.spatialfilter.methods.circle"},
+            {id: "Polygon", name: "queryform.spatialfilter.methods.poly"}
+        ],
+        spatialOperations: [
+            {id: "INTERSECTS", name: "queryform.spatialfilter.operations.intersects"},
+            {id: "BBOX", name: "queryform.spatialfilter.operations.bbox"},
+            {id: "CONTAINS", name: "queryform.spatialfilter.operations.contains"},
+            {id: "DWITHIN", name: "queryform.spatialfilter.operations.dwithin"},
+            {id: "WITHIN", name: "queryform.spatialfilter.operations.within"}
+        ],
         queryFormActions: {
             attributeFilterActions: {
                 onAddGroupField: () => {},
@@ -241,6 +256,12 @@ class SideQueryPanel extends React.Component {
                     filterFields={this.props.filterFields}
                     spatialField={this.props.spatialField}
                     attributes={this.props.attributes}
+                    toolsOptions= {{
+                        hideCrossLayer: true,
+                        hideSpatialFilter: this.props.hideSpatialFilter || false
+                    }}
+                    spatialMethodOptions = {this.props.spatialMethodOptions}
+                    spatialOperations = {this.props.spatialOperations}
                     showDetailsPanel={this.props.showDetailsPanel}
                     toolbarEnabled={this.props.toolbarEnabled}
                     searchUrl={this.props.searchUrl}

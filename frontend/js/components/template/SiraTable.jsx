@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,19 +7,20 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {AgGridReact} = require('ag-grid-react');
+const PropTypes = require('prop-types');
+const DataGrid = require('../identify/featuregrid/DataGrid').default;
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const {selectRows} = require('../../actions/card');
 const GridCellDate = require('../GridCellDate');
 const GridCellLink = require('../GridCellLink');
 const TemplateUtils = require('../../utils/TemplateUtils');
-const {reactCellRendererFactory} = require('../identify/featuregrid/ReactCellRendererFactory');
+const {reactCellRendererFactory} = require('../identify/featuregrid/CellRendererFactory');
 const assign = require('object-assign');
 const uuid = require('uuid');
 
-require("ag-grid-community/dist/styles/ag-grid.css");
-// require("ag-grid-community/dist/styles/theme-blue.css"); //TODO
+require("ag-grid/dist/styles/ag-grid.css");
+require("ag-grid/dist/styles/theme-fresh.css");
 
 const {loadCardTemplate} = require('../../actions/card');
 const {loadFeatureTypeConfig, setWaitingForConfig} = require('../../actions/siradec');
@@ -143,8 +143,8 @@ class SiraTable extends React.Component {
         }
 
         return (
-            <div fluid={false} style={this.props.style} className="ag-blue">
-                <AgGridReact
+            <div fluid={false} style={this.props.style} className="ag-fresh">
+                <DataGrid
                     rowData={features}
                     onSelectionChanged={this.selectRows}
                     enableColResize

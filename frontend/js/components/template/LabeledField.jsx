@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
 var {FormattedDate} = require('react-intl');
-const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const Message = require('@mapstore/components/I18N/Message');
 
 class LabeledField extends React.Component {
     static propTypes = {
@@ -45,7 +45,7 @@ class LabeledField extends React.Component {
                         {
                             this.props.value ? this.renderValue(this.props.value) :
                                 <span className="labeledfield-no-value">
-                                    {LocaleUtils.getMessageById(this.context.messages, "labeledfield.label_value_not_specified")}
+                                    <Message msgId={"labeledfield.label_value_not_specified"}/>
                                 </span>
                         }
                     </Col>

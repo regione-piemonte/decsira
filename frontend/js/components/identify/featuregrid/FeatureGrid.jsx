@@ -8,7 +8,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 
-const {AgGridReact} = require('ag-grid-react');
+const DataGrid = require('./DataGrid').default;
 const {keys, isEqual, isFunction} = require('lodash');
 const {ButtonToolbar, Button, Glyphicon} = require('react-bootstrap');
 const assign = require("object-assign");
@@ -20,10 +20,10 @@ const ZoomToFeature = require("./ZoomToFeature");
 
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
-const {reactCellRendererFactory} = require('./ReactCellRendererFactory');
+const {reactCellRendererFactory} = require('./CellRendererFactory');
 
-require("ag-grid-community/dist/styles/ag-grid.css");
-require("ag-grid-community/dist/styles/ag-theme-blue.css");
+require("ag-grid/dist/styles/ag-grid.css");
+require("ag-grid/dist/styles/theme-fresh.css");
 
 const calcVisibility = (def, state) => {
     if (state === true) {
@@ -218,8 +218,8 @@ class FeatureGrid extends React.Component {
                 flexDirection: "column",
                 height: "100%"
             }}>
-                <div fluid={false} style={this.props.style} className="ag-blue">
-                    <AgGridReact
+                <div style={this.props.style} className="ag-fresh">
+                    <DataGrid
                         virtualPaging={this.props.virtualPaging}
                         columnDefs={this.setColumnDefs()}
                         rowData={(!isPagingOrVirtual) ? this.props.features : null}

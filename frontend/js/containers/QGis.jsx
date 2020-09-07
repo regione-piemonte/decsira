@@ -112,6 +112,7 @@ class QGis extends React.Component {
     }
 
     componentDidMount() {
+        document.body.className = "sira-ms2";
         // profile is array with max length = 1
         let profile = [];
         profile = (this.props?.match?.params?.profile && this.props?.match?.params?.profile) ? this.props?.match?.params?.profile : new Array(urlQuery.profile);
@@ -160,6 +161,7 @@ class QGis extends React.Component {
         ) : (
             <SideQueryPanel
                 withMap={false}
+                hideSpatialFilter
                 params={{authkey: this.props.profile.authParams.authkey}}
                 toggleControl={this.toggleControl}/>
         );
@@ -170,7 +172,7 @@ class QGis extends React.Component {
             <QGisFeatureGrid
                 withMap
                 initWidth={this.state.width}
-                pagination= {(this.state.qGisType !== 'list' && this.props.pagination && this.props.pagination .maxFeatures) ? true : false}
+                pagination= {!!(this.state.qGisType !== 'list' && this.props.pagination && this.props.pagination.maxFeatures)}
                 params={{authkey: this.props.profile.authParams.authkey}}
                 profile={this.props.profile.profile}
                 templateProfile="QGIS"

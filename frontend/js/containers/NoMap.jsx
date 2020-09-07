@@ -79,6 +79,7 @@ class NoMap extends React.Component {
     }
 
     componentDidMount() {
+        document.body.className = "sira-ms2";
         if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
             this.props.onLoadFeatureTypeConfig(
                 this.props.featureTypeConfigUrl, {authkey: authParams[this.props?.match?.params?.profile]?.authkey || ""}, this.props.featureType, true);
@@ -96,7 +97,7 @@ class NoMap extends React.Component {
         return (
             <div className="mappaSiraDecisionale">
                 <Button id="drawer-menu-button" bsStyle="primary" key="menu-button" className="square-button" onClick={() => this.props.expandFilterPanel(true)}><Glyphicon glyph="1-stilo"/></Button>
-                <SidePanel withMap={false} auth={authParams[this.props?.match?.params?.profile]} profile={this.props?.match?.params?.profile}/>
+                <SidePanel hideSpatialFilter withMap={false} auth={authParams[this.props?.match?.params?.profile]} profile={this.props?.match?.params?.profile}/>
                 <Card withMap={false} authParam={authParams[this.props?.match?.params?.profile]}/>
             </div>
         );
@@ -118,7 +119,7 @@ module.exports = connect((state) => {
         // card: state.cardtemplate,
         featureType: state.siradec && state.siradec.featureType,
         featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
-        configLoaded: state.siradec && state.siradec[state.siradec.activeFeatureType] && state.siradec[state.siradec.activeFeatureType].card ? true : false
+        configLoaded: !!(state.siradec && state.siradec[state.siradec.activeFeatureType] && state.siradec[state.siradec.activeFeatureType].card)
         // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {

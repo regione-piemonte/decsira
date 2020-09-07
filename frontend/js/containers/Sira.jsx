@@ -155,7 +155,8 @@ class Sira extends React.Component {
         configLoaded: PropTypes.bool,
         registerEventListener: PropTypes.func,
         toggleControl: PropTypes.func,
-        mapConfigLoaded: PropTypes.bool
+        mapConfigLoaded: PropTypes.bool,
+        panelEnabled: PropTypes.bool
     };
 
     static contextTypes = {
@@ -186,7 +187,7 @@ class Sira extends React.Component {
     componentDidMount() {
         if (this.props.mapConfigLoaded) {
             this.props.registerEventListener('mousemove', 'mouseposition');
-            this.props.toggleControl('drawer');
+            !this.props.panelEnabled && this.props.toggleControl('drawer');
         }
 
     }
@@ -254,7 +255,8 @@ module.exports = connect((state) => {
         card: state.cardtemplate,
         controls: state.siraControls,
         configLoaded: !!(activeConfig && activeConfig.card),
-        mapConfigLoaded: state?.map?.present || false
+        mapConfigLoaded: state?.map?.present || false,
+        panelEnabled: state?.controls?.drawer?.enabled || false
     };
 }, {
     toggleSiraControl,
