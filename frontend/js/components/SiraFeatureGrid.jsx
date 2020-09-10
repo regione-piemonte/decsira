@@ -331,7 +331,7 @@ class SiraFeatureGrid extends React.Component {
                                     maxZoom={16}
                                     paging={this.props.pagination}
                                     zoom={15}
-                                    agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true}}
+                                    agGridOptions={{rowBuffer: 20, enableServerSideSorting: true, suppressMultiSort: true}}
                                     toolbar={{
                                         zoom: true,
                                         exporter: true,
