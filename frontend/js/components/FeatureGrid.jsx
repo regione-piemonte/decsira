@@ -414,7 +414,7 @@ class SiraGrid extends React.Component {
                                 paging={this.props.pagination}
                                 zoom={15}
                                 enableZoomToFeature={this.props.withMap}
-                                agGridOptions={{enableServerSideSorting: true, suppressMultiSort: true, overlayNoRowsTemplate: "Nessun risultato trovato"}}
+                                agGridOptions={{enableServerSideSorting: true,  rowBuffer: 20, suppressMultiSort: true, overlayNoRowsTemplate: "Nessun risultato trovato"}}
                                 zoomToFeatureAction={this.props.zoomToFeatureAction}
                                 toolbar={{
                                     zoom: this.props.withMap,

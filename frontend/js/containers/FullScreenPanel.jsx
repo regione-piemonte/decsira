@@ -130,6 +130,7 @@ class FullScreen extends React.Component {
         return (
             <SideQueryPanel
                 withMap={false}
+                hideSpatialFilter
                 // authkey: (this.props.profile.authParams && this.props.profile.authParams.authkey) ? this.props.profile.authParams.authkey : '')
                 params={{authkey: this.props?.profile?.authParams?.authkey || ''}}
                 toggleControl={this.toggleControl}/>
