@@ -16,7 +16,8 @@ const appReducers = {
     featuregrid: require('../reducers/featuregrid'),
     draw: require('@mapstore/reducers/draw'),
     security: require('../reducers/siraSecurity'),
-    siraexporter: require('../reducers/siraexporter')
+    siraexporter: require('../reducers/siraexporter'),
+    siraTree: require('../reducers/siraTree')
 };
 
 module.exports = {
