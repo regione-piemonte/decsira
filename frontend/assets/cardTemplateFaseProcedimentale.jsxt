@@ -90,7 +90,7 @@
 
     <Section header='DETTAGLIO PROCEDIMENTO' eventKey='2' expanded={true}>
 		<LabeledField label='Stato Procedimento' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flagStatoProceduraFase/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgStatoProceduraFase/text()")
         }/>
         <LabeledField label='Tipologia Procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desTipologiaFase/text()")
@@ -194,9 +194,6 @@
     <Section header='ORGANO TECNICO' eventKey='5' expanded={true}>
         <LabeledField label='Unità Organizzativa responsabile istruttoria' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:denomDirezioneRespOrgTec/text()")
-        }/>
-        <LabeledField label='Responsabile del procedimento' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:responsProcedimentoOrgTec/text()")
         }/>
     </Section>
 
