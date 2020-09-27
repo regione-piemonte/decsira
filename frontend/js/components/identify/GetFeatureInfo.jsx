@@ -327,7 +327,7 @@ class GetFeatureInfo extends React.Component {
     };
 
     calculateRequestParameters = (layer, bounds, crs, newProps) => {
-        const infoFormat = newProps.infoFormat || layer.infoFormat && this.infoFormat(layer.infoFormat, newProps.infoFormat);
+        const infoFormat = layer.infoFormat ? this.infoFormat(layer.infoFormat, newProps.infoFormat) : newProps.infoFormat;
         let requestConf = {
             id: layer.id,
             layers: layer.name,

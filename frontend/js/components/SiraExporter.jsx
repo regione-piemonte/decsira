@@ -76,7 +76,7 @@ class SiraExporter extends React.Component {
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
                 Solo gli elementi dotati di geometria verranno esportati
                 </Alert>) : null}
-                <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export</span><Glyphicon glyph="download-alt" /></Button>
+                <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export&nbsp;</span><Glyphicon glyph="download-alt" /></Button>
             </div>);
     };
 

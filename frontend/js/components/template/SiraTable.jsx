@@ -20,7 +20,7 @@ const assign = require('object-assign');
 const uuid = require('uuid');
 
 require("ag-grid/dist/styles/ag-grid.css");
-require("ag-grid/dist/styles/theme-fresh.css");
+require("ag-grid/dist/styles/theme-blue.css");
 
 const {loadCardTemplate} = require('../../actions/card');
 const {loadFeatureTypeConfig, setWaitingForConfig} = require('../../actions/siradec');
@@ -143,7 +143,7 @@ class SiraTable extends React.Component {
         }
 
         return (
-            <div fluid={false} style={this.props.style} className="ag-fresh">
+            <div fluid={false} style={this.props.style} className="ag-blue">
                 <DataGrid
                     rowData={features}
                     onSelectionChanged={this.selectRows}
