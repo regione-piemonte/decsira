@@ -60,6 +60,7 @@ module.exports = {
         ManagerPlugin: require('@mapstore/plugins/manager/Manager'),
         MapEditorPlugin: require('@mapstore/plugins/MapEditor').default,
         MapFooterPlugin: require('@mapstore/plugins/MapFooter'),
+        MapImportPlugin: require('@mapstore/plugins/MapImport'),
         MapLoadingPlugin: require('@mapstore/plugins/MapLoading'),
         MapPlugin: require('@mapstore/plugins/Map'),
         MapSearchPlugin: require('@mapstore/plugins/MapSearch'),

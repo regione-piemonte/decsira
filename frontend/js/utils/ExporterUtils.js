@@ -8,7 +8,7 @@
 const FileSaver = require('file-saver');
 const shpwrite = require('shp-write');
 const JSZip = require('jszip');
-const ol = require('ol');
+const GeoJSON = require('ol/format/GeoJSON').default;
 const ProWKTDef = require('./ProjWKTDef');
 const {head} = require('lodash');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
@@ -43,7 +43,7 @@ const ExporterUtils = {
         }
     },
     exportShp: function(features, columns, filename, fileToAdd, outputSrs) {
-        const format = new ol.format.GeoJSON();
+        const format = new GeoJSON();
         let featureCollection = this.getFeaturesForShp(features, columns);
         if (Array.isArray(featureCollection)) {
             featureCollection = { "type": "FeatureCollection", features: featureCollection};

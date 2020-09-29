@@ -165,18 +165,18 @@ class FeatureGrid extends React.Component {
 
         let tools = [];
         if (this.props.toolbar.zoom) {
-            tools.push(<Button key="zoom" onClick={this.zoomToFeatures}><Glyphicon glyph="search"/></Button>);
+            tools.push(<Button key="zoom" onClick={this.zoomToFeatures}>&nbsp;<Glyphicon glyph="search"/></Button>);
         }
 
         if (this.props.toolbar.exporter) {
             tools.push(<Button key="exporter" onClick={() => this.props.exportAction(this.api)}>
-                <Glyphicon glyph="download"/><I18N.Message msgId={"featuregrid.export"}/>
+                <Glyphicon glyph="download"/>&nbsp;<I18N.Message msgId={"featuregrid.export"}/>
             </Button>);
         }
 
         if (this.props.toolbar.toolPanel) {
             tools.push(<Button key="toolPanel" onClick={() => { this.api.showToolPanel(!this.api.isToolPanelShowing()); }}>
-                <Glyphicon glyph="cog"/><I18N.Message msgId={"featuregrid.tools"}/>
+                <Glyphicon glyph="cog"/>&nbsp;<I18N.Message msgId={"featuregrid.tools"}/>
             </Button>);
         }
 
@@ -201,7 +201,7 @@ class FeatureGrid extends React.Component {
                 } else {
                     this.selectAllRows(!allSelected);
                 }
-            }}><Glyphicon glyph="check"/>
+            }}><Glyphicon glyph="check"/>&nbsp;
                 {
                     (!allSelected) ? (
                         <I18N.Message msgId={"featuregrid.selectall"}/>
