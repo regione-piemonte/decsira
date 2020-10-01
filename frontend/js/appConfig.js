@@ -85,10 +85,10 @@ module.exports = {
                 format: "wms",
                 "supportedFormats": [{"name": "wms", "label": "WMS"}, {"name": "csw", "label": "CSW"}]
             },
-            mapInfo: {enabled: true, infoFormat: 'text/plain' }
+            mapInfo: {enabled: true, infoFormat: 'text/html' }
         },
         mobile: {
-            mapInfo: {enabled: true, infoFormat: 'application/json' },
+            mapInfo: {enabled: true, infoFormat: 'text/html' },
             mousePosition: {enabled: true, crs: "EPSG:4326", showCenter: true}
         }
     },
