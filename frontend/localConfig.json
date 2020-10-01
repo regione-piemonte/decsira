@@ -61,6 +61,82 @@
       "maptype": {
         "mapType": "{context.mode === 'desktop' ? 'openlayers' : 'leaflet'}"
       },
+      "catalog": {
+        "default": {
+          "newService": {
+            "url": "",
+            "type": "wms",
+            "title": "",
+            "isNew": true,
+            "autoload": false
+          },
+          "selectedService": "WMS",
+          "services": {
+            "WMS": {
+              "url": "${url.geoserver}/geoserver/wms",
+              "type": "wms",
+              "title": "WMS Service",
+              "autoload": true,
+              "format": "image/png"
+            }
+          },
+          "staticServices": {
+            "default_map_backgrounds": {
+              "type": "backgrounds",
+              "title": "defaultMapBackgroundsServiceTitle",
+              "autoload": true,
+              "backgrounds": [{
+                "type": "ol",
+                "title": "None",
+                "name": "None",
+                "source": "ol",
+                "group": "background",
+                "visibility": false
+              },
+                {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
+                  "name": "SfondoCartRifBN",
+                  "title": "Sfondo Cartografico BN",
+                  "group": "background",
+                  "visibility": true,
+                  "format": "image/png",
+                  "tiled": true,
+                  "tileSize": 512
+                },
+                {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                  "name": "SfondoCartRif",
+                  "title": "Sfondo Cartografico a colori",
+                  "group": "background",
+                  "visibility": false,
+                  "format": "image/png",
+                  "tiled": true,
+                  "tileSize": 512
+                },
+                {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
+                  "name": "OrtofotoRegione2010",
+                  "title": "Ortoimmagini Piemonte 2009-2011",
+                  "group": "background",
+                  "visibility": false,
+                  "format": "image/png",
+                  "tiled": true
+                },
+                {
+                  "type": "osm",
+                  "title": "Open Street Map",
+                  "name": "mapnik",
+                  "source": "osm",
+                  "group": "background",
+                  "visibility": false
+                }]
+            }
+          }
+        }
+      },
       "locales": {
         "supportedLocales": {
           "it": {
@@ -406,7 +482,7 @@
           "buttonStyle":"primary"
         }
       },
-    "Details", "MapImport",
+    "Details",
       {
         "name": "Map",
         "cfg": {

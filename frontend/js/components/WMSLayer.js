@@ -6,15 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var Layers = require('@mapstore/utils/openlayers/Layers');
-var ol = require('ol');
-var objectAssign = require('object-assign');
-const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
+import Layers from '@mapstore/utils/openlayers/Layers';
+import {Image, Tile} from 'ol/layer';
+import {ImageWMS, TileWMS} from 'ol/source';
+import objectAssign from 'object-assign';
+import CoordinatesUtils from '@mapstore/utils/CoordinatesUtils';
 
-const {isArray} = require('lodash');
-const SecurityUtils = require('@mapstore/utils/SecurityUtils');
-const axios = require('@mapstore/libs/ajax');
-const urllib = require('url');
+import {isArray} from 'lodash';
+import SecurityUtils from '@mapstore/utils/SecurityUtils';
+import axios from '@mapstore/libs/ajax';
+import urllib from 'url';
 
 
 function wmsToOpenlayersOptions(options) {
@@ -77,21 +78,21 @@ Layers.registerType('wmspost', {
         const queryParameters = wmsToOpenlayersOptions(options) || {};
         urls.forEach(url => SecurityUtils.addAuthenticationParameter(url, queryParameters));
         if (options.singleTile) {
-            return new ol.layer.Image({
+            return new Image({
                 opacity: options.opacity !== undefined ? options.opacity : 1,
                 visible: options.visibility !== false,
                 zIndex: options.zIndex,
-                source: new ol.source.ImageWMS({
+                source: new ImageWMS({
                     url: urls[0],
                     params: queryParameters
                 })
             });
         }
-        return new ol.layer.Tile({
+        return new Tile({
             opacity: options.opacity !== undefined ? options.opacity : 1,
             visible: options.visibility !== false,
             zIndex: options.zIndex,
-            source: new ol.source.TileWMS({
+            source: new TileWMS({
                 urls: urls,
                 params: queryParameters,
                 tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)})
