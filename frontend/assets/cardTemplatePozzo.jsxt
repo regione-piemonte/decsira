@@ -13,86 +13,343 @@
             <LabeledField label='Codice ROC l.r. 22/99' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceROCPozzo/text()")
             }/>
-
             <LabeledField label='Codice rilievo' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceRilievoPozzo/text()")
+            }/>
+			<LabeledField label='Codice SII' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceSIIPozzo/text()")
             }/>
             <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:denominazionePozzo/text()")
             }/>
+			<LabeledField label='Stato pozzo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:desStatoPozzo/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:desComunePozzo/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:localitaPozzo/text()")
+            }/>
             <LabeledField label='Profondità' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:profonditaPozzo/text()")
             }/>
-
             <LabeledField label='Quota del Piano Campagna s.l.m. (m)' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:quotaPCPozzo/text()")
             }/>
-
+			<LabeledField label='Appartenenza ad un campo pozzi' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgCampoPozzo/text()")
+            }/>
+			<LabeledField label='Pozzo artesiano' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgPozzoArtesiano/text()")
+            }/>
+			<LabeledField label='Impianto di acquedotto' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:denomImpAcqPozzo/text()")
+            }/>
+			<LabeledField label='Acquedotto' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:denomAcquedPozzo/text()")
+            }/>
         </Section>
 
-        <Section header='DATI Strutturali' eventKey='2' expanded={true}>
+		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='2' expanded={true}>
+            <LabeledField label='Stato di esercizio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:desStatoEserPozzo/text()")
+            }/>
+            <LabeledField label='Portata massima derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:qMaxDerivPozzo/text()")
+            }/>
+			<LabeledField label='Portata media annua derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:qMedDerivPozzo/text()")
+            }/>
+            <LabeledField label='Volume massimo di concessione (m3)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:volMaxConcPozzo/text()")
+            }/>
+			
+			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
+				<SiraTable
+					   id="PrelievoPerUtenzaPozzo"
+					   selectedRow={model.PrelievoPerUtenzaPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice rilievo',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+							   },
+							   {
+								   headerName: 'Stato pratica',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:desStatoDeriv/text()"
+							   },
+							   {
+								   headerName: 'nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+							   },
+							   {
+								   headerName: 'nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+							   },
+							   {
+								   headerName: 'Portata massima istantanea (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+							   },
+							   {
+								   headerName: 'Volume massimo annuo (m3)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:prelievoPerUtenzaPozzo")}/>
+            </Section>
+			
+        </Section>
+
+        <Section header='DATI STRUTTURALI GENERALI' eventKey='3' expanded={true}>
             <LabeledField label='Data di costruzione' dateFormat='DD/MM/YYYY' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:dataCostruzionePozzo/text()")
             }/>
+			<LabeledField label='Tipo di falda' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:desTipoFaldaPozzo/text()")
+            }/>
+			<LabeledField label='Disponibilita stratigrafia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispStrat/text()")
+            }/>
 
+			<Section header='Valori del diametro della colonna' eventKey='4' expanded={false}>
+				<SiraTable
+					   id="DiametroDiamcolonPozzo"
+					   selectedRow={model.DiametroDiamcolonPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Diametro (mm)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:DiametroDiamcolonPozzo/decsiraogc_operecaptazione:diametroDiamcolonPozzo/text()"
+							   },
+							   {
+								   headerName: 'Profondita da (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:DiametroDiamcolonPozzo/decsiraogc_operecaptazione:profonditaDaDiamcolonPozzo/text()"
+							   },
+							   {
+								   headerName: 'Profondita a (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:DiametroDiamcolonPozzo/decsiraogc_operecaptazione:profonditaADiamcolonPozzo/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:diametroDiamcolonPozzo")}/>
+            </Section>
+			
+			<Section header='Tratti di colonna interessati dalla presenza di cementazione' eventKey='5' expanded={false}>
+				<SiraTable
+					   id="CementazPozzo"
+					   selectedRow={model.CementazPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Materiale impiegato',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:CementazPozzo/decsiraogc_operecaptazione:desMaterCementazPozzo/text()"
+							   },
+							   {
+								   headerName: 'Profondita da (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:CementazPozzo/decsiraogc_operecaptazione:profonditaDaCementazPozzo/text()"
+							   },
+							   {
+								   headerName: 'Profondita a (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:CementazPozzo/decsiraogc_operecaptazione:profonditaACementazPozzo/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:cementazPozzo")}/>
+            </Section>
+			
+			<Section header='Tratti di colonna interessati dalla presenza di dreni' eventKey='6' expanded={false}>
+				<SiraTable
+					   id="DrenoPozzo"
+					   selectedRow={model.DrenoPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Profondita da (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:DrenoPozzo/decsiraogc_operecaptazione:profonditaDaDrenoPozzo/text()"
+							   },
+							   {
+								   headerName: 'Profondita a (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:DrenoPozzo/decsiraogc_operecaptazione:profonditaADrenoPozzo/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:drenoPozzo")}/>
+            </Section>
+			
+			<Section header='Tratti di colonna interessati dalla presenza di filtri' eventKey='7' expanded={false}>
+				<SiraTable
+					   id="FiltroPozzo"
+					   selectedRow={model.FiltroPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Tipologia di filtro',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desTipoFiltro/text()"
+							   },
+							   {
+								   headerName: 'Apertura (mm)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:aperturaFiltro/text()"
+							   },
+							   {
+								   headerName: 'Profondita da (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaDaFiltro/text()"
+							   },
+							   {
+								   headerName: 'Profondita a (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaAFiltro/text()"
+							   },
+							   {
+								   headerName: 'Origine del dato',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desOrigineDatoFiltro/text()"
+							   } 
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:filtroPozzo")}/>
+            </Section>
+			
+        </Section>
+		
+		<Section header='PROVE DI EMUNGIMENTO - dati generali' eventKey='8' expanded={true}>
+            <LabeledField label='Disponibilita di misure piezometriche' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispMisPiezo/text()")
+            }/>
+			<LabeledField label='Piezometri associati' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:NumPiezAssoc/text()")
+            }/>
+			
+			<Section header='Prove di emungimento a gradini' eventKey='9' expanded={false}>
+				<SiraTable
+					   id="EmungGradiniPozzo"
+					   selectedRow={model.EmungGradiniPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Data della misura',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:dataMisuraEmunggradiniPozzo/text()"
+							   },
+							   {
+								   headerName: 'Soggetto esecutore',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:soggEsecutEmunggradiniPozzo/text()"
+							   },
+							   {
+								   headerName: 'Portata critica (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:qCriticaEmunggradiniPozzo/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:emungGradiniPozzo")}/>
+            </Section>
+			
+			<Section header='Prove di emungimento a lunga durata' eventKey='10' expanded={false}>
+				<SiraTable
+					   id="EmungDurataPozzo"
+					   selectedRow={model.EmungDurataPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Data della misura',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:dataMisuraEmungdurataPozzo/text()"
+							   },
+							   {
+								   headerName: 'Soggetto esecutore',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:soggEsecutEmungdurataPozzo/text()"
+							   },
+							   {
+								   headerName: 'Portata costante (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:qCostanteEmungdurataPozzo/text()"
+							   },
+							   {
+								   headerName: 'Durata (h)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:durataEmungdurataPozzo/text()"
+							   },
+							   {
+								   headerName: 'Trasmissivita (m2/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:trasmissivitaEmungdurataPozzo/text()"
+							   },
+							   {
+								   headerName: 'Coefficiente di immagazzinamento',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:coeffImmagEmungdurataPozzo/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:emungDurataPozzo")}/>
+            </Section>
+			
+			<Section header='Pompe idrauliche' eventKey='11' expanded={false}>
+				<SiraTable
+					   id="PompaIdraulPozzo"
+					   selectedRow={model.PompaIdraulPozzo}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Potenza del motore (kW)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:potenzaMotorePompaidrPozzo/text()"
+							   },
+							   {
+								   headerName: 'Portata massima estraibile (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:qMaxPompaidrPozzo/text()"
+							   },
+							   {
+								   headerName: 'Prevalenza (m)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:prevalenzaPompaidrPozzo/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:pompaIdraulPozzo")}/>
+            </Section>
+			
         </Section>
 
-        <Section header='Tratti di colonna interessati dalla presenza di filtri' eventKey='3' expanded={true}>
-
-          <SiraTable
-                id="FiltroPozzi"
-                selectedRow={model.FiltroPozzi}
-                wfsVersion="2.0"
-                rowSelection={false}
-
-                columns={
-                    [
-                        {
-                            hide: true,
-                            id: true,
-                            xpath: "decsiraogc_operecaptazione:FiltroPozzo/@gml:id"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Tipologia di filtro',
-                            width: 170,
-                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desTipoFiltro/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Apertura (mm)',
-                            width: 120,
-                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:aperturaFiltro/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Profondità da (m)',
-                            width: 140,
-                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaDaFiltro/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Profondità a (m)',
-                            width: 140,
-                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaAFiltro/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Origine del dato',
-                            width: 150,
-                            xpath:"decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desOrigineDatoFiltro/text()"
-                        }
-
-                    ]
-                }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:filtroPozzo")}
-
-          />
-
-
-        </Section>
-
-        <Section header='MAPPA SINTESI - Prese da pozzi su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='4' expanded={true}>
+        <Section header='MAPPA SINTESI - Prese da pozzi su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='12' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({
@@ -126,9 +383,6 @@
 	              withMap={model.withMap}/>
 
         </Section>
-
-
-
 
     </Panel>
 </Panel>
