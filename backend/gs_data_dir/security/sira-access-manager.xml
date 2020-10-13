@@ -350,7 +350,13 @@
 		<accessMode>READ</accessMode>
     </Rule>
 	
-	
+	<Rule>
+		<priority>314</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_sivia_geo</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
 	
 	
@@ -1078,6 +1084,40 @@
 		 <attribute>decsiraogc_sivia:dataUltimaModificaOpera</attribute>
 		 <attribute>decsiraogc_sivia:flgNuovaOpera</attribute>
 		 <attribute>decsiraogc_sivia:rappresentanteNucleoOrgTec</attribute>
+		 <attribute>decsiraogc_sivia:responsProcedimentoOrgTec</attribute>
+		</hiddenAttributes>	
+    </Rule>
+	<Rule>
+		<priority>617</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_sivia_geo</workspace>
+		<layer>decsira_geo_sivia_punto</layer>
+		<accessMode>READ</accessMode>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_sivia_geo:id_proc</attribute>
+		 <attribute>decsiraogc_sivia_geo:id_fase</attribute>
+		</hiddenAttributes>	
+    </Rule>
+    <Rule>
+		<priority>618</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_sivia_geo</workspace>
+		<layer>decsira_geo_sivia_linea</layer>
+		<accessMode>READ</accessMode>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_sivia_geo:id_proc</attribute>
+		 <attribute>decsiraogc_sivia_geo:id_fase</attribute>
+		</hiddenAttributes>	
+    </Rule>
+    <Rule>
+		<priority>619</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_sivia_geo</workspace>
+		<layer>decsira_geo_sivia_poligono</layer>
+		<accessMode>READ</accessMode>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_sivia_geo:id_proc</attribute>
+		 <attribute>decsiraogc_sivia_geo:id_fase</attribute>
 		</hiddenAttributes>	
     </Rule>
 	

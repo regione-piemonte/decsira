@@ -1,0 +1,139 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PRESE DA FONTANILI' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:codiceROCFontanile/text()"),
+            ' - codice rilievo: ',
+             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:codiceRilievoFontanile/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Fontanile' eventKey='1' expanded={true}>
+            <LabeledField label='Codice ROC l.r. 22/99' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:codiceROCFontanile/text()")
+            }/>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:codiceRilievoFontanile/text()")
+            }/>
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:denominazioneFontanile/text()")
+            }/>
+			<LabeledField label='Stato fontanile' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:desStatoFontanile/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:desComuneFontanile/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:localitaFontanile/text()")
+            }/>
+        </Section>
+
+		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='3' expanded={true}>
+            <LabeledField label='Stato di esercizio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:desStatoEserFontanile/text()")
+            }/>
+            <LabeledField label='Portata massima derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:qMaxDerivFontanile/text()")
+            }/>
+			<LabeledField label='Portata media annua derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:qMedDerivFontanile/text()")
+            }/>
+            <LabeledField label='Volume massimo di concessione (m3)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:volMaxConcFontanile/text()")
+            }/>
+			
+			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='4' expanded={false}>
+				<SiraTable
+					   id="PrelievoPerUtenzaFontanile"
+					   selectedRow={model.PrelievoPerUtenzaFontanile}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice rilievo',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+							   },
+							   {
+								   headerName: 'Stato pratica',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:desStatoDeriv/text()"
+							   },
+							   {
+								   headerName: 'nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+							   },
+							   {
+								   headerName: 'nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+							   },
+							   {
+								   headerName: 'Portata massima istantanea (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+							   },
+							   {
+								   headerName: 'Volume massimo annuo (m3)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:prelievoPerUtenzaFontanile")}/>
+            </Section>
+			
+        </Section>
+
+        <Section header='MAPPA SINTESI - Prese da fontanili su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:geomFontanile/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Prese da fontanili",
+	                          "name": "decsiraogc_operecaptazione:Fontanile",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+		<Section header='METADATO' eventKey='8' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+				params={{
+					id: 4452,
+					currTab: 'rndt'
+				}}
+			/>
+		</Section>
+		
+    </Panel>
+</Panel>

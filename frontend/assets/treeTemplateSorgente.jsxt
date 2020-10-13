@@ -1,0 +1,56 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='PRESE DA SORGENTI' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceROCSorgente/text()"),
+            ' - codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceRilievoSorgente/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'sorgente'
+			featureId = {'id_sorgente.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:idSorgente/text()")}
+			rootTitle = {
+				'Codice ROC l.r. 22/99: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceROCSorgente/text()") +
+				' - codice rilievo: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceRilievoSorgente/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:oggettoAssociatoSorgente")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:codiceRilDerColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:nomeWFS/text()",
+						xpath: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:idTipoOggetto/text()",
+					value: "29"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: ', " -  matricola: "],
+					descriptionValues: ["decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione::codiceRilMisuColl/text()", "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:matricolaMisuColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:nomeWFS/text()",
+						xpath: "decsiraogc_operecaptazione:OggettoAssociatoSorgente/decsiraogc_operecaptazione:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>
