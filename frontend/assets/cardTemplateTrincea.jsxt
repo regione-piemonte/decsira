@@ -1,0 +1,151 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PRESE DA TRINCEE DRENANTI' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:codiceROCTrincea/text()"),
+            ' - codice rilievo: ',
+             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:codiceRilievoTrincea/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Trincea drenante' eventKey='1' expanded={true}>
+            <LabeledField label='Codice ROC l.r. 22/99' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:codiceROCTrincea/text()")
+            }/>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:codiceRilievoTrincea/text()")
+            }/>
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:denominazioneTrincea/text()")
+            }/>
+			<LabeledField label='Stato trincea drenante' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:desStatoTrincea/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:desComuneTrincea/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:localitaTrincea/text()")
+            }/>
+			<LabeledField label='Sviluppo longitudinale (m)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:svilLongTrincea/text()")
+            }/>
+			<LabeledField label='Inclinazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:inclinazioneTrincea/text()")
+            }/>
+			<LabeledField label='Profondita massima (m)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:profMaxTrincea/text()")
+            }/>
+			<LabeledField label='Profondita minima (m)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:profMinTrincea/text()")
+            }/>
+        </Section>
+
+		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='2' expanded={true}>
+            <LabeledField label='Stato di esercizio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:desStatoEserTrincea/text()")
+            }/>
+            <LabeledField label='Portata massima derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:qMaxDerivTrincea/text()")
+            }/>
+			<LabeledField label='Portata media annua derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:qMedDerivTrincea/text()")
+            }/>
+            <LabeledField label='Volume massimo di concessione (m3)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:volMaxConcTrincea/text()")
+            }/>
+			
+			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
+				<SiraTable
+					   id="PrelievoPerUtenzaTrincea"
+					   selectedRow={model.PrelievoPerUtenzaTrincea}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice rilievo',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+							   },
+							   {
+								   headerName: 'Stato pratica',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:desStatoDeriv/text()"
+							   },
+							   {
+								   headerName: 'nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+							   },
+							   {
+								   headerName: 'nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+							   },
+							   {
+								   headerName: 'Portata massima istantanea (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+							   },
+							   {
+								   headerName: 'Volume massimo annuo (m3)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:prelievoPerUtenzaTrincea")}/>
+            </Section>
+			
+        </Section>
+
+        <Section header='MAPPA SINTESI - Prese da trincee drenanti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='4' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:geomTrincea/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Prese da trincee drenanti",
+	                          "name": "decsiraogc_operecaptazione:TrinceaDrenante",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+		
+		<Section header='METADATO' eventKey='8' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+				params={{
+					id: 4453,
+					currTab: 'rndt'
+				}}
+			/>
+		</Section>
+
+    </Panel>
+</Panel>

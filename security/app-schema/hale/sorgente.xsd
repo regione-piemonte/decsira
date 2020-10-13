@@ -1,0 +1,651 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_operecaptazione="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_sorgente  id= id_sorgente -->
+	<element name="Sorgente" type="decsiraogc_operecaptazione:SorgenteType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_t_oggetto_associato_derivazioni  id= identificativo -->
+	<element name="OggettoAssociatoSorgente" type="decsiraogc_operecaptazione:OggettoAssociatoSorgenteType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_periodo_dmv_sorgente  id= id_sorgente_periodo -->
+	<element name="SorgenteDMV" type="decsiraogc_operecaptazione:SorgenteDMVType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_prelievo_perutenza_captazione  id= id_prelievo_utenza_captazione -->
+	<element name="PrelievoPerUtenzaSorgente" type="decsiraogc_operecaptazione:PrelievoPerUtenzaSorgenteType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_derivazioni_captazioni  id= id_deriv_capt-->
+	<element name="SorgenteDerivazione" type="decsiraogc_operecaptazione:SorgenteDerivazioneType" substitutionGroup="gml:AbstractObject" />
+
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="SorgenteType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idSorgente"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="geomSorgente" type="gml:GeometryPropertyType" minOccurs="1" />
+
+					<xs:element name="codiceROCSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceRilievoSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceSIISorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denominazioneSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkComuneSorgente"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="istatComuneSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desComuneSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="siglaProvinciaSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desProvinciaSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="localitaSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="quotaPianoCSorgente"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkStatoSorgente"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="qMaxDerivSorgente" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qMedDerivSorgente" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="volMaxConcSorgente" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkStatoEserSorgente"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desStatoEserSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgDispositiviSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgDerogaDMVSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="ulterioriObblighiSorgente" minOccurs="1" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkTipoSorgente"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desTipoSorgente" minOccurs="1" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgTributariaSorgente" minOccurs="1" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codAssolutoSorgente"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="denomImpAcqSorgente" minOccurs="1" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denomAcquedSorgente" minOccurs="1" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkAreaIdroSorgente"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desAreaIdroSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkBacIdroSorgente"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desBacIdroSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkBacIdromontSorgente"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desBacIdromontSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="elencoDerivCodrilSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="elencoDerivCodutenzaSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="elencoDerivNclasPratSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgMisuratoreSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="oggettoAssociatoSorgente" type="decsiraogc_operecaptazione:OggettoAssociatoSorgentePropertyType" minOccurs="0" maxOccurs="unbounded" />
+				
+					<xs:element name="sorgenteDMV" type="decsiraogc_operecaptazione:SorgenteDMVPropertyType" minOccurs="0" maxOccurs="unbounded" />
+				
+					<xs:element name="prelievoPerUtenzaSorgente" type="decsiraogc_operecaptazione:PrelievoPerUtenzaSorgentePropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="sorgenteDerivazione" type="decsiraogc_operecaptazione:SorgenteDerivazionePropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+				</sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+		
+	<complexType name="OggettoAssociatoSorgenteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="identificativo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idSorgente"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idTipoOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desTipoOggetto" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="nomeWFS" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idStatoOggetto"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					 <xs:element name="codiceRocCaptColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element name="codiceRilCaptColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element name="denomCaptColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element name="codiceRilDerColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="matricolaMisuColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceRilMisuColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="SorgenteDMVType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idSorgentePeriodoDMV" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idSorgenteDMVSorgente"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idPeriodoDMV"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="inizioPeriodoDMVSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					<xs:element name="finePeriodoDMVSorgente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+					<xs:element name="portataPeriodoDMVSorgente" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="PrelievoPerUtenzaSorgenteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idPrelievoUtenzaCaptazione" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idOperaCapt"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idDerivazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idPeriodoPrelievo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codAssoluto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkTipoOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="deTipoOggetto" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					<xs:element name="fkStatoDeriv"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					<xs:element name="codiceRilievoDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					 <xs:element name="periodoPrelievoDa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					 <xs:element name="periodoPrelievoA" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					<xs:element name="portataMaxDerivata" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="volumeMaxConcessione" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkStatoOpera"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoOpera" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="SorgenteDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idDerivCapt" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idDerivazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idSorgente"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codiceRilievoDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="classificazionePratica" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoEnergetico" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoRiqualifEnergia" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoProduzione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoLavagInerti" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoZootecnico" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoPiscicolo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoPotabile" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoDomestico" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoCivile" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="flgUsoAgricolo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	
+	<!-- property types -->
+	<complexType name="OggettoAssociatoSorgentePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:OggettoAssociatoSorgente" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="SorgenteDMVPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:SorgenteDMV" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="PrelievoPerUtenzaSorgentePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="SorgenteDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:SorgenteDerivazione" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+
+</schema>

@@ -1,0 +1,391 @@
+{
+   "featureTypeName":"decsiraogc_operecaptazione:TrinceaDrenante",
+   "featureTypeNameLabel":"Prese da trincea",
+   "nameSpaces": {
+     "decsiraogc_operecaptazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Prese da trincea",
+        "name": "decsiraogc_operecaptazione:TrinceaDrenante",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "trinceaDrenante",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geomTrincea",
+   "geometryType": "LineString",
+   "card": {
+    "pdfname": "Scheda_Trincea_{{/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:idTrinceaDren/text()}}.pdf",
+     "template": "assets/cardTemplateTrincea.jsxt",
+     "treeTemplate": "assets/treeTemplateTrincea.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_operecaptazione:TrinceaDrenante",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateTrincea.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "N. classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratTrincea/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice ROC",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:codiceROCTrincea/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice rilievo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:codiceRilievoTrincea/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Bacino idrografico",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desBacIdroTrincea/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Area idrografica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desAreaIdroTrincea/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desComuneTrincea/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata max derivabile (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:qMaxDerivTrincea/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Derivazioni servite",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilTrincea/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice utenza",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaTrincea/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata Media derivabile (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:qMedDerivTrincea/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Presenza misuratore",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:flgMisuratoreTrincea/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_operecaptazione:geomTrincea/gml:LineString/gml:posList/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_operecaptazione:desStatoTrincea",
+            "label":"Stato Trincea",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato",
+                "propertyName": "id_stato,des_stato",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102",
+                "sortBy": "des_stato+A"
+             }
+			},
+			"valueId":"des_stato",
+			"valueLabel":"des_stato"
+        },
+        {
+			"index": 2,
+			"attribute": "decsiraogc_operecaptazione:codiceRilievoTrincea",
+			"label":"Codice rilievo",
+			"type":"string"
+        },
+        {
+			"index": 3,
+			"attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+			"label":"Codice rilievo della Derivazione",
+			"type":"string"
+        },
+        {
+			"index": 4,
+			"attribute": "decsiraogc_operecaptazione:codiceROCTrincea",
+			"label":"Codice ROC l.r. 22/99",
+			"type":"string"
+        },
+        {
+			"index": 5,
+			"attribute": "decsiraogc_operecaptazione:denominazioneTrincea",
+			"label":"Denominazione",
+			"type":"string"
+        },
+		{
+            "index": 6,
+            "attribute": "decsiraogc_operecaptazione:desProvinciaSorgente",
+            "label":"Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+				"propertyName": "id_provincia,sigla,toponimo",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 7,
+           "attribute": "decsiraogc_operecaptazione:desComuneSorgente",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+                "field": "decsiraogc_operecaptazione:desProvinciaSorgente",
+                "from": "sigla",
+                "to": "sigla_provincia"
+           }
+        },
+        {
+			"index": 8,
+			"attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:classificazionePratica",
+			"label":"N. classificazione pratica",
+			"type":"string"
+        },
+		{
+            "index": 9,
+            "attribute": "decsiraogc_operecaptazione:qMaxDerivTrincea",
+            "label":"Portata massima derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 10,
+            "attribute": "decsiraogc_operecaptazione:qMedDerivTrincea",
+            "label":"Portata media annua derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 11,
+            "attribute": "decsiraogc_operecaptazione:desStatoEserTrincea",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
+        },
+        {
+            "index": 12,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 13,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 14,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 15,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 16,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 17,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 18,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 19,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 20,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 21,
+            "attribute": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 22,
+            "attribute": "decsiraogc_operecaptazione:volMaxConcTrincea",
+            "label":"Volume annuo derivato (m3/s)",
+            "type":"number"
+        }
+     ]
+
+   }
+
+}

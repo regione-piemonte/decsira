@@ -74,38 +74,38 @@
            "type": 2
          },
          {
-           "headerName": "Denominazione titolare",
+           "headerName": "Titolare",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"],
            "type": 2
          },
          {
-           "headerName": "Specie derivazione",
+           "headerName": "Specie della derivazione",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:desTipoDeriv/text()"],
            "type": 2
          },
-         {
-           "headerName": "Uso promiscuo",
+		 {
+           "headerName": "Portata massima derivabile (l/s)",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_derivazioni:flgUsoPromiscuo/text()"],
+           "xpath": ["decsiraogc_derivazioni:portataMaxDeriv/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Usi della risorsa",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:elencoUsiLegge/text()"],
            "type": 2
          },
-         {
-           "headerName": "Uso energetico",
+		 {
+           "headerName": "Usi effettivi della risorsa",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_derivazioni:flgUsoEnergetico/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Uso potabile",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:flgUsoPotabile/text()"],
+           "xpath": ["decsiraogc_derivazioni:elencoUsiEffettivi/text()"],
            "type": 2
          },
          {
@@ -115,19 +115,25 @@
            "xpath": ["decsiraogc_derivazioni:desStatoDeriv/text()"],
            "type": 2
          },
-         {
-           "headerName": "Autorita competente",
+		 {
+           "headerName": "Portata media derivabile (l/s)",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_derivazioni:desAutoritaCompetente/text()"],
-           "type": 2
+           "xpath": ["decsiraogc_derivazioni:portataMedDeriv/text()"],
+           "type": 1
          },
          {
-           "headerName": "Data scadenza concessione",
+           "headerName": "BIM",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_derivazioni:dataScadenzaEffettiva/text()"],
-           "dateFormat": "DD/MM/YYYY",
+           "xpath": ["decsiraogc_derivazioni:flgBIM/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Enti rivieraschi",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:elencoComuniDeriv/text()"],
            "type": 2
          },
          {
@@ -138,32 +144,20 @@
             "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
-         {
-           "headerName": "Codice fiscale titolare/ Partita IVA azienda",
+		 {
+           "headerName": "Data scadenza concessione",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv/text()"],
+           "xpath": ["decsiraogc_derivazioni:dataScadenzaEffettiva/text()"],
+           "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
          {
-           "headerName": "Portata massima concessa (l/s)",
+           "headerName": "Presenza misuratore",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_derivazioni:portataMaxDeriv/text()"],
+           "xpath": ["decsiraogc_derivazioni:flgMisuratore/text()"],
            "type": 2
-         },
-         {
-           "headerName": "Volume massimo concesso (m3)",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:volumeMaxDeriv/text()"],
-           "type": 2
-         },
-         {
-           "hide": true,
-           "headerName": "Geometry",
-           "xpath": ["decsiraogc_derivazioni:geometria/gml:Point/gml:pos/text()"],
-           "type": 6
          }
        ],
        "exporter":{
@@ -193,7 +187,7 @@
                 "sortBy": "ordinamento+A"
              }
            },
-           "valueId":"des_stato",
+           "valueId":"id_stato",
            "valueLabel":"des_stato"
         },
         {
@@ -202,7 +196,7 @@
            "label":"Codice rilievo",
            "type":"string"
         },
-         {
+        {
             "index": 3,
             "attribute": "decsiraogc_derivazioni:desTipoDeriv",
             "label":"Specie della derivazione",
@@ -261,8 +255,7 @@
             "values": [
               {"value":"SI","name":"SI"},
               {"value":"NO","name":"NO"},
-              {"value":"N.D.","name":"N.D."},
-              {"value":"Non Determinato","name":"Non Determinato"}
+              {"value":"N.D.","name":"Non Determinato"}
             ],
             "valueId":"value",
             "valueLabel":"name"
@@ -279,8 +272,68 @@
             "valueId":"value",
             "valueLabel":"name"
          },
-         {
+		 {
             "index": 10,
+            "attribute": "decsiraogc_derivazioni:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 11,
+            "attribute": "decsiraogc_derivazioni:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 12,
+            "attribute": "decsiraogc_derivazioni:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 13,
+            "attribute": "decsiraogc_derivazioni:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 14,
+            "attribute": "decsiraogc_derivazioni:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 15,
             "attribute": "decsiraogc_derivazioni:flgUsoPotabile",
             "label":"Uso potabile",
             "type":"list",
@@ -292,7 +345,43 @@
             "valueLabel":"name"
          },
          {
-            "index": 11,
+            "index": 16,
+            "attribute": "decsiraogc_derivazioni:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 17,
+            "attribute": "decsiraogc_derivazioni:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 18,
+            "attribute": "decsiraogc_derivazioni:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 19,
             "attribute": "decsiraogc_derivazioni:dataDecorrenzaConcessione",
             "label":"Data decorrenza concessione",
             "type":"date",
@@ -301,28 +390,94 @@
             }
          },
          {
-            "index": 12,
+            "index": 20,
+            "attribute": "decsiraogc_derivazioni:nr_provvedimento",
+            "label":"Numero provvedimento",
+            "type":"string"
+         },
+		 {
+            "index": 21,
             "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv",
             "label":"Codice fiscale titolare/ Partita IVA azienda",
             "type":"string"
          },
          {
-            "index": 13,
+            "index": 22,
             "attribute": "decsiraogc_derivazioni:codiceUtenza",
             "label":"Codice utenza",
             "type":"string"
          },
          {
-            "index": 14,
+            "index": 23,
             "attribute": "decsiraogc_derivazioni:classificazionePraticaDeriv",
             "label":"Numero classificazione pratica",
             "type":"string"
          },
          {
-            "index": 15,
+            "index": 24,
             "attribute": "decsiraogc_derivazioni:volumeMaxDeriv",
             "label":"Volume massimo concesso (m3)",
             "type":"number"
+         },
+		 {
+            "index": 25,
+            "attribute": "decsiraogc_derivazioni:flg_bim",
+            "label":"BIM",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 26,
+            "attribute": "decsiraogc_derivazioni:flg_rivieraschi",
+            "label":"Rivieraschi",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 27,
+            "attribute": "decsiraogc_derivazioni:flg_sovracanone",
+            "label":"Sovracanoni",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 28,
+            "attribute": "decsiraogc_derivazioni:derivazioniCaptazioni/decsiraogc_derivazioni:DerivazioniCaptazioni/decsiraogc_derivazioni:denomCidrsupPresa",
+            "label":"Corpo idrico superficiale",
+            "type":"string"
+         },
+		 {
+            "index": 29,
+            "attribute": "decsiraogc_derivazioni:desStatoPraticaDeriv",
+            "label":"Stato pratica",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_pratica_deriv",
+                "propertyName": "id_stato_pratica_deriv,des_stato_pratica_deriv",
+                 "sortBy": "id_stato_pratica_deriv+A"
+              }
+            },
+            "valueId":"des_stato_pratica_deriv",
+            "valueLabel":"des_stato_pratica_deriv"
          }
      ]
 

@@ -1,7 +1,7 @@
 
 <SiraTable
     style={{width: "100%", height: "200px"}}
-    id="infoTemplateDerivazione"
+    id="infoTemplatePozzo"
     rowSelection={false}
     onCellClicked={props.onCellClicked}
     profile={model.profile}
@@ -13,6 +13,10 @@
             id: true,
             xpath: "@gml:id"
         }, {
+             headerName: 'N. classificazione pratica',
+             width: 90,
+             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratPozzo/text()"
+        }, {
              headerName: 'Codice ROC',
              width: 90,
              xpath: "decsiraogc_operecaptazione:codiceROCPozzo/text()"
@@ -21,13 +25,33 @@
              width: 100,
              xpath: "decsiraogc_operecaptazione:codiceRilievoPozzo/text()"
         }, {
-             headerName: 'Denominazione',
+             headerName: 'Tipo di falda',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:denominazionePozzo/text()"
+             xpath: "decsiraogc_operecaptazione:desTipoFaldaPozzo/text()"
         }, {
-             headerName: 'Quota piano di campagna',
+             headerName: 'Comune di localizzazione',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:quotaPCPozzo/text()"
+             xpath: "decsiraogc_operecaptazione:desComunePozzo/text()"
+        }, {
+             headerName: 'Portata max  derivabile (l/s)',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:qMaxDerivPozzo/text()"
+        }, {
+             headerName: 'Derivazioni servite',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodril/text()"
+        }, {
+             headerName: 'Codice utenza',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenza/text()"
+        },  {
+             headerName: 'Portata Media  derivabile (l/s)',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:qMedDerivPozzo/text()"
+        },  {
+             headerName: 'Presenza misuratore',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:flgMisuratore/text()"
         }, {
             headerName: 'Profondita',
             width: 100,
