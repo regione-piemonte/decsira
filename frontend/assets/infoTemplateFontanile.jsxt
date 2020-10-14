@@ -1,0 +1,53 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateFontanile"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'N. classificazione pratica',
+             width: 90,
+             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratFontanile/text()"
+        }, {
+             headerName: 'Codice ROC',
+             width: 90,
+             xpath: "decsiraogc_operecaptazione:codiceROCFontanile/text()"
+        }, {
+             headerName: 'Codice rilievo',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:codiceRilievoFontanile/text()"
+        }, {
+             headerName: 'Comune di localizzazione',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:desComuneFontanile/text()"
+        }, {
+             headerName: 'Portata max  derivabile (l/s)',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:qMaxDerivFontanile/text()"
+        }, {
+             headerName: 'Derivazioni servite',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodrilFontanile/text()"
+        }, {
+             headerName: 'Codice utenza',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile/text()"
+        },  {
+             headerName: 'Portata Media  derivabile (l/s)',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:qMedDerivFontanile/text()"
+        },  {
+             headerName: 'Presenza misuratore',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:flgMisuratoreFontanile/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_operecaptazione:Fontanile")}/>

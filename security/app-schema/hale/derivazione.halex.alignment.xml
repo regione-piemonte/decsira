@@ -1,0 +1,2923 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C437c0552-29b5-4446-8e73-2d153eebb5ba" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2d88db24-7d55-4646-8c7f-80dcc4db645c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5430a8db-83b7-4a0c-bd4f-6566d00ccf46" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cedf7fa17-04e3-4946-958e-3017063c40d5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkIstanza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C189b85a3-fc80-4b5c-8f7b-5d8516cabc1e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkAttivita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd962d418-530c-4ff2-9425-afbbb361d063" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_utenza_gerica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceUtenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9a0ef9d3-904e-441e-aa80-7fe5519219d9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_decorrenza_concessione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="dataDecorrenzaConcessione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C45af2399-a081-48ad-9a02-3131d38b6ca0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_scadenza_effettiva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="dataScadenzaEffettiva" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C490159a2-75e6-4077-adc2-8e4861aa38cf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_max"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="portataMaxDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc02b37a2-36cf-4432-809e-b1f978edf646" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_tot_rest"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="portataTotRestitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9e5a393a-7907-4782-8859-b048eb833d3e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_sovracanone"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgSovracanone" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C714e1cd8-316e-428b-900c-004106128a09" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_rivieraschi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgRivieraschi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5010f456-bc13-41f2-8659-85bfe6570b3f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_bim"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgBIM" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1ab3b62c-f51d-4b94-9fa5-1c920d261d7c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_promiscuo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoPromiscuo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdf80f814-b7ad-4d49-9df8-18336894f54a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="noteDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc9674f09-53ab-466d-92cc-d0d02e4bfc86" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkTipoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd6611f59-ab24-4896-a530-67b471d1ddbc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C95245047-4f96-44ce-94f9-8608d9c01f94" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato_pratica_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkStatoPraticaDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc067a7ad-bf04-4b9d-8b02-b0a0cdd932bb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_pratica_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoPraticaDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7f9b3075-3869-4030-8281-0f6df852cc9e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca4dd1f70-1c31-44b8-8e8f-9bf78f7b1477" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5ecdaaee-8567-423f-9a53-4a24959b8f45" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_autorizz"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoAutorizzazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C160eabda-dac0-49a5-b57a-607e882a0e7b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_autorita_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkAutoritaCompetente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0d6be45b-2ccf-4945-9312-f224ee97d6e6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_autorita_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desAutoritaCompetente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C239c9a8f-e615-49cd-ba30-b1de9817b093" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="classificazione_pratica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="classificazionePraticaDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C57db142f-8610-4f20-a37d-bb1a85c39205" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nr_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="numProvv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0c753bb4-65dd-4be4-935b-c0759653b2cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_autoriz_provv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="dataAutorizProvv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C45957f6d-7c22-48f9-8e8d-ff448ac7443a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_scadenza_provv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="dataScadenzaProvv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2b035520-b1ca-433f-9cfe-7a72ada8e920" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_med"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="portataMedDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C91694ee8-f3a5-4454-95b5-16d843ae3393" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="volume_max"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="volumeMaxDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C764c8de7-b53f-4e34-9c70-53e8d69be103" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cad2d2fba-83d0-473e-ac93-9093740f8e6c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_titolare_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTitolareDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5ef79255-f386-41e4-b974-f7d51a313695" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_titolare_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4fb659a3-b89c-42c5-96cb-c454486e011a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce93be1ff-203d-431a-8cc0-5d255cf2f5ec" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoTitolare" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C245b5b5e-e8a7-48cd-8591-ef3eca4a93c2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTitolare" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3ea4cf62-87a2-4d79-be6c-2b73cbd0c627" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_raggruppamento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idRaggruppamento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb6662472-d762-4993-87ab-8127cbafafa6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoSoggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca445610c-f0a4-4edc-b1b0-509e9e5e348c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denom_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denomTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37b25fd6-6010-4e85-8266-6d785ea04377" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_fiscale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="cfTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce4ab33eb-58bc-41a8-bc3e-fbc37273b050" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="partita_iva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="pivaTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0b8c4363-99f5-4bb1-86cc-e04705ff798e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="topon_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="provinciaTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca86203c6-c32d-48f8-beea-db42eb40751f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="topon_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="comuneTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b575366-f861-431e-b0ed-868f203a1008" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="indirizzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="indirizzoTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C92f033a6-9153-4b5e-9085-66822fcdbc59" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_telefono"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="telefonoTitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C077e7081-f89d-497b-ab26-e79af3b335fd" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf6de309d-bddd-409e-8ba5-f5e124dc23ce" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6be3fb42-5b29-40b3-a230-572032f6845f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdc19c1e0-8f6e-48cb-85bd-86e50ebf4a20" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc8e70ad3-2585-4df9-8cb0-20becfcab681" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C113a4a07-2d60-42d1-a84a-465314908d5d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6aaf91c8-a3d0-4371-844a-fab481b7c445" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbec11126-e1f2-4e86-a729-c3faf92d0d74" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stato_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idStatoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0c4ad0e2-b79b-4f75-87d5-141011e0eb6e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_roc_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRocCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C15a181f0-a418-4e62-aca7-14245ea6c1eb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denom_capt_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denomCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C43e3676a-5677-4db6-9e59-3698572c471c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_capt_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C05413526-705b-4b24-a668-23833557232f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C399801fa-7ee3-46d8-ac90-80df00103fa0" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C15ebcac6-1c4e-4ecb-8661-237c68049096" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_oggetto_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C0a168681-aea4-4889-8f2e-eed85b9db3f7" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_derivazione.{id_derivazione}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb77e3aa7-bb37-4a0e-b716-3428af8941e7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="vol_annuo_tot_rest"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="volAnnuoTotRestitDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C639f2b20-49ce-4a32-ab9b-67743988da20" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="n_prese"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="numPrese" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C78df081b-14ff-45e2-a4d3-e0e33a746765" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="n_pozzi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="numPozzi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb3608ba4-53c5-4329-a31d-33b4bdd807d6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="n_sorgenti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="numSorgenti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C955ac18d-de3b-48be-9410-51c83e41f882" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="n_fontanili"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="numFontanili" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc7cf438a-7866-436c-8f52-a21872b4aa79" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="n_trincee_drenanti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="numTrinceeDrenanti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C85307faa-782a-49a5-a8b2-173af90acced" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_energetico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoEnergetico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1a504543-e721-437e-a081-33357ba4a74a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_riqualif_energia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoRiqualifEnerg" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3f91bf84-1bfa-481f-95c7-f712dfc8d412" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_produzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoProduzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceec50507-cf0f-4441-a71b-3c36a4c7df07" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_lavag_inerti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoLavagInerti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3252a739-0581-4895-b44c-21f828601bf8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_zootecnico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoZootecnico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3b82e454-fe57-4c47-8a11-f8e840337862" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_piscicolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoPiscicolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb48d1f2f-480e-4fd4-8f13-e895e59540f8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_potabile"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoPotabile" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C83f8df05-4bc8-471f-8a91-006bfd9e4e58" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_domestico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoDomestico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfc929982-ad84-4a17-a0b9-9929cf36951d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_civile"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoCivile" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C85fe9437-7522-428c-a8a9-7afcaa0fd9fa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_agricolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoAgricolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8ba569a7-5609-43de-abc1-4a66050a99b1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_usi_legge"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoUsiLegge" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C057be343-125d-4823-b7cf-5899b5c9e72e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_sovracomu"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoComuniDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdc640b16-3281-4e66-972d-3ed9fc2db4ca" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_misuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37ccb74c-b28f-4a0e-9dbe-29b4b47d12b5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_usi_effettivi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoUsiEffettivi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7b65c9aa-2439-4777-b641-21970218162d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_der_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilDerColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce68676d5-7bce-4c2e-857b-25fe9810e7bc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_rest_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilRestColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6511ea79-e360-4a33-8425-ec26654fa80c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_serb_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilSerbColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C31902153-fd4c-44e9-a2cc-24b08f8107b3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_stazp_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilStazpColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc78e9b90-a3f3-4049-9f22-87ada2302508" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codsira_stab_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codSiraStabColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceecc072e-dbf4-4132-ba94-5643ace145c7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_stab_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="nomeStabColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0806c46b-ae5b-495c-9548-2736b89c5ccd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="comune_stab_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="comuneStabColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C3a971b47-30dd-4e15-b0e9-27d4887fec22" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7329438a-605e-4661-a722-2f8233bf8f31" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_titolare_raggruppamento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTitolareRaggruppamento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C21a1d085-9714-4d8d-baa6-78b7057bdbb8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_titolare_raggruppamento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C59ff8209-f602-42f7-a9a4-b4c29589b4bc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_raggruppamento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idRaggruppamentoRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C86d069d2-9c65-4380-bd3c-39feb921a8b3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTitolareRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd4f942e1-a17c-4985-a3e2-fca47f35da87" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoTitolareRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc1e771b4-6322-4b8b-b189-826ce0454330" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoSoggettoRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc8ce4eac-2ffb-43e6-8b64-ab3dd8825548" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denom_titolare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denomTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb9d0f6ed-ee6a-4e27-a2d3-b1ffca1f2712" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_fiscale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="cfTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C18e28dc4-963d-496a-b21b-94d2a4f7bd92" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="partita_iva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="pivaTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cab9bc0f6-a178-48e5-a5c0-dd43e3f72958" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="topon_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="provinciaTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8263f98f-8472-4f00-9e97-5d68d82613c9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="topon_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="comuneTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9fe2ceb6-4543-4380-8494-58139c59b260" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="indirizzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="indirizzoTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8e1824dc-3fb2-4ff3-8ad7-0d04efb6e81d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_telefono"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="ComponentiRaggruppamentoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="telefonoTitDerivRaggr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C2af702ff-f95c-4acc-8e5a-07e66ef27527" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfbe06f40-a2ea-49f2-ad7b-8f4728ac040f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso_tipouso_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idUsoTipousoDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5592b0dc-0346-4d74-9ae8-7b6f2cafa3bd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso_tipouso_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd4c8678b-77f9-496e-b622-b9ff68a48ae2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso_tipouso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idUsoTipouso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3fc45669-2045-4b49-82dd-39fa74ae0b32" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazioneUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf79c16f0-9046-48bf-a6fa-7fcee639bd64" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb58bc5f3-b8bd-46f3-8d1c-b8a475d3c4cf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbe2a18fd-b0c6-4802-b02b-31290a5249db" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0f94b7da-a71f-449e-b88d-3e83071a1b9c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4d8486af-b23b-4cea-a2e6-cd66d6193ce7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denominazioneUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccc3a8ce3-879e-4056-9945-dd117c1c07ac" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceSiraUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdb16702d-704b-4cd2-b665-2a01d2dd7952" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_usi_effettivi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoUsiUsiEffettivi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce29b5160-02fe-4b40-9e12-0a272c74d1a1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_media"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="portataMediaUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb8f8a73d-37ab-4afd-aaee-d5806e617762" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="volume_max_annuo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="volumeMaxAnnuoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cba376e63-950f-4e5b-8414-bb43922c4c69" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C70b337d4-c43a-4796-81df-cac33f3651d6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_periodo_utiliz_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idPeriodoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7bd9e27b-063d-4e7e-9721-673ddd6e4853" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_periodo_utilizzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idPeriodoUtilizzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbd277d8a-ec62-4336-938d-c100e2a0f5cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso_tipo_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idUsoTipouso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf9a83bf9-a76e-4f1d-87a8-be354a409220" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C765a10d8-52ac-4ee0-a5a4-545de31edd64" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3d1c4395-aa68-49f7-a84a-ab72d03732c6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="inizio_periodo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="inizioPeriodoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C980abae5-698e-4bb0-92bc-89a30f47ac8e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fine_periodo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="finePeriodoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C931e34ea-258c-47e4-9603-0e3fe0759191" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_periodo_utiliz_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C32224d25-7340-43ca-890f-a8774d66f4cf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_massima"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="qMaxPeriodoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc96e6c67-63ed-4ff2-b6b9-02bbe3f7d3d1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_media"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PeriodiUtilizzoUsiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="qMedPeriodoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C9cc66d33-a1ff-4886-9be3-1a6b025686ef" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4d5e2659-28ff-467e-b7a8-b311168718d9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_comune_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idComusovraDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd16af4cc-9730-4180-aad9-5328de499af4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_comune_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6c36e595-357c-40af-b4d9-19b0800be2cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C99b6f801-7d42-4691-85b9-d2addea77251" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idComusovra" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd1e4e45c-5b33-4243-aa9b-c1b641644528" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codIstatComusovra" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C80b7a400-6645-488a-b19c-3ebdf9e06ece" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="toponimo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="toponimoComusovra" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc25b1efc-0b82-484f-ad9a-415c3215a534" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sigla_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SovracanoneDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="provinciaComusovra" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ccdb56cdf-e711-45e1-aceb-23310f612e85" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AcquedottiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C904c1d68-e153-4ee7-be75-893ec7033f40" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_acqued_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AcquedottiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idAcquedDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C15a434eb-270a-4021-80b5-dcca08d34d36" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_acqued_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AcquedottiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdf1870bc-61a0-4d8f-92c3-7d2f85f6bc96" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AcquedottiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd4865a76-6c19-4d71-8de9-fc59fe8d6b1d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oldsiri_acquedotto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AcquedottiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOldSiriAcquedottoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4bc2020e-4fe6-49b3-9c96-ba2ae02f822e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_acquedotto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AcquedottiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denomAcquedottoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C593b023c-9779-483c-837a-0d8020f3df74" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C167d8223-04c9-481d-b795-27a2f0cb8355" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_dati_specif_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDatiSpecifUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf74cc11e-c71f-4880-b03e-0534a0e07e89" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_dati_specif_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0cd1ac14-3aa0-47a2-9543-eaf08f4594bc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0072f1b5-4014-4fe8-827c-2bcc04783ef7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_uso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoUso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca047c523-6588-45b9-9dfc-ae150ddc1563" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_colloc_ener"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idCollocEnerg" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd8510765-aadb-4490-9e43-084d59cd2ad4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_colloc_ener"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desCollocEnerg" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C90917159-dbd5-470b-b993-e18740a5b0b2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="potenza_nma_ener_riqual"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="potenzaNmaEnerRiqual" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7015445b-6857-4b44-b3ca-756de3b229ae" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="energ_pa_ener_riqual"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="energPaEnerRiqual" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5e62d358-4b84-46b9-9f41-db9f69d781b1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_incaverna_riqual"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgIncavernaRiqual" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7a0e6db5-eb83-4da2-ac9e-40e41e54ccbf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="potenza_npomp_riqual"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="potenzaNpompRiqual" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C139db22c-1338-465e-9c94-8b2bd2a2531d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="energia_annua_pomp_riqual"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="energiaAnnuaPompRiqual" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0d7689a0-423b-4c0f-90b1-a9e1956f2f15" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sup_irrigabile_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="supIrrigabileAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb33c504b-31fa-43ae-b9b3-3a9d8816e81a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sup_irrigata_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="supIrrigataAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cba254c0b-c2c2-43f2-8c00-d394f06f7e30" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_bocca_nontassata_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgBoccaNontassataAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C11605bb1-79d5-4d50-a6ce-d90054afaf46" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_irrig_aspers_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgIrrigAspersAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C96a1385e-8b3d-47f0-846c-ddf2782633c1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_irrig_microirr_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgIrrigMicroirrAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce6c8945f-9169-4e03-8549-530179e9a438" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_irrig_scorrim_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgIrrigScorrimAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C141ecb65-04d0-4dcd-88dc-90beb7e180fc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_irrig_sommers_agric"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DatiSpecificiUsoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgIrrigSommersAgric" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C27105c7c-a9c2-4b8f-a3a7-ea069b36b075" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioniCaptazioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2227ac0b-1d48-4a39-ac88-a4e0f806e631" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_deriv_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioniCaptazioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivCapt" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cda1e0f82-55de-4065-8ea9-c80a22e36e7a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_deriv_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioniCaptazioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb288b95b-ad2d-49c5-8c9e-d392a5b40a5c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioniCaptazioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0f917cbb-3a5f-4829-b5ce-c20e778a0cbf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_opera_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioniCaptazioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOperaCapt" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5d032b34-c489-4f88-9f00-b68c2fece68e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denomcidrsuppresa"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DerivazioniCaptazioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denomCidrsupPresa" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Ccc405d36-ec4c-45e6-a028-1be85bc74de6" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TitolareDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_titolare_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_raggruppamento"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_titolari_raggruppamento" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_raggruppamento"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Ce3f8a5b3-adc3-4e13-aa7b-83991ea43e16" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C1ad3d181-46fb-4e4c-a218-14e013237851" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_uso_tipouso"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_periodi_utilizzo_usi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_uso_tipo_uso"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cc38c497b-e781-46c3-a8ad-ff067951cd17" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_deriv_sovracanone" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C81000849-8ba2-4885-a876-e782b1869002" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_deriv_acquedotti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C62657f68-a97e-431e-ad5f-91988f945270" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="UsiDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_usi_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_uso_tipouso"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_dati_specifici_uso_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_dati_specif_uso"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cd3bfc3a3-9a60-4c8c-b560-fc5ed24b4b0c" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_derivazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+</alignment>

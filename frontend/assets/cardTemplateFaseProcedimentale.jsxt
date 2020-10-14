@@ -47,12 +47,14 @@
         <LabeledField label='Data Presentazione istanza' dateFormat='DD/MM/YYYY' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:dataProtIstanza/text()")
         }/>
-        <LabeledField label='Infrastruttura strategia (ex legge 443/2001)' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgOperaLeggeObiettivo/text()")
-        }/>
-        <LabeledField label='Opera esistente' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgNuovaOpera/text()")
-        }/>
+		<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+			<LabeledField label='Infrastruttura strategica (ex legge 443/2001)' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgOperaLeggeObiettivo/text()")
+			}/>
+			<LabeledField label='Modifica Opera esistente' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgNuovaOpera/text()")
+			}/>
+		</ProfileWrapper>
         <LabeledField label='Note progetto' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:noteProg/text()")
         }/>
@@ -88,7 +90,7 @@
 
     <Section header='DETTAGLIO PROCEDIMENTO' eventKey='2' expanded={true}>
 		<LabeledField label='Stato Procedimento' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flagStatoFase/text()")
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:flgStatoProceduraFase/text()")
         }/>
         <LabeledField label='Tipologia Procedimento' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:desTipologiaFase/text()")
@@ -166,22 +168,22 @@
                 [
                     {
                         headerName: 'Denominazione',
-                        width: 150,
+                        width: 200,
                         xpath:"decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropDenominazione/text()"
                     },
                     {
                         headerName: 'Tipo Soggetto',
-                        width: 100,
+                        width: 150,
                         xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropTipo/text()"
                     },
                     {
                         headerName: 'Comune',
-                        width: 100,
+                        width: 150,
                         xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropComune/text()"
                     },
                     {
                         headerName: 'Provincia',
-                        width: 80,
+                        width: 120,
                         xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropProvincia/text()"
                     }
                 ]
@@ -193,9 +195,6 @@
         <LabeledField label='Unità Organizzativa responsabile istruttoria' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:denomDirezioneRespOrgTec/text()")
         }/>
-        <LabeledField label='Responsabile del procedimento' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:responsProcedimentoOrgTec/text()")
-        }/>
     </Section>
 
 	<Section header='MAPPA SINTESI - VIA procedimenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='8' expanded={true}>
@@ -203,7 +202,7 @@
 			center={
 				model.getValue({
 					type: TemplateUtils.GEOMETRY_TYPE,
-					xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:geometria/gml:Polygon /gml:exterior/gml:LinearRing/gml:posList/text()"
+					xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:geometria/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
 				})
 			}
 			layers={[

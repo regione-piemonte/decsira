@@ -1,0 +1,2862 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C49dc500e-b7cb-4c68-98f8-0242583f0a9e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C96a1d3e9-7a37-41b6-8d2f-e16dcf97f4d6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRilievoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9cb13e54-69a6-4d7e-bdca-3423e264a228" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_roc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceROCPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C544141ed-2f1c-4e94-9db3-e2246529b504" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="denominazionePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C109dc769-bb83-4141-9f1d-e6f1aaf4af08" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C78fdb75c-9c54-4192-ad19-109549e945b0" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_pozzo.{id_pozzo}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc6e70428-1183-48b7-9c70-b133d48cb1f7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desComunePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C07739d14-dd6a-4672-80a9-cf05410021bc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="geom_pozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbf95eb18-16ef-47c1-a5db-492a599a9bcd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkComunePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C489afe2a-a2bb-4d25-9f8c-6769e17348aa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="localita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="localitaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C55698acf-ef8a-4c87-8e4c-110c2b6026ea" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkStatoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C480f8da0-af27-485a-849a-aaa8041191a7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desStatoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C20226c41-3d1e-4326-a2b3-e4408ff6fc23" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_max_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="qMaxDerivPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd2fcad19-9ea5-4c85-b7ab-7eee52aa4f4a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_med_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="qMedDerivPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C02cfafb4-c9ed-4ff9-a87b-3481e5be0ca8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="volume_max_concesso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="volMaxConcPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37d0381c-c5b8-4192-b3e3-9937c66d1187" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato_esercizio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkStatoEserPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caf217de0-12ee-4291-b4ee-62d6510038ce" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_esercizio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desStatoEserPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4095bf02-69d2-4704-af58-b33cba9a1243" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="quota_piano_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="quotaPCPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caac02561-9664-468f-b00c-fe8be63059cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C821b79be-d8fe-419c-bf14-15f2a7f9c35e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_costruzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="dataCostruzionePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C2fa535e5-5db0-4ad9-b0a0-fca9d5ee301f" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9bcdcb42-8f77-4b99-bce9-2da4af67e443" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_filtro_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idFiltroPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3207a4ef-db03-40ea-a139-d024515b24fe" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_filtro_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C508ee7ee-91b7-46ac-a3b0-045d092603e1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ced66f832-00f2-400c-8cfc-0721a9a9f461" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_filtro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4408c85f-7532-49a1-a0ce-44bab2147d0b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_origine_dato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idOrigineDatoFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6d6adcdc-ff8e-43d0-8059-122231e48bed" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_origine_dato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desOrigineDatoFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C94ca0ed2-4c31-416e-acc0-796a65adabed" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_filtro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idTipoFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5d6847b0-5e2d-4c26-a943-668ca0583691" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_filtro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desTipoFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C55dfb1ff-b6f8-4db7-8f33-806c57486e05" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_a"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaAFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C958a1b8a-5837-4cb6-bbd7-952b5454c10a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_da"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaDaFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5b03ba2e-bc00-47be-87a0-306aed2771b0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="apertura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="FiltroPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="aperturaFiltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C3d229754-1d54-4328-b746-15fa09943e2f" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_filtro_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cb9da944b-edc8-4cce-b13a-29bd25f1d3c4" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C354f86c3-1eb6-4d43-a3dd-992ac50be080" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_capt_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRilCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4420d245-5120-4d75-8e86-ab0c84a29d9f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_roc_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRocCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C32376318-d1f5-4d72-97bd-c7ce7138a99d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc69bd1cf-c978-4687-9a81-635fb44ae11e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdca41a46-8cb5-4bf9-83da-e968f558fb67" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C90c17db1-55f9-4f9b-9ded-239769a5fee6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca3fb8db6-1c69-4dac-b2d7-cb40db78bae5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C84692ce3-4faf-4f92-b27f-8b46e9d32ada" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denom_capt_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="denomCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf974bf43-c798-4e7b-9264-664b2861652f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6584a134-a9e1-467c-9ebd-0ad16b609470" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stato_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idStatoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3b70cda3-fcdb-4c1e-8be0-863559326801" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cd94ef9d3-21ef-43f7-b5b6-57f088c1443a" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_oggetto_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3104e013-2423-4c2d-9a89-f705e0b2427b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sii"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceSIIPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C67c2528c-1258-44e3-bc1e-e0fe8d2577d2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_falda"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkTipoFaldaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1422c171-9621-43a4-a5ed-646ef2e1261a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_falda"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desTipoFaldaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfa468cef-d514-46a8-8587-cb9464834fcc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="istatComunePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0aaaa075-9a19-4ce5-bb8a-1a5844caed0c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sigla_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="siglaProvinciaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0d6a96be-ecce-4374-ba9e-6dbb9c079601" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desProvinciaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5e8c4586-0715-4029-a2f8-43bba86b97ad" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_campo_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgCampoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8b9f6672-2d5c-4710-bfa6-936973462adc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_pozzo_art"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgPozzoArtesiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C54b7f90b-22eb-4120-9d8a-d9777914d82d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_disp_strat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgDispStratPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C104a46de-49aa-4549-b038-5a2bbfe47007" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_disp_mis_piez"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgDispMisPiezoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C378e69f4-6179-4519-9d93-71b58419f5a7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="piez_assoc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="numPiezAssocPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9e033c03-412e-4cf2-9b2f-d07e3608fbc2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_assoluto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codAssolutoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C07726a6f-85f1-4e6e-95c8-54087a250c42" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_imp_acq"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="denomImpAcqPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdbd9f146-33a0-46cd-bd60-fee46d24c37c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_acquedotto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="denomAcquedPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5aa8abb4-fd4f-49fe-82da-f16e5bf3cdd4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_area_idro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkAreaIdroPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3c3f1371-b3ee-4fda-ba5a-9b05026ee5e2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_areaidro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desAreaIdroPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1fca97a2-72e4-4895-bfd6-771c2e899422" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_bacidromont"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desBacIdromontPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C89dbb09e-fe60-4b5e-81ad-44ad1212f6f1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_bacinoidro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desBacIdroPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca12f5334-7d59-4be6-82c1-8c89025ad475" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bac_idro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkBacIdroPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc64ef781-2489-4f76-bb9d-6e57d62727e4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bac_idromont"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkBacIdromontPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1df68b3f-dc5f-4029-8dd3-0d596c6ca02c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_deriv_codutenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="elencoDerivCodutenzaPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb8237a5d-ddeb-4758-86c5-08c93be30d8d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_deriv_nclasprat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="elencoDerivNclasPratPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C263dad92-8c3a-4409-af2a-5bc254b5d36d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_misuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgMisuratorePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce702fb9b-031f-4b17-bc38-2bf295be2f27" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_deriv_codril"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="elencoDerivCodrilPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf043cb23-23ee-463e-bb8d-49087ab56c46" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_der_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRilDerColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0f93f516-bef2-4f36-8bfe-768a8a8e8098" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_misu_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRilMisuColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2bc4a9d3-1edb-4778-9215-355ad5cf7ab8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="matricola_misu_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="matricolaMisuColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C590fe45e-db9d-4576-ac83-e65bc2eeacc2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_cementazione_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idCementazionePozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C593f60d7-f3a9-43d4-bc4d-895355c20b54" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C790e12d1-d60e-4d96-b6ed-c3b3bca7dcb0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_cementazione_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C74b26a47-07bb-464e-99c3-1e27073d0612" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca37d372e-6f86-448f-afd8-4cad3290bc32" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_cementazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idCementazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9dfdaa7d-5796-41fa-9a7a-c1abe80b5bd4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_mater"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkMaterCementazPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca53c3403-ca73-486a-944b-7bbb4932dd45" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_mat_fabbr"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desMaterCementazPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C36c1c89c-d4e6-4c54-a598-71d72b52f66e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_da"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaDaCementazPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C92b1626a-b8b9-4e65-8441-3656fe296dc6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_a"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CementazPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaACementazPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C24c88de9-b616-4a50-a6b7-cfa100ca803f" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_cementazione_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cd30e46d0-92b5-409b-ba90-da8638eb47a6" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfba6bdec-1143-494e-a759-51f3d14370e7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_diamcolon_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDiamcolonPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C96dc42c0-4989-4ea4-85d9-188418fc9608" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_diamcolon_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C18cd7df3-7509-4f7d-a764-f899d524c87d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc820c87e-e6d4-4abd-9005-0277922d6858" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_diametro_colonna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDiametroColonna" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6f0315e3-30b8-4475-ac28-a9f3ef21e1b6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="diametro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="diametroDiamcolonPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C87624a77-eba5-4bc0-a252-2329f17f654b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_da"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaDaDiamcolonPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C44500b97-e004-418b-9666-07425db1016a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_a"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DiamColonPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaADiamcolonPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C2ecf13c6-6373-42da-9aa9-5d861a6c12da" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_diametro_colonna_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cba19e100-74f1-42b8-be09-ee9ad572587f" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4da99d0e-f431-4abb-b14e-562cd5ef5aa2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_emungdurata_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caaafb36b-c017-41ec-bf21-20ca1dc7554a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_emungdurata_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdd9cac28-c1db-4d75-988b-110f90cc7e7f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5dc5faef-354c-4e36-be54-86419150910d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_emung_durata"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idEmungdurata" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C871cfdb7-d88c-46c0-9520-c2d0615e7551" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_misura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="dataMisuraEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C42ce35fd-0455-45ba-96a9-67c660499525" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="soggetto_esecutore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="soggEsecutEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C519c87c9-1d5b-4cc8-aa10-8fa594d56e44" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_costante"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="qCostanteEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbeaa8fc5-52e4-4fa7-a2ec-955c350b1baf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="durata"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="durataEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6defda79-6dd8-49b9-873a-a317d30ccf56" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="trasmissivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="trasmissivitaEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9f16a20f-eef1-4f84-b4da-1cd09bcb1943" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="coeff_immagazz"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungDurataPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="coeffImmagEmungdurataPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cfe2f14f1-91e2-4cf3-b0a4-e67af041ed78" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_emungim_durata_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C33db90af-c8b9-4934-b468-6085d4fbc861" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdab7f76b-3abe-4ca2-9353-75f4505db17a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_emunggradini_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idEmunggradiniPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C97cd2bb8-805b-43fc-85cf-e968c24ae491" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_emunggradini_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdf30a85d-d781-46b1-89d3-8b9d058c8052" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C629a650a-e807-47ff-9e49-1b98b8e182f7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_emung_gradini"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idEmunggradini" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf58ba588-9f7b-463f-98bd-e7b2a0bae80f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_misura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="dataMisuraEmunggradiniPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce6d4bea2-8c4e-40d6-9d47-d816b8252463" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="soggetto_esecutore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="soggEsecutEmunggradiniPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C22f46ab8-cee0-435b-abf2-b5592eca6537" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_critica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="EmungGradiniPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="qCriticaEmunggradiniPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C4eb19b88-323d-47dd-b7f0-31d1a61fa46d" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_emungim_gradini_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cd9529b2d-f1ca-4028-80ed-5f388ce7c7bf" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6c715626-71eb-44df-a926-3ecf4bd3af5b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_dreno_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDrenoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8d68158d-7596-43c0-bd9f-a79a92cc0250" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_dreno_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8fd52ea3-54bf-48d1-bdb4-ea603d487470" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C59b34b1b-fb81-4a80-9056-502068c0dc39" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_dreno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDreno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3907f7f5-895f-477f-b75f-293c532ce843" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_da"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaDaDrenoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce35e1232-d8f8-4523-8678-ae5cc38c139b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="profondita_a"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="DrenoPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="profonditaADrenoPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cc8d6df3b-a62f-4d84-a436-744bcd4656e5" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_dreno_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cca2687b1-c9d0-49b1-a951-f2d38e7623b5" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9444e29d-5b3a-45ea-9b22-9b716920a40a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pompaidr_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPompaidrPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3b82d2a0-c8f5-4c9d-8ffa-fbd5cf7235bd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pompaidr_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceb452cc4-4373-47af-acee-8ab083d1147f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pozzo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb7f630bb-4546-4aa2-9388-44b5e5579a82" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_pompa_idr"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPompaIdraulica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cee8c892d-209c-4ecf-a9c7-d147c7e42228" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_max"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="qMaxPompaidrPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7d67b227-5c85-4a65-a174-4251108c906c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="potenza_motore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="potenzaMotorePompaidrPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9740d5e7-8897-40b1-a193-e17949e5f713" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="prevalenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PompaIdraulPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="prevalenzaPompaidrPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C0c6cec80-d5d0-44c9-8ee5-bb089a3ec02e" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_pompa_idraul_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ccf935843-715f-46e4-8b02-4ea5eabe5ad9" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C20cd2d32-515b-4002-b950-ee3d41a55a81" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_prelievo_utenza_captazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPrelievoUtenzaCaptazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6ba56a3e-1ecf-4d45-9482-5719fe154ae0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_prelievo_utenza_captazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2ab4471e-1cf0-4955-94a7-4b7812f4d748" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_opera_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idOperaCapt" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca3544b31-6a9c-4572-8364-6e795ae0ad6c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C71fe9e30-484e-47dd-9ab7-63f402997440" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_periodo_prelievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPeriodoPrelievo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C18a2add0-b543-48a1-8930-c133546771e8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_assoluto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codAssoluto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C727e34f8-dfd2-4d07-8583-063eb1055b27" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9170bc47-e17d-4f76-b40c-39cc9069dc26" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="deTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca1e89d3b-2b3b-4642-be3f-f6c0340b7c84" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkStatoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfd608322-d16b-479d-bed3-2c81e62cd484" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desStatoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C052823f0-6a91-41b4-83c5-fff201e303f2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRilievoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce8480482-fda5-4cac-8aef-4290992a4167" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="periodo_da"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="periodoPrelievoDa" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6b135b48-a3a6-428f-8e4d-bd9c193fbb47" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="periodo_a"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="periodoPrelievoA" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6102b751-c215-464a-a6a9-448d7c9c7cef" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_max_derivata"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="portataMaxDerivata" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1017afb9-3faf-4980-9575-745850180c34" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="volume_max_concessione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="volumeMaxConcessione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc5bbfb67-dec6-4cc7-91f5-96c650eca8c2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato_opera"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="fkStatoOpera" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceb27839b-6d4d-4b05-9cdd-967717b92f5e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_opera"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PrelievoPerUtenzaPozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="desStatoOpera" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Caf7817c7-b99f-4231-bdf3-f473d3507737" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="cod_assoluto"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_prelievo_perutenza_captazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="cod_assoluto"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cd3c46c02-73a1-4748-ad65-c73282163e20" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbbbf00da-4c43-4694-80c3-ec23231e21b5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_deriv_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDerivCapt" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf3815445-97f3-472b-8ef3-12a7c07f3e47" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_deriv_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cacf5e527-4280-4604-874f-bbe01dfa87fd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cafc02fad-5ec2-44c5-98aa-dba48bb4040e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_opera_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="idPozzo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf014f900-a38a-4836-acee-a2d967190e6a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="codiceRilievoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2ae72a67-987b-4ddd-9f4e-b6f37954f953" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="classificazione_pratica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="classificazionePratica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb6062595-6517-4007-b6f0-209ad668313f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_agricolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoAgricolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C53d764fb-6a02-450c-97e8-7965d8d1e5dd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_civile"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoCivile" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2e168a09-a1ec-4bcc-8efa-e6bf342c4be0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_domestico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoDomestico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6e689d8d-6f5b-4735-8f27-4c54f34dd5bb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_energetico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoEnergetico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C65dfb2b9-a637-44b5-9de4-d6dfd5185552" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_lavag_inerti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoLavagInerti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce7446057-cd42-436a-9547-baef65cc4b9c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_piscicolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoPiscicolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cff78f7e4-ef79-4662-b4df-7b1a6790cfc8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_potabile"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoPotabile" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd4b74d57-b956-457a-8c09-2871ae9c5369" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_produzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoProduzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd4969d53-e791-4699-ab61-45187532469b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_riqualif_energia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoRiqualifEnergia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb311c81a-7683-4d56-838a-6d9b8b88c8dc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_zootecnico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PozzoDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="flgUsoZootecnico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C24309bcf-82b9-42b0-a0fb-d787ab03f431" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_derivazioni_captazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_opera_capt"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+</alignment>
