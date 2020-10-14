@@ -1,0 +1,471 @@
+{
+   "featureTypeName":"decsiraogc_operecaptazione:Presa",
+   "featureTypeNameLabel":"Prese da acqua superficiale",
+   "nameSpaces": {
+     "decsiraogc_operecaptazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Prese da acqua superficiale",
+        "name": "decsiraogc_operecaptazione:Presa",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "presa",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geomPresa",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_Presa_{{/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:idPresa/text()}}.pdf",
+     "template": "assets/cardTemplatePresa.jsxt",
+     "treeTemplate": "assets/treeTemplatePresa.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_operecaptazione:Presa",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplatePresa.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		 {
+           "headerName": "Progressiva (km)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:progAstaPresa/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "N. classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratPresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice ROC",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:codiceROCPresa/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice rilievo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:codiceRilievoPresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Bacino idrografico",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desBacIdroPresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Area idrografica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desAreaIdroPresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Corpo idrico dal quale si capta la risorsa",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:denomCidrsupPresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desComunePresa/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata max derivabile (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:qMaxDerivPresa/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Derivazioni servite",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilPresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice utenza",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaPresa/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata Media derivabile (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:qMedDerivPresa/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Denominazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:denominazionePresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Presenza misuratore",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:flgMisuratorePresa/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Sponda",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desSpondaPresa/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_operecaptazione:geomPresa/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_operecaptazione:desStatoPresa",
+            "label":"Stato Presa",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato",
+                "propertyName": "id_stato,des_stato",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102",
+                "sortBy": "des_stato+A"
+             }
+			},
+			"valueId":"des_stato",
+			"valueLabel":"des_stato"
+        },
+        {
+			"index": 2,
+			"attribute": "decsiraogc_operecaptazione:codiceRilievoPresa",
+			"label":"Codice rilievo",
+			"type":"string"
+        },
+        {
+			"index": 3,
+			"attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+			"label":"Codice rilievo della Derivazione",
+			"type":"string"
+        },
+        {
+			"index": 4,
+			"attribute": "decsiraogc_operecaptazione:codiceROCPresa",
+			"label":"Codice ROC l.r. 22/99",
+			"type":"string"
+        },
+		{
+			"index": 5,
+			"attribute": "decsiraogc_operecaptazione:codiceSIIPresa",
+			"label":"Codice SII",
+			"type":"string"
+        },
+		{
+			"index": 6,
+			"attribute": "decsiraogc_operecaptazione:denomCidrsupPresa",
+			"label":"Corpo idrico superficiale",
+			"type":"string"
+        },
+        {
+			"index": 7,
+			"attribute": "decsiraogc_operecaptazione:denominazionePresa",
+			"label":"Denominazione",
+			"type":"string"
+        },
+		{
+			"index": 8,
+			"attribute": "decsiraogc_operecaptazione:denomImpAcqPresa",
+			"label":"Denominazione impianto di acquedotto",
+			"type":"string"
+        },
+		{
+            "index": 9,
+            "attribute": "decsiraogc_operecaptazione:desProvinciaSorgente",
+            "label":"Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+				"propertyName": "id_provincia,sigla,toponimo",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 10,
+           "attribute": "decsiraogc_operecaptazione:desComuneSorgente",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+                "field": "decsiraogc_operecaptazione:desProvinciaSorgente",
+                "from": "sigla",
+                "to": "sigla_provincia"
+           }
+        },
+        {
+			"index": 11,
+			"attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:classificazionePratica",
+			"label":"N. classificazione pratica",
+			"type":"string"
+        },
+		{
+            "index": 12,
+            "attribute": "decsiraogc_operecaptazione:qMaxDerivPresa",
+            "label":"Portata massima derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 13,
+            "attribute": "decsiraogc_operecaptazione:qMedDerivPresa",
+            "label":"Portata media annua derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 14,
+            "attribute": "decsiraogc_operecaptazione:desTipoSbarrPresa",
+            "label":"Tipo sbarramento",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_sbarr",
+                "propertyName": "id_tipo_sbarr,des_tipo_sbarr",
+                "sortBy": "id_tipo_sbarr+A"
+             }
+			},
+			"valueId":"des_tipo_sbarr",
+			"valueLabel":"des_tipo_sbarr"
+        },
+		{
+            "index": 15,
+            "attribute": "decsiraogc_operecaptazione:volumeMaxInvasoPresa",
+            "label":"Volume sbarramento (m3/s)",
+            "type":"number"
+        },
+		{
+            "index": 16,
+            "attribute": "decsiraogc_operecaptazione:flgScalaPresa",
+            "label":"Scala di risalita",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+        },
+		{
+            "index": 17,
+            "attribute": "decsiraogc_operecaptazione:desStatoEserPresa",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
+        },
+        {
+            "index": 18,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 19,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 20,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 21,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 22,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 23,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 24,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 25,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 26,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 27,
+            "attribute": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 28,
+            "attribute": "decsiraogc_operecaptazione:volMaxConcPresa",
+            "label":"Volume annuo derivato (m3/s)",
+            "type":"number"
+        }
+     ]
+
+   }
+
+}

@@ -1,0 +1,203 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PRESE DA SORGENTI' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceROCSorgente/text()"),
+            ' - codice rilievo: ',
+             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceRilievoSorgente/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Sorgente' eventKey='1' expanded={true}>
+            <LabeledField label='Codice ROC l.r. 22/99' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceROCSorgente/text()")
+            }/>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceRilievoSorgente/text()")
+            }/>
+			<LabeledField label='Codice SII' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceSIISorgente/text()")
+            }/>
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denominazioneSorgente/text()")
+            }/>
+			<LabeledField label='Stato sorgente' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:desStatoSorgente/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:desComuneSorgente/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:localitaSorgente/text()")
+            }/>
+			<LabeledField label="Quota del Piano Campagna s.l.m. (m)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:quotaPianoCSorgente/text()")
+            }/>
+			<LabeledField label="Impianto di acquedotto" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denomImpAcqSorgente/text()")
+            }/>
+			<LabeledField label='Acquedotto' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denomAcquedSorgente/text()")
+            }/>
+        </Section>
+
+		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='2' expanded={true}>
+            <LabeledField label='Stato di esercizio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:desStatoEserSorgente/text()")
+            }/>
+            <LabeledField label='Portata massima derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:qMaxDerivSorgente/text()")
+            }/>
+			<LabeledField label='Portata media annua derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:qMedDerivSorgente/text()")
+            }/>
+            <LabeledField label='Volume massimo di concessione (m3)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:volMaxConcSorgente/text()")
+            }/>
+			
+			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
+				<SiraTable
+					   id="PrelievoPerUtenzaSorgente"
+					   selectedRow={model.PrelievoPerUtenzaSorgente}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice rilievo',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+							   },
+							   {
+								   headerName: 'Stato pratica',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:desStatoDeriv/text()"
+							   },
+							   {
+								   headerName: 'nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+							   },
+							   {
+								   headerName: 'nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+							   },
+							   {
+								   headerName: 'Portata massima istantanea (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+							   },
+							   {
+								   headerName: 'Volume massimo annuo (m3)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:prelievoPerUtenzaSorgente")}/>
+            </Section>
+			
+        </Section>
+
+		<Section header='RILASCIO A VALLE DELLA PRESA' eventKey='4' expanded={true}>
+            <LabeledField label='Presenza dispositivi per il rilascio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgDispositiviSorgente/text()")
+            }/>
+			<LabeledField label='In deroga al DMV' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgDerogaDMVSorgente/text()")
+            }/>
+            <LabeledField label='Ulteriori obblighi' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:ulterioriObblighiSorgente/text()")
+            }/>
+			
+			<Section header="Rilascio imposto" eventKey='5' expanded={false}>
+				<SiraTable
+					   id="SorgenteDMV"
+					   selectedRow={model.SorgenteDMV}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:SorgenteDMV/decsiraogc_operecaptazione:inizioPeriodoDMVSorgente/text()"
+							   },
+							   {
+								   headerName: 'Nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:SorgenteDMV/decsiraogc_operecaptazione:finePeriodoDMVSorgente/text()"
+							   },
+							   {
+								   headerName: 'Portata (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:SorgenteDMV/decsiraogc_operecaptazione:portataPeriodoDMVSorgente/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:sorgenteDMV")}/>
+            </Section>
+			
+		</Section>
+	
+
+
+		<Section header='DATI SPECIFICI - sorgente' eventKey='6' expanded={true}>
+            <LabeledField label='Tipo di sorgente' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:desTipoSorgente/text()")
+            }/>
+            <LabeledField label="Sorgente tributaria di corso d'acqua" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgTributariaSorgente/text()")
+            }/>
+		</Section>
+
+        <Section header='MAPPA SINTESI - Prese da sorgenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:geomSorgente/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Prese da sorgenti",
+	                          "name": "decsiraogc_operecaptazione:Sorgente",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+		
+		<Section header='METADATO' eventKey='8' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+				params={{
+					id: 4451,
+					currTab: 'rndt'
+				}}
+			/>
+		</Section>
+
+    </Panel>
+</Panel>

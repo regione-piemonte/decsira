@@ -1,0 +1,237 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PRESE DA ACQUA SUPERFICIALE' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceROCPresa/text()"),
+            ' - codice rilievo: ',
+             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceRilievoPresa/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Presa' eventKey='1' expanded={true}>
+            <LabeledField label='Codice ROC l.r. 22/99' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceROCPresa/text()")
+            }/>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceRilievoPresa/text()")
+            }/>
+			<LabeledField label='Codice SII' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceSIIPresa/text()")
+            }/>
+            <LabeledField label='Denominazione presa/del canale alimentato dalla presa' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:denominazionePresa/text()")
+            }/>
+			<LabeledField label='Denominazione corpo idrico/lago/invaso' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:denomCidrsupPresa/text()")
+            }/>
+			<LabeledField label='Stato presa' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desStatoPresa/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desComunePresa/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:localitaPresa/text()")
+            }/>
+			<LabeledField label="Sponda su cui insiste l'opera" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desSpondaPresa/text()")
+            }/>
+			<LabeledField label="Progressiva sull'asta (km)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:progAstaPresa/text()")
+            }/>
+			<LabeledField label='Galleria filtrante o tubazione drenante' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgGalleriaFiltrPresa/text()")
+            }/>
+			<LabeledField label="Captazione d'acqua da subalveo" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgCaptSubalveoPresa/text()")
+            }/>
+			<LabeledField label='Presa da canale (sub-derivazione)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgDaCanalePresa/text()")
+            }/>
+			<LabeledField label='Impianto di acquedotto' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:denomImpAcqPresa/text()")
+            }/>
+			<LabeledField label='Acquedotto' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:denomAcquedPresa/text()")
+            }/>
+        </Section>
+
+		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='2' expanded={true}>
+            <LabeledField label='Stato di esercizio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desStatoEserPresa/text()")
+            }/>
+            <LabeledField label='Portata massima derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:qMaxDerivPresa/text()")
+            }/>
+			<LabeledField label='Portata media annua derivabile (l/s)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:qMedDerivPresa/text()")
+            }/>
+            <LabeledField label='Volume massimo di concessione (m3)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:volMaxConcPresa/text()")
+            }/>
+			
+			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
+				<SiraTable
+					   id="PrelievoPerUtenzaPresa"
+					   selectedRow={model.PrelievoPerUtenzaPresa}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice rilievo',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+							   },
+							   {
+								   headerName: 'Stato pratica',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:desStatoDeriv/text()"
+							   },
+							   {
+								   headerName: 'nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+							   },
+							   {
+								   headerName: 'nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+							   },
+							   {
+								   headerName: 'Portata massima istantanea (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+							   },
+							   {
+								   headerName: 'Volume massimo annuo (m3)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:prelievoPerUtenzaPresa")}/>
+            </Section>
+			
+        </Section>
+
+		<Section header='RILASCIO A VALLE DELLA PRESA' eventKey='4' expanded={true}>
+            <LabeledField label='Presenza dispositivi per il rilascio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgDispositiviPresa/text()")
+            }/>
+            <LabeledField label='DMV' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgDMVPresa/text()")
+            }/>
+			<LabeledField label='In deroga al DMV' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgDerogaDMVPresa/text()")
+            }/>
+            <LabeledField label='Ulteriori obblighi' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:ulterioriObblighiPresa/text()")
+            }/>
+			
+			<Section header="Rilascio imposto" eventKey='5' expanded={false}>
+				<SiraTable
+					   id="PresaDMV"
+					   selectedRow={model.PresaDMV}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PresaDMV/decsiraogc_operecaptazione:inizioPeriodoDMVPresa/text()"
+							   },
+							   {
+								   headerName: 'Nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PresaDMV/decsiraogc_operecaptazione:finePeriodoDMVPresa/text()"
+							   },
+							   {
+								   headerName: 'Portata (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_operecaptazione:PresaDMV/decsiraogc_operecaptazione:portataPeriodoDMVPresa/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:presaDMV")}/>
+            </Section>
+			
+		</Section>
+	
+		<Section header='DATI INFRASTRUTTURALI' eventKey='6' expanded={true}>
+            <LabeledField label='Tipologia di sbarramento' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desTipoSbarrPresa/text()")
+            }/>
+            <LabeledField label='Altezza (m)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:altezzaPresa/text()")
+            }/>
+			<LabeledField label='Volume massimo di invaso (m3)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:volumeMaxInvasoPresa/text()")
+            }/>
+            <LabeledField label='Scala di risalita per la fauna ittica' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgScalaPresa/text()")
+            }/>
+			<LabeledField label='Tipologia della scala' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desTipoScalaPresa/text()")
+            }/>
+			<LabeledField label='Sponda di localizzazione della scala' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:desSpondaScalaPresa/text()")
+            }/>
+			<LabeledField label='Obblighi ittiogenici' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:flgObblighiIttPresa/text()")
+            }/>
+			<LabeledField label='Specie ittiche' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:specieItticheIttichePresa/text()")
+            }/>
+		</Section>
+
+        <Section header='MAPPA SINTESI - Prese da acqua superficiale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:geomPresa/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Prese da acua superficiale",
+	                          "name": "decsiraogc_operecaptazione:Presa",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+		
+		<Section header='METADATO' eventKey='8' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+				params={{
+					id: 4448,
+					currTab: 'rndt'
+				}}
+			/>
+		</Section>
+
+    </Panel>
+</Panel>
