@@ -26,7 +26,7 @@
    "geometryName": "geom_pozzo",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Scheda_Pozzo_{{/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:idDerivazione/text()}}.pdf",
+    "pdfname": "Scheda_Pozzo_{{/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:idPozzo/text()}}.pdf",
      "template": "assets/cardTemplatePozzo.jsxt",
      "treeTemplate": "assets/treeTemplatePozzo.jsxt",
      "service": {
@@ -53,6 +53,13 @@
            "type": 2
          },
          {
+           "headerName": "N. classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratPozzo/text()"],
+           "type": 2
+         },
+		 {
            "headerName": "Codice ROC",
            "suppressSorting": true,
            "width":120,
@@ -66,26 +73,61 @@
            "xpath": ["decsiraogc_operecaptazione:codiceRilievoPozzo/text()"],
            "type": 2
          },
-         {
-           "headerName": "Denominazione",
+		 {
+           "headerName": "Tipo di falda",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:denominazionePozzo/text()"],
+           "xpath": ["decsiraogc_operecaptazione:desTipoFaldaPozzo/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desComunePozzo/text()"],
            "type": 2
          },
          {
-           "headerName": "Quota piano di campagna",
+           "headerName": "Portata max derivabile (l/s)",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:quotaPCPozzo/text()"],
+           "xpath": ["decsiraogc_operecaptazione:qMaxDerivPozzo/text()"],
+           "type": 1
+         },
+         {
+           "headerName": "Derivazioni servite",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodril/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice utenza",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenza/text()"],
            "type": 2
          },
          {
+           "headerName": "Portata Media derivabile (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:qMedDerivPozzo/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Presenza misuratore",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:flgMisuratore/text()"],
+           "type": 2
+         },
+         {
+           "hide": true,
            "headerName": "Profondita",
-           "suppressSorting": true,
-           "width":120,
+		   "suppressSorting": true,
            "xpath": ["decsiraogc_operecaptazione:profonditaPozzo/text()"],
-           "type": 2
+           "type": 1
          },
          {
            "hide": true,
@@ -117,19 +159,267 @@
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_stato",
                 "propertyName": "id_stato,des_stato",
-                "cql_filter": "id_stato=100%20OR%20id_stato=102",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=104",
                 "sortBy": "des_stato+A"
              }
-           },
-           "valueId":"des_stato",
-           "valueLabel":"des_stato"
+			},
+			"valueId":"des_stato",
+			"valueLabel":"des_stato"
         },
         {
-           "index": 2,
-           "attribute": "decsiraogc_operecaptazione:codiceRilievoPozzo",
-           "label":"Codice rilievo",
-           "type":"string"
-        }
+			"index": 2,
+			"attribute": "decsiraogc_operecaptazione:codiceRilievoPozzo",
+			"label":"Codice rilievo",
+			"type":"string"
+        },
+        {
+			"index": 3,
+			"attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+			"label":"Codice rilievo della Derivazione",
+			"type":"string"
+        },
+        {
+			"index": 4,
+			"attribute": "decsiraogc_operecaptazione:codiceROCPozzo",
+			"label":"Codice ROC l.r. 22/99",
+			"type":"string"
+        },
+        {
+			"index": 5,
+			"attribute": "decsiraogc_operecaptazione:codiceSIIPozzo",
+			"label":"Codice SII",
+			"type":"string"
+        },
+		{
+			"index": 6,
+			"attribute": "decsiraogc_operecaptazione:dataCostruzionePozzo",
+			"label":"Data di costruzione",
+			"type":"date",
+			"fieldOptions": {
+			  "dateFormat": "DD/MM/YYYY"
+			}
+		},
+        {
+			"index": 7,
+			"attribute": "decsiraogc_operecaptazione:denominazionePozzo",
+			"label":"Denominazione",
+			"type":"string"
+        },
+		{
+            "index": 8,
+            "attribute": "decsiraogc_operecaptazione:desProvinciaSorgente",
+            "label":"Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+				"propertyName": "id_provincia,sigla,toponimo",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 9,
+           "attribute": "decsiraogc_operecaptazione:desComuneSorgente",
+           "label":"Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+                "field": "decsiraogc_operecaptazione:desProvinciaSorgente",
+                "from": "sigla",
+                "to": "sigla_provincia"
+           }
+        },
+        {
+			"index": 10,
+			"attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:classificazionePratica",
+			"label":"N. classificazione pratica",
+			"type":"string"
+        },
+		{
+            "index": 11,
+            "attribute": "decsiraogc_operecaptazione:qMaxDerivPozzo",
+            "label":"Portata massima derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 12,
+            "attribute": "decsiraogc_operecaptazione:qMedDerivPozzo",
+            "label":"Portata media annua derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 13,
+            "attribute": "decsiraogc_operecaptazione:profonditaPozzo",
+            "label":"Profondita (m)",
+            "type":"number"
+        },
+		{
+            "index": 14,
+            "attribute": "decsiraogc_operecaptazione:desStatoEserPozzo",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
+        },
+		{
+            "index": 15,
+            "attribute": "decsiraogc_operecaptazione:desTipoFaldaPozzo",
+            "label":"Tipo di falda",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_falda",
+                "propertyName": "id_tipo_falda,des_tipo_falda",
+                "sortBy": "id_tipo_falda+A"
+             }
+			},
+			"valueId":"des_tipo_falda",
+			"valueLabel":"des_tipo_falda"
+        },
+		{
+            "index": 16,
+            "attribute": "decsiraogc_operecaptazione:volMaxConcPozzo",
+            "label":"Volume massimo di concessione (m3)",
+            "type":"number"
+        },
+        {
+            "index": 17,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 18,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 19,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 20,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 21,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 22,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 23,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 24,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 25,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 26,
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         }
      ]
 
    }

@@ -12,6 +12,7 @@ const {isObject} = require('lodash');
 
 // include application component
 const QueryBuilder = require('@mapstore/components/data/query/QueryBuilder');
+const {mapSelector} = require('@mapstore/selectors/map');
 const {Panel, Glyphicon, Modal, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const {bindActionCreators} = require('redux');
 
@@ -271,6 +272,7 @@ class SideQueryPanel extends React.Component {
                     spatialPanelExpanded={this.props.spatialPanelExpanded}
                     attributeFilterActions={this.props.queryFormActions.attributeFilterActions}
                     spatialFilterActions={this.props.queryFormActions.spatialFilterActions}
+                    projection={this.props.projection}
                     queryToolbarActions={assign({}, this.props.queryFormActions.queryToolbarActions, {onQuery: this.onQuery})}
                 />
             </Panel>
@@ -365,7 +367,8 @@ module.exports = connect((state) => {
         showGeneratedFilter: state.queryform.showGeneratedFilter,
         featureTypeConfigUrl: state.queryform.featureTypeConfigUrl,
         pagination: state.queryform.pagination,
-        sortOptions: state.queryform.sortOptions
+        sortOptions: state.queryform.sortOptions,
+        projection: (mapSelector(state) || {}).projection
     };
 }, dispatch => {
     return {

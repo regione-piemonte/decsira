@@ -1,0 +1,71 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='PRESE DA ACQUA SUPERFICIALE' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceROCPresa/text()"),
+            ' - codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceRilievoPresa/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'presa'
+			featureId = {'id_presa.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:idPresa/text()")}
+			rootTitle = {
+				'Codice ROC l.r. 22/99: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceROCPresa/text()") +
+				' - codice rilievo: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:codiceRilievoPresa/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Presa/decsiraogc_operecaptazione:oggettoAssociatoPresa")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:idTipoOggetto/text()",
+					value: "23"
+				},
+				groupElement: {
+					descriptionLabels: ['codice ROC: ','codice rilievo: '],
+					descriptionValues: ["decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:codiceRocCaptColl/text()","decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:nomeWFS/text()",
+						xpath: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:codiceRilDerColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:nomeWFS/text()",
+						xpath: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:idTipoOggetto/text()",
+					value: "29"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: ', " -  matricola: "],
+					descriptionValues: ["decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione::codiceRilMisuColl/text()", "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:matricolaMisuColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:nomeWFS/text()",
+						xpath: "decsiraogc_operecaptazione:OggettoAssociatoPresa/decsiraogc_operecaptazione:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

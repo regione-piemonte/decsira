@@ -1,0 +1,937 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_operecaptazione="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_pozzo  id= id_pozzo-->
+	<element name="Pozzo" type="decsiraogc_operecaptazione:PozzoType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_t_filtro_pozzo  id= id_filtro_pozzo-->
+	<element name="FiltroPozzo" type="decsiraogc_operecaptazione:FiltroPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_oggetto_associato_derivazioni  id= identificativo-->
+	<element name="OggettoAssociatoPozzo" type="decsiraogc_operecaptazione:OggettoAssociatoPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_cementazione_pozzo  id= id_cementazione_pozzo-->
+	<element name="CementazPozzo" type="decsiraogc_operecaptazione:CementazPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_diametro_colonna_pozzo  id= id_diamcolon_pozzo-->
+	<element name="DiamColonPozzo" type="decsiraogc_operecaptazione:DiamColonPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_emungim_durata_pozzo  id= id_emungdurata_pozzo-->
+	<element name="EmungDurataPozzo" type="decsiraogc_operecaptazione:EmungDurataPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_emungim_gradini_pozzo  id= id_emunggradini_pozzo-->
+	<element name="EmungGradiniPozzo" type="decsiraogc_operecaptazione:EmungGradiniPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_dreno_pozzo  id= id_dreno_pozzo-->
+	<element name="DrenoPozzo" type="decsiraogc_operecaptazione:DrenoPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_pompa_idraul_pozzo  id= id_pompaidr_pozzo-->
+	<element name="PompaIdraulPozzo" type="decsiraogc_operecaptazione:PompaIdraulPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_prelievo_perutenza_captazione  id= id_prelievo_utenza_captazione-->
+	<element name="PrelievoPerUtenzaPozzo" type="decsiraogc_operecaptazione:PrelievoPerUtenzaPozzoType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_derivazioni_captazioni  id= id_deriv_capt-->
+	<element name="PozzoDerivazione" type="decsiraogc_operecaptazione:PozzoDerivazioneType" substitutionGroup="gml:AbstractObject" />
+	
+
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="PozzoType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="geom_pozzo" type="gml:GeometryPropertyType" minOccurs="1" />
+
+					<xs:element name="codiceROCPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceSIIPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkTipoFaldaPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desTipoFaldaPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceRilievoPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denominazionePozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkComunePozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="istatComunePozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desComunePozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="siglaProvinciaPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desProvinciaPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="localitaPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkStatoPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoPozzo" minOccurs="1" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="qMaxDerivPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qMedDerivPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="volMaxConcPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkStatoEserPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desStatoEserPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="quotaPCPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="profonditaPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataCostruzionePozzo" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="flgCampoPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgPozzoArtesiano" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgDispStratPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgDispMisPiezoPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="numPiezAssocPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="codAssolutoPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="denomImpAcqPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denomAcquedPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkAreaIdroPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desAreaIdroPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkBacIdroPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desBacIdroPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkBacIdromontPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desBacIdromontPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="elencoDerivCodrilPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="elencoDerivCodutenzaPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="elencoDerivNclasPratPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgMisuratorePozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="filtroPozzo" type="decsiraogc_operecaptazione:FiltroPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="oggettoAssociatoPozzo" type="decsiraogc_operecaptazione:OggettoAssociatoPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+				
+					<xs:element name="cementazPozzo" type="decsiraogc_operecaptazione:CementazPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="diamColonPozzo" type="decsiraogc_operecaptazione:DiamColonPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="emungDurataPozzo" type="decsiraogc_operecaptazione:EmungDurataPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="emungGradiniPozzo" type="decsiraogc_operecaptazione:EmungGradiniPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="drenoPozzo" type="decsiraogc_operecaptazione:DrenoPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="pompaIdraulPozzo" type="decsiraogc_operecaptazione:PompaIdraulPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="prelievoPerUtenzaPozzo" type="decsiraogc_operecaptazione:PrelievoPerUtenzaPozzoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="pozzoDerivazione" type="decsiraogc_operecaptazione:PozzoDerivazionePropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+				</sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="FiltroPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idFiltroPozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idFiltro"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idOrigineDatoFiltro"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desOrigineDatoFiltro" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idTipoFiltro"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desTipoFiltro" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="profonditaDaFiltro" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="profonditaAFiltro" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="aperturaFiltro" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+		
+	<complexType name="OggettoAssociatoPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="identificativo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idTipoOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desTipoOggetto" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="nomeWFS" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idStatoOggetto"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					 <xs:element name="codiceRocCaptColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element name="codiceRilCaptColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element name="denomCaptColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element name="codiceRilDerColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="matricolaMisuColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceRilMisuColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="CementazPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idCementazionePozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idCementazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkMaterCementazPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desMaterCementazPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					<xs:element name="profonditaDaCementazPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="profonditaACementazPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="DiamColonPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idDiamcolonPozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idDiametroColonna"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="diametroDiamcolonPozzo"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					 
+					<xs:element name="profonditaDaDiamcolonPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="profonditaADiamcolonPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="EmungDurataPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idEmungdurataPozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idEmungdurata"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="dataMisuraEmungdurataPozzo" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="soggEsecutEmungdurataPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					 
+					<xs:element name="qCostanteEmungdurataPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="durataEmungdurataPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="trasmissivitaEmungdurataPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="coeffImmagEmungdurataPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="EmungGradiniPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idEmunggradiniPozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idEmunggradini"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="dataMisuraEmunggradiniPozzo" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="soggEsecutEmunggradiniPozzo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					 
+					<xs:element name="qCriticaEmunggradiniPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="DrenoPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idDrenoPozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idDreno"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="profonditaDaDrenoPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="profonditaADrenoPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="PompaIdraulPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idPompaidrPozzo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idPompaIdraulica"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="potenzaMotorePompaidrPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qMaxPompaidrPozzo" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="prevalenzaPompaidrPozzo"  type="xs:integer" minOccurs="1" />
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="PrelievoPerUtenzaPozzoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idPrelievoUtenzaCaptazione" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="35" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idOperaCapt"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idDerivazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idPeriodoPrelievo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codAssoluto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkTipoOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="deTipoOggetto" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkStatoDeriv"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceRilievoDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="periodoPrelievoDa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="periodoPrelievoA" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="portataMaxDerivata" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="volumeMaxConcessione" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkStatoOpera"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoOpera" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="PozzoDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idDerivCapt" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idDerivazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idPozzo"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codiceRilievoDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="classificazionePratica" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+					<xs:element name="flgUsoEnergetico" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoRiqualifEnergia" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoProduzione" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoLavagInerti" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+						
+					<xs:element name="flgUsoZootecnico" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoPiscicolo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoPotabile" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoDomestico" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoCivile" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgUsoAgricolo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	<complexType name="FiltroPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:FiltroPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="OggettoAssociatoPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:OggettoAssociatoPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="CementazPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:CementazPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="DiamColonPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:DiamColonPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="EmungDurataPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:EmungDurataPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="EmungGradiniPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:EmungGradiniPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="DrenoPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:DrenoPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="PompaIdraulPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:PompaIdraulPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="PrelievoPerUtenzaPozzoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="PozzoDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_operecaptazione:PozzoDerivazione" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+
+</schema>

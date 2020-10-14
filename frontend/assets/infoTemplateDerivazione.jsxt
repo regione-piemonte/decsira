@@ -25,54 +25,54 @@
              width: 100,
              xpath: "decsiraogc_derivazioni:codiceUtenza/text()"
         }, {
-             headerName: 'Denominazione titolare',
+             headerName: 'Titolare',
              width: 100,
              xpath: "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"
         }, {
-            headerName: 'Specie derivazione',
+            headerName: 'Specie della derivazione',
             width: 100,
             xpath: "decsiraogc_derivazioni:desTipoDeriv/text()"
         }, {
-            headerName: 'Uso promiscuo',
+            headerName: 'Portata massima derivabile (l/s)',
             width: 100,
-            xpath: "decsiraogc_derivazioni:flgUsoPromiscuo/text()"
+            xpath: "decsiraogc_derivazioni:portataMaxDeriv/text()"
         }, {
-            headerName: 'Uso energetico',
+            headerName: 'Usi della risorsa',
             width: 100,
-            xpath: "decsiraogc_derivazioni:flgUsoEnergetico/text()"
+            xpath: "decsiraogc_derivazioni:elencoUsiLegge/text()"
         }, {
-            headerName: 'Uso potabile',
+            headerName: 'Usi effettivi della risorsa',
             width: 100,
-            xpath: "decsiraogc_derivazioni:flgUsoPotabile/text()"
+            xpath: "decsiraogc_derivazioni:elencoUsiEffettivi/text()"
         }, {
             headerName: 'Stato Derivazione',
             width: 100,
             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
             xpath: "decsiraogc_derivazioni:desStatoDeriv/text()"
         }, {
-             headerName: 'Autorita competente',
+             headerName: 'Portata media derivabile (l/s)',
              width: 100,
-             xpath: "decsiraogc_derivazioni:desAutoritaCompetente/text()"
+             xpath: "decsiraogc_derivazioni:portataMedDeriv/text()"
         }, {
-            headerName: 'Data scadenza concessione',
-            width: 100,
-            xpath: "decsiraogc_derivazioni:dataScadenzaEffettiva/text()"
+             headerName: 'BIM',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:flgBIM/text()"
+        }, {
+             headerName: 'Enti rivieraschi',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:elencoComuniDeriv/text()"
         }, {
             headerName: 'Data decorrenza concessione',
             width: 100,
             xpath: "decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"
         }, {
-            headerName: 'Codice fiscale titolare/ Partita IVA azienda',
+            headerName: 'Data scadenza concessione',
             width: 100,
-            xpath: "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv/text()"
+            xpath: "decsiraogc_derivazioni:dataScadenzaEffettiva/text()"
         }, {
-            headerName: 'Portata massima concessa (l/s)',
+            headerName: 'Presenza misuratore',
             width: 100,
-            xpath: "decsiraogc_derivazioni:portataMaxDeriv/text()"
-        }, {
-            headerName: 'Volume massimo concesso (m3)',
-            width: 100,
-            xpath: "decsiraogc_derivazioni:volumeMaxDeriv/text()"
+            xpath: "decsiraogc_derivazioni:flgMisuratore/text()"
         }
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_derivazioni:Derivazione")}/>
