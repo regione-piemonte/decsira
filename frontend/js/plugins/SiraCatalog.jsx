@@ -9,6 +9,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const {connect} = require('react-redux');
 
+const Message = require('@mapstore/components/I18N/Message');
 const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects, toggleCategories, setNodeInUse} = require('../actions/siracatalog');
 const assign = require('object-assign');
 const {Tabs, Tab, Alert} = require("react-bootstrap");
@@ -261,7 +262,7 @@ module.exports = {
             name: 'catalog',
             position: 2,
             glyph: "1-catalog",
-            title: 'Catalog',
+            title: <Message msgId="catalog.title"/>,
             priority: 1
         }
     }),
