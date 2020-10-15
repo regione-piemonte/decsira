@@ -12,6 +12,7 @@ const GroupTitle = require('./fragments/GroupTitle');
 const GroupChildren = require('./fragments/GroupChildren');
 const VisibilityCheck = require('./fragments/VisibilityCheck');
 const PropTypes = require('prop-types');
+const isEmpty = require('lodash/isEmpty');
 
 class DefaultGroup extends React.Component {
     static propTypes = {
@@ -40,19 +41,22 @@ class DefaultGroup extends React.Component {
 
     render() {
         let {children, onToggle, ...other } = this.props;
-        return (
-            <Node className="toc-default-group" sortableStyle={this.props.sortableStyle} style={this.props.style} type="group" {...other}>
-                { this.props.groupVisibilityCheckbox &&
-                  <VisibilityCheck
-                      key="visibility"
-                      checkType={this.props.visibilityCheckType}
-                      propertiesChangeHandler={this.props.propertiesChangeHandler}/>}
-                <GroupTitle onClick={this.props.onToggle}/>
-                <GroupChildren onSort={this.props.onSort} position="collapsible">
-                    {this.props.children}
-                </GroupChildren>
-            </Node>
-        );
+        if (!isEmpty(this.props.node.nodes)) {
+            return (
+                <Node className="toc-default-group" sortableStyle={this.props.sortableStyle} style={this.props.style} type="group" {...other}>
+                    { this.props.groupVisibilityCheckbox &&
+                    <VisibilityCheck
+                        key="visibility"
+                        checkType={this.props.visibilityCheckType}
+                        propertiesChangeHandler={this.props.propertiesChangeHandler}/>}
+                    <GroupTitle onClick={this.props.onToggle}/>
+                    <GroupChildren onSort={this.props.onSort} position="collapsible">
+                        {this.props.children}
+                    </GroupChildren>
+                </Node>
+            );
+        }
+        return null;
     }
 }
 
