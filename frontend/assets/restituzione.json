@@ -1,0 +1,386 @@
+{
+   "featureTypeName":"decsiraogc_derivazioni:Restituzione",
+   "featureTypeNameLabel":"Restituzioni",
+   "nameSpaces": {
+     "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Serbatoi di accumulo",
+        "name": "decsiraogc_derivazioni:Restituzione",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "restituzione",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geomRestituzione",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_Restituzione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:idRestituzione/text()}}.pdf",
+     "template": "assets/cardTemplateRestituzione.jsxt",
+     "treeTemplate": "assets/treeTemplateRestituzione.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_derivazioni:Restituzione",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateRestituzione.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Progressiva (km)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:progAstaRestituzione/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "N. classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:elencoDerivNclasPratRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice rilievo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:codiceRilievoRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Bacino idrografico",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desBacIdroRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Area idrografica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desAreaIdroRestituzione/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Corpo idrico nel quale si recapita la risorsa",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:denomCidrsupRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desComuneRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Derivazioni servite",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:elencoDerivCodrilRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice utenza",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:elencoDerivCodutenzaRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Portata Media  derivabile (l/s)",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:qMedRestituzione/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Presenza misuratore",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:flgMisuratoreRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Sponda",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:desSpondaRestituzione/text()"],
+           "type": 2
+         },
+		 {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_derivazioni:geomRestituzione/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_derivazioni:desStatoRestituzione",
+            "label":"Stato restituzione",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato",
+                "propertyName": "id_stato,des_stato,ordinamento",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=104",
+                "sortBy": "ordinamento+A"
+             }
+			},
+			"valueId":"des_stato",
+			"valueLabel":"des_stato"
+        },
+		{
+			"index": 2,
+			"attribute": "decsiraogc_derivazioni:codiceRilievoRestituzione",
+			"label":"Codice rilievo",
+			"type":"string"
+        },
+        {
+			"index": 3,
+			"attribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+			"label":"Codice rilievo della derivazione",
+			"type":"string"
+        },
+        {
+			"index": 4,
+			"attribute": "decsiraogc_derivazioni:denomCidrsupRestituzione",
+			"label":"Corpo idrico superficiale",
+			"type":"string"
+        },
+		{
+            "index": 5,
+            "attribute": "decsiraogc_derivazioni:desProvinciaRestituzione",
+            "label":"Localizzazione - Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+				"propertyName": "id_provincia,sigla,toponimo",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 6,
+           "attribute": "decsiraogc_derivazioni:desComuneRestituzione",
+           "label":"Localizzazione - Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+                "field": "decsiraogc_derivazioni:desProvinciaRestituzione",
+                "from": "sigla",
+                "to": "sigla_provincia"
+           }
+        },
+		{
+			"index": 7,
+			"attribute": "decsiraogc_derivazioni:qMaxRestituzione",
+			"label":"Portata massima derivabile (l/s)",
+			"type":"number"
+        },
+		{
+			"index": 8,
+			"attribute": "decsiraogc_derivazioni:qMedRestituzione",
+			"label":"Portata media annua derivabile (l/s)",
+			"type":"number"
+        },
+		{
+            "index": 9,
+            "attribute": "decsiraogc_derivazioni:desStatoEserRestituzione",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
+        },
+		{
+            "index": 10,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 11,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 12,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 13,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 14,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 15,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 16,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 17,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 18,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 19,
+            "attribute": "decsiraogc_derivazioni:restituzioneDerivazione/decsiraogc_derivazioni:RestituzioneDerivazione/decsiraogc_derivazioni:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 20,
+            "attribute": "decsiraogc_derivazioni:volMaxRestituzione",
+            "label":"Volume annuo restituito (m3)",
+            "type":"number"
+        }
+     ]
+
+   }
+
+}

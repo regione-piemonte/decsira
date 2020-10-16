@@ -1,0 +1,37 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <TreeTitle title='SERBATOI DI ACCUMULO' subtitle={[
+            'Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:codiceRilievoSerbatoio/text()"),
+            ]} id={model.id}/>
+    )}>	
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'serbatoio'
+			featureId = {'id_serbatoio.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:idSerbatoio/text()")}
+			rootTitle = {
+				'Codice rilievo: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:codiceRilievoSerbatoio/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:oggettoAssociatoSerbatoio")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoSerbatoio/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoSerbatoio/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoSerbatoio/decsiraogc_derivazioni:codiceRilDerColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoSerbatoio/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoSerbatoio/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>
