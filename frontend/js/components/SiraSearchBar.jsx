@@ -41,7 +41,8 @@ class SiraSearchBar extends React.Component {
         tileClick: PropTypes.func,
         selectSubCategory: PropTypes.func,
         subcat: PropTypes.string,
-        tiles: PropTypes.array
+        tiles: PropTypes.array,
+        searchOptions: PropTypes.object
     };
 
     static defaultProps = {
@@ -56,7 +57,10 @@ class SiraSearchBar extends React.Component {
         onReset: () => {},
         onTextChange: () => {},
         tileClick: () => {},
-        selectSubCategory: () => {}
+        selectSubCategory: () => {},
+        searchOptions: {
+            services: [{type: "nominatim", priority: 5}]
+        }
     };
 
     renderPopover = () => {
@@ -87,7 +91,7 @@ class SiraSearchBar extends React.Component {
     };
 
     render() {
-        const {containerClasses, searchClasses, addCategoriesSelector, onSearch, onReset, onTextChange, searchText} = this.props;
+        const {containerClasses, searchClasses, addCategoriesSelector, onSearch, onReset, onTextChange, searchText, searchOptions} = this.props;
         return (
             <div className={containerClasses}>
                 <SearchBar
@@ -97,6 +101,7 @@ class SiraSearchBar extends React.Component {
                     onSearchTextChange={onTextChange}
                     typeAhead={false}
                     searchText={searchText}
+                    searchOptions={searchOptions}
                     showOptions={false}
                     onSearch={(text) => onSearch({text, category: this.props.category})}
                     onSearchReset={() => {
