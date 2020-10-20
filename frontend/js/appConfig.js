@@ -43,6 +43,9 @@ module.exports = {
     initialState: {
         defaultState: {
             mousePosition: {enabled: false, crs: "EPSG:32632"},
+            backgroundSelector: {
+                allowDeletion: false
+            },
             controls: {
                 help: {
                     enabled: false

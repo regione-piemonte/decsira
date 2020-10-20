@@ -14,7 +14,7 @@ const appReducers = {
     grid: require('../reducers/grid'),
     cardtemplate: require('../reducers/card'),
     featuregrid: require('../reducers/featuregrid'),
-    draw: require('@mapstore/reducers/draw'),
+    draw: require('@mapstore/reducers/draw').default,
     security: require('../reducers/siraSecurity'),
     siraexporter: require('../reducers/siraexporter'),
     siraTree: require('../reducers/siraTree')

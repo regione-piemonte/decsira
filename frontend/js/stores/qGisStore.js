@@ -16,10 +16,10 @@ const assign = require('object-assign');
 module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins) => {
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        browser: require('@mapstore/reducers/browser'),
-        locale: require('@mapstore/reducers/locale'),
-        controls: require('@mapstore/reducers/controls'),
-        version: require('@mapstore/reducers/version'),
+        browser: require('@mapstore/reducers/browser').default,
+        locale: require('@mapstore/reducers/locale').default,
+        controls: require('@mapstore/reducers/controls').default,
+        version: require('@mapstore/reducers/version').default,
         router: connectRouter(history)
     });
     const defaultState = initialState.defaultState;
