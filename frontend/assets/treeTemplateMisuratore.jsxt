@@ -1,0 +1,99 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <TreeTitle title='MISURATORI' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:codiceRilievoMisuratore/text()"), 
+           ' - matricola: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:matricolaMisuratore/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'misuratore'
+			featureId = {'id_misuratore.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:idMisuratore/text()")}
+			rootTitle = {
+				"Codice rilievo: " + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:codiceRilievoMisuratore/text()") + 
+				" - Matricola: " + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:matricolaMisuratore/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:oggettoAssociatoMisuratore")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "6"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice ROC: ', ' Codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRocCaptColl/text()","decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "23"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice ROC: ', ' Codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRocCaptColl/text()","decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "24"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice ROC: ', ' Codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRocCaptColl/text()","decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "27"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice ROC: ', ' Codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRocCaptColl/text()","decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRilCaptColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "22"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:codiceRilRestColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoMisuratore/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

@@ -1,0 +1,86 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='MISURATORI' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:codiceRilievoMisuratore/text()"),
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+	
+        <Section header='DATI GENERALI - Misuratore' eventKey='1' expanded={true}>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:codiceRilievoMisuratore/text()")
+            }/>
+			<LabeledField label="Tipo di strumento" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:desTipoStrumMisuratore/text()")
+            }/>
+			<LabeledField label="Matricola" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:matricolaMisuratore/text()")
+            }/>
+			<LabeledField label="Asta idrometrica" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:flgAstaIdrMisuratore/text()")
+            }/>
+			<LabeledField label="Data installazione" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:dataInstallMisuratore/text()")
+            }/>
+			<LabeledField label="Note relative al tipo di srtumento" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:noteStrumentoMisuratore/text()")
+            }/>
+			<LabeledField label='Stato misuratore' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:desStatoMisuratore/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:desComuneMisuratore/text()")
+            }/>
+			<LabeledField label="Ubicazione specifica" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:desUbicazioneMisuratore/text()")
+            }/>
+			<LabeledField label="Posizione corretta" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:flgPosizioneMisuratore/text()")
+            }/>
+			<LabeledField label="Note relative al censimento" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:noteCensimentoMisuratore/text()")
+            }/>
+			<LabeledField label="Stato di esercizio" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:desStatoEsercizioMisuratore/text()")
+            }/>
+        </Section>
+
+        <Section header='MAPPA SINTESI - Misuratore su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='2' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:geomMisuratore/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima misuratore",
+	                          "name": "decsiraogc_derivazioni:Misuratore",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>
