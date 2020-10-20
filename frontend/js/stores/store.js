@@ -8,7 +8,7 @@
 const assign = require('object-assign');
 const {mapConfigHistory, createHistory} = require('@mapstore/utils/MapHistoryUtils');
 
-const map = mapConfigHistory(require('@mapstore/reducers/map'));
+const map = mapConfigHistory(require('@mapstore/reducers/map').default);
 
 const {createEpicMiddleware} = require('redux-observable');
 
@@ -44,17 +44,17 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
     const history = storeOpts.noRouter ? null : require('@mapstore/stores/History').default;
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        browser: require('@mapstore/reducers/browser'),
-        locale: require('@mapstore/reducers/locale'),
-        controls: require('@mapstore/reducers/controls'),
-        help: require('@mapstore/reducers/help'),
-        maptype: require('@mapstore/reducers/maptype'),
-        maps: require('@mapstore/reducers/maps'),
-        maplayout: require('@mapstore/reducers/maplayout'),
-        version: require('@mapstore/reducers/version'),
+        browser: require('@mapstore/reducers/browser').default,
+        locale: require('@mapstore/reducers/locale').default,
+        controls: require('@mapstore/reducers/controls').default,
+        help: require('@mapstore/reducers/help').default,
+        maptype: require('@mapstore/reducers/maptype').default,
+        maps: require('@mapstore/reducers/maps').default,
+        maplayout: require('@mapstore/reducers/maplayout').default,
+        version: require('@mapstore/reducers/version').default,
         mapPopups: require('@mapstore/reducers/mapPopups').default,
         mosaic: require('../reducers/mosaic'),
-        localConfig: require('@mapstore/reducers/localConfig'),
+        localConfig: require('@mapstore/reducers/localConfig').default,
         locales: () => {return null; },
         theme: require('@mapstore/reducers/theme').default,
         map: () => {return null; },

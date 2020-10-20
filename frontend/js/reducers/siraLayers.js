@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const msLayers = require('@mapstore/reducers/layers');
+const msLayers = require('@mapstore/reducers/layers').default;
 const assign = require('object-assign');
 const {isObject, head, findIndex} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('@mapstore/actions/layers');
