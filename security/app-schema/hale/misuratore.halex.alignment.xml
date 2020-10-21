@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C5dc6ce3e-16af-4781-bbd0-29ec1cac204c" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cda0282b7-ccb3-4eeb-b439-42579d52046c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_misuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1c2889f7-d9c2-468f-a383-e22341e1933a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="geomMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf80c168e-3942-4d38-bcdb-ed4493afd07b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0261f66e-bfc6-4d3f-a9ee-7ddc60b39a6b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="autore_censimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="autoreCensimentoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6b228f39-3ef2-4bab-a071-cf58456da716" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_censimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="dataCensimentoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf774dfe3-15f0-4d8f-bc2d-0be03652c23b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_installazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="dataInstallMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C235e7397-a6a4-4d21-88e0-ee4683e08716" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desComuneMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4d694386-ff4c-4ce9-bee2-a93baac5f3ce" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desProvinciaMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7efbe09c-885b-4af1-98ac-182763ab6803" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc86cd7f3-0f43-4f92-9970-c49e7a39885c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato_esercizio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoEsercizioMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caa30588d-e21e-4fdc-ace6-be684a9f4d14" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_strumento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoStrumMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccbf6e032-b864-427c-9867-6c51ba7083e0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_ubicazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desUbicazioneMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce240e450-5343-4d69-aafe-3155277512bb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_anni_misura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoAnniMisuraMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C29315490-c5df-461f-9623-4d87dbd574f4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_deriv_codril"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoDerivCodrilMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C22bb7e61-c2dc-4e7a-a959-7675a8a63780" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_deriv_codutenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoDerivCodutenzaMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C223036b9-6ac5-4249-801e-aeb4b00cfbe8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_deriv_nclasprat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoDerivNclasPratMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce4f4aab1-f93e-45db-89a1-608d351a9385" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="elenco_usi_legge"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="elencoUsiLeggeMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C838e5631-9d40-4dba-bb0e-1a22df056865" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkComuneMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc0d286ec-f77f-4856-b6f9-1fd72da5873e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkStatoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C81d5a032-8fae-4a69-abf9-4ceae32020a4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato_esercizio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkStatoEsercizioMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C809fcad6-2136-464c-a8b4-02ed7b717cdc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_strumento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkTipoStrumMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C42e6a3dc-b03f-4305-8294-0e98b1f342a7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_ubicazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkUbicazioneMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf1a828f8-be94-4123-ab0d-889a2f599070" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_asta_idr"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgAstaIdrMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C73d80bc2-c90a-44e2-9007-2c35a19f4fe8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_posizione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgPosizioneMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfc0f3ae4-079e-48dc-a6a3-4d4c368b4da4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="istatComuneMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd1b1f7ce-f4c8-4340-8b29-b6dec3c62f94" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="matricola"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="matricolaMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf5572ce8-a848-4ae6-8af0-5464e8a6de99" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note_censimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="noteCensimentoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C935c3917-e065-4525-8c1e-337d05779d59" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note_strumento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="noteStrumentoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7178a454-48ef-42ad-a720-fc23fc650356" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sigla_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="siglaProvinciaMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C3fcbc677-755f-46dc-ac0c-e7c74d8e341e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0a5db6c0-ecaa-40d0-807e-1f9b240665e6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0ec9f1a9-557a-436a-a15a-9997f3ef4584" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1073216b-4250-46a2-ba9f-c5ca0b46be88" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdff0cad1-6e1e-4f0b-ab81-83e6d8482ea9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3b92c012-eb70-46f5-b3a6-fe62580b58ee" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdfa3cb09-c4d2-4050-a66d-32fc321cbff6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C50fe5508-0de1-47bb-a381-41e8da989878" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cac5c6697-12ee-4297-bb0b-08b5f5f98f33" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stato_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idStatoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C89381b94-6abf-4ee4-b176-d55ec133f253" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_capt_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C93e6ba2c-af0e-470c-a7c6-789961994416" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_roc_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRocCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5b88d114-0ece-495b-9fe5-f896ccad8581" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denom_capt_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denomCaptColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccbc32f24-27cb-4974-b29e-5a3518413369" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_rest_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilRestColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cb2c98c55-6684-4d93-b619-8ed0e06ae9ae" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_misuratore"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_oggetto_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C9a8bf50f-ce44-4c7f-be18-7f77cec38723" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreAnniMisuraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C65ba8a33-bc1c-4157-a520-84b9f6c6a6dd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_misuratore_anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreAnniMisuraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idMisuratoreAnno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2a67c363-50c5-494e-8353-66e44e83f832" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_misuratore_anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreAnniMisuraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9b8cbb07-ea5c-45cb-9098-b2116431411c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_misuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreAnniMisuraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbe139b94-61a4-4138-bc95-1fee8a63c1a3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreAnniMisuraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="annoMisura" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C743501b6-c6cf-4ffe-98a4-169caff54d57" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_misuratore"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_misuratore_annimisura" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_misuratore"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C398cdafc-f0e7-439f-93ee-77002ff0d29e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C09a5fb4f-15f9-4a5c-bd7d-edbd2fae04cd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_mis_opera_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idMisOperaDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4bacfad8-8d8b-46bb-9018-c5d9ad473dcb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_mis_opera_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5d023d05-4d14-4ef4-95b9-7519e80422fb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_misuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cedf5dcd2-d3ea-438a-b94c-5cfd0c69354c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_opera"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOpera" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8767e8c8-c7ee-45fb-82ba-b0e9171bb6bc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_opera"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoOpera" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8a87dc15-9829-46c5-848b-5d30a8e04fdf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_derivazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idDerivazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc54b352c-89cb-4ecd-b8d2-4ca88a9596f8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="classificazione_pratica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="classificazionePratica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceef01b4f-6961-436f-a87a-7897d9b362db" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo_deriv"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoDeriv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C48568d6c-d2d9-43f4-bd43-aaf174af236c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo_rest"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoRestituzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8c960d32-19ef-4090-8e00-ce02b50bca44" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_roc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceROC" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C93311e19-860c-43b6-9ae4-bfa22d54251d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_utenza_gerica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceUtenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8b0706c0-001a-48f2-99ef-4326b5f44abf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_opera"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoOpera" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C95872ca2-6df1-440f-935c-132b10ddb3ed" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_agricolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoAgricolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cec684ed7-f2c0-4238-81ee-3602c49a75b5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_civile"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoCivile" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb8a96763-d7a3-4f58-aaea-4e872e4518e1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_domestico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoDomestico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce78a4271-db04-4e8b-be1a-c58effb55165" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_energetico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoEnergetico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C20d28ad2-ca78-4949-84e9-253e2ee27ec4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_lavag_inerti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoLavagInerti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3da330c6-c511-4bcf-8d2e-5f73611066ee" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_piscicolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoPiscicolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C539d1d5b-5897-45be-90d2-e87f31c57b4a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_potabile"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoPotabile" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0e550870-5db1-40b0-8e8b-7f77ea269c8c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_produzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoProduzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfc153426-b420-43c7-b829-00a8d2f1050c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_riqualif_energia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoRiqualifEnergia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd3aebcb0-2b1f-4d5c-bfe4-0ec6b7863ce6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_uso_zootecnico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="flgUsoZootecnico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Ce3aaf8e5-446a-4724-8849-2abcd6632fe0" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_misuratore"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_misuratore"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C2303eab5-336b-48dd-b8ca-44ffd5cfce75" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_misuratore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_misuratore.{id_misuratore}" name="pattern"/>
+    </cell>
+</alignment>

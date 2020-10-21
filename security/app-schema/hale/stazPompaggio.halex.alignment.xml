@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C96cc6df9-e60c-4a9f-afb9-4f1c613ad86e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4940da4f-6b1c-4f14-96d3-32206db907d6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_staz_pomp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Ca99f4abe-4526-4f60-a331-e320f8e6ef60" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_staz_pomp"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_staz_pomp.{id_staz_pomp}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8c2d56d3-eb3d-4ade-97b0-df1c212ae01a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf1eea0b1-7278-40e2-a292-a58e2ef6daa0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denominazioneStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4bb30c53-b370-4fea-8806-4394ee2d636b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_areaidro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desAreaIdroStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C45741d55-a586-4175-8b96-83dfe9b11bc3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_bacidromont"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desBacIdromontStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6227fa91-c551-4f60-b58e-d4fd7f1aabe7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_bacinoidro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desBacIdroStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4fca6625-9b7e-44a4-a63d-5d9ca853dfaa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desComuneStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdd45d951-a172-4469-97ae-443548ff4b97" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desProvinciaStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce2b5d52e-cb53-4fc0-b626-6154f0c075d5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C991d9097-9314-4028-8ffd-fb8ea121ae22" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_stazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cac082e24-f73c-480b-9caa-83823780e12f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_area_idro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkAreaIdroStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C67559d01-f64f-4d26-b579-ea37dafac7bc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bac_idro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkBacIdroStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca1623151-fdfb-440f-9d8c-e8d8452c318b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bac_idromont"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkBacIdromontStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9661c2eb-9c2e-49d9-93b1-ec766447875f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkComuneStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8d15b994-c76c-49bc-8360-13ed8d4573a8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkStatoStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C570cd4d0-5547-4fe4-ad18-2c7b0d6e472a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_stazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkTipoStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C748e8ff7-ac32-4502-9223-e6201141f277" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="geomStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C09761815-6c28-479d-9468-8102352594ca" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="istatComuneStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbb29da28-20b0-480d-a90f-c402fa8d834a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="localita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="localitaStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caad2f3f9-557e-40a8-8967-721fa1bbf3fd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="volume_annuo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="volumeAnnuoStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C31caf722-f6e9-4d6c-9eaa-7929d4d61a42" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sigla_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="siglaProvinciaStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C550c5abb-f29b-4eee-9c27-5fb664a5f9c5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="prevalenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="prevalenzaStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C55f5ec4d-363d-4bc2-a651-dc03e48b486b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="portata_complessiva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="qComplessivaStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C66642e70-ae72-4c0f-bc51-b2171af0b33d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="potenza_installata"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="qInstallataStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C8f44e203-cdd8-47a9-a174-459211daac5c" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdb6be8b7-54f5-4c12-b981-c85f70b1b454" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C363ffd5a-9089-4f1d-85c2-491bcfd966d3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf7aea52f-525b-434a-9009-37c467746216" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C90f8bc46-7653-4e22-9a7b-4080ba6d5a38" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idStazPomp" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9c594741-d7cb-436b-b197-55a72d0f175e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C012463aa-8f9b-4159-a178-c9c05a833d5e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C894d7c3e-33e1-4b34-90f0-9f72b2e10c18" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stato_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idStatoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2ef0cf1a-636c-426c-bb58-4acd93a6c176" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbce38ac5-57ce-4c27-8741-070a3244576c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_der_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoStazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilDerColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C791e5a33-1f12-485e-ae01-6e5df4f66b21" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="StazPompaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_staz_pompaggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_staz_pomp"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_oggetto_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+</alignment>

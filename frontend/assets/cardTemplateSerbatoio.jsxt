@@ -1,0 +1,79 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='SERBATOI DI ACCUMULO' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:codiceRilievoSerbatoio/text()"),
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Serbatoio' eventKey='1' expanded={true}>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:codiceRilievoSerbatoio/text()")
+            }/>
+			<LabeledField label="Tipologia dell'opera" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:desTipoSerbSerbatoio/text()")
+            }/>
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:denominazioneSerbatoio/text()")
+            }/>
+			<LabeledField label='Stato stazione di pompaggio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:desStatoSerbatoio/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:desComuneSerbatoio/text()")
+            }/>
+			<LabeledField label="Località" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:localitaSerbatoio/text()")
+            }/>
+			<LabeledField label="Portata complessiva (l/s)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:qComplessivaSerbatoio/text()")
+            }/>
+			<LabeledField label="Potenza installata (kW)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:qInstallataSerbatoio/text()")
+            }/>
+			<LabeledField label="Prevalenza (m)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:prevalenzaSerbatoio/text()")
+            }/>
+			<LabeledField label="Volume annuo (m3)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:volumeAnnuoSerbatoio/text()")
+            }/>
+        </Section>
+
+        <Section header='MAPPA SINTESI - Serbatoi di accumulo su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Serbatoio/decsiraogc_derivazioni:geomSerbatoio/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima serbatoi di accumulo",
+	                          "name": "decsiraogc_derivazioni:Serbatoio",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>

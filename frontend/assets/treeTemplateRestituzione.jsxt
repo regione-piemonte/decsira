@@ -1,0 +1,67 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <TreeTitle title='RESTITUZIONI' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:codiceRilievoRestituzione/text()"),
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'restituzione'
+			featureId = {'id_restituzione.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:idRestituzione/text()")}
+			rootTitle = {
+				'Codice rilievo: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:codiceRilievoRestituzione/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:oggettoAssociatoRestituzione")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "22"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:codiceRilRestColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:codiceRilDerColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "29"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: ', ' - matricola: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:codiceRilMisuColl/text()", "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:matricolaMisuColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoRestituzione/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>
