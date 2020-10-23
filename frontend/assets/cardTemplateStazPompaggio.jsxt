@@ -1,0 +1,70 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='STAZIONI DI POMPAGGIO' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()"),
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Stazione di pompaggio' eventKey='1' expanded={true}>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()")
+            }/>
+			<LabeledField label="Tipologia dell'opera" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:desTipoSerbStazPomp/text()")
+            }/>
+            <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:denominazioneStazPomp/text()")
+            }/>
+			<LabeledField label='Stato stazione di pompaggio' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:desStatoStazPomp/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:desComuneStazPomp/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:localitaStazPomp/text()")
+            }/>
+			<LabeledField label="Capacità di accumulo (m3)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:capacitaAccumuloStazPomp/text()")
+            }/>
+        </Section>
+
+        <Section header='MAPPA SINTESI - Stazione di pompaggio su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:geomStazPomp/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima stazione di pompaggio",
+	                          "name": "decsiraogc_derivazioni:StazPompaggio",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>

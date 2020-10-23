@@ -369,6 +369,8 @@
                     </xs:element>
 					
 					<!-- oggetti innestati -->
+					
+					<xs:element name="presaDMV" type="decsiraogc_operecaptazione:PresaDMVPropertyType" minOccurs="0" maxOccurs="unbounded" />
 
 					<xs:element name="oggettoAssociatoPresa" type="decsiraogc_operecaptazione:OggettoAssociatoPresaPropertyType" minOccurs="0" maxOccurs="unbounded" />
 				
@@ -476,7 +478,7 @@
             <extension base="gml:AbstractGMLType">
                 <sequence>
 				
-					<xs:element name="idPeriodoDMVPresa" minOccurs="1" >
+					<xs:element name="idPresaPeriodoDMV" minOccurs="1" >
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="25" />
@@ -610,7 +612,7 @@
 					
 					<xs:element name="idDerivazione"  type="xs:integer" minOccurs="1" />
 					
-					<xs:element name="idPresaDren"  type="xs:integer" minOccurs="1" />
+					<xs:element name="idPresa"  type="xs:integer" minOccurs="1" />
 					
 					<xs:element name="codiceRilievoDeriv" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>

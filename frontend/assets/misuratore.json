@@ -1,0 +1,402 @@
+{
+   "featureTypeName":"decsiraogc_derivazioni:Misuratore",
+   "featureTypeNameLabel":"Misuratori",
+   "nameSpaces": {
+     "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Misuratori",
+        "name": "decsiraogc_derivazioni:Misuratore",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "misuratore",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geomMisuratore",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_Misuratore_{{/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:idMisuratore/text()}}.pdf",
+     "template": "assets/cardTemplateMisuratore.jsxt",
+     "treeTemplate": "assets/treeTemplateMisuratore.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_derivazioni:Misuratore",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateMisuratore.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice rilievo derivazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:elencoDerivCodrilMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Data di installazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:dataInstallMisuratore/text()"],
+		   "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+		 {
+           "headerName": "Ubicazione misuratore",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desUbicazioneMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Matricola",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:matricolaMisuratore/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:desComuneMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice utenza",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:elencoDerivCodutenzaMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Anni di misura",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:elencoAnniMisuraMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Usi della Risorsa",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:elencoUsiLeggeMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Stato di esercizio",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:desStatoEsercizioMisuratore/text()"],
+           "type": 2
+         },
+		 {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_derivazioni:geomMisuratore/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+            "index": 1,
+            "attribute": "decsiraogc_derivazioni:desStatoMisuratore",
+            "label":"Stato misuratore",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato",
+                "propertyName": "id_stato,des_stato,ordinamento",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=104",
+                "sortBy": "ordinamento+A"
+             }
+			},
+			"valueId":"des_stato",
+			"valueLabel":"des_stato"
+        },
+		{
+			"index": 2,
+			"attribute": "decsiraogc_derivazioni:annoMisura",
+			"label":"Anno misura manuale",
+			"type":"number"
+        },
+		{
+			"index": 3,
+			"attribute": "decsiraogc_derivazioni:codiceROC",
+			"label":"Codice  ROC lr 22/1999",
+			"type":"string"
+        },
+		{
+			"index": 4,
+			"attribute": "decsiraogc_derivazioni:codiceRilievoRestituzione",
+			"label":"Codice rilievo della restituzione",
+			"type":"string"
+        },
+        {
+			"index": 5,
+			"attribute": "decsiraogc_derivazioni:dataInstallMisuratore",
+			"label":"Data di installazione",
+			"type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+        },
+		{
+            "index": 6,
+            "attribute": "decsiraogc_derivazioni:desProvinciaMisuratore",
+            "label":"Localizzazione - Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+				"propertyName": "id_provincia,sigla,toponimo",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 7,
+           "attribute": "decsiraogc_derivazioni:desComuneMisuratore",
+           "label":"Localizzazione - Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+                "field": "decsiraogc_derivazioni:desProvinciaMisuratore",
+                "from": "sigla",
+                "to": "sigla_provincia"
+           }
+        },
+		{
+            "index": 8,
+            "attribute": "decsiraogc_derivazioni:desStatoEsercizioMisuratore",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
+        },
+		{
+            "index": 9,
+            "attribute": "decsiraogc_derivazioni:desTipoStrumMisuratore",
+            "label":"Tipo di strumento",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_strumen_misurat",
+                "propertyName": "id_tipo_strumento,des_tipo_strumento",
+                "sortBy": "id_tipo_strumento+A"
+             }
+			},
+			"valueId":"des_tipo_strumento",
+			"valueLabel":"des_tipo_strumento"
+        },
+		{
+            "index": 10,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:desTipoOpera",
+            "label":"Tipologia di captazione",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_opera",
+                "propertyName": "id_tipo_opera,des_tipo_opera",
+                "sortBy": "id_tipo_opera+A"
+             }
+			},
+			"valueId":"des_tipo_opera",
+			"valueLabel":"des_tipo_opera"
+        },
+		{
+            "index": 11,
+            "attribute": "decsiraogc_derivazioni:desUbicazioneMisuratore",
+            "label":"Ubicazione specifica",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_ubicazione_misurat",
+                "propertyName": "id_ubicazione,des_ubicazione",
+                "sortBy": "id_ubicazione+A"
+             }
+			},
+			"valueId":"des_ubicazione",
+			"valueLabel":"des_ubicazione"
+        },
+		{
+            "index": 12,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 13,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 14,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 15,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 16,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 17,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 18,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+         {
+            "index": 19,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 20,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 21,
+            "attribute": "decsiraogc_derivazioni:misuratoreOperaDerivazione/decsiraogc_derivazioni:MisuratoreOperaDerivazione/decsiraogc_derivazioni:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         }
+     ]
+
+   }
+
+}

@@ -1,0 +1,146 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='RESTITUZIONI' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:codiceRilievoRestituzione/text()"),
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+	
+        <Section header='DATI GENERALI - Restituzione' eventKey='1' expanded={true}>
+            <LabeledField label='Codice rilievo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:codiceRilievoRestituzione/text()")
+            }/>
+			<LabeledField label="Denominazione corpo idrico" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:denomCidrsupRestituzione/text()")
+            }/>
+			<LabeledField label='Stato restituzione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:desStatoRestituzione/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:desComuneRestituzione/text()")
+            }/>
+			<LabeledField label="Località" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:localitaRestituzione/text()")
+            }/>
+			<LabeledField label="Sponda su cui insiste l'opera" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:desSpondaRestituzione/text()")
+            }/>
+			<LabeledField label="Progressiva sull'asta (km)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:progAstaRestituzione/text()")
+            }/>
+        </Section>
+		
+		<Section header='ESERCIZIO DELLA RESTITUZIONE' eventKey='1' expanded={true}>
+            <LabeledField label='Stato di esercizio' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:desStatoEserRestituzione/text()")
+            }/>
+			<LabeledField label="Portata massima restituita (l/s)" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:qMaxRestituzione/text()")
+            }/>
+			<LabeledField label='Portata media annua restituita (l/s)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:qMedRestituzione/text()")
+            }/>
+			<LabeledField label='Volume massimo annuo restituito (m3)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:volMaxRestituzione/text()")
+            }/>
+			
+			<Section header="Quantità di risorsa restituita dall'opera di recapito finale da ogni utenza" eventKey='3' expanded={false}>
+				<SiraTable
+					   id="PeriodoRestituzione"
+					   selectedRow={model.PeriodoRestituzione}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice rilievo',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:codiceRilievoDeriv/text()"
+							   },
+							   {
+								   headerName: 'Stato pratica',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:desStatoDeriv/text()"
+							   },
+							   {
+								   headerName: 'nel periodo dal',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneDa/text()"
+							   },
+							   {
+								   headerName: 'nel periodo al',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneA/text()"
+							   },
+							   {
+								   headerName: 'Portata massima restituita (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMaxRestituita/text()"
+							   },
+							   {
+								   headerName: 'Portata media annua restituita (l/s)',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita/text()"
+							   },
+							   {
+								   headerName: 'Volume massimo annuo restituito (m3)',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:periodoRestituzione")}/>
+            </Section>
+			
+        </Section>
+
+        <Section header='MAPPA SINTESI - Restituzione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:geomRestituzione/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima restituzione",
+	                          "name": "decsiraogc_derivazioni:Restituzione",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+		
+		<Section header='METADATO' eventKey='8' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+				params={{
+					id: 4454,
+					currTab: 'rndt'
+				}}
+			/>
+		</Section>
+
+    </Panel>
+</Panel>

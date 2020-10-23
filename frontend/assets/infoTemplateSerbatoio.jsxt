@@ -1,0 +1,37 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateSerbatoio"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Codice rilievo',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:codiceRilievoSerbatoio/text()"
+        }, {
+             headerName: 'Denominazione',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:denominazioneSerbatoio/text()"
+        },  {
+             headerName: 'Capacità di accumulo (m3)',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:capacitaAccumuloSerbatoio/text()"
+        },  {
+             headerName: 'Tipologia',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:desTipoSerbSerbatoio/text()"
+        },  {
+             headerName: 'Comune di localizzazione',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:desComuneSerbatoio/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_derivazioni:Serbatoio")}/>
