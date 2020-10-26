@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cd63b7db7-c170-4550-9d3e-33ec2fc27e00" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca1326de7-f33b-45dd-8e8d-44412fba6142" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_serbatoio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C58da3506-fb04-4735-ac11-89ec91ae8b1d" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_serbatoio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_serbatoio.{id_serbatoio}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc398f882-7361-4d1d-aaa9-ee8714ebd901" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="geomSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C09ddc151-a96e-4347-b185-f033fee98fb1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="capacita_accumulo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="capacitaAccumuloSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2d5a12eb-7258-4832-bda6-45df8defcb4f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C021e51a0-7df4-430c-bc0f-1f1a74d3d9f2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="denominazioneSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca39da195-113d-4bfd-acc0-5c67ad374b38" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_areaidro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desAreaIdroSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C822a47a6-f1bf-445f-b7b6-bdcd7f8c1ce3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_bacidromont"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desBacIdromontSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5f9e2efb-9e23-4806-9752-65a162312285" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_bacinoidro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desBacIdroSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4235f736-34ec-4207-95ed-79777df1e394" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desComuneSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd4e3cc9e-48af-4b63-9561-d0606626d7e4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desProvinciaSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caa0a046f-e903-4895-8035-79aed4818851" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desStatoSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdb06898a-1493-48e5-b82b-c2266574cbfc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_serb"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoSerbSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2aa2f38d-fd40-458e-b43b-c3de45a32990" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_area_idro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkAreaIdroSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C03ccd791-ce44-4ce8-a93c-42df1a5b4aa4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bac_idro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkBacIdroSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C76e8ac5c-8e6f-4257-ac06-c5003a71e610" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bac_idromont"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkBacIdromontSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3c2163bc-3b22-44ad-b091-b3bd6f759e8c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkComuneSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb2189770-f210-41ce-a6c8-cebb56008e74" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkStatoSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7c80317d-74c4-466d-8909-3b7c36ae1fd9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_serb"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="fkTipoSerbSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C15e3ff44-9ae2-4cce-9df2-a8d73916e41c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="istat_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="istatComuneSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C656050e4-1cc0-4efd-ac11-0b06bd8efc04" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="localita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="localitaSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4d84cb4a-cc4a-49ac-8ff6-d9c6a565a2a8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sigla_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="siglaProvinciaSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cc094f5f1-c40f-4e0d-b297-4ed67b3e0054" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb78b58d9-4932-40d7-90bb-bdb6ef09b60b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="identificativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbbf0095f-73ee-499f-9ae9-fdbc32ff8f78" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="identificativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfb6238ce-f3f9-416d-86a6-4dca0cd175ef" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cecd56df5-9a92-49c4-abba-3d5b90a28ee3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idSerbatoio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C52c4ea17-e1e6-4a4f-afff-5a7c3db586f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stato_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idStatoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb6773548-bf56-490e-8fd9-3afee5f582b5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb8fee58a-5693-4165-9b8c-1c6ba6f897b7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="nomeWFS" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9a436783-e883-4e21-9208-deedfc56d12b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ril_der_c"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilDerColl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C42a7bb0e-d44d-43bf-af2f-a51b2d801b32" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="desTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C511310b9-a2ea-4278-9a3c-1523dd6e1fc3" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SerbatoioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_serbatoio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_serbatoio"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_oggetto_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+</alignment>

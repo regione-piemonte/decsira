@@ -1,0 +1,224 @@
+{
+   "featureTypeName":"decsiraogc_derivazioni:StazPompaggio",
+   "featureTypeNameLabel":"Stazioni di pompaggio",
+   "nameSpaces": {
+     "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Stazioni di pompaggio",
+        "name": "decsiraogc_derivazioni:StazPompaggio",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "stazPompaggio",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geomStazPomp",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_StazPompaggio_{{/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:idStazPomp/text()}}.pdf",
+     "template": "assets/cardTemplateStazPompaggio.jsxt",
+     "treeTemplate": "assets/treeTemplateStazPompaggio.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_derivazioni:StazPompaggio",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateStazPompaggio.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice rilievo",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:codiceRilievoStazPomp/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Denominazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:denominazioneStazPomp/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Portata complessiva pompaggio (l/s)",
+           "suppressSorting": true,
+           "width":280,
+           "xpath": ["decsiraogc_derivazioni:qComplessivaStazPomp/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Tipologia",
+           "suppressSorting": true,
+           "width":350,
+           "xpath": ["decsiraogc_derivazioni:desTipoStazPomp/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:desComuneStazPomp/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Potenza installata (kW)",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:qInstallataStazPomp/text()"],
+           "type": 1
+         },
+		 {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_derivazioni:geomStazPomp/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_derivazioni:desStatoStazPomp",
+            "label":"Stato stazione di pompaggio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato",
+                "propertyName": "id_stato,des_stato,ordinamento",
+                "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=104",
+                "sortBy": "ordinamento+A"
+             }
+			},
+			"valueId":"des_stato",
+			"valueLabel":"des_stato"
+        },
+        {
+			"index": 2,
+			"attribute": "decsiraogc_derivazioni:codiceRilievoStazPomp",
+			"label":"Codice rilievo",
+			"type":"string"
+        },
+        {
+			"index": 3,
+			"attribute": "decsiraogc_derivazioni:denominazioneStazPomp",
+			"label":"Denominazione",
+			"type":"string"
+        },
+		{
+            "index": 4,
+            "attribute": "decsiraogc_derivazioni:desProvinciaStazPomp",
+            "label":"Localizzazione - Provincia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:sipra_t_province",
+				"propertyName": "id_provincia,sigla,toponimo",
+                "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_derivazioni:desComuneStazPompaggio",
+           "label":"Localizzazione - Comune",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+           "dependson":{
+                "field": "decsiraogc_derivazioni:desProvinciaStazPompaggio",
+                "from": "sigla",
+                "to": "sigla_provincia"
+           }
+        },
+		{
+			"index": 6,
+			"attribute": "decsiraogc_derivazioni:localitaStazPomp",
+			"label":"Localizzazione - località",
+			"type":"string"
+        },
+		{
+			"index": 7,
+			"attribute": "decsiraogc_derivazioni:qComplessivaStazPomp",
+			"label":"Portata complessiva di pompaggio (l/s)",
+			"type":"number"
+        },
+		{
+			"index": 8,
+			"attribute": "decsiraogc_derivazioni:qInstallataStazPomp",
+			"label":"Potenza complessiva installata (kW)",
+			"type":"number"
+        },
+		{
+            "index": 9,
+            "attribute": "decsiraogc_derivazioni:desTipoSerbStazPompaggio",
+            "label":"Tipologia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_serb",
+                "propertyName": "id_tipo_serb,des_tipo_serb",
+                "sortBy": "id_tipo_serb+A"
+             }
+			},
+			"valueId":"des_tipo_serb",
+			"valueLabel":"des_tipo_serb"
+        },
+		{
+			"index": 10,
+			"attribute": "decsiraogc_derivazioni:volumeAnnuoStazPomp",
+			"label":"Volume di pompaggio annuo (m3)",
+			"type":"number"
+        }
+     ]
+
+   }
+
+}

@@ -1,0 +1,35 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='STAZIONI DI POMPAGGIO' subtitle={[
+            ' Codice rilievo: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()"),
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'stazPompaggio'
+			featureId = {'id_staz_pomp.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:idStazPomp/text()")}
+			rootTitle = {'Codice rilievo: ' +  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:oggettoAssociatoStazPomp")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['codice rilievo: '],
+					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:codiceRilDerColl/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:nomeWFS/text()",
+						xpath: "decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

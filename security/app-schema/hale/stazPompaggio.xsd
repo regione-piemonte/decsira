@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_derivazioni="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_staz_pompaggio  id= id_staz_pomp-->
+	<element name="StazPompaggio" type="decsiraogc_derivazioni:StazPompaggioType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_t_oggetto_associato_derivazioni  id= identificativo-->
+	<element name="OggettoAssociatoStazPompaggio" type="decsiraogc_derivazioni:OggettoAssociatoStazPompaggioType" substitutionGroup="gml:AbstractObject" />
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="StazPompaggioType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idStazPomp"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="geomStazPomp" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="codiceRilievoStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denominazioneStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkComuneStazPomp"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="istatComuneStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desComuneStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="siglaProvinciaStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desProvinciaStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="localitaStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkTipoStazPomp"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desTipoStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element name="prevalenzaStazPomp" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qComplessivaStazPomp" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qInstallataStazPomp" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="volumeAnnuoStazPomp"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkStatoStazPomp"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desStatoStazPomp" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkAreaIdroStazPomp"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desAreaIdroStazPomp" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkBacIdroStazPomp"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desBacIdroStazPomp" minOccurs="0"  maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkBacIdromontStazPomp"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desBacIdromontStazPomp" minOccurs="0"  maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="oggettoAssociatoStazPompaggio" type="decsiraogc_derivazioni:OggettoAssociatoStazPompaggioPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="OggettoAssociatoStazPompaggioType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="identificativo" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30" />
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idStazPomp"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idTipoOggetto"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desTipoOggetto" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					<xs:element name="nomeWFS" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idStatoOggetto"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="codiceRilDerColl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="OggettoAssociatoStazPompaggioPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:OggettoAssociatoStazPompaggio" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+</schema>
