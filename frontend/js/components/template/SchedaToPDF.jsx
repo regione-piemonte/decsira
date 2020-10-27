@@ -32,7 +32,7 @@ class SchedaToPDF extends React.Component {
                 PropTypes.string])
         }),
         profile: PropTypes.array,
-        pdfname: PropTypes.string,
+        configOggetti: PropTypes.object,
         authParam: PropTypes.object,
         withMap: PropTypes.bool,
         generatePDF: PropTypes.func,
@@ -45,7 +45,7 @@ class SchedaToPDF extends React.Component {
             xml: null,
             loadingCardTemplateError: null
         },
-        pdfname: 'download.pdf',
+        configOggetti: {},
         profile: [],
         withMap: true,
         authParam: null,
@@ -121,21 +121,25 @@ class SchedaToPDF extends React.Component {
     };
 
     resolvePdfName = () => {
-        let name = this.props.pdfname;
-        (name.match(/\{\{.+?\}\}/g) || []).forEach((placeholder) => {
+        let name = 'download.pdf';
+        // Iterate to find the feature with correct namespace and identify the pdfname
+        Object.values(this.props.configOggetti).forEach(({card}) => {
+            const pdfname = card.pdfname;
+            const [placeholder] = pdfname.match(/\{\{.+?\}\}/g) || [];
             const el = placeholder.replace('{{', '').replace('}}', '');
-            name = name.replace(placeholder, TemplateUtils.getValue(this.props.card.xml, el));
+            try {
+                name = pdfname.replace(placeholder, TemplateUtils.getValue(this.props.card.xml, el));
+                // eslint-disable-next-line no-empty
+            } catch (e) {}
         });
-        name = endsWith(name, ".pdf") ? name : `${name}.pdf`;
-        return name;
+        return endsWith(name, ".pdf") ? name : `${name}.pdf`;
     };
 }
 
 module.exports = connect((state) => {
-    const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         card: state.cardtemplate || {},
-        pdfname: activeConfig.card && activeConfig.card.pdfname
+        configOggetti: state.siradec.configOggetti
     };
 }, {
     generatePDF: generatePDF.bind(null, false),
