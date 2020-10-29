@@ -13,11 +13,7 @@ const {keys, isEqual, isFunction} = require('lodash');
 const {ButtonToolbar, Button, Glyphicon} = require('react-bootstrap');
 const assign = require("object-assign");
 
-const mapUtils = require('@mapstore/utils/MapUtils');
-const configUtils = require('@mapstore/utils/ConfigUtils');
-const CoordinateUtils = require('@mapstore/utils/CoordinatesUtils');
 const ZoomToFeature = require("./ZoomToFeature");
-
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {reactCellRendererFactory} = require('./CellRendererFactory');
@@ -63,7 +59,9 @@ class FeatureGrid extends React.Component {
         zoomToFeatureAction: PropTypes.func,
         exportAction: PropTypes.func,
         tools: PropTypes.array,
-        useIcons: PropTypes.bool
+        useIcons: PropTypes.bool,
+        changeMapViewGrid: PropTypes.func,
+        zoomToFeature: PropTypes.func
     };
 
     static contextTypes = {
@@ -272,7 +270,7 @@ class FeatureGrid extends React.Component {
         }));
         return (this.props.enableZoomToFeature) ? [
             {
-                onCellClicked: this.zoomToFeature,
+                onCellClicked: this.props.zoomToFeature,
                 headerName: '',
                 cellRenderer: reactCellRendererFactory(ZoomToFeature),
                 suppressSorting: true,
@@ -292,18 +290,6 @@ class FeatureGrid extends React.Component {
             pageSize: this.props.pageSize,
             overflowSize: this.props.overflowSize
         };
-    };
-
-    zoomToFeature = (params) => {
-        let geometry = params.data.geometry;
-        if (geometry.coordinates) {
-
-            if (this.props.zoomToFeatureAction) {
-                this.props.zoomToFeatureAction(params.data);
-            } else {
-                this.changeMapView([geometry], this.props.zoom);
-            }
-        }
     };
 
     zoomToFeatures = () => {
@@ -333,37 +319,7 @@ class FeatureGrid extends React.Component {
         geometries = geometries.filter((geometry) => geometry.coordinates);
 
         if (geometries.length > 0) {
-            this.changeMapView(geometries);
-        }
-    };
-
-    changeMapView = (geometries, zoom) => {
-        let extent = geometries.reduce((prev, next) => {
-            return CoordinateUtils.extendExtent(prev, CoordinateUtils.getGeoJSONExtent(next));
-        }, CoordinateUtils.getGeoJSONExtent(geometries[0]));
-
-        const mapSize = this.props.map.size;
-        let newZoom = 1;
-        let newCenter = this.props.map.center;
-        const proj = this.props.map.projection || "EPSG:3857";
-
-        if (extent) {
-            extent = (this.props.srs !== proj) ? CoordinateUtils.reprojectBbox(extent, this.props.srs, proj) : extent;
-            // zoom by the max. extent defined in the map's config
-            newZoom = zoom ? zoom : mapUtils.getZoomForExtent(extent, mapSize, 0, 21);
-            newZoom = (this.props.maxZoom && newZoom > this.props.maxZoom) ? this.props.maxZoom : newZoom;
-
-            // center by the max. extent defined in the map's config
-            newCenter = mapUtils.getCenterForExtent(extent, proj);
-
-            // do not reproject for 0/0
-            if (newCenter.x !== 0 || newCenter.y !== 0) {
-                // reprojects the center object
-                newCenter = configUtils.getCenter(newCenter, "EPSG:4326");
-            }
-            // adapt the map view by calling the corresponding action
-            this.props.changeMapView(newCenter, newZoom,
-                this.props.map.bbox, this.props.map.size, null, proj);
+            this.props.changeMapViewGrid(geometries);
         }
     };
 

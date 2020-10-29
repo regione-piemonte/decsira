@@ -12,8 +12,12 @@ const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
 const {setTreeFeatureType} = require('../actions/siradec');
 const {closeTree} = require('../actions/siraTree');
-const { head, isEqual } = require('lodash');
+const { head, isEqual, isEmpty } = require('lodash');
 const {verifyProfiles} = require('../utils/TemplateUtils');
+const MultiSelectLayer = require('./MultiSelectLayer');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
+const mapUtils = require('@mapstore/utils/MapUtils');
+const configUtils = require('@mapstore/utils/ConfigUtils');
 
 const SiraExporter = connect((state) => {
     return {
@@ -107,7 +111,10 @@ class SiraGrid extends React.Component {
         setTreeFeatureType: PropTypes.func,
         closeTree: PropTypes.func,
         datasetHeader: PropTypes.string,
-        featureTypeNameLabel: PropTypes.string
+        featureTypeNameLabel: PropTypes.string,
+        configureMLS: PropTypes.func,
+        multiLayerSelect: PropTypes.array,
+        setGeometry: PropTypes.func
     };
 
     static contextTypes = {
@@ -358,6 +365,16 @@ class SiraGrid extends React.Component {
             hide: !this.props.detailsConfig.service,
             width: 25,
             suppressResize: true
+        }, {
+            onCellClicked: this.multiLayerSelect,
+            headerName: "",
+            cellRenderer: reactCellRendererFactory(MultiSelectLayer),
+            suppressSorting: true,
+            suppressMenu: true,
+            pinned: true,
+            hide: isEmpty(this.props.multiLayerSelect) || !this.props.withMap,
+            width: 25,
+            suppressResize: true
         }, ...(cols.map((c) => {
             let renderer = c.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {};
             renderer = c.type === 1 ? {cellRenderer: reactCellRendererFactory(GridCellNumber)} : renderer;
@@ -414,8 +431,9 @@ class SiraGrid extends React.Component {
                                 paging={this.props.pagination}
                                 zoom={15}
                                 enableZoomToFeature={this.props.withMap}
+                                changeMapViewGrid={this.changeMapView}
                                 agGridOptions={{enableServerSideSorting: true,  rowBuffer: 20, suppressMultiSort: true, overlayNoRowsTemplate: "Nessun risultato trovato"}}
-                                zoomToFeatureAction={this.props.zoomToFeatureAction}
+                                zoomToFeature={this.zoomToFeature}
                                 toolbar={{
                                     zoom: this.props.withMap,
                                     exporter: this.props.exporter,
@@ -488,8 +506,66 @@ class SiraGrid extends React.Component {
             url + "&FEATUREID=" + params.data.id + (this.props.params.authkey ? "&authkey=" + this.props.params.authkey : "")
         );
 
+        params?.data?.geometry?.coordinates && this.props.setGeometry(params?.data?.geometry);
+
         if (!this.props.detailOpen) {
             this.props.onShowDetail();
+        }
+    };
+
+    multiLayerSelect = (params) => {
+        this.props.setTreeFeatureType(undefined);
+        this.props.closeTree();
+        const filterObj = {
+            groupFields: [],
+            filterFields: [],
+            spatialField: {}
+        };
+        const zoomEnabled = params.data?.geometry?.coordinates;
+        this.props.configureMLS(filterObj, zoomEnabled);
+        this.zoomToFeature(params);
+    };
+
+    zoomToFeature = (params) => {
+        let geometry = params.data.geometry;
+        if (geometry.coordinates) {
+            if (this.props.zoomToFeatureAction) {
+                this.props.zoomToFeatureAction(params.data);
+            } else {
+                this.changeMapView([geometry], 15);
+            }
+        }
+    };
+
+    changeMapView = (geometries, zoom) => {
+        let extent = geometries.reduce((prev, next) => {
+            return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
+        }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
+
+        const srs = "EPSG:4326";
+        const maxZoom = 16;
+        const mapSize = this.props.map.size;
+        let newZoom = 1;
+        let newCenter = this.props.map.center;
+        const proj = this.props.map.projection || "EPSG:3857";
+
+        if (extent) {
+            extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
+            // zoom by the max. extent defined in the map's config
+            newZoom = zoom ? zoom : mapUtils.getZoomForExtent(extent, mapSize, 0, 21);
+            newZoom = (maxZoom && newZoom > maxZoom) ? maxZoom : newZoom;
+
+            // center by the max. extent defined in the map's config
+            newCenter = mapUtils.getCenterForExtent(extent, proj);
+
+            // do not reproject for 0/0
+            if (newCenter.x !== 0 || newCenter.y !== 0) {
+                // reprojects the center object
+                newCenter = configUtils.getCenter(newCenter, "EPSG:4326");
+            }
+            // adapt the map view by calling the corresponding action
+            this.props.changeMapView(newCenter, newZoom,
+                this.props.map.bbox, this.props.map.size, null, proj);
         }
     };
 

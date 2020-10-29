@@ -14,9 +14,9 @@ import CoordinatesUtils from '@mapstore/utils/CoordinatesUtils';
 
 import {isArray} from 'lodash';
 import SecurityUtils from '@mapstore/utils/SecurityUtils';
+import {version} from '../utils/WMS';
 import axios from '@mapstore/libs/ajax';
 import urllib from 'url';
-
 
 function wmsToOpenlayersOptions(options) {
     // NOTE: can we use opacity to manage visibility?
@@ -28,7 +28,7 @@ function wmsToOpenlayersOptions(options) {
         SRS: CoordinatesUtils.normalizeSRS(options.srs),
         CRS: CoordinatesUtils.normalizeSRS(options.srs),
         TILED: options.tiled || false,
-        VERSION: options.version || "1.3.0"
+        VERSION: options.version || version
     }, options.params || {});
 }
 
