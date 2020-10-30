@@ -9,7 +9,7 @@
 const {connect} = require('react-redux');
 
 const {changeMapView} = require('@mapstore/actions/map');
-const {selectFeatures, selectAllToggle, configureMultiLayerSelection, setCurrentFeatureGeometry} = require('../actions/featuregrid');
+const {selectFeatures, selectAllToggle, configureMultiLayerSelection, setCurrentFeatureRowData} = require('../actions/featuregrid');
 
 const {
     loadFeaturesWithPagination,
@@ -38,6 +38,7 @@ module.exports = connect((state) => {
         columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
         attributes: activeConfig.attributes || [],
         multiLayerSelect: activeConfig.multiLayerSelect || [],
+        multiLayerSelectionAttribute: activeConfig.multiLayerSelectionAttribute || '',
         features: state.grid && state.grid.data || [],
         totalFeatures: state.grid.totalFeatures,
         map: (state.map && state.map.present) || (state.config && state.config.map),
@@ -71,5 +72,5 @@ module.exports = connect((state) => {
     setExportParams,
     configureExporter,
     configureMLS: configureMultiLayerSelection,
-    setGeometry: setCurrentFeatureGeometry
+    setFeatureRowData: setCurrentFeatureRowData
 })(require('./FeatureGrid'));

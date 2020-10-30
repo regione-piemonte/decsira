@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,6 +7,7 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const {isObject, isEmpty, includes} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
@@ -22,7 +22,7 @@ const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const {getWindowSize} = require('@mapstore/utils/AgentUtils');
-const {configureMultiLayerSelection, setCurrentFeatureGeometry} = require('../../actions/featuregrid');
+const {configureMultiLayerSelection, setCurrentFeatureRowData} = require('../../actions/featuregrid');
 const {goToMapPage} = require('../../utils/SiraUtils');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {changeMapView} = require('@mapstore/actions/map');
@@ -57,7 +57,9 @@ class Card extends React.Component {
         treeTemplate: PropTypes.string,
         configureMLS: PropTypes.func,
         pointSRS: PropTypes.string,
-        zoom: PropTypes.number
+        zoom: PropTypes.number,
+        multiLayerSelectionAttribute: PropTypes.string,
+        rowData: PropTypes.object
     };
 
     static defaultProps = {
@@ -79,7 +81,7 @@ class Card extends React.Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.open !== this.props.open) {
-            !nextProps.open && this.props.setGeometry({});
+            !nextProps.open && this.props.setFeatureRowData({});
         }
     }
 
@@ -125,7 +127,7 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
-        const mlsButtonDisable = !includes(window.location.hash, 'map') && isEmpty(this.props.geometry);
+        const mlsButtonDisable = !includes(window.location.hash, 'map') && isEmpty(this.props?.rowData?.geometry?.coordinates);
 
         const Template = (
             <div className="scheda-sira">
@@ -161,10 +163,13 @@ class Card extends React.Component {
         return (this.props.open) ? this.renderCard() : null;
     }
 
-    onClickMLS = () =>{
-        this.props.configureMLS();
-        if (!isEmpty(this.props.geometry)) {
-            this.changeMapView([this.props.geometry]);
+    onClickMLS = () => {
+        const {properties = {}, geometry = {}} = this.props.rowData;
+        const [result] = this.props.columns.filter(c=> includes(c.xpath[0], this.props.multiLayerSelectionAttribute));
+        const value = properties[result?.field || ''];
+        this.props.configureMLS(value, false);
+        if (!!geometry?.coordinates) {
+            this.changeMapView([geometry]);
         }
     }
 
@@ -188,13 +193,14 @@ module.exports = connect((state) => {
     const featureType = state.siradec.treeFeatureType || state.siradec.activeFeatureType;
     const cardConfig = state.siradec.configOggetti[featureType] || {};
     return {
-        // impiantoModel: state.cardtemplate.impiantoModel,
         card: state.cardtemplate || {},
         open: state.siraControls.detail,
         treeTemplate: cardConfig && cardConfig.card ? cardConfig.card.treeTemplate : undefined,
         mlsShow: !isEmpty(cardConfig?.multiLayerSelect),
         map: state.map,
-        geometry: state.siradec.currentFeatureGeometry || {}
+        rowData: state.siradec?.currentFeatureRowData || {},
+        columns: cardConfig.featuregrid?.grid?.columns || [],
+        multiLayerSelectionAttribute: cardConfig.multiLayerSelectionAttribute || {}
     };
 }, dispatch => {
     return bindActionCreators({
@@ -203,6 +209,6 @@ module.exports = connect((state) => {
         configureTree,
         configureMLS: configureMultiLayerSelection,
         changeMapView: changeMapView,
-        setGeometry: setCurrentFeatureGeometry
+        setFeatureRowData: setCurrentFeatureRowData
     }, dispatch);
 })(Card);

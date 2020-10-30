@@ -12,7 +12,7 @@ const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
 const {setTreeFeatureType} = require('../actions/siradec');
 const {closeTree} = require('../actions/siraTree');
-const { head, isEqual, isEmpty } = require('lodash');
+const { head, isEqual, isEmpty, includes } = require('lodash');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const MultiSelectLayer = require('./MultiSelectLayer');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
@@ -114,7 +114,8 @@ class SiraGrid extends React.Component {
         featureTypeNameLabel: PropTypes.string,
         configureMLS: PropTypes.func,
         multiLayerSelect: PropTypes.array,
-        setGeometry: PropTypes.func
+        setFeatureRowData: PropTypes.func,
+        multiLayerSelectionAttribute: PropTypes.string
     };
 
     static contextTypes = {
@@ -365,7 +366,9 @@ class SiraGrid extends React.Component {
             hide: !this.props.detailsConfig.service,
             width: 25,
             suppressResize: true
-        }, {
+        },
+        // Multi select layer button when mls configured for the feature
+        {
             onCellClicked: this.multiLayerSelect,
             headerName: "",
             cellRenderer: reactCellRendererFactory(MultiSelectLayer),
@@ -506,7 +509,7 @@ class SiraGrid extends React.Component {
             url + "&FEATUREID=" + params.data.id + (this.props.params.authkey ? "&authkey=" + this.props.params.authkey : "")
         );
 
-        params?.data?.geometry?.coordinates && this.props.setGeometry(params?.data?.geometry);
+        params?.data && this.props.setFeatureRowData(params?.data);
 
         if (!this.props.detailOpen) {
             this.props.onShowDetail();
@@ -516,13 +519,16 @@ class SiraGrid extends React.Component {
     multiLayerSelect = (params) => {
         this.props.setTreeFeatureType(undefined);
         this.props.closeTree();
-        const filterObj = {
-            groupFields: [],
-            filterFields: [],
-            spatialField: {}
-        };
-        const zoomEnabled = params.data?.geometry?.coordinates;
-        this.props.configureMLS(filterObj, zoomEnabled);
+
+        // Get value for the attribute path of main feature configured (multiLayerSelectionAttribute)
+        const [result] = this.props.columnsDef.filter(c=> includes(c.xpath[0], this.props.multiLayerSelectionAttribute));
+        const value = params?.data?.properties[result?.field || ''];
+        const zoomEnabled = !!params.data?.geometry?.coordinates;
+
+        // Configure and add the MLS layer to TOC
+        this.props.configureMLS(value, zoomEnabled);
+
+        // Zoom to feature when zoom enabled
         this.zoomToFeature(params);
     };
 
