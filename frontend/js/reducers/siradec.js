@@ -23,6 +23,7 @@ const {
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED
 } = require('../actions/siradec');
+const {SET_FEATURE_ROW_DATA} = require('../actions/featuregrid');
 
 const assign = require('object-assign');
 
@@ -80,6 +81,8 @@ function siradec(state = initialState, action) {
             featureTypeName: action.ftName,
             featureTypeNameLabel: action.ftNameLabel,
             nameSpaces: action.nameSpaces,
+            multiLayerSelect: action.multiLayerSelect,
+            multiLayerSelectionAttribute: action.multiLayerSelectionAttribute,
             layer: action.layer,
             exporter: action.exporter,
             geometryType: action.geometryType || 'Point',
@@ -160,6 +163,11 @@ function siradec(state = initialState, action) {
             loadingQueryFormConfigError: null,
             filterPanelExpanded: false,
             authorized: false
+        });
+    }
+    case SET_FEATURE_ROW_DATA: {
+        return assign({}, state, {
+            currentFeatureRowData: action.geometry
         });
     }
     default:
