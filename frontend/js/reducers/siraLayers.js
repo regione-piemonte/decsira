@@ -10,7 +10,7 @@ const msLayers = require('@mapstore/reducers/layers').default;
 const assign = require('object-assign');
 const {isObject, head, findIndex} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('@mapstore/actions/layers');
-const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL} = require('../actions/featuregrid');
+const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL, SELECT_MLS} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
@@ -100,6 +100,19 @@ function layers(state = [], action) {
         }
         let allLayer = head(state.flat.filter(l => l.id === "selectAll"));
         return allLayer ? msLayers(state, { type: "REMOVE_NODE", nodeType: 'layers', node: 'selectAll'}) : msLayers(state, action);
+    }
+    case SELECT_MLS : {
+        return action.layers.reduce((layersms, layer) => {
+            let mlsLayer = head(state.flat.filter(l => l.name === `${layer.name}` && l.id === `${layer.name}_mls`));
+            if (mlsLayer) {
+                let params = {params: layer.params};
+                return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
+                    layer: mlsLayer.id,
+                    newProperties: params
+                });
+            }
+            return msLayers(layersms, {type: 'ADD_LAYER', layer});
+        }, state);
     }
     case 'THEMATIC_VIEW_CONFIG_LOADED': {
         // We exclude background layers and we add the rest

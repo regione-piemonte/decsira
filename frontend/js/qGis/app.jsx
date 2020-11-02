@@ -118,7 +118,7 @@ const initialActions = [
 ];
 
 const startApp = () => {
-    const StandardApp = require('@mapstore/components/app/StandardApp');
+    const StandardApp = require('@mapstore/components/app/StandardApp').default;
     const {versionSelector} = require('@mapstore/selectors/version');
 
     const {pages, pluginsDef, initialState, storeOpts, appReducers} = require('./appConfig');

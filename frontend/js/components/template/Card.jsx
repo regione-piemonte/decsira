@@ -1,4 +1,3 @@
-const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,7 +7,8 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {isObject} = require('lodash');
+const PropTypes = require('prop-types');
+const {isObject, isEmpty, includes} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
@@ -16,11 +16,16 @@ const {Modal, Button, Glyphicon} = require('react-bootstrap');
 const {toggleSiraControl} = require("../../actions/controls");
 const toggleDetail = toggleSiraControl.bind(null, 'detail');
 const {generatePDF} = require("../../actions/card");
+const img = require("../../../assets/img/scattered_poly.png");
 const {configureTree} = require("../../actions/siraTree");
 const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const {getWindowSize} = require('@mapstore/utils/AgentUtils');
+const {configureMultiLayerSelection, setCurrentFeatureRowData} = require('../../actions/featuregrid');
+const {goToMapPage} = require('../../utils/SiraUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
+const {changeMapView} = require('@mapstore/actions/map');
 
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;
@@ -49,7 +54,12 @@ class Card extends React.Component {
         toggleDetail: PropTypes.func,
         generatePDF: PropTypes.func,
         configureTree: PropTypes.func,
-        treeTemplate: PropTypes.string
+        treeTemplate: PropTypes.string,
+        configureMLS: PropTypes.func,
+        pointSRS: PropTypes.string,
+        zoom: PropTypes.number,
+        multiLayerSelectionAttribute: PropTypes.string,
+        rowData: PropTypes.object
     };
 
     static defaultProps = {
@@ -63,9 +73,17 @@ class Card extends React.Component {
         open: false,
         draggable: true,
         profile: [],
+        pointSRS: "EPSG:4326",
+        zoom: 15,
         // model: {},
         toggleDetail: () => {}
     };
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.props.open) {
+            !nextProps.open && this.props.setFeatureRowData({});
+        }
+    }
 
     renderLoadTemplateException = () => {
         let exception = this.props.card.loadingCardTemplateError;
@@ -109,11 +127,15 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
+        const mlsButtonDisable = !includes(window.location.hash, 'map') && isEmpty(this.props?.rowData?.geometry?.coordinates);
 
         const Template = (
             <div className="scheda-sira">
                 <TemplateSira template={this.props.card.template} model={model}/>
                 <div id="card-btn-group">
+                    <Button id="multiLayerSelect" disabled={mlsButtonDisable} style={{display: this.props.mlsShow ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
+                        <img src={img} width={16} alt=""/>
+                    </Button>
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
@@ -140,21 +162,53 @@ class Card extends React.Component {
     render() {
         return (this.props.open) ? this.renderCard() : null;
     }
+
+    onClickMLS = () => {
+        const {properties = {}, geometry = {}} = this.props.rowData;
+        const [result] = this.props.columns.filter(c=> includes(c.xpath[0], this.props.multiLayerSelectionAttribute));
+        const value = properties[result?.field || ''];
+        this.props.configureMLS(value, false);
+        if (!!geometry?.coordinates) {
+            this.changeMapView([geometry]);
+        }
+    }
+
+    changeMapView = (geometries) => {
+        let extent = geometries.reduce((prev, next) => {
+            return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
+        }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
+        let point = {crs: this.props.pointSRS, x: (extent[0] + extent[2]) / 2, y: (extent[1] + extent[3]) / 2};
+        let center = this.props.pointSRS !== "EPSG:4326" ?
+            CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
+        let zoom = this.props.zoom;
+        const proj = this.props.map.projection || "EPSG:3857";
+        this.props.changeMapView(center, zoom, this.props.map.bbox, this.props.map.size, null, proj);
+        if (!this.props.withMap) {
+            goToMapPage(center, zoom);
+        }
+    };
 }
 
 module.exports = connect((state) => {
     const featureType = state.siradec.treeFeatureType || state.siradec.activeFeatureType;
     const cardConfig = state.siradec.configOggetti[featureType] || {};
     return {
-        // impiantoModel: state.cardtemplate.impiantoModel,
         card: state.cardtemplate || {},
         open: state.siraControls.detail,
-        treeTemplate: cardConfig && cardConfig.card ? cardConfig.card.treeTemplate : undefined
+        treeTemplate: cardConfig && cardConfig.card ? cardConfig.card.treeTemplate : undefined,
+        mlsShow: !isEmpty(cardConfig?.multiLayerSelect),
+        map: state.map,
+        rowData: state.siradec?.currentFeatureRowData || {},
+        columns: cardConfig.featuregrid?.grid?.columns || [],
+        multiLayerSelectionAttribute: cardConfig.multiLayerSelectionAttribute || {}
     };
 }, dispatch => {
     return bindActionCreators({
         toggleDetail: toggleDetail,
         generatePDF: generatePDF.bind(null, true),
-        configureTree
+        configureTree,
+        configureMLS: configureMultiLayerSelection,
+        changeMapView: changeMapView,
+        setFeatureRowData: setCurrentFeatureRowData
     }, dispatch);
 })(Card);

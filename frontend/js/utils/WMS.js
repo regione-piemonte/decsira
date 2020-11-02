@@ -60,6 +60,7 @@ const searchAndPaginate = (json) => {
 };
 
 const Api = {
+    version: "1.3.0",
     getCapabilities: function(url) {
         const parsed = urlUtil.parse(url, true);
         const getCapabilitiesUrl = urlUtil.format(assign({}, parsed, {
