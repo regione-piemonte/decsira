@@ -219,24 +219,24 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:numFontanili/text()")
             }/>
 			
-			<Section header='ACQUEDOTTI' eventKey='8' expanded={false}>
-				<SiraTable
-					   id="AcquedottiDerivazione"
-					   selectedRow={model.AcquedottiDerivazione}
-					   wfsVersion="2.0"
-					   rowSelection={false}
-					   columns={
-						   [
-							   {
-								   headerName: 'Denominazione',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:AcquedottiDerivazione/decsiraogc_derivazioni:denomAcquedottoDeriv/text()"
-							   }
-						   ]
-					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:acquedottiDerivazione")}/>
-            </Section>
-			
+		</Section>
+		
+		<Section header='ACQUEDOTTI' eventKey='8' expanded={false}>
+			<SiraTable
+				   id="AcquedottiDerivazione"
+				   selectedRow={model.AcquedottiDerivazione}
+				   wfsVersion="2.0"
+				   rowSelection={false}
+				   columns={
+					   [
+						   {
+							   headerName: 'Denominazione',
+							   width: 150,
+							   xpath:"decsiraogc_derivazioni:AcquedottiDerivazione/decsiraogc_derivazioni:denomAcquedottoDeriv/text()"
+						   }
+					   ]
+				   }
+				   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:acquedottiDerivazione")}/>
 		</Section>
 		
 		<Section header='RESTITUZIONE' eventKey='9' expanded={true}>

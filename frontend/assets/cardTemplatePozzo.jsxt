@@ -9,7 +9,7 @@
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-        <Section header='DATI GENERALI -  Pozzo' eventKey='1' expanded={true}>
+        <Section header='DATI GENERALI - Pozzo' eventKey='1' expanded={true}>
             <LabeledField label='Codice ROC l.r. 22/99' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceROCPozzo/text()")
             }/>
@@ -118,7 +118,7 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:desTipoFaldaPozzo/text()")
             }/>
 			<LabeledField label='Disponibilita stratigrafia' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispStrat/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispStratPozzo/text()")
             }/>
 
 			<Section header='Valori del diametro della colonna' eventKey='4' expanded={false}>
@@ -242,10 +242,10 @@
 		
 		<Section header='PROVE DI EMUNGIMENTO - dati generali' eventKey='8' expanded={true}>
             <LabeledField label='Disponibilita di misure piezometriche' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispMisPiezo/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispMisPiezoPozzo/text()")
             }/>
 			<LabeledField label='Piezometri associati' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:NumPiezAssoc/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:numPiezAssocPozzo/text()")
             }/>
 			
 			<Section header='Prove di emungimento a gradini' eventKey='9' expanded={false}>
@@ -259,6 +259,7 @@
 							   {
 								   headerName: 'Data della misura',
 								   width: 150,
+								   dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
 								   xpath:"decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:dataMisuraEmunggradiniPozzo/text()"
 							   },
 							   {
@@ -287,6 +288,7 @@
 							   {
 								   headerName: 'Data della misura',
 								   width: 150,
+								   dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
 								   xpath:"decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:dataMisuraEmungdurataPozzo/text()"
 							   },
 							   {

@@ -98,14 +98,14 @@
            "headerName": "Derivazioni servite",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodril/text()"],
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilPozzo/text()"],
            "type": 2
          },
 		 {
            "headerName": "Codice utenza",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenza/text()"],
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaPozzo/text()"],
            "type": 2
          },
          {
@@ -119,7 +119,7 @@
            "headerName": "Presenza misuratore",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:flgMisuratore/text()"],
+           "xpath": ["decsiraogc_operecaptazione:flgMisuratorePozzo/text()"],
            "type": 2
          },
          {
@@ -207,7 +207,7 @@
         },
 		{
             "index": 8,
-            "attribute": "decsiraogc_operecaptazione:desProvinciaSorgente",
+            "attribute": "decsiraogc_operecaptazione:desProvinciaPresa",
             "label":"Provincia",
             "type":"list",
             "valueService": {
@@ -222,7 +222,7 @@
         },
         {
            "index": 9,
-           "attribute": "decsiraogc_operecaptazione:desComuneSorgente",
+           "attribute": "decsiraogc_operecaptazione:desComunePresa",
            "label":"Comune",
            "type":"list",
            "valueService": {
@@ -235,7 +235,7 @@
            "valueId":"toponimo",
            "valueLabel":"toponimo",
            "dependson":{
-                "field": "decsiraogc_operecaptazione:desProvinciaSorgente",
+                "field": "decsiraogc_operecaptazione:desProvinciaPresa",
                 "from": "sigla",
                 "to": "sigla_provincia"
            }
@@ -314,7 +314,7 @@
          },
 		 {
             "index": 18,
-            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoRiqualifEnerg",
+            "attribute": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:flgUsoRiqualifEnergia",
             "label":"Uso riqualificazione energia",
             "type":"list",
             "values": [
