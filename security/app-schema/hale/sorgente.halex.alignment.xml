@@ -1736,4 +1736,20 @@
         </target>
         <parameter value="id_sorgente.{id_sorgente}" name="pattern"/>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C61dc150b-d339-40ac-8d53-b4f341893ef4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_alberatura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoSorgenteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="tipoAlberatura" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>

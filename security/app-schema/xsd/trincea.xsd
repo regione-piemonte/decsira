@@ -15,7 +15,7 @@
 	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
 	
 	<!-- decsira_geo_trincea_drenante  id= id_trincea_dren -->
-	<element name="Trincea" type="decsiraogc_operecaptazione:TrinceaType" substitutionGroup="gml:AbstractFeature" />
+	<element name="TrinceaDrenante" type="decsiraogc_operecaptazione:TrinceaDrenanteType" substitutionGroup="gml:AbstractFeature" />
 	
 	<!-- decsira_t_oggetto_associato_derivazioni  id= identificativo -->
 	<element name="OggettoAssociatoTrincea" type="decsiraogc_operecaptazione:OggettoAssociatoTrinceaType" substitutionGroup="gml:AbstractObject" />
@@ -30,7 +30,7 @@
 	<!-- types -->
 	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
 	
-	<complexType name="TrinceaType">
+	<complexType name="TrinceaDrenanteType">
         <complexContent>
             <extension base="gml:AbstractFeatureType">
                 <sequence>
@@ -249,6 +249,14 @@
                                 <xs:maxLength value="30" />
                             </xs:restriction>
                         </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="tipoAlberatura" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+						</xs:simpleType>
                     </xs:element>
 					
 					<xs:element name="idTrincea"  type="xs:integer" minOccurs="1" />
