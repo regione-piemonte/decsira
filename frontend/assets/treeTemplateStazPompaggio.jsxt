@@ -1,7 +1,7 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='STAZIONI DI POMPAGGIO' subtitle={[
+        <TreeTitle title='STAZIONI DI POMPAGGIO' subtitle={[
             ' Codice rilievo: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()"),
             ]} id={model.id}/>
@@ -12,7 +12,7 @@
 			featureId = {'id_staz_pomp.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:idStazPomp/text()")}
 			rootTitle = {'Codice rilievo: ' +  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()")
 			}
-			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:oggettoAssociatoStazPomp")}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:oggettoAssociatoStazPompaggio")}
 			groups = {[
 			  {
 				groupName: "decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:desTipoOggetto/text()",
@@ -21,7 +21,7 @@
 					value: "28"
 				},
 				groupElement: {
-					descriptionLabels: ['codice rilievo: '],
+					descriptionLabels: ['Codice rilievo: '],
 					descriptionValues: ["decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:codiceRilDerColl/text()"],
 					linkToDetail: {
 						nomeWFS: "decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:nomeWFS/text()",

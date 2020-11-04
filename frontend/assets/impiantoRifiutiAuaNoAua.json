@@ -51,22 +51,7 @@
            "xpath": ["@gml:id"],
            "type": 2
          },
-         {
-           "headerName": "Stato",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:desStato/text()"],
-		   "width" : 100,
-           "type": 2
-         },
-         {
-           "headerName": "Tipo provvedimento",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:tipoProvvedimento/text()"],
-		   "width" : 200,
-           "type": 2
-         },
-         {
+		 {
            "headerName": "Codice sira stabilimento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:codiceSira/text()"],
@@ -88,91 +73,21 @@
            "type": 2
          },
          {
-           "headerName": "Ragione sociale azienda",
+           "headerName": "---TEST---",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:denominazione/text()"],
-		   "width" : 180,
-           "type": 2
-         },
-         {
-           "headerName": "Codice fiscale azienda / partita IVA azienda",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:codiceFiscale/text()"],
-		   "width" : 120,
-           "type": 2
-         },
-         {
-           "headerName": "Tipologia impiantistica",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_rifiuti_aua:elencoTipologiaImpRifiuto/text()"],
-		   "width" : 250,
-           "type": 2
-         },
-         {
-           "headerName": "Operazioni di recupero",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_rifiuti_aua:elencoOperazioniRecupero/text()"],
-		   "width" : 150,
-           "type": 2
-         },
-         {
-           "headerName": "Numero provvedimento finale AUA",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:estremiProvvedimento/text()"],
-		   "width" : 120,
-           "type": 2
-         },
-         {
-           "headerName": "Data provvedimento finale AUA",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataProvvedimento/text()"],
-           "dateFormat": "DD/MM/YYYY",
-		   "width" : 120,
-           "type": 2
-         },
-         {
-           "headerName": "Data scadenza provvedimento finale AUA",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:dataScadenza/text()"],
-           "dateFormat": "DD/MM/YYYY",
-		   "width" : 120,
-           "type": 2
-         },
-		 {
-           "headerName": "Numero iscrizione registro provinciale",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:numeroProvveIscrizione/text()"],
-		   "width" : 120,
-           "type": 2
-         },
-		 {
-           "headerName": "Data iscrizione registro provinciale",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:dataProvvIscrizione/text()"],
-           "dateFormat": "DD/MM/YYYY",
-		   "width" : 120,
-           "type": 2
-         },
-		  {
-           "headerName": "Data scadenza iscrizione registro provinciale",
-           "suppressSorting": true,
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "xpath": ["decsiraogc_rifiuti_aua:dataScadenza/text()"],
-           "dateFormat": "DD/MM/YYYY",
-		   "width" : 120,
-           "type": 2
-         },
-         {
-           "hide": true,
-           "headerName": "Geometry",
-           "xpath": ["decsiraogc_rifiuti_aua:geometria/gml:Point/gml:pos/text()"],
-           "type": 6
+           "xpath": ["decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:codiciCER"],
+		   "fields": [{
+				"xpath": "decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:codiceCER/text()",
+				"type": 2,
+				"field": "codice cer"
+		   },
+		   {
+				"xpath": "decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:classeCER/text()",
+				"type": 2,
+				"field": "classe cer"
+		   }],
+		   "width" : 720,
+           "type": 5
          }
        ],
        "exporter":{

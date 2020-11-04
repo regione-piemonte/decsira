@@ -12,7 +12,7 @@
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()")
             }/>
 			<LabeledField label="Tipologia dell'opera" value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:desTipoSerbStazPomp/text()")
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:desTipoStazPomp/text()")
             }/>
             <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:denominazioneStazPomp/text()")
@@ -26,8 +26,17 @@
 			<LabeledField label='Località' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:localitaStazPomp/text()")
             }/>
-			<LabeledField label="Capacità di accumulo (m3)" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:capacitaAccumuloStazPomp/text()")
+			<LabeledField label="Portata complessiva (l/s)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:qComplessivaStazPomp/text()")
+            }/>
+			<LabeledField label="Potenza installata (kW)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:qInstallataStazPomp/text()")
+            }/>
+			<LabeledField label="Prevalenza (m)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:prevalenzaStazPomp/text()")
+            }/>
+			<LabeledField label="Volume annuo (m3)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:volumeAnnuoStazPomp/text()")
             }/>
         </Section>
 

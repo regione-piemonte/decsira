@@ -2009,4 +2009,20 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C47d0e525-a8a3-4331-aadd-519a203f287e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_alberatura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoPresaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+                <child name="tipoAlberatura" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
