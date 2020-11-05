@@ -67,7 +67,7 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces, 
     case "LineString": {
         result = `<StyledLayerDescriptor version="1.0.0"
                 ${nameSpacesAttr}
-                xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${mlsFtName || ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Fill><CssParameter name="fill">#0000FF</CssParameter><CssParameter name="stroke">#0000FF</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
+                xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${mlsFtName || ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Stroke><CssParameter name="stroke">#0000FF</CssParameter><CssParameter name="stroke-width">2.0</CssParameter><CssParameter name="stroke-opacity">1.0</CssParameter></Stroke></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
         break;
     }
     default:
