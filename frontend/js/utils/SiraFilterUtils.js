@@ -7,6 +7,7 @@
  */
 const FilterUtils = require('@mapstore/utils/FilterUtils');
 const SiraUtils = require('./SiraUtils');
+const head = require('lodash/head');
 
 function getWSNameByFeatureName(ftName = "") {
     if (ftName === "" ) return "";
@@ -46,7 +47,8 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces, 
     }
     // let configName = ftName.indexOf(":") > -1 ? ftName.split(":")[1] : ftName;
     // let geometryType = (configName && SiraUtils.getConfigOggetti()[configName]) ? SiraUtils.getConfigOggetti()[configName].geometryType : SiraUtils.getConfigOggetti()[ftName].geometryType;
-    let geometryType = SiraUtils.getConfigByfeatureTypeName(ftName).geometryType;
+    const config = SiraUtils.getConfigByfeatureTypeName(ftName);
+    let geometryType = mlsFtName ? head(config.multiLayerSelect.filter(mls=> mls.name === mlsFtName)).geometryType : config.geometryType;
     const nameSpacesAttr = Object.keys(nameSpaces).map((prefix) => 'xmlns:' + prefix + '="' + nameSpaces[prefix] + '"').join(" ");
     let result;
     switch (geometryType) {
@@ -60,6 +62,12 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces, 
         result = `<StyledLayerDescriptor version="1.0.0"
                     ${nameSpacesAttr}
                     xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${mlsFtName || ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">#0000FF</CssParameter><CssParameter name="stroke">#0000FF</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
+        break;
+    }
+    case "LineString": {
+        result = `<StyledLayerDescriptor version="1.0.0"
+                ${nameSpacesAttr}
+                xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><NamedLayer><Name>${mlsFtName || ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Fill><CssParameter name="fill">#0000FF</CssParameter><CssParameter name="stroke">#0000FF</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>`;
         break;
     }
     default:
