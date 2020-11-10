@@ -123,8 +123,8 @@
 
 			<Section header='Valori del diametro della colonna' eventKey='4' expanded={false}>
 				<SiraTable
-					   id="DiametroDiamcolonPozzo"
-					   selectedRow={model.DiametroDiamcolonPozzo}
+					   id="DiamColonPozzo"
+					   selectedRow={model.DiamColonPozzo}
 					   wfsVersion="2.0"
 					   rowSelection={false}
 					   columns={
@@ -132,21 +132,21 @@
 							   {
 								   headerName: 'Diametro (mm)',
 								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:DiametroDiamcolonPozzo/decsiraogc_operecaptazione:diametroDiamcolonPozzo/text()"
+								   xpath:"decsiraogc_operecaptazione:DiamColonPozzo/decsiraogc_operecaptazione:diametroDiamcolonPozzo/text()"
 							   },
 							   {
 								   headerName: 'Profondita da (m)',
 								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:DiametroDiamcolonPozzo/decsiraogc_operecaptazione:profonditaDaDiamcolonPozzo/text()"
+								   xpath:"decsiraogc_operecaptazione:DiamColonPozzo/decsiraogc_operecaptazione:profonditaDaDiamcolonPozzo/text()"
 							   },
 							   {
 								   headerName: 'Profondita a (m)',
 								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:DiametroDiamcolonPozzo/decsiraogc_operecaptazione:profonditaADiamcolonPozzo/text()"
+								   xpath:"decsiraogc_operecaptazione:DiamColonPozzo/decsiraogc_operecaptazione:profonditaADiamcolonPozzo/text()"
 							   }
 						   ]
 					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:diametroDiamcolonPozzo")}/>
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:diamColonPozzo")}/>
             </Section>
 			
 			<Section header='Tratti di colonna interessati dalla presenza di cementazione' eventKey='5' expanded={false}>
