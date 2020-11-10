@@ -22,6 +22,7 @@ const assign = require('object-assign');
 const SchedaToPDF = require('./SchedaToPDF');
 const TemplateUtils = require('../../utils/TemplateUtils');
 const {getWindowSize} = require('@mapstore/utils/AgentUtils');
+const mapUtils = require('@mapstore/utils/mapUtils');
 const {configureMultiLayerSelection, setCurrentFeatureRowData} = require('../../actions/featuregrid');
 const {goToMapPage} = require('../../utils/SiraUtils');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
@@ -180,9 +181,11 @@ class Card extends React.Component {
         let point = {crs: this.props.pointSRS, x: (extent[0] + extent[2]) / 2, y: (extent[1] + extent[3]) / 2};
         let center = this.props.pointSRS !== "EPSG:4326" ?
             CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
-        let zoom = this.props.zoom;
+        const srs = "EPSG:4326";
         const proj = this.props.map.projection || "EPSG:3857";
-        this.props.changeMapView(center, zoom, this.props.map.bbox, this.props.map.size, null, proj);
+        extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
+        const zoom = mapUtils.getZoomForExtent(extent, this.props.map.size || {width: 876, height: 650}, 0, 16);
+        this.props.changeMapView(center, zoom, null, null, null, this.props.map.projection || "EPSG:3857");
         if (!this.props.withMap) {
             goToMapPage(center, zoom);
         }

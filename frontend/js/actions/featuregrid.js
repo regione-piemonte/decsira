@@ -7,6 +7,7 @@
  */
 const FilterUtils = require('../utils/SiraFilterUtils');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+const SiraUtils = require('../utils/SiraUtils');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const TemplateUtils = require('../utils/TemplateUtils');
 const axios = require('@mapstore/libs/ajax');
@@ -19,9 +20,16 @@ const SELECT_MLS = 'SELECT_MLS';
 const SET_FEATURE_ROW_DATA = 'SET_FEATURE_ROW_DATA';
 
 function selectFeatures(features) {
-    return {
-        type: SELECT_FEATURES,
-        features: features
+    return (dispatch, getState) => {
+        const {siradec} = getState();
+        const activeFeatureType = siradec?.activeFeatureType || '';
+        const {featureTypeName = ''} = siradec?.configOggetti?.[activeFeatureType];
+        const geometryType = SiraUtils.getConfigByfeatureTypeName(featureTypeName)?.geometryType || '';
+        return dispatch({
+            type: SELECT_FEATURES,
+            features: features,
+            geometryType
+        });
     };
 }
 
@@ -101,19 +109,32 @@ const configureMultiLayerSelection = (value, zoomEnabled = false) => {
         const crs = CoordinatesUtils.normalizeSRS(map?.present?.projection);
         const activeFeatureType = siradec?.activeFeatureType || '';
         const {multiLayerSelect = [], featureTypeName = '', layer = {}} = siradec?.configOggetti?.[activeFeatureType];
-        const layers = multiLayerSelect.map(({name, title = '', filterOn = ''}) => {
-            const CQL_FILTER = `${filterOn}='${value}'`;
-            const SLD_BODY = FilterUtils.getSLD(featureTypeName, {}, "1.0.0", "ogc", {}, name);
+        const layersWithNoFilter = multiLayerSelect.map(({name, title = ''}) => {
             return {
                 ...layer,
                 featureType: name,
                 name,
                 title: title ? title : name.split(':')[1] || name,
                 id: name + '_mls',
-                params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, crs, TILED: true, version, SLD_BODY, CQL_FILTER}
+                params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, crs, TILED: true, version}
             };
         });
+        const layerNames = multiLayerSelect.map(({name}) => name);
+        const SLD_BODY = FilterUtils.getSLDMSLayers(featureTypeName, {}, layerNames);
+        const CQL_FILTER = multiLayerSelect.map(({filterOn = ''}) => `${filterOn}='${value}'`).join(';');
+        const name = 'MLS Layer';
+        const layerWithFilter = {
+            ...layer,
+            featureType: name,
+            name,
+            title: name,
+            id: 'mls_selected',
+            group: 'hidden',
+            visibility: true,
+            params: { LAYERS: layerNames.join(','), FORMAT: layer.format, TRANSPARENT: true, SRS: crs, crs, TILED: true, version, SLD_BODY, CQL_FILTER}
+        };
         const activeFeatureLayerNotPresent = msLayers?.flat?.findIndex((l) => l.name === layer.name ) === -1;
+        const layers = [...layersWithNoFilter, layerWithFilter];
         Promise.all(layers).then(data => {
             data && dispatch(selectMLS(activeFeatureLayerNotPresent && !zoomEnabled ? data.concat(layer) : data));
         });

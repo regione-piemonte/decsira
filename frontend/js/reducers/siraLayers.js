@@ -8,7 +8,7 @@
 
 const msLayers = require('@mapstore/reducers/layers').default;
 const assign = require('object-assign');
-const {isObject, head, findIndex} = require('lodash');
+const {isObject, head, findIndex, isEmpty, includes} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('@mapstore/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL, SELECT_MLS} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
@@ -58,7 +58,26 @@ function layers(state = [], action) {
         return msLayers(tmpState, getAction("topologyItems", []));
     }
     case SELECT_FEATURES:
-        return msLayers(state, getAction("gridItems", action.features) );
+        return ['gridItems', 'mls_selected'].reduce((layersms, layer) => {
+            const features = { features: action.features, style: {
+                type: action.geometryType,
+                radius: 10,
+                stroke: {
+                    width: 3,
+                    color: 'rgba(0,0,255, 0.4)'
+                },
+                fill: {
+                    color: 'rgba(0,0,255, 0.4)'
+                }
+            }};
+            return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
+                layer: layer,
+                newProperties: {
+                    ...(layer === 'gridItems' && features),
+                    ...(layer === 'mls_selected' && {visibility: !isEmpty(action.features)})
+                }
+            });
+        }, state);
     case SET_FEATURES:
     case CONFIGURE_INFO_TOPOLOGY:
         return msLayers(state, getAction("topologyItems", action.features || action.infoTopologyResponse.features));
@@ -103,7 +122,7 @@ function layers(state = [], action) {
     }
     case SELECT_MLS : {
         return action.layers.reduce((layersms, layer) => {
-            let mlsLayer = head(state.flat.filter(l => l.name === `${layer.name}` && l.id === `${layer.name}_mls`));
+            let mlsLayer = head(state.flat.filter(l => l.name === `${layer.name}` && (includes([`${layer.name}_mls`, 'mls_selected'], l.id))));
             if (mlsLayer) {
                 let params = {params: layer.params};
                 return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
