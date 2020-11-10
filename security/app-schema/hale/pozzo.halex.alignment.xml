@@ -734,43 +734,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.join" id="Cd94ef9d3-21ef-43f7-b5b6-57f088c1443a" priority="normal">
-        <source name="types">
-            <class>
-                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <source name="types">
-            <class>
-                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
-            </class>
-        </target>
-        <complexParameter name="join">
-            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
-                <class>
-                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <class>
-                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <jp:condition>
-                    <property>
-                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="id_pozzo"/>
-                    </property>
-                    <property>
-                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="id_oggetto_princ"/>
-                    </property>
-                </jp:condition>
-            </jp:join-parameter>
-        </complexParameter>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="C3104e013-2423-4c2d-9a89-f705e0b2427b" priority="normal">
         <source>
             <property>
@@ -2874,5 +2837,42 @@
         </target>
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cd94ef9d3-21ef-43f7-b5b6-57f088c1443a" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="PozzoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_pozzo" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_pozzo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_oggetto_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
     </cell>
 </alignment>
