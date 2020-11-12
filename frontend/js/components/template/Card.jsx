@@ -128,7 +128,7 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
-        const mlsButtonDisable = !includes(window.location.hash, 'map') && isEmpty(this.props?.rowData?.geometry?.coordinates);
+        const mlsButtonDisable = (!includes(window.location.hash, 'map') && isEmpty(this.props?.rowData?.geometry?.coordinates)) || isEmpty(this.props.geometryType);
 
         const Template = (
             <div className="scheda-sira">
@@ -165,10 +165,8 @@ class Card extends React.Component {
     }
 
     onClickMLS = () => {
-        const {properties = {}, geometry = {}} = this.props.rowData;
-        const [result] = this.props.columns.filter(c=> includes(c.xpath[0], this.props.multiLayerSelectionAttribute));
-        const value = properties[result?.field || ''];
-        this.props.configureMLS(value, false);
+        const {geometry = {}} = this.props.rowData;
+        this.props.configureMLS(this.props.columns, this.props.rowData);
         if (!!geometry?.coordinates) {
             this.changeMapView([geometry]);
         }
@@ -203,7 +201,7 @@ module.exports = connect((state) => {
         map: state.map,
         rowData: state.siradec?.currentFeatureRowData || {},
         columns: cardConfig.featuregrid?.grid?.columns || [],
-        multiLayerSelectionAttribute: cardConfig.multiLayerSelectionAttribute || {}
+        geometryType: cardConfig.featuregrid?.geometryType || ''
     };
 }, dispatch => {
     return bindActionCreators({

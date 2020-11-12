@@ -58,7 +58,8 @@ function layers(state = [], action) {
         return msLayers(tmpState, getAction("topologyItems", []));
     }
     case SELECT_FEATURES:
-        return ['gridItems', 'mls_selected'].reduce((layersms, layer) => {
+        const ftLayers = state.flat.filter(l => includes(l.id, '_mls') || l.id === 'gridItems');
+        return ftLayers.reduce((layersms, layer) => {
             const features = { features: action.features, style: {
                 type: action.geometryType,
                 radius: 10,
@@ -71,10 +72,10 @@ function layers(state = [], action) {
                 }
             }};
             return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
-                layer: layer,
+                layer: layer.id,
                 newProperties: {
-                    ...(layer === 'gridItems' && features),
-                    ...(layer === 'mls_selected' && {visibility: !isEmpty(action.features)})
+                    ...(layer.id === 'gridItems' && features),
+                    ...(includes(layer.id, '_mls') && {visibility: !isEmpty(action.features)})
                 }
             });
         }, state);
@@ -122,7 +123,7 @@ function layers(state = [], action) {
     }
     case SELECT_MLS : {
         return action.layers.reduce((layersms, layer) => {
-            let mlsLayer = head(state.flat.filter(l => l.name === `${layer.name}` && (includes([`${layer.name}_mls`, 'mls_selected'], l.id))));
+            let mlsLayer = head(state.flat.filter(l => l.name === `${layer.name}`));
             if (mlsLayer) {
                 let params = {params: layer.params};
                 return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",

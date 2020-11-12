@@ -40,25 +40,35 @@
    "featureinfo":{
      "templateURL": "assets/infoTemplateFaseProcedimentale.jsxt"
    },
-  "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase",
   "multiLayerSelect": [
       {
         "name": "decsiraogc_sivia_geo:decsira_geo_sivia_linea",
         "title": "Geometrie VIA - Linea",
         "filterOn": "decsiraogc_sivia_geo:codice_fase",
-        "geometryType": "LineString"
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase"
       },
       {
         "name": "decsiraogc_sivia_geo:decsira_geo_sivia_poligono",
         "title": "Geometrie VIA - Poligono",
         "filterOn": "decsiraogc_sivia_geo:codice_fase",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase",
         "geometryType": "Polygon"
       },
       {
         "name": "decsiraogc_sivia_geo:decsira_geo_sivia_punto",
         "title": "Geometrie VIA - Punto",
         "filterOn": "decsiraogc_sivia_geo:codice_fase",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase",
         "geometryType": "Point"
+      },
+      {
+        "name": "ZSC_SIC",
+        "title": "ZSC_SIC",
+        "filterOn": "ms:codice_amministrativo",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:sitoNatura/decsiraogc_sivia:SitoNatura/decsiraogc_sivia:codiceSito",
+        "geometryType": "Polygon",
+        "wmsUrl": "http://geomap.reteunitaria.piemonte.it/ws/gsareprot/rp-01/areeprotwms/wms_gsareprot_1"
       }
     ],
    "featuregrid": {
