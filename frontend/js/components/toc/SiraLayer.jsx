@@ -113,7 +113,7 @@ class DefaultLayer extends React.Component {
                     style={{"float": "right", cursor: 'pointer'}}
                     key="toggle-query"
                     glyph="search"
-                    onClick={()=>this.props.expandFilterPanel(true, this.props.node.featureType)}/>);
+                    onClick={()=> this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType)}/>);
             }
         }
         return tools;

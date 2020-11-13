@@ -38,7 +38,6 @@ module.exports = connect((state) => {
         columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
         attributes: activeConfig.attributes || [],
         multiLayerSelect: activeConfig.multiLayerSelect || [],
-        multiLayerSelectionAttribute: activeConfig.multiLayerSelectionAttribute || '',
         features: state.grid && state.grid.data || [],
         totalFeatures: state.grid.totalFeatures,
         map: (state.map && state.map.present) || (state.config && state.config.map),
@@ -56,7 +55,8 @@ module.exports = connect((state) => {
         backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch",
         gridType: state.grid.gridType,
         maxFeatures: state.siraexporter.maxFeatures,
-        exporterConfig: activeConfig.exporter
+        exporterConfig: activeConfig.exporter,
+        geometryType: activeConfig.featuregrid?.geometryType || ''
     };
 }, {
     onDetail: loadCardTemplate,
