@@ -119,9 +119,10 @@ const configureMultiLayerSelection = (columnsDef, params) => {
         const activeFeatureType = siradec?.activeFeatureType || '';
         const {multiLayerSelect = [], featureTypeName = '', layer = {}} = siradec?.configOggetti?.[activeFeatureType];
         const multiLayerSelectFiltered = multiLayerSelect.filter(({wmsUrl}) => isUndefined(wmsUrl));
-        const layersWithNoFilter = multiLayerSelectFiltered.map(({name, title = ''}) => {
+        const layersWithNoFilter = multiLayerSelect.map(({name, title = '', wmsUrl: url = layer.url}) => {
             return {
                 ...layer,
+                url,
                 featureType: name,
                 name,
                 mlsLayer: true,

@@ -114,8 +114,7 @@ class SiraGrid extends React.Component {
         featureTypeNameLabel: PropTypes.string,
         configureMLS: PropTypes.func,
         multiLayerSelect: PropTypes.array,
-        setFeatureRowData: PropTypes.func,
-        geometryType: PropTypes.string
+        setFeatureRowData: PropTypes.func
     };
 
     static contextTypes = {
@@ -375,7 +374,7 @@ class SiraGrid extends React.Component {
             suppressSorting: true,
             suppressMenu: true,
             pinned: true,
-            hide: isEmpty(this.props.multiLayerSelect) || !this.props.withMap || isEmpty(this.props.geometryType),
+            hide: isEmpty(this.props.multiLayerSelect) || !this.props.withMap,
             width: 25,
             suppressResize: true
         }, ...(cols.map((c) => {
@@ -517,12 +516,13 @@ class SiraGrid extends React.Component {
     };
 
     multiLayerSelect = (params) => {
-        this.props.setTreeFeatureType(undefined);
-        this.props.closeTree();
+        if (params.data?.geometry?.coordinates) {
+            this.props.setTreeFeatureType(undefined);
+            this.props.closeTree();
 
-        // Configure and add the MLS layer to TOC
-        this.props.configureMLS(this.props.columnsDef, params.data);
-
+            // Configure and add the MLS layer to TOC
+            this.props.configureMLS(this.props.columnsDef, params.data);
+        }
         // Zoom to feature when zoom enabled
         this.zoomToFeature(params);
     };

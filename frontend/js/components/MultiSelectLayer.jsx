@@ -7,13 +7,17 @@
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const img = require('../../assets/img/scattered_poly.png');
 
 class MultiSelectLayer extends React.Component {
+    static propTypes = {
+        params: PropTypes.object
+    };
+
     render() {
-        return (
-            <img src={img} width={16} alt=""/>
-        );
+        const geometry = this.props.params?.data?.geometry;
+        return geometry && geometry.coordinates ? <img src={img} width={16} alt=""/> : null;
     }
 }
 
