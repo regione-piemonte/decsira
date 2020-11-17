@@ -128,15 +128,16 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
-        const mlsButtonDisable = isEmpty(this.props?.rowData?.geometry?.coordinates);
+        const hideMLSButton = isEmpty(this.props?.rowData?.geometry?.coordinates);
 
         const Template = (
             <div className="scheda-sira">
                 <TemplateSira template={this.props.card.template} model={model}/>
                 <div id="card-btn-group">
-                    <Button id="multiLayerSelect" disabled={mlsButtonDisable} style={{display: this.props.mlsShow ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
+                    {!hideMLSButton && <Button id="multiLayerSelect" style={{display: this.props.mlsShow ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
                         <img src={img} width={16} alt=""/>
                     </Button>
+                    }
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/>
                     </Button>
