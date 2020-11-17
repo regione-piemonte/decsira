@@ -8,7 +8,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
-const {isObject, isEmpty, includes} = require('lodash');
+const {isObject, isEmpty} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
@@ -128,13 +128,13 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
-        const mlsButtonDisable = (!includes(window.location.hash, 'map') && isEmpty(this.props?.rowData?.geometry?.coordinates)) || isEmpty(this.props.geometryType);
+        const showMLSButton = this.props.mlsShow && !isEmpty(this.props?.rowData?.geometry?.coordinates);
 
         const Template = (
             <div className="scheda-sira">
                 <TemplateSira template={this.props.card.template} model={model}/>
                 <div id="card-btn-group">
-                    <Button id="multiLayerSelect" disabled={mlsButtonDisable} style={{display: this.props.mlsShow ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
+                    <Button id="multiLayerSelect" style={{display: showMLSButton ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
                         <img src={img} width={16} alt=""/>
                     </Button>
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
@@ -176,9 +176,7 @@ class Card extends React.Component {
         let extent = geometries.reduce((prev, next) => {
             return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
         }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
-        let point = {crs: this.props.pointSRS, x: (extent[0] + extent[2]) / 2, y: (extent[1] + extent[3]) / 2};
-        let center = this.props.pointSRS !== "EPSG:4326" ?
-            CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
+        const center = mapUtils.getCenterForExtent(extent, "4326");
         const srs = "EPSG:4326";
         const proj = this.props.map.projection || "EPSG:3857";
         extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
@@ -200,8 +198,7 @@ module.exports = connect((state) => {
         mlsShow: !isEmpty(cardConfig?.multiLayerSelect),
         map: state.map,
         rowData: state.siradec?.currentFeatureRowData || {},
-        columns: cardConfig.featuregrid?.grid?.columns || [],
-        geometryType: cardConfig.featuregrid?.geometryType || ''
+        columns: cardConfig.featuregrid?.grid?.columns || []
     };
 }, dispatch => {
     return bindActionCreators({
