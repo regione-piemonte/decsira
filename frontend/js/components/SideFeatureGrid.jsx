@@ -55,8 +55,7 @@ module.exports = connect((state) => {
         backToSearch: state.grid.gridType === 'search' ? "featuregrid.backtosearch" : "featuregrid.opensearch",
         gridType: state.grid.gridType,
         maxFeatures: state.siraexporter.maxFeatures,
-        exporterConfig: activeConfig.exporter,
-        geometryType: activeConfig.featuregrid?.geometryType || ''
+        exporterConfig: activeConfig.exporter
     };
 }, {
     onDetail: loadCardTemplate,
