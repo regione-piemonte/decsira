@@ -6,4 +6,4 @@ npm install
 npm run compile
 
 cd ..
-mvn clean install -Pweb,$1
+mvn clean install -Pweb,$1 -DskipTests
