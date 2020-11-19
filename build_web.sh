@@ -4,7 +4,6 @@ set -e
 cd frontend
 npm install
 npm run compile
-npm run lint
-# npm test
+
 cd ..
-mvn clean install -Pweb,demo
+mvn clean install -Pweb,$1
