@@ -13,6 +13,10 @@ To start, you need to download the application source code and install some tool
  * Switch to the update branch (*ms_update*):
 
     `git checkout ms_update`
+ 
+ * Align the MapStore2 submodule to the version used by the new branch:
+
+    `git submodule update`
 
  * Ensure that you have **NodeJS** version >= 12 and an NPM version >= 6 installed. A compatible version can be downloaded from [here](https://nodejs.org/en/blog/release/v12.16.1/). You can check the current versions using the following commands:
 
