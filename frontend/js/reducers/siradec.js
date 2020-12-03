@@ -94,7 +94,8 @@ function siradec(state = initialState, action) {
             exporter: action.exporter,
             geometryType: action.geometryType || 'Point',
             queryform,
-            authorized: action.authorized
+            authorized: action.authorized,
+            tematizzatore: action.tematizzatore
         });
 
         if (newConf.featuregrid) {

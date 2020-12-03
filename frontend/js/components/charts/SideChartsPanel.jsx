@@ -21,7 +21,8 @@ class SideChartsPanel extends React.Component {
         header: PropTypes.string,
         datasetHeader: PropTypes.string,
         featureTypeNameLabel: PropTypes.string,
-        aggregation: PropTypes.string
+        aggregation: PropTypes.string,
+        tematizzatore: PropTypes.object
     };
 
     static contextTypes = {
@@ -35,7 +36,8 @@ class SideChartsPanel extends React.Component {
         header: "queryform.form.header",
         datasetHeader: "queryform.form.dataset_header",
         featureTypeNameLabel : "",
-        aggregation: ""
+        aggregation: "",
+        tematizzatore: {}
     };
 
     renderHeader = () => {
@@ -72,7 +74,7 @@ class SideChartsPanel extends React.Component {
             <Panel className={this.props.withMap ? "querypanel-container side-querypanel widthclass" : "querypanel-container side-querypanel hideSpatialFilter widthclass" } collapsible={this.props.collapsible}
                 header={this.renderHeader()} bsStyle="primary">
                 {this.renderDatasetHeader()}
-                <ChartsBuilder/>
+                <ChartsBuilder {...this.props.tematizzatore}/>
             </Panel>
         );
     };
@@ -129,6 +131,7 @@ class SideChartsPanel extends React.Component {
 export default connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
+        tematizzatore: activeConfig.tematizzatore,
         // SiraQueryPanel prop
         expanded: state.siradec.chartsConfigPanel.expanded,
         aggregation: state.siradec.chartsConfigPanel.aggregation,

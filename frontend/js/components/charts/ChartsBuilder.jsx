@@ -5,12 +5,9 @@ import PropTypes from "prop-types";
 import ComboField from "@mapstore/components/data/query/ComboField";
 
 function ChartsBuilder({
-    indicatori = ["Raccolta differenziata", "Raccolta indifferenziata"],
-    periodicita = ["Annuale", "Semestrale"],
-    dettaglioPeriodicita = {
-        "Annuale": ["2018", "2019"],
-        "Semestrale": ["1 ° semestre 2018", "2 ° semestre 2018", "1° semestre 2019", "2° semestre 2019"]
-    }
+    indicatori = [],
+    periodicita = [],
+    dettaglioPeriodicita = {}
 }) {
     const [selectedIndicatore, setSelectedIndicatore] = useState("");
     const [selectedPeriodicita, setSelectedPeriodicita] = useState("");

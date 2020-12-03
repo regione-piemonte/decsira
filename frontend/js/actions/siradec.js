@@ -61,7 +61,8 @@ function configureFeatureType(ft, field, featureType, activate) {
         exporter: ft.exporter,
         field,
         featureType,
-        activate
+        activate,
+        tematizzatore: ft.tematizzatore
     };
 }
 
@@ -286,7 +287,8 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                         multiLayerSelectionAttribute: config.multiLayerSelectionAttribute,
                         nameSpaces: config.nameSpaces || {},
                         layer: layer,
-                        exporter: config.exporter
+                        exporter: config.exporter,
+                        tematizzatore: config.tematizzatore
                     }, fi, featureType, activate));
                 }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
                 // for (let field in config.query.fields) {
