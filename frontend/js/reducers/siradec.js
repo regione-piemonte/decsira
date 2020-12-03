@@ -12,6 +12,8 @@ const {
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
     EXPAND_CHARTS_PANEL,
+    ADD_CHART_LAYER,
+    CLOSE_CHART_CONFIGURATION,
     QUERYFORM_CONFIG_LOAD_ERROR,
     FEATUREGRID_CONFIG_LOADED,
     FEATUREINFO_CONFIG_LOADED,
@@ -36,6 +38,9 @@ const initialState = {
     waitingForConfig: null,
     filterPanelExpanded: false,
     chartsPanelExpanded: false,
+    chartsConfigPanel: {
+        expanded: false
+    },
     configOggetti: {
     },
     topology: null,
@@ -158,6 +163,23 @@ function siradec(state = initialState, action) {
     case EXPAND_CHARTS_PANEL: {
         return assign({}, state, {
             chartsPanelExpanded: action.expand
+        });
+    }
+    case ADD_CHART_LAYER: {
+        return assign({}, state, {
+            chartsConfigPanel: {
+                expanded: true,
+                type: action.chartType,
+                aggregation: action.aggregation
+            },
+            chartsPanelExpanded: false
+        });
+    }
+    case CLOSE_CHART_CONFIGURATION: {
+        return assign({}, state, {
+            chartsConfigPanel: {
+                expanded: false
+            }
         });
     }
     case QUERYFORM_CONFIG_LOAD_ERROR: {

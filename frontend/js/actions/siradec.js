@@ -14,6 +14,8 @@ const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
 const EXPAND_CHARTS_PANEL = 'EXPAND_CHARTS_PANEL';
+const ADD_CHART_LAYER = 'ADD_CHART_LAYER';
+const CLOSE_CHART_CONFIGURATION = 'CLOSE_CHART_CONFIGURATION';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 const QUERYFORM_HIDE_ERROR = 'QUERYFORM_HIDE_ERROR';
 const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
@@ -112,6 +114,20 @@ function expandChartsPanel(expand) {
     return {
         type: EXPAND_CHARTS_PANEL,
         expand: expand
+    };
+}
+
+function addChartLayer(type, aggregation) {
+    return {
+        type: ADD_CHART_LAYER,
+        chartType: type,
+        aggregation
+    };
+}
+
+function closeChartConfiguration() {
+    return {
+        type: CLOSE_CHART_CONFIGURATION
     };
 }
 
@@ -325,6 +341,8 @@ module.exports = {
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED,
     EXPAND_CHARTS_PANEL,
+    ADD_CHART_LAYER,
+    CLOSE_CHART_CONFIGURATION,
     setWaitingForConfig,
     configureTopology,
     configureFeatureGrid,
@@ -339,5 +357,7 @@ module.exports = {
     hideQueryError,
     configureInlineMap,
     setActiveFeatureType,
-    setTreeFeatureType
+    setTreeFeatureType,
+    addChartLayer,
+    closeChartConfiguration
 };

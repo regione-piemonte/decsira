@@ -21,7 +21,7 @@ const Header = require('../components/Header');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {configureInlineMap, expandChartsPanel} = require('../actions/siradec');
+const {configureInlineMap, expandChartsPanel, addChartLayer} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 require("../components/WMSLayer.js");
@@ -87,7 +87,8 @@ const MetadataInfoBox = connect(
 const ChartSelector = connect((state) => ({
     show: state.siradec.chartsPanelExpanded
 }), {
-    closePanel: expandChartsPanel.bind(null, false)
+    closePanel: expandChartsPanel.bind(null, false),
+    addLayer: addChartLayer
 })(require('../components/charts/ChartSelector').default);
 
 const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
@@ -218,7 +219,10 @@ render() {
                 <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                     {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                 </span>
-                <SidePanel auth={authParams[this.props?.match?.params?.profile]} profile={this.props.profile.profile}/>
+                <SidePanel
+                    auth={authParams[this.props?.match?.params?.profile]}
+                    profile={this.props.profile.profile}
+                />
                 <MapViewer
                     plugins={this.props.plugins}
                     params={this.props.viewerParams}
