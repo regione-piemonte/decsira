@@ -11,6 +11,7 @@ const {
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
+    EXPAND_CHARTS_PANEL,
     QUERYFORM_CONFIG_LOAD_ERROR,
     FEATUREGRID_CONFIG_LOADED,
     FEATUREINFO_CONFIG_LOADED,
@@ -34,6 +35,7 @@ const uuid = require('uuid');
 const initialState = {
     waitingForConfig: null,
     filterPanelExpanded: false,
+    chartsPanelExpanded: false,
     configOggetti: {
     },
     topology: null,
@@ -151,6 +153,11 @@ function siradec(state = initialState, action) {
     case EXPAND_FILTER_PANEL: {
         return assign({}, state, {
             filterPanelExpanded: action.expand
+        });
+    }
+    case EXPAND_CHARTS_PANEL: {
+        return assign({}, state, {
+            chartsPanelExpanded: action.expand
         });
     }
     case QUERYFORM_CONFIG_LOAD_ERROR: {

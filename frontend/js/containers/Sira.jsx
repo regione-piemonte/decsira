@@ -21,7 +21,7 @@ const Header = require('../components/Header');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {configureInlineMap} = require('../actions/siradec');
+const {configureInlineMap, expandChartsPanel} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 require("../components/WMSLayer.js");
@@ -83,6 +83,12 @@ const MetadataInfoBox = connect(
     mapStateToPropsMIB,
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
+
+const ChartSelector = connect((state) => ({
+    show: state.siradec.chartsPanelExpanded
+}), {
+    closePanel: expandChartsPanel.bind(null, false)
+})(require('../components/charts/ChartSelector').default);
 
 const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
 
@@ -196,45 +202,46 @@ class Sira extends React.Component {
         // this.props.unRegisterEventListener('mousemove', 'mouseposition');
     }
 
-    render() {
-        return (
-            <div>
-                <Header
-                    goToDataset={this.goToDataset}
-                    goToHome={this.goToHome}
-                    showCart="false"
-                    cartListaStyle="btn btn-primary"
-                    cartMappaStyle="btn btn-primary active"
-                    onBack={this.back}
-                />
+render() {
+    return (
+        <div>
+            <Header
+                goToDataset={this.goToDataset}
+                goToHome={this.goToHome}
+                showCart="false"
+                cartListaStyle="btn btn-primary"
+                cartMappaStyle="btn btn-primary active"
+                onBack={this.back}
+            />
 
-                <div className="mapbody">
-                    <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
-                        {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
-                    </span>
-                    <SidePanel auth={authParams[this.props?.match?.params?.profile]} profile={this.props.profile.profile}/>
-                    <MapViewer
-                        plugins={this.props.plugins}
-                        params={this.props.viewerParams}
-                    />
-                    <Card profile={this.props.profile.profile} authParam={authParams[this.props?.match?.params?.profile]}/>
-                    <GetFeatureInfo
-                        display={"accordion"}
-                        params={{authkey: this.props?.match?.params?.profile ? authParams[this.props?.match?.params?.profile].authkey : ''}}
-                        profile={this.props.profile.profile}
-                        key="getFeatureInfo"/>
-                    <MetadataInfoBox panelStyle={{
-                        height: "500px",
-                        width: "650px",
-                        zIndex: 100,
-                        left: 400,
-                        top: -128,
-                        position: "absolute",
-                        overflow: "auto"}}/>
-                </div>
+            <div className="mapbody">
+                <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
+                    {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
+                </span>
+                <SidePanel auth={authParams[this.props?.match?.params?.profile]} profile={this.props.profile.profile}/>
+                <MapViewer
+                    plugins={this.props.plugins}
+                    params={this.props.viewerParams}
+                />
+                <Card profile={this.props.profile.profile} authParam={authParams[this.props?.match?.params?.profile]}/>
+                <GetFeatureInfo
+                    display={"accordion"}
+                    params={{authkey: this.props?.match?.params?.profile ? authParams[this.props?.match?.params?.profile].authkey : ''}}
+                    profile={this.props.profile.profile}
+                    key="getFeatureInfo"/>
+                <MetadataInfoBox panelStyle={{
+                    height: "500px",
+                    width: "650px",
+                    zIndex: 100,
+                    left: 400,
+                    top: -128,
+                    position: "absolute",
+                    overflow: "auto"}}/>
+                <ChartSelector />
             </div>
-        );
-    }
+        </div>
+    );
+}
 
     goToDataset = () => {
         this.context.router.history.push('/dataset/');

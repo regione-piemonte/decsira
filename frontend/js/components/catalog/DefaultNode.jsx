@@ -19,6 +19,7 @@ class DefaultNode extends React.Component {
         node: PropTypes.object,
         settings: PropTypes.object,
         expandFilterPanel: PropTypes.func,
+        expandChartsPanel: PropTypes.func,
         onToggle: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         style: PropTypes.object,
@@ -30,6 +31,7 @@ class DefaultNode extends React.Component {
     static defaultProps = {
         style: {},
         expandFilterPanel: () => {},
+        expandChartsPanel: () => {},
         onToggle: () => {},
         toggleSiraControl: () => {},
         addToMap: () => {}
@@ -39,6 +41,7 @@ class DefaultNode extends React.Component {
         let tooltipSira = <Tooltip id="tpm-search-details">Ricerca di dettaglio</Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map">Carica in Mappa</Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj">Elenco di Oggetti</Tooltip>;
+        let tooltipChart = <Tooltip id="tpm-chart-obj">Tematizzazione o Serie storica</Tooltip>;
         const tools = [
             (<OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
                 <Glyphicon
@@ -49,6 +52,15 @@ class DefaultNode extends React.Component {
             </OverlayTrigger>)
         ];
         if ( this.props.node.featureType) {
+            tools.push((
+                <OverlayTrigger key={"charts"} rootClose placement="left" overlay={tooltipChart}>
+                    <Glyphicon
+                        style={{"float": "right", cursor: 'pointer'}}
+                        key="toggle-tematizzatore"
+                        glyph="signal"
+                        onClick={()=> this.props.expandChartsPanel(true, this.props.node.featureType)}/>
+                </OverlayTrigger>
+            ));
             tools.push((
                 <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
                     <Glyphicon
@@ -65,6 +77,7 @@ class DefaultNode extends React.Component {
                         glyph="search"
                         onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
                 </OverlayTrigger>));
+
         }
         return tools;
     };

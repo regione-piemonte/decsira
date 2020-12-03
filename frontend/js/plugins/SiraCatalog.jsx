@@ -20,6 +20,7 @@ const {addLayer} = require('@mapstore/actions/layers');
 const {
     // SiraQueryPanel action functions
     expandFilterPanel,
+    expandChartsPanel,
     loadFeatureTypeConfig,
     setActiveFeatureType
 } = require('../actions/siradec');
@@ -67,6 +68,7 @@ class LayerTree extends React.Component {
         onToggle: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         expandFilterPanel: PropTypes.func,
+        expandChartsPanel: PropTypes.func,
         getMetadataObjects: PropTypes.func,
         setNodeInUse: PropTypes.func,
         category: PropTypes.shape({
@@ -130,6 +132,7 @@ class LayerTree extends React.Component {
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
+                            expandChartsPanel={this.openChartsPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
                             groups={nodes}
@@ -201,6 +204,16 @@ class LayerTree extends React.Component {
         this.props.expandFilterPanel(status);
     };
 
+    openChartsPanel = (status, ftType) => {
+        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
+        } else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
+        this.props.expandChartsPanel(status);
+    };
+
     searchAll = (node) => {
         const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
@@ -242,6 +255,7 @@ const CatalogPlugin = connect(tocSelector, {
     onToggle: toggleNode,
     toggleSiraControl,
     expandFilterPanel,
+    expandChartsPanel,
     getMetadataObjects,
     loadFeatureTypeConfig,
     setActiveFeatureType,

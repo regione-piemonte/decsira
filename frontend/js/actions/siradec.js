@@ -13,6 +13,7 @@ const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
 const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
+const EXPAND_CHARTS_PANEL = 'EXPAND_CHARTS_PANEL';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 const QUERYFORM_HIDE_ERROR = 'QUERYFORM_HIDE_ERROR';
 const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
@@ -103,6 +104,13 @@ function configureFeatureInfo(config, featureType) {
 function expandFilterPanel(expand) {
     return {
         type: EXPAND_FILTER_PANEL,
+        expand: expand
+    };
+}
+
+function expandChartsPanel(expand) {
+    return {
+        type: EXPAND_CHARTS_PANEL,
         expand: expand
     };
 }
@@ -316,6 +324,7 @@ module.exports = {
     SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED,
+    EXPAND_CHARTS_PANEL,
     setWaitingForConfig,
     configureTopology,
     configureFeatureGrid,
@@ -324,6 +333,7 @@ module.exports = {
     loadFeatureTypeConfig,
     configureQueryForm,
     expandFilterPanel,
+    expandChartsPanel,
     configureQueryFormError,
     getAttributeValues,
     hideQueryError,
