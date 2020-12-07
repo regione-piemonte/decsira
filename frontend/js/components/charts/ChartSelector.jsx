@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {Panel} from "react-bootstrap";
 import Draggable from "react-draggable";
 import I18N from "@mapstore/components/I18N/I18N";
-import ChartsBuilder from "./ChartsBuilder";
 
 class ChartsSelector extends React.Component {
     static propTypes = {
