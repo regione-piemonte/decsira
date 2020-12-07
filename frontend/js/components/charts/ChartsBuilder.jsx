@@ -1,8 +1,9 @@
 import React, {useState, useCallback} from "react";
-import {Row, Col} from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 import PropTypes from "prop-types";
 
 import ComboField from "@mapstore/components/data/query/ComboField";
+import axios from "@mapstore/libs/ajax";
 // import ClassificationSymbolizer from "@mapstore/components/styleeditor/ClassificationSymbolizer"
 
 /*
@@ -14,7 +15,7 @@ import ComboField from "@mapstore/components/data/query/ComboField";
 
 import Symbolizer from "@mapstore/components/styleeditor/Symbolizer";
 import Fields from "@mapstore/components/styleeditor/Fields";
-import {getColors} from "@mapstore/api/SLDService";
+import {getColors, getStyleService} from "@mapstore/api/SLDService";
 
 function ChartsBuilder({
     indicatori = [],
@@ -36,6 +37,8 @@ function ChartsBuilder({
         min: 10,
         max: 20
     }]);
+    const [style, setStyle] = useState("");
+
 
     const updateField = useCallback((id, name, value) => {
         if (name === "indicatori") {
@@ -91,6 +94,26 @@ function ChartsBuilder({
         colorramp,
         colors
     };
+
+    const layer = {
+        url: "http://localhost:8080/geoserver",
+        name: "topp:states",
+        thematic: {
+            fieldAsParam: true
+        }
+    };
+    function applyStyle() {
+        const url = getStyleService(layer, {
+            ramp: colorramp,
+            attribute: "P_MALE",
+            intervals
+        });
+        axios.get(url).then((resp) => {
+            setStyle(resp.data);
+        }).catch(e => {
+            console.error(e);
+        });
+    }
 
     return (<div>
         <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
@@ -162,6 +185,16 @@ function ChartsBuilder({
                         }}
                     />
             </Symbolizer>
+            </Col>
+        </Row>
+        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+            <Col xs={12}>
+                <Button onClick={applyStyle}>Applica</Button>
+            </Col>
+        </Row>
+        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+            <Col xs={12}>
+                {style}
             </Col>
         </Row>
     </div>);
