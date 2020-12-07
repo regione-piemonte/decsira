@@ -84,12 +84,19 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
 
+/*
 const ChartSelector = connect((state) => ({
     show: state.siradec.chartsPanelExpanded
 }), {
     closePanel: expandChartsPanel.bind(null, false),
     addLayer: addChartLayer
-})(require('../components/charts/ChartSelector').default);
+})(require('../components/charts/ChartSelector').default);*/
+
+const SerieStorica = connect((state) => ({
+    show: state.siradec.chartsPanelExpanded
+}), {
+    closePanel: expandChartsPanel.bind(null, false)
+})(require('../components/charts/SerieStorica').default);
 
 const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
 
@@ -241,7 +248,7 @@ render() {
                     top: -128,
                     position: "absolute",
                     overflow: "auto"}}/>
-                <ChartSelector />
+                <SerieStorica/>
             </div>
         </div>
     );
