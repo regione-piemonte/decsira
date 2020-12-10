@@ -1,0 +1,806 @@
+{
+  "featureTypeName": "decsiraogc_idf_ads:AreaDiSaggio",
+  "featureTypeNameLabel": "Aree di Saggio",
+  "nameSpaces": {
+    "decsiraogc_idf_ads": "http://www.regione.piemonte.it/ambiente/decsira/1.0",
+    "decsiraogc_decodif": "http://www.regione.piemonte.it/ambiente/decodif/1.0"
+  },
+  "layer": {
+    "type": "wms",
+    "url": "{geoserverUrl}/wms",
+    "visibility": true,
+    "title": "Aree di Saggio",
+    "name": "decsiraogc_idf_ads:AreaDiSaggio",
+    "infoFormat": "application/vnd.ogc.gml/3.1.1",
+    "featureType": "areeSaggio",
+    "group": "Oggetti",
+    "format": "image/png"
+  },
+  "geometryName": "decsiraogc_idf_ads:geometria",
+  "geometryType": "Point",
+  "card": {
+     "pdfname": "Scheda_AreaDiSaggio_{{/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:idGeoPtAds/text()}}.pdf",
+     "template": "assets/cardTemplateAreaDiSaggio.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_idf_ads:AreaDiSaggio",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+  },
+  "featureinfo": {
+    "templateURL": "assets/infoTemplateAreaDiSaggio.jsxt"
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio",
+      "columns": [
+		{
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+        },
+        {
+          "hide":true,
+          "headerName": "Geometry",
+          "xpath": [
+            "decsiraogc_idf_ads:geometria/gml:Point/gml:pos/text()"
+          ],
+          "suppressSorting": true,
+          "type": 6
+        },
+        {
+          "headerName": "Codice ADS",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:codiceAds/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Tipologia di ADS",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descrTipoAds/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Ambito di rilievo",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descrAmbito/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Dettaglio Ambito",
+          "width":300,
+          "xpath": [
+            "decsiraogc_idf_ads:ambitoSpecifico/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Provincia",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:denominazioneProvincia/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Comune",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:denominazioneComune/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Data Rilievo",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:dataRil/text()"
+          ],
+          "suppressSorting": true,
+		  "dateFormat": "DD/MM/YYYY",
+          "type": 2
+        },
+        {
+          "headerName": "Cod Categoria Forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:codiceAmminitrativoCf/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Categoria forestale",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:descrCategoriaForestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Cod tipo forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:codiceAmminitrativoTf/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo forestale",
+          "width":300,
+          "xpath": [
+            "decsiraogc_idf_ads:descrTipoForestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Quota (m)",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:quota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Inclinazione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:inclinazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Proprietà",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descrProprieta/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Assetto Evolutivo",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descrAssetto/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Esposizione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrEsposizione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Destinazione",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descrDestinazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Priorita' intervento",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descrPriorita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo intervento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrTipoIntervento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Danno",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrDanno/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Data inizio validità ",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:dataInizioValidita/text()"
+          ],
+          "suppressSorting": true,
+		  "dateFormat": "DD/MM/YYYY",
+          "type": 2
+        },
+        {
+          "headerName": "Note",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:note/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "UTM est",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:utmEst/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "UTM Nord",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:utmNord/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Cod Particella Forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:codiceParticella/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Descrizione Particella Forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:denominazioneParticella/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo strutturale princ",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrTipoStrutturalePrinc/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo strutturale sec",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrTipoStrutturaleSec/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Stadio di sviluppo",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrStadioSviluppo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo di esbosco",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrEsbosco/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Densita campionamento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:densitaCampionamento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Raggio(m)",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:raggioMt/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Cod stadio sviluppo",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:codStadioSviluppo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Perc copertura chiome",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:percCoperturaChiome/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Attitudine produttiva",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:attitudineProduttiva/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Dist esbosco fuori pista",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:distEsboscoFuoriPista/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Dist esbosco su pista",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:distEsboscoSuPista/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Min distanza planimetrica",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:minDistanzaPlanimetrica/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "N. ceppaie",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:nrCeppaie/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "N. piante morte",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:nrPianteMorte/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Rinnovazione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:rinnovazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Rin specie prevalente",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:rinSpeciePrevalente/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Danni perc",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:danniPerc/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Flg pascolamento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:flgPascolamento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Defogliazione %",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:percDefogliazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Ingiallimento %",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:percIngiallimento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Combust",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:combustP/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Sottotipo sup nota",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrSottotipoSupNota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Classe fertilita'",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descrClasseFertilita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Note ads superf. nota",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:noteSupNota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo strutturale princ relasc",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:tipoStrutturalePrincRel/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo strutturale sec relasc",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:tipoStrutturaleSecRel/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Fattore numerazione relascopica",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fattoreNumerazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Note relascopica",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:noteRelascopica/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        }
+      ]
+    }
+  },
+  "query": {
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields": [
+		{
+         "index": 1,
+         "attribute": "decsiraogc_idf_ads:denominazioneProvincia",
+         "label":"Provincia",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_idf_geo_pl_provincia",
+			 "propertyName": "istat_prov,denominazione_prov",
+             "sortBy": "denominazione_prov+A"
+           }
+         },
+         "valueId":"denominazione_prov",
+         "valueLabel":"denominazione_prov"
+	   },
+	   {
+		   "index": 2,
+		   "attribute": "decsiraogc_idf_ads:denominazioneComune",
+		   "label":"Comune",
+		   "type":"list",
+		   "valueService": {
+			 "urlParams": {
+			   "typeName": "decsiraogc_decodif:decsira_d_idf_geo_pl_comune",
+			   "propertyName": "istat_prov,denominazione_comune",
+			   "sortBy": "denominazione_comune+A"
+			 }
+		   },
+		   "valueId":"denominazione_comune",
+		   "valueLabel":"denominazione_comune",
+		   "dependson":{
+				"field": "decsiraogc_idf_ads:denominazioneProvincia",
+				"from": "istat_prov",
+				"to": "istat_prov"
+		   }
+       },
+	   {
+        "index": 3,
+        "attribute": "decsiraogc_idf_ads:descrTipoAds",
+        "label": "Tipologia di rilievo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_ads",
+            "propertyName": "descr_tipo_ads",
+            "sortBy": "descr_tipo_ads+A"
+          }
+        },
+        "valueId": "descr_tipo_ads",
+        "valueLabel": "descr_tipo_ads"
+      },
+	  {
+        "index": 4,
+        "attribute": "decsiraogc_idf_ads:descrAmbito",
+        "label": "Ambito di rilievo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_ambito_rilievo",
+            "propertyName": "descr_ambito",
+            "sortBy": "descr_ambito+A"
+          }
+        },
+        "valueId": "descr_ambito",
+        "valueLabel": "descr_ambito"
+      },
+	  {
+        "index": 5,
+        "attribute": "decsiraogc_idf_ads:dataRil",
+        "label": "Data rilievo",
+        "type": "date",
+        "fieldOptions": {
+          "dateFormat": "DD/MM/YYYY"
+        }
+      },
+	  {
+        "index": 6,
+        "attribute": "decsiraogc_idf_ads:descrCategoriaForestale",
+        "label": "Categoria forestale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_categoria_forestale",
+            "propertyName": "descrizione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descrizione",
+        "valueLabel": "descrizione"
+      },
+	  {
+        "index": 7,
+        "attribute": "decsiraogc_idf_ads:descrTipoStrutturale",
+        "label": "Tipo strutturale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_strutturale",
+            "propertyName": "id_tipo_strutturale,descr_tipo_strutturale,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "decsiraogc_idf_ads:id_tipo_strutturale",
+        "valueLabel": "descr_tipo_strutturale"
+      },
+	  {
+        "index": 8,
+        "attribute": "decsiraogc_idf_ads:descrAssetto",
+        "label": "Assetto evolutivo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_assetto",
+            "propertyName": "descr_assetto,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_assetto",
+        "valueLabel": "descr_assetto"
+      },
+	  {
+        "index": 9,
+        "attribute": "decsiraogc_idf_ads:descrSviluppo",
+        "label": "Stadio di sviluppo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_stadio_sviluppo",
+            "propertyName": "descr_stadio_sviluppo,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_stadio_sviluppo",
+        "valueLabel": "descr_stadio_sviluppo"
+      },
+	  {
+        "index": 10,
+        "attribute": "decsiraogc_idf_ads:descrDestinazione",
+        "label": "Destinazione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_d_destinazione",
+            "propertyName": "descr_destinazione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_destinazione",
+        "valueLabel": "descr_destinazione"
+      },
+	  {
+        "index": 11,
+        "attribute": "decsiraogc_idf_ads:descrIntervento",
+        "label": "Tipo di intervento",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_intervento",
+            "propertyName": "descr_intervento,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_intervento",
+        "valueLabel": "descr_intervento"
+      },
+	  {
+        "index": 12,
+        "attribute": "decsiraogc_idf_ads:descrPriorita",
+        "label": "Priorità di intervento",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_priorita",
+            "propertyName": "descr_priorita,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_priorita",
+        "valueLabel": "descr_priorita"
+      },
+	  {
+        "index": 13,
+        "attribute": "decsiraogc_idf_ads:descrEsbosco",
+        "label": "Tipo di esbosco",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_esbosco",
+            "propertyName": "descr_esbosco,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_esbosco",
+        "valueLabel": "descr_esbosco"
+      },
+	  {
+        "index": 14,
+        "attribute": "decsiraogc_idf_ads:quota",
+        "label": "Quota (m)",
+        "type": "number"
+      },
+	  {
+        "index": 15,
+        "attribute": "decsiraogc_idf_ads:descrEsposizione",
+        "label": "Esposizione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_esposizione",
+            "propertyName": "descr_esposizione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_esposizione",
+        "valueLabel": "descr_esposizione"
+      },
+      {
+        "index": 16,
+        "attribute": "decsiraogc_idf_ads:inclinazione",
+        "label": "Inclinazione",
+        "type": "number"
+      },
+	  {
+        "index": 17,
+        "attribute": "decsiraogc_idf_ads:specieAlberi/decsiraogc_idf_ads:SpecieAlberi/decsiraogc_idf_ads:codTipoCampionePrinc",
+        "label": "Tipologia di campione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_campione",
+            "propertyName": "descr_tipo_campione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_tipo_campione",
+        "valueLabel": "descr_tipo_campione"
+      },
+	  {
+		"index": 18,
+		"attribute": "decsiraogc_idf_ads:specieAlberi/decsiraogc_idf_ads:SpecieAlberi/decsiraogc_idf_ads:flgSemePollone",
+		"label":"Qualità (Seme/Pollone)",
+		"type":"list",
+		"values": [
+		  {"value":"S","name":"Seme"},
+		  {"value":"P","name":"Pollone"}
+		],
+		"valueId":"value",
+		"valueLabel":"name"
+	  }
+    ]
+  }
+}

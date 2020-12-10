@@ -53,13 +53,6 @@
            "type": 2
          },
          {
-           "headerName": "Numero classificazione pratica",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:classificazionePraticaDeriv/text()"],
-           "type": 2
-         },
-         {
            "headerName": "Codice rilievo",
            "suppressSorting": true,
            "width":120,
@@ -71,6 +64,46 @@
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:codiceUtenza/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+		 {
+           "headerName": "Numero classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:classificazionePraticaDeriv/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+		 {
+           "headerName": "Specie della derivazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desTipoDeriv/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Stato Pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:desStatoPraticaDeriv/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Data decorrenza concessione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "dateFormat": "DD/MM/YYYY",
+           "type": 2
+         },
+		 {
+           "headerName": "Data scadenza concessione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:dataScadenzaEffettiva/text()"],
+           "dateFormat": "DD/MM/YYYY",
            "type": 2
          },
          {
@@ -80,18 +113,18 @@
            "xpath": ["decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"],
            "type": 2
          },
-         {
-           "headerName": "Specie della derivazione",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:desTipoDeriv/text()"],
-           "type": 2
-         },
 		 {
            "headerName": "Portata massima derivabile (l/s)",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:portataMaxDeriv/text()"],
+           "type": 1
+         },
+		 {
+           "headerName": "Portata media derivabile (l/s)",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_derivazioni:portataMedDeriv/text()"],
            "type": 1
          },
 		 {
@@ -106,27 +139,15 @@
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:elencoUsiEffettivi/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
-         },
-         {
-           "headerName": "Stato Derivazione",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:desStatoDeriv/text()"],
-           "type": 2
-         },
-		 {
-           "headerName": "Portata media derivabile (l/s)",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:portataMedDeriv/text()"],
-           "type": 1
          },
          {
            "headerName": "BIM",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:flgBIM/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
 		 {
@@ -134,22 +155,7 @@
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:elencoComuniDeriv/text()"],
-           "type": 2
-         },
-         {
-           "headerName": "Data decorrenza concessione",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"],
-            "dateFormat": "DD/MM/YYYY",
-           "type": 2
-         },
-		 {
-           "headerName": "Data scadenza concessione",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_derivazioni:dataScadenzaEffettiva/text()"],
-           "dateFormat": "DD/MM/YYYY",
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -174,7 +180,7 @@
        }
      },
      "fields":[
-         {
+		 {
             "index": 1,
             "attribute": "decsiraogc_derivazioni:desStatoDeriv",
             "label":"Stato Derivazione",
@@ -189,15 +195,45 @@
            },
            "valueId":"des_stato",
            "valueLabel":"des_stato"
-        },
-        {
+         },
+		 {
            "index": 2,
            "attribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
            "label":"Codice rilievo",
            "type":"string"
-        },
-        {
+         },
+		 {
             "index": 3,
+            "attribute": "decsiraogc_derivazioni:codiceUtenza",
+            "label":"Codice utenza",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+		 {
+            "index": 4,
+            "attribute": "decsiraogc_derivazioni:classificazionePraticaDeriv",
+            "label":"Numero classificazione pratica",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+		 {
+            "index": 5,
+            "attribute": "decsiraogc_derivazioni:desStatoPraticaDeriv",
+            "label":"Stato pratica",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_pratica_deriv",
+                "propertyName": "id_stato_pratica_deriv,des_stato_pratica_deriv",
+                 "sortBy": "id_stato_pratica_deriv+A"
+              }
+            },
+            "valueId":"des_stato_pratica_deriv",
+            "valueLabel":"des_stato_pratica_deriv"
+         },
+		 {
+            "index": 6,
             "attribute": "decsiraogc_derivazioni:desTipoDeriv",
             "label":"Specie della derivazione",
             "type":"list",
@@ -211,8 +247,192 @@
             "valueId":"des_tipo_deriv",
             "valueLabel":"des_tipo_deriv"
          },
+		 {
+            "index": 7,
+            "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv",
+            "label":"Denominazione titolare",
+            "type":"string"
+         },
+		 {
+            "index": 8,
+            "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv",
+            "label":"Codice fiscale titolare/ Partita IVA azienda",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+		 {
+            "index": 9,
+            "attribute": "decsiraogc_derivazioni:portataMaxDeriv",
+            "label":"Portata massima concessa (l/s)",
+            "type":"number"
+         },
+		 {
+            "index": 10,
+            "attribute": "decsiraogc_derivazioni:volumeMaxDeriv",
+            "label":"Volume massimo concesso (m3)",
+            "type":"number"
+         },
+		 {
+            "index": 11,
+            "attribute": "decsiraogc_derivazioni:derivazioniCaptazioni/decsiraogc_derivazioni:DerivazioniCaptazioni/decsiraogc_derivazioni:denomCidrsupPresa",
+            "label":"Corpo idrico superficiale",
+            "type":"string"
+         },
+		 {
+            "index": 12,
+            "attribute": "decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:denominazioneUso",
+            "label":"Denominazione dell'opera di utilizzo",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+		 {
+            "index": 13,
+            "attribute": "decsiraogc_derivazioni:flgUsoEnergetico",
+            "label":"Uso energetico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 14,
+            "attribute": "decsiraogc_derivazioni:flgUsoRiqualifEnerg",
+            "label":"Uso riqualificazione energia",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 15,
+            "attribute": "decsiraogc_derivazioni:flgUsoProduzione",
+            "label":"Uso produzione",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 16,
+            "attribute": "decsiraogc_derivazioni:flgUsoLavagInerti",
+            "label":"Uso lavaggio inerti",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 17,
+            "attribute": "decsiraogc_derivazioni:flgUsoZootecnico",
+            "label":"Uso zootecnico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 18,
+            "attribute": "decsiraogc_derivazioni:flgUsoPiscicolo",
+            "label":"Uso piscicolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 19,
+            "attribute": "decsiraogc_derivazioni:flgUsoPotabile",
+            "label":"Uso potabile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
          {
-            "index": 4,
+            "index": 20,
+            "attribute": "decsiraogc_derivazioni:flgUsoDomestico",
+            "label":"Uso domestico",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 21,
+            "attribute": "decsiraogc_derivazioni:flgUsoCivile",
+            "label":"Uso civile",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 22,
+            "attribute": "decsiraogc_derivazioni:flgUsoAgricolo",
+            "label":"Uso agricolo",
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+         },
+		 {
+            "index": 23,
+            "attribute": "decsiraogc_derivazioni:dataDecorrenzaConcessione",
+            "label":"Data decorrenza concessione",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+         },
+		 {
+            "index": 24,
+            "attribute": "decsiraogc_derivazioni:numProvv",
+            "label":"Numero provvedimento",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"string"
+         },
+		 {
+            "index": 25,
+            "attribute": "decsiraogc_derivazioni:dataScadenzaEffettiva",
+            "label":"Data scadenza concessione",
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+         },
+		 {
+            "index": 26,
             "attribute": "decsiraogc_derivazioni:fkAutoritaCompetente",
             "label":"Ente competente",
             "type":"list",
@@ -226,229 +446,11 @@
             "valueId":"id_direzione",
             "valueLabel":"descr_direzione"
          },
-         {
-            "index": 5,
-            "attribute": "decsiraogc_derivazioni:dataScadenzaEffettiva",
-            "label":"Data scadenza concessione",
-            "type":"date",
-            "fieldOptions": {
-              "dateFormat": "DD/MM/YYYY"
-            }
-         },
-         {
-            "index": 6,
-            "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv",
-            "label":"Denominazione titolare",
-            "type":"string"
-         },
-         {
-            "index": 7,
-            "attribute": "decsiraogc_derivazioni:portataMaxDeriv",
-            "label":"Portata massima concessa (l/s)",
-            "type":"number"
-         },
-         {
-            "index": 8,
-            "attribute": "decsiraogc_derivazioni:flgUsoPromiscuo",
-            "label":"Uso promiscuo",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"},
-              {"value":"N.D.","name":"Non Determinato"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-         {
-            "index": 9,
-            "attribute": "decsiraogc_derivazioni:flgUsoEnergetico",
-            "label":"Uso energetico",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 10,
-            "attribute": "decsiraogc_derivazioni:flgUsoRiqualifEnerg",
-            "label":"Uso riqualificazione energia",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 11,
-            "attribute": "decsiraogc_derivazioni:flgUsoProduzione",
-            "label":"Uso produzione",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 12,
-            "attribute": "decsiraogc_derivazioni:flgUsoLavagInerti",
-            "label":"Uso lavaggio inerti",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 13,
-            "attribute": "decsiraogc_derivazioni:flgUsoZootecnico",
-            "label":"Uso zootecnico",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 14,
-            "attribute": "decsiraogc_derivazioni:flgUsoPiscicolo",
-            "label":"Uso piscicolo",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 15,
-            "attribute": "decsiraogc_derivazioni:flgUsoPotabile",
-            "label":"Uso potabile",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-         {
-            "index": 16,
-            "attribute": "decsiraogc_derivazioni:flgUsoDomestico",
-            "label":"Uso domestico",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 17,
-            "attribute": "decsiraogc_derivazioni:flgUsoCivile",
-            "label":"Uso civile",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 18,
-            "attribute": "decsiraogc_derivazioni:flgUsoAgricolo",
-            "label":"Uso agricolo",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-         {
-            "index": 19,
-            "attribute": "decsiraogc_derivazioni:dataDecorrenzaConcessione",
-            "label":"Data decorrenza concessione",
-            "type":"date",
-            "fieldOptions": {
-              "dateFormat": "DD/MM/YYYY"
-            }
-         },
-         {
-            "index": 20,
-            "attribute": "decsiraogc_derivazioni:numProvv",
-            "label":"Numero provvedimento",
-            "type":"string"
-         },
-		 {
-            "index": 21,
-            "attribute": "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv",
-            "label":"Codice fiscale titolare/ Partita IVA azienda",
-            "type":"string"
-         },
-         {
-            "index": 22,
-            "attribute": "decsiraogc_derivazioni:codiceUtenza",
-            "label":"Codice utenza",
-            "type":"string"
-         },
-         {
-            "index": 23,
-            "attribute": "decsiraogc_derivazioni:classificazionePraticaDeriv",
-            "label":"Numero classificazione pratica",
-            "type":"string"
-         },
-         {
-            "index": 24,
-            "attribute": "decsiraogc_derivazioni:volumeMaxDeriv",
-            "label":"Volume massimo concesso (m3)",
-            "type":"number"
-         },
-		 {
-            "index": 25,
-            "attribute": "decsiraogc_derivazioni:flgBIM",
-            "label":"BIM",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"},
-			  {"value":"N.D.","name":"Non Determinato"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
-		 {
-            "index": 26,
-            "attribute": "decsiraogc_derivazioni:flgRivieraschi",
-            "label":"Rivieraschi",
-            "type":"list",
-            "values": [
-              {"value":"SI","name":"SI"},
-              {"value":"NO","name":"NO"},
-			  {"value":"N.D.","name":"Non Determinato"}
-            ],
-            "valueId":"value",
-            "valueLabel":"name"
-         },
 		 {
             "index": 27,
             "attribute": "decsiraogc_derivazioni:flgSovracanone",
             "label":"Sovracanoni",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
             "type":"list",
             "values": [
               {"value":"SI","name":"SI"},
@@ -460,30 +462,44 @@
          },
 		 {
             "index": 28,
-            "attribute": "decsiraogc_derivazioni:derivazioniCaptazioni/decsiraogc_derivazioni:DerivazioniCaptazioni/decsiraogc_derivazioni:denomCidrsupPresa",
-            "label":"Corpo idrico superficiale",
-            "type":"string"
+            "attribute": "decsiraogc_derivazioni:flgRivieraschi",
+            "label":"Rivieraschi",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
          },
 		 {
             "index": 29,
-            "attribute": "decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:denominazioneUso",
-            "label":"Denominazione dell'opera di utilizzo",
-            "type":"string"
+            "attribute": "decsiraogc_derivazioni:flgBIM",
+            "label":"BIM",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"list",
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
          },
 		 {
             "index": 30,
-            "attribute": "decsiraogc_derivazioni:desStatoPraticaDeriv",
-            "label":"Stato pratica",
+            "attribute": "decsiraogc_derivazioni:flgUsoPromiscuo",
+            "label":"Uso promiscuo",
             "type":"list",
-            "valueService": {
-              "urlParams": {
-                "typeName": "decsiraogc_decodif:decsira_d_stato_pratica_deriv",
-                "propertyName": "id_stato_pratica_deriv,des_stato_pratica_deriv",
-                 "sortBy": "id_stato_pratica_deriv+A"
-              }
-            },
-            "valueId":"des_stato_pratica_deriv",
-            "valueLabel":"des_stato_pratica_deriv"
+            "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+              {"value":"N.D.","name":"Non Determinato"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
          }
      ]
 

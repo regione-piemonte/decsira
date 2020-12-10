@@ -1,0 +1,97 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='AREA DI SAGGIO' subtitle={[
+            'Codice ADS: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:codiceAds/text()"),
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Area di Saggio' eventKey='1' expanded={true}>
+           <LabeledField label='Codice ADS' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:codiceAds/text()")
+            }/>
+			<LabeledField label="Tipologia di ADS" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrTipoAds/text()")
+            }/>
+            <LabeledField label='Ambito di rilievo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrAmbito/text()")
+            }/>
+			<LabeledField label='Dettaglio Ambito' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:ambitoSpecifico/text()")
+            }/>
+			<LabeledField label='Provincia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:denominazioneProvincia/text()")
+            }/>
+			<LabeledField label='Comune' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:denominazioneComune/text()")
+            }/>
+			<LabeledField label="UTM est" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:utmEst/text()")
+            }/>
+			<LabeledField label="UTM Nord" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:utmNord/text()")
+            }/>
+			<LabeledField label="Data Rilievo" dateFormat='DD/MM/YYYY' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:dataRil/text()")
+            }/>
+			<LabeledField label="Proprietà " value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrProprieta/text()")
+            }/>
+			<LabeledField label="Esposizione" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrEsposizione/text()")
+            }/>
+			<LabeledField label="Quota (m)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:quota/text()")
+            }/>
+			<LabeledField label="Inclinazione in gradi" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:inclinazione/text()")
+            }/>
+			<LabeledField label="Categoria forestale" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrCategoriaForestale/text()")
+            }/>
+			<LabeledField label="Tipo forestale" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrTipoForestale/text()")
+            }/>
+			<LabeledField label="Note" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:note/text()")
+            }/>
+        </Section>
+
+        <Section header='MAPPA SINTESI - Area di saggio su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:geometria/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima area di saggio",
+	                          "name": "decsiraogc_idf_ads:AreaDiSaggio",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>

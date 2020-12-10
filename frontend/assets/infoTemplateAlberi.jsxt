@@ -1,0 +1,48 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateAlberi"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Data Inizio Validità',
+             width: 90,
+             xpath: "decsiraogc_idf_ads:data_inizio_validita/text()"
+        }, {
+             headerName: 'Latino',
+             width: 90,
+             xpath: "decsiraogc_idf_ads:latino/text()"
+        }, {
+             headerName: 'Descrizione tipo campione',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:descr_tipo_campione/text()"
+        }, {
+             headerName: 'Qualità',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:qualita/text()"
+        }, {
+             headerName: 'Diametro specie',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:diametro_specie/text()"
+        }, {
+             headerName: 'Altezza',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:altezza/text()"
+        }, {
+             headerName: 'Incremento',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:incremento/text()"
+        },  {
+             headerName: 'Età',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:eta/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_idf_ads:CavallettamentoAlberi")}/>

@@ -1,0 +1,1202 @@
+{
+  "featureTypeName": "decsiraogc_idf_ads:CavallettamentoAlberi",
+  "featureTypeNameLabel": "Cavallettamento Alberi",
+  "nameSpaces": {
+    "decsiraogc_idf_ads": "http://www.regione.piemonte.it/ambiente/decsira/1.0",
+    "decsiraogc_decodif": "http://www.regione.piemonte.it/ambiente/decodif/1.0"
+  },
+  "layer": {
+    "type": "wms",
+    "url": "{geoserverUrl}/wms",
+    "visibility": true,
+    "title": "Cavallettamento Alberi",
+    "name": "decsiraogc_idf_ads:CavallettamentoAlberi",
+    "infoFormat": "application/vnd.ogc.gml/3.1.1",
+    "featureType": "alberi",
+    "group": "Oggetti",
+    "format": "image/png"
+  },
+  "geometryName": "decsiraogc_idf_ads:geometria",
+  "geometryType": "Point",
+  "featureinfo": {
+    "templateURL": "assets/infoTemplateAlberi.jsxt"
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:CavallettamentoAlberi",
+      "columns": [
+        {
+          "hide":true,
+          "headerName": "Geometry",
+          "xpath": [
+            "decsiraogc_idf_ads:geometria/gml:Point/gml:pos/text()"
+          ],
+          "suppressSorting": true,
+          "type": 6
+        },
+        {
+          "headerName": "id_specie",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:id_specie/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "data_inizio_validita",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:data_inizio_validita/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "cod_specie",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_specie/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "latino",
+          "width":300,
+          "xpath": [
+            "decsiraogc_idf_ads:latino/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "cod_gruppo",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_gruppo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "codice_pignatti",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:codice_pignatti/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "flg_coniflatif",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:flg_coniflatif/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "cod_tipo_campione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_tipo_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "descr_tipo_campione",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:descr_tipo_campione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "flg_pollone_seme",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:flg_pollone_seme/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "qualita",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:qualita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_config_ipla",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_config_ipla/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "diametro_specie",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:diametro_specie/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "altezza",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:altezza/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "incremento",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:incremento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "eta",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:eta/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "nr_alberi_seme",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:nr_alberi_seme/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "nr_alberi_pollone",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:nr_alberi_pollone/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "num_tavola_coeff_cub",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:num_tavola_coeff_cub/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "des_tavolaCoeff_cub",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:des_tavolaCoeff_cub/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "note",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:note/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_tipo_ads",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_ads/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "descr_tipo_ads",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:descr_tipo_ads/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "data_ril",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:data_ril/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "rilevatore",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:rilevatore/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "codice_ads",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:codice_ads/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "quota",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:quota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "inclinazione",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:inclinazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "fk_comune",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_comune/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "toponimo",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:toponimo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "sigla_prov",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:sigla_prov/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "provincia",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:provincia/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_ambito",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_ambito/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "descr_ambito",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descr_ambito/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "dettaglio",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:dettaglio/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_categoria_forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_categoria_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "cod_categoria_forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_categoria_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "categoria_forestale",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:categoria_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_tipo_forestale",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "tipo_forestale",
+          "width":300,
+          "xpath": [
+            "decsiraogc_idf_ads:tipo_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "descr_tipo_forestale",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:descr_tipo_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_proprieta",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_proprieta/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "proprieta",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:proprieta/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_assetto",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_assetto/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "assetto",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:assetto/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_esposizione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_esposizione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "esposizione",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:esposizione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_destinazione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_destinazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "destinazione",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:destinazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_priorita",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_priorita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "priorita",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:priorita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_tipo_intervento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_intervento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "intervento",
+          "width":200,
+          "xpath": [
+            "decsiraogc_idf_ads:intervento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_danno",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_danno/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "danno",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:danno/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "data_inizio_validita",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:data_inizio_validita/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "note_ads",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:note_ads/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "stato_ads",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:stato_ads/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "utm_est",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:utm_est/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "utm_nord",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:utm_nord/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "idgeo_pl_particella_forest",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:idgeo_pl_particella_forest/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "cod_particella_for",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_particella_for/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "nome_particella_forestale",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:nome_particella_forestale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_tipo_strutturale_princ",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_strutturale_princ/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_tipo_strutturale_second",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_strutturale_second/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "descr_tipo_strutturale_princ",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descr_tipo_strutturale_princ/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "descr_tipo_strutturale_sec",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:descr_tipo_strutturale_sec/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "cod_stadio_sviluppo",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_stadio_sviluppo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "stadio_di_sviluppo",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:stadio_di_sviluppo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "cod_esbosco",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_esbosco/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "tipo_di_esbosco",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:tipo_di_esbosco/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "densita_campionamento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:densita_campionamento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "raggio_mt",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:raggio_mt/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "cod_stadio_sviluppo",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:cod_stadio_sviluppo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "perc_copertura_chiome",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:perc_copertura_chiome/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "attitudine_produttiva",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:attitudine_produttiva/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "dist_esbosco_fuori_pista",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:dist_esbosco_fuori_pista/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "dist_esbosco_su_pista",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:dist_esbosco_su_pista/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "min_distanza_planimetrica",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:min_distanza_planimetrica/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "nr_ceppaie",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:nr_ceppaie/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "nr_piante_morte",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:nr_piante_morte/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "rinnovazione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:rinnovazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "rin_specie_prevalente",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:rin_specie_prevalente/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "danni_perc",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:danni_perc/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "flg_pascolamento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:flg_pascolamento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "perc_defogliazione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:perc_defogliazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "perc_ingiallimento",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:perc_ingiallimento/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "combust_p",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:combust_p/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_sottotipo_sup_nota",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_sottotipo_sup_nota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "sottotipo_sup_nota",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:sottotipo_sup_nota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_classe_fertilita",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_classe_fertilita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "classe_fertilita",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:classe_fertilita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "note_sup_nota",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:note_sup_nota/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "idgeo_pt_ads",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:idgeo_pt_ads/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "fk_tipo_strutturale_princ",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_strutturale_princ/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fk_tipo_strutturale_second",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fk_tipo_strutturale_second/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "tipo_strutturale_princ_rel",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:tipo_strutturale_princ_rel/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "tipo_strutturale_sec_rel",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:tipo_strutturale_sec_rel/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "fattore_numerazione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:fattore_numerazione/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "note_relascopica",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_ads:note_relascopica/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        }
+      ]
+    }
+  },
+  "query": {
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields": [
+		{
+         "index": 1,
+         "attribute": "provincia",
+         "label":"Provincia",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_idf_geo_pl_provincia",
+			 "propertyName": "istat_prov,denominazione_prov",
+             "sortBy": "denominazione_prov+A"
+           }
+         },
+         "valueId":"denominazione_prov",
+         "valueLabel":"denominazione_prov"
+	   },
+	   {
+		   "index": 2,
+		   "attribute": "toponimo",
+		   "label":"Comune",
+		   "type":"list",
+		   "valueService": {
+			 "urlParams": {
+			   "typeName": "decsiraogc_decodif:decsira_d_idf_geo_pl_comune",
+			   "propertyName": "istat_prov,denominazione_comune",
+			   "sortBy": "denominazione_comune+A"
+			 }
+		   },
+		   "valueId":"denominazione_comune",
+		   "valueLabel":"denominazione_comune",
+		   "dependson":{
+				"field": "provincia",
+				"from": "istat_prov",
+				"to": "istat_prov"
+		   }
+       },
+	   {
+        "index": 3,
+        "attribute": "descr_tipo_ads",
+        "label": "Tipologia di rilievo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_ads",
+            "propertyName": "descr_tipo_ads",
+            "sortBy": "descr_tipo_ads+A"
+          }
+        },
+        "valueId": "descr_tipo_ads",
+        "valueLabel": "descr_tipo_ads"
+      },
+	  {
+        "index": 4,
+        "attribute": "dettaglio",
+        "label": "Ambito di rilievo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_ambito_rilievo",
+            "propertyName": "descr_ambito",
+            "sortBy": "descr_ambito+A"
+          }
+        },
+        "valueId": "descr_ambito",
+        "valueLabel": "descr_ambito"
+      },
+	  {
+        "index": 5,
+        "attribute": "data_ril",
+        "label": "Data rilievo",
+        "type": "date",
+        "fieldOptions": {
+          "dateFormat": "DD/MM/YYYY"
+        }
+      },
+	  {
+        "index": 6,
+        "attribute": "categoria_forestale",
+        "label": "Categoria forestale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_categoria_forestale",
+            "propertyName": "descrizione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descrizione",
+        "valueLabel": "descrizione"
+      },
+	  {
+        "index": 7,
+        "attribute": "fk_tipo_strutturale_princ",
+        "label": "Tipo strutturale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_strutturale",
+            "propertyName": "id_tipo_strutturale,descr_tipo_strutturale,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "id_tipo_strutturale",
+        "valueLabel": "descr_tipo_strutturale"
+      },
+	  {
+        "index": 8,
+        "attribute": "assetto",
+        "label": "Assetto evolutivo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_assetto",
+            "propertyName": "descr_assetto,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_assetto",
+        "valueLabel": "descr_assetto"
+      },
+	  {
+        "index": 9,
+        "attribute": "stadio_di_sviluppo",
+        "label": "Stadio di sviluppo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_stadio_sviluppo",
+            "propertyName": "descr_stadio_sviluppo,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_stadio_sviluppo",
+        "valueLabel": "descr_stadio_sviluppo"
+      },
+	  {
+        "index": 10,
+        "attribute": "destinazione",
+        "label": "Destinazione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_d_destinazione",
+            "propertyName": "descr_destinazione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_destinazione",
+        "valueLabel": "descr_destinazione"
+      },
+	  {
+        "index": 11,
+        "attribute": "intervento",
+        "label": "Tipo di intervento",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_intervento",
+            "propertyName": "descr_intervento,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_intervento",
+        "valueLabel": "descr_intervento"
+      },
+	  {
+        "index": 12,
+        "attribute": "priorita",
+        "label": "Priorità di intervento",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_priorita",
+            "propertyName": "descr_priorita,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_priorita",
+        "valueLabel": "descr_priorita"
+      },
+	  {
+        "index": 13,
+        "attribute": "tipo_di_esbosco",
+        "label": "Tipo di esbosco",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_esbosco",
+            "propertyName": "descr_esbosco,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_esbosco",
+        "valueLabel": "descr_esbosco"
+      },
+	  {
+        "index": 14,
+        "attribute": "quota",
+        "label": "Quota (m)",
+        "type": "number"
+      },
+	  {
+        "index": 15,
+        "attribute": "esposizione",
+        "label": "Esposizione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_esposizione",
+            "propertyName": "descr_esposizione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_esposizione",
+        "valueLabel": "descr_esposizione"
+      },
+      {
+        "index": 16,
+        "attribute": "inclinazione",
+        "label": "Inclinazione",
+        "type": "number"
+      },
+	  {
+        "index": 17,
+        "attribute": "descr_tipo_campione",
+        "label": "Tipologia di campione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_idf_tipo_campione",
+            "propertyName": "descr_tipo_campione,mtd_ordinamento",
+            "sortBy": "mtd_ordinamento+A"
+          }
+        },
+        "valueId": "descr_tipo_campione",
+        "valueLabel": "descr_tipo_campione"
+      },
+	  {
+		"index": 18,
+		"attribute": "qualita",
+		"label":"Qualità (Seme/Pollone)",
+		"type":"list",
+		"values": [
+		  {"value":"S","name":"Seme"},
+		  {"value":"P","name":"Pollone"}
+		],
+		"valueId":"value",
+		"valueLabel":"name"
+	  }
+    ]
+  }
+}
