@@ -1,0 +1,1698 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C3fddc299-9288-432b-80db-5d403b779eb4" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cdaf1f796-4c81-40d4-83a1-8e2bbcca6564" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C34d148a3-1f2c-454a-b957-f1e07f34988a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="ambito_specifico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="ambitoSpecifico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8ad22b2d-745a-44bc-b678-40f7b56cbdce" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="attitudine_produttiva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="attitudineProduttiva" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1677f0be-79b6-4948-aa9b-0496d697e913" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_esbosco"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codEsbosco" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4ed424ca-08bd-4ba0-89b3-84e5e973b111" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codiceAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1ffcb92b-f24e-4d08-8795-4bbed6bc4e58" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_particella_for"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codiceParticella" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb6bf8cc0-5341-465f-824b-b260d570863a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="combust_p"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="combustP" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9b9db71b-abbb-4f72-a387-8633d93b2a56" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="danni_perc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="danniPerc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C34a05498-2889-445e-8666-e5c80901cb78" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_inizio_validita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="dataInizioValidita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9a0c4950-42a5-48ef-918d-f1ec1e4a2b2e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_ril"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="dataRil" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b94daa7-d521-4fa7-b6d7-b439f7312c85" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="denominazioneComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfa5cc75b-ff3f-462a-8b5a-7cee2c43df9c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="densita_campionamento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="densitaCampionamento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb08ff9b0-424b-437d-9846-f60484597cc9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="destinazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrDestinazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdc378fc6-298a-4279-815e-79fe5ab3753b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="esposizione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrEsposizione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7d535be0-ba1a-438d-9414-07b39c17aa82" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_ambito"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkAmbito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C65ecc9f5-d309-4cfc-ac53-e15b4c9c3ac0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_assetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkAssetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0a0cde68-3a68-428f-aa46-d0c80cbdd5ac" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_categoria_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkCategoriaForestale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfb146b4e-a8f8-4e69-bf99-09224d5cc409" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_classe_fertilita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkClasseFertilita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdecbd2a9-ac85-4c78-a2db-d0289e894def" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C22944022-3736-4d90-a080-f40fe848ea3c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_danno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkDanno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb2bcde58-4672-4567-8e9a-7e7ec21f7a01" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_destinazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkDestinazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce21bdc77-effb-48ea-9213-9334417f6f8f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_esposizione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkEsposizione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C09dfb6c4-292c-4cb3-94f1-5b56228d6ebd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_priorita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkPriorita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1eeaead9-8044-463b-8d05-97c1cb4620a3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_sottotipo_sup_nota"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkSottotipoSupNota" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C76c56d14-aa34-4a7d-9b33-76bd9557fbd1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkTipoAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3f2f393f-3158-4557-ab2f-c3ab96ac1936" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkTipoForestale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccf837031-8138-4229-a0c5-abb54091706f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_intervento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkTipoIntervento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2e88e7ca-e3e4-47d1-be3d-61e2186dd41b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_strutturale_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkTipoStrutturalePrinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0562304e-89e7-430b-aa83-7929eb4bcac4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_strutturale_second"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkTipoStrutturaleSecond" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2d61eb53-99a6-48c4-8a38-0128e7b2e136" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_pascolamento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="flgPascolamento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7bbb49df-199b-478a-ac27-8e0c4c007c7f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc9d911c1-5629-4b38-849e-fefeeb3139c1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="idgeo_pt_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="idGeoPtAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8a0d1f4a-7419-41b3-ac59-133c445d9b49" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="inclinazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="inclinazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3fd0b269-74e3-469e-a325-ec94629280b0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="min_distanza_planimetrica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="minDistanzaPlanimetrica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca8e2d115-5ead-4acd-9a70-fae5955dc7d8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="noteAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9415e498-83f1-404c-a9c5-d5e83e74fb63" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note_relascopica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="noteRelascopica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C87516169-e459-4347-9371-3c3984cd9e90" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note_sup_nota"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="noteSupNota" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C574bbfc2-043e-48a2-a731-f08741dd698a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nr_ceppaie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="nrCeppaie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8264351e-557b-4798-a23f-487eedb39695" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nr_piante_morte"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="nrPianteMorte" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6115302b-b58c-4a4d-bb09-b1b6f4858495" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="perc_copertura_chiome"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="percCoperturaChiome" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9047870f-2b6a-40cc-85a8-b9c0c159aac0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="perc_defogliazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="percDefogliazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0a34386b-9cf8-4125-a442-537da89b1399" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="perc_ingiallimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="percIngiallimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfdfbd263-7768-4c88-b096-050c07b62d7b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="quota"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="quota" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc6810468-38ac-407b-8121-cc1975da9ab3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="raggio_mt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="raggioMt" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4169323a-9297-4c90-a783-926b9ae72dde" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="rin_specie_prevalente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="rinSpeciePrevalente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C33415a6a-6cc1-4f44-81ec-ce7be2cdac94" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sigla_prov"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="siglaProv" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C05b8474f-39f3-4e84-a1e2-126a3f5d8336" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stato_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="statoAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc96af3ff-7877-4763-9403-d4bac14bfbeb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="utm_est"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="utmEst" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C795a3a8d-ec63-4794-94b7-2a312dd7bcac" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="utm_nord"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="utmNord" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce52c32ed-7caf-4933-844d-6a3bdaadf979" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="priorita_intervento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrPriorita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9942c6f0-88d3-4f31-9885-916c959349a4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="denominazioneProvincia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3a297e7d-c30a-4443-89c8-d666cffcfd71" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_particella_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="denominazioneParticella" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0268ba27-ab3b-4077-8fb9-5b949f5d7f85" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_stadio_sviluppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codStadioSviluppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc99a9a19-4e1c-4b67-8123-6f6cc2c04a5a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="danno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrDanno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3aaf567f-0623-4ac0-af68-88187bb6a87f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_strutturale_princ_rel"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="tipoStrutturalePrincRel" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C323865d4-04a7-4bbb-8ccf-bb481cadbdb1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_strutturale_sec_rel"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="tipoStrutturaleSecRel" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C408b104f-a2c5-4e4c-b489-168fcd8c257a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="rinnovazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="rinnovazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C7dcdfa89-52c3-4066-b87b-9c1d5c64b521" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="idgeo_pt_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="idgeo_pt_ads.{idgeo_pt_ads}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbe6bf51c-d5b3-4dc0-8a35-6295bed5a417" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fattore_numerazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fattoreNumerazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfadd6b4e-9424-40f0-a46a-eb9860d993ef" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codiceAmminitrativoTf" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1f524673-ab0f-4383-8fdb-b03c2823043b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_categoria_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codiceAmminitrativoCf" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdf4a7ca5-e497-4f7f-a738-7a0c59616f24" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="categoria_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrCategoriaForestale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceaf5d5e4-57d3-4c6b-88d9-2bd07253597d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="classe_fertilita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrClasseFertilita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc6e7a7b0-2f4e-42c0-a56f-7c285a1fb7af" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_strutturale_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrTipoStrutturalePrinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C61a33544-f36c-4ca2-ba06-8860a42bbcf5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dist_esbosco_fuori_pista"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="distEsboscoFuoriPista" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca7890942-5a67-424a-8199-def2da756ebf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dist_esbosco_su_pista"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="distEsboscoSuPista" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4e86c230-a627-44a3-8990-9746b4cd6ff2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_di_esbosco"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrEsbosco" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6839898a-6a15-49b9-9deb-fa768da6df91" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="rilevatore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="soggettoRilev" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C063830fc-a60a-4216-bb0e-a2aacc6ff4ae" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="idgeo_pl_particella_forest"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkIdgeoPlParticellaForestale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0cd6b459-2b3c-432b-b48d-d8eb72c284c5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dettaglio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrAmbito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c323527-a049-4063-869a-51e95f9f9771" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="assetto_evolutivo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrAssetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C875cc9b0-d8bd-46a0-bfee-bf8b027cfbf4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="sottotipo_sup_nota"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrSottotipoSupNota" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C780e5030-f031-45b8-a518-c6b9cc99f3ae" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="stadio_di_sviluppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrStadioSviluppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc84b4b1a-14b6-45f0-8227-00424bc31654" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_forestale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrTipoForestale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C00fce7ed-ad03-4702-bc83-c483bde6cbf1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_proprieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrProprieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb20f81e7-0b47-4ecb-a993-66380d2dc2bb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="proprieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkProprieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4455203b-6531-43ee-8d4a-1ff6326578d1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_strutturale_sec"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrTipoStrutturaleSec" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1161bb0a-b990-4fb0-bd03-23af39e21c28" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="intervento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrTipoIntervento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce896b353-83de-451e-8936-65504fea0cff" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipologia_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrTipoIntervento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Caa4173a7-d48a-4a38-abc8-752003cea547" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AreaDiSaggioType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_idf_pt_area_di_saggio" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="idgeo_pt_ads"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="idgeo_pt_ads"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce76d8f5e-5f56-49c1-9d50-39ebdf5c7f00" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_specie_alberi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="idSpecieAlberi " ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Ccfdf8373-cf98-4859-b949-14bfff18eda1" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_specie_alberi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_specie_alberi.{id_specie_alberi}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C77e6574e-e07f-4fa2-8f31-999b424a59d6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altezza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="altezza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cdd6c4d32-0225-44dd-887c-832ec8f91149" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_gruppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codGruppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd812ab02-d17d-4a9b-ba29-4f32339c5883" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_pignatti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codicePignatti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbe92cb9a-d5b2-40e1-b3db-98225ae3340d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codiceSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C23750b6b-9df7-4a94-a1c4-eb695c61b2e3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_tipo_campione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codTipoCampioneDom" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5c0dd48d-08a1-4180-bbf8-4fad0b32e972" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_campione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="codTipoCampionePrinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6d1b440c-2d08-4bb2-a160-a13ffc93d8cb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tavola_coeff_cub"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="desTavolaCoeffcub" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceff42885-6d9c-4440-beb0-b5845986de7a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="diametro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="diametro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c1cd515-79d5-413f-90ae-689f1f82b109" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="eta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="eta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd95ca151-2add-4344-a4bb-7a3e32e9882a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_config_ipla"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkConfigIpla" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc076cb3b-cee6-49ca-8810-6512fa58df5c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_tipo_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="fkTipoAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C97deaebb-34a8-4fe8-8540-76c0dc5ea928" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_coniflatif"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="flgConiflatif" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce3f83a4a-9666-4ae0-aaab-92255d7d2d39" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="idSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C480e1393-a47c-42f6-a858-938dad4dd99d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="idgeo_pt_ads"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="idgeoPtAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6d2b85cc-6e89-4097-b10c-5aef97b016e1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="incremento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="incremento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C038676e6-4805-4307-8f0c-6c9e8f32e6b8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="note"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="note" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfffcf8a4-7895-4e45-b298-71566f16c0b8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nr_alberi_pollone"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="nrAlberiPollone" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6f615be5-38a5-4bde-a350-f2b9960d7405" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nr_alberi_seme"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="nrAlberiSeme" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca1a4ca34-8549-4fde-8434-3e08163875bd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_tavola_coeff_cub"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="numTavolaCoeffCub" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc1d725fe-71c0-4355-bb42-681cabc335ab" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="specie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C191230e1-426c-4f31-881a-33d3383063f6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="qualita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="flgSemePollone" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca0fa6ab6-4dc5-452a-b8e8-cbfa02446acb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_idf_specie_alberi" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipologia_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieAlberiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+                <child name="descrTipoAds" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>

@@ -169,6 +169,13 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
+	<Rule>
+		<priority>25</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_idf_ads</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
 	
 	
@@ -1116,6 +1123,46 @@
 		<hiddenAttributes>
 		 <attribute>decsiraogc_sivia_geo:id_proc</attribute>
 		 <attribute>decsiraogc_sivia_geo:id_fase</attribute>
+		</hiddenAttributes>	
+    </Rule>
+	<Rule>
+		<priority>620</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_derivazioni</workspace>
+		<layer>Derivazione </layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_derivazioni:fkStato" = '9' OR "decsiraogc_derivazioni:fkStato" = '5'</filter>  
+		<hiddenAttributes>
+		 <attribute>decsiraogc_derivazioni:classificazionePraticaDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:codiceUtenza</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoUsiEffettivi</attribute>
+		 <attribute>decsiraogc_derivazioni:flgBIM</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoComuniDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:dataDecorrenzaConcessione</attribute>
+		 <attribute>decsiraogc_derivazioni:numProvv</attribute>
+		 <attribute>decsiraogc_derivazioni:dataAutorizProvv</attribute>
+		 <attribute>decsiraogc_derivazioni:dataScadenzaProvv</attribute>
+		 <attribute>decsiraogc_derivazioni:flgSovracanone</attribute>
+		 <attribute>decsiraogc_derivazioni:flgRivieraschi</attribute>
+		 <attribute>decsiraogc_derivazioni:dataScadenzaProvv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:pivaTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:provinciaTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:comuneTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:indirizzoTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:telefonoTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:emailpecTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:cfTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:pivaTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:provinciaTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:comuneTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:indirizzoTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:telefonoTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:emailpecTitDerivRaggr</attribute>
+		 <attribute>decsiraogc_derivazioni:sovracanoneDerivazione/decsiraogc_derivazioni:SovracanoneDerivazione/decsiraogc_derivazioni:codIstatComusovra</attribute>
+		 <attribute>decsiraogc_derivazioni:sovracanoneDerivazione/decsiraogc_derivazioni:SovracanoneDerivazione/decsiraogc_derivazioni:toponimoComusovra</attribute>
+		 <attribute>decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:denominazioneUso</attribute>
+		 <attribute>decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:elencoUsiUsiEffettivi</attribute>
 		</hiddenAttributes>	
     </Rule>
 	
