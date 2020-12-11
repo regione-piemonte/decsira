@@ -21,7 +21,8 @@ const {
     // SiraQueryPanel action functions
     expandFilterPanel,
     loadFeatureTypeConfig,
-    setActiveFeatureType
+    setActiveFeatureType,
+    expandChartsPopup
 } = require('../actions/siradec');
 
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
@@ -67,6 +68,7 @@ class LayerTree extends React.Component {
         onToggle: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         expandFilterPanel: PropTypes.func,
+        expandChartsPopup: PropTypes.func,
         getMetadataObjects: PropTypes.func,
         setNodeInUse: PropTypes.func,
         category: PropTypes.shape({
@@ -99,6 +101,7 @@ class LayerTree extends React.Component {
     static defaultProps = {
         loading: false,
         onToggle: () => {},
+        expandChartsPopup: () => {},
         showcategories: true
     };
 
@@ -119,6 +122,17 @@ class LayerTree extends React.Component {
         );
     };
 
+    openChartsPopup = (status, ftType) => {
+        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
+        } else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
+        this.props.expandChartsPopup(status);
+    };
+
     render() {
         if (!this.props.nodes) {
             return <div></div>;
@@ -130,6 +144,7 @@ class LayerTree extends React.Component {
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
+                            expandChartsPopup={this.openChartsPopup}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
                             groups={nodes}
@@ -137,6 +152,7 @@ class LayerTree extends React.Component {
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>) : (<DefaultNode
                         expandFilterPanel={this.openFilterPanel}
+                        expandChartsPopup={this.openChartsPopup}
                         toggleSiraControl={this.searchAll}
                         addToMap={this.addToMap}
                         showInfoBox={this.showInfoBox}/>) }
@@ -252,6 +268,7 @@ const CatalogPlugin = connect(tocSelector, {
     selectSubCategory,
     loadNodeMapRecords,
     toggleAddMap,
+    expandChartsPopup,
     addLayer,
     toggleCategories
 })(LayerTree);

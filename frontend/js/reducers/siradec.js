@@ -21,7 +21,9 @@ const {
     SET_ACTIVE_FEATURE_TYPE,
     SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
-    USER_NOT_AUTHORIZED
+    USER_NOT_AUTHORIZED,
+    EXPAND_CHARTS_POPUP,
+    EXPAND_CHARTS_PANEL
 } = require('../actions/siradec');
 const {SET_FEATURE_ROW_DATA} = require('../actions/featuregrid');
 
@@ -34,6 +36,8 @@ const uuid = require('uuid');
 const initialState = {
     waitingForConfig: null,
     filterPanelExpanded: false,
+    chartsPopupExpanded: false,
+    chartsPanelExpanded: false,
     configOggetti: {
     },
     topology: null,
@@ -87,7 +91,8 @@ function siradec(state = initialState, action) {
             exporter: action.exporter,
             geometryType: action.geometryType || 'Point',
             queryform,
-            authorized: action.authorized
+            authorized: action.authorized,
+            tematizzatore: action.tematizzatore
         });
 
         if (newConf.featuregrid) {
@@ -152,6 +157,21 @@ function siradec(state = initialState, action) {
         return assign({}, state, {
             filterPanelExpanded: action.expand
         });
+    }
+    case EXPAND_CHARTS_POPUP: {
+        return assign({}, state, {
+            chartsPopupExpanded: action.status
+        });
+    }
+    case EXPAND_CHARTS_PANEL: {
+        return {
+            ...state,
+            chartsPanelExpanded: action.status,
+            chartsPopupExpanded: false
+        };
+        /* return assign({}, state, {
+            chartsPanelExpanded: action.status
+        });*/
     }
     case QUERYFORM_CONFIG_LOAD_ERROR: {
         return assign({}, state, {

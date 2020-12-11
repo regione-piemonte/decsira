@@ -24,11 +24,28 @@ const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
 const SET_TREE_FEATURE_TYPE = 'SET_TREE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
+const EXPAND_CHARTS_POPUP = 'EXPAND_CHARTS_POPUP';
+const EXPAND_CHARTS_PANEL = 'EXPAND_CHARTS_PANEL';
+
 const assign = require('object-assign');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
+
+function expandChartsPopup(status) {
+    return {
+        type: EXPAND_CHARTS_POPUP,
+        status
+    };
+}
+
+function expandChartsPanel(status) {
+    return {
+        type: EXPAND_CHARTS_PANEL,
+        status
+    };
+}
 
 function setWaitingForConfig(wfc) {
     return {
@@ -56,6 +73,7 @@ function configureFeatureType(ft, field, featureType, activate) {
         multiLayerSelect: ft.multiLayerSelect,
         multiLayerSelectionAttribute: ft.multiLayerSelectionAttribute,
         exporter: ft.exporter,
+        tematizzatore: ft.tematizzatore,
         field,
         featureType,
         activate
@@ -262,6 +280,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                         multiLayerSelectionAttribute: config.multiLayerSelectionAttribute,
                         nameSpaces: config.nameSpaces || {},
                         layer: layer,
+                        tematizzatore: config.tematizzatore,
                         exporter: config.exporter
                     }, fi, featureType, activate));
                 }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
@@ -316,6 +335,8 @@ module.exports = {
     SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED,
+    EXPAND_CHARTS_POPUP,
+    EXPAND_CHARTS_PANEL,
     setWaitingForConfig,
     configureTopology,
     configureFeatureGrid,
@@ -329,5 +350,7 @@ module.exports = {
     hideQueryError,
     configureInlineMap,
     setActiveFeatureType,
-    setTreeFeatureType
+    setTreeFeatureType,
+    expandChartsPopup,
+    expandChartsPanel
 };

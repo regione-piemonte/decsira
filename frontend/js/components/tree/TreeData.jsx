@@ -2,7 +2,9 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const PropTypes = require('prop-types');
-const  {Tree, TreeNode} = require('rc-tree');
+
+const {TreeNode} = require('rc-tree');
+const Tree = require('rc-tree').default;
 const TemplateUtils = require('../../utils/TemplateUtils');
 require('./SiraTree.less');
 const {loadCardTemplate} = require('../../actions/card');

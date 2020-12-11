@@ -19,6 +19,7 @@ class DefaultNode extends React.Component {
         node: PropTypes.object,
         settings: PropTypes.object,
         expandFilterPanel: PropTypes.func,
+        expandChartsPopup: PropTypes.func,
         onToggle: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         style: PropTypes.object,
@@ -30,6 +31,7 @@ class DefaultNode extends React.Component {
     static defaultProps = {
         style: {},
         expandFilterPanel: () => {},
+        expandChartsPopup: () => {},
         onToggle: () => {},
         toggleSiraControl: () => {},
         addToMap: () => {}
@@ -38,6 +40,7 @@ class DefaultNode extends React.Component {
     renderTools = () => {
         let tooltipSira = <Tooltip id="tpm-search-details">Ricerca di dettaglio</Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map">Carica in Mappa</Tooltip>;
+        let tooltipChart = <Tooltip id="tpm-add-chart">Tematizzazione o Serie storica</Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj">Elenco di Oggetti</Tooltip>;
         const tools = [
             (<OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
@@ -48,7 +51,15 @@ class DefaultNode extends React.Component {
                     onClick={()=>this.props.addToMap(this.props.node)}/>
             </OverlayTrigger>)
         ];
-        if ( this.props.node.featureType) {
+        if (this.props.node.featureType) {
+            tools.push((
+                <OverlayTrigger key={"charts"} rootClose placement="left" overlay={tooltipChart}>
+                    <Glyphicon
+                        style={{"float": "right", cursor: 'pointer'}}
+                        key="toggle-tematizzatore"
+                        glyph="signal"
+                        onClick={() => this.props.expandChartsPopup(true, this.props.node.featureType)}/>
+                </OverlayTrigger>));
             tools.push((
                 <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
                     <Glyphicon

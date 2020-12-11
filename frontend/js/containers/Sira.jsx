@@ -21,7 +21,7 @@ const Header = require('../components/Header');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {configureInlineMap} = require('../actions/siradec');
+const {configureInlineMap, expandChartsPopup, expandChartsPanel} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 require("../components/WMSLayer.js");
@@ -83,6 +83,19 @@ const MetadataInfoBox = connect(
     mapStateToPropsMIB,
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
+
+const ChartPopup = connect((state) => ({
+    show: state.siradec.chartsPopupExpanded
+}), {
+    closePopup: expandChartsPopup,
+    openTematizzatore: expandChartsPanel
+})(require('../components/charts/ChartPopup').default);
+
+const SerieStorica = connect((state) => ({
+    show: state.siradec.chartsPopupExpanded
+}), {
+    closePanel: expandChartsPanel.bind(null, false)
+})(require('../components/charts/SerieStorica').default);
 
 const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
 
@@ -223,6 +236,7 @@ class Sira extends React.Component {
                         params={{authkey: this.props?.match?.params?.profile ? authParams[this.props?.match?.params?.profile].authkey : ''}}
                         profile={this.props.profile.profile}
                         key="getFeatureInfo"/>
+                    <SerieStorica/>
                     <MetadataInfoBox panelStyle={{
                         height: "500px",
                         width: "650px",
