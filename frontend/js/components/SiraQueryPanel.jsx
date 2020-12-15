@@ -91,6 +91,7 @@ class SiraQueryPanel extends React.Component {
         spatialField: PropTypes.object,
         showDetailsPanel: PropTypes.bool,
         toolbarEnabled: PropTypes.bool,
+        autocompleteEnabled: PropTypes.bool,
         searchUrl: PropTypes.string,
         showGeneratedFilter: PropTypes.oneOfType([
             PropTypes.bool,
@@ -135,6 +136,7 @@ class SiraQueryPanel extends React.Component {
         spatialPanelExpanded: true,
         showDetailsPanel: false,
         toolbarEnabled: true,
+        autocompleteEnabled: false,
         searchUrl: "",
         showGeneratedFilter: false,
         pagination: null,
@@ -223,6 +225,7 @@ class SiraQueryPanel extends React.Component {
                         filterFields={this.props.filterFields}
                         spatialField={this.props.spatialField}
                         attributes={this.props.attributes}
+                        autocompleteEnabled={this.props.autocompleteEnabled}
                         showDetailsPanel={this.props.showDetailsPanel}
                         toolbarEnabled={this.props.toolbarEnabled}
                         searchUrl={this.props.searchUrl}
