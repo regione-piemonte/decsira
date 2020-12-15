@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_idf_pfa="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pfa/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pfa/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_idf_pl_pfa  id= idgeo_pl_pfa-->
+	<element name="PianiForestaliAziendali" type="decsiraogc_idf_pfa:PianiForestaliAziendaliType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_geo_idf_pfa_particella_forestale  id= idgeo_pl_particella_forest-->
+	<element name="PfaParticellaForestale" type="decsiraogc_idf_pfa:PfaParticellaForestaleType" substitutionGroup="gml:AbstractObject" />
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="PianiForestaliAziendaliType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idgeoPlPfa"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="geometria" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="denominazione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="provincia" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="comuniInteressati" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="gestore" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+					<xs:element name="descrProprieta" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fonteFinanziamento" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataInizioValidita" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataFineValidita" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nomeBrevePfa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataApprovazione" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataRevisione" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="supPianificataTotale" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="supForestaleGestAttiva" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataInserimento" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataAggiornamento" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="utenteAggiornamento" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nDelibera" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element name="durataPfaAnni" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="flgRevisione" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nomeAreaProtetta" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="supRicadenzaHaAP" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="percRicadenzaAp" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nomeRn2000" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="supRicadenzaHaRn" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="percRicadenzaRn" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="denominazionePopSeme" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="supRicadenzaHaPopSeme" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="percRicadenzaPopSeme" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="proprietaSilvopastHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="proprietaForestaleHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="propNonForestaleHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="supPianifForestaleHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="supPianifNonForestaleHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="superfTotBoscataHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="superfBoscGestAttivaHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="superfGestNonAttivaTotHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="superfGestNonAttivaMonHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="superfGestNonAttivaEvlHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="superfAltriUsiHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+							
+					<xs:element name="fkVersione" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="descrVersione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="descrProprietaPrimpa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="note" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="pfaParticellaForestale" type="decsiraogc_idf_pfa:PfaParticellaForestalePropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="PfaParticellaForestaleType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idGeoPlParticellaForest "  type="xs:integer" minOccurs="1" />
+				
+					<xs:element name="idgeoPlPfa"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkCompresa"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="codCompresa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					<xs:element name="descrCompresa" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codParticella" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denominazioneParticella" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="ettari" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataInizioValidita" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataFineValidita" type="xs:date" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="provvigioneHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="provvigioneReale" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="percTassoRipresaPot" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="percTara" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="ripresaTotHa" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="ripresaAttuale" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="ripresaResidua" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="geometria" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="PfaParticellaForestalePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_pfa:PfaParticellaForestale" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+</schema>
