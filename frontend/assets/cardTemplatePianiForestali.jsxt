@@ -1,0 +1,245 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='PIANI FORESTALI AZIENDALI' subtitle={[
+            'Codice ADS: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:idgeoPlPfa/text()"),
+			'Nome breve ADS: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeBrevePfa/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='Piani Forestali Aziendali: Dettaglio dati tecnici' eventKey='1' expanded={true}>
+           <LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:denominazione/text()")
+            }/>
+			<LabeledField label="Provincia" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:provincia/text()")
+            }/>
+            <LabeledField label='Comuni interessati' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:comuniInteressati/text()")
+            }/>
+			<LabeledField label='Gestore' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:gestore/text()")
+            }/>
+			<LabeledField label='Proprietà' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:descrProprieta/text()")
+            }/>
+			<LabeledField label="Fonte di finanziamento" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:fonteFinanziamento/text()")
+            }/>
+			<LabeledField label="Data inizio validità" dateFormat='DD/MM/YYYY' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataInizioValidita/text()")
+            }/>
+			<LabeledField label="Data fine validità" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataFineValidità/text()")
+            }/>
+			<LabeledField label="PFA: nome breve" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeBrevePfa/text()")
+            }/>
+			<LabeledField label="Data approvazione" dateFormat='DD/MM/YYYY' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataApprovazione/text()")
+            }/>
+			<LabeledField label="Data revisione" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataRevisione/text()")
+            }/>
+			<LabeledField label="Superficie pianificata totale (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supPianificataTotale/text()")
+            }/>
+			<LabeledField label="Superficie forestale a  gestione attiva (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supForestaleGestAttiva/text()")
+            }/>
+			<LabeledField label="N. delibera" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nDelibera/text()")
+            }/>
+			<LabeledField label="Durata" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:durataPfaAnni/text()")
+            }/>
+			<LabeledField label="Revisione" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:flgRevisione/text()")
+            }/>
+			<LabeledField label="Proprietà silvopastorale (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:proprietaSilvopastHa/text()")
+            }/>
+			<LabeledField label="Proprietà forestale (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:proprietaForestaleHa/text()")
+            }/>
+			<LabeledField label="Proprietà non forestale (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:propNonForestaleHa/text()")
+            }/>
+			<LabeledField label="Superficie pianificata forestale (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supPianifForestaleHa/text()")
+            }/>
+			<LabeledField label="Superficie pianificata non forestale (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supPianifNonForestaleHa/text()")
+            }/>
+			<LabeledField label="Superficie totale boscata (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfTotBoscataHa/text()")
+            }/>
+			<LabeledField label="Superficie boscata gestione attiva (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfBoscGestAttivaHa/text()")
+            }/>
+			<LabeledField label="Superficie totale gestione non attiva (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfGestNonAttivaTotHa/text()")
+            }/>
+			<LabeledField label="Superficie a gestione non attiva in monitoraggio (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfGestNonAttivaMonHa/text()")
+            }/>
+			<LabeledField label="Superficie a gestione non attiva in evoluz. libera (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfGestNonAttivaEvlHa/text()")
+            }/>
+			<LabeledField label="Superficie altri usi (ha)" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfAltriUsiHa/text()")
+            }/>
+        </Section>
+		
+		<Section header='RICADENZA' eventKey='2' expanded={true}>
+            <LabeledField label='Ricadenza in  Area Protetta' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeAreaProtetta/text()")
+            }/>
+            <LabeledField label='Superficie ricadenza (ha) area protetta' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supRicadenzaHaAP/text()")
+            }/>
+			<LabeledField label='% Ricadenza area protetta' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:percRicadenzaAp/text()")
+            }/>
+			<LabeledField label='Ricadenza in aree Natura 2000' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeRn2000/text()")
+            }/>
+			<LabeledField label='Superficie ricadenza (ha) RN2000' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supRicadenzaHaRn/text()")
+            }/>
+			<LabeledField label='% Ricadenza RN2000' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:percRicadenzaRn/text()")
+            }/>
+			<LabeledField label='Ricadenza in Bosco da seme' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:denominazionePopSeme/text()")
+            }/>
+			<LabeledField label='Superficie ricadenza (ha) Bosco da seme' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supRicadenzaHaPopSeme/text()")
+            }/>
+			<LabeledField label='% Ricadenza Bosco da seme' value={
+               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:percRicadenzaPopSeme/text()")
+            }/>
+		</Section>
+
+		<Section header='PARTICELLE FORESTALI DI RIFERIMENTO' eventKey='3' expanded={true}>
+			<SiraTable
+				id="ParticelleForestali"
+				selectedRow={model.CategorieFasi}
+				wfsVersion="2.0"
+				rowSelection={false}
+				columns={
+					[
+						{
+							headerName: 'Codice Particella Forestale',
+							width: 150,
+							xpath:"decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:codParticella/text()"
+						},
+						{
+							headerName: 'Denominazione Particella Forestale',
+							width: 150,
+							xpath:"decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:denominazioneParticella/text()"
+						},
+						{
+							headerName: 'Ettari',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:ettari/text()"
+						},
+						{
+							headerName: 'Codice Compresa',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:codCompresa/text()"
+						},
+						{
+							headerName: 'Descrizione Compresa',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:descrCompresa/text()"
+						},
+						{
+							headerName: 'Data inizio validità',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:dataInizioValidita/text()"
+						},
+						{
+							headerName: 'Data fine validità',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:dataFineValidita/text()"
+						},
+						{
+							headerName: 'Provvigione Ha',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:provvigioneHa/text()"
+						},
+						{
+							headerName: 'Provvigione Reale',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:provvigioneReale/text()"
+						},
+						{
+							headerName: 'Percentuale Ripresa potenziale',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:percTassoRipresaPot/text()"
+						},
+						{
+							headerName: 'Percentuale Tara',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:percTara/text()"
+						},
+						{
+							headerName: 'Ripresa totale',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:ripresaTotHa/text()"
+						},
+						{
+							headerName: 'Ripresa attuale',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:ripresaAttuale/text()"
+						},
+						{
+							headerName: 'Ripresa residua',
+							width: 150,
+							xpath: "decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:ripresaResidua/text()"
+						}
+					]
+				}
+				features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:pfaParticellaForestale")}/>
+		</Section>
+
+        <Section header='MAPPA SINTESI - Piano forestale aziendale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:geometria/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima piano forestale aziendale",
+	                          "name": "decsiraogc_idf_pfa:PianiForestaliAziendali",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>

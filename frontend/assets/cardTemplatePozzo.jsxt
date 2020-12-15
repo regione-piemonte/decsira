@@ -320,36 +320,35 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:emungDurataPozzo")}/>
             </Section>
-			
-			<Section header='Pompe idrauliche' eventKey='11' expanded={false}>
-				<SiraTable
-					   id="PompaIdraulPozzo"
-					   selectedRow={model.PompaIdraulPozzo}
-					   wfsVersion="2.0"
-					   rowSelection={false}
-					   columns={
-						   [
-							   {
-								   headerName: 'Potenza del motore (kW)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:potenzaMotorePompaidrPozzo/text()"
-							   },
-							   {
-								   headerName: 'Portata massima estraibile (l/s)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:qMaxPompaidrPozzo/text()"
-							   },
-							   {
-								   headerName: 'Prevalenza (m)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:prevalenzaPompaidrPozzo/text()"
-							   }
-						   ]
-					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:pompaIdraulPozzo")}/>
-            </Section>
-			
         </Section>
+		
+		<Section header='POMPE IDRAULICHE' eventKey='11' expanded={false}>
+			<SiraTable
+				   id="PompaIdraulPozzo"
+				   selectedRow={model.PompaIdraulPozzo}
+				   wfsVersion="2.0"
+				   rowSelection={false}
+				   columns={
+					   [
+						   {
+							   headerName: 'Potenza del motore (kW)',
+							   width: 150,
+							   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:potenzaMotorePompaidrPozzo/text()"
+						   },
+						   {
+							   headerName: 'Portata massima estraibile (l/s)',
+							   width: 150,
+							   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:qMaxPompaidrPozzo/text()"
+						   },
+						   {
+							   headerName: 'Prevalenza (m)',
+							   width: 150,
+							   xpath:"decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:prevalenzaPompaidrPozzo/text()"
+						   }
+					   ]
+				   }
+				   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:pompaIdraulPozzo")}/>
+		</Section>
 
         <Section header='MAPPA SINTESI - Prese da pozzi su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='12' expanded={true}>
 	      <MappaScheda

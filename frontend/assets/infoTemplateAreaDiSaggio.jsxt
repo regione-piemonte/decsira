@@ -1,0 +1,72 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateAreaDiSaggio"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Codice ADS',
+             width: 90,
+             xpath: "decsiraogc_idf_ads:codiceAds/text()"
+        }, {
+             headerName: 'Tipologia di ADS',
+             width: 90,
+             xpath: "decsiraogc_idf_ads:descrTipoAds/text()"
+        }, {
+             headerName: 'Ambito di rilievo',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:descrAmbito/text()"
+        }, {
+             headerName: 'Dettaglio Ambito',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:ambitoSpecifico/text()"
+        }, {
+             headerName: 'Provincia',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:denominazioneProvincia/text()"
+        }, {
+             headerName: 'Comune',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:denominazioneComune/text()"
+        }, {
+             headerName: 'UTM est',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:utmEst/text()"
+        },  {
+             headerName: 'UTM Nord',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:utmNord/text()"
+        },  {
+             headerName: 'Proprietà',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:descProprieta/text()"
+        },  {
+             headerName: 'Esposizione',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:descEsposizione/text()"
+        },  {
+             headerName: 'Quota (m)',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:quota/text()"
+        },  {
+             headerName: 'Inclinazione in gradi',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:inclinazione/text()"
+        },  {
+             headerName: 'Categoria forestale',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:descrCategoriaForestale/text()"
+        },  {
+             headerName: 'Tipo forestale',
+             width: 100,
+             xpath: "decsiraogc_idf_ads:descrTipoForestale/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_idf_ads:AreaDiSaggio")}/>

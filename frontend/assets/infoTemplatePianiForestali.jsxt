@@ -1,0 +1,48 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplatePianiForestali"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Denominazione',
+             width: 90,
+             xpath: "decsiraogc_idf_pfa:denominazione/text()"
+        }, {
+             headerName: 'Provincia',
+             width: 90,
+             xpath: "decsiraogc_idf_pfa:provincia/text()"
+        }, {
+             headerName: 'Comuni interessati',
+             width: 100,
+             xpath: "decsiraogc_idf_pfa:comuniInteressati/text()"
+        }, {
+             headerName: 'Gestore',
+             width: 100,
+             xpath: "decsiraogc_idf_pfa:gestore/text()"
+        }, {
+             headerName: 'Proprietà',
+             width: 100,
+             xpath: "decsiraogc_idf_pfa:descrProprieta/text()"
+        }, {
+             headerName: 'Fonte di finanziamento',
+             width: 100,
+             xpath: "decsiraogc_idf_pfa:fonteFinanziamento/text()"
+        }, {
+             headerName: 'Data inizio validità',
+             width: 100,
+             xpath: "decsiraogc_idf_pfa:dataInizioValidita/text()"
+        },  {
+             headerName: 'Data fine validità',
+             width: 100,
+             xpath: "decsiraogc_idf_pfa:dataFineValidità/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_idf_pfa:PianiForestaliAziendali")}/>
