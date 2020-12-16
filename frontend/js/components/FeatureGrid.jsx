@@ -521,7 +521,7 @@ class SiraGrid extends React.Component {
             this.props.closeTree();
 
             // Configure and add the MLS layer to TOC
-            this.props.configureMLS(this.props.columnsDef, params.data);
+            this.props.configureMLS(this.props.columnsDef, params.data?.geometry, params.data);
         }
         // Zoom to feature when zoom enabled
         this.zoomToFeature(params);
