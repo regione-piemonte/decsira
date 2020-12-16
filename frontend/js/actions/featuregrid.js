@@ -122,8 +122,8 @@ const configureMultiLayerSelection = (columnsDef, params) => {
         const layersWithNoFilter = multiLayerSelect.map(({name, title = '', wmsUrl: url = layer.url}) => {
             return {
                 ...layer,
+                featureType: null,
                 url,
-                featureType: name,
                 name,
                 mlsLayer: true,
                 title: title ? title : name.split(':')[1] || name,
@@ -136,7 +136,7 @@ const configureMultiLayerSelection = (columnsDef, params) => {
         const mlsLayerName = 'MLS Layer';
         const layerWithFilter = {
             ...layer,
-            featureType: mlsLayerName,
+            featureType: null,
             name: mlsLayerName,
             title: mlsLayerName,
             id: 'selected_mls',
@@ -155,8 +155,8 @@ const configureMultiLayerSelection = (columnsDef, params) => {
             const additionalLayer = multiLayerSelectWithUrl.map(({name, wmsUrl}, index)=>{
                 return {
                     ...layer,
+                    featureType: null,
                     url: wmsUrl,
-                    featureType: name,
                     name,
                     title: name,
                     id: 'selected_' + index + "_mls",
