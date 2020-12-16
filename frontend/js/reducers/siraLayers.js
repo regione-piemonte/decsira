@@ -12,6 +12,7 @@ const {isObject, head, findIndex, isEmpty, includes} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('@mapstore/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL, SELECT_MLS} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
+const {TOGGLE_SIRA_CONTROL} = require("../actions/controls");
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const getVector = (state) => {
@@ -79,6 +80,19 @@ function layers(state = [], action) {
                 }
             });
         }, state);
+    case TOGGLE_SIRA_CONTROL:
+        if (action.control === "detail") {
+            const ftLayers = state.flat.filter(l => includes(l.id, '_mls') || l.id === 'gridItems');
+            return ftLayers.reduce((layersms, layer) => {
+                return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
+                    layer: layer.id,
+                    newProperties: {
+                        ...(includes(layer.id, '_mls') && {visibility: false})
+                    }
+                });
+            }, state);
+        }
+        return state;
     case SET_FEATURES:
     case CONFIGURE_INFO_TOPOLOGY:
         return msLayers(state, getAction("topologyItems", action.features || action.infoTopologyResponse.features));

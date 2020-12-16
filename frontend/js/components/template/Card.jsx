@@ -8,7 +8,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
-const {isObject, isEmpty} = require('lodash');
+const {isObject, isEmpty, uniq} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
@@ -30,6 +30,7 @@ const {changeMapView} = require('@mapstore/actions/map');
 
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;
+const configUtils = require('@mapstore/utils/ConfigUtils');
 
 require("./card.css");
 
@@ -60,7 +61,9 @@ class Card extends React.Component {
         pointSRS: PropTypes.string,
         zoom: PropTypes.number,
         multiLayerSelectionAttribute: PropTypes.string,
-        rowData: PropTypes.object
+        geometryPath: PropTypes.string,
+        featurePath: PropTypes.string,
+        multiLayerSelect: PropTypes.object
     };
 
     static defaultProps = {
@@ -113,6 +116,21 @@ class Card extends React.Component {
         this.props.configureTree(this.props.card.xml, this.props.treeTemplate);
     };
 
+    getGeometry = () => {
+        return this.props.card?.xml && this.props.geometryPath && TemplateUtils.getValue(this.props.card.xml, {
+            type: 6,
+            xpath: this.props.featurePath + "/" + this.props.geometryPath
+        });
+    };
+
+    getProperties = () => {
+        return (this.props.multiLayerSelect || []).reduce((acc, l) => ({
+            ...acc,
+            [l.name]: TemplateUtils.getValue(this.props.card?.xml,
+                this.props.featurePath + "/" + l.multiLayerSelectionAttribute + "/text()")
+        }), {});
+    };
+
     renderCard = () => {
         const {maxWidth, maxHeight} = getWindowSize();
         const xml = this.props.card.xml;
@@ -128,7 +146,7 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
-        const showMLSButton = this.props.mlsShow && !isEmpty(this.props?.rowData?.geometry?.coordinates);
+        const showMLSButton = this.props.mlsShow && !isEmpty(this.getGeometry()?.coordinates);
 
         const Template = (
             <div className="scheda-sira">
@@ -165,25 +183,46 @@ class Card extends React.Component {
     }
 
     onClickMLS = () => {
-        const {geometry = {}} = this.props.rowData;
-        this.props.configureMLS(this.props.columns, this.props.rowData);
+        const geometry = this.getGeometry();
+        this.props.configureMLS(null, geometry, this.getProperties());
         if (!!geometry?.coordinates) {
-            this.changeMapView([geometry]);
+            this.changeMapView([geometry], 15);
         }
     }
 
-    changeMapView = (geometries) => {
+    changeMapView = (geometries, zoom) => {
         let extent = geometries.reduce((prev, next) => {
             return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
         }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
-        const center = mapUtils.getCenterForExtent(extent, "4326");
+
         const srs = "EPSG:4326";
-        const proj = this.props.map.projection || "EPSG:3857";
-        extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
-        const zoom = mapUtils.getZoomForExtent(extent, this.props.map.size || {width: 876, height: 650}, 0, 16);
-        this.props.changeMapView(center, zoom, null, null, null, this.props.map.projection || "EPSG:3857");
-        if (!this.props.withMap) {
-            goToMapPage(center, zoom);
+        const maxZoom = 16;
+        const map = this.props.map.present;
+        const mapSize = map.size;
+        let newZoom = 1;
+        let newCenter = map.center;
+        const proj = map.projection || "EPSG:3857";
+
+        if (extent) {
+            extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
+            // zoom by the max. extent defined in the map's config
+            newZoom = zoom ? zoom : mapUtils.getZoomForExtent(extent, mapSize, 0, 21);
+            newZoom = (maxZoom && newZoom > maxZoom) ? maxZoom : newZoom;
+
+            // center by the max. extent defined in the map's config
+            newCenter = mapUtils.getCenterForExtent(extent, proj);
+
+            // do not reproject for 0/0
+            if (newCenter.x !== 0 || newCenter.y !== 0) {
+                // reprojects the center object
+                newCenter = configUtils.getCenter(newCenter, "EPSG:4326");
+            }
+            // adapt the map view by calling the corresponding action
+            this.props.changeMapView(newCenter, newZoom,
+                map.bbox, map.size, null, proj);
+            if (!this.props.withMap) {
+                goToMapPage(newCenter, newZoom);
+            }
         }
     };
 }
@@ -195,9 +234,11 @@ module.exports = connect((state) => {
         card: state.cardtemplate || {},
         open: state.siraControls.detail,
         treeTemplate: cardConfig && cardConfig.card ? cardConfig.card.treeTemplate : undefined,
+        geometryPath: cardConfig && cardConfig.card ? cardConfig.card.geometryPath : undefined,
+        featurePath: cardConfig && cardConfig.card ? cardConfig.card.featurePath : undefined,
         mlsShow: !isEmpty(cardConfig?.multiLayerSelect),
+        multiLayerSelect: cardConfig?.multiLayerSelect,
         map: state.map,
-        rowData: state.siradec?.currentFeatureRowData || {},
         columns: cardConfig.featuregrid?.grid?.columns || []
     };
 }, dispatch => {

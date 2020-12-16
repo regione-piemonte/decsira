@@ -105,14 +105,18 @@ const selectMLS = (layers) =>{
 };
 
 const getCQLFilter = (columnsDef, multiSelectLayer, params) =>{
-    return multiSelectLayer.map(({filterOn = '', multiLayerSelectionAttribute}) => {
-        const [result] = columnsDef.filter(c=> includes(c.xpath[0], multiLayerSelectionAttribute));
-        const value = params?.properties[result?.field || ''];
+    return multiSelectLayer.map(({filterOn = '', multiLayerSelectionAttribute, name}) => {
+        if (columnsDef) {
+            const [result] = columnsDef.filter(c=> includes(c.xpath[0], multiLayerSelectionAttribute));
+            const value = params?.properties[result?.field || ''];
+            return `${filterOn}='${value}'`;
+        }
+        const value = params[name];
         return `${filterOn}='${value}'`;
     }).join(';');
 };
 
-const configureMultiLayerSelection = (columnsDef, params) => {
+const configureMultiLayerSelection = (columnsDef, geometry, params) => {
     return (dispatch, getState) => {
         const {siradec, map, layers: msLayers} = getState();
         const crs = CoordinatesUtils.normalizeSRS(map?.present?.projection);
@@ -129,10 +133,10 @@ const configureMultiLayerSelection = (columnsDef, params) => {
                 mlsLayer: true,
                 title: title ? title : name.split(':')[1] || name,
                 id: name + '_mls',
-                params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, crs, TILED: true, version}
+                visibility: true,
+                params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version}
             };
         });
-        const zoomEnabled = !!params?.data?.geometry?.coordinates;
         const layerNames = multiLayerSelectFiltered.map(({name}) => name);
         const mlsLayerName = 'MLS Layer';
         const layerWithFilter = {
@@ -144,7 +148,7 @@ const configureMultiLayerSelection = (columnsDef, params) => {
             group: 'hidden',
             infoFormat: "text/html",
             visibility: true,
-            params: { LAYERS: layerNames.join(','), FORMAT: layer.format, TRANSPARENT: true, SRS: crs, crs, TILED: true, version,
+            params: { LAYERS: layerNames.join(','), FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version,
                 SLD_BODY: FilterUtils.getSLDMSLayers(featureTypeName, {}, layerNames),
                 CQL_FILTER: getCQLFilter(columnsDef, multiLayerSelectFiltered, params)
             }
@@ -165,7 +169,7 @@ const configureMultiLayerSelection = (columnsDef, params) => {
                     group: 'hidden',
                     infoFormat: "text/html",
                     visibility: true,
-                    params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, crs, TILED: true, version,
+                    params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version,
                         SLD_BODY: FilterUtils.getSLDMSLayers(featureTypeName, {}, [name]),
                         CQL_FILTER
                     }
@@ -176,7 +180,7 @@ const configureMultiLayerSelection = (columnsDef, params) => {
             layers = [...layersWithNoFilter, layerWithFilter];
         }
         Promise.all(layers).then(data => {
-            data && dispatch(selectMLS(activeFeatureLayerNotPresent && !zoomEnabled ? data.concat(layer) : data));
+            data && dispatch(selectMLS(activeFeatureLayerNotPresent ? [layer, ...data] : data));
         });
     };
 };
