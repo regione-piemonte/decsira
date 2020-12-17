@@ -20,9 +20,14 @@ const getVector = (state) => {
 };
 
 const checkSelectLayer = (state, vector) => {
-    if (state.flat && state.flat.length > 1 && (state.flat[state.flat.length - 1]).id !== "gridItems") {
-        const newLayers = state.flat.filter((l) => l.id !== "gridItems").concat(getVector(state) || vector).filter((l) => l);
-        return assign({}, state, {flat: newLayers});
+    if (state.flat && state.flat.length) {
+        const mlsLayer = state.flat.filter(l => l.id === "selected_mls");
+        const others = state.flat.filter(l => l.id !== "gridItems" && l.id !== "selected_mls");
+        const newLayers = [...others, getVector(state) || vector, ...mlsLayer].filter(l => l);
+        return {
+            ...state,
+            flat: newLayers
+        };
     }
     return state;
 };
