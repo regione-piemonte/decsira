@@ -1,6 +1,7 @@
 {
    "featureTypeName":"decsiraogc_derivazioni:StazPompaggio",
    "featureTypeNameLabel":"Stazioni di pompaggio",
+   "profiles": ["PA_GEN_DECSIRA@REG_PMN"],
    "nameSpaces": {
      "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
    },
@@ -60,18 +61,18 @@
            "type": 2
          },
 		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:desComuneStazPomp/text()"],
+           "type": 2
+         },
+		 {
            "headerName": "Denominazione",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:denominazioneStazPomp/text()"],
            "type": 2
-         },
-         {
-           "headerName": "Portata complessiva pompaggio (l/s)",
-           "suppressSorting": true,
-           "width":280,
-           "xpath": ["decsiraogc_derivazioni:qComplessivaStazPomp/text()"],
-           "type": 1
          },
 		 {
            "headerName": "Tipologia",
@@ -80,12 +81,12 @@
            "xpath": ["decsiraogc_derivazioni:desTipoStazPomp/text()"],
            "type": 2
          },
-		 {
-           "headerName": "Comune di localizzazione",
+         {
+           "headerName": "Portata complessiva pompaggio (l/s)",
            "suppressSorting": true,
-           "width":200,
-           "xpath": ["decsiraogc_derivazioni:desComuneStazPomp/text()"],
-           "type": 2
+           "width":280,
+           "xpath": ["decsiraogc_derivazioni:qComplessivaStazPomp/text()"],
+           "type": 1
          },
 		 {
            "headerName": "Potenza installata (kW)",
@@ -145,6 +146,21 @@
         },
 		{
             "index": 4,
+            "attribute": "decsiraogc_derivazioni:desTipoStazPomp",
+            "label":"Tipologia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_staz_pompaggio",
+                "propertyName": "id_tipo_stazione,des_tipo_stazione",
+                "sortBy": "id_tipo_stazione+A"
+             }
+			},
+			"valueId":"des_tipo_stazione",
+			"valueLabel":"des_tipo_stazione"
+        },
+		{
+            "index": 5,
             "attribute": "decsiraogc_derivazioni:desProvinciaStazPomp",
             "label":"Localizzazione - Provincia",
             "type":"list",
@@ -159,7 +175,7 @@
            "valueLabel":"toponimo"
         },
         {
-           "index": 5,
+           "index": 6,
            "attribute": "decsiraogc_derivazioni:desComuneStazPomp",
            "label":"Localizzazione - Comune",
            "type":"list",
@@ -179,42 +195,27 @@
            }
         },
 		{
-			"index": 6,
+			"index": 7,
 			"attribute": "decsiraogc_derivazioni:localitaStazPomp",
 			"label":"Localizzazione - località",
 			"type":"string"
         },
 		{
-			"index": 7,
+			"index": 8,
 			"attribute": "decsiraogc_derivazioni:qComplessivaStazPomp",
 			"label":"Portata complessiva di pompaggio (l/s)",
 			"type":"number"
         },
 		{
-			"index": 8,
-			"attribute": "decsiraogc_derivazioni:qInstallataStazPomp",
-			"label":"Potenza complessiva installata (kW)",
+			"index": 9,
+			"attribute": "decsiraogc_derivazioni:volumeAnnuoStazPomp",
+			"label":"Volume di pompaggio annuo (m3)",
 			"type":"number"
         },
 		{
-            "index": 9,
-            "attribute": "decsiraogc_derivazioni:desTipoStazPomp",
-            "label":"Tipologia",
-            "type":"list",
-            "valueService": {
-              "urlParams": {
-                "typeName": "decsiraogc_decodif:decsira_d_tipo_staz_pompaggio",
-                "propertyName": "id_tipo_stazione,des_tipo_stazione",
-                "sortBy": "id_tipo_stazione+A"
-             }
-			},
-			"valueId":"des_tipo_stazione",
-			"valueLabel":"des_tipo_stazione"
-        },
-		{
 			"index": 10,
-			"attribute": "decsiraogc_derivazioni:volumeAnnuoStazPomp",
-			"label":"Volume di pompaggio annuo (m3)",
+			"attribute": "decsiraogc_derivazioni:qInstallataStazPomp",
+			"label":"Potenza complessiva installata (kW)",
 			"type":"number"
         }
      ]

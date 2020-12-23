@@ -13,17 +13,28 @@
             id: true,
             xpath: "@gml:id"
         }, {
-             headerName: 'N. classificazione pratica',
-             width: 90,
-             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratFontanile/text()"
+             headerName: 'Codice rilievo',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:codiceRilievoFontanile/text()"
         }, {
              headerName: 'Codice ROC',
              width: 90,
              xpath: "decsiraogc_operecaptazione:codiceROCFontanile/text()"
         }, {
-             headerName: 'Codice rilievo',
+             headerName: 'Codice utenza',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:codiceRilievoFontanile/text()"
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile/text()"
+        }, {
+             headerName: 'N. classificazione pratica',
+             width: 90,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratFontanile/text()"
+        }, {
+             headerName: 'Derivazioni servite',
+             width: 100,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodrilFontanile/text()"
         }, {
              headerName: 'Comune di localizzazione',
              width: 100,
@@ -33,18 +44,10 @@
              width: 100,
              xpath: "decsiraogc_operecaptazione:qMaxDerivFontanile/text()"
         }, {
-             headerName: 'Derivazioni servite',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:elencoDerivCodrilFontanile/text()"
-        }, {
-             headerName: 'Codice utenza',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile/text()"
-        },  {
              headerName: 'Portata Media  derivabile (l/s)',
              width: 100,
              xpath: "decsiraogc_operecaptazione:qMedDerivFontanile/text()"
-        },  {
+        }, {
              headerName: 'Presenza misuratore',
              width: 100,
              xpath: "decsiraogc_operecaptazione:flgMisuratoreFontanile/text()"

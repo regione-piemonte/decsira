@@ -684,43 +684,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.join" id="Cb2c98c55-6684-4d93-b619-8ed0e06ae9ae" priority="normal">
-        <source name="types">
-            <class>
-                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <source name="types">
-            <class>
-                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
-            </class>
-        </target>
-        <complexParameter name="join">
-            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
-                <class>
-                    <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <class>
-                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <jp:condition>
-                    <property>
-                        <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="id_misuratore"/>
-                    </property>
-                    <property>
-                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="id_oggetto_princ"/>
-                    </property>
-                </jp:condition>
-            </jp:join-parameter>
-        </complexParameter>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.retype" id="C9a8bf50f-ce44-4c7f-be18-7f77cec38723" priority="normal">
         <source>
             <class>
@@ -1269,5 +1232,90 @@
         </target>
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C08f6241c-dec4-431d-b771-f2ffcddc2676" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_ogg_tipo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idoggtipoMisuratore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C48154033-d906-4ebe-8309-31ca1b7ed4eb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_ogg_tipo_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="OggettoAssociatoMisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="idoggtipoprinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b9f215b-1a6c-4d46-8ae1-5d3e2c22189d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_misuratore_opera_derivazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_rilievo_capt"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="MisuratoreOperaDerivazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+                <child name="codiceRilievoCaptazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cb2c98c55-6684-4d93-b619-8ed0e06ae9ae" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="MisuratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_misuratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_ogg_tipo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_ogg_tipo_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
     </cell>
 </alignment>

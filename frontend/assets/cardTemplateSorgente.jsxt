@@ -16,9 +16,11 @@
             <LabeledField label='Codice rilievo' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceRilievoSorgente/text()")
             }/>
-			<LabeledField label='Codice SII' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceSIISorgente/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Codice SII' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:codiceSIISorgente/text()")
+				}/>
+			</ProfileWrapper>
             <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denominazioneSorgente/text()")
             }/>
@@ -31,15 +33,17 @@
 			<LabeledField label='Località' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:localitaSorgente/text()")
             }/>
-			<LabeledField label="Quota del Piano Campagna s.l.m. (m)" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:quotaPianoCSorgente/text()")
-            }/>
-			<LabeledField label="Impianto di acquedotto" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denomImpAcqSorgente/text()")
-            }/>
-			<LabeledField label='Acquedotto' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denomAcquedSorgente/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label="Quota del Piano Campagna s.l.m. (m)" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:quotaPianoCSorgente/text()")
+				}/>
+				<LabeledField label="Impianto di acquedotto" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denomImpAcqSorgente/text()")
+				}/>
+				<LabeledField label='Acquedotto' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:denomAcquedSorgente/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 
 		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='2' expanded={true}>
@@ -56,61 +60,70 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:volMaxConcSorgente/text()")
             }/>
 			
-			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
-				<SiraTable
-					   id="PrelievoPerUtenzaSorgente"
-					   selectedRow={model.PrelievoPerUtenzaSorgente}
-					   wfsVersion="2.0"
-					   rowSelection={false}
-					   columns={
-						   [
-							   {
-								   headerName: 'Codice rilievo',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
-							   },
-							   {
-								   headerName: 'Stato pratica',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:desStatoDeriv/text()"
-							   },
-							   {
-								   headerName: 'nel periodo dal',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
-							   },
-							   {
-								   headerName: 'nel periodo al',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoA/text()"
-							   },
-							   {
-								   headerName: 'Portata massima istantanea (l/s)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:portataMaxDerivata/text()"
-							   },
-							   {
-								   headerName: 'Volume massimo annuo (m3)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
-							   }
-						   ]
-					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:prelievoPerUtenzaSorgente")}/>
-            </Section>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
+					<SiraTable
+						   id="PrelievoPerUtenzaSorgente"
+						   selectedRow={model.PrelievoPerUtenzaSorgente}
+						   wfsVersion="2.0"
+						   rowSelection={false}
+						   columns={
+							   [
+								   {
+									   headerName: 'Codice rilievo',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+								   },
+								   {
+									   headerName: 'Stato pratica',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:desStatoDeriv/text()"
+								   },
+								   {
+									   headerName: 'nel periodo dal',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+								   },
+								   {
+									   headerName: 'nel periodo al',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+								   },
+								   {
+									   headerName: 'Portata massima istantanea (l/s)',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+								   },
+								   {
+									   headerName: 'Portata media (l/s)',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:portataMedDerivata/text()"
+								   },
+								   {
+									   headerName: 'Volume massimo annuo (m3)',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+								   }
+							   ]
+						   }
+						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:prelievoPerUtenzaSorgente")}/>
+				</Section>
+			</ProfileWrapper>
 			
         </Section>
 
 		<Section header='RILASCIO A VALLE DELLA PRESA' eventKey='4' expanded={true}>
-            <LabeledField label='Presenza dispositivi per il rilascio' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgDispositiviSorgente/text()")
-            }/>
-			<LabeledField label='In deroga al DMV' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgDerogaDMVSorgente/text()")
-            }/>
-            <LabeledField label='Ulteriori obblighi' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:ulterioriObblighiSorgente/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Presenza dispositivi per il rilascio' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgDispositiviSorgente/text()")
+				}/>
+				<LabeledField label='In deroga al DMV' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgDerogaDMVSorgente/text()")
+				}/>
+				<LabeledField label='Ulteriori obblighi' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:ulterioriObblighiSorgente/text()")
+				}/>
+			</ProfileWrapper>
 			
 			<Section header="Rilascio imposto" eventKey='5' expanded={false}>
 				<SiraTable
@@ -144,14 +157,16 @@
 	
 
 
-		<Section header='DATI SPECIFICI - sorgente' eventKey='6' expanded={true}>
-            <LabeledField label='Tipo di sorgente' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:desTipoSorgente/text()")
-            }/>
-            <LabeledField label="Sorgente tributaria di corso d'acqua" value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgTributariaSorgente/text()")
-            }/>
-		</Section>
+		<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+			<Section header='DATI SPECIFICI - sorgente' eventKey='6' expanded={false}>
+				<LabeledField label='Tipo di sorgente' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:desTipoSorgente/text()")
+				}/>
+				<LabeledField label="Sorgente tributaria di corso d'acqua" value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Sorgente/decsiraogc_operecaptazione:flgTributariaSorgente/text()")
+				}/>
+			</Section>
+		</ProfileWrapper>
 
         <Section header='MAPPA SINTESI - Prese da sorgenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
 	      <MappaScheda

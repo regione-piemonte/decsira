@@ -52,11 +52,11 @@
            "xpath": ["@gml:id"],
            "type": 2
          },
-         {
-           "headerName": "N. classificazione pratica",
+		 {
+           "headerName": "Codice rilievo",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratFontanile/text()"],
+           "xpath": ["decsiraogc_operecaptazione:codiceRilievoFontanile/text()"],
            "type": 2
          },
 		 {
@@ -67,10 +67,27 @@
            "type": 2
          },
          {
-           "headerName": "Codice rilievo",
+           "headerName": "Codice utenza",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:codiceRilievoFontanile/text()"],
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+		 {
+           "headerName": "N. classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratFontanile/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+		 {
+           "headerName": "Derivazioni servite",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilFontanile/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
 		 {
@@ -88,20 +105,6 @@
            "type": 1
          },
          {
-           "headerName": "Derivazioni servite",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilFontanile/text()"],
-           "type": 2
-         },
-		 {
-           "headerName": "Codice utenza",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile/text()"],
-           "type": 2
-         },
-         {
            "headerName": "Portata Media derivabile (l/s)",
            "suppressSorting": true,
            "width":120,
@@ -113,6 +116,7 @@
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_operecaptazione:flgMisuratoreFontanile/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -170,14 +174,36 @@
 			"label":"Codice ROC l.r. 22/99",
 			"type":"string"
         },
-        {
+		{
 			"index": 5,
+			"attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:classificazionePratica",
+			"label":"N. classificazione pratica",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+			"type":"string"
+        },
+		{
+            "index": 6,
+            "attribute": "decsiraogc_operecaptazione:desStatoEserFontanile",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
+        },
+        {
+			"index": 7,
 			"attribute": "decsiraogc_operecaptazione:denominazioneFontanile",
 			"label":"Denominazione",
 			"type":"string"
         },
 		{
-            "index": 6,
+            "index": 8,
             "attribute": "decsiraogc_operecaptazione:desProvinciaFontanile",
             "label":"Provincia",
             "type":"list",
@@ -192,7 +218,7 @@
            "valueLabel":"toponimo"
         },
         {
-           "index": 7,
+           "index": 9,
            "attribute": "decsiraogc_operecaptazione:desComuneFontanile",
            "label":"Comune",
            "type":"list",
@@ -212,40 +238,7 @@
            }
         },
         {
-			"index": 8,
-			"attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:classificazionePratica",
-			"label":"N. classificazione pratica",
-			"type":"string"
-        },
-		{
-            "index": 9,
-            "attribute": "decsiraogc_operecaptazione:qMaxDerivFontanile",
-            "label":"Portata massima derivabile (l/s)",
-            "type":"number"
-        },
-		{
             "index": 10,
-            "attribute": "decsiraogc_operecaptazione:qMedDerivFontanile",
-            "label":"Portata media annua derivabile (l/s)",
-            "type":"number"
-        },
-		{
-            "index": 11,
-            "attribute": "decsiraogc_operecaptazione:desStatoEserFontanile",
-            "label":"Stato di esercizio",
-            "type":"list",
-            "valueService": {
-              "urlParams": {
-                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
-                "propertyName": "id_stato_esercizio,des_stato_esercizio",
-                "sortBy": "id_stato_esercizio+A"
-             }
-			},
-			"valueId":"des_stato_esercizio",
-			"valueLabel":"des_stato_esercizio"
-        },
-        {
-            "index": 12,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoEnergetico",
             "label":"Uso energetico",
             "type":"list",
@@ -257,7 +250,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 13,
+            "index": 11,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoRiqualifEnergia",
             "label":"Uso riqualificazione energia",
             "type":"list",
@@ -269,7 +262,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 14,
+            "index": 12,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoProduzione",
             "label":"Uso produzione",
             "type":"list",
@@ -281,7 +274,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 15,
+            "index": 13,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoLavagInerti",
             "label":"Uso lavaggio inerti",
             "type":"list",
@@ -293,7 +286,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 16,
+            "index": 14,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoZootecnico",
             "label":"Uso zootecnico",
             "type":"list",
@@ -305,7 +298,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 17,
+            "index": 15,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoPiscicolo",
             "label":"Uso piscicolo",
             "type":"list",
@@ -317,7 +310,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 18,
+            "index": 16,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoPotabile",
             "label":"Uso potabile",
             "type":"list",
@@ -329,7 +322,7 @@
             "valueLabel":"name"
          },
          {
-            "index": 19,
+            "index": 17,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoDomestico",
             "label":"Uso domestico",
             "type":"list",
@@ -341,7 +334,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 20,
+            "index": 18,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoCivile",
             "label":"Uso civile",
             "type":"list",
@@ -353,7 +346,7 @@
             "valueLabel":"name"
          },
 		 {
-            "index": 21,
+            "index": 19,
             "attribute": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:flgUsoAgricolo",
             "label":"Uso agricolo",
             "type":"list",
@@ -364,7 +357,19 @@
             "valueId":"value",
             "valueLabel":"name"
          },
-		 {
+		{
+            "index": 20,
+            "attribute": "decsiraogc_operecaptazione:qMaxDerivFontanile",
+            "label":"Portata massima derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 21,
+            "attribute": "decsiraogc_operecaptazione:qMedDerivFontanile",
+            "label":"Portata media annua derivabile (l/s)",
+            "type":"number"
+        },
+		{
             "index": 22,
             "attribute": "decsiraogc_operecaptazione:volMaxConcFontanile",
             "label":"Volume annuo derivato (m3/s)",

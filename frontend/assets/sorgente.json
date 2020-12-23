@@ -52,11 +52,11 @@
            "xpath": ["@gml:id"],
            "type": 2
          },
-         {
-           "headerName": "N. classificazione pratica",
+		 {
+           "headerName": "Codice rilievo",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratSorgente/text()"],
+           "xpath": ["decsiraogc_operecaptazione:codiceRilievoSorgente/text()"],
            "type": 2
          },
 		 {
@@ -66,11 +66,51 @@
            "xpath": ["decsiraogc_operecaptazione:codiceROCSorgente/text()"],
            "type": 2
          },
-         {
-           "headerName": "Codice rilievo",
+		 {
+           "headerName": "Codice utenza",
            "suppressSorting": true,
            "width":120,
-           "xpath": ["decsiraogc_operecaptazione:codiceRilievoSorgente/text()"],
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaSorgente/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "N. classificazione pratica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivNclasPratSorgente/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+		 {
+           "headerName": "Derivazioni servite",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilSorgente/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+         {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desComuneSorgente/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Area idrografica",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desAreaIdroSorgente/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         },
+		 {
+           "headerName": "Bacino idrografico",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_operecaptazione:desBacIdroSorgente/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
 		 {
@@ -80,47 +120,12 @@
            "xpath": ["decsiraogc_operecaptazione:denominazioneSorgente/text()"],
            "type": 2
          },
-		 {
-           "headerName": "Bacino idrografico",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:desBacIdroSorgente/text()"],
-           "type": 2
-         },
-		 {
-           "headerName": "Area idrografica",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:desAreaIdroSorgente/text()"],
-           "type": 2
-         },
-		 {
-           "headerName": "Comune di localizzazione",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:desComuneSorgente/text()"],
-           "type": 2
-         },
          {
            "headerName": "Portata max derivabile (l/s)",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_operecaptazione:qMaxDerivSorgente/text()"],
            "type": 1
-         },
-         {
-           "headerName": "Derivazioni servite",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodrilSorgente/text()"],
-           "type": 2
-         },
-		 {
-           "headerName": "Codice utenza",
-           "suppressSorting": true,
-           "width":120,
-           "xpath": ["decsiraogc_operecaptazione:elencoDerivCodutenzaSorgente/text()"],
-           "type": 2
          },
          {
            "headerName": "Portata Media derivabile (l/s)",
@@ -134,6 +139,7 @@
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_operecaptazione:flgMisuratoreSorgente/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
@@ -192,16 +198,55 @@
 			"type":"string"
         },
 		{
+			"index": 9,
+			"attribute": "decsiraogc_operecaptazione:sorgenteDerivazione/decsiraogc_operecaptazione:SorgenteDerivazione/decsiraogc_operecaptazione:classificazionePratica",
+			"label":"N. classificazione pratica",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+			"type":"string"
+        },
+		{
 			"index": 5,
 			"attribute": "decsiraogc_operecaptazione:codiceSIISorgente",
 			"label":"Codice SII",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
 			"type":"string"
+        },
+		{
+            "index": 12,
+            "attribute": "decsiraogc_operecaptazione:desStatoEserSorgente",
+            "label":"Stato di esercizio",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
+                "propertyName": "id_stato_esercizio,des_stato_esercizio",
+                "sortBy": "id_stato_esercizio+A"
+             }
+			},
+			"valueId":"des_stato_esercizio",
+			"valueLabel":"des_stato_esercizio"
         },
         {
 			"index": 6,
 			"attribute": "decsiraogc_operecaptazione:denominazioneSorgente",
 			"label":"Denominazione",
 			"type":"string"
+        },
+		{
+            "index": 13,
+            "attribute": "decsiraogc_operecaptazione:desTipoSorgente",
+            "label":"Tipo di sorgente",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_sorgente",
+                "propertyName": "id_tipo_sorgente,des_tipo_sorgente",
+                "sortBy": "id_tipo_sorgente+A"
+             }
+			},
+			"valueId":"des_tipo_sorgente",
+			"valueLabel":"des_tipo_sorgente"
         },
 		{
             "index": 7,
@@ -237,54 +282,6 @@
                 "from": "sigla",
                 "to": "sigla_provincia"
            }
-        },
-        {
-			"index": 9,
-			"attribute": "decsiraogc_operecaptazione:sorgenteDerivazione/decsiraogc_operecaptazione:SorgenteDerivazione/decsiraogc_operecaptazione:classificazionePratica",
-			"label":"N. classificazione pratica",
-			"type":"string"
-        },
-		{
-            "index": 10,
-            "attribute": "decsiraogc_operecaptazione:qMaxDerivSorgente",
-            "label":"Portata massima derivabile (l/s)",
-            "type":"number"
-        },
-		{
-            "index": 11,
-            "attribute": "decsiraogc_operecaptazione:qMedDerivSorgente",
-            "label":"Portata media annua derivabile (l/s)",
-            "type":"number"
-        },
-		{
-            "index": 12,
-            "attribute": "decsiraogc_operecaptazione:desStatoEserSorgente",
-            "label":"Stato di esercizio",
-            "type":"list",
-            "valueService": {
-              "urlParams": {
-                "typeName": "decsiraogc_decodif:decsira_d_stato_esercizio",
-                "propertyName": "id_stato_esercizio,des_stato_esercizio",
-                "sortBy": "id_stato_esercizio+A"
-             }
-			},
-			"valueId":"des_stato_esercizio",
-			"valueLabel":"des_stato_esercizio"
-        },
-		{
-            "index": 13,
-            "attribute": "decsiraogc_operecaptazione:desTipoSorgente",
-            "label":"Tipo di sorgente",
-            "type":"list",
-            "valueService": {
-              "urlParams": {
-                "typeName": "decsiraogc_decodif:decsira_d_tipo_sorgente",
-                "propertyName": "id_tipo_sorgente,des_tipo_sorgente",
-                "sortBy": "id_tipo_sorgente+A"
-             }
-			},
-			"valueId":"des_tipo_sorgente",
-			"valueLabel":"des_tipo_sorgente"
         },
         {
             "index": 14,
@@ -407,6 +404,18 @@
             "valueLabel":"name"
          },
 		 {
+            "index": 10,
+            "attribute": "decsiraogc_operecaptazione:qMaxDerivSorgente",
+            "label":"Portata massima derivabile (l/s)",
+            "type":"number"
+        },
+		{
+            "index": 11,
+            "attribute": "decsiraogc_operecaptazione:qMedDerivSorgente",
+            "label":"Portata media annua derivabile (l/s)",
+            "type":"number"
+        },
+		{
             "index": 24,
             "attribute": "decsiraogc_operecaptazione:volMaxConcSorgente",
             "label":"Volume annuo derivato (m3/s)",

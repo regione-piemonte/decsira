@@ -47,27 +47,31 @@
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:dataScadenzaProvv/text()")
 				}/>
 			</ProfileWrapper>
-			<LabeledField label='Ente competente' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desAutoritaCompetente/text()")
-            }/>
-			<LabeledField label='Stato autorizzazione' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desStatoAutorizzazione/text()")
-            }/>
-			<LabeledField label='Stato pratica' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desStatoPraticaDeriv/text()")
-            }/>
-			<LabeledField label='Uso promiscuo' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgUsoPromiscuo/text()")
-            }/>
-			<LabeledField label='Note' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:noteDerivazione/text()")
-            }/>
+				<LabeledField label='Ente competente' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desAutoritaCompetente/text()")
+				}/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Stato autorizzazione' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desStatoAutorizzazione/text()")
+				}/>
+				<LabeledField label='Stato pratica' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:desStatoPraticaDeriv/text()")
+				}/>
+				<LabeledField label='Uso promiscuo' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgUsoPromiscuo/text()")
+				}/>
+				<LabeledField label='Note' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:noteDerivazione/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 
         <Section header='DATI TITOLARE' eventKey='2' expanded={true}>
-            <LabeledField label='Tipologia' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:desTipoSoggetto/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Tipologia' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:desTipoSoggetto/text()")
+				}/>
+			</ProfileWrapper>
             <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()")
             }/>
@@ -106,6 +110,7 @@
 						   {
 							   headerName: 'Tipo soggetto',
 							   width: 150,
+							   profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							   xpath:"decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:desTipoSoggettoRaggr/text()"
 						   },
 						   {
@@ -176,8 +181,9 @@
             }/>
 		</Section>
 		
-		<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-			<Section header='DATI SOVRACANONE - dati generali' eventKey='5' expanded={true}>
+		
+		<Section header='DATI SOVRACANONE - dati generali' eventKey='5' expanded={true}>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 				<LabeledField label='Presenza sovracanone' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgSovracanone/text()")
 				}/>
@@ -185,11 +191,13 @@
 				<LabeledField label='Rivieraschi' value={
 				   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgRivieraschi/text()")
 				}/>
+			</ProfileWrapper>
 
-				<LabeledField label='Bacino Imbrifero Montano' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgBIM/text()")
-				}/>
+			<LabeledField label='Bacino Imbrifero Montano' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:flgBIM/text()")
+			}/>
 				
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 				<Section header='DATI SOVRACANONE - elenco comuni rivieraschi' eventKey='6' expanded={false}>
 					<SiraTable
 						   id="SovracanoneDerivazione"
@@ -212,8 +220,8 @@
 						   }
 						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:sovracanoneDerivazione")}/>
 				</Section>
-			</Section>
-		</ProfileWrapper>
+			</ProfileWrapper>
+		</Section>
 		
 		<Section header='OPERE DI CAPTAZIONE' eventKey='7' expanded={true}>
             <LabeledField label='Numero prese' value={
@@ -238,23 +246,25 @@
 			
 		</Section>
 		
-		<Section header='ACQUEDOTTI' eventKey='8' expanded={false}>
-			<SiraTable
-				   id="AcquedottiDerivazione"
-				   selectedRow={model.AcquedottiDerivazione}
-				   wfsVersion="2.0"
-				   rowSelection={false}
-				   columns={
-					   [
-						   {
-							   headerName: 'Denominazione',
-							   width: 150,
-							   xpath:"decsiraogc_derivazioni:AcquedottiDerivazione/decsiraogc_derivazioni:denomAcquedottoDeriv/text()"
-						   }
-					   ]
-				   }
-				   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:acquedottiDerivazione")}/>
-		</Section>
+		<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+			<Section header='ACQUEDOTTI' eventKey='8' expanded={false}>
+				<SiraTable
+					   id="AcquedottiDerivazione"
+					   selectedRow={model.AcquedottiDerivazione}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Denominazione',
+								   width: 150,
+								   xpath:"decsiraogc_derivazioni:AcquedottiDerivazione/decsiraogc_derivazioni:denomAcquedottoDeriv/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:acquedottiDerivazione")}/>
+			</Section>
+		</ProfileWrapper>
 		
 		<Section header='RESTITUZIONE' eventKey='9' expanded={true}>
             <LabeledField label='Portata complessivamente restituita (l/s)' value={
@@ -292,12 +302,12 @@
 						   {
 							   headerName: 'Denominazione',
 							   width: 150,
-							   profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							   xpath:"decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:denominazioneUso/text()"
 						   },
 						   {
 							   headerName: 'Codice SIRA stabilimento',
 							   width: 150,
+							   profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							   xpath:"decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:codiceSiraUso/text()"
 						   },
 						   {
@@ -320,49 +330,51 @@
 				   }
 				   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:usiDerivazione")}/>
 			
-			<Section header='PERIODI DI UTILIZZO' eventKey='11' expanded={( model.UsiDerivazione !== undefined && model.UsiDerivazione !== null ) ? true: false}>
-				<SiraTable
-                  id="PeriodiUtilizzoUsi"
-                  selectedRow={model.PeriodiUtilizzoUsi}
-                  wfsVersion="2.0"
-                  rowSelection={false}
-                  dependsOn={{
-                      tableId: "UsiDerivazione",
-                      parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:usiDerivazione"),
-                      xpath: "decsiraogc_derivazioni:UsiDerivazione/@gml:id",
-					  pdfTitle: "Codice uso: {{decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:idUsoTipouso/text()}}"
-                  }}
-                  columns={
-                      [
-                        {
-							hide: true,
-							id: true,
-							xpath:"../../decsiraogc_derivazioni:UsiDerivazione/@gml:id"
-						},
-						{
-							headerName: 'Dal',
-							width: 100,
-							xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:inizioPeriodoUso/text()"
-						},
-						{
-							headerName: 'al',
-							width: 100,
-							xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:finePeriodoUso/text()"
-						},
-						{
-							headerName: 'Portata massima utilizzata (l/s)',
-							width: 100,
-							xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:qMaxPeriodoUso/text()"
-						},
-						{
-							headerName: 'Portata media utilizzata (l/s)',
-							width: 100,
-							xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:qMedPeriodoUso/text()"
-						}
-                      ]
-                  }
-                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:periodiUtilizzoUsi")}/>
-            </Section>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<Section header='PERIODI DI UTILIZZO' eventKey='11' expanded={( model.UsiDerivazione !== undefined && model.UsiDerivazione !== null ) ? true: false}>
+					<SiraTable
+					  id="PeriodiUtilizzoUsi"
+					  selectedRow={model.PeriodiUtilizzoUsi}
+					  wfsVersion="2.0"
+					  rowSelection={false}
+					  dependsOn={{
+						  tableId: "UsiDerivazione",
+						  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:usiDerivazione"),
+						  xpath: "decsiraogc_derivazioni:UsiDerivazione/@gml:id",
+						  pdfTitle: "Codice uso: {{decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:idUsoTipouso/text()}}"
+					  }}
+					  columns={
+						  [
+							{
+								hide: true,
+								id: true,
+								xpath:"../../decsiraogc_derivazioni:UsiDerivazione/@gml:id"
+							},
+							{
+								headerName: 'Dal',
+								width: 100,
+								xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:inizioPeriodoUso/text()"
+							},
+							{
+								headerName: 'al',
+								width: 100,
+								xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:finePeriodoUso/text()"
+							},
+							{
+								headerName: 'Portata massima utilizzata (l/s)',
+								width: 100,
+								xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:qMaxPeriodoUso/text()"
+							},
+							{
+								headerName: 'Portata media utilizzata (l/s)',
+								width: 100,
+								xpath:"decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:qMedPeriodoUso/text()"
+							}
+						  ]
+					  }
+					  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:periodiUtilizzoUsi")}/>
+				</Section>
+			</ProfileWrapper>
 			
 			<Section header='DATI SPECIFICI - uso energetico' eventKey='12' expanded={( model.UsiDerivazione !== undefined && model.UsiDerivazione !== null ) ? true: false}>
 				<SiraTable
@@ -386,6 +398,7 @@
 						{
 							headerName: 'Centrale',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:desCollocEnerg/text()"
 						},
 						{
@@ -396,6 +409,7 @@
 						{
 							headerName: 'Energia annualmente producibile (kWh)',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:energPaEner/text()"
 						}
                       ]
@@ -425,6 +439,7 @@
 						{
 							headerName: 'Centrale in caverna',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIncavernaRiqual/text()"
 						},
 						{
@@ -435,6 +450,7 @@
 						{
 							headerName: 'Energia annualmente producibile (kWh)',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:energPaRiqual/text()"
 						},
 						{
@@ -445,6 +461,7 @@
 						{
 							headerName: 'Energia annua utilizzata per il pompaggio (kWh)',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:energiaAnnuaPompRiqual/text()"
 						}
                       ]
@@ -479,6 +496,7 @@
 						{
 							headerName: 'Bocca non tassata',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgBoccaNontassataAgric/text()"
 						},
 						{
@@ -489,21 +507,25 @@
 						{
 							headerName: 'Irrigazione per scorrimento',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigScorrimAgric/text()"
 						},
 						{
 							headerName: 'Irrigazione per aspersione',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigAspersAgric/text()"
 						},
 						{
 							headerName: 'Irrigazione per microirrigazione',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigMicroirrAgric/text()"
 						},
 						{
 							headerName: 'Irrigazione per sommersione',
 							width: 100,
+							profiles: ["B", "PA_GEN_DECSIRA@REG_PMN"],
 							xpath:"decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigSommersAgric/text()"
 						}
                       ]

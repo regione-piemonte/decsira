@@ -13,21 +13,28 @@
             id: true,
             xpath: "@gml:id"
         }, {
-             headerName: 'N. classificazione pratica',
-             width: 90,
-             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratPozzo/text()"
+             headerName: 'Codice rilievo',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:codiceRilievoPozzo/text()"
         }, {
              headerName: 'Codice ROC',
              width: 90,
              xpath: "decsiraogc_operecaptazione:codiceROCPozzo/text()"
         }, {
-             headerName: 'Codice rilievo',
+             headerName: 'Codice utenza',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:codiceRilievoPozzo/text()"
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenza/text()"
         }, {
-             headerName: 'Tipo di falda',
+             headerName: 'N. classificazione pratica',
+             width: 90,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratPozzo/text()"
+        }, {
+             headerName: 'Derivazioni servite',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:desTipoFaldaPozzo/text()"
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodril/text()"
         }, {
              headerName: 'Comune di localizzazione',
              width: 100,
@@ -37,25 +44,22 @@
              width: 100,
              xpath: "decsiraogc_operecaptazione:qMaxDerivPozzo/text()"
         }, {
-             headerName: 'Derivazioni servite',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:elencoDerivCodril/text()"
-        }, {
-             headerName: 'Codice utenza',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenza/text()"
-        },  {
              headerName: 'Portata Media  derivabile (l/s)',
              width: 100,
              xpath: "decsiraogc_operecaptazione:qMedDerivPozzo/text()"
-        },  {
-             headerName: 'Presenza misuratore',
+        }, {
+             headerName: 'Tipo di falda',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:flgMisuratore/text()"
+             xpath: "decsiraogc_operecaptazione:desTipoFaldaPozzo/text()"
         }, {
             headerName: 'Profondita',
             width: 100,
             xpath: "decsiraogc_operecaptazione:profonditaPozzo/text()"
+        }, {
+             headerName: 'Presenza misuratore',
+             width: 100,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:flgMisuratore/text()"
         }
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_operecaptazione:Pozzo")}/>

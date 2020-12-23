@@ -36,6 +36,14 @@
                 <sequence>
 				
 					<xs:element name="idRestituzione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idoggtipoRestituzione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 
 					<xs:element name="geomRestituzione" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
 
@@ -221,6 +229,14 @@
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="30" />
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idoggtipoprinc" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
                             </xs:restriction>
 						</xs:simpleType>
                     </xs:element>

@@ -39,6 +39,24 @@
                 <sequence>
 				
 					<xs:element name="idPresa"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idoggtipoPresa" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="tipoPresa"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desTipoPresa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 
 					<xs:element name="geomPresa" type="gml:GeometryPropertyType" minOccurs="1" />
 
@@ -368,6 +386,14 @@
                         </xs:simpleType>
                     </xs:element>
 					
+					<xs:element name="flgUsoPotabilePresa" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
 					<!-- oggetti innestati -->
 					
 					<xs:element name="presaDMV" type="decsiraogc_operecaptazione:PresaDMVPropertyType" minOccurs="0" maxOccurs="unbounded" />
@@ -392,6 +418,14 @@
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="30" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idoggtipoprinc" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
@@ -587,6 +621,8 @@
 					</xs:element>
 					 
 					<xs:element name="portataMaxDerivata" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="portataMedDerivata" type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					
 					<xs:element name="volumeMaxConcessione" type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					

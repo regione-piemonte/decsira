@@ -28,18 +28,20 @@
 			<LabeledField label='Località' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:localitaTrincea/text()")
             }/>
-			<LabeledField label='Sviluppo longitudinale (m)' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:svilLongTrincea/text()")
-            }/>
-			<LabeledField label='Inclinazione' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:inclinazioneTrincea/text()")
-            }/>
-			<LabeledField label='Profondita massima (m)' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:profMaxTrincea/text()")
-            }/>
-			<LabeledField label='Profondita minima (m)' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:profMinTrincea/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Sviluppo longitudinale (m)' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:svilLongTrincea/text()")
+				}/>
+				<LabeledField label='Inclinazione' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:inclinazioneTrincea/text()")
+				}/>
+				<LabeledField label='Profondita massima (m)' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:profMaxTrincea/text()")
+				}/>
+				<LabeledField label='Profondita minima (m)' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:profMinTrincea/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 
 		<Section header='ESERCIZIO DELLA CAPTAZIONE' eventKey='2' expanded={true}>
