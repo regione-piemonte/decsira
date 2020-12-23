@@ -58,48 +58,50 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:volMaxConcTrincea/text()")
             }/>
 			
-			<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
-				<SiraTable
-					   id="PrelievoPerUtenzaTrincea"
-					   selectedRow={model.PrelievoPerUtenzaTrincea}
-					   wfsVersion="2.0"
-					   rowSelection={false}
-					   columns={
-						   [
-							   {
-								   headerName: 'Codice rilievo',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
-							   },
-							   {
-								   headerName: 'Stato pratica',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:desStatoDeriv/text()"
-							   },
-							   {
-								   headerName: 'nel periodo dal',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
-							   },
-							   {
-								   headerName: 'nel periodo al',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoA/text()"
-							   },
-							   {
-								   headerName: 'Portata massima istantanea (l/s)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:portataMaxDerivata/text()"
-							   },
-							   {
-								   headerName: 'Volume massimo annuo (m3)',
-								   width: 150,
-								   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
-							   }
-						   ]
-					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:prelievoPerUtenzaTrincea")}/>
-            </Section>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<Section header="Quantità di risorsa prelevata dall'opera di captazione da ogni utenza" eventKey='3' expanded={false}>
+					<SiraTable
+						   id="PrelievoPerUtenzaTrincea"
+						   selectedRow={model.PrelievoPerUtenzaTrincea}
+						   wfsVersion="2.0"
+						   rowSelection={false}
+						   columns={
+							   [
+								   {
+									   headerName: 'Codice rilievo',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:codiceRilievoDeriv/text()"
+								   },
+								   {
+									   headerName: 'Stato pratica',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:desStatoDeriv/text()"
+								   },
+								   {
+									   headerName: 'nel periodo dal',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoDa/text()"
+								   },
+								   {
+									   headerName: 'nel periodo al',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoA/text()"
+								   },
+								   {
+									   headerName: 'Portata massima istantanea (l/s)',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:portataMaxDerivata/text()"
+								   },
+								   {
+									   headerName: 'Volume massimo annuo (m3)',
+									   width: 150,
+									   xpath:"decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:volumeMaxConcessione/text()"
+								   }
+							   ]
+						   }
+						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:prelievoPerUtenzaTrincea")}/>
+				</Section>
+			</ProfileWrapper>
 			
         </Section>
 
