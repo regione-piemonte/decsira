@@ -13,11 +13,6 @@
             id: true,
             xpath: "@gml:id"
         }, {
-             headerName: 'Numero classificazione pratica',
-             width: 90,
-			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
-             xpath: "decsiraogc_derivazioni:classificazionePraticaDeriv/text()"
-        }, {
              headerName: 'Codice rilievo',
              width: 100,
              xpath: "decsiraogc_derivazioni:codiceRilievoDeriv/text()"
@@ -27,17 +22,40 @@
 			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
              xpath: "decsiraogc_derivazioni:codiceUtenza/text()"
         }, {
-             headerName: 'Titolare',
-             width: 100,
-             xpath: "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"
+             headerName: 'Numero classificazione pratica',
+             width: 90,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:classificazionePraticaDeriv/text()"
         }, {
             headerName: 'Specie della derivazione',
             width: 100,
             xpath: "decsiraogc_derivazioni:desTipoDeriv/text()"
         }, {
+            headerName: 'Stato Pratica',
+            width: 100,
+			profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_derivazioni:desStatoPraticaDeriv/text()"
+        }, {
+            headerName: 'Data decorrenza concessione',
+            width: 100,
+			profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+            xpath: "decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"
+        }, {
+            headerName: 'Data scadenza concessione',
+            width: 100,
+            xpath: "decsiraogc_derivazioni:dataScadenzaEffettiva/text()"
+        }, {
+             headerName: 'Titolare',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()"
+        }, {
             headerName: 'Portata massima derivabile (l/s)',
             width: 100,
             xpath: "decsiraogc_derivazioni:portataMaxDeriv/text()"
+        }, {
+             headerName: 'Portata media derivabile (l/s)',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:portataMedDeriv/text()"
         }, {
             headerName: 'Usi della risorsa',
             width: 100,
@@ -47,15 +65,6 @@
             width: 100,
 			profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
             xpath: "decsiraogc_derivazioni:elencoUsiEffettivi/text()"
-        }, {
-            headerName: 'Stato Derivazione',
-            width: 100,
-            profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
-            xpath: "decsiraogc_derivazioni:desStatoDeriv/text()"
-        }, {
-             headerName: 'Portata media derivabile (l/s)',
-             width: 100,
-             xpath: "decsiraogc_derivazioni:portataMedDeriv/text()"
         }, {
              headerName: 'BIM',
              width: 100,
@@ -67,17 +76,9 @@
 			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
              xpath: "decsiraogc_derivazioni:elencoComuniDeriv/text()"
         }, {
-            headerName: 'Data decorrenza concessione',
-            width: 100,
-			profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
-            xpath: "decsiraogc_derivazioni:dataDecorrenzaConcessione/text()"
-        }, {
-            headerName: 'Data scadenza concessione',
-            width: 100,
-            xpath: "decsiraogc_derivazioni:dataScadenzaEffettiva/text()"
-        }, {
             headerName: 'Presenza misuratore',
             width: 100,
+			profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
             xpath: "decsiraogc_derivazioni:flgMisuratore/text()"
         }
     ]}

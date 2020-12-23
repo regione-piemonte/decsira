@@ -54,6 +54,14 @@
                 <sequence>
 				
 					<xs:element name="idDerivazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idoggtipoDeriv" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 
 					<xs:element name="geometria" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
 
@@ -427,6 +435,14 @@
                         </xs:simpleType>
                     </xs:element>
 					
+					<xs:element name="emailpecTitDeriv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
 					<!-- oggetti innestati -->
 
 					<xs:element name="componentiRaggruppamento" type="decsiraogc_derivazioni:ComponentiRaggruppamentoPropertyType" minOccurs="0" maxOccurs="unbounded" />
@@ -519,6 +535,14 @@
                         </xs:simpleType>
                     </xs:element>
 					
+					<xs:element name="emailpecTitDerivRaggr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
                 </sequence>
             </extension>
         </complexContent>
@@ -533,6 +557,14 @@
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="30" />
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idoggtipoprinc" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
                             </xs:restriction>
 						</xs:simpleType>
                     </xs:element>
@@ -887,9 +919,13 @@
 						</xs:simpleType>
                     </xs:element>
 					
-					<xs:element name="potenzaNmaEnerRiqual" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="potenzaNmaEner" type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					
-					<xs:element name="energPaEnerRiqual" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="energPaEner" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="potenzaNmaRiqual" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="energPaRiqual" type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					
 					<xs:element name="flgIncavernaRiqual" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>

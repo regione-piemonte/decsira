@@ -1,6 +1,7 @@
 {
    "featureTypeName":"decsiraogc_derivazioni:Serbatoio",
    "featureTypeNameLabel":"Serbatoi di accumulo",
+   "profiles": ["PA_GEN_DECSIRA@REG_PMN"],
    "nameSpaces": {
      "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
    },
@@ -60,18 +61,18 @@
            "type": 2
          },
 		 {
+           "headerName": "Comune di localizzazione",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_derivazioni:desComuneSerbatoio/text()"],
+           "type": 2
+         },
+		 {
            "headerName": "Denominazione",
            "suppressSorting": true,
            "width":120,
            "xpath": ["decsiraogc_derivazioni:denominazioneSerbatoio/text()"],
            "type": 2
-         },
-         {
-           "headerName": "Capacità di accumulo (m3)",
-           "suppressSorting": true,
-           "width":200,
-           "xpath": ["decsiraogc_derivazioni:capacitaAccumuloSerbatoio/text()"],
-           "type": 1
          },
 		 {
            "headerName": "Tipologia",
@@ -80,12 +81,12 @@
            "xpath": ["decsiraogc_derivazioni:desTipoSerbSerbatoio/text()"],
            "type": 2
          },
-		 {
-           "headerName": "Comune di localizzazione",
+         {
+           "headerName": "Capacità di accumulo (m3)",
            "suppressSorting": true,
            "width":200,
-           "xpath": ["decsiraogc_derivazioni:desComuneSerbatoio/text()"],
-           "type": 2
+           "xpath": ["decsiraogc_derivazioni:capacitaAccumuloSerbatoio/text()"],
+           "type": 1
          },
 		 {
            "hide": true,
@@ -124,23 +125,32 @@
 			"valueId":"des_stato",
 			"valueLabel":"des_stato"
         },
-        {
+		{
 			"index": 2,
-			"attribute": "decsiraogc_derivazioni:capacitaAccumuloSerbatoio",
-			"label":"Capacità di accumulo (m3)",
-			"type":"number"
-        },
-        {
-			"index": 3,
 			"attribute": "decsiraogc_derivazioni:codiceRilievoSerbatoio",
 			"label":"Codice rilievo",
 			"type":"string"
         },
-        {
-			"index": 4,
+		{
+			"index": 3,
 			"attribute": "decsiraogc_derivazioni:denominazioneSerbatoio",
 			"label":"Denominazione",
 			"type":"string"
+        },
+		{
+            "index": 4,
+            "attribute": "decsiraogc_derivazioni:desTipoSerbSerbatoio",
+            "label":"Tipologia",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_tipo_serb",
+                "propertyName": "id_tipo_serb,des_tipo_serb",
+                "sortBy": "id_tipo_serb+A"
+             }
+			},
+			"valueId":"des_tipo_serb",
+			"valueLabel":"des_tipo_serb"
         },
 		{
             "index": 5,
@@ -178,19 +188,10 @@
            }
         },
 		{
-            "index": 7,
-            "attribute": "decsiraogc_derivazioni:desTipoSerbSerbatoio",
-            "label":"Tipologia",
-            "type":"list",
-            "valueService": {
-              "urlParams": {
-                "typeName": "decsiraogc_decodif:decsira_d_tipo_serb",
-                "propertyName": "id_tipo_serb,des_tipo_serb",
-                "sortBy": "id_tipo_serb+A"
-             }
-			},
-			"valueId":"des_tipo_serb",
-			"valueLabel":"des_tipo_serb"
+			"index": 7,
+			"attribute": "decsiraogc_derivazioni:capacitaAccumuloSerbatoio",
+			"label":"Capacità di accumulo (m3)",
+			"type":"number"
         }
      ]
 

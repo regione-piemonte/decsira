@@ -36,6 +36,14 @@
                 <sequence>
 				
 					<xs:element name="idMisuratore"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idoggtipoMisuratore" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 
 					<xs:element name="geomMisuratore" type="gml:GeometryPropertyType"  minOccurs="1" />
 
@@ -235,6 +243,14 @@
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="30" />
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idoggtipoprinc" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
                             </xs:restriction>
 						</xs:simpleType>
                     </xs:element>
@@ -467,6 +483,14 @@
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="codiceRilievoCaptazione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
                             </xs:restriction>
 						</xs:simpleType>
 					</xs:element>

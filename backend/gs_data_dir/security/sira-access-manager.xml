@@ -1148,17 +1148,14 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_derivazioni:fkStato" = '9' OR "decsiraogc_derivazioni:fkStato" = '5'</filter>  
 		<hiddenAttributes>
-		 <attribute>decsiraogc_derivazioni:classificazionePraticaDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:codiceUtenza</attribute>
-		 <attribute>decsiraogc_derivazioni:elencoUsiEffettivi</attribute>
-		 <attribute>decsiraogc_derivazioni:flgBIM</attribute>
-		 <attribute>decsiraogc_derivazioni:elencoComuniDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:classificazionePraticaDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:desStatoPraticaDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:dataDecorrenzaConcessione</attribute>
 		 <attribute>decsiraogc_derivazioni:numProvv</attribute>
-		 <attribute>decsiraogc_derivazioni:dataAutorizProvv</attribute>
-		 <attribute>decsiraogc_derivazioni:dataScadenzaProvv</attribute>
 		 <attribute>decsiraogc_derivazioni:flgSovracanone</attribute>
 		 <attribute>decsiraogc_derivazioni:flgRivieraschi</attribute>
+		 <attribute>decsiraogc_derivazioni:dataAutorizProvv</attribute>
 		 <attribute>decsiraogc_derivazioni:dataScadenzaProvv</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:pivaTitDeriv</attribute>
@@ -1176,9 +1173,87 @@
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:emailpecTitDerivRaggr</attribute>
 		 <attribute>decsiraogc_derivazioni:sovracanoneDerivazione/decsiraogc_derivazioni:SovracanoneDerivazione/decsiraogc_derivazioni:codIstatComusovra</attribute>
 		 <attribute>decsiraogc_derivazioni:sovracanoneDerivazione/decsiraogc_derivazioni:SovracanoneDerivazione/decsiraogc_derivazioni:toponimoComusovra</attribute>
-		 <attribute>decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:denominazioneUso</attribute>
 		 <attribute>decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:elencoUsiUsiEffettivi</attribute>
 		</hiddenAttributes>	
+    </Rule>
+
+	<Rule>
+		<priority>621</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_operecaptazione</workspace>
+		<layer>Pozzo</layer>
+		<accessMode>READ</accessMode>
+		<filter>("decsiraogc_operecaptazione:fkStatoPozzo" = '100' OR "decsiraogc_operecaptazione:fkStatoPozzo" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabilePozzo" = 'NO'</filter>  
+		<hiddenAttributes>
+		 <attribute>decsiraogc_operecaptazione:codiceSIIPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:desAreaIdroPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:desBacIdroPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:dataCostruzionePozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:classificazionePratica</attribute>
+		</hiddenAttributes>	
+    </Rule>
+	
+	<Rule>
+		<priority>622</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_operecaptazione</workspace>
+		<layer>Fontanile</layer>
+		<accessMode>READ</accessMode>
+		<filter>("decsiraogc_operecaptazione:fkStatoFontanile" = '100' OR "decsiraogc_operecaptazione:fkStatoFontanile" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileFontanile" = 'NO'</filter>
+    </Rule>
+	
+	<Rule>
+		<priority>623</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_derivazioni</workspace>
+		<layer>Misuratore</layer>
+		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
+    </Rule>
+	
+	<Rule>
+		<priority>624</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_operecaptazione</workspace>
+		<layer>Presa</layer>
+		<accessMode>READ</accessMode>
+		<filter>("decsiraogc_operecaptazione:fkStatoPresa" = '100' OR "decsiraogc_operecaptazione:fkStatoPresa" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabilePresa" = 'NO'</filter>
+    </Rule>
+	
+	<Rule>
+		<priority>625</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_derivazioni</workspace>
+		<layer>Serbatoio</layer>
+		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
+    </Rule>
+	
+	<Rule>
+		<priority>626</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_operecaptazione</workspace>
+		<layer>Sorgente</layer>
+		<accessMode>READ</accessMode>
+		<filter>("decsiraogc_operecaptazione:fkStatoSorgente" = '100' OR "decsiraogc_operecaptazione:fkStatoSorgente" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileSorgente" = 'NO'</filter>
+    </Rule>
+	
+	<Rule>
+		<priority>627</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_derivazioni</workspace>
+		<layer>StazPompaggio</layer>
+		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
+    </Rule>
+	
+	<Rule>
+		<priority>628</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_operecaptazione</workspace>
+		<layer>TrinceaDrenante</layer>
+		<accessMode>READ</accessMode>
+		<filter>("decsiraogc_operecaptazione:fkStatoTrincea" = '100' OR "decsiraogc_operecaptazione:fkStatoTrincea" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileTrincea" = 'NO'</filter>
     </Rule>
 	
     </rules>

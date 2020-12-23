@@ -13,52 +13,58 @@
             id: true,
             xpath: "@gml:id"
         }, {
-             headerName: 'N. classificazione pratica',
-             width: 90,
-             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratSorgente/text()"
+             headerName: 'Codice rilievo',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:codiceRilievoSorgente/text()"
         }, {
              headerName: 'Codice ROC',
              width: 90,
              xpath: "decsiraogc_operecaptazione:codiceROCSorgente/text()"
         }, {
-             headerName: 'Codice rilievo',
+             headerName: 'Codice utenza',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:codiceRilievoSorgente/text()"
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenzaSorgente/text()"
         }, {
-             headerName: 'Denominazione',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:denominazioneSorgente/text()"
+             headerName: 'N. classificazione pratica',
+             width: 90,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivNclasPratSorgente/text()"
         }, {
-             headerName: 'Bacino idrografico',
+             headerName: 'Derivazioni servite',
              width: 100,
-             xpath: "decsiraogc_operecaptazione:desBacIdroSorgente/text()"
-        }, {
-             headerName: 'Area idrografica',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:desAreaIdroSorgente/text()"
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:elencoDerivCodrilSorgente/text()"
         }, {
              headerName: 'Comune di localizzazione',
              width: 100,
              xpath: "decsiraogc_operecaptazione:desComuneSorgente/text()"
         }, {
+             headerName: 'Area idrografica',
+             width: 100,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:desAreaIdroSorgente/text()"
+        }, {
+             headerName: 'Bacino idrografico',
+             width: 100,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_operecaptazione:desBacIdroSorgente/text()"
+        }, {
+             headerName: 'Denominazione',
+             width: 100,
+             xpath: "decsiraogc_operecaptazione:denominazioneSorgente/text()"
+        }, {
              headerName: 'Portata max  derivabile (l/s)',
              width: 100,
              xpath: "decsiraogc_operecaptazione:qMaxDerivSorgente/text()"
         }, {
-             headerName: 'Derivazioni servite',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:elencoDerivCodrilSorgente/text()"
-        }, {
-             headerName: 'Codice utenza',
-             width: 100,
-             xpath: "decsiraogc_operecaptazione:elencoDerivCodutenzaSorgente/text()"
-        },  {
              headerName: 'Portata Media  derivabile (l/s)',
              width: 100,
              xpath: "decsiraogc_operecaptazione:qMedDerivSorgente/text()"
-        },  {
+        }, {
              headerName: 'Presenza misuratore',
              width: 100,
+			 profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
              xpath: "decsiraogc_operecaptazione:flgMisuratoreSorgente/text()"
         }
     ]}

@@ -13,49 +13,60 @@
             id: true,
             xpath: "@gml:id"
         }, {
-             headerName: 'N. classificazione pratica',
+             headerName: 'Progressiva (km)',
              width: 100,
-             xpath: "decsiraogc_derivazioni:elencoDerivNclasPratRestituzione/text()"
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:progAstaRestituzione/text()"
         }, {
              headerName: 'Codice rilievo',
              width: 100,
              xpath: "decsiraogc_derivazioni:codiceRilievoRestituzione/text()"
         }, {
-             headerName: 'Bacino idrografico',
+             headerName: 'Codice utenza',
              width: 100,
-             xpath: "decsiraogc_derivazioni:desBacIdroRestituzione/text()"
-        },  {
-             headerName: 'Area idrografica',
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:elencoDerivCodutenzaRestituzione/text()"
+        }, {
+             headerName: 'N. classificazione pratica',
              width: 100,
-             xpath: "decsiraogc_derivazioni:desAreaIdroRestituzione/text()"
-        },  {
-             headerName: 'Corpo idrico nel quale si recapita la risorsa',
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:elencoDerivNclasPratRestituzione/text()"
+        }, {
+             headerName: 'Derivazioni servite',
              width: 100,
-             xpath: "decsiraogc_derivazioni:denomCidrsupRestituzione/text()"
-        },  {
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:elencoDerivCodrilRestituzione/text()"
+        }, {
              headerName: 'Comune di localizzazione',
              width: 100,
              xpath: "decsiraogc_derivazioni:desComuneRestituzione/text()"
-        },  {
-             headerName: 'Derivazioni servite',
+        }, {
+             headerName: 'Area idrografica',
              width: 100,
-             xpath: "decsiraogc_derivazioni:elencoDerivCodrilRestituzione/text()"
-        },  {
-             headerName: 'Codice utenza',
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:desAreaIdroRestituzione/text()"
+        }, {
+             headerName: 'Bacino idrografico',
              width: 100,
-             xpath: "decsiraogc_derivazioni:elencoDerivCodutenzaRestituzione/text()"
-        },  {
-             headerName: 'Portata Media  derivabile (l/s)',
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:desBacIdroRestituzione/text()"
+        }, {
+             headerName: 'Corpo idrico nel quale si recapita la risorsa',
              width: 100,
-             xpath: "decsiraogc_derivazioni:qMedRestituzione/text()"
-        },  {
-             headerName: 'Presenza misuratore',
-             width: 100,
-             xpath: "decsiraogc_derivazioni:flgMisuratoreRestituzione/text()"
-        },  {
+             xpath: "decsiraogc_derivazioni:denomCidrsupRestituzione/text()"
+        }, {
              headerName: 'Sponda',
              width: 100,
              xpath: "decsiraogc_derivazioni:desSpondaRestituzione/text()"
+        }, {
+             headerName: 'Portata Media  derivabile (l/s)',
+             width: 100,
+             xpath: "decsiraogc_derivazioni:qMedRestituzione/text()"
+        }, {
+             headerName: 'Presenza misuratore',
+             width: 100,
+             profiles : ["B","PA_GEN_DECSIRA@REG_PMN"],
+             xpath: "decsiraogc_derivazioni:flgMisuratoreRestituzione/text()"
         }
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_derivazioni:Restituzione")}/>

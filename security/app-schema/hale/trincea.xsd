@@ -36,6 +36,14 @@
                 <sequence>
 				
 					<xs:element name="idTrinceaDren"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idoggtipoTrincea" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 
 					<xs:element name="geomTrincea" type="gml:GeometryPropertyType" minOccurs="1" />
 
@@ -225,6 +233,14 @@
                         </xs:simpleType>
                     </xs:element>
 					
+					<xs:element name="flgUsoPotabileTrincea" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
 					<!-- oggetti innestati -->
 
 					<xs:element name="oggettoAssociatoTrincea" type="decsiraogc_operecaptazione:OggettoAssociatoTrinceaPropertyType" minOccurs="0" maxOccurs="unbounded" />
@@ -247,6 +263,14 @@
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="30" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idoggtipoprinc" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
@@ -402,6 +426,8 @@
 					</xs:element>
 					 
 					<xs:element name="portataMaxDerivata" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="portataMedDerivata" type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					
 					<xs:element name="volumeMaxConcessione" type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					

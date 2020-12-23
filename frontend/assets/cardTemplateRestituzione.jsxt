@@ -27,9 +27,11 @@
 			<LabeledField label="Sponda su cui insiste l'opera" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:desSpondaRestituzione/text()")
             }/>
-			<LabeledField label="Progressiva sull'asta (km)" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:progAstaRestituzione/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label="Progressiva sull'asta (km)" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:progAstaRestituzione/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 		
 		<Section header='ESERCIZIO DELLA RESTITUZIONE' eventKey='1' expanded={true}>
@@ -46,53 +48,55 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:volMaxRestituzione/text()")
             }/>
 			
-			<Section header="Quantità di risorsa restituita dall'opera di recapito finale da ogni utenza" eventKey='3' expanded={false}>
-				<SiraTable
-					   id="PeriodoRestituzione"
-					   selectedRow={model.PeriodoRestituzione}
-					   wfsVersion="2.0"
-					   rowSelection={false}
-					   columns={
-						   [
-							   {
-								   headerName: 'Codice rilievo',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:codiceRilievoDeriv/text()"
-							   },
-							   {
-								   headerName: 'Stato pratica',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:desStatoDeriv/text()"
-							   },
-							   {
-								   headerName: 'nel periodo dal',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneDa/text()"
-							   },
-							   {
-								   headerName: 'nel periodo al',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneA/text()"
-							   },
-							   {
-								   headerName: 'Portata massima restituita (l/s)',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMaxRestituita/text()"
-							   },
-							   {
-								   headerName: 'Portata media annua restituita (l/s)',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita/text()"
-							   },
-							   {
-								   headerName: 'Volume massimo annuo restituito (m3)',
-								   width: 150,
-								   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito/text()"
-							   }
-						   ]
-					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:periodoRestituzione")}/>
-            </Section>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<Section header="Quantità di risorsa restituita dall'opera di recapito finale da ogni utenza" eventKey='3' expanded={false}>
+					<SiraTable
+						   id="PeriodoRestituzione"
+						   selectedRow={model.PeriodoRestituzione}
+						   wfsVersion="2.0"
+						   rowSelection={false}
+						   columns={
+							   [
+								   {
+									   headerName: 'Codice rilievo',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:codiceRilievoDeriv/text()"
+								   },
+								   {
+									   headerName: 'Stato pratica',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:desStatoDeriv/text()"
+								   },
+								   {
+									   headerName: 'nel periodo dal',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneDa/text()"
+								   },
+								   {
+									   headerName: 'nel periodo al',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneA/text()"
+								   },
+								   {
+									   headerName: 'Portata massima restituita (l/s)',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMaxRestituita/text()"
+								   },
+								   {
+									   headerName: 'Portata media annua restituita (l/s)',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita/text()"
+								   },
+								   {
+									   headerName: 'Volume massimo annuo restituito (m3)',
+									   width: 150,
+									   xpath:"decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito/text()"
+								   }
+							   ]
+						   }
+						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Restituzione/decsiraogc_derivazioni:periodoRestituzione")}/>
+				</Section>
+			</ProfileWrapper>
 			
         </Section>
 
