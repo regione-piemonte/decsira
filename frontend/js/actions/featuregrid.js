@@ -146,6 +146,7 @@ const configureMultiLayerSelection = (columnsDef, geometry, params) => {
             title: mlsLayerName,
             id: 'selected_mls',
             group: 'hidden',
+            queryable: false,
             infoFormat: "text/html",
             visibility: true,
             params: { LAYERS: layerNames.join(','), FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version,
