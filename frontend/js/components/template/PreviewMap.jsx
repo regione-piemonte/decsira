@@ -81,6 +81,7 @@ class PreviewMap extends React.Component {
                             pinchRotate: false,
                             pinchZoom: false
                         }}}
+                        registerHooks={false}
                         zoomControl={false}
                         zoom={this.props.zoom}
                         center={this.getCenter([this.props.center])}

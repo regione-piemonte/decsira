@@ -186,44 +186,21 @@ class Card extends React.Component {
         const geometry = this.getGeometry();
         this.props.configureMLS(null, geometry, this.getProperties());
         if (!!geometry?.coordinates) {
-            this.changeMapView([geometry], 15);
+            this.changeMapView([geometry]);
         }
     }
 
-    changeMapView = (geometries, zoom) => {
+    changeMapView = (geometries) => {
         let extent = geometries.reduce((prev, next) => {
             return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
         }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
-
+        const center = mapUtils.getCenterForExtent(extent, "4326");
         const srs = "EPSG:4326";
-        const maxZoom = 16;
         const map = this.props.map.present;
-        const mapSize = map.size;
-        let newZoom = 1;
-        let newCenter = map.center;
         const proj = map.projection || "EPSG:3857";
-
-        if (extent) {
-            extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
-            // zoom by the max. extent defined in the map's config
-            newZoom = zoom ? zoom : mapUtils.getZoomForExtent(extent, mapSize, 0, 21);
-            newZoom = (maxZoom && newZoom > maxZoom) ? maxZoom : newZoom;
-
-            // center by the max. extent defined in the map's config
-            newCenter = mapUtils.getCenterForExtent(extent, proj);
-
-            // do not reproject for 0/0
-            if (newCenter.x !== 0 || newCenter.y !== 0) {
-                // reprojects the center object
-                newCenter = configUtils.getCenter(newCenter, "EPSG:4326");
-            }
-            // adapt the map view by calling the corresponding action
-            this.props.changeMapView(newCenter, newZoom,
-                map.bbox, map.size, null, proj);
-            if (!this.props.withMap) {
-                goToMapPage(newCenter, newZoom);
-            }
-        }
+        extent = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extent, srs, proj) : extent;
+        const zoom = mapUtils.getZoomForExtent(extent, map.size || {width: 876, height: 650}, 0, 16);
+        this.props.changeMapView(center, zoom, mapUtils.getBbox(center, zoom), map.size, null, proj);
     };
 }
 

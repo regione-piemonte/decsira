@@ -189,7 +189,7 @@ class SidePanel extends React.Component {
         const proj = this.props.map.projection || "EPSG:3857";
         extent = (srs !== proj) ? CoordinateUtils.reprojectBbox(extent, srs, proj) : extent;
         const zoom = mapUtils.getZoomForExtent(extent, this.props.map.size || {width: 876, height: 650}, 0, 16);
-        this.props.changeMapView(center, zoom, null, null, null, this.props.map.projection || "EPSG:3857");
+        this.props.changeMapView(center, zoom, mapUtils.getBbox(center, zoom), this.props.map.size, null, this.props.map.projection || "EPSG:3857");
     };
 }
 
