@@ -18,6 +18,7 @@ const img = require('../../../assets/img/magnifier.png');
 const assign = require('object-assign');
 const PropTypes = require('prop-types');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+const MapUtils = require('@mapstore/utils/MapUtils');
 const {goToMapPage} = require('../../utils/SiraUtils');
 
 class PreviewMap extends React.Component {
@@ -64,6 +65,9 @@ class PreviewMap extends React.Component {
     };
 
     render() {
+        const extent = this.getExtent();
+        const zoom = this.getZoom(extent);
+        const center = this.getCenter(extent);
         return this.props.map && this.props.center && this.props.center.coordinates ?
             (
                 <div>
@@ -80,11 +84,11 @@ class PreviewMap extends React.Component {
                             shiftDragZoom: false,
                             pinchRotate: false,
                             pinchZoom: false
-                        }}}
+                        }, view: {resolutions: this.props.map.resolutions}}}
                         registerHooks={false}
                         zoomControl={false}
-                        zoom={this.props.zoom}
-                        center={this.getCenter([this.props.center])}
+                        zoom={zoom}
+                        center={center}
                         id="scheda_pMap">
                         {
                             this.props.layers.map((layer, index) =>
@@ -100,21 +104,31 @@ class PreviewMap extends React.Component {
             ) : <span/>;
     }
 
-    getCenter = (geometries) => {
-        let extent = geometries.reduce((prev, next) => {
+    getExtent = () => {
+        const geometries = [this.props.center];
+        return geometries.reduce((prev, next) => {
             return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
         }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
-
-        let point = {crs: this.props.pointSRS, x: (extent[0] + extent[2]) / 2, y: (extent[1] + extent[3]) / 2};
-        return this.props.pointSRS !== "EPSG:4326" ?
-            CoordinatesUtils.reproject(point, this.props.pointSRS, "EPSG:4326") : point;
     };
 
-    changeMapView = () => {
-        let center = this.getCenter([this.props.center]);
-        let zoom = this.props.zoom;
+    getCenter = (extent) => {
+        return MapUtils.getCenterForExtent(extent, "EPSG:4326");
+    };
+
+    getZoom = (extent) => {
+        let extentObj = extent;
+        const srs = "EPSG:4326";
         const proj = this.props.map.projection || "EPSG:3857";
-        this.props.changeMapView( center, zoom, this.props.map.bbox, this.props.map.size, null, proj);
+        extentObj = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extentObj, srs, proj) : extentObj;
+        return MapUtils.getZoomForExtent(extentObj, this.props.map.size, 0, 16);
+    }
+
+    changeMapView = () => {
+        const extent = this.getExtent();
+        const center = this.getCenter(extent);
+        const proj = this.props.map.projection || "EPSG:3857";
+        const zoom = this.getZoom(extent);
+        this.props.changeMapView(center, zoom, MapUtils.getBbox(center, zoom), this.props.map.size, null, proj);
         if (!this.props.withMap) {
             goToMapPage(center, zoom);
         }
