@@ -20,6 +20,7 @@ const sectionBodyHorMargin = 20;
 const elAfterSpace = 20;
 const imgMapH = 222;
 const imgMapW = 560;
+const wordWrapLength = 80;
 let pdfHeight = pageTopMargin;
 let parseElement;
 function countPages() {
@@ -153,8 +154,20 @@ parseElement = function(children = []) {
             break;
         }
         case 'pdf-title': {
-            let s = doc.fromHTML(el, titleLeftMargin, pdfHeight);
-            pdfHeight = s.y + titleAfterSpace;
+            const regexHTML = /(<([^>]+)>)/i;
+            if (!regexHTML.test(el.innerHTML) && el.textContent.length > wordWrapLength) {
+                const splitTitle = doc.splitTextToSize(el.textContent, 400);
+                let tempHeight = 0;
+                splitTitle.forEach((text, i) => {
+                    el.textContent = text;
+                    const s = doc.fromHTML(el, titleLeftMargin, pdfHeight + (i * elAfterSpace));
+                    tempHeight = s.y;
+                });
+                pdfHeight = tempHeight;
+            } else {
+                let s = doc.fromHTML(el, titleLeftMargin, pdfHeight);
+                pdfHeight = s.y + titleAfterSpace;
+            }
             break;
         }
         default: {
