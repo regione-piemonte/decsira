@@ -6,37 +6,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var React = require('react');
-var Node = require('../../MapStore2/web/client/components/TOC/Node');
-var GroupTitle = require('../../MapStore2/web/client/components/TOC/fragments/GroupTitle');
-var GroupChildren = require('../../MapStore2/web/client/components/TOC/fragments/GroupChildren');
-var VisibilityCheck = require('../../MapStore2/web/client/components/TOC/fragments/VisibilityCheck');
+const React = require('react');
+const Node = require('@mapstore/components/TOC/Node');
+const GroupTitle = require('frontend/js/components/toc/fragments/GroupTitle');
+const GroupChildren = require('frontend/js/components/toc/fragments/GroupChildren');
+const VisibilityCheck = require('frontend/js/components/toc/fragments/VisibilityCheck');
+const PropTypes = require('prop-types');
 
-var Group = React.createClass({
-    propTypes: {
-        node: React.PropTypes.object,
-        expanded: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        onToggle: React.PropTypes.func,
-        onSort: React.PropTypes.func,
-        onRemove: React.PropTypes.func,
-        onSettings: React.PropTypes.func,
-        propertiesChangeHandler: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            node: {},
-            onToggle: () => {},
-            onRemove: () => {},
-            onSettings: () => {},
-            propertiesChangeHandler: () => {},
-            expanded: true,
-            style: {
-                marginBottom: "16px",
-                cursor: "pointer"
-            }
-        };
-    },
+class Group extends React.Component {
+    static propTypes = {
+        node: PropTypes.object,
+        expanded: PropTypes.bool,
+        style: PropTypes.object,
+        onToggle: PropTypes.func,
+        onSort: PropTypes.func,
+        onRemove: PropTypes.func,
+        onSettings: PropTypes.func,
+        propertiesChangeHandler: PropTypes.func
+    };
+
+    static defaultProps = {
+        node: {},
+        onToggle: () => {},
+        onRemove: () => {},
+        onSettings: () => {},
+        propertiesChangeHandler: () => {},
+        expanded: true,
+        style: {
+            marginBottom: "16px",
+            cursor: "pointer"
+        }
+    };
+
     render() {
         let {children, onToggle, ...other } = this.props;
         let visibilityStyle = {
@@ -55,6 +56,6 @@ var Group = React.createClass({
             </Node>
         );
     }
-});
+}
 
 module.exports = Group;

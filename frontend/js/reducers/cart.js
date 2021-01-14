@@ -9,14 +9,14 @@ const assign = require('object-assign');
 
 const {HIDE_PANEL, SHOW_CART_PANEL, ADD_SERVICE_IN_CART, REFRESH_NUMBER_OF_SERVICES, SET_CART_SERVICES, EMPTY_CART, RM_SERVICES, RM_LAYERS_SERVICES} = require('../actions/cart');
 const {SIRA_ADD_LAYERS_IN_CART} = require('../actions/addmap');
-
+const msLayers = require('@mapstore/reducers/layers').default;
 const initialState = {
-  // showCart: true,
-  showPanel: false,
-  showLayersPanel: false,
-  servicesNumber: 0,
-  layers: [],
-  wmsservices: []
+    // showCart: true,
+    showPanel: false,
+    showLayersPanel: false,
+    servicesNumber: 0,
+    layers: [],
+    wmsservices: []
 };
 
 function cart(state = initialState, action) {
@@ -47,13 +47,13 @@ function cart(state = initialState, action) {
                 wmsservices: action.service ? [...state.wmsservices, action.service] : state.wmsservices
             }
         );
-    }case SET_CART_SERVICES: {
+    } case SET_CART_SERVICES: {
         return assign({}, state,
             {
                 wmsservices: action.wmsservices ? action.wmsservices : []
             }
         );
-    }case EMPTY_CART: {
+    } case EMPTY_CART: {
         return assign({}, state,
             {
                 wmsservices: [],
@@ -61,7 +61,7 @@ function cart(state = initialState, action) {
                 servicesNumber: 0
             }
         );
-    }case RM_SERVICES: {
+    } case RM_SERVICES: {
         let servicesOk = state.wmsservices ? state.wmsservices : [];
         if (action.idService) {
             servicesOk = servicesOk.filter((el) => el.id !== action.idService);
@@ -71,7 +71,7 @@ function cart(state = initialState, action) {
                 wmsservices: servicesOk
             }
         );
-    }case RM_LAYERS_SERVICES: {
+    } case RM_LAYERS_SERVICES: {
         let layersOk = state.layers ? state.layers : [];
         if (action.idNode) {
             layersOk = layersOk.filter((el) => el.siraId !== action.idNode);
@@ -81,6 +81,11 @@ function cart(state = initialState, action) {
                 layers: layersOk
             }
         );
+    }
+    case 'ADD_LAYERS': {
+        return action.layers.map((layer) => {
+            return msLayers(action.msLayers, {type: 'ADD_LAYER', layer});
+        });
     }
     default:
         return state;

@@ -5,48 +5,59 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+LocaleUtils.setSupportedLocales({
+    "it": {
+        code: "it-IT",
+        description: "Italiano"}});
+
+require('../utils/ProjUtils')();
+
+const {loadMapConfig} = require('@mapstore/actions/config');
+const {configureQueryForm} = require('../actions/siradec');
+const {loadTiles} = require('../actions/mosaictile');
+const {loadPlatformNumbers} = require('../actions/platformnumbers');
+const {configureExporter} = require('../actions/siraexporter');
+const {loadUserIdentity} = require('../actions/userprofile');
+
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+ConfigUtils.setConfigProp('translationsPath', ['MapStore2/web/client/translations', 'translations']);
+ConfigUtils.setLocalConfigurationFile('localConfig.json');
+
+const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
+const {loadVersion} = require('@mapstore/actions/version');
+
+const initialActions = [
+    () => loadUserIdentity(),
+    () => loadTiles(),
+    () => loadPlatformNumbers(),
+    () => loadMapConfig(configUrl, legacy),
+    () => configureQueryForm(ConfigUtils.getConfigProp("query")),
+    () => configureExporter(ConfigUtils.getConfigProp("exporter")),
+    () => loadVersion()
+];
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const {connect} = require('react-redux');
-
-const LocaleUtils = require('../../MapStore2/web/client/utils/LocaleUtils');
-
-const {loadMapConfig} = require('../../MapStore2/web/client/actions/config');
-const {configureQueryForm} = require('../actions/siradec');
-const {configureExporter} = require('../actions/siraexporter');
-
-const appReducers = {
-    userprofile: require('../reducers/userprofile'),
-    siraControls: require('../reducers/controls'),
-    queryform: require('../reducers/queryform'),
-    siradec: require('../reducers/siradec'),
-    grid: require('../reducers/grid'),
-    cardtemplate: require('../reducers/card'),
-    featuregrid: require('../reducers/featuregrid'),
-    draw: require('../../MapStore2/web/client/reducers/draw'),
-    security: require('../reducers/siraSecurity'),
-    siraexporter: require('../reducers/siraexporter')
-};
+const {createSelector} = require('reselect');
 
 const startApp = () => {
-    const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
-    const StandardApp = require('../../MapStore2/web/client/components/app/StandardApp');
+    const StandardApp = require('@mapstore/components/app/StandardApp').default;
+    const {versionSelector} = require('@mapstore/selectors/version');
 
-    const {pages, pluginsDef, initialState, storeOpts} = require('./appConfig');
 
-    const StandardRouter = connect((state) => ({
-        locale: state.locale || {},
+    const {pages, pluginsDef, initialState, storeOpts, appReducers} = require('./appConfig');
+
+    const routerSelector = createSelector(state => state.locale, state=>versionSelector(state), (locale, version) => ({
+        locale: locale || {},
+        version,
         pages
-    }))(require('../../MapStore2/web/client/components/app/StandardRouter'));
+    }));
+
+    const StandardRouter = connect(routerSelector)(require('@mapstore/components/app/StandardRouter').default);
 
     const appStore = require('../stores/store').bind(null, initialState, appReducers);
-    const { configUrl, legacy } = ConfigUtils.getUserConfiguration('config', 'json');
-
-    const initialActions = [
-        () => loadMapConfig(configUrl, legacy),
-        ()=> configureQueryForm(ConfigUtils.getConfigProp("query")),
-        ()=> configureExporter(ConfigUtils.getConfigProp("exporter"))
-    ];
 
     const appConfig = {
         storeOpts,
@@ -54,7 +65,7 @@ const startApp = () => {
         pluginsDef,
         initialActions,
         appComponent: StandardRouter,
-        printingEnabled: false
+        mode: "desktop"
     };
 
     ReactDOM.render(
@@ -66,6 +77,6 @@ const startApp = () => {
 if (!global.Intl ) {
     // Ensure Intl is loaded, then call the given callback
     LocaleUtils.ensureIntl(startApp);
-}else {
+} else {
     startApp();
 }

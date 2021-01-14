@@ -23,26 +23,26 @@ const TemplateUtils = {
     ARRAY_TYPE: 5,
     GEOMETRY_TYPE: 6,
 
-    nsResolver(wfsVersion="2.0", nameSpaces = {}) {
+    nsResolver(wfsVersion = "2.0", nameSpaces = {}) {
         switch (wfsVersion) {
-            case "1.1.0": {
-                return assign({}, nameSpaces, {
-                    "wfs": "http://www.opengis.net/wfs",
-                    "gml": "http://www.opengis.net/gml",
-                    "ms": "http://mapserver.gis.umn.edu/mapserver"
-                });
-            }
-            case "2.0": {
-                return assign({}, nameSpaces, {
-                    "wfs": "http://www.opengis.net/wfs/2.0",
-                    "gml": "http://www.opengis.net/gml/3.2"
-                });
-            }
-            default:
-                return assign({}, nameSpaces, {
-                    "wfs": "http://www.opengis.net/wfs",
-                    "gml": "http://www.opengis.net/gml"
-                });
+        case "1.1.0": {
+            return assign({}, nameSpaces, {
+                "wfs": "http://www.opengis.net/wfs",
+                "gml": "http://www.opengis.net/gml",
+                "ms": "http://mapserver.gis.umn.edu/mapserver"
+            });
+        }
+        case "2.0": {
+            return assign({}, nameSpaces, {
+                "wfs": "http://www.opengis.net/wfs/2.0",
+                "gml": "http://www.opengis.net/gml/3.2"
+            });
+        }
+        default:
+            return assign({}, nameSpaces, {
+                "wfs": "http://www.opengis.net/wfs",
+                "gml": "http://www.opengis.net/gml"
+            });
         }
     },
     getNamespaces(attributes) {
@@ -55,7 +55,7 @@ const TemplateUtils = {
         }
         return nameSpaces;
     },
-    getModels(data, root, config, wfsVersion="2.0") {
+    getModels(data, root, config, wfsVersion = "2.0") {
         let doc = new Dom().parseFromString(data);
 
         let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces(doc.documentElement.attributes)));
@@ -65,7 +65,7 @@ const TemplateUtils = {
             return this.getModel(data, config, row, wfsVersion);
         });
     },
-    getModel(data, config, el, wfsVersion="2.0") {
+    getModel(data, config, el, wfsVersion = "2.0") {
         let doc = el || new Dom().parseFromString(data);
 
         let model = {};
@@ -76,30 +76,30 @@ const TemplateUtils = {
         }
         return model;
     },
-    getElementValue(result, type, wfsVersion="2.0") {
+    getElementValue(result, type, wfsVersion = "2.0") {
         switch (type) {
-            case 1 /*NUMBER_TYPE*/: {
-                return parseFloat(result && result.nodeValue || '0');
+        case 1 /* NUMBER_TYPE*/: {
+            return parseFloat(result && result.nodeValue || '0');
+        }
+        case 2 /* STRING_TYPE*/: {
+            return result && result.nodeValue || '';
+        }
+        case 3 /* BOOLEAN_TYPE*/: {
+            return result && result.nodeValue === "true" || false;
+        }
+        case 6 /* GEOMETRY_TYPE*/: {
+            let value;
+            if (wfsVersion === "2.0") {
+                value = result && result.nodeValue || {};
+            } else {
+                value = result && result.nodeValue && parse(result.nodeValue) || result && result.nodeValue || {};
             }
-            case 2 /*STRING_TYPE*/: {
-                return result && result.nodeValue || '';
-            }
-            case 3 /*BOOLEAN_TYPE*/: {
-                return result && result.nodeValue === "true" || false;
-            }
-            case 6 /*GEOMETRY_TYPE*/: {
-                let value;
-                if (wfsVersion === "2.0") {
-                    value = result && result.nodeValue || {};
-                } else {
-                    value = result && result.nodeValue && parse(result.nodeValue) || result && result.nodeValue || {};
-                }
-                return value;
-            }
-            default: return result.nodeValue || result;
+            return value;
+        }
+        default: return result.nodeValue || result;
         }
     },
-    getElement(element, doc, wfsVersion="2.0") {
+    getElement(element, doc, wfsVersion = "2.0") {
         if (doc === undefined) {
             return "";
         }
@@ -173,7 +173,7 @@ const TemplateUtils = {
                             type: "geometry",
                             coordinates: coordinates
                         };
-                    } catch(e) {
+                    } catch (e) {
                         value = value;
                     }
                 }
@@ -206,7 +206,7 @@ const TemplateUtils = {
                     value += " ";
                 }
                 value += this.getElementValue(result, element.type, wfsVersion);
-                /*} else {
+                /* } else {
                     value = this.getElementValue(result, element.type, wfsVersion);
                 }*/
             }
@@ -216,7 +216,7 @@ const TemplateUtils = {
         }
         return value;
     },
-    getValue(xml, element, wfsVersion="2.0") {
+    getValue(xml, element, wfsVersion = "2.0") {
         let doc = new Dom().parseFromString(xml);
         let value;
 
@@ -241,7 +241,7 @@ const TemplateUtils = {
         }
         return result;
     },
-    getNumberOfFeatures(data, wfsVersion="2.0") {
+    getNumberOfFeatures(data, wfsVersion = "2.0") {
         let doc = new Dom().parseFromString(data);
 
         let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces(doc.documentElement.attributes)));
@@ -262,7 +262,8 @@ const TemplateUtils = {
         fieldProfiles.forEach((val) => {
             if (userProfilesOk.filter((profile) => profile === val).length > 0) {
                 check = true;
-            }});
+            }
+        });
         return check;
     }
 };

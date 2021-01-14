@@ -5,8 +5,8 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const {addLayer} = require('../../MapStore2/web/client/actions/layers');
+const axios = require('@mapstore/libs/ajax');
+const {addLayer} = require('@mapstore/actions/layers');
 const {setSiraControl} = require('./controls');
 
 const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
@@ -25,7 +25,7 @@ const SET_TREE_FEATURE_TYPE = 'SET_TREE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
@@ -53,6 +53,8 @@ function configureFeatureType(ft, field, featureType, activate) {
         geometryType: ft.geometryType,
         nameSpaces: ft.nameSpaces,
         layer: ft.layer,
+        multiLayerSelect: ft.multiLayerSelect,
+        multiLayerSelectionAttribute: ft.multiLayerSelectionAttribute,
         exporter: ft.exporter,
         field,
         featureType,
@@ -133,7 +135,7 @@ function getAttributeValuesPromise(field, params, serviceUrl) {
             if (typeof config !== "object") {
                 try {
                     config = JSON.parse(config);
-                } catch(e) {
+                } catch (e) {
                     Promise.reject(`Configuration broken (${url}): ${ e.message}`);
                 }
             }
@@ -141,9 +143,11 @@ function getAttributeValuesPromise(field, params, serviceUrl) {
             return assign({}, field, {values: values});
         });
     }
+    return {};
 }
 
 function getAttributeValues(ft, field, params, serviceUrl) {
+    // eslint-disable-next-line consistent-return
     return (dispatch) => {
         if (serviceUrl) {
             let {url} = ConfigUtils.setUrlPlaceholders({url: serviceUrl});
@@ -159,7 +163,7 @@ function getAttributeValues(ft, field, params, serviceUrl) {
                 if (typeof config !== "object") {
                     try {
                         config = JSON.parse(config);
-                    } catch(e) {
+                    } catch (e) {
                         dispatch(configureQueryFormError(ft, 'Configuration broken (' + url + '): ' + e.message));
                     }
                 }
@@ -212,7 +216,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
             if (typeof config !== "object") {
                 try {
                     config = JSON.parse(config);
-                } catch(e) {
+                } catch (e) {
                     dispatch(configureQueryFormError(featureType, 'Configuration file broken (' + url + '): ' + e.message));
                 }
             }
@@ -250,14 +254,16 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 });
                 Promise.all(fields).then((fi) => {
                     dispatch(configureFeatureType({
-                            id: config.featureTypeName,
-                            name: config.featureTypeNameLabel,
-                            geometryName: config.geometryName,
-                            geometryType: config.geometryType,
-                            nameSpaces: config.nameSpaces || {},
-                            layer: layer,
-                            exporter: config.exporter
-                        }, fi, featureType, activate));
+                        id: config.featureTypeName,
+                        name: config.featureTypeNameLabel,
+                        geometryName: config.geometryName,
+                        geometryType: config.geometryType,
+                        multiLayerSelect: config.multiLayerSelect,
+                        multiLayerSelectionAttribute: config.multiLayerSelectionAttribute,
+                        nameSpaces: config.nameSpaces || {},
+                        layer: layer,
+                        exporter: config.exporter
+                    }, fi, featureType, activate));
                 }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
                 // for (let field in config.query.fields) {
                 //     if (field) {

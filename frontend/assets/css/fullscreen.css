@@ -1,3 +1,7 @@
+#fullscreen-container, #qgis-container {
+    padding: 0;
+    margin: 0;
+}
 #fullscreen-container .fill {
     position:fixed !important;
     top:0px;
@@ -5,6 +9,13 @@
     left: 0px;
     right: 0px;
     overflow: hidden;
+}
+#fullscreen-container .mapstore-switch-panel{
+    padding: 0
+}
+#fullscreen-container .mapstore-switch-panel .panel-heading{
+    background-color: #017f4f;
+    color: #ffffff;
 }
 #fullscreen-container {
     position: absolute;
@@ -189,10 +200,19 @@ div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class
     content: "\e252";
     font-family: inherit !important;
 }
+.querypanel-container .panel-title .m-slider{
+    background-color: #d1d1d1;
+}
+.querypanel-container .query-filter-container .no-border.btn-default{
+    background: #017f4f;
+}
 .querypanel-container .btn-default {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+.querypanel-container .glyphicon-expand{
+    display: none;
 }
 .querypanel-container .glyphicon-expand:before {
     color: black;
@@ -304,7 +324,7 @@ button.close.grid-close{
     padding-top: 15px;
 }
 button.exporter-close.close {
-    font-size: 30px !important;
+    font-size: 20px !important;
 }
 #scheda2pdf {
     color: #078aa3;
@@ -315,6 +335,10 @@ button.exporter-close.close {
     font-size: 14px;
     border-radius: 10px;
     }
+#multiLayerSelect {
+    border-radius: 10px;
+    margin-left: 14px;
+}
 @keyframes cssShowBtnScheda {
     to {
         top :78px;
@@ -331,4 +355,93 @@ button.exporter-close.close {
     left: 45%;
     width: 100%;
     height: 100%
+}
+
+#fullscreen-container, #qgis-container .panel-primary > .panel-heading {
+    color: #ffffff;
+    background-color: #017f4f!important;
+    border-color: #026641!important;
+}
+#fullscreen-container, #qgis-container .btn-default {
+    color: #017f4f;
+    background-color: #ffffff;
+}
+#fullscreen-container, #qgis-container .btn-default:hover{
+    color: #017f4f
+}
+
+#fullscreen-container, #qgis-container .btn-primary{
+    color: #ffffff;
+    background-color: #007e4f;
+    border-color: #026641;
+}
+#fullscreen-container, #qgis-container .btn-primary:hover{
+    color: #017f4f;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+#fullscreen-container,#qgis-container .mapstore-switch-btn input:checked + .m-slider {
+    background-color: #ffffff;
+    opacity: 1.0;
+}
+
+#fullscreen-container, #qgis-container .mapstore-switch-btn .m-slider {
+    background-color: #ffffff;
+}
+#fullscreen-container, #qgis-container .mapstore-switch-btn .m-slider:before {
+     background-color: #017f4f;
+}
+
+#fullscreen-container, #qgis-container .rw-i {
+    color: #017f4f !important;
+}
+
+#fullscreen-container, #qgis-container .filter-logic-header-text {
+    flex: none;
+}
+
+#query-form-panel.mapstore-query-builder {
+    position: inherit;
+}
+#query-form-panel .mapstore-switch-panel {
+    padding: 0;
+}
+#query-form-panel .mapstore-switch-panel .panel-heading {
+    background-color: #017f4f;
+}
+#query-form-panel .logicHeader .btn-group{
+    flex: 1;
+}
+
+#query-form-panel .mapstore-switch-panel .inline-form{
+    width: 100%;
+    padding: 10px;
+}
+.mapbody .btn-primary {
+    background-color: #017f4f;
+    color: #ffffff;
+    border-color: #017f4f;
+}
+
+.mapbody .btn-primary:hover {
+    color: #017f4f;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.mapbody #query-form-panel button:disabled {
+    color: #ffffff;
+    background-color: #e0e0e0 !important;
+}
+.mapbody .rw-list-option:hover{
+    color: #ffffff !important;
+    background-color: #017f4f !important;
+}
+
+.mapbody .rw-widget{
+    color: #017f4f !important;
+    border: 1px solid #017f4f !important;
+}
+.mapbody .rw-state-focus {
+    color: #017f4f !important;
+    border: 1px solid #017f4f !important;
 }

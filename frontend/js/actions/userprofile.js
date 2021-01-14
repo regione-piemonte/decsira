@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const axios = require('@mapstore/libs/ajax');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';
@@ -81,14 +81,14 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                         cf: response.data.userIdentity.nome,
                         idProvider: response.data.userIdentity.idProvider,
                         profile: response.data.profile
-                   };
+                    };
                 }
                 response.data.user = user;
                 dispatch(userIdentityLoaded(response.data));
             } else {
                 try {
                     dispatch(userIdentityLoaded(JSON.parse(response.data)));
-                } catch(e) {
+                } catch (e) {
                     dispatch(userIdentityError('Error in getRolesForDigitalIdentity: ' + e.message));
                 }
             }

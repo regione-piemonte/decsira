@@ -6,16 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-var Layers = require('../../MapStore2/web/client/utils/openlayers/Layers');
-var ol = require('openlayers');
-var objectAssign = require('object-assign');
-const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+import Layers from '@mapstore/utils/openlayers/Layers';
+import {Image, Tile} from 'ol/layer';
+import {ImageWMS, TileWMS} from 'ol/source';
+import objectAssign from 'object-assign';
+import CoordinatesUtils from '@mapstore/utils/CoordinatesUtils';
 
-const {isArray} = require('lodash');
-const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
-const axios = require('../../MapStore2/web/client/libs/ajax');
-const urllib = require('url');
-
+import {isArray} from 'lodash';
+import SecurityUtils from '@mapstore/utils/SecurityUtils';
+import {version} from '../utils/WMS';
+import axios from '@mapstore/libs/ajax';
+import urllib from 'url';
 
 function wmsToOpenlayersOptions(options) {
     // NOTE: can we use opacity to manage visibility?
@@ -27,7 +28,7 @@ function wmsToOpenlayersOptions(options) {
         SRS: CoordinatesUtils.normalizeSRS(options.srs),
         CRS: CoordinatesUtils.normalizeSRS(options.srs),
         TILED: options.tiled || false,
-        VERSION: options.version || "1.3.0"
+        VERSION: options.version || version
     }, options.params || {});
 }
 
@@ -61,15 +62,15 @@ function postTileLoadFunction(queryParameters, imageTile, src) {
    </ogc:GetMap>`;
     axios.post(newSrc, request, {
         timeout: 60000,
-           responseType: 'blob',
-           headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
-        }).then((response) => {
-            let image = imageTile.getImage();
-            image.onload = function() {
-                window.URL.revokeObjectURL(image.src); // Clean up after yourself.
-            };
-            image.src = window.URL.createObjectURL(response.data);
-        });
+        responseType: 'blob',
+        headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+    }).then((response) => {
+        let image = imageTile.getImage();
+        image.onload = function() {
+            window.URL.revokeObjectURL(image.src); // Clean up after yourself.
+        };
+        image.src = window.URL.createObjectURL(response.data);
+    });
 }
 Layers.registerType('wmspost', {
     create: (options) => {
@@ -77,24 +78,24 @@ Layers.registerType('wmspost', {
         const queryParameters = wmsToOpenlayersOptions(options) || {};
         urls.forEach(url => SecurityUtils.addAuthenticationParameter(url, queryParameters));
         if (options.singleTile) {
-            return new ol.layer.Image({
+            return new Image({
                 opacity: options.opacity !== undefined ? options.opacity : 1,
                 visible: options.visibility !== false,
                 zIndex: options.zIndex,
-                source: new ol.source.ImageWMS({
+                source: new ImageWMS({
                     url: urls[0],
                     params: queryParameters
                 })
             });
         }
-        return new ol.layer.Tile({
+        return new Tile({
             opacity: options.opacity !== undefined ? options.opacity : 1,
             visible: options.visibility !== false,
             zIndex: options.zIndex,
-            source: new ol.source.TileWMS({
-              urls: urls,
-              params: queryParameters,
-              tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)})
+            source: new TileWMS({
+                urls: urls,
+                params: queryParameters,
+                tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)})
         });
     },
     update: (layer, newOptions, oldOptions) => {

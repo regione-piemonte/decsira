@@ -6,19 +6,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const DebugUtils = require('../../MapStore2/web/client/utils/DebugUtils');
-const {combineReducers} = require('../../MapStore2/web/client/utils/PluginsUtils');
+const DebugUtils = require('@mapstore/utils/DebugUtils').default;
+const {combineReducers} = require('@mapstore/utils/PluginsUtils');
+const {connectRouter} = require( 'connected-react-router');
+const history  = require( '@mapstore/stores/History').default;
 
-const {persistStore, autoRehydrate} = require('redux-persist');
-
-const SecurityUtils = require('../../MapStore2/web/client/utils/SecurityUtils');
+const SecurityUtils = require('@mapstore/utils/SecurityUtils');
 const assign = require('object-assign');
-module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins, storeOpts) => {
+module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins) => {
     const allReducers = combineReducers(plugins, {
         ...appReducers,
-        browser: require('../../MapStore2/web/client/reducers/browser'),
-        locale: require('../../MapStore2/web/client/reducers/locale'),
-        controls: require('../../MapStore2/web/client/reducers/controls')
+        browser: require('@mapstore/reducers/browser').default,
+        locale: require('@mapstore/reducers/locale').default,
+        controls: require('@mapstore/reducers/controls').default,
+        version: require('@mapstore/reducers/version').default,
+        router: connectRouter(history)
     });
     const defaultState = initialState.defaultState;
 
@@ -28,19 +30,14 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
         };
         if (action && (action.type === 'FEATURETYPE_CONFIG_LOADED' || action.type === 'SET_ACTIVE_FEATURE_TYPE') && newState.siradec.configOggetti[action.featureType] && action.activate) {
             const configOggetti = newState.siradec.configOggetti[action.featureType];
-        //     // Devi assegnare a queryform e grid i valori che hai in     siradec.configOggetti.featureType
+            //     // Devi assegnare a queryform e grid i valori che hai in     siradec.configOggetti.featureType
             const newGrid = assign({}, newState.grid, {featuregrid: configOggetti.featuregrid});
             newState = assign({}, newState, {queryform: configOggetti.queryform, grid: newGrid});
         }
         return newState;
     };
     let store;
-    if (storeOpts && storeOpts.persist) {
-        store = DebugUtils.createDebugStore(rootReducer, defaultState, [], autoRehydrate());
-        persistStore(store, storeOpts.persist, storeOpts.onPersist);
-    } else {
-        store = DebugUtils.createDebugStore(rootReducer, defaultState);
-    }
+    store = DebugUtils.createDebugStore(rootReducer, defaultState);
     SecurityUtils.setStore(store);
     return store;
 };

@@ -8,19 +8,19 @@ const initialState = {
 
 function siraTree(state = initialState, action) {
     switch (action.type) {
-        case TREE_DATA_LOADING: {
-            return assign({}, state, {
-                loading: action.loading
-            });
-        }
-        case TREE_DATA_LOADED: {
-            return assign({}, state, {
-                treeData: action.treeData,
-                loading: false
-            });
-        }
-        default:
-            return state;
+    case TREE_DATA_LOADING: {
+        return assign({}, state, {
+            loading: action.loading
+        });
+    }
+    case TREE_DATA_LOADED: {
+        return assign({}, state, {
+            treeData: action.treeData,
+            loading: false
+        });
+    }
+    default:
+        return state;
     }
 }
 

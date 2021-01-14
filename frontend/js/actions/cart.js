@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -121,4 +122,4 @@ module.exports = {
     prepareDataToMap,
     addSiraLayers,
     emptyCart
-  };
+};

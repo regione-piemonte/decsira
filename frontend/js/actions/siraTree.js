@@ -1,4 +1,4 @@
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 const {treeDataLoading} = require('../actions/treeData');
 
 const TREE_LOADED = 'TREE_LOADED';

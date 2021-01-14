@@ -8,7 +8,7 @@
 
 const {connect} = require('react-redux');
 
-const {changeMapView} = require('../../MapStore2/web/client/actions/map');
+const {changeMapView} = require('@mapstore/actions/map');
 
 
 const {
@@ -33,25 +33,25 @@ require('./SiraFeatureGrid.css');
 module.exports = connect((state) => {
     const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
-    open: state.siraControls.grid,
-    detailOpen: state.siraControls.detail,
-    detailsConfig: activeConfig && activeConfig.card || {},
-    columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
-    attributes: activeConfig.attributes,
-    features: state.grid && state.grid.data || [],
-    totalFeatures: state.grid.totalFeatures,
-    map: (state.map && state.map.present) || (state.config && state.config.map),
-    loadingGrid: state.grid.loadingGrid,
-    loadingGridError: state.grid.loadingGridError,
-    groupFields: state.queryform.groupFields,
-    filterFields: state.queryform.filterFields,
-    spatialField: state.queryform.spatialField,
-    featureTypeName: activeConfig.featureTypeName,
-    searchUrl: state.queryform.searchUrl,
-    dataSourceOptions: state.grid.dataSourceOptions,
-    maxFeatures: state.siraexporter.maxFeatures,
-    profile: state.userprofile.profile,
-    exportCsvMimeType: "application/octet-stream"
+        open: state.siraControls.grid,
+        detailOpen: state.siraControls.detail,
+        detailsConfig: activeConfig && activeConfig.card || {},
+        columnsDef: state.grid.featuregrid && state.grid.featuregrid.grid ? state.grid.featuregrid.grid.columns : [],
+        attributes: activeConfig.attributes,
+        features: state.grid && state.grid.data || [],
+        totalFeatures: state.grid.totalFeatures,
+        map: (state.map && state.map.present) || (state.config && state.config.map),
+        loadingGrid: state.grid.loadingGrid,
+        loadingGridError: state.grid.loadingGridError,
+        groupFields: state.queryform.groupFields,
+        filterFields: state.queryform.filterFields,
+        spatialField: state.queryform.spatialField,
+        featureTypeName: activeConfig.featureTypeName,
+        searchUrl: state.queryform.searchUrl,
+        dataSourceOptions: state.grid.dataSourceOptions,
+        maxFeatures: state.siraexporter.maxFeatures,
+        profile: state.userprofile.profile,
+        exportCsvMimeType: "application/octet-stream"
     };
 }, {
     onDetail: loadCardTemplate,

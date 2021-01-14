@@ -1,29 +1,30 @@
+const PropTypes = require('prop-types');
 const React = require('react');
 const {Grid, Row, Col} = require('react-bootstrap');
 const {closeTree} = require('../../actions/siraTree');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 
-const TreeTitle = React.createClass({
-    propTypes: {
-        title: React.PropTypes.string,
-        subtitle: React.PropTypes.array,
-        id: React.PropTypes.string,
-        closeTree: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            title: '',
-            subtitle: '',
-            id: null,
-            closeTree: () => {}
-        };
-    },
+class TreeTitle extends React.Component {
+    static propTypes = {
+        title: PropTypes.string,
+        subtitle: PropTypes.array,
+        id: PropTypes.string,
+        closeTree: PropTypes.func
+    };
+
+    static defaultProps = {
+        title: '',
+        subtitle: '',
+        id: null,
+        closeTree: () => {}
+    };
+
     render() {
         let subtitle = this.props.subtitle.join(" ");
 
         return (
-            <Grid className="detail-title" fluid={true}>
+            <Grid className="detail-title" fluid>
                 <Row>
                     <Col xs={11} sm={11} md={11} lg={11}>
                         <h4>{this.props.title}<br/><small>{subtitle}</small></h4>
@@ -35,7 +36,7 @@ const TreeTitle = React.createClass({
             </Grid>
         );
     }
-});
+}
 
 module.exports = connect(null, dispatch => {
     return bindActionCreators({closeTree}, dispatch);

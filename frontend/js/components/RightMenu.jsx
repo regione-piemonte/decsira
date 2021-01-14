@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -8,47 +9,45 @@
 
 const React = require('react');
 
-const RightMenu = React.createClass({
-    propTypes: {
-        open: React.PropTypes.bool,
-        iconStyleOpen: React.PropTypes.string,
-        iconStyleClose: React.PropTypes.string,
-        clickOnIconButton: React.PropTypes.func,
-        clickOnHelp: React.PropTypes.func,
-        clickOnCredits: React.PropTypes.func,
-        clickOnSistemaCA: React.PropTypes.func
-    },
+class RightMenu extends React.Component {
+    static propTypes = {
+        open: PropTypes.bool,
+        iconStyleOpen: PropTypes.string,
+        iconStyleClose: PropTypes.string,
+        clickOnIconButton: PropTypes.func,
+        clickOnHelp: PropTypes.func,
+        clickOnCredits: PropTypes.func,
+        clickOnSistemaCA: PropTypes.func
+    };
 
-    getDefaultProps() {
-        return {
-            open: false,
-            iconStyleOpen: "fa fa-times fa-2x",
-            iconStyleClose: "fa fa-ellipsis-v fa-2x",
-            clickOnIconButton: () => {},
-            clickOnHelp: () => {},
-            clickOnCredits: () => {},
-            clickOnSistemaCA: () => {}
-       };
-    },
+    static defaultProps = {
+        open: false,
+        iconStyleOpen: "fa fa-times fa-2x",
+        iconStyleClose: "fa fa-ellipsis-v fa-2x",
+        clickOnIconButton: () => {},
+        clickOnHelp: () => {},
+        clickOnCredits: () => {},
+        clickOnSistemaCA: () => {}
+    };
 
-    renderIconStyle() {
+    renderIconStyle = () => {
         let style = this.props.open ? this.props.iconStyleOpen : this.props.iconStyleClose;
         return style;
-    },
+    };
 
-    renderMenu() {
+    renderMenu = () => {
         let toReturn = this.props.open ?
-        (
-            <div className="navbar-on" id="offcanvas-sidebar">
-                <ul id="menu" className="nav navbar-nav navbar-right">
-                    <li data-menuanchor="home" onClick={this.props.clickOnSistemaCA} >Sistema Conoscenze Ambientali</li>
-                    <li data-menuanchor="piemontepay" onClick={this.props.clickOnCredits}>Credits e Copyright</li>
-                    <li data-menuanchor="pagamenti" onClick={this.props.clickOnHelp}>Help</li>
-                </ul>
-            </div>
-        ) : '';
+            (
+                <div className="navbar-on" id="offcanvas-sidebar">
+                    <ul id="menu" className="nav navbar-nav navbar-right">
+                        <li data-menuanchor="home" onClick={this.props.clickOnSistemaCA} >Sistema Conoscenze Ambientali</li>
+                        <li data-menuanchor="piemontepay" onClick={this.props.clickOnCredits}>Credits e Copyright</li>
+                        <li data-menuanchor="pagamenti" onClick={this.props.clickOnHelp}>Help</li>
+                    </ul>
+                </div>
+            ) : '';
         return toReturn;
-    },
+    };
 
     render() {
         return (
@@ -59,8 +58,8 @@ const RightMenu = React.createClass({
                 </a>
                 {this.renderMenu()}
             </div>
-    );
+        );
     }
-});
+}
 
 module.exports = RightMenu;

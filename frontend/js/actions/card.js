@@ -5,7 +5,7 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
@@ -61,7 +61,7 @@ function activateSection(section) {
     };
 }
 
-function loadCardData(template, wfsUrl, params={}) {
+function loadCardData(template, wfsUrl, params = {}) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     return (dispatch) => {
         return axios.get(url).then((response) => {
@@ -73,7 +73,7 @@ function loadCardData(template, wfsUrl, params={}) {
     };
 }
 
-/*function loadCardModelConfig(template, modelConfigURL, wfsUrl) {
+/* function loadCardModelConfig(template, modelConfigURL, wfsUrl) {
     return (dispatch) => {
         return axios.get(modelConfigURL).then((response) => {
             let modelConfig = response.data;
@@ -115,7 +115,7 @@ function selectRows(tableId, rows) {
     };
 }
 
-/*function setSiraImpiantoModel(impiantoModel) {
+/* function setSiraImpiantoModel(impiantoModel) {
     return {
         type: SET_IMPIANTO_MODEL,
         impiantoModel: impiantoModel

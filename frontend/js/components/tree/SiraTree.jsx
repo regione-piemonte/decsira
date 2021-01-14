@@ -1,38 +1,39 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const {connect} = require('react-redux');
-const {getWindowSize} = require('../../../MapStore2/web/client/utils/AgentUtils');
-const TemplateSira = require('../template/TemplateSira');
-const TemplateUtils = require('../../utils/TemplateUtils');
-const assign = require('object-assign');
+import {connect} from 'react-redux';
+import {getWindowSize} from '@mapstore/utils/AgentUtils';
+import TemplateSira from '../template/TemplateSira';
+import TemplateUtils from '../../utils/TemplateUtils';
+import assign from 'object-assign';
 import './SiraTree.less';
 
-const Draggable = require('react-draggable');
+import Draggable from 'react-draggable';
 
-const SiraTree = React.createClass({
-    propTypes: {
-        card: React.PropTypes.shape({
-            treeTemplate: React.PropTypes.oneOfType([
-                    React.PropTypes.string,
-                    React.PropTypes.func]),
-            xml: React.PropTypes.oneOfType([
-                    React.PropTypes.string])
+class SiraTree extends React.Component {
+    static propTypes = {
+        card: PropTypes.shape({
+            treeTemplate: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.func]),
+            xml: PropTypes.oneOfType([
+                PropTypes.string])
         }),
-        show: React.PropTypes.string,
-        panelStyle: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
-            show: 'none',
-            panelStyle: {
-                height: "400px",
-                width: "550px",
-                zIndex: 100,
-                position: "absolute",
-                overflow: "auto"
-            }
-        };
-    },
+        show: PropTypes.string,
+        panelStyle: PropTypes.object
+    };
+
+    static defaultProps = {
+        show: 'none',
+        panelStyle: {
+            height: "400px",
+            width: "550px",
+            zIndex: 100,
+            position: "absolute",
+            overflow: "auto"
+        }
+    };
+
     render() {
         const {maxWidth, maxHeight} = getWindowSize();
         const xml = this.props.card.xml;
@@ -43,14 +44,14 @@ const SiraTree = React.createClass({
 
         return (
             <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: (maxWidth / 2) - 300, y: 100}} handle=".panel-heading, .panel-heading *">
-            <div className="scheda-tree" style={{display: this.props.show}}>
-                <TemplateSira template={this.props.card.treeTemplate} model={model} />
-            </div>
+                <div className="scheda-tree" style={{display: this.props.show}}>
+                    <TemplateSira template={this.props.card.treeTemplate} model={model} />
+                </div>
             </Draggable>);
     }
-  });
+}
 
-module.exports = connect((state) => {
+export default connect((state) => {
     return {
         show: state.siraTree.show,
         card: state.siraTree.card || {}

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -16,48 +17,48 @@ const {
 } = require('../actions/userprofile');
 
 // const SiraUtils = require('../utils/SiraUtils');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
 
 const SistemaConoscenzeAmbientaliBox = connect((state) => ({
-    show: state.header.showSistemaConoscenzeAmbientaliBox
+    show: state.header?.showSistemaConoscenzeAmbientaliBox
 }), (dispatch) => {
     return {
-      closePanel: () => {
-          dispatch(showHideRightConoscenzaAmbBox());
-      }
-  };
+        closePanel: () => {
+            dispatch(showHideRightConoscenzaAmbBox());
+        }
+    };
 })(require('./SistemaConoscenzeAmbientaliBox'));
 
 const Credits = connect((state) => ({
-    show: state.header.showCreditsBox
+    show: state.header?.showCreditsBox
 }), (dispatch) => {
     return {
-      closePanel: () => {
-          dispatch(showHideCreditsBox());
-      }
-  };
+        closePanel: () => {
+            dispatch(showHideCreditsBox());
+        }
+    };
 })(require('./Credits'));
 
 const RightMenu = connect((state) => ({
-    open: state.header.showRightMenu
+    open: state.header?.showRightMenu
 }), (dispatch) => {
     return {
-      clickOnIconButton: () => {
-          dispatch(showHideRightMenu());
-      },
-      clickOnHelp: () => {
-          let helpUrl = ConfigUtils.getConfigProp('decsiraHelpUrl');
-          window.open(helpUrl, '_blank');
-      },
-      clickOnSistemaCA: () => {
-          dispatch(showHideRightConoscenzaAmbBox());
-      },
-      clickOnCredits: () => {
-          dispatch(showHideCreditsBox());
-      }
-  };
+        clickOnIconButton: () => {
+            dispatch(showHideRightMenu());
+        },
+        clickOnHelp: () => {
+            let helpUrl = ConfigUtils.getConfigProp('decsiraHelpUrl');
+            window.open(helpUrl, '_blank');
+        },
+        clickOnSistemaCA: () => {
+            dispatch(showHideRightConoscenzaAmbBox());
+        },
+        clickOnCredits: () => {
+            dispatch(showHideCreditsBox());
+        }
+    };
 })(require('./RightMenu'));
 
 const LoginNav = connect((state) => ({
@@ -71,19 +72,19 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     className: "btn btn-default btn-login dropdown-toggle"
 }), {
-      onShowLogin: showLoginPanel,
-      onLogout: (e) => {
-          e.preventDefault();
-          window.location.href = ConfigUtils.getConfigProp('logOutService');
-      }
-})(require('../../MapStore2/web/client/components/security/UserMenu'));
+    onShowLogin: showLoginPanel,
+    onLogout: (e) => {
+        e.preventDefault();
+        window.location.href = ConfigUtils.getConfigProp('logOutService');
+    }
+})(require('@mapstore/components/security/UserMenu'));
 
 const CartPanel = connect((state) => ({
-        showPanel: state.cart.showPanel,
-        layers: state.cart.layers,
-        wmsservices: state.cart.wmsservices
-    }), (dispatch) => {
-        return {
+    showPanel: state.cart.showPanel,
+    layers: state.cart.layers,
+    wmsservices: state.cart.wmsservices
+}), (dispatch) => {
+    return {
         onClosePanel: () => {
             dispatch(hidePanel());
         },
@@ -95,7 +96,8 @@ const CartPanel = connect((state) => ({
             dispatch(prepareDataToMap());
             dispatch(hidePanel());
         }
-    }; })(require('./CartPanel'));
+    };
+})(require('./CartPanel'));
 
 const Cart = connect((state) => ({
     showCart: false,
@@ -103,10 +105,11 @@ const Cart = connect((state) => ({
 }),
 (dispatch) => {
     return {
-    showCartPanel: () => {
-        dispatch(showPanel());
-    }
-}; })(require('./Cart'));
+        showCartPanel: () => {
+            dispatch(showPanel());
+        }
+    };
+})(require('./Cart'));
 
 const LoginPanel = connect((state) => ({
     showLoginPanel: state.userprofile.showLoginPanel
@@ -118,30 +121,28 @@ const LoginPanel = connect((state) => ({
 })(require('./LoginPanel'));
 
 
-const Header = React.createClass({
-    propTypes: {
-        showCart: React.PropTypes.bool,
-        cartMappaStyle: React.PropTypes.string,
-        cartListaStyle: React.PropTypes.string,
-        goToDataset: React.PropTypes.func,
-        goToHome: React.PropTypes.func
-    },
+class Header extends React.Component {
+    static propTypes = {
+        showCart: PropTypes.bool,
+        cartMappaStyle: PropTypes.string,
+        cartListaStyle: PropTypes.string,
+        goToDataset: PropTypes.func,
+        goToHome: PropTypes.func
+    };
 
-    getDefaultProps() {
-        return {
-            cartMappaStyle: 'btn btn-primary',
-            cartListaStyle: 'btn btn-primary active',
-            showCart: false,
-            goToDataset: () => {},
-            goToHome: () => {}
-       };
-    },
+    static defaultProps = {
+        cartMappaStyle: 'btn btn-primary',
+        cartListaStyle: 'btn btn-primary active',
+        showCart: false,
+        goToDataset: () => {},
+        goToHome: () => {}
+    };
 
-    renderCart() {
+    renderCart = () => {
         const lStyle = this.props.cartListaStyle;
         const mStyle = this.props.cartMappaStyle;
         return this.props.showCart ? <Cart onListaClick={this.props.goToDataset} listaStyle={lStyle} mappaStyle={mStyle}/> : null;
-    },
+    };
 
     render() {
         return (
@@ -169,8 +170,8 @@ const Header = React.createClass({
                 <CartPanel />
                 <LoginPanel />
             </div>
-    );
+        );
     }
-});
+}
 
 module.exports = Header;

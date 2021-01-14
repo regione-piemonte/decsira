@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -8,13 +9,14 @@
 
 const React = require('react');
 
-const GridCellLink = React.createClass({
-    propTypes: {
-        params: React.PropTypes.object.isRequired
-    },
+class GridCellLink extends React.Component {
+    static propTypes = {
+        params: PropTypes.object.isRequired
+    };
+
     render() {
         return <span className="grid-cell-link">{this.props.params.value}</span>;
     }
-});
+}
 
 module.exports = GridCellLink;

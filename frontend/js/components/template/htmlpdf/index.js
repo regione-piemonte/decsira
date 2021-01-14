@@ -5,10 +5,10 @@ const React = require('react');
 const DetailTitle = require("./DetailTitle");
 const Section = require("./Section");
 const LabeledField = require("./LabeledField");
-const LinkToPage = require ('../../../../MapStore2/web/client/components/misc/LinkToPage');
-const {reactCellRendererFactory} = require('ag-grid-react');
+const LinkToPage = require ('@mapstore/components/misc/LinkToPage');
+const {reactCellRendererFactory} = require('../../identify/featuregrid/CellRendererFactory');
 const GoToDetail = require('../../GoToDetail');
-const ZoomToRenderer = require ('../../../../MapStore2/web/client/components/data/featuregrid/ZoomToFeatureRenderer');
+const ZoomToRenderer = require ('../../identify/featuregrid/ZoomToFeature');
 const MappaScheda = require("./PreviewMap");
 const LinkScheda = require("../LinkScheda");
 const AuthorizedObject = require("../AuthorizedObject");
@@ -26,5 +26,5 @@ const renderSira = function(comp, props) {
     return eval(comp);
 };
 
-/*eslint-enable */
+/* eslint-enable */
 module.exports = renderSira;

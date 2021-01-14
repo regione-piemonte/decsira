@@ -6,13 +6,20 @@
     right: 0px;
     overflow: hidden;
 }
+
 #qgis-container {
     position: absolute;
+    padding: 0;
+    margin: 0;
     top:0px;
     bottom: 0px;
     left: 0px;
     right: 0px;
     background-color: white;
+    background-image: unset;
+}
+#qgis-container .ag-fresh .ag-header-row{
+    background: #ffffff;
 }
 #qgis-container .querypanel-container{
     position: absolute;
@@ -26,11 +33,6 @@
 
 #qgis-container .querypanel-container > .panel-body{
     overflow: hidden;
-    position: absolute;
-    top:40px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
     background-color: white;
     margin: 0px;
 }
@@ -180,15 +182,27 @@
 div.mappaSiraDecisionale .querypanel-container .querypanel .panel-heading [class^="glyphicon-triangle-"]:before, [class*=" glyphicon-triangle-"]:before {
     font-family: inherit !important;
 }
+.querypanel-container .glyphicon-collapse-down{
+    display: none;
+}
 .querypanel-container .glyphicon-collapse-down:before {
     color: black;
     content: "\e252";
     font-family: inherit !important;
 }
+.querypanel-container .panel-title .m-slider{
+    background-color: #d1d1d1;
+}
+.querypanel-container .query-filter-container .no-border.btn-default{
+    background: #017f4f;
+}
 .querypanel-container .btn-default {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+.querypanel-container .glyphicon-expand{
+    display: none;
 }
 .querypanel-container .glyphicon-expand:before {
     color: black;
@@ -302,7 +316,7 @@ button.close.grid-close{
     padding-top: 15px;
 }
 button.exporter-close.close {
-    font-size: 30px !important;
+    font-size: 20px !important;
 }
 #scheda2pdf {
     color: #078aa3;
@@ -313,6 +327,11 @@ button.exporter-close.close {
     font-size: 14px;
     border-radius: 10px;
     }
+
+#multiLayerSelect {
+    border-radius: 10px;
+    margin-left: 14px;
+}
 @keyframes cssShowBtnScheda {
     to {
         top :78px;

@@ -26,6 +26,8 @@
    "geometryName": "geometria",
    "geometryType": "Polygon",
    "card": {
+    "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura",
+    "geometryPath": "decsiraogc_sivia:geometria/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()",
     "pdfname": "Scheda_FaseProcedimentale_{{/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:idProgetto/text()}}.pdf",
      "template": "assets/cardTemplateFaseProcedimentale.jsxt",
      "service": {
@@ -40,6 +42,29 @@
    "featureinfo":{
      "templateURL": "assets/infoTemplateFaseProcedimentale.jsxt"
    },
+  "multiLayerSelect": [
+      {
+        "name": "decsiraogc_sivia_geo:decsira_geo_sivia_linea",
+        "title": "Valutazione Impatto Ambientale - Lineari",
+        "filterOn": "decsiraogc_sivia_geo:codice_fase",
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase"
+      },
+      {
+        "name": "decsiraogc_sivia_geo:decsira_geo_sivia_poligono",
+        "title": "Valutazione Impatto Ambientale - Areali",
+        "filterOn": "decsiraogc_sivia_geo:codice_fase",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase",
+        "geometryType": "Polygon"
+      },
+      {
+        "name": "decsiraogc_sivia_geo:decsira_geo_sivia_punto",
+        "title": "Valutazione Impatto Ambientale - Puntuali",
+        "filterOn": "decsiraogc_sivia_geo:codice_fase",
+        "multiLayerSelectionAttribute": "decsiraogc_sivia:codiceFase",
+        "geometryType": "Point"
+      }
+    ],
    "featuregrid": {
      "grid": {
        "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura",
@@ -171,7 +196,7 @@
           "hide" : true,
           "suppressSorting" : true,
           "headerName" : "geometry",
-          "xpath" : [ "decsiraogc_sivia:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "xpath" : [ "decsiraogc_sivia:geometria/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
           "type" : 6
         }
        ],

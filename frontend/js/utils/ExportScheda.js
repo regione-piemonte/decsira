@@ -8,7 +8,7 @@
 const JSpdf = require('jspdf');
 /*eslint-disable*/
 const autotable = require('jspdf-autotable');
-/*eslint-enable*/
+/* eslint-enable*/
 
 let doc;
 const pageTopMargin = 15;
@@ -20,6 +20,7 @@ const sectionBodyHorMargin = 20;
 const elAfterSpace = 20;
 const imgMapH = 222;
 const imgMapW = 560;
+const wordWrapLength = 80;
 let pdfHeight = pageTopMargin;
 let parseElement;
 function countPages() {
@@ -59,7 +60,7 @@ function transformLabelField(tableEl) {
             {columnWidth: (doc.internal.pageSize.width - (sectionBodyHorMargin * 2)) * 0.4, fontStyle: 'bold'},
             {columnWidth: (doc.internal.pageSize.width - (sectionBodyHorMargin * 2)) * 0.6}
         ]
-       });
+    });
     pdfHeight = doc.autoTableEndPosY();
     return doc;
 }
@@ -71,7 +72,7 @@ function parseSection(el) {
             doc.addPage();
             pdfHeight = pageTopMargin;
         }
-    }else {
+    } else {
         if (pdfHeight + 100 > doc.internal.pageSize.height) {
             doc.addPage();
             pdfHeight = pageTopMargin;
@@ -112,7 +113,7 @@ function parseSection(el) {
         doc.setDrawColor(125, 125, 125);
         doc.line(left, pageTopMargin, left, pdfHeight);
         doc.line(right, pageTopMargin, right, pdfHeight);
-    }else {
+    } else {
         doc.setLineWidth(1);
         doc.setDrawColor(125, 125, 125);
         doc.line(left, sInitHeigth, left, pdfHeight);
@@ -125,53 +126,65 @@ function parseSection(el) {
 parseElement = function(children = []) {
     Array.from(children).forEach((el) => {
         switch (el.className) {
-            case 'pdf-panel': {
-                parseElement(el.children, doc);
-                break;
+        case 'pdf-panel': {
+            parseElement(el.children, doc);
+            break;
+        }
+        case 'pdf-section': {
+            // Skip map section if image not present
+            if (!el.querySelector(".pdf-nomap")) {
+                parseSection(el);
             }
-            case 'pdf-section': {
-                // Skip map section if image not present
-                if (!el.querySelector(".pdf-nomap")) {
-                    parseSection(el);
-                }
-                break;
-            }
-            case 'pdf-table': {
-                transformTable(el, doc);
-                break;
-            }
-            case 'pdf-map': {
-                const imgData = el.getAttribute('src');
-                doc.setDrawColor(0, 0, 0);
-                doc.rect(15, pdfHeight + 10, imgMapW + 2, imgMapH + 2, 'F');
-                doc.addImage(imgData, 'PNG', 16, pdfHeight + 11, imgMapW, imgMapH);
-                pdfHeight += imgMapH + 20;
-                break;
-            }
-            case 'labeledfield': {
-                transformLabelField(el, doc);
-                break;
-            }
-            case 'pdf-title': {
+            break;
+        }
+        case 'pdf-table': {
+            transformTable(el, doc);
+            break;
+        }
+        case 'pdf-map': {
+            const imgData = el.getAttribute('src');
+            doc.setDrawColor(0, 0, 0);
+            doc.rect(15, pdfHeight + 10, imgMapW + 2, imgMapH + 2, 'F');
+            doc.addImage(imgData, 'PNG', 16, pdfHeight + 11, imgMapW, imgMapH);
+            pdfHeight += imgMapH + 20;
+            break;
+        }
+        case 'labeledfield': {
+            transformLabelField(el, doc);
+            break;
+        }
+        case 'pdf-title': {
+            const regexHTML = /(<([^>]+)>)/i;
+            if (!regexHTML.test(el.innerHTML) && el.textContent.length > wordWrapLength) {
+                const splitTitle = doc.splitTextToSize(el.textContent, 400);
+                let tempHeight = 0;
+                splitTitle.forEach((text, i) => {
+                    el.textContent = text;
+                    const s = doc.fromHTML(el, titleLeftMargin, pdfHeight + (i * elAfterSpace));
+                    tempHeight = s.y;
+                });
+                pdfHeight = tempHeight;
+            } else {
                 let s = doc.fromHTML(el, titleLeftMargin, pdfHeight);
                 pdfHeight = s.y + titleAfterSpace;
-                break;
             }
-            default: {
-                if (el.querySelector(".pdf-table") || el.querySelector(".labeledfield") || el.querySelector(".pdf-map")) {
-                    parseElement(el.children, doc);
-                }else if (el.nodeName === "A") {
-                    doc.setFontSize(12);
-                    doc.setTextColor("#5c9fb4");
-                    doc.textWithLink(el.textContent || '', 20, pdfHeight + 5, {
-                        url: el.getAttribute('href') || ''
-                     });
-                    pdfHeight += doc.getLineHeight() + 5;
-                }else {
-                    let s = doc.fromHTML(el, 20, pdfHeight);
-                    pdfHeight = s.y + 5;
-                }
+            break;
+        }
+        default: {
+            if (el.querySelector(".pdf-table") || el.querySelector(".labeledfield") || el.querySelector(".pdf-map")) {
+                parseElement(el.children, doc);
+            } else if (el.nodeName === "A") {
+                doc.setFontSize(12);
+                doc.setTextColor("#5c9fb4");
+                doc.textWithLink(el.textContent || '', 20, pdfHeight + 5, {
+                    url: el.getAttribute('href') || ''
+                });
+                pdfHeight += doc.getLineHeight() + 5;
+            } else {
+                let s = doc.fromHTML(el, 20, pdfHeight);
+                pdfHeight = s.y + 5;
             }
+        }
         }
     });
 };
@@ -183,6 +196,7 @@ function scheda2pdf(el) {
         parseElement(el.children, doc);
         return doc;
     }
+    return null;
 }
 
 module.exports = scheda2pdf;

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
 
 const LOAD_TILES = 'LOAD_TILES';
 const TILES_LOADED = 'TILES_LOADED';
@@ -14,16 +14,16 @@ const TILES_LOAD_ERROR = 'TILES_LOAD_ERROR';
 
 function tilesLoaded(data) {
     return {
-		type: TILES_LOADED,
-		tiles: data
-	};
+        type: TILES_LOADED,
+        tiles: data
+    };
 }
 
 function loadTilesError(error) {
     return {
-		type: TILES_LOAD_ERROR,
-		error
-	};
+        type: TILES_LOAD_ERROR,
+        error
+    };
 }
 
 function loadTiles(serviceUrl = 'services/metadata/getMosaico', params = {}) {
@@ -37,7 +37,7 @@ function loadTiles(serviceUrl = 'services/metadata/getMosaico', params = {}) {
             } else {
                 try {
                     dispatch(tilesLoaded(JSON.parse(response.data)));
-                } catch(e) {
+                } catch (e) {
                     dispatch(loadTilesError('Configuration file for tiles broken: ' + e.message));
                 }
             }
@@ -49,8 +49,8 @@ function loadTiles(serviceUrl = 'services/metadata/getMosaico', params = {}) {
 
 
 module.exports = {
-		LOAD_TILES,
-		TILES_LOADED,
-		TILES_LOAD_ERROR,
-		loadTiles
+    LOAD_TILES,
+    TILES_LOADED,
+    TILES_LOAD_ERROR,
+    loadTiles
 };

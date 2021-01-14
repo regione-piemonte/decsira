@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -9,30 +10,31 @@
 const React = require('react');
 const {Glyphicon} = require('react-bootstrap');
 
-const Viste = React.createClass({
-    propTypes: {
-        node: React.PropTypes.object,
-        addToMap: React.PropTypes.func,
-        expandObjects: React.PropTypes.func,
-        onToggle: React.PropTypes.func,
-        toggleSiraControl: React.PropTypes.func,
-        expandFilterPanel: React.PropTypes.func,
-        showInfoBox: React.PropTypes.func
-    },
-    contextTypes: {
-        messages: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
-            addToMap: () => {},
-            expandObjects: () => {},
-            onToggle: () => {},
-            toggleSiraControl: () => {},
-            expandFilterPanel: () => {},
-            showInfoBox: () => {}
-        };
-    },
-    renderObjectTools() {
+class Viste extends React.Component {
+    static propTypes = {
+        node: PropTypes.object,
+        addToMap: PropTypes.func,
+        expandObjects: PropTypes.func,
+        onToggle: PropTypes.func,
+        toggleSiraControl: PropTypes.func,
+        expandFilterPanel: PropTypes.func,
+        showInfoBox: PropTypes.func
+    };
+
+    static contextTypes = {
+        messages: PropTypes.object
+    };
+
+    static defaultProps = {
+        addToMap: () => {},
+        expandObjects: () => {},
+        onToggle: () => {},
+        toggleSiraControl: () => {},
+        expandFilterPanel: () => {},
+        showInfoBox: () => {}
+    };
+
+    renderObjectTools = () => {
         return [(<Glyphicon
             key="toggle-featuregrid"
             glyph="th"
@@ -42,18 +44,16 @@ const Viste = React.createClass({
             glyph="search"
             onClick={() => this.props.expandFilterPanel(true)}/>)];
 
-    },
-    renderVistaTools() {
+    };
+
+    renderVistaTools = () => {
         return [(<Glyphicon
             key="addToMap"
-            glyph="plus-sign"
-            onClick={this.loadConfig}/>) // ,
-        // (<Glyphicon
-        //     key="objects"
-        //     glyph="list-alt"
-        //     onClick={()=> this.props.onToggle(this.props.node.id, expanded)}/>)
+            glyph="1-map"
+            onClick={this.loadConfig}/>)
         ];
-    },
+    };
+
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
         return (
@@ -61,8 +61,9 @@ const Viste = React.createClass({
                 <div className="sira-view-title"><span onClick={this.showInfoBox}>{this.props.node.title}</span>{this.renderVistaTools(expanded)}</div>
                 {expanded && this.props.node.nodes ? this.props.node.nodes.map((o)=> (<div className="sira-view-object"><span>{o.title}</span>{this.renderObjectTools()}</div>)) : (<div/>)}
             </div>);
-    },
-    loadConfig() {
+    }
+
+    loadConfig = () => {
         const v = this.props.node.view;
         if (v) {
             let view = v;
@@ -71,10 +72,11 @@ const Viste = React.createClass({
             }
             this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
         }
-    },
-    showInfoBox() {
+    };
+
+    showInfoBox = () => {
         this.props.showInfoBox(this.props.node.id);
-    }
-});
+    };
+}
 
 module.exports = Viste;

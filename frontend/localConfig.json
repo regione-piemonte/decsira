@@ -1,292 +1,172 @@
 {
-    "geoStoreUrl": "rest/geostore",
-    "geoserverUrl": "${url.geoserver}/geoserver",
-    "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
-  	"secureDecsirawebUrl": "${url.secure.decsiraweb}",
-    "decsirawebUrl": "${url.decsiraweb}",
-    "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
-    "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
-    "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
-    "useAuthenticationRules": true,
-    "authenticationRules": [
-        {
-            "urlPattern": ".*geoserver.*",
-            "method": "authkey"
+  "geoStoreUrl": "rest/geostore",
+  "geoserverUrl": "${url.geoserver}/geoserver",
+  "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
+  "secureDecsirawebUrl": "${url.secure.decsiraweb}",
+  "decsirawebUrl": "${url.decsiraweb}",
+  "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
+  "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
+  "logOutService": "${url.secure.VH.decsiraweb}territoriosliv1sisp/Shibboleth.sso/Logout",
+  "useAuthenticationRules": true,
+  "authenticationRules": [
+    {
+      "urlPattern": ".*geoserver.*",
+      "method": "authkey"
+    }
+  ],
+
+  "mailingList": "https://groups.google.com/forum/#!forum/mapstore-users",
+  "printUrl": "pdf/info.json",
+  "bingApiKey": "AhuXBu7ipR1gNbBfXhtUAyCZ6rkC5PkWpxs2MnMRZ1ZupxQfivjLCch22ozKSCAn",
+  "mapquestApiKey": "__API_KEY_MAPQUEST__",
+  "initialMapFilter": "",
+  "ignoreMobileCss": false,
+  "loadAfterTheme": true,
+  "mapLayout": {"left": {"sm": 400, "md": 500, "lg": 600}, "right": {"md": 658}, "bottom": {"sm": 30}},
+  "defaultMapOptions": {
+    "cesium": {
+      "flyTo": true,
+      "navigationTools": true,
+      "terrainProvider": {
+        "type": "ellipsoid"
+      }
+    },
+    "floatingIdentifyDelay": 1000
+  },
+  "localizedLayerStyles": {
+    "name": "mapstore_language"
+  },
+
+  "monitorState": [
+    {"name": "router", "path": "router.location.pathname"},
+    {"name": "browser", "path": "browser"},
+    {"name": "geostorymode", "path": "geostory.mode"},
+    {"name": "featuregridmode", "path": "featuregrid.mode"},
+    {"name": "userrole", "path": "security.user.role"},
+    {"name": "printEnabled", "path": "print.capabilities"}
+  ],
+  "userSessions": {
+    "enabled": true
+  },
+  "projectionDefs": [
+      {
+      "code": "EPSG:32632",
+      "def": "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs",
+      "extent": [-250000, -200000, 1250000, 8400000],
+      "worldExtent": [6.0000, 0.0000, 12.0000, 84.0000]
+    }
+  ],
+  "initialState": {
+    "defaultState": {
+      "maptype": {
+        "mapType": "{context.mode === 'desktop' ? 'openlayers' : 'leaflet'}"
+      },
+      "catalog": {
+        "default": {
+          "newService": {
+            "url": "",
+            "type": "wms",
+            "title": "",
+            "isNew": true,
+            "autoload": false
+          },
+          "selectedService": "WMS",
+          "services": {
+            "WMS": {
+              "url": "${url.geoserver}/geoserver/wms",
+              "type": "wms",
+              "title": "WMS Service",
+              "autoload": true,
+              "format": "image/png"
+            }
+          },
+          "staticServices": {
+            "default_map_backgrounds": {
+              "type": "backgrounds",
+              "title": "defaultMapBackgroundsServiceTitle",
+              "autoload": true,
+              "backgrounds": [{
+                "type": "ol",
+                "title": "None",
+                "name": "None",
+                "source": "ol",
+                "group": "background",
+                "visibility": false
+              },
+                {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
+                  "name": "SfondoCartRifBN",
+                  "title": "Sfondo Cartografico BN",
+                  "group": "background",
+                  "visibility": true,
+                  "format": "image/png",
+                  "tiled": true,
+                  "tileSize": 512
+                },
+                {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+                  "name": "SfondoCartRif",
+                  "title": "Sfondo Cartografico a colori",
+                  "group": "background",
+                  "visibility": false,
+                  "format": "image/png",
+                  "tiled": true,
+                  "tileSize": 512
+                },
+                {
+                  "type": "wms",
+                  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
+                  "name": "OrtofotoRegione2010",
+                  "title": "Ortoimmagini Piemonte 2009-2011",
+                  "group": "background",
+                  "visibility": false,
+                  "format": "image/png",
+                  "tiled": true
+                },
+                {
+                  "type": "osm",
+                  "title": "Open Street Map",
+                  "name": "mapnik",
+                  "source": "osm",
+                  "group": "background",
+                  "visibility": false
+                }]
+            }
+          }
         }
-    ],
-    "plugins": {
-        "desktop": [
-            {
-                "cfg": {
-                    "tools": [
-                        "measurement",
-                        "locate",
-                        "scalebar",
-                        "draw"
-                    ],
-                    "toolsOptions": {
-                        "scalebar": {
-                            "leaflet": {
-                                "position": "bottomright"
-                            }
-                        }
-                    },
-                    "zoomControl": false
-                },
-                "name": "Map"
-            },
-            {
-                "cfg": {
-                    "buttonClassName": "square-button",
-                    "buttonStyle": "primary",
-                    "glyph": "1-stilo",
-                    "singleSection": true,
-                    "menuOptions": {
-                        "width": 400
-                    }
-                },
-                "name": "DrawerMenu"
-            },
-            {
-                "cfg": {
-                    "columnProperties": {
-                        "md": 12,
-                        "sm": 12,
-                        "xs": 12
-                    },
-                    "fluid": true
-                },
-                "name": "BackgroundSwitcher",
-                "override": {
-                    "DrawerMenu": {
-                        "buttonConfig": {
-                            "buttonClassName": "square-button no-border",
-                            "tooltip": "backgroundSwither.tooltip"
-                        },
-                        "glyph": "1-map",
-                        "position": 3
-                    }
-                }
-            },
-            {
-                "cfg": {
-                    "areaGlyph": "1-measure-area",
-                    "bearingGlyph": "1-bearing",
-                    "lineGlyph": "1-measure-lenght",
-                    "showResults": false,
-                    "useButtonGroup": false
-                },
-                "name": "Measure",
-                "override": {
-                    "DrawerMenu": {
-                        "buttonConfig": {
-                            "buttonClassName": "square-button no-border",
-                            "tooltip": "Measurement_tooltip"
-                        },
-                        "glyph": "1-stilo",
-                        "position": 4
-                    }
-                }
-            },
-            {
-                "cfg": {
-                    "closeGlyph": "1-close",
-                    "withPanelAsContainer": false
-                },
-                "name": "MeasureResults"
-            },{
-                "name": "TOC",
-                "cfg": {
-                    "visibilityCheckType": "glyph",
-                    "settingsOptions": {
-                        "includeCloseButton": false,
-                        "closeGlyph": "1-close",
-                        "asModal": false,
-                        "buttonSize": "small"
-                    },
-                    "activateSettingsTool": true,
-                    "activateLegendTool": true
-                },
-                "override": {
-                    "DrawerMenu": {
-                        "glyph": "1-layer",
-                        "buttonConfig": {
-                          "buttonClassName": "square-button no-border",
-                          "tooltip": "toc.tooltip"
-                      }
-                  }
-              }
-            },
-            {
-                "name": "Catalog",
-                "override": {
-                    "DrawerMenu": {
-                        "buttonConfig": {
-                          "buttonClassName": "square-button no-border",
-                          "tooltip": "catalog.tooltip"
-                      }
-                  }
-              }
-            },
-            {
-              "name":"ShapeFile",
-              "cfg":{
-                 "wrap":true,
-                 "wrapWithPanel":false,
-                 "closeGlyph":"1-close",
-                 "buttonSize":"small"
-              }
-           },
-           {
-              "name":"MetadataExplorer",
-              "cfg":{
-                 "showGetCapLinks":false,
-                 "addAuthentication":false,
-                 "wrap":true,
-                 "wrapWithPanel":false,
-                 "closeGlyph":"1-close"
-              }
-           },
-           "MousePosition",
-           {
-              "name":"Snapshot",
-              "cfg":{
-                 "wrap":true,
-                 "wrapWithPanel":false,
-                 "closeGlyph":"1-close",
-                 "buttonStyle":"primary"
-              }
-           },
-		   {
-			   "name": "Search",
-			   "cfg": {
-				 "withToggle": true
-			   }
-		   },
-            {
-                "name": "Toolbar",
-                "id": "NavigationBar",
-                "stateSelector": "toolbar",
-                "cfg": {
-                    "buttonStyle": "primary",
-                    "id": "navigationBar"
-                }
-            },
-            {
-                "name": "Locate",
-                "cfg": {
-                    "glyph": "1-position-1",
-                    "btnConfig": {
-                        "className": "square-button"
-                    }
-            },
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            },
-            {
-                "name": "ZoomAll",
-                "hide": true,
-                "cfg":{
-                    "className": "square-button"
-                }
-            },
-            {
-                "name": "MapLoading",
-                "cfg": {
-                    "className": "ms2-loading"
-                },
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                }
-            },
-            {
-                "name":"ZoomIn",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true,
-                        "position": 4
-                    }
-                }
-            },
-            {
-                "name":"ZoomOut",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true,
-                        "position": 5
-                    }
-                }
-            },
-            "OmniBar",
-            {
-                "name": "BurgerMenu"
-            },
-            {
-                "name": "Expander",
-                "cfg":{
-                    "className": "square-button"
-                }
-            },
-            "ScaleBox",
-            {
-                "name": "Settings",
-                "cfg": {
-                    "wrapWithPanel": false,
-                    "closeGlyph": "1-close",
-                    "overrideSettings": {
-                        "history": false
-                    },
-                    "wrap": true
-                }
-            },
-            {
-                "name":"Info",
-                "override": {
-                    "Toolbar": {
-                        "alwaysVisible": true
-                    }
-                },
-                "hide": true
-            },
-            {
-                  "name": "Undo",
-                  "override": {
-                      "Toolbar": {
-                          "position": 6
-                      }
-                  },
-                  "cfg": {
-                    "glyph": "1-screen-backward",
-                    "buttonStyle": "primary",
-                    "btnConfig": {
-                      "className": "square-button"
-                    }
-                  }
-                }, {
-                  "name": "Redo",
-                  "override": {
-                      "Toolbar": {
-                          "position": 7
-                      }
-                  },
-                  "cfg": {
-                    "glyph": "1-screen-forward",
-                    "buttonStyle": "primary",
-                    "btnConfig": {
-                      "className": "square-button"
-                    }
-                  }
-                }
-        ]
-},
+      },
+      "locales": {
+        "supportedLocales": {
+          "it": {
+            "code": "it-IT",
+            "description": "Italiano"
+          },
+          "en": {
+            "code": "en-US",
+            "description": "English"
+          },
+          "fr": {
+            "code": "fr-FR",
+            "description": "Français"
+          },
+          "de": {
+            "code": "de-DE",
+            "description": "Deutsch"
+          },
+          "es": {
+            "code": "es-ES",
+            "description": "Español"
+          }
+        }
+      }
+    }
+  },
 "proxyUrl": {
   "url": "proxy/?url=",
-  "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org"]
+  "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org"],
+  "autoDetectCORS": true
 },
 "query": {
     "attributePanelExpanded": true,
@@ -432,5 +312,587 @@
     "shpName": "Shp_{featureType}",
     "maxFeatures": 1000000,
     "srs": "EPSG:32632"
-}
+},
+  "plugins": {
+    "mobile": [{
+      "name": "Map",
+      "cfg": {
+        "mapOptions": {
+          "openlayers": {
+            "interactions": {
+              "pinchRotate": false,
+              "altShiftDragRotate": false
+            }
+          }
+        },
+        "tools": ["locate"]
+      }
+    }, "Version", "DrawerMenu",
+      {
+        "name": "BackgroundSelector",
+        "cfg": {
+          "bottom": 25,
+          "dimensions": {
+            "side": 65,
+            "sidePreview": 65,
+            "frame": 3,
+            "margin": 5,
+            "label": false,
+            "vertical": true
+          }
+        }
+      },
+      {
+        "name":"Info",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        },
+        "hide": true
+      }, {
+        "name": "Locate",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      }, "Home", {
+        "name": "TOC",
+        "cfg": {
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
+            }
+          }
+        }
+      },{
+        "name": "Catalog",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "catalog.tooltip"
+            }
+          }
+        }
+      }, "AddGroup", {
+        "name": "Settings",
+        "cfg": {
+          "wrapWithPanel": false,
+          "closeGlyph": "1-close",
+          "overrideSettings": {
+            "history": false
+          },
+          "wrap": true
+        }
+      }, {
+        "name": "Search",
+        "cfg": {
+          "showOptions": false,
+          "withToggle": true
+        }
+      }, {
+        "name": "Toolbar",
+        "id": "NavigationBar",
+        "cfg": {
+          "id": "navigationBar"
+        }
+      }, "ZoomAll", {
+        "name": "MapLoading",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      }, "Login",
+      "OmniBar", "BurgerMenu", "Expander", {
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl" : "",
+          "declineUrl" : "http://www.google.com"
+        }
+      },
+      "FeedbackMask"
+    ],
+    "desktop": [
+      {
+        "name": "TOC",
+        "cfg": {
+          "visibilityCheckType": "glyph",
+          "settingsOptions": {
+            "includeCloseButton": false,
+            "closeGlyph": "1-close",
+            "asModal": false,
+            "buttonSize": "small"
+          },
+          "activateSettingsTool": true,
+          "activateLegendTool": true
+        },
+        "override": {
+          "DrawerMenu": {
+            "glyph": "1-layer",
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "toc.tooltip"
+            }
+          }
+        }
+      },
+      {
+        "name": "Catalog",
+        "override": {
+          "DrawerMenu": {
+            "buttonConfig": {
+              "buttonClassName": "square-button no-border",
+              "tooltip": "catalog.tooltip"
+            }
+          }
+        }
+      },
+      {
+        "name":"MetadataExplorer",
+        "cfg":{
+          "showGetCapLinks":false,
+          "addAuthentication":false,
+          "wrap":true,
+          "wrapWithPanel":false,
+          "closeGlyph":"1-close"
+        }
+      },
+      {
+        "name":"Snapshot",
+        "cfg":{
+          "wrap":true,
+          "wrapWithPanel":false,
+          "closeGlyph":"1-close",
+          "buttonStyle":"primary"
+        }
+      },
+    "Details",
+      {
+        "name": "Map",
+        "cfg": {
+          "mapOptions": {
+            "openlayers": {
+              "maxResolution": 33590,
+              "interactions": {
+                "pinchRotate": false,
+                "altShiftDragRotate": false
+              },
+              "attribution": {
+                "container": "#footer-attribution-container"
+              }
+            },
+            "leaflet": {
+              "attribution": {
+                "container": "#footer-attribution-container"
+              }
+            }
+          },
+          "toolsOptions": {
+            "scalebar": {
+              "container" : "#footer-scalebar-container"
+            }
+          }
+        }
+      }, "AutoMapUpdate", "HelpLink", {
+        "name": "DrawerMenu",
+        "cfg": {
+          "menuOptions": {
+            "width": 400
+          }
+        }
+      }, "Version", "Notifications", "BackgroundSelector",
+      {
+        "name":"Info",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        },
+        "hide": true
+      },
+      {
+        "name": "Locate",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      }, "Home", "FeatureEditor",
+      "WFSDownload",
+      {
+        "name": "QueryPanel",
+        "cfg": {
+          "activateQueryTool": true,
+          "spatialOperations": [
+            {"id": "INTERSECTS", "name": "queryform.spatialfilter.operations.intersects"},
+            {"id": "CONTAINS", "name": "queryform.spatialfilter.operations.contains"},
+            {"id": "WITHIN", "name": "queryform.spatialfilter.operations.within"}
+          ],
+          "spatialMethodOptions": [
+            {"id": "Viewport", "name": "queryform.spatialfilter.methods.viewport"},
+            {"id": "BBOX", "name": "queryform.spatialfilter.methods.box"},
+            {"id": "Circle", "name": "queryform.spatialfilter.methods.circle"},
+            {"id": "Polygon", "name": "queryform.spatialfilter.methods.poly"}
+          ]
+        }
+      },
+      "FilterLayer",
+      "AddGroup",
+      "MapFooter", {
+        "name": "Measure",
+        "cfg": {
+          "defaultOptions": {
+            "showAddAsAnnotation": true
+          }
+        }
+      }, "Print", "MapImport", {
+        "name": "MapExport"
+      }, {
+        "name": "Settings",
+        "cfg": {
+          "wrapWithPanel": false,
+          "closeGlyph": "1-close",
+          "overrideSettings": {
+            "history": false
+          },
+          "wrap": true
+        }
+      },
+      {
+        "name": "MousePosition",
+        "cfg": {
+          "editCRS": true,
+          "showLabels": true,
+          "showToggle": true,
+          "filterAllowedCRS": ["EPSG:4326", "EPSG:3857"],
+          "additionalCRS": {
+              "EPSG:32632": { "label": "EPSG:32632" }
+          }
+        }
+      }, {
+        "name": "CRSSelector",
+        "cfg": {
+          "additionalCRS": {
+
+          },
+          "filterAllowedCRS": [
+            "EPSG:4326",
+            "EPSG:3857"
+          ],
+          "allowedRoles": [
+            "ADMIN"
+          ]
+        }
+      }, {
+        "name": "Search",
+        "cfg": {
+          "withToggle": true
+        }
+      }, {
+        "name": "Toolbar",
+        "id": "NavigationBar",
+        "cfg": {
+          "id": "navigationBar"
+        }
+      },
+      "ScaleBox", {
+        "name":"ZoomAll",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": false
+          }
+        }
+      }, {
+        "name": "MapLoading",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      }, {
+        "name": "ZoomIn",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      }, {
+        "name": "ZoomOut",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      }, {
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl" : "",
+          "declineUrl" : "http://www.google.com"
+        }
+      },
+      "OmniBar", "Save", "SaveAs", "BurgerMenu", "Expander", "Undo", "Redo", "SearchServicesConfig", "SearchByBookmark", "WidgetsBuilder", "Widgets",
+      "WidgetsTray",
+      "Timeline",
+      "Playback",
+      "FeedbackMask",
+      "StyleEditor"
+    ],
+    "embedded": [{
+      "name": "Map",
+      "cfg": {
+        "tools": ["locate"],
+        "mapOptions": {
+          "openlayers": {
+            "interactions": {
+              "pinchRotate": false,
+              "altShiftDragRotate": false
+            },
+            "attribution": {
+              "container": "#footer-attribution-container"
+            }
+          },
+          "leaflet": {
+            "attribution": {
+              "container": "#footer-attribution-container"
+            }
+          }
+        },
+        "toolsOptions": {
+          "scalebar": {
+            "container" : "#footer-scalebar-container"
+          }
+        }
+      }
+    }, {
+      "name": "DrawerMenu",
+      "hide": "{!(request.query && request.query.forceDrawer)}"
+    },{
+      "name": "BackgroundSelector",
+      "cfg": {
+        "bottom": 40,
+        "dimensions": {
+          "side": 65,
+          "sidePreview": 65,
+          "frame": 3,
+          "margin": 5,
+          "label": false,
+          "vertical": true
+        }
+      }
+    }, {
+      "name": "ZoomAll",
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": false
+        }
+      }
+    },{
+      "name":"Info",
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": true
+        }
+      },
+      "hide": true
+    }, {
+      "name": "Locate",
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": true
+        }
+      }
+    }, {
+      "name": "TOC",
+      "cfg": {
+        "visibilityCheckType": "glyph",
+        "settingsOptions": {
+          "includeCloseButton": false,
+          "closeGlyph": "1-close",
+          "asModal": false,
+          "buttonSize": "small"
+        },
+        "activateSettingsTool": true,
+        "activateLegendTool": true
+      },
+      "override": {
+        "DrawerMenu": {
+          "glyph": "1-layer",
+          "buttonConfig": {
+            "buttonClassName": "square-button no-border",
+            "tooltip": "toc.tooltip"
+          }
+        }
+      }
+    },{
+      "name": "Catalog",
+      "override": {
+        "DrawerMenu": {
+          "buttonConfig": {
+            "buttonClassName": "square-button no-border",
+            "tooltip": "catalog.tooltip"
+          }
+        }
+      }
+    }, "AddGroup", "MapFooter", {
+      "name": "Settings",
+      "cfg": {
+        "wrapWithPanel": false,
+        "closeGlyph": "1-close",
+        "overrideSettings": {
+          "history": false
+        },
+        "wrap": true
+      }
+    }, {
+      "name": "Search",
+      "cfg": {
+        "showOptions": false,
+        "withToggle": true
+      }
+    }, {
+      "name": "Toolbar",
+      "id": "NavigationBar",
+      "cfg": {
+        "id": "navigationBar"
+      }
+    }, {
+      "name": "MapLoading",
+      "override": {
+        "Toolbar": {
+          "alwaysVisible": true
+        }
+      }
+    }, "Cookie",
+      "OmniBar", {
+        "name": "GoFull",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      },
+      "FeedbackMask"
+    ],
+    "common": [{
+      "name": "OmniBar",
+      "cfg": {
+        "className": "navbar shadow navbar-home"
+      }
+    }, {
+      "name": "ManagerMenu",
+      "cfg": {
+        "enableContextManager": true
+      }
+    },"Language", "NavMenu", "Attribution", "ScrollTop", "Notifications"],
+    "maps": ["HomeDescription", "Fork", "MapSearch", "CreateNewMap", "FeaturedMaps", "ContentTabs",
+
+      {
+        "name": "Maps",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 12
+          },
+          "fluid": true
+        }
+      },
+      {
+        "name": "GeoStories",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 12
+          },
+          "fluid": true
+        }
+      },
+      {
+        "name": "Contexts",
+        "cfg": {
+          "mapsOptions": {
+            "start": 0,
+            "limit": 12
+          },
+          "fluid": true
+        }
+      }
+    , "MailingLists", "Footer", {
+        "name": "Cookie",
+        "cfg": {
+          "externalCookieUrl" : "",
+          "declineUrl" : "http://www.google.com"
+        }
+      }],
+    "dashboard": [{
+      "name": "OmniBar",
+      "cfg": {
+        "containerPosition": "header",
+        "className": "navbar shadow navbar-home"
+      }
+    }, "Language", "NavMenu", "Attribution", "Home",
+      {
+        "name": "QueryPanel",
+        "cfg": {
+          "toolsOptions": {
+            "hideCrossLayer": true,
+            "hideSpatialFilter": true
+          },
+          "containerPosition": "columns"
+        }
+      }, "BurgerMenu", "Dashboard", "Notifications",
+      {
+        "name": "FeedbackMask",
+        "cfg": {
+          "containerPosition": "header"
+        }
+      }],
+    "context-creator": [
+      {
+        "name": "OmniBar",
+        "cfg": {
+          "containerPosition": "header",
+          "className": "navbar shadow navbar-home"
+        }
+      },
+      "Redirect",
+      "Login",
+      "Language",
+      "NavMenu",
+      "Attribution",
+      "Tutorial",
+      {
+        "name": "ContextCreator",
+        "cfg": {
+          "documentationBaseURL": "https://mapstore.geo-solutions.it/mapstore/docs/api/plugins",
+          "backToPageDestRoute": "/context-manager",
+          "backToPageConfirmationMessage": "contextCreator.undo"
+        }
+      },
+      "Notifications",
+      {
+        "name": "FeedbackMask",
+        "cfg": {
+          "containerPosition": "header"
+        }
+      }
+    ],
+    "manager": ["Header", "Redirect", "Manager", "Home", "UserManager", "GroupManager", "Footer"],
+    "context-manager": ["Header", "Redirect", "Home", "ContextManager", "Footer"]
+  }
 }

@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -11,7 +12,7 @@ const {connect} = require('react-redux');
 const {Glyphicon} = require('react-bootstrap');
 const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
 
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
@@ -24,11 +25,11 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     className: "square-button"
 }), {
-      onShowLogin: showLoginPanel,
-      onLogout: () => {
-          window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
-      }
-})(require('../../MapStore2/web/client/components/security/UserMenu'));
+    onShowLogin: showLoginPanel,
+    onLogout: () => {
+        window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+    }
+})(require('@mapstore/components/security/UserMenu'));
 const LoginPanel = connect((state) => ({
     showLoginPanel: state.userprofile.showLoginPanel
 }), {
@@ -38,17 +39,17 @@ const LoginPanel = connect((state) => ({
     }
 })(require('./LoginPanel'));
 
-const MapHeader = React.createClass({
-    propTypes: {
-        onBack: React.PropTypes.func,
-        onHome: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            onBack: () => {},
-            onHome: () => {}
-        };
-    },
+class MapHeader extends React.Component {
+    static propTypes = {
+        onBack: PropTypes.func,
+        onHome: PropTypes.func
+    };
+
+    static defaultProps = {
+        onBack: () => {},
+        onHome: () => {}
+    };
+
     render() {
         return (
             <div id="header-servizio" className="container-fluid">
@@ -94,6 +95,6 @@ const MapHeader = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = MapHeader;

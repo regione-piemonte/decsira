@@ -1,35 +1,28 @@
-var webpackConfig = require('./webpack.config.js');
-var path = require("path");
-var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
-var DefinePlugin = require("webpack/lib/DefinePlugin");
-var NormalModuleReplacementPlugin = require("webpack/lib/NormalModuleReplacementPlugin");
+const path = require("path");
 
-webpackConfig.plugins = [
-    new DefinePlugin({
-        "__DEVTOOLS__": false
-    }),
-    new DefinePlugin({
-      'process.env': {
-        'NODE_ENV': '"production"'
-      }
-    }),
-    new NormalModuleReplacementPlugin(/leaflet$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "leaflet")),
-    new NormalModuleReplacementPlugin(/openlayers$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "openlayers")),
-    new NormalModuleReplacementPlugin(/proj4$/, path.join(__dirname, "MapStore2", "web", "client", "libs", "proj4")),
-    new NormalModuleReplacementPlugin(/map\/openlayers\/Feature/, path.join(__dirname, "js", "Ms2Override", "Feature.jsx")),
-    new NormalModuleReplacementPlugin(/map\/openlayers\/plugins\/VectorLayer/, path.join(__dirname, "js", "Ms2Override", "VectorLayer.jsx")),	
-	new NormalModuleReplacementPlugin(/NumberField/, path.join(__dirname, "js", "Ms2Override", "NumberField.jsx")),
-	new NormalModuleReplacementPlugin(/SpatialFilter/, path.join(__dirname, "js", "Ms2Override", "SpatialFilter.jsx")),
-    new UglifyJsPlugin({
-        compress: {warnings: false},
-        mangle: true
-    })
-];
-webpackConfig.devtool = undefined;
-webpackConfig.debug = false;
+const themeEntries = require('./MapStore2/build/themes.js').themeEntries;
+const extractThemesPlugin = require('./MapStore2/build/themes.js').extractThemesPlugin;
 
-// this is a workaround for this issue https://github.com/webpack/file-loader/issues/3
-// use `__webpack_public_path__` in the index.html when fixed
-webpackConfig.output.publicPath = "dist/";
-
-module.exports = webpackConfig;
+module.exports = require('./MapStore2/build/buildConfig')(
+    {
+        sira: path.join(__dirname, "js", "app"),
+        siranomap: path.join(__dirname, "js", "siranomap", "app"),
+        qgis: path.join(__dirname, "js", "qGis", "app")
+    },
+    themeEntries,
+    {
+        base: __dirname,
+        dist: path.join(__dirname, "dist"),
+        framework: path.join(__dirname, "MapStore2", "web", "client"),
+        code: [path.join(__dirname, "js"), path.join(__dirname, "MapStore2", "web", "client")]
+    },
+    extractThemesPlugin,
+    true,
+    "dist/",
+    '.sira-ms2',
+    null,
+    {
+        '@mapstore': path.resolve(__dirname, 'MapStore2/web/client'),
+        '@js': path.resolve(__dirname, 'js')
+    }
+);

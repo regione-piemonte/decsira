@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -11,7 +12,7 @@ const {Button, Glyphicon} = require('react-bootstrap');
 const {expandFilterPanel} = require('../actions/siradec');
 
 require('../../assets/css/sira.css');
-require('../../MapStore2/web/client/product/assets/css/viewer.css');
+require('@mapstore/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
 
@@ -51,57 +52,65 @@ const {
 } = require('../actions/siradec');
 
 
-const NoMap = React.createClass({
-    propTypes: {
-        params: React.PropTypes.object,
-        featureTypeConfigUrl: React.PropTypes.string,
-        error: React.PropTypes.object,
-        setProfile: React.PropTypes.func,
-        onLoadFeatureTypeConfig: React.PropTypes.func,
-        expandFilterPanel: React.PropTypes.func,
-        configLoaded: React.PropTypes.bool,
-        featureType: React.PropTypes.string
-    },
-    getDefaultProps() {
-        return {
-            setProfile: () => {},
-            onLoadFeatureTypeConfig: () => {},
-            configLoaded: false
-        };
-    },
+class NoMap extends React.Component {
+    static propTypes = {
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
+        featureTypeConfigUrl: PropTypes.string,
+        error: PropTypes.object,
+        setProfile: PropTypes.func,
+        onLoadFeatureTypeConfig: PropTypes.func,
+        expandFilterPanel: PropTypes.func,
+        configLoaded: PropTypes.bool,
+        featureType: PropTypes.string
+    };
+
+    static defaultProps = {
+        setProfile: () => {},
+        onLoadFeatureTypeConfig: () => {},
+        configLoaded: false
+    };
+
     componentWillMount() {
-        if (this.props.params.profile) {
-            this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
+        if (this.props?.match?.params?.profile) {
+            this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
-    },
+    }
+
     componentDidMount() {
+        document.body.className = "sira-ms2";
         if (!this.props.configLoaded && this.props.featureTypeConfigUrl) {
             this.props.onLoadFeatureTypeConfig(
-                this.props.featureTypeConfigUrl, {authkey: authParams[this.props.params.profile].authkey}, this.props.featureType, true);
+                this.props.featureTypeConfigUrl, {authkey: authParams[this.props?.match?.params?.profile]?.authkey || ""}, this.props.featureType, true);
         }
-    },
-    componentWillReceiveProps(props) {
+    }
+
+    UNSAFE_componentWillReceiveProps(props) {
         let fturl = props.featureTypeConfigUrl;
         if (fturl !== this.props.featureTypeConfigUrl) {
-            this.props.onLoadFeatureTypeConfig(fturl, {authkey: authParams[this.props.params.profile].authkey}, this.props.featureType, true);
+            this.props.onLoadFeatureTypeConfig(fturl, {authkey: authParams[this.props?.match?.params?.profile]?.authkey || ""}, this.props.featureType, true);
         }
-    },
+    }
+
     render() {
         return (
             <div className="mappaSiraDecisionale">
                 <Button id="drawer-menu-button" bsStyle="primary" key="menu-button" className="square-button" onClick={() => this.props.expandFilterPanel(true)}><Glyphicon glyph="1-stilo"/></Button>
-                <SidePanel withMap={false} auth={authParams[this.props.params.profile]} profile={this.props.params.profile}/>
-                <Card withMap={false} authParam={authParams[this.props.params.profile]}/>
+                <SidePanel hideSpatialFilter withMap={false} auth={authParams[this.props?.match?.params?.profile]} profile={this.props?.match?.params?.profile}/>
+                <Card withMap={false} authParam={authParams[this.props?.match?.params?.profile]}/>
             </div>
         );
-    },
-    back() {
-        window.location.href = urlQuery.back + ".html?profile=" + this.props.params.profile;
-    },
-    goHome() {
-        window.location.href = "index.html?profile=" + this.props.params.profile;
     }
-});
+
+    back = () => {
+        window.location.href = urlQuery.back + ".html?profile=" + this.props?.match?.params?.profile;
+    };
+
+    goHome = () => {
+        window.location.href = "index.html?profile=" + this.props?.match?.params?.profile;
+    };
+}
 
 module.exports = connect((state) => {
     return {
@@ -110,7 +119,7 @@ module.exports = connect((state) => {
         // card: state.cardtemplate,
         featureType: state.siradec && state.siradec.featureType,
         featureTypeConfigUrl: state.siradec && state.siradec.featureType && 'assets/' + state.siradec.featureType + '.json',
-        configLoaded: state.siradec && state.siradec[state.siradec.activeFeatureType] && state.siradec[state.siradec.activeFeatureType].card ? true : false
+        configLoaded: !!(state.siradec && state.siradec[state.siradec.activeFeatureType] && state.siradec[state.siradec.activeFeatureType].card)
         // featureGrigConfigUrl: state.grid.featureGrigConfigUrl
     };
 }, {

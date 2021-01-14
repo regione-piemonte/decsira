@@ -6,18 +6,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 const FilterUtils = require('../utils/SiraFilterUtils');
-const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+const SiraUtils = require('../utils/SiraUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const TemplateUtils = require('../utils/TemplateUtils');
-const axios = require('../../MapStore2/web/client/libs/ajax');
+const axios = require('@mapstore/libs/ajax');
+const {version} = require('../utils/WMS');
+const {includes, isUndefined} = require('lodash');
 const {showLoading} = require('./grid');
 const SELECT_FEATURES = 'SELECT_FEATURES';
 const SET_FEATURES = 'SET_FEATURES';
 const SELECT_ALL = 'SELECT_ALL';
+const SELECT_MLS = 'SELECT_MLS';
+const SET_FEATURE_ROW_DATA = 'SET_FEATURE_ROW_DATA';
 
 function selectFeatures(features) {
-    return {
-        type: SELECT_FEATURES,
-        features: features
+    return (dispatch, getState) => {
+        const {siradec} = getState();
+        const activeFeatureType = siradec?.activeFeatureType || '';
+        const {featureTypeName = ''} = siradec?.configOggetti?.[activeFeatureType] || {};
+        const geometryType = SiraUtils.getConfigByfeatureTypeName(featureTypeName)?.geometryType || '';
+        return dispatch({
+            type: SELECT_FEATURES,
+            features: features,
+            geometryType
+        });
     };
 }
 
@@ -38,6 +51,7 @@ function selectAllToggle(featureTypeName, filterObj, ogcVersion, params, wfsUrl,
 }
 
 function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
+    // eslint-disable-next-line consistent-return
     return (dispatch, getState) => {
         if (featureTypeName) {
             let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
@@ -51,8 +65,8 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
             let state = getState();
             const featuregrid = state.grid && state.grid.featuregrid;
             return axios.post(url, filter, {
-              timeout: 60000,
-              headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+                timeout: 60000,
+                headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
             }).then((response) => {
 
                 if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
@@ -75,7 +89,7 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
                         }
                     }
 
-                    /*eslint-enable */
+                    /* eslint-enable */
                 }
                 dispatch(showLoading(false));
             });
@@ -83,12 +97,112 @@ function selectAllQgis(featureTypeName, filterObj, ogcVersion, params, wfsUrl) {
     };
 }
 
+const selectMLS = (layers) =>{
+    return {
+        type: SELECT_MLS,
+        layers
+    };
+};
+
+const getCQLFilter = (columnsDef, multiSelectLayer, params) =>{
+    return multiSelectLayer.map(({filterOn = '', multiLayerSelectionAttribute, name}) => {
+        if (columnsDef) {
+            const [result] = columnsDef.filter(c=> includes(c.xpath[0], multiLayerSelectionAttribute));
+            const value = params?.properties[result?.field || ''];
+            return `${filterOn}='${value}'`;
+        }
+        const value = params[name];
+        return `${filterOn}='${value}'`;
+    }).join(';');
+};
+
+const configureMultiLayerSelection = (columnsDef, geometry, params) => {
+    return (dispatch, getState) => {
+        const {siradec, map, layers: msLayers} = getState();
+        const crs = CoordinatesUtils.normalizeSRS(map?.present?.projection);
+        const activeFeatureType = siradec?.activeFeatureType || '';
+        const {multiLayerSelect = [], featureTypeName = '', layer = {}} = siradec?.configOggetti?.[activeFeatureType];
+        const multiLayerSelectFiltered = multiLayerSelect.filter(({wmsUrl}) => isUndefined(wmsUrl));
+        const layersWithNoFilter = multiLayerSelect.map(({name, title = '', wmsUrl: url = layer.url}) => {
+            return {
+                ...layer,
+                featureType: null,
+                url,
+                name,
+                infoFormat: "text/html",
+                mlsLayer: true,
+                title: title ? title : name.split(':')[1] || name,
+                id: name + '_mls',
+                visibility: true,
+                params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version}
+            };
+        });
+        const layerNames = multiLayerSelectFiltered.map(({name}) => name);
+        const mlsLayerName = 'MLS Layer';
+        const layerWithFilter = {
+            ...layer,
+            featureType: null,
+            name: mlsLayerName,
+            title: mlsLayerName,
+            id: 'selected_mls',
+            group: 'hidden',
+            queryable: false,
+            infoFormat: "text/html",
+            visibility: true,
+            params: { LAYERS: layerNames.join(','), FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version,
+                SLD_BODY: FilterUtils.getSLDMSLayers(featureTypeName, {}, layerNames),
+                CQL_FILTER: getCQLFilter(columnsDef, multiLayerSelectFiltered, params)
+            }
+        };
+        const activeFeatureLayerNotPresent = msLayers?.flat?.findIndex((l) => l.name === layer.name ) === -1;
+        const multiLayerSelectWithUrl = multiLayerSelect.filter(({wmsUrl}) => !isUndefined(wmsUrl));
+        let layers = [];
+        if (multiLayerSelectWithUrl) {
+            const CQL_FILTER = getCQLFilter(columnsDef, multiLayerSelectWithUrl, params); // TODO UPDATE FILTER FOR EXTERNAL URL
+            const additionalLayer = multiLayerSelectWithUrl.map(({name, wmsUrl}, index)=>{
+                return {
+                    ...layer,
+                    featureType: null,
+                    url: wmsUrl,
+                    name,
+                    title: name,
+                    id: 'selected_' + index + "_mls",
+                    group: 'hidden',
+                    infoFormat: "text/html",
+                    visibility: true,
+                    params: { LAYERS: name, FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version,
+                        SLD_BODY: FilterUtils.getSLDMSLayers(featureTypeName, {}, [name]),
+                        CQL_FILTER
+                    }
+                };
+            });
+            layers = [...layersWithNoFilter, layerWithFilter, ...additionalLayer];
+        } else {
+            layers = [...layersWithNoFilter, layerWithFilter];
+        }
+        Promise.all(layers).then(data => {
+            data && dispatch(selectMLS(activeFeatureLayerNotPresent ? [layer, ...data] : data));
+        });
+    };
+};
+
+const setCurrentFeatureRowData = (geometry) => {
+    return {
+        type: SET_FEATURE_ROW_DATA,
+        geometry
+    };
+};
+
 module.exports = {
     SELECT_FEATURES,
     SET_FEATURES,
     SELECT_ALL,
+    SELECT_MLS,
+    SET_FEATURE_ROW_DATA,
     selectFeatures,
     setFeatures,
     selectAllToggle,
-    selectAllQgis
+    selectAllQgis,
+    configureMultiLayerSelection,
+    setCurrentFeatureRowData
 };

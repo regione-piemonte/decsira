@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2015, GeoSolutions Sas.
  * All rights reserved.
@@ -13,7 +14,7 @@ const {Glyphicon, Panel} = require('react-bootstrap');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 
-const {setFeatures} = require('../../../MapStore2/web/client/actions/featuregrid');
+const {setFeatures} = require('@mapstore/actions/featuregrid');
 
 const TopologyInfoViewer = connect((state) => ({
     // modelConfig: state.mapInfo.modelConfig,
@@ -33,103 +34,102 @@ const GetFeatureInfoViewer = require('./GetFeatureInfoViewer');
 
 const Draggable = require('react-draggable');
 
-const I18N = require('../../../MapStore2/web/client/components/I18N/I18N');
-const Spinner = require('../../../MapStore2/web/client/components/misc/spinners/BasicSpinner/BasicSpinner');
+const I18N = require('@mapstore/components/I18N/I18N');
+const Spinner = require('@mapstore/components/misc/spinners/BasicSpinner/BasicSpinner');
 
-const CoordinatesUtils = require('../../../MapStore2/web/client/utils/CoordinatesUtils');
-const FilterUtils = require('../../../MapStore2/web/client/utils/FilterUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
+const FilterUtils = require('@mapstore/utils/FilterUtils');
 
-const MapInfoUtils = require('../../../MapStore2/web/client/utils/MapInfoUtils');
+const MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
 const {isArray, head} = require('lodash');
 
-const GetFeatureInfo = React.createClass({
-    propTypes: {
-        params: React.PropTypes.object,
-        infoFormat: React.PropTypes.oneOf(
+class GetFeatureInfo extends React.Component {
+    static propTypes = {
+        params: PropTypes.object,
+        infoFormat: PropTypes.oneOf(
             MapInfoUtils.getAvailableInfoFormatValues()
         ),
-        featureCount: React.PropTypes.number,
-        htmlResponses: React.PropTypes.array,
-        htmlRequests: React.PropTypes.object,
-        btnConfig: React.PropTypes.object,
-        infoEnabled: React.PropTypes.bool,
-        topologyInfoEnabled: React.PropTypes.bool,
-        map: React.PropTypes.object,
-        layers: React.PropTypes.array,
-        layerFilter: React.PropTypes.func,
-        actions: React.PropTypes.shape({
-            getFeatureInfo: React.PropTypes.func,
-            purgeMapInfoResults: React.PropTypes.func,
-            changeMousePointer: React.PropTypes.func,
-            showMapinfoMarker: React.PropTypes.func,
-            hideMapinfoMarker: React.PropTypes.func,
-            loadGetFeatureInfoConfig: React.PropTypes.func,
-            selectFeatures: React.PropTypes.func,
-            setFeatures: React.PropTypes.func,
-            setModelConfig: React.PropTypes.func
+        featureCount: PropTypes.number,
+        htmlResponses: PropTypes.array,
+        htmlRequests: PropTypes.object,
+        btnConfig: PropTypes.object,
+        infoEnabled: PropTypes.bool,
+        topologyInfoEnabled: PropTypes.bool,
+        map: PropTypes.object,
+        layers: PropTypes.array,
+        layerFilter: PropTypes.func,
+        actions: PropTypes.shape({
+            getFeatureInfo: PropTypes.func,
+            purgeMapInfoResults: PropTypes.func,
+            changeMousePointer: PropTypes.func,
+            showMapinfoMarker: PropTypes.func,
+            hideMapinfoMarker: PropTypes.func,
+            loadGetFeatureInfoConfig: PropTypes.func,
+            selectFeatures: PropTypes.func,
+            setFeatures: PropTypes.func,
+            setModelConfig: PropTypes.func
         }),
-        clickedMapPoint: React.PropTypes.object,
-        display: React.PropTypes.string,
-        draggable: React.PropTypes.bool,
-        style: React.PropTypes.object,
-        collapsible: React.PropTypes.bool,
+        clickedMapPoint: PropTypes.object,
+        display: PropTypes.string,
+        draggable: PropTypes.bool,
+        style: PropTypes.object,
+        collapsible: PropTypes.bool,
 
-        siraFeatureTypeName: React.PropTypes.string,
-        siraFeatureInfoDetails: React.PropTypes.object,
-        siraTopology: React.PropTypes.object,
-        siraTopologyConfig: React.PropTypes.object,
-        profile: React.PropTypes.string,
-        detailsConfig: React.PropTypes.object,
+        siraFeatureTypeName: PropTypes.string,
+        siraFeatureInfoDetails: PropTypes.object,
+        siraTopology: PropTypes.object,
+        siraTopologyConfig: PropTypes.object,
+        profile: PropTypes.string,
+        detailsConfig: PropTypes.object,
         // modelConfig: React.PropTypes.object,
-        template: React.PropTypes.object,
-        infoType: React.PropTypes.string
-    },
-    getDefaultProps() {
-        return {
-            siraFeatureTypeName: null,
-            siraFeatureInfoDetails: null,
-            siraTopology: null,
-            siraTopologyConfig: null,
-            profile: null,
-            infoEnabled: false,
-            topologyInfoEnabled: false,
-            featureCount: 10,
-            draggable: true,
-            display: "accordion",
-            htmlResponses: [],
-            htmlRequests: {length: 0},
-            map: {},
-            layers: [],
-            layerFilter(l) {
-                return l.visibility &&
-                    l.type === 'wms' &&
-                    (l.queryable === undefined || l.queryable) &&
-                    l.group !== "background";
-            },
-            actions: {
-                getFeatureInfo() {},
-                purgeMapInfoResults() {},
-                changeMousePointer() {},
-                showMapinfoMarker() {},
-                hideMapinfoMarker() {}
-            },
-            infoFormat: MapInfoUtils.getDefaultInfoFormatValue(),
-            clickedMapPoint: {},
-            style: {
-                position: "absolute",
-                maxWidth: "500px",
-                top: "56px",
-                left: "45px",
-                zIndex: 1010,
-                boxShadow: "2px 2px 4px #A7A7A7"
-            }
-        };
-    },
-    getInitialState() {
-        return { showModal: true };
-    },
+        template: PropTypes.object,
+        infoType: PropTypes.string
+    };
+
+    static defaultProps = {
+        siraFeatureTypeName: null,
+        siraFeatureInfoDetails: null,
+        siraTopology: null,
+        siraTopologyConfig: null,
+        profile: null,
+        infoEnabled: false,
+        topologyInfoEnabled: false,
+        featureCount: 10,
+        draggable: true,
+        display: "accordion",
+        htmlResponses: [],
+        htmlRequests: {length: 0},
+        map: {},
+        layers: [],
+        layerFilter(l) {
+            return l.visibility &&
+                l.type === 'wms' &&
+                (l.queryable === undefined || l.queryable) &&
+                l.group !== "background";
+        },
+        actions: {
+            getFeatureInfo() {},
+            purgeMapInfoResults() {},
+            changeMousePointer() {},
+            showMapinfoMarker() {},
+            hideMapinfoMarker() {}
+        },
+        infoFormat: MapInfoUtils.getDefaultInfoFormatValue(),
+        clickedMapPoint: {},
+        style: {
+            position: "absolute",
+            maxWidth: "500px",
+            top: "56px",
+            left: "45px",
+            zIndex: 1010,
+            boxShadow: "2px 2px 4px #A7A7A7"
+        }
+    };
+
+    state = { showModal: true };
+
     componentWillReceiveProps(newProps) {
         // if there's a new clicked point on map and GetFeatureInfo is active
         // it composes and sends a getFeatureInfo action.
@@ -189,13 +189,13 @@ const GetFeatureInfo = React.createClass({
                                 geometry: {
                                     coordinates: [
                                         topologyConfig.wfsVersion === "1.1.0" || topologyConfig.wfsVersion === "2.0" ?
-                                        [[
-                                            topologyConfig.clickedMapPoint.latlng.lat,
-                                            topologyConfig.clickedMapPoint.latlng.lng
-                                        ]] : [[
-                                            topologyConfig.clickedMapPoint.latlng.lng,
-                                            topologyConfig.clickedMapPoint.latlng.lat
-                                        ]]
+                                            [[
+                                                topologyConfig.clickedMapPoint.latlng.lat,
+                                                topologyConfig.clickedMapPoint.latlng.lng
+                                            ]] : [[
+                                                topologyConfig.clickedMapPoint.latlng.lng,
+                                                topologyConfig.clickedMapPoint.latlng.lat
+                                            ]]
                                     ],
                                     projection: "EPSG:4326",
                                     type: "Point"
@@ -232,15 +232,18 @@ const GetFeatureInfo = React.createClass({
             this.props.actions.hideMapinfoMarker();
             this.props.actions.purgeMapInfoResults();
         }
-    },
-    onModalHiding() {
+    }
+
+    onModalHiding = () => {
         this.props.actions.hideMapinfoMarker();
         this.props.actions.purgeMapInfoResults();
-    },
-    renderInfo(missingRequests) {
+    };
+
+    renderInfo = (missingRequests) => {
         let component;
 
         if (this.props.infoType === "getfeatureinfo") {
+
             component = (
                 <GetFeatureInfoViewer
                     missingRequests={missingRequests}
@@ -256,7 +259,7 @@ const GetFeatureInfo = React.createClass({
                     display={this.props.display}/>
             );
         } else {
-            if (/*this.props.modelConfig*/ this.props.siraTopologyConfig) {
+            if (/* this.props.modelConfig*/ this.props.siraTopologyConfig) {
                 component = (
                     <TopologyInfoViewer
                         missingRequests={missingRequests}
@@ -279,8 +282,9 @@ const GetFeatureInfo = React.createClass({
         }
 
         return component;
-    },
-    renderHeader(missingRequests) {
+    };
+
+    renderHeader = (missingRequests) => {
         let glyph = this.props.infoType === "getfeatureinfo" ? "info-sign" : "glyphicon glyphicon-picture";
 
         return (
@@ -290,12 +294,13 @@ const GetFeatureInfo = React.createClass({
                 <button onClick={this.onModalHiding} className="close"><span>×</span></button>
             </div>
         );
-    },
-    renderContent() {
+    };
+
+    renderContent = () => {
         let missingRequests = this.props.htmlRequests.length - this.props.htmlResponses.length;
         return (
             <Panel
-                defaultExpanded={true}
+                defaultExpanded
                 collapsible={this.props.collapsible}
                 id="mapstore-getfeatureinfo"
                 header={this.renderHeader(missingRequests)}
@@ -303,7 +308,8 @@ const GetFeatureInfo = React.createClass({
                 {this.renderInfo(missingRequests)}
             </Panel>
         );
-    },
+    };
+
     render() {
         if (this.props.htmlRequests.length !== 0) {
             return this.props.draggable ? (
@@ -313,12 +319,14 @@ const GetFeatureInfo = React.createClass({
             ) : this.renderContent();
         }
         return null;
-    },
-    infoFormat(layerInfoFormat, propsInfoFormat) {
+    }
+
+    infoFormat = (layerInfoFormat, propsInfoFormat) => {
         const infoFormats = isArray(layerInfoFormat) && layerInfoFormat || [layerInfoFormat];
         return head(infoFormats.filter((f) => f === propsInfoFormat)) || head(infoFormats);
-    },
-    calculateRequestParameters(layer, bounds, crs, newProps) {
+    };
+
+    calculateRequestParameters = (layer, bounds, crs, newProps) => {
         const infoFormat = layer.infoFormat ? this.infoFormat(layer.infoFormat, newProps.infoFormat) : newProps.infoFormat;
         let requestConf = {
             id: layer.id,
@@ -356,8 +364,9 @@ const GetFeatureInfo = React.createClass({
             layerMetadata: layerMetadata,
             requestConf: requestConf
         });
-    },
-    reprojectBbox(bbox, destSRS) {
+    };
+
+    reprojectBbox = (bbox, destSRS) => {
         let newBbox = CoordinatesUtils.reprojectBbox([
             bbox.bounds.minx,
             bbox.bounds.miny,
@@ -373,7 +382,7 @@ const GetFeatureInfo = React.createClass({
                 maxy: newBbox[3]
             }
         });
-    }
-});
+    };
+}
 
 module.exports = GetFeatureInfo;

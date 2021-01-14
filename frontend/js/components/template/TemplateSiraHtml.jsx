@@ -7,14 +7,15 @@
  */
 const React = require('react');
 // include application component
-const Template = require('../../../MapStore2/web/client/components/data/template/jsx/Template');
+const Template = require('@mapstore/components/data/template/jsx/Template');
 // Template needs to import all component used in string definition.
 // The referene should be available in eval scope. Needs to disable eslint
 const renderSira = require("./htmlpdf/index");
 
-const TemplateSiraHtml = React.createClass({
+class TemplateSiraHtml extends React.Component {
     render() {
         return (<Template {...this.props} renderContent={renderSira}/>);
     }
-});
+}
+
 module.exports = TemplateSiraHtml;

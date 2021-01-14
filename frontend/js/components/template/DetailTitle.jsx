@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -11,26 +12,26 @@ const {toggleSiraControl} = require('../../actions/controls');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 
-const DetailTitle = React.createClass({
-    propTypes: {
-        title: React.PropTypes.string,
-        subtitle: React.PropTypes.array,
-        id: React.PropTypes.string,
-        toggleSiraControl: React.PropTypes.func
-    },
-    getDefaultProps() {
-        return {
-            title: '',
-            subtitle: '',
-            id: null,
-            toggleSiraControl: () => {}
-        };
-    },
+class DetailTitle extends React.Component {
+    static propTypes = {
+        title: PropTypes.string,
+        subtitle: PropTypes.array,
+        id: PropTypes.string,
+        toggleSiraControl: PropTypes.func
+    };
+
+    static defaultProps = {
+        title: '',
+        subtitle: '',
+        id: null,
+        toggleSiraControl: () => {}
+    };
+
     render() {
         let subtitle = this.props.subtitle.join(" ");
 
         return (
-            <Grid className="detail-title" fluid={true}>
+            <Grid className="detail-title" fluid>
                 <Row>
                     <Col xs={11} sm={11} md={11} lg={11}>
                         <h4>{this.props.title}<br/><small>{subtitle}</small></h4>
@@ -42,7 +43,7 @@ const DetailTitle = React.createClass({
             </Grid>
         );
     }
-});
+}
 
 module.exports = connect(null, dispatch => {
     return bindActionCreators({toggleSiraControl: toggleSiraControl.bind(null, 'detail')}, dispatch);

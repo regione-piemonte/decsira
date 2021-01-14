@@ -1,3 +1,4 @@
+const PropTypes = require('prop-types');
 /**
  * Copyright 2016, GeoSolutions Sas.
  * All rights reserved.
@@ -9,7 +10,7 @@ const React = require('react');
 
 
 require('../../assets/css/sira.css');
-require('../../MapStore2/web/client/product/assets/css/viewer.css');
+require('@mapstore/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
 
@@ -19,8 +20,7 @@ const Header = require('../components/Header');
 
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
-// const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {setProfile} = require('../actions/userprofile');
+const {setProfile, loadUserIdentity} = require('../actions/userprofile');
 const {configureInlineMap} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
@@ -50,67 +50,68 @@ const authParams = {
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 const mapStateToPropsMIB = (state) => {
     return {
-      show: state.metadatainfobox.show,
-      openLegendPanel: state.metadatainfobox.openLegendPanel,
-      title: state.metadatainfobox.title,
-      text: state.metadatainfobox.text,
-      numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
-      dataProvider: state.metadatainfobox.dataProvider,
-      urlMetadato: state.metadatainfobox.urlMetadato,
-      urlWMS: state.metadatainfobox.urlWMS,
-      urlWFS: state.metadatainfobox.urlWFS,
-      urlLegend: state.metadatainfobox.urlLegend,
-      error: state.metadatainfobox.error,
-      showButtonLegend: state.metadatainfobox.showButtonLegend
-  };
+        show: state.metadatainfobox.show,
+        openLegendPanel: state.metadatainfobox.openLegendPanel,
+        title: state.metadatainfobox.title,
+        text: state.metadatainfobox.text,
+        numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
+        dataProvider: state.metadatainfobox.dataProvider,
+        urlMetadato: state.metadatainfobox.urlMetadato,
+        urlWMS: state.metadatainfobox.urlWMS,
+        urlWFS: state.metadatainfobox.urlWFS,
+        urlLegend: state.metadatainfobox.urlLegend,
+        error: state.metadatainfobox.error,
+        showButtonLegend: state.metadatainfobox.showButtonLegend
+    };
 };
 
 const mapDispatchToPropsMIB = (dispatch) => {
     return {
-    loadLegend: (u, actualUrl) => {
-        if (actualUrl && actualUrl.length === 0) {
-            dispatch(loadLegends(u));
+        loadLegend: (u, actualUrl) => {
+            if (actualUrl && actualUrl.length === 0) {
+                dispatch(loadLegends(u));
+            }
+            dispatch(toggleLegendBox());
+        },
+        closePanel: () => {
+            dispatch(hideBox());
         }
-        dispatch(toggleLegendBox());
-    },
-    closePanel: () => {
-        dispatch(hideBox());
-    }
-  };
+    };
 };
 
 const MetadataInfoBox = connect(
     mapStateToPropsMIB,
     mapDispatchToPropsMIB
-    )(require('../components/MetadataInfoBox'));
+)(require('../components/MetadataInfoBox'));
 
-const { changeMousePointer} = require('../../MapStore2/web/client/actions/map');
+const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
 
-const MapViewer = require('../../MapStore2/web/client/containers/MapViewer');
+const MapViewer = require('@mapstore/containers/MapViewer');
 
 const {getFeatureInfo, purgeMapInfoResults, showMapinfoMarker, hideMapinfoMarker} = require('../actions/mapInfo');
+const {toggleControl} = require('@mapstore/actions/controls');
 const {loadGetFeatureInfoConfig, setModelConfig} = require('../actions/mapInfo');
 const {selectFeatures, setFeatures} = require('../actions/featuregrid');
 
 const GetFeatureInfo = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
-    siraFeatureTypeName: activeConfig.featureTypeName,
-    siraFeatureInfoDetails: state.siradec.configOggetti,
-    siraTopology: state.siradec.topology,
-    siraTopologyConfig: state.mapInfo.topologyConfig,
-    infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,
-    topologyInfoEnabled: state.mapInfo && state.mapInfo.topologyInfoEnabled || false,
-    htmlResponses: state.mapInfo && state.mapInfo.responses || [],
-    htmlRequests: state.mapInfo && state.mapInfo.requests || {length: 0},
-    infoFormat: state.mapInfo && state.mapInfo.infoFormat,
-    detailsConfig: state.mapInfo.detailsConfig,
-    // modelConfig: state.mapInfo.modelConfig,
-    template: state.mapInfo.template,
-    map: state.map && state.map.present,
-    infoType: state.mapInfo.infoType,
-    layers: state.layers && state.layers.flat || [],
-    clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint};
+        siraFeatureTypeName: activeConfig.featureTypeName,
+        siraFeatureInfoDetails: state.siradec.configOggetti,
+        siraTopology: state.siradec.topology,
+        siraTopologyConfig: state.mapInfo.topologyConfig,
+        infoEnabled: state.mapInfo && state.mapInfo.infoEnabled || false,
+        topologyInfoEnabled: state.mapInfo && state.mapInfo.topologyInfoEnabled || false,
+        htmlResponses: state.mapInfo && state.mapInfo.responses || [],
+        htmlRequests: state.mapInfo && state.mapInfo.requests || {length: 0},
+        infoFormat: state.mapInfo && state.mapInfo.infoFormat,
+        detailsConfig: state.mapInfo.detailsConfig,
+        // modelConfig: state.mapInfo.modelConfig,
+        template: state.mapInfo.template,
+        map: state.map && state.map.present,
+        infoType: state.mapInfo.infoType,
+        layers: state.layers && state.layers.flat || [],
+        clickedMapPoint: state.mapInfo && state.mapInfo.clickPoint};
 }, (dispatch) => {
     return {
         actions: bindActionCreators({
@@ -127,54 +128,74 @@ const GetFeatureInfo = connect((state) => {
     };
 })(require('../components/identify/GetFeatureInfo'));
 
-let MapInfoUtils = require('../../MapStore2/web/client/utils/MapInfoUtils');
+let MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
-const Sira = React.createClass({
-    propTypes: {
-        mode: React.PropTypes.string,
-        params: React.PropTypes.object,
-        roles: React.PropTypes.object,
-        profile: React.PropTypes.object,
-        loadMapConfig: React.PropTypes.func,
-        reset: React.PropTypes.func,
-        error: React.PropTypes.object,
-        loading: React.PropTypes.bool,
-        nsResolver: React.PropTypes.func,
-        controls: React.PropTypes.object,
-        toggleSiraControl: React.PropTypes.func,
-        setProfile: React.PropTypes.func,
-        // loadUserIdentity: React.PropTypes.func,
-        plugins: React.PropTypes.object,
-        viewerParams: React.PropTypes.object,
-        configureInlineMap: React.PropTypes.func,
-        configLoaded: React.PropTypes.bool
-    },
-    contextTypes: {
-        router: React.PropTypes.object
-    },
-    getDefaultProps() {
-        return {
-            toggleSiraControl: () => {},
-            setProfile: () => {},
-            // loadUserIdentity: () => {},
-            onLoadFeatureTypeConfig: () => {},
-            mode: 'desktop',
-            viewerParams: {mapType: "openlayers"},
-            configLoaded: false
-        };
-    },
+class Sira extends React.Component {
+    static propTypes = {
+        mode: PropTypes.string,
+        match: PropTypes.shape({
+            params: PropTypes.object
+        }),
+        roles: PropTypes.object,
+        profile: PropTypes.object,
+        loadMapConfig: PropTypes.func,
+        reset: PropTypes.func,
+        error: PropTypes.object,
+        loading: PropTypes.bool,
+        nsResolver: PropTypes.func,
+        controls: PropTypes.object,
+        toggleSiraControl: PropTypes.func,
+        setProfile: PropTypes.func,
+        loadUserIdentity: PropTypes.func,
+        plugins: PropTypes.object,
+        viewerParams: PropTypes.object,
+        configureInlineMap: PropTypes.func,
+        configLoaded: PropTypes.bool,
+        registerEventListener: PropTypes.func,
+        toggleControl: PropTypes.func,
+        mapConfigLoaded: PropTypes.bool,
+        panelEnabled: PropTypes.bool
+    };
+
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
+    static defaultProps = {
+        toggleSiraControl: () => {},
+        setProfile: () => {},
+        loadUserIdentity: () => {},
+        onLoadFeatureTypeConfig: () => {},
+        mode: 'desktop',
+        viewerParams: {mapType: "openlayers"},
+        configLoaded: false
+    };
+
     componentWillMount() {
-        document.body.className = "body_map";
+        document.body.className = "body_map sira-ms2";
         if (urlQuery.map) {
             this.props.configureInlineMap(JSON.parse(urlQuery.map));
         }
-        // if (this.props.params.profile) {
-        //    this.props.setProfile(this.props.params.profile, authParams[this.props.params.profile]);
-        // }
-        // this.props.loadUserIdentity();
-    },
+        if (this.props?.match?.params?.profile) {
+            this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
+        }
+        this.props.loadUserIdentity();
+    }
+
+    componentDidMount() {
+        if (this.props.mapConfigLoaded) {
+            this.props.registerEventListener('mousemove', 'mouseposition');
+            !this.props.panelEnabled && this.props.toggleControl('drawer');
+        }
+
+    }
+
+    componentWillUnmount() {
+        // this.props.unRegisterEventListener('mousemove', 'mouseposition');
+    }
+
     render() {
         return (
             <div>
@@ -185,21 +206,21 @@ const Sira = React.createClass({
                     cartListaStyle="btn btn-primary"
                     cartMappaStyle="btn btn-primary active"
                     onBack={this.back}
-                    />
+                />
 
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
                     </span>
-                    <SidePanel auth={authParams[this.props.params.profile]} profile={this.props.profile.profile}/>
+                    <SidePanel auth={authParams[this.props?.match?.params?.profile]} profile={this.props.profile.profile}/>
                     <MapViewer
-                    plugins={this.props.plugins}
-                    params={this.props.viewerParams}
+                        plugins={this.props.plugins}
+                        params={this.props.viewerParams}
                     />
-                    <Card profile={this.props.profile.profile} authParam={authParams[this.props.params.profile]}/>
+                    <Card profile={this.props.profile.profile} authParam={authParams[this.props?.match?.params?.profile]}/>
                     <GetFeatureInfo
                         display={"accordion"}
-                        params={{authkey: this.props.params.profile ? authParams[this.props.params.profile].authkey : ''}}
+                        params={{authkey: this.props?.match?.params?.profile ? authParams[this.props?.match?.params?.profile].authkey : ''}}
                         profile={this.props.profile.profile}
                         key="getFeatureInfo"/>
                     <MetadataInfoBox panelStyle={{
@@ -213,14 +234,16 @@ const Sira = React.createClass({
                 </div>
             </div>
         );
-    },
-    goToDataset() {
-        this.context.router.push('/dataset/');
-    },
-    goToHome() {
-        this.context.router.push('/');
     }
-});
+
+    goToDataset = () => {
+        this.context.router.history.push('/dataset/');
+    };
+
+    goToHome = () => {
+        this.context.router.history.push('/');
+    };
+}
 
 module.exports = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
@@ -229,13 +252,18 @@ module.exports = connect((state) => {
         mode: 'desktop',
         loading: !state.config || !state.locale || false,
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
-        // card: state.cardtemplate,
+        card: state.cardtemplate,
         controls: state.siraControls,
-        configLoaded: activeConfig && activeConfig.card ? true : false
+        configLoaded: !!(activeConfig && activeConfig.card),
+        mapConfigLoaded: state?.map?.present || false,
+        panelEnabled: state?.controls?.drawer?.enabled || false
     };
 }, {
     toggleSiraControl,
     setProfile,
-    // loadUserIdentity,
-    configureInlineMap
+    loadUserIdentity,
+    configureInlineMap,
+    registerEventListener,
+    unRegisterEventListener,
+    toggleControl
 })(Sira);

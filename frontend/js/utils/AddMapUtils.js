@@ -7,9 +7,9 @@
  */
 const assign = require('object-assign');
 const {isArray, memoize} = require('lodash');
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 const urlUtil = require('url');
-const CoordinatesUtils = require('../../MapStore2/web/client/utils/CoordinatesUtils');
+const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {Promise} = require('es6-promise');
 
 // Add here default layer config for layer added by sira catalog
@@ -104,16 +104,16 @@ const AddMapUtils = {
             const nodeGroup = (node.title || "").replace(/\./g, '${dot}');
             const group = useTitle ? layer.groupTitle : layer.group;
             resolve(assign({}, {
-                    url: layer.url,
-                    name: layer.Name,
-                    title: useTitle ? layer.Title : layer.Name,
-                    bbox: getWMSBBox(layer),
-                    params: params,
-                    allowedSRS: allowedSRS,
-                    siraId: node.id,
-                    infoFormat: layer.infoFormat,
-                    group: useGroup ? group || nodeGroup : nodeGroup
-                }, layerDefaultConfig));
+                url: layer.url,
+                name: layer.Name,
+                title: useTitle ? layer.Title : layer.Name,
+                bbox: getWMSBBox(layer),
+                params: params,
+                allowedSRS: allowedSRS,
+                siraId: node.id,
+                infoFormat: layer.infoFormat,
+                group: useGroup ? group || nodeGroup : nodeGroup
+            }, layerDefaultConfig));
         });
     }
 };
