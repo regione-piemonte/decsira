@@ -8,7 +8,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
-const {isObject, isEmpty, uniq} = require('lodash');
+const {isObject, isEmpty} = require('lodash');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const TemplateSira = require('./TemplateSira');
@@ -24,13 +24,11 @@ const TemplateUtils = require('../../utils/TemplateUtils');
 const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 const mapUtils = require('@mapstore/utils/MapUtils');
 const {configureMultiLayerSelection, setCurrentFeatureRowData} = require('../../actions/featuregrid');
-const {goToMapPage} = require('../../utils/SiraUtils');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {changeMapView} = require('@mapstore/actions/map');
 
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;
-const configUtils = require('@mapstore/utils/ConfigUtils');
 
 require("./card.css");
 

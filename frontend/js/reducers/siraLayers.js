@@ -87,8 +87,8 @@ function layers(state = [], action) {
         }, state);
     case TOGGLE_SIRA_CONTROL:
         if (action.control === "detail") {
-            const ftLayers = state.flat.filter(l => includes(l.id, '_mls') || l.id === 'gridItems');
-            return ftLayers.reduce((layersms, layer) => {
+            const ft2Layers = state.flat.filter(l => includes(l.id, '_mls') || l.id === 'gridItems');
+            return ft2Layers.reduce((layersms, layer) => {
                 return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
                     layer: layer.id,
                     newProperties: {
