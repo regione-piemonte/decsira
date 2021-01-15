@@ -144,7 +144,7 @@ function layers(state = [], action) {
         return action.layers.reduce((layersms, layer) => {
             let mlsLayer = head(state.flat.filter(l => l.name === `${layer.name}`));
             if (mlsLayer) {
-                let params = {params: layer.params};
+                let params = {params: layer.params, visibility: true};
                 return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
                     layer: mlsLayer.id,
                     newProperties: params
