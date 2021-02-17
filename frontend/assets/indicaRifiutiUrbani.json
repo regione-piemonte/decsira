@@ -1,0 +1,179 @@
+{
+   "featureTypeName":"decsiraogc_indicatori_ru:IndicaRifiutiUrbani",
+   "featureTypeNameLabel":"PRODUZIONE RIFIUTI URBANI",
+   "nameSpaces": {
+     "decsiraogc_indicatori_ru": "http://www.regione.piemonte.it/ambiente/indicatori_ru/1.0"
+   },
+   "tematizzatore": {
+	  "description": "Produzione Rifiuti Urbani",
+	  "attribute": "valore_rappresentato",
+	  "defaultMethod": "jenks",
+	  "defaultIntervals": 5,
+	  "defaultRamp": "dark2",
+	  "viewParams": ["ris_spaziale", "dimensione", "ambito_temporale"],
+	  "viewParams": "ris_spaziale:%RIS_SPAZIALE%;dimensione:%DIMENSIONE%;ambito_temporale:%AMBITO_TEMPORALE%",
+	  "filters": [
+			{
+				"index": 1,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_ris_spaziale",
+				"label":"Risoluzione Spaziale",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_risoluzione_spaziale",
+				  "propertyName": "id_ris_spaziale,des_ris_spaziale,ord_ris_spaz",
+				  "cql_filter": "id_ris_spaziale=1%20OR%20id_ris_spaziale=2%20OR%20id_ris_spaziale=3%20OR%20id_ris_spaziale=101",
+				  "sortBy": "ord_ris_spaz+A"
+				}
+				},
+				"valueId":"id_ris_spaziale",
+				"valueLabel":"des_ris_spaziale"
+			},
+			{
+				"index": 2,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_dimensione",
+				"label":"Dimensione indicatore",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_dimensioni",
+				  "propertyName": "id_dimensione,des_dimensione",
+				  "cql_filter": "id_dimensione=45%20OR%20id_dimensione=46%20OR%20id_dimensione=47%20OR%20id_dimensione=57%20OR%20id_dimensione=69%20OR%20id_dimensione=70%20OR%20id_dimensione=71"
+				}
+				},
+				"valueId":"id_dimensione",
+				"valueLabel":"des_dimensione"
+			},
+			{
+				"index": 3,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_ambito_temporale",
+				"label":"Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_risoluzione_temporale",
+				  "propertyName": "id_ris_temporale,des_ris_temporale,ord_ris_temp",
+				  "sortBy": "ord_ris_temp+A"
+				}
+				},
+				"valueId":"id_ris_temporale",
+				"valueLabel":"des_ris_temporale"
+			},
+			{
+				"index": 4,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_ambito_temporale",
+				"label":"Dettaglio Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_ambiti_temporali",
+				  "propertyName": "id_ambito_temporale,valore,anno",
+				  "sortBy": "anno+A,valore+A"
+				}
+				},
+				"valueId":"id_ambito_temporale",
+				"valueLabel":"id_ambito_temporale"
+			}
+	  ]
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Indicatori Rifiuti Urbani",
+        "name": "decsiraogc_indicatori_ru:IndicaRifiutiUrbani",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "indicaRifiutiUrbani",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+    "geometryName": "geometria",
+    "geometryType": "Polygon",
+	"featureinfo":{
+     "templateURL": "assets/infoTemplateRifiutiUrbani.jsxt"
+	},
+	"featuregrid": {
+     "grid": {
+		"root": "/wfs:FeatureCollection/wfs:member/decsiraogc_indicatori_ru:IndicaRifiutiUrbani",
+		"columns": [
+		  {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+          },
+		  {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "geometry",
+          "xpath" : [ "decsiraogc_indicatori_ru:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "type" : 6
+         },
+		 {
+           "headerName": "Dimensione Indicatore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_dimensione/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Valore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:valore_rappresentato/text()"],
+           "type": 1,
+          "width" : 150
+         },
+         {
+           "headerName": "Unità di misura",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_unita_misura/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Risoluzione Spaziale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_ris_spaziale/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Localizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_entita_spaziale/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Abitanti",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:abitanti/text()"],
+           "type": 1,
+          "width" : 150
+         }
+		]
+		}
+	},
+	"query": {
+		"service": {
+		   "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+		   "urlParams": {
+			 "version": "1.1.0",
+			 "outputFormat": "application/json"
+		   }
+		 },
+		 "fields":[
+			{
+				"index": 1,
+				"attribute": "decsiraogc_indicatori_ru:abitanti",
+				"label":"Abitanti",
+				"type":"number"
+			}
+		 ]
+	}
+}

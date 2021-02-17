@@ -24,7 +24,8 @@ class DefaultNode extends React.Component {
         style: PropTypes.object,
         groups: PropTypes.array,
         addToMap: PropTypes.func,
-        showInfoBox: PropTypes.func
+        showInfoBox: PropTypes.func,
+        expandIndicaPanel: PropTypes.func,
     };
 
     static defaultProps = {
@@ -32,13 +33,15 @@ class DefaultNode extends React.Component {
         expandFilterPanel: () => {},
         onToggle: () => {},
         toggleSiraControl: () => {},
-        addToMap: () => {}
+        addToMap: () => {},
+        expandIndicaPanel: () => {}
     };
 
     renderTools = () => {
         let tooltipSira = <Tooltip id="tpm-search-details">Ricerca di dettaglio</Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map">Carica in Mappa</Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj">Elenco di Oggetti</Tooltip>;
+        let tooltipIndica = <Tooltip id="tpm-list-obj">Indicatore</Tooltip>;
         const tools = [
             (<OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
                 <Glyphicon
@@ -65,6 +68,19 @@ class DefaultNode extends React.Component {
                         glyph="search"
                         onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
                 </OverlayTrigger>));
+            let indicaFunctions = this.props.node.functions.filter(
+                (func)=> {return func.type =="Tematizzatore" || func.type =="Serie Storica"}
+            );
+            if (indicaFunctions.length > 0) {
+                tools.push((
+                    <OverlayTrigger key={"indicatori"} rootClose placement="left" overlay={tooltipIndica}>
+                        <Glyphicon
+                            style={glyphStyle}
+                            key="toggle-indicatori"
+                            glyph="signal"
+                            onClick={() => this.props.expandIndicaPanel(true, this.props.node.featureType)}/>
+                    </OverlayTrigger>));
+            }
         }
         return tools;
     };

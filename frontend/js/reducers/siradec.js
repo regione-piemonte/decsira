@@ -11,6 +11,9 @@ const {
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
+    EXPAND_INDICA_PANEL,
+    CONFIGURE_INDICA_LAYER,
+    CLOSE_INDICA_CONFIGURATION,
     QUERYFORM_CONFIG_LOAD_ERROR,
     FEATUREGRID_CONFIG_LOADED,
     FEATUREINFO_CONFIG_LOADED,
@@ -34,6 +37,10 @@ const uuid = require('uuid');
 const initialState = {
     waitingForConfig: null,
     filterPanelExpanded: false,
+    indicaPanelExpanded: false,
+    indicaConfigPanel: {
+        expanded: false
+    },
     configOggetti: {
     },
     topology: null,
@@ -68,16 +75,21 @@ function siradec(state = initialState, action) {
     }
     case FEATURETYPE_CONFIG_LOADED: {
         let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
+        let queryAttributes = attributes.filter((att) => {return att.filterType!="tematizzatore"});
+        let indicaFilters = attributes.filter((att) => {return att.filterType=="tematizzatore"});
 
         // Sorting the attributes by the given index in configuration
-        attributes.sort((attA, attB) => {
+        queryAttributes.sort((attA, attB) => {
             return attA.index && attB.index && attA.index - attB.index;
+        });
+        indicaFilters.sort((filA, filB) => {
+            return filA.index && filB.index && filA.index - filB.index;
         });
 
         const queryform = assign({}, state.queryform, {geometryName: action.geometryName, spatialField: assign({}, state.queryform.spatialField, {attribute: action.geometryName})});
 
         let newConf = assign({}, state.configOggetti[action.featureType], {
-            attributes: attributes,
+            attributes: queryAttributes,
             featureTypeName: action.ftName,
             featureTypeNameLabel: action.ftNameLabel,
             nameSpaces: action.nameSpaces,
@@ -87,7 +99,9 @@ function siradec(state = initialState, action) {
             exporter: action.exporter,
             geometryType: action.geometryType || 'Point',
             queryform,
-            authorized: action.authorized
+            authorized: action.authorized,
+            tematizzatore: action.tematizzatore,
+            indicaFilters: indicaFilters
         });
 
         if (newConf.featuregrid) {
@@ -151,6 +165,28 @@ function siradec(state = initialState, action) {
     case EXPAND_FILTER_PANEL: {
         return assign({}, state, {
             filterPanelExpanded: action.expand
+        });
+    }
+    case EXPAND_INDICA_PANEL: {
+        return assign({}, state, {
+            indicaPanelExpanded: action.expand
+        });
+    }
+    case CONFIGURE_INDICA_LAYER: {
+        return assign({}, state, {
+            indicaConfigPanel: {
+                expanded: true,
+                type: action.chartType,
+                aggregation: action.aggregation
+            },
+            indicaPanelExpanded: false
+        });
+    }
+    case CLOSE_INDICA_CONFIGURATION: {
+        return assign({}, state, {
+            indicaConfigPanel: {
+                expanded: false
+            }
         });
     }
     case QUERYFORM_CONFIG_LOAD_ERROR: {

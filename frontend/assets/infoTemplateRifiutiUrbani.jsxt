@@ -1,0 +1,34 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateRifiutiUrbani"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+             headerName: 'Dimensione Indicatore',
+             width: 100,
+             xpath: "decsiraogc_indicatori_ru:des_dimensione/text()"
+        }, {
+             headerName: 'Valore',
+             width: 100,
+             xpath: "decsiraogc_indicatori_ru:valore_rappresentato/text()"
+        }, {
+             headerName: 'Unità di misura',
+             width: 100,
+             xpath: "decsiraogc_indicatori_ru:des_unita_misura/text()"
+        }, {
+             headerName: 'Risoluzione Spaziale',
+             width: 100,
+             xpath: "decsiraogc_indicatori_ru:des_ris_spaziale/text()"
+        }, {
+             headerName: 'Localizzazione',
+             width: 100,
+             xpath: "decsiraogc_indicatori_ru:des_entita_spaziale/text()"
+        }, {
+             headerName: 'Abitanti',
+             width: 100,
+             xpath: "decsiraogc_indicatori_ru:abitanti/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_indicatori_ru:IndicaRifiutiUrbani")}/>
