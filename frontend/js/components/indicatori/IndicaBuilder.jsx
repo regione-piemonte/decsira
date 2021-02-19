@@ -13,6 +13,7 @@ const SwitchPanel = require('@mapstore/components/misc/switch/SwitchPanel');
 const assign = require('object-assign');
 
 const {addIndicaLayer, removeIndicaLayer} = require('../../actions/addmap');
+const {indicaFormClosed} = require('../../actions/indicaform');
 
 function IndicaBuilder({
     risoluzioneSpaziale = [],
@@ -27,7 +28,9 @@ function IndicaBuilder({
     viewParams,
     wmsLayer,
     addIndicaLayer,
-    removeIndicaLayer
+    removeIndicaLayer,
+    indicaform,
+    indicaFormClosed
 }) {
     const [selectedRisSpaziale, setSelectedRisSpaziale] = useState({});
     const [selectedIndicatore, setSelectedIndicatore] = useState({});
@@ -37,31 +40,87 @@ function IndicaBuilder({
     const [classification, setClassification] = useState(defaultMethod);
     const [colorramp, setColorRamp] = useState(defaultRamp);
     const [colors, setColors] = useState([]);
-    const [rampColors, setRampColors] = useState({});
+    const [rampColors, setRampColors] = useState(getRampColors(defaultRamp));
     const [sldError, setSldError] = useState(false);
     const [errorTitle, setErrorTitle] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [tematizePanelExpanded, setTematizePanelExpanded] = useState(false);
+    const [formTouched, setFormTouched] = useState(false);
     const standardColors = ['red', 'blue', 'gray', 'jet'];
+
+    const formData = React.useRef({
+            selectedRisSpaziale: selectedRisSpaziale,
+            selectedIndicatore: selectedIndicatore,
+            selectedPeriodicita: selectedPeriodicita,
+            selectedDettaglioPeriodicita: selectedDettaglioPeriodicita,
+            classification: classification,
+            intervals: intervals,
+            colorramp: colorramp,
+            rampColors: rampColors,
+            colors: colors,
+            tematizePanelExpanded: tematizePanelExpanded
+        }
+    ); // ref to store state value
 
     wmsLayer.type = "wmspost";
     wmsLayer.CRS = 'EPSG:32632';
+    
+    React.useEffect(() => {
+        console.log("IndicaBuilder MOUNT");
+        console.log(indicaform);
+        if(indicaform // null and undefined check
+            && Object.keys(indicaform).length > 0) {
+            setSelectedRisSpaziale(indicaform.selectedRisSpaziale);
+            setSelectedIndicatore(indicaform.selectedIndicatore);
+            setSelectedPeriodicita(indicaform.selectedPeriodicita);
+            setSelectedDettaglioPeriodicita(indicaform.selectedDettaglioPeriodicita);
+            setClassification(indicaform.classification);
+            setIntervals(indicaform.intervals);
+            setColorRamp(indicaform.colorramp);
+            setRampColors(indicaform.rampColors);
+            setColors(indicaform.colors);
+            setTematizePanelExpanded(indicaform.tematizePanelExpanded);
+        }
+        return () => {
+            console.log("IndicaBuilder UNMOUNT");
+            console.log(formData.current);
+            indicaFormClosed(formData.current);
+        }
+    }, []);
 
     React.useEffect(() => {
-        if (!standardColors.includes(colorramp)) {
-            setCustomColors(colorramp);
-        }
+        formData.current = {
+            selectedRisSpaziale: selectedRisSpaziale,
+            selectedIndicatore: selectedIndicatore,
+            selectedPeriodicita: selectedPeriodicita,
+            selectedDettaglioPeriodicita: selectedDettaglioPeriodicita,
+            classification: classification,
+            intervals: intervals,
+            colorramp: colorramp,
+            rampColors: rampColors,
+            colors: colors,
+            tematizePanelExpanded: tematizePanelExpanded
+        };
         setupStyle();
     }, [intervals, 
         classification, 
-        colorramp, 
+        colorramp,
         selectedRisSpaziale, 
         selectedIndicatore, 
         selectedPeriodicita, 
         selectedDettaglioPeriodicita]
     );
 
+    React.useEffect(() => {
+        formData.current.colors = colors;
+    }, [colors]);
+
+    React.useEffect(() => {
+        formData.current.tematizePanelExpanded = tematizePanelExpanded;
+    }, [tematizePanelExpanded]);
+
     const updateField = useCallback((id, name, value) => {
+        setFormTouched(true);
         if (name === "risoluzioneSpaziale") {
             const opt = getOptionFromValue(risoluzioneSpaziale, value);
             setSelectedRisSpaziale(opt);
@@ -78,6 +137,25 @@ function IndicaBuilder({
         if (name === "dettaglioPeriodicita") {
             const opt = getOptionFromValue(dettaglioPeriodicita, value);
             setSelectedDettaglioPeriodicita(opt);
+        }
+    });
+
+    const updateSymbolizer = useCallback((evt) => {
+        setFormTouched(true);
+        switch(evt.param) {
+            case "intervals":
+                setIntervals(evt.value);
+                break;
+            case "classification":
+                setClassification(evt.value);
+                break;
+            case "colorramp":
+                setColorRamp(evt.value);
+                setCustomColors(evt.value);
+                break;
+        }
+        if(evt.classification){
+            setColors(evt.classification);
         }
     });
 
@@ -137,13 +215,18 @@ function IndicaBuilder({
     };
 
     function setCustomColors(color) {
+        let newColors = getRampColors(color);
+        setRampColors(newColors);
+    }
+
+    function getRampColors(color){
         const colorOption = getColors().filter((opt) => {
-            return color === opt.name && opt;
+            return color === opt.name;
         })[0];
-        setRampColors({
+        return {
             startColor: colorOption.colors[0],
             endColor: colorOption.colors[1]
-        });
+        };
     }
 
     function getViewParams(){
@@ -164,16 +247,28 @@ function IndicaBuilder({
         if(!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
             return;
         }
-        
-        const styleOpts = {
-            ramp: standardColors.includes(colorramp)? colorramp : "custom",
-            attribute: attribute,
-            intervals,
-            method: classification,
-            viewparams: getViewParams(),
-            startColor: rampColors.startColor,
-            endColor: rampColors.endColor
-        };
+        let styleOpts = {};
+        if (!formTouched) {
+            styleOpts = {
+                ramp: "custom",
+                customClasses: colors.map(col => {return col.min+','+col.max+','+col.color}).join(';'),
+                attribute: attribute,
+                intervals,
+                method: classification,
+                viewparams: getViewParams()
+            }
+        } else {
+            setCustomColors(colorramp);
+            styleOpts = {
+                ramp: standardColors.includes(colorramp)? colorramp : "custom",
+                attribute: attribute,
+                intervals,
+                method: classification,
+                viewparams: getViewParams(),
+                startColor: rampColors.startColor,
+                endColor: rampColors.endColor
+            };
+        }
         const urlMetadata = getStyleMetadataService(layer, styleOpts);
 
         axios.get(urlMetadata).then((resp) => {
@@ -212,7 +307,8 @@ function IndicaBuilder({
 
         const sldUrl = getStyleService(layer, {
             ramp: "custom",
-            colors: colors.map(col => {return col.color}).join(','),
+            //colors: colors.map(col => {return col.color}).join(','),
+            customClasses: colors.map(col => {return col.min+','+col.max+','+col.color}).join(';'),
             attribute: attribute,
             intervals,
             method: classification,
@@ -327,25 +423,7 @@ function IndicaBuilder({
                         properties={properties}
                         config={{}}
                         params={params}
-                        onChange={(evt) => {
-                            switch(evt.param) {
-                                case "intervals":
-                                    setIntervals(evt.value);
-                                    break;
-                                case "classification":
-                                    setClassification(evt.value);
-                                    break;
-                                case "colorramp":
-                                    setColorRamp(evt.value);
-                                    if (!standardColors.includes(evt.value)) {
-                                        setCustomColors(evt.value);
-                                    }
-                                    break;
-                            }
-                            if(evt.classification){
-                                setColors(evt.classification);
-                            }
-                        }}
+                        onChange={updateSymbolizer}
                     />
             </Symbolizer>
             </Col>
@@ -385,15 +463,17 @@ export default connect((state) => {
             return { fk_ris_temporale: att.fk_ris_temporale, id: att.id_ambito_temporale, value: att.valore ? att.valore + " - "+ att.anno : att.anno }
         });
     }
-    
+
     return { 
         wmsLayer: activeConfig.layer,
         risoluzioneSpaziale: risSp,
         dimensione: dim,
         periodicita: period,
         dettaglioPeriodicita: dettPer,
+        indicaform: state.indicaform
     };
 }, {
     addIndicaLayer: addIndicaLayer,
-    removeIndicaLayer: removeIndicaLayer
+    removeIndicaLayer: removeIndicaLayer,
+    indicaFormClosed: indicaFormClosed
 })(IndicaBuilder);

@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {hideQueryError} from "../../actions/siradec";
 import LocaleUtils from "@mapstore/utils/LocaleUtils";
 import IndicaBuilder from "./IndicaBuilder";
+const Spinner = require('react-spinkit');
 
 class SideIndicaPanel extends React.Component {
     static propTypes = {
@@ -22,7 +23,8 @@ class SideIndicaPanel extends React.Component {
         datasetHeader: PropTypes.string,
         featureTypeNameLabel: PropTypes.string,
         aggregation: PropTypes.string,
-        tematizzatore: PropTypes.object
+        tematizzatore: PropTypes.object,
+        indicaform: PropTypes.object
     };
 
     static contextTypes = {
@@ -37,7 +39,8 @@ class SideIndicaPanel extends React.Component {
         datasetHeader: "queryform.form.dataset_header",
         featureTypeNameLabel : "",
         aggregation: "",
-        tematizzatore: {}
+        tematizzatore: {},
+        indicaform: {}
     };
 
     renderHeader = () => {
@@ -73,7 +76,7 @@ class SideIndicaPanel extends React.Component {
             <Panel className={this.props.withMap ? "querypanel-container side-querypanel widthclass" : "querypanel-container side-querypanel hideSpatialFilter widthclass" } collapsible={this.props.collapsible}
                 header={this.renderHeader()} bsStyle="primary">
                 {this.renderDatasetHeader()}
-                <IndicaBuilder {...this.props.tematizzatore}/>
+                <IndicaBuilder {...this.props.tematizzatore} indicaform={this.props.indicaform} />
             </Panel>
         );
     };
@@ -135,26 +138,19 @@ export default connect((state) => {
         aggregation: state.siradec.indicaConfigPanel.aggregation,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
-        indicaFilters: activeConfig.indicaFilters
+        indicaFilters: activeConfig.indicaFilters,
         //featureTypeName: activeConfig.featureTypeName,
 
-        // QueryBuilder props
-        /*groupLevels: state.queryform.groupLevels,
-        groupFields: state.queryform.groupFields,
-        filterFields: state.queryform.filterFields,
-        attributes: activeConfig.attributes,
-        spatialField: state.queryform.spatialField,
-        showDetailsPanel: state.queryform.showDetailsPanel,
-        toolbarEnabled: state.queryform.toolbarEnabled,
-        attributePanelExpanded: state.queryform.attributePanelExpanded,
-        spatialPanelExpanded: state.queryform.spatialPanelExpanded,
-        useMapProjection: state.queryform.useMapProjection,
-        searchUrl: state.queryform.searchUrl,
-        showGeneratedFilter: state.queryform.showGeneratedFilter,
-        featureTypeConfigUrl: state.queryform.featureTypeConfigUrl,
-        pagination: state.queryform.pagination,
-        sortOptions: state.queryform.sortOptions,
-        projection: (mapSelector(state) || {}).projection*/
+        // IndicaBuilder props
+        /*selectedRisSpaziale: state.indicaform.selectedRisSpaziale,
+        selectedIndicatore: state.indicaform.selectedIndicatore,
+        selectedPeriodicita: state.indicaform.selectedPeriodicita,
+        selectedDettaglioPeriodicita: state.indicaform.selectedDettaglioPeriodicita,
+        classification: state.indicaform.classification,
+        intervals: state.indicaform.intervals,
+        colorramp: state.indicaform.colorramp,
+        colors: state.indicaform.colors*/
+        indicaform: state.indicaform
     };
 }, {
     onCloseError: hideQueryError,

@@ -10,6 +10,7 @@ const appReducers = {
     userprofile: require('../reducers/userprofile'),
     siraControls: require('../reducers/controls'),
     queryform: require('../reducers/queryform'),
+    indicaform: require('../reducers/indicaform'),
     siradec: require('../reducers/siradec'),
     grid: require('../reducers/grid'),
     cardtemplate: require('../reducers/card'),

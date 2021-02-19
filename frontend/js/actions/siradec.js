@@ -7,7 +7,6 @@
  */
 const axios = require('@mapstore/libs/ajax');
 const {addLayer} = require('@mapstore/actions/layers');
-const {addSiraLayers} = require('./cart');
 const {setSiraControl} = require('./controls');
 
 const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
@@ -31,6 +30,7 @@ const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
+const {indicaFormReset} = require('./indicaform');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
 
@@ -267,6 +267,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 dispatch(configureFeatureGrid(config.featuregrid, featureType));
                 dispatch(configureFeatureInfo(config.featureinfo, featureType));
                 dispatch(configureCard(config.card, featureType));
+                dispatch(indicaFormReset());
 
                 let serviceUrl = config.query.service.url;
 
@@ -278,7 +279,8 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                     return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
                 });
 
-                const temaFields = config.tematizzatore.filters.map((f) => {
+                let temaFilters = config.tematizzatore && config.tematizzatore.filters? config.tematizzatore.filters: [];
+                const temaFields = temaFilters.map((f) => {
                     let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
                     urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
                     return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
