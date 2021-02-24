@@ -300,6 +300,27 @@ function IndicaBuilder({
         });
     }
 
+    /*let indicaFilters = [
+        {
+            attribute:"decsiraogc_indicatori_ru:fk_ris_spaziale",
+            operator:"=",
+            type:"number",
+            value: selectedRisSpaziale.id
+        },
+        {
+            attribute:"decsiraogc_indicatori_ru:fk_dimensione",
+            operator:"=",
+            type:"number",
+            value: selectedIndicatore.id
+        },
+        {
+            attribute:"decsiraogc_indicatori_ru:fk_ambito_temporale",
+            operator:"=",
+            type:"number",
+            value: selectedDettaglioPeriodicita.id
+        }
+    ];*/
+
     function applyStyle() {
         if(!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
             return;
@@ -319,6 +340,8 @@ function IndicaBuilder({
             let bodyData = resp.data.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
             wmsLayer.title = getWmsTitle();
             wmsLayer.params = assign({}, wmsLayer.params, {SLD_BODY: bodyData});
+            //wmsLayer.viewparams = getViewParams();
+            //wmsLayer.indicaFilters = indicaFilters;
             addIndicaLayer(wmsLayer);
         }).catch(e => {
             console.error(e);
