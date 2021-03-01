@@ -64,7 +64,7 @@ function siradec(state = initialState, action) {
         return assign({}, state, {treeFeatureType: action.featureType});
     }
     case FEATURETYPE_CONFIG_LOADING: {
-        return assign({}, state, {fTypeConfigLoading: true});
+        return assign({}, state, {fTypeConfigLoading: action.loading});
     }
     case FEATURETYPE_CONFIG_LOADED: {
         let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
