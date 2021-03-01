@@ -149,7 +149,7 @@ class Card extends React.Component {
         const Template = (
             <div className="scheda-sira">
                 <TemplateSira template={this.props.card.template} model={model}/>
-                <div id="card-btn-group">
+                <div id="card-btn-group" style={{paddingTop: 4}}>
                     <Button id="multiLayerSelect" style={{display: showMLSButton ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
                         <img src={img} width={16} alt=""/>
                     </Button>

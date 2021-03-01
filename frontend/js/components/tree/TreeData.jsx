@@ -2,7 +2,7 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {bindActionCreators} = require('redux');
 const PropTypes = require('prop-types');
-const Tree = require('rc-tree').default;
+const Tree = require('rc-tree');
 const {TreeNode} = require('rc-tree');
 const TemplateUtils = require('../../utils/TemplateUtils');
 require('./SiraTree.less');
@@ -62,6 +62,7 @@ class TreeData extends React.Component {
         }
     }
 
+
     onSelect = (selectedKeys, info) => {
         let selectedData = this.searchKey(this.props.treeData[0], info.node.props.eventKey);
         if (selectedData && selectedData.linkToDetail) {
@@ -81,21 +82,16 @@ class TreeData extends React.Component {
                 const featureType = selectedData.linkToDetail.featureType;
                 this.props.setTreeFeatureType(featureType);
                 if (this.props.configOggetti[featureType]) {
-                    const detailsConfig = this.props.configOggetti[featureType];
-                    const templateUrl = detailsConfig.card.template.default || detailsConfig.card.template;
-                    let url = detailsConfig.card.service.url;
-                    Object.keys(detailsConfig.card.service.params).forEach((param) => {
-                        url += `&${param}=${detailsConfig.card.service.params[param]}`;
-                    });
-                    url = url += "&cql_filter=" + cqlFilter;
-                    this.props.loadCardTemplate(templateUrl, url);
+                    this.loadCardTemplate(this.props.configOggetti[featureType], cqlFilter);
                 } else {
                     let waitingForConfig = {
                         featureType,
                         info
                     };
                     this.props.setWaitingForConfig(waitingForConfig);
-                    this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false);
+                    this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false, false, null, false, null, false, (detailsConfig = {})=>{
+                        this.loadCardTemplate(detailsConfig, cqlFilter);
+                    });
                 }
             }
         }
@@ -226,6 +222,16 @@ class TreeData extends React.Component {
         }
         return null;
     };
+
+    loadCardTemplate = (detailsConfig = {}, cqlFilter) => {
+        const templateUrl = detailsConfig.card.template.default || detailsConfig.card.template;
+        let url = detailsConfig.card.service.url;
+        Object.keys(detailsConfig.card.service.params).forEach((param) => {
+            url += `&${param}=${detailsConfig.card.service.params[param]}`;
+        });
+        url = url += "&cql_filter=" + cqlFilter;
+        this.props.loadCardTemplate(templateUrl, url);
+    }
 }
 
 module.exports = connect((state) => {

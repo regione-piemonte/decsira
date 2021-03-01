@@ -183,9 +183,10 @@ function getAttributeValues(ft, field, params, serviceUrl) {
         dispatch(configureFeatureType(ft, assign({}, field, {})));
     };
 }
-function configurationLoading() {
+function configurationLoading(loading = true) {
     return {
-        type: FEATURETYPE_CONFIG_LOADING
+        type: FEATURETYPE_CONFIG_LOADING,
+        loading
     };
 }
 
@@ -206,11 +207,11 @@ function userNotAuthorized(feature) {
     };
 }
 
-function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null) {
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null, loading = true, loadCardTemplate = null) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const { userprofile} = getState();
-        dispatch(configurationLoading());
+        dispatch(configurationLoading(loading));
         return axios.get(url).then((response) => {
             let config = response.data;
             if (typeof config !== "object") {
@@ -252,6 +253,10 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                     urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
                     return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
                 });
+
+                // Load card template
+                loadCardTemplate && loadCardTemplate({card: config.card});
+
                 Promise.all(fields).then((fi) => {
                     dispatch(configureFeatureType({
                         id: config.featureTypeName,
