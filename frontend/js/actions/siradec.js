@@ -7,6 +7,7 @@
  */
 const axios = require('@mapstore/libs/ajax');
 const {addLayer} = require('@mapstore/actions/layers');
+const {cardLoading} = require('../actions/card');
 const {setSiraControl} = require('./controls');
 
 const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
@@ -212,6 +213,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
     return (dispatch, getState) => {
         const { userprofile} = getState();
         dispatch(configurationLoading(loading));
+        loadCardTemplate && dispatch(cardLoading());
         return axios.get(url).then((response) => {
             let config = response.data;
             if (typeof config !== "object") {

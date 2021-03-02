@@ -26,6 +26,7 @@ const mapUtils = require('@mapstore/utils/MapUtils');
 const {configureMultiLayerSelection, setCurrentFeatureRowData} = require('../../actions/featuregrid');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {changeMapView} = require('@mapstore/actions/map');
+const Spinner = require('react-spinkit');
 
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;
@@ -129,6 +130,16 @@ class Card extends React.Component {
         }), {});
     };
 
+    renderCardLoadingTemplate = () => (
+        <div style={{
+            position: "fixed",
+            width: "60px",
+            top: "50%",
+            left: "50%"}}>
+            <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+        </div>
+    );
+
     renderCard = () => {
         const {maxWidth, maxHeight} = getWindowSize();
         const xml = this.props.card.xml;
@@ -148,8 +159,9 @@ class Card extends React.Component {
 
         const Template = (
             <div className="scheda-sira">
-                <TemplateSira template={this.props.card.template} model={model}/>
-                <div id="card-btn-group" style={{paddingTop: 4}}>
+                {this.props.card.loadingCardTemplate
+                    ? this.renderCardLoadingTemplate() : <TemplateSira template={this.props.card.template} model={model}/>}
+                <div id="card-btn-group" style={{paddingTop: 4, display: this.props.card.loadingCardTemplate ? 'none' : 'block' }}>
                     <Button id="multiLayerSelect" style={{display: showMLSButton ? 'inline-block' : 'none'}} onClick={this.onClickMLS}>
                         <img src={img} width={16} alt=""/>
                     </Button>

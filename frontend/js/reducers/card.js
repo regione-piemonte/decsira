@@ -7,7 +7,7 @@
  */
 
 const {
-    CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR,
+    CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_LOADING,
     SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS, GENERATE_PDF,
     MAP_IMAGE_READY// , SET_IMPIANTO_MODEL
 } = require('../actions/card');
@@ -30,12 +30,14 @@ function cardtemplate(state = initialState, action) {
             template: action.template,
             xml: action.xml || state.xml,
             activeSections: null,
-            params: action.params
+            params: action.params,
+            loadingCardTemplate: false
         });
     }
     case CARD_TEMPLATE_LOAD_ERROR: {
         return assign({}, state, {
             loadingCardTemplateError: action.error,
+            loadingCardTemplate: false,
             params: {}
         });
     }
@@ -67,6 +69,9 @@ function cardtemplate(state = initialState, action) {
     /* case SET_IMPIANTO_MODEL: {
             return assign({}, state, {impiantoModel: action.impiantoModel});
         } */
+    case CARD_TEMPLATE_LOADING: {
+        return assign({}, state, {loadingCardTemplate: true});
+    }
     default:
         return state;
     }
