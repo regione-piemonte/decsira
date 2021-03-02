@@ -65,7 +65,7 @@ class TreeData extends React.Component {
 
     onSelect = (selectedKeys, info) => {
         let selectedData = this.searchKey(this.props.treeData[0], info.node.props.eventKey);
-        if (selectedData && selectedData.linkToDetail) {
+        if (selectedKeys && selectedData && selectedData.linkToDetail) {
             if (selectedData.linkToDetail.featureId) {
                 const featureType = selectedData.linkToDetail.featureType;
                 this.props.setTreeFeatureType(featureType);

@@ -9,6 +9,7 @@ const axios = require('@mapstore/libs/ajax');
 const ConfigUtils = require('../../MapStore2/web/client/utils/ConfigUtils');
 
 const CARD_TEMPLATE_LOADED = 'CARD_TEMPLATE_LOADED';
+const CARD_TEMPLATE_LOADING = 'CARD_TEMPLATE_LOADING';
 const CARD_TEMPLATE_LOAD_ERROR = 'CARD_TEMPLATE_LOAD_ERROR';
 const SELECT_SECTION = 'SELECT_SECTION';
 const ACTIVE_SECTION = 'ACTIVE_SECTION';
@@ -61,9 +62,16 @@ function activateSection(section) {
     };
 }
 
+function cardLoading() {
+    return {
+        type: CARD_TEMPLATE_LOADING
+    };
+}
+
 function loadCardData(template, wfsUrl, params = {}) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     return (dispatch) => {
+        dispatch(cardLoading());
         return axios.get(url).then((response) => {
             // let model = TemplateUtils.getModel(response.data, modelConfig);
             dispatch(configureCard(template, response.data, params));
@@ -93,6 +101,7 @@ function loadCardData(template, wfsUrl, params = {}) {
 
 function loadCardTemplate(templateConfigURL, wfsUrl, params = {}) {
     return (dispatch) => {
+        dispatch(cardLoading());
         return axios.get(templateConfigURL).then((response) => {
             let template = response.data;
             if (wfsUrl) {
@@ -124,6 +133,7 @@ function selectRows(tableId, rows) {
 
 module.exports = {
     CARD_TEMPLATE_LOADED,
+    CARD_TEMPLATE_LOADING,
     CARD_TEMPLATE_LOAD_ERROR,
     SELECT_SECTION,
     ACTIVE_SECTION,
@@ -139,6 +149,7 @@ module.exports = {
     activateSection,
     selectRows,
     generatePDF,
-    mapImageReady
+    mapImageReady,
+    cardLoading
     // setSiraImpiantoModel
 };
