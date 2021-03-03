@@ -37,7 +37,7 @@ class SideIndicaPanel extends React.Component {
         withMap: true,
         header: "queryform.form.header",
         datasetHeader: "queryform.form.dataset_header",
-        featureTypeNameLabel : "",
+        featureTypeNameLabel: "",
         aggregation: "",
         tematizzatore: {},
         indicaform: {}
@@ -139,10 +139,11 @@ export default connect((state) => {
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
         indicaFilters: activeConfig.indicaFilters,
-        //featureTypeName: activeConfig.featureTypeName,
+        // featureTypeName: activeConfig.featureTypeName,
 
         // IndicaBuilder props
-        /*selectedRisSpaziale: state.indicaform.selectedRisSpaziale,
+        /*
+        selectedRisSpaziale: state.indicaform.selectedRisSpaziale,
         selectedIndicatore: state.indicaform.selectedIndicatore,
         selectedPeriodicita: state.indicaform.selectedPeriodicita,
         selectedDettaglioPeriodicita: state.indicaform.selectedDettaglioPeriodicita,
@@ -153,6 +154,6 @@ export default connect((state) => {
         indicaform: state.indicaform
     };
 }, {
-    onCloseError: hideQueryError,
+    onCloseError: hideQueryError
 })(SideIndicaPanel);
 

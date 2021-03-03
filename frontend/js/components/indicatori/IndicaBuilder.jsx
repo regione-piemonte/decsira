@@ -8,7 +8,7 @@ import axios from "@mapstore/libs/ajax";
 import Symbolizer from "@mapstore/components/styleeditor/Symbolizer";
 import Fields from "@mapstore/components/styleeditor/Fields";
 import {getColors, getStyleService, getStyleMetadataService} from "@mapstore/api/SLDService";
-const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+// const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const SwitchPanel = require('@mapstore/components/misc/switch/SwitchPanel');
 const assign = require('object-assign');
 
@@ -23,15 +23,26 @@ function IndicaBuilder({
     attribute,
     description,
     defaultMethod,
-	defaultIntervals,
+    defaultIntervals,
     defaultRamp,
     viewParams,
     wmsLayer,
-    addIndicaLayer,
-    removeIndicaLayer,
+    addLayer,
+    removeLayer,
     indicaform,
-    indicaFormClosed
+    formClosed
 }) {
+
+    function getRampColors(color) {
+        const colorOption = getColors().filter((opt) => {
+            return color === opt.name;
+        })[0];
+        return {
+            startColor: colorOption.colors[0],
+            endColor: colorOption.colors[1]
+        };
+    }
+
     const [selectedRisSpaziale, setSelectedRisSpaziale] = useState({});
     const [selectedIndicatore, setSelectedIndicatore] = useState({});
     const [selectedPeriodicita, setSelectedPeriodicita] = useState({});
@@ -49,26 +60,26 @@ function IndicaBuilder({
     const standardColors = ['red', 'blue', 'gray', 'jet'];
 
     const formData = React.useRef({
-            selectedRisSpaziale: selectedRisSpaziale,
-            selectedIndicatore: selectedIndicatore,
-            selectedPeriodicita: selectedPeriodicita,
-            selectedDettaglioPeriodicita: selectedDettaglioPeriodicita,
-            classification: classification,
-            intervals: intervals,
-            colorramp: colorramp,
-            rampColors: rampColors,
-            colors: colors,
-            tematizePanelExpanded: tematizePanelExpanded
-        }
+        selectedRisSpaziale: selectedRisSpaziale,
+        selectedIndicatore: selectedIndicatore,
+        selectedPeriodicita: selectedPeriodicita,
+        selectedDettaglioPeriodicita: selectedDettaglioPeriodicita,
+        classification: classification,
+        intervals: intervals,
+        colorramp: colorramp,
+        rampColors: rampColors,
+        colors: colors,
+        tematizePanelExpanded: tematizePanelExpanded
+    }
     ); // ref to store state value
 
     wmsLayer.type = "wmspost";
     wmsLayer.CRS = 'EPSG:32632';
-    
+
     React.useEffect(() => {
-        console.log("IndicaBuilder MOUNT");
-        console.log(indicaform);
-        if(indicaform // null and undefined check
+        // console.log("IndicaBuilder MOUNT");
+        // console.log(indicaform);
+        if (indicaform // null and undefined check
             && Object.keys(indicaform).length > 0) {
             setSelectedRisSpaziale(indicaform.selectedRisSpaziale);
             setSelectedIndicatore(indicaform.selectedIndicatore);
@@ -82,11 +93,95 @@ function IndicaBuilder({
             setTematizePanelExpanded(indicaform.tematizePanelExpanded);
         }
         return () => {
-            console.log("IndicaBuilder UNMOUNT");
-            console.log(formData.current);
-            indicaFormClosed(formData.current);
-        }
+            // console.log("IndicaBuilder UNMOUNT");
+            // console.log(formData.current);
+            formClosed(formData.current);
+        };
     }, []);
+
+    const layer = {
+        url: "http://tst-gisserver5.territorio.csi.it:8080/geoserver", // ConfigUtils.getConfigProp('geoserverUrl'),
+        name: wmsLayer.name,
+        thematic: {
+            fieldAsParam: true
+        }
+    };
+
+    function getViewParams() {
+        return viewParams.replace("%RIS_SPAZIALE%", selectedRisSpaziale.id)
+            .replace("%DIMENSIONE%", selectedIndicatore.id)
+            .replace("%AMBITO_TEMPORALE%", selectedDettaglioPeriodicita.id);
+    }
+
+    function getWmsTitle() {
+        return description + " - "
+        + selectedIndicatore.value + " - "
+        + selectedRisSpaziale.value + " - "
+        + selectedPeriodicita.value + " - "
+        + selectedDettaglioPeriodicita.value;
+    }
+
+    function setCustomColors(color) {
+        let newColors = getRampColors(color);
+        setRampColors(newColors);
+    }
+
+    function setupStyle() {
+        if (!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
+            return;
+        }
+        let styleOpts = {};
+        if (!formTouched) {
+            styleOpts = {
+                ramp: "custom",
+                customClasses: colors.map(col => { return col.min + ',' + col.max + ',' + col.color; }).join(';'),
+                attribute: attribute,
+                intervals,
+                method: classification,
+                viewparams: getViewParams()
+            };
+        } else {
+            setCustomColors(colorramp);
+            styleOpts = {
+                ramp: standardColors.includes(colorramp) ? colorramp : "custom",
+                attribute: attribute,
+                intervals,
+                method: classification,
+                viewparams: getViewParams(),
+                startColor: rampColors.startColor,
+                endColor: rampColors.endColor
+            };
+        }
+        const urlMetadata = getStyleMetadataService(layer, styleOpts);
+
+        axios.get(urlMetadata).then((resp) => {
+            const rules = resp.data.Rules.Rule;
+            let colorsArray = [];
+            rules.forEach(rule => {
+                colorsArray.push({
+                    color: rule.PolygonSymbolizer.Fill.CssParameter.$,
+                    min: rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal,
+                    max: rule.Filter.And.PropertyIsLessThan ?
+                        rule.Filter.And.PropertyIsLessThan.Literal :
+                        rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal
+                });
+            });
+            setColors(colorsArray);
+        }).catch(error => {
+            if (error.status && error.status === 404) {
+                setErrorTitle("Dati non disponibili");
+                setErrorMessage("Non ci sono dati disponibi per la ricerca effettuata.");
+            } else {
+                setErrorTitle("Errore");
+                setErrorMessage("Errore nella classificazione dei dati.");
+            }
+            // console.error(error);
+            setColors([]);
+            setSldError(true);
+            wmsLayer.title = getWmsTitle();
+            removeLayer(wmsLayer);
+        });
+    }
 
     React.useEffect(() => {
         formData.current = {
@@ -102,12 +197,12 @@ function IndicaBuilder({
             tematizePanelExpanded: tematizePanelExpanded
         };
         setupStyle();
-    }, [intervals, 
-        classification, 
+    }, [intervals,
+        classification,
         colorramp,
-        selectedRisSpaziale, 
-        selectedIndicatore, 
-        selectedPeriodicita, 
+        selectedRisSpaziale,
+        selectedIndicatore,
+        selectedPeriodicita,
         selectedDettaglioPeriodicita]
     );
 
@@ -118,6 +213,12 @@ function IndicaBuilder({
     React.useEffect(() => {
         formData.current.tematizePanelExpanded = tematizePanelExpanded;
     }, [tematizePanelExpanded]);
+
+    function getOptionFromValue(array, value) {
+        return array.filter((opt) => {
+            return value === opt.value && opt;
+        })[0];
+    }
 
     const updateField = useCallback((id, name, value) => {
         setFormTouched(true);
@@ -142,19 +243,21 @@ function IndicaBuilder({
 
     const updateSymbolizer = useCallback((evt) => {
         setFormTouched(true);
-        switch(evt.param) {
-            case "intervals":
-                setIntervals(evt.value);
-                break;
-            case "classification":
-                setClassification(evt.value);
-                break;
-            case "colorramp":
-                setColorRamp(evt.value);
-                setCustomColors(evt.value);
-                break;
+        switch (evt.param) {
+        case "intervals":
+            setIntervals(evt.value);
+            break;
+        case "classification":
+            setClassification(evt.value);
+            break;
+        case "colorramp":
+            setColorRamp(evt.value);
+            setCustomColors(evt.value);
+            break;
+        default:
+            break;
         }
-        if(evt.classification){
+        if (evt.classification) {
             setColors(evt.classification);
         }
     });
@@ -163,7 +266,7 @@ function IndicaBuilder({
         "intervals": {
             type: "input",
             label: "Intervalli",
-            getValue: (value) => ({param: "intervals", value: parseInt(value, 10)}),
+            getValue: (value) => ({ param: "intervals", value: parseInt(value, 10) }),
             config: {
                 type: "number"
             }
@@ -172,11 +275,11 @@ function IndicaBuilder({
             type: "select",
             label: "Tipo Classificazione Statistica",
             config: {
-                getOptions: () => [{label: "Equal Interval", value: "equalInterval"}, {label: "Quantile", value: "quantile"}, {label: "Jenks", value: "jenks"}],
+                getOptions: () => [{ label: "Equal Interval", value: "equalInterval" }, { label: "Quantile", value: "quantile" }, { label: "Jenks", value: "jenks" }],
                 selectProps: {},
                 isValid: () => true
             },
-            getValue: (value) => ({param: "classification", value})
+            getValue: (value) => ({ param: "classification", value })
         },
         "colorramp": {
             type: "colorRamp",
@@ -184,20 +287,15 @@ function IndicaBuilder({
             config: {
                 samples: 4,
                 getOptions: () => getColors(),
+                // eslint-disable-next-line no-shadow
                 rampFunction: ({ colors }) => colors
             },
-            getValue: (value) => ({param: "colorramp", value})
+            getValue: (value) => ({ param: "colorramp", value })
         },
         "colors": {
             type: "colorMap"
         }
-    }
-
-    function getOptionFromValue(array, value) {
-        return array.filter((opt) => {
-            return value === opt.value && opt;
-        })[0];
-    }
+    };
 
     const properties = {
         intervals,
@@ -206,109 +304,15 @@ function IndicaBuilder({
         colors
     };
 
-    const layer = {
-        url: "http://tst-gisserver5.territorio.csi.it:8080/geoserver", //ConfigUtils.getConfigProp('geoserverUrl'),
-        name: wmsLayer.name,
-        thematic: {
-            fieldAsParam: true
-        }
-    };
-
-    function setCustomColors(color) {
-        let newColors = getRampColors(color);
-        setRampColors(newColors);
-    }
-
-    function getRampColors(color){
-        const colorOption = getColors().filter((opt) => {
-            return color === opt.name;
-        })[0];
-        return {
-            startColor: colorOption.colors[0],
-            endColor: colorOption.colors[1]
-        };
-    }
-
-    function getViewParams(){
-        return viewParams.replace("%RIS_SPAZIALE%", selectedRisSpaziale.id)
-        .replace("%DIMENSIONE%", selectedIndicatore.id)
-        .replace("%AMBITO_TEMPORALE%", selectedDettaglioPeriodicita.id);
-    }
-
-    function getWmsTitle() {
-        return description + " - " 
-        + selectedIndicatore.value + " - " 
-        + selectedRisSpaziale.value + " - " 
-        + selectedPeriodicita.value + " - " 
-        + selectedDettaglioPeriodicita.value;
-    }
-
-    function setupStyle() {
-        if(!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
-            return;
-        }
-        let styleOpts = {};
-        if (!formTouched) {
-            styleOpts = {
-                ramp: "custom",
-                customClasses: colors.map(col => {return col.min+','+col.max+','+col.color}).join(';'),
-                attribute: attribute,
-                intervals,
-                method: classification,
-                viewparams: getViewParams()
-            }
-        } else {
-            setCustomColors(colorramp);
-            styleOpts = {
-                ramp: standardColors.includes(colorramp)? colorramp : "custom",
-                attribute: attribute,
-                intervals,
-                method: classification,
-                viewparams: getViewParams(),
-                startColor: rampColors.startColor,
-                endColor: rampColors.endColor
-            };
-        }
-        const urlMetadata = getStyleMetadataService(layer, styleOpts);
-
-        axios.get(urlMetadata).then((resp) => {
-            const rules = resp.data.Rules.Rule;
-            let colors = [];
-            rules.forEach(rule => {
-                colors.push({
-                    color: rule.PolygonSymbolizer.Fill.CssParameter.$,
-                    min: rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal,
-                    max: rule.Filter.And.PropertyIsLessThan ?
-                         rule.Filter.And.PropertyIsLessThan.Literal :
-                         rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal
-                });
-            });
-            setColors(colors);
-        }).catch(error => {
-            if (error.status && error.status == 404) {
-                setErrorTitle("Dati non disponibili");
-                setErrorMessage("Non ci sono dati disponibi per la ricerca effettuata.");
-            } else {
-                setErrorTitle("Errore");
-                setErrorMessage("Errore nella classificazione dei dati.");
-            }
-            console.error(error);
-            setColors([]);
-            setSldError(true);
-            wmsLayer.title = getWmsTitle();
-            removeIndicaLayer(wmsLayer);
-        });
-    }
-
     function applyStyle() {
-        if(!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
+        if (!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
             return;
         }
 
         const sldUrl = getStyleService(layer, {
             ramp: "custom",
-            //colors: colors.map(col => {return col.color}).join(','),
-            customClasses: colors.map(col => {return col.min+','+col.max+','+col.color}).join(';'),
+            // colors: colors.map(col => {return col.color}).join(','),
+            customClasses: colors.map(col => { return col.min + ',' + col.max + ',' + col.color;}).join(';'),
             attribute: attribute,
             intervals,
             method: classification,
@@ -320,15 +324,15 @@ function IndicaBuilder({
             wmsLayer.title = getWmsTitle();
             wmsLayer.params = assign({}, wmsLayer.params, {SLD_BODY: bodyData});
             wmsLayer.viewparams = getViewParams();
-            addIndicaLayer(wmsLayer);
+            addLayer(wmsLayer);
         }).catch(e => {
             console.error(e);
-        }); 
+        });
     }
 
     function renderErrorModal() {
         return (
-            <Modal show={true} bsSize="small" onHide={() => {
+            <Modal show bsSize="small" onHide={() => {
                 setSldError(false);
             }}>
                 <Modal.Header className="dialog-error-header-side" closeButton>
@@ -344,99 +348,99 @@ function IndicaBuilder({
     }
 
     return (
-    <div id="query-form-panel">
-        {sldError ? renderErrorModal(): ""}
-        <SwitchPanel
-            id="configFilterPanel"
-            title="Configura indicatore"
-            expanded
-            locked
-        >
-        <div className="container-fluid">
-        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
-            <Col xs={6}>
-                <div>Risoluzione spaziale</div>
-            </Col>
-            <Col xs={6}>
-                <ComboField
-                    fieldOptions={risoluzioneSpaziale.map(a => a.value)}
-                    fieldName="risoluzioneSpaziale"
-                    fieldRowId={new Date().getUTCMilliseconds()}
-                    fieldValue={selectedRisSpaziale.value}
-                    onUpdateField={updateField}/>
-            </Col>
-        </Row>
-        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
-            <Col xs={6}>
-                <div>Dimensione indicatore</div>
-            </Col>
-            <Col xs={6}>
-                <ComboField
-                    fieldOptions={dimensione.map(a => a.value)}
-                    fieldName="dimensione"
-                    fieldRowId={new Date().getUTCMilliseconds()}
-                    fieldValue={selectedIndicatore.value}
-                    onUpdateField={updateField}/>
-            </Col>
-        </Row>
-        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
-            <Col xs={6}>
-                <div>Periodicità</div>
-            </Col>
-            <Col xs={6}>
-                <ComboField
-                    fieldOptions={periodicita.map(a => a.value)}
-                    fieldName="periodicita"
-                    fieldRowId={new Date().getUTCMilliseconds()}
-                    fieldValue={selectedPeriodicita.value}
-                    onUpdateField={updateField}/>
-            </Col>
-        </Row>
-        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
-            <Col xs={6}>
-                <div>Dettaglio Periodicità</div>
-            </Col>
-            <Col xs={6}>
-                <ComboField
-                    fieldOptions={ dettaglioPeriodicita.filter(dett => {return dett.fk_ris_temporale == selectedPeriodicita.id}).map(a => a.value)}
-                    fieldName="dettaglioPeriodicita"
-                    fieldRowId={new Date().getUTCMilliseconds()}
-                    fieldValue={selectedDettaglioPeriodicita.value}
-                    onUpdateField={updateField}/>
-            </Col>
-        </Row>
-        </div>
-        </SwitchPanel>
-        <SwitchPanel
-            id="tematizePanel"
-            title="Tematizzazione"
-            collapsible
-            expanded={tematizePanelExpanded}
-            onSwitch={(expanded) => setTematizePanelExpanded(expanded)}
-        >
-        <div className="container-fluid">
-        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
-            <Col xs={12}>
-            <Symbolizer
-                key="Classification"
-                tools={[]}>
-                    <Fields
-                        properties={properties}
-                        config={{}}
-                        params={params}
-                        onChange={updateSymbolizer}
-                    />
-            </Symbolizer>
-            </Col>
-        </Row>
-        </div>
-        </SwitchPanel>
-        <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
-            <Col xs={12}>
-                <Button onClick={applyStyle}>Applica</Button>
-            </Col>
-        </Row>
-    </div>);
+        <div id="query-form-panel">
+            {sldError ? renderErrorModal() : ""}
+            <SwitchPanel
+                id="configFilterPanel"
+                title="Configura indicatore"
+                expanded
+                locked
+            >
+                <div className="container-fluid">
+                    <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+                        <Col xs={6}>
+                            <div>Risoluzione spaziale</div>
+                        </Col>
+                        <Col xs={6}>
+                            <ComboField
+                                fieldOptions={risoluzioneSpaziale.map(a => a.value)}
+                                fieldName="risoluzioneSpaziale"
+                                fieldRowId={new Date().getUTCMilliseconds()}
+                                fieldValue={selectedRisSpaziale.value}
+                                onUpdateField={updateField}/>
+                        </Col>
+                    </Row>
+                    <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+                        <Col xs={6}>
+                            <div>Dimensione indicatore</div>
+                        </Col>
+                        <Col xs={6}>
+                            <ComboField
+                                fieldOptions={dimensione.map(a => a.value)}
+                                fieldName="dimensione"
+                                fieldRowId={new Date().getUTCMilliseconds()}
+                                fieldValue={selectedIndicatore.value}
+                                onUpdateField={updateField}/>
+                        </Col>
+                    </Row>
+                    <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+                        <Col xs={6}>
+                            <div>Periodicità</div>
+                        </Col>
+                        <Col xs={6}>
+                            <ComboField
+                                fieldOptions={periodicita.map(a => a.value)}
+                                fieldName="periodicita"
+                                fieldRowId={new Date().getUTCMilliseconds()}
+                                fieldValue={selectedPeriodicita.value}
+                                onUpdateField={updateField}/>
+                        </Col>
+                    </Row>
+                    <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+                        <Col xs={6}>
+                            <div>Dettaglio Periodicità</div>
+                        </Col>
+                        <Col xs={6}>
+                            <ComboField
+                                fieldOptions={dettaglioPeriodicita.filter(dett => { return dett.fk_ris_temporale === selectedPeriodicita.id;}).map(a => a.value)}
+                                fieldName="dettaglioPeriodicita"
+                                fieldRowId={new Date().getUTCMilliseconds()}
+                                fieldValue={selectedDettaglioPeriodicita.value}
+                                onUpdateField={updateField}/>
+                        </Col>
+                    </Row>
+                </div>
+            </SwitchPanel>
+            <SwitchPanel
+                id="tematizePanel"
+                title="Tematizzazione"
+                collapsible
+                expanded={tematizePanelExpanded}
+                onSwitch={(expanded) => setTematizePanelExpanded(expanded)}
+            >
+                <div className="container-fluid">
+                    <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+                        <Col xs={12}>
+                            <Symbolizer
+                                key="Classification"
+                                tools={[]}>
+                                <Fields
+                                    properties={properties}
+                                    config={{}}
+                                    params={params}
+                                    onChange={updateSymbolizer}
+                                />
+                            </Symbolizer>
+                        </Col>
+                    </Row>
+                </div>
+            </SwitchPanel>
+            <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
+                <Col xs={12}>
+                    <Button onClick={applyStyle}>Applica</Button>
+                </Col>
+            </Row>
+        </div>);
 }
 
 IndicaBuilder.propTypes = {
@@ -448,24 +452,24 @@ IndicaBuilder.propTypes = {
 
 export default connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
-    let risSp = [], dettPer = [], dim = [], period = [];
+    let risSp = []; let dettPer = []; let dim = []; let period = [];
     if (activeConfig.indicaFilters) {
         let filters = activeConfig.indicaFilters;
         risSp = filters[0].values.map((att) => {
-            return { id: att.id_ris_spaziale, value: att.des_ris_spaziale }
+            return { id: att.id_ris_spaziale, value: att.des_ris_spaziale };
         });
         dim = filters[1].values.map((att) => {
-            return { id: att.id_dimensione, value: att.des_dimensione }
+            return { id: att.id_dimensione, value: att.des_dimensione };
         });
         period = filters[2].values.map((att) => {
-            return { id: att.id_ris_temporale, value: att.des_ris_temporale }
+            return { id: att.id_ris_temporale, value: att.des_ris_temporale };
         });
         dettPer = filters[3].values.map((att) => {
-            return { fk_ris_temporale: att.fk_ris_temporale, id: att.id_ambito_temporale, value: att.valore ? att.valore + " - "+ att.anno : att.anno }
+            return { fk_ris_temporale: att.fk_ris_temporale, id: att.id_ambito_temporale, value: att.valore ? att.valore + " - " + att.anno : att.anno };
         });
     }
 
-    return { 
+    return {
         wmsLayer: activeConfig.layer,
         risoluzioneSpaziale: risSp,
         dimensione: dim,
@@ -474,7 +478,7 @@ export default connect((state) => {
         indicaform: state.indicaform
     };
 }, {
-    addIndicaLayer: addIndicaLayer,
-    removeIndicaLayer: removeIndicaLayer,
-    indicaFormClosed: indicaFormClosed
+    addLayer: addIndicaLayer,
+    removeLayer: removeIndicaLayer,
+    formClosed: indicaFormClosed
 })(IndicaBuilder);

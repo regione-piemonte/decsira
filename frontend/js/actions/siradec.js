@@ -279,14 +279,14 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                     return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
                 });
 
-                let temaFilters = config.tematizzatore && config.tematizzatore.filters? config.tematizzatore.filters: [];
+                let temaFilters = config.tematizzatore && config.tematizzatore.filters ? config.tematizzatore.filters : [];
                 const temaFields = temaFilters.map((f) => {
                     let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
                     urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
                     return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
                 });
-				
-				const allFields = fields.concat(temaFields);
+
+                const allFields = fields.concat(temaFields);
 
                 Promise.all(allFields).then((fi) => {
                     dispatch(configureFeatureType({

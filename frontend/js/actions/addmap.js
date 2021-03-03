@@ -140,9 +140,9 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
 
 function addIndicaLayer(layer) {
     return (dispatch) => {
-        //dispatch(removeIndicaLayer(layer));
+        // dispatch(removeIndicaLayer(layer));
         dispatch(addSiraLayers([layer]));
-    }
+    };
 }
 
 function removeIndicaLayer(layer) {
@@ -154,7 +154,7 @@ function removeIndicaLayer(layer) {
         alreadyPresentLayers.forEach(lay => {
             dispatch(removeLayer(lay.id));
         });
-    }
+    };
 }
 
 function addFeatureTypeLayerInCart(layers, node) {

@@ -13,15 +13,15 @@ const initialState = {
 
 function indicaform(state = initialState, action) {
     switch (action.type) {
-        case 'INDICA_FORM_RESET': {
-            return assign({}, state.indicaform, initialState);
-        }
+    case 'INDICA_FORM_RESET': {
+        return assign({}, state.indicaform, initialState);
+    }
 
-        case 'INDICA_FORM_CLOSED': {
-            return assign({}, state.indicaform, action.indicaform);
-        }
+    case 'INDICA_FORM_CLOSED': {
+        return assign({}, state.indicaform, action.indicaform);
+    }
 
-        default: return state;
+    default: return state;
     }
 }
 

@@ -89,7 +89,7 @@ const IndicaSelector = connect((state) => {
     return {
         show: state.siradec.indicaPanelExpanded,
         tematizzatore: activeConfig.tematizzatore
-    }
+    };
 }, {
     closePanel: expandIndicaPanel.bind(null, false),
     configureLayer: configureIndicaLayer
@@ -167,7 +167,8 @@ class Sira extends React.Component {
         registerEventListener: PropTypes.func,
         toggleControl: PropTypes.func,
         mapConfigLoaded: PropTypes.bool,
-        panelEnabled: PropTypes.bool
+        panelEnabled: PropTypes.bool,
+        tematizzatore: PropTypes.object
     };
 
     static contextTypes = {

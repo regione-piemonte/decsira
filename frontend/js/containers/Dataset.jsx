@@ -82,7 +82,7 @@ const IndicaSelector = connect((state) => {
     return {
         show: state.siradec.indicaPanelExpanded,
         tematizzatore: activeConfig.tematizzatore
-    }
+    };
 }, {
     closePanel: expandIndicaPanel.bind(null, false),
     configureLayer: configureIndicaLayer
@@ -162,7 +162,8 @@ class Dataset extends React.Component {
         toggleAddMap: PropTypes.func,
         loadNodeMapRecords: PropTypes.func,
         addLayersInCart: PropTypes.func,
-        setNodeInUse: PropTypes.func
+        setNodeInUse: PropTypes.func,
+        tematizzatore: PropTypes.object
     };
 
     static contextTypes = {

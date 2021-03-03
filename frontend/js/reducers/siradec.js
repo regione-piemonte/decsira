@@ -75,8 +75,8 @@ function siradec(state = initialState, action) {
     }
     case FEATURETYPE_CONFIG_LOADED: {
         let attributes = state.attributes ? [...state.attributes, ...action.field] : action.field;
-        let queryAttributes = attributes.filter((att) => {return att.filterType!="tematizzatore"});
-        let indicaFilters = attributes.filter((att) => {return att.filterType=="tematizzatore"});
+        let queryAttributes = attributes.filter((att) => {return att.filterType !== "tematizzatore";});
+        let indicaFilters = attributes.filter((att) => {return att.filterType === "tematizzatore";});
 
         // Sorting the attributes by the given index in configuration
         queryAttributes.sort((attA, attB) => {
@@ -88,7 +88,8 @@ function siradec(state = initialState, action) {
 
         const queryform = assign({}, state.queryform, {geometryName: action.geometryName, spatialField: assign({}, state.queryform.spatialField, {attribute: action.geometryName})});
 
-        /*const indicaform = assign({}, state.indicaform, {
+        /*
+        const indicaform = assign({}, state.indicaform, {
             selectedRisSpaziale: action.selectedRisSpaziale,
             selectedIndicatore: action.selectedIndicatore,
             selectedPeriodicita: action.selectedPeriodicita,
@@ -110,7 +111,7 @@ function siradec(state = initialState, action) {
             exporter: action.exporter,
             geometryType: action.geometryType || 'Point',
             queryform,
-            //indicaform,
+            // indicaform,
             authorized: action.authorized,
             tematizzatore: action.tematizzatore,
             indicaFilters: indicaFilters

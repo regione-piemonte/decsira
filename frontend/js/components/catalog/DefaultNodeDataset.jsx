@@ -75,7 +75,7 @@ class DefaultNode extends React.Component {
                         onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
                 </OverlayTrigger>));
             let indicaFunctions = this.props.node.functions.filter(
-                (func)=> {return func.type =="Tematizzatore" || func.type =="Serie Storica"}
+                (func) => {return func.type === "Tematizzatore" || func.type === "Serie Storica";}
             );
             if (indicaFunctions.length > 0) {
                 tools.push((
@@ -87,7 +87,6 @@ class DefaultNode extends React.Component {
                             onClick={() => this.props.expandIndicaPanel(true, this.props.node.featureType)}/>
                     </OverlayTrigger>));
             }
-            
         }
         return tools;
     };

@@ -8,7 +8,12 @@ class IndicaSelector extends React.Component {
         show: PropTypes.bool,
         closePanel: PropTypes.func,
         configureLayer: PropTypes.func,
-        goToMap: PropTypes.func
+        goToMap: PropTypes.func,
+        tematizzatore: PropTypes.object
+    };
+
+    static contextTypes = {
+        router: PropTypes.object
     };
 
     static defaultProps = {
@@ -18,23 +23,10 @@ class IndicaSelector extends React.Component {
         goToMap: () => {}
     };
 
-    static contextTypes = {
-        router: PropTypes.object
-    };
-    
-    goMap = () => {
-        this.context.router.history.replace("/map/");
-    };
-
-    configureLayer = () => {
-        this.props.configureLayer("tematizzatore");
-        this.props.goToMap();this.goMap();
-    };
-    
     onChangeValue(event) {
         console.log(event.target.value);
-    };
-    
+    }
+
     render() {
         return (
             <Draggable bounds="parent" start={{x: 0, y: 300}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
@@ -48,17 +40,17 @@ class IndicaSelector extends React.Component {
                                 </span>
                                 <button className="indica-selector-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
                             </span>}
-                            footer={
-                                <div>
-                                    <button onClick={this.configureLayer}>Configure Layer</button>
-                                </div>
-                            }
-                        >
+                        footer={
+                            <div>
+                                <button onClick={this.configureLayer}>Configure Layer</button>
+                            </div>
+                        }
+                    >
                         <Panel className="indica-selector-content">
-                            <h3>{this.props.tematizzatore? this.props.tematizzatore.description : ""}</h3>
+                            <h3>{this.props.tematizzatore ? this.props.tematizzatore.description : ""}</h3>
                             <div onChange={this.onChangeValue}>
-                            <p><input type="radio" value="tematizzatore" name="indicatore"/> Tematizzatore</p>
-                            <p><input type="radio" value="serie-storica" name="indicatore"/> Serie Storica</p>
+                                <p><input type="radio" value="tematizzatore" name="indicatore"/> Tematizzatore</p>
+                                <p><input type="radio" value="serie-storica" name="indicatore"/> Serie Storica</p>
                             </div>
                         </Panel>
                     </Panel>
@@ -66,6 +58,16 @@ class IndicaSelector extends React.Component {
             </Draggable>
         );
     }
+
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
+    configureLayer = () => {
+        this.props.configureLayer("tematizzatore");
+        this.props.goToMap();
+        this.goMap();
+    };
 }
 
 export default IndicaSelector;
