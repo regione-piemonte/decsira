@@ -47,7 +47,7 @@ module.exports = connect((state) => {
         filterFields: state.queryform.filterFields,
         spatialField: state.queryform.spatialField,
         featureTypeName: activeConfig.featureTypeName,
-        searchUrl: state.queryform.searchUrl,
+        searchUrl: state.queryform.searchUrl || activeConfig?.queryform?.searchUrl,
         dataSourceOptions: state.grid.dataSourceOptions,
         maxFeatures: state.siraexporter.maxFeatures,
         profile: state.userprofile.profile,
