@@ -120,7 +120,10 @@ class PreviewMap extends React.Component {
         const srs = "EPSG:4326";
         const proj = this.props.map.projection || "EPSG:3857";
         extentObj = (srs !== proj) ? CoordinatesUtils.reprojectBbox(extentObj, srs, proj) : extentObj;
-        return MapUtils.getZoomForExtent(extentObj, this.props.map.size, 0, 16);
+        return MapUtils.getZoomForExtent(extentObj, this.props.map.size || {
+            width: 600,
+            height: 300
+        }, 0, 16);
     }
 
     changeMapView = () => {

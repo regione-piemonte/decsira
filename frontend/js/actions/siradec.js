@@ -7,6 +7,7 @@
  */
 const axios = require('@mapstore/libs/ajax');
 const {addLayer} = require('@mapstore/actions/layers');
+const {cardLoading} = require('../actions/card');
 const {setSiraControl} = require('./controls');
 
 const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
@@ -208,9 +209,10 @@ function getAttributeValues(ft, field, params, serviceUrl) {
         dispatch(configureFeatureType(ft, assign({}, field, {})));
     };
 }
-function configurationLoading() {
+function configurationLoading(loading = true) {
     return {
-        type: FEATURETYPE_CONFIG_LOADING
+        type: FEATURETYPE_CONFIG_LOADING,
+        loading
     };
 }
 
@@ -231,11 +233,12 @@ function userNotAuthorized(feature) {
     };
 }
 
-function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null) {
+function loadFeatureTypeConfig(configUrl, params, featureType, activate = false, addlayer = false, siraId, addCartlayer = false, node = null, loading = true, loadCardTemplate = null) {
     const url = configUrl ? configUrl : 'assets/' + featureType + '.json';
     return (dispatch, getState) => {
         const { userprofile} = getState();
-        dispatch(configurationLoading());
+        dispatch(configurationLoading(loading));
+        loadCardTemplate && dispatch(cardLoading());
         return axios.get(url).then((response) => {
             let config = response.data;
             if (typeof config !== "object") {
@@ -287,6 +290,9 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 });
 
                 const allFields = fields.concat(temaFields);
+
+                // Load card template
+                loadCardTemplate && loadCardTemplate({card: config.card});
 
                 Promise.all(allFields).then((fi) => {
                     dispatch(configureFeatureType({

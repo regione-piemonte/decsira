@@ -261,6 +261,9 @@
             <id>web</id>
             <modules>
                 <module>backend</module>
+                <module>security/iride-commons</module>
+                <module>security/iride-entities</module>
+                <module>security/iride-service-client</module>
                 <module>frontend/iride-services</module>
 				<module>frontend/web</module>
 				<module>frontend/metadata-services</module>
@@ -280,6 +283,14 @@
                 <module>frontend/ogc-services</module>
 				<module>metadata-batch</module>
 				<module>security/app-schema</module>
+            </modules>
+        </profile>
+		<profile>
+            <id>datadir</id>
+            <modules>
+                <module>backend</module>
+				<module>security/app-schema</module>
+				<module>frontend/ogc-services</module>
             </modules>
         </profile>
     </profiles>
