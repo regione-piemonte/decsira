@@ -21,7 +21,7 @@ const Header = require('../components/Header');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {configureInlineMap} = require('../actions/siradec');
+const {configureInlineMap, expandIndicaPanel, configureIndicaLayer} = require('../actions/siradec');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 require("../components/WMSLayer.js");
@@ -83,6 +83,17 @@ const MetadataInfoBox = connect(
     mapStateToPropsMIB,
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
+
+const IndicaSelector = connect((state) => {
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    return {
+        show: state.siradec.indicaPanelExpanded,
+        tematizzatore: activeConfig.tematizzatore
+    };
+}, {
+    closePanel: expandIndicaPanel.bind(null, false),
+    configureLayer: configureIndicaLayer
+})(require('../components/indicatori/IndicaSelector').default);
 
 const { changeMousePointer, registerEventListener, unRegisterEventListener} = require('@mapstore/actions/map');
 
@@ -156,7 +167,8 @@ class Sira extends React.Component {
         registerEventListener: PropTypes.func,
         toggleControl: PropTypes.func,
         mapConfigLoaded: PropTypes.bool,
-        panelEnabled: PropTypes.bool
+        panelEnabled: PropTypes.bool,
+        tematizzatore: PropTypes.object
     };
 
     static contextTypes = {
@@ -223,6 +235,7 @@ class Sira extends React.Component {
                         params={{authkey: this.props?.match?.params?.profile ? authParams[this.props?.match?.params?.profile].authkey : ''}}
                         profile={this.props.profile.profile}
                         key="getFeatureInfo"/>
+                    <IndicaSelector {...this.props.tematizzatore}/>
                     <MetadataInfoBox panelStyle={{
                         height: "500px",
                         width: "650px",

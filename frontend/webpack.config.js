@@ -34,29 +34,29 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
         path: '/proxy',
         pathRewrite: {'^/proxy': '/decsiraweb/proxy'},
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it/"
+        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
     }, {
         path: '/services/metadata',
         pathRewrite: {'^/services/metadata': '/decsiraweb/services/metadata'},
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it"
+        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
     }, {
         path: '/services/iride',
         pathRewrite: {'^/services/iride': '/decsiraweb/services/iride'},
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it"
+        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
     }, {
         path: '/decsiraweb/services/queryformconfig',
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it"
+        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
     }, {
         path: '/geoserver/ows',
         host: "localhost",
-        target: "http://decsira-dev.geo-solutions.it"
+        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
     }, {
         path: '/territoriosliv1sisp',
         host: "localhost",
         target: "https://tst-conoscenzaambientale.sistemapiemonte.it"
     }]
-)
+), { devtool: "inline-source-map" }
 );

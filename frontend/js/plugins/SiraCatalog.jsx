@@ -20,6 +20,7 @@ const {addLayer} = require('@mapstore/actions/layers');
 const {
     // SiraQueryPanel action functions
     expandFilterPanel,
+    expandIndicaPanel,
     loadFeatureTypeConfig,
     setActiveFeatureType
 } = require('../actions/siradec');
@@ -67,6 +68,7 @@ class LayerTree extends React.Component {
         onToggle: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         expandFilterPanel: PropTypes.func,
+        expandIndicaPanel: PropTypes.func,
         getMetadataObjects: PropTypes.func,
         setNodeInUse: PropTypes.func,
         category: PropTypes.shape({
@@ -130,6 +132,7 @@ class LayerTree extends React.Component {
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
+                            expandIndicaPanel={this.openIndicaPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
                             groups={nodes}
@@ -137,6 +140,7 @@ class LayerTree extends React.Component {
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>) : (<DefaultNode
                         expandFilterPanel={this.openFilterPanel}
+                        expandIndicaPanel={this.openIndicaPanel}
                         toggleSiraControl={this.searchAll}
                         addToMap={this.addToMap}
                         showInfoBox={this.showInfoBox}/>) }
@@ -201,6 +205,16 @@ class LayerTree extends React.Component {
         this.props.expandFilterPanel(status);
     };
 
+    openIndicaPanel = (status, ftType) => {
+        const featureType = ftType.replace('featuretype=', '').replace('.json', '');
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
+        } else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+        }
+        this.props.expandIndicaPanel(status);
+    };
+
     searchAll = (node) => {
         const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
@@ -242,6 +256,7 @@ const CatalogPlugin = connect(tocSelector, {
     onToggle: toggleNode,
     toggleSiraControl,
     expandFilterPanel,
+    expandIndicaPanel,
     getMetadataObjects,
     loadFeatureTypeConfig,
     setActiveFeatureType,

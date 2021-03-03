@@ -71,7 +71,7 @@ const LoginNav = connect((state) => ({
     showAccountInfo: false,
     showPasswordChange: false,
     showLogout: true,
-    className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user)})
+    className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), {
     onShowLogin: showLoginPanel,
     onLogout: (e) => {

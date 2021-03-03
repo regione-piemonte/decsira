@@ -366,7 +366,7 @@ module.exports = connect((state) => {
         attributePanelExpanded: state.queryform.attributePanelExpanded,
         spatialPanelExpanded: state.queryform.spatialPanelExpanded,
         useMapProjection: state.queryform.useMapProjection,
-        searchUrl: state.queryform.searchUrl,
+        searchUrl: state.queryform.searchUrl || activeConfig?.queryform?.searchUrl,
         showGeneratedFilter: state.queryform.showGeneratedFilter,
         featureTypeConfigUrl: state.queryform.featureTypeConfigUrl,
         pagination: state.queryform.pagination,

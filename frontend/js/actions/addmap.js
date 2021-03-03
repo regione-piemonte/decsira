@@ -11,6 +11,8 @@ const API = {
 };
 const AddMapUtils = require('../utils/AddMapUtils');
 const {addServiceIncart, refreshNumberOfServices, addSiraLayers} = require('./cart');
+const {removeLayer} = require('@mapstore/actions/layers');
+
 const SIRA_RECORDS_LOADING = 'SIRA_RECORDS_LOADING';
 const SIRA_RECORDS_ERROR = 'SIRA_RECORDS_ERROR';
 const SIRA_RECORDS_LOADED = 'SIRA_RECORDS_LOADED';
@@ -136,6 +138,25 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     };
 }
 
+function addIndicaLayer(layer) {
+    return (dispatch) => {
+        // dispatch(removeIndicaLayer(layer));
+        dispatch(addSiraLayers([layer]));
+    };
+}
+
+function removeIndicaLayer(layer) {
+    return (dispatch, getState) => {
+        // rimuovo i layers già presenti in mappa con lo stesso title
+        const mapLayers = getState().layers.flat || [];
+
+        let alreadyPresentLayers = mapLayers.filter((el) => el.title === layer.title);
+        alreadyPresentLayers.forEach(lay => {
+            dispatch(removeLayer(lay.id));
+        });
+    };
+}
+
 function addFeatureTypeLayerInCart(layers, node) {
     return (dispatch) => {
         dispatch(addSiraLayersIncart(layers));
@@ -155,5 +176,7 @@ module.exports = {
     toggleAddMap,
     addLayers,
     addLayersInCart,
+    addIndicaLayer,
+    removeIndicaLayer,
     addFeatureTypeLayerInCart
 };
