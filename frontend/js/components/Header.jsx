@@ -10,7 +10,8 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {connect} = require('react-redux');
 const {Glyphicon} = require('react-bootstrap');
-
+const cs = require('classnames');
+const isEmpty = require('lodash/isEmpty');
 const {
     showLoginPanel,
     hideLoginPanel
@@ -70,7 +71,7 @@ const LoginNav = connect((state) => ({
     showAccountInfo: false,
     showPasswordChange: false,
     showLogout: true,
-    className: "btn btn-default btn-login dropdown-toggle"
+    className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), {
     onShowLogin: showLoginPanel,
     onLogout: (e) => {

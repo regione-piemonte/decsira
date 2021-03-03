@@ -257,7 +257,7 @@ class SiraGrid extends React.Component {
                 let pagination = {startIndex: params.startRow, maxFeatures: params.endRow - params.startRow};
                 let filterObj = this.props.gridType === 'search' ? {
                     groupFields: this.props.groupFields,
-                    filterFields: this.props.filterFields.filter((field) => field.value),
+                    filterFields: this.props.filterFields.filter(({value = ''}) => value !== null && value !== ''),
                     spatialField: this.props.spatialField,
                     pagination
                 } : {

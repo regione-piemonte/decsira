@@ -9,6 +9,7 @@
 const expect = require('expect');
 const {
     CARD_TEMPLATE_LOADED,
+    CARD_TEMPLATE_LOADING,
     CARD_TEMPLATE_LOAD_ERROR,
     SELECT_SECTION,
     ACTIVE_SECTION,
@@ -25,7 +26,11 @@ describe('Test correctness of the card template actions', () => {
         loadCardTemplate('base/js/test-resources/template-test.config', 'modelconfig/url', 'wfs/url')((e) => {
             try {
                 expect(e).toExist();
-                expect(e).withArgs('templateConfigURL', 'modelConfigURL', 'wfsUrl');
+                if (e.type) {
+                    expect(e.type).toBe(CARD_TEMPLATE_LOADING);
+                } else {
+                    expect(e).withArgs('templateConfigURL', 'modelConfigURL', 'wfsUrl');
+                }
                 done();
             } catch (ex) {
                 done(ex);
@@ -53,7 +58,7 @@ describe('Test correctness of the card template actions', () => {
         loadCardData(template, 'base/js/test-resources/testWFSModel.xml')((e) => {
             try {
                 expect(e).toExist();
-                expect(e.type).toBe(CARD_TEMPLATE_LOADED);
+                expect([CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOADING].includes(e.type)).toBe(true);
                 done();
             } catch (ex) {
                 done(ex);
@@ -65,7 +70,7 @@ describe('Test correctness of the card template actions', () => {
         loadCardTemplate('base/js/test-resources/template-test.conf')((e) => {
             try {
                 expect(e).toExist();
-                expect(e.type).toBe(CARD_TEMPLATE_LOAD_ERROR);
+                expect([CARD_TEMPLATE_LOADING, CARD_TEMPLATE_LOAD_ERROR].includes(e.type)).toBe(true);
                 done();
             } catch (ex) {
                 done(ex);
