@@ -14,6 +14,9 @@ const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
 const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
+const EXPAND_INDICA_PANEL = 'EXPAND_INDICA_PANEL';
+const CONFIGURE_INDICA_LAYER = 'CONFIGURE_INDICA_LAYER';
+const CLOSE_INDICA_CONFIGURATION = 'CLOSE_INDICA_CONFIGURATION';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 const QUERYFORM_HIDE_ERROR = 'QUERYFORM_HIDE_ERROR';
 const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
@@ -28,6 +31,7 @@ const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
+const {indicaFormReset} = require('./indicaform');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
 
@@ -59,7 +63,8 @@ function configureFeatureType(ft, field, featureType, activate) {
         exporter: ft.exporter,
         field,
         featureType,
-        activate
+        activate,
+        tematizzatore: ft.tematizzatore
     };
 }
 
@@ -105,6 +110,26 @@ function expandFilterPanel(expand) {
     return {
         type: EXPAND_FILTER_PANEL,
         expand: expand
+    };
+}
+
+function expandIndicaPanel(expand) {
+    return {
+        type: EXPAND_INDICA_PANEL,
+        expand: expand
+    };
+}
+
+function configureIndicaLayer(type) {
+    return {
+        type: CONFIGURE_INDICA_LAYER,
+        indicaType: type
+    };
+}
+
+function closeIndicaConfiguration() {
+    return {
+        type: CLOSE_INDICA_CONFIGURATION
     };
 }
 
@@ -245,6 +270,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 dispatch(configureFeatureGrid(config.featuregrid, featureType));
                 dispatch(configureFeatureInfo(config.featureinfo, featureType));
                 dispatch(configureCard(config.card, featureType));
+                dispatch(indicaFormReset());
 
                 let serviceUrl = config.query.service.url;
 
@@ -256,10 +282,19 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                     return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
                 });
 
+                let temaFilters = config.tematizzatore && config.tematizzatore.filters ? config.tematizzatore.filters : [];
+                const temaFields = temaFilters.map((f) => {
+                    let urlParams = config.query.service && config.query.service.urlParams ? assign({}, params, config.query.service.urlParams) : params;
+                    urlParams = f.valueService && f.valueService.urlParams ? assign({}, urlParams, f.valueService.urlParams) : urlParams;
+                    return f.valueService && f.valueService.urlParams ? getAttributeValuesPromise(f, urlParams, serviceUrl) : Promise.resolve(f);
+                });
+
+                const allFields = fields.concat(temaFields);
+
                 // Load card template
                 loadCardTemplate && loadCardTemplate({card: config.card});
 
-                Promise.all(fields).then((fi) => {
+                Promise.all(allFields).then((fi) => {
                     dispatch(configureFeatureType({
                         id: config.featureTypeName,
                         name: config.featureTypeNameLabel,
@@ -269,7 +304,8 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                         multiLayerSelectionAttribute: config.multiLayerSelectionAttribute,
                         nameSpaces: config.nameSpaces || {},
                         layer: layer,
-                        exporter: config.exporter
+                        exporter: config.exporter,
+                        tematizzatore: config.tematizzatore
                     }, fi, featureType, activate));
                 }).catch((e) => dispatch(configureQueryFormError(featureType, e)));
                 // for (let field in config.query.fields) {
@@ -312,6 +348,9 @@ module.exports = {
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
+    EXPAND_INDICA_PANEL,
+    CONFIGURE_INDICA_LAYER,
+    CLOSE_INDICA_CONFIGURATION,
     QUERYFORM_CONFIG_LOAD_ERROR,
     QUERYFORM_HIDE_ERROR,
     FEATUREGRID_CONFIG_LOADED,
@@ -331,6 +370,9 @@ module.exports = {
     loadFeatureTypeConfig,
     configureQueryForm,
     expandFilterPanel,
+    expandIndicaPanel,
+    configureIndicaLayer,
+    closeIndicaConfiguration,
     configureQueryFormError,
     getAttributeValues,
     hideQueryError,

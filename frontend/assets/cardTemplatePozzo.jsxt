@@ -121,7 +121,7 @@
 			
         </Section>
 
-        <Section header='DATI STRUTTURALI GENERALI' eventKey='3' expanded={true}>
+        <Section header='DATI STRUTTURALI GENERALI' eventKey='4' expanded={true}>
 			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 				<LabeledField label='Data di costruzione' dateFormat='DD/MM/YYYY' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:dataCostruzionePozzo/text()")
@@ -137,7 +137,7 @@
 			</ProfileWrapper>
 
 			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-				<Section header='Valori del diametro della colonna' eventKey='4' expanded={false}>
+				<Section header='Valori del diametro della colonna' eventKey='5' expanded={false}>
 					<SiraTable
 						   id="DiamColonPozzo"
 						   selectedRow={model.DiamColonPozzo}
@@ -165,7 +165,7 @@
 						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:diamColonPozzo")}/>
 				</Section>
 				
-				<Section header='Tratti di colonna interessati dalla presenza di cementazione' eventKey='5' expanded={false}>
+				<Section header='Tratti di colonna interessati dalla presenza di cementazione' eventKey='6' expanded={false}>
 					<SiraTable
 						   id="CementazPozzo"
 						   selectedRow={model.CementazPozzo}
@@ -193,7 +193,7 @@
 						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:cementazPozzo")}/>
 				</Section>
 				
-				<Section header='Tratti di colonna interessati dalla presenza di dreni' eventKey='6' expanded={false}>
+				<Section header='Tratti di colonna interessati dalla presenza di dreni' eventKey='7' expanded={false}>
 					<SiraTable
 						   id="DrenoPozzo"
 						   selectedRow={model.DrenoPozzo}
@@ -216,7 +216,7 @@
 						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:drenoPozzo")}/>
 				</Section>
 				
-				<Section header='Tratti di colonna interessati dalla presenza di filtri' eventKey='7' expanded={false}>
+				<Section header='Tratti di colonna interessati dalla presenza di filtri' eventKey='8' expanded={false}>
 					<SiraTable
 						   id="FiltroPozzo"
 						   selectedRow={model.FiltroPozzo}
@@ -258,7 +258,7 @@
         </Section>
 		
 		<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-			<Section header='PROVE DI EMUNGIMENTO - dati generali' eventKey='8' expanded={false}>
+			<Section header='PROVE DI EMUNGIMENTO - dati generali' eventKey='9' expanded={false}>
 				<LabeledField label='Disponibilita di misure piezometriche' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:flgDispMisPiezoPozzo/text()")
 				}/>
@@ -266,7 +266,7 @@
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:numPiezAssocPozzo/text()")
 				}/>
 				
-				<Section header='Prove di emungimento a gradini' eventKey='9' expanded={false}>
+				<Section header='Prove di emungimento a gradini' eventKey='10' expanded={false}>
 					<SiraTable
 						   id="EmungGradiniPozzo"
 						   selectedRow={model.EmungGradiniPozzo}
@@ -295,7 +295,7 @@
 						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:emungGradiniPozzo")}/>
 				</Section>
 				
-				<Section header='Prove di emungimento a lunga durata' eventKey='10' expanded={false}>
+				<Section header='Prove di emungimento a lunga durata' eventKey='11' expanded={false}>
 					<SiraTable
 						   id="EmungDurataPozzo"
 						   selectedRow={model.EmungDurataPozzo}
@@ -340,7 +340,7 @@
 				</Section>
 			</Section>
 			
-			<Section header='POMPE IDRAULICHE' eventKey='11' expanded={false}>
+			<Section header='POMPE IDRAULICHE' eventKey='12' expanded={false}>
 				<SiraTable
 					   id="PompaIdraulPozzo"
 					   selectedRow={model.PompaIdraulPozzo}
@@ -369,7 +369,7 @@
 			</Section>
 		</ProfileWrapper>
 
-        <Section header='MAPPA SINTESI - Prese da pozzi su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='12' expanded={true}>
+        <Section header='MAPPA SINTESI - Prese da pozzi su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='13' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({
@@ -404,7 +404,7 @@
 
         </Section>
 		
-		<Section header='METADATO' eventKey='8' expanded={true}>
+		<Section header='METADATO' eventKey='14' expanded={true}>
 			<LinkToPage
 				txt="Visualizza la scheda del metadato"
 				url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"

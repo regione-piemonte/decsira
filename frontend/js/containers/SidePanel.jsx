@@ -15,9 +15,10 @@ const {changeMapView} = require('../../MapStore2/web/client/actions/map');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const Sidebar = require('react-sidebar').default;
 const SideQueryPanel = require('../components/SideQueryPanel');
+const SideIndicaPanel = require('../components/indicatori/SideIndicaPanel').default;
 const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
-const {expandFilterPanel} = require('../actions/siradec');
+const {expandFilterPanel, closeIndicaConfiguration} = require('../actions/siradec');
 const Resizable = require('react-resizable').Resizable;
 const Spinner = require('react-spinkit');
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
@@ -26,6 +27,7 @@ require('../../assets/css/sira.css');
 class SidePanel extends React.Component {
     static propTypes = {
         filterPanelExpanded: PropTypes.bool,
+        indicaConfigPanelExpanded: PropTypes.bool,
         gridExpanded: PropTypes.bool,
         auth: PropTypes.object,
         profile: PropTypes.string,
@@ -34,6 +36,7 @@ class SidePanel extends React.Component {
         addLayer: PropTypes.func,
         withMap: PropTypes.bool.isRequired,
         expandFilterPanel: PropTypes.func.isRequired,
+        closeIndicaConfiguration: PropTypes.func,
         fTypeConfigLoading: PropTypes.bool.isRequired,
         layers: PropTypes.array,
         siraActiveConfig: PropTypes.object,
@@ -47,10 +50,12 @@ class SidePanel extends React.Component {
 
     static defaultProps = {
         filterPanelExpanded: false,
+        indicaConfigPanelExpanded: false,
         gridExpanded: false,
         withMap: true,
         fTypeConfigLoading: true,
         expandFilterPanel: () => {},
+        closeIndicaConfiguration: () => {},
         changeMapStyle: () => {},
         changeMapView: () => {}
     };
@@ -61,15 +66,15 @@ class SidePanel extends React.Component {
     };
 
     componentDidMount() {
-        if (this.props.withMap && (this.props.filterPanelExpanded || this.props.gridExpanded)) {
+        if (this.props.withMap && (this.props.filterPanelExpanded || this.props.gridExpanded || this.props.indicaConfigPanelExpanded)) {
             let style = {left: this.state.width, width: `calc(100% - ${this.state.width}px)`};
             this.props.changeMapStyle(style, "sirasidepanel");
         }
     }
 
     componentDidUpdate(prevProps) {
-        const prevShowing = prevProps.filterPanelExpanded || prevProps.gridExpanded;
-        const show = this.props.filterPanelExpanded || this.props.gridExpanded;
+        const prevShowing = prevProps.filterPanelExpanded || prevProps.gridExpanded || prevProps.indicaConfigPanelExpanded;
+        const show = this.props.filterPanelExpanded || this.props.gridExpanded || this.props.indicaConfigPanelExpanded;
         if (prevShowing !== show && this.props.withMap) {
             let style = show ? {left: this.state.width, width: `calc(100% - ${this.state.width}px)`} : {};
             this.props.changeMapStyle(style, "sirasidepanel");
@@ -94,6 +99,13 @@ class SidePanel extends React.Component {
             withMap={this.props.withMap}
             params={this.props.auth}
             toggleControl={this.props.expandFilterPanel.bind(null, false)}
+        />);
+    };
+
+    renderIndicaPanel = () => {
+        return (<SideIndicaPanel
+            withMap={this.props.withMap}
+            toggleControl={this.props.closeIndicaConfiguration}
         />);
     };
 
@@ -124,6 +136,8 @@ class SidePanel extends React.Component {
             comp = this.renderQueryPanel();
         } else if (this.props.gridExpanded) {
             comp = this.renderGrid();
+        } else if (this.props.indicaConfigPanelExpanded) {
+            comp = this.renderIndicaPanel();
         } else {
             comp = (<div/>);
         }
@@ -143,7 +157,7 @@ class SidePanel extends React.Component {
     };
 
     render() {
-        const show = this.props.filterPanelExpanded || this.props.gridExpanded;
+        const show = this.props.filterPanelExpanded || this.props.gridExpanded || this.props.indicaConfigPanelExpanded;
         return (
 
             <Sidebar
@@ -198,6 +212,7 @@ module.exports = connect((state) => {
     return {
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         gridExpanded: state.siraControls.grid,
+        indicaConfigPanelExpanded: state.siradec.indicaConfigPanel.expanded,
         fTypeConfigLoading: state.siradec.fTypeConfigLoading,
         siraActiveConfig: activeConfig,
         layers: state.layers.flat,
@@ -206,6 +221,7 @@ module.exports = connect((state) => {
 }, {
     changeMapStyle,
     expandFilterPanel,
+    closeIndicaConfiguration,
     addLayer: addLayer,
     changeMapView: changeMapView
 })(SidePanel);

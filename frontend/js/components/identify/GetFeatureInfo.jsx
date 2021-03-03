@@ -105,7 +105,7 @@ class GetFeatureInfo extends React.Component {
         layers: [],
         layerFilter(l) {
             return l.visibility &&
-                l.type === 'wms' &&
+                (l.type === 'wms' || l.type === 'wmspost') &&
                 (l.queryable === undefined || l.queryable) &&
                 l.group !== "background";
         },
