@@ -267,7 +267,7 @@ module.exports = connect((state) => {
         detailsConfig: activeConfig && activeConfig.card,
         gridConfig: activeConfig && activeConfig.featuregrid,
         featureTypeName: activeConfig && activeConfig.featureTypeName,
-        searchUrl: state.queryform.searchUrl,
+        searchUrl: state.queryform.searchUrl || activeConfig?.queryform?.searchUrl,
         pagination: state.queryform.pagination
     };
 }, {
