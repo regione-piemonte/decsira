@@ -71,13 +71,14 @@ const LoginNav = connect((state) => ({
     showAccountInfo: false,
     showPasswordChange: false,
     showLogout: true,
+    renderUnsavedMapChangesDialog: false,
+    onCloseUnsavedDialog: () => {},
+    onLogout: () => {
+        window.location.href = ConfigUtils.getConfigProp('logOutService');
+    },
     className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), {
-    onShowLogin: showLoginPanel,
-    onLogout: (e) => {
-        e.preventDefault();
-        window.location.href = ConfigUtils.getConfigProp('logOutService');
-    }
+    onShowLogin: showLoginPanel
 })(require('@mapstore/components/security/UserMenu'));
 
 const CartPanel = connect((state) => ({
