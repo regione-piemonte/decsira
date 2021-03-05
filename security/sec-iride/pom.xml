@@ -134,7 +134,28 @@
             <name>GeoSolutions Repository</name>
             <url>http://maven.geo-solutions.it</url>
         </repository>
+		
+	    <repository>
+		   <!-- contains release (including third-party-dependences)               -->
+		   <!-- Restlet maven Repository (http://maven.restlet.org)                             -->
+		   <!-- ucar (https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases) -->
+		   <id>osgeo-release</id>
+		   <name>OSGeo Nexus Release Repository</name>
+		   <url>https://repo.osgeo.org/repository/release/</url>
+	  </repository>
+	  
+	  <repository>
+		   <!-- contains snapshot (including third-party-dependences)               -->
+		   <!-- Restlet maven Repository (http://maven.restlet.org)                             -->
+		   <!-- ucar (https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases) -->
+		   <id>osgeo-snapshots</id>
+		   <name>OSGeo Nexus Snapshot Repository</name>
+		   <url>https://repo.osgeo.org/repository/snapshot/</url>
+	  </repository>
     </repositories>
+	
+	
+	
 
     <dependencies>
         <!-- SIRA modules -->
@@ -155,6 +176,7 @@
         </dependency>
 
         <!-- GeoServer -->
+		
         <dependency>
             <groupId>org.geoserver</groupId>
             <artifactId>gs-main</artifactId>
@@ -435,6 +457,7 @@
             </plugin>
         </plugins>
     </build>
+	
 
     <reporting>
         <plugins>
