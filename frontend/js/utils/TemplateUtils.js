@@ -243,11 +243,10 @@ const TemplateUtils = {
     },
     getNumberOfFeatures(data, wfsVersion = "2.0") {
         let doc = new Dom().parseFromString(data);
-
         let select = XPath.useNamespaces(this.nsResolver(wfsVersion, this.getNamespaces(doc.documentElement.attributes)));
-
-        let elements = select("/wfs:ValueCollection/wfs:member", doc);
-        return elements.length;
+        let element = select("/wfs:FeatureCollection", doc)[0];
+        let numberMatched = element.getAttribute("numberMatched");
+        return numberMatched !== "unknown" ? parseInt(numberMatched, 10) : -1;
     },
 
     verifyProfiles(fieldProfiles, userProfiles) {
