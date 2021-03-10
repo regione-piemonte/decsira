@@ -154,7 +154,7 @@ class GetFeatureInfo extends React.Component {
                 for (let l = 0; l < wmsVisibleLayers.length; l++) {
                     const layer = wmsVisibleLayers[l];
                     const {url, requestConf, layerMetadata} = this.calculateRequestParameters(layer, bounds, crs, newProps);
-                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams);
+                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams, layer.viewparams);
 
                     // Load the template if required
                     if (layer.featureType) {
@@ -218,7 +218,7 @@ class GetFeatureInfo extends React.Component {
                         this.props.actions.setModelConfig({});
                     }
 
-                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams, topologyOptions);
+                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams, null, topologyOptions);
                 }
             }
         }
