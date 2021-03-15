@@ -92,7 +92,7 @@ function newMapInfoRequest(reqId, reqConfig) {
  * @param wmsBasePath {string} base path to the wms service
  * @param requestParams {object} map of params for a getfeatureinfo request.
  */
-function getFeatureInfo(wmsBasePath, requestParams, lMetaData, options = {}, topologyOptions = null) {
+function getFeatureInfo(wmsBasePath, requestParams, lMetaData, options = {}, viewparams, topologyOptions = null) {
     const defaultParams = assign({
         service: 'WMS',
         version: '1.1.1',
@@ -103,6 +103,9 @@ function getFeatureInfo(wmsBasePath, requestParams, lMetaData, options = {}, top
         y: 0,
         exceptions: 'application/vnd.ogc.se_xml'
     }, options);
+    if (viewparams && viewparams !== null) {
+        defaultParams.viewparams = viewparams;
+    }
     const param = assign({}, defaultParams, requestParams);
     const reqId = uuid.v1();
     return (dispatch) => {
