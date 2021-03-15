@@ -92,6 +92,13 @@ function configureGridDataWithPagination(data, requestId) {
     };
 }
 
+function updateTotalFeatures(data) {
+    return {
+        type: UPDATE_TOTAL_FEATURES,
+        data
+    };
+}
+
 function loadFeaturesWithPagination(wfsUrl, data, params, requestId) {
     let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
     for (let param in params) {
@@ -108,6 +115,7 @@ function loadFeaturesWithPagination(wfsUrl, data, params, requestId) {
             headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
         }).then((response) => {
             if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
+                dispatch(updateTotalFeatures(response.data));
                 dispatch(configureGridDataWithPagination(response.data, requestId));
             } else {
                 dispatch(configureGridError("GeoServer Exception, query fallita!"));
@@ -133,35 +141,9 @@ function setGridType(gridType) {
     };
 }
 
-function updateTotalFeatures(data) {
-    return {
-        type: UPDATE_TOTAL_FEATURES,
-        data
-    };
-}
-
-
-function loadGridModelWithPagination(wfsUrl, data, params, pagination) {
-    let {url} = ConfigUtils.setUrlPlaceholders({url: wfsUrl});
-    for (let param in params) {
-        if (params.hasOwnProperty(param)) {
-            url += "&" + param + "=" + params[param];
-        }
-    }
+function loadGridModelWithPagination(pagination) {
     return (dispatch) => {
         dispatch(createGridDataSource(pagination));
-        return axios.post(url, data, {
-            timeout: 120000,
-            headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
-        }).then((response) => {
-            if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
-                dispatch(updateTotalFeatures(response.data));
-            } else {
-                dispatch(configureGridError("GeoServer Exception, impossibile recuperare numero totale oggetti!"));
-            }
-        }).catch(() => {
-            dispatch(configureGridError("Network problem, impossibile recuperare numero totale oggetti!"));
-        });
     };
 }
 

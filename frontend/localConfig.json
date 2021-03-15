@@ -1,8 +1,8 @@
 {
   "geoStoreUrl": "rest/geostore",
-  "geoserverUrl": "http://tst-gisserver.territorio.csi.it/geoserver",
-  "secureGeoserverUrl": "https://tst-conoscenzaambientale.sistemapiemonte.it/geoserver",
-  "secureDecsirawebUrl": "https://tst-conoscenzaambientale.sistemapiemonte.it/decsiraweb/map.html",
+  "geoserverUrl": "${url.geoserver}/geoserver",
+  "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
+  "secureDecsirawebUrl": "${url.secure.decsiraweb}",
   "decsirawebUrl": "${url.decsiraweb}",
   "decsiraHelpUrl": "http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf",
   "logOutUrl": "http://www.sistemapiemonte.it/cms/privati/ambiente-e-energia",
@@ -166,7 +166,7 @@
 "proxyUrl": {
   "url": "proxy/?url=",
   "useCORS": ["http://nominatim.openstreetmap.org", "https://nominatim.openstreetmap.org"],
-  "autoDetectCORS": true
+  "autoDetectCORS": false
 },
 "query": {
     "attributePanelExpanded": true,
