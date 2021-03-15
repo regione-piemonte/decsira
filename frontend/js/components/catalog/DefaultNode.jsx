@@ -25,7 +25,7 @@ class DefaultNode extends React.Component {
         groups: PropTypes.array,
         addToMap: PropTypes.func,
         showInfoBox: PropTypes.func,
-        expandIndicaPanel: PropTypes.func
+        configureIndicaLayer: PropTypes.func
     };
 
     static defaultProps = {
@@ -34,7 +34,7 @@ class DefaultNode extends React.Component {
         onToggle: () => {},
         toggleSiraControl: () => {},
         addToMap: () => {},
-        expandIndicaPanel: () => {}
+        configureIndicaLayer: () => {}
     };
 
     renderTools = () => {
@@ -69,7 +69,7 @@ class DefaultNode extends React.Component {
                         onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
                 </OverlayTrigger>));
             let indicaFunctions = this.props.node.functions.filter(
-                (func) => { return func.type === "Tematizzatore" || func.type === "Serie Storica";}
+                (func) => { return func.type === "Tematizzatore";}
             );
             if (indicaFunctions.length > 0) {
                 tools.push((
@@ -78,7 +78,7 @@ class DefaultNode extends React.Component {
                             style={glyphStyle}
                             key="toggle-indicatori"
                             glyph="signal"
-                            onClick={() => this.props.expandIndicaPanel(true, this.props.node.featureType)}/>
+                            onClick={() => this.props.configureIndicaLayer(this.props.node.featureType)}/>
                     </OverlayTrigger>));
             }
         }
@@ -101,6 +101,7 @@ class DefaultNode extends React.Component {
             </Node>
         );
     }
+
 }
 
 module.exports = DefaultNode;

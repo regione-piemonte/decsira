@@ -22,7 +22,6 @@ class SideIndicaPanel extends React.Component {
         header: PropTypes.string,
         datasetHeader: PropTypes.string,
         featureTypeNameLabel: PropTypes.string,
-        aggregation: PropTypes.string,
         tematizzatore: PropTypes.object,
         indicaform: PropTypes.object
     };
@@ -38,7 +37,6 @@ class SideIndicaPanel extends React.Component {
         header: "indicaform.form.header",
         datasetHeader: "indicaform.form.dataset_header",
         featureTypeNameLabel: "",
-        aggregation: "",
         tematizzatore: {},
         indicaform: {}
     };
@@ -134,8 +132,7 @@ export default connect((state) => {
     return {
         tematizzatore: activeConfig.tematizzatore,
         // SiraIndicaPanel prop
-        expanded: state.siradec.indicaConfigPanel.expanded,
-        aggregation: state.siradec.indicaConfigPanel.aggregation,
+        expanded: state.siradec.indicaConfigPanelExpanded,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
         indicaFilters: activeConfig.indicaFilters,

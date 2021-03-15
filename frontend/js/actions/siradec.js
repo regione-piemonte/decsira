@@ -14,7 +14,6 @@ const WAITING_FOR_CONFIG = 'WAITING_FOR_CONFIG';
 const QUERYFORM_CONFIG_LOADED = 'QUERYFORM_CONFIG_LOADED';
 const FEATURETYPE_CONFIG_LOADED = 'FEATURETYPE_CONFIG_LOADED';
 const EXPAND_FILTER_PANEL = 'EXPAND_FILTER_PANEL';
-const EXPAND_INDICA_PANEL = 'EXPAND_INDICA_PANEL';
 const CONFIGURE_INDICA_LAYER = 'CONFIGURE_INDICA_LAYER';
 const CLOSE_INDICA_CONFIGURATION = 'CLOSE_INDICA_CONFIGURATION';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
@@ -109,13 +108,6 @@ function configureFeatureInfo(config, featureType) {
 function expandFilterPanel(expand) {
     return {
         type: EXPAND_FILTER_PANEL,
-        expand: expand
-    };
-}
-
-function expandIndicaPanel(expand) {
-    return {
-        type: EXPAND_INDICA_PANEL,
         expand: expand
     };
 }
@@ -348,7 +340,6 @@ module.exports = {
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
-    EXPAND_INDICA_PANEL,
     CONFIGURE_INDICA_LAYER,
     CLOSE_INDICA_CONFIGURATION,
     QUERYFORM_CONFIG_LOAD_ERROR,
@@ -370,7 +361,6 @@ module.exports = {
     loadFeatureTypeConfig,
     configureQueryForm,
     expandFilterPanel,
-    expandIndicaPanel,
     configureIndicaLayer,
     closeIndicaConfiguration,
     configureQueryFormError,

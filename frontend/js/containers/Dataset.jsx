@@ -23,7 +23,6 @@ const {toggleSiraControl} = require('../actions/controls');
 const {
     // SiraQueryPanel action functions
     expandFilterPanel,
-    expandIndicaPanel,
     configureIndicaLayer,
     loadFeatureTypeConfig,
     setActiveFeatureType
@@ -77,17 +76,6 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
 
-const IndicaSelector = connect((state) => {
-    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
-    return {
-        show: state.siradec.indicaPanelExpanded,
-        tematizzatore: activeConfig.tematizzatore
-    };
-}, {
-    closePanel: expandIndicaPanel.bind(null, false),
-    configureLayer: configureIndicaLayer
-})(require('../components/indicatori/IndicaSelector').default);
-
 const AddMapModal = connect(({addmap = {}}) => ({
     error: addmap.error,
     records: addmap.records,
@@ -140,7 +128,7 @@ class Dataset extends React.Component {
         onToggle: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         expandFilterPanel: PropTypes.func,
-        expandIndicaPanel: PropTypes.func,
+        configureIndicaLayer: PropTypes.func,
         getMetadataObjects: PropTypes.func,
         selectSubCategory: PropTypes.func,
         subcat: PropTypes.string,
@@ -278,7 +266,7 @@ class Dataset extends React.Component {
                     <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
                             expandFilterPanel={this.openFilterPanel}
-                            expandIndicaPanel={this.openIndicaPanel}
+                            configureIndicaLayer={this.openIndicaPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
                             node={nodes}
@@ -288,7 +276,7 @@ class Dataset extends React.Component {
                     </DefaultGroup> :
                     <DefaultNode
                         expandFilterPanel={this.openFilterPanel}
-                        expandIndicaPanel={this.openIndicaPanel}
+                        configureIndicaLayer={this.openIndicaPanel}
                         toggleSiraControl={this.searchAll}
                         flat
                         showInfoBox={this.showInfoBox}
@@ -334,7 +322,6 @@ class Dataset extends React.Component {
                         <Footer/>
                     </div>
                 </div>
-                <IndicaSelector {...this.props.tematizzatore}/>
                 <MetadataInfoBox panelStyle={{
                     height: "500px",
                     width: "650px",
@@ -407,14 +394,14 @@ class Dataset extends React.Component {
         this.props.expandFilterPanel(status);
     };
 
-    openIndicaPanel = (status, ftType) => {
+    openIndicaPanel = (ftType) => {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
-        this.props.expandIndicaPanel(status);
+        this.props.configureIndicaLayer();
     };
 
     searchAll = (node) => {
@@ -472,7 +459,7 @@ module.exports = connect(datasetSelector, {
     showInfoBox: showBox,
     setProfile,
     expandFilterPanel,
-    expandIndicaPanel,
+    configureIndicaLayer,
     loadFeatureTypeConfig,
     setActiveFeatureType,
     toggleSiraControl,

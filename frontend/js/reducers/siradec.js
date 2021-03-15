@@ -11,7 +11,6 @@ const {
     QUERYFORM_CONFIG_LOADED,
     FEATURETYPE_CONFIG_LOADED,
     EXPAND_FILTER_PANEL,
-    EXPAND_INDICA_PANEL,
     CONFIGURE_INDICA_LAYER,
     CLOSE_INDICA_CONFIGURATION,
     QUERYFORM_CONFIG_LOAD_ERROR,
@@ -37,10 +36,7 @@ const uuid = require('uuid');
 const initialState = {
     waitingForConfig: null,
     filterPanelExpanded: false,
-    indicaPanelExpanded: false,
-    indicaConfigPanel: {
-        expanded: false
-    },
+    indicaConfigPanelExpanded: false,
     configOggetti: {
     },
     topology: null,
@@ -180,26 +176,14 @@ function siradec(state = initialState, action) {
             filterPanelExpanded: action.expand
         });
     }
-    case EXPAND_INDICA_PANEL: {
-        return assign({}, state, {
-            indicaPanelExpanded: action.expand
-        });
-    }
     case CONFIGURE_INDICA_LAYER: {
         return assign({}, state, {
-            indicaConfigPanel: {
-                expanded: true,
-                type: action.chartType,
-                aggregation: action.aggregation
-            },
-            indicaPanelExpanded: false
+            indicaConfigPanelExpanded: true
         });
     }
     case CLOSE_INDICA_CONFIGURATION: {
         return assign({}, state, {
-            indicaConfigPanel: {
-                expanded: false
-            }
+            indicaConfigPanelExpanded: false
         });
     }
     case QUERYFORM_CONFIG_LOAD_ERROR: {
