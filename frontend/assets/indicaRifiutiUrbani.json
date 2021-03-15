@@ -20,13 +20,13 @@
 				"type":"list",
 				"valueService": {
 				"urlParams": {
-				  "typeName": "decsiraogc_decodif:decsira_d_indica_risoluzione_spaziale",
-				  "propertyName": "id_ris_spaziale,des_ris_spaziale,ord_ris_spaz",
-				  "cql_filter": "id_ris_spaziale=1%20OR%20id_ris_spaziale=2%20OR%20id_ris_spaziale=3%20OR%20id_ris_spaziale=101",
-				  "sortBy": "ord_ris_spaz+A"
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_spaziale",
+				  "propertyName": "fk_ris_spaziale,des_ris_spaziale,ordinamento",
+				  "cql_filter": "fk_metadato=2001",
+				  "sortBy": "ordinamento+A"
 				}
 				},
-				"valueId":"id_ris_spaziale",
+				"valueId":"fk_ris_spaziale",
 				"valueLabel":"des_ris_spaziale"
 			},
 			{
@@ -37,12 +37,13 @@
 				"type":"list",
 				"valueService": {
 				"urlParams": {
-				  "typeName": "decsiraogc_decodif:decsira_d_indica_dimensioni",
-				  "propertyName": "id_dimensione,des_dimensione",
-				  "cql_filter": "id_dimensione=45%20OR%20id_dimensione=46%20OR%20id_dimensione=47%20OR%20id_dimensione=57%20OR%20id_dimensione=69%20OR%20id_dimensione=70%20OR%20id_dimensione=71"
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_dimensioni",
+				  "propertyName": "fk_dimensione,des_dimensione,ordinamento",
+				  "cql_filter": "fk_metadato=2001",
+				  "sortBy": "ordinamento+A"
 				}
 				},
-				"valueId":"id_dimensione",
+				"valueId":"fk_dimensione",
 				"valueLabel":"des_dimensione"
 			},
 			{
@@ -53,12 +54,13 @@
 				"type":"list",
 				"valueService": {
 				"urlParams": {
-				  "typeName": "decsiraogc_decodif:decsira_d_indica_risoluzione_temporale",
-				  "propertyName": "id_ris_temporale,des_ris_temporale,ord_ris_temp",
-				  "sortBy": "ord_ris_temp+A"
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_temporale",
+				  "propertyName": "fk_ris_temporale,des_ris_temporale,ordinamento",
+				  "cql_filter": "fk_metadato=2001",
+				  "sortBy": "ordinamento+A"
 				}
 				},
-				"valueId":"id_ris_temporale",
+				"valueId":"fk_ris_temporale",
 				"valueLabel":"des_ris_temporale"
 			},
 			{
@@ -69,13 +71,14 @@
 				"type":"list",
 				"valueService": {
 				"urlParams": {
-				  "typeName": "decsiraogc_decodif:decsira_d_indica_ambiti_temporali",
-				  "propertyName": "id_ambito_temporale,valore,anno",
-				  "sortBy": "anno+A,valore+A"
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ambiti_temporali",
+				  "propertyName": "fk_ris_temporale,fk_ambito_temporale,valore,anno,ordinamento",
+				  "cql_filter": "fk_metadato=2001",
+				  "sortBy": "ordinamento+A"
 				}
 				},
-				"valueId":"id_ambito_temporale",
-				"valueLabel":"id_ambito_temporale"
+				"valueId":"fk_ambito_temporale",
+				"valueLabel":"fk_ambito_temporale"
 			}
 	  ]
    },
