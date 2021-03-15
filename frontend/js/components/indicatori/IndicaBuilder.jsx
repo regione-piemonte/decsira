@@ -75,6 +75,7 @@ function IndicaBuilder({
 
     wmsLayer.type = "wmspost";
     wmsLayer.CRS = 'EPSG:32632';
+    wmsLayer.opacity = 0.7;
 
     React.useEffect(() => {
         // console.log("IndicaBuilder MOUNT");
@@ -245,7 +246,9 @@ function IndicaBuilder({
         setFormTouched(true);
         switch (evt.param) {
         case "intervals":
-            setIntervals(evt.value);
+            if (evt.value >= 3 && evt.value <= 10) {
+                setIntervals(evt.value);
+            }
             break;
         case "classification":
             setClassification(evt.value);

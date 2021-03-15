@@ -178,8 +178,7 @@ class SiraGrid extends React.Component {
         if (this.props.pagination && this.props.gridType === 'search') {
             this.dataSource = this.getDataSource(this.props.dataSourceOptions);
         } else if ( this.props.pagination && this.props.gridType === 'all_results' && this.props.attributes[0]) {
-            let newFilter = FilterUtils.getOgcAllPropertyValue(this.props.featureTypeName, this.props.attributes[0].attribute);
-            this.props.onConfigureQuery(this.props.searchUrl, newFilter, this.props.params, {
+            this.props.onConfigureQuery({
                 "maxFeatures": this.props.dataSourceOptions.pageSize || 20,
                 "startIndex": 0
             });

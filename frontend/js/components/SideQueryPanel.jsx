@@ -337,9 +337,7 @@ class SideQueryPanel extends React.Component {
             FilterUtils.toOGCFilter(filterObj.featureTypeName, filterObj, filterObj.ogcVersion, filterObj.sortOptions, filterObj.hits) :
             FilterUtils.toCQLFilter(filterObj);
         if (this.props.pagination && (this.props.pagination.startIndex || this.props.pagination.startIndex === 0)) {
-            let newFilter = filter.replace("<wfs:GetFeature", "<wfs:GetPropertyValue valueReference='" + this.props.attributes[0].attribute + "' ");
-            newFilter = newFilter.replace("</wfs:GetFeature", "</wfs:GetPropertyValue");
-            this.props.queryFormActions.queryToolbarActions.onQueryPagination(url, newFilter, params, this.props.pagination);
+            this.props.queryFormActions.queryToolbarActions.onQueryPagination(this.props.pagination);
         } else {
             this.props.queryFormActions.queryToolbarActions.onQuery(url, filter, params);
         }
