@@ -212,7 +212,7 @@ module.exports = connect((state) => {
     return {
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         gridExpanded: state.siraControls.grid,
-        indicaConfigPanelExpanded: state.siradec.indicaConfigPanel.expanded,
+        indicaConfigPanelExpanded: state.siradec.indicaConfigPanelExpanded,
         fTypeConfigLoading: state.siradec.fTypeConfigLoading,
         siraActiveConfig: activeConfig,
         layers: state.layers.flat,

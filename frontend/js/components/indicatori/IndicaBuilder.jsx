@@ -459,16 +459,16 @@ export default connect((state) => {
     if (activeConfig.indicaFilters) {
         let filters = activeConfig.indicaFilters;
         risSp = filters[0].values.map((att) => {
-            return { id: att.id_ris_spaziale, value: att.des_ris_spaziale };
+            return { id: att.fk_ris_spaziale, value: att.des_ris_spaziale };
         });
         dim = filters[1].values.map((att) => {
-            return { id: att.id_dimensione, value: att.des_dimensione };
+            return { id: att.fk_dimensione, value: att.des_dimensione };
         });
         period = filters[2].values.map((att) => {
-            return { id: att.id_ris_temporale, value: att.des_ris_temporale };
+            return { id: att.fk_ris_temporale, value: att.des_ris_temporale };
         });
         dettPer = filters[3].values.map((att) => {
-            return { fk_ris_temporale: att.fk_ris_temporale, id: att.id_ambito_temporale, value: att.valore ? att.valore + " - " + att.anno : att.anno };
+            return { fk_ris_temporale: att.fk_ris_temporale, id: att.fk_ambito_temporale, value: att.valore ? att.valore + " - " + att.anno : att.anno };
         });
     }
 

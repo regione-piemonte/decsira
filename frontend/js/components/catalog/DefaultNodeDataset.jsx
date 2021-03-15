@@ -26,7 +26,11 @@ class DefaultNode extends React.Component {
         addToMap: PropTypes.func,
         flat: PropTypes.bool,
         showInfoBox: PropTypes.func,
-        expandIndicaPanel: PropTypes.func
+        configureIndicaLayer: PropTypes.func
+    };
+
+    static contextTypes = {
+        router: PropTypes.object
     };
 
     static defaultProps = {
@@ -38,7 +42,7 @@ class DefaultNode extends React.Component {
         onToggle: () => {},
         toggleSiraControl: () => {},
         addToMap: () => {},
-        expandIndicaPanel: () => {}
+        configureIndicaLayer: () => {}
     };
 
     renderTools = () => {
@@ -75,7 +79,7 @@ class DefaultNode extends React.Component {
                         onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
                 </OverlayTrigger>));
             let indicaFunctions = this.props.node.functions.filter(
-                (func) => {return func.type === "Tematizzatore" || func.type === "Serie Storica";}
+                (func) => {return func.type === "Tematizzatore";}
             );
             if (indicaFunctions.length > 0) {
                 tools.push((
@@ -84,7 +88,7 @@ class DefaultNode extends React.Component {
                             style={glyphStyle}
                             key="toggle-indicatori"
                             glyph="signal"
-                            onClick={() => this.props.expandIndicaPanel(true, this.props.node.featureType)}/>
+                            onClick={() => this.configureIndicaLayer(this.props.node.featureType)}/>
                     </OverlayTrigger>));
             }
         }
@@ -112,6 +116,15 @@ class DefaultNode extends React.Component {
             </Node>
         );
     }
+
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
+    configureIndicaLayer = (featureType) => {
+        this.props.configureIndicaLayer(featureType);
+        this.goMap();
+    };
 
     showInfoBox = () => {
         this.props.showInfoBox(this.props.node.id);
