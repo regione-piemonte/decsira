@@ -55,13 +55,18 @@ class TreeData extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
+        /*
         if (this.props.featureId !== newProps.featureId) {
             this.loadDataForTree(newProps);
         } else {
             this.props.treeDataLoading(false);
+        }*/
+
+        if (this.props.treeData !== null && this.props.treeData !== undefined && this.props.loading) {
+            this.loadDataForTree(newProps);
+            this.props.treeDataLoading(false);
         }
     }
-
 
     onSelect = (selectedKeys, info) => {
         let selectedData = this.searchKey(this.props.treeData[0], info.node.props.eventKey);
@@ -89,7 +94,7 @@ class TreeData extends React.Component {
                         info
                     };
                     this.props.setWaitingForConfig(waitingForConfig);
-                    this.props.loadFeatureTypeConfig(null, {authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : ''}, featureType, false, false, null, false, null, false, (detailsConfig = {})=>{
+                    this.props.loadFeatureTypeConfig(null, { authkey: this.authParams && this.authParams.authkey ? this.authParams.authkey : '' }, featureType, false, false, null, false, null, false, (detailsConfig = {}) => {
                         this.loadCardTemplate(detailsConfig, cqlFilter);
                     });
                 }
@@ -138,24 +143,10 @@ class TreeData extends React.Component {
         };
         const treeNodes = this.props.treeData ? loop(this.props.treeData) : [];
 
-        const getKeys = (data) => {
-            return data.reduce(function(acc, o) {
-                let ret = acc;
-                if (o.key) {
-                    ret.push(o.key);
-                }
-                if (o.children) {
-                    ret = ret.concat(getKeys(o.children));
-                }
-                return ret;
-            }, []);
-        };
-        const expandedKeys = this.props.treeData ? getKeys(this.props.treeData) : [];
-
         return (
             <Tree showLine
                 showIcon={false}
-                defaultExpandedKeys={expandedKeys}
+                defaultExpandAll
                 onSelect={this.onSelect}>
                 {treeNodes}
             </Tree>);
