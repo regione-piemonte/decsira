@@ -10,7 +10,7 @@ const DebugUtils = require('@mapstore/utils/DebugUtils').default;
 const {combineReducers} = require('@mapstore/utils/PluginsUtils');
 const {connectRouter} = require( 'connected-react-router');
 const history  = require( '@mapstore/stores/History').default;
-
+const SiraUtils = require('../utils/SiraUtils');
 const SecurityUtils = require('@mapstore/utils/SecurityUtils');
 const assign = require('object-assign');
 module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {}, plugins) => {
@@ -39,5 +39,6 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
     let store;
     store = DebugUtils.createDebugStore(rootReducer, defaultState);
     SecurityUtils.setStore(store);
+    SiraUtils.setStore(store);
     return store;
 };
