@@ -29,7 +29,7 @@ const {
 
 require('react-resizable/css/styles.css');
 require('./SiraFeatureGrid.css');
-
+const {setCurrentFeatureRowData} = require('../actions/featuregrid');
 module.exports = connect((state) => {
     const activeConfig = state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
@@ -62,5 +62,6 @@ module.exports = connect((state) => {
     onQuery: loadFeaturesWithPagination,
     onConfigureQuery: loadGridModelWithPagination,
     cleanError: configureGridError,
-    setExportParams
+    setExportParams,
+    setFeatureRowData: setCurrentFeatureRowData
 })(require('./FeatureGrid'));
