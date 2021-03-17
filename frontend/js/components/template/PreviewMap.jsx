@@ -55,57 +55,8 @@ class PreviewMap extends React.Component {
         }
     }
 
-    fillUrl = (layer) => {
-        if (layer.url) {
-            return assign({}, layer, {
-                url: layer.url.replace("{geoserverUrl}", ConfigUtils.getConfigProp('geoserverUrl'))
-            });
-        }
-        return layer;
-    };
-
-    render() {
-        const extent = this.getExtent();
-        const zoom = this.getZoom(extent);
-        const center = this.getCenter(extent);
-        return this.props.map && this.props.center && this.props.center.coordinates ?
-            (
-                <div>
-                    <PMap
-                        ref="mappa"
-                        {...this.props.map}
-                        style={this.props.style}
-                        mapOptions={{interactions: {
-                            doubleClickZoom: false,
-                            dragPan: false,
-                            altShiftDragRotate: false,
-                            keyboard: false,
-                            mouseWheelZoom: false,
-                            shiftDragZoom: false,
-                            pinchRotate: false,
-                            pinchZoom: false
-                        }, view: {resolutions: this.props.map.resolutions}}}
-                        registerHooks={false}
-                        zoomControl={false}
-                        zoom={zoom}
-                        center={center}
-                        id="scheda_pMap">
-                        {
-                            this.props.layers.map((layer, index) =>
-                                <Layer key={layer.title || layer.name} position={index} type={layer.type}
-                                    options={assign({}, this.fillUrl(layer), {params: {authkey: this.props.authParam && this.props.authParam.authkey ? this.props.authParam.authkey : ''}})}/>
-                            )
-                        }
-                    </PMap>
-                    <Button onClick={this.changeMapView} style={{position: "relative", top: "-" + this.props.style.height, 'float': "right", margin: "2px"}}>
-                        <img src={img} width={16}/>
-                    </Button>
-                </div>
-            ) : <span/>;
-    }
-
     getExtent = () => {
-        const geometries = [this.props.center];
+        const geometries = [this.props.center] || [];
         return geometries.reduce((prev, next) => {
             return CoordinatesUtils.extendExtent(prev, CoordinatesUtils.getGeoJSONExtent(next));
         }, CoordinatesUtils.getGeoJSONExtent(geometries[0]));
@@ -126,6 +77,53 @@ class PreviewMap extends React.Component {
         }, 0, 16);
     }
 
+    render() {
+
+        const extent = this.props.center && this.getExtent();
+        return this.props.map ?
+            (
+                <div>
+                    <PMap
+                        ref="mappa"
+                        {...this.props.map}
+                        style={this.props.style}
+                        mapOptions={{interactions: {
+                            doubleClickZoom: false,
+                            dragPan: false,
+                            altShiftDragRotate: false,
+                            keyboard: false,
+                            mouseWheelZoom: false,
+                            shiftDragZoom: false,
+                            pinchRotate: false,
+                            pinchZoom: false
+                        }, view: {resolutions: this.props.map.resolutions}}}
+                        registerHooks={false}
+                        zoomControl={false}
+                        {...(extent && {zoom: this.getZoom(extent), center: this.getCenter(extent)})}
+                        id="scheda_pMap">
+                        {
+                            this.props.layers.map((layer, index) =>
+                                <Layer key={layer.title || layer.name} position={index} type={layer.type}
+                                    options={assign({}, this.fillUrl(layer), {params: {authkey: this.props.authParam && this.props.authParam.authkey ? this.props.authParam.authkey : ''}})}/>
+                            )
+                        }
+                    </PMap>
+                    {extent && <Button onClick={this.changeMapView} style={{position: "relative", top: "-" + this.props.style.height, 'float': "right", margin: "2px"}}>
+                        <img alt="zoom-to" src={img} width={16}/>
+                    </Button>}
+                </div>
+            ) : <span/>;
+    }
+
+    fillUrl = (layer) => {
+        if (layer.url) {
+            return assign({}, layer, {
+                url: layer.url.replace("{geoserverUrl}", ConfigUtils.getConfigProp('geoserverUrl'))
+            });
+        }
+        return layer;
+    };
+
     changeMapView = () => {
         const extent = this.getExtent();
         const center = this.getCenter(extent);
@@ -140,7 +138,7 @@ class PreviewMap extends React.Component {
 
 module.exports = connect((state) => {
     return {
-        map: (state.map && state.map && state.map.present) || (state.config && state.config.map),
+        map: (state.map && state.map.present) || (state.config && state.config.map),
         activeSections: state.cardtemplate.activeSections || {}
     };
 }, {
