@@ -406,6 +406,8 @@ class SiraGrid extends React.Component {
                         searchUrl={this.props.searchUrl}
                         params={this.props.params}
                         csvMimeType={this.props.exportCsvMimeType}
+                        totalFeatures={this.props.totalFeatures}
+                        maxFeatures={this.props.maxFeatures}
                     />
                     {this.renderDatasetHeader()}
                     <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>

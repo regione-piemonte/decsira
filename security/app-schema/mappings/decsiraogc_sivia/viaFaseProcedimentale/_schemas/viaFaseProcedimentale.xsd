@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_sivia="http://www.regione.piemonte.it/ambiente/decsiraogc_sivia/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_sivia/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- qui estendono gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_sivia_fase_procedura  id= pk(id_fase) -->
+	<element name="FaseProcedura" substitutionGroup="gml:AbstractFeature" type="decsiraogc_sivia:FaseProceduraType"/>
+	
+	<!-- decsira_t_sivia_soggetto_proponente id= id_soggetto_prop (pk)  -->
+	<element name="SoggettoProponente" substitutionGroup="gml:AbstractObject" type="decsiraogc_sivia:SoggettoProponenteType"/>
+	
+    <!-- decsira_t_sivia_categoria_fase id = id_fase -->
+	<element name="CategoriaFase" substitutionGroup="gml:AbstractObject" type="decsiraogc_sivia:CategoriaFaseType"/>
+	
+	<!-- decsira_t_sivia_localizzazione id = id_opera_comune (pk) -->
+	<element name="Localizzazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_sivia:LocalizzazioneType"/>
+	
+	<!-- decsira_t_sivia_area_protetta id = id_area_protetta (pk) -->
+	<element name="AreaProtetta" substitutionGroup="gml:AbstractObject" type="decsiraogc_sivia:AreaProtettaType"/>
+	
+	<!-- decsira_t_sivia_siti_natura id = id_sito (pk) -->
+	<element name="SitoNatura" substitutionGroup="gml:AbstractObject" type="decsiraogc_sivia:SitoNaturaType"/>
+	
+	
+	<!-- types -->
+	<!-- qui estendono gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	
+	<complexType name="FaseProceduraType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+					<xs:element minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+							<xs:element minOccurs="1" name="idProgetto" type="xs:integer"/>
+					<xs:element minOccurs="1" name="flagStatoProgetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="autoritCompetente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="noteProg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="listaComuniProg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="listaProvinceProg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="listaCategorie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="idOperaProg" type="xs:integer"/>
+					<xs:element minOccurs="0" name="desEsitoProg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="idEsitoProg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="dataUltimaModifProg" type="xs:date"/>
+					<xs:element minOccurs="1" name="idTipoProgetto" type="xs:integer"/>
+					<xs:element minOccurs="1" name="desTipoProgetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="desTipoEnte">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="titoloProgetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="descrizioneProgetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="flgNuovaOpera">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="localitaProgetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="flgValutIncidenza">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="flgOperaLeggeObiettivo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="dataUltimaModificaOpera" type="xs:date"/>
+					<xs:element minOccurs="1" name="flgMultiFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="idFaseProcedura" type="xs:integer"/>
+					<xs:element minOccurs="1" name="codiceFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="tipologiaFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="desTipologiaFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="idEsitoFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="desEsitoFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="flgStatoProceduraFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="noteVia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="scadenzaOsservazPub" type="xs:date"/>
+					<xs:element minOccurs="0" name="scadenzaTermini" type="xs:date"/>
+					<xs:element minOccurs="1" name="annoRegistro" type="xs:integer"/>
+					<xs:element minOccurs="1" name="numRegistro" type="xs:integer"/>
+					<xs:element minOccurs="1" name="dataProtIstanza" type="xs:date"/>
+					<xs:element minOccurs="0" name="numProtIstanza" type="xs:integer"/>
+					<xs:element minOccurs="1" name="dataUltimaModifFase" type="xs:date"/>
+					<xs:element minOccurs="0" name="gestoreNatura2000">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="500"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="respProcedValutIncidenza">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="100"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="pubWebValutIncidenza">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="4"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="noteValutIncidenza">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="500"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="preScreeningValutIncidenza">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="idOrganoTecnico" type="xs:integer"/>
+					<xs:element minOccurs="0" name="vicarioNucleoOrgTec">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="rappresentanteNucleoOrgTec">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="denomDirezioneRespOrgTec">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="settoreResponsOrgTec">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="200"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="0" name="responsProcedimentoOrgTec">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="30"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="1" name="geomPt">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="1" name="geomLn">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<xs:element minOccurs="1" name="geomPl">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="2"/>
+								</xs:restriction>
+							</xs:simpleType>
+				    </xs:element>
+					<!-- innesti di primo livello-->
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="soggettoProponente" type="decsiraogc_sivia:SoggettoProponentePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="categoriaFase" type="decsiraogc_sivia:CategoriaFasePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="localizzazione" type="decsiraogc_sivia:LocalizzazionePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="areaProtetta" type="decsiraogc_sivia:AreaProtettaPropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="sitoNatura" type="decsiraogc_sivia:SitoNaturaPropertyType"/>
+			
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="SoggettoProponenteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="idSoggettoProponente" type="xs:integer"/>
+					<xs:element minOccurs="1" name="idsoggPropProgetto" type="xs:integer"/>
+					<xs:element minOccurs="1" name="idsoggPropFase" type="xs:integer"/>
+					<xs:element minOccurs="1" name="idsoggPropOpera" type="xs:integer"/>
+					<xs:element minOccurs="1" name="soggPropTipo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropDenominazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropCodiceFiscale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropPartitaIva">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropIndirizzo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="60"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropCap">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="soggPropProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="CategoriaFaseType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idCategFase">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				    <xs:element minOccurs="0" name="idFase" type="xs:integer"/>
+					<xs:element minOccurs="0" name="idProgetto" type="xs:integer"/>
+					<xs:element minOccurs="0" name="idOpera" type="xs:integer"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="idCatOriginale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoCategoria">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="idCategoria">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="desCategoria">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="catDesConcatenata">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	
+	<complexType name="LocalizzazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idOperaComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+				    <xs:element minOccurs="1" name="idProgetto" type="xs:integer"/>
+					<xs:element minOccurs="0" name="istatComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="desComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="60"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="desProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="frazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	
+	
+	<complexType name="AreaProtettaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idAreaProtetta" type="xs:integer"/>
+				    <xs:element minOccurs="1" name="idProgetto" type="xs:integer"/>
+					<xs:element minOccurs="1" name="idFaseProcedura" type="xs:integer"/>
+					<xs:element minOccurs="0" name="idParco" type="xs:integer"/>
+					<xs:element minOccurs="0" name="desAreaParco">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="150"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="SitoNaturaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idSito" type="xs:integer"/>
+				    <xs:element minOccurs="1" name="idProgetto" type="xs:integer"/>
+					<xs:element minOccurs="1" name="idFaseProcedura" type="xs:integer"/>
+					<xs:element minOccurs="0" name="codiceSito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="12"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="desSito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="0" name="flgTipo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	
+	
+	<!-- property types -->
+	
+	<complexType name="SoggettoProponentePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_sivia:SoggettoProponente"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="CategoriaFasePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_sivia:CategoriaFase"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="LocalizzazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_sivia:Localizzazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="AreaProtettaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_sivia:AreaProtetta"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="SitoNaturaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_sivia:SitoNatura"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	</schema>
