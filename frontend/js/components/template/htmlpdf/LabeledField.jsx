@@ -26,7 +26,8 @@ class LabeledField extends React.Component {
     };
 
     renderDate = (value, dateFormat) => {
-        const date = new Date(value);
+        const valueOk = value !== null && value !== undefined && value.indexOf('Z') !== -1 ? value.replace('Z', '') : value;
+        const date = new Date(valueOk);
         return !isNaN(date.getTime()) ? (<FormattedDate locales={this.props.locale} value={date} {...dateFormat} />) : (<span/>);
     };
 
