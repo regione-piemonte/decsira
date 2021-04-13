@@ -82,13 +82,25 @@ function getFeatures(url, filter, featuregrid) {
                         }
                         f.geometry.coordinates = coordinates;
                     } else {
-                        f.geometry = null;
+                        f.geometry.coordinates = null;
+                    }
+                } else if (featuregrid.grid.geometryType === "LineString") {
+                    let coordinates = [];
+                    if (geometry && geometry.coordinates.length > 0) {
+                        for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                            let coords = featuregrid.grid.wfsVersion === "1.1.0" ?
+                                [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
+                            coordinates.push(coords);
+                        }
+                        f.geometry.coordinates = coordinates;
+                    } else {
+                        f.geometry.coordinates = null;
                     }
                 } else if (featuregrid.grid.geometryType === "Point") {
                     f.geometry.coordinates = geometry ? [geometry.coordinates[0][0], geometry.coordinates[0][1]] : null;
                 }
                 return f;
-            }).filter(f => f.geometry);
+            });
             return features;
         }
         throw new Error("GeoServer Exception, query fallita!");

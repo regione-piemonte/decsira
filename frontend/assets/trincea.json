@@ -11,14 +11,6 @@
         "title": "Prese da trincea",
         "name": "decsiraogc_operecaptazione:TrinceaDrenante",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
-        "topologyConfig": {
-            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
-            "wfsVersion": "1.1.0",
-            "layerName": "ZONES_IPR",
-            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
-            "geomAttribute": "msGeometry",
-            "geometryType": "Polygon"
-        },
         "featureType": "trincea",
         "group": "Oggetti",
         "format": "image/png"
@@ -26,6 +18,8 @@
    "geometryName": "geomTrincea",
    "geometryType": "LineString",
    "card": {
+	"featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante",
+    "geometryPath": "decsiraogc_operecaptazione:geomTrincea/gml:LineString/gml:posList/text()",
     "pdfname": "Scheda_Trincea_{{/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:TrinceaDrenante/decsiraogc_operecaptazione:idTrinceaDren/text()}}.pdf",
      "template": "assets/cardTemplateTrincea.jsxt",
      "treeTemplate": "assets/treeTemplateTrincea.jsxt",
@@ -138,7 +132,7 @@
          {
            "hide": true,
            "headerName": "Geometry",
-           "xpath": ["decsiraogc_operecaptazione:geomTrincea/gml:MultiCurve/gml:curveMember/gml:LineString/gml:posList/text()"],
+           "xpath": ["decsiraogc_operecaptazione:geomTrincea/gml:LineString/gml:posList/text()"],
            "type": 6
          }
        ],

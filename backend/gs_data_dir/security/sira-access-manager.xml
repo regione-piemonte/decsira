@@ -1144,7 +1144,7 @@
 		<priority>620</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_derivazioni</workspace>
-		<layer>Derivazione </layer>
+		<layer>Derivazione</layer>
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_derivazioni:fkStato" = '9' OR "decsiraogc_derivazioni:fkStato" = '5'</filter>  
 		<hiddenAttributes>
@@ -1155,8 +1155,15 @@
 		 <attribute>decsiraogc_derivazioni:numProvv</attribute>
 		 <attribute>decsiraogc_derivazioni:flgSovracanone</attribute>
 		 <attribute>decsiraogc_derivazioni:flgRivieraschi</attribute>
+		 <attribute>decsiraogc_derivazioni:flgUsoPromiscuo</attribute>
 		 <attribute>decsiraogc_derivazioni:dataAutorizProvv</attribute>
 		 <attribute>decsiraogc_derivazioni:dataScadenzaProvv</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoUsiEffettivi</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoComuniDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:flgMisuratore</attribute>
+		 <attribute>decsiraogc_derivazioni:desStatoAutorizzazione</attribute>
+		 <attribute>decsiraogc_derivazioni:noteDerivazione</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:desTipoSoggetto</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:cfTitDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:pivaTitDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:provinciaTitDeriv</attribute>
@@ -1164,6 +1171,7 @@
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:indirizzoTitDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:telefonoTitDeriv</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:emailpecTitDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:desTipoSoggettoRaggr</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:cfTitDerivRaggr</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:pivaTitDerivRaggr</attribute>
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:provinciaTitDerivRaggr</attribute>
@@ -1173,7 +1181,23 @@
 		 <attribute>decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:componentiRaggruppamento/decsiraogc_derivazioni:ComponentiRaggruppamento/decsiraogc_derivazioni:emailpecTitDerivRaggr</attribute>
 		 <attribute>decsiraogc_derivazioni:sovracanoneDerivazione/decsiraogc_derivazioni:SovracanoneDerivazione/decsiraogc_derivazioni:codIstatComusovra</attribute>
 		 <attribute>decsiraogc_derivazioni:sovracanoneDerivazione/decsiraogc_derivazioni:SovracanoneDerivazione/decsiraogc_derivazioni:toponimoComusovra</attribute>
+		 <attribute>decsiraogc_derivazioni:acquedottiDerivazione/decsiraogc_derivazioni:AcquedottiDerivazione/decsiraogc_derivazioni:denomAcquedottoDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:codiceSiraUso</attribute>
 		 <attribute>decsiraogc_derivazioni:usiDerivazione/decsiraogc_derivazioni:UsiDerivazione/decsiraogc_derivazioni:elencoUsiUsiEffettivi</attribute>
+		 <attribute>decsiraogc_derivazioni:periodiUtilizzoUsi/decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:idUsoTipouso</attribute>
+		 <attribute>decsiraogc_derivazioni:periodiUtilizzoUsi/decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:inizioPeriodoUso</attribute>
+		 <attribute>decsiraogc_derivazioni:periodiUtilizzoUsi/decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:finePeriodoUso</attribute>
+		 <attribute>decsiraogc_derivazioni:periodiUtilizzoUsi/decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:qMaxPeriodoUso</attribute>
+		 <attribute>decsiraogc_derivazioni:periodiUtilizzoUsi/decsiraogc_derivazioni:PeriodiUtilizzoUsi/decsiraogc_derivazioni:qMedPeriodoUso</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:desCollocEnerg</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:energPaEner</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIncavernaRiqual</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:energPaRiqual</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgBoccaNontassataAgric</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigScorrimAgric</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigAspersAgric</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigMicroirrAgric</attribute>
+		 <attribute>decsiraogc_derivazioni:datiSpecificiUsoDerivazione/decsiraogc_derivazioni:DatiSpecificiUsoDerivazione/decsiraogc_derivazioni:flgIrrigSommersAgric</attribute>
 		</hiddenAttributes>	
     </Rule>
 
@@ -1189,7 +1213,51 @@
 		 <attribute>decsiraogc_operecaptazione:desAreaIdroPozzo</attribute>
 		 <attribute>decsiraogc_operecaptazione:desBacIdroPozzo</attribute>
 		 <attribute>decsiraogc_operecaptazione:dataCostruzionePozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodutenzaPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivNclasPratPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodrilPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgMisuratorePozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:quotaPCPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgCampoPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgPozzoArtesiano</attribute>
+		 <attribute>decsiraogc_operecaptazione:DenomImpAcqPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:DenomAcquedPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDispStratPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDispMisPiezoPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:NumPiezAssocPozzo</attribute>	 
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:codiceRilievoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:desStatoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:periodoPrelievoDa</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:periodoPrelievoA</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:portataMaxDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:portataMedDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPozzo/decsiraogc_operecaptazione:PrelievoPerUtenzaPozzo/decsiraogc_operecaptazione:volumeMaxConcessione</attribute>
+		 <attribute>decsiraogc_operecaptazione:diamColonPozzo/decsiraogc_operecaptazione:DiamColonPozzo/decsiraogc_operecaptazione:diametroDiamcolonPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:diamColonPozzo/decsiraogc_operecaptazione:DiamColonPozzo/decsiraogc_operecaptazione:profonditaDaDiamcolonPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:diamColonPozzo/decsiraogc_operecaptazione:DiamColonPozzo/decsiraogc_operecaptazione:profonditaADiamcolonPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:cementazionePozzo/decsiraogc_operecaptazione:CementazionePozzo/decsiraogc_operecaptazione:desMaterCementazPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:cementazionePozzo/decsiraogc_operecaptazione:CementazionePozzo/decsiraogc_operecaptazione:profonditaDaCementazPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:cementazionePozzo/decsiraogc_operecaptazione:CementazionePozzo/decsiraogc_operecaptazione:profonditaACementazPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:drenoPozzo/decsiraogc_operecaptazione:DrenoPozzo/decsiraogc_operecaptazione:profonditaDaDrenoPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:drenoPozzo/decsiraogc_operecaptazione:DrenoPozzo/decsiraogc_operecaptazione:profonditaADrenoPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:filtroPozzo/decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desTipoFiltro</attribute>
+		 <attribute>decsiraogc_operecaptazione:filtroPozzo/decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:aperturaFiltro</attribute>
+		 <attribute>decsiraogc_operecaptazione:filtroPozzo/decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaDaFiltro</attribute>
+		 <attribute>decsiraogc_operecaptazione:filtroPozzo/decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:profonditaAFiltro</attribute>
+		 <attribute>decsiraogc_operecaptazione:filtroPozzo/decsiraogc_operecaptazione:FiltroPozzo/decsiraogc_operecaptazione:desOrigineDatoFiltro</attribute> 
 		 <attribute>decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:classificazionePratica</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungGradiniPozzo/decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:dataMisuraEmunggradiniPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungGradiniPozzo/decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:soggEsecutEmunggradiniPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungGradiniPozzo/decsiraogc_operecaptazione:EmungGradiniPozzo/decsiraogc_operecaptazione:qCriticaEmunggradiniPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungDurataPozzo/decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:dataMisuraEmungdurataPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungDurataPozzo/decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:soggEsecutEmungdurataPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungDurataPozzo/decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:qCostanteEmungdurataPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungDurataPozzo/decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:durataEmungdurataPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungDurataPozzo/decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:trasmissivitaEmungdurataPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:emungDurataPozzo/decsiraogc_operecaptazione:EmungDurataPozzo/decsiraogc_operecaptazione:coeffImmagEmungdurataPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:pompaIdraulPozzo/decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:potenzaMotorePompaidrPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:pompaIdraulPozzo/decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:qMaxPompaidrPozzo</attribute>
+		 <attribute>decsiraogc_operecaptazione:pompaIdraulPozzo/decsiraogc_operecaptazione:PompaIdraulPozzo/decsiraogc_operecaptazione:prevalenzaPompaidrPozzo</attribute>
 		</hiddenAttributes>	
     </Rule>
 	
@@ -1200,6 +1268,20 @@
 		<layer>Fontanile</layer>
 		<accessMode>READ</accessMode>
 		<filter>("decsiraogc_operecaptazione:fkStatoFontanile" = '100' OR "decsiraogc_operecaptazione:fkStatoFontanile" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileFontanile" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivNclasPratFontanile</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodrilFontanile</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgMisuratoreFontanile</attribute>
+		 <attribute>decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:classificazionePratica</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:codiceRilievoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:desStatoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:periodoPrelievoDa</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:periodoPrelievoA</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:portataMaxDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:portataMedDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaFontanile/decsiraogc_operecaptazione:PrelievoPerUtenzaFontanile/decsiraogc_operecaptazione:volumeMaxConcessione</attribute>
+		</hiddenAttributes>	
     </Rule>
 	
 	<Rule>
@@ -1218,6 +1300,42 @@
 		<layer>Presa</layer>
 		<accessMode>READ</accessMode>
 		<filter>("decsiraogc_operecaptazione:fkStatoPresa" = '100' OR "decsiraogc_operecaptazione:fkStatoPresa" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabilePresa" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_operecaptazione:codiceSIIPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:desBacIdroPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:desBacIdromontPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:desAreaIdroPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:desTipoSbarrPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:volumeMaxInvasoPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgScalaPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:denomImpAcqPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:denomAcquedPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:progAstaPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodutenzaPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivNclasPratPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodrilPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:denomCidrsupPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgMisuratorePresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgGalleriaFiltrPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgCaptSubalveoPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDaCanalePresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDispositiviPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDerogaDMVPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:ulterioriObblighiPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:altezzaPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:desTipoScalaPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:desSpondaScalaPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgObblighiIttPresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:specieItticheIttichePresa</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:codiceRilievoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:desStatoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:periodoPrelievoDa</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:periodoPrelievoA</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:portataMaxDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:portataMedDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaPresa/decsiraogc_operecaptazione:PrelievoPerUtenzaPresa/decsiraogc_operecaptazione:volumeMaxConcessione</attribute>
+		 <attribute>decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:classificazionePratica</attribute>
+		</hiddenAttributes>
     </Rule>
 	
 	<Rule>
@@ -1236,6 +1354,31 @@
 		<layer>Sorgente</layer>
 		<accessMode>READ</accessMode>
 		<filter>("decsiraogc_operecaptazione:fkStatoSorgente" = '100' OR "decsiraogc_operecaptazione:fkStatoSorgente" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileSorgente" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_operecaptazione:codiceSIISorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:desTipoSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:desAreaIdroSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:desBacIdroSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodutenzaSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivNclasPratSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodrilSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgMisuratoreSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:quotaPianoCSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:denomImpAcqSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:denomAcquedSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDispositiviSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgDerogaDMVSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:ulterioriObblighiSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgTributariaSorgente</attribute>
+		 <attribute>decsiraogc_operecaptazione:sorgenteDerivazione/decsiraogc_operecaptazione:SorgenteDerivazione/decsiraogc_operecaptazione:classificazionePratica</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:codiceRilievoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:desStatoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoDa</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:periodoPrelievoA</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:portataMaxDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:portataMedDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaSorgente/decsiraogc_operecaptazione:PrelievoPerUtenzaSorgente/decsiraogc_operecaptazione:volumeMaxConcessione</attribute>
+		</hiddenAttributes>
     </Rule>
 	
 	<Rule>
@@ -1254,6 +1397,51 @@
 		<layer>TrinceaDrenante</layer>
 		<accessMode>READ</accessMode>
 		<filter>("decsiraogc_operecaptazione:fkStatoTrincea" = '100' OR "decsiraogc_operecaptazione:fkStatoTrincea" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileTrincea" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_operecaptazione:desAreaIdroTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:desBacIdroTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodutenzaTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivNclasPratTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:elencoDerivCodrilTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:flgMisuratoreTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:svilLongTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:inclinazioneTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:profMaxTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:profMinTrincea</attribute>
+		 <attribute>decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:classificazionePratica</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaTrincea/decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:codiceRilievoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaTrincea/decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:desStatoDeriv</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaTrincea/decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:periodoPrelievoA</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaTrincea/decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:portataMaxDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaTrincea/decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:portataMedDerivata</attribute>
+		 <attribute>decsiraogc_operecaptazione:prelievoPerUtenzaTrincea/decsiraogc_operecaptazione:PrelievoPerUtenzaTrincea/decsiraogc_operecaptazione:volumeMaxConcessione</attribute>
+		</hiddenAttributes>
+    </Rule>
+	
+	<Rule>
+		<priority>629</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_derivazioni</workspace>
+		<layer>Restituzione</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_derivazioni:fkStatoRestituzione" = '100' OR "decsiraogc_derivazioni:fkStatoRestituzione" = '102'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_derivazioni:desAreaIdroRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:desBacIdroRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:desBacIdromontRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:progAstaRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoDerivCodutenzaRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoDerivNclasPratRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:elencoDerivCodrilRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:flgMisuratoreRestituzione</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:codiceRilievoDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:desStatoDeriv</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneDa</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneA</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMaxRestituita</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita</attribute>
+		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito</attribute>
+		</hiddenAttributes>
     </Rule>
 	
     </rules>

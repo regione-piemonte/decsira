@@ -81,6 +81,14 @@ function grid(state = initialState, action) {
                     coordinates[0].push(coords);
                 }
                 f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
+            } else if (state.featuregrid.grid.geometryType === "LineString") {
+                let coordinates = [];
+                for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                    let coords = state.featuregrid.grid.wfsVersion === "1.1.0" ?
+                        [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
+                    coordinates.push(coords);
+                }
+                f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "Point") {
                 f.geometry.coordinates = geometry ? [geometry.coordinates[0][0], geometry.coordinates[0][1]] : null;
             }
@@ -161,6 +169,14 @@ function grid(state = initialState, action) {
                     let coords = state.featuregrid.grid.wfsVersion === "1.1.0" ?
                         [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
                     coordinates[0].push(coords);
+                }
+                f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
+            } else if (state.featuregrid.grid.geometryType === "LineString") {
+                let coordinates = [];
+                for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                    let coords = state.featuregrid.grid.wfsVersion === "1.1.0" ?
+                        [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
+                    coordinates.push(coords);
                 }
                 f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "Point") {

@@ -306,6 +306,13 @@ function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter
                             [feature.geometry.coordinates[i][1], feature.geometry.coordinates[i][0]] : feature.geometry.coordinates[i];
                         f.geometry.coordinates[0].push(coordinates);
                     }
+                } else if (topologyConfig.geometryType === "LineString") {
+                    f.geometry.coordinates = [];
+                    for (let i = 0; i < feature.geometry.coordinates.length; i++) {
+                        let coordinates = topologyConfig.wfsVersion === "1.1.0" ?
+                            [feature.geometry.coordinates[i][1], feature.geometry.coordinates[i][0]] : feature.geometry.coordinates[i];
+                        f.geometry.coordinates.push(coordinates);
+                    }
                 }
 
                 return f;
