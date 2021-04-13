@@ -137,7 +137,7 @@ const ExporterUtils = {
     getFeaturesForShp: function(features, columns) {
         const cols = columns.map((c) => ({id: c.field.replace('properties.', ''), header: c.headerName}));
         return features.reduce((res, ft) => {
-            if (ft.geometry.coordinates) {
+            if (ft.geometry && ft.geometry.coordinates) {
                 res.push({
                     type: ft.type,
                     id: ft.id,
