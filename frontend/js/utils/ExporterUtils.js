@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const FileSaver = require('file-saver');
-const shpwrite = require('shp-write');
+const shpwrite = require('fixed-shp-write');
 const JSZip = require('jszip');
 const GeoJSON = require('ol/format/GeoJSON').default;
 const ProWKTDef = require('./ProjWKTDef');
@@ -51,6 +51,11 @@ const ExporterUtils = {
         const olFeatures = format.readFeatures(featureCollection);
         olFeatures.map((f) => f.getGeometry().transform('EPSG:4326', outputSrs));
         const geoObject = format.writeFeaturesObject(olFeatures);
+        geoObject.features.map((ft) => {
+            if (ft.geometry.type === "LineString") {
+                ft.geometry.coordinates = [ft.geometry.coordinates];
+            }
+        });
         const shpString = shpwrite.zip({
             type: 'FeatureCollection',
             features: geoObject.features
@@ -141,7 +146,7 @@ const ExporterUtils = {
                 res.push({
                     type: ft.type,
                     id: ft.id,
-                    geometry: ft. geometry,
+                    geometry: ft.geometry,
                     properties: cols.reduce((obj, col) => {
                         obj[col.header] = ft.properties[col.id];
                         return obj;
