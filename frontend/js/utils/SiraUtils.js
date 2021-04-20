@@ -3,7 +3,6 @@ const {endsWith} = require('lodash');
 const axios = require('@mapstore/libs/ajax');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
-
 module.exports = {
     goToMapPage(center, zoom) {
         const currentUrl = url.parse(window.location.href, true);
@@ -55,6 +54,12 @@ module.exports = {
 
     getLayersFlat() {
         return this.store.getState().layers.flat;
+    },
+
+    arrayEquals(a1, a2) {
+        return a1.length === a2.length && a1.every(function(element, index) {
+            return element === a2[index];
+        });
     }
 
 };

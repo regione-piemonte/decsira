@@ -48,6 +48,10 @@ const getSLDByGeomType = (geometryType, ftName, filter, styleColor = '#0000FF') 
         result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
+    case "MultiPolygon": {
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        break;
+    }
     case "LineString": {
         result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Stroke><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="stroke-width">2.0</CssParameter><CssParameter name="stroke-opacity">1.0</CssParameter></Stroke></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;

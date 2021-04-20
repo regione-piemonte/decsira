@@ -32,6 +32,7 @@ const CONFIGURE_INFO_TOPOLOGY = 'CONFIGURE_INFO_TOPOLOGY';
 const SET_MODEL_CONFIG = 'SET_MODEL_CONFIG';
 
 const TemplateUtils = require('../utils/TemplateUtils');
+const SiraUtils = require('../utils/SiraUtils');
 const {parseXMLResponse} = require('@mapstore/utils/FeatureInfoUtils');
 const {loadFeatureTypeConfig} = require('./siradec');
 /**
@@ -306,6 +307,18 @@ function loadTopologyInfoWithFilter(layerId, modelConfig, topologyConfig, filter
                             [feature.geometry.coordinates[i][1], feature.geometry.coordinates[i][0]] : feature.geometry.coordinates[i];
                         f.geometry.coordinates[0].push(coordinates);
                     }
+                } else if (topologyConfig.geometryType === "MultiPolygon") {
+                    let coordinates = [[]];
+                    let polygon = [];
+                    for (let i = 0; feature.geometry.coordinates; i++) {
+                        let point = feature.geometry.coordinates[i];
+                        polygon.push(point);
+                        if (polygon.length > 1 && SiraUtils.arrayEquals(point, polygon[0])) {
+                            coordinates.push([polygon]);
+                            polygon = [];
+                        }
+                    }
+                    f.geometry.coordinates = coordinates;
                 } else if (topologyConfig.geometryType === "LineString") {
                     f.geometry.coordinates = [];
                     for (let i = 0; i < feature.geometry.coordinates.length; i++) {
