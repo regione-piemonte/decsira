@@ -19,6 +19,7 @@ const {
 
 const assign = require('object-assign');
 const TemplateUtils = require('../utils/TemplateUtils');
+const SiraUtils = require('../utils/SiraUtils');
 
 const initialState = {
     data: null,
@@ -81,6 +82,18 @@ function grid(state = initialState, action) {
                     coordinates[0].push(coords);
                 }
                 f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
+            } else if (state.featuregrid.grid.geometryType === "MultiPolygon") {
+                let coordinates = [];
+                let polygon = [];
+                for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                    let point = geometry.coordinates[i];
+                    polygon.push(point);
+                    if (polygon.length > 1 && SiraUtils.arrayEquals(point, polygon[0])) {
+                        coordinates.push([polygon]);
+                        polygon = [];
+                    }
+                }
+                f.geometry.coordinates = coordinates && coordinates.length > 0 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "LineString") {
                 let coordinates = [];
                 for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
@@ -88,7 +101,7 @@ function grid(state = initialState, action) {
                         [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
                     coordinates.push(coords);
                 }
-                f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
+                f.geometry.coordinates = coordinates[0] && coordinates[0].length > 0 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "Point") {
                 f.geometry.coordinates = geometry ? [geometry.coordinates[0][0], geometry.coordinates[0][1]] : null;
             }
@@ -171,6 +184,19 @@ function grid(state = initialState, action) {
                     coordinates[0].push(coords);
                 }
                 f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
+            } else if (state.featuregrid.grid.geometryType === "MultiPolygon") {
+                let coordinates = [];
+                let polygon = [];
+                for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                    let point = geometry.coordinates[i];
+                    polygon.push(point);
+                    if (polygon.length > 1 && SiraUtils.arrayEquals(point, polygon[0])) {
+                        coordinates.push([polygon]);
+                        polygon = [];
+                    }
+                }
+                // SiraUtils.chekPolygonHoles(coordinates);
+                f.geometry.coordinates = coordinates && coordinates.length > 0 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "LineString") {
                 let coordinates = [];
                 for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
@@ -178,7 +204,7 @@ function grid(state = initialState, action) {
                         [geometry.coordinates[i][1], geometry.coordinates[i][0]] : geometry.coordinates[i];
                     coordinates.push(coords);
                 }
-                f.geometry.coordinates = coordinates[0] && coordinates[0].length > 1 ? coordinates : null;
+                f.geometry.coordinates = coordinates[0] && coordinates[0].length > 0 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "Point") {
                 f.geometry.coordinates = geometry ? [geometry.coordinates[0][0], geometry.coordinates[0][1]] : null;
             }
