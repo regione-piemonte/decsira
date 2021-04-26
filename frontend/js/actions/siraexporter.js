@@ -9,6 +9,7 @@ const axios = require('@mapstore/libs/ajax');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const ExporterUtils = require('../utils/ExporterUtils');
 const TemplateUtils = require('../utils/TemplateUtils');
+const SiraUtils = require('../utils/SiraUtils');
 const SET_EXPORT_PARAMS = 'SET_EXPORT_PARAMS';
 const EXPORT_LOADING = 'EXPORT_LOADING';
 const EXPORT_ERROR = 'EXPORT_ERROR';
@@ -84,6 +85,18 @@ function getFeatures(url, filter, featuregrid) {
                     } else {
                         f.geometry.coordinates = null;
                     }
+                } else if (featuregrid.grid.geometryType === "MultiPolygon") {
+                    let coordinates = [];
+                    let polygon = [];
+                    for (let i = 0; geometry && i < geometry.coordinates.length; i++) {
+                        let point = geometry.coordinates[i];
+                        polygon.push(point);
+                        if (polygon.length > 1 && SiraUtils.arrayEquals(point, polygon[0])) {
+                            coordinates.push([polygon]);
+                            polygon = [];
+                        }
+                    }
+                    f.geometry.coordinates = coordinates && coordinates.length > 0 ? coordinates : null;
                 } else if (featuregrid.grid.geometryType === "LineString") {
                     let coordinates = [];
                     if (geometry && geometry.coordinates.length > 0) {

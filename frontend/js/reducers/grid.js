@@ -195,7 +195,6 @@ function grid(state = initialState, action) {
                         polygon = [];
                     }
                 }
-                // SiraUtils.chekPolygonHoles(coordinates);
                 f.geometry.coordinates = coordinates && coordinates.length > 0 ? coordinates : null;
             } else if (state.featuregrid.grid.geometryType === "LineString") {
                 let coordinates = [];
