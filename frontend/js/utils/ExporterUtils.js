@@ -148,7 +148,9 @@ const ExporterUtils = {
                     id: ft.id,
                     geometry: ft.geometry,
                     properties: cols.reduce((obj, col) => {
-                        obj[col.header] = ft.properties[col.id];
+                        let ret = this.formatNumber(ft.properties[col.id]);
+                        ret = this.formatDate(ret);
+                        obj[col.header] = ret;
                         return obj;
                     }, {}) });
             }
