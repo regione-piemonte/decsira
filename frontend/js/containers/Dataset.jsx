@@ -25,7 +25,8 @@ const {
     expandFilterPanel,
     configureIndicaLayer,
     loadFeatureTypeConfig,
-    setActiveFeatureType
+    setActiveFeatureType,
+    queryFormPreloaded
 } = require('../actions/siradec');
 const {setGridType} = require('../actions/grid');
 
@@ -144,6 +145,7 @@ class Dataset extends React.Component {
         activeFeatureType: PropTypes.string,
         loadFeatureTypeConfig: PropTypes.func,
         setActiveFeatureType: PropTypes.func,
+        queryFormPreloaded: PropTypes.func,
         setGridType: PropTypes.func,
         getThematicViewConfig: PropTypes.func,
         map: PropTypes.object,
@@ -312,7 +314,10 @@ class Dataset extends React.Component {
         return (
             <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
-                    <Header showCart="true" goToHome={this.goToHome}/>
+                    <Header showCart="true" goToHome={this.goToHome} />
+                    <div className="dataset-category-name">
+                        <span>{category ? category.name : (<noscript/>)}</span>
+                    </div>
                     {this.renderSerchBar()}
                     <div className="dataset-results-container">
                         {category ? this.renderResults() : (<noscript/>)}
@@ -384,6 +389,7 @@ class Dataset extends React.Component {
         } else {
             if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
+                this.props.queryFormPreloaded(false);
             }
             if (this.props?.match?.params?.profile) {
                 this.context.router.history.push(`/full/${this.props.match.params.profile}/`);
@@ -400,6 +406,7 @@ class Dataset extends React.Component {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
+            this.props.queryFormPreloaded(false);
         }
         this.props.configureIndicaLayer();
     };
@@ -419,6 +426,7 @@ class Dataset extends React.Component {
         } else {
             if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
+                this.props.queryFormPreloaded(false);
             }
             this.props.setGridType('all_results');
             this.props.toggleSiraControl('grid', true);
@@ -462,6 +470,7 @@ module.exports = connect(datasetSelector, {
     configureIndicaLayer,
     loadFeatureTypeConfig,
     setActiveFeatureType,
+    queryFormPreloaded,
     toggleSiraControl,
     setGridType,
     getThematicViewConfig,

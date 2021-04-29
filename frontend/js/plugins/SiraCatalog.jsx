@@ -153,6 +153,9 @@ class LayerTree extends React.Component {
             showInfoBox={this.showInfoBox}/>)) : (<div/>);
         return (
             <div id="siracatalog">
+                <div className="toc-category-name">
+                    {this.props.category ? this.props.category.name : (<noscript/>)}
+                </div>
                 <SiraSearchBar
                     onSearch={this.loadMetadata}
                     onReset={this.loadMetadata}
