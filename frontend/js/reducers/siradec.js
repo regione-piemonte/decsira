@@ -19,6 +19,7 @@ const {
     TOPOLOGY_CONFIG_LOADED,
     CARD_CONFIG_LOADED,
     QUERYFORM_HIDE_ERROR,
+    QUERYFORM_PRELOADED,
     INLINE_MAP_CONFIG,
     SET_ACTIVE_FEATURE_TYPE,
     SET_TREE_FEATURE_TYPE,
@@ -201,6 +202,11 @@ function siradec(state = initialState, action) {
     case SET_FEATURE_ROW_DATA: {
         return assign({}, state, {
             currentFeatureRowData: action.geometry
+        });
+    }
+    case QUERYFORM_PRELOADED: {
+        return assign({}, state, {
+            queryformPreloaded: action.preloaded
         });
     }
     default:

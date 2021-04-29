@@ -18,6 +18,7 @@ const CONFIGURE_INDICA_LAYER = 'CONFIGURE_INDICA_LAYER';
 const CLOSE_INDICA_CONFIGURATION = 'CLOSE_INDICA_CONFIGURATION';
 const QUERYFORM_CONFIG_LOAD_ERROR = 'QUERYFORM_CONFIG_LOAD_ERROR';
 const QUERYFORM_HIDE_ERROR = 'QUERYFORM_HIDE_ERROR';
+const QUERYFORM_PRELOADED = 'QUERYFORM_PRELOADED';
 const FEATUREGRID_CONFIG_LOADED = 'FEATUREGRID_CONFIG_LOADED';
 const FEATUREINFO_CONFIG_LOADED = 'FEATUREINFO_CONFIG_LOADED';
 const TOPOLOGY_CONFIG_LOADED = 'TOPOLOGY_CONFIG_LOADED';
@@ -32,7 +33,7 @@ const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 const {indicaFormReset} = require('./indicaform');
 const {verifyProfiles} = require('../utils/TemplateUtils');
-const {Promise} = require('es6-promise');
+const { Promise } = require('es6-promise');
 
 function setWaitingForConfig(wfc) {
     return {
@@ -136,6 +137,13 @@ function configureQueryFormError(featureType, e) {
 function hideQueryError() {
     return {
         type: QUERYFORM_HIDE_ERROR
+    };
+}
+
+function queryFormPreloaded(preloaded) {
+    return {
+        type: QUERYFORM_PRELOADED,
+        preloaded: preloaded
     };
 }
 
@@ -263,6 +271,7 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 dispatch(configureFeatureInfo(config.featureinfo, featureType));
                 dispatch(configureCard(config.card, featureType));
                 dispatch(indicaFormReset());
+                dispatch(queryFormPreloaded(false));
 
                 let serviceUrl = config.query.service.url;
 
@@ -344,6 +353,7 @@ module.exports = {
     CLOSE_INDICA_CONFIGURATION,
     QUERYFORM_CONFIG_LOAD_ERROR,
     QUERYFORM_HIDE_ERROR,
+    QUERYFORM_PRELOADED,
     FEATUREGRID_CONFIG_LOADED,
     FEATUREINFO_CONFIG_LOADED,
     TOPOLOGY_CONFIG_LOADED,
@@ -368,5 +378,6 @@ module.exports = {
     hideQueryError,
     configureInlineMap,
     setActiveFeatureType,
-    setTreeFeatureType
+    setTreeFeatureType,
+    queryFormPreloaded
 };

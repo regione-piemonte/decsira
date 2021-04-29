@@ -22,7 +22,7 @@ const I18N = require('@mapstore/components/I18N/I18N');
 const assign = require('object-assign');
 const Spinner = require('react-spinkit');
 
-const {hideQueryError} = require('../actions/siradec');
+const {hideQueryError, queryFormPreloaded} = require('../actions/siradec');
 
 const FilterUtils = require('@mapstore/utils/FilterUtils');
 
@@ -172,7 +172,8 @@ class SideQueryPanel extends React.Component {
                 onRemoveGroupField: () => {},
                 onChangeCascadingValue: () => {},
                 onExpandAttributeFilterPanel: () => {},
-                onLoadFeatureTypeConfig: () => {}
+                onLoadFeatureTypeConfig: () => { },
+                onQueryFormPreloaded: () => {}
             },
             spatialFilterActions: {
                 onExpandSpatialFilterPanel: () => {},
@@ -192,6 +193,32 @@ class SideQueryPanel extends React.Component {
             }
         }
     };
+
+    componentWillMount() {
+        let filterFieldsCount = this.props.filterFields.length;
+        let preloadedAttr = this.props.attributes.filter((attr) => { return attr.preload; });
+        if (filterFieldsCount < preloadedAttr.length && !this.props.queryformPreloaded) {
+            for (let index = 0; index < preloadedAttr.length - 1; index++) {
+                this.props.queryFormActions.attributeFilterActions.onAddFilterField(1);
+            }
+        }
+    }
+
+    componentWillUpdate(nextProps) {
+        let filterFieldsCount = nextProps.filterFields.length;
+        let preloadedAttr = nextProps.attributes.filter((attr) => { return attr.preload; });
+        if (filterFieldsCount === preloadedAttr.length && !nextProps.queryformPreloaded) {
+            preloadedAttr.forEach((attr, index) => {
+                let filterField = nextProps.filterFields[index];
+                nextProps.queryFormActions.attributeFilterActions.onUpdateFilterField(filterField.rowId, "attribute", attr.attribute, attr.type, { currentPage: 1 });
+            });
+            this.props.queryFormActions.attributeFilterActions.onQueryFormPreloaded(true);
+        }
+    }
+
+    /* componentWillUnmount() {
+        this.props.queryFormActions.attributeFilterActions.onQueryFormPreloaded(false);
+    }*/
 
     renderHeader = () => {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
@@ -369,7 +396,8 @@ module.exports = connect((state) => {
         featureTypeConfigUrl: state.queryform.featureTypeConfigUrl,
         pagination: state.queryform.pagination,
         sortOptions: state.queryform.sortOptions,
-        projection: (mapSelector(state) || {}).projection
+        projection: (mapSelector(state) || {}).projection,
+        queryformPreloaded: state.siradec.queryformPreloaded
     };
 }, dispatch => {
     return {
@@ -391,7 +419,8 @@ module.exports = connect((state) => {
                 onRemoveGroupField: removeGroupField,
                 onChangeCascadingValue: changeCascadingValue,
                 onExpandAttributeFilterPanel: expandAttributeFilterPanel,
-                onLoadFeatureTypeConfig: loadFeatureTypeConfig
+                onLoadFeatureTypeConfig: loadFeatureTypeConfig,
+                onQueryFormPreloaded: queryFormPreloaded
             }, dispatch),
             spatialFilterActions: bindActionCreators({
                 onExpandSpatialFilterPanel: expandSpatialFilterPanel,

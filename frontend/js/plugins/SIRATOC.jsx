@@ -22,7 +22,8 @@ const {
     // SiraQueryPanel action functions
     expandFilterPanel,
     loadFeatureTypeConfig,
-    setActiveFeatureType
+    setActiveFeatureType,
+    queryFormPreloaded
 } = require('../actions/siradec');
 const {toggleSiraControl} = require('../actions/controls');
 const {setGridType} = require('../actions/grid');
@@ -78,6 +79,7 @@ class LayerTree extends React.Component {
         expandFilterPanel: PropTypes.func,
         loadFeatureTypeConfig: PropTypes.func,
         setActiveFeatureType: PropTypes.func,
+        queryFormPreloaded: PropTypes.func,
         toggleSiraControl: PropTypes.func,
         setGridType: PropTypes.func,
         showInfoBox: PropTypes.func,
@@ -151,6 +153,7 @@ class LayerTree extends React.Component {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
+            this.props.queryFormPreloaded(false);
         }
         this.props.expandFilterPanel(status);
     };
@@ -160,6 +163,7 @@ class LayerTree extends React.Component {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
+            this.props.queryFormPreloaded(false);
         }
         this.props.setGridType('all_results');
         this.props.toggleSiraControl('grid', true);
@@ -185,6 +189,7 @@ const TOCPlugin = connect(tocSelector, {
     expandFilterPanel,
     loadFeatureTypeConfig,
     setActiveFeatureType,
+    queryFormPreloaded,
     toggleSiraControl,
     setGridType,
     loadMetadata,
