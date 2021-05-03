@@ -196,8 +196,11 @@ class SideQueryPanel extends React.Component {
 
     componentWillMount() {
         let filterFieldsCount = this.props.filterFields.length;
-        let preloadedAttr = this.props.attributes.filter((attr) => { return attr.preload; });
-        if (filterFieldsCount < preloadedAttr.length && !this.props.queryformPreloaded) {
+        let preloadedAttr = this.props.attributes.filter((attr) => { return attr.preload === true; });
+        if (filterFieldsCount === 1 && preloadedAttr.length === 1 && !this.props.queryformPreloaded) {
+            this.props.queryFormActions.attributeFilterActions.onUpdateFilterField(this.props.filterFields[0].rowId, "attribute", preloadedAttr[0].attribute, preloadedAttr[0].type, { currentPage: 1 });
+            this.props.queryFormActions.attributeFilterActions.onQueryFormPreloaded(true);
+        } else if (filterFieldsCount < preloadedAttr.length && !this.props.queryformPreloaded) {
             for (let index = 0; index < preloadedAttr.length - 1; index++) {
                 this.props.queryFormActions.attributeFilterActions.onAddFilterField(1);
             }
@@ -206,7 +209,7 @@ class SideQueryPanel extends React.Component {
 
     componentWillUpdate(nextProps) {
         let filterFieldsCount = nextProps.filterFields.length;
-        let preloadedAttr = nextProps.attributes.filter((attr) => { return attr.preload; });
+        let preloadedAttr = nextProps.attributes.filter((attr) => { return attr.preload === true; });
         if (filterFieldsCount === preloadedAttr.length && !nextProps.queryformPreloaded) {
             preloadedAttr.forEach((attr, index) => {
                 let filterField = nextProps.filterFields[index];
@@ -215,10 +218,6 @@ class SideQueryPanel extends React.Component {
             this.props.queryFormActions.attributeFilterActions.onQueryFormPreloaded(true);
         }
     }
-
-    /* componentWillUnmount() {
-        this.props.queryFormActions.attributeFilterActions.onQueryFormPreloaded(false);
-    }*/
 
     renderHeader = () => {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
