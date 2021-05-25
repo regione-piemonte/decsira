@@ -52,17 +52,17 @@
           "type": 6
         },
         {
-          "headerName": "Codice ADS",
-          "width":80,
+          "headerName": "Codice ads",
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:codiceAds/text()"
           ],
           "suppressSorting": true,
-          "type": 1
+          "type": 2
         },
         {
-          "headerName": "Tipologia di ADS",
-          "width":100,
+          "headerName": "Tipologia di rilievo",
+          "width":200,
           "xpath": [
             "decsiraogc_idf_ads:descrTipoAds/text()"
           ],
@@ -71,7 +71,7 @@
         },
         {
           "headerName": "Ambito di rilievo",
-          "width":100,
+          "width":200,
           "xpath": [
             "decsiraogc_idf_ads:descrAmbito/text()"
           ],
@@ -79,17 +79,8 @@
           "type": 2
         },
         {
-          "headerName": "Dettaglio Ambito",
-          "width":300,
-          "xpath": [
-            "decsiraogc_idf_ads:ambitoSpecifico/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
           "headerName": "Provincia",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:denominazioneProvincia/text()"
           ],
@@ -98,7 +89,7 @@
         },
         {
           "headerName": "Comune",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:denominazioneComune/text()"
           ],
@@ -107,7 +98,7 @@
         },
         {
           "headerName": "Data Rilievo",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:dataRil/text()"
           ],
@@ -115,9 +106,27 @@
 		  "dateFormat": "DD/MM/YYYY",
           "type": 2
         },
+		{
+          "headerName": "UTM est",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:utmEst/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "UTM nord",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_ads:utmNord/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
         {
           "headerName": "Cod Categoria Forestale",
-          "width":80,
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:codiceAmminitrativoCf/text()"
           ],
@@ -135,7 +144,7 @@
         },
         {
           "headerName": "Cod tipo forestale",
-          "width":80,
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:codiceAmminitrativoTf/text()"
           ],
@@ -153,7 +162,7 @@
         },
         {
           "headerName": "Quota (m)",
-          "width":80,
+          "width":00,
           "xpath": [
             "decsiraogc_idf_ads:quota/text()"
           ],
@@ -162,7 +171,7 @@
         },
         {
           "headerName": "Inclinazione",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:inclinazione/text()"
           ],
@@ -179,8 +188,8 @@
           "type": 2
         },
         {
-          "headerName": "Assetto Evolutivo",
-          "width":100,
+          "headerName": "Assetto evolutivo culturale",
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:descrAssetto/text()"
           ],
@@ -189,7 +198,7 @@
         },
         {
           "headerName": "Esposizione",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:descrEsposizione/text()"
           ],
@@ -207,7 +216,7 @@
         },
         {
           "headerName": "Priorita' intervento",
-          "width":100,
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:descrPriorita/text()"
           ],
@@ -216,7 +225,7 @@
         },
         {
           "headerName": "Tipo intervento",
-          "width":80,
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:descrTipoIntervento/text()"
           ],
@@ -225,7 +234,7 @@
         },
         {
           "headerName": "Danno",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:descrDanno/text()"
           ],
@@ -233,63 +242,39 @@
           "type": 2
         },
         {
-          "headerName": "Data inizio validità ",
-          "width":80,
+          "headerName": "Data inizio validità",
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:dataInizioValidita/text()"
           ],
           "suppressSorting": true,
 		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
-          "headerName": "Note",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_ads:note/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "UTM est",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_ads:utmEst/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "UTM Nord",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_ads:utmNord/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "Cod Particella Forestale",
-          "width":80,
+          "headerName": "Cod Particella Forestale (PFA)",
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:codiceParticella/text()"
           ],
           "suppressSorting": true,
-          "type": 1
+          "type": 2,
+		  "hide": true
         },
         {
-          "headerName": "Descrizione Particella Forestale",
-          "width":80,
+          "headerName": "Descrizione Particella Forestale (PFA)",
+          "width":200,
           "xpath": [
             "decsiraogc_idf_ads:denominazioneParticella/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
           "headerName": "Tipo strutturale princ",
-          "width":80,
+          "width":150,
           "xpath": [
             "decsiraogc_idf_ads:descrTipoStrutturalePrinc/text()"
           ],
@@ -298,7 +283,7 @@
         },
         {
           "headerName": "Tipo strutturale sec",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:descrTipoStrutturaleSec/text()"
           ],
@@ -307,7 +292,7 @@
         },
         {
           "headerName": "Stadio di sviluppo",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:descrStadioSviluppo/text()"
           ],
@@ -316,7 +301,7 @@
         },
         {
           "headerName": "Tipo di esbosco",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:descrEsbosco/text()"
           ],
@@ -325,7 +310,7 @@
         },
         {
           "headerName": "Densita campionamento",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:densitaCampionamento/text()"
           ],
@@ -415,7 +400,7 @@
         },
         {
           "headerName": "Rinnovazione",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:rinnovazione/text()"
           ],
@@ -424,7 +409,7 @@
         },
         {
           "headerName": "Rin specie prevalente",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:rinSpeciePrevalente/text()"
           ],
@@ -465,7 +450,7 @@
             "decsiraogc_idf_ads:percIngiallimento/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 1
         },
         {
           "headerName": "Combust",
@@ -478,7 +463,7 @@
         },
         {
           "headerName": "Sottotipo sup nota",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:descrSottotipoSupNota/text()"
           ],
@@ -496,7 +481,7 @@
         },
         {
           "headerName": "Note ads superf. nota",
-          "width":80,
+          "width":200,
           "xpath": [
             "decsiraogc_idf_ads:noteSupNota/text()"
           ],
@@ -505,7 +490,7 @@
         },
         {
           "headerName": "Tipo strutturale princ relasc",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:tipoStrutturalePrincRel/text()"
           ],
@@ -514,7 +499,7 @@
         },
         {
           "headerName": "Tipo strutturale sec relasc",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_ads:tipoStrutturaleSecRel/text()"
           ],
@@ -532,7 +517,7 @@
         },
         {
           "headerName": "Note relascopica",
-          "width":80,
+          "width":200,
           "xpath": [
             "decsiraogc_idf_ads:noteRelascopica/text()"
           ],
@@ -658,7 +643,7 @@
 	  {
         "index": 8,
         "attribute": "decsiraogc_idf_ads:descrAssetto",
-        "label": "Assetto evolutivo",
+        "label": "Assetto evolutivo culturale",
         "type": "list",
         "valueService": {
           "urlParams": {
