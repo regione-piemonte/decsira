@@ -2,11 +2,9 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='PIANI FORESTALI AZIENDALI' subtitle={[
-            'Codice ADS: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:idgeoPlPfa/text()"),
-			'Nome breve ADS: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeBrevePfa/text()")
-            ]} id={model.id}/>
+            'Denominazione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:denominazione/text()")
+			]} id={model.id}/>
     )}>
     <Panel className="template">
         <Section header='Piani Forestali Aziendali: Dettaglio dati tecnici' eventKey='1' expanded={true}>
@@ -28,14 +26,11 @@
 			<LabeledField label="Fonte di finanziamento" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:fonteFinanziamento/text()")
             }/>
-			<LabeledField label="Data inizio validità" dateFormat='DD/MM/YYYY' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataInizioValidita/text()")
-            }/>
-			<LabeledField label="Data fine validità" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataFineValidità/text()")
-            }/>
 			<LabeledField label="PFA: nome breve" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeBrevePfa/text()")
+            }/>
+			<LabeledField label="N. delibera" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nDelibera/text()")
             }/>
 			<LabeledField label="Data approvazione" dateFormat='DD/MM/YYYY' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataApprovazione/text()")
@@ -43,20 +38,14 @@
 			<LabeledField label="Data revisione" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:dataRevisione/text()")
             }/>
+			<LabeledField label="Durata" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:durataPfaAnni/text()")
+            }/>
 			<LabeledField label="Superficie pianificata totale (ha)" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supPianificataTotale/text()")
             }/>
 			<LabeledField label="Superficie forestale a  gestione attiva (ha)" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:supForestaleGestAttiva/text()")
-            }/>
-			<LabeledField label="N. delibera" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nDelibera/text()")
-            }/>
-			<LabeledField label="Durata" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:durataPfaAnni/text()")
-            }/>
-			<LabeledField label="Revisione" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:flgRevisione/text()")
             }/>
 			<LabeledField label="Proprietà silvopastorale (ha)" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:proprietaSilvopastHa/text()")
@@ -90,6 +79,12 @@
             }/>
 			<LabeledField label="Superficie altri usi (ha)" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:superfAltriUsiHa/text()")
+            }/>
+			<LabeledField label="Versione" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:descrVersione/text()")
+            }/>
+			<LabeledField label="Note" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:note/text()")
             }/>
         </Section>
 		

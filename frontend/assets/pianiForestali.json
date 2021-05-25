@@ -63,7 +63,7 @@
         },
         {
           "headerName": "Provincia",
-          "width":80,
+          "width":150,
           "xpath": [
             "decsiraogc_idf_pfa:provincia/text()"
           ],
@@ -81,7 +81,7 @@
         },
         {
           "headerName": "Gestore",
-          "width":150,
+          "width":200,
           "xpath": [
             "decsiraogc_idf_pfa:gestore/text()"
           ],
@@ -99,7 +99,7 @@
         },
         {
           "headerName": "Fonte di finanziamento",
-          "width":80,
+          "width":120,
           "xpath": [
             "decsiraogc_idf_pfa:fonteFinanziamento/text()"
           ],
@@ -108,94 +108,39 @@
         },
         {
           "headerName": "Data inizio validità",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_pfa:dataInizioValidita/text()"
           ],
           "suppressSorting": true,
 		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
           "headerName": "Data fine validità",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_pfa:dataFineValidita/text()"
           ],
           "suppressSorting": true,
 		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
           "headerName": "PFA: nome breve",
-          "width":150,
+          "width":200,
           "xpath": [
             "decsiraogc_idf_pfa:nomeBrevePfa/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
-        {
-          "headerName": "Data approvazione",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:dataApprovazione/text()"
-          ],
-          "suppressSorting": true,
-		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
-        },
-        {
-          "headerName": "Data revisione",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:dataRevisione/text()"
-          ],
-          "suppressSorting": true,
-		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
-        },
-        {
-          "headerName": "Superficie pianificata totale (ha)",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:supPianificataTotale/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "Superficie forestale a  gestione attiva (ha)",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:supForestaleGestAttiva/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "Data inserimento",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:dataInserimento/text()"
-          ],
-          "suppressSorting": true,
-		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
-        },
-        {
-          "headerName": "Data aggiornamento",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:dataAggiornamento/text()"
-          ],
-          "suppressSorting": true,
-		  "dateFormat": "DD/MM/YYYY",
-          "type": 2
-        },
-        {
+		{
           "headerName": "N. delibera",
-          "width":80,
+          "width":100,
           "xpath": [
             "decsiraogc_idf_pfa:nDelibera/text()"
           ],
@@ -203,6 +148,16 @@
           "type": 2
         },
         {
+          "headerName": "Data approvazione",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_pfa:dataApprovazione/text()"
+          ],
+          "suppressSorting": true,
+		  "dateFormat": "DD/MM/YYYY",
+          "type": 2
+        },
+		{
           "headerName": "Durata",
           "width":80,
           "xpath": [
@@ -220,86 +175,55 @@
           "suppressSorting": true,
           "type": 2
         },
-        {
-          "headerName": "Ricadenza in  Area Protetta",
-          "width":80,
+		{
+          "headerName": "Data inserimento",
+          "width":120,
           "xpath": [
-            "decsiraogc_idf_pfa:nomeAreaProtetta/text()"
+            "decsiraogc_idf_pfa:dataInserimento/text()"
           ],
           "suppressSorting": true,
+		  "dateFormat": "DD/MM/YYYY",
+          "type": 2,
+		  "hide": true
+        },
+        {
+          "headerName": "Data aggiornamento",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_pfa:dataAggiornamento/text()"
+          ],
+          "suppressSorting": true,
+		  "dateFormat": "DD/MM/YYYY",
+          "type": 2,
+		  "hide": true
+        },
+		{
+          "headerName": "Superficie pianificata totale (ha)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_idf_pfa:supPianificataTotale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Superficie forestale a  gestione attiva (ha)",
+          "width":120,
+          "xpath": [
+            "decsiraogc_idf_pfa:supForestaleGestAttiva/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Data revisione",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_pfa:dataRevisione/text()"
+          ],
+          "suppressSorting": true,
+		  "dateFormat": "DD/MM/YYYY",
           "type": 2
-        },
-        {
-          "headerName": "Superficie ricadenza (ha) area protetta",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:supRicadenzaHaAP/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "% Ricadenza area protetta",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:percRicadenzaAp/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "Ricadenza in aree Natura 2000",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:nomeRn2000/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Superficie ricadenza (ha) RN2000",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:supRicadenzaHaRn/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "% ricadenza RN2000",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:percRicadenzaRn/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "Ricadenza in Bosco da seme",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:denominazionePopSeme/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Superficie ricadenza (ha) Bosco da seme",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:supRicadenzaHaPopSeme/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
-          "headerName": "% Ricadenza Bosco da seme",
-          "width":80,
-          "xpath": [
-            "decsiraogc_idf_pfa:percRicadenzaPopSeme/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
         },
         {
           "headerName": "Proprietà silvopastorale (ha)",
@@ -339,7 +263,7 @@
         },
         {
           "headerName": "Superficie pianificata non forestale (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:supPianifNonForestaleHa/text()"
           ],
@@ -348,7 +272,7 @@
         },
         {
           "headerName": "Superficie totale boscata (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:superfTotBoscataHa/text()"
           ],
@@ -357,7 +281,7 @@
         },
         {
           "headerName": "Superficie boscata gestione attiva (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:superfBoscGestAttivaHa/text()"
           ],
@@ -366,7 +290,7 @@
         },
         {
           "headerName": "Superficie totale gestione non attiva (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:superfGestNonAttivaTotHa/text()"
           ],
@@ -375,7 +299,7 @@
         },
         {
           "headerName": "Superficie a gestione non attiva in monitoraggio (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:superfGestNonAttivaMonHa/text()"
           ],
@@ -384,7 +308,7 @@
         },
         {
           "headerName": "Superficie a gestione non attiva in evoluz. libera (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:superfGestNonAttivaEvlHa/text()"
           ],
@@ -393,9 +317,90 @@
         },
         {
           "headerName": "Superficie altri usi (ha)",
-          "width":150,
+          "width":80,
           "xpath": [
             "decsiraogc_idf_pfa:superfAltriUsiHa/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Ricadenza in  Area Protetta",
+          "width":150,
+          "xpath": [
+            "decsiraogc_idf_pfa:nomeAreaProtetta/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Superficie ricadenza (ha) area protetta",
+          "width":120,
+          "xpath": [
+            "decsiraogc_idf_pfa:supRicadenzaHaAP/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "% Ricadenza area protetta",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_pfa:percRicadenzaAp/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Ricadenza in aree Natura 2000",
+          "width":150,
+          "xpath": [
+            "decsiraogc_idf_pfa:nomeRn2000/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Superficie ricadenza (ha) RN2000",
+          "width":120,
+          "xpath": [
+            "decsiraogc_idf_pfa:supRicadenzaHaRn/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "% ricadenza RN2000",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_pfa:percRicadenzaRn/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Ricadenza in Bosco da seme",
+          "width":150,
+          "xpath": [
+            "decsiraogc_idf_pfa:denominazionePopSeme/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Superficie ricadenza (ha) Bosco da seme",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_pfa:supRicadenzaHaPopSeme/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "% Ricadenza Bosco da seme",
+          "width":80,
+          "xpath": [
+            "decsiraogc_idf_pfa:percRicadenzaPopSeme/text()"
           ],
           "suppressSorting": true,
           "type": 1
@@ -416,11 +421,12 @@
             "decsiraogc_idf_pfa:descrProprietaPrimpa/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
           "headerName": "note",
-          "width":80,
+          "width":200,
           "xpath": [
             "decsiraogc_idf_pfa:note/text()"
           ],
@@ -440,20 +446,14 @@
     },
     "fields": [
 		{
-        "index": 1,
-        "attribute": "decsiraogc_idf_pfa:denominazione",
-        "label": "Denominazione",
-        "type": "string"
-        },
-		{
-         "index": 2,
-         "attribute": "decsiraogc_idf_pfa:provincia",
+         "index": 1,
+         "attribute": "decsiraogc_idf_pfa:pfaComuni/decsiraogc_idf_pfa:PfaComuni/decsiraogc_idf_pfa:denominazioneProv",
          "label":"Provincia",
          "type":"list",
          "valueService": {
            "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_idf_pl_provincia",
-			 "propertyName": "istat_prov,denominazione_prov",
+             "typeName": "decsiraogc_decodif:decsira_d_idf_pfa_provincia",
+			 "propertyName": "id_provincia,istat_prov,denominazione_prov",
              "sortBy": "denominazione_prov+A"
            }
          },
@@ -461,27 +461,57 @@
          "valueLabel":"denominazione_prov"
 	   },
 	   {
-		   "index": 3,
-		   "attribute": "decsiraogc_idf_pfa:denominazioneComune",
+		   "index": 2,
+		   "attribute": "decsiraogc_idf_pfa:pfaComuni/decsiraogc_idf_pfa:PfaComuni/decsiraogc_idf_pfa:denominazioneComune",
 		   "label":"Comune",
 		   "type":"list",
 		   "valueService": {
 			 "urlParams": {
-			   "typeName": "decsiraogc_decodif:decsira_d_idf_pl_comune",
-			   "propertyName": "istat_prov,denominazione_comune",
+			   "typeName": "decsiraogc_decodif:decsira_d_idf_pfa_comune",
+			   "propertyName": "fk_provincia,denominazione_comune",
 			   "sortBy": "denominazione_comune+A"
 			 }
 		   },
 		   "valueId":"denominazione_comune",
 		   "valueLabel":"denominazione_comune",
 		   "dependson":{
-				"field": "decsiraogc_idf_pfa:provincia",
-				"from": "istat_prov",
-				"to": "istat_prov"
+				"field": "decsiraogc_idf_pfa:pfaComuni/decsiraogc_idf_pfa:PfaComuni/decsiraogc_idf_pfa:denominazioneProv",
+				"from": "id_provincia",
+				"to": "fk_provincia"
 		   }
        },
 	   {
+        "index": 3,
+        "attribute": "decsiraogc_idf_pfa:denominazione",
+        "label": "Denominazione",
+        "type": "string"
+       },
+	   {
         "index": 4,
+        "attribute": "decsiraogc_idf_pfa:nDelibera",
+        "label": "N. DGR",
+        "type": "string"
+       },
+	   {
+		"index": 5,
+		"attribute": "decsiraogc_idf_pfa:dataApprovazione",
+		"label":"Data approvazione",
+		"type":"date",
+		"fieldOptions": {
+		  "dateFormat": "DD/MM/YYYY"
+		}
+	   },
+	   {
+		"index": 6,
+		"attribute": "decsiraogc_idf_pfa:dataFineValidita",
+		"label":"Data scadenza",
+		"type":"date",
+		"fieldOptions": {
+		  "dateFormat": "DD/MM/YYYY"
+		}
+	   },
+	   {
+        "index": 7,
         "attribute": "decsiraogc_idf_pfa:descrProprieta",
         "label": "Proprieta'",
         "type": "list",
@@ -496,7 +526,7 @@
         "valueLabel": "descr_proprieta"
       },
 	  {
-        "index": 5,
+        "index": 8,
         "attribute": "decsiraogc_idf_pfa:descrCompresa",
         "label": "Compresa",
         "type": "list",
@@ -511,50 +541,17 @@
         "valueLabel": "descr_compresa"
       },
 	  {
-		"index": 6,
+		"index": 9,
 		"attribute": "decsiraogc_idf_pfa:pfaParticellaForestale/decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:codParticella",
 		"label":"Codice particella forestale",
 		"type":"string"
       },
 	  {
-		"index": 7,
+		"index": 10,
 		"attribute": "decsiraogc_idf_pfa:pfaParticellaForestale/decsiraogc_idf_pfa:PfaParticellaForestale/decsiraogc_idf_pfa:denominazioneParticella",
 		"label":"Denominazione particella forestale",
 		"type":"string"
-      },
-	  {
-        "index": 8,
-        "attribute": "decsiraogc_idf_pfa:nDelibera",
-        "label": "N. DGR",
-        "type": "string"
-      },
-	  {
-		"index": 9,
-		"attribute": "decsiraogc_idf_pfa:dataInizioValidita",
-		"label":"Validità",
-		"type":"date",
-		"fieldOptions": {
-		  "dateFormat": "DD/MM/YYYY"
-		}
-	  },
-	  {
-		"index": 10,
-		"attribute": "decsiraogc_idf_pfa:dataApprovazione",
-		"label":"Data approvazione",
-		"type":"date",
-		"fieldOptions": {
-		  "dateFormat": "DD/MM/YYYY"
-		}
-	  },
-	  {
-		"index": 11,
-		"attribute": "decsiraogc_idf_pfa:dataFineValidita",
-		"label":"Data scadenza",
-		"type":"date",
-		"fieldOptions": {
-		  "dateFormat": "DD/MM/YYYY"
-		}
-	  }
+      }
     ]
   }
 }

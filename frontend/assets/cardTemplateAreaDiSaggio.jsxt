@@ -8,17 +8,14 @@
     )}>
     <Panel className="template">
         <Section header='DATI GENERALI - Area di Saggio' eventKey='1' expanded={true}>
-           <LabeledField label='Codice ADS' value={
+           <LabeledField label='Codice ads' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:codiceAds/text()")
             }/>
-			<LabeledField label="Tipologia di ADS" value={
+			<LabeledField label="Tipologia di rilievo" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrTipoAds/text()")
             }/>
             <LabeledField label='Ambito di rilievo' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:descrAmbito/text()")
-            }/>
-			<LabeledField label='Dettaglio Ambito' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:ambitoSpecifico/text()")
             }/>
 			<LabeledField label='Provincia' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_ads:AreaDiSaggio/decsiraogc_idf_ads:denominazioneProvincia/text()")
