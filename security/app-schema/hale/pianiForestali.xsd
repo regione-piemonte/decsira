@@ -20,6 +20,9 @@
 	<!-- decsira_geo_idf_pfa_particella_forestale  id= idgeo_pl_particella_forest-->
 	<element name="PfaParticellaForestale" type="decsiraogc_idf_pfa:PfaParticellaForestaleType" substitutionGroup="gml:AbstractObject" />
 	
+	<!-- decsira_t_idf_pfa_comuni  id= idgeo_pl_pfa-->
+	<element name="PfaComuni" type="decsiraogc_idf_pfa:PfaComuniType" substitutionGroup="gml:AbstractObject" />
+	
 	
 	<!-- types -->
 	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
@@ -212,6 +215,7 @@
 					<!-- oggetti innestati -->
 
 					<xs:element name="pfaParticellaForestale" type="decsiraogc_idf_pfa:PfaParticellaForestalePropertyType" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="pfaComuni" type="decsiraogc_idf_pfa:PfaComuniPropertyType" minOccurs="0" maxOccurs="unbounded" />
 					
                 </sequence>
             </extension>
@@ -288,12 +292,78 @@
         </complexContent>
     </complexType>
 	
+	<complexType name="PfaComuniType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idPfaComuni" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				
+					<xs:element name="idgeoPlPfa"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="idComune"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="istatProv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="denominazioneProv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="istatComune" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="denominazioneComune" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					
+					<xs:element name="dataInizioValidita" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataFineValidita" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
 	
 	<!-- property types -->
 	
 	<complexType name="PfaParticellaForestalePropertyType">
         <sequence minOccurs="0">
             <element ref="decsiraogc_idf_pfa:PfaParticellaForestale" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="PfaComuniPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_pfa:PfaComuni" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
