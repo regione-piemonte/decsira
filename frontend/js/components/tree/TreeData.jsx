@@ -5,6 +5,7 @@ const PropTypes = require('prop-types');
 const Tree = require('rc-tree');
 const {TreeNode} = require('rc-tree');
 const TemplateUtils = require('../../utils/TemplateUtils');
+const {verifyProfiles} = require('../../utils/TemplateUtils');
 require('./SiraTree.less');
 const {loadCardTemplate} = require('../../actions/card');
 const {treeDataLoaded, treeDataLoading} = require('../../actions/treeData');
@@ -27,7 +28,8 @@ class TreeData extends React.Component {
         setTreeFeatureType: PropTypes.func,
         loading: PropTypes.bool,
         treeDataLoaded: PropTypes.func,
-        treeDataLoading: PropTypes.func
+        treeDataLoading: PropTypes.func,
+        profile: PropTypes.object
     };
 
     static defaultProps = {
@@ -165,7 +167,9 @@ class TreeData extends React.Component {
         }];
 
         let treeDataFlat = [];
-        let groups = props.groups;
+        let groups = this.props.groups.filter(
+            (group) => verifyProfiles(group.profiles, this.props.profile)
+        );
         let objects = props.objects;
         groups.forEach(group => {
             objects.forEach(object => {
@@ -231,7 +235,8 @@ module.exports = connect((state) => {
         treeData: state.treeData.treeData,
         configOggetti: state.siradec.configOggetti,
         authParams: state.userprofile.authParams,
-        waitingForConfig: state.siradec.waitingForConfig
+        waitingForConfig: state.siradec.waitingForConfig,
+        profile: state.userprofile.profile
     };
 }, dispatch => {
     return bindActionCreators({

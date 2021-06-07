@@ -32,7 +32,8 @@ class SiraExporter extends React.Component {
         csvMimeType: PropTypes.string,
         srs: PropTypes.string,
         totalFeatures: PropTypes.number,
-        maxFeatures: PropTypes.number
+        maxFeatures: PropTypes.number,
+        confMaxFeatures: PropTypes.number
     };
 
     static defaultProps = {
@@ -55,8 +56,9 @@ class SiraExporter extends React.Component {
 
     renderSelectors = () => {
         // const height = this.state.outputformat === 'shp' ? "260px" : "150px";
+        let maxFeat = this.props.confMaxFeatures ? this.props.confMaxFeatures : this.props.maxFeatures;
         let h = this.state.outputformat === 'shp' ? 260 : 150;
-        let height = this.state.type === 'all' && this.props.totalFeatures > this.props.maxFeatures ? (h + 80) + "px" : h + "px";
+        let height = this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (h + 80) + "px" : h + "px";
         return (
             <div role="body" style={{height, display: "flex",
                 flexDirection: "column", justifyContent: "space-between"}}>
@@ -80,8 +82,8 @@ class SiraExporter extends React.Component {
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
                     Solo gli elementi dotati di geometria verranno esportati
                 </Alert>) : null}
-                {this.state.type === 'all' && this.props.totalFeatures > this.props.maxFeatures ? (<Alert bsStyle="info" >
-                Superato limite massimo: saranno esportati {this.props.maxFeatures} di {this.props.totalFeatures} oggetti
+                {this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (<Alert bsStyle="info" >
+                Superato limite massimo: saranno esportati {maxFeat} di {this.props.totalFeatures} oggetti
                 </Alert>) : null}
                 <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export&nbsp;</span><Glyphicon glyph="download-alt" /></Button>
             </div>);
