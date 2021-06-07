@@ -11,6 +11,7 @@ const PropTypes = require('prop-types');
 const {createSelector} = require('reselect');
 const { Tabs, Tab, Modal} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 
@@ -241,10 +242,10 @@ class Dataset extends React.Component {
     renderUnauthorized = () => {
         return (<Modal show bsSize="small" onHide={() => this.props.setActiveFeatureType(null)}>
             <Modal.Header className="dialog-error-header-side" closeButton>
-                <Modal.Title>Errore</Modal.Title>
+                <Modal.Title><I18N.Message msgId="Modal.InfoTitle"/></Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="mapstore-error">Non si dispone delle autorizzazioni necessarie per accedere a questo dato</div>
+                <div className="mapstore-error"><I18N.Message msgId="Modal.UnauthorizedMessage"/></div>
             </Modal.Body>
             <Modal.Footer>
             </Modal.Footer>

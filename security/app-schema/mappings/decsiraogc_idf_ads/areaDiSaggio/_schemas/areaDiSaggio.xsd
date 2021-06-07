@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_idf_ads="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_ads/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_idf_pt_area_di_saggio  id= idgeo_pt_ads-->
+	<element name="AreaDiSaggio" substitutionGroup="gml:AbstractFeature" type="decsiraogc_idf_ads:AreaDiSaggioType"/>
+	
+	<!-- decsira_t_idf_specie_alberi  id= ??-->
+	<element name="SpecieAlberi" substitutionGroup="gml:AbstractObject" type="decsiraogc_idf_ads:SpecieAlberiType"/>
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="AreaDiSaggioType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idGeoPtAds" type="xs:integer"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoAds" type="xs:integer"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="descrTipoAds">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataRil" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="soggettoRilev" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceAds">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="quota" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="inclinazione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkComune" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denominazioneComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="siglaProv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denominazioneProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAmbito" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrAmbito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="ambitoSpecifico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="fkCategoriaForestale" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceAmminitrativoCf">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrCategoriaForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoForestale" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceAmminitrativoTf">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkProprieta" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrProprieta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAssetto" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrAssetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkEsposizione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrEsposizione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkDestinazione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrDestinazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkPriorita" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrPriorita">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoIntervento" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrTipoIntervento">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkDanno" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrDanno">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataInizioValidita" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="noteAds">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="statoAds" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="utmEst" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="utmNord" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkIdgeoPlParticellaForestale" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceParticella">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denominazioneParticella">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoStrutturalePrinc" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrTipoStrutturalePrinc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoStrutturaleSecond" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrTipoStrutturaleSec">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codStadioSviluppo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrStadioSviluppo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codEsbosco">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrEsbosco">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="densitaCampionamento" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="raggioMt" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codStadioSviluppo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="percCoperturaChiome" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="attitudineProduttiva">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="distEsboscoFuoriPista" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="distEsboscoSuPista" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="minDistanzaPlanimetrica" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nrCeppaie" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nrPianteMorte" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="rinnovazione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="rinSpeciePrevalente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="danniPerc" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgPascolamento" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="percDefogliazione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="percIngiallimento" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="combustP" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkSottotipoSupNota" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrSottotipoSupNota">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkClasseFertilita" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrClasseFertilita">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="noteSupNota">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoStrutturalePrinc" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoStrutturalePrincRel">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoStrutturaleSecond" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoStrutturaleSecRel">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fattoreNumerazione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="noteRelascopica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="specieAlberi" type="decsiraogc_idf_ads:SpecieAlberiPropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="SpecieAlberiType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element maxOccurs="1" name="idSpecieAlberi " type="xs:integer"/>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="idSpecie" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					<xs:element minOccurs="1" name="specie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codGruppo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codicePignatti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgConiflatif">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codTipoCampioneDom">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codTipoCampionePrinc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgSemePollone">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkConfigIpla" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="diametro" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altezza" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="incremento" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="eta" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nrAlberiSeme" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nrAlberiPollone" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="numTavolaCoeffCub" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desTavolaCoeffcub">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="note">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idgeoPtAds" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoAds" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrTipoAds">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="SpecieAlberiPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_ads:SpecieAlberi"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+</schema>

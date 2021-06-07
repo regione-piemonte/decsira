@@ -12,7 +12,8 @@ const {connect} = require('react-redux');
 const Message = require('@mapstore/components/I18N/Message');
 const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects, toggleCategories, setNodeInUse} = require('../actions/siracatalog');
 const assign = require('object-assign');
-const {Tabs, Tab, Alert} = require("react-bootstrap");
+const { Tabs, Tab, Modal } = require("react-bootstrap");
+const I18N = require('@mapstore/components/I18N/I18N');
 const {toggleSiraControl} = require('../actions/controls');
 
 const {addLayer} = require('@mapstore/actions/layers');
@@ -111,13 +112,16 @@ class LayerTree extends React.Component {
     }
 
     renderUnauthorized = () => {
-        return (
-            <Alert bsStyle="danger" dismissible >
-                <button className="close" onClick= {() => this.props.setActiveFeatureType(null)} data-dismiss="danger" aria-label="Close">
-                    <span aria-hidden="true" color="#A9A9A9;">&times;</span>
-                </button>
-            Non si dispone delle autorizzazioni necessarie per accedere a questo dato
-            </Alert>
+        return (<Modal show bsSize="small" onHide={() => this.props.setActiveFeatureType(null)}>
+            <Modal.Header className="dialog-error-header-side" closeButton>
+                <Modal.Title><I18N.Message msgId="Modal.InfoTitle"/></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="mapstore-error"><I18N.Message msgId="Modal.UnauthorizedMessage"/></div>
+            </Modal.Body>
+            <Modal.Footer>
+            </Modal.Footer>
+        </Modal>
         );
     };
 

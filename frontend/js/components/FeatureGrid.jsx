@@ -20,9 +20,11 @@ const mapUtils = require('@mapstore/utils/MapUtils');
 const configUtils = require('@mapstore/utils/ConfigUtils');
 
 const SiraExporter = connect((state) => {
+    const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     return {
         show: state.siraControls.exporter,
         exportParams: state.siraexporter.params,
+        confMaxFeatures: (activeConfig.exporter ? activeConfig.exporter.maxFeatures : undefined),
         featuregrid: state.grid && state.grid.featuregrid,
         loading: state.siraexporter.loading,
         errormsg: state.siraexporter.errormsg,
@@ -572,11 +574,12 @@ class SiraGrid extends React.Component {
     };
 
     exportFeatures = (api) => {
-        const {exporterConfig, configureExporter, toggleSiraControl, maxFeatures, gridType,
-            groupFields, filterFields, spatialField} = this.props;
-        if ( exporterConfig ) {
+        const {exporterConfig, /* configureExporter,*/ toggleSiraControl, maxFeatures, gridType,
+            groupFields, filterFields, spatialField } = this.props;
+        /*
+        if (exporterConfig) {
             configureExporter(exporterConfig);
-        }
+        }*/
         toggleSiraControl("exporter", true);
         const pagination = (exporterConfig && exporterConfig.maxFeatures || maxFeatures) ? {
             startIndex: 0,
