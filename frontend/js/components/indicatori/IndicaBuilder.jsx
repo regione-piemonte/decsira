@@ -101,7 +101,7 @@ function IndicaBuilder({
     }, []);
 
     const layer = {
-        url: "http://tst-gisserver5.territorio.csi.it:8080/geoserver", // ConfigUtils.getConfigProp('geoserverUrl'),
+        url: "http://ts-tc2-decsira.site03.nivolapiemonte.it:8080/geoserver",  // ConfigUtils.getConfigProp('geoserverUrl'),
         name: wmsLayer.name,
         thematic: {
             fieldAsParam: true
