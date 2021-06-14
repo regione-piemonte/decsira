@@ -26,7 +26,8 @@ const {
     FEATURETYPE_CONFIG_LOADING,
     USER_NOT_AUTHORIZED
 } = require('../actions/siradec');
-const {SET_FEATURE_ROW_DATA} = require('../actions/featuregrid');
+const { SET_FEATURE_ROW_DATA } = require('../actions/featuregrid');
+const { SHOW_SETTINGS } = require('@mapstore/actions/layers');
 
 const assign = require('object-assign');
 
@@ -174,12 +175,19 @@ function siradec(state = initialState, action) {
     }
     case EXPAND_FILTER_PANEL: {
         return assign({}, state, {
-            filterPanelExpanded: action.expand
+            filterPanelExpanded: action.expand,
+            currentNodeId: action.expand ? action.currentNodeId : state.currentNodeId
+        });
+    }
+    case SHOW_SETTINGS: {
+        return assign({}, state, {
+            currentNodeId: action.node ? action.node : state.currentNodeId
         });
     }
     case CONFIGURE_INDICA_LAYER: {
         return assign({}, state, {
-            indicaConfigPanelExpanded: true
+            indicaConfigPanelExpanded: true,
+            currentNodeId: action.currentNodeId
         });
     }
     case CLOSE_INDICA_CONFIGURATION: {

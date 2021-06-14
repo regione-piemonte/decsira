@@ -69,7 +69,7 @@ class SiraSettings extends React.Component {
     };
 
     render() {
-        const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && this.props.element.type === "wms";
+        const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && (this.props.element.type === "wms" || this.props.element.type === "wmspost");
         const renderSTool = !!this.props.element.featureType;
         const renderLegendTool = this.props.element.type !== "vector";
         return (<div id="sira-layer-settings">

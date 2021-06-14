@@ -78,7 +78,7 @@ class DefaultNode extends React.Component {
                             style={glyphStyle}
                             key="toggle-indicatori"
                             glyph="signal"
-                            onClick={() => this.props.configureIndicaLayer(this.props.node.featureType)}/>
+                            onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id)}/>
                     </OverlayTrigger>));
             }
         }

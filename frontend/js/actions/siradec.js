@@ -106,17 +106,18 @@ function configureFeatureInfo(config, featureType) {
     };
 }
 
-function expandFilterPanel(expand) {
+function expandFilterPanel(expand, nodeId = null) {
     return {
         type: EXPAND_FILTER_PANEL,
-        expand: expand
+        expand: expand,
+        currentNodeId: nodeId
     };
 }
 
-function configureIndicaLayer(type) {
+function configureIndicaLayer(nodeId = null) {
     return {
         type: CONFIGURE_INDICA_LAYER,
-        indicaType: type
+        currentNodeId: nodeId
     };
 }
 

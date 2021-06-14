@@ -114,9 +114,12 @@ class SiraGrid extends React.Component {
         closeTree: PropTypes.func,
         datasetHeader: PropTypes.string,
         featureTypeNameLabel: PropTypes.string,
+        viewParams: PropTypes.string,
         configureMLS: PropTypes.func,
         multiLayerSelect: PropTypes.array,
-        setFeatureRowData: PropTypes.func
+        setFeatureRowData: PropTypes.func,
+        isIndicatore: PropTypes.bool,
+        indicaTitle: PropTypes.string
     };
 
     static contextTypes = {
@@ -158,6 +161,7 @@ class SiraGrid extends React.Component {
         fullScreen: false,
         selectAll: true,
         featureTypeNameLabel: null,
+        viewParams: null,
         onDetail: () => {},
         onShowDetail: () => {},
         toggleSiraControl: () => {},
@@ -260,12 +264,14 @@ class SiraGrid extends React.Component {
                     groupFields: this.props.groupFields,
                     filterFields: this.props.filterFields.filter(({value = ''}) => value !== null && value !== ''),
                     spatialField: this.props.spatialField,
-                    pagination
+                    pagination,
+                    options: { viewParams: this.props.viewParams }
                 } : {
                     groupFields: [],
                     filterFields: [],
                     spatialField: {},
-                    pagination
+                    pagination,
+                    options: { viewParams: this.props.viewParams }
                 };
                 let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.getSortOptions(params));
                 this.featureLoaded = params;
@@ -332,10 +338,18 @@ class SiraGrid extends React.Component {
 
     renderDatasetHeader = () => {
         const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
-        return (
+        const indicaTitle = this.props.isIndicatore ? (
             <div className="dhContainer">
-                <label>{datasetHeader}</label>
-                <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+                <b>Indicatore selezionato</b> <br /> {this.props.indicaTitle}
+            </div>
+        ) : "";
+        return (
+            <div>
+                <div className="dhContainer">
+                    <label>{datasetHeader}</label>
+                    <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+                </div>
+                {indicaTitle}
             </div>
         );
     };
@@ -473,11 +487,13 @@ class SiraGrid extends React.Component {
             let filterObj = this.props.gridType === 'search' ? {
                 groupFields: this.props.groupFields,
                 filterFields: this.props.filterFields.filter((field) => field.value),
-                spatialField: this.props.spatialField
+                spatialField: this.props.spatialField,
+                options: { viewParams: this.props.viewParams }
             } : {
                 groupFields: [],
                 filterFields: [],
-                spatialField: {}
+                spatialField: {},
+                options: { viewParams: this.props.viewParams }
             };
             this.props.selectAllToggle(this.props.featureTypeName, filterObj, this.props.ogcVersion, this.props.params, this.props.searchUrl, this.props.nameSpaces);
         } else {
@@ -589,12 +605,14 @@ class SiraGrid extends React.Component {
             groupFields: groupFields,
             filterFields: filterFields.filter((field) => field.value),
             spatialField: spatialField,
-            pagination
+            pagination,
+            options: { viewParams: this.props.viewParams }
         } : {
             groupFields: [],
             filterFields: [],
             spatialField: {},
-            pagination
+            pagination,
+            options: { viewParams: this.props.viewParams }
         };
         let filter = FilterUtils.toOGCFilterSira(this.props.featureTypeName, filterObj, this.props.ogcVersion);
         let features = [];
@@ -611,8 +629,15 @@ class SiraGrid extends React.Component {
 
 module.exports = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const layers = state.layers.flat;
+    const layerId = state.siradec.currentNodeId ? state.siradec.currentNodeId : null;
+    const currLayer = layerId ? layers.filter((l) => l.featureType === state.siradec.activeFeatureType && l.id === layerId)[0] : null;
     return {
-        featureTypeNameLabel: activeConfig.featureTypeNameLabel
+        featureTypeNameLabel: activeConfig.featureTypeNameLabel,
+        viewParams: currLayer ? currLayer.viewparams : undefined,
+        // Indica title props
+        isIndicatore: currLayer && currLayer.isIndicatore ? true : false,
+        indicaTitle: currLayer ? currLayer.indicaTitle : ""
     };
 }, dispatch => {
     return bindActionCreators({
