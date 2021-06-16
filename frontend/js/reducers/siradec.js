@@ -86,18 +86,6 @@ function siradec(state = initialState, action) {
 
         const queryform = assign({}, state.queryform, {geometryName: action.geometryName, spatialField: assign({}, state.queryform.spatialField, {attribute: action.geometryName})});
 
-        /*
-        const indicaform = assign({}, state.indicaform, {
-            selectedRisSpaziale: action.selectedRisSpaziale,
-            selectedIndicatore: action.selectedIndicatore,
-            selectedPeriodicita: action.selectedPeriodicita,
-            selectedDettaglioPeriodicita: action.selectedDettaglioPeriodicita,
-            classification: action.classification,
-            intervals: action.intervals,
-            colorramp: action.colorramp,
-            colors: action.colors
-        });*/
-
         let newConf = assign({}, state.configOggetti[action.featureType], {
             attributes: queryAttributes,
             featureTypeName: action.ftName,
@@ -109,7 +97,6 @@ function siradec(state = initialState, action) {
             exporter: action.exporter,
             geometryType: action.geometryType || 'Point',
             queryform,
-            // indicaform,
             authorized: action.authorized,
             tematizzatore: action.tematizzatore,
             indicaFilters: indicaFilters
@@ -176,7 +163,8 @@ function siradec(state = initialState, action) {
     case EXPAND_FILTER_PANEL: {
         return assign({}, state, {
             filterPanelExpanded: action.expand,
-            currentNodeId: action.expand ? action.currentNodeId : state.currentNodeId
+            // currentNodeId: action.expand ? action.currentNodeId : state.currentNodeId
+            currentNodeId: action.expand && action.currentNodeId !== null ? action.currentNodeId : state.currentNodeId
         });
     }
     case SHOW_SETTINGS: {

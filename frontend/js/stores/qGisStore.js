@@ -32,7 +32,7 @@ module.exports = (initialState = {defaultState: {}, mobile: {}}, appReducers = {
             const configOggetti = newState.siradec.configOggetti[action.featureType];
             //     // Devi assegnare a queryform e grid i valori che hai in     siradec.configOggetti.featureType
             const newGrid = assign({}, newState.grid, {featuregrid: configOggetti.featuregrid});
-            newState = assign({}, newState, {queryform: configOggetti.queryform, grid: newGrid, indicaform: configOggetti.indicaform});
+            newState = assign({}, newState, {queryform: configOggetti.queryform, grid: newGrid});
         }
         return newState;
     };

@@ -22,8 +22,7 @@ class SideIndicaPanel extends React.Component {
         header: PropTypes.string,
         datasetHeader: PropTypes.string,
         featureTypeNameLabel: PropTypes.string,
-        tematizzatore: PropTypes.object,
-        indicaform: PropTypes.object
+        tematizzatore: PropTypes.object
     };
 
     static contextTypes = {
@@ -37,8 +36,7 @@ class SideIndicaPanel extends React.Component {
         header: "indicaform.form.header",
         datasetHeader: "indicaform.form.dataset_header",
         featureTypeNameLabel: "",
-        tematizzatore: {},
-        indicaform: {}
+        tematizzatore: {}
     };
 
     renderHeader = () => {
@@ -74,7 +72,7 @@ class SideIndicaPanel extends React.Component {
             <Panel className={this.props.withMap ? "querypanel-container side-querypanel widthclass" : "querypanel-container side-querypanel hideSpatialFilter widthclass" } collapsible={this.props.collapsible}
                 header={this.renderHeader()} bsStyle="primary">
                 {this.renderDatasetHeader()}
-                <IndicaBuilder {...this.props.tematizzatore} indicaform={this.props.indicaform} />
+                <IndicaBuilder {...this.props.tematizzatore} />
             </Panel>
         );
     };
@@ -135,20 +133,8 @@ export default connect((state) => {
         expanded: state.siradec.indicaConfigPanelExpanded,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
-        indicaFilters: activeConfig.indicaFilters,
+        indicaFilters: activeConfig.indicaFilters
         // featureTypeName: activeConfig.featureTypeName,
-
-        // IndicaBuilder props
-        /*
-        selectedRisSpaziale: state.indicaform.selectedRisSpaziale,
-        selectedIndicatore: state.indicaform.selectedIndicatore,
-        selectedPeriodicita: state.indicaform.selectedPeriodicita,
-        selectedDettaglioPeriodicita: state.indicaform.selectedDettaglioPeriodicita,
-        classification: state.indicaform.classification,
-        intervals: state.indicaform.intervals,
-        colorramp: state.indicaform.colorramp,
-        colors: state.indicaform.colors*/
-        indicaform: state.indicaform
     };
 }, {
     onCloseError: hideQueryError
