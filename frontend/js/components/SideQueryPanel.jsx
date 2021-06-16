@@ -262,10 +262,18 @@ class SideQueryPanel extends React.Component {
 
     renderDatasetHeader = () => {
         const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
-        return (
+        const indicaTitle = this.props.isIndicatore ? (
             <div className="dhContainer">
-                <label>{datasetHeader}</label>
-                <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+                <b>Indicatore selezionato</b> <br /> {this.props.indicaTitle}
+            </div>
+        ) : "";
+        return (
+            <div>
+                <div className="dhContainer">
+                    <label>{datasetHeader}</label>
+                    <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+                </div>
+                {indicaTitle}
             </div>
         );
     };
@@ -372,12 +380,19 @@ class SideQueryPanel extends React.Component {
 
 module.exports = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const layers = state.layers.flat;
+    const layerId = state.siradec.currentNodeId ? state.siradec.currentNodeId : null;
+    const currLayer = layerId ? layers.filter((l) => l.featureType === state.siradec.activeFeatureType && l.id === layerId)[0] : null;
     return {
         // SiraQueryPanel prop
         filterPanelExpanded: state.siradec.filterPanelExpanded,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
         featureTypeName: activeConfig.featureTypeName,
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
+
+        // Indica title props
+        isIndicatore: currLayer && currLayer.isIndicatore ? true : false,
+        indicaTitle: currLayer ? currLayer.indicaTitle : "",
 
         // QueryBuilder props
         groupLevels: state.queryform.groupLevels,

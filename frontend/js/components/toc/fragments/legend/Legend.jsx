@@ -30,7 +30,7 @@ class Legend extends React.Component {
     };
 
     render() {
-        if (this.props.layer && this.props.layer.type === "wms" && this.props.layer.url) {
+        if (this.props.layer && (this.props.layer.type === "wms" || this.props.layer.type === "wmspost") && this.props.layer.url) {
             let layer = this.props.layer;
             const url = isArray(layer.url) ?
                 layer.url[Math.floor(Math.random() * layer.url.length)] :
@@ -50,7 +50,8 @@ class Legend extends React.Component {
                 LEGEND_OPTIONS: this.props.legendOptions
                 // SCALE TODO
             }, layer.legendParams || {},
-            layer.params || {},
+            // layer.params || {},
+            // layer.params && layer.params.SLD ? {SLD: layer.params.SLD} : {});
             layer.params && layer.params.SLD_BODY ? {SLD_BODY: layer.params.SLD_BODY} : {});
             SecurityUtils.addAuthenticationParameter(url, query);
 

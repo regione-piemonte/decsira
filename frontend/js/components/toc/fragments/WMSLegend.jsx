@@ -22,7 +22,7 @@ class WMSLegend extends React.Component {
 
     render() {
         let node = this.props.node || {};
-        if (this.canShow(node) && node.type === "wms" && node.group !== "background") {
+        if (this.canShow(node) && (node.type === "wms" || node.type === "wmspost") && node.group !== "background") {
             return <div style={{marginLeft: "15px"}}><Legend layer={node}/></div>;
         }
         return null;

@@ -13,7 +13,7 @@ const SwitchPanel = require('@mapstore/components/misc/switch/SwitchPanel');
 const assign = require('object-assign');
 
 const {addIndicaLayer, removeIndicaLayer} = require('../../actions/addmap');
-const {indicaFormClosed} = require('../../actions/indicaform');
+const { closeIndicaConfiguration } = require('../../actions/siradec');
 
 function IndicaBuilder({
     risoluzioneSpaziale = [],
@@ -30,7 +30,8 @@ function IndicaBuilder({
     addLayer,
     removeLayer,
     indicaform,
-    formClosed
+    currLayer,
+    closeConfiguration
 }) {
 
     function getRampColors(color) {
@@ -93,11 +94,6 @@ function IndicaBuilder({
             setColors(indicaform.colors);
             setTematizePanelExpanded(indicaform.tematizePanelExpanded);
         }
-        return () => {
-            // console.log("IndicaBuilder UNMOUNT");
-            // console.log(formData.current);
-            formClosed(formData.current);
-        };
     }, []);
 
     const layer = {
@@ -115,11 +111,26 @@ function IndicaBuilder({
     }
 
     function getWmsTitle() {
+        if (!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
+            return "";
+        }
         return description + " - "
-        + selectedIndicatore.value + " - "
-        + selectedRisSpaziale.value + " - "
-        + selectedPeriodicita.value + " - "
-        + selectedDettaglioPeriodicita.value;
+            + selectedIndicatore.value + " - "
+            + selectedIndicatore.unitaMisura + " - "
+            + selectedRisSpaziale.value + " - "
+            + selectedPeriodicita.value + " - "
+            + selectedDettaglioPeriodicita.value;
+    }
+
+    function getIndicaTitle() {
+        if (!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
+            return "";
+        }
+        return selectedIndicatore.value + " - "
+            + selectedIndicatore.unitaMisura + " - "
+            + selectedRisSpaziale.value + " - "
+            + selectedPeriodicita.value + " - "
+            + selectedDettaglioPeriodicita.value;
     }
 
     function setCustomColors(color) {
@@ -230,6 +241,10 @@ function IndicaBuilder({
         if (name === "dimensione") {
             const opt = getOptionFromValue(dimensione, value);
             setSelectedIndicatore(opt);
+            setIntervals(opt.intervals);
+            setClassification(opt.method);
+            setColorRamp(opt.ramp);
+            setCustomColors(opt.ramp);
         }
         if (name === "periodicita") {
             const opt = getOptionFromValue(periodicita, value);
@@ -307,6 +322,10 @@ function IndicaBuilder({
         colors
     };
 
+    function isUpdate() {
+        return currLayer && currLayer.viewparams === wmsLayer.viewparams;
+    }
+
     function applyStyle() {
         if (!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
             return;
@@ -325,9 +344,18 @@ function IndicaBuilder({
         axios.get(sldUrl).then((resp) => {
             let bodyData = resp.data.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
             wmsLayer.title = getWmsTitle();
-            wmsLayer.params = assign({}, wmsLayer.params, {SLD_BODY: bodyData});
+            wmsLayer.indicaTitle = getIndicaTitle();
+            wmsLayer.params = assign({}, wmsLayer.params, { SLD_BODY: bodyData, SLD: sldUrl});
             wmsLayer.viewparams = getViewParams();
+            wmsLayer.isIndicatore = true;
+            wmsLayer.indicaform = formData.current;
+            if (isUpdate()) {
+                wmsLayer.id = currLayer.id;
+            } else {
+                wmsLayer.id = undefined;
+            }
             addLayer(wmsLayer);
+            closeConfiguration();
         }).catch(e => {
             console.error(e);
         });
@@ -414,6 +442,9 @@ function IndicaBuilder({
                     </Row>
                 </div>
             </SwitchPanel>
+            <div className="dhContainer">
+                <b>Indicatore selezionato</b> <br/> {getIndicaTitle()}
+            </div>
             <SwitchPanel
                 id="tematizePanel"
                 title="Tematizzazione"
@@ -455,6 +486,10 @@ IndicaBuilder.propTypes = {
 
 export default connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const layers = state.layers.flat;
+    const layerId = state.siradec.currentNodeId ? state.siradec.currentNodeId : null;
+    const currLayer = layerId ? layers.filter((l) => l.featureType === state.siradec.activeFeatureType && l.id === layerId)[0] : null;
+
     let risSp = []; let dettPer = []; let dim = []; let period = [];
     if (activeConfig.indicaFilters) {
         let filters = activeConfig.indicaFilters;
@@ -462,7 +497,14 @@ export default connect((state) => {
             return { id: att.fk_ris_spaziale, value: att.des_ris_spaziale };
         });
         dim = filters[1].values.map((att) => {
-            return { id: att.fk_dimensione, value: att.des_dimensione };
+            return {
+                id: att.fk_dimensione,
+                value: att.des_dimensione,
+                unitaMisura: att.des_unita_misura,
+                ramp: att.des_ramp,
+                method: att.method,
+                intervals: att.intervals
+            };
         });
         period = filters[2].values.map((att) => {
             return { id: att.fk_ris_temporale, value: att.des_ris_temporale };
@@ -478,10 +520,11 @@ export default connect((state) => {
         dimensione: dim,
         periodicita: period,
         dettaglioPeriodicita: dettPer,
-        indicaform: state.indicaform
+        currLayer: currLayer,
+        indicaform: currLayer ? currLayer.indicaform : undefined
     };
 }, {
     addLayer: addIndicaLayer,
     removeLayer: removeIndicaLayer,
-    formClosed: indicaFormClosed
+    closeConfiguration: closeIndicaConfiguration
 })(IndicaBuilder);

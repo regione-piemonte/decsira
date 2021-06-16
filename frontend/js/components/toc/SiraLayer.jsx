@@ -16,7 +16,7 @@ const PropTypes = require('prop-types');
 const LayersTool = require('./fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
 const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
-const {Glyphicon} = require('react-bootstrap');
+const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 
 class DefaultLayer extends React.Component {
     static propTypes = {
@@ -31,6 +31,7 @@ class DefaultLayer extends React.Component {
         updateSettings: PropTypes.func,
         updateNode: PropTypes.func,
         removeNode: PropTypes.func,
+        configureIndicaLayer: PropTypes.func,
         activateLegendTool: PropTypes.bool,
         activateSettingsTool: PropTypes.bool,
         settingsText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -113,7 +114,20 @@ class DefaultLayer extends React.Component {
                     style={{"float": "right", cursor: 'pointer'}}
                     key="toggle-query"
                     glyph="search"
-                    onClick={()=> this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType)}/>);
+                    onClick={()=> this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType, this.props.node.id)}/>);
+            }
+            if (this.props.node.isIndicatore === true) {
+                const tooltip = <Tooltip>Configura indicatore</Tooltip>;
+                const tool = (<Glyphicon
+                    style={{"float": "right", cursor: 'pointer'}}
+                    key="edit-indicatori"
+                    glyph="signal"
+                    onClick={this.configuraIndicatore}
+                    overlay={tooltip}
+                />);
+                tools.push((<OverlayTrigger placement="bottom" overlay={tooltip}>
+                    {tool}
+                </OverlayTrigger>));
             }
         }
         return tools;
@@ -124,9 +138,9 @@ class DefaultLayer extends React.Component {
         return (
             <Node className="toc-default-layer" animateCollapse={false} sortableStyle={this.props.sortableStyle} style={this.props.style} type="layer" {...other}>
                 <Title onClick={this.showInfoBox}/>
-                <InlineSpinner loading={this.props.node.loading}/>
                 {this.renderCollapsible()}
                 {this.renderTools()}
+                <InlineSpinner loading={this.props.node.loading}/>
             </Node>
         );
     }
@@ -136,6 +150,10 @@ class DefaultLayer extends React.Component {
             this.props.onToggle(this.props.node.siraId);
         }
     };
+
+    configuraIndicatore = () => {
+        this.props.configureIndicaLayer(this.props.node.id);
+    }
 }
 
 module.exports = DefaultLayer;

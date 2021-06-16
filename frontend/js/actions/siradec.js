@@ -31,7 +31,6 @@ const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
 const assign = require('object-assign');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
-const {indicaFormReset} = require('./indicaform');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const { Promise } = require('es6-promise');
 
@@ -106,17 +105,18 @@ function configureFeatureInfo(config, featureType) {
     };
 }
 
-function expandFilterPanel(expand) {
+function expandFilterPanel(expand, nodeId = null) {
     return {
         type: EXPAND_FILTER_PANEL,
-        expand: expand
+        expand: expand,
+        currentNodeId: nodeId
     };
 }
 
-function configureIndicaLayer(type) {
+function configureIndicaLayer(nodeId = null) {
     return {
         type: CONFIGURE_INDICA_LAYER,
-        indicaType: type
+        currentNodeId: nodeId
     };
 }
 
@@ -270,7 +270,6 @@ function loadFeatureTypeConfig(configUrl, params, featureType, activate = false,
                 dispatch(configureFeatureGrid(config.featuregrid, featureType));
                 dispatch(configureFeatureInfo(config.featureinfo, featureType));
                 dispatch(configureCard(config.card, featureType));
-                dispatch(indicaFormReset());
                 dispatch(queryFormPreloaded(false));
 
                 let serviceUrl = config.query.service.url;

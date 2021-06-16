@@ -11,7 +11,8 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {changeLayerProperties, changeGroupProperties, toggleNode,
     sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('@mapstore/actions/layers');
-const {groupsSelector} = require('@mapstore/selectors/layers');
+const { configureIndicaLayer } = require('../actions/siradec');
+const { groupsSelector } = require('@mapstore/selectors/layers');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const LayersUtils = require('@mapstore/utils/LayersUtils');
 const Message = require('@mapstore/plugins/locale/Message');
@@ -83,7 +84,8 @@ class LayerTree extends React.Component {
         toggleSiraControl: PropTypes.func,
         setGridType: PropTypes.func,
         showInfoBox: PropTypes.func,
-        loadMetadata: PropTypes.func
+        loadMetadata: PropTypes.func,
+        configureIndicaLayer: PropTypes.func
     };
 
     static defaultProps = {
@@ -93,7 +95,8 @@ class LayerTree extends React.Component {
         onToggleLayer: () => {},
         onSettings: () => {},
         updateNode: () => {},
-        removeNode: () => {},
+        removeNode: () => { },
+        configureIndicaLayer: () => { },
         activateLegendTool: true,
         activateSettingsTool: true,
         visibilityCheckType: "checkbox",
@@ -127,6 +130,7 @@ class LayerTree extends React.Component {
             updateSettings={this.props.updateSettings}
             updateNode={this.props.updateNode}
             removeNode={this.props.removeNode}
+            configureIndicaLayer={this.props.configureIndicaLayer}
             visibilityCheckType={this.props.visibilityCheckType}
             activateLegendTool={this.props.activateLegendTool}
             activateSettingsTool={this.props.activateSettingsTool}
@@ -148,14 +152,14 @@ class LayerTree extends React.Component {
         );
     }
 
-    openFilterPanel = (status, featureType) => {
+    openFilterPanel = (status, featureType, nodeId) => {
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
             this.props.queryFormPreloaded(false);
         }
-        this.props.expandFilterPanel(status);
+        this.props.expandFilterPanel(status, nodeId);
     };
 
     searchAll = (featureType) => {
@@ -193,7 +197,8 @@ const TOCPlugin = connect(tocSelector, {
     toggleSiraControl,
     setGridType,
     loadMetadata,
-    showInfoBox: showBox
+    showInfoBox: showBox,
+    configureIndicaLayer
 })(LayerTree);
 
 module.exports = {

@@ -138,13 +138,6 @@ function addLayersInCart(layers, useTitle, useGroup, srs = 'EPSG:32632') {
     };
 }
 
-function addIndicaLayer(layer) {
-    return (dispatch) => {
-        // dispatch(removeIndicaLayer(layer));
-        dispatch(addSiraLayers([layer]));
-    };
-}
-
 function removeIndicaLayer(layer) {
     return (dispatch, getState) => {
         // rimuovo i layers già presenti in mappa con lo stesso title
@@ -154,6 +147,13 @@ function removeIndicaLayer(layer) {
         alreadyPresentLayers.forEach(lay => {
             dispatch(removeLayer(lay.id));
         });
+    };
+}
+
+function addIndicaLayer(layer) {
+    return (dispatch) => {
+        dispatch(removeIndicaLayer(layer));
+        dispatch(addSiraLayers([layer]));
     };
 }
 

@@ -212,14 +212,14 @@ class LayerTree extends React.Component {
         this.props.expandFilterPanel(status);
     };
 
-    openIndicaPanel = (ftType) => {
+    openIndicaPanel = (ftType, nodeId) => {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
-        this.props.configureIndicaLayer();
+        this.props.configureIndicaLayer(nodeId);
     };
 
     searchAll = (node) => {
