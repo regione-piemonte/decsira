@@ -59,6 +59,7 @@ function IndicaBuilder({
     const [tematizePanelExpanded, setTematizePanelExpanded] = useState(false);
     const [formTouched, setFormTouched] = useState(false);
     const standardColors = ['red', 'blue', 'gray', 'jet'];
+    const [dimOptions, setDimOptions] = useState([]);
 
     const formData = React.useRef({
         selectedRisSpaziale: selectedRisSpaziale,
@@ -167,16 +168,25 @@ function IndicaBuilder({
         const urlMetadata = getStyleMetadataService(layer, styleOpts);
 
         axios.get(urlMetadata).then((resp) => {
-            const rules = resp.data.Rules.Rule;
+            let rules = resp.data.Rules.Rule;
+            if (!Array.isArray(rules)) {
+                rules = [rules];
+            }
             let colorsArray = [];
             rules.forEach(rule => {
-                colorsArray.push({
-                    color: rule.PolygonSymbolizer.Fill.CssParameter.$,
-                    min: rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal,
-                    max: rule.Filter.And.PropertyIsLessThan ?
-                        rule.Filter.And.PropertyIsLessThan.Literal :
-                        rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal
-                });
+                rule.Filter.And ?
+                    colorsArray.push({
+                        color: rule.PolygonSymbolizer.Fill.CssParameter.$,
+                        min: rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal,
+                        max: rule.Filter.And.PropertyIsLessThan ?
+                            rule.Filter.And.PropertyIsLessThan.Literal :
+                            rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal
+                    })
+                    : colorsArray.push({
+                        color: rule.PolygonSymbolizer.Fill.CssParameter.$,
+                        min: rule.Filter.PropertyIsEqualTo.Literal,
+                        max: rule.Filter.PropertyIsEqualTo.Literal
+                    });
             });
             setColors(colorsArray);
         }).catch(error => {
@@ -226,6 +236,10 @@ function IndicaBuilder({
         formData.current.tematizePanelExpanded = tematizePanelExpanded;
     }, [tematizePanelExpanded]);
 
+    React.useEffect(() => {
+        setDimOptions(dimensione.filter(dim => { return dim.fk_ris_spaziale === selectedRisSpaziale.id; }));
+    }, [selectedRisSpaziale]);
+
     function getOptionFromValue(array, value) {
         return array.filter((opt) => {
             return value === opt.value && opt;
@@ -237,9 +251,10 @@ function IndicaBuilder({
         if (name === "risoluzioneSpaziale") {
             const opt = getOptionFromValue(risoluzioneSpaziale, value);
             setSelectedRisSpaziale(opt);
+            setSelectedIndicatore({});
         }
         if (name === "dimensione") {
-            const opt = getOptionFromValue(dimensione, value);
+            const opt = getOptionFromValue(dimOptions, value);
             setSelectedIndicatore(opt);
             setIntervals(opt.intervals);
             setClassification(opt.method);
@@ -261,7 +276,7 @@ function IndicaBuilder({
         setFormTouched(true);
         switch (evt.param) {
         case "intervals":
-            if (evt.value >= 3 && evt.value <= 10) {
+            if (evt.value >= 1 && evt.value <= 10) {
                 setIntervals(evt.value);
             }
             break;
@@ -407,7 +422,8 @@ function IndicaBuilder({
                         </Col>
                         <Col xs={6}>
                             <ComboField
-                                fieldOptions={dimensione.map(a => a.value)}
+                                fieldOptions={dimOptions.map(a => a.value)}
+                                // fieldOptions={dimensione.map(a => a.value)}
                                 fieldName="dimensione"
                                 fieldRowId={new Date().getUTCMilliseconds()}
                                 fieldValue={selectedIndicatore.value}
@@ -503,7 +519,8 @@ export default connect((state) => {
                 unitaMisura: att.des_unita_misura,
                 ramp: att.des_ramp,
                 method: att.method,
-                intervals: att.intervals
+                intervals: att.intervals,
+                fk_ris_spaziale: att.fk_ris_spaziale
             };
         });
         period = filters[2].values.map((att) => {
