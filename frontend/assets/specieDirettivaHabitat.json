@@ -1,0 +1,210 @@
+{
+   "featureTypeName":"decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat",
+   "featureTypeNameLabel":"Specie direttiva habitat",
+   "nameSpaces": {
+     "decsiraogc_specie_direttiva_habitat": "http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"
+   },
+   "layer": {
+       "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Specie direttiva habitat",
+        "name": "decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "Polygon"
+       },
+        "featureType": "specieDirettivaHabitat",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+	     "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat",
+		 "pdfname": "Scheda_Specie_Direttiva_Habitat_{{/wfs:FeatureCollection/wfs:member/decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat/decsiraogc_specie_direttiva_habitat:idSpecieHabitat/text()}}.pdf",
+		 "template": "assets/cardTemplateSpecieDirettivaHabitat.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateSpecieDirettivaHabitat.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice specie",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:codSpecie/text()"],
+           "type": 2,
+           "width" : 120
+         },
+		 {
+           "headerName": "Nome scientifico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:nomeScientifico/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Nome volgare",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:nomeVolgare/text()"],
+           "type": 2,
+           "width" : 300
+         },
+		 {
+           "headerName": "Descrizione specie gruppo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:descrSpecieGruppo/text()"],
+           "type": 2,
+           "width" : 120
+         },
+		 {
+           "headerName": "Descrizione specie sotto gruppo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:descrSpecieSottogruppo/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Allegato B",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:flgAllegatoB/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Allegato D",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:flgAllegatod/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Prioritario",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:flgPrioritario/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Url scheda habitat",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:urlSchedaHabi/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_specie_direttiva_habitat:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+         "index": 1,
+         "attribute": "decsiraogc_specie_direttiva_habitat:codSpecie",
+         "label":"Nome scientifico specie",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_specie",
+			 "propertyName": "cod_specie,nome_scientifico",
+             "sortBy": "nome_scientifico+A"
+           }
+         },
+         "valueId":"cod_specie",
+         "valueLabel":"nome_scientifico"
+	   },
+	  {
+		"index": 2,
+		"attribute": "decsiraogc_specie_direttiva_habitat:descrSpecieGruppo",
+		"label":"Gruppo specie ",
+		"type":"list",
+		 "valueService": {
+		"urlParams": {
+			"typeName": "decsiraogc_decodif:decsira_d_biodiversita_specie_gruppo",
+			"propertyName": "id_specie_gruppo,descr_specie_gruppo",
+			"sortBy": "descr_specie_gruppo+A"
+		 }
+		},
+		"valueId":"descr_specie_gruppo",
+		"valueLabel":"descr_specie_gruppo"
+      },
+	  {
+            "index": 3,
+            "attribute": "decsiraogc_specie_direttiva_habitat:flgAllegatoB",
+            "label":"Allegato b",
+            "type":"list",
+            "values": [
+              {"value":"S","name":"S"},
+              {"value":"N","name":"N"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+        },
+		{
+            "index": 4,
+            "attribute": "decsiraogc_specie_direttiva_habitat:flgAllegatod",
+            "label":"Allegato d",
+            "type":"list",
+            "values": [
+              {"value":"S","name":"S"},
+              {"value":"N","name":"N"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+        },
+		{
+            "index": 5,
+            "attribute": "decsiraogc_specie_direttiva_habitat:flgPrioritario",
+            "label":"Prioritario ",
+            "type":"list",
+            "values": [
+              {"value":"S","name":"S"},
+              {"value":"N","name":"N"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+        }
+        
+     ]
+
+   }
+
+}

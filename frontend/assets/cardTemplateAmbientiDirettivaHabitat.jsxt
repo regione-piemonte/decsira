@@ -1,0 +1,34 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='Ambienti Direttive Habitat' subtitle={[
+            'Ambiente habitat: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:deschabitat/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+    <Section header='DATI GENERALI Ambienti direttiva Habitat' eventKey='1' expanded={true}>
+        <LabeledField label='Codice Habitat' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:codHabitat/text()")
+        }/>    
+        <LabeledField label='Descrizione Habitat' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:deschabitat/text()")
+        }/>
+        <LabeledField label='Flag validato' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:flg_validato/text()")
+        }/>
+        <LabeledField label='Flag prioritario' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:flgPrioritario/text()")
+        }/>
+        <LabeledField label='Categoria habitat Piemonte' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()")
+        }/>
+        <LabeledField label='Url Scheda Habitat' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:urlSchedaHabi/text()")
+        }/>
+		
+		
+    </Section>
+	
+    </Panel>
+</Panel>

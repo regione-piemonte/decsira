@@ -1,0 +1,123 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='AREA PROTETTA' subtitle={[
+            'Area protetta: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:nomeAreaProtetta/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+    <Section header='DATI GENERALI' eventKey='1' expanded={true}>
+        <LabeledField label='Codice amministrativo' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:codiceAmministrativo/text()")
+        }/>    
+        <LabeledField label='Nome area protetta' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:nomeAreaProtetta/text()")
+        }/>
+        <LabeledField label='Tipo area protetta' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrTipoAreaProtetta/text()")
+        }/>
+        <LabeledField label='Superficie amministrativa (ha)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:superficieAmministrativa/text()")
+        }/>
+        <LabeledField label='Province interessate' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:provincia/text()")
+        }/>
+        <LabeledField label='Comuni interessati' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:comuniInteressati/text()")
+        }/>
+		<LabeledField label='Località' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrizioneLocalita/text()")
+        }/>
+        <LabeledField label='Perimetro amministrativo (m)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:perimetroAmministrativo/text()")
+        }/>
+        <LabeledField label='Legge istitutiva' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:leggeIstitutiva/text()")
+        }/>
+        <LabeledField label='Ente gestore' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrEnteGestore/text()")
+        }/>
+        <LabeledField label='Tipo ente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrTipoEnte/text()")
+        }/>
+		<LabeledField label='Tipo patrimonialità' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrTipoPatrimonialita/text()")
+        }/>
+		<LabeledField label='Id Inspire' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:idInspire/text()")
+        }/>
+		<LabeledField label='Codice euap' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:codiceEuap/text()")
+        }/>
+	   <LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataIstituzione/text()")
+        }/>
+		<LabeledField label='Data aggiornamento istituzionale' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataAggiornIstituzionale/text()")
+        }/>
+        <LabeledField label='Url normativa' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlNormativa/text()")
+        }/>
+		<LabeledField label='Url piano' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlPiano/text()")
+        }/>
+		<LabeledField label='Url metadato' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlMetadato/text()")
+        }/>
+		<LabeledField label='Url allegato' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlAllegato/text()")
+        }/>
+		<LabeledField label='Url legge istitutiva' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlLeggeIstitutiva/text()")
+        }/>
+		
+    </Section>
+	
+	<Section header='MAPPA SINTESI - Area protetta su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='2' expanded={true}>
+		<MappaScheda
+			center={
+				model.getValue({
+					type: TemplateUtils.GEOMETRY_TYPE,
+					xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+				})
+			}
+			layers={[
+			{
+				"type": "wms",
+				"url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+				"name": "SfondoCartRif",
+				"title": "Sfondo Cartografico",
+				"group": "background",
+				"visibility": true,
+				"format": "image/png",
+				"tiled": true,
+				"tileSize": 512
+			},
+			{
+				"type": "wms",
+				"url": "{geoserverUrl}/wms",
+				"visibility": true,
+				"title": "Area protetta Preview",
+				"name": "decsiraogc_aree_protette:AreaProtetta",
+				"group": "Overlays",
+				"format": "image/png"
+			}
+			]}
+			authParam={model.authParam}
+			withMap={model.withMap}/>
+	</Section>
+	
+	<Section header='METADATO' eventKey='3' expanded={true}>
+		<LinkToPage
+			txt="Visualizza la scheda del metadato"
+			url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+			params={{
+				uuid: 'r_piemon:4368c018-6b58-4834-b233-c45360cb1206',
+				currTab: 'rndt'
+			}}
+		/>
+	</Section>
+	
+    </Panel>
+</Panel>

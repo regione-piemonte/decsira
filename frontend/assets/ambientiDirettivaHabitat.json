@@ -1,0 +1,165 @@
+{
+   "featureTypeName":"decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat",
+   "featureTypeNameLabel":"Ambienti direttiva habitat",
+   "nameSpaces": {
+     "decsiraogc_amb_direttiva_habitat": "http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"
+   },
+   "layer": {
+       "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Ambienti direttiva habitat",
+        "name": "decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "Polygon"
+       },
+        "featureType": "ambientiDirettivaHabitat",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+	     "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat",
+		 "pdfname": "Scheda_Ambienti_Direttiva_Habitat_{{/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:idAmbHabitat/text()}}.pdf",
+		 "template": "assets/cardTemplateAmbientiDirettivaHabitat.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateAmbientiDirettivaHabitat.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice habitat",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:codHabitat/text()"],
+           "type": 2,
+           "width" : 120
+         },
+		 {
+           "headerName": "Descrizione habitat",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:deschabitat/text()"],
+           "type": 2,
+           "width" : 250
+         },
+		 {
+           "headerName": "Flag validato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:flg_validato/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Flag prioritario",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:flgPrioritario/text()"],
+           "type": 2,
+           "width" : 110
+         },
+		 {
+           "headerName": "Categoria habitat piemonte",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Url scheda habitat",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:urlSchedaHabi/text()"],
+           "type": 2,
+           "width" : 250
+         },
+		 {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_amb_direttiva_habitat:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+         "index": 1,
+         "attribute": "decsiraogc_amb_direttiva_habitat:codHabitat",
+         "label":"Codice categoria habitat",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_descriz_habitat",
+			 "propertyName": "cod_habitat,desc_habitat",
+             "sortBy": "desc_habitat+A"
+           }
+         },
+         "valueId":"cod_habitat",
+         "valueLabel":"desc_habitat"
+	   },
+	   {
+        "index": 2,
+        "attribute": "decsiraogc_amb_direttiva_habitat:fkCategHabitatPiem",
+        "label": "Descrizione categoria habitat piemontese",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_categoria_habitat_piem",
+            "propertyName": "id_categ_habitat_piem,desc_categ_habitat_piem",
+            "sortBy": "desc_categ_habitat_piem+A"
+          }
+        },
+        "valueId": "id_categ_habitat_piem",
+        "valueLabel": "desc_categ_habitat_piem"
+      },
+	  {
+            "index": 3,
+            "attribute": "decsiraogc_amb_direttiva_habitat:flgPrioritario",
+            "label":"Flag prioritario",
+            "type":"list",
+            "values": [
+              {"value":"S","name":"S"},
+              {"value":"N","name":"N"}
+            ],
+            "valueId":"value",
+            "valueLabel":"name"
+        }
+        
+     ]
+
+   }
+
+}

@@ -1,0 +1,103 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateAreaProtetta"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Codice amministrativo",
+		  "xpath" : "decsiraogc_aree_protette:codiceAmministrativo/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Nome area protetta",
+		  "xpath" : "decsiraogc_aree_protette:nomeAreaProtetta/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Tipo area protetta",
+		  "xpath" : "decsiraogc_aree_protette:descrTipoAreaProtetta/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Superficie amministrativa (ha)",
+		  "xpath" : "decsiraogc_aree_protette:superficieAmministrativa/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Province interessate",
+		  "xpath" : "decsiraogc_aree_protette:provincia/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Comuni interessati",
+		  "xpath" : "decsiraogc_aree_protette:comuniInteressati/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Localita'",
+		  "xpath" : "decsiraogc_aree_protette:descrizioneLocalita/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Perimetro amministrativo (m)",
+		  "xpath" : "decsiraogc_aree_protette:perimetroAmministrativo/text()",
+		  "width" : 150
+		}, {
+          "headerName": "Legge istitutiva",
+          "xpath": "decsiraogc_aree_protette:leggeIstitutiva/text()",
+		  "width":150
+        }, {
+		  "headerName" : "Ente gestore",
+		  "xpath" : "decsiraogc_aree_protette:descrEnteGestore/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Tipo ente",
+		  "xpath" : "decsiraogc_aree_protette:descrTipoEnte/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Tipo patrimonialita'",
+		  "xpath" : "decsiraogc_aree_protette:descrTipoPatrimonialita/text()",
+		  "width" : 150
+		},{
+		  "headerName" : "Id Inspire",
+		  "xpath" : "decsiraogc_aree_protette:idInspire/text()",
+		  "width" : 100
+		},{
+		  "headerName" : "Codice euap",
+		  "xpath" : "decsiraogc_aree_protette:codiceEuap/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Data istituzione",
+		  "xpath" : "decsiraogc_aree_protette:dataIstituzione/text()",
+		  "dateFormat": "DD/MM/YYYY",
+		  "width" : 100
+		}, {
+		  "headerName" : "Data aggiornamento istituzionale",
+		  "xpath" : "decsiraogc_aree_protette:dataAggiornIstituzionale/text()",
+		  "dateFormat": "DD/MM/YYYY",
+		  "width" : 100
+		}, {
+		  "headerName" : "Url normativa",
+		  "xpath" : "decsiraogc_aree_protette:urlNormativa/text()",
+		  "width" : 100
+		},{
+		  "headerName" : "Url piano",
+		  "xpath" : "decsiraogc_aree_protette:urlPiano/text()",
+		  "width" : 100
+		},{
+		  "headerName" : "Url metadato",
+		  "xpath" : "decsiraogc_aree_protette:urlMetadato/text()",
+		  "width" : 100
+		},{
+		  "headerName" : "Url allegato",
+		  "xpath" : "decsiraogc_aree_protette:urlAllegato/text()",
+		  "width" : 100
+		},{
+		  "headerName" : "Url legge istitutiva",
+		  "xpath" : "decsiraogc_aree_protette:urlLeggeIstitutiva/text()",
+		  "width" : 100
+		}
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_aree_protette:AreaProtetta")}/>

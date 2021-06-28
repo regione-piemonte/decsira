@@ -1,0 +1,111 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateReteNatura2000"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Codice amministrativo",
+		  "xpath" : "decsiraogc_rete_natura_2000:codiceAmministrativo/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Nome rete natura2000",
+		  "xpath" : "decsiraogc_rete_natura_2000:nomeReteNatura2000/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Tipo rete natura2000",
+		  "xpath" : "decsiraogc_rete_natura_2000:descrTipoReteNatura2000/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Regione biogeografica'",
+		  "xpath" : "decsiraogc_rete_natura_2000:descrRegBiogeografica/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Province interessate",
+		  "xpath" : "decsiraogc_rete_natura_2000:provincia/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Comuni interessati",
+		  "xpath" : "decsiraogc_rete_natura_2000:comuniInteressati/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Superficie amministrativa",
+		  "xpath" : "decsiraogc_rete_natura_2000:superficieAmministrativa/text()",
+		  "width" : 80
+		}, {
+		  "headerName" : "Perimetro amministrativo",
+		  "xpath" : "decsiraogc_rete_natura_2000:perimetroAmministrativo/text()",
+		  "width" : 80
+		}, {
+		  "headerName" : "Data istituzione",
+		  "xpath" : "decsiraogc_rete_natura_2000:dataIstituzione/text()",
+		  "dateFormat": "DD/MM/YYYY",
+		  "width" : 80
+		}, {
+		  "headerName" : "Ente gestore",
+		  "xpath" : "decsiraogc_rete_natura_2000:descrEnteGestore/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Tipo ente",
+		  "xpath" : "decsiraogc_rete_natura_2000:descrTipoEnte/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Ente delegante'",
+		  "xpath" : "decsiraogc_rete_natura_2000:descrEnteDelegante/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Id Inspire",
+		  "xpath" : "decsiraogc_rete_natura_2000:idInspire/text()",
+		  "width" : 80
+		}, {
+		  "headerName" : "Data aggiornamento istituzionale",
+		  "xpath" : "decsiraogc_rete_natura_2000:dataAggiornIstituzionale/text()",
+		  "dateFormat": "DD/MM/YYYY",
+		  "width" : 80
+		}, {
+		  "headerName" : "Url normativa",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlNormativa/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url piano",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlPiano/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url formulario standard",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlFormularioStd/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url misura conservazione",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlMisuraConserv/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url cartografia",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlCartografia/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url metadato sic zsc",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlMetadatoZsc/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url metadato zps",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlMetadatoZps/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url misure normative",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlNormativaMisure/text()",
+		  "width" : 120
+		},{
+		  "headerName" : "Url scheda sito",
+		  "xpath" : "decsiraogc_rete_natura_2000:urlSchedaSito/text()",
+		  "width" : 120
+		}
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_rete_natura_2000:ReteNatura2000")}/>
