@@ -58,7 +58,9 @@ class Home extends React.Component {
                             <div className="row">
                                 <div className="col-md-7 col-xs-12 testo-home">
                                     <div>
-                                 Piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte), che si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Imprese, Regione, Province e ARPA)
+                                        Accedi ai <strong>dati ambientali e territoriali</strong> del <strong>Piemonte</strong>.<br />
+                                        I dati ambientali sono raccolti e integrati nel SIRA Piemonte (Sistema Informativo Regionale Ambientale), in cooperazione tra soggetti produttori di informazioni ambientali (Regione, Province e ARPA).<br />
+                                        Il servizio nasce per il <strong>governo</strong> e la <strong>tutela del territorio</strong>, la <strong>pianificazione partecipata</strong>, la <strong>sensibilizzazione e il coinvolgimento dei cittadini</strong>.
                                     </div>
                                 </div>
                                 <SiraSearchBar
