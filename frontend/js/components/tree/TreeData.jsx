@@ -176,13 +176,30 @@ class TreeData extends React.Component {
                 let id = TemplateUtils.getElement({xpath: group.groupId.xpath}, object);
                 let name = TemplateUtils.getElement({xpath: group.groupName}, object);
                 if (group.groupId.value === id) {
-                    const data = {
-                        title: name,
-                        id: id,
-                        key: '' + keyCount,
-                        children: [this.getChildData(group, object, keyCount++)]
-                    };
-                    treeDataFlat.push(data);
+                    let filterAttribute = null;
+                    let filterValue = null;
+                    let profileOk = true;
+                    if (group.groupFilter !== undefined) {
+                        filterAttribute = TemplateUtils.getElement({xpath: group.groupFilter.xpath}, object);
+                        filterValue = group.groupFilter.value;
+                        profileOk = verifyProfiles(group.profiles, this.props.profile);
+                        console.log("filterAttribute= " + filterAttribute);
+                        console.log("filterValue= " + filterValue);
+                    }
+                    if (profileOk
+                            || filterAttribute === null
+                            || filterAttribute === undefined
+                            || filterAttribute !== filterValue) {
+                        const data = {
+                            title: name,
+                            id: id,
+                            key: '' + keyCount,
+                            children: [this.getChildData(group, object, keyCount++)]
+                        };
+                        treeDataFlat.push(data);
+                    } else {
+                        console.log("Element filtered ");
+                    }
                 }
             });
         });

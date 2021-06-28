@@ -360,7 +360,7 @@ function IndicaBuilder({
             let bodyData = resp.data.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
             wmsLayer.title = getWmsTitle();
             wmsLayer.indicaTitle = getIndicaTitle();
-            wmsLayer.params = assign({}, wmsLayer.params, { SLD_BODY: bodyData, SLD: sldUrl});
+            wmsLayer.params = assign({}, wmsLayer.params, { SLD_BODY: bodyData });
             wmsLayer.viewparams = getViewParams();
             wmsLayer.isIndicatore = true;
             wmsLayer.indicaform = formData.current;
