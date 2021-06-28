@@ -182,9 +182,7 @@ class TreeData extends React.Component {
                     if (group.groupFilter !== undefined) {
                         filterAttribute = TemplateUtils.getElement({xpath: group.groupFilter.xpath}, object);
                         filterValue = group.groupFilter.value;
-                        profileOk = verifyProfiles(group.profiles, this.props.profile);
-                        console.log("filterAttribute= " + filterAttribute);
-                        console.log("filterValue= " + filterValue);
+                        profileOk = verifyProfiles(group.groupFilter.profiles, this.props.profile);
                     }
                     if (profileOk
                             || filterAttribute === null
@@ -197,8 +195,6 @@ class TreeData extends React.Component {
                             children: [this.getChildData(group, object, keyCount++)]
                         };
                         treeDataFlat.push(data);
-                    } else {
-                        console.log("Element filtered ");
                     }
                 }
             });
