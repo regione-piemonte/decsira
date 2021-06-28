@@ -1,0 +1,336 @@
+{
+   "featureTypeName":"decsiraogc_aree_protette:AreaProtetta",
+   "featureTypeNameLabel":"Aree Protette",
+   "nameSpaces": {
+     "decsiraogc_aree_protette": "http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"
+   },
+   "layer": {
+       "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Aree Protette",
+        "name": "decsiraogc_aree_protette:AreaProtetta",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "Polygon"
+       },
+        "featureType": "areeProtette",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "MultiPolygon",
+   "card": {
+	     "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta",
+		 "geometryPath": "decsiraogc_aree_protette:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()",
+		 "pdfname": "Scheda_Area_Protetta_{{/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:idAreaProtetta/text()}}.pdf",
+		 "template": "assets/cardTemplateAreaProtetta.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_aree_protette:AreaProtetta",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateAreaProtetta.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice amministrativo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:codiceAmministrativo/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Nome area protetta",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:nomeAreaProtetta/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Tipo area protetta",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:descrTipoAreaProtetta/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Superficie amministrativa (ha)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:superficieAmministrativa/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Province interessate",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:provincia/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Comuni interessati",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:comuniInteressati/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Localita",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:descrizioneLocalita/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Perimetro amministrativo (m)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:perimetroAmministrativo/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Legge istitutiva",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:leggeIstitutiva/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Ente gestore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:descrEnteGestore/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Tipo ente",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:descrTipoEnte/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Tipo patrimonialita",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:descrTipoPatrimonialita/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Id inspire",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:idInspire/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Codice euap",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:codiceEuap/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Data istituzione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:dataIstituzione/text()"],
+		   "dateFormat": "DD/MM/YYYY",
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Data aggiornamento istituzionale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:dataAggiornIstituzionale/text()"],
+		    "dateFormat": "DD/MM/YYYY",
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Url normativa",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:urlNormativa/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Url piano",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:urlPiano/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Url metadato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:urlMetadato/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Url allegato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:urlAllegato/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Url legge istitutiva",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:urlLeggeIstitutiva/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "geometry",
+          "xpath" : [ "decsiraogc_aree_protette:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "type" : 6
+        }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+         "index": 1,
+         "attribute": "decsiraogc_aree_protette:provincia",
+         "label":"Provincia",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_geo_province",
+			 "propertyName": "prov_ist,prov_nom",
+             "sortBy": "prov_nom+A"
+           }
+         },
+         "valueId":"prov_nom",
+         "valueLabel":"prov_nom"
+	   },
+	   {
+		   "index": 2,
+		   "attribute": "decsiraogc_aree_protette:comuniInteressati",
+		   "label":"Comune",
+		   "type":"list",
+		   "valueService": {
+			 "urlParams": {
+			   "typeName": "decsiraogc_decodif:decsira_geo_comuni",
+			   "propertyName": "prov_ist,comune_nom",
+			   "sortBy": "comune_nom+A"
+			 }
+		   },
+		   "valueId":"comune_nom",
+		   "valueLabel":"comune_nom",
+		   "dependson":{
+				"field": "provincia",
+				"from": "prov_ist",
+				"to": "prov_ist"
+		   }
+       }, 
+	   {
+        "index": 3,
+        "attribute": "decsiraogc_aree_protette:codiceAmministrativo",
+        "label": "Codice amministrativo",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_nome_area_protetta",
+            "propertyName": "codice_amministrativo",
+            "sortBy": "codice_amministrativo+A"
+          }
+        },
+        "valueId": "codice_amministrativo",
+        "valueLabel": "codice_amministrativo"
+      },
+	  {
+        "index": 4,
+        "attribute": "decsiraogc_aree_protette:nomeAreaProtetta",
+        "label": "Nome area protetta",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_nome_area_protetta",
+            "propertyName": "nome",
+            "sortBy": "nome+A"
+          }
+        },
+        "valueId": "nome",
+        "valueLabel": "nome"
+      },
+	  {
+	    "index": 5,
+	    "attribute": "decsiraogc_aree_protette:dataIstituzione",
+	    "label":"Data istituzione",
+	    "type":"date",
+	    "fieldOptions": {
+		  "dateFormat": "DD/MM/YYYY"
+	    }
+      },
+	  {
+        "index": 6,
+        "attribute": "decsiraogc_aree_protette:descrTipoAreaProtetta",
+        "label": "Tipologia di area protetta",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_tipo_area_protetta",
+            "propertyName": "descrizione",
+            "sortBy": "descrizione+A"
+          }
+        },
+        "valueId": "descrizione",
+        "valueLabel": "descrizione"
+      },
+	  {
+        "index": 7,
+        "attribute": "decsiraogc_aree_protette:descrEnteGestore",
+        "label": "Ente gestore",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_ente_gestore",
+            "propertyName": "descrizione",
+            "sortBy": "descrizione+A"
+          }
+        },
+        "valueId": "descrizione",
+        "valueLabel": "descrizione"
+      }
+        
+     ]
+
+   }
+
+}

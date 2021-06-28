@@ -1,0 +1,56 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateSpecieDirettivaHabitat"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Codice specie",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:codSpecie/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Nome scientifico",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:nomeScientifico/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Nome volgare",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:nomeVolgare/text()",
+		  "width" : 300
+		}, {
+		  "headerName" : "Descrizione specie gruppo",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:descrSpecieGruppo/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Descrizione specie sotto gruppo",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:descrSpecieSottogruppo/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Allegato B",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:flgAllegatoB/text()",
+		  "width" : 100
+		},
+		{
+		  "headerName" : "Allegato D",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:flgAllegatod/text()",
+		  "width" : 100
+		},
+		{
+		  "headerName" : "Prioritario",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:flgPrioritario/text()",
+		  "width" : 100
+		},
+		{
+		  "headerName" : "Url scheda habitat",
+		  "xpath" : "decsiraogc_specie_direttiva_habitat:urlSchedaHabi/text()",
+		  "width" : 200
+		}
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat")}/>

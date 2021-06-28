@@ -1,0 +1,122 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='RETE NATURA 2000' subtitle={[
+            'Rete natura 2000: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:nomeReteNatura2000/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+    <Section header='DATI GENERALI Rete Natura 2000' eventKey='1' expanded={true}>
+        <LabeledField label='Codice amministrativo' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:codiceAmministrativo/text()")
+        }/>    
+        <LabeledField label='Nome rete natura 2000' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:nomeReteNatura2000/text()")
+        }/>
+        <LabeledField label='Tipo rete natura 2000' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrTipoReteNatura/text()")
+        }/>
+		 <LabeledField label='Regione biogeografica' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrRegBiogeografica/text()")
+        }/>
+        <LabeledField label='Province interessate' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:provincia/text()")
+        }/>
+		 <LabeledField label='Comuni interessati' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:comuniInteressati/text()")
+        }/>
+		<LabeledField label='Superficie amministrativa' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:superficieAmministrativa/text()")
+        }/>
+        <LabeledField label='Perimetro amministrativo' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:perimetroAmministrativo/text()")
+        }/>
+		 <LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:dataIstituzione/text()")
+        }/>
+        <LabeledField label='Ente gestore' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrEnteGestore/text()")
+        }/>
+        <LabeledField label='Tipo ente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrTipoEnte/text()")
+        }/>
+		<LabeledField label='Id Inspire' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:idInspire/text()")
+        }/>
+	   	<LabeledField label='Data aggiornamento istituzionale' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:dataAggiornIstituzionale/text()")
+        }/>
+		 <LabeledField label='Url normativa' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlNormativa/text()")
+        }/>
+		<LabeledField label='Url piano' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlPiano/text()")
+        }/>
+		<LabeledField label='Url formulario standard' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlFormularioStd/text()")
+        }/>
+		<LabeledField label='Url  cartografia' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlCartografia/text()")
+        }/>
+		<LabeledField label='Url metadato sic zsc' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlMetadatoZsc/text()")
+        }/>
+		<LabeledField label='Url metadato zps' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlMetadatoZps/text()")
+        }/>
+		<LabeledField label='Url normativa misure' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlNormativaMisure/text()")
+        }/>
+		<LabeledField label='Url scheda sito' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlSchedaSito/text()")
+        }/>
+    </Section>
+	
+	<Section header='MAPPA SINTESI - Rete natura 2000 su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='2' expanded={true}>
+		<MappaScheda
+			center={
+				model.getValue({
+					type: TemplateUtils.GEOMETRY_TYPE,
+					xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+				})
+			}
+			layers={[
+			{
+				"type": "wms",
+				"url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+				"name": "SfondoCartRif",
+				"title": "Sfondo Cartografico",
+				"group": "background",
+				"visibility": true,
+				"format": "image/png",
+				"tiled": true,
+				"tileSize": 512
+			},
+			{
+				"type": "wms",
+				"url": "{geoserverUrl}/wms",
+				"visibility": true,
+				"title": "Rete natura 2000 Preview",
+				"name": "decsiraogc_rete_natura_2000:ReteNatura2000",
+				"group": "Overlays",
+				"format": "image/png"
+			}
+			]}
+			authParam={model.authParam}
+			withMap={model.withMap}/>
+	</Section>
+	
+	<Section header='METADATO ZSC/SIC' eventKey='3' expanded={true}>
+		<LinkToPage
+			txt="Visualizza la scheda del metadato ZSC/SIC"
+			url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
+			params={{
+				uuid: 'r_piemon:b5cd9a2d-68a1-41a1-a1bc-ad6243308bc2',
+				currTab: 'rndt'
+			}}
+		/>
+	</Section>
+	
+    </Panel>
+</Panel>
