@@ -75,7 +75,7 @@ function IndicaBuilder({
     }
     ); // ref to store state value
 
-    wmsLayer.type = "wmspost";
+    wmsLayer.type = "wms";
     wmsLayer.CRS = 'EPSG:32632';
     wmsLayer.opacity = 0.7;
 
@@ -356,6 +356,21 @@ function IndicaBuilder({
             viewparams: getViewParams()
         });
 
+        wmsLayer.title = getWmsTitle();
+        wmsLayer.indicaTitle = getIndicaTitle();
+        wmsLayer.params = assign({}, wmsLayer.params, { SLD: sldUrl, viewparams: getViewParams() });
+        wmsLayer.viewparams = getViewParams();
+        wmsLayer.isIndicatore = true;
+        wmsLayer.indicaform = formData.current;
+        if (isUpdate()) {
+            wmsLayer.id = currLayer.id;
+        } else {
+            wmsLayer.id = undefined;
+        }
+        addLayer(wmsLayer);
+        closeConfiguration();
+
+        /*
         axios.get(sldUrl).then((resp) => {
             let bodyData = resp.data.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
             wmsLayer.title = getWmsTitle();
@@ -373,7 +388,7 @@ function IndicaBuilder({
             closeConfiguration();
         }).catch(e => {
             console.error(e);
-        });
+        });*/
     }
 
     function renderErrorModal() {
