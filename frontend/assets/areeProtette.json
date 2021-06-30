@@ -75,13 +75,6 @@
            "width" : 150
          },
 		 {
-           "headerName": "Superficie amministrativa (ha)",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_aree_protette:superficieAmministrativa/text()"],
-           "type": 2,
-           "width" : 200
-         },
-		 {
            "headerName": "Province interessate",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:provincia/text()"],
@@ -96,23 +89,23 @@
            "width" : 200
          },
 		 {
-           "headerName": "Localita",
+           "headerName": "Località",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:descrizioneLocalita/text()"],
            "type": 2,
            "width" : 150
          },
 		 {
+           "headerName": "Superficie amministrativa (m²)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:superficieAmministrativa/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
            "headerName": "Perimetro amministrativo (m)",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:perimetroAmministrativo/text()"],
-           "type": 2,
-           "width" : 150
-         },
-		 {
-           "headerName": "Legge istitutiva",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_aree_protette:leggeIstitutiva/text()"],
            "type": 2,
            "width" : 150
          },
@@ -131,25 +124,32 @@
            "width" : 150
          },
 		 {
-           "headerName": "Tipo patrimonialita",
+           "headerName": "Tipo patrimonialità",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:descrTipoPatrimonialita/text()"],
            "type": 2,
            "width" : 150
          },
 		 {
-           "headerName": "Id inspire",
+           "headerName": "Codice INSPIRE",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:idInspire/text()"],
            "type": 2,
            "width" : 100
          },
 		 {
-           "headerName": "Codice euap",
+           "headerName": "Codice EUAP",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:codiceEuap/text()"],
            "type": 2,
            "width" : 100
+         },
+		 {
+           "headerName": "Legge istitutiva",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:leggeIstitutiva/text()"],
+           "type": 2,
+           "width" : 150
          },
 		 {
            "headerName": "Data istituzione",
@@ -160,7 +160,7 @@
            "width" : 100
          },
 		 {
-           "headerName": "Data aggiornamento istituzionale",
+           "headerName": "Data aggiornamento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:dataAggiornIstituzionale/text()"],
 		    "dateFormat": "DD/MM/YYYY",
@@ -168,37 +168,37 @@
            "width" : 100
          },
 		 {
-           "headerName": "Url normativa",
+           "headerName": "Link legge istitutiva",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_aree_protette:urlLeggeIstitutiva/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Link normativa",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:urlNormativa/text()"],
            "type": 2,
            "width" : 100
          },
 		 {
-           "headerName": "Url piano",
+           "headerName": "Link piano",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:urlPiano/text()"],
            "type": 2,
            "width" : 100
          },
 		 {
-           "headerName": "Url metadato",
+           "headerName": "Link metadato",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:urlMetadato/text()"],
            "type": 2,
            "width" : 100
          },
 		 {
-           "headerName": "Url allegato",
+           "headerName": "Link allegato",
            "suppressSorting": true,
            "xpath": ["decsiraogc_aree_protette:urlAllegato/text()"],
-           "type": 2,
-           "width" : 100
-         },
-		 {
-           "headerName": "Url legge istitutiva",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_aree_protette:urlLeggeIstitutiva/text()"],
            "type": 2,
            "width" : 100
          },
@@ -321,7 +321,8 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_ente_gestore",
-            "propertyName": "descrizione",
+            "propertyName": "descrizione,data_fine_validita",
+			"cql_filter": "data_fine_validita is null",
             "sortBy": "descrizione+A"
           }
         },
