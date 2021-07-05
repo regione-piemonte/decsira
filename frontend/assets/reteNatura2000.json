@@ -61,14 +61,14 @@
            "width" : 120
          },
 		 {
-           "headerName": "Nome rete natura2000",
+           "headerName": "Nome" ,
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:nomeReteNatura2000/text()"],
            "type": 2,
            "width" : 200
          },
 		 {
-           "headerName": "Tipo rete natura2000",
+           "headerName": "Tipo",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:descrTipoReteNatura2000/text()"],
            "type": 2,
@@ -110,14 +110,6 @@
            "width" : 80
          },
 		 {
-           "headerName": "Data istituzione",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_rete_natura_2000:dataIstituzione/text()"],
-		   "dateFormat": "DD/MM/YYYY",
-           "type": 2,
-           "width" : 80
-         },
-		 {
            "headerName": "Ente gestore",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:descrEnteGestore/text()"],
@@ -139,14 +131,22 @@
            "width" : 120
          },
 		 {
-           "headerName": "Id inspire",
+           "headerName": "Codice INSPIRE",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:idInspire/text()"],
            "type": 2,
            "width" : 80
          },
 		 {
-           "headerName": "Data aggiornamento istituzionale",
+           "headerName": "Data istituzione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_rete_natura_2000:dataIstituzione/text()"],
+		   "dateFormat": "DD/MM/YYYY",
+           "type": 2,
+           "width" : 80
+         },
+		 {
+           "headerName": "Data aggiornamento",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:dataAggiornIstituzionale/text()"],
 		    "dateFormat": "DD/MM/YYYY",
@@ -154,63 +154,63 @@
            "width" : 80
          },
 		 {
-           "headerName": "Url normativa",
+           "headerName": "Link normativa",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlNormativa/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url piano",
+           "headerName": "Link piano",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlPiano/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url formulario standard",
+           "headerName": "Link formulario standard",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlFormularioStd/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url misura conservatrice",
+           "headerName": "Link misura conservatrice",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlMisuraConserv/text()"],
            "type": 2,
            "width" : 100
          },
 		 {
-           "headerName": "Url cartografia",
+           "headerName": "Link cartografia",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlCartografia/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url metadato sic zsc",
+           "headerName": "Link metadato sic zsc",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlMetadatoZsc/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url metadato zps",
+           "headerName": "Link metadato zps",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlMetadatoZps/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url misure normative",
+           "headerName": "Link misure normative",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlNormativaMisure/text()"],
            "type": 2,
            "width" : 120
          },
 		 {
-           "headerName": "Url scheda sito",
+           "headerName": "Link scheda sito",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlSchedaSito/text()"],
            "type": 2,
@@ -335,7 +335,8 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_ente_gestore",
-            "propertyName": "descrizione",
+            "propertyName": "descrizione,data_fine_validita",
+			"cql_filter": "data_fine_validita is null",
             "sortBy": "descrizione+A"
           }
         },

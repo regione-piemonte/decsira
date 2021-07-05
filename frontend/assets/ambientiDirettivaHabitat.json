@@ -53,46 +53,39 @@
            "type": 2
          },
 		 {
-           "headerName": "Codice habitat",
+           "headerName": "Codice categoria Habitat",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:codHabitat/text()"],
            "type": 2,
-           "width" : 120
+           "width" : 200
          },
 		 {
-           "headerName": "Descrizione habitat",
+           "headerName": "Descrizione Habitat",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:deschabitat/text()"],
            "type": 2,
            "width" : 250
          },
 		 {
-           "headerName": "Flag validato",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_amb_direttiva_habitat:flg_validato/text()"],
-           "type": 2,
-           "width" : 100
-         },
-		 {
-           "headerName": "Flag prioritario",
+           "headerName": "Prioritario",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:flgPrioritario/text()"],
            "type": 2,
            "width" : 110
          },
 		 {
-           "headerName": "Categoria habitat piemonte",
+           "headerName": "Descrizione categoria Habitat  del Piemonte",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()"],
            "type": 2,
-           "width" : 200
+           "width" : 250
          },
 		 {
-           "headerName": "Url scheda habitat",
+           "headerName": "Link scheda",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:urlSchedaHabi/text()"],
            "type": 2,
-           "width" : 250
+           "width" : 350
          },
 		 {
            "hide": true,
@@ -118,7 +111,22 @@
         {
          "index": 1,
          "attribute": "decsiraogc_amb_direttiva_habitat:codHabitat",
-         "label":"Codice categoria habitat",
+         "label":"Codice categoria Habitat",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_descriz_habitat",
+			 "propertyName": "cod_habitat,desc_habitat",
+             "sortBy": "cod_habitat+A"
+           }
+         },
+         "valueId":"cod_habitat",
+         "valueLabel":"cod_habitat"
+	   },
+	   {
+         "index": 2,
+         "attribute": "decsiraogc_amb_direttiva_habitat:deschabitat",
+         "label":"Descrizione Habitat",
          "type":"list",
          "valueService": {
            "urlParams": {
@@ -127,13 +135,13 @@
              "sortBy": "desc_habitat+A"
            }
          },
-         "valueId":"cod_habitat",
+         "valueId":"desc_habitat",
          "valueLabel":"desc_habitat"
 	   },
 	   {
-        "index": 2,
+        "index": 3,
         "attribute": "decsiraogc_amb_direttiva_habitat:fkCategHabitatPiem",
-        "label": "Descrizione categoria habitat piemontese",
+        "label": "Descrizione categoria Habitat  del Piemonte",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -146,9 +154,9 @@
         "valueLabel": "desc_categ_habitat_piem"
       },
 	  {
-            "index": 3,
+            "index": 4,
             "attribute": "decsiraogc_amb_direttiva_habitat:flgPrioritario",
-            "label":"Flag prioritario",
+            "label":"Prioritario",
             "type":"list",
             "values": [
               {"value":"S","name":"S"},

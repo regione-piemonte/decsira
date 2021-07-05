@@ -17,9 +17,7 @@
         <LabeledField label='Tipo area protetta' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrTipoAreaProtetta/text()")
         }/>
-        <LabeledField label='Superficie amministrativa (ha)' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:superficieAmministrativa/text()")
-        }/>
+        
         <LabeledField label='Province interessate' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:provincia/text()")
         }/>
@@ -29,12 +27,13 @@
 		<LabeledField label='Località' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrizioneLocalita/text()")
         }/>
+		<LabeledField label='Superficie amministrativa (m²)' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:superficieAmministrativa/text()")
+        }/>
         <LabeledField label='Perimetro amministrativo (m)' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:perimetroAmministrativo/text()")
         }/>
-        <LabeledField label='Legge istitutiva' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:leggeIstitutiva/text()")
-        }/>
+       
         <LabeledField label='Ente gestore' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrEnteGestore/text()")
         }/>
@@ -44,19 +43,19 @@
 		<LabeledField label='Tipo patrimonialità' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:descrTipoPatrimonialita/text()")
         }/>
-		<LabeledField label='Id Inspire' value={
+		<LabeledField label='Codice INSPIRE' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:idInspire/text()")
         }/>
-		<LabeledField label='Codice euap' value={
+		<LabeledField label='Codice EUAP' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:codiceEuap/text()")
         }/>
-	   <LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
+	  <LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataIstituzione/text()")
         }/>
 		<LabeledField label='Data aggiornamento istituzionale' dateFormat='DD/MM/YYYY' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataAggiornIstituzionale/text()")
         }/>
-        <LabeledField label='Url normativa' link='true' value={
+    <LabeledField label='Url normativa' link='true' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlNormativa/text()")
         }/>
 		<LabeledField label='Url piano' link='true' value={
@@ -71,10 +70,39 @@
 		<LabeledField label='Url legge istitutiva' link='true' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlLeggeIstitutiva/text()")
         }/>
+		 <LabeledField label='Legge istitutiva' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:leggeIstitutiva/text()")
+        }/>
+		
+		  <Section header='Normativa e riferimenti' eventKey='2' expanded={true}>
+				<LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataIstituzione/text()")
+				}/>
+				<LabeledField label='Data aggiornamento' dateFormat='DD/MM/YYYY' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataAggiornIstituzionale/text()")
+				}/>
+				
+				<LabeledField label='Link legge istitutiva' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlLeggeIstitutiva/text()")
+				}/>
+				<LabeledField label='Link normativa' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlNormativa/text()")
+				}/>
+				<LabeledField label='Link piano' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlPiano/text()")
+				}/>
+				<LabeledField label='Link metadato' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlMetadato/text()")
+				}/>
+				<LabeledField label='Link allegato' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlAllegato/text()")
+				}/>
+			
+		  </Section>
 		
     </Section>
 	
-	<Section header='MAPPA SINTESI - Area protetta su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='2' expanded={true}>
+	<Section header='MAPPA SINTESI - Area protetta su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='3' expanded={true}>
 		<MappaScheda
 			center={
 				model.getValue({
@@ -108,7 +136,7 @@
 			withMap={model.withMap}/>
 	</Section>
 	
-	<Section header='METADATO' eventKey='3' expanded={true}>
+	<Section header='METADATO' eventKey='4' expanded={true}>
 		<LinkToPage
 			txt="Visualizza la scheda del metadato"
 			url="http://www.geoportale.piemonte.it/geonetworkrp/srv/ita/metadata.show"
