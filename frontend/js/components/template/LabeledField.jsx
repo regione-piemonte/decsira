@@ -16,6 +16,7 @@ class LabeledField extends React.Component {
         label: PropTypes.string,
         value: PropTypes.any,
         dateFormat: PropTypes.object,
+        link: PropTypes.string,
         locale: PropTypes.string
     };
 
@@ -31,8 +32,20 @@ class LabeledField extends React.Component {
         return !isNaN(date.getTime()) ? (<FormattedDate locales={this.props.locale} value={date} {...dateFormat} />) : (<span/>);
     };
 
+    renderLink = (value) => {
+        return <a href={value} target="_blank">{value}</a>;
+    };
+
     renderValue = (value) => {
-        return this.props.dateFormat ? this.renderDate(value, this.props.dateFormat) : value;
+        let isDate = this.props.dateFormat !== undefined;
+        let isLink = this.props.link !== undefined;
+        if (isDate) {
+            return this.renderDate(value, this.props.dateFormat);
+        }
+        if (isLink) {
+            return this.renderLink(value);
+        }
+        return value;
     };
 
     render() {

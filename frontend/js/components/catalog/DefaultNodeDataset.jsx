@@ -50,8 +50,21 @@ class DefaultNode extends React.Component {
         let tooltipMap = <Tooltip id="tp-add-map">Carica in Mappa</Tooltip>;
         let tooltipList = <Tooltip id="tp-list-obj">Elenco di Oggetti</Tooltip>;
         let tooltipIndica = <Tooltip id="tpm-list-obj">Indicatore</Tooltip>;
-        const tools = [
-            (
+        const tools = [];
+        let indicaFunction = this.props.node.functions.filter(
+            (func) => {return func.type === "Tematizzatore";}
+        );
+        if (indicaFunction.length > 0) {
+            tools.push((
+                <OverlayTrigger key={"indicatori-tp"} rootClose placement="left" overlay={tooltipIndica}>
+                    <Glyphicon
+                        style={glyphStyle}
+                        key="toggle-indicatori"
+                        glyph="signal"
+                        onClick={() => this.configureIndicaLayer(this.props.node.featureType)} />
+                </OverlayTrigger>));
+        } else {
+            tools.push((
                 <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
                     <Glyphicon
                         style={glyphStyle}
@@ -59,36 +72,23 @@ class DefaultNode extends React.Component {
                         glyph="plus-sign"
                         onClick={()=>this.props.addToMap(this.props.node)}/>
                 </OverlayTrigger>
-            )
-        ];
-        if ( this.props.node.featureType) {
-            tools.push((
-                <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
-                    <Glyphicon
-                        style={glyphStyle}
-                        key="toggle-featuregrid"
-                        glyph="th"
-                        onClick={() => this.props.toggleSiraControl(this.props.node)}/>
-                </OverlayTrigger>));
-            tools.push((
-                <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipSira}>
-                    <Glyphicon
-                        style={glyphStyle}
-                        key="toggle-query"
-                        glyph="search"
-                        onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
-                </OverlayTrigger>));
-            let indicaFunctions = this.props.node.functions.filter(
-                (func) => {return func.type === "Tematizzatore";}
-            );
-            if (indicaFunctions.length > 0) {
+            ));
+            if (this.props.node.featureType) {
                 tools.push((
-                    <OverlayTrigger key={"indicatori-tp"} rootClose placement="left" overlay={tooltipIndica}>
+                    <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
                         <Glyphicon
                             style={glyphStyle}
-                            key="toggle-indicatori"
-                            glyph="signal"
-                            onClick={() => this.configureIndicaLayer(this.props.node.featureType)}/>
+                            key="toggle-featuregrid"
+                            glyph="th"
+                            onClick={() => this.props.toggleSiraControl(this.props.node)} />
+                    </OverlayTrigger>));
+                tools.push((
+                    <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipSira}>
+                        <Glyphicon
+                            style={glyphStyle}
+                            key="toggle-query"
+                            glyph="search"
+                            onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)} />
                     </OverlayTrigger>));
             }
         }

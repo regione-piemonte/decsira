@@ -56,7 +56,7 @@ function IndicaBuilder({
     const [sldError, setSldError] = useState(false);
     const [errorTitle, setErrorTitle] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const [tematizePanelExpanded, setTematizePanelExpanded] = useState(false);
+    const [tematizePanelExpanded, setTematizePanelExpanded] = useState(true);
     const [formTouched, setFormTouched] = useState(false);
     const standardColors = ['red', 'blue', 'gray', 'jet'];
     const [dimOptions, setDimOptions] = useState([]);
