@@ -8,7 +8,7 @@ import axios from "@mapstore/libs/ajax";
 import Symbolizer from "@mapstore/components/styleeditor/Symbolizer";
 import Fields from "@mapstore/components/styleeditor/Fields";
 import {getColors, getStyleService, getStyleMetadataService} from "@mapstore/api/SLDService";
-// const ConfigUtils = require('@mapstore/utils/ConfigUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const SwitchPanel = require('@mapstore/components/misc/switch/SwitchPanel');
 const assign = require('object-assign');
 
@@ -98,7 +98,7 @@ function IndicaBuilder({
     }, []);
 
     const layer = {
-        url: "http://ts-tc2-decsira.site03.nivolapiemonte.it:8080/geoserver",  // ConfigUtils.getConfigProp('geoserverUrl'),
+        url: ConfigUtils.getConfigProp('geoserverUrl'), // "http://ts-tc2-decsira.site03.nivolapiemonte.it:8080/geoserver",
         name: wmsLayer.name,
         thematic: {
             fieldAsParam: true
