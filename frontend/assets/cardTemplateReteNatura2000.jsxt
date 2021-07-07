@@ -1,20 +1,20 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='RETE NATURA 2000' subtitle={[
-            'Rete natura 2000: ',
+        <DetailTitle title='SITI RETE NATURA 2000' subtitle={[
+            'Sito Rete natura 2000: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:nomeReteNatura2000/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-    <Section header='DATI GENERALI Rete Natura 2000' eventKey='1' expanded={true}>
-        <LabeledField label='Codice amministrativo' value={
+    <Section header='DATI GENERALI Sito Rete Natura 2000' eventKey='1' expanded={true}>
+        <LabeledField label='Codice Sito Natura 2000' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:codiceAmministrativo/text()")
         }/>    
-        <LabeledField label='Nome' value={
+        <LabeledField label='Nome Sito Rete Natura 2000' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:nomeReteNatura2000/text()")
         }/>
-        <LabeledField label='Tipo' value={
+        <LabeledField label='Sito Rete Natura 2000' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrTipoReteNatura/text()")
         }/>
 		 <LabeledField label='Regione biogeografica' value={
@@ -49,35 +49,35 @@
 			<LabeledField label='Data aggiornamento' dateFormat='DD/MM/YYYY' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:dataAggiornIstituzionale/text()")
 			}/>
-			 <LabeledField label='Link normativa' value={
+			 <LabeledField label='Link normativa' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlNormativa/text()")
 			}/>
-			<LabeledField label='Link piano' value={
+			<LabeledField label='Link piano' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlPiano/text()")
 			}/>
-			<LabeledField label='Link formulario standard' value={
+			<LabeledField label='Link formulario standard' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlFormularioStd/text()")
 			}/>
-			<LabeledField label='Link  cartografia' value={
+			<LabeledField label='Link  cartografia' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlCartografia/text()")
 			}/>
-			<LabeledField label='Link metadato sic zsc' value={
+			<LabeledField label='Link metadato sic zsc' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlMetadatoZsc/text()")
 			}/>
-			<LabeledField label='Link metadato zps' value={
+			<LabeledField label='Link metadato zps' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlMetadatoZps/text()")
 			}/>
-			<LabeledField label='Link normativa misure' value={
+			<LabeledField label='Link normativa misure' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlNormativaMisure/text()")
 			}/>
-			<LabeledField label='Link scheda sito' value={
+			<LabeledField label='Link scheda sito' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlSchedaSito/text()")
 			}/>
 		 </Section>
 	   
     </Section>
 	
-	<Section header='MAPPA SINTESI - Rete natura 2000 su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='3' expanded={true}>
+	<Section header='MAPPA SINTESI - Siti Rete natura 2000 su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='3' expanded={true}>
 		<MappaScheda
 			center={
 				model.getValue({
@@ -101,7 +101,7 @@
 				"type": "wms",
 				"url": "{geoserverUrl}/wms",
 				"visibility": true,
-				"title": "Rete natura 2000 Preview",
+				"title": "Sito Rete natura 2000 Preview",
 				"name": "decsiraogc_rete_natura_2000:ReteNatura2000",
 				"group": "Overlays",
 				"format": "image/png"
