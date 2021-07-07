@@ -1,14 +1,14 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='AREA PROTETTA' subtitle={[
+        <DetailTitle title='AREE PROTETTE E ALTRE AREE TUTELATE' subtitle={[
             'Area protetta: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:nomeAreaProtetta/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
     <Section header='DATI GENERALI' eventKey='1' expanded={true}>
-        <LabeledField label='Codice amministrativo' value={
+        <LabeledField label='Codice L.r. 19/09' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:codiceAmministrativo/text()")
         }/>    
         <LabeledField label='Nome area protetta' value={
@@ -49,30 +49,11 @@
 		<LabeledField label='Codice EUAP' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:codiceEuap/text()")
         }/>
-	  <LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataIstituzione/text()")
-        }/>
-		<LabeledField label='Data aggiornamento istituzionale' dateFormat='DD/MM/YYYY' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataAggiornIstituzionale/text()")
-        }/>
-    <LabeledField label='Url normativa' link='true' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlNormativa/text()")
-        }/>
-		<LabeledField label='Url piano' link='true' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlPiano/text()")
-        }/>
-		<LabeledField label='Url metadato' link='true' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlMetadato/text()")
-        }/>
-		<LabeledField label='Url allegato' link='true' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlAllegato/text()")
-        }/>
-		<LabeledField label='Url legge istitutiva' link='true' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlLeggeIstitutiva/text()")
-        }/>
-		 <LabeledField label='Legge istitutiva' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:leggeIstitutiva/text()")
-        }/>
+	 
+	    <LabeledField label='Legge istitutiva' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:leggeIstitutiva/text()")
+		}/>
+			
 		
 		  <Section header='Normativa e riferimenti' eventKey='2' expanded={true}>
 				<LabeledField label='Data istituzione' dateFormat='DD/MM/YYYY' value={
@@ -82,22 +63,23 @@
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:dataAggiornIstituzionale/text()")
 				}/>
 				
-				<LabeledField label='Link legge istitutiva' value={
+				<LabeledField label='Link legge istitutiva'  link='true' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlLeggeIstitutiva/text()")
 				}/>
-				<LabeledField label='Link normativa' value={
+				<LabeledField label='Link normativa' link='true' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlNormativa/text()")
 				}/>
-				<LabeledField label='Link piano' value={
+				<LabeledField label='Link piano' link='true' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlPiano/text()")
 				}/>
-				<LabeledField label='Link metadato' value={
+				<LabeledField label='Link metadato' link='true' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlMetadato/text()")
 				}/>
-				<LabeledField label='Link allegato' value={
+				<LabeledField label='Link allegato'link='true'  value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_aree_protette:AreaProtetta/decsiraogc_aree_protette:urlAllegato/text()")
 				}/>
-			
+				
+				
 		  </Section>
 		
     </Section>

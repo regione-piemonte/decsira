@@ -53,18 +53,18 @@
            "type": 2
          },
 		 {
-           "headerName": "Codice categoria Habitat",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_amb_direttiva_habitat:codHabitat/text()"],
-           "type": 2,
-           "width" : 200
-         },
-		 {
            "headerName": "Descrizione Habitat",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:deschabitat/text()"],
            "type": 2,
            "width" : 250
+         },
+		 {
+           "headerName": "Codice Habitat",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:codHabitat/text()"],
+           "type": 2,
+           "width" : 200
          },
 		 {
            "headerName": "Prioritario",
@@ -74,7 +74,7 @@
            "width" : 110
          },
 		 {
-           "headerName": "Descrizione categoria Habitat  del Piemonte",
+           "headerName": "Macrocategoria Habitat",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()"],
            "type": 2,
@@ -110,21 +110,6 @@
      "fields":[
         {
          "index": 1,
-         "attribute": "decsiraogc_amb_direttiva_habitat:codHabitat",
-         "label":"Codice categoria Habitat",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_descriz_habitat",
-			 "propertyName": "cod_habitat,desc_habitat",
-             "sortBy": "cod_habitat+A"
-           }
-         },
-         "valueId":"cod_habitat",
-         "valueLabel":"cod_habitat"
-	   },
-	   {
-         "index": 2,
          "attribute": "decsiraogc_amb_direttiva_habitat:deschabitat",
          "label":"Descrizione Habitat",
          "type":"list",
@@ -139,9 +124,24 @@
          "valueLabel":"desc_habitat"
 	   },
 	   {
+         "index": 2,
+         "attribute": "decsiraogc_amb_direttiva_habitat:codHabitat",
+         "label":"Codice Habitat",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_descriz_habitat",
+			 "propertyName": "cod_habitat,desc_habitat",
+             "sortBy": "cod_habitat+A"
+           }
+         },
+         "valueId":"cod_habitat",
+         "valueLabel":"cod_habitat"
+	   },
+	   {
         "index": 3,
         "attribute": "decsiraogc_amb_direttiva_habitat:fkCategHabitatPiem",
-        "label": "Descrizione categoria Habitat  del Piemonte",
+        "label": "Macrocategoria Habitat",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -159,8 +159,8 @@
             "label":"Prioritario",
             "type":"list",
             "values": [
-              {"value":"S","name":"S"},
-              {"value":"N","name":"N"}
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"}
             ],
             "valueId":"value",
             "valueLabel":"name"
