@@ -50,8 +50,8 @@ class Legend extends React.Component {
                 LEGEND_OPTIONS: this.props.legendOptions
                 // SCALE TODO
             }, layer.legendParams || {},
-                // layer.params || {},
-                layer.params && layer.params.SLD ? { SLD: layer.params.SLD } : {});
+            // layer.params || {},
+            layer.params && layer.params.SLD ? { SLD: layer.params.SLD } : {});
             // layer.params && layer.params.SLD_BODY ? {SLD_BODY: layer.params.SLD_BODY} : {});
             SecurityUtils.addAuthenticationParameter(url, query);
 
