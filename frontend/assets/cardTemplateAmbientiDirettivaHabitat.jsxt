@@ -8,17 +8,17 @@
     )}>
     <Panel className="template">
     <Section header='DATI GENERALI Ambienti direttiva Habitat' eventKey='1' expanded={true}>
-        <LabeledField label='Descrizione Habitat' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:deschabitat/text()")
+		<LabeledField label='Macrocategoria Habitat' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()")
         }/>
 		<LabeledField label='Codice Habitat' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:codHabitat/text()")
         }/> 
+        <LabeledField label='Descrizione Habitat' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:deschabitat/text()")
+        }/>
         <LabeledField label='Prioritario' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:flgPrioritario/text()")
-        }/>
-        <LabeledField label='Macrocategoria Habitat' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()")
         }/>
         <LabeledField label='Link scheda' link='true' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_amb_direttiva_habitat:AmbientiDirettivaHabitat/decsiraogc_amb_direttiva_habitat:urlSchedaHabi/text()")

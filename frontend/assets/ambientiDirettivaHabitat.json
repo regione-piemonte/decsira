@@ -53,9 +53,9 @@
            "type": 2
          },
 		 {
-           "headerName": "Descrizione Habitat",
+           "headerName": "Macrocategoria Habitat",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_amb_direttiva_habitat:deschabitat/text()"],
+           "xpath": ["decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()"],
            "type": 2,
            "width" : 250
          },
@@ -67,6 +67,13 @@
            "width" : 200
          },
 		 {
+           "headerName": "Descrizione Habitat",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_amb_direttiva_habitat:deschabitat/text()"],
+           "type": 2,
+           "width" : 450
+         },
+		 {
            "headerName": "Prioritario",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:flgPrioritario/text()"],
@@ -74,18 +81,11 @@
            "width" : 110
          },
 		 {
-           "headerName": "Macrocategoria Habitat",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_amb_direttiva_habitat:descCategHabitatPiem/text()"],
-           "type": 2,
-           "width" : 250
-         },
-		 {
            "headerName": "Link scheda",
            "suppressSorting": true,
            "xpath": ["decsiraogc_amb_direttiva_habitat:urlSchedaHabi/text()"],
            "type": 2,
-           "width" : 350
+           "width" : 450
          },
 		 {
            "hide": true,
@@ -108,22 +108,22 @@
        }
      },
      "fields":[
-        {
-         "index": 1,
-         "attribute": "decsiraogc_amb_direttiva_habitat:deschabitat",
-         "label":"Descrizione Habitat",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_descriz_habitat",
-			 "propertyName": "cod_habitat,desc_habitat",
-             "sortBy": "desc_habitat+A"
-           }
-         },
-         "valueId":"desc_habitat",
-         "valueLabel":"desc_habitat"
-	   },
-	   {
+		 {
+			"index": 1,
+			"attribute": "decsiraogc_amb_direttiva_habitat:fkCategHabitatPiem",
+			"label": "Macrocategoria Habitat",
+			"type": "list",
+			"valueService": {
+			  "urlParams": {
+				"typeName": "decsiraogc_decodif:decsira_d_biodiversita_categoria_habitat_piem",
+				"propertyName": "id_categ_habitat_piem,desc_categ_habitat_piem",
+				"sortBy": "desc_categ_habitat_piem+A"
+			  }
+			},
+			"valueId": "id_categ_habitat_piem",
+			"valueLabel": "desc_categ_habitat_piem"
+		},
+		{
          "index": 2,
          "attribute": "decsiraogc_amb_direttiva_habitat:codHabitat",
          "label":"Codice Habitat",
@@ -138,21 +138,21 @@
          "valueId":"cod_habitat",
          "valueLabel":"cod_habitat"
 	   },
-	   {
-        "index": 3,
-        "attribute": "decsiraogc_amb_direttiva_habitat:fkCategHabitatPiem",
-        "label": "Macrocategoria Habitat",
-        "type": "list",
-        "valueService": {
-          "urlParams": {
-            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_categoria_habitat_piem",
-            "propertyName": "id_categ_habitat_piem,desc_categ_habitat_piem",
-            "sortBy": "desc_categ_habitat_piem+A"
-          }
-        },
-        "valueId": "id_categ_habitat_piem",
-        "valueLabel": "desc_categ_habitat_piem"
-      },
+        {
+         "index": 3,
+         "attribute": "decsiraogc_amb_direttiva_habitat:deschabitat",
+         "label":"Descrizione Habitat",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_descriz_habitat",
+			 "propertyName": "cod_habitat,desc_habitat",
+             "sortBy": "desc_habitat+A"
+           }
+         },
+         "valueId":"desc_habitat",
+         "valueLabel":"desc_habitat"
+	   },
 	  {
             "index": 4,
             "attribute": "decsiraogc_amb_direttiva_habitat:flgPrioritario",
