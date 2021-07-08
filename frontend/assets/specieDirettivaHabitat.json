@@ -53,32 +53,11 @@
            "type": 2
          },
 		 {
-           "headerName": "Codice specie",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_specie_direttiva_habitat:codSpecie/text()"],
-           "type": 2,
-           "width" : 120
-         },
-		 {
-           "headerName": "Nome scientifico",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_specie_direttiva_habitat:nomeScientifico/text()"],
-           "type": 2,
-           "width" : 200
-         },
-		 {
-           "headerName": "Nome volgare",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_specie_direttiva_habitat:nomeVolgare/text()"],
-           "type": 2,
-           "width" : 300
-         },
-		 {
            "headerName": "Gruppo",
            "suppressSorting": true,
            "xpath": ["decsiraogc_specie_direttiva_habitat:descrSpecieGruppo/text()"],
            "type": 2,
-           "width" : 120
+           "width" : 250
          },
 		 {
            "headerName": "Sottogruppo",
@@ -86,6 +65,27 @@
            "xpath": ["decsiraogc_specie_direttiva_habitat:descrSpecieSottogruppo/text()"],
            "type": 2,
            "width" : 200
+         },
+		 {
+           "headerName": "Codice specie",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:codSpecie/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Nome scientifico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:nomeScientifico/text()"],
+           "type": 2,
+           "width" : 230
+         },
+		 {
+           "headerName": "Nome volgare",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_specie_direttiva_habitat:nomeVolgare/text()"],
+           "type": 2,
+           "width" : 300
          },
 		 {
            "headerName": "Allegato II",
@@ -113,7 +113,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_specie_direttiva_habitat:urlSchedaHabi/text()"],
            "type": 2,
-           "width" : 200
+           "width" : 460
          },
 		 {
            "hide": true,
@@ -136,8 +136,23 @@
        }
      },
      "fields":[
+	    {
+		"index": 1,
+		"attribute": "decsiraogc_specie_direttiva_habitat:descrSpecieGruppo",
+		"label":"Gruppo specie",
+		"type":"list",
+		 "valueService": {
+		"urlParams": {
+			"typeName": "decsiraogc_decodif:decsira_d_biodiversita_specie_gruppo",
+			"propertyName": "id_specie_gruppo,descr_specie_gruppo",
+			"sortBy": "descr_specie_gruppo+A"
+		 }
+		},
+		"valueId":"descr_specie_gruppo",
+		"valueLabel":"descr_specie_gruppo"
+		},
         {
-         "index": 1,
+         "index": 2,
          "attribute": "decsiraogc_specie_direttiva_habitat:codSpecie",
          "label":"Nome scientifico specie",
          "type":"list",
@@ -151,21 +166,7 @@
          "valueId":"cod_specie",
          "valueLabel":"nome_scientifico"
 	   },
-	  {
-		"index": 2,
-		"attribute": "decsiraogc_specie_direttiva_habitat:descrSpecieGruppo",
-		"label":"Gruppo specie",
-		"type":"list",
-		 "valueService": {
-		"urlParams": {
-			"typeName": "decsiraogc_decodif:decsira_d_biodiversita_specie_gruppo",
-			"propertyName": "id_specie_gruppo,descr_specie_gruppo",
-			"sortBy": "descr_specie_gruppo+A"
-		 }
-		},
-		"valueId":"descr_specie_gruppo",
-		"valueLabel":"descr_specie_gruppo"
-      },
+	  
 	  {
             "index": 3,
             "attribute": "decsiraogc_specie_direttiva_habitat:flgAllegatoB",
