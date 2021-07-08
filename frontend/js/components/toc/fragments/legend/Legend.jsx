@@ -9,7 +9,7 @@
 const urlUtil = require('url');
 const PropTypes = require('prop-types');
 const React = require('react');
-const {isArray} = require('lodash');
+const { isArray } = require('lodash');
 
 const SecurityUtils = require('@mapstore/utils/SecurityUtils');
 
@@ -50,9 +50,9 @@ class Legend extends React.Component {
                 LEGEND_OPTIONS: this.props.legendOptions
                 // SCALE TODO
             }, layer.legendParams || {},
-            // layer.params || {},
-            // layer.params && layer.params.SLD ? {SLD: layer.params.SLD} : {});
-            layer.params && layer.params.SLD_BODY ? {SLD_BODY: layer.params.SLD_BODY} : {});
+                // layer.params || {},
+                layer.params && layer.params.SLD ? { SLD: layer.params.SLD } : {});
+            // layer.params && layer.params.SLD_BODY ? {SLD_BODY: layer.params.SLD_BODY} : {});
             SecurityUtils.addAuthenticationParameter(url, query);
 
             let legendUrl = urlUtil.format({
@@ -61,7 +61,7 @@ class Legend extends React.Component {
                 pathname: urlObj.pathname,
                 query: query
             });
-            return <img alt={''} src={legendUrl} style={{maxWidth: "100%"}}/>;
+            return <img alt={''} src={legendUrl} style={{ maxWidth: "100%" }} />;
         }
         return null;
     }

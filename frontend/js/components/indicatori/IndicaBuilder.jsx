@@ -98,7 +98,8 @@ function IndicaBuilder({
     }, []);
 
     const layer = {
-        url: ConfigUtils.getConfigProp('geoserverUrl'), // "http://ts-tc2-decsira.site03.nivolapiemonte.it:8080/geoserver",
+        // url: "http://ts-tc2-decsira.site03.nivolapiemonte.it:8080/geoserver",
+        url: ConfigUtils.getConfigProp('geoserverUrl'),
         name: wmsLayer.name,
         thematic: {
             fieldAsParam: true
@@ -346,6 +347,7 @@ function IndicaBuilder({
             return;
         }
 
+        layer.url = "http://localhost:8080/geoserver";
         const sldUrl = getStyleService(layer, {
             ramp: "custom",
             // colors: colors.map(col => {return col.color}).join(','),
