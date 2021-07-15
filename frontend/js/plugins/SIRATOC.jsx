@@ -154,7 +154,7 @@ class LayerTree extends React.Component {
 
     openFilterPanel = (status, featureType, nodeId) => {
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
             this.props.queryFormPreloaded(false);
@@ -164,7 +164,7 @@ class LayerTree extends React.Component {
 
     searchAll = (featureType) => {
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey}, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
             this.props.queryFormPreloaded(false);
