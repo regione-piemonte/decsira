@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ccfbf095f-7702-4244-b7c3-04c29edbc73d" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C05d1b3b4-31f4-4d78-8581-91ec8c69a90a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_specie_gruppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="descrSpecieGruppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C77f10c5a-b8fa-460a-8ab1-57b5981e57ba" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_specie_sottogruppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="descrSpecieSottogruppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C210f0c3a-9a3f-423a-93d2-0b93cdd48e64" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_allegato_b"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="flgAllegatoB" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd9f00135-9504-41f0-a2e2-e3d1fa706ee2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_allegato_d"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="flgAllegatod" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf6356ae2-ef2b-4043-8447-cd604b7d5a96" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_prioritario"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="flgPrioritario " ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3d6b7016-179b-43ac-bf07-a17aaa56228d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceb597262-4755-4ff9-bcd1-482b0a1fbc0b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_specie_habitat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="idSpecieHabitat" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C26570016-024f-465f-9802-2689f5795ffa" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_specie_habitat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_specie_habitat.{id_specie_habitat}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc86e01f5-c76a-452c-b2be-bf07d1894170" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_scientifico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="nomeScientifico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1286d982-cee2-4154-8cd5-fba4511faf7a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_volgare"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="nomeVolgare" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6aa99415-688d-45cd-8cb2-f0d8ee3803c3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_scheda_habi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="urlSchedaHabi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccd5770ba-95cd-435c-b8e7-4455d1f3799f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_scheda_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="urlSchedaMonitoraggio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8be8345f-748b-414f-bff5-1b0c8eb8490e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_specie_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="SpecieDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+                <child name="codSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_specie_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>

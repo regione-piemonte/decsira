@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ceaaa4fa5-cfa9-49b5-8121-63ef50b1cd92" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C700f4d25-80ac-4c79-97f5-0bdce83ccc30" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="cod_habitat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="codHabitat" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb380ce7d-49e7-4551-b5f9-c446e14965fa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_natura_2000"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="deschabitat" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C55133c3d-3a20-4cc4-afd5-1fd61c6f51b1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="desc_categ_habitat_piem"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="descCategHabitatPiem" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca208aeaf-9168-43f9-8111-d4e69eb394a9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_categ_habitat_piem"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="fkCategHabitatPiem " ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4febb0d4-fa15-45a3-8f9a-cca7538dd634" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_prioritario"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="flgPrioritario" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf17392dd-4d13-4715-a70b-e970d5e819f9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_validato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="flg_validato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca647a8f6-1ded-4df4-a6aa-22b08beee87c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C91d200b8-f291-473f-b028-683d669a1be1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_amb_habitat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="idAmbHabitat" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C99a4453c-9646-4568-9f33-29411a925036" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_amb_habitat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_amb_habitat.{id_amb_habitat}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C64d8fa06-c9a7-4ef4-9940-9a7eebab868d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_scheda_habi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="urlSchedaHabi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C52cddd7f-5cf1-42f3-bab9-1c867109f3dc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_scheda_monitoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="urlSchedaMonitoraggio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>

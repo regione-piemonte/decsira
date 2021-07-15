@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C4cb218b2-7c83-408b-9e20-8cf1ac67946e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C25d43564-547a-4e9a-81a7-d5b35c2cd742" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_amministrativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="codiceAmministrativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd09f937b-8d48-4fb8-8fbe-b2cc959888e0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_euap"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="codiceEuap" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C112a3b82-fe4e-4efe-9824-10405e39e0fa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="comuni_interessati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="comuniInteressati" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C436c1921-4a25-40fa-89d5-006542fa5ce7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_aggiorn_istituzionale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="dataAggiornIstituzionale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cef437b4d-e0b6-4276-8e85-6a2f82096377" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_istituzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="dataIstituzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2ecdfd39-5001-46ed-9f15-2d852119cc97" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_ente_gestore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="descrEnteGestore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C68c7dc40-0856-49cf-a508-78e2e952c1af" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_area_protetta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="descrTipoAreaProtetta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12be6ef4-2259-46d8-af8e-4e16694467c4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_ente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="descrTipoEnte" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cda3b30fa-cc88-468e-9d5d-538060287235" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_tipo_patrimonialita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="descrTipoPatrimonialita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caf97ab56-f57f-4263-a96e-37a01600c52d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0b8279cd-c008-4e1d-8f83-19effa74d5a2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_area_protetta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="idAreaProtetta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C9976d7be-5709-467b-9c39-586460ce9a68" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_area_protetta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_area_protetta.{id_area_protetta}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caa88ca9f-e3fc-415a-8363-df385efb453a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_inspire"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="idInspire" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce9fe2671-5105-4245-90c5-73c6552e8d27" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="legge_istitutiva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="leggeIstitutiva" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2f2fcd59-64c8-448a-9ea4-ea50ca629c02" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_area_protetta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="nomeAreaProtetta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca9b6f03e-a641-4091-b001-006478d920be" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="perimetro_amministrativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="perimetroAmministrativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf32824c7-83c4-4610-92b5-596eaa3ab7cb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="province_interessate"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="provincia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C627698eb-3aa3-45f8-a418-2138ac2f44f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="superficie_amministrativa"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="superficieAmministrativa" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0ea3ee24-527e-4cd4-bd61-23d3faebe89e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_allegato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="urlAllegato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbae04a4e-b787-4ad4-ae1e-947cdcb35c19" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_legge_istitutiva"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="urlLeggeIstitutiva" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9b267ad2-1235-4b9a-906a-993e8be7194a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_metadato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="urlMetadato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6d15f89a-ba07-47b3-aeea-d35ddee34b63" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_normativa"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="urlNormativa" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C25055915-4758-4ae3-9949-c7a97b3e73fb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="urlPiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C10b88f49-2b96-4e48-9c6f-a77b1d0fdf53" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_t_area_protetta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="localita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AreaProtettaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+                <child name="descrizioneLocalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_aree_protette/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>
