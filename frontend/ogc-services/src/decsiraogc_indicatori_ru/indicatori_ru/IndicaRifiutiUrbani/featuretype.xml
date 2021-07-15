@@ -1,0 +1,83 @@
+<featureType>
+  <id>FeatureTypeInfoImpl--16793891:17795d3fbe5:-7ffe</id>
+  <name>IndicaRifiutiUrbani</name>
+  <nativeName>IndicaRifiutiUrbani</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl-398b232a:177207bdd91:-69d2</id>
+  </namespace>
+  <title>IndicaRifiutiUrbani</title>
+  <keywords>
+    <string>features</string>
+    <string>IndicaRifiutiUrbani</string>
+  </keywords>
+  <srs>EPSG:32632</srs>
+  <nativeBoundingBox>
+    <minx>313294.418686353</minx>
+    <maxx>516961.503953319</maxx>
+    <miny>4879334.85480411</miny>
+    <maxy>5145789.13056908</maxy>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>6.569423477491917</minx>
+    <maxx>9.220909139368585</maxx>
+    <miny>44.043411005310666</miny>
+    <maxy>46.465460182649124</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="elevation">
+      <dimensionInfo>
+        <enabled>false</enabled>
+      </dimensionInfo>
+    </entry>
+    <entry key="JDBC_VIRTUAL_TABLE">
+      <virtualTable>
+        <name>IndicaRifiutiUrbani</name>
+        <sql>select pk_indica_ru,fk_metadato,fk_dimensione,fk_ris_spaziale,fk_ris_temporale,fk_ambito_temporale,titolo_metadato,des_dimensione,des_unita_misura,des_ris_spaziale,ord_ris_spaz,des_ris_temporale,denominaz_temporale,anno_ambito_temporale,valore_ambito_temporale,geometria,id_entita_spaziale,des_entita_spaziale,valore_rappresentato,ideal_point,worst_point,avg_point,ordinamento_indica,abitanti,fonte_internalid,fonte_valore_rappresentato,id_consorzio,sigla_consorzio,des_consorzio,prov_sede_consorzio,prov_comune from decsira_geo_indica_ru where fk_ris_spaziale=%ris_spaziale% and fk_dimensione=%dimensione% and &#xd;
+fk_ambito_temporale=%ambito_temporale%
+</sql>
+        <escapeSql>false</escapeSql>
+        <keyColumn>pk_indica_ru</keyColumn>
+        <geometry>
+          <name>geometria</name>
+          <type>MultiPolygon</type>
+          <srid>32362</srid>
+        </geometry>
+        <parameter>
+          <name>ris_spaziale</name>
+          <defaultValue>1</defaultValue>
+          <regexpValidator>^[\w\d\s]+$</regexpValidator>
+        </parameter>
+        <parameter>
+          <name>ambito_temporale</name>
+          <defaultValue>29</defaultValue>
+          <regexpValidator>^[\w\d\s]+$</regexpValidator>
+        </parameter>
+        <parameter>
+          <name>dimensione</name>
+          <defaultValue>69</defaultValue>
+          <regexpValidator>^[\w\d\s]+$</regexpValidator>
+        </parameter>
+      </virtualTable>
+    </entry>
+    <entry key="time">
+      <dimensionInfo>
+        <enabled>false</enabled>
+      </dimensionInfo>
+    </entry>
+    <entry key="cachingEnabled">false</entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl-398b232a:177207bdd91:-69d1</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>
