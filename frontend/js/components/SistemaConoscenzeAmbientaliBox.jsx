@@ -30,7 +30,7 @@ class SistemaConoscenzeAmbientaliBox extends React.Component {
         const {maxWidth, maxHeight} = getWindowSize();
         return (
             <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div className="scheda-credits" style={{display: this.props.show}}>
+                <div className="scheda-credits" style={{display: this.props.show}} role="contentinfo" arial-label="presentazione">
                     <Panel
                         className = "info-header panel panel-primary"
                         header={
@@ -58,12 +58,14 @@ class SistemaConoscenzeAmbientaliBox extends React.Component {
                           Il sistema permette di accedere alla consultazione dei dati attraverso ricerca libera e/o tramite un accesso organizzato in categorie tematiche (cataloghi dati come Catalogo Direttiva INSPIRE e Catalogo Informazioni Ambientali; categorie tematiche ambientali - Aria, Bonifiche, Imprese autorizzate in campo ambientale, Rifiuti, etc.).
                             </p>
                             <p>
-                          Per ogni dato viene resa disponibile:<br />
-                                <ul>
-                                    <li>la descrizione sintetica del singolodato/ dataset e vista tematica;</li>
-                                    <li>la scheda metadati pubblicata sul Geoportale dell&rsquo;ente fornitore e/o distributore del dato (servizio CSW);</li>
-                                </ul>
-                          con le specifiche funzioni di consultazione quali:
+                                Per ogni dato viene resa disponibile:
+                            </p>
+                            <ul>
+                                <li>la descrizione sintetica del singolo dato/dataset e vista tematica;</li>
+                                <li>la scheda metadati pubblicata sul Geoportale dell&rsquo;ente fornitore e/o distributore del dato (servizio CSW);</li>
+                            </ul>
+                            <p>
+                                con le specifiche funzioni di consultazione quali:
                             </p>
                             <ul>
                                 <li>semplice consultazione su Mappa dei dati geografici (servizi WMS)</li>
