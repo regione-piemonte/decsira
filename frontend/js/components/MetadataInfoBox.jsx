@@ -152,7 +152,7 @@ class MetadataInfoBox extends React.Component {
 
         return (
             <Draggable bounds="parent" start={{x: 0, y: 300}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div className="scheda-info" style={{display: this.props.show}}>
+                <div className="scheda-info" style={{display: this.props.show}} role="contentinfo" aria-label="Informazioni aggiuntive">
                     <Panel
                         className="info-header panel panel-primary"
                         header={

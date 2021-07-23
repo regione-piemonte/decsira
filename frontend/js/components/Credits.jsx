@@ -30,7 +30,7 @@ class Credits extends React.Component {
         const {maxWidth, maxHeight} = getWindowSize();
         return (
             <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div className="scheda-credits" style={{display: this.props.show}}>
+                <div className="scheda-credits" style={{display: this.props.show}} role="contentinfo" arial-label="credits">
                     <Panel
                         className="info-header panel panel-primary"
                         header={

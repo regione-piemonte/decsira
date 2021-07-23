@@ -258,9 +258,9 @@ class Dataset extends React.Component {
         const {showCategories} = this.state;
         const searchSwitch = this.props.nodes.length > 0 ? (
             <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
-                <div className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
+                <button className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
                     <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
-                </div>
+                </button>
             </div>) : (<noscript key="categoriesSearch"/>);
         const nodes = this.updateNodes(this.props.nodes);
         const tocObjects = (
@@ -316,11 +316,11 @@ class Dataset extends React.Component {
             <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
                     <Header showCart="true" goToHome={this.goToHome} />
-                    <div className="dataset-category-name">
+                    <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
                         <span>{category ? category.name : (<noscript/>)}</span>
                     </div>
                     {this.renderSerchBar()}
-                    <div className="dataset-results-container">
+                    <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                         {category ? this.renderResults() : (<noscript/>)}
                         {this.props.notAuthorized && this.renderUnauthorized()}
                     </div>

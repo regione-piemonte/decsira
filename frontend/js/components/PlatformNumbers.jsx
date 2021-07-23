@@ -26,7 +26,7 @@ class PlatformNumbers extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid piattaforma">
+            <div className="container-fluid piattaforma" role="contentinfo" aria-label="Approfondimento">
                 <div className="row-fluid">
                     <div className="container">
                         <div className="row">

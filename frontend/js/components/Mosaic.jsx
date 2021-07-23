@@ -39,8 +39,9 @@ class Mosaic extends React.Component {
 
     render() {
         return (
-            <div className={this.props.className}>
+            <div className={this.props.className} role="contentinfo" aria-labelledby=" argomenti">
                 <div className="row">
+                    <h3 className="sr-only" id="argomenti">Elenco argomenti</h3>
                     <ul className="list-group categorie">
                         {this.renderTiles()}
                     </ul>

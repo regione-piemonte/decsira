@@ -17,13 +17,13 @@ class Footer extends React.Component {
 
     render() {
         return (
-            <footer className="footer" role="contentinfo">
+            <footer className="footer" role="contentinfo" aria-label="informazioni">
                 <div className="container-fluid">
                     <div className="custom footerCsi row-fluid">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-4 footer-sx">
-                                    <a href=""><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
+                                    <a href="#"><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
                                 </div>
                                 <div className="col-md-4 text-center">
                                     <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy" target="_blank">Cookie policy</a>

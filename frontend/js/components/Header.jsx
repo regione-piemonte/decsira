@@ -55,9 +55,11 @@ const RightMenu = connect((state) => ({
         },
         clickOnSistemaCA: () => {
             dispatch(showHideRightConoscenzaAmbBox());
+            dispatch(showHideRightMenu());
         },
         clickOnCredits: () => {
             dispatch(showHideCreditsBox());
+            dispatch(showHideRightMenu());
         }
     };
 })(require('./RightMenu'));
@@ -66,7 +68,7 @@ const LoginNav = connect((state) => ({
     user: state.userprofile.user,
     nav: false,
     renderButtonText: false,
-    renderButtonContent: () => {return <Glyphicon glyph="user" />; },
+    renderButtonContent: () => { return <div><Glyphicon glyph="user" /><span className="sr-only">menu utente</span></div>; },
     bsStyle: "primary",
     showAccountInfo: false,
     showPasswordChange: false,
@@ -149,13 +151,10 @@ class Header extends React.Component {
     render() {
         return (
             <div className="navbar-header">
-                <SistemaConoscenzeAmbientaliBox />
-                <Credits />
                 <header className="navbar">
                     <div className="row-fluid">
 
                         <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 testalino-sx">
-                            <h1><a href="http://www.sistemapiemonte.it/cms/privati/" title="Home page Sistemapiemonte"><span>SP</span></a></h1>
                             <h2><a onClick={this.props.goToHome} href="#" title="Home page Sistema Conoscenze Ambientali"><span>Sistema</span> Conoscenze Ambientali</a></h2>
                         </div>
 
@@ -169,6 +168,8 @@ class Header extends React.Component {
 
                     </div>
                 </header>
+                <SistemaConoscenzeAmbientaliBox />
+                <Credits />
                 <CartPanel />
                 <LoginPanel />
             </div>
