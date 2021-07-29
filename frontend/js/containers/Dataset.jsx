@@ -43,6 +43,9 @@ const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 const {toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
 
+const proj4 = require('proj4').default;
+const { register } = require('ol/proj/proj4.js');
+
 const mapStateToPropsMIB = (state) => {
     return {
         show: state.metadatainfobox.show,
@@ -185,6 +188,7 @@ class Dataset extends React.Component {
 
     componentDidMount() {
         document.body.className = "body_dataset sira-ms2";
+        register(proj4);
     }
 
     componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
