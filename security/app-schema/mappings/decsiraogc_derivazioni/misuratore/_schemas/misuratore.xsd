@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_derivazioni="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_misuratore  id= id_misuratore-->
+	<element name="Misuratore" substitutionGroup="gml:AbstractFeature" type="decsiraogc_derivazioni:MisuratoreType"/>
+	
+	<!-- decsira_t_oggetto_associato_derivazioni  id= identificativo-->
+	<element name="OggettoAssociatoMisuratore" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:OggettoAssociatoMisuratoreType"/>
+	
+	<!-- decsira_t_misuratore_annimisura  id= id_misuratore_anno-->
+	<element name="MisuratoreAnniMisura" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:MisuratoreAnniMisuraType"/>
+	
+	<!-- decsira_t_misuratore_opera_derivazione  id= id_mis_opera_deriv-->
+	<element name="MisuratoreOperaDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:MisuratoreOperaDerivazioneType"/>
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="MisuratoreType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idMisuratore" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idoggtipoMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element minOccurs="1" name="geomMisuratore" type="gml:GeometryPropertyType"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilievoMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="matricolaMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkComuneMisuratore" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="istatComuneMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desComuneMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="siglaProvinciaMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desProvinciaMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgAstaIdrMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoStrumMisuratore" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desTipoStrumMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataInstallMisuratore" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="noteStrumentoMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkUbicazioneMisuratore" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desUbicazioneMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="fkStatoMisuratore" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="desStatoMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgPosizioneMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="noteCensimentoMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataCensimentoMisuratore" type="xs:date"/>
+					
+					<xs:element minOccurs="1" name="autoreCensimentoMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkStatoEsercizioMisuratore" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desStatoEsercizioMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoDerivCodrilMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoDerivCodutenzaMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoDerivNclasPratMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoUsiLeggeMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoAnniMisuraMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="oggettoAssociatoMisuratore" type="decsiraogc_derivazioni:OggettoAssociatoMisuratorePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="misuratoreAnniMisura" type="decsiraogc_derivazioni:MisuratoreAnniMisuraPropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="misuratoreOperaDerivazione" type="decsiraogc_derivazioni:MisuratoreOperaDerivazionePropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="OggettoAssociatoMisuratoreType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="identificativo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idoggtipoprinc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoAlberatura">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idMisuratore" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idOggetto" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoOggetto" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="desTipoOggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					<xs:element minOccurs="1" name="nomeWFS">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idStatoOggetto" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRocCaptColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilCaptColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="denomCaptColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="codiceRilRestColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="MisuratoreAnniMisuraType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idMisuratoreAnno">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idMisuratore" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="annoMisura" type="xs:integer"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="MisuratoreOperaDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idMisOperaDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idMisuratore" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idOpera" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoOpera" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desTipoOpera">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilievoDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceUtenza">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="classificazionePratica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoEnergetico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoRiqualifEnergia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoProduzione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoLavagInerti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoZootecnico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoPiscicolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoPotabile">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoDomestico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoCivile">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgUsoAgricolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceROC">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilievoCaptazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilievoRestituzione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="OggettoAssociatoMisuratorePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:OggettoAssociatoMisuratore"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="MisuratoreAnniMisuraPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:MisuratoreAnniMisura"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="MisuratoreOperaDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:MisuratoreOperaDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+</schema>

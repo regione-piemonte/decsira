@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:AppSchemaDataAccess xmlns:ns2="http://www.opengis.net/ogc" xmlns:ns3="http://www.geotools.org/app-schema">
+    <namespaces>
+        <Namespace>
+            <prefix>decsiraogc_derivazioni</prefix>
+            <uri>http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0</uri>
+        </Namespace>
+        <Namespace>
+            <prefix>gml</prefix>
+            <uri>http://www.opengis.net/gml/3.2</uri>
+        </Namespace>
+    </namespaces>
+    <includedTypes/>
+    <sourceDataStores>
+        <DataStore>
+			<id>dataStore</id>
+			<parameters>
+				<Parameter>
+					<name>Connection timeout</name>
+					<value>20</value>
+				</Parameter>
+				<Parameter>
+					<name>port</name>
+					<value>${db.port}</value>
+				</Parameter>
+				<Parameter>
+					<name>passwd</name>
+					<value>${db.password}</value>
+				</Parameter>
+				<Parameter>
+					<name>dbtype</name>
+					<value>postgis</value>
+				</Parameter>
+				<Parameter>
+					<name>encode functions</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Evictor run periodicity</name>
+					<value>300</value>
+				</Parameter>
+				<Parameter>
+					<name>namespace</name>
+					<value></value>
+				</Parameter>
+				<Parameter>
+					<name>schema</name>
+					<value>${db.schema}</value>
+				</Parameter>
+				<Parameter>
+					<name>create database</name>
+					<value>false</value>
+				</Parameter>
+				<Parameter>
+					<name>fetch size</name>
+					<value>1000</value>
+				</Parameter>
+				<Parameter>
+					<name>preparedStatements</name>
+					<value>false</value>
+				</Parameter>
+				<Parameter>
+					<name>min connections</name>
+					<value>1</value>
+				</Parameter>
+				<Parameter>
+					<name>Evictor tests per run</name>
+					<value>3</value>
+				</Parameter>
+				<Parameter>
+					<name>host</name>
+					<value>${db.host}</value>
+				</Parameter>
+				<Parameter>
+					<name>validate connections</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>max connections</name>
+					<value>10</value>
+				</Parameter>
+				<Parameter>
+					<name>database</name>
+					<value>${db.name}</value>
+				</Parameter>
+				<Parameter>
+					<name>Support on the fly geometry simplification</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Max connection idle time</name>
+					<value>300</value>
+				</Parameter>
+				<Parameter>
+					<name>Test while idle</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Loose bbox</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Expose primary keys</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Max open prepared statements</name>
+					<value>50</value>
+				</Parameter>
+				<Parameter>
+					<name>Estimated extends</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>user</name>
+					<value>${db.user}</value>
+				</Parameter>
+			</parameters>
+		</DataStore>
+    </sourceDataStores>
+    <targetTypes>
+        <FeatureType>
+            <schemaUri>_schemas/serbatoio.xsd</schemaUri>
+        </FeatureType>
+    </targetTypes>
+    <typeMappings>
+        <FeatureTypeMapping>
+            <sourceDataStore>dataStore</sourceDataStore>
+            <sourceType>decsira_t_oggetto_associato_derivazioni</sourceType>
+            <targetElement>decsiraogc_derivazioni:OggettoAssociatoSerbatoio</targetElement>
+            <attributeMappings>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:identificativo</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>identificativo</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:OggettoAssociatoSerbatoio</targetAttribute>
+                    <idExpression>
+                        <OCQL>identificativo</OCQL>
+                    </idExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:idOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:idSerbatoio</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_oggetto_princ</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:idStatoOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>stato_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:idTipoOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>tipo_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:nomeWFS</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>nome_wfs</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:codiceRilDerColl</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_ril_der_c</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:desTipoOggetto</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_tipo_oggetto</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:tipoAlberatura</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>tipo_alberatura</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_derivazioni:idoggtipoprinc</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_ogg_tipo_princ</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_ogg_tipo_princ</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+            </attributeMappings>
+        </FeatureTypeMapping>
+    </typeMappings>
+</ns3:AppSchemaDataAccess>

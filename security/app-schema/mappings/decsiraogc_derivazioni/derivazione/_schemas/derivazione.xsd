@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_derivazioni="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_derivazione  id= id_derivazione-->
+	<element name="Derivazione" substitutionGroup="gml:AbstractFeature" type="decsiraogc_derivazioni:DerivazioneType"/>
+	
+	<!-- decsira_t_titolare_derivazione  id= id_titolare_derivazione-->
+	<element name="TitolareDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:TitolareDerivazioneType"/>
+	
+	<!-- decsira_t_titolari_raggruppamento  id= id_titolare_raggruppamento-->
+	<element name="ComponentiRaggruppamento" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:ComponentiRaggruppamentoType"/>
+
+	<!-- decsira_t_oggetto_associato_derivazioni  id= identificativo-->
+	<element name="OggettoAssociatoDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:OggettoAssociatoDerivazioneType"/>
+
+	<!-- decsira_t_usi_derivazione  id= id_uso_tipouso_derivazione-->
+	<element name="UsiDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:UsiDerivazioneType"/>
+	
+	<!-- decsira_t_periodi_utilizzo_usi  id= id_periodo_utiliz_uso-->
+	<element name="PeriodiUtilizzoUsi" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:PeriodiUtilizzoUsiType"/>
+	
+	<!-- decsira_t_deriv_sovracanone  id= id_comune_deriv-->
+	<element name="SovracanoneDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:SovracanoneDerivazioneType"/>
+	
+	<!-- decsira_t_deriv_acquedotti  id= id_acqued_deriv-->
+	<element name="AcquedottiDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:AcquedottiDerivazioneType"/>
+	
+	<!-- decsira_t_dati_specifici_uso_derivazione  id= id_dati_specif_uso-->
+	<element name="DatiSpecificiUsoDerivazione" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:DatiSpecificiUsoDerivazioneType"/>
+	
+	<!-- decsira_t_deriv_captazioni  id= id_deriv_capt-->
+	<element name="DerivazioniCaptazioni" substitutionGroup="gml:AbstractObject" type="decsiraogc_derivazioni:DerivazioniCaptazioniType"/>
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="DerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idoggtipoDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+
+					<xs:element minOccurs="1" name="codiceRilievoDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="fkIstanza" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="fkAttivita" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceUtenza">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataDecorrenzaConcessione" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataScadenzaEffettiva" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="portataMaxDeriv" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="portataMedDeriv" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="volumeMaxDeriv" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="portataTotRestitDeriv" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="volAnnuoTotRestitDeriv" type="xs:decimal"/>
+					
+					
+					<xs:element minOccurs="1" name="flgSovracanone">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					
+					<xs:element minOccurs="1" name="flgRivieraschi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgBIM">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoPromiscuo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="noteDerivazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoDeriv" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desTipoDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="fkStatoPraticaDeriv" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desStatoPraticaDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="fkStato" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="desStatoDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="desStatoAutorizzazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAutoritaCompetente" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desAutoritaCompetente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="classificazionePraticaDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="numProvv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataAutorizProvv" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataScadenzaProvv" type="xs:date"/>
+					
+					<xs:element minOccurs="1" name="numPrese" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="numPozzi" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="numSorgenti" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="numFontanili" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="numTrinceeDrenanti" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="flgUsoEnergetico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoRiqualifEnerg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoProduzione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoLavagInerti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoZootecnico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoPiscicolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoPotabile">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoDomestico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoCivile">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgUsoAgricolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoUsiLegge">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoUsiEffettivi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoComuniDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="flgMisuratore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="1" minOccurs="1" name="titolareDerivazione" type="decsiraogc_derivazioni:TitolareDerivazionePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="oggettoAssociatoDerivazione" type="decsiraogc_derivazioni:OggettoAssociatoDerivazionePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="usiDerivazione" type="decsiraogc_derivazioni:UsiDerivazionePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="sovracanoneDerivazione" type="decsiraogc_derivazioni:SovracanoneDerivazionePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="acquedottiDerivazione" type="decsiraogc_derivazioni:AcquedottiDerivazionePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="derivazioniCaptazioni" type="decsiraogc_derivazioni:DerivazioniCaptazioniPropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TitolareDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idTitolareDerivazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoTitolare" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTitolare" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idRaggruppamento" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="desTipoSoggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denomTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="cfTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="pivaTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="provinciaTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="comuneTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="indirizzoTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="130"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="telefonoTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="emailpecTitDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="componentiRaggruppamento" type="decsiraogc_derivazioni:ComponentiRaggruppamentoPropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="ComponentiRaggruppamentoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idTitolareRaggruppamento">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idRaggruppamentoRaggr" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTitolareRaggr" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoTitolareRaggr" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="desTipoSoggettoRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denomTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="cfTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="pivaTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="provinciaTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="comuneTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="indirizzoTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="telefonoTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="emailpecTitDerivRaggr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="OggettoAssociatoDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="identificativo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idoggtipoprinc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoAlberatura">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idOggetto" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoOggetto" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="desTipoOggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element minOccurs="1" name="nomeWFS">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idStatoOggetto" type="xs:integer"/>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="codiceRocCaptColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="codiceRilCaptColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="denomCaptColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="codiceRilDerColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilRestColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilSerbColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilStazpColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="1" name="codSiraStabColl" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomeStabColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="310"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="comuneStabColl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nascostoCittadino" type="xs:boolean"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="UsiDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idUsoTipousoDerivazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idUsoTipouso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="15"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazioneUso" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idUso" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoUso" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desTipoUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceRilievoUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denominazioneUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="305"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denominazioneUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="305"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceSiraUso" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="elencoUsiUsiEffettivi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="portataMediaUso" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="volumeMaxAnnuoUso" type="xs:decimal"/>
+					
+					<!-- oggetti innestati -->
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="periodiUtilizzoUsi" type="decsiraogc_derivazioni:PeriodiUtilizzoUsiPropertyType"/>
+					
+					<xs:element maxOccurs="1" minOccurs="1" name="datiSpecificiUsoDerivazione" type="decsiraogc_derivazioni:DatiSpecificiUsoDerivazionePropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="PeriodiUtilizzoUsiType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idPeriodoUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idPeriodoUtilizzo" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idUsoTipouso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="15"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idUso" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoUso" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="inizioPeriodoUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="finePeriodoUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="qMaxPeriodoUso" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="qMedPeriodoUso" type="xs:decimal"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="SovracanoneDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idComusovraDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idComusovra" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codIstatComusovra">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="toponimoComusovra">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="provinciaComusovra">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="AcquedottiDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idAcquedDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idOldSiriAcquedottoDeriv" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denomAcquedottoDeriv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="DatiSpecificiUsoDerivazioneType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idDatiSpecifUso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idUso" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idTipoUso" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idCollocEnerg" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="desCollocEnerg">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="potenzaNmaEner" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="energPaEner" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="potenzaNmaRiqual" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="energPaRiqual" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgIncavernaRiqual">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="potenzaNpompRiqual" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="energiaAnnuaPompRiqual" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="supIrrigabileAgric" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgBoccaNontassataAgric">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="supIrrigataAgric" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgIrrigScorrimAgric">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgIrrigAspersAgric">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgIrrigMicroirrAgric">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgIrrigSommersAgric">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="DerivazioniCaptazioniType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element minOccurs="1" name="idDerivCapt">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="25"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="1" name="idDerivazione" type="xs:integer"/>
+					
+					<xs:element minOccurs="1" name="idOperaCapt" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="denomCidrsupPresa">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	<complexType name="TitolareDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:TitolareDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="ComponentiRaggruppamentoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:ComponentiRaggruppamento"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="OggettoAssociatoDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:OggettoAssociatoDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="UsiDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:UsiDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="PeriodiUtilizzoUsiPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:PeriodiUtilizzoUsi"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="SovracanoneDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:SovracanoneDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+
+	<complexType name="AcquedottiDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:AcquedottiDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="DatiSpecificiUsoDerivazionePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:DatiSpecificiUsoDerivazione"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="DerivazioniCaptazioniPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_derivazioni:DerivazioniCaptazioni"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+</schema>
