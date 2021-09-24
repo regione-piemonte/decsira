@@ -1,0 +1,84 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='IMPIANTI GESTIONE RIFIUTI' subtitle={[
+            'Codice SIRA: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:codiceSIRA/text()"),
+            ' - Stato: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:desStato/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'impiantoRifiutiGenerico'
+			featureId = {'impianto_generico.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:identificativoRifiutoGenerico/text()")}
+			rootTitle = {
+				'Impianto gestione rifiuti - Comune di ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:nomeComune/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:oggettoAssociatoStringa")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desTipo/text()",
+				groupId: {
+					xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idTipo/text()",
+					value: "8"
+				},
+				groupElement: {
+					descriptionLabels: ['Stato autorizzazione: '],
+					descriptionValues: ["decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desStato/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:nomeWfs/text()",
+						xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desTipo/text()",
+				groupId: {
+					xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idTipo/text()",
+					value: "9"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice SIRA: ', ' - Stato: '],
+					descriptionValues: ["decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:codiceSira/text()","decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desStato/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:nomeWfs/text()",
+						xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desTipo/text()",
+				groupId: {
+					xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idTipo/text()",
+					value: "14"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice SIRA: ', ' - Stato: '],
+					descriptionValues: ["decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:codiceSira/text()","decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desStato/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:nomeWfs/text()",
+						xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desTipo/text()",
+				groupId: {
+					xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idTipo/text()",
+					value: "15"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice SIRA: ', ' - Stato: '],
+					descriptionValues: ["decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:codiceSira/text()","decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desStato/text()"],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:nomeWfs/text()",
+						xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>
