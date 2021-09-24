@@ -122,16 +122,17 @@ class SchedaToPDF extends React.Component {
 
     resolvePdfName = () => {
         let name = 'download.pdf';
-        // Iterate to find the feature with correct namespace and identify the pdfname
-        Object.values(this.props.configOggetti).forEach(({card}) => {
-            const pdfname = card.pdfname;
-            const [placeholder] = pdfname.match(/\{\{.+?\}\}/g) || [];
-            const el = placeholder.replace('{{', '').replace('}}', '');
-            try {
-                name = pdfname.replace(placeholder, TemplateUtils.getValue(this.props.card.xml, el));
-                // eslint-disable-next-line no-empty
-            } catch (e) {}
-        });
+        for (const [key, value] of Object.entries(this.props.configOggetti)) {
+            if (key === this.props.activeFeatureType) {
+                const pdfname = value.card.pdfname;
+                const [placeholder] = pdfname.match(/\{\{.+?\}\}/g) || [];
+                const el = placeholder.replace('{{', '').replace('}}', '');
+                try {
+                    name = pdfname.replace(placeholder, TemplateUtils.getValue(this.props.card.xml, el));
+                    // eslint-disable-next-line no-empty
+                } catch (e) {}
+            }
+        }
         return endsWith(name, ".pdf") ? name : `${name}.pdf`;
     };
 }
@@ -139,7 +140,8 @@ class SchedaToPDF extends React.Component {
 module.exports = connect((state) => {
     return {
         card: state.cardtemplate || {},
-        configOggetti: state.siradec.configOggetti
+        configOggetti: state.siradec.configOggetti,
+        activeFeatureType: state.siradec.treeFeatureType || state.siradec.activeFeatureType
     };
 }, {
     generatePDF: generatePDF.bind(null, false),

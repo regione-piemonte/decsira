@@ -322,7 +322,7 @@ class SiraGrid extends React.Component {
         return (
             <Modal show={!!loadingError} bsSize="small" onHide={() => {
                 this.props.cleanError(false);
-                // this.onGridClose(true);
+                this.onGridClose(false);
             }}>
                 <Modal.Header className="dialog-error-header-side" closeButton>
                     <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>

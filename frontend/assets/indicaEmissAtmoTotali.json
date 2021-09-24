@@ -1,0 +1,214 @@
+{
+   "featureTypeName":"decsiraogc_indicatori_irea:IndicaEmissAtmoTotali",
+   "featureTypeNameLabel":"EMISSIONI TOTALI IN ATMOSFERA - INDICATORE",
+   "nameSpaces": {
+     "decsiraogc_indicatori_irea": "http://www.regione.piemonte.it/ambiente/indicatori_irea/1.0"
+   },
+   "tematizzatore": {
+	  "description": "Emissioni Totali in Atmosfera",
+	  "attribute": "valore_rappresentato",
+	  "defaultMethod": "jenks",
+	  "defaultIntervals": 5,
+	  "defaultRamp": "dark2",
+	  "viewParams": "ris_spaziale:%RIS_SPAZIALE%;dimensione:%DIMENSIONE%;ambito_temporale:%AMBITO_TEMPORALE%",
+	  "filters": [
+			{
+				"index": 1,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_ris_spaziale",
+				"label":"Risoluzione Spaziale",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_spaziale",
+				  "propertyName": "fk_ris_spaziale,des_ris_spaziale,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ris_spaziale",
+				"valueLabel":"des_ris_spaziale"
+			},
+			{
+				"index": 2,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_dimensione",
+				"label":"Dimensione indicatore",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_dimensioni",
+				  "propertyName": "fk_dimensione,fk_ris_spaziale,des_dimensione,des_unita_misura,des_ramp,method,intervals,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_dimensione",
+				"valueLabel":"des_dimensione"
+			},
+			{
+				"index": 3,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_ambito_temporale",
+				"label":"Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_temporale",
+				  "propertyName": "fk_ris_temporale,des_ris_temporale,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ris_temporale",
+				"valueLabel":"des_ris_temporale"
+			},
+			{
+				"index": 4,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_ambito_temporale",
+				"label":"Dettaglio Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ambiti_temporali",
+				  "propertyName": "fk_ris_temporale,fk_ambito_temporale,valore,anno,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ambito_temporale",
+				"valueLabel":"fk_ambito_temporale"
+			}
+	  ]
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Produzione Rifiuti Urbani",
+        "name": "decsiraogc_indicatori_irea:IndicaEmissAtmoTotali",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "indicaEmissAtmoTotali",
+        "group": "Emissioni Totali in Atmosfera - Indicatore",
+        "format": "image/png"
+    },
+    "geometryName": "geometria",
+    "geometryType": "MultiPolygon",
+	"featureinfo":{
+     "templateURL": "assets/infoTemplateEmissAtmoTotali.jsxt"
+	},
+	"featuregrid": {
+     "grid": {
+		"root": "/wfs:FeatureCollection/wfs:member/decsiraogc_indicatori_irea:IndicaEmissAtmoTotali",
+		"columns": [
+		  {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+          },
+		  {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "geometry",
+          "xpath" : [ "decsiraogc_indicatori_irea:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "type" : 6
+         },
+		 {
+           "headerName": "Dimensione Indicatore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_dimensione/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Periodicita",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_ris_temporale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Dettaglio Periodicita",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:anno_ambito_temporale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Risoluzione Spaziale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_ris_spaziale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Localizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_entita_spaziale/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Abitanti",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:abitanti/text()"],
+           "type": 1,
+          "width" : 150
+         },
+		 {
+           "headerName": "Superficie (hm2)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:superficie_hm2/text()"],
+           "type": 1,
+          "width" : 150
+         },
+		 {
+           "headerName": "Valore rappresentato",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:valore_rappresentato/text()"],
+           "type": 1,
+          "width" : 150
+         },
+         {
+           "headerName": "Unità di misura",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_unita_misura/text()"],
+           "type": 2,
+          "width" : 150
+         }
+		]
+		}
+	},
+	"query": {
+		"service": {
+		   "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+		   "urlParams": {
+			 "version": "1.1.0",
+			 "outputFormat": "application/json"
+		   }
+		 },
+		 "fields":[
+			{
+				"index": 1,
+				"attribute": "decsiraogc_indicatori_irea:abitanti",
+				"label":"Abitanti",
+				"type":"number"
+			},
+			{
+				"index": 1,
+				"attribute": "decsiraogc_indicatori_irea:superficie_hm2",
+				"label":"Superficie (hm2)",
+				"type":"number"
+			},
+			{
+				"index": 2,
+				"attribute": "decsiraogc_indicatori_irea:valore_rappresentato",
+				"label":"Valore rappresentato",
+				"type":"number"
+			}
+		 ]
+	}
+}
