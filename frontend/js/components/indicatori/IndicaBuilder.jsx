@@ -521,11 +521,13 @@ export default connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     const layers = state.layers.flat;
     const layerId = state.siradec.currentNodeId ? state.siradec.currentNodeId : null;
-    const currLayer = layerId ? layers.filter((l) => l.featureType === state.siradec.activeFeatureType && l.id === layerId)[0] : null;
+    const currLayer = layerId ? layers.filter((l) => l.id === layerId)[0] : null;
+    const layerConfig = currLayer ? state.siradec.configOggetti[currLayer.featureType] : null;
+    const config = layerConfig ? layerConfig : activeConfig;
 
     let risSp = []; let dettPer = []; let dim = []; let period = [];
-    if (activeConfig.indicaFilters) {
-        let filters = activeConfig.indicaFilters;
+    if (config.indicaFilters) {
+        let filters = config.indicaFilters;
         risSp = filters[0].values.map((att) => {
             return { id: att.fk_ris_spaziale, value: att.des_ris_spaziale };
         });
@@ -549,7 +551,7 @@ export default connect((state) => {
     }
 
     return {
-        wmsLayer: activeConfig.layer,
+        wmsLayer: config.layer,
         risoluzioneSpaziale: risSp,
         dimensione: dim,
         periodicita: period,

@@ -18,7 +18,7 @@ const THEMATIC_VIEW_CONFIG_MAP = 'THEMATIC_VIEW_CONFIG_MAP';
 const SEARCH_TEXT_CHANGE = 'SEARCH_TEXT_CHANGE';
 const SHOWCATEGORIES = 'SHOWCATEGORIES';
 const SET_NODE_IN_USE = 'SET_NODE_IN_USE';
-
+const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
 
 function searchTextChange(text) {
@@ -121,16 +121,33 @@ function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?'
         });
     };
 }
+
 function thematicViewConfigLoaded(data) {
     return {
         type: THEMATIC_VIEW_CONFIG_LOADED,
         config: data
     };
 }
-function thematicViewConfigMap(data) {
+
+/* function thematicViewConfigMap(data) {
     return {
         type: THEMATIC_VIEW_CONFIG_MAP,
         config: data
+    };
+}*/
+function thematicViewConfigMap(data) {
+    return (dispatch, getState) => {
+        const { userprofile } = getState();
+        const layersFiltered = data.map.layers.filter(
+            (layer) => verifyProfiles(layer.profiles, userprofile.profile)
+        );
+        data.map.layers = layersFiltered;
+        dispatch(
+            {
+                type: THEMATIC_VIEW_CONFIG_MAP,
+                config: data
+            }
+        );
     };
 }
 
