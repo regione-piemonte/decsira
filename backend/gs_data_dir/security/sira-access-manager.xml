@@ -225,7 +225,13 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	
+	<Rule>
+		<priority>33</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_rifiuti_consorzi</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>	
 	
 	
 	
@@ -1525,6 +1531,24 @@
 		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita</attribute>
 		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito</attribute>
 		</hiddenAttributes>
+    </Rule>
+	
+	<Rule>		
+		<priority>630</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_indicatori_irea</workspace>
+		<layer>IndicaEmissAtmoTotali</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_indicatori_irea:fk_dimensione" = '1' OR "decsiraogc_indicatori_irea:fk_dimensione" = '2' OR "decsiraogc_indicatori_irea:fk_dimensione" = '3' OR "decsiraogc_indicatori_irea:fk_dimensione" = '4' OR "decsiraogc_indicatori_irea:fk_dimensione" = '5' OR "decsiraogc_indicatori_irea:fk_dimensione" = '6' OR "decsiraogc_indicatori_irea:fk_dimensione" = '7' OR "decsiraogc_indicatori_irea:fk_dimensione" = '8' OR "decsiraogc_indicatori_irea:fk_dimensione" = '9' OR "decsiraogc_indicatori_irea:fk_dimensione" = '10' OR "decsiraogc_indicatori_irea:fk_dimensione" = '11' OR "decsiraogc_indicatori_irea:fk_dimensione" = '12' OR "decsiraogc_indicatori_irea:fk_dimensione" = '13'</filter>
+	</Rule>
+	
+	<Rule>
+		<priority>631</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_decodif</workspace>
+		<layer>decsira_d_indica_app_dimensioni</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_indicatori_irea:fk_dimensione" = '1' OR "decsiraogc_indicatori_irea:fk_dimensione" = '2' OR "decsiraogc_indicatori_irea:fk_dimensione" = '3' OR "decsiraogc_indicatori_irea:fk_dimensione" = '4' OR "decsiraogc_indicatori_irea:fk_dimensione" = '5' OR "decsiraogc_indicatori_irea:fk_dimensione" = '6' OR "decsiraogc_indicatori_irea:fk_dimensione" = '7' OR "decsiraogc_indicatori_irea:fk_dimensione" = '8' OR "decsiraogc_indicatori_irea:fk_dimensione" = '9' OR "decsiraogc_indicatori_irea:fk_dimensione" = '10' OR "decsiraogc_indicatori_irea:fk_dimensione" = '11' OR "decsiraogc_indicatori_irea:fk_dimensione" = '12' OR "decsiraogc_indicatori_irea:fk_dimensione" = '13'</filter>
     </Rule>
 	
     </rules>

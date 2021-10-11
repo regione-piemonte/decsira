@@ -127,14 +127,18 @@ class SideIndicaPanel extends React.Component {
 
 export default connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
+    const layers = state.layers.flat;
+    const layerId = state.siradec.currentNodeId ? state.siradec.currentNodeId : null;
+    const currLayer = layerId ? layers.filter((l) => l.id === layerId)[0] : null;
+    const layerConfig = currLayer ? state.siradec.configOggetti[currLayer.featureType] : null;
+
     return {
-        tematizzatore: activeConfig.tematizzatore,
+        tematizzatore: layerConfig ? layerConfig.tematizzatore : activeConfig.tematizzatore,
         // SiraIndicaPanel prop
         expanded: state.siradec.indicaConfigPanelExpanded,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,
-        featureTypeNameLabel: activeConfig.featureTypeNameLabel,
-        indicaFilters: activeConfig.indicaFilters
-        // featureTypeName: activeConfig.featureTypeName,
+        featureTypeNameLabel: layerConfig ? layerConfig.featureTypeNameLabel : activeConfig.featureTypeNameLabel,
+        indicaFilters: layerConfig ? layerConfig.indicaFilters : activeConfig.indicaFilters
     };
 }, {
     onCloseError: hideQueryError

@@ -121,61 +121,75 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:des_dimensione/text()"],
            "type": 2,
-           "width" : 200
+           "width" : 240
          },
 		 {
-           "headerName": "Periodicita",
+           "headerName": "Periodicità",
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:des_ris_temporale/text()"],
            "type": 2,
-           "width" : 150
+           "width" : 100
          },
 		 {
-           "headerName": "Dettaglio Periodicita",
+           "headerName": "Dettaglio Periodo",
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:anno_ambito_temporale/text()"],
            "type": 2,
-           "width" : 150
+           "width" : 140
          },
 		 {
            "headerName": "Risoluzione Spaziale",
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:des_ris_spaziale/text()"],
            "type": 2,
-           "width" : 150
+           "width" : 140
          },
 		 {
-           "headerName": "Localizzazione",
+           "headerName": "Denominazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:des_entita_spaziale/text()"],
            "type": 2,
           "width" : 150
          },
 		 {
-           "headerName": "Abitanti",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_indicatori_irea:abitanti/text()"],
-           "type": 1,
-          "width" : 150
-         },
-		 {
-           "headerName": "Superficie (hm2)",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_indicatori_irea:superficie_hm2/text()"],
-           "type": 1,
-          "width" : 150
-         },
-		 {
-           "headerName": "Valore rappresentato",
+           "headerName": "Valore emissione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:valore_rappresentato/text()"],
            "type": 1,
-          "width" : 150
+          "width" : 130
          },
          {
            "headerName": "Unità di misura",
            "suppressSorting": true,
            "xpath": ["decsiraogc_indicatori_irea:des_unita_misura/text()"],
+           "type": 2,
+          "width" : 100
+         },
+		 {
+           "headerName": "Abitanti",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:abitanti/text()"],
+           "type": 1,
+          "width" : 80
+         },
+		 {
+           "headerName": "Superficie (km2)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:superficie_km2/text()"],
+           "type": 1,
+          "width" : 120
+         },
+		 {
+           "headerName": "Codice zona",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:cod_zoniz_area/text()"],
+           "type": 2,
+          "width" : 100
+         },
+		 {
+           "headerName": "Denominazione zona",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_zoniz_area/text()"],
            "type": 2,
           "width" : 150
          }
@@ -198,16 +212,30 @@
 				"type":"number"
 			},
 			{
-				"index": 1,
-				"attribute": "decsiraogc_indicatori_irea:superficie_hm2",
-				"label":"Superficie (hm2)",
+				"index": 2,
+				"attribute": "decsiraogc_indicatori_irea:superficie_km2",
+				"label":"Superficie (km2)",
 				"type":"number"
 			},
 			{
-				"index": 2,
+				"index": 3,
 				"attribute": "decsiraogc_indicatori_irea:valore_rappresentato",
-				"label":"Valore rappresentato",
+				"label":"Valore emissione",
 				"type":"number"
+			},
+			{
+				"index": 4,
+				"attribute": "decsiraogc_indicatori_irea:id_zoniz_area",
+				"label":"Zonizzazione",
+				"type":"list",
+				"valueService": {
+				  "urlParams": {
+					"typeName": "decsiraogc_decodif:decsira_geo_zoniz_prqa_storica",
+					"propertyName": "id_geo_zoniz_prqa_storica,label_zone"
+				 }
+				},
+				"valueId":"id_geo_zoniz_prqa_storica",
+				"valueLabel":"label_zone"
 			}
 		 ]
 	}
