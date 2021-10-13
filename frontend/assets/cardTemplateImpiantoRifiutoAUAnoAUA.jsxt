@@ -142,178 +142,177 @@
 				</Section>
 			</Section>
 
-            <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-              <Section header='DATI TECNICI - Impianti di Recupero Rifiuti' eventKey='6' expanded={true}>
-                <LabeledField label='Quantita totale inviata a recupero (t/anno)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:quantitaInviataTotaleRecupero/text()")
-                }/>
-                <LabeledField label='Capacita massima stoccabile (t)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:capacitaMaxStocct/text()")
-                }/>
-                <LabeledField label='Capacita massima stoccabile (m3)' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:capacitaMaxStoccMc/text()")
-                }/>
-             </Section>
-          </ProfileWrapper>
-
-      <Section header='TIPOLOGIA DI RIFIUTO' eventKey='7' expanded={true}>
-      <SiraTable
-          id="RecuperoRifiuti"
-          selectedRow={model.RecuperoRifiuti}
-          wfsVersion="2.0"
-          rowSelection={"single"}
-          columns={
-              [
-                  {
-                      hide: true,
-                      id: true,
-                      xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
-                  },
-                  {
-                      headerName: 'Numero scheda rifiuti',
-                      width: 70,
-                      xpath:"decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()"
-                  },
-                  {
-                      headerName: 'Tipologia del rifiuto',
-                      width: 500,
-                      xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:desTipoRifiuto/text()"
-                  },
-                  {
-                      headerName: 'Tipo di recupero',
-                      width: 150,
-                      xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:desTipoRecupero/text()"
-                  }
-              ]
-          }
-          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA")}/>
-
-
-
-         <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-          <Section header='Operazioni di recupero' eventKey='10' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
-              <SiraTable
-                  id="AttivitaRecuperoRifiuti"
-                  selectedRow={model.AttivitaRecuperoRifiuti}
-                  wfsVersion="2.0"
-                  rowSelection={false}
-                  dependsOn={{
-                      tableId: "RecuperoRifiuti",
-                      parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA"),
-                      xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id",
-                      pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()}}"
-                  }}
-                  columns={
-                      [
-                        {
-                              hide: true,
-                              id: true,
-                              xpath:"../../decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
-                          },
-                          {
-                              headerName: 'Codifica di recupero',
-                              width: 100,
-                              xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:codOperazRecupero/text()"
-                          },
-                          {
-                              headerName: 'Operazione di recupero',
-                              width: 500,
-                              xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desOperazRecupero/text()"
-                          },
-                          {
-                              headerName: 'Quantita massima inviata a recupero(t/anno)',
-                              width: 200,
-                              xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:qtaMaxRecupero/text()"
-                          },
-                          {
-                              headerName: 'Quantita massima gestita(t/anno)',
-                              width: 150,
-                              xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxGestTanno/text()"
-                          },
-                          {
-                              headerName: 'Quantita massima stoccabile(t)',
-                              width: 150,
-                              xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxStoccT/text()"
-                          },
-                          {
-                              headerName: 'Quantita massima stoccabile(m3)',
-                              width: 150,
-                              xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxStoccMc/text()"
-                          }
-                      ]
-                  }
-                  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA")}/>
-              </Section>
-          </ProfileWrapper>
-
-
-      <Section header='Codice EER' eventKey='8' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
-      <SiraTable
-          id="CodiciEER"
-          selectedRow={model.CodiciEER}
-          wfsVersion="2.0"
-          rowSelection={false}
-          dependsOn={{
-              tableId: "RecuperoRifiuti",
-              parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA"),
-              xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id",
-              pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()}}"
-          }}
-          columns={
-              [
-                {
-                      hide: true,
-                      id: true,
-                      xpath:"../../decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
-                  },
-                  {
-                      headerName: 'Codice EER',
-                      width: 100,
-                      xpath:"decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:codiceCER/text()"
-                  },
-                  {
-                      headerName: 'Descrizione EER',
-                      width: 700,
-                      xpath:"decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:desCER/text()"
-                  }
-              ]
-          }
-          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:codiciCER")}/>
       </Section>
 
-      <Section header='Attivit&agrave; di recupero' eventKey='9' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
-      <SiraTable
-          id="AttivitaRecuperoRifiuti"
-          selectedRow={model.AttivitaRecuperoRifiuti}
-          wfsVersion="2.0"
-          rowSelection={false}
-          dependsOn={{
-              tableId: "RecuperoRifiuti",
-              parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA"),
-              xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id",
-              pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()}}"
-          }}
-          columns={
-              [
-                {
-                      hide: true,
-                      id: true,
-                      xpath:"../../decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
-                  },
-                  {
-                      headerName: 'Attivita di recupero',
-                      width: 700,
-                      xpath:"decsiraogc_rifiuti_aua:AttivitaRecuperoRifiuti/decsiraogc_rifiuti_aua:desAttivitaRecupero/text()"
-                  }
-              ]
-          }
-          features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:attivitaRecuperoRifiuti")}/>
-      </Section>
-    </Section>
+    <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+	  <Section header='DATI TECNICI - Impianti di Recupero Rifiuti' eventKey='6' expanded={true}>
+		<LabeledField label='Quantita totale inviata a recupero (t/anno)' value={
+		  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:quantitaInviataTotaleRecupero/text()")
+		}/>
+		<LabeledField label='Capacita massima stoccabile (t)' value={
+		  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:capacitaMaxStocct/text()")
+		}/>
+		<LabeledField label='Capacita massima stoccabile (m3)' value={
+		  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:capacitaMaxStoccMc/text()")
+		}/>
+		
+		<Section header='TIPOLOGIA DI RIFIUTO' eventKey='7' expanded={true}>
+		  <SiraTable
+			  id="RecuperoRifiuti"
+			  selectedRow={model.RecuperoRifiuti}
+			  wfsVersion="2.0"
+			  rowSelection={"single"}
+			  columns={
+				  [
+					  {
+						  hide: true,
+						  id: true,
+						  xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
+					  },
+					  {
+						  headerName: 'Numero scheda rifiuti',
+						  width: 70,
+						  xpath:"decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()"
+					  },
+					  {
+						  headerName: 'Tipologia del rifiuto',
+						  width: 500,
+						  xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:desTipoRifiuto/text()"
+					  },
+					  {
+						  headerName: 'Tipo di recupero',
+						  width: 150,
+						  xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:desTipoRecupero/text()"
+					  }
+				  ]
+			  }
+			  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA")}/>
 
-      </Section>
 
-     
+
+			 <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+			  <Section header='Operazioni di recupero' eventKey='10' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
+				  <SiraTable
+					  id="AttivitaRecuperoRifiuti"
+					  selectedRow={model.AttivitaRecuperoRifiuti}
+					  wfsVersion="2.0"
+					  rowSelection={false}
+					  dependsOn={{
+						  tableId: "RecuperoRifiuti",
+						  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA"),
+						  xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id",
+						  pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()}}"
+					  }}
+					  columns={
+						  [
+							{
+								  hide: true,
+								  id: true,
+								  xpath:"../../decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
+							  },
+							  {
+								  headerName: 'Codifica di recupero',
+								  width: 100,
+								  xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:codOperazRecupero/text()"
+							  },
+							  {
+								  headerName: 'Operazione di recupero',
+								  width: 500,
+								  xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desOperazRecupero/text()"
+							  },
+							  {
+								  headerName: 'Quantita massima inviata a recupero(t/anno)',
+								  width: 200,
+								  xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:qtaMaxRecupero/text()"
+							  },
+							  {
+								  headerName: 'Quantita massima gestita(t/anno)',
+								  width: 150,
+								  xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxGestTanno/text()"
+							  },
+							  {
+								  headerName: 'Quantita massima stoccabile(t)',
+								  width: 150,
+								  xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxStoccT/text()"
+							  },
+							  {
+								  headerName: 'Quantita massima stoccabile(m3)',
+								  width: 150,
+								  xpath:"decsiraogc_rifiuti_aua:OperazioniRecuperoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:messRiservaQtaMaxStoccMc/text()"
+							  }
+						  ]
+					  }
+					  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:operazioniRecuperoRifiutiAUAnoAUA")}/>
+				  </Section>
+			  </ProfileWrapper>
+
+
+		  <Section header='Codice EER' eventKey='8' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
+		  <SiraTable
+			  id="CodiciEER"
+			  selectedRow={model.CodiciEER}
+			  wfsVersion="2.0"
+			  rowSelection={false}
+			  dependsOn={{
+				  tableId: "RecuperoRifiuti",
+				  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA"),
+				  xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id",
+				  pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()}}"
+			  }}
+			  columns={
+				  [
+					{
+						  hide: true,
+						  id: true,
+						  xpath:"../../decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
+					  },
+					  {
+						  headerName: 'Codice EER',
+						  width: 100,
+						  xpath:"decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:codiceCER/text()"
+					  },
+					  {
+						  headerName: 'Descrizione EER',
+						  width: 700,
+						  xpath:"decsiraogc_rifiuti_aua:CodiciCER/decsiraogc_rifiuti_aua:desCER/text()"
+					  }
+				  ]
+			  }
+			  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:codiciCER")}/>
+		  </Section>
+
+		  <Section header='Attivit&agrave; di recupero' eventKey='9' expanded={( model.RecuperoRifiuti !== undefined && model.RecuperoRifiuti !== null ) ? true: false}>
+		  <SiraTable
+			  id="AttivitaRecuperoRifiuti"
+			  selectedRow={model.AttivitaRecuperoRifiuti}
+			  wfsVersion="2.0"
+			  rowSelection={false}
+			  dependsOn={{
+				  tableId: "RecuperoRifiuti",
+				  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA"),
+				  xpath: "decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id",
+				  pdfTitle: "Numero Scheda Rifiuto: {{decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:idSchedaRifiuto/text()}}"
+			  }}
+			  columns={
+				  [
+					{
+						  hide: true,
+						  id: true,
+						  xpath:"../../decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/@gml:id"
+					  },
+					  {
+						  headerName: 'Attivita di recupero',
+						  width: 700,
+						  xpath:"decsiraogc_rifiuti_aua:AttivitaRecuperoRifiuti/decsiraogc_rifiuti_aua:desAttivitaRecupero/text()"
+					  }
+				  ]
+			  }
+			  features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:schedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:SchedaAutorizzateAUAnoAUA/decsiraogc_rifiuti_aua:attivitaRecuperoRifiuti")}/>
+		  </Section>
+		</Section>
+		
+	 </Section>
+    </ProfileWrapper> 
 	
 	<Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE DEI RIFIUTI' eventKey='10' expanded={true}>
        <LinkScheda

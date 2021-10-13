@@ -45,11 +45,11 @@ const getSLDByGeomType = (geometryType, ftName, filter, styleColor = '#0000FF') 
         break;
     }
     case "Polygon": {
-        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.7</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
     case "MultiPolygon": {
-        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.4</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PolygonSymbolizer><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.7</CssParameter></Fill></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
     case "LineString": {
