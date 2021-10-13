@@ -1,11 +1,11 @@
 {
-   "featureTypeName":"decsiraogc_indicatori_irea:IndicaEmissAtmoTotali",
-   "featureTypeNameLabel":"IREA – Emissioni Totali – Indicatore",
+   "featureTypeName":"decsiraogc_indicatori_irea:IndicaEmissAtmoS03",
+   "featureTypeNameLabel":"IREA - 07. Trasporto su strada – Automobili diesel – Indicatore",
    "nameSpaces": {
      "decsiraogc_indicatori_irea": "http://www.regione.piemonte.it/ambiente/indicatori_irea/1.0"
    },
    "tematizzatore": {
-	  "description": "IREA – Emissioni Totali – Indicatore",
+	  "description": "IREA - 07. Trasporto su strada – Automobili diesel – Indicatore",
 	  "attribute": "valore_rappresentato",
 	  "defaultMethod": "jenks",
 	  "defaultIntervals": 5,
@@ -22,7 +22,7 @@
 				"urlParams": {
 				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_spaziale",
 				  "propertyName": "fk_ris_spaziale,des_ris_spaziale,ordinamento",
-				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "cql_filter": "dc_identifier='r_piemon:8fc8349f-64a5-443d-a4b8-3b76adc4784b'",
 				  "sortBy": "ordinamento+A"
 				}
 				},
@@ -39,7 +39,7 @@
 				"urlParams": {
 				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_dimensioni",
 				  "propertyName": "fk_dimensione,fk_ris_spaziale,des_dimensione,des_unita_misura,des_ramp,method,intervals,ordinamento",
-				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "cql_filter": "dc_identifier='r_piemon:8fc8349f-64a5-443d-a4b8-3b76adc4784b'",
 				  "sortBy": "ordinamento+A"
 				}
 				},
@@ -56,7 +56,7 @@
 				"urlParams": {
 				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_temporale",
 				  "propertyName": "fk_ris_temporale,des_ris_temporale,ordinamento",
-				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "cql_filter": "dc_identifier='r_piemon:8fc8349f-64a5-443d-a4b8-3b76adc4784b'",
 				  "sortBy": "ordinamento+A"
 				}
 				},
@@ -73,7 +73,7 @@
 				"urlParams": {
 				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ambiti_temporali",
 				  "propertyName": "fk_ris_temporale,fk_ambito_temporale,valore,anno,ordinamento",
-				  "cql_filter": "dc_identifier='r_piemon:4ea46b99-185e-45ba-bc49-6d8c8e440ec9'",
+				  "cql_filter": "dc_identifier='r_piemon:8fc8349f-64a5-443d-a4b8-3b76adc4784b'",
 				  "sortBy": "ordinamento+A"
 				}
 				},
@@ -86,21 +86,21 @@
         "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "IREA – Emissioni Totali – Indicatore",
-        "name": "decsiraogc_indicatori_irea:IndicaEmissAtmoTotali",
+        "title": "IREA - 07. Trasporto su strada – Automobili diesel – Indicatore",
+        "name": "decsiraogc_indicatori_irea:IndicaEmissAtmoS03",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
-        "featureType": "indicaEmissAtmoTotali",
-        "group": "IREA – Emissioni Totali",
+        "featureType": "indicaEmissAtmoS03",
+        "group": "IREA - 07 Trasporto su strada – Automobili diesel",
         "format": "image/png"
     },
     "geometryName": "geometria",
     "geometryType": "MultiPolygon",
 	"featureinfo":{
-     "templateURL": "assets/infoTemplateEmissAtmoTotali.jsxt"
+     "templateURL": "assets/infoTemplateEmissAtmoS03.jsxt"
 	},
 	"featuregrid": {
      "grid": {
-		"root": "/wfs:FeatureCollection/wfs:member/decsiraogc_indicatori_irea:IndicaEmissAtmoTotali",
+		"root": "/wfs:FeatureCollection/wfs:member/decsiraogc_indicatori_irea:IndicaEmissAtmoS03",
 		"columns": [
 		  {
            "hide": true,
@@ -213,7 +213,7 @@
 			},
 			{
 				"index": 2,
-				"attribute": "superficie_km2",
+				"attribute": "decsiraogc_indicatori_irea:superficie_km2",
 				"label":"Superficie (km2)",
 				"type":"number"
 			},

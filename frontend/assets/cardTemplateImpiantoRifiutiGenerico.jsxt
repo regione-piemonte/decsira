@@ -2,10 +2,10 @@
     bsStyle="primary"
     header={(
             <DetailTitle title='IMPIANTI GESTIONE RIFIUTI' subtitle={[
-            'Codice SIRA stabilimento: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:codiceSIRA/text()"),
-            ' - Stato Istanza: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:autorizAmbImpRifiuti/decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti/decsiraogc_rifiuti_generici:desStato/text()")
+            'Denominazione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:azienda/decsiraogc_rifiuti_generici:Azienda/decsiraogc_rifiuti_generici:denominazione/text()"),
+            ' - ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:nomeComune/text()")
             ]} id={model.id}/>
     )}>
 
@@ -249,55 +249,6 @@
         </Section>
           
 
-
-        </Section>
-
-        <Section header='CONSULTA SCHEDE DI DETTAGLIO  IMPIANTI GESTIONE RIFIUTI' eventKey='8' expanded={true}>
-
-           <SiraTable
-                id="OggettoAssociatoStringa"
-                selectedRow={model.OggettoAssociatoStringa}
-                wfsVersion="2.0"
-                rowSelection={false}
-                
-                columns={
-                    [
-                        {
-                            hide: true,
-                            id: true,
-                            xpath: "decsiraogc_rifiuti_generici:OggettoAssociatoStringa/@gml:id"
-                        },
-                        {
-                            hide: true,
-                            headerName: 'idAutorizzazioneAmbientale',
-                            width: 100,
-                            xpath:"decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idAutorizzazione/text()"
-                        },
-                        {
-                            hide: false,
-                            headerName: 'Tipo Impianto',
-                            width: 460,
-							linkToDetail: {
-                                featureType: (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:oggettoAssociatoStringa/decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:nomeWfs/text()")).split("#")[0],
-                                xpath: null,
-                                cqlFilter: (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:oggettoAssociatoStringa/decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:nomeWfs/text()")).split("#")[1]+"='"+(model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:oggettoAssociatoStringa/decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:idOggetto/text()"))+"'"
-                            },
-								xpath:"decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desTipo/text()"
-							},
-						{
-							hide: false,
-							headerName: 'Stato',
-							width: 280,
-							xpath:"decsiraogc_rifiuti_generici:OggettoAssociatoStringa/decsiraogc_rifiuti_generici:desStato/text()"
-						}
-
-
-                    ]
-                }
-                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:oggettoAssociatoStringa")}
-                
-          />
-                
 
         </Section>
           

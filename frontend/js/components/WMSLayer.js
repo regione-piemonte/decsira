@@ -45,9 +45,11 @@ function postTileLoadFunction(queryParameters, imageTile, src) {
     }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`);
     const srs = queryParameters.SRS.split(":")[1];
     const BBOX = urlQuery.BBOX.split(',');
+    let viewparams = queryParameters.viewparams ? 'viewParams="' + queryParameters.viewparams + '"'  : '';
     const request = `<?xml version="1.0" encoding="UTF-8"?>
 <ogc:GetMap xmlns:ogc="http://www.opengis.net/ows"
             xmlns:gml="http://www.opengis.net/gml"
+            ${viewparams}
    version="1.3.0" service="WMS">
    ${queryParameters.SLD_BODY}
    <BoundingBox srsName="http://www.opengis.net/gml/srs/epsg.xml#${srs}">
@@ -61,6 +63,24 @@ function postTileLoadFunction(queryParameters, imageTile, src) {
    </Output>
    </ogc:GetMap>`;
     axios.post(newSrc, request, {
+        timeout: 60000,
+        responseType: 'blob',
+        headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
+    }).then((response) => {
+        let image = imageTile.getImage();
+        image.onload = function() {
+            window.URL.revokeObjectURL(image.src); // Clean up after yourself.
+        };
+        image.src = window.URL.createObjectURL(response.data);
+    });
+}
+function getTileLoadFunction(queryParameters, imageTile, src) {
+    const parsedUrl = urllib.parse(src, true);
+    const urlQuery = parsedUrl.query;
+    let newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
+        return (param !== "SLD") ? `${url}${idx ? '&' : '?'}${param}=${encodeURIComponent(urlQuery[param])}` : url;
+    }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`);
+    axios.get(newSrc, {
         timeout: 60000,
         responseType: 'blob',
         headers: {'Accept': 'text/xml', 'Content-Type': 'text/plain'}
@@ -95,7 +115,9 @@ Layers.registerType('wmspost', {
             source: new TileWMS({
                 urls: urls,
                 params: queryParameters,
-                tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)})
+                // tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)
+                tileLoadFunction: getTileLoadFunction.bind(null, queryParameters)
+            })
         });
     },
     update: (layer, newOptions, oldOptions) => {
