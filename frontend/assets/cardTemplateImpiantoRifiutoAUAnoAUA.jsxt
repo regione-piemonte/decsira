@@ -1,11 +1,11 @@
 <Panel
     bsStyle="primary"
-    header={(
-        <DetailTitle title='IMPIANTI RECUPERO RIFIUTI AUA O PROCEDURA SEMPLIFICATA (FUORI AUA)' subtitle={[
-            'Codice SIRA stabilimento: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:codiceSira/text()"),
-            ' - Stato Istanza: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:autorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:AutorizAmbImpRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:desStato/text()")
+	header={(
+            <DetailTitle title='IMPIANTI GESTIONE RIFIUTI: RECUPERO (AUA O PCOMUNICAZIONI FUORI AUA)' subtitle={[
+            'Denominazione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:azienda/decsiraogc_rifiuti_aua:Azienda/decsiraogc_rifiuti_aua:denominazione/text()"),
+            ' - ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:stabilimentoSemplice/decsiraogc_rifiuti_aua:StabilimentoSemplice/decsiraogc_rifiuti_aua:nomeComune/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
@@ -317,7 +317,7 @@
 	<Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE DEI RIFIUTI' eventKey='10' expanded={true}>
        <LinkScheda
               params={{
-                  cql_filter: "decsiraogc_rifiuti_generici:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:identificativoRifiutoGenerico/text()")+"'"
+                  cql_filter: "decsiraogc_rifiuti_aua:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_aua:ImpiantoRifiutiAUAnoAUA/decsiraogc_rifiuti_aua:identificativoRifiutoGenerico/text()")+"'"
               }}
               featureType="impiantoRifiutiGenerico"
               linkTitle="Vai a scheda impianto di gestione rifiuti"

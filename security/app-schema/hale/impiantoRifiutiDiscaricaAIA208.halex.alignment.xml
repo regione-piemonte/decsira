@@ -28,20 +28,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cab658c42-093b-4d67-b397-2ffd7e87bb2a" priority="normal">
-        <source>
-            <class>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </class>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.retype" id="C3e0d412f-4406-4082-ac48-d977ffaaa143" priority="normal">
         <source>
             <class>
@@ -1264,214 +1250,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca56b65e0-e349-4ac6-8e49-74b3ad80da23" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id_autorizzamb_sede"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="idAutorizzazioneAmbientaleSede" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd366cb52-27fa-45e7-a85a-02b8a2a1b5a5" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id_istanza"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="idAutorizzazioneAmbientale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbc228aa4-8d96-4f9c-9133-7d399143899f" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id_attivita"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="IdAttivita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C21b3071d-ada2-42bf-9c7b-7a759ca35b65" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id_tipo_provvedimento"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="idTipoProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceb1e0757-4f3c-44df-8726-8efc95935351" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="tipo_provvedimento"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="tipoProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5f1fe112-7f85-4bcb-93d9-d9ca33dca084" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="estremi_provvedimento"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="estremiProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5c23fc9a-3b37-429c-8de5-5aa17f46796f" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="data_provvedimento"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="dataProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C805ec19b-242f-4d48-a97b-705e96528ddc" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="data_scadenza"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="dataScadenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1a3a5ab3-9691-4256-ab7a-80c4ef8ca525" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="fk_autorita_competente"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="idEnteCompetente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C43489bbf-9b2a-4da1-a851-4a4411e53a47" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="ente_competente"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="desEnteCompetente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37854235-6c34-4221-81f1-a0e6b207e2b9" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="codice_sira"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9f670d0f-a687-4617-8a85-d0f232def49d" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="des_stato"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7bccd51c-3ca9-4a36-ba5b-d9598c63a8d1" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id_stato"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="C670c2555-bd47-4618-b3b8-3e95ad26e138" priority="normal">
         <source>
             <property>
@@ -1754,43 +1532,6 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.join" id="Ccebb18f0-6ec8-4002-8ce6-78c6638d2dee" priority="normal">
-        <source name="types">
-            <class>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <source name="types">
-            <class>
-                <type name="decsira_geo_rifiuto_discarica_aia208" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="ImpiantoRifiutiDiscaricaAIA208Type" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-            </class>
-        </target>
-        <complexParameter name="join">
-            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
-                <class>
-                    <type name="decsira_geo_rifiuto_discarica_aia208" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <class>
-                    <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <jp:condition>
-                    <property>
-                        <type name="decsira_geo_rifiuto_discarica_aia208" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="id_istanza"/>
-                    </property>
-                    <property>
-                        <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="id_istanza"/>
-                    </property>
-                </jp:condition>
-            </jp:join-parameter>
-        </complexParameter>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.join" id="C89d43421-2fdf-47c4-bdd0-4f52b92c9c2e" priority="normal">
         <source name="types">
             <class>
@@ -1918,22 +1659,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C95298501-d3a9-46fb-9e0b-af616899604c" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_t_autorizzazione_amb" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id_autorizzamb_sede"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
-                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="C83cab04d-8183-43ac-a4b5-b1ce11c176d8" priority="normal">
         <source>
             <property>
@@ -1981,5 +1706,280 @@
         </target>
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cdb270764-bab6-45f3-a011-e0e0a8ad7669" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceab57b4c-7165-4490-9dc2-7d54457a96d3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sira"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="codiceSira" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C19524c67-65b3-4153-ad66-63461ac4133e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="dataProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C923f3c4e-10c5-49be-836a-9f2cab745d3e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_scadenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="dataScadenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8ed6b075-6bef-43df-b07f-08575ab6b61c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="desStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cef2c228b-7573-4b93-94d8-5b4309622a1a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="estremi_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="estremiProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C82b22b20-a2fe-4963-86a0-c303979207d0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="idTipoProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce0f40765-3010-415a-80ab-6b73c8eecaf7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_provvedimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="tipoProvvedimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5aa87320-670d-4416-b3cd-3859aabcbe75" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="idStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb49bace6-703e-4eb5-a3ae-d436f885a0c8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_attivita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="IdAttivita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9a9500d6-ba18-4b09-8208-8d5089e64d63" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_autorita_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="idEnteCompetente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C62b6f8c3-368d-41fa-972b-3dace2bf33de" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="ente_competente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="desEnteCompetente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbb945af8-7e4e-4da4-baab-ce4dbaa116ef" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_autorizzamb_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="idAutorizzazioneAmbientaleSede" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C046f0b93-53a3-4ee4-a2a1-56ea77255631" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_autorizzamb_sede"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C35ef3b9e-c09f-4f90-ac18-50b0b755c9db" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_istanza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AutorizAmbImpRifiutiType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+                <child name="idAutorizzazioneAmbientale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cd2ea7a56-5320-4812-8f8a-ac0799128016" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_rifiuto_discarica_aia208" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="ImpiantoRifiutiDiscaricaAIA208Type" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_discarica/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_rifiuto_discarica_aia208" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_rifiuto_discarica_aia208" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_istanza"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_autorizzazione_amb_rifiuti" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_istanza"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
     </cell>
 </alignment>
