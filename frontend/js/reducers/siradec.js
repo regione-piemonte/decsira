@@ -175,7 +175,8 @@ function siradec(state = initialState, action) {
     case CONFIGURE_INDICA_LAYER: {
         return assign({}, state, {
             indicaConfigPanelExpanded: true,
-            currentNodeId: action.currentNodeId
+            currentNodeId: action.currentNodeId,
+            currentSiraId: action.currentSiraId
         });
     }
     case CLOSE_INDICA_CONFIGURATION: {
