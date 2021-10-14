@@ -1,14 +1,13 @@
 <Panel
     bsStyle="primary"
-    header={(
-            <DetailTitle title='IMPIANTI SMALTIMENTO RIFIUTI AIA o Ex Art. 208 D.Lgs 152/2006' subtitle={[
-            'Codice SIRA stabilimento: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:codiceSIRA/text()"),
-            ' - Stato Istanza: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:autorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:AutorizAmbImpRifiuti/decsiraogc_rifiuti_smaltimento:desStato/text()")
+	header={(
+            <DetailTitle title='IMPIANTI GESTIONE RIFIUTI: RECUPERO E SMALTIMENTO (AIA O EX ART. 208 D.LGS. 152/2006)' subtitle={[
+            'Denominazione: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:azienda/decsiraogc_rifiuti_smaltimento:Azienda/decsiraogc_rifiuti_smaltimento:denominazione/text()"),
+            ' - ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:stabilimentoSemplice/decsiraogc_rifiuti_smaltimento:StabilimentoSemplice/decsiraogc_rifiuti_smaltimento:nomeComune/text()")
             ]} id={model.id}/>
     )}>
-
     <Panel className="template">
 
                 <Section header='DATI GENERALI - Impianto Smaltimento' eventKey='1' expanded={true}>
@@ -412,7 +411,7 @@
         <Section header='CONSULTA SCHEDA SINTETICA IMPIANTI DI GESTIONE RIFIUTI' eventKey='11' expanded={true}>
 			 <LinkScheda
 				  params={{
-					  cql_filter: "decsiraogc_rifiuti_generici:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico/text()")+"'"
+					  cql_filter: "decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico='"+model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_smaltimento:ImpiantoRifiutiSmaltimAIA208/decsiraogc_rifiuti_smaltimento:identificativoRifiutoGenerico/text()")+"'"
 				  }}
 				  featureType="impiantoRifiutiGenerico"
 				  linkTitle="Vai a scheda impianto di gestione rifiuti"
