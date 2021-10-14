@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/geosolutions-it/csi-sira.png?label=ready&title=Ready)](https://waffle.io/geosolutions-it/csi-sira)
 CSI-SIRA
 ==========
 
