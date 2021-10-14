@@ -405,7 +405,7 @@ class Dataset extends React.Component {
         this.props.expandFilterPanel(status);
     };
 
-    openIndicaPanel = (ftType) => {
+    openIndicaPanel = (ftType, siraId) => {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
             this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
@@ -413,7 +413,7 @@ class Dataset extends React.Component {
             this.props.setActiveFeatureType(featureType);
             this.props.queryFormPreloaded(false);
         }
-        this.props.configureIndicaLayer();
+        this.props.configureIndicaLayer(null, siraId);
     };
 
     searchAll = (node) => {

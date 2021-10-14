@@ -61,7 +61,7 @@ class DefaultNode extends React.Component {
                         style={glyphStyle}
                         key="toggle-indicatori"
                         glyph="signal"
-                        onClick={() => this.configureIndicaLayer(this.props.node.featureType)} />
+                        onClick={() => this.configureIndicaLayer(this.props.node)} />
                 </OverlayTrigger>));
         } else {
             tools.push((
@@ -121,8 +121,8 @@ class DefaultNode extends React.Component {
         this.context.router.history.replace("/map/");
     };
 
-    configureIndicaLayer = (featureType) => {
-        this.props.configureIndicaLayer(featureType);
+    configureIndicaLayer = (node) => {
+        this.props.configureIndicaLayer(node.featureType, node.id);
         this.goMap();
     };
 

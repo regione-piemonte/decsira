@@ -113,10 +113,11 @@ function expandFilterPanel(expand, nodeId = null) {
     };
 }
 
-function configureIndicaLayer(nodeId = null) {
+function configureIndicaLayer(nodeId = null, siraId = null) {
     return {
         type: CONFIGURE_INDICA_LAYER,
-        currentNodeId: nodeId
+        currentNodeId: nodeId,
+        currentSiraId: siraId
     };
 }
 
