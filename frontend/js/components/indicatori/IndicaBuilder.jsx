@@ -31,7 +31,7 @@ function IndicaBuilder({
     removeLayer,
     indicaform,
     currLayer,
-    currSiraId,
+    currentSiraId,
     closeConfiguration
 }) {
 
@@ -365,7 +365,7 @@ function IndicaBuilder({
         wmsLayer.viewparams = getViewParams();
         wmsLayer.isIndicatore = true;
         wmsLayer.indicaform = formData.current;
-        wmsLayer.siraId = currSiraId;
+        wmsLayer.siraId = currentSiraId;
         if (isUpdate()) {
             wmsLayer.id = currLayer.id;
         } else {
@@ -559,7 +559,7 @@ export default connect((state) => {
         periodicita: period,
         dettaglioPeriodicita: dettPer,
         currLayer: currLayer,
-        currSiraId: state.siradec.currentSiraId,
+        // currSiraId: state.siradec.currentSiraId,
         indicaform: currLayer ? currLayer.indicaform : undefined
     };
 }, {

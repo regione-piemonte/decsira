@@ -22,7 +22,8 @@ class SideIndicaPanel extends React.Component {
         header: PropTypes.string,
         datasetHeader: PropTypes.string,
         featureTypeNameLabel: PropTypes.string,
-        tematizzatore: PropTypes.object
+        tematizzatore: PropTypes.object,
+        currentSiraId: PropTypes.string
     };
 
     static contextTypes = {
@@ -36,7 +37,8 @@ class SideIndicaPanel extends React.Component {
         header: "indicaform.form.header",
         datasetHeader: "indicaform.form.dataset_header",
         featureTypeNameLabel: "",
-        tematizzatore: {}
+        tematizzatore: {},
+        currentSiraId: null
     };
 
     renderHeader = () => {
@@ -72,7 +74,7 @@ class SideIndicaPanel extends React.Component {
             <Panel className={this.props.withMap ? "querypanel-container side-querypanel widthclass" : "querypanel-container side-querypanel hideSpatialFilter widthclass" } collapsible={this.props.collapsible}
                 header={this.renderHeader()} bsStyle="primary">
                 {this.renderDatasetHeader()}
-                <IndicaBuilder {...this.props.tematizzatore} />
+                <IndicaBuilder {...this.props.tematizzatore} currentSiraId={this.props.currentSiraId} />
             </Panel>
         );
     };
@@ -134,6 +136,7 @@ export default connect((state) => {
 
     return {
         tematizzatore: layerConfig ? layerConfig.tematizzatore : activeConfig.tematizzatore,
+        currentSiraId: state.siradec.currentSiraId,
         // SiraIndicaPanel prop
         expanded: state.siradec.indicaConfigPanelExpanded,
         loadingQueryFormConfigError: state.siradec.loadingQueryFormConfigError,

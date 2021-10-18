@@ -219,7 +219,7 @@ class LayerTree extends React.Component {
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
         }
-        this.props.configureIndicaLayer(nodeId);
+        this.props.configureIndicaLayer(null, nodeId);
     };
 
     searchAll = (node) => {
