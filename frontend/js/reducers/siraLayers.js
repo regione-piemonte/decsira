@@ -133,7 +133,7 @@ function layers(state = [], action) {
                 newLayer.type = "wmspost";
                 newLayer.visibility = true;
                 delete newLayer.group;
-                newLayer.params = assign({}, newLayer.params, {SLD_BODY: action.sldBody});
+                newLayer.params = assign({}, newLayer.params, {SLD_BODY: action.sldBody, viewparams: action.viewparams});
                 return msLayers(state, { type: "ADD_LAYER", layer: newLayer});
             }
         }
