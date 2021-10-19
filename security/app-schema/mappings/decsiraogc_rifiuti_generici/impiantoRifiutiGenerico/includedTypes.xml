@@ -12,111 +12,111 @@
     </namespaces>
     <includedTypes/>
     <sourceDataStores>
-         <DataStore>
-            <id>dataStore</id>
-            <parameters>
-                <Parameter>
-                    <name>Connection timeout</name>
-                    <value>20</value>
-                </Parameter>
-                <Parameter>
-                    <name>port</name>
-                    <value>${db.port}</value>
-                </Parameter>
-                <Parameter>
-                    <name>passwd</name>
-                    <value>${db.password}</value>
-                </Parameter>
-                <Parameter>
-                    <name>dbtype</name>
-                    <value>postgis</value>
-                </Parameter>
-                <Parameter>
-                    <name>encode functions</name>
-                    <value>false</value>
-                </Parameter>
-                <Parameter>
-                    <name>Evictor run periodicity</name>
-                    <value>300</value>
-                </Parameter>
-                <Parameter>
-                    <name>namespace</name>
-                    <value></value>
-                </Parameter>
-                <Parameter>
-                    <name>schema</name>
-                    <value>${db.schema}</value>
-                </Parameter>
-                <Parameter>
-                    <name>create database</name>
-                    <value>false</value>
-                </Parameter>
-                <Parameter>
-                    <name>fetch size</name>
-                    <value>1000</value>
-                </Parameter>
-                <Parameter>
-                    <name>preparedStatements</name>
-                    <value>false</value>
-                </Parameter>
-                <Parameter>
-                    <name>min connections</name>
-                    <value>1</value>
-                </Parameter>
-                <Parameter>
-                    <name>Evictor tests per run</name>
-                    <value>3</value>
-                </Parameter>
-                <Parameter>
-                    <name>host</name>
-                    <value>${db.host}</value>
-                </Parameter>
-                <Parameter>
-                    <name>validate connections</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>max connections</name>
-                    <value>10</value>
-                </Parameter>
-                <Parameter>
-                    <name>database</name>
-                    <value>${db.name}</value>
-                </Parameter>
-                <Parameter>
-                    <name>Support on the fly geometry simplification</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>Max connection idle time</name>
-                    <value>300</value>
-                </Parameter>
-                <Parameter>
-                    <name>Test while idle</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>Loose bbox</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>Expose primary keys</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>Max open prepared statements</name>
-                    <value>50</value>
-                </Parameter>
-                <Parameter>
-                    <name>Estimated extends</name>
-                    <value>true</value>
-                </Parameter>
-                <Parameter>
-                    <name>user</name>
-                    <value>${db.user}</value>
-                </Parameter>
-            </parameters>
-        </DataStore>
+        <DataStore>
+			<id>dataStore</id>
+			<parameters>
+				<Parameter>
+					<name>Connection timeout</name>
+					<value>20</value>
+				</Parameter>
+				<Parameter>
+					<name>port</name>
+					<value>${db.port}</value>
+				</Parameter>
+				<Parameter>
+					<name>passwd</name>
+					<value>${db.password}</value>
+				</Parameter>
+				<Parameter>
+					<name>dbtype</name>
+					<value>postgis</value>
+				</Parameter>
+				<Parameter>
+					<name>encode functions</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Evictor run periodicity</name>
+					<value>300</value>
+				</Parameter>
+				<Parameter>
+					<name>namespace</name>
+					<value></value>
+				</Parameter>
+				<Parameter>
+					<name>schema</name>
+					<value>${db.schema}</value>
+				</Parameter>
+				<Parameter>
+					<name>create database</name>
+					<value>false</value>
+				</Parameter>
+				<Parameter>
+					<name>fetch size</name>
+					<value>1000</value>
+				</Parameter>
+				<Parameter>
+					<name>preparedStatements</name>
+					<value>false</value>
+				</Parameter>
+				<Parameter>
+					<name>min connections</name>
+					<value>1</value>
+				</Parameter>
+				<Parameter>
+					<name>Evictor tests per run</name>
+					<value>3</value>
+				</Parameter>
+				<Parameter>
+					<name>host</name>
+					<value>${db.host}</value>
+				</Parameter>
+				<Parameter>
+					<name>validate connections</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>max connections</name>
+					<value>10</value>
+				</Parameter>
+				<Parameter>
+					<name>database</name>
+					<value>${db.name}</value>
+				</Parameter>
+				<Parameter>
+					<name>Support on the fly geometry simplification</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Max connection idle time</name>
+					<value>300</value>
+				</Parameter>
+				<Parameter>
+					<name>Test while idle</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Loose bbox</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Expose primary keys</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>Max open prepared statements</name>
+					<value>50</value>
+				</Parameter>
+				<Parameter>
+					<name>Estimated extends</name>
+					<value>true</value>
+				</Parameter>
+				<Parameter>
+					<name>user</name>
+					<value>${db.user}</value>
+				</Parameter>
+			</parameters>
+		</DataStore>
     </sourceDataStores>
     <targetTypes>
         <FeatureType>
@@ -277,97 +277,6 @@
                     <targetAttribute>FEATURE_LINK[1]</targetAttribute>
                     <sourceExpression>
                         <OCQL>codice_sira</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-            </attributeMappings>
-        </FeatureTypeMapping>
-        <FeatureTypeMapping>
-            <sourceDataStore>dataStore</sourceDataStore>
-            <sourceType>decsira_t_autorizzazione_amb</sourceType>
-            <targetElement>decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti</targetElement>
-            <attributeMappings>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:codiceSira</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>codice_sira</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:idAutorizzazioneAmbientaleSede</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>id_autorizzamb_sede</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:idAutorizzazioneAmbientale</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>id_istanza</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:idAttivita</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>id_attivita</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:idTipoProvvedimento</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>id_tipo_provvedimento</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:tipoProvvedimento</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>tipo_provvedimento</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:estremiProvvedimento</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>estremi_provvedimento</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:dataProvvedimento</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>data_provvedimento</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:dataScadenza</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>data_scadenza</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:idEnteCompetente</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>fk_autorita_competente</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:desStato</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>des_stato</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:idStato</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>id_stato</OCQL>
-                    </sourceExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti</targetAttribute>
-                    <idExpression>
-                        <OCQL>id_autorizzamb_sede</OCQL>
-                    </idExpression>
-                </AttributeMapping>
-                <AttributeMapping>
-                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
-                    <sourceExpression>
-                        <OCQL>id_istanza</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
             </attributeMappings>
@@ -630,6 +539,97 @@
                     <targetAttribute>FEATURE_LINK[1]</targetAttribute>
                     <sourceExpression>
                         <OCQL>id_rifiuto_generico</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+            </attributeMappings>
+        </FeatureTypeMapping>
+        <FeatureTypeMapping>
+            <sourceDataStore>dataStore</sourceDataStore>
+            <sourceType>decsira_t_autorizzazione_amb_rifiuti</sourceType>
+            <targetElement>decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti</targetElement>
+            <attributeMappings>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:codiceSira</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>codice_sira</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:dataProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:dataScadenza</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>data_scadenza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:desStato</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>des_stato</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:estremiProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>estremi_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:AutorizAmbImpRifiuti</targetAttribute>
+                    <idExpression>
+                        <OCQL>id_autorizzamb_sede</OCQL>
+                    </idExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:idAutorizzazioneAmbientaleSede</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_autorizzamb_sede</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:idAutorizzazioneAmbientale</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:idStato</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_stato</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:idTipoProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_tipo_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:tipoProvvedimento</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>tipo_provvedimento</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:idEnteCompetente</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>fk_autorita_competente</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>decsiraogc_rifiuti_generici:idAttivita</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_attivita</OCQL>
+                    </sourceExpression>
+                </AttributeMapping>
+                <AttributeMapping>
+                    <targetAttribute>FEATURE_LINK[1]</targetAttribute>
+                    <sourceExpression>
+                        <OCQL>id_istanza</OCQL>
                     </sourceExpression>
                 </AttributeMapping>
             </attributeMappings>
