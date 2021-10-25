@@ -1,5 +1,8 @@
 {
   "map": {
+	"info": {
+		"canEdit": false
+	},
     "projection": "EPSG:32632",
     "units": "m",
     "center": {"x": 807374, "y": 5606503, "crs": "EPSG:3857"},
@@ -15,34 +18,45 @@
     "layers":[
       {
         "type": "ol",
-        "title": "None",
+        "title": "Nessuno Sfondo",
         "name": "None",
         "source": "ol",
         "group": "background",
-        "visibility": false
+        "visibility": false,
+		"thumbURL": "assets/img/nessunoSfondo.jpg"
       },
 	  {
-        "type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
-        "name": "SfondoCartRifBN",
-        "title": "Sfondo Cartografico BN",
+        "type": "osm",
+        "title": "Open Street Map",
+        "name": "mapnik",
+        "source": "osm",
         "group": "background",
-        "visibility": true,
-        "format": "image/png",
-        "tiled": true,
-        "tileSize": 512
+        "visibility": true
       },
-      {
-        "type": "wms",
-        "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
-        "name": "SfondoCartRif",
-        "title": "Sfondo Cartografico a colori",
-        "group": "background",
-        "visibility": false,
-        "format": "image/png",
-        "tiled": true,
-        "tileSize": 512
-      },
+	  {
+		"type": "wms",
+		"url": "http://geomap.reteunitaria.piemonte.it/mapproxy/service",
+		"name": "regp_basecarto10bn_2021",
+		"title": "Sfondo Cartografico BDTRE BN",
+		"group": "background",
+		"visibility": false,
+		"format": "image/png",
+		"tiled": false,
+		"tileSize": 256,
+		"thumbURL": "assets/img/BDTRE_BN.jpg"
+	  },
+	  {
+		"type": "wms",
+		"url": "http://geomap.reteunitaria.piemonte.it/mapproxy/service",
+		"name": "regp_basecarto25col_2021",
+		"title": "Sfondo Cartografico a colori BDTRE 1:25.000",
+		"group": "background",
+		"visibility": false,
+		"format": "image/png",
+		"tiled": false,
+		"tileSize": 256,
+		"thumbURL": "assets/img/BDTRE_Colori.jpg"
+	  },
       {
         "type": "wms",
         "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010",
@@ -51,7 +65,8 @@
         "group": "background",
         "visibility": false,
         "format": "image/png",
-        "tiled": true
+        "tiled": true,
+		"thumbURL": "assets/img/OrtofotoPie2010.jpg"
       },
       {
   			"type": "wms",
