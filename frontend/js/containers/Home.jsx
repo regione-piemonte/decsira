@@ -24,6 +24,7 @@ const PlatformNumbers = connect((state) => ({
 }))(require('../components/PlatformNumbers'));
 
 const SiraSearchBar = require('../components/SiraSearchBar');
+const { handleKeyFocus } = require('../utils/SiraUtils');
 
 class Home extends React.Component {
     static propTypes = {
@@ -46,6 +47,11 @@ class Home extends React.Component {
 
     componentDidMount() {
         document.body.className = "body_home";
+        window.addEventListener('keyup', handleKeyFocus);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keyup', handleKeyFocus);
     }
 
     render() {
