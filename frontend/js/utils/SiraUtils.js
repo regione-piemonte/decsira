@@ -60,6 +60,20 @@ module.exports = {
         return a1.length === a2.length && a1.every(function(element, index) {
             return element === a2[index];
         });
+    },
+
+    handleKeyFocus(e) {
+        if (e.key === 'Tab') {
+            let focused = Array.from(document.getElementsByClassName('keyFocus'));
+            new Promise((resolve) => {
+                focused.forEach(function(element) {
+                    element.classList.remove('keyFocus');
+                });
+                resolve();
+            }).then(() => {
+                document.activeElement.classList.add('keyFocus');
+            });
+        }
     }
 
 };

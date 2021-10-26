@@ -20,7 +20,8 @@ const {tocSelector} = require('../selectors/sira');
 const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({map, ...toc}));
 
 const {setProfile} = require('../actions/userprofile');
-const {toggleSiraControl} = require('../actions/controls');
+const { toggleSiraControl } = require('../actions/controls');
+const { handleKeyFocus } = require('../utils/SiraUtils');
 const {
     // SiraQueryPanel action functions
     expandFilterPanel,
@@ -184,6 +185,7 @@ class Dataset extends React.Component {
         if (!nodesLoaded && !loading && category && category.id) {
             this.loadMetadata({category: category});
         }
+        window.addEventListener('keyup', handleKeyFocus);
     }
 
     componentDidMount() {
@@ -225,6 +227,10 @@ class Dataset extends React.Component {
                 this.context.router.history.push(this.state.waitingForConfig.redirect);
             }
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keyup', handleKeyFocus);
     }
 
     renderSerchBar = () => {
