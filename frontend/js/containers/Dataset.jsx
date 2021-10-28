@@ -185,12 +185,12 @@ class Dataset extends React.Component {
         if (!nodesLoaded && !loading && category && category.id) {
             this.loadMetadata({category: category});
         }
-        window.addEventListener('keyup', handleKeyFocus);
     }
 
     componentDidMount() {
         document.body.className = "body_dataset sira-ms2";
         register(proj4);
+        window.addEventListener('keyup', handleKeyFocus);
     }
 
     componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
@@ -326,6 +326,8 @@ class Dataset extends React.Component {
             <div className="interna">
                 <div style={{minHeight: '100%', position: 'relative'}}>
                     <Header showCart="true" goToHome={this.goToHome} />
+                    <div id="#main-content"></div>
+                    <h1 className="sr-only">Ricerca oggetti e viste tematiche</h1>
                     <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
                         <span>{category ? category.name : (<noscript/>)}</span>
                     </div>

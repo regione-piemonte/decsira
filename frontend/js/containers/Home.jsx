@@ -58,6 +58,8 @@ class Home extends React.Component {
         return (
             <div className="home-page">
                 <Header />
+                <h1 className="sr-only">Homepage</h1>
+                <div id="#main-content"></div>
                 <div className="container-fluid" role="search">
                     <div className="row-fluid sb-sx">
                         <div className="container search-home">

@@ -155,7 +155,7 @@ class Header extends React.Component {
                     <div className="row-fluid">
 
                         <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 testalino-sx">
-                            <h2><a onClick={this.props.goToHome} href="#" title="Home page Sistema Conoscenze Ambientali"><span>Sistema</span> Conoscenze Ambientali</a></h2>
+                            <div className="navbar-header-title"><a onClick={this.props.goToHome} href="#" title="Home page Sistema Conoscenze Ambientali"><span>Sistema</span> Conoscenze Ambientali</a></div>
                         </div>
 
                         <div className="col-lg-3 col-md-3 col-sm-4 col-xs-4 testalino-dx">
