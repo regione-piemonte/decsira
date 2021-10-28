@@ -3,10 +3,10 @@
 	"info": {
 		"canEdit": false
 	},
-    "projection": "EPSG:32632",
+    "projection": "EPSG:3857",
     "units": "m",
-    "center": {"x": 807374, "y": 5606503, "crs": "EPSG:3857"},
-    "zoom": 6,
+    "center": {"x": 807374, "y": 5686503, "crs": "EPSG:3857"},
+    "zoom": 8,
     "mapOptions": {
         "view" : {
                 "extent": [302000, 4850000, 620000, 5160000]}
@@ -36,26 +36,27 @@
 	  {
 		"type": "wms",
 		"url": "http://geomap.reteunitaria.piemonte.it/mapproxy/service",
-		"name": "regp_basecarto10bn_2021",
-		"title": "Sfondo Cartografico BDTRE BN",
+		"name": "regp_sfondo_bdtre_epsg3857",
+		"title": "Sfondo Cartografico BDTRE a colori",
+		"group": "background",
+		"visibility": true,
+		"format": "image/png",
+		"tiled": false,
+		"tileSize": 256,
+		"singleTile": true,
+		"thumbURL": "assets/img/BDTRE_Colori.jpg"
+	  },
+	  {
+		"type": "wms",
+		"url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif_bn",
+        "name": "SfondoCartRifBN",
+		"title": "Sfondo Cartografico BDTRE bianco e nero",
 		"group": "background",
 		"visibility": false,
 		"format": "image/png",
 		"tiled": false,
 		"tileSize": 256,
 		"thumbURL": "assets/img/BDTRE_BN.jpg"
-	  },
-	  {
-		"type": "wms",
-		"url": "http://geomap.reteunitaria.piemonte.it/mapproxy/service",
-		"name": "regp_basecarto25col_2021",
-		"title": "Sfondo Cartografico a colori BDTRE 1:25.000",
-		"group": "background",
-		"visibility": false,
-		"format": "image/png",
-		"tiled": false,
-		"tileSize": 256,
-		"thumbURL": "assets/img/BDTRE_Colori.jpg"
 	  },
       {
         "type": "wms",
