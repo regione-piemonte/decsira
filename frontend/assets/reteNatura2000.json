@@ -54,21 +54,21 @@
            "type": 2
          },
 		 {
-           "headerName": "Codice Sito Natura 2000",
+           "headerName": "Codice Sito",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:codiceAmministrativo/text()"],
            "type": 2,
            "width" : 220
          },
 		 {
-           "headerName": "Nome Sito Rete Natura 2000" ,
+           "headerName": "Nome Sito" ,
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:nomeReteNatura2000/text()"],
            "type": 2,
            "width" : 220
          },
 		 {
-           "headerName": "Sito Rete Natura 2000",
+           "headerName": "Tipo Sito",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:descrTipoReteNatura2000/text()"],
            "type": 2,
@@ -175,13 +175,6 @@
            "width" : 200
          },
 		 {
-           "headerName": "Link misura conservatrice",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_rete_natura_2000:urlMisuraConserv/text()"],
-           "type": 2,
-           "width" : 230
-         },
-		 {
            "headerName": "Link cartografia",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlCartografia/text()"],
@@ -202,12 +195,19 @@
            "type": 2,
            "width" : 200
          },
+         {
+          "headerName": "Link misure di conservazione",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_rete_natura_2000:urlMisuraConserv/text()"],
+          "type": 2,
+          "width" : 250
+        },
 		 {
-           "headerName": "Link misure normative",
+           "headerName": "Link allegati misure di conservazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_rete_natura_2000:urlNormativaMisure/text()"],
            "type": 2,
-           "width" : 200
+           "width" : 300
          },
 		 {
            "headerName": "Link scheda sito",
@@ -276,7 +276,7 @@
 	   {
         "index": 3,
         "attribute": "decsiraogc_rete_natura_2000:codiceAmministrativo",
-        "label": "Codice Sito Natura 2000",
+        "label": "Codice Sito",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -291,7 +291,7 @@
 	  {
         "index": 4,
         "attribute": "decsiraogc_rete_natura_2000:nomeReteNatura2000",
-        "label": "Nome Sito Rete Natura 2000",
+        "label": "Nome Sito",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -315,7 +315,7 @@
 	  {
         "index": 6,
         "attribute": "decsiraogc_rete_natura_2000:descrTipoReteNatura2000",
-        "label": "Tipo Sito Rete Natura 2000",
+        "label": "Tipo Sito",
         "type": "list",
         "valueService": {
           "urlParams": {

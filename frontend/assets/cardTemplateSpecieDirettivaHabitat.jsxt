@@ -1,13 +1,13 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='Specie Direttive Habitat' subtitle={[
-            'Specie habitat: ',
+        <DetailTitle title='Specie Direttiva Habitat' subtitle={[
+            '',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat/decsiraogc_specie_direttiva_habitat:nomeScientifico/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-    <Section header='DATI GENERALI Specie Direttiva Habitat' eventKey='1' expanded={true}>
+    <Section header='DATI GENERALI' eventKey='1' expanded={true}>
 		<LabeledField label='Gruppo' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_specie_direttiva_habitat:SpecieDirettivaHabitat/decsiraogc_specie_direttiva_habitat:descrSpecieGruppo/text()")
         }/>

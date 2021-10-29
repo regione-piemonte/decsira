@@ -2,20 +2,20 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='SITI RETE NATURA 2000' subtitle={[
-            'Sito Rete natura 2000: ',
+            '',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:nomeReteNatura2000/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-    <Section header='DATI GENERALI Sito Rete Natura 2000' eventKey='1' expanded={true}>
-        <LabeledField label='Codice Sito Natura 2000' value={
+    <Section header='DATI GENERALI' eventKey='1' expanded={true}>
+        <LabeledField label='Codice Sito' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:codiceAmministrativo/text()")
         }/>    
-        <LabeledField label='Nome Sito Rete Natura 2000' value={
+        <LabeledField label='Nome Sito' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:nomeReteNatura2000/text()")
         }/>
-        <LabeledField label='Sito Rete Natura 2000' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrTipoReteNatura/text()")
+        <LabeledField label='Tipo Sito' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrTipoReteNatura2000/text()")
         }/>
 		 <LabeledField label='Regione biogeografica' value={
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:descrRegBiogeografica/text()")
@@ -70,7 +70,7 @@
 			<LabeledField label='Link metadato zps' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlMetadatoZps/text()")
 			}/>
-			<LabeledField label='Link normativa misure' link='true' value={
+			<LabeledField label='Link allegati misure di conservazione' link='true' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rete_natura_2000:ReteNatura2000/decsiraogc_rete_natura_2000:urlNormativaMisure/text()")
 			}/>
 			<LabeledField label='Link scheda sito' link='true' value={
