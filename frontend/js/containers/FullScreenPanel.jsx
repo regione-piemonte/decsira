@@ -28,7 +28,8 @@ const Card = require('../components/template/Card');
 const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {setProfile} = require('../actions/userprofile');
 const Spinner = require('react-spinkit');
-const {selectFeatures} = require('../actions/featuregrid');
+const { selectFeatures } = require('../actions/featuregrid');
+const { handleKeyFocus } = require('../utils/SiraUtils');
 
 const {
     loadFeatureTypeConfig,
@@ -97,6 +98,7 @@ class FullScreen extends React.Component {
 
     componentDidMount() {
         document.body.className = "body_map sira-ms2";
+        window.addEventListener('keyup', handleKeyFocus);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -124,6 +126,7 @@ class FullScreen extends React.Component {
         if (window.removeEventListener) {
             window.removeEventListener('resize', this.setSize, false);
         }
+        window.removeEventListener('keyup', handleKeyFocus);
     }
 
     renderQueryPanel = () => {

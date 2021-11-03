@@ -17,7 +17,7 @@ const {connect} = require('react-redux');
 const SidePanel = require('./SidePanel');
 const Card = require('../components/template/Card');
 const Header = require('../components/Header');
-
+const { handleKeyFocus } = require('../utils/SiraUtils');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile, loadUserIdentity} = require('../actions/userprofile');
@@ -190,11 +190,12 @@ class Sira extends React.Component {
             this.props.registerEventListener('mousemove', 'mouseposition');
             !this.props.panelEnabled && this.props.toggleControl('drawer');
         }
-
+        window.addEventListener('keyup', handleKeyFocus);
     }
 
     componentWillUnmount() {
         // this.props.unRegisterEventListener('mousemove', 'mouseposition');
+        window.removeEventListener('keyup', handleKeyFocus);
     }
 
     render() {

@@ -119,7 +119,7 @@ class MetadataInfoBox extends React.Component {
             this.props.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
                     <p>
-                        <a className="infobox-service-url"
+                        <a tabIndex="0" className="infobox-service-url"
                             title="wms" key={'wms_' + index}
                             href={val} target="_blank" >
                             <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"}/>
@@ -133,7 +133,7 @@ class MetadataInfoBox extends React.Component {
             renderWfsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWFS"}/></h4>);
             this.props.urlWFS.map((val, index) =>
                 renderWfsUrl.push(
-                    <a className="infobox-service-url"
+                    <a tabIndex="0" className="infobox-service-url"
                         title="wfs" key={'wfs_' + index}
                         href={val} target="_blank" >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"}/>
@@ -152,7 +152,7 @@ class MetadataInfoBox extends React.Component {
 
         return (
             <Draggable bounds="parent" start={{x: 0, y: 300}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div className="scheda-info" style={{display: this.props.show}} role="contentinfo" aria-label="Informazioni aggiuntive">
+                <div tabIndex="0" id="metadataInfoBox" className="scheda-info" style={{display: this.props.show}} role="contentinfo" aria-label="Informazioni aggiuntive">
                     <Panel
                         className="info-header panel panel-primary"
                         header={
@@ -169,7 +169,7 @@ class MetadataInfoBox extends React.Component {
                             <h4><b><I18N.Message msgId={"metadataInfoBox.entePA"}/></b></h4>
                             <p>{this.props.dataProvider}</p>
                             <h4><b><I18N.Message msgId={"metadataInfoBox.urlMetadato"}/></b></h4>
-                            <a className="infobox-metadata-url"
+                            <a tabIndex="0" className="infobox-metadata-url"
                                 title="metadato"
                                 href={this.props.urlMetadato} target="_blank" >
                                 <I18N.Message msgId={"metadataInfoBox.link_to_metadata"}/>

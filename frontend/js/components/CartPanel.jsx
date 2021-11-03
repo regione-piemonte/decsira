@@ -65,7 +65,7 @@ class CartPanel extends React.Component {
     render() {
         return this.props.showPanel ?
             (
-                <Dialog style ={{position: "absolute", right: "100px", backgroundColor: "white", width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
+                <Dialog tabIndex="0" style ={{position: "absolute", right: "100px", backgroundColor: "white", width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
                     <span role="header"><span className="cartpanel-panel-title" ><I18N.Message msgId={"cartpanel.title"}/></span><button className="print-panel-close close" onClick={this.props.onClosePanel}><span>×</span></button></span>
                     <div role="body">
                         {this.renderServicesList()}

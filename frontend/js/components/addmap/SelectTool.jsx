@@ -28,7 +28,7 @@ class SelectTool extends React.Component {
     render() {
         const {selected} = this.props;
         return (
-            <Glyphicon onClick={() => this.props.toggleSelect(!selected)} glyph={selected ? "check" : "unchecked"}/>);
+            <Glyphicon tabIndex="0" onClick={() => this.props.toggleSelect(!selected)} onKeyPress={() => this.props.toggleSelect(!selected)} glyph={selected ? "check" : "unchecked"}/>);
     }
 }
 

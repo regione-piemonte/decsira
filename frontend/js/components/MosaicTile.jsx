@@ -47,13 +47,13 @@ class MosaicTile extends React.Component {
             </div>
         ) : (
             <div className="ogg_appl">
-                <span >
-                    <a className="list-group-item" onClick={() => this.props.onClick('objects')}>
+                <span>
+                        <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('objects')} onKeyPress={() => this.props.onClick('objects')}>
                         Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
                     </a>
                 </span>
-                <span >
-                    <a className="list-group-item" onClick={() => this.props.onClick('views')}>
+                <span>
+                    <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('views')} onKeyPress={() => this.props.onClick('views')}>
                         Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
                     </a>
                 </span>
@@ -64,7 +64,7 @@ class MosaicTile extends React.Component {
     render() {
         let bClass = `${this.props.liClass} ${this.props.icon}`;
         return (
-            <li className={bClass} style={this.props.boxStyle}>
+            <li className={bClass} style={this.props.boxStyle} tabIndex="0">
                 {this.props.name}
                 {this.renderInfo()}
             </li>

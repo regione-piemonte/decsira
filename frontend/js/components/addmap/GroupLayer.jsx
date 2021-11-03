@@ -45,7 +45,7 @@ class GroupLayer extends React.Component {
         const titleStyle = node.Layer ? "title-cursor" : "title";
         return (<div className={`sira-map-layer ${node && node.nodetype}`}>
             <div className={`group-layer-header ${node && node.nodetype} ${expanded ? 'expanded' : 'collapsed'}`}>
-                <SelectTool selected={selected} toggleSelect={this.toggleSelect}/>
+                <SelectTool selected={selected} toggleSelect={this.toggleSelect} />
                 <span className={titleStyle} onClick={() => this.props.toggleLayer(node.id, !expanded)}>{label}</span>
             </div>
             { expanded && node.Layer ? (<div className="sira-map-layer-children">

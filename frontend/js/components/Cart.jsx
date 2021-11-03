@@ -41,14 +41,14 @@ class Cart extends React.Component {
         return (
             <div data-toggle="buttons" className="btn-group map-list">
                 <OverlayTrigger key={"cart-item-tp-list"} rootClose placement="left" overlay={listTooltip}>
-                    <label className={listaStyle}>
-                        <input type="radio" onClick={this.props.onListaClick} checked="" autoComplete="off" id="option1" name="options"/>
+                    <label className={listaStyle} tabIndex="0" onKeyPress={this.props.onListaClick} >
+                        <input tabIndex="-1" type="radio" onClick={this.props.onListaClick} checked="" autoComplete="off" id="option1" name="options"/>
                         <span className="fa fa-list" aria-hidden="true"></span> <span className="label-text">Lista</span>
                     </label>
                 </OverlayTrigger>
                 <OverlayTrigger key={"cart-item-tp-map"} rootClose placement="left" overlay={tooltip}>
-                    <label className={mappaStyle}>
-                        <input type="radio" onClick={this.props.showCartPanel} autoComplete="off" id="option2" name="options"/>
+                    <label className={mappaStyle} tabIndex="0"onKeyPress={this.props.showCartPanel} >
+                        <input tabIndex="-1" type="radio" onClick={this.props.showCartPanel} autoComplete="off" id="option2" name="options"/>
                         <span className="fa fa-map-o" aria-hidden="true"></span>
                         <span className="label-text">Mappa</span>
                         <span className="badge" >{this.props.servicesNumber}</span>
