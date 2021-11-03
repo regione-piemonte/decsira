@@ -189,4 +189,20 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbd01b783-515d-4ba3-9972-b60d157a9b6d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_amb_habitat" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="denominazione_natura_piemonte"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbientiDirettivaHabitatType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+                <child name="denominazioneNaturaPiemonte" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_amb_direttiva_habitat/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
