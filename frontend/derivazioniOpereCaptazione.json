@@ -3,17 +3,37 @@
 	"info": {
 		"canEdit": false
 	},
-    "projection": "EPSG:3857",
+    "projection": "EPSG:32632",
     "units": "m",
     "center": {"x": 807374, "y": 5656503, "crs": "EPSG:3857"},
-    "zoom": 8,
+    "zoom": 7,
     "mapOptions": {
         "view" : {
-                "extent": [302000, 4850000, 620000, 5160000]}
-            },
+            "extent": [-10198294.6545, -5596920.6825000001, 11389716.691400001, 15991090.6634],
+			"resolutions": [
+				84328.169319921872, 
+				42164.084659960936, 
+				21082.042329980468, 
+				10541.021164990234, 
+				5270.510582495117,  
+				2635.2552912475585, 
+				1317.6276456237792, 
+				658.81382281188962, 
+				329.40691140594481, 
+				164.70345570297241, 
+				82.351727851486203, 
+				41.175863925743101, 
+				20.587931962871551, 
+				10.293965981435775, 
+				5.1469829907178877, 
+				2.5734914953589438, 
+				1.2867457476794719, 
+				0.64337287383973596
+			]        
+		}
+	},
     "maxExtent": [
-      -20037508.34, -20037508.34,
-      20037508.34, 20037508.34
+		-10198294.6545, -5596920.6825000001, 11389716.691400001, 15991090.6634
     ],
      "layers":[
 	 {
@@ -36,14 +56,13 @@
 	  {
 		"type": "wms",
 		"url": "http://geomap.reteunitaria.piemonte.it/mapproxy/service",
-		"name": "regp_sfondo_bdtre_epsg3857",
+		"name": "regp_sfondo_bdtre",
 		"title": "Sfondo Cartografico BDTRE a colori",
 		"group": "background",
 		"visibility": true,
 		"format": "image/png",
 		"tiled": false,
 		"tileSize": 256,
-		"singleTile": true,
 		"thumbURL": "assets/img/BDTRE_Colori.jpg"
 	  },
 	  {
