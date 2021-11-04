@@ -40,9 +40,9 @@ class RightMenu extends React.Component {
             (
                 <div className="navbar-on" id="offcanvas-sidebar">
                     <ul id="menu" className="nav navbar-nav navbar-right">
-                        <li data-menuanchor="home" onClick={this.props.clickOnSistemaCA} >Sistema Conoscenze Ambientali</li>
-                        <li data-menuanchor="piemontepay" onClick={this.props.clickOnCredits}>Credits e Copyright</li>
-                        <li data-menuanchor="pagamenti" onClick={this.props.clickOnHelp}>Help</li>
+                        <li tabIndex="0" data-menuanchor="home" onClick={this.props.clickOnSistemaCA} onKeyPress={this.props.clickOnSistemaCA}>Sistema Conoscenze Ambientali</li>
+                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.props.clickOnCredits} onKeyPress={this.props.clickOnCredits}>Credits e Copyright</li>
+                        <li tabIndex="0" data-menuanchor="pagamenti" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp}>Help</li>
                     </ul>
                 </div>
             ) : '';
@@ -52,10 +52,10 @@ class RightMenu extends React.Component {
     render() {
         return (
             <div>
-                <a className="offcanvas-toggle" aria-expanded="false">
+                <button className="btn btn-link offcanvas-toggle" aria-expanded="false" onClick={this.props.clickOnIconButton}>
                     <span className="sr-only">Menu di navigazione</span>
-                    <span className={this.renderIconStyle()} onClick={this.props.clickOnIconButton}></span>
-                </a>
+                    <span className={this.renderIconStyle()}></span>
+                </button>
                 {this.renderMenu()}
             </div>
         );

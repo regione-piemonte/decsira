@@ -49,38 +49,38 @@ class DefaultNode extends React.Component {
         if (indicaFunction.length > 0) {
             tools.push((
                 <OverlayTrigger key={"indicatori"} rootClose placement="left" overlay={tooltipIndica}>
-                    <Glyphicon
-                        style={glyphStyle}
-                        key="toggle-indicatori"
-                        glyph="signal"
-                        onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id)}/>
+                    <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id)}>
+                        <Glyphicon
+                            key="toggle-indicatori"
+                            glyph="signal"/>
+                    </button>
                 </OverlayTrigger>));
         } else {
             tools.push((
                 <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
-                    <Glyphicon
-                        style={glyphStyle}
-                        key="addToMap"
-                        glyph="plus-sign"
-                        onClick={()=>this.props.addToMap(this.props.node)}/>
+                    <button className="btn btn-link" style={glyphStyle} onClick={()=>this.props.addToMap(this.props.node)}>
+                        <Glyphicon
+                            key="addToMap"
+                            glyph="plus-sign"/>
+                    </button>
                 </OverlayTrigger>
             ));
             if ( this.props.node.featureType) {
                 tools.push((
                     <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
-                        <Glyphicon
-                            style={glyphStyle}
-                            key="toggle-featuregrid"
-                            glyph="th"
-                            onClick={() => this.props.toggleSiraControl(this.props.node)}/>
+                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.toggleSiraControl(this.props.node)}>
+                            <Glyphicon
+                                key="toggle-featuregrid"
+                                glyph="th"/>
+                        </button>
                     </OverlayTrigger>));
                 tools.push((
                     <OverlayTrigger key={"list-ltp"} rootClose placement="left" overlay={tooltipSira}>
-                        <Glyphicon
-                            style={glyphStyle}
-                            key="toggle-query"
-                            glyph="search"
-                            onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}/>
+                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
+                            <Glyphicon
+                                key="toggle-query"
+                                glyph="search"/>
+                        </button>
                     </OverlayTrigger>));
             }
         }
