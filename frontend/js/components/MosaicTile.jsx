@@ -48,7 +48,7 @@ class MosaicTile extends React.Component {
         ) : (
             <div className="ogg_appl">
                 <span>
-                        <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('objects')} onKeyPress={() => this.props.onClick('objects')}>
+                    <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('objects')} onKeyPress={() => this.props.onClick('objects')}>
                         Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
                     </a>
                 </span>
