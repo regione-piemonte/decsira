@@ -14,6 +14,7 @@ const assign = require('object-assign');
 
 const {addIndicaLayer, removeIndicaLayer} = require('../../actions/addmap');
 const { closeIndicaConfiguration } = require('../../actions/siradec');
+const LayersUtils = require('@mapstore/utils/LayersUtils');
 
 function IndicaBuilder({
     risoluzioneSpaziale = [],
@@ -32,7 +33,8 @@ function IndicaBuilder({
     indicaform,
     currLayer,
     currentSiraId,
-    closeConfiguration
+    closeConfiguration,
+    geometryType
 }) {
 
     function getRampColors(color) {
@@ -78,7 +80,6 @@ function IndicaBuilder({
 
     wmsLayer.type = "wms";
     wmsLayer.CRS = 'EPSG:32632';
-    wmsLayer.opacity = 0.7;
 
     React.useEffect(() => {
         // console.log("IndicaBuilder MOUNT");
@@ -141,6 +142,14 @@ function IndicaBuilder({
         setRampColors(newColors);
     }
 
+    function floorRuleValue(value, index) {
+        return index === 0 ? Math.floor(value) : value;
+    }
+
+    function ceilRuleValue(value, index, maxIndex) {
+        return index === maxIndex ? Math.ceil(value) : value;
+    }
+
     function setupStyle() {
         if (!(selectedRisSpaziale.id && selectedIndicatore.id && selectedDettaglioPeriodicita.id)) {
             return;
@@ -175,17 +184,20 @@ function IndicaBuilder({
                 rules = [rules];
             }
             let colorsArray = [];
-            rules.forEach(rule => {
+            let lastRuleIndex = rules.length - 1;
+            rules.forEach((rule, index) => {
                 rule.Filter.And ?
                     colorsArray.push({
-                        color: rule.PolygonSymbolizer.Fill.CssParameter.$,
-                        min: rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal,
+                        color: geometryType === 'Point' ? rule.PointSymbolizer.Graphic.Mark.Fill.CssParameter.$ :
+                            rule.PolygonSymbolizer.Fill.CssParameter.$,
+                        min: floorRuleValue(rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal, index),
                         max: rule.Filter.And.PropertyIsLessThan ?
-                            rule.Filter.And.PropertyIsLessThan.Literal :
-                            rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal
+                            ceilRuleValue(rule.Filter.And.PropertyIsLessThan.Literal, index, lastRuleIndex) :
+                            ceilRuleValue(rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal, index, lastRuleIndex)
                     })
                     : colorsArray.push({
-                        color: rule.PolygonSymbolizer.Fill.CssParameter.$,
+                        color: geometryType === 'Point' ? rule.PointSymbolizer.Graphic.Mark.Fill.CssParameter.$ :
+                            rule.PolygonSymbolizer.Fill.CssParameter.$,
                         min: rule.Filter.PropertyIsEqualTo.Literal,
                         max: rule.Filter.PropertyIsEqualTo.Literal
                     });
@@ -351,12 +363,13 @@ function IndicaBuilder({
         layer.url = "http://localhost:8080/geoserver";
         const sldUrl = getStyleService(layer, {
             ramp: "custom",
-            // colors: colors.map(col => {return col.color}).join(','),
             customClasses: colors.map(col => { return col.min + ',' + col.max + ',' + col.color;}).join(';'),
             attribute: attribute,
             intervals,
             method: classification,
-            viewparams: getViewParams()
+            viewparams: getViewParams(),
+            strokeColor: geometryType === 'Point' ? '#000000' : undefined,
+            pointSize: geometryType === 'Point' ? 10 : undefined
         });
 
         wmsLayer.title = getWmsTitle();
@@ -366,33 +379,17 @@ function IndicaBuilder({
         wmsLayer.isIndicatore = true;
         wmsLayer.indicaform = formData.current;
         wmsLayer.siraId = currentSiraId;
+        wmsLayer.opacity = geometryType === 'Point' ? 1 : 0.7;
         if (isUpdate()) {
             wmsLayer.id = currLayer.id;
         } else {
+            // Annullo l'id del vecchio layer
             wmsLayer.id = undefined;
+            // Chiedo un id random per il nuovo layer
+            wmsLayer.id = LayersUtils.getLayerId(wmsLayer);
         }
         addLayer(wmsLayer);
         closeConfiguration();
-
-        /*
-        axios.get(sldUrl).then((resp) => {
-            let bodyData = resp.data.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
-            wmsLayer.title = getWmsTitle();
-            wmsLayer.indicaTitle = getIndicaTitle();
-            wmsLayer.params = assign({}, wmsLayer.params, { SLD_BODY: bodyData, viewparams: getViewParams() });
-            wmsLayer.viewparams = getViewParams();
-            wmsLayer.isIndicatore = true;
-            wmsLayer.indicaform = formData.current;
-            if (isUpdate()) {
-                wmsLayer.id = currLayer.id;
-            } else {
-                wmsLayer.id = undefined;
-            }
-            addLayer(wmsLayer);
-            closeConfiguration();
-        }).catch(e => {
-            console.error(e);
-        });*/
     }
 
     function renderErrorModal() {
@@ -560,7 +557,8 @@ export default connect((state) => {
         dettaglioPeriodicita: dettPer,
         currLayer: currLayer,
         // currSiraId: state.siradec.currentSiraId,
-        indicaform: currLayer ? currLayer.indicaform : undefined
+        indicaform: currLayer ? currLayer.indicaform : undefined,
+        geometryType: config.geometryType
     };
 }, {
     addLayer: addIndicaLayer,
