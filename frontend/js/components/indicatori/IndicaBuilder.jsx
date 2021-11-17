@@ -143,7 +143,10 @@ function IndicaBuilder({
     }
 
     function floorRuleValue(value, index) {
-        return index === 0 ? Math.floor(value) : value;
+        if (index === 0) {
+            return Math.floor(value) > 0 ? Math.floor(value) : 0;
+        }
+        return value;
     }
 
     function ceilRuleValue(value, index, maxIndex) {
