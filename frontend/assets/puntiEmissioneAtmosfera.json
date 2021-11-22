@@ -3,7 +3,7 @@
    "featureTypeNameLabel":"PUNTI DI EMISSIONE IN ATMOSFERA",
    "nameSpaces": {
      "decsiraogc_emissioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_emissioni/1.0",
-     "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"
+     "decsiraogc_emissioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_emissioni/1.0"
    },
    "layer": {
         "type": "wms",
@@ -67,40 +67,40 @@
          {
            "headerName": "Codice sira stabilimento",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()"],
+           "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:codiceSira/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Denominazione stabilimento",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()"],
+           "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nome/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Provincia",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desProvincia/text()"],
+           "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia/text()"],
            "type": 2
          },
          {
            "headerName": "Comune",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()"],
+           "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune/text()"],
            "type": 2
          },
          {
            "headerName": "Indirizzo",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:indirizzo/text()"],
+           "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:indirizzo/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type": 2
          },
          {
            "headerName": "Ragione sociale",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione/text()"],
+           "xpath": ["decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:denominazione/text()"],
            "type": 2
          },
          {
@@ -234,7 +234,7 @@
      "fields":[
         {
            "index": 1,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desProvincia",
+           "attribute": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
            "label":"Provincia",
            "type":"list",
            "valueService": {
@@ -247,7 +247,7 @@
         },
         {
            "index": 2,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune",
+           "attribute": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune",
            "label":"Comune",
            "type":"list",
            "valueService": {
@@ -262,21 +262,21 @@
            "valueId":"toponimo",
            "valueLabel":"toponimo",
 		    "dependson":{
-              "field": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desProvincia",
+              "field": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
               "from": "sigla",
               "to": "sigla_provincia"
            }
         },
         {
            "index": 3,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira",
+           "attribute": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:codiceSira",
            "label":"Codice sira stabilimento",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 4,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:attivitaProduttiva/decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:codAteco",
+           "attribute": "decsiraogc_emissioni:attivitaProduttiva/decsiraogc_emissioni:AttivitaProduttiva/decsiraogc_emissioni:codAteco",
            "label":"Tipo attivita produttiva",
            "type":"list",
            "valueService": {
@@ -293,20 +293,20 @@
         },
         {
            "index": 5,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:denominazione",
+           "attribute": "decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:denominazione",
            "label":"Ragione sociale azienda",
            "type":"string"
         },
         {
            "index": 6,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA",
+           "attribute": "decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:partitaIVA",
            "label":"Partita IVA azienda",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"
         },
         {
            "index": 7,
-           "attribute": "decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale",
+           "attribute": "decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:codiceFiscale",
            "label":"Codice fiscale azienda",
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"string"

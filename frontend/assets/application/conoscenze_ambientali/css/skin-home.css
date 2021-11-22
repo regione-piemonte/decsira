@@ -708,30 +708,92 @@ ul.categorie li.vuoto {
 	opacity:.8;
 	}
 
-ul.categorie li div.ogg_appl {
-	/*display:none;*/
+/*inizio modificate x pagine interne*/
+
+.sira-ms2 #search-categories ul.categorie li div.ogg_appl {
 	position:absolute;
-	top:80px;
 	left:0;
 	width:100%;
 	opacity:0;
 	margin-top:90px;
 	transform:rotateX(90deg);
 	transition:.3s;
-	}
+}
 
-ul.categorie li:hover div.ogg_appl {
+.sira-ms2 #search-categories ul.categorie li:hover div.ogg_appl {
 	opacity:1;
 	margin-top:0;
 	transition:.5s;
 	transform:rotateX(0deg);
 }
-ul.categorie li:focus div.ogg_appl {
+
+.sira-ms2 #search-categories ul.categorie li:focus div.ogg_appl {
 	opacity:1;
 	margin-top:0;
 	transition:.5s;
 	transform:rotateX(0deg);
 }
+
+/*fine modificate per pagine interne*/
+
+
+/*inizio categorie hover e focus accessibile*/
+
+.body_home ul.categorie li:hover {
+	padding-top: 100px!important;
+	transition: none 0s ease 0s!important;
+}
+
+.body_home ul.categorie li .ogg_title {
+	position:absolute;
+	top:100px;
+	left:0;
+	width:100%;
+	opacity:1;
+	margin-top:0;
+	transition:.3s;
+}
+
+.body_home ul.categorie li:hover .ogg_title {
+	margin-top:-55px;
+	transition:.3s;
+}
+
+.body_home ul.categorie li:hover {
+    background-image: none;
+}
+
+.body_home ul.categorie li .ogg_appl {
+	position: relative;
+}
+
+.body_home ul.categorie li .ogg_appl span .list-group-item {
+	position:absolute;
+	top:-15px;
+	left:0;
+	width:93%;
+	opacity:0;
+	transition:.3s;
+}
+
+.body_home ul.categorie li:hover .ogg_appl span:first-child .list-group-item {
+	opacity:1;
+	margin-top:0!important;
+	transition:.5s;
+}
+
+.body_home ul.categorie li:hover .ogg_appl span:last-child .list-group-item {
+	opacity:1;
+	margin-top:60px!important;
+	transition:.5s;
+}
+
+.body_home ul.categorie li .ogg_appl span .list-group-item:focus {
+	opacity:1;
+	margin-top:60px!important;
+}
+
+/*fine categorie hover e focus accessibile*/
 
 ul.categorie li span a {
     background: #009440;
