@@ -3,7 +3,7 @@
     header={(
         <DetailTitle title='PUNTI DI EMISSIONE IN ATMOSFERA' subtitle={[
             'Denominazione : ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()"),
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nome/text()"),
             'Sigla: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:sigla/text()")
             ]} id={model.id}/>
@@ -78,28 +78,28 @@
         <Section header='DATI STABILIMENTO' eventKey='2' expanded={true}>
             <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
               <LabeledField label='Codice sira' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:codiceSira/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:codiceSira/text()")
                 }/>
             </ProfileWrapper>
 
             <LabeledField label='Denominazione' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nome/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nome/text()")
             }/>
 
             <LabeledField label='Provincia' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:desProvincia/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia/text()")
             }/>
 
             <LabeledField label='Comune' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:nomeComune/text()")
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune/text()")
             }/>
 
             <ProfileWrapper condition={() =>   (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
               <LabeledField label='Indirizzo' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:indirizzo/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:indirizzo/text()")
               }/>
               <LabeledField label='Email-pec' value={
-                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:emailPec/text()")
+                  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:emailPec/text()")
               }/>
             </ProfileWrapper>
 
@@ -114,58 +114,58 @@
                             {
                                 headerName: 'Descrizione attivita Ateco',
                                 width: 681,
-                                xpath: "decsiraogc_stabilimenti:AttivitaProduttiva/decsiraogc_stabilimenti:desAteco/text()"
+                                xpath: "decsiraogc_emissioni:AttivitaProduttiva/decsiraogc_emissioni:desAteco/text()"
                             }
                         ]
                     }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:attivitaProduttiva")}/>
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:attivitaProduttiva")}/>
             </Section>
 
             <Section header='Dati azienda' eventKey='4' expanded={true}>
                  <LabeledField label='Ragione sociale' value={
-                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_emissioni:Stabilimento/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:denominazione/text()")
+                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:denominazione/text()")
                  }/>
 
                  <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 
                      <LabeledField label='Codice fiscale' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:codiceFiscale/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:codiceFiscale/text()")
                      }/>
 
                      <LabeledField label='Partita IVA' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:partitaIVA/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:partitaIVA/text()")
                      }/>
 
                  </ProfileWrapper>
 
                  <LabeledField label='Provincia' value={
-                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desProvincia/text()")
+                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:desProvincia/text()")
                  }/>
 
                  <LabeledField label='Comune' value={
-                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:desComune/text()")
+                   model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:desComune/text()")
                  }/>
 
                  <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
 
                      <LabeledField label='Indirizzo' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:indirizzo/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:indirizzo/text()")
                      }/>
 
                      <LabeledField label='Telefono' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:telefono/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:telefono/text()")
                      }/>
 
                      <LabeledField label='Fax' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:fax/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:fax/text()")
                      }/>
 
                      <LabeledField label='Numero iscrizione CCIAA' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:numeroCIAA/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:numeroCIAA/text()")
                      }/>
 
                      <LabeledField label='Anno iscrizione CCIAA' value={
-                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:annoCIAA/text()")
+                       model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:annoCIAA/text()")
                      }/>
 
                   </ProfileWrapper>
@@ -173,10 +173,10 @@
                   <ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
                      <Section header='Dati titolare/legale rappresentante' eventKey='5' expanded={true}>
                         <LabeledField label='Cognome' value={
-                          model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:cognomeTitolare/text()")
+                          model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:cognomeTitolare/text()")
                         }/>
                         <LabeledField label='Nome' value={
-                          model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:stabilimento/decsiraogc_stabilimenti:Stabilimento/decsiraogc_stabilimenti:azienda/decsiraogc_stabilimenti:Azienda/decsiraogc_stabilimenti:nomeTitolare/text()")
+                          model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_emissioni:PuntoEmissione/decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:nomeTitolare/text()")
                         }/>
                      </Section>
                    </ProfileWrapper>

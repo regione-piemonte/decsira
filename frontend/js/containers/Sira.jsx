@@ -209,7 +209,7 @@ class Sira extends React.Component {
                     cartMappaStyle="btn btn-primary active"
                     onBack={this.back}
                 />
-                <div id="#main-content"></div>
+                <div id="main-content"></div>
                 <h1 className="sr-only">Mappa interattiva</h1>
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
