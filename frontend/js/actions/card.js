@@ -16,6 +16,22 @@ const ACTIVE_SECTION = 'ACTIVE_SECTION';
 const SELECT_ROWS = 'SELECT_ROWS';
 const GENERATE_PDF = 'GENERATE_PDF';
 const MAP_IMAGE_READY = 'MAP_IMAGE_READY';
+const SHOW_CONFIRM_DOWNLOAD = 'SHOW_CONFIRM_DOWNLOAD';
+const HIDE_CONFIRM_DOWNLOAD = 'HIDE_CONFIRM_DOWNLOAD';
+
+function showConfirmDownload() {
+    return {
+        type: SHOW_CONFIRM_DOWNLOAD,
+        showConfirmDownload: true
+    };
+}
+
+function hideConfirmDownload() {
+    return {
+        type: HIDE_CONFIRM_DOWNLOAD,
+        showConfirmDownload: false
+    };
+}
 
 function mapImageReady(state) {
     return {
@@ -140,6 +156,8 @@ module.exports = {
     SELECT_ROWS,
     GENERATE_PDF,
     MAP_IMAGE_READY,
+    SHOW_CONFIRM_DOWNLOAD,
+    HIDE_CONFIRM_DOWNLOAD,
     // SET_IMPIANTO_MODEL,
     loadCardTemplate,
     loadCardData,
@@ -150,6 +168,8 @@ module.exports = {
     selectRows,
     generatePDF,
     mapImageReady,
-    cardLoading
+    cardLoading,
+    showConfirmDownload,
+    hideConfirmDownload
     // setSiraImpiantoModel
 };

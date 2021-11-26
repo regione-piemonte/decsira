@@ -176,7 +176,7 @@ class MetadataInfoBox extends React.Component {
                             </a>
                             {renderWmsUrl}
                             {renderWfsUrl}
-                            <button style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
+                            <button aria-expanded={this.props.showButtonLegend} style={{display: this.props.showButtonLegend}} onClick={this.onOpenLegendPanel}><I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
                             {renderLegendPanel}
                         </Panel>
                     </Panel>

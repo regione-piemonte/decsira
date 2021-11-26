@@ -14,6 +14,7 @@ const LinkScheda = require("./LinkScheda");
 const AuthorizedObject = require("./AuthorizedObject");
 const AdempimentiAmbientali = require("./AdempimentiAmbientali");
 const SiraTable = require("./SiraTable");
+const AttachmentTable = require("./AttachmentTable");
 const TreeTitle = require("../tree/TreeTitle");
 const TreeData = require("../tree/TreeData");
 const TemplateUtils = require('../../utils/TemplateUtils');

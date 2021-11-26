@@ -25,6 +25,8 @@ const PlatformNumbers = connect((state) => ({
 
 const SiraSearchBar = require('../components/SiraSearchBar');
 const { handleKeyFocus } = require('../utils/SiraUtils');
+const { HashLink } = require('react-router-hash-link');
+
 
 class Home extends React.Component {
     static propTypes = {
@@ -57,6 +59,9 @@ class Home extends React.Component {
     render() {
         return (
             <div className="home-page">
+                <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
+                    <HashLink to="/#main-content">Salta al contenuto principale</HashLink>
+                </div>
                 <Header />
                 <h1 className="sr-only">Homepage</h1>
                 <div id="main-content"></div>

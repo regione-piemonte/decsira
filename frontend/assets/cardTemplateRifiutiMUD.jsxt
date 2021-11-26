@@ -1,0 +1,462 @@
+<Panel
+    bsStyle="primary"
+    header={(
+            <DetailTitle title='RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE' subtitle={[
+            'Codice impianto: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()"),
+            ' - ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()"),
+			' - Anno MUD: ',
+			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:anno/text()"),
+			' - Codice EER: ',
+			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+
+        <Section header='DATI AZIENDA' eventKey='1' expanded={true}>
+          
+            <LabeledField label='Codice impianto (ARPA MUD)' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()")
+			}/>
+            
+            <LabeledField label='Codice SIRA' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceSira/text()")
+			}/>
+			
+			<LabeledField label='Ragione sociale azienda' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()")
+			}/>
+			
+			<LabeledField label='Codice fiscale azienda / Partita IVA azienda' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codFiscPartIva/text()")
+			}/>
+			
+			<LabeledField label='Provincia impianto' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia/text()")
+			}/>
+			
+			<LabeledField label='Comune impianto' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desComune/text()")
+			}/>
+			
+			<LabeledField label='Indirizzo impianto' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:indirizzo/text()")
+			}/>
+
+        </Section>
+
+        <Section header='AUTORIZZAZIONI AZIENDA' eventKey='2' expanded={true}>  
+
+			<Section header='Estremi autorizzativi' eventKey='3' expanded={true}>
+				<SiraTable
+					id="EstremiAutorizzativi"
+					selectedRow={model.EstremiAutorizzativi}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: 'Estremi autorizzazione',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Data di rilascio autorizzazione',
+								width: 150,
+								dateFormat: 'DD/MM/YYYY',
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:dataRilascioAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Data di scadenza autorizzazione',
+								width: 150,
+								dateFormat: 'DD/MM/YYYY',
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:dataScadenzaAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Ente Rilascio autorizzazione',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:enteAutorizzante/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Tipo Autorizzazione - Tipo Impianto',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:tipoAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Rinnovo per autocertificazione',
+								width: 600,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:rinnovoPerAutocertificazione/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+          
+			<Section header='Certificazioni' eventKey='4' expanded={true}>
+				<SiraTable
+					id="Certificazioni"
+					selectedRow={model.Certificazioni}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: 'Data 1a registrazione certificazione EMAS',
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:dataPrimaRegistrazEMAS/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Numero registrazione certificazione EMAS',
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:numRegistrazEMAS/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Data emissione corrente certificazione UNI EN ISO 14001',
+								width: 250,
+								dateFormat: 'DD/MM/YYYY',
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:dataEmissCorrenteUNIENISO14001/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+			<Section header='Operazioni autorizzate' eventKey='5' expanded={true}>
+				<SiraTable
+					id="OperazioniAutorizzate"
+					selectedRow={model.OperazioniAutorizzate}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: "Estremi dell'autorizzazione",
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Operazioni di recupero autorizzate',
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:operazioniRecupAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Operazioni di smaltimento autorizzate',
+								width: 250,
+								dateFormat: 'DD/MM/YYYY',
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:operazioneSmaltAutoriz/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+			<Section header='Capacità autorizzate' eventKey='6' expanded={true}>
+				<SiraTable
+					id="CapacitaAutorizzate"
+					selectedRow={model.CapacitaAutorizzate}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: "Estremi dell'autorizzazione",
+								width: 200,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità autorizzata complessiva (t/a)',
+								width: 200,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaTotAut1/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità rifiuti pericolosi autorizzata (t/a)',
+								width: 200,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaPericolosiAut1/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità rifiuti non pericolosi autorizzata (t/a)',
+								width: 200,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaNonPericolosiAut1/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+			<Section header='Veicoli Fuori Uso - RAEE' eventKey='7' expanded={true}>
+				<SiraTable
+					id="VeicoliFuoriUso"
+					selectedRow={model.VeicoliFuoriUso}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: "Estremi dell'autorizzazione",
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Gestione Veicoli Fuori Uso',
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:gestioneVeicoliFuoriUso/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Gestione RAEE',
+								width: 250,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:gestioneRAEE/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+			<Section header='Incenerimento' eventKey='8' expanded={true}>
+				<SiraTable
+					id="Incenerimento"
+					selectedRow={model.Incenerimento}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: "Estremi dell'autorizzazione",
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Incenerimento',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:incenerimento/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità totale autorizzata incenerimento (t/a)',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaTotAut1/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità rifiuti pericolosi incenerimento (t/a)',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaPericolosiAut1/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità rifiuti non pericolosi incenerimento (t/a)',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaNonPericolosiAut1/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+			<Section header='Coincenerimento' eventKey='9' expanded={true}>
+				<SiraTable
+					id="Coincenerimento"
+					selectedRow={model.Coincenerimento}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: "Estremi dell'autorizzazione",
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Coincenerimento',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:coincenerimento/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità totale autorizzata coincenerimento (t/a)',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaTotAut2/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità rifiuti pericolosi coincenerimento (t/a)',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaPericolosiAut2/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità rifiuti non pericolosi coincenerimento (t/a)',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaNonPericolosiAut2/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+			<Section header='Discariche' eventKey='9' expanded={true}>
+				<SiraTable
+					id="Discariche"
+					selectedRow={model.Discariche}
+					wfsVersion="2.0"
+					rowSelection={false}
+					columns={
+						[
+							{
+								hide: true,
+								id: true,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/@gml:id"
+							},
+							{
+								hide: false,
+								headerName: "Estremi dell'autorizzazione",
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:estremiAutoriz/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Categoria prima discarica',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:categoriaPrimaDiscarica/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità residua in metri cubi prima discarica al 31/12',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaResidua3112PrimaDiscarica/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Categoria seconda discarica',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:categoriaSecondaDiscarica/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità residua in metri cubi seconda discarica al 31/12',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaResidua3112SecondaDiscarica/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Categoria terza discarica',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:categoriaTerzaDiscarica/text()"
+							},
+							{
+								hide: false,
+								headerName: 'Capacità residua in metri cubi terza discarica al 31/12',
+								width: 150,
+								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:capacitaResidua3112TerzaDiscarica/text()"
+							}
+						]
+					}
+					features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:autorizMUD")}
+				/>
+			</Section>
+			
+        </Section>
+          
+        <Section header='MAPPA SINTESI - Rifiuti - Modello Unico Dichiarazione Ambientale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='9' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:geometria/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Rifiuti MUD",
+	                          "name": "decsiraogc_rifiuti_mud:RifiutiMUD",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+	              
+        </Section>
+
+    </Panel>
+        
+</Panel>

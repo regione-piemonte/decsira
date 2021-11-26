@@ -12,7 +12,7 @@ const {createSelector} = require('reselect');
 const { Tabs, Tab, Modal} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
-
+const { HashLink } = require('react-router-hash-link');
 const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
@@ -324,7 +324,10 @@ class Dataset extends React.Component {
         const {category} = this.props;
         return (
             <div className="interna">
-                <div style={{minHeight: '100%', position: 'relative'}}>
+                <div style={{ minHeight: '100%', position: 'relative' }}>
+                    <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
+                        <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
+                    </div>
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
                     <h1 className="sr-only">Ricerca oggetti e viste tematiche</h1>

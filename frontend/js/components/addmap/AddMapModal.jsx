@@ -70,7 +70,7 @@ class AddMapModal extends React.Component {
         const {loading, show, node, records, error} = this.props;
         return (
             <Modal dialogComponent={DraggableModalDialog} dialogClassName="sira-add-map" show={show} container={document.getElementById("body")}>
-                <Modal.Header closeButton={!loading} onHide={this.props.close}><Modal.Title>{node ? node.title : ""}</Modal.Title></Modal.Header>
+                <Modal.Header closeButton={!loading} onHide={this.props.close}><Modal.Title>{node && node.title ? node.title : "Carica in mappa"}</Modal.Title></Modal.Header>
                 <Modal.Body>
                     <div className="sira-add-map-body">
                         {loading ? this.renderSpinner() : this.renderBody(error, records)}

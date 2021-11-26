@@ -9,7 +9,7 @@
 const {
     CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_LOADING,
     SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS, GENERATE_PDF,
-    MAP_IMAGE_READY// , SET_IMPIANTO_MODEL
+    MAP_IMAGE_READY, SHOW_CONFIRM_DOWNLOAD, HIDE_CONFIRM_DOWNLOAD // , SET_IMPIANTO_MODEL
 } = require('../actions/card');
 
 const assign = require('object-assign');
@@ -19,7 +19,8 @@ const initialState = {
     show: false,
     template: null,
     xml: null,
-    mapImageReady: false
+    mapImageReady: false,
+    showConfirmDownload: false
     // impiantoModel: null
 };
 
@@ -71,6 +72,12 @@ function cardtemplate(state = initialState, action) {
         } */
     case CARD_TEMPLATE_LOADING: {
         return assign({}, state, {loadingCardTemplate: true});
+    }
+    case SHOW_CONFIRM_DOWNLOAD: {
+        return assign({}, state, {showConfirmDownload: true});
+    }
+    case HIDE_CONFIRM_DOWNLOAD: {
+        return assign({}, state, {showConfirmDownload: false});
     }
     default:
         return state;
