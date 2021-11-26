@@ -1,0 +1,499 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_rifiuti_mud="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_mud/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_mud/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_mud_rifiuti  id= id_geo_rifiuti_mud-->
+	<element name="RifiutiMUD" type="decsiraogc_rifiuti_mud:RifiutiMUDType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_geo_oggetto_associato_string  id = identificativo-->
+	<element name="OggettiCollegati" type="decsiraogc_rifiuti_mud:OggettiCollegatiType" substitutionGroup="gml:AbstractObject" />
+
+	<!-- decsira_t_impianto_mud  id = cod_impianto-->
+	<element name="ImpiantoMUD" type="decsiraogc_rifiuti_mud:ImpiantoMUDType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_autoriz_mud ID = cod_impianto-->
+	<element name="AutorizMUD" type="decsiraogc_rifiuti_mud:AutorizMUDType" substitutionGroup="gml:AbstractObject" />
+	
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="RifiutiMUDType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idCerMud" minOccurs="1" maxOccurs="1" />
+					
+					<xs:element name="anno" type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="codiceImpianto" type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="codiceSira" type="xs:decimal" minOccurs="1" />
+					
+					<xs:element name="codiceCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="labelCodiceCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="311" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="classeCodiceCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desClasseCodiceCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="famCodiceCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desFamCodiceCER" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="pericolosita" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="qtaProdotta" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qtaRicevuta" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="qtaConsegnata" type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="tipoGestione" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="40" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="qtaGestita" type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="tipoOperazione" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desOperazione" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="labelOperazione" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="113" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="geometria" type="gml:GeometryPropertyType"  />
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="oggettiCollegati" type="decsiraogc_rifiuti_mud:OggettiCollegatiPropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+					<xs:element name="impiantoMUD" type="decsiraogc_rifiuti_mud:ImpiantoMUDPropertyType" minOccurs="0" maxOccurs="unbounded" />	
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="OggettiCollegatiType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element name="identificativo" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codiceSira" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+					
+					<xs:element name="idOggetto" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idTipoOggetto" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desTipoOggetto" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nomeWFS" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="301" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idStatoAut" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="desStatoAut" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="estremiAtto" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataEmissione" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="ImpiantoMUDType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idMudImpianto" type="xs:integer" minOccurs="1" />
+				
+					<xs:element name="codiceImpianto" type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="codiceSira" type="xs:decimal" minOccurs="1" />
+					
+					<xs:element name="ragioneSociale" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codFiscPartIva" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="16" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="istatProvincia" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desProvincia" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="istatComune" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="6" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desComune" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element name="indirizzo" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="autorizMUD" type="decsiraogc_rifiuti_mud:AutorizMUDPropertyType" minOccurs="0" maxOccurs="unbounded" />
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="AutorizMUDType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element name="idMudAutorizz" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codiceImpianto" type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="codiceSira" type="xs:decimal" minOccurs="1" />
+					
+					<xs:element name="progressivoAutoriz" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="estremiAutoriz" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataRilascioAutoriz" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataScadenzaAutoriz" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="enteAutorizzante" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="fkProvvedim" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="tipoProvvedim" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="rinnovoPerAutocertificazione" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="operazioniRecupAutoriz" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="operazioneSmaltAutoriz" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="gestioneVeicoliFuoriUso" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="gestioneRAEE" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="incenerimento" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="capacitaTotAut1" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="capacitaPericolosiAut1" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="capacitaNonPericolosiAut1" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="coincenerimento" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="capacitaTotAut2" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="capacitaRifPericolosiAut2" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="capacitaRifNonPericolosiAut2" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="categoriaPrimaDiscarica" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="capacitaResidua3112PrimaDiscarica" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="categoriaSecondaDiscarica" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="capacitaResidua3112SecondaDiscarica" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="categoriaTerzaDiscarica" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="capacitaResidua3112TerzaDiscarica" type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="dataPrimaRegistrazEMAS" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="numRegistrazEMAS" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataEmissCorrenteUNIENISO14001" type="xs:date" minOccurs="0" maxOccurs="1" />
+
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	
+	<!-- property types -->
+	<complexType name="OggettiCollegatiPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_rifiuti_mud:OggettiCollegati" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="ImpiantoMUDPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_rifiuti_mud:ImpiantoMUD" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+	<complexType name="AutorizMUDPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_rifiuti_mud:AutorizMUD" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+</schema>

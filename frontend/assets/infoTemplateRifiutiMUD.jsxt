@@ -1,0 +1,93 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateRifiutiMUD"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+				 {
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Anno MUD",
+		  "xpath" : "decsiraogc_rifiuti_mud:anno/text()",
+		  "width" : 90
+		}, {
+		  "headerName" : "Tipo Operazione di Gestione",
+		  "xpath" : "decsiraogc_rifiuti_mud:tipoOperazione/text()",
+		  "width" : 130
+		}, {
+		  "headerName" : "Operazione di Gestione",
+		  "xpath" : "decsiraogc_rifiuti_mud:tipoGestione/text()",
+		  "width" : 170
+		}, {
+		  "headerName" : "Descrizione Operazione di Gestione",
+		  "xpath" : "decsiraogc_rifiuti_mud:labelOperazione/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Codice EER",
+		  "xpath" : "decsiraogc_rifiuti_mud:codiceCER/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Descrizione EER",
+		  "xpath" : "decsiraogc_rifiuti_mud:desCER/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Rifiuti pericolosi",
+		  "xpath" : "decsiraogc_rifiuti_mud:pericolosita/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Tipologia impiantistica",
+		  "xpath" : "decsiraogc_rifiuti_mud:elencoTipologiaImpRifiuto/text()",
+		  "width" : 120
+		}, {
+		  "headerName" : "Quantità Prodotta (t)",
+		  "xpath" : "decsiraogc_rifiuti_mud:qtaProdotta/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Quantità Ricevuta (t)",
+		  "xpath" : "decsiraogc_rifiuti_mud:qtaRicevuta/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Quantità Consegnata (t)",
+		  "xpath" : "decsiraogc_rifiuti_mud:qtaConsegnata/text()",
+		  "width" : 170
+		}, {
+		  "headerName" : "Quantità Gestita (t)",
+		  "xpath" : "decsiraogc_rifiuti_mud:qtaGestita/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Provincia impianto",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Comune impianto",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desComune/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Codice impianto MUD",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()",
+		  "width" : 160
+		}, {
+		  "headerName" : "Codice SIRA",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceSira/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Ragione sociale azienda",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Codice fiscale / P. IVA",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codFiscPartIva/text()",
+		  "width" : 160
+		}, {
+		  "headerName" : "Indirizzo impianto",
+		  "xpath" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:indirizzo/text()",
+		  "width" : 200
+		}
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_rifiuti_mud:RifiutiMUD")}/>

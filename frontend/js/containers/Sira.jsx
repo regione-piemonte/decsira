@@ -13,7 +13,7 @@ require('../../assets/css/sira.css');
 require('@mapstore/product/assets/css/viewer.css');
 
 const {connect} = require('react-redux');
-
+const { HashLink } = require('react-router-hash-link');
 const SidePanel = require('./SidePanel');
 const Card = require('../components/template/Card');
 const Header = require('../components/Header');
@@ -201,6 +201,9 @@ class Sira extends React.Component {
     render() {
         return (
             <div>
+                <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
+                    <HashLink to="/map/#main-content">Salta al contenuto principale</HashLink>
+                </div>
                 <Header
                     goToDataset={this.goToDataset}
                     goToHome={this.goToHome}
