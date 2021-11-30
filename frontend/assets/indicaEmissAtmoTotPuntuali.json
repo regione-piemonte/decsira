@@ -1,0 +1,256 @@
+{
+   "featureTypeName":"decsiraogc_indicatori_irea:IndicaEmissAtmoTotPuntuali",
+   "featureTypeNameLabel":"IREA – Emissioni Puntuali – Indicatore",
+   "nameSpaces": {
+     "decsiraogc_indicatori_irea": "http://www.regione.piemonte.it/ambiente/indicatori_irea/1.0"
+   },
+   "tematizzatore": {
+	  "description": "IREA – Emissioni Puntuali – Indicatore",
+	  "attribute": "valore_rappresentato",
+	  "defaultMethod": "jenks",
+	  "defaultIntervals": 5,
+	  "defaultRamp": "dark2",
+	  "viewParams": "ris_spaziale:%RIS_SPAZIALE%;dimensione:%DIMENSIONE%;ambito_temporale:%AMBITO_TEMPORALE%",
+	  "filters": [
+			{
+				"index": 1,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_ris_spaziale",
+				"label":"Risoluzione Spaziale",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_spaziale",
+				  "propertyName": "fk_ris_spaziale,des_ris_spaziale,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:9318093e-53c2-4401-9d77-1c061406af56'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ris_spaziale",
+				"valueLabel":"des_ris_spaziale"
+			},
+			{
+				"index": 2,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_dimensione",
+				"label":"Dimensione indicatore",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_dimensioni",
+				  "propertyName": "fk_dimensione,fk_ris_spaziale,des_dimensione,des_unita_misura,des_ramp,method,intervals,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:9318093e-53c2-4401-9d77-1c061406af56'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_dimensione",
+				"valueLabel":"des_dimensione"
+			},
+			{
+				"index": 3,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_ambito_temporale",
+				"label":"Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_temporale",
+				  "propertyName": "fk_ris_temporale,des_ris_temporale,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:9318093e-53c2-4401-9d77-1c061406af56'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ris_temporale",
+				"valueLabel":"des_ris_temporale"
+			},
+			{
+				"index": 4,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_irea:fk_ambito_temporale",
+				"label":"Dettaglio Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ambiti_temporali",
+				  "propertyName": "fk_ris_temporale,fk_ambito_temporale,valore,anno,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:9318093e-53c2-4401-9d77-1c061406af56'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ambito_temporale",
+				"valueLabel":"fk_ambito_temporale"
+			}
+	  ]
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "IREA – Emissioni Puntuali – Indicatore",
+        "name": "decsiraogc_indicatori_irea:IndicaEmissAtmoTotPuntuali",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "indicaEmissAtmoTotPuntuali",
+        "group": "IREA – Emissioni Puntuali",
+        "format": "image/png"
+    },
+    "geometryName": "geometria",
+    "geometryType": "Point",
+	"featureinfo":{
+		"templateURL": "assets/infoTemplateEmissAtmoTotPuntuali.jsxt"
+	},
+	"featuregrid": {
+     "grid": {
+		"root": "/wfs:FeatureCollection/wfs:member/decsiraogc_indicatori_irea:IndicaEmissAtmoTotPuntuali",
+		"columns": [
+		  {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+          },
+		  {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "geometry",
+          "xpath" : [ "decsiraogc_indicatori_irea:geometria/gml:Point/gml:pos/text()" ],
+          "type" : 6
+         },
+		 {
+           "headerName": "Dimensione Indicatore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_dimensione/text()"],
+           "type": 2,
+           "width" : 240
+         },
+		 {
+           "headerName": "Periodicità",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_ris_temporale/text()"],
+           "type": 2,
+           "width" : 100
+         },
+		 {
+           "headerName": "Dettaglio Periodo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:anno_ambito_temporale/text()"],
+           "type": 2,
+           "width" : 140
+         },
+		 {
+           "headerName": "Tipo stabilimento",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:tipo_stabilimento/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Denominazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_entita_spaziale/text()"],
+           "type": 2,
+          "width" : 200
+         },
+		 {
+           "headerName": "Valore emissione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:valore_rappresentato/text()"],
+           "type": 1,
+          "width" : 130
+         },
+         {
+           "headerName": "Unità di misura",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:des_unita_misura/text()"],
+           "type": 2,
+          "width" : 100
+         },
+		 {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:provincia/text()"],
+           "type": 2,
+          "width" : 150
+         },
+         {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:comune/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Indirizzo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_irea:indirizzo/text()"],
+           "type": 2,
+          "width" : 150
+         }
+		]
+		}
+	},
+	"query": {
+		"service": {
+		   "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+		   "urlParams": {
+			 "version": "1.1.0",
+			 "outputFormat": "application/json"
+		   }
+		 },
+		 "fields":[
+			{
+				"index": 1,
+				"attribute": "valore_rappresentato",
+				"label":"Valore emissione",
+				"type":"number"
+			},
+			{
+			  "index" : 2,
+			  "attribute" : "provincia",
+			  "label" : "Provincia",
+			  "type" : "list",
+			  "valueService" : {
+				"urlParams" : {
+				  "typeName" : "decsiraogc_decodif:decsira_geo_province",
+				  "propertyName" : "prov_nom,prov_ist",
+				  "sortBy" : "prov_nom+A"
+				}
+			  },
+			  "valueId" : "prov_nom",
+			  "valueLabel" : "prov_nom"
+			},
+			{
+			  "index" : 3,
+			  "attribute" : "comune",
+			  "label" : "Comune",
+			  "type" : "list",
+			  "valueService" : {
+				"urlParams" : {
+				  "typeName" : "decsiraogc_decodif:decsira_geo_comuni_storico",
+				  "propertyName" : "comune_nom,prov_ist,label",
+				  "sortBy" : "label+A"
+				}
+			  },
+			  "dependson" : {
+				"field" : "provincia",
+				"from" : "prov_ist",
+				"to" : "prov_ist"
+			  },
+			  "valueId" : "comune_nom",
+			  "valueLabel" : "label"
+			},
+			{
+			  "index" : 4,
+			  "attribute" : "tipo_stabilimento",
+			  "label" : "Tipo stabilimento",
+			  "type":"list",
+			  "values": [
+				  {"value":"STABILIMENTO","name":"Stabilimento"},
+				  {"value":"DISCARICA","name":"Discarica"}
+			  ],
+			  "valueId":"value",
+			  "valueLabel":"name"
+			}
+		 ]
+	}
+}

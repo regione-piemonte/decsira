@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_rifiuti_mud:RifiutiMUD",
-   "featureTypeNameLabel":"Modello Unico Dichirazioni Ambientali - Impianti di Produzione e Gestione Rifiuti (MUD)",
+   "featureTypeNameLabel":"RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE (MUD)",
    
    "nameSpaces": {
      "decsiraogc_rifiuti_mud": "http://www.regione.piemonte.it/ambiente/decsiraogc_rifiuti_mud/1.0"
@@ -9,7 +9,7 @@
         "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "Modello Unico Dichirazioni Ambientali - Impianti di Produzione e Gestione Rifiuti (MUD)",
+        "title": "Rifiuti - Modello Unico Dichiarazione ambientale (MUD)",
         "name": "decsiraogc_rifiuti_mud:RifiutiMUD",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
@@ -27,7 +27,7 @@
    "geometryName": "geometria",
    "geometryType": "Point",
    "card": {
-    "pdfname": "Scheda_RifiutiMUD_Codice_SIRA_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:idCerMud/text()}}.pdf",
+    "pdfname": "Scheda_RifiutiMUD_CodiceEER_{{/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()}}.pdf",
      "template": "assets/cardTemplateRifiutiMUD.jsxt",
 	 "treeTemplate": "assets/treeTemplateRifiutiMUD.jsxt",
      "service": {
@@ -59,27 +59,41 @@
 			  "xpath" : [ "decsiraogc_rifiuti_mud:anno/text()" ],
 			  "type" : 2,
 			  "width" : 90
-			}, 
+			},
 			{
 			  "suppressSorting" : true,
-			  "headerName" : "Tipo Operazione di Gestione",
+			  "headerName" : "Codice impianto (ARPA)",
+			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()" ],
+			  "type" : 2,
+			  "width" : 180
+			},
+			{
+			  "suppressSorting" : true,
+			  "headerName" : "Codice SIRA",
+			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceSira/text()" ],
+			  "type" : 2,
+			  "width" : 100
+			},
+			{
+			  "suppressSorting" : true,
+			  "headerName" : "Tipologia Operazione",
 			  "xpath" : [ "decsiraogc_rifiuti_mud:tipoOperazione/text()" ],
 			  "type" : 2,
 			  "width" : 130
 			}, 
 			{
 			  "suppressSorting" : true,
-			  "headerName" : "Operazione di Gestione",
+			  "headerName" : "Operazione",
 			  "xpath" : [ "decsiraogc_rifiuti_mud:tipoGestione/text()" ],
 			  "type" : 2,
-			  "width" : 170
+			  "width" : 120
 			}, 
 			{
 			  "suppressSorting" : true,
 			  "headerName" : "Descrizione Operazione di Gestione",
 			  "xpath" : [ "decsiraogc_rifiuti_mud:labelOperazione/text()" ],
 			  "type" : 2,
-			  "width" : 200
+			  "width" : 220
 			}, 
 			{
 			  "suppressSorting" : true,
@@ -113,7 +127,7 @@
 			},
 			{
 			  "suppressSorting" : true,
-			  "headerName" : "Rifiuti pericolosi",
+			  "headerName" : "Pericolosità",
 			  "xpath" : [ "decsiraogc_rifiuti_mud:pericolosita/text()" ],
 			  "type" : 2,
 			  "width" : 120
@@ -148,34 +162,6 @@
 			},
 			{
 			  "suppressSorting" : true,
-			  "headerName" : "Provincia impianto",
-			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia/text()" ],
-			  "type" : 2,
-			  "width" : 150
-			}, 
-			{
-			  "suppressSorting" : true,
-			  "headerName" : "Comune impianto",
-			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desComune/text()" ],
-			  "type" : 2,
-			  "width" : 150
-			},
-			{
-			  "suppressSorting" : true,
-			  "headerName" : "Codice impianto MUD",
-			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()" ],
-			  "type" : 2,
-			  "width" : 160
-			}, 
-			{
-			  "suppressSorting" : true,
-			  "headerName" : "Codice SIRA",
-			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceSira/text()" ],
-			  "type" : 2,
-			  "width" : 100
-			}, 
-			{
-			  "suppressSorting" : true,
 			  "headerName" : "Ragione sociale azienda",
 			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()" ],
 			  "type" : 2,
@@ -187,6 +173,20 @@
 			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codFiscPartIva/text()" ],
 			  "type" : 2,
 			  "width" : 160
+			}, 
+			{
+			  "suppressSorting" : true,
+			  "headerName" : "Provincia",
+			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia/text()" ],
+			  "type" : 2,
+			  "width" : 150
+			}, 
+			{
+			  "suppressSorting" : true,
+			  "headerName" : "Comune",
+			  "xpath" : [ "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desComune/text()" ],
+			  "type" : 2,
+			  "width" : 150
 			}, 
 			{
 			  "suppressSorting" : true,
@@ -234,7 +234,7 @@
 		{
             "index": 2,
             "attribute": "decsiraogc_rifiuti_mud:tipoOperazione",
-            "label":"Tipo Operazione di Gestione",
+            "label":"Tipologia operazione",
             "type":"list",
             "values": [
               {"value":"SMALTIMENTO","name":"Smaltimento"},
@@ -247,7 +247,7 @@
 		{
 		  "index" : 3,
 		  "attribute" : "decsiraogc_rifiuti_mud:labelOperazione",
-		  "label" : "Operazione di Gestione",
+		  "label" : "Operazione",
 		  "type" : "list",
 		  "valueService" : {
 			"urlParams" : {
@@ -297,7 +297,7 @@
 		{
 		  "index" : 6,
 		  "attribute" : "decsiraogc_rifiuti_mud:pericolosita",
-		  "label" : "Rifiuti pericolosi",
+		  "label" : "Pericolosità",
 		  "type":"list",
 		  "values": [
 			  {"value":"SI","name":"SI"},
@@ -332,13 +332,13 @@
         },
 		{
 		  "index" : 11,
-		  "attribute" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:/desProvincia",
-		  "label" : "Provincia impianto",
+		  "attribute" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia",
+		  "label" : "Provincia",
 		  "type" : "list",
 		  "valueService" : {
 			"urlParams" : {
 			  "typeName" : "decsiraogc_decodif:decsira_geo_province",
-			  "propertyName" : "prov_nom",
+			  "propertyName" : "prov_nom,prov_ist",
 			  "sortBy" : "prov_nom+A"
 			}
 		  },
@@ -347,8 +347,8 @@
 		},
 		{
 		  "index" : 12,
-		  "attribute" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:/desComune",
-		  "label" : "Comune impianto",
+		  "attribute" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desComune",
+		  "label" : "Comune",
 		  "type" : "list",
 		  "valueService" : {
 			"urlParams" : {
@@ -358,7 +358,7 @@
 			}
 		  },
 		  "dependson" : {
-			"field" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:/desProvincia",
+			"field" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia",
 			"from" : "prov_ist",
 			"to" : "prov_ist"
 		  },
@@ -367,8 +367,8 @@
 		}, 
 		{
 		  "index" : 13,
-		  "attribute" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpiantoMud",
-		  "label" : "Codice impianto (ARPA MUD)",
+		  "attribute" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto",
+		  "label" : "Codice impianto (ARPA)",
 		  "type" : "string"
 		}, 
 		{

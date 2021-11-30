@@ -1,22 +1,58 @@
 <Panel
     bsStyle="primary"
     header={(
-            <DetailTitle title='RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE' subtitle={[
-            'Codice impianto: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()"),
-            ' - ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()"),
-			' - Anno MUD: ',
+            <DetailTitle title='RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE (MUD)' subtitle={[
+            'Anno MUD: ',
 			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:anno/text()"),
 			' - Codice EER: ',
-			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()")
+			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()"),
+            ' - Codice impianto: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()"),
+            ' - ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-
-        <Section header='DATI AZIENDA' eventKey='1' expanded={true}>
+	
+		<Section header='RIFIUTO EER' eventKey='1' expanded={true}>
+			<LabeledField label='Anno MUD' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:anno/text()")
+			}/>
+			<LabeledField label='Codice EER' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()")
+			}/>
+			<LabeledField label='Descrizione EER' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:desCER/text()")
+			}/>
+			<LabeledField label='Pericolosità' value={
+              model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:pericolosita/text()")
+			}/>
+			
+			<Section header='PRODUZIONE EER' eventKey='2' expanded={true}>
+				<LabeledField label='Quantità Prodotta (t)' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:qtaProdotta/text()")
+				}/>
+				<LabeledField label='Quantità Ricevuta (t)' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:qtaRicevuta/text()")
+				}/>
+				<LabeledField label='Quantità Consegnata (t)' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:qtaConsegnata/text()")
+				}/>
+			</Section>
+			
+			<Section header='GESTIONE EER' eventKey='3' expanded={true}>
+				<LabeledField label='Operazione di Gestione' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:tipoGestione/text()")
+				}/>
+				<LabeledField label='Quantità Gestita (t)' value={
+				  model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:qtaGestita/text()")
+				}/>
+			</Section>
+		</Section>
+		
+		<Section header='DATI AZIENDA' eventKey='4' expanded={true}>
           
-            <LabeledField label='Codice impianto (ARPA MUD)' value={
+            <LabeledField label='Codice impianto (ARPA)' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()")
 			}/>
             
@@ -28,15 +64,15 @@
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()")
 			}/>
 			
-			<LabeledField label='Codice fiscale azienda / Partita IVA azienda' value={
+			<LabeledField label='Codice fiscale / Partita IVA' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codFiscPartIva/text()")
 			}/>
 			
-			<LabeledField label='Provincia impianto' value={
+			<LabeledField label='Provincia' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia/text()")
 			}/>
 			
-			<LabeledField label='Comune impianto' value={
+			<LabeledField label='Comune' value={
               model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desComune/text()")
 			}/>
 			
@@ -46,9 +82,9 @@
 
         </Section>
 
-        <Section header='AUTORIZZAZIONI AZIENDA' eventKey='2' expanded={true}>  
+        <Section header='AUTORIZZAZIONI AZIENDA' eventKey='5' expanded={true}>  
 
-			<Section header='Estremi autorizzativi' eventKey='3' expanded={true}>
+			<Section header='Estremi autorizzativi' eventKey='6' expanded={true}>
 				<SiraTable
 					id="EstremiAutorizzativi"
 					selectedRow={model.EstremiAutorizzativi}
@@ -96,7 +132,7 @@
 							{
 								hide: false,
 								headerName: 'Rinnovo per autocertificazione',
-								width: 600,
+								width: 150,
 								xpath: "decsiraogc_rifiuti_mud:AutorizMUD/decsiraogc_rifiuti_mud:rinnovoPerAutocertificazione/text()"
 							}
 						]
@@ -105,7 +141,7 @@
 				/>
 			</Section>
           
-			<Section header='Certificazioni' eventKey='4' expanded={true}>
+			<Section header='Certificazioni' eventKey='7' expanded={true}>
 				<SiraTable
 					id="Certificazioni"
 					selectedRow={model.Certificazioni}
@@ -143,7 +179,7 @@
 				/>
 			</Section>
 			
-			<Section header='Operazioni autorizzate' eventKey='5' expanded={true}>
+			<Section header='Operazioni autorizzate' eventKey='8' expanded={true}>
 				<SiraTable
 					id="OperazioniAutorizzate"
 					selectedRow={model.OperazioniAutorizzate}
@@ -181,7 +217,7 @@
 				/>
 			</Section>
 			
-			<Section header='Capacità autorizzate' eventKey='6' expanded={true}>
+			<Section header='Capacità autorizzate' eventKey='9' expanded={true}>
 				<SiraTable
 					id="CapacitaAutorizzate"
 					selectedRow={model.CapacitaAutorizzate}
@@ -224,7 +260,7 @@
 				/>
 			</Section>
 			
-			<Section header='Veicoli Fuori Uso - RAEE' eventKey='7' expanded={true}>
+			<Section header='Veicoli Fuori Uso - RAEE' eventKey='10' expanded={true}>
 				<SiraTable
 					id="VeicoliFuoriUso"
 					selectedRow={model.VeicoliFuoriUso}
@@ -261,7 +297,7 @@
 				/>
 			</Section>
 			
-			<Section header='Incenerimento' eventKey='8' expanded={true}>
+			<Section header='Incenerimento' eventKey='11' expanded={true}>
 				<SiraTable
 					id="Incenerimento"
 					selectedRow={model.Incenerimento}
@@ -310,7 +346,7 @@
 				/>
 			</Section>
 			
-			<Section header='Coincenerimento' eventKey='9' expanded={true}>
+			<Section header='Coincenerimento' eventKey='12' expanded={true}>
 				<SiraTable
 					id="Coincenerimento"
 					selectedRow={model.Coincenerimento}
@@ -359,7 +395,7 @@
 				/>
 			</Section>
 			
-			<Section header='Discariche' eventKey='9' expanded={true}>
+			<Section header='Discariche' eventKey='13' expanded={true}>
 				<SiraTable
 					id="Discariche"
 					selectedRow={model.Discariche}
@@ -422,7 +458,7 @@
 			
         </Section>
           
-        <Section header='MAPPA SINTESI - Rifiuti - Modello Unico Dichiarazione Ambientale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='9' expanded={true}>
+        <Section header='MAPPA SINTESI - Rifiuti - Modello Unico Dichiarazione Ambientale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='14' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({

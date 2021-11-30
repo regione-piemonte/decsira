@@ -56,19 +56,22 @@
            "headerName": "Sigla",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:sigla/text()"],
+		   "width" : 50,
            "type": 2
          },
          {
            "headerName": "Tipo emissione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:desTipoEmissione/text()"],
+		   "width" : 80,
            "type": 2
          },
          {
-           "headerName": "Codice sira stabilimento",
+           "headerName": "Codice Sira",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:codiceSira/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 100,
            "type": 2
          },
          {
@@ -76,18 +79,21 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nome/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 150,
            "type": 2
          },
          {
            "headerName": "Provincia",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia/text()"],
+		   "width" : 150,
            "type": 2
          },
          {
            "headerName": "Comune",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune/text()"],
+		   "width" : 150,
            "type": 2
          },
          {
@@ -95,41 +101,47 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:indirizzo/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 200,
            "type": 2
          },
          {
            "headerName": "Ragione sociale",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:azienda/decsiraogc_emissioni:Azienda/decsiraogc_emissioni:denominazione/text()"],
+		   "width" : 230,
            "type": 2
          },
          {
-           "headerName": "Tipo provvedimento",
+           "headerName": "Tipo autorizzazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:tipoProvvedimento/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 200,
            "type": 2
          },
-         {
-           "headerName": "Stato del provvedimento",
+		 {
+           "headerName": "Stato autorizzazione",
            "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:desStato/text()"],
+           "xpath": ["decsiraogc_emissioni:desStato/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 150,
            "type": 2
          },
          {
-           "headerName": "Numero del provvedimento",
+           "headerName": "Estremi autorizzazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:estremiProvvedimento/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 100,
            "type": 2
          },
          {
-           "headerName": "Data provvedimento",
+           "headerName": "Data autorizzazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:dataProvvedimento/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "dateFormat": "DD/MM/YYYY",
+		   "width" : 100,
            "type": 2
          },
          {
@@ -138,6 +150,7 @@
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:dataScadenza/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "dateFormat": "DD/MM/YYYY",
+		   "width" : 100,
            "type": 2
          },
          {
@@ -145,70 +158,73 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:autorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:AutorizzazioneAmbientalePuntoEmissione/decsiraogc_emissioni:desEnteCompetente/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 150,
            "type": 2
          },
          {
-           "headerName": "Stato punto di emissione",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_emissioni:desStato/text()"],
-           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
-           "type": 2
-         },
-         {
-           "headerName": "Portata dell&rsquo;aeriforme",
+           "headerName": "Portata aeriforme",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:portataAeriforme_Nm3_h/text()"],
+		   "width" : 150,
            "type": 1
          },
          {
-           "headerName": "Durata dell&rsquo;emissione",
+           "headerName": "Durata emissione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:durataEmissione_h_g/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 150,
            "type": 1
          },
          {
-           "headerName": "Frequenza dell&rsquo;emissione",
+           "headerName": "Frequenza emissione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:frequenzaEmisione/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 150,
            "type": 1
          },
          {
-           "headerName": "Costante/discontinua",
+           "headerName": "Costante/Discontinua",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:desCostanteDiscontinua/text()"],
            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+		   "width" : 150,
            "type": 2
          },
          {
-           "headerName": "Temperatura dell&rsquo;emissione",
+           "headerName": "Temperatura emissione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:temperaturaEmissione/text()"],
+		   "width" : 150,
            "type": 1
          },
          {
            "headerName": "Temperatura ambiente",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:temperaturaAmbiente/text()"],
+		   "width" : 150,
            "type": 2
          },
          {
-           "headerName": "Altezza geometrica dell&rsquo;emissione",
+           "headerName": "Altezza geometrica emissione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:altezza_m/text()"],
+		   "width" : 150,
            "type": 1
          },
          {
            "headerName": "Diametro o primo lato camino (m)",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:diametroPrimoLato/text()"],
+		   "width" : 150,
            "type": 1
          },
          {
            "headerName": "Secondo lato camino (m)",
            "suppressSorting": true,
            "xpath": ["decsiraogc_emissioni:secondoLato/text()"],
+		   "width" : 150,
            "type": 1
          },
          {
@@ -318,13 +334,12 @@
            "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "type":"list",
            "valueService": {
-
              "urlParams": {
                "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+			   "cql_filter": "id_proc_attivita IN (1,2,3,4,5,6,7,9,10,11,12,13,14,15,23,99)",
                "propertyName": "id_proc_attivita,provv"
              }
            },
-
            "valueId":"id_proc_attivita",
            "valueLabel":"provv"
         },
@@ -348,20 +363,20 @@
              "dateFormat": "DD/MM/YYYY"
            }
         },
-        {
+		{
            "index": 11,
            "attribute": "decsiraogc_emissioni:idStato",
-           "label":"Stato punto di emissione",
-           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "label":"Stato autorizzativo",
            "type":"list",
+		   "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
            "valueService": {
-
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_d_stato",
-               "propertyName": "id_stato,des_stato"
+               "typeName": "decsiraogc_decodif:decsira_d_stato",
+               "propertyName": "id_stato,des_stato",
+               "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=103",
+               "sortBy": "ordinamento+A"
              }
            },
-
            "valueId":"id_stato",
            "valueLabel":"des_stato"
         },
