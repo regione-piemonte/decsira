@@ -1,15 +1,15 @@
 <Panel
 	bsStyle="primary"
     header={(
-        <TreeTitle title='RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE' subtitle={[
-            'Codice impianto: ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()"),
-            ' - ',
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()"),
-			' - Anno MUD: ',
+        <TreeTitle title='RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE (MUD)' subtitle={[
+			'Anno MUD: ',
 			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:anno/text()"),
 			' - Codice EER: ',
-			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()")
+			model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()"),
+            ' - Codice impianto: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:codiceImpianto/text()"),
+            ' - ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()")
             ]} id={model.id}/>
     )}>
 	<Panel className="tree-content infobox-content">
@@ -18,10 +18,8 @@
 			featureId = {'id_geo_mud_rifiuti.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:idCerMud/text()")}
 			rootTitle = {
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()") +
-				' - Anno MUD: ' +
-				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:anno/text()") +
-				'- Codice EER: ' +
-				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceCER/text()")
+				" - Codice Sira: " +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:codiceSira/text()")
 			}
 			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:oggettiCollegati")}
 			groups = {[

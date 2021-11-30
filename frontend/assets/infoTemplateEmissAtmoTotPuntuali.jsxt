@@ -1,0 +1,42 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateEmissAtmoTotPuntuali"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+             headerName: 'Dimensione Indicatore',
+             width: 150,
+             xpath: "decsiraogc_indicatori_irea:des_dimensione/text()"
+        }, {
+             headerName: 'Dettaglio Periodo',
+             width: 130,
+             xpath: "decsiraogc_indicatori_irea:anno_ambito_temporale/text()"
+        }, {
+             headerName: 'Valore emissione',
+             width: 100,
+             xpath: "decsiraogc_indicatori_irea:valore_rappresentato/text()"
+        }, {
+             headerName: 'Unità di misura',
+             width: 100,
+             xpath: "decsiraogc_indicatori_irea:des_unita_misura/text()"
+        }, {
+             headerName: 'Denominazione',
+             width: 100,
+             xpath: "decsiraogc_indicatori_irea:des_entita_spaziale/text()"
+        }, {
+             headerName: 'Provincia',
+             width: 200,
+             xpath: "decsiraogc_indicatori_irea:provincia/text()"
+        }, {
+             headerName: 'Comune',
+             width: 200,
+             xpath: "decsiraogc_indicatori_irea:comune/text()"
+        }, {
+             headerName: 'Indirizzo',
+             width: 200,
+             xpath: "decsiraogc_indicatori_irea:indirizzo/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_indicatori_irea:IndicaEmissAtmoTotPuntuali")}/>

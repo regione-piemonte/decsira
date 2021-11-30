@@ -324,7 +324,7 @@
 	
 	
 	<!-- da 300 a 599 ruolo, workspace, tutti i layers -->
-	 <Rule>
+	 <!--Rule>
             <priority>300</priority>
             <roles>Profilo_B</roles>
             <workspace>decsiraogc_emissioni</workspace>
@@ -337,7 +337,7 @@
            <workspace>decsiraogc_emissioni</workspace>
            <layer>*</layer>
            <accessMode>READ</accessMode>
-     </Rule>
+     </Rule-->
     <Rule>
 		<priority>302</priority>
 		<roles>ROLE_ANONYMOUS</roles>
@@ -504,6 +504,7 @@
 		<workspace>decsiraogc_emissioni</workspace>
 		<layer>PuntoEmissione</layer>
 		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
 		<hiddenAttributes>
 		  <attribute>decsiraogc_emissioni:idStato</attribute>
 		  <attribute>decsiraogc_emissioni:desStato</attribute>
@@ -1555,6 +1556,15 @@
 		<layer>decsira_d_indica_app_dimensioni</layer>
 		<accessMode>READ</accessMode>
 		<filter>"fk_dimensione" IN (46,45,57,69,70,47,71,1,2,3,4,5,6,7,8,9,10,11,12,13)</filter>
+	</Rule>
+	
+	<Rule>
+		<priority>631</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_rifiuti_mud</workspace>
+		<layer>RifiutiMUD</layer>
+		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
 	</Rule>
 	
     </rules>
