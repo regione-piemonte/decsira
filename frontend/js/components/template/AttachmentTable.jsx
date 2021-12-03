@@ -91,7 +91,7 @@ class AttachmentTable extends React.Component {
                     column,
                     {field: fieldName},
                     column.dateFormat ? {cellRenderer: reactCellRendererFactory(GridCellDate)} : {},
-                    column.download ? {onCellClicked: this.props.showConfirm, cellRenderer: reactCellRendererFactory(GridCellDownload)} : {}
+                    column.download ? {onCellClicked: this.selectRows, cellRenderer: reactCellRendererFactory(GridCellDownload)} : {}
                 );
             }
             return null;
@@ -132,14 +132,36 @@ class AttachmentTable extends React.Component {
 
     downloadAttachment = () => {
         this.props.hideConfirm();
-        let selectedNodes = this.api.getSelectedNodes();
-        console.log(selectedNodes);
+        // let url = this.props.card[this.props.id].url;
+        // let filename = this.props.card[this.props.id].filename;
+        let url = "https://tst-applogic.reteunitaria.piemonte.it:1449/ecmenginecxf-exp03/http/download/cHJpbWFyeXxzY3JpdmF8ZWNjN2Q0ZDA1MjkwMTFlY2FhMGQ1ZGU5OTI1NmEzMzd8MTYzODQ1MjgyMTcwN3w3NjExMjEw";
+        let filename = "provaDownloadAllegati";
+        let anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = filename;
+        anchor.target = "_blank";
+        anchor.dispatchEvent(
+            new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            })
+        );
     }
 
-    selectRows = (params) => {
+    /* selectRows = (params) => {
         // this.props.selectRows(this.props.id, (params.selectedRows[0]) ? params.selectedRows[0].id : null);
         if (params.selectedRows[0]) {
             this.props.selectRows(this.props.id, params.selectedRows[0].id || params.selectedRows[0][this.idFieldName]);
+            this.props.showConfirm();
+        }
+    };*/
+
+    selectRows = (params) => {
+        // this.props.selectRows(this.props.id, (params.selectedRows[0]) ? params.selectedRows[0].id : null);
+        if (params.node && params.node.data) {
+            this.props.selectRows(this.props.id, params.node.data);
+            this.props.showConfirm();
         }
     };
 }
