@@ -38,7 +38,7 @@ function getWMSURLs( urls ) {
 }
 
 // Works with geosolutions proxy
-/* function postTileLoadFunction(queryParameters, imageTile, src) {
+function postTileLoadFunction(queryParameters, imageTile, src) {
     const parsedUrl = urllib.parse(src, true);
     const urlQuery = parsedUrl.query;
     const newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
@@ -74,7 +74,8 @@ function getWMSURLs( urls ) {
         };
         image.src = window.URL.createObjectURL(response.data);
     });
-} */
+}
+
 function getTileLoadFunction(queryParameters, imageTile, src) {
     const parsedUrl = urllib.parse(src, true);
     const urlQuery = parsedUrl.query;
@@ -117,7 +118,10 @@ Layers.registerType('wmspost', {
                 urls: urls,
                 params: queryParameters,
                 // tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)
-                tileLoadFunction: getTileLoadFunction.bind(null, queryParameters)
+                // tileLoadFunction: getTileLoadFunction.bind(null, queryParameters)
+                tileLoadFunction: queryParameters.viewparams ?
+                    getTileLoadFunction.bind(null, queryParameters) :
+                    postTileLoadFunction.bind(null, queryParameters)
             })
         });
     },

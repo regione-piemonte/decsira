@@ -1,6 +1,7 @@
 {
    "featureTypeName":"decsiraogc_emissioni:PuntoEmissione",
    "featureTypeNameLabel":"PUNTI DI EMISSIONE IN ATMOSFERA",
+   "profiles": ["PA_GEN_DECSIRA@REG_PMN"],
    "nameSpaces": {
      "decsiraogc_emissioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_emissioni/1.0",
      "decsiraogc_emissioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_emissioni/1.0"
@@ -248,41 +249,41 @@
        }
      },
      "fields":[
-        {
-           "index": 1,
-           "attribute": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
-           "label":"Provincia",
-           "type":"list",
-           "valueService": {
-             "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_t_province"
-             }
-           },
-           "valueId":"toponimo",
-           "valueLabel":"toponimo"
-        },
-        {
-           "index": 2,
-           "attribute": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune",
-           "label":"Comune",
-           "type":"list",
-           "valueService": {
-
-             "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_t_comuni",
-               "propertyName": "id_comune,sigla_provincia,toponimo",
-               "sortBy": "toponimo+A"
-             }
-           },
-
-           "valueId":"toponimo",
-           "valueLabel":"toponimo",
-		    "dependson":{
-              "field": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
-              "from": "sigla",
-              "to": "sigla_provincia"
-           }
-        },
+		{
+		  "index" : 1,
+		  "attribute" : "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
+		  "label" : "Provincia",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_geo_province",
+			  "propertyName" : "prov_nom,prov_ist",
+			  "sortBy" : "prov_nom+A"
+			}
+		  },
+		  "valueId" : "prov_nom",
+		  "valueLabel" : "prov_nom"
+		},
+		{
+		  "index" : 2,
+		  "attribute" : "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune",
+		  "label" : "Comune",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_geo_comuni_storico",
+			  "propertyName" : "comune_nom,prov_ist,label",
+			  "sortBy" : "label+A"
+			}
+		  },
+		  "dependson" : {
+			"field" : "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
+			"from" : "prov_ist",
+			"to" : "prov_ist"
+		  },
+		  "valueId" : "comune_nom",
+		  "valueLabel" : "label"
+		}, 
         {
            "index": 3,
            "attribute": "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:codiceSira",
@@ -336,7 +337,7 @@
            "valueService": {
              "urlParams": {
                "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
-			   "cql_filter": "id_proc_attivita IN (1,2,3,4,5,6,7,9,10,11,12,13,14,15,23,99)",
+			   "cql_filter": "id_proc_attivita IN (9,23, 99)",
                "propertyName": "id_proc_attivita,provv"
              }
            },
@@ -388,8 +389,9 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_emissione",
-               "propertyName": "id_tipo_emissione,des_tipo_emissione"
+               "typeName": "decsiraogc_decodif:decsira_dt_d_tipo_emissione",
+               "propertyName": "id_tipo_emissione,des_tipo_emissione,ordinamento",
+			   "sortBy" : "ordinamento+A"
              }
            },
            "valueId":"id_tipo_emissione",
@@ -402,8 +404,9 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_d_abbattimento",
-               "propertyName": "id_abbattimento,des_abbattimento"
+               "typeName": "decsiraogc_decodif:decsira_d_abbattimento",
+               "propertyName": "id_abbattimento,des_abbattimento,ordinamento",
+			   "sortBy" : "ordinamento+A"
              }
            },
            "valueId":"id_abbattimento",
@@ -416,8 +419,9 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_d_provenienza",
-               "propertyName": "id_provenienza,des_provenienza"
+               "typeName": "decsiraogc_decodif:decsira_d_provenienza",
+               "propertyName": "id_provenienza,des_provenienza,ordinamento",
+			   "sortBy" : "ordinamento+A"
              }
            },
            "valueId":"id_provenienza",
@@ -430,8 +434,9 @@
            "type":"list",
            "valueService": {
              "urlParams": {
-               "typeName": "decsiraogc_decodif:sipra_dt_d_inquinanti",
-               "propertyName": "id_inquinante,des_inquinante"
+               "typeName": "decsiraogc_decodif:decsira_dt_d_inquinanti",
+               "propertyName": "id_inquinante,des_inquinante,ordinamento",
+			   "sortBy" : "ordinamento+A"
              }
            },
            "valueId":"id_inquinante",
