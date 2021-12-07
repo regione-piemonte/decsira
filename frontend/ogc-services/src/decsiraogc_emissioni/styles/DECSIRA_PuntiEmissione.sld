@@ -19,7 +19,7 @@
           <Name>rule1</Name>
           <Title>Punti di emissione in atmosfera autorizzati</Title>
           <Abstract>Punti di emissione in atmosfera autorizzati</Abstract>
-          <MaxScaleDenominator>250000</MaxScaleDenominator>
+          <MaxScaleDenominator>500000</MaxScaleDenominator> 
             <PointSymbolizer>
               <Graphic>
                 <Mark>
@@ -29,10 +29,9 @@
                   </Fill>
                   <Stroke>
                     <CssParameter name="stroke">#000000</CssParameter>
-                    <CssParameter name="stroke-width">1</CssParameter>                                      
-                  </Stroke>
+                    <CssParameter name="stroke-width">2</CssParameter>                                                   </Stroke>
                 </Mark>
-              <Size>7</Size>
+              <Size>8</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>
