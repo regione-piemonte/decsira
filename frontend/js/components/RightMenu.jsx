@@ -41,7 +41,7 @@ class RightMenu extends React.Component {
                 <div className="navbar-on" id="offcanvas-sidebar">
                     <ul id="menu" className="nav navbar-nav navbar-right">
                         <li tabIndex="0" data-menuanchor="home" onClick={this.props.clickOnSistemaCA} onKeyPress={this.props.clickOnSistemaCA}>Sistema Conoscenze Ambientali</li>
-                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.props.clickOnCredits} onKeyPress={this.props.clickOnCredits}>Credits e Copyright</li>
+                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.props.clickOnCredits} onKeyPress={this.props.clickOnCredits}>Credits e Assistenza</li>
                         <li tabIndex="0" data-menuanchor="pagamenti" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp}>Help</li>
                     </ul>
                 </div>

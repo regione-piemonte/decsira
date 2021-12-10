@@ -51,8 +51,8 @@ class Credits extends React.Component {
                             </p>
                             <h3>Utilizzo del Sito</h3>
                             <p>In nessun caso Regione Piemonte potrà essere ritenuta responsabile dei danni di qualsiasi natura causati direttamente o indirettamente dall'accesso al Sistema Conoscenze Ambientali, dall'utilizzo degli strumenti interattivi, dall'incapacità o impossibilità di accedervi, dall'utilizzo off-line dei contenuti scaricati. Regione Piemonte si riserva il diritto di modificare i contenuti del sito (testi, immagini, dataset, geoservizi, ...) e delle note legali in qualsiasi momento e senza alcun preavviso. Nonostante si presti grande attenzione all’esattezza delle informazioni pubblicate su questo sito, fedeltà, esattezza, attualità, affidabilità e completezza dei contenuti restano responsabilità dei titolari indicati nei metadati. L’utente si impegna a non abusare del servizio offerto ed a rinunciare ad un suo utilizzo per pratiche illegali.</p>
-                            <h3>Segnalazione di Errori</h3>
-                            <p>Errori o malfunzionamenti del Sistema Conoscenze Ambientali possono essere segnalati a <a href="mailto:redazione@html.it">assistenza.sira@regione.piemonte.it</a> .</p>
+                            <h3>Assistenza</h3>
+                            <p>Eventuali segnalazioni possono essere inviate a <a href="mailto:assistenza.sira@regione.piemonte.it">assistenza.sira@regione.piemonte.it</a> .</p>
                         </Panel>
                     </Panel>
                 </div>
