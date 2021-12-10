@@ -202,7 +202,7 @@ class SideQueryPanel extends React.Component {
             this.props.queryFormActions.attributeFilterActions.onQueryFormPreloaded(true);
         } else if (filterFieldsCount < preloadedAttr.length && !this.props.queryformPreloaded) {
             for (let index = 0; index < preloadedAttr.length - 1; index++) {
-                this.props.queryFormActions.attributeFilterActions.onAddFilterField(1);
+                setTimeout(() => { this.props.queryFormActions.attributeFilterActions.onAddFilterField(1);}, 10);
             }
         }
     }
