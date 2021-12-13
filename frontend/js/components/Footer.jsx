@@ -8,11 +8,15 @@
 
 const React = require('react');
 
+const PropTypes = require('prop-types');
+
 class Footer extends React.Component {
     static propTypes = {
+        openAccessibilityPanel: PropTypes.func
     };
 
     static defaultProps = {
+        openAccessibilityPanel: () => {}
     };
 
     render() {
@@ -26,7 +30,8 @@ class Footer extends React.Component {
                                     <a href="#"><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
                                 </div>
                                 <div className="col-md-4 text-center">
-                                    <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy" target="_blank">Cookie policy</a>
+                                    <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy" target="_blank">Cookie policy</a><br/><br/>
+                                    <a href="#" onClick={this.props.openAccessibilityPanel} >Accessibilità</a>
                                 </div>
                                 <div className="col-md-4 footer-dx">
                                     <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>
@@ -38,6 +43,7 @@ class Footer extends React.Component {
             </footer>
         );
     }
+
 }
 
 module.exports = Footer;
