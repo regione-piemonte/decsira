@@ -42,9 +42,7 @@ class Accessibility extends React.Component {
                         <Panel className="accessibility-content infobox-content">
                             <h3>Accessibilità</h3>
                             <p>Regione Piemonte pone grande attenzione al tema dell'accessibilità delle informazioni.</p>
-                            <p>
-                            Consulta la  <a href="#" target="_blank">Dichiarazione di accessibilità rilasciata dall'Agenzia per l'Italia Digitale (AgID)</a>
-                            </p>
+                            <p>La pubblicazione sul sito AGID è in corso. Il link sarà aggiornato non appena disponibile.</p>
                             <p>
                             Per segnalare casi di mancata conformità ai requisiti di accessibilità, per richiedere informazioni e contenuti che siano stati esclusi dall'ambito di applicazione della Direttiva UE 2016/2102 scrivere a <a href="mailto:sita@regione.piemonte.it">sita@regione.piemonte.it</a>
                             </p>
@@ -56,6 +54,9 @@ class Accessibility extends React.Component {
                 </div>
             </Draggable>
         );
+        /*
+        <p>Consulta la  <a href="#" target="_blank">Dichiarazione di accessibilità rilasciata dall'Agenzia per l'Italia Digitale (AgID)</a></p>
+         */
     }
 }
 

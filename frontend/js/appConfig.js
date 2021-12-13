@@ -24,7 +24,8 @@ const appReducers = {
     cart: require('./reducers/cart'),
     header: require('./reducers/header'),
     siraTree: require('./reducers/siraTree'),
-    treeData: require('./reducers/treeData')
+    treeData: require('./reducers/treeData'),
+    footer: require('./reducers/footer')
 };
 
 module.exports = {
@@ -38,7 +39,7 @@ module.exports = {
         { path: "/nomap/", component: require('./containers/NoMap')},
         { path: "/nomap/:profile", component: require('./containers/NoMap')},
         { path: "/full/", component: require('./containers/FullScreenPanel')},
-        { path: "/full/:profile", component: require('./containers/FullScreenPanel')}
+        { path: "/full/:profile", component: require('./containers/FullScreenPanel') }
     ],
     pluginsDef: require('./plugins'),
     initialState: {
