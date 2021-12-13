@@ -9,7 +9,27 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {connect} = require('react-redux');
 const {head} = require('lodash');
-const Footer = require('../components/Footer');
+// const Footer = require('../components/Footer');
+const { showHideAccessibilityBox } = require('../actions/footer');
+
+const Footer = connect(() => ({
+}), (dispatch) => {
+    return {
+        openAccessibilityPanel: (e) => {
+            e.preventDefault();
+            dispatch(showHideAccessibilityBox());
+        }
+    };
+})(require('../components/Footer'));
+const Accessibility = connect((state) => ({
+    show: state.footer?.showAccessibilityBox
+}), (dispatch) => {
+    return {
+        closePanel: () => {
+            dispatch(showHideAccessibilityBox());
+        }
+    };
+})(require('../components/Accessibility'));
 const Header = require('../components/Header');
 
 const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
@@ -95,6 +115,7 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <Mosaic useLink={false} tileClick={this.selectCategory} />
+                <Accessibility />
                 <PlatformNumbers />
                 <Footer />
             </div>);
