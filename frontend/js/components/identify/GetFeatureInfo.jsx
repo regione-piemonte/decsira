@@ -150,7 +150,8 @@ class GetFeatureInfo extends React.Component {
 
             if (newProps.infoType === "getfeatureinfo") {
                 this.props.actions.purgeMapInfoResults();
-                const wmsVisibleLayers = newProps.layers.filter(newProps.layerFilter);
+                let wmsVisibleLayers = newProps.layers.filter(newProps.layerFilter);
+                wmsVisibleLayers = wmsVisibleLayers.filter(l => l.id !== "selectAll");
                 for (let l = 0; l < wmsVisibleLayers.length; l++) {
                     const layer = wmsVisibleLayers[l];
                     const {url, requestConf, layerMetadata} = this.calculateRequestParameters(layer, bounds, crs, newProps);

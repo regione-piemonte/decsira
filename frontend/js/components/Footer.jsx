@@ -9,14 +9,20 @@
 const React = require('react');
 
 const PropTypes = require('prop-types');
+const {bindActionCreators} = require('redux');
+const {connect} = require('react-redux');
+const { showHideAccessibilityBox } = require('../actions/footer');
+const Accessibility = require('../components/Accessibility');
 
 class Footer extends React.Component {
     static propTypes = {
-        openAccessibilityPanel: PropTypes.func
+        show: PropTypes.bool,
+        showHideAccessibilityBox: PropTypes.func
     };
 
     static defaultProps = {
-        openAccessibilityPanel: () => {}
+        show: false,
+        showHideAccessibilityBox: () => {}
     };
 
     render() {
@@ -31,7 +37,7 @@ class Footer extends React.Component {
                                 </div>
                                 <div className="col-md-4 text-center">
                                     <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy" target="_blank">Cookie policy</a><br/><br/>
-                                    <a href="#" onClick={this.props.openAccessibilityPanel} >Accessibilità</a>
+                                    <a href="#" onClick={this.showAccessibilityModal} >Accessibilità</a>
                                 </div>
                                 <div className="col-md-4 footer-dx">
                                     <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>
@@ -40,10 +46,26 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Accessibility show={this.props.show} closePanel={ this.props.showHideAccessibilityBox}/>
             </footer>
         );
+    }
+
+    showAccessibilityModal = (e) => {
+        e.preventDefault();
+        this.props.showHideAccessibilityBox();
     }
 
 }
 
 module.exports = Footer;
+
+module.exports = connect((state) => {
+    return {
+        show: state.footer.showAccessibilityBox
+    };
+}, dispatch => {
+    return bindActionCreators({
+        showHideAccessibilityBox
+    }, dispatch);
+})(Footer);

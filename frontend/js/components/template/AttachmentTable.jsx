@@ -132,10 +132,13 @@ class AttachmentTable extends React.Component {
 
     downloadAttachment = () => {
         this.props.hideConfirm();
-        // let url = this.props.card[this.props.id].url;
-        // let filename = this.props.card[this.props.id].filename;
-        let url = "https://tst-applogic.reteunitaria.piemonte.it:1449/ecmenginecxf-exp03/http/download/cHJpbWFyeXxzY3JpdmF8ZWNjN2Q0ZDA1MjkwMTFlY2FhMGQ1ZGU5OTI1NmEzMzd8MTYzODQ1MjgyMTcwN3w3NjExMjEw";
-        let filename = "provaDownloadAllegati";
+        let url = this.props.card[this.props.id].url;
+        // console.log("url-->" + url);
+        let filename = this.props.card[this.props.id].filename;
+        // console.log("filename-->" + filename);
+        // TODO: rimuovere
+        url = "https://tst-applogic.reteunitaria.piemonte.it:1449/ecmenginecxf-exp03/http/download/cHJpbWFyeXxzY3JpdmF8ZWNjN2Q0ZDA1MjkwMTFlY2FhMGQ1ZGU5OTI1NmEzMzd8MTYzODQ1MjgyMTcwN3w3NjExMjEw";
+        filename = "provaDownloadAllegati";
         let anchor = document.createElement("a");
         anchor.href = url;
         anchor.download = filename;

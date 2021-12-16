@@ -12,14 +12,14 @@ const {
 } = require('../actions/footer');
 
 const initialState = {
-    showAccessibilityBox: 'none'
+    showAccessibilityBox: false
 };
 
 function footer(state = initialState, action) {
     switch (action.type) {
     case SHOW_HIDE_ACCESSIBILITY_BOX: {
         return assign({}, state,
-            {showAccessibilityBox: state.showAccessibilityBox === 'none' ? 'block' : 'none'});
+            {showAccessibilityBox: state.showAccessibilityBox === false ? true : false});
     }
     default:
         return state;
