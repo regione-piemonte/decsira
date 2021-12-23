@@ -1,0 +1,204 @@
+{
+   "featureTypeName":"decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora",
+   "featureTypeNameLabel":"Banche Dati Naturalistiche: griglia di distribuzione flora",
+   "nameSpaces": {
+     "decsiraogc_biodiversita_bdn_griglia_distr_flora": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"
+   },
+   "layer": {
+       "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Banche Dati Naturalistiche: griglia di distribuzione flora",
+        "name": "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "Polygon"
+       },
+        "featureType": "bdnDistribuzioneFlora",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Polygon",
+   "card": {
+    "pdfname": "Scheda_Bdn_Distribuzione_Flora_{{/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:idBdnGrigliaDistrFlora/text()}}.pdf",
+    "template": "assets/cardTemplateBdnDistribuzioneFlora.jsxt",
+    "service": {
+         "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+            "params": {
+               "typeName": "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora",
+                "version": "2.0",
+                "srsName": "EPSG:4326"
+            }
+      }
+    },
+     "featureinfo":{
+     "templateURL": "assets/infoTemplateBdnDistribuzioneFlora.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+          "headerName": "Griglia 5 KM",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:idGriglia5Km/text()"],
+          "type": 2,
+          "width" : 120
+        },
+        {
+          "headerName": "Totale specie presenti",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:numSpecieTotali/text()"],
+          "type": 2,
+          "width" : 150
+        },
+        {
+          "headerName": "Totale osservazioni presenti",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:numOsservazioniTotali/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "Anno osservazione piu' antica",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:annoOsservazAntica/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "Anno osservazione piu' recente",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:annoOsservazRecente/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "Presenza specie meritevoli di attenzione",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieMeritevolAttenz/text()"],
+          "type": 2,
+          "width" : 280
+        },
+        {
+          "headerName": "Presenza specie protette legalmente",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieProtettLegal/text()"],
+          "type": 2,
+          "width" : 280
+        },
+        {
+          "hide": true,
+          "headerName": "Geometry",
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_flora:geometria/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"],
+          "type": 6
+        }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+      {
+        "index": 1,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:famigliaDesc",
+        "label": "Famiglia",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_famiglia",
+            "propertyName": "id_bdn_flora_famiglia,famiglia_d",
+            "sortBy": "famiglia_d+A"
+          }
+        },
+        "valueId": "famiglia_d",
+        "valueLabel": "famiglia_d"
+      },
+      {
+        "index": 2,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:genere",
+        "label": "Genere",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_genere",
+            "propertyName": "id_bdn_flora_genere,genere",
+            "sortBy": "genere+A"
+          }
+        },
+        "valueId": "genere",
+        "valueLabel": "genere"
+      },
+      {
+        "index": 3,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:concatenazioneNomeSpecie",
+        "label": "Nome specie",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_specie",
+            "propertyName": "id_bdn_flora_specie,concatenazione_nome_specie",
+            "sortBy": "concatenazione_nome_specie+A"
+          }
+        },
+        "valueId": "concatenazione_nome_specie",
+        "valueLabel": "concatenazione_nome_specie"
+      },
+      {
+        "index": 4,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnAnnoGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnAnnoGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:anno",
+        "label":"Anno rilievo (es.2006)",
+        "type":"number"
+     },
+     {
+      "index": 5,
+      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieProtettLegal",
+      "label":"Protetta legalmente",
+      "type":"list",
+      "values": [
+        {"value":"SI","name":"SI"},
+        {"value":"NO","name":"NO"}
+      ],
+      "valueId":"value",
+      "valueLabel":"name"
+     },
+     {
+      "index":6,
+      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieMeritevolAttenz",
+      "label":"Meritevole attenzione",
+      "type":"list",
+      "values": [
+         {"value":"SI","name":"SI"},
+         {"value":"NO","name":"NO"}
+      ],
+       "valueId":"value",
+       "valueLabel":"name"
+     }
+	 
+     ]
+
+   }
+
+}

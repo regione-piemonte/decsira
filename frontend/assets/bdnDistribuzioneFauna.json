@@ -1,0 +1,204 @@
+{
+   "featureTypeName":"decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna",
+   "featureTypeNameLabel":"Banche Dati Naturalistiche: griglia di distribuzione fauna",
+   "nameSpaces": {
+     "decsiraogc_biodiversita_bdn_griglia_distr_fauna": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"
+   },
+   "layer": {
+       "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Banche Dati Naturalistiche: griglia di distribuzione fauna",
+        "name": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "Polygon"
+       },
+        "featureType": "bdnDistribuzioneFauna",
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "Polygon",
+   "card": {
+    "pdfname": "Scheda_Bdn_Distribuzione_Fauna_{{/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:idBdnGrigliaDistrFauna/text()}}.pdf",
+    "template": "assets/cardTemplateBdnDistribuzioneFauna.jsxt",
+    "service": {
+         "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+            "params": {
+               "typeName": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna",
+                "version": "2.0",
+                "srsName": "EPSG:4326"
+            }
+      }
+    },
+     "featureinfo":{
+     "templateURL": "assets/infoTemplateBdnDistribuzioneFauna.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+          "headerName": "Griglia 5 KM",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:idGriglia5Km/text()"],
+          "type": 2,
+          "width" : 120
+        },
+        {
+          "headerName": "Totale specie presenti",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:numSpecieTotali/text()"],
+          "type": 2,
+          "width" : 150
+        },
+        {
+          "headerName": "Totale osservazioni presenti",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:numOsservazioniTotali/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "Anno osservazione piu' antica",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazAntica/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "Anno osservazione piu' recente",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazRecente/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "Presenza specie meritevoli di attenzione",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieMeritevolAttenz/text()"],
+          "type": 2,
+          "width" : 280
+        },
+        {
+          "headerName": "Presenza specie protette legalmente",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieProtettLegal/text()"],
+          "type": 2,
+          "width" : 280
+        },
+        {
+          "hide": true,
+          "headerName": "Geometry",
+          "xpath": ["decsiraogc_biodiversita_bdn_griglia_distr_fauna:geometria/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"],
+          "type": 6
+        }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+      {
+        "index": 1,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:famigliaDesc",
+        "label": "Famiglia",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_famiglia",
+            "propertyName": "id_bdn_fauna_famiglia,famiglia",
+            "sortBy": "famiglia+A"
+          }
+        },
+        "valueId": "famiglia",
+        "valueLabel": "famiglia"
+      },
+      {
+        "index": 2,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:genere",
+        "label": "Genere",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_genere",
+            "propertyName": "id_bdn_fauna_genere,genere",
+            "sortBy": "genere+A"
+          }
+        },
+        "valueId": "genere",
+        "valueLabel": "genere"
+      },
+      {
+        "index": 3,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:concatenazioneNomeSpecie",
+        "label": "Nome specie",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_specie",
+            "propertyName": "id_bdn_fauna_specie,nome_specie",
+            "sortBy": "nome_specie+A"
+          }
+        },
+        "valueId": "nome_specie",
+        "valueLabel": "nome_specie"
+      },
+      {
+        "index": 4,
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnAnnoGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnAnnoGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:anno",
+        "label":"Anno rilievo (es.2006)",
+        "type":"number"
+     },
+     {
+      "index": 5,
+      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieProtettLegal",
+      "label":"Protetta legalmente",
+      "type":"list",
+      "values": [
+        {"value":"SI","name":"SI"},
+        {"value":"NO","name":"NO"}
+      ],
+      "valueId":"value",
+      "valueLabel":"name"
+     },
+     {
+      "index": 6,
+      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieMeritevolAttenz",
+      "label":"Meritevole attenzione",
+      "type":"list",
+      "values": [
+         {"value":"SI","name":"SI"},
+          {"value":"NO","name":"NO"}
+      ],
+       "valueId":"value",
+       "valueLabel":"name"
+     }
+	 
+     ]
+
+   }
+
+}
