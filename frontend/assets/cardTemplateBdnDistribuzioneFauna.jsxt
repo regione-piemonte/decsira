@@ -1,0 +1,97 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='Banche Dati Naturalistiche: griglia di distribuzione fauna' subtitle={[
+            ]} id={model.id}/>
+    )}>
+
+    
+    <Panel className="template">
+    <Section header='DATI GENERALI' eventKey='1' expanded={true}>
+        <LabeledField label='Id griglia 5 KM' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:idGriglia5Km/text()")
+        }/>    
+        <LabeledField label='Totale specie presenti' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:numSpecieTotali/text()")
+        }/>
+		<LabeledField label='Totale osservazioni presenti' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:numOsservazioniTotali/text()")
+        }/>
+		<LabeledField label='Anno osservazione pi&ugrave; antica' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazAntica/text()")
+        }/>
+		<LabeledField label='Anno osservazione pi&ugrave; recente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazRecente/text()")
+        }/>
+    
+		<LabeledField label='Presenza specie meritevoli di attenzione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieMeritevolAttenz/text()")
+        }/>
+    
+		<LabeledField label='Presenza specie protette legalmente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieProtettLegal/text()")
+        }/>
+    
+    </Section>
+
+     <Section header='DETTAGLIO SPECIE PRESENTI' eventKey='2' expanded={true}>
+                <SiraTable
+                    id="SpecieGligliaFauna"
+                    selectedRow={model.SpecieGligliaFauna}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    columns={
+                        [
+                            {
+                                hide: true,
+                                id: true,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/@gml:id"
+                            },
+                            {
+                                headerName: 'Nome specie',
+                                width: 300,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:concatenazioneNomeSpecie/text()"
+                            },
+                            {
+                                headerName: 'Famiglia',
+                                width: 160,
+                                xpath:"decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:famigliaDesc/text()"
+                            },
+                            {
+                                headerName: 'Genere',
+                                width: 120,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:genere/text()"
+                            },
+                            {
+                                headerName: 'Totale osservazioni presenti',
+                                width: 250,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:numOsservazioniTotali/text()"
+                            },
+                            {
+                                headerName: 'Anno osservazone pi&ugrave; antica',
+                                width:250,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazAntica/text()"
+                            },
+							{
+                                headerName: 'Anno osservazone pi&ugrave; recente',
+                                width: 250,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazRecente/text()"
+                            },
+							{
+                                headerName: 'Presenza specie meritevoli di attenzione',
+                                width: 250,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieMeritevolAttenz/text()"
+                            },
+							{
+                                headerName: 'Presenza specie protette legalmente',
+                                width: 250,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieProtettLegal/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna")}/>
+                    </Section>
+
+	
+    </Panel>
+</Panel>

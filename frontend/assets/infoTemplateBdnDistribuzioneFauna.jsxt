@@ -1,0 +1,45 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateBdnDistribuzioneFauna"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Griglia 5 KM",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:idGriglia5Km/text()",
+		  "width" : 160
+		}, {
+		  "headerName" : "Totale specie presenti",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:numSpecieTotali/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Totale osservazioni presenti",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:numOsservazioniTotali/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Anno osservazione pi&ugrave; antica",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazAntica/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Anno osservazione pi&ugrave; recente",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:annoOsservazRecente/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Presenza specie meritevoli di attenzione",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieMeritevolAttenz/text()",
+		  "width" : 250
+		}, {
+		  "headerName" : "Presenza specie protette legalmente",
+		  "xpath" : "decsiraogc_biodiversita_bdn_griglia_distr_fauna:flgSpecieProtettLegal/text()",
+		  "width" : 230
+		}
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnDistribuzioneFauna")}/>
