@@ -1,0 +1,714 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_biodiversita_bdn_osservazioni_fauna="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_biodiversita_bdn_osservazioni_fauna  id=id_bdn_osservazioni_fauna -->
+	<element name="BdnOsservazioniFauna" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFaunaType" substitutionGroup="gml:AbstractFeature" />
+	
+    <!-- decsira_t_biodiversita_bdn_fauna_proprietario  id=id_fauna_proprietario-->
+	<element name="BdnFaunaProprietario" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProprietarioType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_rilevatore  id=id_fauna_rilevatore-->
+	<element name="BdnFaunaRilevatore" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRilevatoreType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_profili  id=id_bdn_fauna_profili-->
+	<element name="BdnFaunaProfili" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProfiliType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_aapp  id=id_bdn_osservazioni_fauna -->
+    <element name="BdnFaunaAreaProtetta" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtettaType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_rn2000  id=id_bdn_osservazioni_fauna -->
+    <element name="BdnFaunaRn2000" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000Type" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_speleologica  id=id_bdn_osservazioni_fauna-->
+	<element name="BdnFaunaSpeleologica" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologicaType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_individui  id=id_bdn_osservazioni_fauna-->
+	<element name="BdnFaunaIndividui" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividuiType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_biblio  id=id_bdn_osservazioni_fauna -->
+    <element name="BdnFaunaBiblio" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblioType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_specie  id=id_bdn_osservazioni_fauna -->
+    <element name="BdnFaunaSpecie" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecieType" substitutionGroup="gml:AbstractObject" />
+
+    <!-- decsira_t_biodiversita_bdn_fauna_protezioni  id=id_fauna_protezioni-->
+	<element name="BdnFaunaProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniType" substitutionGroup="gml:AbstractObject" />
+
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="BdnOsservazioniFaunaType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+				    <xs:element name="idBdnOsservazioniFauna"  type="xs:decimal" minOccurs="1" />
+					
+					<xs:element name="geometria" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
+
+					<xs:element name="codiceRilievo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataRilievoCompleta" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="tipoData" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="soggettoRilevatore" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                     <xs:element name="provincia" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="comune" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="localita" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element name="codAmbiente" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="daQuotaMinima" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="aQuotaMax" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sitoVulnerabile" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                     <xs:element name="causeVulnerabilita" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    
+                    <xs:element name="tipoSegnalaz" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="quantificazioneIndividui" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="flgOvature" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="codFonteDati" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="codProprietaDato" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="nomeProprietario" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="idFaunaSpecie"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+                    
+                    <xs:element name="codImprecisione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idGriglia1Km"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+                    
+					<xs:element name="idGriglia5Km"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+
+                    <xs:element name="fusoUtm" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="datumUtm" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+                    <xs:element name="utmX"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+                    
+					<xs:element name="utmY"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+                    
+                    <!-- oggetti innestati -->
+
+					<xs:element name="bdnFaunaProprietario" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProprietarioPropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+					<xs:element name="bdnFaunaRilevatore" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRilevatorePropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:element name="bdnFaunaProfili" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProfiliPropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:element name="bdnFaunaAreaProtetta" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtettaPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+                    <xs:element name="bdnFaunaRn2000" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000PropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:element name="bdnFaunaSpeleologica" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologicaPropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:element name="bdnFaunaIndividui" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividuiPropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:element name="bdnFaunaBiblio" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblioPropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+                    <xs:element name="bdnFaunaSpecie" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeciePropertyType" minOccurs="0" maxOccurs="unbounded" />
+
+					<xs:element name="bdnFaunaErbario" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaErbarioPropertyType" minOccurs="0" maxOccurs="unbounded" />
+                    
+					<xs:element name="bdnFaunaProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+    <complexType name="BdnFaunaProprietarioType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idFaunaProprietario"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkGeoOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nomeProprietario" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+     <complexType name="BdnFaunaRilevatoreType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idFaunaRilevatore"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="soggettoRilevatore" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+     <complexType name="BdnFaunaProfiliType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idbdnFaunaProfili"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+                    <xs:element name="fkEnteGestore"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+					<xs:element name="codiceEnteGestore" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="3" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+     <complexType name="BdnFaunaAreaProtettaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="areaProtetta" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+     <complexType name="BdnFaunaRn2000Type">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="reteNatura2000Cod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                     <xs:element name="reteNatura2000Descr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                      <xs:element name="reteNatura2000Completo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="BdnFaunaSpeleologicaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="codCatastSpeleolog" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+                    <xs:element name="nomeGrotta" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="BdnFaunaIndividuiType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nMaschi"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nFemmine"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="numSessoIndetermin"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nAdulti"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nImmaturi"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nGiovaniAnno"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="nLarve"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="BdnFaunaBiblioType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idBdnOsservazioniFauna"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="riferBibliograf" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+                    <xs:element name="autoriFonteBib" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+                    <xs:element name="annoFonteBib" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+
+                    <xs:element name="titoloFonteBib" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+
+                    <xs:element name="rivistaFonteBib" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+
+                    <xs:element name="nomeMuseo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element name="nomeCollezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="BdnFaunaSpecieType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idFaunaSpecie"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					<xs:element name="codGruppo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 <xs:element name="gruppo" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 <xs:element name="codSpecie" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                     <xs:element name="phylum" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                     <xs:element name="classe" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                      <xs:element name="ordine" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                     <xs:element name="famigliaDesc" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                     <xs:element name="genere" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 <xs:element name="codiceTassonomico" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 <xs:element name="concatenazioneNomeSpecie" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 <xs:element name="codEuring" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 <xs:element name="speMinacc" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+    <complexType name="BdnFaunaProtezioniType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idFaunaProtezioni"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkFaunaSpecie"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+					<xs:element name="protezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+                     <xs:element name="dettaglioProtezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	
+	<!-- property types -->
+
+    <complexType name="BdnFaunaProprietarioPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProprietario" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="BdnFaunaRilevatorePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRilevatore" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="BdnFaunaProfiliPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProfili" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="BdnFaunaAreaProtettaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtetta" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="BdnFaunaRn2000PropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="BdnFaunaSpeleologicaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologica" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="BdnFaunaIndividuiPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="BdnFaunaBiblioPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="BdnFaunaSpeciePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="BdnFaunaProtezioniPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+	
+</schema>
