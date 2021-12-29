@@ -333,22 +333,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccf799397-c635-4125-92f0-4fdf3f82f4f1" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_geo_biodiversita_bdn_osservazioni_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="tipo_segn"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="BdnOsservazioniFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
-                <child name="tipoSegnalaz" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="C23f7cbe4-f713-4e78-8d6b-c8e187321340" priority="normal">
         <source>
             <property>
@@ -1838,5 +1822,21 @@
                 </jp:condition>
             </jp:join-parameter>
         </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccd15319d-9800-4159-9179-50b26a9f48a8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_osservazioni_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_segnale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnOsservazioniFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+                <child name="tipoSegnalaz" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
     </cell>
 </alignment>
