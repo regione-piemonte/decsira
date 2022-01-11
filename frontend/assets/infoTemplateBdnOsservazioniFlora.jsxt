@@ -1,0 +1,70 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateBdnOsservazioniFlora"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		},  {
+		  "headerName" : "Anno di osservazione",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:dataRilievoCompleta/text()",
+		  "dateFormat": "DD/MM/YYYY",
+		  "width" : 240
+		}, {
+		  "headerName" : "Fonte segnalazione",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Nome specie",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Famiglia",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Provincia",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:provincia/text()",
+		  "width" : 150
+		},  {
+		  "headerName" : "Comune",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:comune/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Quota minima",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Quota massima",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:aQuotaMax/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Ambiente",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente/text()",
+		  "width" : 150
+		}, {
+		  "headerName" : "Settore Geografico",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:descrSettoGeogr/text()",
+		  "width" : 100
+		},{
+		  "headerName" : "Propriet&agrave;",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Proprietario",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:nomeProprietario/text()",
+		  "width" : 100
+		}, {
+		  "headerName" : "Dati validi",
+		  "xpath" : "decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata/text()",
+		  "width" : 100
+		}
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora")}/>

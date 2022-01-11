@@ -1,0 +1,394 @@
+{
+   "featureTypeName":"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
+   "featureTypeNameLabel":"Banche dati naturalistiche: osservazioni fauna",
+   "nameSpaces":{
+      "decsiraogc_biodiversita_bdn_osservazioni_fauna":"http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"
+   },
+   "layer":{
+      "type":"wms",
+      "url":"{geoserverUrl}/wms",
+      "visibility":true,
+      "title":"Fauna banca dati naturalistiche",
+      "name":"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
+      "infoFormat":"application/vnd.ogc.gml/3.1.1",
+      "featureType":"bdnOsservazioniFauna",
+      "group":"Oggetti",
+      "format":"image/png"
+   },
+   "geometryName":"geometria",
+   "geometryType":"Point",
+   "card":{
+      "pdfname":"Scheda_Bdn_Osservazioni_Fauna_{{/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:idBdnOsservazioniFauna/text()}}.pdf",
+      "template":"assets/cardTemplateBdnOsservazioniFauna.jsxt",
+      "service":{
+         "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+         "params":{
+            "typeName":"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
+            "version":"2.0",
+            "srsName":"EPSG:4326"
+         }
+      }
+   },
+   "featureinfo":{
+      "templateURL":"assets/infoTemplateBdnOsservazioniFauna.jsxt"
+   },
+   "featuregrid":{
+      "grid":{
+         "root":"/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
+         "columns":[
+            {
+               "hide":true,
+               "id":true,
+               "headerName":"Id",
+               "xpath": ["@gml:id"],
+               "type":2
+            },
+            {
+               "headerName":"Anno di osservazione",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:dataRilievoCompleta/text()"],
+			         "dateFormat": "DD/MM/YYYY",
+               "type":2,
+               "width":150
+            },
+			{
+               "headerName":"Fonte segnalazione",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codFonteDati/text()"],
+               "type":2,
+               "width":180
+            },
+			{
+               "headerName":"Nome specie",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:concatenazioneNomeSpecie/text()"],
+               "type":2,
+               "width":300
+            },
+			{
+               "headerName":"Famiglia",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:famigliaDesc/text()"],
+               "type":2,
+               "width":120
+            },
+            {
+              "headerName":"Phylum",
+              "suppressSorting":true,
+              "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:phylum/text()"],
+              "type":2,
+              "width":120
+           },
+			{
+               "headerName":"Provincia",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:provincia/text()"],
+               "type":2,
+               "width":120
+            },
+			{
+               "headerName":"Comune",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:comune/text()"],
+               "type":2,
+               "width":200
+            },
+			{
+               "headerName":"Quota minima",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:daQuotaMinima/text()"],
+               "type":1,
+               "width":120
+            },
+			{
+               "headerName":"Quota massima",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax/text()"],
+               "type":1,
+               "width":120
+            },
+			{
+               "headerName":"Ambiente",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codAmbiente/text()"],
+               "type":2,
+               "width":250
+            },
+			{
+               "headerName":"Proprietà",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato/text()"],
+               "type":2,
+               "width":250
+            },
+			{
+               "headerName":"Proprietario",
+               "suppressSorting":true,
+               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario/text()"],
+               "type":2,
+               "width":250
+            },
+			{
+			   "hide": true,
+			   "headerName": "Geometry",
+			   "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_fauna:geometria/gml:Point/gml:pos/text()"],
+			   "type": 6
+			}
+         ],
+         "exporter":{
+            "addFile":""
+         }
+      }
+   },
+   "query":{
+      "service":{
+         "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+         "urlParams":{
+            "version":"1.1.0",
+            "outputFormat":"application/json"
+         }
+      },
+      "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:phylum",
+            "label": "Phylum",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_phylum",
+                "propertyName": "id_bdn_fauna_phylum,phylum",
+                "sortBy": "phylum+A"
+              }
+            },
+            "valueId": "phylum",
+            "valueLabel": "phylum"
+          },
+          {
+            "index": 2,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:classe",
+            "label": "Classe",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_classe",
+                "propertyName": "id_bdn_fauna_classe,classe",
+                "sortBy": "classe+A"
+              }
+            },
+            "valueId": "classe",
+            "valueLabel": "classe"
+         },
+         {
+            "index": 3,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:famigliaDesc",
+            "label": "Famiglia",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_famiglia",
+                "propertyName": "id_bdn_fauna_famiglia,famiglia",
+                "sortBy": "famiglia+A"
+              }
+            },
+            "valueId": "famiglia",
+            "valueLabel": "famiglia"
+          },
+          {
+            "index": 4,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:genere",
+            "label": "Genere",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_genere",
+                "propertyName": "id_bdn_fauna_genere,genere",
+                "sortBy": "genere+A"
+              }
+            },
+            "valueId": "genere",
+            "valueLabel": "genere"
+          },
+          {
+            "index": 5,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:concatenazioneNomeSpecie",
+            "label": "Nome specie",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_specie",
+                "propertyName": "id_bdn_fauna_specie,nome_specie",
+                "sortBy": "nome_specie+A"
+              }
+            },
+            "valueId": "nome_specie",
+            "valueLabel": "nome_specie"
+          },
+          {
+            "index": 6,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:codFonteDati",
+            "label": "Fonte segnalazione",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_tipo_fonte",
+                "propertyName": "id_bdn_fauna_tipo_fonte,fonte",
+                "sortBy": "fonte+A"
+              }
+            },
+            "valueId": "fonte",
+            "valueLabel": "fonte"
+          },
+          {
+            "index": 7,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:soggettoRilevatore",
+            "label": "Rilevatore segnalazione",
+            "type": "list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_rilevatore",
+                "propertyName": "id_bdn_fauna_rilevatore,rilevatore",
+                "sortBy": "rilevatore+A"
+              }
+            },
+            "valueId": "rilevatore",
+            "valueLabel": "rilevatore"
+          },
+		   {
+			"index": 8,
+			"attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:decsiraogc_operecaptazione:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:decsiraogc_operecaptazione:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:annoFonteBib",
+			"label":"Anno di osservazione",
+			"type":"string"
+        },
+		{
+			"index": 9,
+			"attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:daQuotaMinima",
+			"label":"Quota minima",
+			"type":"string"
+        },
+		{
+			"index": 10,
+			"attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax",
+			"label":"Quota massima",
+			"type":"string"
+        },
+
+      {
+          "index": 11,
+          "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:codAmbiente",
+          "label": "Ambiente",
+          "type": "list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_ambiente",
+              "propertyName": "id_bdn_fauna_ambiente,ambiente",
+              "sortBy": "ambiente+A"
+            }
+          },
+          "valueId": "ambiente",
+          "valueLabel": "ambiente"
+        },
+		{
+		  "index" : 12,
+		  "attribute" : "decsiraogc_biodiversita_bdn_osservazioni_fauna:provincia",
+		  "label" : "Provincia",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_geo_province",
+			  "propertyName" : "prov_nom,prov_ist",
+			  "sortBy" : "prov_nom+A"
+			}
+		  },
+		  "valueId" : "prov_nom",
+		  "valueLabel" : "prov_nom"
+		},
+		{
+		  "index" : 13,
+		  "attribute" : "decsiraogc_biodiversita_bdn_osservazioni_fauna:comune",
+		  "label" : "Comune",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_geo_comuni_storico",
+			  "propertyName" : "comune_nom,prov_ist,label",
+			  "sortBy" : "label+A"
+			}
+		  },
+		  "dependson" : {
+			"field" : "decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:desProvincia",
+			"from" : "prov_ist",
+			"to" : "prov_ist"
+		  },
+		  "valueId" : "comune_nom",
+		  "valueLabel" : "label"
+		},
+    {
+		  "index" : 14,
+		  "attribute" : "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:areaProtetta",
+		  "label" : "Area protetta",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_d_biodiversita_fauna_area_protetta",
+			  "propertyName" : "id_bdn_fauna_area_protetta,protetta,ordinamento",
+			  "sortBy" : "ordinamento+A"
+			}
+		  },
+		  "valueId" : "protetta",
+		  "valueLabel" : "protetta"
+		},
+    {
+		  "index" : 15,
+		  "attribute" : "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:reteNatura2000Completo",
+		  "label" : "Rete natura 2000",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_d_biodiversita_fauna_rn2000",
+			  "propertyName" : "id_bdn_fauna_rn2000,rete_natura_2000_completo",
+			  "sortBy" : "rete_natura_2000_completo+A"
+			}
+		  },
+		  "valueId" : "rete_natura_2000_completo",
+		  "valueLabel" : "rete_natura_2000_completo"
+		},
+		{
+			"index": 16,
+			"attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario",
+			"label":"Proprietà",
+			"type":"string"
+        },
+		{
+            "index": 17,
+            "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaProprietario/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProprietario/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario",
+            "label":"Proprietario",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_proprietario",
+                "propertyName": "nome_proprietario",
+                "sortBy": "nome_proprietario"
+			  }
+			},
+			"valueId":"nome_proprietario",
+			"valueLabel":"nome_proprietario"
+      },
+      {
+          "index": 18,
+          "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:protezione",
+          "label":"Protezioni",
+          "type":"list",
+          "valueService": {
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_protezioni",
+              "propertyName": "id_bdn_fauna_protezioni,protezione",
+              "sortBy": "protezione+A"
+        }
+      },
+      "valueId":"protezione",
+      "valueLabel":"protezione"
+      }
+      ]
+   }
+}

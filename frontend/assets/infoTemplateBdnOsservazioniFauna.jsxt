@@ -1,0 +1,85 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateBdnOsservazioniFauna"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		},
+		{
+		   "headerName":"Anno di osservazione",
+		   "xpath":"decsiraogc_biodiversita_bdn_osservazioni_fauna:dataRilievoCompleta/text()",
+		   "dateFormat": "DD/MM/YYYY",
+		   "type":2,
+		   "width":150
+        },
+		{
+		   "headerName":"Fonte segnalazione",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codFonteDati/text()"],
+		   "type":2,
+		   "width":150
+		},
+		{
+		   "headerName":"Nome specie",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:concatenazioneNomeSpecie/text()"],
+		   "type":2,
+		   "width":250
+		},
+		{
+		   "headerName":"Famiglia",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:famigliaDesc/text()"],
+		   "type":2,
+		   "width":120
+		},
+		{
+		   "headerName":"Provincia",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:provincia/text()"],
+		   "type":2,
+		   "width":120
+		},
+		{
+		   "headerName":"Comune",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:comune/text()"],
+		   "type":2,
+		   "width":150
+		},
+		{
+		   "headerName":"Quota minima",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:daQuotaMinima/text()"],
+		   "type":1,
+		   "width":120
+		},
+		{
+		   "headerName":"Quota massima",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax/text()"],
+		   "type":1,
+		   "width":120
+		},
+		{
+		   "headerName":"Ambiente",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codAmbiente/text()"],
+		   "type":2,
+		   "width":200
+		},
+		{
+		   "headerName":"Proprietà",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato/text()"],
+		   "type":2,
+		   "width":200
+		},
+		{
+		   "headerName":"Proprietario",
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario/text()"],
+		   "type":2,
+		   "width":200
+		}
+    ]}
+	
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna")}
+/>

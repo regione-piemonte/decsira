@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C061ef9e9-ba4d-42d9-8fa3-1ce43e9517d1" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C35fb9b63-7803-4683-99f5-0d0b5ae34299" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_oss_antica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="annoOsservazAntica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C40adb079-ec93-4a51-8b1f-6c58931b3fdc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_osserv_recente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="annoOsservazRecente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0f937c39-8772-432e-93c5-99e9cc4b1604" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_griglia_5km"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="idGriglia5Km" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C942db1d1-b5eb-46b2-8dab-42e230b076d7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_griglia_distr_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="idBdnGrigliaDistrFauna" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C73b54b1c-d3df-4664-84fd-f4f189904c9f" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_griglia_distr_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_griglia_distr_fauna}.id_bdn_griglia_distr_fauna" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12325bdb-fb33-4ea9-a7f5-5fccc6998c94" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_meritevol_attenz"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="flgSpecieMeritevolAttenz" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C430349e4-0f48-435b-a499-872f59b92376" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_protett_legal"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="flgSpecieProtettLegal" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc79d3599-251f-4918-b9a7-69f8837118f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb3932f03-386e-4bd2-bada-7497a1892447" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_osservazioni_totali"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="numOsservazioniTotali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C083b8111-9f66-4047-ab18-12076a4609f8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_specie_totali"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="numSpecieTotali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C5120f544-7e53-4864-ac0d-d004224db0de" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnAnnoGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce1d1cfed-93f2-46b9-85bb-9ca78a5afd5d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="anno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C592308d9-1f7f-4b70-a429-7d61cf65f4e1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_specie_griglia_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="idBdnSpecieGrigliaDistrFauna" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca215562f-87f4-4f1b-94fe-a9799f51455a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_anno_griglia_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="idBdnAnnoGrigliaDistrFauna" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C654d7071-8f1e-49f4-a695-b6e407481d84" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_anno_griglia_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_anno_griglia_fauna}.id_bdn_anno_griglia_fauna" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C066d4f2f-6127-4271-963d-3f7a81059f3d" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C38a8f418-e6a4-417f-8b0e-4f942f8283e0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_oss_antica_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="annoOsservazAntica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3db9b043-6d44-42c5-b32c-82c5693c25c8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_osserv_recente_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="annoOsservazRecente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9c3134bd-2c8a-4a1c-ac0f-320c1be6ab03" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="concatenazioneNomeSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce94a331e-7227-4d91-9025-3bb433f46e36" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="famiglia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="famigliaDesc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C86becf80-d5cd-46cb-8b3d-baadfd2009f2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="genere"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="genere" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf7b95958-39c2-4ef1-9c6d-2fdb8518dd08" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="gruppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="gruppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cef1f3d11-30a2-4d2f-b87a-ba809561eba8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_osservazioni_totali_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="numOsservazioniTotali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C16bad5a2-cac7-4f1a-8a13-a7acd1193b6a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_specie_griglia_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="idBdnSpecieGrigliaDistrFauna" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Cb8cd5d80-c3fd-42e9-953f-52a77281bdcb" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_specie_griglia_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_specie_griglia_fauna}.id_bdn_specie_griglia_fauna" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb91a9d50-d1a8-42b2-89c4-6ae9ffeb5c83" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_protett_legal"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="flgSpecieProtettLegal" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5b01a3ca-0973-4353-9d2a-73d3e89d0bd6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_meritevol_attenz"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="flgSpecieMeritevolAttenz" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb005f1f4-03a4-4bea-9f1c-0645bc9d94c0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_griglia_distr_fauna"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+                <child name="fkBdnGrigliaDistrFauna" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C432e51ae-032c-446a-9421-d316c4b63024" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnSpecieGrigliaFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_specie_griglia_fauna"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_anno_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_specie_griglia_fauna"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Ce6967ee9-3280-4543-9572-243560077ae1" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnDistribuzioneFaunaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_fauna/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_biodiversita_bdn_griglia_distr_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_griglia_distr_fauna"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_specie_griglia_fauna" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_griglia_distr_fauna"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+</alignment>

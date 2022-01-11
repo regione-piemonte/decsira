@@ -144,12 +144,17 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_genere",
-            "propertyName": "id_bdn_fauna_genere,genere",
+            "propertyName": "id_bdn_fauna_genere,genere,fk_bdn_fauna_famiglia",
             "sortBy": "genere+A"
           }
         },
         "valueId": "genere",
-        "valueLabel": "genere"
+        "valueLabel": "genere",
+        "dependson":{
+          "field": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:famigliaDesc",
+          "from": "id_bdn_fauna_famiglia",
+          "to": "fk_bdn_fauna_famiglia"
+       }
       },
       {
         "index": 3,
@@ -164,12 +169,17 @@
           }
         },
         "valueId": "nome_specie",
-        "valueLabel": "nome_specie"
+        "valueLabel": "nome_specie",
+        "dependson":{
+          "field": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:genere",
+          "from": "id_bdn_fauna_genere",
+          "to": "fk_bdn_fauna_genere"
+       }
       },
       {
         "index": 4,
         "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnAnnoGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnAnnoGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:anno",
-        "label":"Anno rilievo (es.2006)",
+        "label":"Anno rilievo",
         "type":"number"
      },
      {
