@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cd06e62a7-731e-4843-942a-a418e16442a2" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce25c3106-25b3-4be3-97f8-85d1633a0f05" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_oss_antica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="annoOsservazAntica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc79cb697-317f-4ede-8b2a-fe51f44f0250" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_osserv_recente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="annoOsservazRecente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc800af1f-466d-43f6-bd8f-16513ef02fa1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_griglia_5km"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="idGriglia5Km" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C22cc54db-9b02-4b9d-8655-f4c061412fdb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_meritevol_attenz"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="flgSpecieMeritevolAttenz" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4b77903b-90c8-4389-a1bf-afb92fe78896" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_protett_legal"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="flgSpecieProtettLegal" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C760369f2-9590-4fff-98bf-aedce19609a1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C22eaa2c0-922d-406f-9901-14979ec26891" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_specie_totali"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="numSpecieTotali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2463c128-ea61-42f5-be88-fe49ec35a32e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_osservazioni_totali"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="numOsservazioniTotali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4ffaf7ba-185d-4cbc-b5ec-760c4c083827" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_griglia_distr_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="idBdnGrigliaDistrFlora" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C313c0bed-f3c3-4f8a-a010-3e67ccf6bb11" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_griglia_distr_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_griglia_distr_flora}.id_bdn_griglia_distr_flora" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cac1862f0-1a1b-434b-b995-c91efb93bc84" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbafdf6ff-8459-4221-99e7-68af3208f1c2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_oss_antica_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="annoOsservazAntica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb5f5ccca-c122-45f9-881f-b6c1816e973a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_osserv_recente_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="annoOsservazRecente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C83ec8caa-077c-4ba3-9a55-2dfd6b67ce3c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="concatenazione_nome_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="concatenazioneNomeSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9325cf9e-c495-4c84-b733-1518ad04720c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="famiglia_d"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="famigliaDesc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca3579320-d7b2-4166-998e-cd16e549a31d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_griglia_distr_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="fkBdnGrigliaDistrFlora" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C665ec5d6-e0cb-4ffe-bb82-5a7c7dc2f4f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_meritevol_attenz"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="flgSpecieMeritevolAttenz" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C86a3c33d-f1e1-41a4-82e6-52e5e4797983" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_specie_protett_legal"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="flgSpecieProtettLegal" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf430491a-76f5-4b23-a914-2381f49957b6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="genere"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="genere" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6aef8210-4cef-4287-a014-bf8e2dd1f62b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="num_osservazioni_totali_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="numOsservazioniTotali" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2f10071a-f2d9-45b1-a69f-4acdca17066a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_specie_griglia_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="idBdnSpecieGrigliaDistrFlora" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C494bcb8f-a155-46b1-9534-b387e98e9961" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_specie_griglia_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_specie_griglia_flora}.id_bdn_specie_griglia_flora" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C45a61937-ab67-4baf-a928-8b303e79dad4" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_griglia_distr_flora"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_griglia_distr_flora"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cb2e74a3a-51b6-4ca6-b1be-ee8f18e5cb5c" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnAnnoGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6ad4af44-6870-4e18-b61d-8c6043fbbdf1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="anno" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce3b5579a-7f1c-4a9e-ab5e-a763bc632987" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_specie_griglia_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="idBdnSpecieGrigliaDistrFlora" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0e6a39cf-8ae9-46ac-8662-ce9511afd7d2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_anno_griglia_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="idBdnAnnoGrigliaDistrFlora" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Ca12b43c7-85c3-4a62-ba05-347a1d04e80d" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_anno_griglia_flora"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAnnoGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_anno_griglia_flora}.id_bdn_anno_griglia_flora" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C89e4dcc4-3d6a-4604-a785-e5718a043b55" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnSpecieGrigliaFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_specie_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_specie_griglia_flora"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_anno_griglia_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_specie_griglia_flora"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+</alignment>
