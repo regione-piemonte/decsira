@@ -1,0 +1,23 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='FLORA BANCA DATI NATURALISTICHE' subtitle={[
+			'Osservazioni floristiche:',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+    <Section header='DATI GENERALI' eventKey='1' expanded={true}>
+        <LabeledField label='Soggetto Rilevatore' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatori/text()")
+        }/>    
+        <LabeledField label='Nome specie' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie/text()")
+        }/>
+    
+    </Section>
+	
+	
+	
+    </Panel>
+</Panel>
