@@ -13,6 +13,42 @@
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codiceRilievo/text()")
 			}/>    
 		</Section>
+
+
+    <Section header='MAPPA SINTESI - FAUNA BANCA DATI NATURALISTICHE su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='13' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:geometria/gml:Point/gml:pos/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima Osservazioni Fauna",
+	                          "name": "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
 	
     </Panel>
 
