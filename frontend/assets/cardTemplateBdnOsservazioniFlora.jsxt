@@ -1,23 +1,138 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='FLORA BANCA DATI NATURALISTICHE' subtitle={[
+        <DetailTitle title='FLORA BANCA DATI NATURALISTICA' subtitle={[
 			'Osservazioni floristiche:',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-    <Section header='DATI GENERALI' eventKey='1' expanded={true}>
-        <LabeledField label='Soggetto Rilevatore' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatori/text()")
+    <Section header='Scheda segnalazioni: inquadramento generale' eventKey='1' expanded={true}>
+       <LabeledField label='Specie segnalata' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie/text()")
         }/>    
-        <LabeledField label='Nome specie' value={
-            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie/text()")
+        <LabeledField label='Tipo sistematico' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:tipoSist/text()")
+        }/>
+		<LabeledField label='Famiglia' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc/text()")
+        }/>
+		<LabeledField label='Genere' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:genere/text()")
+        }/>
+		<LabeledField label='Specie sensibile' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:specieSensib/text()")
+        }/>
+		<LabeledField label='Tipo di protezione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:dettaglioProtezione/text()")
+        }/>
+		<LabeledField label='Data di osservazione' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:dataRilievoCompleta/text()")
+        }/>
+		<LabeledField label='Fonte della segnalazione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati/text()")
+        }/>
+		<LabeledField label='Archivio provenienza del dato' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:archivio/text()")
+        }/>
+		<LabeledField label='Rilevatore' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatori/text()")
+        }/>
+		<LabeledField label='Scheda validata' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata/text()")
+        }/>
+		<LabeledField label='Nome erbario' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraErbario/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraErbario/decsiraogc_biodiversita_bdn_osservazioni_flora:nomeErbario/text()")
+        }/>
+		<LabeledField label='Validatore' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:nomeValidatore/text()")
+        }/>
+		<LabeledField label='Data validazione' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:dataValidaz/text()")
+        }/>
+		<LabeledField label='Propriet&agrave; del dato' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato/text()")
+        }/>
+		<LabeledField label='Proprietario' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:nomeProprietario/text()")
         }/>
     
     </Section>
 
-    <Section header='MAPPA SINTESI - FLORA BANCA DATI NATURALISTICHE su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='13' expanded={true}>
+
+	 <Section header='Dati stazionali' eventKey='2' expanded={true}>
+       <LabeledField label='Ambiente' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente/text()")
+        }/>   
+		 <LabeledField label='Quota (m) da' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima/text()")
+        }/>  
+		 <LabeledField label='Quota (m) a' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:aQuotaMax/text()")
+        }/>   
+		 <LabeledField label='Descrizione causa minaccia in atto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:descrCausaMinacAtto/text()")
+        }/>   
+	</Section> 
+
+	 <Section header='Inquadramento Bibliografico' eventKey='3' expanded={true}>
+       <LabeledField label='Riferimento bibliografico' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:riferBibliograf/text()")
+        }/>  
+		<LabeledField label='Codice Bibliografia Piemontese' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:codBibliogrPiemont/text()")
+        }/> 
+		<LabeledField label='Autori' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:autoriFonteBib/text()")
+        }/>  
+		<LabeledField label='Anno' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:annoFonteBib/text()")
+        }/>   
+		<LabeledField label='Titolo' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:titoloFonteBib/text()")
+        }/>  
+		<LabeledField label='Rivista' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraBiblio/decsiraogc_biodiversita_bdn_osservazioni_flora:rivistaFonteBib/text()")
+        }/>   
+	</Section> 
+
+	<Section header='Inquadramento geografico' eventKey='4' expanded={true}>
+       <LabeledField label='Provincia' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:provincia/text()")
+        }/>  
+		<LabeledField label='Comune' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:comune/text()")
+        }/>  
+		<LabeledField label='Localit&agrave;' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:localita/text()")
+        }/> 
+		<LabeledField label='Descrizione settore geografico' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:descrSettoGeogr/text()")
+        }/>  
+		<LabeledField label='Descrizione area protetta' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:areaProtetta/text()")
+        }/>  
+			<LabeledField label='Descrizione area protetta' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:reteNatura2000Completo/text()")
+        }/>  
+		<LabeledField label='Codice imprecisione' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:codImprecisione/text()")
+        }/> 
+		<LabeledField label='Fuso UTM' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:fusoUtm/text()")
+        }/> 
+		<LabeledField label='Datum UTM' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:datumUtm/text()")
+        }/> 
+		<LabeledField label='Coordinate UTM: longitudine' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:utmX/text()")
+        }/> 
+		<LabeledField label='Coordinate UTM: latitudine' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:utmY/text()")
+        }/> 
+    </Section> 
+
+    <Section header='MAPPA SINTESI - FLORA BANCA DATI NATURALISTICHE su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({
