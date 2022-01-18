@@ -10,7 +10,7 @@ const PropTypes = require('prop-types');
 
 const DataGrid = require('./DataGrid').default;
 const {keys, isEqual, isFunction} = require('lodash');
-const {ButtonToolbar, Button, Glyphicon} = require('react-bootstrap');
+const {ButtonToolbar, Button, Glyphicon, Popover, OverlayTrigger} = require('react-bootstrap');
 const assign = require("object-assign");
 
 const ZoomToFeature = require("./ZoomToFeature");
@@ -58,6 +58,7 @@ class FeatureGrid extends React.Component {
         selectAllActive: PropTypes.bool,
         zoomToFeatureAction: PropTypes.func,
         exportAction: PropTypes.func,
+        totalFeatures: PropTypes.number,
         tools: PropTypes.array,
         useIcons: PropTypes.bool,
         changeMapViewGrid: PropTypes.func,
@@ -101,6 +102,7 @@ class FeatureGrid extends React.Component {
         },
         dataSource: null,
         selectAllActive: false,
+        totalFeatures: 0,
         exportAction: (api) => {
             if ( api) {
                 api.exportDataAsCsv();
@@ -190,26 +192,44 @@ class FeatureGrid extends React.Component {
             } else {
                 allSelected = !(this.props.select.length < nOfFeatures);
             }
-            tools.push(<Button key="allrowsselection" onClick={() => {
-                if (this.props.selectAll) {
-                    if (!allSelected && this.api) {
-                        this.api.deselectAll();
+            const popoverAlert = (
+                <Popover id="popover-positioned-top" title="Attenzione">
+                    <div className="alert alert-info">
+                        <I18N.Message msgId={"featuregrid.popoverMessage"}/>
+                    </div>
+                </Popover>
+            );
+            const buttonSelectAll = (
+                <Button key="allrowsselection" onClick={() => {
+                    if (this.props.selectAll) {
+                        if (!allSelected && this.api) {
+                            this.api.deselectAll();
+                        }
+                        this.props.selectAll(!allSelected);
+                    } else {
+                        this.selectAllRows(!allSelected);
                     }
-                    this.props.selectAll(!allSelected);
-                } else {
-                    this.selectAllRows(!allSelected);
-                }
-            }}><Glyphicon glyph="check"/>&nbsp;
-                {
-                    (!allSelected) ? (
-                        <I18N.Message msgId={"featuregrid.selectall"}/>
-                    ) : (
-                        <I18N.Message msgId={"featuregrid.deselectall"}/>
-                    )
-                }
-            </Button>);
+                }}><Glyphicon glyph="check"/>&nbsp;
+                    {
+                        (!allSelected) ? (
+                            <I18N.Message msgId={"featuregrid.selectall"}/>
+                        ) : (
+                            <I18N.Message msgId={"featuregrid.deselectall"}/>
+                        )
+                    }
+                </Button>
+            );
+            let trigger = !allSelected ? "click" : "none";
+            if (this.props.totalFeatures > 50000) {
+                tools.push(<OverlayTrigger trigger={trigger} placement="top" overlay={popoverAlert} rootClose>
+                    {buttonSelectAll}
+                </OverlayTrigger>);
+            } else {
+                tools.push(buttonSelectAll);
+            }
         }
         tools = [...tools, this.props.tools];
+
         return (
             <div style={{
                 display: "flex",

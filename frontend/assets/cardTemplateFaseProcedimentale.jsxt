@@ -196,56 +196,6 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:denomDirezioneRespOrgTec/text()")
         }/>
     </Section>
-	
-	<Section header='TEST ALLEGATI' eventKey='4' expanded={true}>
-        <AttachmentTable
-            id="SiviaAttachments"
-            selectedRow={model.SiviaAttachments}
-            wfsVersion="2.0"
-			rowSelection={"single"}
-            columns={
-                [
-					{
-						hide: true,
-						id: true,
-						xpath:"decsiraogc_sivia:SoggettoProponente/@gml:id"
-					},
-                    {
-                        headerName: '',
-                        width: 50,
-                        download: 'true'
-                    },
-					{
-                        headerName: 'Documento',
-                        width: 150,
-                        xpath:"decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropDenominazione/text()"
-                    },
-                    {
-                        headerName: 'Categoria',
-                        width: 150,
-                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropTipo/text()"
-                    },
-					{
-                        headerName: 'Codice elaborato',
-                        width: 150,
-                        xpath: "decsiraogc_sivia:SoggettoProponente/decsiraogc_sivia:soggPropComune/text()"
-                    },
-					{
-                        headerName: 'Data',
-                        width: 150,
-						dateFormat: 'DD/MM/YYYY',
-                        xpath: "decsiraogc_sivia:SiviaAttachments/decsiraogc_sivia:data/text()"
-                    },
-                    {
-                        headerName: 'Dimensione (kb)',
-						field: 'url',
-                        width: 150,
-                        xpath: "decsiraogc_sivia:SiviaAttachments/decsiraogc_sivia:dimensione/text()"
-                    }
-                ]
-            }
-            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_sivia:FaseProcedura/decsiraogc_sivia:soggettoProponente")}/>
-    </Section>
 
 	<Section header='MAPPA SINTESI - VIA procedimenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='8' expanded={true}>
 		<MappaScheda
