@@ -460,6 +460,7 @@ class SiraGrid extends React.Component {
                                     selectAll: this.props.selectAll
                                 }}
                                 exportAction={this.exportFeatures}
+                                totalFeatures={this.props.totalFeatures}
 
                                 {...gridConf}
                             />
