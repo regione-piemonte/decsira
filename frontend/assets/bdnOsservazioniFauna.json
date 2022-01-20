@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
-   "featureTypeNameLabel":"Banche dati naturalistiche: osservazioni fauna",
+   "featureTypeNameLabel":"BDN – OSSERVAZIONI SPECIE FAUNA (scala minima  1:100.000) – DATASET",
    "nameSpaces":{
       "decsiraogc_biodiversita_bdn_osservazioni_fauna":"http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"
    },
@@ -8,7 +8,7 @@
       "type":"wms",
       "url":"{geoserverUrl}/wms",
       "visibility":true,
-      "title":"Fauna banca dati naturalistiche",
+      "title":"BDN – OSSERVAZIONI SPECIE FAUNA (scala minima  1:100.000) – DATASET",
       "name":"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
       "infoFormat":"application/vnd.ogc.gml/3.1.1",
       "featureType":"bdnOsservazioniFauna",
@@ -32,6 +32,9 @@
    "featureinfo":{
       "templateURL":"assets/infoTemplateBdnOsservazioniFauna.jsxt"
    },
+   "exporter": {
+    "maxFeatures": 5000  
+    },
    "featuregrid":{
       "grid":{
          "root":"/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
@@ -73,12 +76,33 @@
                "width":120
             },
             {
+              "headerName":"Ordine",
+              "suppressSorting":true,
+              "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:ordine/text()"],
+              "type":2,
+              "width":120
+           },
+           {
+            "headerName":"Classe",
+            "suppressSorting":true,
+            "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:classe/text()"],
+            "type":2,
+            "width":120
+           },
+           {
               "headerName":"Phylum",
               "suppressSorting":true,
               "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:phylum/text()"],
               "type":2,
               "width":120
            },
+           {
+            "headerName":"Rilevatore",
+            "suppressSorting":true,
+            "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRilevatore/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRilevatore/decsiraogc_biodiversita_bdn_osservazioni_fauna:soggettoRilevatore/text()"],
+            "type":2,
+            "width":120
+          },
 		     	{
                "headerName":"Provincia",
                "suppressSorting":true,
@@ -106,6 +130,13 @@
                "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax/text()"],
                "type":1,
                "width":120
+            },
+            {
+              "headerName":"Tipo segnalazione",
+              "suppressSorting":true,
+              "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:tipoSegnalaz/text()"],
+              "type":2,
+              "width":160
             },
 			      {
                "headerName":"Ambiente",
@@ -154,8 +185,8 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_phylum",
-                "propertyName": "id_bdn_fauna_phylum,phylum",
-                "sortBy": "phylum+A"
+                "propertyName": "id_bdn_fauna_phylum,phylum,ordinamento",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "phylum",
@@ -169,12 +200,12 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_classe",
-                "propertyName": "id_bdn_fauna_classe,classe",
-                "sortBy": "classe+A"
+                "propertyName": "id_bdn_fauna_classe,classe,ordinamento,label",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "classe",
-            "valueLabel": "classe"
+            "valueLabel": "label"
          },
          {
             "index": 3,
@@ -184,12 +215,12 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_famiglia",
-                "propertyName": "id_bdn_fauna_famiglia,famiglia",
-                "sortBy": "famiglia+A"
+                "propertyName": "id_bdn_fauna_famiglia,famiglia,label,ordinamento",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "famiglia",
-            "valueLabel": "famiglia"
+            "valueLabel": "label"
           },
           {
             "index": 4,
@@ -199,12 +230,12 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_genere",
-                "propertyName": "id_bdn_fauna_genere,genere",
-                "sortBy": "genere+A"
+                "propertyName": "id_bdn_fauna_genere,genere,label,ordinamento",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "genere",
-            "valueLabel": "genere"
+            "valueLabel": "label"
           },
           {
             "index": 5,
@@ -214,12 +245,12 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_specie",
-                "propertyName": "id_bdn_fauna_specie,nome_specie",
-                "sortBy": "nome_specie+A"
+                "propertyName": "id_bdn_fauna_specie,nome_specie,label,ordinamento",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "nome_specie",
-            "valueLabel": "nome_specie"
+            "valueLabel": "label"
           },
           {
             "index": 6,
@@ -229,8 +260,8 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_tipo_fonte",
-                "propertyName": "id_bdn_fauna_tipo_fonte,fonte",
-                "sortBy": "fonte+A"
+                "propertyName": "id_bdn_fauna_tipo_fonte,fonte,ordinamento",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "fonte",
@@ -244,8 +275,8 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_rilevatore",
-                "propertyName": "id_bdn_fauna_rilevatore,rilevatore",
-                "sortBy": "rilevatore+A"
+                "propertyName": "id_bdn_fauna_rilevatore,rilevatore,ordinamento",
+                "sortBy": "ordinamento+A"
               }
             },
             "valueId": "rilevatore",
@@ -277,8 +308,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_ambiente",
-              "propertyName": "id_bdn_fauna_ambiente,ambiente",
-              "sortBy": "ambiente+A"
+              "propertyName": "id_bdn_fauna_ambiente,ambiente,ordinamento",
+              "sortBy": "ordinamento+A"
             }
           },
           "valueId": "ambiente",
@@ -342,19 +373,40 @@
 		  "valueService" : {
 			"urlParams" : {
 			  "typeName" : "decsiraogc_decodif:decsira_d_biodiversita_fauna_rn2000",
-			  "propertyName" : "id_bdn_fauna_rn2000,rete_natura_2000_completo",
-			  "sortBy" : "rete_natura_2000_completo+A"
+			  "propertyName" : "id_bdn_fauna_rn2000,rete_natura_2000_completo,ordinamento",
+			  "sortBy" : "ordinamento+A"
 			}
 		  },
 		  "valueId" : "rete_natura_2000_completo",
 		  "valueLabel" : "rete_natura_2000_completo"
 		},
-		{
-			"index": 16,
-			"attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario",
-			"label":"Proprietà",
-			"type":"string"
-        },
+    {
+		  "index" : 16,
+		  "attribute" : "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:reteNatura2000Completo",
+		  "label" : "Rete natura 2000",
+		  "type" : "list",
+		  "valueService" : {
+			"urlParams" : {
+			  "typeName" : "decsiraogc_decodif:decsira_d_biodiversita_fauna_rn2000",
+			  "propertyName" : "id_bdn_fauna_rn2000,rete_natura_2000_completo,ordinamento",
+			  "sortBy" : "ordinamento+A"
+			}
+		  },
+		  "valueId" : "rete_natura_2000_completo",
+		  "valueLabel" : "rete_natura_2000_completo"
+		},
+    {
+      "index":16,
+      "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato",
+      "label":"Proprietà",
+      "type":"list",
+      "values": [
+         {"value":"DIVULGABILE CON CONSENSO AUTORE","name":"DIVULGABILE CON CONSENSO AUTORE"},
+         {"value":"PUBBLICA","name":"PUBBLICA"}
+      ],
+       "valueId":"value",
+       "valueLabel":"name"
+     },
 		{
             "index": 17,
             "attribute": "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaProprietario/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProprietario/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario",
@@ -363,8 +415,8 @@
             "valueService": {
               "urlParams": {
                 "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_proprietario",
-                "propertyName": "nome_proprietario",
-                "sortBy": "nome_proprietario"
+                "propertyName": "nome_proprietario,ordinamento",
+                "sortBy": "ordinamento+A"
 			  }
 			},
 			"valueId":"nome_proprietario",
@@ -378,8 +430,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_protezioni",
-              "propertyName": "id_bdn_fauna_protezioni,protezione",
-              "sortBy": "protezione+A"
+              "propertyName": "id_bdn_fauna_protezioni,protezione,ordinamento",
+              "sortBy": "ordinamento+A"
         }
       },
       "valueId":"protezione",
