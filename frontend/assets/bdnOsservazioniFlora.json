@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora",
-   "featureTypeNameLabel":"Flora Banca Dati Naturalistiche",
+   "featureTypeNameLabel":"BDN – OSSERVAZIONI SPECIE FLORA (scala minima  1:100.000) – DATASET",
    "nameSpaces": {
      "decsiraogc_biodiversita_bdn_osservazioni_flora": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_flora/1.0"
    },
@@ -8,7 +8,7 @@
        "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "Flora Banca Dati Naturalistiche",
+        "title": "BDN – OSSERVAZIONI SPECIE FLORA (scala minima  1:100.000) – DATASET",
         "name": "decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
@@ -40,6 +40,9 @@
      "featureinfo":{
      "templateURL": "assets/infoTemplateBdnOsservazioniFlora.jsxt"
    },
+   "exporter": {
+    "maxFeatures": 5000  
+    },
    "featuregrid": {
      "grid": {
        "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora",
@@ -60,7 +63,7 @@
           "width" : 250
         },
 		    {
-           "headerName": "Fonte di segnalazione",
+           "headerName": "Fonte segnalazione",
            "suppressSorting": true,
            "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati/text()"],
            "type": 2,
@@ -79,6 +82,13 @@
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc/text()"],
           "type": 2,
           "width" : 200
+        },
+        {
+          "headerName": "Rilevatore",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatore/text()"],
+          "type": 2,
+          "width" : 150
         },
         {
           "headerName": "Provincia",
@@ -138,7 +148,7 @@
           "width" : 150
         },
         {
-          "headerName": "Dati validi",
+          "headerName": "Dati validati",
           "suppressSorting": true,
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata/text()"],
           "type": 2,
@@ -164,71 +174,81 @@
      "fields":[
       {
         "index": 1,
+        "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc",
+        "label": "Famiglia",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_famiglia",
+            "propertyName": "id_bdn_flora_famiglia,famiglia_d,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "famiglia_d",
+        "valueLabel": "famiglia_d"
+      },
+      {
+        "index": 2,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:genere",
-        "label": "Famiglia - Genere",
+        "label": "Genere",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_genere",
-            "propertyName": "id_bdn_flora_genere,genere,label",
-            "sortBy": "genere+A"
+            "propertyName": "id_bdn_flora_genere,genere,label,ordinamento",
+            "sortBy": "ordinamento+A"
           }
         },
         "valueId": "genere",
         "valueLabel": "label"
       },
       {
-        "index": 2,
+        "index": 3,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie",
         "label": "Nome Specie",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_specie",
-            "propertyName": "id_bdn_flora_specie,concatenazione_nome_specie,fk_bdn_flora_genere",
-            "sortBy": "concatenazione_nome_specie+A"
+            "propertyName": "id_bdn_flora_specie,concatenazione_nome_specie,ordinamento,label",
+            "sortBy": "ordinamento+A"
           }
         },
         "valueId": "concatenazione_nome_specie",
-        "valueLabel": "concatenazione_nome_specie",
-        "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_osservazioni_flora:genere",
-          "from": "id_bdn_flora_genere",
-          "to": "fk_bdn_flora_genere"
-       }
+        "valueLabel": "label"
       },
       {
-        "index": 3,
+        "index": 4,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati",
         "label": "Fonte segnalazione",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_tipo_fonte",
-            "propertyName": "id_bdn_flora_tipo_fonte,fonte",
-            "sortBy": "fonte+A"
+            "propertyName": "id_bdn_flora_tipo_fonte,fonte,ordinamento",
+            "sortBy": "ordinamento+A"
           }
         },
         "valueId": "fonte",
         "valueLabel": "fonte"
       },
       {
-        "index": 4,
+        "index": 5,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatore",
         "label": "Rilevatore segnalazione",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_rilevatore",
-            "propertyName": "id_bdn_flora_rilevatore,rilevatore",
-            "sortBy": "rilevatore+A"
+            "propertyName": "id_bdn_flora_rilevatore,rilevatore,ordinamento",
+            "sortBy": "ordinamento+A"
           }
         },
         "valueId": "rilevatore",
         "valueLabel": "rilevatore"
       },
       {
-        "index":5,
+        "index":6,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:dataRilievoCompleta",
         "label":"Data di osservazione",
         "type":"date",
@@ -237,34 +257,34 @@
         }
      },
       {
-        "index":6,
+        "index":7,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima",
         "label":"Quota minima",
         "type":"number"
      },
      {
-      "index": 7,
+      "index": 8,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:aQuotaMax",
       "label":"Quota massima",
       "type":"number"
      },
      {
-      "index": 8,
+      "index": 9,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente",
       "label": "Ambiente",
       "type": "list",
       "valueService": {
         "urlParams": {
           "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_ambiente",
-          "propertyName": "id_bdn_flora_flora_ambiente,ambiente",
-          "sortBy": "ambiente+A"
+          "propertyName": "id_bdn_flora_flora_ambiente,ambiente,ordinamento",
+          "sortBy": "ordinamento+A"
         }
       },
       "valueId": "ambiente",
       "valueLabel": "ambiente"
     },
     {
-      "index": 9,
+      "index": 10,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:provincia",
       "label": "Provincia",
       "type": "list",
@@ -279,7 +299,7 @@
       "valueLabel": "prov_nom"
     },
     {
-      "index": 10,
+      "index": 11,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:comune",
       "label": "Comune",
       "type": "list",
@@ -299,7 +319,7 @@
      }
     },
     {
-      "index": 11,
+      "index": 12,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:areaProtetta",
       "label": "Area Protetta",
       "type": "list",
@@ -314,49 +334,56 @@
       "valueLabel": "nome"
     },
     {
-      "index": 12,
+      "index": 13,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:reteNatura2000Descr",
       "label": "Rete Natura 2000",
       "type": "list",
       "valueService": {
         "urlParams": {
           "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_nome_rn2000",
-          "propertyName": "id_rete_natura2000,codice_amministrativo,nome",
-          "sortBy": "nome+A"
+          "propertyName": "id_rete_natura2000,codice_amministrativo,nome,label,ordinamento",
+          "sortBy": "ordinamento+A"
         }
       },
       "valueId": "nome",
-      "valueLabel": "nome"
+      "valueLabel": "label"
     },
     {
-      "index":13,
+      "index":14,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:descrSettoGeogr",
       "label":"Settore geografico",
       "type":"string"
      },
      {
-      "index":14,
+      "index":15,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato",
       "label":"Proprietà",
-      "type":"string"
+      "type":"list",
+      "values": [
+         {"value":"DIVULGABILE CON CONSENSO AUTORE","name":"DIVULGABILE CON CONSENSO AUTORE"},
+         {"value":"NON DISPONIBILE","name":"NON DISPONIBILE"},
+         {"value":"PUBBLICO","name":"PUBBLICO"}
+      ],
+       "valueId":"value",
+       "valueLabel":"name"
      },
      {
-      "index": 15,
+      "index": 16,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:nomeProprietario",
       "label": "Proprietario",
       "type": "list",
       "valueService": {
         "urlParams": {
           "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_proprietario",
-          "propertyName": "id_bdn_flora_proprietario,nome_proprietario",
-          "sortBy": "nome_proprietario+A"
+          "propertyName": "id_bdn_flora_proprietario,nome_proprietario,ordinamento",
+          "sortBy": "ordinamento+A"
         }
       },
       "valueId": "nome_proprietario",
       "valueLabel": "nome_proprietario"
     },
     {
-      "index":16,
+      "index":17,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata",
       "label":"Dati validati",
       "type":"list",
@@ -368,15 +395,15 @@
        "valueLabel":"name"
      },
      {
-      "index": 17,
+      "index": 18,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:protezione",
       "label": "Protezioni",
       "type": "list",
       "valueService": {
         "urlParams": {
           "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_protezioni",
-          "propertyName": "id_bdn_flora_protezioni,protezione",
-          "sortBy": "protezione+A"
+          "propertyName": "id_bdn_flora_protezioni,protezione,ordinamento",
+          "sortBy": "ordinamento+A"
         }
       },
       "valueId": "protezione",
