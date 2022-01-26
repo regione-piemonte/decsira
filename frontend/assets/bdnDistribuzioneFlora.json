@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora",
-   "featureTypeNameLabel":"BDN - DISTRIBUZIONE SPECIE FLORA SU GRIGLIA 5 KM – DATASET",
+   "featureTypeNameLabel":"BDN - Distribuzione Specie Flora Su Griglia 5 KM – dataset",
    "nameSpaces": {
      "decsiraogc_biodiversita_bdn_griglia_distr_flora": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"
    },
@@ -8,7 +8,7 @@
        "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "BDN - DISTRIBUZIONE SPECIE FLORA SU GRIGLIA 5 KM – DATASET",
+        "title": "BDN - Distribuzione Specie Flora Su Griglia 5 KM – dataset",
         "name": "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
@@ -123,7 +123,7 @@
      "fields":[
       {
         "index": 1,
-        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:famigliaDesc",
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:famigliaDesc",
         "label": "Famiglia",
         "type": "list",
         "valueService": {
@@ -138,7 +138,7 @@
       },
       {
         "index": 2,
-        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:genere",
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:genere",
         "label": "Genere",
         "type": "list",
         "valueService": {
@@ -151,14 +151,14 @@
         "valueId": "genere",
         "valueLabel": "genere",
         "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:famigliaDesc",
+          "field": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:famigliaDesc",
           "from": "id_bdn_flora_famiglia",
           "to": "fk_bdn_flora_famiglia"
        }
       },
       {
         "index": 3,
-        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:concatenazioneNomeSpecie",
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:concatenazioneNomeSpecie",
         "label": "Nome specie",
         "type": "list",
         "valueService": {
@@ -171,20 +171,20 @@
         "valueId": "concatenazione_nome_specie",
         "valueLabel": "concatenazione_nome_specie",
         "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:genere",
+          "field": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:genere",
           "from": "id_bdn_flora_genere",
           "to": "fk_bdn_flora_genere"
        }
       },
       {
         "index": 4,
-        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnAnnoGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnAnnoGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:anno",
+        "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:anno",
         "label":"Anno rilievo",
         "type":"number"
      },
      {
       "index": 5,
-      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieProtettLegal",
+      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieProtettLegal",
       "label":"Protetta legalmente",
       "type":"list",
       "values": [
@@ -196,7 +196,7 @@
      },
      {
       "index":6,
-      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieMeritevolAttenz",
+      "attribute": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:flgSpecieMeritevolAttenz",
       "label":"Meritevole attenzione",
       "type":"list",
       "values": [
