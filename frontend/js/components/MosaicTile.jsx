@@ -10,6 +10,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 
 const {Link} = require('react-router');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class MosaicTile extends React.Component {
     static propTypes = {
@@ -36,12 +37,12 @@ class MosaicTile extends React.Component {
             <div className="ogg_appl">
                 <span>
                     <Link to={'/dataset/' + this.props.objectNumber + '/0'} className="list-group-item">
-                        Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
+                        <I18N.Message msgId={"MosaicTile.objectsBtnText"}/> <span className="items-badge" > {this.props.objectNumber} </span>
                     </Link>
                 </span>
                 <span>
                     <Link to={'/dataset/0/' + this.props.tematicViewNumber} className="list-group-item" >
-                        Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
+                        <I18N.Message msgId={"MosaicTile.thematicViewsBtnText"}/> <span className="items-badge" > {this.props.tematicViewNumber} </span>
                     </Link>
                 </span>
             </div>
@@ -49,12 +50,12 @@ class MosaicTile extends React.Component {
             <div className="ogg_appl">
                 <span>
                     <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('objects')} onKeyPress={() => this.props.onClick('objects')}>
-                        Oggetti <span className="items-badge" > {this.props.objectNumber} </span>
+                        <I18N.Message msgId={"MosaicTile.objectsBtnText"}/> <span className="items-badge" > {this.props.objectNumber} </span>
                     </a>
                 </span>
                 <span>
                     <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('views')} onKeyPress={() => this.props.onClick('views')}>
-                        Viste tematiche <span className="items-badge" > {this.props.tematicViewNumber} </span>
+                        <I18N.Message msgId={"MosaicTile.thematicViewsBtnText"}/> <span className="items-badge" > {this.props.tematicViewNumber} </span>
                     </a>
                 </span>
             </div>

@@ -43,7 +43,7 @@ class SideIndicaPanel extends React.Component {
 
     renderHeader = () => {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
-        let tooltip = <Tooltip id="header_tp">Chiudi Tematizzatore</Tooltip>;
+        let tooltip = <Tooltip id="header_tp">{LocaleUtils.getMessageById(this.context.messages, "queryPanel.closeIndicaTooltip")}</Tooltip>;
 
         return (
             <div className="handle_querypanel">

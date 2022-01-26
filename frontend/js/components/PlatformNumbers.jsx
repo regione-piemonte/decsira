@@ -8,6 +8,7 @@ const PropTypes = require('prop-types');
 */
 
 const React = require('react');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class PlatformNumbers extends React.Component {
     static propTypes = {
@@ -30,11 +31,11 @@ class PlatformNumbers extends React.Component {
                 <div className="row-fluid">
                     <div className="container">
                         <div className="row">
-                            <h3>I numeri della piattaforma</h3>
+                            <h3><I18N.Message msgId={"PlatformNumbers.numbersTitle"}/></h3>
                             <ul className="list-group numeri">
-                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectMap}</span> <span className="sotto_cifra">Mappe visualizzabili</span></li>
-                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectSearch}</span> <span className="sotto_cifra">Ricerche di dettaglio disponibili</span></li>
-                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectView}</span> <span className="sotto_cifra">Viste tematiche disponibili</span></li>
+                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectMap}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.mapNumbersTitle"}/></span></li>
+                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectSearch}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.searchNumbersTitle"}/></span></li>
+                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectView}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.ViewsNumbersTitle"}/></span></li>
                             </ul>
                         </div>
                     </div>

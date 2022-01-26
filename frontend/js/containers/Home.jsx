@@ -15,6 +15,7 @@ const Header = require('../components/Header');
 const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const PlatformNumbers = connect((state) => ({
     siradecObject: state.platformnumbers.siradecObject,
@@ -40,7 +41,8 @@ class Home extends React.Component {
     };
 
     static contextTypes = {
-        router: PropTypes.object
+        router: PropTypes.object,
+        messages: PropTypes.object
     };
 
     state = {
@@ -57,6 +59,7 @@ class Home extends React.Component {
     }
 
     render() {
+        let description = LocaleUtils.getMessageById(this.context.messages, "Homepage.appDescription");
         return (
             <div className="home-page">
                 <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
@@ -71,9 +74,7 @@ class Home extends React.Component {
                             <div className="row">
                                 <div className="col-md-7 col-xs-12 testo-home">
                                     <div>
-                                        Accedi ai <strong>dati ambientali e territoriali</strong> del <strong>Piemonte</strong>.<br />
-                                        I dati ambientali sono raccolti e integrati nel SIRA Piemonte (Sistema Informativo Regionale Ambientale), in cooperazione tra soggetti produttori di informazioni ambientali (Regione, Province e ARPA).<br />
-                                        Il servizio nasce per il <strong>governo</strong> e la <strong>tutela del territorio</strong>, la <strong>pianificazione partecipata</strong>, la <strong>sensibilizzazione e il coinvolgimento dei cittadini</strong>.
+                                        <span dangerouslySetInnerHTML={{ __html: description }} />
                                     </div>
                                 </div>
                                 <SiraSearchBar

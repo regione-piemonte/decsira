@@ -11,7 +11,7 @@ const React = require('react');
 const {connect} = require('react-redux');
 const {Glyphicon} = require('react-bootstrap');
 const {showLoginPanel, hideLoginPanel} = require('../actions/userprofile');
-
+const I18N = require('@mapstore/components/I18N/I18N');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const LoginNav = connect((state) => ({
@@ -68,10 +68,10 @@ class MapHeader extends React.Component {
                                                 <div data-toggle="buttons" className="btn-group map-list">
                                                     <label className="btn btn-primary ">
                                                         <input type="radio" onChange={this.props.onBack} checked="" autoComplete="off" id="option1"
-                                                            name="options"/> Lista
+                                                            name="options"/> <I18N.Message msgId={"Cart.ListText"}/>
                                                     </label>
                                                     <label className="btn btn-primary active">
-                                                        <input type="radio" autoComplete="off" id="option2" name="options"/> Mappa
+                                                        <input type="radio" autoComplete="off" id="option2" name="options"/> <I18N.Message msgId={"Cart.mapText"}/>
                                                         <span className="badge">1</span>
                                                     </label>
                                                 </div>

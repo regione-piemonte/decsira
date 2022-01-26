@@ -21,6 +21,7 @@ const {
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
+const { loadLocale } = require('@mapstore/actions/locale');
 
 const SistemaConoscenzeAmbientaliBox = connect((state) => ({
     show: state.header?.showSistemaConoscenzeAmbientaliBox
@@ -63,6 +64,12 @@ const RightMenu = connect((state) => ({
         }
     };
 })(require('./RightMenu'));
+
+const LangBar = connect((state) => ({
+    currentLocale: state.locale && state.locale.current
+}), {
+    onLanguageChange: loadLocale.bind(null, null)
+})(require('@mapstore/components/I18N/LangBar'));
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
@@ -162,6 +169,7 @@ class Header extends React.Component {
                             <div className="pull-right">
                                 {this.renderCart()}
                                 <LoginNav />
+                                <LangBar/>
                             </div>
                             <RightMenu />
                         </div>

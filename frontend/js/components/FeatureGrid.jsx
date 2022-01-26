@@ -18,6 +18,7 @@ const MultiSelectLayer = require('./MultiSelectLayer');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const mapUtils = require('@mapstore/utils/MapUtils');
 const configUtils = require('@mapstore/utils/ConfigUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const SiraExporter = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
@@ -44,7 +45,6 @@ const FeatureGrid = connect((state) => {
     };
 })(require('../components/identify/featuregrid/FeatureGrid'));
 
-const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const I18N = require('@mapstore/components/I18N/I18N');
 const Message = require('@mapstore/components/I18N/Message');
 const {reactCellRendererFactory} = require('../components/identify/featuregrid/CellRendererFactory');
@@ -432,7 +432,7 @@ class SiraGrid extends React.Component {
                             style={{marginBottom: "12px"}}
                             onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
                         </Button>
-                        <h5>Risultati - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
+                        <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
                         <div style={{
                             display: "flex",
                             flexDirection: "column"
@@ -632,13 +632,13 @@ module.exports = connect((state) => {
     const activeConfig = state.siradec.activeFeatureType && state.siradec.configOggetti[state.siradec.activeFeatureType] || {};
     const layers = state.layers.flat;
     const layerId = state.siradec.currentNodeId ? state.siradec.currentNodeId : null;
-    const currLayer = layerId ? layers.filter((l) => l.featureType === state.siradec.activeFeatureType && l.id === layerId)[0] : null;
+    const currLayer = layerId ? layers.filter((l) => l.params && l.params.featureType === state.siradec.activeFeatureType && l.id === layerId)[0] : null;
     return {
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
-        viewParams: currLayer ? currLayer.viewparams : undefined,
+        viewParams: currLayer && currLayer.params ? currLayer.params.viewparams : undefined,
         // Indica title props
-        isIndicatore: currLayer && currLayer.isIndicatore ? true : false,
-        indicaTitle: currLayer ? currLayer.indicaTitle : ""
+        isIndicatore: currLayer && currLayer.params && currLayer.params.isIndicatore ? true : false,
+        indicaTitle: currLayer && currLayer.params ? currLayer.params.indicaTitle : ""
     };
 }, dispatch => {
     return bindActionCreators({

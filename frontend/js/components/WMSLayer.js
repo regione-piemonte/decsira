@@ -29,7 +29,7 @@ function wmsToOpenlayersOptions(options) {
         CRS: CoordinatesUtils.normalizeSRS(options.srs),
         TILED: options.tiled || false,
         VERSION: options.version || version,
-        viewparams: options.viewparams
+        viewparams: options.params ? options.params.viewparams : undefined
     }, options.params || {});
 }
 

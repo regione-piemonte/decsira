@@ -12,7 +12,8 @@ const I18N = require('@mapstore/components/I18N/I18N');
 const Dialog = require('@mapstore/components/misc/Dialog');
 const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
 const {Button} = require('react-bootstrap');
-const {Glyphicon} = require('react-bootstrap');
+const { Glyphicon } = require('react-bootstrap');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 class CartPanel extends React.Component {
     static propTypes = {
@@ -32,7 +33,8 @@ class CartPanel extends React.Component {
     };
 
     static contextTypes = {
-        router: PropTypes.object
+        router: PropTypes.object,
+        messages: PropTypes.object
     };
 
     goMap = () => {
@@ -48,7 +50,7 @@ class CartPanel extends React.Component {
                     <ConfirmButton key="removelayer"
                         text={(<Glyphicon glyph="1-close"/>)}
                         style={{"float": "right", "cursor": "pointer", "marginTop": -45}}
-                        confirming={{text: "Sei sicuro",
+                        confirming={{text: LocaleUtils.getMessageById(this.context.messages, "layerProperties.confirmDelete"),
                             style: {"float": "right", cursor: "pointer", marginTop: -35}}}
                         onConfirm={() => {
                             this.props.removeService(service.id);

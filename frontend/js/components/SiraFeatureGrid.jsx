@@ -23,6 +23,7 @@ const {selectFeatures} = require('../actions/featuregrid');
 const FilterUtils = require('@mapstore/utils/FilterUtils');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {head} = require('lodash');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const {
     loadFeaturesWithPagination
@@ -320,7 +321,7 @@ class SiraFeatureGrid extends React.Component {
                                     style={{marginBottom: "12px"}}
                                     onClick={this.onGridClose}><span><Message msgId={this.props.backToSearch}/></span>
                                 </Button>
-                                <h5>Risultati - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
+                                <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
 
                                 <FeatureGrid
                                     changeMapView={this.props.changeMapView}

@@ -64,13 +64,13 @@ class SiraSettings extends React.Component {
             style={glyphStyle}
             key="toggle-featuregrid"
             glyph="th"
-            onClick={() => this.props.searchAll(this.props.element.featureType)}/>)
+            onClick={() => this.props.searchAll(this.props.element.featureType || (this.props.element.params.featureType && this.props.element.params.featureType))}/>)
         ];
     };
 
     render() {
         const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && (this.props.element.type === "wms" || this.props.element.type === "wmspost");
-        const renderSTool = !!this.props.element.featureType;
+        const renderSTool = !!this.props.element.featureType || !!(this.props.element.params && this.props.element.params.featureType);
         const renderLegendTool = this.props.element.type !== "vector";
         return (<div id="sira-layer-settings">
             {renderLeg ? this.renderLegend() : this.renderOpacity()}

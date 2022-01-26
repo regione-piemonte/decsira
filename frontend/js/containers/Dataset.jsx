@@ -14,7 +14,7 @@ const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
 const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
-
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
 const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({map, ...toc}));
@@ -162,7 +162,8 @@ class Dataset extends React.Component {
     };
 
     static contextTypes = {
-        router: PropTypes.object
+        router: PropTypes.object,
+        messages: PropTypes.object
     };
 
     state = {
@@ -269,7 +270,7 @@ class Dataset extends React.Component {
         const searchSwitch = this.props.nodes.length > 0 ? (
             <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
                 <button className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
-                    <span>{showCategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+                    <span>{showCategories ? LocaleUtils.getMessageById(this.context.messages, "Dataset.hideCategories") : LocaleUtils.getMessageById(this.context.messages, "Dataset.showCategories")} </span>
                 </button>
             </div>) : (<noscript key="categoriesSearch"/>);
         const nodes = this.updateNodes(this.props.nodes);
@@ -310,11 +311,11 @@ class Dataset extends React.Component {
                 onSelect={this.props.selectSubCategory}>
                 <Tab
                     eventKey={'objects'}
-                    title={`Oggetti (${objects ? objects.length : 0})`}>
+                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>
                     {loading ? this.renderSpinner() : objEl}
                 </Tab>
                 <Tab eventKey={'views'}
-                    title={`Viste Tematiche (${views ? views.length : 0})`}>
+                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText") + ` (${views ? views.length : 0})`}>
                     {loading ? this.renderSpinner() : (<div id="dataset-results-view"> {viste}</div>)}
                 </Tab>
             </Tabs>);
@@ -330,7 +331,7 @@ class Dataset extends React.Component {
                     </div>
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
-                    <h1 className="sr-only">Ricerca oggetti e viste tematiche</h1>
+                    <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
                     <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
                         <span>{category ? category.name : (<noscript/>)}</span>
                     </div>

@@ -155,7 +155,7 @@ class GetFeatureInfo extends React.Component {
                 for (let l = 0; l < wmsVisibleLayers.length; l++) {
                     const layer = wmsVisibleLayers[l];
                     const {url, requestConf, layerMetadata} = this.calculateRequestParameters(layer, bounds, crs, newProps);
-                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams, layer.viewparams);
+                    this.props.actions.getFeatureInfo(url, requestConf, layerMetadata, layer.featureInfoParams, layer.params ? layer.params.viewparams : undefined);
 
                     // Load the template if required
                     if (layer.featureType) {
