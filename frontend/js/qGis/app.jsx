@@ -101,7 +101,13 @@ if (!Array.from) {
 LocaleUtils.setSupportedLocales({
     "it": {
         code: "it-IT",
-        description: "Italiano"}});
+        description: "Italiano"
+    },
+    "en": {
+        code: "en-US",
+        description: "English"
+    }
+});
 
 require('../utils/ProjUtils')();
 

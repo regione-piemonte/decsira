@@ -14,6 +14,7 @@ const {toggleNode, getThematicViewConfig, selectSubCategory, getMetadataObjects,
 const assign = require('object-assign');
 const { Tabs, Tab, Modal } = require("react-bootstrap");
 const I18N = require('@mapstore/components/I18N/I18N');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {toggleSiraControl} = require('../actions/controls');
 
 const {addLayer} = require('@mapstore/actions/layers');
@@ -99,6 +100,10 @@ class LayerTree extends React.Component {
         srs: PropTypes.string
     };
 
+    static contextTypes = {
+        messages: PropTypes.object
+    };
+
     static defaultProps = {
         loading: false,
         onToggle: () => {},
@@ -166,12 +171,12 @@ class LayerTree extends React.Component {
                 />
                 <div className="catalog-categories-switch-container">
                     <div className="catalog-categories-switch" onClick={() => this.props.toggleCategories(!showcategories)}>
-                        <span>{showcategories ? 'Nascondi Categorie' : 'Mostra Categorie'} </span>
+                        <span>{showcategories ? LocaleUtils.getMessageById(this.context.messages, "Dataset.hideCategories") : LocaleUtils.getMessageById(this.context.messages, "Dataset.showCategories")} </span>
                     </div>
                 </div>
                 <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
-                    <Tab eventKey={'objects'} title={`Oggetti (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
-                    <Tab eventKey={'views'} title={`Viste Tematiche (${views ? views.length : 0})`}>{viste}</Tab>
+                    <Tab eventKey={'objects'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
+                    <Tab eventKey={'views'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText") + ` (${views ? views.length : 0})`}>{viste}</Tab>
                 </Tabs>
                 {this.props.notAuthorized && this.renderUnauthorized()}
                 {this.props.loading ? (

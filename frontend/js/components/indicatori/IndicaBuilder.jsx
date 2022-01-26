@@ -15,6 +15,8 @@ const assign = require('object-assign');
 const {addIndicaLayer, removeIndicaLayer} = require('../../actions/addmap');
 const { closeIndicaConfiguration } = require('../../actions/siradec');
 const LayersUtils = require('@mapstore/utils/LayersUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 function IndicaBuilder({
     risoluzioneSpaziale = [],
@@ -34,7 +36,8 @@ function IndicaBuilder({
     currLayer,
     currentSiraId,
     closeConfiguration,
-    geometryType
+    geometryType,
+    messages
 }) {
 
     function getRampColors(color) {
@@ -147,7 +150,8 @@ function IndicaBuilder({
     }
 
     function ceilRuleValue(value, index, maxIndex) {
-        return index === maxIndex ? Math.ceil(value) : value;
+        let v = value + 0.5;
+        return index === maxIndex ? Math.ceil(v) : value;
     }
 
     function setupStyle() {
@@ -312,7 +316,7 @@ function IndicaBuilder({
     const params = {
         "intervals": {
             type: "input",
-            label: "Intervalli",
+            label: LocaleUtils.getMessageById(messages, "IndicaBuilder.intervalsLabel"),
             getValue: (value) => ({ param: "intervals", value: parseInt(value, 10) }),
             config: {
                 type: "number"
@@ -320,7 +324,7 @@ function IndicaBuilder({
         },
         "classification": {
             type: "select",
-            label: "Tipo Classificazione Statistica",
+            label: LocaleUtils.getMessageById(messages, "IndicaBuilder.classificationLabel"),
             config: {
                 getOptions: () => [{ label: "Equal Interval", value: "equalInterval" }, { label: "Quantile", value: "quantile" }, { label: "Jenks", value: "jenks" }],
                 selectProps: {},
@@ -330,7 +334,7 @@ function IndicaBuilder({
         },
         "colorramp": {
             type: "colorRamp",
-            label: "Scala colori",
+            label: LocaleUtils.getMessageById(messages, "IndicaBuilder.colorRampLabel"),
             config: {
                 samples: 4,
                 getOptions: () => getColors(),
@@ -352,7 +356,7 @@ function IndicaBuilder({
     };
 
     function isUpdate() {
-        return currLayer && currLayer.viewparams === wmsLayer.viewparams;
+        return currLayer && currLayer.params.viewparams === wmsLayer.params.viewparams;
     }
 
     function applyStyle() {
@@ -373,13 +377,21 @@ function IndicaBuilder({
         });
 
         wmsLayer.title = getWmsTitle();
-        wmsLayer.indicaTitle = getIndicaTitle();
-        wmsLayer.params = assign({}, wmsLayer.params, { SLD: sldUrl, viewparams: getViewParams() });
-        wmsLayer.viewparams = getViewParams();
-        wmsLayer.isIndicatore = true;
-        wmsLayer.indicaform = formData.current;
-        wmsLayer.siraId = currentSiraId;
         wmsLayer.opacity = geometryType === 'Point' ? 1 : 0.7;
+        wmsLayer.params = assign({}, wmsLayer.params, {
+            SLD: sldUrl,
+            viewparams: getViewParams(),
+            isIndicatore: true,
+            indicaform: formData.current,
+            siraId: currentSiraId,
+            indicaTitle: getIndicaTitle()
+        });
+        // wmsLayer.indicaTitle = getIndicaTitle();
+        // wmsLayer.viewparams = getViewParams();
+        // wmsLayer.isIndicatore = true;
+        // wmsLayer.indicaform = formData.current;
+        // wmsLayer.siraId = currentSiraId;
+
         if (isUpdate()) {
             wmsLayer.id = currLayer.id;
         } else {
@@ -414,14 +426,14 @@ function IndicaBuilder({
             {sldError ? renderErrorModal() : ""}
             <SwitchPanel
                 id="configFilterPanel"
-                title="Configura indicatore"
+                title={LocaleUtils.getMessageById(messages, "IndicaBuilder.configPanelTitle")}
                 expanded
                 locked
             >
                 <div className="container-fluid">
                     <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
                         <Col xs={6}>
-                            <div>Risoluzione spaziale</div>
+                            <div><I18N.Message msgId={"IndicaBuilder.risoluzioneSpaziale"}/></div>
                         </Col>
                         <Col xs={6}>
                             <ComboField
@@ -434,7 +446,7 @@ function IndicaBuilder({
                     </Row>
                     <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
                         <Col xs={6}>
-                            <div>Dimensione indicatore</div>
+                            <div><I18N.Message msgId={"IndicaBuilder.dimensione"}/></div>
                         </Col>
                         <Col xs={6}>
                             <ComboField
@@ -448,7 +460,7 @@ function IndicaBuilder({
                     </Row>
                     <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
                         <Col xs={6}>
-                            <div>Periodicità</div>
+                            <div><I18N.Message msgId={"IndicaBuilder.periodicita"}/></div>
                         </Col>
                         <Col xs={6}>
                             <ComboField
@@ -461,7 +473,7 @@ function IndicaBuilder({
                     </Row>
                     <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
                         <Col xs={6}>
-                            <div>Dettaglio Periodicità</div>
+                            <div><I18N.Message msgId={"IndicaBuilder.dettaglioPeriod"}/></div>
                         </Col>
                         <Col xs={6}>
                             <ComboField
@@ -475,11 +487,11 @@ function IndicaBuilder({
                 </div>
             </SwitchPanel>
             <div className="dhContainer">
-                <b>Indicatore selezionato</b> <br/> {getIndicaTitle()}
+                <b><I18N.Message msgId={"IndicaBuilder.selectedIndica"}/></b> <br/> {getIndicaTitle()}
             </div>
             <SwitchPanel
                 id="tematizePanel"
-                title="Tematizzazione"
+                title={LocaleUtils.getMessageById(messages, "IndicaBuilder.temaPanelTitle")}
                 collapsible
                 expanded={tematizePanelExpanded}
                 onSwitch={(expanded) => setTematizePanelExpanded(expanded)}
@@ -503,7 +515,7 @@ function IndicaBuilder({
             </SwitchPanel>
             <Row className="logicHeader inline-form filter-field-row filter-field-fixed-row">
                 <Col xs={12}>
-                    <Button onClick={applyStyle}>Applica</Button>
+                    <Button onClick={applyStyle}><I18N.Message msgId={"IndicaBuilder.applyBtn"}/></Button>
                 </Col>
             </Row>
         </div>);
@@ -557,8 +569,9 @@ export default connect((state) => {
         dettaglioPeriodicita: dettPer,
         currLayer: currLayer,
         // currSiraId: state.siradec.currentSiraId,
-        indicaform: currLayer ? currLayer.indicaform : undefined,
-        geometryType: config.geometryType
+        indicaform: currLayer ? currLayer.params.indicaform : undefined,
+        geometryType: config.geometryType,
+        messages: state.locale.messages
     };
 }, {
     addLayer: addIndicaLayer,

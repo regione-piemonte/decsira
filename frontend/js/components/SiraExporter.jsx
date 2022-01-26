@@ -12,6 +12,7 @@ const Dialog = require('@mapstore/components/misc/Dialog');
 const Select = require('react-select').default;
 const {Button, Glyphicon, Alert} = require('react-bootstrap');
 const ExporterUtils = require('../utils/ExporterUtils');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 require('react-select/dist/react-select.css');
 
 class SiraExporter extends React.Component {
@@ -40,6 +41,10 @@ class SiraExporter extends React.Component {
         show: false,
         toggleExporter: () => {},
         exportparams: {}
+    };
+
+    static contextTypes = {
+        messages: PropTypes.object
     };
 
     state = {
@@ -75,8 +80,8 @@ class SiraExporter extends React.Component {
                     clearable={false}
                     value={this.state.type}
                     options={[
-                        { value: 'all', label: 'Tutti gli oggetti' },
-                        { value: 'page', label: 'Pagina corrente' }]}
+                        { value: 'all', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportAll") },
+                        { value: 'page', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportPage") }]}
                     onChange={(val) => this.setState({type: val.value})}
                 />
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >

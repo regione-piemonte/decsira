@@ -13,6 +13,7 @@ const {createSelector} = require('reselect');
 const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 
 const SearchBar = require('@mapstore/components/mapcontrols/search/SearchBar').default;
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const {categorySelector} = require('../selectors/sira');
 const {selectCategory, searchTextChange, selectSubCategory} = require('../actions/siracatalog');
@@ -43,6 +44,10 @@ class SiraSearchBar extends React.Component {
         subcat: PropTypes.string,
         tiles: PropTypes.array,
         searchOptions: PropTypes.object
+    };
+
+    static contextTypes = {
+        messages: PropTypes.object
     };
 
     static defaultProps = {
@@ -97,7 +102,7 @@ class SiraSearchBar extends React.Component {
         return (
             <div className={containerClasses}>
                 <SearchBar
-                    placeholder="Cerca oggetti"
+                    placeholder={LocaleUtils.getMessageById(this.context.messages, "SiraSearchBar.placeholder")}
                     placeholderMsgId=""
                     className={searchClasses}
                     onSearchTextChange={onTextChange}

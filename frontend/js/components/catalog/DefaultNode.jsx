@@ -13,6 +13,7 @@ const Title = require('../toc/fragments/Title');
 const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../toc/DefaultGroup');
 const glyphStyle = {"float": "right", cursor: 'pointer'};
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class DefaultNode extends React.Component {
     static propTypes = {
@@ -38,10 +39,10 @@ class DefaultNode extends React.Component {
     };
 
     renderTools = () => {
-        let tooltipSira = <Tooltip id="tpm-search-details">Ricerca di dettaglio</Tooltip>;
-        let tooltipMap = <Tooltip id="tpm-add-map">Carica in Mappa</Tooltip>;
-        let tooltipList = <Tooltip id="tpm-list-obj">Elenco di Oggetti</Tooltip>;
-        let tooltipIndica = <Tooltip id="tpm-list-obj">Indicatore</Tooltip>;
+        let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"}/></Tooltip>;
+        let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"}/></Tooltip>;
+        let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"}/></Tooltip>;
+        let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"}/></Tooltip>;
         const tools = [];
         let indicaFunction = this.props.node.functions.filter(
             (func) => { return func.type === "Tematizzatore";}

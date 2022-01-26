@@ -221,7 +221,7 @@ class SideQueryPanel extends React.Component {
 
     renderHeader = () => {
         const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
-        let tooltip = <Tooltip id="header_tp">Chiudi Ricerca di dettaglio</Tooltip>;
+        let tooltip = <Tooltip id="header_tp">{LocaleUtils.getMessageById(this.context.messages, "queryPanel.closeSearchTooltip")}</Tooltip>;
         let heading;
         if (this.props.collapsible) {
             heading = this.props.filterPanelExpanded ? (
@@ -391,8 +391,8 @@ module.exports = connect((state) => {
         featureTypeNameLabel: activeConfig.featureTypeNameLabel,
 
         // Indica title props
-        isIndicatore: currLayer && currLayer.isIndicatore ? true : false,
-        indicaTitle: currLayer ? currLayer.indicaTitle : "",
+        isIndicatore: currLayer && currLayer.params && currLayer.params.isIndicatore ? true : false,
+        indicaTitle: currLayer && currLayer.params ? currLayer.params.indicaTitle : "",
 
         // QueryBuilder props
         groupLevels: state.queryform.groupLevels,

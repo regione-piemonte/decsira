@@ -12,6 +12,7 @@ const PropTypes = require('prop-types');
 const {bindActionCreators} = require('redux');
 const {connect} = require('react-redux');
 const { showHideAccessibilityBox } = require('../actions/footer');
+const I18N = require('@mapstore/components/I18N/I18N');
 const Accessibility = require('../components/Accessibility');
 
 class Footer extends React.Component {
@@ -36,8 +37,8 @@ class Footer extends React.Component {
                                     <a href="#"><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
                                 </div>
                                 <div className="col-md-4 text-center">
-                                    <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy" target="_blank">Cookie policy</a><br/><br/>
-                                    <a href="#" onClick={this.showAccessibilityModal} >Accessibilità</a>
+                                    <a href="http://www.sistemapiemonte.it/cms/privati/cookies-policy" target="_blank"><I18N.Message msgId={"Footer.cookiePolicy"}/></a><br/><br/>
+                                    <a href="#" onClick={this.showAccessibilityModal} ><I18N.Message msgId={"Footer.accessibility"}/></a>
                                 </div>
                                 <div className="col-md-4 footer-dx">
                                     <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>

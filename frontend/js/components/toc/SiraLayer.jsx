@@ -17,6 +17,8 @@ const LayersTool = require('./fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
 const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
+const I18N = require('@mapstore/components/I18N/I18N');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 class DefaultLayer extends React.Component {
     static propTypes = {
@@ -44,6 +46,10 @@ class DefaultLayer extends React.Component {
         groups: PropTypes.array,
         expandFilterPanel: PropTypes.func,
         searchAll: PropTypes.func
+    };
+
+    static contextTypes = {
+        messages: PropTypes.object
     };
 
     static defaultProps = {
@@ -83,7 +89,7 @@ class DefaultLayer extends React.Component {
             <ConfirmButton key="removelayer"
                 text={(<Glyphicon glyph="1-close"/>)}
                 style={{"float": "right", cursor: "pointer", borderColor: 'unset', backgroundColor: "transparent", marginRight: 3, padding: 0, outline: "none"}}
-                confirming={{text: "Sei sicuro",
+                confirming={{text: LocaleUtils.getMessageById(this.context.messages, "layerProperties.confirmDelete"),
                     style: {"float": "right", cursor: "pointer", marginTop: -5}}}
                 onConfirm={() => {
                     this.props.removeNode(this.props.node.id, "layers");
@@ -98,7 +104,7 @@ class DefaultLayer extends React.Component {
         if (this.props.activateSettingsTool) {
             tools.push(
                 <LayersTool key="toolsettings"
-                    style={{"float": "right", cursor: "pointer", marginRight: 0}}
+                    style={{ "float": "right", cursor: "pointer", marginRight: 0 }}
                     glyph="1-menu-manage"
                     onClick={(node) => {
                         if (this.props.settings && this.props.settings.node === this.props.node.id) {
@@ -109,15 +115,21 @@ class DefaultLayer extends React.Component {
                         }
                     }}/>
             );
-            if (this.props.node.featureType) {
-                tools.push(<Glyphicon
+            if (this.props.node.featureType || (this.props.node.params && this.props.node.params.featureType)) {
+                const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.search" /></Tooltip>;
+                const tool = (<Glyphicon
                     style={{"float": "right", cursor: 'pointer'}}
                     key="toggle-query"
                     glyph="search"
-                    onClick={()=> this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType, this.props.node.id)}/>);
+                    onClick={() => this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType || this.props.node.params.featureType, this.props.node.id)}
+                />);
+                tools.push(<OverlayTrigger placement="bottom" overlay={tooltip}>
+                    {tool}
+                </OverlayTrigger>
+                );
             }
-            if (this.props.node.isIndicatore === true) {
-                const tooltip = <Tooltip>Configura indicatore</Tooltip>;
+            if (this.props.node.params && this.props.node.params.isIndicatore === true) {
+                const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.configureIndica"/></Tooltip>;
                 const tool = (<Glyphicon
                     style={{"float": "right", cursor: 'pointer'}}
                     key="edit-indicatori"
@@ -146,13 +158,14 @@ class DefaultLayer extends React.Component {
     }
 
     showInfoBox = () => {
-        if (this.props.node && this.props.node.siraId) {
-            this.props.onToggle(this.props.node.siraId);
+        let siraId = this.props.node.siraId || this.props.node.params.siraId;
+        if (this.props.node && siraId) {
+            this.props.onToggle(siraId);
         }
     };
 
     configuraIndicatore = () => {
-        this.props.configureIndicaLayer(this.props.node.id, this.props.node.siraId);
+        this.props.configureIndicaLayer(this.props.node.id, this.props.node.params.siraId);
     }
 }
 
