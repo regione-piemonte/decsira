@@ -1661,6 +1661,9 @@
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
 		<layer>BdnOsservazioniFauna</layer>
 		<accessMode>READ</accessMode>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_fauna:geometria</attribute>
+		</hiddenAttributes>
 	</Rule>
 	<Rule>
 		<priority>644</priority>
@@ -1764,6 +1767,27 @@
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
 		<layer>BdnOsservazioniFlora</layer>
 		<accessMode>READ</accessMode>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:geometria</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:aQuotaMax</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:nomeValidatore</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:descrCausaMinacAtto</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:localita</attribute>
+		 
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:codImprecisione</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:fusoUtm</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:datumUtm</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:utmX</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:utmY</attribute>
+		 
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:specieSensib</attribute>
+		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:dettaglioProtezione</attribute>
+		</hiddenAttributes> 
 	</Rule>
 	<Rule>
 		<priority>657</priority>
@@ -1773,7 +1797,7 @@
 		<accessMode>READ</accessMode>
 	</Rule>
 	
-	<Rule>
+	<!--Rule>
 		<priority>658</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
@@ -1789,6 +1813,24 @@
 		<layer>BdnOsservazioniFlora</layer>
 		<accessMode>READ</accessMode>
 		<filter>EXCLUDE</filter>
+	</Rule-->
+	
+	<Rule>
+		<priority>660</priority>
+		<roles>PA_GEN_DECSIRA@REG_PMN</roles>
+		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
+		<layer>BdnOsservazioniFlora</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato" = 'PUBBLICO' AND "decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata" = 'SI' AND "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:specieSensib" IS NULL</filter>
+	</Rule>
+	
+	<Rule>
+		<priority>661</priority>
+		<roles>PA_GEN_DECSIRA@REG_PMN</roles>
+		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
+		<layer>BdnOsservazioniFauna</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato" = 'PUBBLICA' AND  "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:speMinacc" = 'NO'</filter>
 	</Rule>
 	
     </rules>
