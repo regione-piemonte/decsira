@@ -8,22 +8,21 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {connect} = require('react-redux');
-const {isObject} = require('lodash');
+const { connect } = require('react-redux');
+const { isObject } = require('lodash');
 
 const Draggable = require('react-draggable');
 
-const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
+const { Modal, Panel, Grid, Row, Col, Button } = require('react-bootstrap');
 
-const {Resizable} = require('react-resizable');
+const { Resizable } = require('react-resizable');
 
-const {bindActionCreators} = require('redux');
-const {changeMapView} = require('@mapstore/actions/map');
-const {selectFeatures} = require('../actions/featuregrid');
+const { bindActionCreators } = require('redux');
+const { changeMapView } = require('@mapstore/actions/map');
+const { selectFeatures } = require('../actions/featuregrid');
 const FilterUtils = require('@mapstore/utils/FilterUtils');
-const {verifyProfiles} = require('../utils/TemplateUtils');
-const {head} = require('lodash');
-const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const { verifyProfiles } = require('../utils/TemplateUtils');
+const { head } = require('lodash');
 
 const {
     loadFeaturesWithPagination
@@ -43,11 +42,11 @@ const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const I18N = require('@mapstore/components/I18N/I18N');
 const Message = require('@mapstore/components/I18N/Message');
 
-const {reactCellRendererFactory} = require('../components/identify/featuregrid/CellRendererFactory');
+const { reactCellRendererFactory } = require('../components/identify/featuregrid/CellRendererFactory');
 const GoToDetail = require('./GoToDetail');
 
-const {loadCardTemplate} = require('../actions/card');
-const {toggleSiraControl} = require('../actions/controls');
+const { loadCardTemplate } = require('../actions/card');
+const { toggleSiraControl } = require('../actions/controls');
 // const {loadFeatureGridConfig} = require('../actions/grid');
 
 const Spinner = require('react-spinkit');
@@ -67,7 +66,7 @@ class SiraFeatureGrid extends React.Component {
         detailOpen: PropTypes.bool,
         expanded: PropTypes.bool,
         header: PropTypes.string,
-        features: PropTypes.oneOfType([ PropTypes.array, PropTypes.object]),
+        features: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         detailsConfig: PropTypes.object,
         columnsDef: PropTypes.array,
         map: PropTypes.object,
@@ -130,14 +129,14 @@ class SiraFeatureGrid extends React.Component {
             pageSize: 20
         },
         backToSearch: "featuregrid.backtosearch",
-        onDetail: () => {},
-        onShowDetail: () => {},
-        toggleSiraControl: () => {},
-        changeMapView: () => {},
+        onDetail: () => { },
+        onShowDetail: () => { },
+        toggleSiraControl: () => { },
+        changeMapView: () => { },
         // loadFeatureGridConfig: () => {},
-        onExpandFilterPanel: () => {},
-        selectFeatures: () => {},
-        onQuery: () => {}
+        onExpandFilterPanel: () => { },
+        selectFeatures: () => { },
+        onQuery: () => { }
     };
 
     state = {
@@ -186,12 +185,12 @@ class SiraFeatureGrid extends React.Component {
 
     onResize = (event, resize) => {
         let size = resize.size;
-        this.setState({width: size.width, height: size.height});
+        this.setState({ width: size.width, height: size.height });
 
     };
 
     getRequestId = (params) => {
-        return `${params.startRow}_${params.endRow}_${params.sortModel.map((m) => `${m.colId}_${m.sort}` ).join('_')}`;
+        return `${params.startRow}_${params.endRow}_${params.sortModel.map((m) => `${m.colId}_${m.sort}`).join('_')}`;
     };
 
     getSortAttribute = (colId) => {
@@ -200,7 +199,7 @@ class SiraFeatureGrid extends React.Component {
     };
 
     getSortOptions = (params) => {
-        return params.sortModel.reduce((o, m) => ({sortBy: this.getSortAttribute(m.colId), sortOrder: m.sort}), {});
+        return params.sortModel.reduce((o, m) => ({ sortBy: this.getSortAttribute(m.colId), sortOrder: m.sort }), {});
     };
 
     getFeatures = (params) => {
@@ -210,7 +209,7 @@ class SiraFeatureGrid extends React.Component {
             if (rowsThisPage) {
                 params.successCallback(rowsThisPage, this.props.totalFeatures);
             } else {
-                let pagination = {startIndex: params.startRow, maxFeatures: params.endRow - params.startRow};
+                let pagination = { startIndex: params.startRow, maxFeatures: params.endRow - params.startRow };
                 let filterObj = {
                     groupFields: this.props.groupFields,
                     filterFields: this.props.filterFields.filter((field) => field.value),
@@ -266,7 +265,7 @@ class SiraFeatureGrid extends React.Component {
         return (
             <Modal show={!!loadingError} bsSize="small">
                 <Modal.Header>
-                    <Modal.Title><I18N.Message msgId={msg}/></Modal.Title>
+                    <Modal.Title><I18N.Message msgId={msg} /></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mapstore-error">{exception}</div>
@@ -297,42 +296,42 @@ class SiraFeatureGrid extends React.Component {
         }, ...(this.props.columnsDef.map((column) => {
             // if (!column.profiles || (column.profiles && column.profiles.indexOf(this.props.profile) !== -1)) {
             return verifyProfiles(column.profiles, this.props.profile) &&
-                 assign({}, column, {field: "properties." + column.field});
-        })).filter((c) => c )];
+                assign({}, column, { field: "properties." + column.field });
+        })).filter((c) => c)];
         if (this.sortModel && this.sortModel.length > 0) {
             columns = columns.map((c) => {
                 let model = head(this.sortModel.filter((m) => m.colId === c.field));
-                if ( model ) {
+                if (model) {
                     c.sort = model.sort;
                 }
                 return c;
             });
         }
 
-        let gridConf = this.props.pagination ? {dataSource: this.dataSource, features: []} : {features: this.props.features};
+        let gridConf = this.props.pagination ? { dataSource: this.dataSource, features: [] } : { features: this.props.features };
 
         if (this.props.open) {
             return (
-                <Draggable start={{x: 760, y: 120}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+                <Draggable start={{ x: 760, y: 120 }} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
                     <Panel className="featuregrid-container" collapsible expanded={this.props.expanded} header={this.renderHeader()} bsStyle="primary">
                         <Resizable className="box" height={this.state.height} width={this.state.width} onResize={this.onResize} minConstraints={[500, 250]}>
-                            <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
+                            <div style={this.props.loadingGrid ? { display: "none" } : { height: this.state.height, width: this.state.width }}>
                                 <Button
-                                    style={{marginBottom: "12px"}}
-                                    onClick={this.onGridClose}><span><Message msgId={this.props.backToSearch}/></span>
+                                    style={{ marginBottom: "12px" }}
+                                    onClick={this.onGridClose}><span><Message msgId={this.props.backToSearch} /></span>
                                 </Button>
-                                <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
+                                <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"} />)}</h5>
 
                                 <FeatureGrid
                                     changeMapView={this.props.changeMapView}
                                     srs="EPSG:4326"
                                     map={this.props.map}
                                     columnDefs={columns}
-                                    style={{height: this.state.height - 120, width: this.state.width}}
+                                    style={{ height: this.state.height - 120, width: this.state.width }}
                                     maxZoom={16}
                                     paging={this.props.pagination}
                                     zoom={15}
-                                    agGridOptions={{rowBuffer: 20, enableServerSideSorting: true, suppressMultiSort: true}}
+                                    agGridOptions={{ rowBuffer: 20, enableServerSideSorting: true, suppressMultiSort: true }}
                                     toolbar={{
                                         zoom: true,
                                         exporter: true,
@@ -344,13 +343,14 @@ class SiraFeatureGrid extends React.Component {
 
                             </div>
                         </Resizable>
-                        {this.props.loadingGrid ? (<div style={{height: "300px", width: this.state.width}}>
+                        {this.props.loadingGrid ? (<div style={{ height: "300px", width: this.state.width }}>
                             <div style={{
                                 position: "relative",
                                 width: "60px",
                                 top: "50%",
-                                left: "45%"}}>
-                                <Spinner style={{width: "60px"}} spinnerName="three-bounce" noFadeIn/>
+                                left: "45%"
+                            }}>
+                                <Spinner style={{ width: "60px" }} spinnerName="three-bounce" noFadeIn />
                             </div>
                         </div>) : null}
                     </Panel>
