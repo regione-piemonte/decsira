@@ -1,6 +1,7 @@
 {
    "featureTypeName":"decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora",
-   "featureTypeNameLabel":"BDN – OSSERVAZIONI SPECIE FLORA (scala minima  1:100.000) – DATASET",
+   "featureTypeNameLabel":"BDN – Osservazioni Specie Flora (scala minima  1:100.000) – dataset",
+   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
    "nameSpaces": {
      "decsiraogc_biodiversita_bdn_osservazioni_flora": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_flora/1.0"
    },
@@ -8,7 +9,7 @@
        "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "BDN – OSSERVAZIONI SPECIE FLORA (scala minima  1:100.000) – DATASET",
+        "title": "BDN – Osservazioni Specie Flora (scala minima  1:100.000) – dataset",
         "name": "decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
@@ -20,6 +21,9 @@
            "geometryType": "Polygon"
        },
         "featureType": "bdnOsservazioniFlora",
+        "params": {
+          "featureType": "bdnOsservazioniFlora"
+        },
         "group": "Oggetti",
         "format": "image/png"
     },
@@ -55,52 +59,67 @@
            "type": 2
          },
          {
-          "headerName": "Data di osservazione",
+          "headerName": "Codice rilievo",
           "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:dataRilievoCompleta/text()"],
-          "type": 2,
-          "dateFormat": "DD/MM/YYYY",
-          "width" : 250
-        },
-		    {
-           "headerName": "Fonte segnalazione",
-           "suppressSorting": true,
-           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati/text()"],
-           "type": 2,
-           "width" : 200
-         },
-         {
-          "headerName": "Nome specie",
-          "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie/text()"],
-          "type": 2,
-          "width" : 200
-        },
-        {
-          "headerName": "Famiglia",
-          "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc/text()"],
-          "type": 2,
-          "width" : 200
-        },
-        {
-          "headerName": "Rilevatore",
-          "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatore/text()"],
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:codIdentScheda/text()"],
           "type": 2,
           "width" : 150
         },
         {
+          "headerName": "Data di osservazione",
+          "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:dataRilievoCompleta/text()"],
+          "type": 2,
+          "dateFormat": "DD/MM/YYYY",
+          "width" : 180
+        },
+		    {
+           "headerName": "Fonte segnalazione",
+           "suppressSorting": true,
+           "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati/text()"],
+           "type": 2,
+           "width" : 180
+         },
+         {
+          "headerName": "Nome specie",
+          "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie/text()"],
+          "type": 2,
+          "width" : 210
+        },
+        {
+          "headerName": "Famiglia",
+          "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc/text()"],
+          "type": 2,
+          "width" : 180
+        },
+        {
+          "headerName": "Rilevatore",
+          "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+          "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatore/text()"],
+          "type": 2,
+          "width" : 140
+        },
+        {
           "headerName": "Provincia",
           "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:provincia/text()"],
           "type": 2,
-          "width" : 160
+          "width" : 150
         },
        
         {
           "headerName": "Comune",
           "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:comune/text()"],
           "type": 2,
           "width" : 200
@@ -108,20 +127,23 @@
         {
           "headerName": "Quota minima",
           "suppressSorting": true,
+          "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima/text()"],
           "type": 2,
-          "width" : 150
+          "width" : 140
         },
         {
           "headerName": "Quota max",
           "suppressSorting": true,
+          "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:aQuotaMax/text()"],
           "type": 2,
-          "width" : 150
+          "width" : 140
         },
         {
           "headerName": "Ambiente",
           "suppressSorting": true,
+          "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente/text()"],
           "type": 2,
           "width" : 200
@@ -129,6 +151,7 @@
         {
           "headerName": "Settore geografico",
           "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:descrSettoGeogr/text()"],
           "type": 2,
           "width" : 300
@@ -136,6 +159,7 @@
         {
           "headerName": "Proprieta'",
           "suppressSorting": true,
+          "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato/text()"],
           "type": 2,
           "width" : 150
@@ -143,6 +167,7 @@
         {
           "headerName": "Proprietario",
           "suppressSorting": true,
+          "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:nomeProprietario/text()"],
           "type": 2,
           "width" : 150
@@ -150,9 +175,10 @@
         {
           "headerName": "Dati validati",
           "suppressSorting": true,
+          "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
           "xpath": ["decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata/text()"],
           "type": 2,
-          "width" : 150
+          "width" : 130
         },
         {
           "hide": true,
@@ -176,6 +202,7 @@
         "index": 1,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:famigliaDesc",
         "label": "Famiglia",
+        "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -191,6 +218,7 @@
         "index": 2,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:genere",
         "label": "Genere",
+        "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -206,6 +234,7 @@
         "index": 3,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:concatenazioneNomeSpecie",
         "label": "Nome Specie",
+        "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -215,12 +244,13 @@
           }
         },
         "valueId": "concatenazione_nome_specie",
-        "valueLabel": "label"
+        "valueLabel": "concatenazione_nome_specie"
       },
       {
         "index": 4,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:codFonteDati",
         "label": "Fonte segnalazione",
+        "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -236,6 +266,7 @@
         "index": 5,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRilevatore/decsiraogc_biodiversita_bdn_osservazioni_flora:soggettoRilevatore",
         "label": "Rilevatore segnalazione",
+        "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -251,6 +282,7 @@
         "index":6,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:dataRilievoCompleta",
         "label":"Data di osservazione",
+        "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type":"date",
         "fieldOptions": {
           "dateFormat": "DD/MM/YYYY"
@@ -260,18 +292,21 @@
         "index":7,
         "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:daQuotaMinima",
         "label":"Quota minima",
+        "profile": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
         "type":"number"
      },
      {
       "index": 8,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:aQuotaMax",
       "label":"Quota massima",
+      "profile": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type":"number"
      },
      {
       "index": 9,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:descrAmbiente",
       "label": "Ambiente",
+      "profile": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {
@@ -287,6 +322,7 @@
       "index": 10,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:provincia",
       "label": "Provincia",
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {
@@ -302,6 +338,7 @@
       "index": 11,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:comune",
       "label": "Comune",
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {
@@ -322,6 +359,7 @@
       "index": 12,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:areaProtetta",
       "label": "Area Protetta",
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {
@@ -337,6 +375,7 @@
       "index": 13,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:reteNatura2000Descr",
       "label": "Rete Natura 2000",
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {
@@ -352,12 +391,23 @@
       "index":14,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:descrSettoGeogr",
       "label":"Settore geografico",
-      "type":"string"
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+      "type": "list",
+      "valueService": {
+        "urlParams": {
+          "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_settore_geo",
+          "propertyName": "id_bdn_flora_settore_geo,set_geodes,label,ordinamento",
+          "sortBy": "ordinamento+A"
+        }
+      },
+      "valueId": "set_geodes",
+      "valueLabel": "label"
      },
      {
       "index":15,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:codProprietaDato",
       "label":"Proprietà",
+      "profile": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type":"list",
       "values": [
          {"value":"DIVULGABILE CON CONSENSO AUTORE","name":"DIVULGABILE CON CONSENSO AUTORE"},
@@ -371,6 +421,7 @@
       "index": 16,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:nomeProprietario",
       "label": "Proprietario",
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {
@@ -387,6 +438,7 @@
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:schedaValidata",
       "label":"Dati validati",
       "type":"list",
+      "profile": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "values": [
          {"value":"SI","name":"SI"},
          {"value":"NO","name":"NO"}
@@ -398,6 +450,7 @@
       "index": 18,
       "attribute": "decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraSpecie/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:protezione",
       "label": "Protezioni",
+      "profile": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
       "type": "list",
       "valueService": {
         "urlParams": {

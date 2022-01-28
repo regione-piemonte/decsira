@@ -30,22 +30,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="C252f2a2c-761e-4d2a-9eae-71a17cb36deb" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="anno_osserv_recente"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
-                <child name="annoOsservazRecente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf525fa1b-d1a8-49db-abe6-307d4a2ef2a4" priority="normal">
         <source>
             <property>
@@ -624,5 +608,21 @@
                 </jp:condition>
             </jp:join-parameter>
         </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0ae6d579-427d-475c-8b5c-6edbab101c6f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_griglia_distr_flora" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="anno_oss_recente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDistribuzioneFloraType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+                <child name="annoOsservazRecente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
     </cell>
 </alignment>

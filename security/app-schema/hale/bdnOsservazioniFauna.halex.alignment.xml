@@ -1969,4 +1969,20 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C30991bce-2bcc-4d04-b868-8b5f6f4b2652" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="presenza_protezione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnFaunaProtezioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+                <child name="presenzaProtezione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
