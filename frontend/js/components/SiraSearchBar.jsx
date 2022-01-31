@@ -84,7 +84,7 @@ class SiraSearchBar extends React.Component {
 
     renderSearchCategories = () => {
         const { btnClasses, category, overlayPlacement } = this.props;
-        const sezioneAttivaLbl = "sezione attiva " + category.icon;
+        const sezioneAttivaLbl = LocaleUtils.getMessageById(this.context.messages, "sr-only.activeSection") + category.icon;
         return (
             <OverlayTrigger
                 trigger={["focus", "click"]}
@@ -92,7 +92,7 @@ class SiraSearchBar extends React.Component {
                 overlay={this.renderPopover()}>
                 <Button className={btnClasses}>
                     <div className={category && category.icon}><span className="sr-only">{sezioneAttivaLbl}</span></div>
-                    <span className="sr-only">avvia a ricerca</span>
+                    <span className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.startSearch")}</span>
                 </Button>
             </OverlayTrigger>);
     };

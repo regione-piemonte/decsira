@@ -66,7 +66,7 @@ class Home extends React.Component {
                     <HashLink to="/#main-content">Salta al contenuto principale</HashLink>
                 </div>
                 <Header />
-                <h1 className="sr-only">Homepage</h1>
+                <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.homepage")}</h1>
                 <div id="main-content"></div>
                 <div className="container-fluid" role="search">
                     <div className="row-fluid sb-sx">

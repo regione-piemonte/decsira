@@ -54,7 +54,7 @@ class RightMenu extends React.Component {
         return (
             <div>
                 <button className="btn btn-link offcanvas-toggle" aria-expanded="false" onClick={this.props.clickOnIconButton}>
-                    <span className="sr-only">Menu di navigazione</span>
+                    <span className="sr-only"><I18N.Message msgId={"sr-only.navigationMenu"}/></span>
                     <span className={this.renderIconStyle()}></span>
                 </button>
                 {this.renderMenu()}

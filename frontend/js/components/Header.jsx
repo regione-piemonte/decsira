@@ -22,6 +22,8 @@ const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
 const { loadLocale } = require('@mapstore/actions/locale');
+const I18N = require('@mapstore/components/I18N/I18N');
+const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const SistemaConoscenzeAmbientaliBox = connect((state) => ({
     show: state.header?.showSistemaConoscenzeAmbientaliBox
@@ -75,7 +77,7 @@ const LoginNav = connect((state) => ({
     user: state.userprofile.user,
     nav: false,
     renderButtonText: false,
-    renderButtonContent: () => { return <div><Glyphicon glyph="user" /><span className="sr-only">menu utente</span></div>; },
+    renderButtonContent: () => { return <div><Glyphicon glyph="user" /><span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>; },
     bsStyle: "primary",
     showAccountInfo: false,
     showPasswordChange: false,
@@ -141,6 +143,10 @@ class Header extends React.Component {
         goToHome: PropTypes.func
     };
 
+    static contextTypes = {
+        messages: PropTypes.object
+    };
+
     static defaultProps = {
         cartMappaStyle: 'btn btn-primary',
         cartListaStyle: 'btn btn-primary active',
@@ -162,7 +168,7 @@ class Header extends React.Component {
                     <div className="row-fluid">
 
                         <div className="col-lg-9 col-md-9 col-sm-8 col-xs-8 testalino-sx">
-                            <div className="navbar-header-title"><a onClick={this.props.goToHome} href="#" title="Home page Sistema Conoscenze Ambientali"><span>Sistema</span> Conoscenze Ambientali</a></div>
+                            <div className="navbar-header-title"><a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")}><span><I18N.Message msgId={"Header.appAcronym"}/></span> <I18N.Message msgId={"Header.appName"}/></a></div>
                         </div>
 
                         <div className="col-lg-3 col-md-3 col-sm-4 col-xs-4 testalino-dx">
