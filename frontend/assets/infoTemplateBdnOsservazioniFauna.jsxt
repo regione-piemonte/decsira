@@ -13,7 +13,15 @@
 		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
 		},
 		{
-		   "headerName":"Anno di osservazione",
+		   "headerName":"Codice rilievo",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codiceRilievo/text()"],
+		   "type":2,
+		   "width":140
+		},
+		{
+		   "headerName":"Data di osservazione",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":"decsiraogc_biodiversita_bdn_osservazioni_fauna:dataRilievoCompleta/text()",
 		   "dateFormat": "DD/MM/YYYY",
 		   "type":2,
@@ -21,60 +29,105 @@
         },
 		{
 		   "headerName":"Fonte segnalazione",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codFonteDati/text()"],
 		   "type":2,
 		   "width":150
 		},
 		{
 		   "headerName":"Nome specie",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:concatenazioneNomeSpecie/text()"],
 		   "type":2,
 		   "width":250
 		},
 		{
 		   "headerName":"Famiglia",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:famigliaDesc/text()"],
 		   "type":2,
 		   "width":120
 		},
 		{
+		   "headerName":"Ordine",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:ordine/text()"],
+		   "type":2,
+		   "width":120
+		},
+		{
+		   "headerName":"Classe",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:classe/text()"],
+		   "type":2,
+		   "width":120
+		},
+		{
+		   "headerName":"Phylum",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:phylum/text()"],
+		   "type":2,
+		   "width":120
+		},
+		{
+		   "headerName":"Rilevatore",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRilevatore/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRilevatore/decsiraogc_biodiversita_bdn_osservazioni_fauna:soggettoRilevatore/text()"],
+		   "type":2,
+		   "width":120
+		},
+		{
 		   "headerName":"Provincia",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:provincia/text()"],
 		   "type":2,
 		   "width":120
 		},
 		{
 		   "headerName":"Comune",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:comune/text()"],
 		   "type":2,
 		   "width":150
 		},
 		{
 		   "headerName":"Quota minima",
+		   "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:daQuotaMinima/text()"],
 		   "type":1,
 		   "width":120
 		},
 		{
 		   "headerName":"Quota massima",
+		   "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax/text()"],
 		   "type":1,
 		   "width":120
 		},
 		{
+		   "headerName":"Tipo segnalazione",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
+		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:tipoSegnalaz/text()"],
+		   "type":2,
+		   "width":200
+		},
+		{
 		   "headerName":"Ambiente",
+		     "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codAmbiente/text()"],
 		   "type":2,
 		   "width":200
 		},
 		{
 		   "headerName":"Proprietà",
+		   "profiles": ["BDN_GESTORE@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato/text()"],
 		   "type":2,
 		   "width":200
 		},
 		{
 		   "headerName":"Proprietario",
+		   "profiles": ["PA_GEN_DECSIRA@REG_PMN","BDN_GESTORE@REG_PMN","BDN_ARPA@REG_PMN","BDN_EG_01@REG_PMN","BDN_EG_02@REG_PMN","BDN_EG_03@REG_PMN","BDN_EG_04@REG_PMN","BDN_EG_05@REG_PMN","BDN_EG_06@REG_PMN","BDN_EG_07@REG_PMN","BDN_EG_08@REG_PMN","BDN_EG_09@REG_PMN","BDN_EG_10@REG_PMN","BDN_EG_11@REG_PMN"],
 		   "xpath":["decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario/text()"],
 		   "type":2,
 		   "width":200

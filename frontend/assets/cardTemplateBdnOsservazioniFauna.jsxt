@@ -1,14 +1,24 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='BANCA DATI NATURALISTICA: OSSERVAZIONI FAUNISTICHE' subtitle={[
-			'Codice Rilievo: ',
+        <DetailTitle title='BDN – OSSERVAZIONI SPECIE FAUNA (scala minima  1:100.000) – DATASET' subtitle={[
+			'Codice rlievo: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codiceRilievo/text()")
             ]} id={model.id}/>
     )}>
     
     <Panel className="template">
 		<Section header='Scheda segnalazioni: inquadramento generale' eventKey='1' expanded={true}>
+
+		<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+        || ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+        || ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+	    || ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+	    || ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+   
+			<LabeledField label='Codice rilievo' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codiceRilievo/text()")
+			}/> 
 			<LabeledField label='Specie segnalata' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:concatenazioneNomeSpecie/text()")
 			}/> 
@@ -27,18 +37,46 @@
 			<LabeledField label='Rilevatore' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:soggettoRilevatore/text()")
 			}/> 
-			<LabeledField label='Proprietà del dato' value={
-				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato/text()")
-			}/> 
-			<LabeledField label='Proprietario' value={
-				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario/text()")
-			}/> 
+
+		</ProfileWrapper>
+
+			<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+        		|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+        		|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+	    		|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+	    		|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+            
+					<LabeledField label='Proprietà del dato' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato/text()")
+					}/> 
+			</ProfileWrapper>
+
+			<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+				|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+				|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+				|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+				|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+   
+
+					<LabeledField label='Proprietario' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeProprietario/text()")
+					}/> 
+					<LabeledField label='Museo' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeMuseo/text()")
+					}/>
+					<LabeledField label='Collezione' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeCollezione/text()")
+					}/>
+			</ProfileWrapper>
 		</Section>
 
 		<Section header='Dettaglio specie segnalata' eventKey='2' expanded={true}>
-				<LabeledField label='Cod. Gruppo' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:codGruppo/text()")
-				}/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+			|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+			|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+	
 				<LabeledField label='Gruppo' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:gruppo/text()")
 				}/> 
@@ -66,165 +104,291 @@
 				<LabeledField label='Nome specie' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:concatenazioneNomeSpecie/text()")
 				}/> 
-				<LabeledField label='Specie sensibile' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:specieSensib/text()")
-				}/>
-				<LabeledField label='Codice euring' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:codEuring/text()")
-				}/> 
-				<LabeledField label='Specie minacciata' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:speMinacc/text()")
-				}/> 
-				<LabeledField label='Quantificazione individui' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:quantificazioneIndividui/text()")
-				}/> 
-				<LabeledField label='Presenza uova/ovature' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:flgOvature/text()")
-				}/> 
-				<LabeledField label='Numero maschi' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nMaschi/text()")
-				}/> 
-				<LabeledField label='Numero femmine' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nFemmine/text()")
-				}/> 
-				<LabeledField label='Numero sesso indeterm.' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:numSessoIndetermin/text()")
-				}/> 
-				<LabeledField label='Numero adulti' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nAdulti/text()")
-				}/> 
-				<LabeledField label='Numero immaturi' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nImmaturi/text()")
-				}/> 
-				<LabeledField label='N° giovani dell&rsquo;anno' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nGiovaniAnno/text()")
-				}/> 
-				<LabeledField label='N° larve' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nLarve/text()")
-				}/>
-				<LabeledField label='Tipo di protezione' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:dettaglioProtezione/text()")
-				}/>
+
+		    </ProfileWrapper>
+				
+				<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+						|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+						|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+						
+						<LabeledField label='Specie sensibile' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:specieSensib/text()")
+						}/>
+
+				</ProfileWrapper>
+
+				<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+					|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+					|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+					|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+					|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+			
+						<LabeledField label='Codice euring' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:codEuring/text()")
+						}/> 
+
+			  </ProfileWrapper>
+
+				<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+						|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+						|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+
+
+						<LabeledField label='Specie minacciata' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:speMinacc/text()")
+						}/> 
+
+			    </ProfileWrapper>
+
+				<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+					|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+					|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+					|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+					|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+			
+				<Section header='Dettaglio specie segnalata' eventKey='3' expanded={true}>
+					 <SiraTable
+                        id="BdnFaunaProtezioni"
+                        selectedRow={model.BdnFaunaProtezioni}
+                        wfsVersion="2.0"
+                        rowSelection={false}
+                        columns={
+                            [
+                                {
+                                    headerName: 'Tipo di protezione',
+                                    width: 351,
+                                    xpath:"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:dettaglioProtezione/text()"
+                                },
+                                {
+                                    headerName: 'Presenza',
+                                    width: 100,
+                                    xpath: "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:presenzaProtezione/text()"
+                                },
+                                {
+                                    headerName: 'Dettaglio',
+                                    width: 290,
+                                    xpath: "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:protezione/text()"
+                                }
+                            ]
+                        }
+                        features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaProtezioni")}/>
+
+				</Section>
+
+			 </ProfileWrapper>
 		</Section>
 
-		<Section header='Dati stazionali' eventKey='3' expanded={true}>
-				<LabeledField label='Ambiente' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codAmbiente/text()")
-				}/>
-				<LabeledField label='Quota (m) da' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:daQuotaMinima/text()")
-				}/>
-				<LabeledField label='Quota (m) a' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax/text()")
-				}/>
-				<LabeledField label='Sito vulnerabile' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:sitoVulnerabile/text()")
-				}/>
-				<LabeledField label='Cause vulnerabilità' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:causeVulnerabilit/text()")
-				}/>
-		</Section>
+		<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+			|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+			|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+	
 
-		<Section header='Inquadramento bibliografico' eventKey='4' expanded={true}>
-				<LabeledField label='Riferimento bibliografico' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:riferBibliograf/text()")
-				}/>
-				<LabeledField label='Autori' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:autoriFonteBib/text()")
-				}/>
-				<LabeledField label='Anno' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:annoFonteBib/text()")
-				}/>
-				<LabeledField label='Titolo' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:titoloFonteBib/text()")
-				}/>
-				<LabeledField label='Rivista' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:rivistaFonteBib/text()")
-				}/>
-				<LabeledField label='Museo' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeMuseo/text()")
-				}/>
-				<LabeledField label='Collezione' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeCollezione/text()")
-				}/>
-		</Section> 
+			<Section header='Inquadramento bibliografico' eventKey='4' expanded={true}>
+					<LabeledField label='Riferimento bibliografico' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:riferBibliograf/text()")
+					}/>
+					<LabeledField label='Autori' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:autoriFonteBib/text()")
+					}/>
+					<LabeledField label='Anno' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:annoFonteBib/text()")
+					}/>
+					<LabeledField label='Titolo' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:titoloFonteBib/text()")
+					}/>
+					<LabeledField label='Rivista' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaBiblio/decsiraogc_biodiversita_bdn_osservazioni_fauna:rivistaFonteBib/text()")
+					}/>
+				
+			</Section> 
 
-		<Section header='Inquadramento geografico' eventKey='5' expanded={true}>
+		 </ProfileWrapper>
+
+		 <ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+			|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+			|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+	
+				<Section header='Individui osservati' eventKey='5' expanded={true}>
+						<LabeledField label='Quantificazione individui' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:quantificazioneIndividui/text()")
+						}/> 
+						<LabeledField label='Presenza uova/ovature' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:flgOvature/text()")
+						}/> 
+						<LabeledField label='Numero maschi' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nMaschi/text()")
+						}/> 
+						<LabeledField label='Numero femmine' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nFemmine/text()")
+						}/> 
+						<LabeledField label='Numero sesso indeterm.' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:numSessoIndetermin/text()")
+						}/> 
+						<LabeledField label='Numero adulti' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nAdulti/text()")
+						}/> 
+						<LabeledField label='Numero immaturi' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nImmaturi/text()")
+						}/> 
+						<LabeledField label='N° giovani dell&rsquo;anno' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nGiovaniAnno/text()")
+						}/> 
+						<LabeledField label='N° larve' value={
+							model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaIndividui/decsiraogc_biodiversita_bdn_osservazioni_fauna:nLarve/text()")
+						}/>
+				</Section> 
+			</ProfileWrapper>
+
+		<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+						|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+						|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+
+					<Section header='Dati stazionali' eventKey='6' expanded={true}>
+							<LabeledField label='Ambiente' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codAmbiente/text()")
+							}/>
+							<LabeledField label='Quota (m) minima' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:daQuotaMinima/text()")
+							}/>
+							<LabeledField label='Quota (m) massima' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:aQuotaMax/text()")
+							}/>
+							<LabeledField label='Sito vulnerabile' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:sitoVulnerabile/text()")
+							}/>
+							<LabeledField label='Cause vulnerabilità' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:causeVulnerabilit/text()")
+							}/>
+					</Section>
+
+		</ProfileWrapper>
+
+		<Section header='Inquadramento geografico' eventKey='7' expanded={true}>
+
+		<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+			|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+			|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+			|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+	
 				<LabeledField label='Provincia' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:provincia/text()")
 				}/> 
 				<LabeledField label='Comune' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:comune/text()")
 				}/> 
+
+		</ProfileWrapper>
+
+			<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+					|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+					|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+					|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+					|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+
 				<LabeledField label='Località' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:localita/text()")
 				}/>
-				<LabeledField label='Descrizione settore geografico' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:descrSettoGeogr/text()")
-				}/> 
-				<LabeledField label='Descrizione area protetta' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:areaProtetta/text()")
-				}/> 
-				<LabeledField label='Descrizione Sito Natura 2000' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:reteNatura2000Completo/text()")
-				}/> 
-				<LabeledField label='Codice catasto speleologico' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:codcatastSpeleolog/text()")
-				}/>
-				<LabeledField label='Nome grotta' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeGrotta/text()")
-				}/> 
-				<LabeledField label='Codice imprecisione' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codImprecisione/text()")
-				}/> 
-				<LabeledField label='Fuso UTM' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:fusoUtm/text()")
-				}/> 
-				<LabeledField label='Datum UTM' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:datumUtm/text()")
-				}/>
-				<LabeledField label='Coordinate UTM: longitudine' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:utmX/text()")
-				}/> 
-				<LabeledField label='Coordinate UTM: latitudine' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:utmY/text()")
-				}/> 
+
+			</ProfileWrapper>
+
+			<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+				|| ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+				|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+				|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+				|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+		
+					<LabeledField label='Area protetta' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:areaProtetta/text()")
+					}/> 
+					<LabeledField label='Sito Natura 2000' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:reteNatura2000Completo/text()")
+					}/> 
+
+			</ProfileWrapper>
+				
+				<ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+						|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+						|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
+
+							<LabeledField label='Codice catasto speleologico' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:codcatastSpeleolog/text()")
+							}/>
+							<LabeledField label='Nome grotta' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpeleologica/decsiraogc_biodiversita_bdn_osservazioni_fauna:nomeGrotta/text()")
+							}/> 
+							<LabeledField label='Imprecisione' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:codImprecisione/text()")
+							}/> 
+							<LabeledField label='Fuso UTM' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:fusoUtm/text()")
+							}/> 
+							<LabeledField label='Datum UTM' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:datumUtm/text()")
+							}/>
+							<LabeledField label='Coordinate UTM: longitudine' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:utmX/text()")
+							}/> 
+							<LabeledField label='Coordinate UTM: latitudine' value={
+								model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:utmY/text()")
+							}/> 
+
+			</ProfileWrapper>
 		</Section>
 
-    <Section header='MAPPA SINTESI - FAUNA BANCA DATI NATURALISTICHE su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='6' expanded={true}>
-	      <MappaScheda
-	              center={
-	                      model.getValue({
-	                          type: TemplateUtils.GEOMETRY_TYPE,
-	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:geometria/gml:Point/gml:pos/text()"
-	                      })
-	              }
-	              layers={[
-	                      {
-							  "type": "wms",
-							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
-							  "name": "SfondoCartRif",
-							  "title": "Sfondo Cartografico",
-							  "group": "background",
-							  "visibility": true,
-							  "format": "image/png",
-							  "tiled": true,
-							  "tileSize": 512
-                          },
-	                      {
-	                          "type": "wms",
-	                          "url": "{geoserverUrl}/wms",
-	                          "visibility": true,
-	                          "title": "Anteprima Osservazioni Fauna",
-	                          "name": "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
-	                          "group": "Overlays",
-	                          "format": "image/png"
-	                      }
-	              ]}
-	              authParam={model.authParam}
-	              withMap={model.withMap}/>
+   <ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+						|| ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
+						|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
+						|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
 
+         <Section header='MAPPA SINTESI - FAUNA BANCA DATI NATURALISTICHE su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='8' expanded={true}>
+			<MappaScheda
+					center={
+							model.getValue({
+								type: TemplateUtils.GEOMETRY_TYPE,
+								xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:geometria/gml:Point/gml:pos/text()"
+							})
+					}
+					layers={[
+							{
+								"type": "wms",
+								"url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+								"name": "SfondoCartRif",
+								"title": "Sfondo Cartografico",
+								"group": "background",
+								"visibility": true,
+								"format": "image/png",
+								"tiled": true,
+								"tileSize": 512
+							},
+							{
+								"type": "wms",
+								"url": "{geoserverUrl}/wms",
+								"visibility": true,
+								"title": "Anteprima Osservazioni Fauna",
+								"name": "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna",
+								"group": "Overlays",
+								"format": "image/png"
+							}
+					]}
+					authParam={model.authParam}
+					withMap={model.withMap}/>
         </Section>
+		
+	</ProfileWrapper>
 	
     </Panel>
 
