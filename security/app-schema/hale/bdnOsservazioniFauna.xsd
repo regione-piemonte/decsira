@@ -253,6 +253,7 @@
 
 					<xs:element name="bdnFaunaErbario" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaErbarioPropertyType" minOccurs="0" maxOccurs="unbounded" />
                     
+							
                 </sequence>
             </extension>
         </complexContent>
@@ -590,10 +591,8 @@
 						</xs:simpleType>
 					 </xs:element>
 					 
-
 					 <!--innesto oggetti -->
 					 <xs:element name="bdnFaunaProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniPropertyType" minOccurs="0" maxOccurs="unbounded" />
-		
 					 
                 </sequence>
             </extension>
@@ -617,10 +616,19 @@
                             </xs:restriction>
 						</xs:simpleType>
 					 </xs:element>
+					 
                      <xs:element name="dettaglioProtezione" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="presenzaProtezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
                             </xs:restriction>
 						</xs:simpleType>
 					 </xs:element>

@@ -1695,4 +1695,20 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C456803bb-a764-4630-ab1b-9ecdbac90c90" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_flora_protezioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="presenza_protezione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnFloraProtezioniType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_flora/1.0"/>
+                <child name="presenzaProtezione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_flora/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
