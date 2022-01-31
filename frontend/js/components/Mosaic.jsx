@@ -9,6 +9,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const Tile = require('./MosaicTile');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class Mosaic extends React.Component {
     static propTypes = {
@@ -41,7 +42,7 @@ class Mosaic extends React.Component {
         return (
             <div className={this.props.className} role="contentinfo" aria-labelledby=" argomenti">
                 <div className="row">
-                    <h2 className="sr-only" id="argomenti">Elenco argomenti</h2>
+                    <h2 className="sr-only" id="argomenti"><I18N.Message msgId={"sr-only.categories"}/></h2>
                     <ul className="list-group categorie">
                         {this.renderTiles()}
                     </ul>

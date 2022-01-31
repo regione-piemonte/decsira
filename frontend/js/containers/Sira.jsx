@@ -21,7 +21,8 @@ const { handleKeyFocus } = require('../utils/SiraUtils');
 const {bindActionCreators} = require('redux');
 const {toggleSiraControl} = require('../actions/controls');
 const {setProfile, loadUserIdentity} = require('../actions/userprofile');
-const {configureInlineMap} = require('../actions/siradec');
+const { configureInlineMap } = require('../actions/siradec');
+const I18N = require('@mapstore/components/I18N/I18N');
 const url = require('url');
 const urlQuery = url.parse(window.location.href, true).query;
 require("../components/WMSLayer.js");
@@ -213,7 +214,7 @@ class Sira extends React.Component {
                     onBack={this.back}
                 />
                 <div id="main-content"></div>
-                <h1 className="sr-only">Mappa interattiva</h1>
+                <h1 className="sr-only"><I18N.Message msgId={"sr-only.map"}/></h1>
                 <div className="mapbody">
                     <span className={this.props.error && 'error' || !this.props.loading && 'hidden' || ''}>
                         {this.props.error && ("Error: " + this.props.error) || (this.props.loading)}
