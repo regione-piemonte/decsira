@@ -37,13 +37,12 @@
     </Section>
 
 
-
-	 <Section header='DETTAGLIO SPECIE PRESENTI' eventKey='2' expanded={true}>
+	 <Section header='SINTESI SPECIE PRESENTI' eventKey='2' expanded={true}>
                 <SiraTable
-                    id="SpecieGligliaFlora"
-                    selectedRow={model.SpecieGligliaFlora}
+                    id="SpecieGrigliaFlora"
+                    selectedRow={model.SpecieGrigliaFlora}
                     wfsVersion="2.0"
-                    rowSelection={false}
+                    rowSelection={"single"}
                     columns={
                         [
                             {
@@ -68,17 +67,17 @@
                             },
                             {
                                 headerName: 'Totale osservazioni presenti',
-                                width: 250,
+                                width: 190,
                                 xpath: "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:numOsservazioniTotali/text()"
                             },
                             {
-                                headerName: 'Anno osservazone pi&ugrave; antica',
-                                width:250,
+                                headerName: 'Anno osservazione pi&ugrave; antica',
+                                width:220,
                                 xpath: "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:annoOsservazAntica/text()"
                             },
 							{
-                                headerName: 'Anno osservazone pi&ugrave; recente',
-                                width: 250,
+                                headerName: 'Anno osservazione pi&ugrave; recente',
+                                width: 220,
                                 xpath: "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:annoOsservazRecente/text()"
                             },
 							{
@@ -96,7 +95,42 @@
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora")}/>
             </Section>
 
-             <Section header='MAPPA SINTESI - Banche Dati Naturalistiche: griglia di distribuzione flora su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='13' expanded={true}>
+
+          <Section header='DETTAGLIO SPECIE OSSERVATE' eventKey='3' expanded={true}>
+                <SiraTable
+                    id="SpecieAnnoFlora"
+                    selectedRow={model.SpecieAnnoFlora}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    dependsOn={{
+						  tableId: "SpecieGrigliaFlora",
+						  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora"),
+						  xpath: "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/@gml:id",
+						  pdfTitle: "Numero Scheda Dettaglio Specie Osservate: {{decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:idBdnSpecieGrigliaDistrFlora/text()}}"
+					  }}
+                    columns={
+                        [
+                            {
+                                hide: true,
+                                id: true,
+                                xpath: "../../decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/@gml:id"
+                            },
+							{
+                                headerName: 'Nome specie',
+                                width: 470,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:concatenazioneNomeSpecie/text()"
+                            },
+							{
+                                headerName: 'Anno',
+                                width: 310,
+                                xpath: "decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:anno/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno")}/>
+            </Section>
+
+             <Section header='MAPPA SINTESI - Banche Dati Naturalistiche: griglia di distribuzione flora su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='4' expanded={true}>
                     <MappaScheda
                             center={
                                     model.getValue({

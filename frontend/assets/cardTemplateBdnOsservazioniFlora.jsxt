@@ -96,12 +96,12 @@
 
             </ProfileWrapper>
 
-             <ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
-                || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
+            <ProfileWrapper condition={() => (model && model.profile) && ( ((model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_GESTORE@REG_PMN')) > -1 ) 
+                || ((model.profile.indexOf('BDN_ARPA@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_01@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_02@REG_PMN')) > -1 )	
                 || ((model.profile.indexOf('BDN_EG_03@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_04@REG_PMN')) > -1 )  || ((model.profile.indexOf('BDN_EG_05@REG_PMN')) > -1 )
 	            || ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
 	            || ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
-           
+            
                 <Section header='Protezioni presenti' eventKey='2' expanded={true}>
                     <SiraTable
                         id="BdnFloraProtezioni"
@@ -232,7 +232,7 @@
                 <LabeledField label='Area protetta' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_flora:areaProtetta/text()")
                 }/>  
-                    <LabeledField label='Sito natura 2000' value={
+                    <LabeledField label='Sito Rete Natura 2000' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnOsservazioniFlora/decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraRn2000/decsiraogc_biodiversita_bdn_osservazioni_flora:reteNatura2000Completo/text()")
                 }/>
 

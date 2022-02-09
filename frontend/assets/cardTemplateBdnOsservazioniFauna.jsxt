@@ -150,7 +150,7 @@
 					|| ((model.profile.indexOf('BDN_EG_06@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_07@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_08@REG_PMN')) > -1 ) 
 					|| ((model.profile.indexOf('BDN_EG_09@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_10@REG_PMN')) > -1 ) || ((model.profile.indexOf('BDN_EG_11@REG_PMN')) > -1 ))}>
 			
-				<Section header='Dettaglio specie segnalata' eventKey='3' expanded={true}>
+				<Section header='Protezioni presenti' eventKey='3' expanded={true}>
 					 <SiraTable
                         id="BdnFaunaProtezioni"
                         selectedRow={model.BdnFaunaProtezioni}
@@ -161,7 +161,7 @@
                                 {
                                     headerName: 'Tipo di protezione',
                                     width: 351,
-                                    xpath:"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:dettaglioProtezione/text()"
+                                    xpath:"decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:protezione/text()"
                                 },
                                 {
                                     headerName: 'Presenza',
@@ -171,7 +171,7 @@
                                 {
                                     headerName: 'Dettaglio',
                                     width: 290,
-                                    xpath: "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:protezione/text()"
+                                    xpath: "decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni/decsiraogc_biodiversita_bdn_osservazioni_fauna:dettaglioProtezione/text()"
                                 }
                             ]
                         }
@@ -311,7 +311,7 @@
 					<LabeledField label='Area protetta' value={
 						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaAreaProtetta/decsiraogc_biodiversita_bdn_osservazioni_fauna:areaProtetta/text()")
 					}/> 
-					<LabeledField label='Sito Natura 2000' value={
+					<LabeledField label='Sito Rete Natura 2000' value={
 						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnOsservazioniFauna/decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaRn2000/decsiraogc_biodiversita_bdn_osservazioni_fauna:reteNatura2000Completo/text()")
 					}/> 
 
