@@ -132,12 +132,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_famiglia",
-            "propertyName": "id_bdn_flora_famiglia,famiglia_d",
+            "propertyName": "id_bdn_flora_famiglia,famiglia_d,label",
             "sortBy": "famiglia_d+A"
           }
         },
         "valueId": "famiglia_d",
-        "valueLabel": "famiglia_d"
+        "valueLabel": "label"
       },
       {
         "index": 2,
@@ -147,17 +147,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_genere",
-            "propertyName": "id_bdn_flora_genere,genere,fk_bdn_flora_famiglia",
+            "propertyName": "id_bdn_flora_genere,genere,fk_bdn_flora_famiglia,label",
             "sortBy": "genere+A"
           }
         },
         "valueId": "genere",
-        "valueLabel": "genere",
-        "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:famigliaDesc",
-          "from": "id_bdn_flora_famiglia",
-          "to": "fk_bdn_flora_famiglia"
-       }
+        "valueLabel": "label"
       },
       {
         "index": 3,
@@ -167,17 +162,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_flora_specie",
-            "propertyName": "id_bdn_flora_specie,concatenazione_nome_specie,fk_bdn_flora_genere",
+            "propertyName": "id_bdn_flora_specie,concatenazione_nome_specie,fk_bdn_flora_genere,label",
             "sortBy": "concatenazione_nome_specie+A"
           }
         },
         "valueId": "concatenazione_nome_specie",
-        "valueLabel": "concatenazione_nome_specie",
-        "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora/decsiraogc_biodiversita_bdn_griglia_distr_flora:bdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_flora:genere",
-          "from": "id_bdn_flora_genere",
-          "to": "fk_bdn_flora_genere"
-       }
+        "valueLabel": "label"
       },
       {
         "index": 4,
