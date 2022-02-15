@@ -47,6 +47,9 @@
     <!-- decsira_t_biodiversita_bdn_fauna_protezioni  id=id_fauna_protezioni-->
 	<element name="BdnFaunaProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniType" substitutionGroup="gml:AbstractObject" />
 
+	<!-- decsira_t_biodiversita_bdn_fauna_protezioni_attive  id=id_fauna_protezioni_attive-->
+	<element name="BdnFaunaProtezioniAttive" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniAttiveType" substitutionGroup="gml:AbstractObject" />
+
 	<!-- types -->
 	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
 	
@@ -117,21 +120,9 @@
                         </xs:simpleType>
                     </xs:element>
 					
-					<xs:element name="daQuotaMinima" minOccurs="0" maxOccurs="1" >
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:maxLength value="10" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
-
-                    <xs:element name="aQuotaMax" minOccurs="0" maxOccurs="1" >
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:maxLength value="10" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
+					
+					<xs:element name="daQuotaMinima"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="aQuotaMax"  type="xs:integer" minOccurs="0" maxOccurs="1" />
 					
 					<xs:element name="sitoVulnerabile" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>
@@ -594,6 +585,9 @@
 					 <!--innesto oggetti -->
 					 <xs:element name="bdnFaunaProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniPropertyType" minOccurs="0" maxOccurs="unbounded" />
 					 
+					  <!--innesto oggetti -->
+					 <xs:element name="bdnFaunaProtezioniAttive" type="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniAttivePropertyType" minOccurs="0" maxOccurs="unbounded" />
+				
                 </sequence>
             </extension>
         </complexContent>
@@ -637,6 +631,29 @@
             </extension>
         </complexContent>
     </complexType>
+	
+	<complexType name="BdnFaunaProtezioniAttiveType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idFaunaProtezioniAttive"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkFaunaSpecie"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+					<xs:element name="protezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
 
 	
 	<!-- property types -->
@@ -716,6 +733,14 @@
     <complexType name="BdnFaunaProtezioniPropertyType">
         <sequence minOccurs="0">
             <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioni" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	 <complexType name="BdnFaunaProtezioniAttivePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProtezioniAttive" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />

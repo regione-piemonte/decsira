@@ -43,6 +43,9 @@
 
     <!-- decsira_t_biodiversita_bdn_flora_protezioni  id=id_flora_protezioni-->
 	<element name="BdnFloraProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioniType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_biodiversita_bdn_flora_protezioni_attive  id=id_flora_protezioni_attive-->
+	<element name="BdnFloraProtezioniAttive" type="decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioniAttiveType" substitutionGroup="gml:AbstractObject" />
 
 	<!-- types -->
 	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
@@ -172,7 +175,7 @@
                         </xs:simpleType>
                     </xs:element>
 
-                      <xs:element name="dataValidaz" type="xs:date" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="dataValidaz" type="xs:date" minOccurs="0" maxOccurs="1" />
 
                     <xs:element name="schedaValidata" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>
@@ -507,6 +510,9 @@
 					 <!-- innesto di un oggetto-->
 					 <xs:element name="bdnFloraProtezioni" type="decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioniPropertyType" minOccurs="0" maxOccurs="unbounded" />
 					 
+					  <!-- innesto di un oggetto-->
+					 <xs:element name="bdnFloraProtezioniAttive" type="decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioniAttivePropertyType" minOccurs="0" maxOccurs="unbounded" />
+					 
                 </sequence>
             </extension>
         </complexContent>
@@ -529,10 +535,41 @@
                             </xs:restriction>
 						</xs:simpleType>
 					 </xs:element>
+					 
                      <xs:element name="dettaglioProtezione" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:maxLength value="100" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element name="presenzaProtezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	 <complexType name="BdnFloraProtezioniAttiveType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element name="idFloraProtezioniAttive"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkFloraSpecie"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
+				
+					<xs:element name="protezione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
                             </xs:restriction>
 						</xs:simpleType>
 					 </xs:element>
@@ -612,6 +649,14 @@
     <complexType name="BdnFloraProtezioniPropertyType">
         <sequence minOccurs="0">
             <element ref="decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	 <complexType name="BdnFloraProtezioniAttivePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioniAttive" />
         </sequence>
         <attributeGroup ref="gml:AssociationAttributeGroup" />
         <attributeGroup ref="gml:OwnershipAttributeGroup" />
