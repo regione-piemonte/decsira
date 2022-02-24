@@ -132,12 +132,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_famiglia",
-            "propertyName": "id_bdn_fauna_famiglia,famiglia",
+            "propertyName": "id_bdn_fauna_famiglia,famiglia,label",
             "sortBy": "famiglia+A"
           }
         },
         "valueId": "famiglia",
-        "valueLabel": "famiglia"
+        "valueLabel": "label"
       },
       {
         "index": 2,
@@ -147,17 +147,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_genere",
-            "propertyName": "id_bdn_fauna_genere,genere,fk_bdn_fauna_famiglia",
+            "propertyName": "id_bdn_fauna_genere,genere,fk_bdn_fauna_famiglia,label",
             "sortBy": "genere+A"
           }
         },
         "valueId": "genere",
-        "valueLabel": "genere",
-        "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnFaunaSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnFaunaSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_fauna:famigliaDesc",
-          "from": "id_bdn_fauna_famiglia",
-          "to": "fk_bdn_fauna_famiglia"
-       }
+        "valueLabel": "label"
       },
       {
         "index": 3,
@@ -167,17 +162,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_fauna_specie",
-            "propertyName": "id_bdn_fauna_specie,nome_specie",
+            "propertyName": "id_bdn_fauna_specie,nome_specie,label",
             "sortBy": "nome_specie+A"
           }
         },
         "valueId": "nome_specie",
-        "valueLabel": "nome_specie",
-        "dependson":{
-          "field": "decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnSpecieGrigliaFauna/decsiraogc_biodiversita_bdn_griglia_distr_fauna:bdnFaunaSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_fauna:BdnFaunaSpecieAnno/decsiraogc_biodiversita_bdn_griglia_distr_fauna:genere",
-          "from": "id_bdn_fauna_genere",
-          "to": "fk_bdn_fauna_genere"
-       }
+        "valueLabel": "label"
       },
       {
         "index": 4,

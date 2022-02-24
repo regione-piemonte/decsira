@@ -1985,4 +1985,118 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cc1e02857-51fd-40f3-8b36-91b4afafdf3a" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnFaunaProtezioniAttiveType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1b6de5ac-2336-4e99-9557-aa659c67c468" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_fauna_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnFaunaProtezioniAttiveType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+                <child name="fkFaunaSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfa780dd4-6178-4ad2-9664-d9126a39abb3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_fauna_protezioni_attive"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnFaunaProtezioniAttiveType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+                <child name="idFaunaProtezioniAttive" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb8c6947c-b04d-45b7-8e28-e5badcf29d4a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="protezione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnFaunaProtezioniAttiveType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+                <child name="protezione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Cd024da8e-ae40-446f-acf3-b3d57e0afeac" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_fauna_protezioni_attive"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnFaunaProtezioniAttiveType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_fauna_protezioni_attive}.id_fauna_protezioni_attive" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C4d77866e-cb5f-49b2-ab7e-3f26bcffcdce" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_fauna_specie" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnFaunaSpecieType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_osservazioni_fauna/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_fauna_specie" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_fauna_specie" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_fauna_specie"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_fauna_protezioni_attive" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_fauna_specie"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
 </alignment>
