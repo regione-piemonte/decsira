@@ -217,35 +217,35 @@
 		<workspace>decsiraogc_specie_direttiva_habitat</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
+    </Rule>	
+    <Rule>
 		<priority>32</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_indicatori_irea</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
-    </Rule>
-	<Rule>
+    </Rule>	
+    <Rule>
 		<priority>33</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_rifiuti_consorzi</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>	
-	<Rule>
+    <Rule>
 		<priority>34</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_rifiuti_mud</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>	
-	<Rule>
+    <Rule>
 		<priority>35</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
-    </Rule>
+    </Rule>	
 	<Rule>
 		<priority>36</priority>
 		<roles>*</roles>
@@ -253,21 +253,21 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	<Rule>
+    <Rule>
 		<priority>37</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_biodiversita_bdn_griglia_distr_fauna</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	<Rule>
+ <Rule>
 		<priority>38</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_biodiversita_bdn_griglia_distr_flora</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	<Rule>
+<Rule>
 		<priority>39</priority>
 		<roles>*</roles>
 		<workspace>decsiraogc_bdn_semaforo_flora</workspace>
@@ -281,10 +281,22 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>	
-	
-	
-	
-	
+	<Rule>
+		<priority>41</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_pianificazione</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>	
+    <Rule>
+		<priority>42</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_geo_captazioni</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>	
+
+
 	
 	<!-- da 100 a 299 tutti i ruoli, workspace, layer -->
 	<Rule>
@@ -353,6 +365,46 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_idf_ads:sigla_prov" = 'AT'</filter>
 	</Rule-->
+	
+	<Rule>
+		<priority>107</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
+		<layer>BdnOsservazioniFlora</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
+	
+	<Rule>
+		<priority>108</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
+		<layer>BdnOsservazioniFauna</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
+	
+	<Rule>
+		<priority>109</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_griglia_distr_flora</workspace>
+		<layer>BdnDistribuzioneFlora</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
+	
+	<Rule>
+		<priority>110</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_griglia_distr_fauna</workspace>
+		<layer>BdnDistribuzioneFauna</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
+	
+	<Rule>
+		<priority>111</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_pianificazione</workspace>
+		<layer>BdnPianificazione</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
 	
 	
 	
@@ -456,6 +508,7 @@
 		<workspace>decsiraogc_monitor_datidimens</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
+                <filter>EXCLUDE</filter>
     </Rule>
 	<Rule>
 		<priority>313</priority>
@@ -504,17 +557,53 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	<Rule>
+    <Rule>
 		<priority>319</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_indicatori_irea</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_indicatori_irea:fk_dimensione" IN (1,2,3,4,5,6,7,8,9,10,11,12,13)</filter>
-	</Rule>
+    </Rule>
 	
+	<Rule>
+		<priority>320</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	<Rule>
+		<priority>321</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
+	<Rule>
+		<priority>322</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_biodiversita_bdn_griglia_distr_flora</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
+	<Rule>
+		<priority>323</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_biodiversita_bdn_griglia_distr_fauna</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	
+	<Rule>
+		<priority>324</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_biodiversita_bdn_pianificazione</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
 	
 	
@@ -540,13 +629,13 @@
             <layer>AutorizzazioneUnicaAmbientale</layer>
 			<accessMode>READ</accessMode>
      </Rule>
-	<Rule>
+     <Rule>
 		<priority>602</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_emissioni</workspace>
 		<layer>PuntoEmissione</layer>
 		<accessMode>READ</accessMode>
-		<filter>EXCLUDE</filter>
+                <filter>EXCLUDE</filter>
 		<hiddenAttributes>
 		  <attribute>decsiraogc_emissioni:idStato</attribute>
 		  <attribute>decsiraogc_emissioni:desStato</attribute>
@@ -1064,9 +1153,9 @@
 		<workspace>decsiraogc_rifiuti_aua</workspace>
 		<layer>ImpiantoRifiutiAUAnoAUA</layer>
 		<accessMode>READ</accessMode>
-		<filter>EXCLUDE</filter>
+		<!--filter>EXCLUDE</filter-->
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<!--filter>"decsiraogc_rifiuti_aua:idStato" = '101' OR "decsiraogc_rifiuti_aua:idStato" = '102'</filter-->
+		<filter>"decsiraogc_rifiuti_aua:idStato" = '101' OR "decsiraogc_rifiuti_aua:idStato" = '102'</filter>
 		<hiddenAttributes>
 		      <attribute>decsiraogc_rifiuti_aua:idStato</attribute>
 			  <attribute>decsiraogc_rifiuti_aua:desStato</attribute>
@@ -1106,9 +1195,9 @@
 		<workspace>decsiraogc_rifiuti_discarica</workspace>
 		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
 		<accessMode>READ</accessMode>
-		<filter>EXCLUDE</filter>
+		<!--filter>EXCLUDE</filter-->
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<!--filter>"decsiraogc_rifiuti_discarica:idStato" = '102' OR "decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter-->
+		<filter>"decsiraogc_rifiuti_discarica:idStato" = '102' OR "decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_discarica:desStato</attribute>
 			  <attribute>decsiraogc_rifiuti_discarica:numeroProvveIscrizione</attribute>
@@ -1145,9 +1234,9 @@
 		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
 		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
 		<accessMode>READ</accessMode>
-		<filter>EXCLUDE</filter>
+		<!--filter>EXCLUDE</filter-->
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<!--filter>"decsiraogc_rifiuti_smaltimento:idStato" = '101' OR "decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter-->
+		<filter>"decsiraogc_rifiuti_smaltimento:idStato" = '101' OR "decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_smaltimento:desStato</attribute>
 			  <attribute>decsiraogc_rifiuti_smaltimento:numeroProvveIscrizione</attribute>
@@ -1178,9 +1267,9 @@
 		<workspace>decsiraogc_rifiuti_generici</workspace>
 		<layer>ImpiantoRifiutiGenerico</layer>
 		<accessMode>READ</accessMode>
-		<filter>EXCLUDE</filter>
+		<!--filter>EXCLUDE</filter-->
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<!--filter>"decsiraogc_rifiuti_generici:idStato" = '101' OR "decsiraogc_rifiuti_generici:idStato" = '102'</filter-->
+		<filter>"decsiraogc_rifiuti_generici:idStato" = '101' OR "decsiraogc_rifiuti_generici:idStato" = '102'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:indirizzo</attribute>
 			   <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:emailPec</attribute>
@@ -1229,7 +1318,7 @@
 			  <attribute>decsiraogc_monitor_depuratori:monitoraggioDepuratori/decsiraogc_monitor_depuratori:MonitoraggioDatiDimens/decsiraogc_monitor_depuratori:abitantiEquivRifiutiLiquidi</attribute>
 		</hiddenAttributes>		  
     </Rule>
-	<Rule>
+    <Rule>
 		<priority>615</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_monitor_datidimens</workspace>
@@ -1240,7 +1329,7 @@
 		 <attribute>decsiraogc_monitor_datidimens:flg_validazione</attribute>
 		</hiddenAttributes>	
     </Rule>
-	<Rule>
+    <Rule>
 		<priority>616</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_sivia</workspace>
@@ -1572,43 +1661,49 @@
 		<layer>Restituzione</layer>
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_derivazioni:fkStatoRestituzione" = '100' OR "decsiraogc_derivazioni:fkStatoRestituzione" = '102'</filter>
-		<hiddenAttributes>
-		 <attribute>decsiraogc_derivazioni:desAreaIdroRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:desBacIdroRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:desBacIdromontRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:progAstaRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:elencoDerivCodutenzaRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:elencoDerivNclasPratRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:elencoDerivCodrilRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:flgMisuratoreRestituzione</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:codiceRilievoDeriv</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:desStatoDeriv</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneDa</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneA</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMaxRestituita</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita</attribute>
-		 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito</attribute>
-		</hiddenAttributes>
+                 <hiddenAttributes>
+                 <attribute>decsiraogc_derivazioni:desTipoDeriv</attribute>
+                 <attribute>decsiraogc_derivazioni:desAreaIdroRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:desBacIdroRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:desBacIdromontRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:progAstaRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:elencoDerivCodutenzaRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:elencoDerivNclasPratRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:elencoDerivCodrilRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:flgMisuratoreRestituzione</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:codiceRilievoDeriv</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:desStatoDeriv</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneDa</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:periodoRestituzioneA</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMaxRestituita</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:portataMedRestituita</attribute>
+                 <attribute>decsiraogc_derivazioni:periodoRestituzione/decsiraogc_derivazioni:PeriodoRestituzione/decsiraogc_derivazioni:volumeMaxRestituito</attribute>
+                </hiddenAttributes>
     </Rule>
-	
-	<Rule>
-		<priority>630</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_decodif</workspace>
-		<layer>decsira_d_indica_app_dimensioni</layer>
-		<accessMode>READ</accessMode>
-		<filter>"fk_dimensione" IN (46,45,57,69,70,47,71,1,2,3,4,5,6,7,8,9,10,11,12,13)</filter>
-	</Rule>
-	
-	<Rule>
-		<priority>631</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_rifiuti_mud</workspace>
-		<layer>RifiutiMUD</layer>
-		<accessMode>READ</accessMode>
-		<filter>EXCLUDE</filter>
-	</Rule>
-	
+<Rule>
+	<priority>630</priority>
+	<roles>ROLE_ANONYMOUS</roles>
+	<workspace>decsiraogc_decodif</workspace>
+	<layer>decsira_d_indica_app_dimensioni</layer>
+	<accessMode>READ</accessMode>
+	<filter>"fk_dimensione" IN (46,45,57,69,70,47,71,1,2,3,4,5,6,7,8,9,10,11,12,13)</filter>
+</Rule>
+    <Rule>
+	<priority>631</priority>
+	<roles>ROLE_ANONYMOUS</roles>
+	<workspace>decsiraogc_rifiuti_mud</workspace>
+	<layer>RifiutiMUD</layer>
+	<accessMode>READ</accessMode>
+	<filter>EXCLUDE</filter>
+    </Rule>
+    <!--Rule>
+      <priority>999</priority>
+      <roles>PA_SPEC_AUT_DECSIRA@REG_PMN</roles>
+      <workspace>decsiraogc_monitor_datidimens</workspace>
+      <layer>DepMonitorDatiDimens</layer>
+      <accessMode>READ</accessMode>
+    </Rule-->
+
 	<Rule>
 		<priority>632</priority>
 		<roles>BDN_EG_01@REG_PMN</roles>
@@ -1697,7 +1792,7 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaProfili/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaProfili/decsiraogc_biodiversita_bdn_osservazioni_fauna:codiceEnteGestore" = '421'</filter>
 	</Rule>
-	<Rule>
+        <Rule>
 		<priority>643</priority>
 		<roles>BDN_ARPA@REG_PMN</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
@@ -1730,8 +1825,8 @@
 		<layer>BdnOsservazioniFauna</layer>
 		<accessMode>READ</accessMode>
 	</Rule>
-	
-	<Rule>
+
+<Rule>
 		<priority>645</priority>
 		<roles>BDN_EG_01@REG_PMN</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
@@ -1819,7 +1914,7 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProfili/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProfili/decsiraogc_biodiversita_bdn_osservazioni_flora:codiceEnteGestore" = '421'</filter>
 	</Rule>
-	<Rule>
+        <Rule>
 		<priority>656</priority>
 		<roles>BDN_ARPA@REG_PMN</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
@@ -1845,14 +1940,15 @@
 		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:protezione</attribute>
 		 <attribute>decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProtezioni/decsiraogc_biodiversita_bdn_osservazioni_flora:presenzaProtezione</attribute>
 		</hiddenAttributes> 
-	</Rule>
-	<Rule>
+	</Rule>	
+        <Rule>
 		<priority>657</priority>
 		<roles>BDN_GESTORE@REG_PMN</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_flora</workspace>
 		<layer>BdnOsservazioniFlora</layer>
 		<accessMode>READ</accessMode>
 	</Rule>
+
 	
 	<Rule>
 		<priority>658</priority>
@@ -1890,5 +1986,139 @@
 		<filter>"decsiraogc_biodiversita_bdn_osservazioni_fauna:codProprietaDato" = 'PUBBLICA' AND  "decsiraogc_biodiversita_bdn_osservazioni_fauna:bdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:BdnFaunaSpecie/decsiraogc_biodiversita_bdn_osservazioni_fauna:speMinacc" = 'NO'</filter>
 	</Rule>
 	
+	
+	
+	<Rule>
+		<priority>662</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_geo_captazioni</workspace>
+		<layer>Pozzo</layer>
+		<accessMode>READ</accessMode>
+		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>  
+		<hiddenAttributes>
+		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:data_costruzione</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
+		 <attribute>decsiraogc_geo_captazioni:quota_piano_c</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_campo_pozzo</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_pozzo_art</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denominazione_imp_acq</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denominazione_acquedotto</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_disp_strat</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_disp_mis_piez</attribute>
+		 <attribute>decsiraogc_geo_captazioni:piez_assoc</attribute>	 
+		</hiddenAttributes>	
+    </Rule>
+	
+	
+	
+	<Rule>
+		<priority>663</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_geo_captazioni</workspace>
+		<layer>Fontanile</layer>
+		<accessMode>READ</accessMode>
+		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
+	    </hiddenAttributes>	
+    </Rule>
+	
+	
+	<Rule>
+		<priority>664</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_geo_captazioni</workspace>
+		<layer>Presa</layer>
+		<accessMode>READ</accessMode>
+		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_bacidromont</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_tipo_sbarr</attribute>
+		 <attribute>decsiraogc_geo_captazioni:volume_max_invaso</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_scala</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denominazione_imp_acq</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denominazione_acquedotto</attribute>
+		 <attribute>decsiraogc_geo_captazioni:progressiva_asta</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denom_cidrsup</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_galleria_filtr</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_capt_subalveo</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_da_canale</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_dispositivi</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_deroga_dmv</attribute>
+		 <attribute>decsiraogc_geo_captazioni:ulteriori_obblighi</attribute>
+		 <attribute>decsiraogc_geo_captazioni:altezza</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_tipo_scala</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_sponda_scala</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_obblighi_itt</attribute>
+		 <attribute>decsiraogc_geo_captazioni:specie_ittiche</attribute>
+	   </hiddenAttributes>
+    </Rule>
+	
+	<Rule>
+		<priority>665</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_geo_captazioni</workspace>
+		<layer>Sorgente</layer>
+		<accessMode>READ</accessMode>
+		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_tipo_sorgente</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
+		 <attribute>decsiraogc_geo_captazioni:quota_piano_c</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denominazione_imp_acq</attribute>
+		 <attribute>decsiraogc_geo_captazioni:denominazione_acquedotto</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_dispositivi</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_deroga_dmv</attribute>
+		 <attribute>decsiraogc_geo_captazioni:ulteriori_obblighi</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_tributaria</attribute>
+		</hiddenAttributes>
+    </Rule>
+	
+	<Rule>
+		<priority>666</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_geo_captazioni</workspace>
+		<layer>TrinceaDrenante</layer>
+		<accessMode>READ</accessMode>
+		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<hiddenAttributes>
+		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
+		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
+		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
+		 <attribute>decsiraogc_geo_captazioni:sviluppo_long</attribute>
+		 <attribute>decsiraogc_geo_captazioni:inclinazione</attribute>
+		 <attribute>decsiraogc_geo_captazioni:profondita_max</attribute>
+		 <attribute>decsiraogc_geo_captazioni:profondita_min</attribute>
+   	    </hiddenAttributes>
+    </Rule>
+	
+	
+
     </rules>
+
 </Config>
