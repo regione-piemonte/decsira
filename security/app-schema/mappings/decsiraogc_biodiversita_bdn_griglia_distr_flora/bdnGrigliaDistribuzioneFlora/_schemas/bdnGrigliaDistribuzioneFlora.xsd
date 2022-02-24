@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_biodiversita_bdn_griglia_distr_flora="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_griglia_distr_flora/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_biodiversita_bdn_griglia_distr_flora  id=id_bdn_griglia_distr_flora -->
+	<element name="BdnDistribuzioneFlora" substitutionGroup="gml:AbstractFeature" type="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnDistribuzioneFloraType"/>
+	
+	 <!-- decsira_t_biodiversita_bdn_specie_griglia_flora  id=id_bdn_specie_griglia_flor-->
+	<element name="BdnSpecieGrigliaFlora" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFloraType"/>
+
+    <!-- decsira_t_biodiversita_bdn_flora_specie_anno  id=id_bdn_flora_specie_anno-->
+	<element name="BdnFloraSpecieAnno" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnnoType"/>
+
+    <!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="BdnDistribuzioneFloraType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+				    <xs:element minOccurs="1" name="idBdnGrigliaDistrFlora" type="xs:decimal"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+
+                    <xs:element maxOccurs="1" minOccurs="0" name="idGriglia5Km" type="xs:integer"/>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="numSpecieTotali" type="xs:decimal"/>
+                     <xs:element maxOccurs="1" minOccurs="0" name="numOsservazioniTotali" type="xs:decimal"/>
+
+					 <xs:element maxOccurs="1" minOccurs="0" name="annoOsservazAntica" type="xs:decimal"/>
+                     <xs:element maxOccurs="1" minOccurs="0" name="annoOsservazRecente" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgSpecieMeritevolAttenz">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgSpecieProtettLegal">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+
+                     <!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnSpecieGrigliaFlora" type="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFloraPropertyType"/>
+
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+    <complexType name="BdnSpecieGrigliaFloraType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idBdnSpecieGrigliaDistrFlora" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkBdnGrigliaDistrFlora" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="concatenazioneNomeSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1003"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element maxOccurs="1" minOccurs="0" name="codSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="famigliaDesc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="genere">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="numOsservazioniTotali" type="xs:decimal"/>
+                    
+                     <xs:element maxOccurs="1" minOccurs="0" name="annoOsservazAntica" type="xs:decimal"/>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="annoOsservazRecente" type="xs:decimal"/>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="flgSpecieMeritevolAttenz">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="flgSpecieProtettLegal">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+                      <!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnFloraSpecieAnno" type="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnnoPropertyType"/>
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+    <complexType name="BdnFloraSpecieAnnoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element maxOccurs="1" minOccurs="0" name="idBdnAnnoFloraSpecieAnno" type="xs:decimal"/>
+					
+				    <xs:element maxOccurs="1" minOccurs="0" name="fkBdnSpecieGrigliaDistrFlora" type="xs:decimal"/>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="codSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="concatenazioneNomeSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1003"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="famigliaDesc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 <xs:element maxOccurs="1" minOccurs="0" name="genere">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="flgSpecieMeritevolAttenz">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+                     <xs:element maxOccurs="1" minOccurs="0" name="flgSpecieProtettLegal">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+                    <xs:element maxOccurs="1" minOccurs="0" name="anno" type="xs:decimal"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+
+	
+	<!-- property types -->
+
+    <complexType name="BdnSpecieGrigliaFloraPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnSpecieGrigliaFlora"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+
+    <complexType name="BdnFloraSpecieAnnoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_griglia_distr_flora:BdnFloraSpecieAnno"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	
+</schema>
