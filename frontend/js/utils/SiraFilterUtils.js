@@ -102,4 +102,20 @@ FilterUtils.getFilterByIds = function(ftName, ids, idField, pagination) {
     return this.toOGCFilter(ftName, filterObj, "2.0");
 };
 
+FilterUtils.getFesFilter = function(filter) {
+    let startIndex = filter.indexOf("<fes:Filter>");
+    let endIndex = filter.indexOf("</fes:Filter>");
+    if (startIndex > -1) {
+        return filter.substring(startIndex, endIndex + 13);
+    }
+    return null;
+};
+
+FilterUtils.fesFilterToOgcFilter = function(fesFilter) {
+    let ret = fesFilter.replace('<fes:Filter>', '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">');
+    ret = ret.replace(/fes/gi, "ogc");
+    ret = ret.replace(/ValueReference/gi, "PropertyName");
+    return ret;
+};
+
 module.exports = FilterUtils;

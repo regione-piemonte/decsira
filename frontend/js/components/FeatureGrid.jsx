@@ -9,7 +9,7 @@ const {Modal, Panel, Grid, Row, Col, Button} = require('react-bootstrap');
 const FilterUtils = require('../utils/SiraFilterUtils');
 
 const {getWindowSize} = require('@mapstore/utils/AgentUtils');
-const {getFeaturesAndExport, getFileAndExport} = require('../actions/siraexporter');
+const {getFeaturesAndExport, getFileAndExport, downloadFeatures} = require('../actions/siraexporter');
 const {setTreeFeatureType} = require('../actions/siradec');
 const {closeTree} = require('../actions/siraTree');
 const { head, isEqual, isEmpty } = require('lodash');
@@ -26,6 +26,10 @@ const SiraExporter = connect((state) => {
         show: state.siraControls.exporter,
         exportParams: state.siraexporter.params,
         confMaxFeatures: (activeConfig.exporter ? activeConfig.exporter.maxFeatures : undefined),
+        exportAsync: (activeConfig.exporter ? activeConfig.exporter.exportAsync : undefined),
+        wpsUrl: (activeConfig.exporter ? activeConfig.exporter.wpsUrl : undefined),
+        layerName: activeConfig.layer.name,
+        layerTitle: activeConfig.layer.title,
         featuregrid: state.grid && state.grid.featuregrid,
         loading: state.siraexporter.loading,
         errormsg: state.siraexporter.errormsg,
@@ -35,7 +39,8 @@ const SiraExporter = connect((state) => {
     };
 }, {
     getFeaturesAndExport,
-    getFileAndExport
+    getFileAndExport,
+    downloadFeatures
 })(require('./SiraExporter'));
 
 const FeatureGrid = connect((state) => {
@@ -178,7 +183,7 @@ class SiraGrid extends React.Component {
     state = {};
 
     componentWillMount() {
-        const hOffset = this.props.fullScreen ? 150 : 181;
+        const hOffset = this.props.fullScreen ? 180 : 181;
         let height = getWindowSize().maxHeight - hOffset;
         this.setState({width: this.props.initWidth - 30, height});
         if (this.props.pagination && this.props.gridType === 'search') {

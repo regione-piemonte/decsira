@@ -12,6 +12,8 @@ const GeoJSON = require('ol/format/GeoJSON').default;
 const ProWKTDef = require('./ProjWKTDef');
 const {head} = require('lodash');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const SiraFilterUtils = require('../utils/SiraFilterUtils');
+const Dom = require('xmldom').DOMParser;
 const ExporterUtils = {
     exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd, outputSrs = 'EPSG:32632') {
         const name = filename.replace(':', "_");
@@ -157,6 +159,74 @@ const ExporterUtils = {
             return res;
         }, []);
 
+    },
+    getWpsDownloadRequest: function(layerName, wfsRequest) {
+        const fesFilter = SiraFilterUtils.getFesFilter(wfsRequest);
+
+        const filterInput = fesFilter ? `
+        <wps:Input>
+        <ows:Identifier>filter</ows:Identifier>
+        <wps:Data>
+            <wps:ComplexData mimeType="text/xml; filter/1.0"><![CDATA[
+                ${SiraFilterUtils.fesFilterToOgcFilter(fesFilter)}
+            ]]>
+            </wps:ComplexData>
+        </wps:Data>
+        </wps:Input>` : '';
+
+        const request = `
+        <wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+        <ows:Identifier>gs:Download</ows:Identifier>
+        <wps:DataInputs>
+            <wps:Input>
+            <ows:Identifier>layerName</ows:Identifier>
+            <wps:Data>
+                <wps:LiteralData>${layerName}</wps:LiteralData>
+            </wps:Data>
+            </wps:Input>
+            <wps:Input>
+            <ows:Identifier>outputFormat</ows:Identifier>
+            <wps:Data>
+                <wps:LiteralData>text/csv</wps:LiteralData>
+            </wps:Data>
+            </wps:Input>
+            <wps:Input>
+            <ows:Identifier>targetCRS</ows:Identifier>
+            <wps:Data>
+                <wps:LiteralData>EPSG:32632</wps:LiteralData>
+            </wps:Data>
+            </wps:Input>
+            ${filterInput}
+        </wps:DataInputs>
+        <wps:ResponseForm>
+            <wps:ResponseDocument storeExecuteResponse="true" status="true">
+                <wps:Output asReference="true" mimeType="application/zip">
+                <ows:Identifier>result</ows:Identifier>
+                </wps:Output>
+            </wps:ResponseDocument>
+        </wps:ResponseForm>
+        </wps:Execute>
+        `;
+        return request;
+    },
+    getDownloadStatusLocation: function(xmlResponse) {
+        let doc = new Dom().parseFromString(xmlResponse);
+        let element = doc.getElementsByTagName('wps:ExecuteResponse')[0];
+        return element.getAttribute('statusLocation');
+    },
+    getDownloadResultLocation: function(xmlResponse) {
+        const doc = new Dom().parseFromString(xmlResponse);
+        const output = doc.getElementsByTagName('wps:ExecuteResponse')[0].childNodes[2];
+        const ref = output.getElementsByTagName('wps:Reference')[0];
+        let resultLocation = ref.getAttribute('href');
+        return resultLocation;
+    },
+    getDownloadError: function(xmlResponse) {
+        const doc = new Dom().parseFromString(xmlResponse);
+        const exception = doc.getElementsByTagName('ows:ExceptionReport')[0].childNodes[1];
+        const exceptionText = exception.getElementsByTagName('ows:ExceptionText')[0];
+        let error = exceptionText.childNodes[0].nodeValue;
+        return error;
     }
 };
 

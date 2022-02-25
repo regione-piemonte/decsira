@@ -23,6 +23,7 @@ class SiraExporter extends React.Component {
         toggleExporter: PropTypes.func,
         searchUrl: PropTypes.string.isRequired,
         getFeaturesAndExport: PropTypes.func,
+        downloadFeatures: PropTypes.func,
         getFileAndExport: PropTypes.func,
         featuregrid: PropTypes.object,
         loading: PropTypes.bool,
@@ -34,7 +35,11 @@ class SiraExporter extends React.Component {
         srs: PropTypes.string,
         totalFeatures: PropTypes.number,
         maxFeatures: PropTypes.number,
-        confMaxFeatures: PropTypes.number
+        confMaxFeatures: PropTypes.number,
+        exportAsync: PropTypes.bool,
+        wpsUrl: PropTypes.string,
+        layerName: PropTypes.string,
+        layerTitle: PropTypes.string
     };
 
     static defaultProps = {
@@ -63,7 +68,7 @@ class SiraExporter extends React.Component {
         // const height = this.state.outputformat === 'shp' ? "260px" : "150px";
         let maxFeat = this.props.confMaxFeatures ? this.props.confMaxFeatures : this.props.maxFeatures;
         let h = this.state.outputformat === 'shp' ? 260 : 150;
-        let height = this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (h + 80) + "px" : h + "px";
+        let height = this.state.type === 'all' && (this.props.totalFeatures > maxFeat || this.props.exportAsync) ? (h + 80) + "px" : h + "px";
         return (
             <div role="body" style={{height, display: "flex",
                 flexDirection: "column", justifyContent: "space-between"}}>
@@ -87,7 +92,10 @@ class SiraExporter extends React.Component {
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
                     Solo gli elementi dotati di geometria verranno esportati
                 </Alert>) : null}
-                {this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (<Alert bsStyle="info" >
+                {this.props.exportAsync ? (<Alert bsStyle="info" >
+                Export in modalità asincrona, verificare il completamento dell'operazione con l'apposita funzione
+                </Alert>) : null}
+                {!this.props.exportAsync && this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (<Alert bsStyle="info" >
                 Superato limite massimo: saranno esportati {maxFeat} di {this.props.totalFeatures} oggetti
                 </Alert>) : null}
                 <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export&nbsp;</span><Glyphicon glyph="download-alt" /></Button>
@@ -120,14 +128,20 @@ class SiraExporter extends React.Component {
         (name.match(/\{featureType\}/g) || []).forEach((placeholder) => {
             name = name.replace(placeholder, ftName);
         });
-        if (this.state.type === 'page' && params.features && params.columns) {
-            if (this.props.addFile) {
-                this.props.getFileAndExport(params.features, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
-            } else {
-                ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
+        if (this.props.exportAsync) {
+            // Nuova funzione download WPS
+            this.props.downloadFeatures(this.props.wpsUrl, this.props.layerName, this.props.layerTitle, params.filter, this.state.outputformat, name, this.props.csvMimeType, this.props.addFile);
+        } else {
+            // Vecchia funzione export WFS
+            if (this.state.type === 'page' && params.features && params.columns) {
+                if (this.props.addFile) {
+                    this.props.getFileAndExport(params.features, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
+                } else {
+                    ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
+                }
+            } else if (this.state.type === 'all' && params.filter && params.columns) {
+                this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
             }
-        } else if (this.state.type === 'all' && params.filter && params.columns) {
-            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
         }
     };
 }
