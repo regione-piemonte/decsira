@@ -38,7 +38,7 @@ const DownloadResultsComponent = ({
     return (
         <>
             {results.length > 0 ? <div id="mapstore-export-data-results-button-container">
-                <OverlayTrigger placement="left" overlay={<Tooltip id="mapstore-export-data-results-tooltip"><I18N.Message msgId="exportDataResults.title"/></Tooltip>}>
+                <OverlayTrigger placement="bottom" overlay={<Tooltip id="mapstore-export-data-results-tooltip"><I18N.Message msgId="exportDataResults.title"/></Tooltip>}>
                     <Button
                         bsStyle="default"
                         onClick={() => onToggle("downloadResultsDialog", true)}>
@@ -64,8 +64,12 @@ const DownloadResultsComponent = ({
                     <DownloadResults
                         loading={checkingDownload}
                         results={results}
-                        onRemoveResult={onRemoveResult}/>
+                        onRemoveResult={onRemoveResult}
+                        onUpdate={onActive}/>
                 </div>
+                <span role="footer">
+                    <button onClick={() => onActive(results)} className="btn btn-default" bsSize="small"> <Glyphicon glyph="refresh"/> <I18N.Message msgId="exportDataResults.refresh"/></button>
+                </span>
             </Dialog>
         </>
     );

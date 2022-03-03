@@ -160,7 +160,7 @@ const ExporterUtils = {
         }, []);
 
     },
-    getWpsDownloadRequest: function(layerName, wfsRequest) {
+    getWpsDownloadRequest: function(layerName, outputFormat, wfsRequest) {
         const fesFilter = SiraFilterUtils.getFesFilter(wfsRequest);
 
         const filterInput = fesFilter ? `
@@ -187,7 +187,7 @@ const ExporterUtils = {
             <wps:Input>
             <ows:Identifier>outputFormat</ows:Identifier>
             <wps:Data>
-                <wps:LiteralData>text/csv</wps:LiteralData>
+                <wps:LiteralData>${outputFormat}</wps:LiteralData>
             </wps:Data>
             </wps:Input>
             <wps:Input>

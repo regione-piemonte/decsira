@@ -10,7 +10,7 @@ import React from 'react';
 import { Button, Glyphicon, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 import Loader from '../misc/Loader';
-// const I18N = require('@mapstore/components/I18N/I18N');
+const I18N = require('@mapstore/components/I18N/I18N');
 import "./dataDownload.less";
 
 const failButton = (
@@ -25,7 +25,7 @@ const failButton = (
 const ExportDataResults = ({
     loading = false,
     results = [],
-    onRemoveResult = () => {}
+    onRemoveResult = () => { }
 }) => loading ? <Loader size={100} style={{margin: '0 auto', padding: '10px'}}/> : (
     <div className="mapstore-exportdataresults-container">
         {results.map(({id, layerTitle, startTime, status, resultLocation, error}) => {
@@ -49,17 +49,21 @@ const ExportDataResults = ({
                                 {failButton}
                             </OverlayTrigger> : null}
                         {status === 'completed' &&
-                            <a href={resultLocation}>
-                                <Button bsStyle="default" bsSize="small">
-                                    <Glyphicon glyph="floppy-disk"/>
-                                </Button>
-                            </a>}
-                        <Button
-                            bsStyle="default"
-                            bsSize="small"
-                            onClick={() => onRemoveResult(id)}>
-                            <Glyphicon glyph="trash"/>
-                        </Button>
+                            <OverlayTrigger placement="top" overlay={<Tooltip id="exportresults-success-tooltip"><I18N.Message msgId="layerdownload.exportResultsMessages.download"/></Tooltip>}>
+                                <a href={resultLocation}>
+                                    <Button bsStyle="default" bsSize="small">
+                                        <Glyphicon glyph="floppy-disk"/>
+                                    </Button>
+                                </a>
+                            </OverlayTrigger>}
+                        <OverlayTrigger placement="top" overlay={<Tooltip id="exportresults-delete-tooltip"><I18N.Message msgId="layerdownload.exportResultsMessages.delete"/></Tooltip>}>
+                            <Button
+                                bsStyle="default"
+                                bsSize="small"
+                                onClick={() => onRemoveResult(id)}>
+                                <Glyphicon glyph="trash"/>
+                            </Button>
+                        </OverlayTrigger>
                     </div>
                 </div>
             );

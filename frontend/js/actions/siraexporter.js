@@ -240,7 +240,8 @@ function showInfoBubbleMessage(msgId, msgParams, level, duration) {
 }
 
 function downloadFeatures(wpsUrl, layerName, layerTitle, wfsRequest, outputformat, filename, mimeType, addFile) {
-    const request = ExporterUtils.getWpsDownloadRequest(layerName, wfsRequest);
+    const format = outputformat === 'shp' ? "application/zip" : "text/csv";
+    const request = ExporterUtils.getWpsDownloadRequest(layerName, format, wfsRequest);
 
     return (dispatch) => {
         dispatch(toggleLoading(true));
