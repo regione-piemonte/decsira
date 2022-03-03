@@ -21,7 +21,7 @@
           <Abstract>A solid blue line with a 1 pixel width</Abstract>
           <LineSymbolizer>
             <Stroke>
-              <CssParameter name="stroke">#d5ff2e</CssParameter>
+              <CssParameter name="stroke">#a7d100</CssParameter>
               <CssParameter name="stroke-width">1.4</CssParameter>
 			  <CssParameter name="stroke-linecap">round</CssParameter> 
             </Stroke>
