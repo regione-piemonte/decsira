@@ -19,7 +19,7 @@
                 <Mark>
                   <WellKnownName>circle</WellKnownName>
                   <Fill>
-                    <CssParameter name="fill">#d5ff2e</CssParameter>
+                    <CssParameter name="fill">#a7d100</CssParameter>
                     <CssParameter name="fill-opacity">1</CssParameter>
                   </Fill>
                   <Stroke>

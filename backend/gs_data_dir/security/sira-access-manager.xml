@@ -605,7 +605,20 @@
 		<accessMode>READ</accessMode>
     </Rule>
 	
-	
+	 <Rule>
+		<priority>325</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_bdn_semaforo_flora</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
+	 <Rule>
+		<priority>326</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_bdn_semaforo_fauna</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 	
 	
 	
@@ -1382,7 +1395,7 @@
 		<workspace>decsiraogc_derivazioni</workspace>
 		<layer>Derivazione</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_derivazioni:fkStato" = '9' OR "decsiraogc_derivazioni:fkStato" = '5'</filter>  
+		<filter>"decsiraogc_derivazioni:fkStato" = '9'</filter>  
 		<hiddenAttributes>
 		 <attribute>decsiraogc_derivazioni:codiceUtenza</attribute>
 		 <attribute>decsiraogc_derivazioni:classificazionePraticaDeriv</attribute>
@@ -1443,7 +1456,7 @@
 		<workspace>decsiraogc_operecaptazione</workspace>
 		<layer>Pozzo</layer>
 		<accessMode>READ</accessMode>
-		<filter>("decsiraogc_operecaptazione:fkStatoPozzo" = '100' OR "decsiraogc_operecaptazione:fkStatoPozzo" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabilePozzo" = 'NO'</filter>  
+		<filter>"decsiraogc_operecaptazione:fkStatoPozzo" = '102' AND "decsiraogc_operecaptazione:flgUsoPotabilePozzo" = 'NO'</filter>  
 		<hiddenAttributes>
 		 <attribute>decsiraogc_operecaptazione:codiceSIIPozzo</attribute>
 		 <attribute>decsiraogc_operecaptazione:desAreaIdroPozzo</attribute>
@@ -1503,7 +1516,7 @@
 		<workspace>decsiraogc_operecaptazione</workspace>
 		<layer>Fontanile</layer>
 		<accessMode>READ</accessMode>
-		<filter>("decsiraogc_operecaptazione:fkStatoFontanile" = '100' OR "decsiraogc_operecaptazione:fkStatoFontanile" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileFontanile" = 'NO'</filter>
+		<filter>"decsiraogc_operecaptazione:fkStatoFontanile" = '102' AND "decsiraogc_operecaptazione:flgUsoPotabileFontanile" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_operecaptazione:elencoDerivCodutenzaFontanile</attribute>
 		 <attribute>decsiraogc_operecaptazione:elencoDerivNclasPratFontanile</attribute>
@@ -1535,7 +1548,7 @@
 		<workspace>decsiraogc_operecaptazione</workspace>
 		<layer>Presa</layer>
 		<accessMode>READ</accessMode>
-		<filter>("decsiraogc_operecaptazione:fkStatoPresa" = '100' OR "decsiraogc_operecaptazione:fkStatoPresa" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabilePresa" = 'NO'</filter>
+		<filter>"decsiraogc_operecaptazione:fkStatoPresa" = '102' AND "decsiraogc_operecaptazione:flgUsoPotabilePresa" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_operecaptazione:codiceSIIPresa</attribute>
 		 <attribute>decsiraogc_operecaptazione:desBacIdroPresa</attribute>
@@ -1589,7 +1602,7 @@
 		<workspace>decsiraogc_operecaptazione</workspace>
 		<layer>Sorgente</layer>
 		<accessMode>READ</accessMode>
-		<filter>("decsiraogc_operecaptazione:fkStatoSorgente" = '100' OR "decsiraogc_operecaptazione:fkStatoSorgente" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileSorgente" = 'NO'</filter>
+		<filter>"decsiraogc_operecaptazione:fkStatoSorgente" = '102' AND "decsiraogc_operecaptazione:flgUsoPotabileSorgente" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_operecaptazione:codiceSIISorgente</attribute>
 		 <attribute>decsiraogc_operecaptazione:desTipoSorgente</attribute>
@@ -1632,7 +1645,7 @@
 		<workspace>decsiraogc_operecaptazione</workspace>
 		<layer>TrinceaDrenante</layer>
 		<accessMode>READ</accessMode>
-		<filter>("decsiraogc_operecaptazione:fkStatoTrincea" = '100' OR "decsiraogc_operecaptazione:fkStatoTrincea" = '102') AND "decsiraogc_operecaptazione:flgUsoPotabileTrincea" = 'NO'</filter>
+		<filter>"decsiraogc_operecaptazione:fkStatoTrincea" = '102' AND "decsiraogc_operecaptazione:flgUsoPotabileTrincea" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_operecaptazione:desAreaIdroTrincea</attribute>
 		 <attribute>decsiraogc_operecaptazione:desBacIdroTrincea</attribute>
@@ -1660,7 +1673,7 @@
 		<workspace>decsiraogc_derivazioni</workspace>
 		<layer>Restituzione</layer>
 		<accessMode>READ</accessMode>
-		<filter>"decsiraogc_derivazioni:fkStatoRestituzione" = '100' OR "decsiraogc_derivazioni:fkStatoRestituzione" = '102'</filter>
+		<filter>"decsiraogc_derivazioni:fkStatoRestituzione" = '102'</filter>
                  <hiddenAttributes>
                  <attribute>decsiraogc_derivazioni:desTipoDeriv</attribute>
                  <attribute>decsiraogc_derivazioni:desAreaIdroRestituzione</attribute>
@@ -1948,7 +1961,9 @@
 		<layer>BdnOsservazioniFlora</layer>
 		<accessMode>READ</accessMode>
 	</Rule>
-        <Rule>
+
+	
+	<Rule>
 		<priority>658</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
@@ -1992,7 +2007,7 @@
 		<workspace>decsiraogc_geo_captazioni</workspace>
 		<layer>Pozzo</layer>
 		<accessMode>READ</accessMode>
-		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>  
+		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>  
 		<hiddenAttributes>
 		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
 		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
@@ -2021,7 +2036,7 @@
 		<workspace>decsiraogc_geo_captazioni</workspace>
 		<layer>Fontanile</layer>
 		<accessMode>READ</accessMode>
-		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
 		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
@@ -2037,7 +2052,7 @@
 		<workspace>decsiraogc_geo_captazioni</workspace>
 		<layer>Presa</layer>
 		<accessMode>READ</accessMode>
-		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
 		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
@@ -2074,7 +2089,7 @@
 		<workspace>decsiraogc_geo_captazioni</workspace>
 		<layer>Sorgente</layer>
 		<accessMode>READ</accessMode>
-		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
 		 <attribute>decsiraogc_geo_captazioni:des_tipo_sorgente</attribute>
@@ -2100,7 +2115,7 @@
 		<workspace>decsiraogc_geo_captazioni</workspace>
 		<layer>TrinceaDrenante</layer>
 		<accessMode>READ</accessMode>
-		<filter>("fk_stato" = '100' OR "fk_stato" = '102') AND "uso_potabile" = 'NO'</filter>
+		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
 		<hiddenAttributes>
 		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
 		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
