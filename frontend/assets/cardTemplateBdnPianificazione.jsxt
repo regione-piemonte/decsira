@@ -1,0 +1,114 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='Pianificazione e misure di conservazione' subtitle={[
+            ' ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()"),
+            ]} id={model.id}/>
+    )}>
+
+    <Panel className="template">
+        <Section header='Pianificazione e Misure di conservazione: dati generali' eventKey='1' expanded={true}>
+           <LabeledField label='Tipologia di Piano o Misura' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()")
+            }/>
+			<LabeledField label='Legge di approvazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:numeroLegge/text()")
+            }/>
+            <LabeledField label='Data di approvazione' dateFormat='DD/MM/YYYY' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:dataApprovazione/text()")
+            }/>
+			<LabeledField label='Data di scadenza' dateFormat='DD/MM/YYYY' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:dataFine/text()")
+            }/>
+            <LabeledField label='Tipologia di sito' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:tipoAreaSito/text()")
+            }/>
+            <LabeledField label='Codice sito' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:codiceSito/text()")
+            }/>
+             <LabeledField label='Nome sito' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:nomeSito/text()")
+            }/>
+
+              <LabeledField label='Province interessate' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:bdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:descrProvincia/text()")
+            }/>
+
+              <LabeledField label='Comuni interessati' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:bdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:BdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:descrComune/text()")
+            }/>
+
+              <LabeledField label='Tipologia di finanziamento' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:crediti/text()")
+            }/>
+
+              <LabeledField label='Link cartografia' link='true' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:url/text()")
+            }/>
+	
+        </Section>
+
+       
+       <Section header='Pianificazione e Misure di conservazione: documentazione allegata' eventKey='2' expanded={true}>
+            <SiraTable
+                id="BdnAllegatoPiano"
+                selectedRow={model.BdnAllegatoPiani}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            headerName: 'Tipologia di Allegato',
+                            width: 300,
+                            xpath:"decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:tipoAllegato/text()"
+                        },
+                        {
+                            headerName: 'Link  di riferimento',
+                            width: 500,
+                            xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:url/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:bdnAllegatoPiano")}/>
+        </Section>
+
+
+
+        <Section header='MAPPA SINTESI - Pianificazione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima del piano",
+	                          "name": "decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>
