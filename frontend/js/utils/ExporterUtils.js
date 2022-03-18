@@ -14,6 +14,7 @@ const {head} = require('lodash');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const SiraFilterUtils = require('../utils/SiraFilterUtils');
 const Dom = require('xmldom').DOMParser;
+
 const ExporterUtils = {
     exportFeatures: function(outputformat, features, columns, filename = 'export', mimeType, fileToAdd, outputSrs = 'EPSG:32632') {
         const name = filename.replace(':', "_");
@@ -227,7 +228,27 @@ const ExporterUtils = {
         const exceptionText = exception.getElementsByTagName('ows:ExceptionText')[0];
         let error = exceptionText.childNodes[0].nodeValue;
         return error;
+    },
+    getDownloadResponse: function(xmlObj) {
+        const status = xmlObj?.ExecuteResponse?.Status?.[0];
+        if (status?.ProcessAccepted) {
+            return {status: 'ProcessAccepted'};
+        }
+        if (status?.ProcessStarted) {
+            return {status: 'ProcessStarted'};
+        }
+        if (status?.ProcessSucceeded) {
+            return {status: 'ProcessSucceeded', data: xmlObj.ExecuteResponse.ProcessOutputs?.[0]?.Output};
+        }
+        if (status?.ProcessFailed) {
+            return {status: 'ProcessFailed', exceptionReport: status?.ProcessFailed?.[0]?.ExceptionReport?.[0]?.Exception?.[0]?.ExceptionText?.[0]};
+        }
+        if (status?.ProcessPaused) {
+            return {status: 'ProcessPaused'};
+        }
+        return {status: 'UnexpectedStatus'};
     }
+
 };
 
 module.exports = ExporterUtils;
