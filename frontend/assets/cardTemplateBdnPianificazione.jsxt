@@ -51,7 +51,7 @@
 
        
        <Section header='Pianificazione e Misure di conservazione: documentazione allegata' eventKey='2' expanded={true}>
-            <SiraTable
+            <AttachmentTable
                 id="BdnAllegatoPiano"
                 selectedRow={model.BdnAllegatoPiani}
                 wfsVersion="2.0"
@@ -59,20 +59,29 @@
                 columns={
                     [
                         {
+                            headerName: '',
+                            width: 50,
+                            download: 'true',
+                            confirm: false,
+                            xpath:"decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:tipoFunzione/text()"
+				        },
+                        {
+                            field: 'filename',
                             headerName: 'Tipologia di Allegato',
                             width: 300,
                             xpath:"decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:tipoAllegato/text()"
                         },
                         {
+                            field: 'url',
                             headerName: 'Link  di riferimento',
                             width: 500,
+                            hide: false,
                             xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:url/text()"
                         }
                     ]
                 }
                 features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:bdnAllegatoPiano")}/>
         </Section>
-
 
 
         <Section header='MAPPA SINTESI - Pianificazione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>

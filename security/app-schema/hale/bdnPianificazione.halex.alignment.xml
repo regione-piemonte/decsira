@@ -901,4 +901,20 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C001def54-3cb7-481f-b42e-7fe146daf349" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_funzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="tipoFunzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
