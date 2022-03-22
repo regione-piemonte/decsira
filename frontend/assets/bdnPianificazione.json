@@ -1,0 +1,277 @@
+{
+   "featureTypeName":"decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
+   "featureTypeNameLabel":"Piani e misure di conservazione",
+   "nameSpaces": {
+     "decsiraogc_biodiversita_bdn_pianificazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"
+   },
+   "layer": {
+       "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Piani e misure di conservazione",
+        "name": "decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "Polygon"
+       },
+        "featureType": "bdnPianificazione",
+		"params": {
+			"featureType": "bdnPianificazione"
+		},
+        "group": "Piani e misure di conservazione",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "MultiPolygon",
+   "card": {
+	     "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
+		 "geometryPath": "decsiraogc_biodiversita_bdn_pianificazione:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()",
+		 "pdfname": "Scheda_BDN_Pianificazione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:idBdnPianificazione/text()}}.pdf",
+		 "template": "assets/cardTemplateBdnPianificazione.jsxt",
+     "treeTemplate": "assets/treeTemplatePianificazione.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateBdnPianificazione.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		     {
+           "headerName": "Tipologia di Piano o Misura",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()"],
+           "type": 2,
+           "width" : 220
+         },
+		     {
+           "headerName": "Legge di approvazione" ,
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:numeroLegge/text()"],
+           "type": 2,
+           "width" : 220
+         },
+         {
+          "headerName": "Data di approvazione",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:dataApprovazione/text()"],
+          "type": 2,
+          "dateFormat": "DD/MM/YYYY",
+          "width" : 180
+        },
+        {
+          "headerName": "Data di scadenza",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:dataFine/text()"],
+          "type": 2,
+          "dateFormat": "DD/MM/YYYY",
+          "width" : 150
+        },
+        {
+          "headerName": "Tipologia di sito" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:tipoAreaSito/text()"],
+          "type": 2,
+          "width" : 150
+        },
+        {
+          "headerName": "Codice sito" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:codiceSito/text()"],
+          "type": 2,
+          "width" : 120
+        },
+        {
+          "headerName": "Nome sito" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:nomeSito/text()"],
+          "type": 2,
+          "width" : 200
+        },
+        {
+          "headerName": "Province interessate" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:bdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:descrProvincia/text()"],
+          "type": 2,
+          "width" : 200
+        },
+        {
+          "headerName": "Comuni interessati" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:bdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:BdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:descrComune/text()"],
+          "type": 2,
+          "width" : 200
+        },
+        {
+          "headerName": "Tipologia di finanziamento" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:crediti/text()"],
+          "type": 2,
+          "width" : 200
+        },
+        {
+          "headerName": "Link cartografia" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:url/text()"],
+          "type": 2,
+          "width" : 200
+        },
+		    {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "geometry",
+          "xpath" : [ "decsiraogc_biodiversita_bdn_pianificazione:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "type" : 6
+        }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+         "index": 1,
+         "attribute": "decsiraogc_biodiversita_bdn_pianificazione:bdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:descrProvincia",
+         "label":"Provincia",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_geo_province",
+			       "propertyName": "prov_ist,prov_nom",
+             "sortBy": "prov_nom+A"
+           }
+         },
+         "valueId":"prov_nom",
+         "valueLabel":"prov_nom"
+	   },
+	   {
+		   "index": 2,
+		   "attribute": "decsiraogc_biodiversita_bdn_pianificazione:bdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:BdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:descrComune",
+		   "label":"Comune",
+		   "type":"list",
+		   "valueService": {
+			 "urlParams": {
+			   "typeName": "decsiraogc_decodif:decsira_geo_comuni_storico",
+			   "propertyName": "prov_ist,comune_nom",
+			   "sortBy": "comune_nom+A"
+			 }
+		   },
+		   "valueId":"comune_nom",
+		   "valueLabel":"comune_nom",
+        "dependson":{
+          "field": "decsiraogc_biodiversita_bdn_pianificazione:bdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:descrProvincia",
+          "from": "prov_ist",
+          "to": "prov_ist"
+        }
+       },
+       {
+        "index": 3,
+        "attribute": "decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano",
+        "label":"Tipologia di Piano o Misura",
+        "type":"list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_tipo_piano",
+            "propertyName": "id_bdn_tipo_piano,desc_tipo_piano,ordinamento,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId":"desc_tipo_piano",
+        "valueLabel":"label"
+    },
+
+       {
+        "index": 4,
+        "attribute": "decsiraogc_biodiversita_bdn_pianificazione:numeroLegge",
+        "label":"Legge di approvazione",
+        "type":"string"
+      },
+      {
+        "index": 5,
+        "attribute": "decsiraogc_biodiversita_bdn_pianificazione:dataApprovazione",
+        "label":"Data di approvazione",
+        "type":"date",
+        "fieldOptions": {
+          "dateFormat": "DD/MM/YYYY"
+        }
+      },
+      {
+        "index": 6,
+        "attribute": "decsiraogc_biodiversita_bdn_pianificazione:nomeSito",
+        "label":"Area Protetta",
+        "type":"list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_nome_area_protetta",
+            "propertyName": "id_area_protetta,nome,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId":"nome",
+        "valueLabel":"nome"
+    },
+    {
+      "index": 7,
+      "attribute": "decsiraogc_biodiversita_bdn_pianificazione:nomeSito",
+      "label":"Sito Rete Natura 2000",
+      "type":"list",
+      "valueService": {
+        "urlParams": {
+          "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_nome_rn2000",
+          "propertyName": "id_rete_natura2000,nome,ordinamento,label",
+          "sortBy": "ordinamento+A"
+        }
+      },
+      "valueId":"nome",
+      "valueLabel":"label"
+     },
+     {
+      "index": 8,
+      "attribute": "decsiraogc_biodiversita_bdn_pianificazione:bdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:tipoAllegato",
+      "label":"Tipologia di allegato",
+      "type":"list",
+      "valueService": {
+        "urlParams": {
+          "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_tipo_allegato",
+          "propertyName": "id_bdn_tipo_allegato,tipo_allegato,ordinamento,label",
+          "sortBy": "ordinamento+A"
+        }
+      },
+      "valueId":"tipo_allegato",
+      "valueLabel":"label"
+     }
+        
+     ]
+
+   }
+
+}

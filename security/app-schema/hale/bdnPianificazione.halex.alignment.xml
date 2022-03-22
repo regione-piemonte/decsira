@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C181044c9-2583-4ae4-b08e-383e6816f305" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfccff736-d8d1-4f6e-a31a-642e5b95f75f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice_sito"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="codiceSito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2b16f78b-455d-4443-b86e-018b558dfdc2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="comuni_interessati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="comuniInteressati" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf0256c0d-5c4b-4dd7-a9bf-54f930a88d79" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="crediti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="crediti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C55f7bc9e-76a4-4fbd-b1e2-ff9d5d2a37ba" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_approvazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="dataApprovazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfa0468b4-723f-4a3b-adc2-7daec1038e32" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_fine"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="dataFine" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0fc2afa6-4d0e-4f4e-b186-97d624eb8ece" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="desc_tipo_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="descTipoPiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4ca8310f-ef1e-4074-87fd-7583ff3a31b9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="fkPiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce0f98c0c-dde8-4e15-b473-6e08b9b6d3d2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf32715c6-5f7f-4e89-a65c-45860cff8a93" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_pianificazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idBdnPianificazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C3c3edefd-cc2e-4ee3-8d1e-1a68b76c530b" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_pianificazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_pianificazione}.id_bdn_pianificazione" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C25f22f62-28f5-4771-a9a5-5c72a34961bb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="link_cartografia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="linkCartografia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ced91705d-7656-474e-9fcf-0b0158e61173" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_sito"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="nomeSito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce8087a6d-3be5-4d73-a19a-2668136a3f12" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="numero_legge"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="numeroLegge" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbba69eb0-f20b-40bb-bd6e-518e5c1f3e6b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="province_interessate"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="provinceIntereressate" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccab8cb21-14b3-4afc-969a-2fb66c7ff96a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_area_sito"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="tipoAreaSito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cc982937e-02fe-447a-92ae-2d35d550f39b" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0b4982e9-479a-4180-a4dc-f1363242ec73" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_pianificazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="fkBdnPianificazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1cac7509-f33a-413e-8aad-1570a6d72c9b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_allegato_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idBdnAllegatoPiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C2e860ed7-42f6-4c67-a189-f10afd73dcd4" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_allegato_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_allegato_piano}.id_bdn_allegato_piano" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0f0cfd15-38e9-473d-a28b-bf6431b68c53" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_allegato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="tipoAllegato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12aa7245-507e-4e97-8030-c65e267df6ce" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="url " ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cc7cc3efd-af6e-4236-9638-5e0cae257feb" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnComunePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C74cdda40-5998-4317-a52a-5da603b1848d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnComunePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="descrComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7ec057f9-64c7-4bf5-82f8-86e0ec7e0bdc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_pianificazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnComunePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="fkBdnPianificazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3e32d675-eabe-45e5-ba18-1ee7e9dbef9e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_comune_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnComunePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idBdnComunePiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Ce9d2d705-2177-4bd8-b9ff-a686a0234794" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_comune_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnComunePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_comune_piano}.id_bdn_comune_piano" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cba971f8d-097d-493c-ba58-b1c72a52d99e" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnProvinciaPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbdd14315-07c7-44cb-9955-bf6b20259125" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnProvinciaPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="descrProvincia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4762c427-dbbb-46c4-a62c-97044a4d9a42" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_bdn_pianificazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnProvinciaPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="fkBdnPianificazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C14b54c58-3ad0-4577-bb97-8e3280ab50e4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_provincia_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnProvinciaPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idBdnProvinciaPiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C957b7781-1ca4-46bc-bca7-561edd0556ed" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_bdn_provincia_piano"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnProvinciaPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_bdn_provincia_piano}.id_bdn_provincia_piano" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Ccd38cbd0-c6b4-4366-b5b9-ebb4c448c228" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_pianificazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_pianificazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C3d32b04c-11c8-4223-8da8-823fd5a6b701" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_pianificazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_comune_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_pianificazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cb2df5527-236a-4c23-a585-3143dfa07058" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_bdn_pianificazione"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_biodiversita_bdn_provincia_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_bdn_pianificazione"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C928437a3-b69d-46e1-8a9e-557252740f8b" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce0c647b8-7a5d-451b-bd8d-4cec521904a5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="des_tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="desTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c52bbd1-5e6b-4dc1-a35c-f6953b73d87e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1f69bb2e-442e-4c20-b8c5-3a79a681600c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_associato_biodiversita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idOggettoAssociatoBiodiversita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C596f8ab0-acca-4654-a859-65769505c3b2" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_associato_biodiversita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="{id_oggetto_associato_biodiversita}.id_oggetto_associato_biodiversita" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C38f2c7d5-a30d-41b2-a21a-be3da161e118" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_oggetto_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idOggettoPrinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cae76a5df-ab0a-4ca9-b2c8-26ca8ab58faf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nascosto_cittadino"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="nascostoCittadino" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C56eeca5f-b787-4943-8b89-bacb5a61dc75" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_wfs"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="nomeWfs" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C03f03990-3d6e-4c88-9e67-5b671828b725" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_alberatura"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="tipoAlberatura" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C36d43b48-72c4-48a1-a90a-6ea9facf37c6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_ogg_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="fkTipoOggPrinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C741c62b3-f459-401f-b831-358dce4e86e9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_oggetto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="fkTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C38681944-45bc-44d5-a7f0-88633edf0715" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_tipo_area_sito"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idTipoAreaSito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C209ca494-52f6-4385-80c6-b7d7e8f12239" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_ogg_tipo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idTipoOggetto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd7cbf142-e569-4857-a9bb-bf8e292cfcad" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="codice"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="codicePiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2954f72c-fec4-4d3e-8a39-137499daa6aa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_ogg_tipo_princ"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="idOggettoTipoPrinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7f8d6095-0722-43d7-86bc-1d2da5e05ecd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnDatatreePianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="nomePiano" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C28b540f0-a12b-4a23-b7ae-9633c7ec922c" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_ogg_tipo"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_oggetto_associato_biodiversita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_ogg_tipo_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C001def54-3cb7-481f-b42e-7fe146daf349" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_biodiversita_bdn_allegato_piano" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_funzione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnAllegatoPianoType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="tipoFunzione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>
