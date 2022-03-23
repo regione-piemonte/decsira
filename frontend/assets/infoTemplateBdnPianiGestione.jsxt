@@ -1,0 +1,166 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateBdnPianiGestione"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+		{
+		  "id" : true,
+		  "headerName" : '',
+		  "xpath" : "@gml:id",
+		  "width" : 30,
+		  "cellRenderer" : reactCellRendererFactory(GoToDetail)
+		}, {
+		  "headerName" : "Codice sito",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:codiceSitoRn2000/text()",
+		  "width" : 160
+		}, {
+		  "headerName" : "Nome sito",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Province interessate",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:provinceIntereressate/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "Comuni interessati",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:comuniInteressati/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "H1 codice Corine biotopes",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodCorineBiotopes/text()",
+		  "width" : 200
+		}, {
+		  "headerName" : "H1 descrizione Corine biotopes",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescCorineBiotopes/text()",
+		  "width" : 250
+		}, {
+		  "headerName" : "H1 codice Natura 2000",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodHabitat/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H1 descrizione Natura 2000",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescHabitat/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H1 codice Eunis",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodEunisAmb/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H1 descrizione Eunis",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescEunisAmb/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H1 codice tipo forestale",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodTipoForestale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H1 descrizione tipo forestale",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescTipoForestale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H1 percentuale di copertura",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1Perc/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Presenza altri ambienti",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:presenzaAltriAmbienti/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Url scheda Report di monitoraggio",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1SchedaMonitoraggio/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Autore",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifAutore/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Anno",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifAnno/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Titolo",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifTitolo/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "Url riferimento bibliografico",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifUrl/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 codice Corine biotopes",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodCorineBiotopes/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 descrizione Corine biotopes",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescCorineBiotopes/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 codice Natura 2000",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodHabitat/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 descrizione Natura 2000",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescHabitat/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 codice Eunis",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodEunisAmb/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 descrizione Eunis",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescEunisAmb/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 codice tipo forestale",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodTipoForestale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 descrizione tipo forestale",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescTipoForestale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H2 percentuale di copertura",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h2Perc/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 codice Corine biotopes",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodCorineBiotopes/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 descrizione Corine biotopes",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescCorineBiotopes/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 codice Natura 2000",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodHabitat/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 descrizione Natura 2000",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescHabitat/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 codice Eunis",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodEunisAmb/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 descrizione Eunis",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescEunisAmb/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 codice tipo forestale",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodTipoForestale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 descrizione tipo forestale ",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescTipoForestale/text()",
+		  "width" : 230
+		}, {
+		  "headerName" : "H3 percentuale di copertura",
+		  "xpath" : "decsiraogc_biodiversita_bdn_piano_gest_uso:h3Perc/text()",
+		  "width" : 230
+		}
+    ]}
+
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso")}/>

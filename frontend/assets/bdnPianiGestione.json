@@ -1,0 +1,287 @@
+{
+  "featureTypeName":"decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
+  "featureTypeNameLabel":"Piani di gestione",
+  "nameSpaces": {
+    "decsiraogc_biodiversita_bdn_piano_gest_uso": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_piano_gest_uso/1.0"
+  },
+  "layer": {
+      "type": "wms",
+       "url": "{geoserverUrl}/wms",
+       "visibility": true,
+       "title": "Piani di gestione",
+       "name": "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
+       "infoFormat": "application/vnd.ogc.gml/3.1.1",
+       "topologyConfig": {
+          "wfsUrl": "",
+          "wfsVersion": "1.1.0",
+          "layerName": "",
+          "layerTitle": "",
+          "geomAttribute": "msGeometry",
+          "geometryType": "Polygon"
+      },
+       "featureType": "bdnPianiGestione",
+  "params" :{
+    "featureType":"bdnPianiGestione"
+  },
+       "group": "Piani di gestione",
+       "format": "image/png"
+   },
+  "geometryName": "geometria",
+  "geometryType": "MultiPolygon",
+  "card": {
+      "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
+    "geometryPath": "decsiraogc_biodiversita_bdn_piano_gest_uso:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()",
+    "pdfname": "Scheda_BDN_Piani_Gestione_{{/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:idBdnPianoGestUso/text()}}.pdf",
+    "template": "assets/cardTemplateBdnPianiGestione.jsxt",
+    "treeTemplate": "assets/treeTemplatePianiGestione.jsxt",
+    "service": {
+      "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "params": {
+        "typeName": "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
+        "version": "2.0",
+        "srsName": "EPSG:4326"
+      }
+    }
+  },
+  "featureinfo":{
+    "templateURL": "assets/infoTemplateBdnPianiGestione.jsxt"
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
+      "columns": [
+        {
+          "hide": true,
+          "id": true,
+          "headerName": "Id",
+          "xpath": ["@gml:id"],
+          "type": 2
+        },
+    {
+          "headerName": "Province interessate",
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:bdnProvinciaPianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnProvinciaPianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:descrProvincia/text()"],
+          "type": 2,
+          "width" : 220
+        },
+    {
+          "headerName": "Comuni interessati" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:bdnComunePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnComunePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:descrComune/text()"],
+          "type": 2,
+          "width" : 220
+        },
+        {
+          "headerName": "Codice sito" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:codiceSitoRn2000/text()"],
+          "type": 2,
+          "width" : 220
+        },
+    {
+          "headerName": "Nome sito" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000/text()"],
+          "type": 2,
+          "width" : 220
+        },
+        {
+          "headerName": "H1 codice Corine biotopes " ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodCorineBiotopes/text()"],
+          "type": 2,
+          "width" : 110
+        },
+        {
+          "headerName": "H1 descrizione Corine biotopes " ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescCorineBiotopes/text()"],
+          "type": 2,
+          "width" : 250
+        },
+        {
+          "headerName": "H1 codice Natura 2000" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodHabitat/text()"],
+          "type": 2,
+          "width" : 70
+        },
+        {
+          "headerName": "H1 descrizione Natura 2000" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescHabitat/text()"],
+          "type": 2,
+          "width" : 280
+        },
+        {
+          "headerName": "H1 codice Eunis" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodEunisAmb/text()"],
+          "type": 2,
+          "width" : 70
+        },
+        {
+          "headerName": "H1 descrizione Eunis" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescEunisAmb/text()"],
+          "type": 2,
+          "width" : 220
+        },
+        {
+          "headerName": "H1 codice tipo forestale" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodTipoForestale/text()"],
+          "type": 2,
+          "width" : 70
+        },
+        {
+          "headerName": "H1 descrizione tipo forestale" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescTipoForestale/text()"],
+          "type": 2,
+          "width" : 220
+        },
+        {
+          "headerName": "H1 url scheda Report di monitoraggio" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1SchedaMonitoraggio/text()"],
+          "type": 2,
+          "width" : 280
+        },
+        {
+          "headerName": "H1 percentuale di copertura" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:h1Perc/text()"],
+          "type": 2,
+          "width" : 50
+        },
+        {
+          "headerName": "Presenza altri ambienti" ,
+          "suppressSorting": true,
+          "xpath": ["decsiraogc_biodiversita_bdn_piano_gest_uso:presenzaAltriAmbienti/text()"],
+          "type": 2,
+          "width" : 50
+        },
+    {
+         "hide" : true,
+         "suppressSorting" : true,
+         "headerName" : "geometry",
+         "xpath" : [ "decsiraogc_biodiversita_bdn_piano_gest_uso:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+         "type" : 6
+       }
+      ],
+      "exporter":{
+        "addFile":""
+      }
+    }
+  },
+  "query": {
+    "service": {
+      "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields":[
+      {
+        "index": 1,
+        "attribute": "decsiraogc_biodiversita_bdn_piano_gest_uso:bdnProvinciaPianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnProvinciaPianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:descrProvincia",
+        "label":"Provincia",
+        "type":"list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_geo_province",
+      "propertyName": "prov_ist,prov_nom",
+            "sortBy": "prov_nom+A"
+          }
+        },
+        "valueId":"prov_nom",
+        "valueLabel":"prov_nom"
+    },
+    {
+      "index": 2,
+      "attribute": "decsiraogc_biodiversita_bdn_piano_gest_uso:bdnComunePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnComunePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:descrComune",
+      "label":"Comune",
+      "type":"list",
+      "valueService": {
+      "urlParams": {
+        "typeName": "decsiraogc_decodif:decsira_geo_comuni_storico",
+        "propertyName": "prov_ist,comune_nom",
+        "sortBy": "comune_nom+A"
+      }
+      },
+      "valueId":"comune_nom",
+      "valueLabel":"comune_nom",
+      "dependson":{
+       "field": "decsiraogc_biodiversita_bdn_piano_gest_uso:bdnProvinciaPianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnProvinciaPianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:descrProvincia",
+       "from": "prov_ist",
+       "to": "prov_ist"
+      }
+      },
+      {
+        "index": 3,
+        "attribute": "decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000",
+        "label":"Sito Rete Natura 2000",
+        "type":"list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_biodiversita_cod_nome_rn2000",
+      "propertyName": "nome,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId":"nome",
+        "valueLabel":"label"
+    },
+    {
+      "index": 4,
+      "attribute": "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescCorineBiotopes",
+      "label":"Ambienti Corine biotopes",
+      "type":"list",
+      "valueService": {
+        "urlParams": {
+          "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_corine_biotopes",
+    "propertyName": "h1_desc_corine_biotopes,label",
+          "sortBy": "ordinamento+A"
+        }
+      },
+      "valueId":"h1_desc_corine_biotopes",
+      "valueLabel":"label"
+    },
+    {
+      "index": 5,
+      "attribute": "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescHabitat",
+      "label":"Ambienti Natura 2000",
+      "type":"list",
+      "valueService": {
+        "urlParams": {
+          "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_habitat",
+    "propertyName": "desc_habitat,label",
+          "sortBy": "ordinamento+A"
+        }
+      },
+      "valueId":"desc_habitat",
+      "valueLabel":"label"
+  },
+    {
+      "index": 6,
+      "attribute": "decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescTipoForestale",
+      "label":"Tipi forestali",
+      "type":"list",
+      "valueService": {
+        "urlParams": {
+          "typeName": "decsiraogc_decodif:decsira_d_biodiversita_bdn_tipo_forestale",
+    "propertyName": "h1_desc_tipo_forestale,label",
+          "sortBy": "ordinamento+A"
+        }
+      },
+      "valueId":"h1_desc_tipo_forestale",
+      "valueLabel":"label"
+  }
+
+    ]
+
+  }
+
+}

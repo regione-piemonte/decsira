@@ -1,0 +1,43 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='Pianificazione e misure di conservazione' subtitle={[
+            ' ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'bdnPianiGestione'
+			featureId = {model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:idBdnPianoGestUso/text()")+ '.id_bdn_piano_gest_uso' }
+            rootTitle = {
+				'Nome sito: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:bdnDatatreePianoGestUso")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:fkTipoOggetto/text()",
+					value: "305"
+				},
+				groupElement: {
+						descriptionLabels: ['Codice Habitat: ', ' - Descrizione Habitat: '],
+						descriptionValues: ["decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:codice/text()",
+						"decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nome/text()"
+			        ],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nomeWfs/text()",
+						xpath: "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:idOggetto/text()"
+					}
+				},
+				groupFilter: {
+					xpath: "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nascostoCittadino/text()",
+					value: "NO"
+		        }
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

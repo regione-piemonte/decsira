@@ -1,0 +1,170 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='Pianificazione e misure di conservazione' subtitle={[
+            'Codice sito: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:codiceSitoRn2000/text()"),
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='Piani di Gestione: dati generali del sito' eventKey='1' expanded={true}>
+           <LabeledField label='Codice sito' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:codiceSitoRn2000/text()")
+            }/>
+			<LabeledField label='Nome sito' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000/text()")
+            }/>
+            <LabeledField label='Province interessate' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:provinceIntereressate/text()")
+            }/>
+			<LabeledField label='Comuni interessati' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:comuniInteressati/text()")
+            }/>
+        </Section>
+
+        <Section header='Ambienti H1: dati di dettaglio' eventKey='1' expanded={true}>
+           <LabeledField label='H1 codice Corine biotopes' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodCorineBiotopes/text()")
+            }/>
+			<LabeledField label='H1 descrizione Corine biotopes' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescCorineBiotopes/text()")
+            }/>
+            <LabeledField label='H1 codice Natura 2000' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodHabitat/text()")
+            }/>
+			<LabeledField label='H1 descrizione Natura 2000' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescHabitat/text()")
+            }/>
+            <LabeledField label='H1 codice Eunis' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodEunisAmb/text()")
+            }/>
+			<LabeledField label='H1 descrizione Eunis' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescEunisAmb/text()")
+            }/>
+            <LabeledField label='H1 codice tipo forestale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodTipoForestale/text()")
+            }/>
+			<LabeledField label='H1 descrizione tipo forestale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1DescTipoForestale/text()")
+            }/>
+            <LabeledField label='H1 percentuale di copertura' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1Perc/text()")
+            }/>
+			<LabeledField label='Presenza altri ambienti' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:presenzaAltriAmbienti/text()")
+            }/>
+        </Section>
+
+               <Section header='Ambienti H1: riferimenti bibliografici' eventKey='1' expanded={true}>
+           <LabeledField label='Url scheda Report di monitoraggio'  link='true' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1SchedaMonitoraggio/text()")
+            }/>
+			<LabeledField label='Autore' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifAutore/text()")
+            }/>
+            <LabeledField label='Anno' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifAnno/text()")
+            }/>
+			<LabeledField label='Titolo' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifTitolo/text()")
+            }/>
+            <LabeledField label='Url riferimento bibliografico' link='true' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifUrl/text()")
+            }/>
+        </Section>
+
+        <Section header='Altri Ambienti: dati di dettaglio' eventKey='1' expanded={true}>
+           <LabeledField label='H2 codice Corine biotopes' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodCorineBiotopes/text()")
+            }/>
+			<LabeledField label='H2 descrizione Corine biotopes' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescCorineBiotopes/text()")
+            }/>
+            <LabeledField label='H2 codice Natura 2000' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodHabitat/text()")
+            }/>
+			<LabeledField label='H2 descrizione Natura 2000' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescHabitat/text()")
+            }/>
+            <LabeledField label='H2 codice Eunis' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodEunisAmb/text()")
+            }/>
+			<LabeledField label='H2 descrizione Eunis' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescEunisAmb/text()")
+            }/>
+            <LabeledField label='H2 codice tipo forestale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2CodTipoForestale/text()")
+            }/>
+			<LabeledField label='H2 descrizione tipo forestale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2DescTipoForestale/text()")
+            }/>
+            <LabeledField label='H2 percentuale di copertura' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h2Perc/text()")
+            }/>
+			<LabeledField label='H3 codice Corine biotopes' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodCorineBiotopes/text()")
+            }/>
+            <LabeledField label='H3 descrizione Corine biotopes' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescCorineBiotopes/text()")
+            }/>
+			<LabeledField label='H3 codice Natura 2000' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodHabitat/text()")
+            }/>
+            <LabeledField label='H3 descrizione Natura 2000' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescHabitat/text()")
+            }/>
+			<LabeledField label='H3 codice Eunis' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodEunisAmb/text()")
+            }/>
+            <LabeledField label='H3 descrizione Eunis' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescEunisAmb/text()")
+            }/>
+			<LabeledField label='H3 codice tipo forestale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3CodTipoForestale/text()")
+            }/>
+            <LabeledField label='H3 descrizione tipo forestale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3DescTipoForestale/text()")
+            }/>
+			<LabeledField label='H3 percentuale di copertura' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h3Perc/text()")
+            }/>
+        </Section>
+
+
+        <Section header='MAPPA SINTESI - Piani di gestione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima dei piani di gestione",
+	                          "name": "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>
