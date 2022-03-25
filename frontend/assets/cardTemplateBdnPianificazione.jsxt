@@ -1,14 +1,14 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='Pianificazione e misure di conservazione' subtitle={[
+        <DetailTitle title='Piani e misure di conservazione' subtitle={[
             ' ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()"),
             ]} id={model.id}/>
     )}>
 
     <Panel className="template">
-        <Section header='Pianificazione e Misure di conservazione: dati generali' eventKey='1' expanded={true}>
+        <Section header='Dati generali' eventKey='1' expanded={true}>
            <LabeledField label='Tipologia di Piano o Misura' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()")
             }/>
@@ -39,7 +39,7 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:comuniInteressati/text()")
             }/>
 
-              <LabeledField label='Tipologia di finanziamento' value={
+              <LabeledField label='Crediti' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:crediti/text()")
             }/>
 
@@ -50,7 +50,7 @@
         </Section>
 
        
-       <Section header='Pianificazione e Misure di conservazione: documentazione allegata' eventKey='2' expanded={true}>
+       <Section header='Documentazione allegata' eventKey='2' expanded={true}>
             <AttachmentTable
                 id="BdnAllegatoPiano"
                 selectedRow={model.BdnAllegatoPiani}
@@ -84,7 +84,7 @@
         </Section>
 
 
-        <Section header='MAPPA SINTESI - Pianificazione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+        <Section header='MAPPA SINTESI - Piani e misure di conservazione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='3' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({
@@ -117,6 +117,13 @@
 	              authParam={model.authParam}
 	              withMap={model.withMap}/>
 
+        </Section>
+
+        <Section header='METADATO' eventKey='4' expanded={true}>
+            <LinkToPage
+                txt="Visualizza la scheda del metadato"
+                url="https://www.geoportale.piemonte.it/geonetwork/auth/ita/catalog.search#/metadata/r_piemon:a6d1cbec-3cd2-47e2-8f8f-615036557089"
+            />
         </Section>
 
     </Panel>
