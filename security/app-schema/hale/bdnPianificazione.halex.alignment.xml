@@ -917,4 +917,36 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C42ea790c-131b-4b43-bba0-81b91bb3e1fb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_area_protetta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="nomeAreaProtetta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1bb0b26b-ea0a-45d1-9709-8a68525f2777" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_biodiversita_bdn_pianificazione" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_rete_natura2000"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="BdnPianificazioneType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+                <child name="nomeSitoReteNatura" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
