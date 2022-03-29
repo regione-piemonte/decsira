@@ -1,13 +1,13 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='Piani di gestione' subtitle={[
+        <DetailTitle title='Piani di gestione Rete Natura 2000' subtitle={[
             'Codice sito: ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:codiceSitoRn2000/text()"),
             ]} id={model.id}/>
     )}>
     <Panel className="template">
-        <Section header='Piani di Gestione: dati generali del sito' eventKey='1' expanded={true}>
+        <Section header='Piani di gestione Rete Natura 2000: dati generali del sito' eventKey='1' expanded={true}>
            <LabeledField label='Codice sito' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:codiceSitoRn2000/text()")
             }/>
@@ -56,9 +56,6 @@
         </Section>
 
                <Section header='Ambienti H1: riferimenti bibliografici' eventKey='1' expanded={true}>
-           <LabeledField label='Url scheda Report di monitoraggio'  link='true' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1SchedaMonitoraggio/text()")
-            }/>
 			<LabeledField label='Autore' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifAutore/text()")
             }/>
@@ -71,6 +68,9 @@
             <LabeledField label='Url riferimento bibliografico' link='true' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1RifUrl/text()")
             }/>
+           <LabeledField label='Url scheda Report di monitoraggio'  link='true' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:h1SchedaMonitoraggio/text()")
+           }/>
         </Section>
 
         <Section header='Altri Ambienti: dati di dettaglio' eventKey='1' expanded={true}>
@@ -131,7 +131,7 @@
         </Section>
 
 
-        <Section header='MAPPA SINTESI - Piani di gestione su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
+        <Section header='MAPPA SINTESI - Piani di gestione Rete Natura 2000 su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='7' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({
@@ -155,7 +155,7 @@
 	                          "type": "wms",
 	                          "url": "{geoserverUrl}/wms",
 	                          "visibility": true,
-	                          "title": "Anteprima dei piani di gestione",
+	                          "title": "Anteprima dei piani di gestione Rete Natura 2000",
 	                          "name": "decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso",
 	                          "group": "Overlays",
 	                          "format": "image/png"
