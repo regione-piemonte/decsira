@@ -58,7 +58,7 @@ const DownloadResultsComponent = ({
                 modal>
                 <span role="header">
                     <span className="about-panel-title"><I18N.Message msgId="exportDataResults.title"/></span>
-                    <button onClick={() => onToggle("downloadResultsDialog", false)} className="settings-panel-close close"><Glyphicon glyph="1-close"/></button>
+                    <Button onClick={() => onToggle("downloadResultsDialog", false)} className="settings-panel-close close"><Glyphicon glyph="1-close"/></Button>
                 </span>
                 <div role="body">
                     <DownloadResults
@@ -68,7 +68,7 @@ const DownloadResultsComponent = ({
                         onUpdate={onActive}/>
                 </div>
                 <span role="footer">
-                    <button onClick={() => onActive(results)} className="btn btn-default" bsSize="small"> <Glyphicon glyph="refresh"/> <I18N.Message msgId="exportDataResults.refresh"/></button>
+                    <Button onClick={() => onActive(results)} className="btn btn-default" bsSize="small"> <Glyphicon glyph="refresh"/> <I18N.Message msgId="exportDataResults.refresh"/></Button>
                 </span>
             </Dialog>
         </>
