@@ -1,7 +1,7 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='Piani e misure di conservazione' subtitle={[
+        <DetailTitle title='Aree protette e Siti Rete Natura 2000: piani e misure di conservazione' subtitle={[
             ' ',
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()"),
             ]} id={model.id}/>
@@ -9,7 +9,7 @@
 
     <Panel className="template">
         <Section header='Dati generali' eventKey='1' expanded={true}>
-           <LabeledField label='Tipologia di Piano o Misura' value={
+           <LabeledField label='Tipologia di Piano o MdC' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()")
             }/>
 			<LabeledField label='Legge di approvazione' value={
