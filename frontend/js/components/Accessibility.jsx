@@ -34,7 +34,7 @@ class Accessibility extends React.Component {
                     <Modal.Body>
                         <h3>Accessibilità</h3>
                         <p>Regione Piemonte pone grande attenzione al tema dell'accessibilità delle informazioni.</p>
-                        <p>La pubblicazione sul sito AGID è in corso. Il link sarà aggiornato non appena disponibile.</p>
+                        <p>Consulta la <a href="https://form.agid.gov.it/view/d3cc32bd-b55e-4ab5-a2fb-6e66d06803e3" target="_blank">Dichiarazione di accessibilit&agrave; rilasciata dall'Agenzia per l'Italia Digitale (AgID)</a>.</p>
                         <p>
                         Per segnalare casi di mancata conformità ai requisiti di accessibilità, per richiedere informazioni e contenuti che siano stati esclusi dall'ambito di applicazione della Direttiva UE 2016/2102 scrivere a <a href="mailto:sita@regione.piemonte.it">sita@regione.piemonte.it</a>
                         </p>
