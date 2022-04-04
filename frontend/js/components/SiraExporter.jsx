@@ -67,8 +67,9 @@ class SiraExporter extends React.Component {
     renderSelectors = () => {
         // const height = this.state.outputformat === 'shp' ? "260px" : "150px";
         let maxFeat = this.props.confMaxFeatures ? this.props.confMaxFeatures : this.props.maxFeatures;
-        let h = this.state.outputformat === 'shp' ? 260 : 150;
-        let height = this.state.type === 'all' && (this.props.totalFeatures > maxFeat || this.props.exportAsync) ? (h + 80) + "px" : h + "px";
+        let h = this.state.outputformat === 'shp' ? 210 : 150;
+        let height = this.state.type === 'all' && (this.props.totalFeatures > maxFeat || this.props.exportAsync) ? (h + 60) + "px" : h + "px";
+
         return (
             <div role="body" style={{height, display: "flex",
                 flexDirection: "column", justifyContent: "space-between"}}>
@@ -80,15 +81,15 @@ class SiraExporter extends React.Component {
                         { value: 'shp', label: 'Shape file' }]}
                     onChange={(val) => this.setState({outputformat: val.value})}
                 />
-
-                <Select
-                    clearable={false}
-                    value={this.state.type}
-                    options={[
-                        { value: 'all', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportAll") },
-                        { value: 'page', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportPage") }]}
-                    onChange={(val) => this.setState({type: val.value})}
-                />
+                {!this.props.exportAsync ? (
+                    <Select
+                        clearable={false}
+                        value={this.state.type}
+                        options={[
+                            { value: 'all', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportAll") },
+                            { value: 'page', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportPage") }]}
+                        onChange={(val) => this.setState({type: val.value})}
+                    />) : null}
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
                     Solo gli elementi dotati di geometria verranno esportati
                 </Alert>) : null}

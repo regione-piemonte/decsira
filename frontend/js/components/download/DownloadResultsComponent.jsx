@@ -7,9 +7,9 @@
  */
 
 import React from 'react';
-import { Button, Tooltip, Glyphicon, OverlayTrigger } from 'react-bootstrap';
+import { Modal, Button, Tooltip, Glyphicon, OverlayTrigger } from 'react-bootstrap';
 
-const Dialog = require('@mapstore/components/misc/Dialog');
+// const Dialog = require('@mapstore/components/misc/Dialog');
 import DownloadResults from './DownloadResults';
 import InfoBubble from '../misc/infobubble/InfoBubble';
 import DefaultInfoBubbleInner from '../misc/infobubble/DefaultInnerComponent';
@@ -51,26 +51,22 @@ const DownloadResultsComponent = ({
                     <DefaultInfoBubbleInner {...infoBubbleMessage} />
                 </InfoBubble>
             </div> : null}
-            <Dialog
-                id="mapstore-export-data-results"
-                style={{display: active ? "block" : "none"}}
-                draggable={false}
-                modal>
-                <span role="header">
-                    <span className="about-panel-title"><I18N.Message msgId="exportDataResults.title"/></span>
-                    <Button onClick={() => onToggle("downloadResultsDialog", false)} className="settings-panel-close close"><Glyphicon glyph="1-close"/></Button>
-                </span>
-                <div role="body">
+            <Modal
+                show= {active}>
+                <Modal.Header closeButton onClick={() => onToggle("downloadResultsDialog", false)}>
+                    <Modal.Title><I18N.Message msgId="exportDataResults.title"/></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <DownloadResults
                         loading={checkingDownload}
                         results={results}
                         onRemoveResult={onRemoveResult}
                         onUpdate={onActive}/>
-                </div>
-                <span role="footer">
-                    <Button onClick={() => onActive(results)} className="btn btn-default" bsSize="small"> <Glyphicon glyph="refresh"/> <I18N.Message msgId="exportDataResults.refresh"/></Button>
-                </span>
-            </Dialog>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={() => onActive(results)}><Glyphicon glyph="refresh"/> <I18N.Message msgId="exportDataResults.refresh"/></Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };

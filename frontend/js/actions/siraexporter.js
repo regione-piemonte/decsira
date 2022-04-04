@@ -23,8 +23,6 @@ const SET_INFO_BUBBLE_MESSAGE = "SET_INFO_BUBBLE_MESSAGE";
 const { Promise } = require('es6-promise');
 const { toggleSiraControl } = require('./controls');
 const uuidv1 = require('uuid/v1');
-// const { parseString } = require('xml2js');
-// const { stripPrefix } = require('xml2js/lib/processors');
 
 function setExportParams(params) {
     return {
@@ -223,11 +221,6 @@ function asynchDownoad(url, request) {
         timeout: 60000,
         headers: { 'Accept': 'text/xml', 'Content-Type': 'text/plain' }
     }).then((response) => {
-        /* parseString(response.data, { tagNameProcessors: [stripPrefix] }, function(err, result) {
-            console.log(result);
-            console.log(ExporterUtils.getDownloadResponse(result));
-            console.log(result.ExecuteResponse.$.statusLocation);
-        });*/
         if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
             let statusLocation = ExporterUtils.getDownloadStatusLocation(response.data);
             return statusLocation;
@@ -288,7 +281,6 @@ function getExecutionStatus(result) {
             status = {...result, status: 'failed', error: error };
         }
         return status;
-        // throw new Error("GeoServer Exception, query fallita!");
     });
 }
 

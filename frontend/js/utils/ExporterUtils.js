@@ -223,32 +223,21 @@ const ExporterUtils = {
         return resultLocation;
     },
     getDownloadError: function(xmlResponse) {
-        const doc = new Dom().parseFromString(xmlResponse);
-        const exception = doc.getElementsByTagName('ows:ExceptionReport')[0].childNodes[1];
+        let owsException = this.getOwsException(xmlResponse);
+        const doc = new Dom().parseFromString(owsException);
+        const exception = doc.getElementsByTagName('ows:ExceptionReport')[0].childNodes[0];
         const exceptionText = exception.getElementsByTagName('ows:ExceptionText')[0];
         let error = exceptionText.childNodes[0].nodeValue;
         return error;
     },
-    getDownloadResponse: function(xmlObj) {
-        const status = xmlObj?.ExecuteResponse?.Status?.[0];
-        if (status?.ProcessAccepted) {
-            return {status: 'ProcessAccepted'};
-        }
-        if (status?.ProcessStarted) {
-            return {status: 'ProcessStarted'};
-        }
-        if (status?.ProcessSucceeded) {
-            return {status: 'ProcessSucceeded', data: xmlObj.ExecuteResponse.ProcessOutputs?.[0]?.Output};
-        }
-        if (status?.ProcessFailed) {
-            return {status: 'ProcessFailed', exceptionReport: status?.ProcessFailed?.[0]?.ExceptionReport?.[0]?.Exception?.[0]?.ExceptionText?.[0]};
-        }
-        if (status?.ProcessPaused) {
-            return {status: 'ProcessPaused'};
-        }
-        return {status: 'UnexpectedStatus'};
+    getOwsException: function(xmlResponse) {
+        let res = xmlResponse.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
+        res = xmlResponse.replace(/\n/g, "");
+        if (res.startsWith('<ows:ExceptionReport')) return res;
+        let startIndex = res.indexOf('<ows:ExceptionReport');
+        let endIndex = res.indexOf('</ows:ExceptionReport>') + 22;
+        return res.substring(startIndex, endIndex);
     }
-
 };
 
 module.exports = ExporterUtils;
