@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_biodiversita_bdn_piano_gest_uso="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_piano_gest_uso/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_piano_gest_uso/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_biodiversita_bdn_piano_gest_uso  id= id_bdn_piano_gest_uso-->
+	<element name="BdnPianiGestUso" substitutionGroup="gml:AbstractFeature" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUsoType"/>
+	
+	<!-- decsira_t_biodiversita_bdn_piano_provincia_gest_uso  id= id_bdn_piano_provincia_gest_uso -->
+	<element name="BdnProvinciaPianoGestUso" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnProvinciaPianoGestUsoType"/>
+	
+	<!-- decsira_t_biodiversita_bdn_piano_comune_gest_uso  id= id_bdn_piano_comune_gest_uso -->
+	<element name="BdnComunePianoGestUso" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnComunePianoGestUsoType"/>
+
+	<!-- decsira_t_oggetto_associato_biodiversita id=id_oggetto_associato_biodiversita-->
+<element name="BdnDatatreePianoGestUso" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUsoType"/>
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="BdnPianiGestUsoType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idBdnPianoGestUso" type="xs:decimal"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+                    
+					<xs:element maxOccurs="1" minOccurs="0" name="idOggTipo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="8"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceSitoRn2000">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="9"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomeSitoRn2000">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="provinceIntereressate">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="comuniInteressati">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>			
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1CodCorineBiotopes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1DescCorineBiotopes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1CodHabitat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1DescHabitat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1CodEunisAmb">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1DescEunisAmb">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1CodTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1DescTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1SchedaHabi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1SchedaMonitoraggio">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1RifAutore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1RifAnno">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1RifTitolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h1RifUrl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="h1Perc" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="presenzaAltriAmbienti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2CodCorineBiotopes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2DescCorineBiotopes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2CodHabitat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2DescHabitat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2CodEunisAmb">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2DescEunisAmb">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2CodTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h2DescTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="h2Perc" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3CodCorineBiotopes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3DescCorineBiotopes">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3CodHabitat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3DescHabitat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3CodEunisAmb">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3DescEunisAmb">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3CodTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="h3DescTipoForestale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element minOccurs="0" name="h3Perc" type="xs:decimal"/>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnProvinciaPianoGestUso" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnProvinciaPianoGestUsoPropertyType"/>
+					  
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnComunePianoGestUso" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnComunePianoGestUsoPropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnDatatreePianoGestUso" type="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUsoPropertyType"/>
+
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="BdnDatatreePianoGestUsoType">
+    <complexContent>
+     <extension base="gml:AbstractGMLType">
+	<sequence>
+		<xs:element minOccurs="1" name="idOggettoAssociatoBiodiversita" type="xs:decimal"/>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="fkTipoOggPrinc" type="xs:decimal"/>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="idOggettoPrinc" type="xs:decimal"/>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="idOggetto" type="xs:decimal"/>
+		
+		<xs:element maxOccurs="1" minOccurs="0" name="idOggTipoPrinc" type="xs:decimal"/>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="fkTipoOggetto" type="xs:decimal"/>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="tipoAlberatura">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+		<xs:maxLength value="50"/>
+		</xs:restriction>
+		</xs:simpleType>
+		</xs:element>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="desTipoOggetto">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+		<xs:maxLength value="50"/>
+		</xs:restriction>
+		</xs:simpleType>
+		</xs:element>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="nomeWfs">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+		<xs:maxLength value="301"/>
+		</xs:restriction>
+		</xs:simpleType>
+		</xs:element>
+		
+		<xs:element maxOccurs="1" minOccurs="0" name="codice">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+		<xs:maxLength value="20"/>
+		</xs:restriction>
+		</xs:simpleType>
+		</xs:element>
+		
+		<xs:element maxOccurs="1" minOccurs="0" name="nome">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+		<xs:maxLength value="300"/>
+		</xs:restriction>
+		</xs:simpleType>
+		</xs:element>
+
+		<xs:element maxOccurs="1" minOccurs="0" name="nascostoCittadino">
+		<xs:simpleType>
+		<xs:restriction base="xs:string">
+		<xs:maxLength value="5"/>
+		</xs:restriction>
+		</xs:simpleType>
+		</xs:element>
+
+
+		</sequence>
+		</extension>
+		</complexContent>
+		</complexType>
+
+	
+	<complexType name="BdnProvinciaPianoGestUsoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="idBdnPianoProvinciaGestUso" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="fkBdnPianoGestUso" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="descrProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="BdnComunePianoGestUsoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element minOccurs="1" name="idBdnPianoComuneGestUso" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="fkBdnPianoGestUso" type="xs:decimal"/>
+					
+					<xs:element minOccurs="1" name="descrComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="BdnProvinciaPianoGestUsoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnProvinciaPianoGestUso"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="BdnComunePianoGestUsoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnComunePianoGestUso"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	
+   <complexType name="BdnDatatreePianoGestUsoPropertyType">
+       <sequence minOccurs="0">
+          <element ref="decsiraogc_biodiversita_bdn_piano_gest_uso:BdnDatatreePianoGestUso"/>
+		</sequence>
+	    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+	    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+	
+	
+</schema>
