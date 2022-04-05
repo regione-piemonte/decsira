@@ -295,6 +295,20 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>	
+	<Rule>
+		<priority>43</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_geo_biodiversita_piani</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>	
+	<Rule>
+		<priority>44</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_piano_gest_uso</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 
 
 	
@@ -405,7 +419,13 @@
 		<layer>BdnPianificazione</layer>
 		<accessMode>READ</accessMode>
 	</Rule>
-	
+	<Rule>
+		<priority>112</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_biodiversita_bdn_piano_gest_uso</workspace>
+		<layer>BdnPianiGestUso</layer>
+		<accessMode>READ</accessMode>
+	</Rule>
 	
 	
 	
@@ -605,20 +625,23 @@
 		<accessMode>READ</accessMode>
     </Rule>
 	
-	 <Rule>
+	<Rule>
 		<priority>325</priority>
 		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_bdn_semaforo_flora</workspace>
+		<workspace>decsiraogc_geo_biodiversita_piani</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	 <Rule>
+	
+	<Rule>
 		<priority>326</priority>
 		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_bdn_semaforo_fauna</workspace>
+		<workspace>decsiraogc_biodiversita_bdn_piano_gest_uso</workspace>
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
+	
+	
 	
 	
 	
@@ -1339,7 +1362,7 @@
 		<accessMode>READ</accessMode>
 		<filter>"flg_validazione" = 'si'</filter>  
 		<hiddenAttributes>
-		 <attribute>decsiraogc_monitor_datidimens:flg_validazione</attribute>
+		 <attribute>portata_media_annua</attribute>
 		</hiddenAttributes>	
     </Rule>
     <Rule>
@@ -1961,9 +1984,7 @@
 		<layer>BdnOsservazioniFlora</layer>
 		<accessMode>READ</accessMode>
 	</Rule>
-
-	
-	<Rule>
+        <Rule>
 		<priority>658</priority>
 		<roles>ROLE_ANONYMOUS</roles>
 		<workspace>decsiraogc_biodiversita_bdn_osservazioni_fauna</workspace>
