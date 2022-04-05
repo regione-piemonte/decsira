@@ -12,6 +12,7 @@ const Dialog = require('@mapstore/components/misc/Dialog');
 const Select = require('react-select').default;
 const {Button, Glyphicon, Alert} = require('react-bootstrap');
 const ExporterUtils = require('../utils/ExporterUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 require('react-select/dist/react-select.css');
 
@@ -58,9 +59,13 @@ class SiraExporter extends React.Component {
     };
 
     renderError = () => {
+        let errorMsg = this.props.errormsg;
+        if (errorMsg === "downloadEstimatorFailed") {
+            errorMsg = LocaleUtils.getMessageById(this.context.messages, "SiraExporter.downloadEstimatorFailed");
+        }
         return (<div role="body" style={{height: "150px", display: "flex",
             flexDirection: "column", justifyContent: "space-between"}}>
-            <span><strong style={{color: "red", textAlign: "center"}}>{this.props.errormsg}</strong></span>
+            <Alert bsStyle="danger" >{errorMsg}</Alert>
         </div>);
     };
 
@@ -91,13 +96,13 @@ class SiraExporter extends React.Component {
                         onChange={(val) => this.setState({type: val.value})}
                     />) : null}
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
-                    Solo gli elementi dotati di geometria verranno esportati
+                    <I18N.Message msgId="SiraExporter.shpMsg" />
                 </Alert>) : null}
                 {this.props.exportAsync ? (<Alert bsStyle="info" >
-                Export in modalità asincrona, verificare il completamento dell'operazione con l'apposita funzione
+                    <I18N.Message msgId="SiraExporter.asynch" />
                 </Alert>) : null}
                 {!this.props.exportAsync && this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (<Alert bsStyle="info" >
-                Superato limite massimo: saranno esportati {maxFeat} di {this.props.totalFeatures} oggetti
+                    <I18N.Message msgId="SiraExporter.maxFeatures" msgParams={{ maxFeat, totalFeatures: this.props.totalFeatures }} />
                 </Alert>) : null}
                 <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export&nbsp;</span><Glyphicon glyph="download-alt" /></Button>
             </div>);
@@ -114,7 +119,7 @@ class SiraExporter extends React.Component {
             onClickOut={this.props.toggleExporter.bind(null, 'exporter')}
         >
             <span role="header">
-                <span>Export Data</span>
+                <span><I18N.Message msgId="featuregrid.export" /></span>
                 <button onClick={this.props.toggleExporter.bind(null, 'exporter')} className="exporter-close close"><Glyphicon glyph="1-close"/></button>
             </span>
             <div role="header"/>

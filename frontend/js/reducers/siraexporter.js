@@ -8,7 +8,7 @@
 const assign = require("object-assign");
 const { SET_EXPORT_PARAMS, EXPORT_LOADING, EXPORT_ERROR, CONFIGURE_EXPORTER,
     STORE_DOWNLOAD_RESULT, CHECKING_DOWNLOAD_DATA_ENTRIES, UPDATE_DOWNLOAD_RESULT,
-    REMOVE_DOWNLOAD_RESULT, SHOW_INFO_BUBBLE, SET_INFO_BUBBLE_MESSAGE } = require('../actions/siraexporter');
+    REMOVE_DOWNLOAD_RESULT, SHOW_INFO_BUBBLE, SET_INFO_BUBBLE_MESSAGE, EXPORT_RESULT_POLLING } = require('../actions/siraexporter');
 const { findIndex } = require('lodash');
 
 function siraexporter(state = {
@@ -22,7 +22,8 @@ function siraexporter(state = {
     srs: 'EPSG:4326',
     downloadResults: [],
     showInfoBubble: false,
-    infoBubbleMessage: {}
+    infoBubbleMessage: {},
+    polling: false
 }, action) {
     switch (action.type) {
     case SET_EXPORT_PARAMS: {
@@ -36,6 +37,9 @@ function siraexporter(state = {
     }
     case CONFIGURE_EXPORTER: {
         return assign({}, state, action.config);
+    }
+    case EXPORT_RESULT_POLLING: {
+        return assign({}, state, {polling: action.polling});
     }
     case STORE_DOWNLOAD_RESULT: {
         return {

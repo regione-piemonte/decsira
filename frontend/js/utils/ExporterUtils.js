@@ -161,6 +161,49 @@ const ExporterUtils = {
         }, []);
 
     },
+    getDownloadEstimatorRequest: function(layerName, wfsRequest) {
+        const fesFilter = SiraFilterUtils.getFesFilter(wfsRequest);
+
+        const filterInput = fesFilter ? `
+        <wps:Input>
+        <ows:Identifier>filter</ows:Identifier>
+        <wps:Data>
+            <wps:ComplexData mimeType="text/xml; filter/1.0"><![CDATA[
+                ${SiraFilterUtils.fesFilterToOgcFilter(fesFilter)}
+            ]]>
+            </wps:ComplexData>
+        </wps:Data>
+        </wps:Input>` : '';
+
+        const request = `
+        <wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/1.1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+        <ows:Identifier>gs:DownloadEstimator</ows:Identifier>
+        <wps:DataInputs>
+            <wps:Input>
+            <ows:Identifier>layerName</ows:Identifier>
+            <wps:Data>
+                <wps:LiteralData>${layerName}</wps:LiteralData>
+            </wps:Data>
+            </wps:Input>
+            <wps:Input>
+            <ows:Identifier>targetCRS</ows:Identifier>
+            <wps:Data>
+                <wps:LiteralData>EPSG:32632</wps:LiteralData>
+            </wps:Data>
+            </wps:Input>
+            ${filterInput}
+        </wps:DataInputs>
+        <wps:ResponseForm>
+            <wps:ResponseDocument status="true">
+                <wps:Output asReference="true" mimeType="application/zip">
+                <ows:Identifier>result</ows:Identifier>
+                </wps:Output>
+            </wps:ResponseDocument>
+        </wps:ResponseForm>
+        </wps:Execute>
+        `;
+        return request;
+    },
     getWpsDownloadRequest: function(layerName, outputFormat, wfsRequest) {
         const fesFilter = SiraFilterUtils.getFesFilter(wfsRequest);
 
@@ -210,6 +253,13 @@ const ExporterUtils = {
         `;
         return request;
     },
+    getDownloadEstimatorResult: function(xmlResponse) {
+        const doc = new Dom().parseFromString(xmlResponse);
+        const output = doc.getElementsByTagName('wps:ExecuteResponse')[0].childNodes[2];
+        const data = output.getElementsByTagName('wps:Data')[0];
+        const result = data.getElementsByTagName('wps:LiteralData')[0].childNodes[0].nodeValue;
+        return result;
+    },
     getDownloadStatusLocation: function(xmlResponse) {
         let doc = new Dom().parseFromString(xmlResponse);
         let element = doc.getElementsByTagName('wps:ExecuteResponse')[0];
@@ -237,6 +287,17 @@ const ExporterUtils = {
         let startIndex = res.indexOf('<ows:ExceptionReport');
         let endIndex = res.indexOf('</ows:ExceptionReport>') + 22;
         return res.substring(startIndex, endIndex);
+    },
+    getProcessStatus: function(xmlResponse) {
+        const doc = new Dom().parseFromString(xmlResponse);
+        try {
+            return doc.getElementsByTagName('wps:ExecuteResponse')[0]
+                .childNodes[1]
+                .childNodes[0]
+                .localName;
+        } catch (e) {
+            return "UnexpectedStatus";
+        }
     }
 };
 

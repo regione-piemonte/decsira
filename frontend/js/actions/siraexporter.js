@@ -20,6 +20,7 @@ const UPDATE_DOWNLOAD_RESULT = 'UPDATE_DOWNLOAD_RESULT';
 const REMOVE_DOWNLOAD_RESULT = 'REMOVE_DOWNLOAD_RESULT';
 const SHOW_INFO_BUBBLE = "SHOW_INFO_BUBBLE";
 const SET_INFO_BUBBLE_MESSAGE = "SET_INFO_BUBBLE_MESSAGE";
+const EXPORT_RESULT_POLLING = "EXPORT_RESULT_POLLING";
 const { Promise } = require('es6-promise');
 const { toggleSiraControl } = require('./controls');
 const uuidv1 = require('uuid/v1');
@@ -86,6 +87,13 @@ function setInfoBubbleMessage(msgId, msgParams, level) {
         msgId,
         msgParams,
         level
+    };
+}
+
+function togglePolling(polling) {
+    return {
+        type: EXPORT_RESULT_POLLING,
+        polling
     };
 }
 
@@ -216,6 +224,19 @@ function getFeaturesAndExport(wfsUrl, params, filter, columns, outputformat, fea
     };
 }
 
+function estimateDownload(url, request) {
+    return axios.post(url, request, {
+        timeout: 60000,
+        headers: { 'Accept': 'text/xml', 'Content-Type': 'text/plain' }
+    }).then((response) => {
+        if (response.data && response.data.indexOf("<ows:ExceptionReport") !== 0) {
+            let result = ExporterUtils.getDownloadEstimatorResult(response.data);
+            return result === 'true';
+        }
+        throw new Error("GeoServer Exception, query fallita!");
+    });
+}
+
 function asynchDownoad(url, request) {
     return axios.post(url, request, {
         timeout: 60000,
@@ -239,34 +260,6 @@ function showInfoBubbleMessage(msgId, msgParams, level, duration) {
     };
 }
 
-function downloadFeatures(wpsUrl, layerName, layerTitle, wfsRequest, outputformat, filename, mimeType, addFile) {
-    const format = outputformat === 'shp' ? "application/zip" : "text/csv";
-    const request = ExporterUtils.getWpsDownloadRequest(layerName, format, wfsRequest);
-
-    return (dispatch) => {
-        dispatch(toggleLoading(true));
-        let {url} = ConfigUtils.setUrlPlaceholders({url: wpsUrl});
-        const downloadPromise = asynchDownoad(url, request);
-        const promises = addFile ? [downloadPromise, getFile(addFile)] : [downloadPromise];
-        const newResult = {
-            id: uuidv1(),
-            layerName: layerName,
-            layerTitle: layerTitle,
-            status: 'pending',
-            startTime: new Date().getTime()
-        };
-        Promise.all(promises).then((results) => {
-            dispatch(toggleLoading(false));
-            dispatch(toggleSiraControl("exporter", false));
-            dispatch(storeDownloadResult({...newResult, statusLocation: results[0] }));
-            dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.newExport'));
-        }).catch((e) => {
-            const message = e.message || `Network problem code ${e.status}`;
-            dispatch(exportError(message));
-        });
-    };
-}
-
 function getExecutionStatus(result) {
     return axios.get(result.statusLocation, {
         timeout: 60000,
@@ -274,8 +267,13 @@ function getExecutionStatus(result) {
     }).then((response) => {
         let status = {};
         if (response.data && response.data.indexOf("<ows:ExceptionReport") === -1) {
-            let resultLocation = ExporterUtils.getDownloadResultLocation(response.data);
-            status = {...result, status: 'completed', resultLocation: resultLocation };
+            let procStatus = ExporterUtils.getProcessStatus(response.data);
+            if (procStatus === "ProcessSucceeded") {
+                let resultLocation = ExporterUtils.getDownloadResultLocation(response.data);
+                status = {...result, status: 'completed', resultLocation: resultLocation };
+            } else {
+                status = {...result, status: 'pending'};
+            }
         } else {
             let error = ExporterUtils.getDownloadError(response.data);
             status = {...result, status: 'failed', error: error };
@@ -284,16 +282,102 @@ function getExecutionStatus(result) {
     });
 }
 
+function continuePolling(downloadResults) {
+    let ret = false;
+    downloadResults.map(result => {
+        if (result.status === "pending") ret = true;
+    });
+    return ret;
+}
+
+function pollingDownloadDataEntries() {
+    return (dispatch, getState) => {
+        const promises = [];
+        let downloadResults = getState().siraexporter.downloadResults;
+        downloadResults.forEach(result => {
+            if (result.status === "pending") {
+                promises.push(getExecutionStatus(result));
+            }
+        });
+        Promise.all(promises).then((results) => {
+            results.map(result => {
+                dispatch(updateDownloadResult(result));
+                if (result.status === "completed") {
+                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.exportSuccess'));
+                } else if (result.status === "failed") {
+                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.exportFailure'));
+                }
+            });
+
+            if (continuePolling(results)) {
+                setTimeout(() => { dispatch(pollingDownloadDataEntries()); }, 5000);
+            } else {
+                dispatch(togglePolling(false));
+            }
+        });
+    };
+}
+
+function downloadFeatures(wpsUrl, layerName, layerTitle, wfsRequest, outputformat, filename, mimeType, addFile) {
+    const format = outputformat === 'shp' ? "application/zip" : "text/csv";
+    let {url} = ConfigUtils.setUrlPlaceholders({url: wpsUrl});
+    const request = ExporterUtils.getWpsDownloadRequest(layerName, format, wfsRequest);
+    const estimateRequest = ExporterUtils.getDownloadEstimatorRequest(layerName, format, wfsRequest);
+
+    return (dispatch, getState) => {
+        dispatch(toggleLoading(true));
+
+        estimateDownload(url, estimateRequest).then(result => {
+            if (result === true) {
+                const downloadPromise = asynchDownoad(url, request);
+                const promises = addFile ? [downloadPromise, getFile(addFile)] : [downloadPromise];
+                const newResult = {
+                    id: uuidv1(),
+                    layerName: layerName,
+                    layerTitle: layerTitle,
+                    status: 'pending',
+                    startTime: new Date().getTime()
+                };
+                Promise.all(promises).then((results) => {
+                    dispatch(toggleLoading(false));
+                    dispatch(toggleSiraControl("exporter", false));
+                    dispatch(storeDownloadResult({...newResult, statusLocation: results[0] }));
+                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.newExport'));
+
+                    if (getState().siraexporter.polling === false) {
+                        dispatch(pollingDownloadDataEntries());
+                        dispatch(togglePolling(true));
+                    }
+                }).catch((e) => {
+                    const message = e.message || `Network problem code ${e.status}`;
+                    dispatch(exportError(message));
+                });
+            } else {
+                dispatch(exportError("downloadEstimatorFailed"));
+            }
+        });
+    };
+}
+
 function checkDownloadDataEntries(downloadResults) {
     return (dispatch) => {
         checkingDownloadDataEntries(true);
         const promises = [];
         downloadResults.forEach(result => {
-            promises.push(getExecutionStatus(result));
+            if (result.status === "pending") {
+                promises.push(getExecutionStatus(result));
+            }
         });
         Promise.all(promises).then((results) => {
             dispatch(checkingDownloadDataEntries(false));
-            results.map(result => dispatch(updateDownloadResult(result)));
+            results.map(result => {
+                dispatch(updateDownloadResult(result));
+                /* if (result.status === "completed") {
+                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.exportSuccess'));
+                } else if (result.status === "failed") {
+                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.exportFailure'));
+                }*/
+            });
         }).catch((e) => {
             const message = e.message || `Network problem code ${e.status}`;
             dispatch(exportError(message));
@@ -312,6 +396,7 @@ module.exports = {
     REMOVE_DOWNLOAD_RESULT,
     SHOW_INFO_BUBBLE,
     SET_INFO_BUBBLE_MESSAGE,
+    EXPORT_RESULT_POLLING,
     toggleLoading,
     setExportParams,
     getFeaturesAndExport,
