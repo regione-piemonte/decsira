@@ -364,19 +364,12 @@ function checkDownloadDataEntries(downloadResults) {
         checkingDownloadDataEntries(true);
         const promises = [];
         downloadResults.forEach(result => {
-            if (result.status === "pending") {
-                promises.push(getExecutionStatus(result));
-            }
+            promises.push(getExecutionStatus(result));
         });
         Promise.all(promises).then((results) => {
             dispatch(checkingDownloadDataEntries(false));
             results.map(result => {
                 dispatch(updateDownloadResult(result));
-                /* if (result.status === "completed") {
-                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.exportSuccess'));
-                } else if (result.status === "failed") {
-                    dispatch(showInfoBubbleMessage('layerdownload.exportResultsMessages.exportFailure'));
-                }*/
             });
         }).catch((e) => {
             const message = e.message || `Network problem code ${e.status}`;
