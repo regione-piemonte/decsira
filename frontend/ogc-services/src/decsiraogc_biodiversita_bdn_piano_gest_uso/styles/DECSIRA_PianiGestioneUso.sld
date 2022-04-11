@@ -1606,6 +1606,25 @@
             </Stroke>
            </PolygonSymbolizer>         
         </Rule>
+        
+        	<!-- WMS piani gestione: habitat - cod habitat Ambiente descritto secondo Corine Biotopes, EUNIS o Tipi forestali del Piemonte* -->
+	 <Rule>
+	    <Name>R60</Name>
+         <Title>Ambiente descritto secondo Corine Biotopes, EUNIS o Tipi forestali del Piemonte</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>decsiraogc_biodiversita_bdn_piano_gest_uso:h1CodHabitat</ogc:PropertyName>
+              <ogc:Literal>n.d.</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PolygonSymbolizer>   
+           <Stroke>
+              <CssParameter name="stroke">>#000001</CssParameter>
+              <CssParameter name="stroke-width">1</CssParameter>
+              <CssParameter name="stroke-linejoin">bevel</CssParameter>
+            </Stroke>
+           </PolygonSymbolizer>         
+        </Rule>
 	
         
       </FeatureTypeStyle>
