@@ -115,7 +115,10 @@ const ExporterUtils = {
         } else {
             stringValue = '';
         }
-        stringValue = stringValue.replace(/"/g, "\"\"");
+        // stringValue = stringValue.replace(/"/g, "\"\"");
+        stringValue = stringValue.replace(/"/g, "");
+        // Replace del carattere di new line con uno spazio
+        stringValue = stringValue.replace(/\r\n/g, " ");
         stringValue = (stringValue.indexOf(",") > -1) ? "\"" + stringValue + "\"" : stringValue;
         return stringValue;
     },

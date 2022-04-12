@@ -1,6 +1,6 @@
 {
    "featureTypeName":"decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
-   "featureTypeNameLabel":"Piani e misure di conservazione",
+   "featureTypeNameLabel":"Pianificazione e Normativa",
    "nameSpaces": {
      "decsiraogc_biodiversita_bdn_pianificazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0"
    },
@@ -8,7 +8,7 @@
        "type": "wms",
         "url": "{geoserverUrl}/wms",
         "visibility": true,
-        "title": "Piani e misure di conservazione",
+        "title": "Pianificazione e Normativa",
         "name": "decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione",
         "infoFormat": "application/vnd.ogc.gml/3.1.1",
         "topologyConfig": {
@@ -23,7 +23,7 @@
 		"params": {
 			"featureType": "bdnPianificazione"
 		},
-        "group": "Piani e misure di conservazione",
+        "group": "Pianificazione e Normativa",
         "format": "image/png"
     },
    "geometryName": "geometria",
@@ -58,7 +58,7 @@
            "type": 2
          },
 		     {
-           "headerName": "Tipologia di Piano o Misura",
+           "headerName": "Tipologia di Piano o MdC",
            "suppressSorting": true,
            "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()"],
            "type": 2,
@@ -78,14 +78,6 @@
           "type": 2,
           "dateFormat": "DD/MM/YYYY",
           "width" : 180
-        },
-        {
-          "headerName": "Data di scadenza",
-          "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:dataFine/text()"],
-          "type": 2,
-          "dateFormat": "DD/MM/YYYY",
-          "width" : 150
         },
         {
           "headerName": "Tipologia di sito" ,
@@ -111,28 +103,21 @@
         {
           "headerName": "Province interessate" ,
           "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:bdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPiano/decsiraogc_biodiversita_bdn_pianificazione:descrProvincia/text()"],
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:provinceIntereressate/text()"],
           "type": 2,
           "width" : 200
         },
         {
           "headerName": "Comuni interessati" ,
           "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:bdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:BdnComunePiano/decsiraogc_biodiversita_bdn_pianificazione:descrComune/text()"],
+          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:comuniInteressati/text()"],
           "type": 2,
           "width" : 200
         },
         {
-          "headerName": "Tipologia di finanziamento" ,
+          "headerName": "Crediti" ,
           "suppressSorting": true,
           "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:crediti/text()"],
-          "type": 2,
-          "width" : 200
-        },
-        {
-          "headerName": "Link cartografia" ,
-          "suppressSorting": true,
-          "xpath": ["decsiraogc_biodiversita_bdn_pianificazione:url/text()"],
           "type": 2,
           "width" : 200
         },
@@ -196,7 +181,7 @@
        {
         "index": 3,
         "attribute": "decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano",
-        "label":"Tipologia di Piano o Misura",
+        "label":"Tipologia di Piano o MdC",
         "type":"list",
         "valueService": {
           "urlParams": {
@@ -226,7 +211,7 @@
       },
       {
         "index": 6,
-        "attribute": "decsiraogc_biodiversita_bdn_pianificazione:nomeSito",
+        "attribute": "decsiraogc_biodiversita_bdn_pianificazione:nomeAreaProtetta",
         "label":"Area Protetta",
         "type":"list",
         "valueService": {
@@ -241,7 +226,7 @@
     },
     {
       "index": 7,
-      "attribute": "decsiraogc_biodiversita_bdn_pianificazione:nomeSito",
+      "attribute": "decsiraogc_biodiversita_bdn_pianificazione:nomeSitoReteNatura",
       "label":"Sito Rete Natura 2000",
       "type":"list",
       "valueService": {
@@ -257,7 +242,7 @@
      {
       "index": 8,
       "attribute": "decsiraogc_biodiversita_bdn_pianificazione:bdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano/decsiraogc_biodiversita_bdn_pianificazione:tipoAllegato",
-      "label":"Tipologia di allegato",
+      "label":"Tipologia di documentazione",
       "type":"list",
       "valueService": {
         "urlParams": {

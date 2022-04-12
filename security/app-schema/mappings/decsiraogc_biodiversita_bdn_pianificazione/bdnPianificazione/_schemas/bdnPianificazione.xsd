@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_biodiversita_bdn_pianificazione="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_biodiversita_bdn_pianificazione/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_biodiversita_bdn_pianificazione  id= id_bdn_pianificazione-->
+	<element name="BdnPianificazione" substitutionGroup="gml:AbstractFeature" type="decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazioneType"/>
+	
+	<!-- decsira_t_biodiversita_bdn_allegato_piano  id=id_bdn_allegato_piano-->
+	<element name="BdnAllegatoPiano" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPianoType"/>
+	
+	<!-- decsira_t_biodiversita_bdn_provincia_piano  id=id_bdn_provincia_piano-->
+	<element name="BdnProvinciaPiano" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPianoType"/>
+
+	<!-- decsira_t_biodiversita_bdn_comune_piano  id=id_bdn_comune_piano-->
+	<element name="BdnComunePiano" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_pianificazione:BdnComunePianoType"/>
+
+	<!-- decsira_t_oggetto_associato_biodiversita  id=id_oggetto_associato_biodiversita-->
+	<element name="BdnDatatreePiano" substitutionGroup="gml:AbstractObject" type="decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePianoType"/>
+
+
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="BdnPianificazioneType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idBdnPianificazione" type="xs:decimal"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="fkPiano" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idTipoAreaSito" type="xs:decimal"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="descTipoPiano">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idTipoOggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="8"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="numeroLegge">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataApprovazione" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataFine" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoAreaSito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="codiceSito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomeSito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomeAreaProtetta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomeSitoReteNatura">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="provinceIntereressate">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="comuniInteressati">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="crediti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="linkCartografia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					
+					 <!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnAllegatoPiano" type="decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPianoPropertyType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnProvinciaPiano" type="decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPianoPropertyType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnComunePiano" type="decsiraogc_biodiversita_bdn_pianificazione:BdnComunePianoPropertyType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="bdnDatatreePiano" type="decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePianoPropertyType"/>
+
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	
+	
+    <complexType name="BdnAllegatoPianoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idBdnAllegatoPiano" type="xs:decimal"/>
+					
+				    <xs:element maxOccurs="1" minOccurs="0" name="fkBdnPianificazione" type="xs:decimal"/>
+
+					 <xs:element maxOccurs="1" minOccurs="0" name="tipoAllegato">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					  <xs:element maxOccurs="1" minOccurs="0" name="tipoFunzione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="url ">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	 <complexType name="BdnProvinciaPianoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idBdnProvinciaPiano" type="xs:decimal"/>
+					
+				    <xs:element maxOccurs="1" minOccurs="0" name="fkBdnPianificazione" type="xs:decimal"/>
+
+					 <xs:element maxOccurs="1" minOccurs="0" name="descrProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="BdnComunePianoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idBdnComunePiano" type="xs:decimal"/>
+					
+				    <xs:element maxOccurs="1" minOccurs="0" name="fkBdnPianificazione" type="xs:decimal"/>
+
+					 <xs:element maxOccurs="1" minOccurs="0" name="descrComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="BdnDatatreePianoType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				    <xs:element minOccurs="1" name="idOggettoAssociatoBiodiversita" type="xs:decimal"/>
+					
+				    <xs:element maxOccurs="1" minOccurs="0" name="fkTipoOggPrinc" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idOggettoPrinc" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="idOggetto" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkTipoOggetto" type="xs:decimal"/>
+					
+					 <xs:element maxOccurs="1" minOccurs="0" name="idOggettoTipoPrinc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+
+					 <xs:element maxOccurs="1" minOccurs="0" name="tipoAlberatura">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="desTipoOggetto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="codicePiano">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="nomePiano">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="300"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="nomeWfs">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="301"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					 
+					  <xs:element maxOccurs="1" minOccurs="0" name="nascostoCittadino">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					 </xs:element>
+					
+					 
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="BdnAllegatoPianoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_pianificazione:BdnAllegatoPiano"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+
+    <complexType name="BdnProvinciaPianoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_pianificazione:BdnProvinciaPiano"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+
+    <complexType name="BdnComunePianoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_pianificazione:BdnComunePiano"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	 <complexType name="BdnDatatreePianoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	
+</schema>
