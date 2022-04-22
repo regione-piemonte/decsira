@@ -1,0 +1,64 @@
+<Panel
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='Aree protette e Siti Rete Natura 2000: piani e misure di conservazione' subtitle={[
+            ' ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content infobox-content">
+		<TreeData
+			featureType = 'bdnPianificazione'
+			featureId = {model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:idBdnPianificazione/text()")+ '.id_bdn_pianificazione' }
+			rootTitle = {
+				'Tipo di piano o misura: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()")
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:bdnDatatreePiano")}
+			groups = {[
+			  {
+				groupName: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:fkTipoOggetto/text()",
+					value: "303"
+				},
+				groupElement: {
+						descriptionLabels: ['Codice L.r. 19/09: ', ' - Nome area: '],
+						descriptionValues: ["decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:codicePiano/text()",
+						"decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:nomePiano/text()"
+			        ],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:nomeWfs/text()",
+						xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:idOggetto/text()"
+					}
+				},
+				groupFilter: {
+					xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:nascostoCittadino/text()",
+					value: "NO"
+		        }
+			  },
+			  {
+				groupName: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:fkTipoOggetto/text()",
+					value: "304"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice sito: ',' - Nome sito:'],
+					descriptionValues: ["decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:codicePiano/text()",
+					"decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:nomePiano/text()"
+					],
+					linkToDetail: {
+						nomeWFS: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:nomeWfs/text()",
+						xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:idOggetto/text()"
+					}
+				},
+				groupFilter: {
+					xpath: "decsiraogc_biodiversita_bdn_pianificazione:BdnDatatreePiano/decsiraogc_biodiversita_bdn_pianificazione:nascostoCittadino/text()",
+					value: "NO"
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

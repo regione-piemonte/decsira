@@ -49,7 +49,7 @@ module.exports = {
         MapEditorPlugin: require('@mapstore/plugins/MapEditor').default,
         MapFooterPlugin: require('@mapstore/plugins/MapFooter'),
         MapImportPlugin: require('@mapstore/plugins/MapImport'),
-        MapExportPlugin: require('@mapstore/plugins/MapExport').default,
+        // MapExportPlugin: require('@mapstore/plugins/MapExport').default,
         MapLoadingPlugin: require('@mapstore/plugins/MapLoading'),
         MapPlugin: require('@mapstore/plugins/Map'),
         MapSearchPlugin: require('@mapstore/plugins/MapSearch'),

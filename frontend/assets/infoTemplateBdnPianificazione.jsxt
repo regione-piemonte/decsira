@@ -1,0 +1,57 @@
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateBdnPianificazione"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+             headerName: 'Tipologia di Piano o MdC',
+             width: 200,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()"
+        }, {
+             headerName: 'Legge di approvazione',
+             width: 170,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:numeroLegge/text()"
+        }, {
+             headerName: 'Data di approvazione',
+             width: 140,
+             "dateFormat": "DD/MM/YYYY",
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:dataApprovazione/text()"
+        }, {
+             headerName: 'Tipologia di sito',
+             width: 120,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:tipoAreaSito/text()"
+        }, {
+             headerName: 'Codice sito',
+             width: 120,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:codiceSito/text()"
+        }, {
+             headerName: 'Nome sito',
+             width: 120,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:nomeSito/text()"
+        },  {
+             headerName: 'Province interessate',
+             width: 130,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:provinceIntereressate/text()"
+        },  {
+             headerName: 'Comuni interessati',
+             width: 130,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:comuniInteressati/text()"
+        },  {
+             headerName: 'Crediti',
+             width: 180,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:crediti/text()"
+        },  {
+             headerName: 'Link cartografia',
+             width: 130,
+             xpath: "decsiraogc_biodiversita_bdn_pianificazione:url/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione")}/>

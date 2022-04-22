@@ -12,7 +12,12 @@ const React = require('react');
 const TemplateSira = require('../../template/TemplateSira');
 const TemplateUtils = require('../../../utils/TemplateUtils');
 
-const {isString} = require('lodash');
+const { isString } = require('lodash');
+
+const { connect } = require('react-redux');
+const { bindActionCreators } = require('redux');
+const {setTreeFeatureType} = require('../../../actions/siradec');
+const {closeTree} = require('../../../actions/siraTree');
 
 class GMLViewer extends React.Component {
     static propTypes = {
@@ -83,6 +88,9 @@ class GMLViewer extends React.Component {
     }
 
     goToDetail = (data, idFieldName) => {
+        this.props.setTreeFeatureType(undefined);
+        this.props.closeTree();
+
         let url = this.props.contentConfig.detailsConfig.card.service.url;
         let urlParams = this.props.contentConfig.detailsConfig.card.service.params;
         for (let param in urlParams) {
@@ -104,4 +112,11 @@ class GMLViewer extends React.Component {
     };
 }
 
-module.exports = GMLViewer;
+// module.exports = GMLViewer;
+
+module.exports = connect(() => { }, dispatch => {
+    return bindActionCreators({
+        setTreeFeatureType,
+        closeTree
+    }, dispatch);
+})(GMLViewer);
