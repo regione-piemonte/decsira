@@ -102,4 +102,44 @@ FilterUtils.getFilterByIds = function(ftName, ids, idField, pagination) {
     return this.toOGCFilter(ftName, filterObj, "2.0");
 };
 
+FilterUtils.getFesFilter = function(filter) {
+    let startIndex = filter.indexOf("<fes:Filter>");
+    let endIndex = filter.indexOf("</fes:Filter>");
+    if (startIndex > -1) {
+        return filter.substring(startIndex, endIndex + 13);
+    }
+    return null;
+};
+
+function formatCoordinates(ret) {
+    let coordIndex = ret.indexOf('<gml:posList>');
+    if (coordIndex !== -1) {
+        let endCoordsIndex = ret.indexOf('</gml:posList>');
+        let coords = ret.substring(coordIndex + 13, endCoordsIndex);
+        let coordsOk  = coords.split(' ').map((v, i) => {
+            return (i % 2) ? v + ' ' : v + ',';
+        }).join('');
+        let startIndex = ret.indexOf('<gml:exterior>');
+        let endIndex = ret.indexOf('</gml:exterior>') + 15;
+        let result = ret.substring(0, startIndex) +
+            `<gml:outerBoundaryIs>
+					<gml:LinearRing>
+						<gml:coordinates>` +
+                            coordsOk +
+                        `</gml:coordinates>
+					</gml:LinearRing>
+			</gml:outerBoundaryIs>` + ret.substring(endIndex);
+        return result;
+    }
+    return ret;
+}
+
+FilterUtils.fesFilterToOgcFilter = function(fesFilter) {
+    let ret = fesFilter.replace('<fes:Filter>', '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">');
+    ret = ret.replace(/fes/gi, "ogc");
+    ret = ret.replace(/ValueReference/gi, "PropertyName");
+    ret = formatCoordinates(ret);
+    return ret;
+};
+
 module.exports = FilterUtils;

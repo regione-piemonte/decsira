@@ -16,10 +16,12 @@ const assign = require("object-assign");
 const ZoomToFeature = require("./ZoomToFeature");
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
-const {reactCellRendererFactory} = require('./CellRendererFactory');
+const { reactCellRendererFactory } = require('./CellRendererFactory');
 
 require("ag-grid/dist/styles/ag-grid.css");
 require("ag-grid/dist/styles/theme-fresh.css");
+
+// const DownloadResultsComponent = require('../../download/DownloadResultsComponent').default;
 
 const calcVisibility = (def, state) => {
     if (state === true) {
@@ -77,7 +79,7 @@ class FeatureGrid extends React.Component {
         changeMapView: () => {},
         selectFeatures: () => {},
         style: {
-            height: "400px",
+            height: "325px",
             width: "800px"
         },
         virtualPaging: false,
