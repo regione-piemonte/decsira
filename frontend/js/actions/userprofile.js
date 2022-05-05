@@ -56,6 +56,9 @@ function userIdentityError(err) {
 }
 
 function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentity') {
+    if (window.location.href.indexOf('auth') === -1) {
+        return () => { };
+    }
     return (dispatch) => {
         return axios.get(serviceUrl).then((response) => {
             // response example
