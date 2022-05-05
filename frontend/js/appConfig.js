@@ -30,7 +30,8 @@ const appReducers = {
 
 module.exports = {
     pages: [
-        { path: "/", component: require('./containers/Home')},
+        { path: "/", component: require('./containers/Home') },
+        { path: "/auth", component: require('./containers/Home')},
         { path: "/siradataset/:categoryName", component: require('./containers/SiraDataset')},
         { path: "/dataset/", component: require('./containers/Dataset')},
         { path: "/dataset/:profile", component: require('./containers/Dataset')},
