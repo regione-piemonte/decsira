@@ -256,7 +256,7 @@ function showInfoBubbleMessage(msgId, msgParams, level, duration) {
         dispatch(showInfoBubble(true));
         setTimeout(() => {
             dispatch(showInfoBubble(false));
-        }, duration || 3000);
+        }, duration || 5000);
     };
 }
 
