@@ -43,7 +43,7 @@ const FilterUtils = require('@mapstore/utils/FilterUtils');
 const MapInfoUtils = require('@mapstore/utils/MapInfoUtils');
 MapInfoUtils.AVAILABLE_FORMAT = ['TEXT', 'JSON', 'HTML', 'GML3'];
 
-const {isArray, head} = require('lodash');
+const { isArray, head } = require('lodash');
 
 class GetFeatureInfo extends React.Component {
     static propTypes = {
@@ -120,15 +120,22 @@ class GetFeatureInfo extends React.Component {
         clickedMapPoint: {},
         style: {
             position: "absolute",
-            maxWidth: "500px",
+            minWidth: "400px",
+            minHeight: "300px",
             top: "56px",
             left: "45px",
             zIndex: 1010,
-            boxShadow: "2px 2px 4px #A7A7A7"
+            boxShadow: "2px 2px 4px #A7A7A7",
+            resize: "both",
+            overflow: "hidden"
         }
     };
 
-    state = { showModal: true };
+    state = {
+        showModal: true,
+        width: 500,
+        height: 400
+    };
 
     componentWillReceiveProps(newProps) {
         // if there's a new clicked point on map and GetFeatureInfo is active
@@ -384,6 +391,7 @@ class GetFeatureInfo extends React.Component {
             }
         });
     };
+
 }
 
 module.exports = GetFeatureInfo;

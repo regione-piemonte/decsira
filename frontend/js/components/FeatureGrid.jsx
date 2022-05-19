@@ -541,13 +541,13 @@ class SiraGrid extends React.Component {
     };
 
     multiLayerSelect = (params) => {
-        if (params.data?.geometry?.coordinates) {
-            this.props.setTreeFeatureType(undefined);
-            this.props.closeTree();
+        // if (params.data?.geometry?.coordinates) {
+        this.props.setTreeFeatureType(undefined);
+        this.props.closeTree();
 
-            // Configure and add the MLS layer to TOC
-            this.props.configureMLS(this.props.columnsDef, params.data?.geometry, params.data);
-        }
+        // Configure and add the MLS layer to TOC
+        this.props.configureMLS(this.props.columnsDef, params.data?.geometry, params.data);
+        // }
         // Zoom to feature when zoom enabled
         this.zoomToFeature(params);
     };
@@ -560,6 +560,9 @@ class SiraGrid extends React.Component {
             } else {
                 this.changeMapView([geometry], 15);
             }
+        } else {
+            this.props.changeMapView(this.props.map.center, 7,
+                this.props.map.bbox, this.props.map.size, null, this.props.map.projection || "EPSG:3857");
         }
     };
 
