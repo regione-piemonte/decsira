@@ -24,11 +24,14 @@ import it.csi.sira.frontend.iride.vo.IrideRoleVO;
 import it.csi.sira.frontend.iride.vo.UserPermissionVO;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.management.relation.Role;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.geoserver.security.iride.entity.IrideApplication;
@@ -51,36 +54,45 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 
 /**
- * <code>IRIDE</code> <code>REST</code> <a href="https://en.wikipedia.org/wiki/Spring_Framework#Model.E2.80.93view.E2.80.93controller_framework">Spring MVC</a> action,
- * backed by <a href="http://www.csipiemonte.it/">CSI</a> <code>IRIDE</code> service.
- * <p>Please see also:
+ * <code>IRIDE</code> <code>REST</code> <a href=
+ * "https://en.wikipedia.org/wiki/Spring_Framework#Model.E2.80.93view.E2.80.93controller_framework">Spring
+ * MVC</a> action, backed by <a href="http://www.csipiemonte.it/">CSI</a>
+ * <code>IRIDE</code> service.
+ * <p>
+ * Please see also:
  * <ul>
- *   <li><a href="http://stackoverflow.com/questions/19556039/spring-mvc-controller-rest-service-needs-access-to-header-information-how-to-do">Spring mvc controller REST service needs access to header information. How to do that in spring mvc?</a></li>
- *   <li><a href="http://stackoverflow.com/questions/28209242/read-http-headers-in-java-spring-rest-api/28209710#28209710">Read http headers in Java Spring rest api</a></li>
+ * <li><a href=
+ * "http://stackoverflow.com/questions/19556039/spring-mvc-controller-rest-service-needs-access-to-header-information-how-to-do">Spring
+ * mvc controller REST service needs access to header information. How to do
+ * that in spring mvc?</a></li>
+ * <li><a href=
+ * "http://stackoverflow.com/questions/28209242/read-http-headers-in-java-spring-rest-api/28209710#28209710">Read
+ * http headers in Java Spring rest api</a></li>
  * </ul>
  *
- * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+ * @author "Simone Cornacchia - seancrow76@gmail.com,
+ *         simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
 @Controller
 @RequestMapping(method = RequestMethod.GET, value = IrideServiceConstants.MAPPING_IRIDE_SERVICE)
 public final class IrideServiceController {
-	
+
 	private static String className = IrideServiceController.class.getSimpleName();
 
-    /**
-     * "No roles" empty {@link IrideRole} array.
-     */
-    private static final IrideRole[] NO_ROLES = new IrideRole[0];
+	/**
+	 * "No roles" empty {@link IrideRole} array.
+	 */
+	private static final IrideRole[] NO_ROLES = new IrideRole[0];
 
-    /**
-     * <code>IRIDE</code> service "policies" enforcer instance.
-     */
-    private IrideService irideService;
-    
-    /**
-     * <code>Properties</code> url of iride service.
-     */
-    private Properties irideProperties = null;
+	/**
+	 * <code>IRIDE</code> service "policies" enforcer instance.
+	 */
+	private IrideService irideService;
+
+	/**
+	 * <code>Properties</code> url of iride service.
+	 */
+	private Properties irideProperties = null;
 
 	public Properties getIrideProperties() {
 		return irideProperties;
@@ -90,156 +102,194 @@ public final class IrideServiceController {
 		this.irideProperties = irideProperties;
 	}
 
-    /**
-     * Get the <code>IRIDE</code> service "policies" enforcer instance.
-     *
-     * @return the <code>IRIDE</code> service "policies" enforcer instance
-     */
-    public IrideService getIrideService() {
-        return this.irideService;
-    }
+	/**
+	 * Get the <code>IRIDE</code> service "policies" enforcer instance.
+	 *
+	 * @return the <code>IRIDE</code> service "policies" enforcer instance
+	 */
+	public IrideService getIrideService() {
+		return this.irideService;
+	}
 
-    /**
-     * Set the <code>IRIDE</code> service "policies" enforcer instance.
-     *
-     * @param irideService the <code>IRIDE</code> service "policies" enforcer instance
-     */
-    @Autowired
-    public void setIrideService(IrideService irideService) {
-        this.irideService = irideService;
-    }
+	/**
+	 * Set the <code>IRIDE</code> service "policies" enforcer instance.
+	 *
+	 * @param irideService the <code>IRIDE</code> service "policies" enforcer
+	 *                     instance
+	 */
+	@Autowired
+	public void setIrideService(IrideService irideService) {
+		this.irideService = irideService;
+	}
 
-     /**
-     * Executed after dependencies have been injected.
-     *
-     * @throws IOException
-     */
-    @PostConstruct
-    public void init() throws IOException {
-    	
-    	final String methodName = new Object() {
-    	}.getClass().getEnclosingMethod().getName();
-    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
-        
-        this.getIrideService().initializeFromConfig(irideProperties.getProperty("serverURL"));
-    }
-    
-    @RequestMapping(value = "/testResources", method = RequestMethod.GET)
-    public @ResponseBody boolean testResources() {
-    	
-    	final String methodName = new Object() {
-    	}.getClass().getEnclosingMethod().getName();
-    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
-       
-    	return true;
-    }
+	/**
+	 * Executed after dependencies have been injected.
+	 *
+	 * @throws IOException
+	 */
+	@PostConstruct
+	public void init() throws IOException {
 
-    /**
-     *
-     * @param user
-     * @return
-     */
-    @RequestMapping(
-        headers = { IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE },
-        value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY,
-        produces = "application/json"
-    )
-    @ResponseBody
-    public ResponseEntity<UserPermissionVO> getRolesForDigitalIdentity(
-        @RequestHeader(
-            value = IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE,
-            defaultValue = ""
-        ) String user) {
-    	final String methodName = new Object() {
-    	}.getClass().getEnclosingMethod().getName();
-    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
-    	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "user: "+user));
-       
-        
-        try {
-        	UserPermissionVO userP = this.getUserPermission(user);
-            
-            Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "Got {} role(s) for IRIDE Digital Identity {} "+userP.getRoles().length));
-                          
-            return new ResponseEntity<>(userP, HttpStatus.OK);
-        } catch (Exception e) {
-            Logger.getLogger(IrideServiceConstants.LOGGER).error(LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "),e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    
-    
-   @RequestMapping(
-		   value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY, 
-		   method = RequestMethod.GET,
-		   produces = "application/json"
-		   )
-   public @ResponseBody ResponseEntity<UserPermissionVO> getRolesForDigitalIdentity() {
-   	final String methodName = new Object() {
-   	}.getClass().getEnclosingMethod().getName();
-   	Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN NOT AUTHENTICATED... fake"));
-   	   
-       try {
-    	   UserPermissionVO userP = new UserPermissionVO();
-    	                       
-           return new ResponseEntity<>(userP, HttpStatus.OK);
-       } catch (Exception e) {
-           Logger.getLogger(IrideServiceConstants.LOGGER).error(LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "),e);
-           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-       }
-   }
-   
-   
-   /**
-   *
-   * @param user
-   * @return
-   */
-  private UserPermissionVO getUserPermission(String user) {
-      IrideRole[] roles = NO_ROLES;
-      UserPermissionVO userP = new UserPermissionVO();
-      final String methodName = new Object() {
-	  	}.getClass().getEnclosingMethod().getName();
-	  Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
-  	
+		final String methodName = new Object() {
+		}.getClass().getEnclosingMethod().getName();
+		Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
-      final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(user);
-      Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "irideIdentity: "+irideIdentity));
-      if(irideIdentity != null)
-        Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "getCodFiscale: "+irideIdentity.getCodFiscale()));
-      
-      if (irideIdentity != null) {
-    	  userP.setUserIdentity(CastUtils.getIrideIdentityVOFromIrideIdentity(irideIdentity));
-          
-    	  roles = this.getIrideService().findRuoliForPersonaInApplication(
-              irideIdentity,
-              new IrideApplication(IrideServiceConstants.APPLICATION_NAME)
-          );
-    	  
-    	  userP.setRoles(CastUtils.getRolesVOFromRole(roles));
-      }
+		this.getIrideService().initializeFromConfig(irideProperties.getProperty("serverURL"));
+	}
 
-      return userP;
-  }
+	@RequestMapping(value = "/testResources", method = RequestMethod.GET)
+	public @ResponseBody boolean testResources() {
 
-    /**
-     *
-     * @param user
-     * @return
-     */
-    private IrideRole[] getRolesForUser(String user) {
-        IrideRole[] roles = NO_ROLES;
+		final String methodName = new Object() {
+		}.getClass().getEnclosingMethod().getName();
+		Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 
-        final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(user);
-        if (irideIdentity != null) {
-            roles = this.getIrideService().findRuoliForPersonaInApplication(
-                irideIdentity,
-                new IrideApplication(IrideServiceConstants.APPLICATION_NAME)
-            );
-        }
+		return true;
+	}
 
-        return roles;
-    }
+	/**
+	 *
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(headers = {
+			IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE }, value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<UserPermissionVO> getRolesForDigitalIdentity(
+			@RequestHeader(value = IrideServiceConstants.HEADER_SHIBBOLETH_IRIDE, defaultValue = "") String user, HttpServletRequest request) {
+		final String methodName = new Object() {
+		}.getClass().getEnclosingMethod().getName();
+		Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
+		Logger.getLogger(IrideServiceConstants.LOGGER)
+				.info(LogFormatter.format(className, methodName, "user: " + user));
+		Logger.getLogger(IrideServiceConstants.LOGGER).info("**************** Logging headers - parameters - coockies ****************");
+		Enumeration headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			String value = request.getHeader(key);
+			Logger.getLogger(IrideServiceConstants.LOGGER)
+					.info(LogFormatter.format(className, methodName, "header: " + key + ": " + value));
+		}
+		Enumeration parameterNames = request.getParameterNames();
+		while (parameterNames.hasMoreElements()) {
+			String key = (String) parameterNames.nextElement();
+			String value = request.getParameter(key);
+			Logger.getLogger(IrideServiceConstants.LOGGER)
+					.info(LogFormatter.format(className, methodName, "parameterName: " + key + ": " + value));
+		}
+		Cookie[] cookies = request.getCookies();
+		for (int i = 0; i < cookies.length; i++) {
+			Cookie cookie = cookies[i];
+			Logger.getLogger(IrideServiceConstants.LOGGER)
+					.info(LogFormatter.format(className, methodName, "cookie: " + cookie.getName()+ ": " + cookie.getValue()));
+		}
+		Logger.getLogger(IrideServiceConstants.LOGGER).info("*******************************************");
+		
+		try {
+			UserPermissionVO userP = this.getUserPermission(user);
 
+			Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName,
+					"Got {} role(s) for IRIDE Digital Identity {} " + userP.getRoles().length));
+
+			return new ResponseEntity<>(userP, HttpStatus.OK);
+		} catch (Exception e) {
+			Logger.getLogger(IrideServiceConstants.LOGGER).error(
+					LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "), e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@RequestMapping(value = IrideServiceConstants.MAPPING_ROLES_FOR_DIGITAL_IDENTITY, method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody ResponseEntity<UserPermissionVO> getRolesForDigitalIdentity(HttpServletRequest request) {
+		final String methodName = new Object() {
+		}.getClass().getEnclosingMethod().getName();
+		Logger.getLogger(IrideServiceConstants.LOGGER)
+				.info(LogFormatter.format(className, methodName, "BEGIN NOT AUTHENTICATED... fake"));
+
+		Logger.getLogger(IrideServiceConstants.LOGGER).info("**************** Logging headers - parameters - cookies ****************");
+		Enumeration headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			String value = request.getHeader(key);
+			Logger.getLogger(IrideServiceConstants.LOGGER)
+					.info(LogFormatter.format(className, methodName, "header: " + key + ": " + value));
+		}
+		Enumeration parameterNames = request.getParameterNames();
+		while (parameterNames.hasMoreElements()) {
+			String key = (String) parameterNames.nextElement();
+			String value = request.getParameter(key);
+			Logger.getLogger(IrideServiceConstants.LOGGER)
+					.info(LogFormatter.format(className, methodName, "parameterName: " + key + ": " + value));
+		}
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null && cookies.length > 0) {
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie cookie = cookies[i];
+				Logger.getLogger(IrideServiceConstants.LOGGER)
+						.info(LogFormatter.format(className, methodName, "cookie: " + cookie.getName()+ ": " + cookie.getValue()));
+			}
+		} else {
+			Logger.getLogger(IrideServiceConstants.LOGGER).info("no cookies");
+		}
+		Logger.getLogger(IrideServiceConstants.LOGGER).info("*******************************************");
+		
+		try {
+			UserPermissionVO userP = new UserPermissionVO();
+
+			return new ResponseEntity<>(userP, HttpStatus.OK);
+		} catch (Exception e) {
+			Logger.getLogger(IrideServiceConstants.LOGGER).error(
+					LogFormatter.format(className, methodName, "IRIDE roles retrieval for Digital Identity "), e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	/**
+	 *
+	 * @param user
+	 * @return
+	 */
+	private UserPermissionVO getUserPermission(String user) {
+		IrideRole[] roles = NO_ROLES;
+		UserPermissionVO userP = new UserPermissionVO();
+		final String methodName = new Object() {
+		}.getClass().getEnclosingMethod().getName();
+		Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
+
+		final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(user);
+		Logger.getLogger(IrideServiceConstants.LOGGER)
+				.info(LogFormatter.format(className, methodName, "irideIdentity: " + irideIdentity));
+		if (irideIdentity != null)
+			Logger.getLogger(IrideServiceConstants.LOGGER).info(
+					LogFormatter.format(className, methodName, "getCodFiscale: " + irideIdentity.getCodFiscale()));
+
+		if (irideIdentity != null) {
+			userP.setUserIdentity(CastUtils.getIrideIdentityVOFromIrideIdentity(irideIdentity));
+
+			roles = this.getIrideService().findRuoliForPersonaInApplication(irideIdentity,
+					new IrideApplication(IrideServiceConstants.APPLICATION_NAME));
+
+			userP.setRoles(CastUtils.getRolesVOFromRole(roles));
+		}
+
+		return userP;
+	}
+
+	/**
+	 *
+	 * @param user
+	 * @return
+	 */
+	private IrideRole[] getRolesForUser(String user) {
+		IrideRole[] roles = NO_ROLES;
+
+		final IrideIdentity irideIdentity = IrideIdentity.parseIrideIdentity(user);
+		if (irideIdentity != null) {
+			roles = this.getIrideService().findRuoliForPersonaInApplication(irideIdentity,
+					new IrideApplication(IrideServiceConstants.APPLICATION_NAME));
+		}
+
+		return roles;
+	}
 
 }

@@ -12,6 +12,7 @@ const Dialog = require('@mapstore/components/misc/Dialog');
 const Select = require('react-select').default;
 const {Button, Glyphicon, Alert} = require('react-bootstrap');
 const ExporterUtils = require('../utils/ExporterUtils');
+const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 require('react-select/dist/react-select.css');
 
@@ -23,6 +24,7 @@ class SiraExporter extends React.Component {
         toggleExporter: PropTypes.func,
         searchUrl: PropTypes.string.isRequired,
         getFeaturesAndExport: PropTypes.func,
+        downloadFeatures: PropTypes.func,
         getFileAndExport: PropTypes.func,
         featuregrid: PropTypes.object,
         loading: PropTypes.bool,
@@ -34,7 +36,11 @@ class SiraExporter extends React.Component {
         srs: PropTypes.string,
         totalFeatures: PropTypes.number,
         maxFeatures: PropTypes.number,
-        confMaxFeatures: PropTypes.number
+        confMaxFeatures: PropTypes.number,
+        exportAsync: PropTypes.bool,
+        wpsUrl: PropTypes.string,
+        layerName: PropTypes.string,
+        layerTitle: PropTypes.string
     };
 
     static defaultProps = {
@@ -53,17 +59,22 @@ class SiraExporter extends React.Component {
     };
 
     renderError = () => {
+        let errorMsg = this.props.errormsg;
+        if (errorMsg === "downloadEstimatorFailed") {
+            errorMsg = LocaleUtils.getMessageById(this.context.messages, "SiraExporter.downloadEstimatorFailed");
+        }
         return (<div role="body" style={{height: "150px", display: "flex",
             flexDirection: "column", justifyContent: "space-between"}}>
-            <span><strong style={{color: "red", textAlign: "center"}}>{this.props.errormsg}</strong></span>
+            <Alert bsStyle="danger" >{errorMsg}</Alert>
         </div>);
     };
 
     renderSelectors = () => {
         // const height = this.state.outputformat === 'shp' ? "260px" : "150px";
         let maxFeat = this.props.confMaxFeatures ? this.props.confMaxFeatures : this.props.maxFeatures;
-        let h = this.state.outputformat === 'shp' ? 260 : 150;
-        let height = this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (h + 80) + "px" : h + "px";
+        let h = this.state.outputformat === 'shp' ? 210 : 150;
+        let height = this.state.type === 'all' && (this.props.totalFeatures > maxFeat || this.props.exportAsync) ? (h + 60) + "px" : h + "px";
+
         return (
             <div role="body" style={{height, display: "flex",
                 flexDirection: "column", justifyContent: "space-between"}}>
@@ -75,20 +86,23 @@ class SiraExporter extends React.Component {
                         { value: 'shp', label: 'Shape file' }]}
                     onChange={(val) => this.setState({outputformat: val.value})}
                 />
-
-                <Select
-                    clearable={false}
-                    value={this.state.type}
-                    options={[
-                        { value: 'all', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportAll") },
-                        { value: 'page', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportPage") }]}
-                    onChange={(val) => this.setState({type: val.value})}
-                />
+                {!this.props.exportAsync ? (
+                    <Select
+                        clearable={false}
+                        value={this.state.type}
+                        options={[
+                            { value: 'all', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportAll") },
+                            { value: 'page', label: LocaleUtils.getMessageById(this.context.messages, "featuregrid.exportPage") }]}
+                        onChange={(val) => this.setState({type: val.value})}
+                    />) : null}
                 {this.state.outputformat === 'shp' ? (<Alert bsStyle="info" >
-                    Solo gli elementi dotati di geometria verranno esportati
+                    <I18N.Message msgId="SiraExporter.shpMsg" />
                 </Alert>) : null}
-                {this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (<Alert bsStyle="info" >
-                Superato limite massimo: saranno esportati {maxFeat} di {this.props.totalFeatures} oggetti
+                {this.props.exportAsync ? (<Alert bsStyle="info" >
+                    <I18N.Message msgId="SiraExporter.asynch" />
+                </Alert>) : null}
+                {!this.props.exportAsync && this.state.type === 'all' && this.props.totalFeatures > maxFeat ? (<Alert bsStyle="info" >
+                    <I18N.Message msgId="SiraExporter.maxFeatures" msgParams={{ maxFeat, totalFeatures: this.props.totalFeatures }} />
                 </Alert>) : null}
                 <Button bsStyle="primary" style={{alignSelf: "flex-end"}} onClick={this.exportFeatures}><span>Export&nbsp;</span><Glyphicon glyph="download-alt" /></Button>
             </div>);
@@ -105,7 +119,7 @@ class SiraExporter extends React.Component {
             onClickOut={this.props.toggleExporter.bind(null, 'exporter')}
         >
             <span role="header">
-                <span>Export Data</span>
+                <span><I18N.Message msgId="featuregrid.export" /></span>
                 <button onClick={this.props.toggleExporter.bind(null, 'exporter')} className="exporter-close close"><Glyphicon glyph="1-close"/></button>
             </span>
             <div role="header"/>
@@ -120,14 +134,20 @@ class SiraExporter extends React.Component {
         (name.match(/\{featureType\}/g) || []).forEach((placeholder) => {
             name = name.replace(placeholder, ftName);
         });
-        if (this.state.type === 'page' && params.features && params.columns) {
-            if (this.props.addFile) {
-                this.props.getFileAndExport(params.features, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
-            } else {
-                ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
+        if (this.props.exportAsync) {
+            // Nuova funzione download WPS
+            this.props.downloadFeatures(this.props.wpsUrl, this.props.layerName, this.props.layerTitle, params.filter, this.state.outputformat, name, this.props.csvMimeType, this.props.addFile);
+        } else {
+            // Vecchia funzione export WFS
+            if (this.state.type === 'page' && params.features && params.columns) {
+                if (this.props.addFile) {
+                    this.props.getFileAndExport(params.features, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
+                } else {
+                    ExporterUtils.exportFeatures(this.state.outputformat, params.features, params.columns, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
+                }
+            } else if (this.state.type === 'all' && params.filter && params.columns) {
+                this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
             }
-        } else if (this.state.type === 'all' && params.filter && params.columns) {
-            this.props.getFeaturesAndExport(this.props.searchUrl, this.props.params, params.filter, params.columns, this.state.outputformat, this.props.featuregrid, name, this.props.csvMimeType, this.props.addFile, this.props.srs);
         }
     };
 }

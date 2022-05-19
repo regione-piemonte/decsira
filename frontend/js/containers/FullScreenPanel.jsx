@@ -30,6 +30,8 @@ const {setProfile} = require('../actions/userprofile');
 const Spinner = require('react-spinkit');
 const { selectFeatures } = require('../actions/featuregrid');
 const { handleKeyFocus } = require('../utils/SiraUtils');
+const Header = require('../components/Header');
+const { HashLink } = require('react-router-hash-link');
 
 const {
     loadFeatureTypeConfig,
@@ -167,12 +169,23 @@ class FullScreen extends React.Component {
             comp = this.renderQueryPanel();
         }
         return (
-            <div id="fullscreen-container" className="mappaSiraDecisionale">
-                {comp}
-                <Card draggable profile ={profile.profile} authParam={profile.authParams} withMap/>
-            </div>
+            <>
+                <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
+                    <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
+                </div>
+                <Header showCart="true" goToHome={this.goToHome} />
+                <div id="main-content"></div>
+                <div id="fullscreen-container" className="mappaSiraDecisionale">
+                    {comp}
+                    <Card draggable profile ={profile.profile} authParam={profile.authParams} withMap/>
+                </div>
+            </>
         );
     }
+
+    goToHome = () => {
+        this.context.router.history.push('/');
+    };
 
     toggleControl = () => {
         this.props.expandFilterPanel(false);
