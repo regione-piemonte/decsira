@@ -8,6 +8,7 @@
 const FilterUtils = require('@mapstore/utils/FilterUtils');
 const SiraUtils = require('./SiraUtils');
 const head = require('lodash/head');
+const {includes} = require('lodash');
 
 function getWSNameByFeatureName(ftName = "") {
     if (ftName === "" ) return "";
@@ -41,7 +42,7 @@ const getSLDByGeomType = (geometryType, ftName, filter, styleColor = '#0000FF') 
     let result;
     switch (geometryType) {
     case "Point": {
-        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">${styleColor}</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.5</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
     case "Polygon": {
@@ -53,7 +54,7 @@ const getSLDByGeomType = (geometryType, ftName, filter, styleColor = '#0000FF') 
         break;
     }
     case "LineString": {
-        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Stroke><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="stroke-width">2.0</CssParameter><CssParameter name="stroke-opacity">1.0</CssParameter></Stroke></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Stroke><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="stroke-width">10</CssParameter><CssParameter name="stroke-opacity">0.5</CssParameter></Stroke></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
     default:
@@ -77,6 +78,47 @@ FilterUtils.getSLD = function(ftName, json, version, nsplaceholder, nameSpaces, 
     return `<StyledLayerDescriptor version="1.0.0"
                     ${nameSpacesAttr}
                     xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">${getSLDByGeomType(geometryType, ftName, filter)}</StyledLayerDescriptor>`;
+};
+
+const getOGCFilters = (columnsDef, multiSelectLayer, params) =>{
+    return multiSelectLayer.map(({filterOn = '', multiLayerSelectionAttribute, name}) => {
+        if (columnsDef) {
+            const [result] = columnsDef.filter(c=> includes(c.xpath[0], multiLayerSelectionAttribute));
+            const value = params?.properties[result?.field || ''];
+            return `<ogc:Filter>
+              <ogc:And>
+                <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyName>${filterOn}</ogc:PropertyName>
+                  <ogc:Literal>${value}</ogc:Literal>
+                </ogc:PropertyIsEqualTo>
+              </ogc:And>
+            </ogc:Filter>`;
+        }
+        const value = params[name];
+        return `<ogc:Filter>
+              <ogc:And>
+                <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyName>${filterOn}</ogc:PropertyName>
+                  <ogc:Literal>${value}</ogc:Literal>
+                </ogc:PropertyIsEqualTo>
+              </ogc:And>
+            </ogc:Filter>`;
+    });
+};
+
+FilterUtils.getSLDMSLayersWithFilter = (columnsDef, multiSelectLayer, params, ftName, mlsFtNames = []) => {
+    const config = SiraUtils.getConfigByfeatureTypeName(ftName);
+    const filters = getOGCFilters(columnsDef, multiSelectLayer, params);
+    const nameSpacesAttr = Object.keys(config.nameSpaces).map((prefix) => 'xmlns:' + prefix + '="' + config.nameSpaces[prefix] + '"').join(" ");
+    let result = [];
+    mlsFtNames.forEach((mlsFtName, index) => {
+        let geometryType = mlsFtName ? head(config.multiLayerSelect.filter(mls=> mls.name === mlsFtName)).geometryType : config.geometryType;
+        let filter = filters[index];
+        result.push(getSLDByGeomType(geometryType, mlsFtName, filter, "#00FFFF"));
+    });
+    return `<StyledLayerDescriptor version="1.0.0" 
+                     ${nameSpacesAttr}
+                    xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gsml="urn:cgi:xmlns:CGI:GeoSciML:2.0" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">${result.join('')}</StyledLayerDescriptor>`;
 };
 
 FilterUtils.getSLDMSLayers = (ftName, nameSpaces, mlsFtNames = []) => {

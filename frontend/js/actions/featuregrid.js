@@ -125,10 +125,10 @@ const configureMultiLayerSelection = (columnsDef, geometry, params) => {
         const activeFeatureType = siradec?.activeFeatureType || '';
         const {multiLayerSelect = [], featureTypeName = '', layer = {}} = siradec?.configOggetti?.[activeFeatureType];
         const multiLayerSelectFiltered = multiLayerSelect.filter(({wmsUrl}) => isUndefined(wmsUrl));
-        const layersWithNoFilter = multiLayerSelect.map(({name, title = '', wmsUrl: url = layer.url}) => {
+        const layersWithNoFilter = multiLayerSelect.map(({name, title = '', wmsUrl: url = layer.url, featureType}) => {
             return {
                 ...layer,
-                featureType: null,
+                featureType: featureType || null,
                 url,
                 name,
                 infoFormat: "text/html",
@@ -147,12 +147,13 @@ const configureMultiLayerSelection = (columnsDef, geometry, params) => {
             name: mlsLayerName,
             title: mlsLayerName,
             id: 'selected_mls',
+            type: "wmspost",
             group: 'hidden',
             queryable: false,
             infoFormat: "text/html",
             visibility: true,
             params: { LAYERS: layerNames.join(','), FORMAT: layer.format, TRANSPARENT: true, SRS: crs, CRS: crs, TILED: true, version,
-                SLD_BODY: FilterUtils.getSLDMSLayers(featureTypeName, {}, layerNames),
+                SLD_BODY: FilterUtils.getSLDMSLayersWithFilter(columnsDef, multiLayerSelectFiltered, params, featureTypeName, layerNames),
                 CQL_FILTER: getCQLFilter(columnsDef, multiLayerSelectFiltered, params)
             }
         };

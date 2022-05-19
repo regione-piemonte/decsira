@@ -156,18 +156,20 @@ class Card extends React.Component {
         if (this.props.card.loadingCardTemplateError) {
             return this.renderLoadTemplateException();
         }
-        const showMLSButton = this.props.mlsShow && !isEmpty(this.getGeometry()?.coordinates);
-
+        // const showMLSButton = this.props.mlsShow && !this.props.card.loadingCardTemplate && !isEmpty(this.getGeometry()?.coordinates);
+        const showMLSButton = this.props.mlsShow;
         let tooltipTree = <Tooltip id="tooltip-data-tree">Oggetti collegati</Tooltip>;
         let tooltipPdf = <Tooltip id="tooltip-pdf-print">Stampa</Tooltip>;
         let tooltipMultilayer = <Tooltip id="tooltip-multilayer">Livelli di dettaglio</Tooltip>;
+        let btnMargin = this.props.treeTemplate ? '40px' : '14px';
+
         const Template = (
             <div className="scheda-sira">
                 {this.props.card.loadingCardTemplate
                     ? this.renderCardLoadingTemplate() : <TemplateSira template={this.props.card.template} model={model}/>}
                 <div id="card-btn-group" style={{paddingTop: 4, display: this.props.card.loadingCardTemplate ? 'none' : 'block' }}>
                     <OverlayTrigger key={"btn-multilayer"} rootClose placement="right" overlay={tooltipMultilayer} style={{ display: showMLSButton ? 'inline-block' : 'none' }}>
-                        <Button id="multiLayerSelect" style={{ display: showMLSButton ? 'inline-block' : 'none' }} onClick={this.onClickMLS}>
+                        <Button id="multiLayerSelect" style={{ marginLeft: btnMargin, display: showMLSButton ? 'inline-block' : 'none' }} onClick={this.onClickMLS}>
                             <img src={img} width={16} alt=""/>
                         </Button>
                     </OverlayTrigger>
@@ -177,7 +179,7 @@ class Card extends React.Component {
                         </Button>
                     </OverlayTrigger>
                     <OverlayTrigger key={"btn-data-tree"} rootClose placement="right" overlay={tooltipTree}>
-                        <Button id="treeButton" onClick={this.renderTree} style={{display: this.props.treeTemplate ? 'block' : 'none'}} disabled={this.props.card.xml === undefined || this.props.card.xml === null}>
+                        <Button id="treeButton" onClick={this.renderTree} style={{display: this.props.treeTemplate ? 'inline-block' : 'none'}} disabled={this.props.card.xml === undefined || this.props.card.xml === null}>
                             <Glyphicon glyph="link"/>
                         </Button>
                     </OverlayTrigger>
@@ -207,6 +209,10 @@ class Card extends React.Component {
         this.props.configureMLS(null, geometry, this.getProperties());
         if (!!geometry?.coordinates) {
             this.changeMapView([geometry]);
+        } else {
+            const map = this.props.map.present;
+            const proj = map.projection || "EPSG:3857";
+            this.props.changeMapView(map.center, 7, map.bbox, map.size, null, proj);
         }
     }
 
