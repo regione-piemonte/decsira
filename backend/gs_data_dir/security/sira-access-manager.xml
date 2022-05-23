@@ -1213,9 +1213,9 @@
 		<workspace>decsiraogc_rifiuti_aua</workspace>
 		<layer>ImpiantoRifiutiAUAnoAUA</layer>
 		<accessMode>READ</accessMode>
-		<!--filter>EXCLUDE</filter-->
+		<filter>EXCLUDE</filter>
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<filter>"decsiraogc_rifiuti_aua:idStato" = '101' OR "decsiraogc_rifiuti_aua:idStato" = '102'</filter>
+		<!--filter>"decsiraogc_rifiuti_aua:idStato" = '101' OR "decsiraogc_rifiuti_aua:idStato" = '102'</filter-->
 		<hiddenAttributes>
 		      <attribute>decsiraogc_rifiuti_aua:idStato</attribute>
 			  <attribute>decsiraogc_rifiuti_aua:desStato</attribute>
@@ -1255,9 +1255,9 @@
 		<workspace>decsiraogc_rifiuti_discarica</workspace>
 		<layer>ImpiantoRifiutiDiscaricaAIA208</layer>
 		<accessMode>READ</accessMode>
-		<!--filter>EXCLUDE</filter-->
+		<filter>EXCLUDE</filter>
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<filter>"decsiraogc_rifiuti_discarica:idStato" = '102' OR "decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter>
+		<!--filter>"decsiraogc_rifiuti_discarica:idStato" = '102' OR "decsiraogc_rifiuti_discarica:autorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:AutorizAmbImpRifiuti/decsiraogc_rifiuti_discarica:IdAttivita" = '100'</filter-->
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_discarica:desStato</attribute>
 			  <attribute>decsiraogc_rifiuti_discarica:numeroProvveIscrizione</attribute>
@@ -1294,9 +1294,9 @@
 		<workspace>decsiraogc_rifiuti_smaltimento</workspace>
 		<layer>ImpiantoRifiutiSmaltimAIA208</layer>
 		<accessMode>READ</accessMode>
-		<!--filter>EXCLUDE</filter-->
+		<filter>EXCLUDE</filter>
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<filter>"decsiraogc_rifiuti_smaltimento:idStato" = '101' OR "decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter>
+		<!--filter>"decsiraogc_rifiuti_smaltimento:idStato" = '101' OR "decsiraogc_rifiuti_smaltimento:idStato" = '102'</filter-->
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_smaltimento:desStato</attribute>
 			  <attribute>decsiraogc_rifiuti_smaltimento:numeroProvveIscrizione</attribute>
@@ -1327,9 +1327,9 @@
 		<workspace>decsiraogc_rifiuti_generici</workspace>
 		<layer>ImpiantoRifiutiGenerico</layer>
 		<accessMode>READ</accessMode>
-		<!--filter>EXCLUDE</filter-->
+		<filter>EXCLUDE</filter>
 		<!--riattivare il filtro quando si toglie EXCLUDE-->
-		<filter>"decsiraogc_rifiuti_generici:idStato" = '101' OR "decsiraogc_rifiuti_generici:idStato" = '102'</filter>
+		<!--filter>"decsiraogc_rifiuti_generici:idStato" = '101' OR "decsiraogc_rifiuti_generici:idStato" = '102'</filter-->
 		<hiddenAttributes>
 			  <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:indirizzo</attribute>
 			   <attribute>decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:emailPec</attribute>
@@ -2038,132 +2038,6 @@
 		<layer>BdnOsservazioniFauna</layer>
 		<accessMode>READ</accessMode>
 	</Rule>	
-	
-	<Rule>
-		<priority>662</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_geo_captazioni</workspace>
-		<layer>Pozzo</layer>
-		<accessMode>READ</accessMode>
-		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>  
-		<hiddenAttributes>
-		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:data_costruzione</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
-		 <attribute>decsiraogc_geo_captazioni:quota_piano_c</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_campo_pozzo</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_pozzo_art</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denominazione_imp_acq</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denominazione_acquedotto</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_disp_strat</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_disp_mis_piez</attribute>
-		 <attribute>decsiraogc_geo_captazioni:piez_assoc</attribute>	 
-		</hiddenAttributes>	
-    </Rule>
-	
-	<Rule>
-		<priority>663</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_geo_captazioni</workspace>
-		<layer>Fontanile</layer>
-		<accessMode>READ</accessMode>
-		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
-		<hiddenAttributes>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
-	    </hiddenAttributes>	
-    </Rule>
-	
-	<Rule>
-		<priority>664</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_geo_captazioni</workspace>
-		<layer>Presa</layer>
-		<accessMode>READ</accessMode>
-		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
-		<hiddenAttributes>
-		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_bacidromont</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_tipo_sbarr</attribute>
-		 <attribute>decsiraogc_geo_captazioni:volume_max_invaso</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_scala</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denominazione_imp_acq</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denominazione_acquedotto</attribute>
-		 <attribute>decsiraogc_geo_captazioni:progressiva_asta</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denom_cidrsup</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_galleria_filtr</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_capt_subalveo</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_da_canale</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_dispositivi</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_deroga_dmv</attribute>
-		 <attribute>decsiraogc_geo_captazioni:ulteriori_obblighi</attribute>
-		 <attribute>decsiraogc_geo_captazioni:altezza</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_tipo_scala</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_sponda_scala</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_obblighi_itt</attribute>
-		 <attribute>decsiraogc_geo_captazioni:specie_ittiche</attribute>
-	   </hiddenAttributes>
-    </Rule>
-	
-	<Rule>
-		<priority>665</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_geo_captazioni</workspace>
-		<layer>Sorgente</layer>
-		<accessMode>READ</accessMode>
-		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
-		<hiddenAttributes>
-		 <attribute>decsiraogc_geo_captazioni:codice_sii</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_tipo_sorgente</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
-		 <attribute>decsiraogc_geo_captazioni:quota_piano_c</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denominazione_imp_acq</attribute>
-		 <attribute>decsiraogc_geo_captazioni:denominazione_acquedotto</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_dispositivi</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_deroga_dmv</attribute>
-		 <attribute>decsiraogc_geo_captazioni:ulteriori_obblighi</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_tributaria</attribute>
-		</hiddenAttributes>
-    </Rule>
-	
-	<Rule>
-		<priority>666</priority>
-		<roles>ROLE_ANONYMOUS</roles>
-		<workspace>decsiraogc_geo_captazioni</workspace>
-		<layer>TrinceaDrenante</layer>
-		<accessMode>READ</accessMode>
-		<filter>"fk_stato" = '102' AND "uso_potabile" = 'NO'</filter>
-		<hiddenAttributes>
-		 <attribute>decsiraogc_geo_captazioni:des_areaidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:des_bacinoidro</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codutenza</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_nclasprat</attribute>
-		 <attribute>decsiraogc_geo_captazioni:elenco_deriv_codril</attribute>
-		 <attribute>decsiraogc_geo_captazioni:flg_misuratore</attribute>
-		 <attribute>decsiraogc_geo_captazioni:sviluppo_long</attribute>
-		 <attribute>decsiraogc_geo_captazioni:inclinazione</attribute>
-		 <attribute>decsiraogc_geo_captazioni:profondita_max</attribute>
-		 <attribute>decsiraogc_geo_captazioni:profondita_min</attribute>
-   	    </hiddenAttributes>
-    </Rule>
 
     </rules>
 
