@@ -10,6 +10,7 @@ const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const SiraUtils = require('../utils/SiraUtils');
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const TemplateUtils = require('../utils/TemplateUtils');
+const {verifyProfiles} = require('../utils/TemplateUtils');
 const axios = require('@mapstore/libs/ajax');
 const {version} = require('../utils/WMS');
 const {includes, isUndefined} = require('lodash');
@@ -123,7 +124,14 @@ const configureMultiLayerSelection = (columnsDef, geometry, params) => {
         const {siradec, map, layers: msLayers} = getState();
         const crs = CoordinatesUtils.normalizeSRS(map?.present?.projection);
         const activeFeatureType = siradec?.activeFeatureType || '';
-        const {multiLayerSelect = [], featureTypeName = '', layer = {}} = siradec?.configOggetti?.[activeFeatureType];
+        let {multiLayerSelect = [], featureTypeName = '', layer = {}} = siradec?.configOggetti?.[activeFeatureType];
+
+        // Tolgo dall'elenco dei layer configurati quelli che non soddisfano la profilatura utente
+        const { userprofile } = getState();
+        multiLayerSelect = multiLayerSelect.filter(
+            (mlsConfig) => verifyProfiles(mlsConfig.profiles, userprofile.profile)
+        );
+
         const multiLayerSelectFiltered = multiLayerSelect.filter(({wmsUrl}) => isUndefined(wmsUrl));
         const layersWithNoFilter = multiLayerSelect.map(({name, title = '', wmsUrl: url = layer.url, featureType}) => {
             return {

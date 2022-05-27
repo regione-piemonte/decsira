@@ -2,7 +2,9 @@
    "featureTypeName":"decsiraogc_derivazioni:Derivazione",
    "featureTypeNameLabel":"Concessioni di derivazione di acqua pubblica",
    "nameSpaces": {
-     "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0"
+     "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0",
+	 "decsiraogc_operecaptazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0",
+	 "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"
    },
    "layer": {
         "type": "wms",
@@ -46,6 +48,110 @@
    "featureinfo":{
      "templateURL": "assets/infoTemplateDerivazione.jsxt"
    },
+   "multiLayerSelect": [
+	  {
+        "name": "decsiraogc_derivazioni:decsira_geo_tratto_canale",
+        "title": "Tratti di canale",
+        "filterOn": "codice_rilievo_canale",
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
+      },
+	  {
+        "name": "decsiraogc_derivazioni:decsira_geo_tratto_cf",
+        "title": "Tratti di condotta forzata",
+        "filterOn": "codice_rilievo_condotta",
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
+      },
+	  {
+        "name": "decsiraogc_derivazioni:decsira_geo_tratto_galleria",
+        "title": "Tratti di galleria",
+        "filterOn": "codice_rilievo_galleria",
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
+      },
+	  {
+        "name": "decsiraogc_derivazioni:decsira_geo_tratto_cond",
+        "title": "Tratti di condotta generica",
+        "filterOn": "codice_rilievo_condotta",
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
+      },
+	  {
+        "name": "decsiraogc_operecaptazione:Presa",
+        "title": "Prese da acqua superficiale",
+        "filterOn": "decsiraogc_operecaptazione:presaDerivazione/decsiraogc_operecaptazione:PresaDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "presa"
+      },
+	  {
+        "name": "decsiraogc_derivazioni:Restituzione",
+        "title": "Restituzioni",
+        "filterOn": "decsiraogc_derivazioni:elencoDerivCodrilRestituzione",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "restituzione"
+      },
+	  {
+        "name": "decsiraogc_operecaptazione:Pozzo",
+        "title": "Pozzi di derivazione",
+        "filterOn": "decsiraogc_operecaptazione:pozzoDerivazione/decsiraogc_operecaptazione:PozzoDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "pozzo"
+      },
+	  {
+        "name": "decsiraogc_operecaptazione:Sorgente",
+        "title": "Prese da sorgenti",
+        "filterOn": "decsiraogc_operecaptazione:sorgenteDerivazione/decsiraogc_operecaptazione:SorgenteDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "sorgente"
+      },
+	  {
+        "name": "decsiraogc_operecaptazione:Fontanile",
+        "title": "Fontanili",
+        "filterOn": "decsiraogc_operecaptazione:fontanileDerivazione/decsiraogc_operecaptazione:FontanileDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "fontanile"
+      },
+	  {
+        "name": "decsiraogc_operecaptazione:TrinceaDrenante",
+        "title": "Prese da trincea",
+        "filterOn": "decsiraogc_operecaptazione:trinceaDerivazione/decsiraogc_operecaptazione:TrinceaDerivazione/decsiraogc_operecaptazione:codiceRilievoDeriv",
+        "geometryType": "LineString",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "trincea"
+      },
+	  {
+        "name": "decsiraogc_derivazioni:StazPompaggio",
+        "title": "Stazioni di pompaggio",
+        "filterOn": "decsiraogc_derivazioni:oggettoAssociatoStazPompaggio/decsiraogc_derivazioni:OggettoAssociatoStazPompaggio/decsiraogc_derivazioni:codiceRilDerColl",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "stazPompaggio",
+		"profiles": ["PA_GEN_DECSIRA@REG_PMN"]
+      },
+	  {
+        "name": "decsiraogc_derivazioni:Serbatoio",
+        "title": "Serbatoi di accumulo",
+        "filterOn": "decsiraogc_derivazioni:oggettoAssociatoSerbatoio/decsiraogc_derivazioni:OggettoAssociatoSerbatoio/decsiraogc_derivazioni:codiceRilDerColl",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv",
+		"featureType": "serbatoio",
+		"profiles": ["PA_GEN_DECSIRA@REG_PMN"]
+      },
+	  {
+        "name": "decsiraogc_stabilimenti:Stabilimento",
+        "title": "Stabilimenti",
+        "filterOn": "decsiraogc_stabilimenti:codiceSira",
+        "geometryType": "Point",
+        "multiLayerSelectionAttribute": "decsiraogc_derivazioni:oggettoAssociatoDerivazione/decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codSiraStabColl",
+		"featureType": "stabilimento"
+      }
+    ],
    "featuregrid": {
      "grid": {
        "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione",
@@ -176,7 +282,13 @@
            "headerName": "Geometry",
            "xpath": ["decsiraogc_derivazioni:geometria/gml:Point/gml:pos/text()"],
            "type": 6
-         }
+         },
+		 {
+			"hide": true,
+			"headerName": "Codice sira stabilimento",
+			"xpath": ["decsiraogc_derivazioni:oggettoAssociatoDerivazione/decsiraogc_derivazioni:OggettoAssociatoDerivazione/decsiraogc_derivazioni:codSiraStabColl/text()"],
+			"type": 2
+		 }
        ],
        "exporter":{
          "addFile":""
