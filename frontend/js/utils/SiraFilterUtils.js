@@ -84,7 +84,8 @@ const getOGCFilters = (columnsDef, multiSelectLayer, params) =>{
     return multiSelectLayer.map(({filterOn = '', multiLayerSelectionAttribute, name}) => {
         if (columnsDef) {
             const [result] = columnsDef.filter(c=> includes(c.xpath[0], multiLayerSelectionAttribute));
-            const value = params?.properties[result?.field || ''];
+            let value = params?.properties[result?.field || ''];
+            if (value === null || value === undefined || value === "") { return null; }
             return `<ogc:Filter>
               <ogc:And>
                 <ogc:PropertyIsEqualTo>
@@ -94,7 +95,8 @@ const getOGCFilters = (columnsDef, multiSelectLayer, params) =>{
               </ogc:And>
             </ogc:Filter>`;
         }
-        const value = params[name];
+        let value = params[name];
+        if (value === null || value === undefined || value === "") { return null; }
         return `<ogc:Filter>
               <ogc:And>
                 <ogc:PropertyIsEqualTo>
@@ -114,7 +116,9 @@ FilterUtils.getSLDMSLayersWithFilter = (columnsDef, multiSelectLayer, params, ft
     mlsFtNames.forEach((mlsFtName, index) => {
         let geometryType = mlsFtName ? head(config.multiLayerSelect.filter(mls=> mls.name === mlsFtName)).geometryType : config.geometryType;
         let filter = filters[index];
-        result.push(getSLDByGeomType(geometryType, mlsFtName, filter, "#00FFFF"));
+        if ( filter !== null ) {
+            result.push(getSLDByGeomType(geometryType, mlsFtName, filter, "#00FFFF"));
+        }
     });
     return `<StyledLayerDescriptor version="1.0.0" 
                      ${nameSpacesAttr}
