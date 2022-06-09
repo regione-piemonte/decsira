@@ -104,7 +104,7 @@ const LoginNav = connect((state) => ({
     className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), {
     onShowLogin: showLoginPanel
-})(require('@mapstore/components/security/UserMenu'));
+})(require('./UserMenu'));
 
 const CartPanel = connect((state) => ({
     showPanel: state.cart.showPanel,

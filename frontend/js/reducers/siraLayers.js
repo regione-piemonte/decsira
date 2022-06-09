@@ -8,11 +8,12 @@
 
 const msLayers = require('@mapstore/reducers/layers').default;
 const assign = require('object-assign');
-const {isObject, head, findIndex, isEmpty, includes} = require('lodash');
+// const {isObject, head, findIndex, isEmpty, includes} = require('lodash');
+const {isObject, head, findIndex} = require('lodash');
 const {SHOW_SETTINGS, HIDE_SETTINGS, TOGGLE_NODE, addLayer} = require('@mapstore/actions/layers');
 const {SELECT_FEATURES, SET_FEATURES, SELECT_ALL, SELECT_MLS} = require('../actions/featuregrid');
 const {CONFIGURE_INFO_TOPOLOGY, CHANGE_MAPINFO_STATE, CHANGE_TOPOLOGY_MAPINFO_STATE} = require('../actions/mapInfo');
-const {TOGGLE_SIRA_CONTROL} = require("../actions/controls");
+// const {TOGGLE_SIRA_CONTROL} = require("../actions/controls");
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const getVector = (state) => {
@@ -64,7 +65,7 @@ function layers(state = [], action) {
         return msLayers(tmpState, getAction("topologyItems", []));
     }
     case SELECT_FEATURES:
-        const ftLayers = state.flat.filter(l => includes(l.id, '_mls') || l.id === 'gridItems');
+        const ftLayers = state.flat.filter(l => /* includes(l.id, '_mls') || */ l.id === 'gridItems');
         return ftLayers.reduce((layersms, layer) => {
             const features = { features: action.features, style: {
                 type: action.geometryType,
@@ -80,12 +81,12 @@ function layers(state = [], action) {
             return msLayers(layersms, { type: "CHANGE_LAYER_PROPERTIES",
                 layer: layer.id,
                 newProperties: {
-                    ...(layer.id === 'gridItems' && features),
-                    ...(includes(layer.id, '_mls') && {visibility: !isEmpty(action.features)})
+                    ...(layer.id === 'gridItems' && features) // ,
+                    /* ...(includes(layer.id, '_mls') && {visibility: !isEmpty(action.features)}) */
                 }
             });
         }, state);
-    case TOGGLE_SIRA_CONTROL:
+    /* case TOGGLE_SIRA_CONTROL:
         if (action.control === "detail") {
             const ft2Layers = state.flat.filter(l => includes(l.id, '_mls') || l.id === 'gridItems');
             return ft2Layers.reduce((layersms, layer) => {
@@ -97,7 +98,7 @@ function layers(state = [], action) {
                 });
             }, state);
         }
-        return state;
+        return state; */
     case SET_FEATURES:
     case CONFIGURE_INFO_TOPOLOGY:
         return msLayers(state, getAction("topologyItems", action.features || action.infoTopologyResponse.features));

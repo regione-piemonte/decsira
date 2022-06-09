@@ -62,7 +62,10 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
     return (dispatch) => {
         return axios.get(serviceUrl).then((response) => {
             // response example
-            // response.data = {"roles": [{"code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN"}], "userIdentity": {"codFiscale": "AAAAAA00B77B000F", "nome": "CSI PIEMONTE", "cognome": "DEMO 20", "idProvider": "SISTEMAPIEMONTE"}};
+            // response.data = { "roles": [{ "code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN", "description": "PA Generica" }], "userIdentity": { "codFiscale": "AAAAAA00B77B000F", "nome": "CSI PIEMONTE", "cognome": "DEMO 20", "idProvider": "ACTALIS_EU" } };
+            // response.data = { "roles": [{ "code": "BDN_EG_01", "domain": "REG_PMN", "mnemonic": "BDN_EG_01@REG_PMN", "description": "BDN - Ente di gestione delle aree protette delle Alpi Cozie" }], "userIdentity": { "codFiscale": "AAAAAA00A11K000S", "nome": "CSI PIEMONTE", "cognome": "DEMO 30", "idProvider": "ACTALIS_EU" } };
+            // response.data = { "roles": [{ "code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN", "description": "PA Generica" }, { "code": "PA_SPEC_AUT_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_AUT_DECSIRA@REG_PMN", "description": "PA Specialistico Autorita' Regionale" }], "userIdentity": { "codFiscale": "AAAAAA00A11B000J", "nome": "CSI PIEMONTE", "cognome": "DEMO 21", "idProvider": "ACTALIS_EU" } };
+            // response.data = { "roles": null, "userIdentity": null };
             if (typeof response.data === 'object') {
                 if (response.data.userIdentity && response.data.roles && response.data.roles.length > 0) {
                     // there is a logged user, geoserverUrl = secureGeoserverUrl
@@ -84,7 +87,8 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                         surname: response.data.userIdentity.cognome,
                         cf: response.data.userIdentity.nome,
                         idProvider: response.data.userIdentity.idProvider,
-                        profile: response.data.profile
+                        profile: response.data.profile,
+                        roles: response.data.roles
                     };
                 }
                 response.data.user = user;
