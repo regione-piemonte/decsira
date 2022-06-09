@@ -23,63 +23,76 @@ import java.io.Serializable;
 import org.geoserver.security.iride.entity.IrideRole;
 
 /**
- * <code>IRIDE</code> Role <a href="https://en.wikipedia.org/wiki/Value_object#Value_Objects_in_Java">value object</a>.
+ * <code>IRIDE</code> Role <a href=
+ * "https://en.wikipedia.org/wiki/Value_object#Value_Objects_in_Java">value
+ * object</a>.
  *
- * @author "Simone Cornacchia - seancrow76@gmail.com, simone.cornacchia@consulenti.csi.it (CSI:71740)"
+ * @author "Simone Cornacchia - seancrow76@gmail.com,
+ *         simone.cornacchia@consulenti.csi.it (CSI:71740)"
  */
-public final class IrideRoleVO implements Serializable{
+public final class IrideRoleVO implements Serializable {
 
-    /**
-     * <code>IRIDE</code> Role code.
-     */
-    private final String code;
+	/**
+	 * <code>IRIDE</code> Role code.
+	 */
+	private final String code;
 
-    /**
-     * <code>IRIDE</code> Role domain code.
-     */
-    private final String domain;
+	/**
+	 * <code>IRIDE</code> Role domain code.
+	 */
+	private final String domain;
 
-    /**
-     * <code>IRIDE</code> Role mnemonic string representation.
-     */
-    private final String mnemonic;
+	/**
+	 * <code>IRIDE</code> Role mnemonic string representation.
+	 */
+	private final String mnemonic;
 
-    /**
-     * Constructor.
-     *
-     * @param role <code>IRIDE</code> Role entity.
-     */
-    public IrideRoleVO(IrideRole role) {
-        this.code     = role.getCode();
-        this.domain   = role.getDomain();
-        this.mnemonic = role.toMnemonicRepresentation();
-    }
+	private String description;
 
-    /**
-     * Returns the <code>IRIDE</code> Role code.
-     *
-     * @return the <code>IRIDE</code> Role code
-     */
-    public String getCode() {
-        return this.code;
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param role <code>IRIDE</code> Role entity.
+	 */
+	public IrideRoleVO(IrideRole role) {
+		this.code = role.getCode();
+		this.domain = role.getDomain();
+		this.mnemonic = role.toMnemonicRepresentation();
+	}
 
-    /**
-     * Returns the <code>IRIDE</code> Role domain code.
-     *
-     * @return the <code>IRIDE</code> Role domain code
-     */
-    public String getDomain() {
-        return this.domain;
-    }
+	/**
+	 * Returns the <code>IRIDE</code> Role code.
+	 *
+	 * @return the <code>IRIDE</code> Role code
+	 */
+	public String getCode() {
+		return this.code;
+	}
 
-    /**
-     * Returns the <code>IRIDE</code> Role mnemonic string representation.
-     *
-     * @return the <code>IRIDE</code> Role mnemonic string representation
-     */
-    public String getMnemonic() {
-        return this.mnemonic;
-    }
+	/**
+	 * Returns the <code>IRIDE</code> Role domain code.
+	 *
+	 * @return the <code>IRIDE</code> Role domain code
+	 */
+	public String getDomain() {
+		return this.domain;
+	}
+
+	/**
+	 * Returns the <code>IRIDE</code> Role mnemonic string representation.
+	 *
+	 * @return the <code>IRIDE</code> Role mnemonic string representation
+	 */
+	public String getMnemonic() {
+		return this.mnemonic;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }

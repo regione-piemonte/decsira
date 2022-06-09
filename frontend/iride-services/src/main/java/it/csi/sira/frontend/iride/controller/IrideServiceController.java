@@ -18,18 +18,11 @@
  */
 package it.csi.sira.frontend.iride.controller;
 
-import it.csi.frontend.iride.utils.CastUtils;
-import it.csi.frontend.iride.utils.LogFormatter;
-import it.csi.sira.frontend.iride.vo.IrideRoleVO;
-import it.csi.sira.frontend.iride.vo.UserPermissionVO;
-
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-import javax.management.relation.Role;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,20 +31,21 @@ import org.geoserver.security.iride.entity.IrideApplication;
 import org.geoserver.security.iride.entity.IrideIdentity;
 import org.geoserver.security.iride.entity.IrideRole;
 import org.geoserver.security.iride.service.IrideService;
-import org.geoserver.security.iride.util.logging.LoggerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
+import it.csi.frontend.iride.utils.CastUtils;
+import it.csi.frontend.iride.utils.LogFormatter;
+import it.csi.sira.frontend.iride.business.dao.DecsiraRuoliIrideAttoreDAO;
+import it.csi.sira.frontend.iride.business.dto.DecsiraRuoliIrideAttore;
+import it.csi.sira.frontend.iride.vo.IrideRoleVO;
+import it.csi.sira.frontend.iride.vo.UserPermissionVO;
 
 /**
  * <code>IRIDE</code> <code>REST</code> <a href=
@@ -93,6 +87,9 @@ public final class IrideServiceController {
 	 * <code>Properties</code> url of iride service.
 	 */
 	private Properties irideProperties = null;
+	
+	@Autowired
+	private DecsiraRuoliIrideAttoreDAO decsiraRuoliIrideAttoreDAO;
 
 	public Properties getIrideProperties() {
 		return irideProperties;
@@ -190,7 +187,15 @@ public final class IrideServiceController {
 
 			Logger.getLogger(IrideServiceConstants.LOGGER).info(LogFormatter.format(className, methodName,
 					"Got {} role(s) for IRIDE Digital Identity {} " + userP.getRoles().length));
-
+			
+			IrideRoleVO[] roles =  userP.getRoles();
+			for (IrideRoleVO role : roles) {
+				DecsiraRuoliIrideAttore ruoloIrideAttore = decsiraRuoliIrideAttoreDAO.findByRuoloIride(role.getCode());
+				if(ruoloIrideAttore!=null) {
+					role.setDescription(ruoloIrideAttore.getDescrizione());
+				}
+			}
+			
 			return new ResponseEntity<>(userP, HttpStatus.OK);
 		} catch (Exception e) {
 			Logger.getLogger(IrideServiceConstants.LOGGER).error(
