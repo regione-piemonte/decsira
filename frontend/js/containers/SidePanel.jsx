@@ -150,7 +150,7 @@ class SidePanel extends React.Component {
                 onResizeStop={this.onResizeStop}
                 minConstraints={[400]}
                 className="box">
-                <div className="box" style={{width: `${this.state.boxwidth}px`, height: "100%"}}>
+                <div id="sidepanel-container" className="box" style={{width: `${this.state.boxwidth}px`, height: "100%"}}>
                     {comp}
                 </div>
             </Resizable>);
@@ -201,10 +201,24 @@ class SidePanel extends React.Component {
         const center = mapUtils.getCenterForExtent(extent, "4326");
         const srs = "EPSG:4326";
         const proj = this.props.map.projection || "EPSG:3857";
+        extent = this.fixExtent(geometries[0], extent);
         extent = (srs !== proj) ? CoordinateUtils.reprojectBbox(extent, srs, proj) : extent;
         const zoom = mapUtils.getZoomForExtent(extent, this.props.map.size || {width: 876, height: 650}, 0, 16);
         this.props.changeMapView(center, zoom, mapUtils.getBbox(center, zoom), this.props.map.size, null, this.props.map.projection || "EPSG:3857");
     };
+
+    fixExtent(geometry, extent) {
+        if (geometry.type === "Point") {
+            let point = geometry.coordinates;
+            let newExtent = [];
+            newExtent[0] = point[0] - point[0] * 0.001;
+            newExtent[1] = point[1] - point[1] * 0.001;
+            newExtent[2] = point[0] + point[0] * 0.001;
+            newExtent[3] = point[1] + point[1] * 0.001;
+            return newExtent;
+        }
+        return extent;
+    }
 }
 
 module.exports = connect((state) => {

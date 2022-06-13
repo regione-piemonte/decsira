@@ -30,7 +30,7 @@ class LoginPanel extends React.Component {
                 <Modal
                     show= {this.props.showLoginPanel}>
                     <Modal.Header closeButton onClick={this.props.onClosePanel}>
-                        <Modal.Title>Login</Modal.Title>
+                        <Modal.Title><I18N.Message msgId={"loginpanel.title"}/></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h4><I18N.Message msgId={"loginpanel.panelMsg"}/></h4>

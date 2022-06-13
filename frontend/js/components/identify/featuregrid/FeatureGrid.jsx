@@ -247,7 +247,7 @@ class FeatureGrid extends React.Component {
                         enableServerSideSorting={(isPagingOrVirtual)}
                         // or provide props the old way with no binding
                         onSelectionChanged={this.selectFeatures}
-                        rowSelection="multiple"
+                        rowSelection="single"
                         enableColResize
                         enableSorting={(!isPagingOrVirtual)}
                         toolPanelSuppressValues
@@ -355,7 +355,11 @@ class FeatureGrid extends React.Component {
 
     selectFeatures = (params) => {
         if (!this.suppresSelectionEvent) {
-            this.props.selectFeatures(params.selectedRows.slice());
+            let sf = params.selectedRows.slice();
+            this.props.selectFeatures(sf);
+            if (sf.length > 0) {
+                this.selectHighlighted(sf[0]);
+            }
         } else {
             this.suppresSelectionEvent = false;
         }
@@ -390,13 +394,11 @@ class FeatureGrid extends React.Component {
         return resultOfSort;
     };
 
-    // If highlighted features are passed we try to select corresponding row
-    // using geojson feature id
-    selectHighlighted = () => {
-        let selectedId = this.props.highlightedFeatures;
+    selectHighlighted = (selectedFeature) => {
+        let selectedId = selectedFeature || this.props.highlightedFeatures;
         let me = this;
         this.api.forEachNode((n) => {
-            if (selectedId.indexOf(n.data.id) !== -1) {
+            if (selectedId && selectedId.indexOf(n.data.id) !== -1) {
                 me.api.selectNode(n, true, true);
             } else if (me.api.isNodeSelected(n)) {
                 me.suppresSelectionEvent = true;

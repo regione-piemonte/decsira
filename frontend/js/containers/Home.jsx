@@ -11,7 +11,8 @@ const {connect} = require('react-redux');
 const {head} = require('lodash');
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
-
+const { Modal } = require("react-bootstrap");
+const I18N = require('@mapstore/components/I18N/I18N');
 const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
@@ -37,7 +38,8 @@ class Home extends React.Component {
         }),
         selectCategory: PropTypes.func,
         allCategory: PropTypes.object,
-        resetObjectAndView: PropTypes.func
+        resetObjectAndView: PropTypes.func,
+        profile: PropTypes.object
     };
 
     static contextTypes = {
@@ -58,6 +60,19 @@ class Home extends React.Component {
         window.removeEventListener('keyup', handleKeyFocus);
     }
 
+    renderProfileAlert = () => {
+        return (<Modal show bsSize="small">
+            <Modal.Header closeButton>
+                <Modal.Title><I18N.Message msgId="Modal.InfoTitle"/></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="mapstore-error"><I18N.Message msgId="Modal.NoRoleMessage"/></div>
+            </Modal.Body>
+            <Modal.Footer>
+            </Modal.Footer>
+        </Modal>);
+    };
+
     render() {
         let description = LocaleUtils.getMessageById(this.context.messages, "Homepage.appDescription");
         return (
@@ -69,6 +84,7 @@ class Home extends React.Component {
                 <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.homepage")}</h1>
                 <div id="main-content"></div>
                 <div className="container-fluid" role="search">
+                    {this.props.profile.error === 'empty_roles' && this.renderProfileAlert()}
                     <div className="row-fluid sb-sx">
                         <div className="container search-home">
                             <div className="row">
@@ -118,7 +134,8 @@ module.exports = connect((state) => {
         allCategory: head(tiles.filter((t) => t.id === 999)),
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
         locale: state.locale && state.locale.locale,
-        messages: state.locale && state.locale.messages || {}
+        messages: state.locale && state.locale.messages || {},
+        profile: state.userprofile
     };
 }, {
     loadMetadata: getMetadataObjects,

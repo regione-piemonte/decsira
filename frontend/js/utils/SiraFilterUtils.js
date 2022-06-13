@@ -42,7 +42,7 @@ const getSLDByGeomType = (geometryType, ftName, filter, styleColor = '#0000FF') 
     let result;
     switch (geometryType) {
     case "Point": {
-        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.5</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<PointSymbolizer><Graphic><Mark><WellKnownName>circle</WellKnownName><Fill><CssParameter name="fill">${styleColor}</CssParameter><CssParameter name="fill-opacity">0.7</CssParameter></Fill></Mark><Size>20</Size></Graphic></PointSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
     case "Polygon": {
@@ -54,7 +54,7 @@ const getSLDByGeomType = (geometryType, ftName, filter, styleColor = '#0000FF') 
         break;
     }
     case "LineString": {
-        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Stroke><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="stroke-width">10</CssParameter><CssParameter name="stroke-opacity">0.5</CssParameter></Stroke></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
+        result = `<NamedLayer><Name>${ftName}</Name><UserStyle><FeatureTypeStyle><Rule >${filter}<LineSymbolizer><Stroke><CssParameter name="stroke">${styleColor}</CssParameter><CssParameter name="stroke-width">10</CssParameter><CssParameter name="stroke-opacity">0.7</CssParameter></Stroke></LineSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer>`;
         break;
     }
     default:

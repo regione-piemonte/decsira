@@ -66,7 +66,12 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
             // response.data = { "roles": [{ "code": "BDN_EG_01", "domain": "REG_PMN", "mnemonic": "BDN_EG_01@REG_PMN", "description": "BDN - Ente di gestione delle aree protette delle Alpi Cozie" }], "userIdentity": { "codFiscale": "AAAAAA00A11K000S", "nome": "CSI PIEMONTE", "cognome": "DEMO 30", "idProvider": "ACTALIS_EU" } };
             // response.data = { "roles": [{ "code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN", "description": "PA Generica" }, { "code": "PA_SPEC_AUT_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_AUT_DECSIRA@REG_PMN", "description": "PA Specialistico Autorita' Regionale" }], "userIdentity": { "codFiscale": "AAAAAA00A11B000J", "nome": "CSI PIEMONTE", "cognome": "DEMO 21", "idProvider": "ACTALIS_EU" } };
             // response.data = { "roles": null, "userIdentity": null };
+            // response.data = { "roles": [], "userIdentity": { "codFiscale": "MRLFNC68A56H456Q", "nome": "FRANCESCA", "cognome": "MORELLI", "idProvider": "ACTALIS_EU" } };
+            // response.data = { "roles": [{ "code": "PA_SPEC_CONS_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_CONS_DECSIRA@REG_PMN", "description": "Pubblica Amministrazione - Specialistico su ambito regionale" }, { "code": "PA_SPEC_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_DECSIRA@REG_PMN", "description": null }], "userIdentity": { "codFiscale": "AAAAAA00A11E000M", "nome": "CSI PIEMONTE", "cognome": "DEMO 24", "idProvider": "ACTALIS_EU" } };
             if (typeof response.data === 'object') {
+                let user = {
+                    profile: []
+                };
                 if (response.data.userIdentity && response.data.roles && response.data.roles.length > 0) {
                     // there is a logged user, geoserverUrl = secureGeoserverUrl
                     ConfigUtils.setConfigProp('geoserverUrl', ConfigUtils.getConfigProp('secureGeoserverUrl'));
@@ -77,19 +82,20 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
                             response.data.profile.push(val.mnemonic);
                         }
                     });
+
+                    if (response.data.userIdentity) {
+                        user = {
+                            name: response.data.userIdentity.nome + " " + response.data.userIdentity.cognome,
+                            surname: response.data.userIdentity.cognome,
+                            cf: response.data.userIdentity.nome,
+                            idProvider: response.data.userIdentity.idProvider,
+                            profile: response.data.profile,
+                            roles: response.data.roles
+                        };
+                    }
                 }
-                let user = {
-                    profile: []
-                };
-                if (response.data.userIdentity) {
-                    user = {
-                        name: response.data.userIdentity.nome + " " + response.data.userIdentity.cognome,
-                        surname: response.data.userIdentity.cognome,
-                        cf: response.data.userIdentity.nome,
-                        idProvider: response.data.userIdentity.idProvider,
-                        profile: response.data.profile,
-                        roles: response.data.roles
-                    };
+                if (response.data.roles.length === 0) {
+                    dispatch(userIdentityError('empty_roles'));
                 }
                 response.data.user = user;
                 dispatch(userIdentityLoaded(response.data));

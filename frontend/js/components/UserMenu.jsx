@@ -121,13 +121,14 @@ class UserMenu extends React.Component {
         let roles = this.props.user.roles;
         let rolesArray = [];
         roles.forEach(role => {
-            if (role && role.description) {
-                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}>{role.description}</span>);
-            } else {
-                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}><Message msgId="user.freeAccess"/></span>);
+            if (role) {
+                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}>{role.description ? role.description : role.code}</span>);
+                rolesArray.push(<MenuItem key="divider" divider />);
             }
-            rolesArray.push(<MenuItem key="divider" divider />);
         });
+        if (roles === null || roles === undefined) {
+            rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}><Message msgId="user.freeAccess" /></span>);
+        }
 
         let rolesTitle = (<div><span style={{ "fontWeight": "bold", "marginLeft": "20px", "color": "white"}}><Message msgId="user.profile" /></span><MenuItem key="divider" divider /></div>);
 
