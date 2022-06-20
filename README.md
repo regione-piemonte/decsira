@@ -1,4 +1,4 @@
-CSI-SIRA
+DECSIRA
 ==========
 
 Quick Start
