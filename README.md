@@ -41,9 +41,8 @@ To build the application you can run the build script (**build_web.sh**) from a 
 ```
 
 The <environment> parameter allows building with different configurations. The available environments are:
- * *demo*: GeoSolutions development and test server (decsira-dev.geo-solutions.it)
- * *produzione*: CSI-Piemonte production environment
-
+ * *produzione Accesso libero*: CSI-Piemonte production environment (https://conoscenzaambientale.sistemapiemonte.it/decsiraweb/map.html#/)  * *produzione Accesso Autenticato*: CSI-Piemonte production environment (https://servizi.regione.piemonte.it/catalogo/sistema-conoscenze-ambientali)
+ 
 New environments can be created easily editing the 
 frontend/web/pom.xml file, in particular the **profiles** section.
 
@@ -147,16 +146,6 @@ The GeoServer to be used can be configured in the frontend/localConfig.json file
   ...
 }
 ```
-
-To use our demo server:
-
-```json
-{
-  "geoStoreUrl": "rest/geostore",
-  "geoserverUrl": "https://decsira-dev.geo-solutions.it/geoserver",
-  "secureGeoserverUrl": "https://decsira-dev.geo-solutions.it/geoserver",
-  ...
-}
 ```
 
 Ensure that your GeoServer instance has CORS enabled for your local client, so that the application requests are not blocked due to cross origin issues, or use a browser extension to simulate fake CORS headers (for example, for Chrome use can use ModHeader).
