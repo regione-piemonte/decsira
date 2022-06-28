@@ -7,7 +7,7 @@ To start, you need to download the application source code and install some tool
  
  * Clone the repository with the --recursive option to automatically clone submodules:
 
-    `git clone --recursive https://github.com/geosolutions-it/csi-sira.git`
+    `git clone --recursive https://github.com/regione-piemonte/decsira.git
 
  * Switch to the update branch (*ms_update*):
 
