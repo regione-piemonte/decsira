@@ -18,7 +18,7 @@ const {
     resetUserIdentity
 } = require('../actions/userprofile');
 
-const SiraUtils = require('../utils/SiraUtils');
+// const SiraUtils = require('../utils/SiraUtils');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
@@ -91,7 +91,8 @@ const LoginNav = connect((state) => ({
     return {
         onLogout: () => {
             dispatch((resetUserIdentity()));
-            SiraUtils.sendLogOut();
+            window.open(ConfigUtils.getConfigProp('logOutService'), '_blank');
+            // SiraUtils.sendLogOut();
             window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
         },
         onShowLogin: () => {
