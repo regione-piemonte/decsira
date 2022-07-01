@@ -94,9 +94,9 @@ const LoginNav = connect((state) => ({
             let newWindow = window.open(ConfigUtils.getConfigProp('logOutService'), '_blank');
             // SiraUtils.sendLogOut();
             setTimeout(() => {
-                newWindow.close();
                 window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
-            }, 2000);
+                newWindow.close();
+            }, 1500);
         },
         onShowLogin: () => {
             dispatch(showLoginPanel());
