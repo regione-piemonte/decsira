@@ -27,7 +27,7 @@ module.exports = {
 
     sendLogOut: function() {
         let murl = ConfigUtils.getConfigProp('logOutService');
-        return axios.get(murl).then(response => {
+        return axios.get(murl).then((response) => {
             let myData;
             if (typeof response.data === 'object') {
                 myData = response.data;
