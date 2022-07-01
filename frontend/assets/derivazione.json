@@ -4,7 +4,8 @@
    "nameSpaces": {
      "decsiraogc_derivazioni": "http://www.regione.piemonte.it/ambiente/decsiraogc_derivazioni/1.0",
 	 "decsiraogc_operecaptazione": "http://www.regione.piemonte.it/ambiente/decsiraogc_operecaptazione/1.0",
-	 "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0"
+	 "decsiraogc_stabilimenti": "http://www.regione.piemonte.it/ambiente/decsiraogc_stabilimenti/1.0",
+	 "decsiraogc_geo_tratti_deriv": "http://www.regione.piemonte.it/ambiente/decsiraogc_geo_tratti_deriv/1.0"
    },
    "layer": {
         "type": "wms",
@@ -50,28 +51,28 @@
    },
    "multiLayerSelect": [
 	  {
-        "name": "decsiraogc_derivazioni:decsira_geo_tratto_canale",
+        "name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_canale",
         "title": "Tratti di canale",
         "filterOn": "codice_rilievo_canale",
         "geometryType": "LineString",
         "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
       },
 	  {
-        "name": "decsiraogc_derivazioni:decsira_geo_tratto_cf",
+        "name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_cf",
         "title": "Tratti di condotta forzata",
-        "filterOn": "codice_rilievo_condotta",
+        "filterOn": "codice_rilievo_condotta_forzata",
         "geometryType": "LineString",
         "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
       },
 	  {
-        "name": "decsiraogc_derivazioni:decsira_geo_tratto_galleria",
+        "name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_galleria",
         "title": "Tratti di galleria",
         "filterOn": "codice_rilievo_galleria",
         "geometryType": "LineString",
         "multiLayerSelectionAttribute": "decsiraogc_derivazioni:codiceRilievoDeriv"
       },
 	  {
-        "name": "decsiraogc_derivazioni:decsira_geo_tratto_cond",
+        "name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_cond",
         "title": "Tratti di condotta generica",
         "filterOn": "codice_rilievo_condotta",
         "geometryType": "LineString",
