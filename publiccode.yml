@@ -1,0 +1,250 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - geographic-information-systems
+  - data-analytics
+  - data-collection
+  - data-visualization
+dependsOn:
+  open:
+    - name: Geoserver
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: Tomcat
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+    - name: PostGis (DB server)
+      optional: false
+      version: ''
+      versionMax: ''
+      versionMin: ''
+description:
+  it:
+    documentation: |-
+      http://www.sistemapiemonte.it/eXoRisorse/dwd/servizi/SistemaConoscenzeAmbientali/SistemaConoscenzeAmbientali_Manuale_utente.pdf
+    features:
+      - Visualizzazione di dati in mappa (usa WMS)
+      - |-
+        Costruttore di interrogazioni: alfanumeriche e/o spaziali (usa WFS 2.0
+
+        Complex Feature o WFS 1.0)
+      - Scheda di dettaglio su oggetto (usa WFS 2.0 Complex Feature)
+      - |-
+        Navigazione metadati esposti da Geoportale Piemonte (usa CSW Catalog
+
+        Service web)
+      - Importa in mappa dati vettoriali dell'utente in locale
+      - Tematizzazione dinamica di dati di tipo indicatore (usa WFS 1.0)
+      - Navigazione tra oggetti collegati - Data Tree (usa WFS 2.0)
+      - Selezione in mappa di oggetti collegati - Multi Layer Selection
+    genericName: Open Source WebGIS framework
+    localisedName: Sistema Conoscenze Ambientali
+    longDescription: |
+      Il servizio nasce per il **governo** e la **tutela del territorio**, la
+
+
+      **pianificazione partecipata**, la **sensibilizzazione **e il
+
+
+      **coinvolgimento dei cittadini**. Il Sistema Conoscenze Ambientali è una
+
+
+      piattaforma di fruizione delle conoscenze alfanumeriche e geografiche
+
+
+      prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale
+
+
+      della Regione Piemonte). Si configura come una rete di cooperazione tra
+
+
+      soggetti produttori e/o detentori di informazioni di interesse ambientale
+
+
+      (Regione, Province e ARPA) e nasce allo scopo di supportare lo sviluppo
+
+
+      delle conoscenze ambientali per le attività di: governo e pianificazione
+
+
+      partecipata; promozione della competitività del territorio;
+
+
+      sensibilizzazione e coinvolgimento (empowerment); accessibilità alle
+
+
+      informazioni pubbliche.
+
+
+      Il sistema è rivolto a fruitori pubblici e privati diversi:
+
+
+      - Pubblica Amministrazione (Regione, Province, ARPA, …)
+
+      - Cittadini
+
+
+      I dati messi a disposizione nel sistema sono raccolti attraverso
+
+
+      - processi molteplici:  
+
+      - Dematerializzazione procedimenti amministrativi; 
+
+      - Sistemi di monitoraggio (manuali o automatici) stato/pressione
+      ambiente; 
+
+      - Raccolta dati su specifiche matrici (es. Osservatori Rifiuti/Acque…), 
+
+      - Fattori di pressione/rischio, …
+
+
+
+      Il sistema permette di accedere alla consultazione dei dati attraverso 
+
+
+      ricerca libera e/o tramite un accesso organizzato in categorie tematiche 
+
+
+      (cataloghi dati come Catalogo Direttiva INSPIRE e Catalogo Informazioni
+      Ambientali; 
+
+
+      categorie tematiche ambientali - Aria, Bonifiche, Imprese autorizzate in
+      campo 
+
+
+      ambientale, Rifiuti, etc.). 
+
+
+      Per ogni dato viene resa disponibile:
+
+
+      - la descrizione sintetica del singolo dato/dataset e vista tematica;
+
+      - la scheda metadati pubblicata sul Geoportale dell’ente fornitore e/o
+
+
+      distributore del dato (servizio CSW);
+
+
+      con le specifiche funzioni di consultazione quali:
+
+
+      - semplice consultazione su Mappa dei dati geografici (servizi WMS)
+
+      - consultazione di informazioni di dettaglio sui dataset basate su
+
+
+      ricerche alfanumeriche e/o geografiche sui dati che restituiscono viste di
+
+
+      tipo reportistico e singole schede di dettaglio sugli oggetti (servizi WFS
+
+
+      di tipo complex feature)
+
+
+      - tematizzazione di indicatori: numero delle classi statistiche, colori
+
+      - tematizzazione, range delle classi, tipo di classificazione statistica
+
+
+      da utilizzare per la tematizzazione sono configurabili da utente (usa
+
+
+      servizi WFS)
+
+
+      - accesso ad allegati tramite url a servizi di archiviazione documentale
+
+      - I dati della vista report - dati di sintesi/elenco risultati della
+
+
+      ricerca - sono configurabili da utente ed esportabili in formato csv e/o
+
+
+      Shapefile ESRI;
+
+
+      - la scheda di dettaglio è esportabile in formato pdf
+
+
+      Tutti i dati messi a disposizione nella piattaforma sono esposti e/o usano
+
+
+      servizi di interoperabilità standard OGC (Open Spatial Consortium) come
+
+
+      previsto dalla Direttiva INSPIRE.
+    shortDescription: |-
+      Sistema Conoscenze Ambientali: accedi ai dati ambientali e territorialidel
+
+
+
+
+
+      Piemonte
+developmentStatus: stable
+intendedAudience:
+  countries:
+    - it
+  scope:
+    - environment
+    - government
+    - healthcare
+it:
+  conforme:
+    gdpr: true
+    lineeGuidaDesign: true
+    misureMinimeSicurezza: true
+    modelloInteroperabilita: true
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+  riuso:
+    codiceIPA: r_piemon
+landingURL: 'https://github.com/regione-piemonte/decsira/'
+legal:
+  license: GPL-2.0-only
+  mainCopyrightOwner: Regione Piemonte
+localisation:
+  availableLanguages:
+    - it
+    - en
+  localisationReady: true
+maintenance:
+  contacts:
+    - affiliation: CSI Piemonte
+      email: assistenza.sira@regione.piemonte.it
+      name: CSI Piemonte - assistenza SIRA Regione Piemonte
+  type: internal
+name: DECSIRA
+platforms:
+  - web
+releaseDate: '2022-03-16'
+softwareType: standalone/web
+softwareVersion: 6.4.0.
+url: 'https://github.com/regione-piemonte/decsira.git'
+usedBy:
+  - Regione Piemonte
+  - ARPA Piemonte
+  - Enti gestori aree protette  Regione Piemonte
+  - Provincia di Alessandria
+  - Provincia d Asti
+  - Provincia di Biella
+  - Provincia di Cuneo
+  - Provincia di Novara
+  - Provincia di Vercelli
+  - Provincia del Verbano-Cusio-Ossola
+  - Città metropolitana di Torino
