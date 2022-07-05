@@ -14,7 +14,8 @@ const cs = require('classnames');
 const isEmpty = require('lodash/isEmpty');
 const {
     showLoginPanel,
-    hideLoginPanel
+    hideLoginPanel,
+    resetUserIdentity
 } = require('../actions/userprofile');
 
 // const SiraUtils = require('../utils/SiraUtils');
@@ -25,19 +26,6 @@ const { loadLocale } = require('@mapstore/actions/locale');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const DownloadResultsComponent = require('./download/DownloadResultsComponent').default;
-// const { toggleSiraControl } = require('../actions/controls');
-
-/* const DownloadResultsComponent = connect((state) => {
-    return {
-        active: state.siraControls.downloadResultsDialog,
-        checkingExportDataEntries: false,
-        results: state.siraexporter.downloadResults
-    };
-}, {
-    onToggle: toggleSiraControl,
-    onActive: () => {},
-    onRemoveResult: () => {}
-})(require('./download/DownloadResultsComponent').default);*/
 
 const SistemaConoscenzeAmbientaliBox = connect((state) => ({
     show: state.header?.showSistemaConoscenzeAmbientaliBox
@@ -98,12 +86,22 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     renderUnsavedMapChangesDialog: false,
     onCloseUnsavedDialog: () => {},
-    onLogout: () => {
-        window.location.href = ConfigUtils.getConfigProp('logOutService');
-    },
     className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user?.name)})
-}), {
-    onShowLogin: showLoginPanel
+}), (dispatch) => {
+    return {
+        onLogout: () => {
+            dispatch((resetUserIdentity()));
+            let newWindow = window.open(ConfigUtils.getConfigProp('logOutService'), '_blank');
+            // SiraUtils.sendLogOut();
+            setTimeout(() => {
+                window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+                newWindow.close();
+            }, 1500);
+        },
+        onShowLogin: () => {
+            dispatch(showLoginPanel());
+        }
+    };
 })(require('./UserMenu'));
 
 const CartPanel = connect((state) => ({
@@ -158,7 +156,8 @@ class Header extends React.Component {
     };
 
     static contextTypes = {
-        messages: PropTypes.object
+        messages: PropTypes.object,
+        router: PropTypes.object
     };
 
     static defaultProps = {

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 const assign = require("object-assign");
-const {SHOW_LOGIN_PANEL, HIDE_LOGIN_PANEL, SET_PROFILE, SET_USER_IDENTITY, SET_USER_IDENTITY_ERROR} = require('../actions/userprofile');
+const {SHOW_LOGIN_PANEL, HIDE_LOGIN_PANEL, SET_PROFILE, SET_USER_IDENTITY, RESET_USER_IDENTITY, SET_USER_IDENTITY_ERROR} = require('../actions/userprofile');
 
 function userprofile(state = {
     profile: [],
@@ -31,6 +31,15 @@ function userprofile(state = {
                 roles: action.roles,
                 user: action.user,
                 profile: state.profile ? state.profile.concat(action.user.profile) : action.user.profile,
+                error: ''
+            });
+    }
+    case RESET_USER_IDENTITY: {
+        return assign({}, state,
+            {
+                roles: null,
+                user: null,
+                profile: [],
                 error: ''
             });
     }

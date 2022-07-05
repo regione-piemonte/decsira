@@ -12,6 +12,7 @@ const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const SET_PROFILE = 'SET_PROFILE';
 const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';
 const SET_USER_IDENTITY = 'LOADED_USER_IDENTITY';
+const RESET_USER_IDENTITY = 'RESET_USER_IDENTITY';
 const SHOW_LOGIN_PANEL = 'SHOW_LOGIN_PANEL';
 const HIDE_LOGIN_PANEL = 'HIDE_LOGIN_PANEL';
 
@@ -42,6 +43,15 @@ function userIdentityLoaded(data) {
         type: SET_USER_IDENTITY,
         roles: data.roles,
         user: data.user,
+        error: ''
+    };
+}
+
+function resetUserIdentity() {
+    return {
+        type: RESET_USER_IDENTITY,
+        roles: null,
+        user: null,
         error: ''
     };
 }
@@ -116,12 +126,14 @@ module.exports = {
     SET_PROFILE,
     SET_USER_IDENTITY_ERROR,
     SET_USER_IDENTITY,
+    RESET_USER_IDENTITY,
     SHOW_LOGIN_PANEL,
     HIDE_LOGIN_PANEL,
     showLoginPanel,
     hideLoginPanel,
     loadUserIdentity,
     userIdentityLoaded,
+    resetUserIdentity,
     userIdentityError,
     setProfile
 };

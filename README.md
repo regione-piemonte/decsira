@@ -1,21 +1,43 @@
-DECSIRA
+# DECSIRA
 ==========
 
-Quick Start
-------------
+# Descrizione del prodotto
+------
+Il Sistema Conoscenze Ambientali è una piattaforma di fruizione delle conoscenze alfanumeriche e geografiche prodotte nel contesto del SIRA Piemonte (Sistema Informativo Ambientale della Regione Piemonte). Si configura come una rete di cooperazione tra soggetti produttori e/o detentori di informazioni di interesse ambientale (Regione, Province e ARPA) e nasce allo scopo di supportare lo sviluppo delle conoscenze ambientali per le attività di: governo e pianificazione partecipata; promozione della competitività del territorio; sensibilizzazione e coinvolgimento (empowerment); accessibilità alle informazioni pubbliche.
+
+Per ogni dato viene resa disponibile:
+      - la descrizione sintetica del singolo dato/dataset e vista tematica;
+      - la scheda metadati pubblicata sul Geoportale dell’ente fornitore e/o distributore del dato (servizio CSW);
+
+con le specifiche funzioni di consultazione quali:
+
+      - semplice consultazione su Mappa dei dati geografici (servizi WMS)
+      - consultazione di informazioni di dettaglio sui dataset basate su ricerche alfanumeriche e/o geografiche sui dati che restituiscono viste di tipo reportistico e singole schede di dettaglio sugli oggetti (servizi WFS anche di tipo complex feature)
+      - tematizzazione di indicatori: numero delle classi statistiche, colori tematizzazione, range delle classi, tipo di classificazione statistica da utilizzare per la tematizzazione sono configurabili da utente (usa servizi WFS)
+      - accesso ad allegati tramite url a servizi di archiviazione documentale
+      - I dati della vista report - dati di sintesi/elenco risultati della ricerca - sono configurabili da utente ed esportabili in formato csv e/o formato vettoriale;
+      - la scheda di dettaglio è esportabile in formato pdf
+
+Tutti i dati messi a disposizione nella piattaforma sono esposti e/o usano servizi di interoperabilità standard OGC (Open Spatial Consortium) come previsto dalla Direttiva INSPIRE.
+--------
+
+# Getting Started
+2022-03-16 (6.4.0.)
+
+# Copyrights
+ © Copyright Regione Piemonte – 2022
+ 
+# License 
+SPDX-License-Identifier: GPL-2.0
+
+
+# Getting Started
+------
 To start, you need to download the application source code and install some tools. Here are the steps to follow:
  
  * Clone the repository with the --recursive option to automatically clone submodules:
 
-    `git clone --recursive https://github.com/geosolutions-it/csi-sira.git`
-
- * Switch to the update branch (*ms_update*):
-
-    `git checkout ms_update`
- 
- * Align the MapStore2 submodule to the version used by the new branch:
-
-    `git submodule update`
+    `git clone --recursive https://github.com/regione-piemonte/decsira.git
 
  * Ensure that you have **NodeJS** version >= 12 and an NPM version >= 6 installed. A compatible version can be downloaded from [here](https://nodejs.org/en/blog/release/v12.16.1/). You can check the current versions using the following commands:
 
@@ -33,7 +55,8 @@ To start, you need to download the application source code and install some tool
 
     `mvn -v`
 
-### Building the application
+## Building the application
+------
 To build the application you can run the build script (**build_web.sh**) from a shell or command prompt:
 
 ```sh
@@ -50,7 +73,7 @@ The script builds both the frontend (using NPM) and the backend (using Maven) an
 
 The final war is available as frontend/web/target/decsiraweb.war.
 
-#### The build_web.sh script
+##  The build_web.sh script
 The script content is the following:
 
 ```sh
@@ -70,14 +93,14 @@ cd ..
 mvn clean install -Pweb,$1
 ```
 
-### Deploying the application
+##  Deploying the application
 The application can be deployed by simply copying the war in the Tomcat webapps folder, and eventually restarting Tomcat. After the deploy, the application will be available as:
 
     http://<host>:<port>/decsiraweb/
 
 Any Tomcat version >= 7 should work. A compatible version can be downloaded [here](https://tomcat.apache.org/download-70.cgi) 
 
-### Starting a local development environment
+##  Starting a local development environment
 To develop the application locally, you will need:
 
  * a running backend
@@ -94,7 +117,7 @@ Start the development application locally:
 
 The application runs at `http://localhost:8082` afterwards.
 
-#### Connecting to a running backend
+##  Connecting to a running backend
 You can either use an already deployed backend (e.g. our dev-test instance) or deploy a local backend on Tomcat (as we have seen in the *Deploying the application* section).
 
 To switch the backend to be used, you can edit the frontend/webpack.config.js file, changing all the target urls to point to the desired host/port (use http://localhost:8080 to switch to the local backend):
@@ -134,13 +157,12 @@ To switch the backend to be used, you can edit the frontend/webpack.config.js fi
 ```
 Remember to restart the frontend application (npm start) when you change this file.
 
-#### Connecting to a running GeoServer
+##  Connecting to a running GeoServer
 
 The GeoServer to be used can be configured in the frontend/localConfig.json file. Just replace all ${url...} variables with a valid URL:
 
 ```json
 {
-  "geoStoreUrl": "rest/geostore",
   "geoserverUrl": "${url.geoserver}/geoserver",
   "secureGeoserverUrl": "${url.secure.geoserver}/geoserver",
   ...
@@ -148,4 +170,7 @@ The GeoServer to be used can be configured in the frontend/localConfig.json file
 ```
 ```
 
-Ensure that your GeoServer instance has CORS enabled for your local client, so that the application requests are not blocked due to cross origin issues, or use a browser extension to simulate fake CORS headers (for example, for Chrome use can use ModHeader).
+##   Ensure that your GeoServer instance has CORS enabled for your local client, so that the application requests are not blocked due to cross origin issues, or use a browser extension to simulate fake CORS headers (for example, for Chrome use can use ModHeader).
+-------------
+
+
