@@ -6,10 +6,10 @@
 	  <th>Provincia</th>
 	  <th>Comuni interessati</th>
 	  <th>Gestore</th>
-	  <th>Proprietà</th>
+	  <th>Propriet&agrave;</th>
 	  <th>Fonte di finanziamento</th>
-	  <th>Data inizio validità</th>
-	  <th>Data fine validità</th>
+	  <th>Data inizio validit&agrave;</th>
+	  <th>Data fine validit&agrave;</th>
     </tr>
     <tr>
 	  <td>${feature.denominazione.value}</td>
@@ -19,7 +19,7 @@
 	  <td>${feature.descrProprieta.value}</td>
 	  <td>${feature.fonteFinanziamento.value}</td>
 	  <td>${feature.dataInizioValidita.value}</td>
-	  <td>${feature.dataFineValidità.value}</td>
+	  <td>${feature.dataFineValidita.value}</td>
     </tr>
   </#list>
 </table>

@@ -19,7 +19,7 @@
           <Name>rule1</Name>
           <Title>Sorgente</Title>
           <Abstract>Circle</Abstract>
-            <MaxScaleDenominator>100000</MaxScaleDenominator> 
+            <MaxScaleDenominator>500000</MaxScaleDenominator> 
             <PointSymbolizer>
               <Graphic>
                 <Mark>

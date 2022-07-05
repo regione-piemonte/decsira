@@ -1,0 +1,104 @@
+<featureType>
+  <id>FeatureTypeInfoImpl--49016f55:18070ad3147:-7a3d</id>
+  <name>Fontanile</name>
+  <nativeName>Fontanile</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl--544eef5c:17f0be143ee:-7ffd</id>
+  </namespace>
+  <title>Fontanile</title>
+  <keywords>
+    <string>features</string>
+    <string>Fontanile</string>
+  </keywords>
+  <metadataLinks>
+    <metadataLink>
+      <type>text/plain</type>
+      <metadataType>ISO19115:2003</metadataType>
+      <content>https://www.geoportale.piemonte.it/geonetwork/srv/ita/csw?request=GetRecordById&amp;service=CSW&amp;version=2.0.2&amp;id=r_piemon:83c59eab-70b4-4f25-b32c-ca519d96de1c&amp;elementSetName=full&amp;outputSchema=http://www.isotc211.org/2005/gmd</content>
+    </metadataLink>
+  </metadataLinks>
+  <nativeCRS class="projected">PROJCS[&quot;WGS 84 / UTM zone 32N&quot;, 
+  GEOGCS[&quot;WGS 84&quot;, 
+    DATUM[&quot;World Geodetic System 1984&quot;, 
+      SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], 
+      AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], 
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], 
+    UNIT[&quot;degree&quot;, 0.017453292519943295], 
+    AXIS[&quot;Geodetic longitude&quot;, EAST], 
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], 
+    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]], 
+  PROJECTION[&quot;Transverse_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9807&quot;]], 
+  PARAMETER[&quot;central_meridian&quot;, 9.0], 
+  PARAMETER[&quot;latitude_of_origin&quot;, 0.0], 
+  PARAMETER[&quot;scale_factor&quot;, 0.9996], 
+  PARAMETER[&quot;false_easting&quot;, 500000.0], 
+  PARAMETER[&quot;false_northing&quot;, 0.0], 
+  UNIT[&quot;m&quot;, 1.0], 
+  AXIS[&quot;Easting&quot;, EAST], 
+  AXIS[&quot;Northing&quot;, NORTH], 
+  AUTHORITY[&quot;EPSG&quot;,&quot;32632&quot;]]</nativeCRS>
+  <srs>EPSG:32632</srs>
+  <nativeBoundingBox>
+    <minx>299671.0</minx>
+    <maxx>522939.0</maxx>
+    <miny>4871606.0</miny>
+    <maxy>5166280.0</maxy>
+    <crs class="projected">EPSG:32632</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>6.502607695769945</minx>
+    <maxx>9.29977997929991</maxx>
+    <miny>43.97029790769522</miny>
+    <maxy>46.64969623498951</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="JDBC_VIRTUAL_TABLE">
+      <virtualTable>
+        <name>Fontanile</name>
+        <sql>select&#xd;
+	id_fontanile,&#xd;
+	codice_roc,&#xd;
+	codice_rilievo,&#xd;
+	denominazione,&#xd;
+	des_comune as comune,&#xd;
+	localita,&#xd;
+	des_stato as stato_di_esercizio,&#xd;
+	portata_max_deriv as portata_massima_derivabile,&#xd;
+	portata_med_deriv as portata_media_annua_derivabile,&#xd;
+	volume_max_concesso as volume_massimo_di_concessione,&#xd;
+	uso_potabile,&#xd;
+        fk_stato,&#xd;
+	geometria&#xd;
+from&#xd;
+	decsira_geo_fontanile&#xd;
+where&#xd;
+	fk_stato = 102&#xd;
+	and uso_potabile = &apos;NO&apos;
+</sql>
+        <escapeSql>false</escapeSql>
+        <keyColumn>id_fontanile</keyColumn>
+        <geometry>
+          <name>geometria</name>
+          <type>Point</type>
+          <srid>32632</srid>
+        </geometry>
+      </virtualTable>
+    </entry>
+    <entry key="cachingEnabled">false</entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl--544eef5c:17f0be143ee:-7ffc</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <simpleConversionEnabled>false</simpleConversionEnabled>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>
