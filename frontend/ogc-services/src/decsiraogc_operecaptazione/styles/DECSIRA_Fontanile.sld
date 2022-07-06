@@ -10,7 +10,7 @@
     <Name>default_circle</Name>
     <UserStyle>
     <!-- Styles can have names, titles and abstracts -->
-      <Title>Default Cerchio</Title>
+      <Title>Fontanile</Title>
       <Abstract>Cerchio</Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering points -->

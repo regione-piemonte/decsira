@@ -29,7 +29,7 @@
                   </Fill>
                   <Stroke>
                     <CssParameter name="stroke">#000000</CssParameter>
-                    <CssParameter name="stroke-width">2</CssParameter>                                                   </Stroke>
+                    <CssParameter name="stroke-width">1.2</CssParameter>                                                   </Stroke>
                 </Mark>
               <Size>8</Size>
             </Graphic>

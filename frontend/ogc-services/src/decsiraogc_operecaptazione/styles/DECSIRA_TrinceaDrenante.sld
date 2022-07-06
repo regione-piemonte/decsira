@@ -11,18 +11,18 @@
       <FeatureTypeStyle>
        <Rule>
         <Title> Trincea drenante</Title>
-   	    <MaxScaleDenominator>100000</MaxScaleDenominator> 
+   	    <MaxScaleDenominator>500000</MaxScaleDenominator> 
         <LineSymbolizer>
          <Stroke>
            <CssParameter name="stroke">#0077e6</CssParameter>
-           <CssParameter name="stroke-width">1</CssParameter>
+           <CssParameter name="stroke-width">2</CssParameter>
          </Stroke>
         </LineSymbolizer>
         <LineSymbolizer>
          <Stroke>
            <CssParameter name="stroke">#0077e6</CssParameter>
-           <CssParameter name="stroke-width">5</CssParameter>
-           <CssParameter name="stroke-dasharray">1 9</CssParameter>
+           <CssParameter name="stroke-width">6</CssParameter>
+           <CssParameter name="stroke-dasharray">2 9</CssParameter>
          </Stroke>
         </LineSymbolizer>
        </Rule>

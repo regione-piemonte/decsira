@@ -6,8 +6,8 @@
 	  <th>Provincia</th>
 	  <th>Codice Sira</th>
 	  <th>Categoria Discarica</th>
-	  <th>Capacità totale (mc)</th>
-	  <th>Capacità autorizzata (mc)</th>
+	  <th>Capacit&agrave; totale (mc)</th>
+	  <th>Capacit&agrave; autorizzata (mc)</th>
     </tr>
     <tr>
 	  <td>${feature.desComune.value}</td>

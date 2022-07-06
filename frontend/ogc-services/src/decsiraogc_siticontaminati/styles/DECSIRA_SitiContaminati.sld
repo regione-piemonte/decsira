@@ -23,7 +23,7 @@
          <Title> Bonifica e ripristino ambientale</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal> BONIFICA E RIPRISTINO AMBIENTALE</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -50,7 +50,7 @@
            <Title> Bonifica e ripristino ambientale con misure di sicurezza</Title>
            <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal>BONIFICA E RIPRISTINO AMBIENTALE CON MISURE DI SICUREZZA</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -77,7 +77,7 @@
            <Title> Intervento non necessario</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal> INTERVENTO NON NECESSARIO</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -104,7 +104,7 @@
            <Title> Intervento non necessario a seguito analisi di rischio</Title>
             <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal> INTERVENTO NON NECESSARIO A SEGUITO ANALISI DI RISCHIO</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -131,7 +131,7 @@
            <Title> Messa in sicurezza operativa</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal> MESSA IN SICUREZZA OPERATIVA</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -172,7 +172,7 @@
            <Title> Messa in sicurezza permanente</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal> MESSA IN SICUREZZA PERMANENTE</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -192,16 +192,17 @@
             </Graphic>
           </PointSymbolizer>
         </Rule>
-
- <!-- n.d. -->        
+          
+              
+         <!-- Interventi diversi sullo stesso sito   -->        
         <Rule>
 		   <Name>R7</Name>
-           <Title> Intervento diversi sullo stesso sito </Title>
+           <Title> Interventi diversi sullo stesso sito</Title>
           <ogc:Filter>
-             <ogc:PropertyIsLike wildCard="%" singleChar="?" escapeChar="!">
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
-              <ogc:Literal>%,%</ogc:Literal>
-           </ogc:PropertyIsLike>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
+              <ogc:Literal> INTERVENTI DIVERSI SULLO STESSO SITO</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
           </ogc:Filter>
 		  <MaxScaleDenominator>1000000</MaxScaleDenominator>
           <PointSymbolizer>
@@ -217,13 +218,15 @@
           </PointSymbolizer>
         </Rule>
           
+
+
 <!-- Default   -->      
 	  <Rule>
 	    <Name>R8</Name>
          <Title> Verifica in corso</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>decsiraogc_siticontaminati:interventi</ogc:PropertyName>
+              <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
               <ogc:Literal> n.d.</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
