@@ -133,7 +133,9 @@ class AttachmentTable extends React.Component {
     downloadAttachment = () => {
         this.props.hideConfirm();
         let url = this.props.card[this.props.id].url;
-        let filename = this.props.card[this.props.id].filename;
+        window.open(url, '_blank');
+
+        /* let filename = this.props.card[this.props.id].filename;
         let anchor = document.createElement("a");
         anchor.href = url;
         anchor.download = filename;
@@ -144,7 +146,7 @@ class AttachmentTable extends React.Component {
                 cancelable: true,
                 view: window
             })
-        );
+        );*/
     }
 
     /* selectRows = (params) => {
