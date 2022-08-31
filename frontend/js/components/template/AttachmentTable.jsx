@@ -133,7 +133,11 @@ class AttachmentTable extends React.Component {
     downloadAttachment = () => {
         this.props.hideConfirm();
         let url = this.props.card[this.props.id].url;
-        window.open(url, '_blank');
+        if (url.endsWith(".zip")) {
+            window.open(url, '_self');
+        } else {
+            window.open(url, '_blank');
+        }
 
         /* let filename = this.props.card[this.props.id].filename;
         let anchor = document.createElement("a");
