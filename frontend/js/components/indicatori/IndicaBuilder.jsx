@@ -364,7 +364,8 @@ function IndicaBuilder({
             return;
         }
 
-        layer.url = "http://localhost:8080/geoserver";
+        // layer.url = "http://localhost:8080/geoserver";
+        layer.url = ConfigUtils.getConfigProp('geoserverSldServiceUrl');
         const sldUrl = getStyleService(layer, {
             ramp: "custom",
             customClasses: colors.map(col => { return col.min + ',' + col.max + ',' + col.color;}).join(';'),
