@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor version="1.0.0"
+  xmlns:decsiraogc_irea="http://www.regione.piemonte.it/ambiente/decsiraogc_irea/1.0"                       
+  xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd"  
+  xmlns="http://www.opengis.net/sld"
+  xmlns:ogc="http://www.opengis.net/ogc" 
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- a Named Layer is the basic building block of an SLD document -->
+  <NamedLayer>
+    <Name>IREA 2010</Name>
+    <UserStyle>
+	  <Title> IREA 2010 – Emissioni puntuali   </Title>
+      <Abstract> SIREA 2010 – Emissioni puntuali </Abstract>
+        <FeatureTypeStyle>
+		
+		<!-- discarica -->
+		
+		<Rule>
+		   <Name>R1</Name>
+           <Title> Discarica</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>decsiraogc_irea:tipo_stabilimento</ogc:PropertyName>
+              <ogc:Literal>DISCARICA</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+           <MaxScaleDenominator>10000</MaxScaleDenominator>
+          <PointSymbolizer>
+            <Graphic>
+              <Mark>
+                <WellKnownName>circle</WellKnownName>
+                <Fill>
+                  <CssParameter name="fill">#3ca327</CssParameter>
+                </Fill>
+                <Stroke>
+                  <CssParameter name="stroke">#000000</CssParameter>
+                </Stroke>
+              </Mark>
+              <Size>10</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+		
+		<!-- stabilimento -->
+		
+		<Rule>
+		   <Name>R2</Name>
+           <Title> Stabilimento produttivo</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>decsiraogc_irea:tipo_stabilimento</ogc:PropertyName>
+              <ogc:Literal>STABILIMENTO</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <MaxScaleDenominator>100000</MaxScaleDenominator>
+          <PointSymbolizer>
+            <Graphic>
+              <Mark>
+                <WellKnownName>circle</WellKnownName>
+                <Fill>
+                  <CssParameter name="fill">#e83c1e</CssParameter>
+                </Fill>
+                <Stroke>
+                  <CssParameter name="stroke">#000000</CssParameter>
+                </Stroke>
+              </Mark>
+              <Size>10</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+		
+	 </FeatureTypeStyle>
+		</UserStyle>
+	  </NamedLayer>
+	</StyledLayerDescriptor>

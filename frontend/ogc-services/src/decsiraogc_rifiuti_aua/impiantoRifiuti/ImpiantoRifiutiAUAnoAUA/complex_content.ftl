@@ -7,9 +7,9 @@
 	  <th>Codice Sira</th>
 	  <th>Tipologia impiantistica</th>
 	  <th>Operazioni di recupero</th>
-	  <th>Quantità totale inviata a recupero (t)</th>
-	  <th>Capacità massima stoccata (t)</th>
-	  <th>Capacità massima stoccata (mc)</th>
+	  <th>Quantit&agrave; totale inviata a recupero (t)</th>
+	  <th>Capacit&agrave; massima stoccata (t)</th>
+	  <th>Capacit&agrave; massima stoccata (mc)</th>
     </tr>
     <tr>
 	  <td>${feature.desComune.value}</td>

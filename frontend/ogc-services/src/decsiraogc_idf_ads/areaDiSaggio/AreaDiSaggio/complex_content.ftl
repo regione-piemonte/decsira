@@ -10,7 +10,7 @@
 	  <th>Comune</th>
 	  <th>UTM est</th>
 	  <th>UTM Nord</th>
-	  <th>Proprietà</th>
+	  <th>Propriet&agrave;</th>
 	  <th>Esposizione</th>
 	  <th>Quota (m)</th>
 	  <th>Inclinazione in gradi</th>
@@ -26,8 +26,8 @@
 	  <td>${feature.denominazioneComune.value}</td>
 	  <td>${feature.utmEst.value}</td>
 	  <td>${feature.utmNord.value}</td>
-	  <td>${feature.descProprieta.value}</td>
-	  <td>${feature.descEsposizione.value}</td>
+	  <td>${feature.descrProprieta.value}</td>
+	  <td>${feature.descrEsposizione.value}</td>
 	  <td>${feature.quota.value}</td>
 	  <td>${feature.inclinazione.value}</td>
 	  <td>${feature.descrCategoriaForestale.value}</td>

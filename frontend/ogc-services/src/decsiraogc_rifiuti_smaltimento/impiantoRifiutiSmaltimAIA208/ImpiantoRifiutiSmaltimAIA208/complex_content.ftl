@@ -8,8 +8,8 @@
 	  <th>Tipologia Impiantistica</th>
 	  <th>Operazioni recupero</th>
 	  <th>Operazioni smaltimento</th>
-	  <th>Capacità smaltimento (mc)</th>
-	  <th>Capacità smaltimento (t)</th>
+	  <th>Capacit&agrave; smaltimento (mc)</th>
+	  <th>Capacit&agrave; smaltimento (t)</th>
     </tr>
     <tr>
 	  <td>${feature.desComune.value}</td>

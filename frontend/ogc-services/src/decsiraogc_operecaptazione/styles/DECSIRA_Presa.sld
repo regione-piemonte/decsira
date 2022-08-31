@@ -20,7 +20,7 @@
 <!-- non definito     -->    	  
         <Rule>
           <Name>R1</Name>
-          <Title>non definito</Title>
+          <Title> Presa</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>decsiraogc_operecaptazione:desTipoPresa</ogc:PropertyName>
