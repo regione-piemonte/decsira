@@ -11,9 +11,10 @@ const {connect} = require('react-redux');
 const {head} = require('lodash');
 const Footer = require('../components/Footer');
 const Header = require('../components/Header');
-const { Modal } = require("react-bootstrap");
+const { Modal, Button } = require("react-bootstrap");
 const I18N = require('@mapstore/components/I18N/I18N');
-const {getMetadataObjects, selectCategory, resetObjectAndView} = require('../actions/siracatalog');
+const { getMetadataObjects, selectCategory, resetObjectAndView } = require('../actions/siracatalog');
+const { resetUserIdentityError } = require('../actions/userprofile');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
@@ -39,7 +40,8 @@ class Home extends React.Component {
         selectCategory: PropTypes.func,
         allCategory: PropTypes.object,
         resetObjectAndView: PropTypes.func,
-        profile: PropTypes.object
+        profile: PropTypes.object,
+        resetUserIdentityError: PropTypes.func
     };
 
     static contextTypes = {
@@ -48,7 +50,8 @@ class Home extends React.Component {
     };
 
     state = {
-        searchText: ""
+        searchText: "",
+        profileError: ''
     };
 
     componentDidMount() {
@@ -62,13 +65,14 @@ class Home extends React.Component {
 
     renderProfileAlert = () => {
         return (<Modal show bsSize="small">
-            <Modal.Header closeButton>
+            <Modal.Header closeButton onClick={() => { this.props.resetUserIdentityError(); }}>
                 <Modal.Title><I18N.Message msgId="Modal.InfoTitle"/></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="mapstore-error"><I18N.Message msgId="Modal.NoRoleMessage"/></div>
             </Modal.Body>
             <Modal.Footer>
+                <Button onClick={() => { this.props.resetUserIdentityError(); }}><I18N.Message msgId="Accessibility.button"/></Button>
             </Modal.Footer>
         </Modal>);
     };
@@ -140,5 +144,6 @@ module.exports = connect((state) => {
 }, {
     loadMetadata: getMetadataObjects,
     selectCategory,
-    resetObjectAndView
+    resetObjectAndView,
+    resetUserIdentityError
 })(Home);

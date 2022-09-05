@@ -8,7 +8,8 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {Modal, Button} = require('react-bootstrap');
+const { Modal, Button } = require('react-bootstrap');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class DownloadConfirm extends React.Component {
     static propTypes = {
@@ -29,14 +30,14 @@ class DownloadConfirm extends React.Component {
                 <Modal
                     show= {this.props.showConfirm}>
                     <Modal.Header closeButton onClick={this.props.onClose}>
-                        <Modal.Title>Scarica allegato</Modal.Title>
+                        <Modal.Title><I18N.Message msgId="DownloadConfirm.title"/></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h4>L'allegato sarà scaricato in locale, vuoi procedere?</h4>
+                        <h4><I18N.Message msgId="DownloadConfirm.message"/></h4>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.props.onConfirm}>Si</Button>
-                        <Button onClick={this.props.onClose}>No</Button>
+                        <Button onClick={this.props.onConfirm}><I18N.Message msgId="DownloadConfirm.confirm"/></Button>
+                        <Button onClick={this.props.onClose}><I18N.Message msgId="DownloadConfirm.close"/></Button>
                     </Modal.Footer>
                 </Modal>
             </div>
