@@ -73,9 +73,9 @@ function resetUserIdentityError() {
 }
 
 function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentity') {
-    /* if (window.location.href.indexOf('auth') === -1) {
+    if (window.location.href.indexOf('auth') === -1) {
         return () => { };
-    }*/
+    }
     return (dispatch) => {
         return axios.get(serviceUrl).then((response) => {
             // response example
@@ -83,7 +83,7 @@ function loadUserIdentity(serviceUrl = 'services/iride/getRolesForDigitalIdentit
             // response.data = { "roles": [{ "code": "BDN_EG_01", "domain": "REG_PMN", "mnemonic": "BDN_EG_01@REG_PMN", "description": "BDN - Ente di gestione delle aree protette delle Alpi Cozie" }], "userIdentity": { "codFiscale": "AAAAAA00A11K000S", "nome": "CSI PIEMONTE", "cognome": "DEMO 30", "idProvider": "ACTALIS_EU" } };
             // response.data = { "roles": [{ "code": "PA_GEN_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_GEN_DECSIRA@REG_PMN", "description": "PA Generica" }, { "code": "PA_SPEC_AUT_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_AUT_DECSIRA@REG_PMN", "description": "PA Specialistico Autorita' Regionale" }], "userIdentity": { "codFiscale": "AAAAAA00A11B000J", "nome": "CSI PIEMONTE", "cognome": "DEMO 21", "idProvider": "ACTALIS_EU" } };
             // response.data = { "roles": null, "userIdentity": null };
-            response.data = { "roles": [], "userIdentity": { "codFiscale": "MRLFNC68A56H456Q", "nome": "FRANCESCA", "cognome": "MORELLI", "idProvider": "ACTALIS_EU" } };
+            // response.data = { "roles": [], "userIdentity": { "codFiscale": "MRLFNC68A56H456Q", "nome": "FRANCESCA", "cognome": "MORELLI", "idProvider": "ACTALIS_EU" } };
             // response.data = { "roles": [{ "code": "PA_SPEC_CONS_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_CONS_DECSIRA@REG_PMN", "description": "Pubblica Amministrazione - Specialistico su ambito regionale" }, { "code": "PA_SPEC_DECSIRA", "domain": "REG_PMN", "mnemonic": "PA_SPEC_DECSIRA@REG_PMN", "description": null }], "userIdentity": { "codFiscale": "AAAAAA00A11E000M", "nome": "CSI PIEMONTE", "cognome": "DEMO 24", "idProvider": "ACTALIS_EU" } };
             if (typeof response.data === 'object') {
                 let user = {
