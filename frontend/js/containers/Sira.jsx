@@ -183,7 +183,7 @@ class Sira extends React.Component {
         if (this.props?.match?.params?.profile) {
             this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
-        this.props.loadUserIdentity();
+        // this.props.loadUserIdentity();
     }
 
     componentDidMount() {
