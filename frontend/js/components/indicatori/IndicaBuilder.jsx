@@ -194,7 +194,9 @@ function IndicaBuilder({
                     colorsArray.push({
                         color: geometryType === 'Point' ? rule.PointSymbolizer.Graphic.Mark.Fill.CssParameter.$ :
                             rule.PolygonSymbolizer.Fill.CssParameter.$,
-                        min: floorRuleValue(rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal, index),
+                        min: rule.Filter.And.PropertyIsGreaterThan ?
+                            floorRuleValue(rule.Filter.And.PropertyIsGreaterThan.Literal, index) :
+                            floorRuleValue(rule.Filter.And.PropertyIsGreaterThanOrEqualTo.Literal, index),
                         max: rule.Filter.And.PropertyIsLessThan ?
                             ceilRuleValue(rule.Filter.And.PropertyIsLessThan.Literal, index, lastRuleIndex) :
                             ceilRuleValue(rule.Filter.And.PropertyIsLessThanOrEqualTo.Literal, index, lastRuleIndex)
