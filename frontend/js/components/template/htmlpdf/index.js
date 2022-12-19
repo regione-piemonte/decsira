@@ -15,6 +15,7 @@ const AuthorizedObject = require("../AuthorizedObject");
 const AdempimentiAmbientali = require("../AdempimentiAmbientali");
 const SiraTable = require("./SiraTable");
 const AttachmentTable = require("./AttachmentTable");
+const AttachmentTableApi = require("./AttachmentTableApi");
 
 
 const TemplateUtils = require('../../../utils/TemplateUtils');

@@ -34,25 +34,30 @@ module.exports = assign({}, require('./MapStore2/build/buildConfig')(
         path: '/proxy',
         pathRewrite: {'^/proxy': '/decsiraweb/proxy'},
         host: "localhost",
-        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        target: "http://localhost:8093"
     }, {
         path: '/services/metadata',
         pathRewrite: {'^/services/metadata': '/decsiraweb/services/metadata'},
         host: "localhost",
-        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        target: "http://localhost:8093"
     }, {
         path: '/services/iride',
         pathRewrite: {'^/services/iride': '/decsiraweb/services/iride'},
         host: "localhost",
-        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        target: "http://localhost:8093"
+    }, {
+        path: '/services/scriva',
+        pathRewrite: {'^/services/scriva': '/decsiraweb/services/scriva'},
+        host: "localhost",
+        target: "http://localhost:8093"
     }, {
         path: '/decsiraweb/services/queryformconfig',
         host: "localhost",
-        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        target: "http://localhost:8093"
     }, {
         path: '/geoserver/ows',
         host: "localhost",
-        target: "http://tst-sipradecweb.territorio.csi.it:8080/"
+        target: "http://localhost:8093"
     }, {
         path: '/territoriosliv1sisp',
         host: "localhost",
