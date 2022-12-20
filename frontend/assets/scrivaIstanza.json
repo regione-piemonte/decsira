@@ -1,0 +1,141 @@
+{
+   "featureTypeName":"decsiraogc_scriva:ScrivaIstanza",
+   "featureTypeNameLabel":"Adempimenti ambientali Scriva",
+   "nameSpaces": {
+     "decsiraogc_scriva": "http://www.regione.piemonte.it/ambiente/decsiraogc_scriva/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Adempimenti ambientali Scriva",
+        "name": "decsiraogc_scriva:ScrivaIstanza",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+            "wfsUrl": "http://geomap.reteunitaria.piemonte.it/ws/siradec/rp-01/siradecwfs/wfs_srrqa_zones_airquality?srsName=EPSG:4326",
+            "wfsVersion": "1.1.0",
+            "layerName": "ZONES_IPR",
+            "layerTitle": "Zonizzazione qualita' dell'aria vigente",
+            "geomAttribute": "msGeometry",
+            "geometryType": "Polygon"
+        },
+        "featureType": "scrivaIstanza",
+		"params": {
+			"featureType": "scrivaIstanza"
+		},
+        "group": "Oggetti",
+        "format": "image/png"
+    },
+   "geometryName": "",
+   "geometryType": "Point",
+   "card": {
+    "pdfname": "Scheda_ScrivaIstanza_{{/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:idIstanza/text()}}.pdf",
+     "template": "assets/cardTemplateScrivaIstanza.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_scriva:ScrivaIstanza",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateScrivaIstanza.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice istanza",
+           "suppressSorting": true,
+           "width":150,
+           "xpath": ["decsiraogc_scriva:codIstanza/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Tipo adempimento",
+           "suppressSorting": true,
+           "width":300,
+           "xpath": ["decsiraogc_scriva:destipoAdempimento/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Adempimento",
+           "suppressSorting": true,
+           "width":300,
+           "xpath": ["decsiraogc_scriva:desAdempimento/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Stato Istanza",
+           "suppressSorting": true,
+           "width":180,
+           "xpath": ["decsiraogc_scriva:desStatoIstanza/text()"],
+		   "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_scriva:destipoAdempimento",
+            "label":"Tipo adempimento",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:scriva_d_tipo_adempimento",
+                "propertyName": "cod_tipo_adempimento,des_tipo_adempimento,ordinamento_tipo_adempimento",
+                "sortBy": "ordinamento_tipo_adempimento+A"
+			  }
+			},
+			"valueId":"des_tipo_adempimento",
+			"valueLabel":"des_tipo_adempimento"
+        },
+		{
+            "index": 2,
+            "attribute": "decsiraogc_scriva:desAdempimento",
+            "label":"Adempimento",
+            "type":"list",
+            "valueService": {
+              "urlParams": {
+                "typeName": "decsiraogc_decodif:scriva_d_adempimento",
+                "propertyName": "id_adempimento,des_adempimento,ordinamento_adempimento",
+                "sortBy": "ordinamento_adempimento+A"
+			  }
+			},
+			"valueId":"des_adempimento",
+			"valueLabel":"des_adempimento"
+        },
+        {
+			"index": 3,
+			"attribute": "decsiraogc_scriva:codIstanza",
+			"label":"Codice istanza",
+			"type":"string"
+        }
+     ]
+
+   }
+
+}

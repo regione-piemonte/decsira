@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_scriva="http://www.regione.piemonte.it/ambiente/decsiraogc_scriva/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_scriva/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_t_scriva_istanza  id= id_istanza -->
+	<element name="ScrivaIstanza" type="decsiraogc_scriva:ScrivaIstanzaType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_t_scriva_allegato_istanza  id= identificativo -->
+	<element name="ScrivaAllegatoIstanza" type="decsiraogc_scriva:ScrivaAllegatoIstanzaType" substitutionGroup="gml:AbstractObject" />
+
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="ScrivaIstanzaType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idIstanza"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codIstanza" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element name="idStatoIstanza"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="desStatoIstanza" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idAdempimento"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codAdempimento" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desAdempimento" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idTipoAdempimento"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codTipoAdempimento" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="destipoAdempimento" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<!-- oggetti innestati -->
+
+					<xs:element name="scrivaAllegatoIstanza" type="decsiraogc_scriva:ScrivaAllegatoIstanzaPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+				</sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+		
+	<complexType name="ScrivaAllegatoIstanzaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idAllegatoIstanza"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idIstanza"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nomeAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="150" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="uuidIndex" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="36" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dimensioneUpload"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="dataPubblicazione" type="xs:date" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="flgPubblicazione"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idTipolAllegato"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="codTipolAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desTipolAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idClasseAllegato"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="codClasseAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desClasseAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idCategoriaAllegato"  type="xs:integer" minOccurs="1" />
+
+					<xs:element name="codCategoriaAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desCategoriaAllegato" minOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<!-- property types -->
+	<complexType name="OggettoAssociatoSorgentePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_scriva:ScrivaAllegatoIstanza" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+</schema>

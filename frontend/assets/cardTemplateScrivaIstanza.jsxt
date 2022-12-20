@@ -1,0 +1,194 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='ADEMPIMENTI AMBIENTALI SCRIVA' subtitle={[
+            'Codice Istanza: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:codIstanza/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+        <Section header='DATI GENERALI - Scriva Istanza' eventKey='1' expanded={true}>
+            <LabeledField label='Codice istanza' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:codIstanza/text()")
+            }/>
+            <LabeledField label='Tipo adempimento' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:destipoAdempimento/text()")
+            }/>
+			<LabeledField label='Adempimento' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:desAdempimento/text()")
+            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Stato Istanza' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:desStatoIstanza/text()")
+				}/>
+			</ProfileWrapper>
+        </Section>
+
+		<Section header="Documentazione allegata Sintesi" eventKey='2' expanded={true}>
+			<SiraTable
+				   id="ScrivaAllegatoIstanza"
+				   selectedRow={model.ScrivaAllegatoIstanza}
+				   wfsVersion="2.0"
+				   rowSelection={false}
+				   columns={
+					   [
+						   {
+							   headerName: ' Codice Allegato',
+							   width: 120,
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:codAllegato/text()"
+						   },
+						   {
+							   headerName: 'Nome Allegato',
+							   width: 200,
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:nomeAllegato/text()"
+						   },
+						   {
+							   headerName: 'Classe Allegato',
+							   width: 120,
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:desClasseAllegato/text()"
+						   },
+						   {
+							   headerName: 'Dimensione file',
+							   width: 120,
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:dimensioneUpload/text()"
+						   },
+						   {
+							   headerName: 'Data Pubblicazione',
+							   width: 120,
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:dataPubblicazione/text()",
+							   dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+						   },
+						   {
+							   headerName: 'Tipo pubblicazione',
+							   width: 150,
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:flgPubblicazione/text()"
+						   }
+					   ]
+				   }
+				   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:scrivaAllegatoIstanza")}/>
+		</Section>
+		
+		<Section header='Documentazione Elaborati progettuali (API SCRIVA)' eventKey='3' expanded={true}>
+            <AttachmentTableApi
+                id="ScrivaAllegatoIstanzaApi"
+                selectedRow={model.BdnAllegatoPiani}
+                wfsVersion="2.0"
+                rowSelection={false}
+				idIstanza={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:idIstanza/text()")}
+                columns={
+                    [
+                        {
+                            headerName: '',
+                            width: 50,
+                            download: true,
+                            confirm: true,
+							field: "link"
+				        },
+						{
+                            headerName: 'Codice Allegato',
+                            width: 120,
+							field: "cod_allegato",
+                            jsonField:"cod_allegato"
+                        },
+						{
+                            headerName: 'Nome Allegato',
+                            width: 120,
+							field: "nome_allegato",
+                            jsonField: "nome_allegato"
+                        },
+						{
+                            headerName: 'Titolo Allegato',
+                            width: 120,
+							field: "titolo_allegato",
+                            jsonField: "titolo_allegato"
+                        },
+						{
+                            headerName: 'Tipologia Allegato',
+                            width: 120,
+							field: "des_tipologia_allegato",
+                            jsonField: "tipologia_allegato.des_tipologia_allegato"
+                        },
+						{
+                            headerName: 'Categoria Allegato',
+                            width: 120,
+							field: "des_categoria_allegato",
+                            jsonField: "tipologia_allegato.categoria_allegato.des_categoria_allegato"
+                        },
+						{
+                            headerName: 'Classe Allegato',
+                            width: 120,
+							field: "des_classe_allegato",
+                            jsonField: "classe_allegato.des_classe_allegato"
+                        },
+						{
+                            headerName: 'Flag cancellazione',
+                            width: 120,
+							field: "flg_cancellato",
+                            jsonField: "flg_cancellato"
+                        },
+						{
+                            headerName: 'Tipo pubblicazione',
+                            width: 120,
+							field: "flg_da_pubblicare",
+                            jsonField: "flg_da_pubblicare"
+                        },
+						{
+                            headerName: 'Dimensione file',
+                            width: 120,
+							field: "dimensione_upload",
+                            jsonField: "dimensione_upload"
+                        },
+						{
+                            headerName: 'Data Pubblicazione',
+                            width: 120,
+							field: "data_pubblicazione",
+                            jsonField: "data_pubblicazione",
+							dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"}
+                        },
+						{
+                            headerName: 'Numero protocollo',
+                            width: 120,
+							field: "num_protocollo_allegato",
+                            jsonField: "num_protocollo_allegato"
+                        },
+						{
+                            headerName: 'Link Allegato',
+                            width: 120,
+							field: "url_doc",
+                            jsonField: "url_doc",
+							showUrlField: "flg_da_pubblicare",
+							url: true
+                        }
+                    ]
+                }
+            />
+        </Section>
+		
+		<Section header='MAPPA SINTESI' eventKey='3' expanded={false}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_scriva:ScrivaIstanza/decsiraogc_scriva:geometria/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>

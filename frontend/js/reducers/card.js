@@ -9,7 +9,8 @@
 const {
     CARD_TEMPLATE_LOADED, CARD_TEMPLATE_LOAD_ERROR, CARD_TEMPLATE_LOADING,
     SELECT_SECTION, ACTIVE_SECTION, SELECT_ROWS, GENERATE_PDF,
-    MAP_IMAGE_READY, SHOW_CONFIRM_DOWNLOAD, HIDE_CONFIRM_DOWNLOAD // , SET_IMPIANTO_MODEL
+    MAP_IMAGE_READY, SHOW_CONFIRM_DOWNLOAD, HIDE_CONFIRM_DOWNLOAD, // , SET_IMPIANTO_MODEL
+    ATTACHMENTS_LOADED
 } = require('../actions/card');
 
 const assign = require('object-assign');
@@ -20,7 +21,8 @@ const initialState = {
     template: null,
     xml: null,
     mapImageReady: false,
-    showConfirmDownload: false
+    showConfirmDownload: false,
+    attachments: []
     // impiantoModel: null
 };
 
@@ -66,6 +68,9 @@ function cardtemplate(state = initialState, action) {
     }
     case MAP_IMAGE_READY: {
         return assign({}, state, {mapImageReady: action.state});
+    }
+    case ATTACHMENTS_LOADED: {
+        return assign({}, state, {attachments: action.attachments});
     }
     /* case SET_IMPIANTO_MODEL: {
             return assign({}, state, {impiantoModel: action.impiantoModel});
