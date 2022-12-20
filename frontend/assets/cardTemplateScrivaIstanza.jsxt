@@ -55,7 +55,8 @@
 						   {
 							   headerName: 'Data Pubblicazione',
 							   width: 120,
-							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:dataPubblicazione/text()"
+							   xpath:"decsiraogc_scriva:ScrivaAllegatoIstanza/decsiraogc_scriva:dataPubblicazione/text()",
+							   dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
 						   },
 						   {
 							   headerName: 'Tipo pubblicazione',
@@ -80,7 +81,7 @@
                             headerName: '',
                             width: 50,
                             download: true,
-                            confirm: false,
+                            confirm: true,
 							field: "link"
 				        },
 						{
@@ -142,7 +143,7 @@
                             width: 120,
 							field: "data_pubblicazione",
                             jsonField: "data_pubblicazione",
-							dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+							dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"}
                         },
 						{
                             headerName: 'Numero protocollo',

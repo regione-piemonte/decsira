@@ -43,6 +43,9 @@ public class AllegatoIstanzaDTO {
 	@JsonProperty("flg_da_pubblicare")
 	public boolean flgDaPubblicare;
 
+	@JsonProperty("data_pubblicazione")
+	public String dataPubblicazione;
+
 	@JsonProperty("id_istanza_osservazione")
 	public int idIstanzaOsservazione;
 
@@ -51,10 +54,10 @@ public class AllegatoIstanzaDTO {
 
 	@JsonProperty("classe_allegato")
 	public ClasseAllegatoDTO classeAllegato;
-	
+
 	@JsonProperty("url_doc")
 	public String urlDoc;
-	
+
 	@JsonProperty("note")
 	public String note;
 
@@ -201,7 +204,13 @@ public class AllegatoIstanzaDTO {
 	public void setUrlDoc(String urlDoc) {
 		this.urlDoc = urlDoc;
 	}
-	
-	
+
+	public String getDataPubblicazione() {
+		return dataPubblicazione;
+	}
+
+	public void setDataPubblicazione(String dataPubblicazione) {
+		this.dataPubblicazione = dataPubblicazione;
+	}
 
 }

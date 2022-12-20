@@ -98,7 +98,7 @@ public class ScrivaServiceHelper {
 		Logger.getLogger(ScrivaServiceConstants.LOGGER).info("ScrivaServiceHelper - getAllegatiIstanza - BEGIN");
 		Logger.getLogger(ScrivaServiceConstants.LOGGER).info("Parametro in input idIstanza: " + idIstanza);
 		List<AllegatoIstanzaDTO> result = null;
-		String api = "/documenti-pubblicati?id_istanza=" + idIstanza;
+		String api = "/documenti-pubblicati?id_istanza=" + idIstanza +"&flg_link_documento=true";
 		
 		try {
 			RestTemplate restTemplate = new RestTemplate();

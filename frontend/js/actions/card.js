@@ -166,7 +166,7 @@ function loadAttachments(idIstanza, columns) {
         if (window.location.href.indexOf('auth') !== -1) {
             secure = '/secure';
         }
-        let url = "services/scriva" + secure + "/allegati-istanza?id_istanza=605"; // + idIstanza;
+        let url = "services/scriva" + secure + "/allegati-istanza?id_istanza="+ idIstanza;
 
         return axios.get(url).then((resp) => {
             let data = resp.data;
