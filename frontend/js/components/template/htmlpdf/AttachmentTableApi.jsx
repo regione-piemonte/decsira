@@ -61,7 +61,7 @@ class AttachmentTableApi extends React.Component {
     renderTableBody = (attachments, columns) => {
         return attachments.map((f, idx) => {
             return (<tr key={idx}>{columns.map((c) => {
-                if (c.field === 'url') {
+                if (c.url === true) {
                     return (<td key={c.field}>{this.renderLinkDownload(f[c.field])}</td>);
                 }
                 return (<td key={c.field}>{c.dateFormat ? this.renderDate(f[c.field], c.dateFormat, c.locale || 'it-IT' ) : f[c.field]}</td>);
