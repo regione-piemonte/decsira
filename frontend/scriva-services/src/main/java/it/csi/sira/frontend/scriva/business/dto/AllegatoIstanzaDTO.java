@@ -72,6 +72,9 @@ public class AllegatoIstanzaDTO {
 	@JsonProperty("autore_allegato")
 	public String autoreAllegato;
 
+	@JsonProperty("titolo_allegato")
+	public String titoloAllegato;
+
 	public String getNote() {
 		return note;
 	}
@@ -246,6 +249,14 @@ public class AllegatoIstanzaDTO {
 
 	public void setAutoreAllegato(String autoreAllegato) {
 		this.autoreAllegato = autoreAllegato;
+	}
+
+	public String getTitoloAllegato() {
+		return titoloAllegato;
+	}
+
+	public void setTitoloAllegato(String titoloAllegato) {
+		this.titoloAllegato = titoloAllegato;
 	}
 
 }
