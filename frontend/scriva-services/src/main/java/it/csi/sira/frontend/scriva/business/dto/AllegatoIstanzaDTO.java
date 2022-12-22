@@ -1,7 +1,9 @@
 package it.csi.sira.frontend.scriva.business.dto;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+@JsonIgnoreProperties
 public class AllegatoIstanzaDTO {
 
 	@JsonProperty("id_allegato_istanza")
@@ -60,6 +62,9 @@ public class AllegatoIstanzaDTO {
 
 	@JsonProperty("note")
 	public String note;
+
+	@JsonProperty("data_atto")
+	public String dataAtto;
 
 	public String getNote() {
 		return note;
@@ -211,6 +216,14 @@ public class AllegatoIstanzaDTO {
 
 	public void setDataPubblicazione(String dataPubblicazione) {
 		this.dataPubblicazione = dataPubblicazione;
+	}
+
+	public String getDataAtto() {
+		return dataAtto;
+	}
+
+	public void setDataAtto(String dataAtto) {
+		this.dataAtto = dataAtto;
 	}
 
 }
