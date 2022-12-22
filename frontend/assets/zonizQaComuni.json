@@ -1,0 +1,256 @@
+{
+  "featureTypeName": "decsiraogc_zones_prqa_current:decsira_geo_zoniz_prqa_storica_comuni_current",
+  "featureTypeNameLabel": "Zone qualita’ dell'aria su base comunale -  Vigenti",
+  "nameSpaces": {
+    "decsiraogc_zones_prqa_current": "http://www.regione.piemonte.it/ambiente/decsiraogc_zones_prqa_current/1.0"
+  },
+  "layer": {
+    "type": "wms",
+    "url": "{geoserverUrl}/wms",
+    "visibility": true,
+    "title": "Zone qualita’ dell'aria su base comunale -  Vigenti",
+    "name": "decsiraogc_zones_prqa_current:decsira_geo_zoniz_prqa_storica_comuni_current",
+    "infoFormat": "application/vnd.ogc.gml/3.1.1",
+    "featureType": "zonizQa",
+	"params": {
+		"featureType": "zonizQaComuni"
+	},
+    "group": "Oggetti",
+    "format": "image/png"
+  },
+  "geometryName": "geometria",
+  "geometryType": "Polygon",
+  "featureinfo": {
+    "templateURL": "assets/infoTemplateZonizQa.jsxt"
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_zones_prqa_current:decsira_geo_zoniz_prqa_storica_comuni_current",
+      "columns": [
+        {
+          "hide":true,
+          "headerName": "Geometry",
+          "xpath": [
+            "decsiraogc_zones_prqa_current:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+          ],
+          "suppressSorting": true,
+          "type": 6
+        },
+        {
+          "headerName": "Istat comune",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:istat/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Comune",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:toponimo/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Codice zona",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_code/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Denominazione zona",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:label_zone/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Inizio validità",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_start_date/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Fine validita",
+          "width":300,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_end_date/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Popolazione",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_population/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Anno popolazione",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_population_year/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Area (Km2)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_area_km2/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+		{
+          "headerName": "Densita' (ab/Km2)",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_density/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+        {
+          "headerName": "Tipo zona",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_type_label/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Regione",
+          "width":200,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:region_label/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Inquinanti target",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:poll_targ/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Determina approvazione",
+          "width":200,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:determina_regionale/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        }
+      ]
+    }
+  },
+  "query": {
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields": [
+		{
+         "index": 1,
+         "attribute": "toponimo",
+         "label":"Comuni",
+         "type":"list",
+         "valueService": {
+           "urlParams": {
+             "typeName": "decsiraogc_decodif:decsira_d_zoneqaria_vigente_comuni",
+			 "propertyName": "toponimo,ordinamento",
+             "sortBy": "ordinamento+A"
+           }
+         },
+         "valueId":"toponimo",
+         "valueLabel":"toponimo"
+	   },
+	   {
+		   "index": 2,
+		   "attribute": "label_zone",
+		   "label":"Zona qualita' aria",
+		   "type":"list",
+		   "valueService": {
+			 "urlParams": {
+			   "typeName": "decsiraogc_decodif:decsira_d_zoneqaria_vigente_label_zone",
+			   "propertyName": "label_zone,order",
+			   "sortBy": "order+A"
+			 }
+		   },
+		   "valueId":"label_zone ",
+		   "valueLabel":"label_zone "
+      },
+	  {
+        "index": 3,
+        "attribute": "zone_population",
+        "label": "Popolazione [ab]",
+        "type": "number"
+      },
+	  {
+		"index": 4,
+		"attribute": "zone_type_label",
+		"label":"Tipologia zona",
+		"type":"list",
+		"values": [
+		  {"value":"Agglomeration","name":"Agglomerato"},
+		  {"value":"Non-agglomeration","name":"Non Agglomerato"}
+		],
+		"valueId":"value",
+		"valueLabel":"name"
+      },
+	  {
+        "index": 5,
+        "attribute": "zone_area_km2",
+        "label": "Area comune [km2]",
+        "type": "number"
+      },
+	  {
+        "index": 6,
+        "attribute": "zone_density",
+        "label": "Densità abitativa [ab/km2]",
+        "type": "number"
+      },
+	  {
+        "index": 7,
+        "attribute": "poll_targ",
+        "label": "Inquinanti Target",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_zoneqaria_vigente_poll_targ",
+            "propertyName": "poll_targ,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "poll_targ",
+        "valueLabel": "poll_targ"
+      }
+    ]
+  }
+}
