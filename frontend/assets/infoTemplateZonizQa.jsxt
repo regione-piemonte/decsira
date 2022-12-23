@@ -1,0 +1,51 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateZonizQa"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+             headerName: 'Codice zona',
+             width: 100,
+             xpath: "decsiraogc_zones_prqa_current:zone_code/text()"
+        }, {
+             headerName: 'Denominazione zona',
+             width: 150,
+             xpath: "decsiraogc_zones_prqa_current:label_zone/text()"
+        }, {
+             headerName: 'Popolazione',
+             width: 100,
+             xpath: "decsiraogc_zones_prqa_current:zone_population/text()"
+        }, {
+             headerName: 'Anno popolazione',
+             width: 120,
+             xpath: "decsiraogc_zones_prqa_current:zone_population_year/text()"
+        }, {
+             headerName: 'Area (Km2)',
+             width: 130,
+             xpath: "decsiraogc_zones_prqa_current:zone_area_km2/text()"
+        }, {
+             headerName: "Densita' (ab/Km2)",
+             width: 130,
+             xpath: "decsiraogc_zones_prqa_current:zone_density/text()"
+        }, {
+             headerName: 'Tipo zona',
+             width: 120,
+             xpath: "decsiraogc_zones_prqa_current:zone_type_label/text()"
+        }, {
+             headerName: 'Regione',
+             width: 100,
+             xpath: "decsiraogc_zones_prqa_current:region_label/text()"
+        }, {
+             headerName: "Inquinanti target",
+             width: 180,
+             xpath: "decsiraogc_zones_prqa_current:poll_targ/text()"
+        }, {
+             headerName: 'Determina approvazione',
+             width: 180,
+             xpath: "decsiraogc_zones_prqa_current:determina_regionale/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_zones_prqa_current:decsira_geo_zoniz_prqa_storica_current")}/>

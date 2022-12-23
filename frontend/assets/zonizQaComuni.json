@@ -1,6 +1,6 @@
 {
   "featureTypeName": "decsiraogc_zones_prqa_current:decsira_geo_zoniz_prqa_storica_comuni_current",
-  "featureTypeNameLabel": "Zone qualita’ dell'aria su base comunale -  Vigenti",
+  "featureTypeNameLabel": "Zone qualita' dell'aria su base comunale -  Vigenti",
   "nameSpaces": {
     "decsiraogc_zones_prqa_current": "http://www.regione.piemonte.it/ambiente/decsiraogc_zones_prqa_current/1.0"
   },
@@ -11,17 +11,17 @@
     "title": "Zone qualita’ dell'aria su base comunale -  Vigenti",
     "name": "decsiraogc_zones_prqa_current:decsira_geo_zoniz_prqa_storica_comuni_current",
     "infoFormat": "application/vnd.ogc.gml/3.1.1",
-    "featureType": "zonizQa",
+    "featureType": "zonizQaComuni",
 	"params": {
 		"featureType": "zonizQaComuni"
 	},
-    "group": "Oggetti",
+    "group": "Zone qualita' aria",
     "format": "image/png"
   },
   "geometryName": "geometria",
-  "geometryType": "Polygon",
+  "geometryType": "MultiPolygon",
   "featureinfo": {
-    "templateURL": "assets/infoTemplateZonizQa.jsxt"
+    "templateURL": "assets/infoTemplateZonizQaComuni.jsxt"
   },
   "featuregrid": {
     "grid": {
@@ -47,7 +47,7 @@
         },
 		{
           "headerName": "Comune",
-          "width":100,
+          "width":150,
           "xpath": [
             "decsiraogc_zones_prqa_current:toponimo/text()"
           ],
@@ -65,7 +65,7 @@
         },
         {
           "headerName": "Denominazione zona",
-          "width":100,
+          "width":200,
           "xpath": [
             "decsiraogc_zones_prqa_current:label_zone/text()"
           ],
@@ -73,37 +73,8 @@
           "type": 2
         },
         {
-          "headerName": "Inizio validità",
-          "width":100,
-          "xpath": [
-            "decsiraogc_zones_prqa_current:zone_start_date/text()"
-          ],
-		  "dateFormat": "DD/MM/YYYY",
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Fine validita",
-          "width":300,
-          "xpath": [
-            "decsiraogc_zones_prqa_current:zone_end_date/text()"
-          ],
-		  "dateFormat": "DD/MM/YYYY",
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Popolazione",
-          "width":100,
-          "xpath": [
-            "decsiraogc_zones_prqa_current:zone_population/text()"
-          ],
-          "suppressSorting": true,
-          "type": 1
-        },
-        {
           "headerName": "Anno popolazione",
-          "width":100,
+          "width":150,
           "xpath": [
             "decsiraogc_zones_prqa_current:zone_population_year/text()"
           ],
@@ -121,7 +92,7 @@
         },
 		{
           "headerName": "Densita' (ab/Km2)",
-          "width":100,
+          "width":150,
           "xpath": [
             "decsiraogc_zones_prqa_current:zone_density/text()"
           ],
@@ -130,7 +101,7 @@
         },
         {
           "headerName": "Tipo zona",
-          "width":100,
+          "width":150,
           "xpath": [
             "decsiraogc_zones_prqa_current:zone_type_label/text()"
           ],
@@ -139,7 +110,7 @@
         },
         {
           "headerName": "Regione",
-          "width":200,
+          "width":120,
           "xpath": [
             "decsiraogc_zones_prqa_current:region_label/text()"
           ],
@@ -148,7 +119,7 @@
         },
         {
           "headerName": "Inquinanti target",
-          "width":100,
+          "width":280,
           "xpath": [
             "decsiraogc_zones_prqa_current:poll_targ/text()"
           ],
@@ -157,12 +128,34 @@
         },
         {
           "headerName": "Determina approvazione",
-          "width":200,
+          "width":250,
           "xpath": [
             "decsiraogc_zones_prqa_current:determina_regionale/text()"
           ],
           "suppressSorting": true,
           "type": 2
+        },
+		{
+          "headerName": "Inizio validità",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_start_date/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2,
+		  "hide":true
+        },
+        {
+          "headerName": "Fine validita",
+          "width":100,
+          "xpath": [
+            "decsiraogc_zones_prqa_current:zone_end_date/text()"
+          ],
+		  "dateFormat": "DD/MM/YYYY",
+          "suppressSorting": true,
+          "type": 2,
+		  "hide":true
         }
       ]
     }
@@ -203,8 +196,8 @@
 			   "sortBy": "order+A"
 			 }
 		   },
-		   "valueId":"label_zone ",
-		   "valueLabel":"label_zone "
+		   "valueId":"label_zone",
+		   "valueLabel":"label_zone"
       },
 	  {
         "index": 3,
@@ -244,12 +237,12 @@
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_zoneqaria_vigente_poll_targ",
-            "propertyName": "poll_targ,ordinamento",
+            "propertyName": "poll_targ_string,ordinamento",
             "sortBy": "ordinamento+A"
           }
         },
-        "valueId": "poll_targ",
-        "valueLabel": "poll_targ"
+        "valueId": "poll_targ_string",
+        "valueLabel": "poll_targ_string"
       }
     ]
   }
