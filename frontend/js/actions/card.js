@@ -162,6 +162,8 @@ function findProp(object, property) {
 
 function loadAttachments(idIstanza, columns) {
     return (dispatch) => {
+        //reset della lista degli allegati prima di caricare la lista per il nuovo idIstanza
+        dispatch(attachmentsLoaded([]));
         let secure = '';
         if (window.location.href.indexOf('auth') !== -1) {
             secure = '/secure';
@@ -171,79 +173,6 @@ function loadAttachments(idIstanza, columns) {
         return axios.get(url).then((resp) => {
             let data = resp.data;
             // console.log(data);
-
-            /* data.push({
-                "autore_allegato": "Mario Rossi",
-                "classe_allegato": {
-                    "cod_classe_allegato": "ELAB_PROGETTUALI",
-                    "des_classe_allegato": "Elaborati progettuali"
-                },
-                "cod_allegato": "VER-2022-0035",
-                "cod_allegato_padre": "VER-2022-0034",
-                "data_protocollo_allegato": "2022-08-15T14:23:49.000Z",
-                "data_pubblicazione": "2022-08-22T15:23:49.000Z",
-                "dimensione_upload": 1912,
-                "flg_cancellato": false,
-                "flg_da_pubblicare": true,
-                "flg_riservato": false,
-                "id_allegato_istanza": 134,
-                "id_allegato_padre": 133,
-                "id_istanza": 46,
-                "ind_firma": 1,
-                "nome_allegato": "Nome documento",
-                "note": "Documento progetto",
-                "num_protocollo_allegato": "Prot772022",
-                "tipo_integra_allegato": {
-                    "cod_tipo_integra_allegato": "P",
-                    "des_tipo_integra_allegato": "Integrazione di perfezionamento"
-                },
-                "tipologia_allegato": {
-                    "categoria_allegato": {
-                        "cod_categoria_allegato": "ALTRA-DOC",
-                        "des_categoria_allegato": "Ulteriore documentazione"
-                    },
-                    "cod_tipologia_allegato": "ATTO_FIN",
-                    "des_tipologia_allegato": "Atto finale"
-                },
-                "titolo_allegato": "Titolo",
-                "url_documento": "https://www.liberliber.eu/mediateca/libri/d/de_amicis/cuore/pdf/de_amicis_cuore.pdf"
-            });
-            data.push({
-                "autore_allegato": "Mario Rossi",
-                "classe_allegato": {
-                    "cod_classe_allegato": "ELAB_PROGETTUALI",
-                    "des_classe_allegato": "Elaborati progettuali"
-                },
-                "cod_allegato": "VER-2022-0035-bis",
-                "cod_allegato_padre": "VER-2022-0034",
-                "data_protocollo_allegato": "2022-08-15T14:23:49.000Z",
-                "data_pubblicazione": "2022-08-22T15:23:49.000Z",
-                "dimensione_upload": 1912,
-                "flg_cancellato": false,
-                "flg_da_pubblicare": false,
-                "flg_riservato": false,
-                "id_allegato_istanza": 134,
-                "id_allegato_padre": 133,
-                "id_istanza": 46,
-                "ind_firma": 1,
-                "nome_allegato": "Nome documento 2",
-                "note": "Documento progetto",
-                "num_protocollo_allegato": "Prot772022",
-                "tipo_integra_allegato": {
-                    "cod_tipo_integra_allegato": "P",
-                    "des_tipo_integra_allegato": "Integrazione di perfezionamento"
-                },
-                "tipologia_allegato": {
-                    "categoria_allegato": {
-                        "cod_categoria_allegato": "ALTRA-DOC",
-                        "des_categoria_allegato": "Ulteriore documentazione"
-                    },
-                    "cod_tipologia_allegato": "ATTO_FIN",
-                    "des_tipologia_allegato": "Atto finale"
-                },
-                "titolo_allegato": "Titolo 2",
-                "url_documento": "https://www.liberliber.eu/mediateca/libri/d/de_amicis/cuore/pdf/de_amicis_cuore.pdf"
-            }); */
 
             let rows = data.map((el) => {
                 let f = {};
