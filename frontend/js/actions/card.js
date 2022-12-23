@@ -162,7 +162,7 @@ function findProp(object, property) {
 
 function loadAttachments(idIstanza, columns) {
     return (dispatch) => {
-        //reset della lista degli allegati prima di caricare la lista per il nuovo idIstanza
+        // reset della lista degli allegati prima di caricare la lista per il nuovo idIstanza
         dispatch(attachmentsLoaded([]));
         let secure = '';
         if (window.location.href.indexOf('auth') !== -1) {
