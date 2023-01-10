@@ -123,7 +123,7 @@ class DefaultNode extends React.Component {
     };
 
     configureIndicaLayer = (node) => {
-        this.props.configureIndicaLayer(node.featureType, node.id);
+        this.props.configureIndicaLayer(node.featureType, node.id, null);
         this.goMap();
     };
 
