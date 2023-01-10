@@ -166,7 +166,7 @@ class DefaultLayer extends React.Component {
     };
 
     configuraIndicatore = () => {
-        this.props.configureIndicaLayer(this.props.node.id, this.props.node.params.siraId);
+        this.props.configureIndicaLayer(this.props.node.params.featureType, this.props.node.id, this.props.node.params.siraId);
     }
 }
 

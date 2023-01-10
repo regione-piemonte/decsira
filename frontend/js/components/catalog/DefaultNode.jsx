@@ -50,7 +50,7 @@ class DefaultNode extends React.Component {
         if (indicaFunction.length > 0) {
             tools.push((
                 <OverlayTrigger key={"indicatori"} rootClose placement="left" overlay={tooltipIndica}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id)}>
+                    <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id, null)}>
                         <Glyphicon
                             key="toggle-indicatori"
                             glyph="signal"/>

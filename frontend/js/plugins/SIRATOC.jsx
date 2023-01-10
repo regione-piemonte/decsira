@@ -130,7 +130,7 @@ class LayerTree extends React.Component {
             updateSettings={this.props.updateSettings}
             updateNode={this.props.updateNode}
             removeNode={this.props.removeNode}
-            configureIndicaLayer={this.props.configureIndicaLayer}
+            configureIndicaLayer={this.openIndicaPanel}
             visibilityCheckType={this.props.visibilityCheckType}
             activateLegendTool={this.props.activateLegendTool}
             activateSettingsTool={this.props.activateSettingsTool}
@@ -151,6 +151,16 @@ class LayerTree extends React.Component {
             </div>
         );
     }
+
+    openIndicaPanel = (featureType, nodeId, siraId) => {
+        if (!this.props.configOggetti[featureType]) {
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
+        } else if (this.props.activeFeatureType !== featureType) {
+            this.props.setActiveFeatureType(featureType);
+            this.props.queryFormPreloaded(false);
+        }
+        this.props.configureIndicaLayer(nodeId, siraId);
+    };
 
     openFilterPanel = (status, featureType, nodeId) => {
         if (!this.props.configOggetti[featureType]) {
