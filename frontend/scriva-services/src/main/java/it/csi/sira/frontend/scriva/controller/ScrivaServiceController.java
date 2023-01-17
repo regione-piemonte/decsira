@@ -21,6 +21,7 @@ package it.csi.sira.frontend.scriva.controller;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.geoserver.security.iride.entity.IrideIdentity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.csi.sira.frontend.scriva.business.ScrivaServiceHelper;
+import it.csi.sira.frontend.scriva.business.dao.ConfigurazioneDAO;
 import it.csi.sira.frontend.scriva.business.dto.AllegatoIstanzaDTO;
 import it.csi.sira.frontend.scriva.utils.LogFormatter;
 
@@ -51,7 +54,12 @@ public final class ScrivaServiceController {
 	/**
 	 * <code>Properties</code> url of scriva service.
 	 */
-	private Properties scrivaProperties = null;
+	private Properties scrivaProperties;
+
+	@Autowired
+	private ConfigurazioneDAO configurazioneDAO;
+
+	private Map<String, String> configurazione;
 
 	public Properties getScrivaProperties() {
 		return scrivaProperties;
@@ -68,7 +76,7 @@ public final class ScrivaServiceController {
 	 */
 	@PostConstruct
 	public void init() throws IOException {
-		Logger.getLogger(ScrivaServiceConstants.LOGGER).info("************** ScrivaServiceController **************");
+		this.configurazione = configurazioneDAO.loadConfigByKeyList(ScrivaServiceConstants.CONF_KEYS_RISCA_SCRIVA);
 	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -78,7 +86,6 @@ public final class ScrivaServiceController {
 
 		Logger.getLogger(ScrivaServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "BEGIN"));
 		Logger.getLogger(ScrivaServiceConstants.LOGGER).info(LogFormatter.format(className, methodName, "END"));
-
 		return "OK";
 	}
 
@@ -120,12 +127,11 @@ public final class ScrivaServiceController {
 		Logger.getLogger(ScrivaServiceConstants.LOGGER).info("*******************************************");
 
 		try {
-			// TODO file di properties
-			String endPoint = "http://tst-api-piemonte.ecosis.csi.it";
-			String serviceUrl = "/ambiente/scriva-scrivaapisrv-rp-01/v1";
+			String endPoint = scrivaProperties.getProperty("scrivaEndPoint");
+			String serviceUrl = scrivaProperties.getProperty("scrivaServiceUrl");
 			String idIstanza = request.getParameter("id_istanza");
 			Logger.getLogger(ScrivaServiceConstants.LOGGER).info("instantiating helper class");
-			ScrivaServiceHelper helper = new ScrivaServiceHelper(endPoint, serviceUrl);
+			ScrivaServiceHelper helper = new ScrivaServiceHelper(endPoint, serviceUrl, configurazione);
 			Logger.getLogger(ScrivaServiceConstants.LOGGER).info("calling getAllegatiIstanza");
 			List<AllegatoIstanzaDTO> result = helper.getAllegatiIstanza(idIstanza, irideIdentity);
 
@@ -169,12 +175,14 @@ public final class ScrivaServiceController {
 		Logger.getLogger(ScrivaServiceConstants.LOGGER).info("*******************************************");
 
 		try {
-			// TODO file di properties
-			String endPoint = "http://tst-api-piemonte.ecosis.csi.it";
-			String serviceUrl = "/ambiente/scriva-scrivaapisrv-rp-01/v1";
+			Logger.getLogger(ScrivaServiceConstants.LOGGER).info("scrivaEndPoint: " + scrivaProperties.getProperty("scrivaEndPoint"));
+			Logger.getLogger(ScrivaServiceConstants.LOGGER).info("scrivaServiceUrl: " + scrivaProperties.getProperty("scrivaServiceUrl"));
+			
+			String endPoint = scrivaProperties.getProperty("scrivaEndPoint");
+			String serviceUrl = scrivaProperties.getProperty("scrivaServiceUrl");
 			String idIstanza = request.getParameter("id_istanza");
 			Logger.getLogger(ScrivaServiceConstants.LOGGER).info("instantiating helper class");
-			ScrivaServiceHelper helper = new ScrivaServiceHelper(endPoint, serviceUrl);
+			ScrivaServiceHelper helper = new ScrivaServiceHelper(endPoint, serviceUrl, configurazione);
 			Logger.getLogger(ScrivaServiceConstants.LOGGER).info("calling getAllegatiIstanza");
 			List<AllegatoIstanzaDTO> result = helper.getAllegatiIstanza(idIstanza, null);
 

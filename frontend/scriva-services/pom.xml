@@ -89,8 +89,9 @@
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
 
         <!-- default scriva url -->
-        <scriva.service.base.url>http://tst-api-piemonte.ecosis.csi.it/ambiente/scriva-scrivaapisrv-rp-01/v1</scriva.service.base.url>
-
+        <scriva.service.base.endPoint>http://tst-api-piemonte.ecosis.csi.it</scriva.service.base.endPoint>
+        <scriva.service.base.serviceUrl>/ambiente/scriva-scrivaapisrv-rp-01/v1</scriva.service.base.serviceUrl>
+                
     </properties>
 
     <repositories>
@@ -403,13 +404,15 @@
         <profile>
             <id>demo</id>
             <properties>
-                <scriva.service.base.url>http://tst-api-piemonte.ecosis.csi.it/ambiente/scriva-scrivaapisrv-rp-01/v1</scriva.service.base.url>
+                <scriva.service.base.endPoint>http://tst-api-piemonte.ecosis.csi.it</scriva.service.base.endPoint>
+                <scriva.service.base.serviceUrl>/ambiente/scriva-scrivaapisrv-rp-01/v1</scriva.service.base.serviceUrl>
             </properties>
         </profile>
         <profile>
             <id>produzione</id>
             <properties>
-                <scriva.service.base.url>http://tst-api-piemonte.ecosis.csi.it/ambiente/scriva-scrivaapisrv-rp-01/v1</scriva.service.base.url>
+                <scriva.service.base.endPoint>http://tst-api-piemonte.ecosis.csi.it</scriva.service.base.endPoint>
+                <scriva.service.base.serviceUrl>/ambiente/scriva-scrivaapisrv-rp-01/v1</scriva.service.base.serviceUrl>
             </properties>
         </profile>
     </profiles>
