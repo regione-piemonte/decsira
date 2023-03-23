@@ -41,8 +41,9 @@ function getWMSURLs( urls ) {
 function postTileLoadFunction(queryParameters, imageTile, src) {
     const parsedUrl = urllib.parse(src, true);
     const urlQuery = parsedUrl.query;
+    
     const newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
-        return (param !== "SLD_BODY") ? `${url}${idx ? '&' : '?'}${param}=${urlQuery[param]}` : url;
+        return (param !== "SLD_BODY" && param !== "SLD") ? `${url}${idx ? '&' : '?'}${param}=${urlQuery[param]}` : url;
     }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`);
     const srs = queryParameters.SRS.split(":")[1];
     const BBOX = urlQuery.BBOX.split(',');
@@ -117,11 +118,11 @@ Layers.registerType('wmspost', {
             source: new TileWMS({
                 urls: urls,
                 params: queryParameters,
-                // tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)
+                tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)
                 // tileLoadFunction: getTileLoadFunction.bind(null, queryParameters)
-                tileLoadFunction: queryParameters.viewparams ?
-                    getTileLoadFunction.bind(null, queryParameters) :
-                    postTileLoadFunction.bind(null, queryParameters)
+                //tileLoadFunction: queryParameters.viewparams ?
+                //    getTileLoadFunction.bind(null, queryParameters) :
+                //    postTileLoadFunction.bind(null, queryParameters)
             })
         });
     },
