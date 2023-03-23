@@ -41,7 +41,6 @@ function getWMSURLs( urls ) {
 function postTileLoadFunction(queryParameters, imageTile, src) {
     const parsedUrl = urllib.parse(src, true);
     const urlQuery = parsedUrl.query;
-    
     const newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
         return (param !== "SLD_BODY" && param !== "SLD") ? `${url}${idx ? '&' : '?'}${param}=${urlQuery[param]}` : url;
     }, `${parsedUrl.protocol}//${parsedUrl.host}${parsedUrl.pathname}`);
@@ -77,7 +76,7 @@ function postTileLoadFunction(queryParameters, imageTile, src) {
     });
 }
 
-function getTileLoadFunction(queryParameters, imageTile, src) {
+/* function getTileLoadFunction(queryParameters, imageTile, src) {
     const parsedUrl = urllib.parse(src, true);
     const urlQuery = parsedUrl.query;
     let newSrc = Object.keys(urlQuery).reduce((url, param, idx) => {
@@ -94,7 +93,8 @@ function getTileLoadFunction(queryParameters, imageTile, src) {
         };
         image.src = window.URL.createObjectURL(response.data);
     });
-}
+} */
+
 Layers.registerType('wmspost', {
     create: (options) => {
         const urls = getWMSURLs(isArray(options.url) ? options.url : [options.url]);
@@ -120,7 +120,7 @@ Layers.registerType('wmspost', {
                 params: queryParameters,
                 tileLoadFunction: postTileLoadFunction.bind(null, queryParameters)
                 // tileLoadFunction: getTileLoadFunction.bind(null, queryParameters)
-                //tileLoadFunction: queryParameters.viewparams ?
+                // tileLoadFunction: queryParameters.viewparams ?
                 //    getTileLoadFunction.bind(null, queryParameters) :
                 //    postTileLoadFunction.bind(null, queryParameters)
             })
