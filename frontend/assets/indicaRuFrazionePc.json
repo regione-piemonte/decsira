@@ -1,0 +1,204 @@
+{
+   "featureTypeName":"decsiraogc_indicatori_ru:IndicaRuFrazionePc",
+   "featureTypeNameLabel":"RIFIUTI URBANI RACCOLTA PER FRAZIONE PRO CAPITE - INDICATORE",
+   "nameSpaces": {
+     "decsiraogc_indicatori_ru": "http://www.regione.piemonte.it/ambiente/indicatori_ru/1.0"
+   },
+   "tematizzatore": {
+	  "description": "Rifiuti Urbani Raccolta per Frazione Pro Capite",
+	  "attribute": "valore_rappresentato",
+	  "defaultMethod": "jenks",
+	  "defaultIntervals": 5,
+	  "defaultRamp": "dark2",
+	  "viewParams": "ris_spaziale:%RIS_SPAZIALE%;dimensione:%DIMENSIONE%;ambito_temporale:%AMBITO_TEMPORALE%",
+	  "filters": [
+			{
+				"index": 1,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_ris_spaziale",
+				"label":"Risoluzione Spaziale",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_spaziale",
+				  "propertyName": "fk_ris_spaziale,des_ris_spaziale,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:8069a444-63f6-4834-b0a8-369aabfa1790'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ris_spaziale",
+				"valueLabel":"des_ris_spaziale"
+			},
+			{
+				"index": 2,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_dimensione",
+				"label":"Dimensione indicatore",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_dimensioni",
+				  "propertyName": "fk_dimensione,fk_ris_spaziale,des_dimensione,des_unita_misura,des_ramp,method,intervals,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:8069a444-63f6-4834-b0a8-369aabfa1790'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_dimensione",
+				"valueLabel":"des_dimensione"
+			},
+			{
+				"index": 3,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_ambito_temporale",
+				"label":"Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ris_temporale",
+				  "propertyName": "fk_ris_temporale,des_ris_temporale,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:8069a444-63f6-4834-b0a8-369aabfa1790'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ris_temporale",
+				"valueLabel":"des_ris_temporale"
+			},
+			{
+				"index": 4,
+				"filterType": "tematizzatore",
+				"attribute": "decsiraogc_indicatori_ru:fk_ambito_temporale",
+				"label":"Dettaglio Periodicità",
+				"type":"list",
+				"valueService": {
+				"urlParams": {
+				  "typeName": "decsiraogc_decodif:decsira_d_indica_app_ambiti_temporali",
+				  "propertyName": "fk_ris_temporale,fk_ambito_temporale,valore,anno,ordinamento",
+				  "cql_filter": "dc_identifier='r_piemon:8069a444-63f6-4834-b0a8-369aabfa1790'",
+				  "sortBy": "ordinamento+A"
+				}
+				},
+				"valueId":"fk_ambito_temporale",
+				"valueLabel":"fk_ambito_temporale"
+			}
+	  ]
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Rifiuti Urbani Raccolta per Frazione Pro Capite",
+        "name": "decsiraogc_indicatori_ru:IndicaRuFrazionePc",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "indicaRuFrazionePc",
+		"params": {
+			"featureType": "indicaRuFrazionePc"
+		},
+        "group": "Rifiuti Urbani Raccolta per Frazione Pro Capite - Indicatore",
+        "format": "image/png"
+    },
+    "geometryName": "geometria",
+    "geometryType": "MultiPolygon",
+	"featureinfo":{
+     "templateURL": "assets/infoTemplateRuFrazionePc.jsxt"
+	},
+	"featuregrid": {
+     "grid": {
+		"root": "/wfs:FeatureCollection/wfs:member/decsiraogc_indicatori_ru:IndicaRuFrazionePc",
+		"columns": [
+		  {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+          },
+		  {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "geometry",
+          "xpath" : [ "decsiraogc_indicatori_ru:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "type" : 6
+         },
+		 {
+           "headerName": "Dimensione Indicatore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_dimensione/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Periodicita",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_ris_temporale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Dettaglio Periodicita",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:anno_ambito_temporale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Risoluzione Spaziale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_ris_spaziale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+		 {
+           "headerName": "Localizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_entita_spaziale/text()"],
+           "type": 2,
+          "width" : 150
+         },
+		 {
+           "headerName": "Abitanti",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:abitanti/text()"],
+           "type": 1,
+          "width" : 150
+         },
+		 {
+           "headerName": "Quantità Pro Capite",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:valore_rappresentato/text()"],
+           "type": 1,
+          "width" : 150
+         },
+         {
+           "headerName": "Unità di misura",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_indicatori_ru:des_unita_misura/text()"],
+           "type": 2,
+          "width" : 150
+         }
+		]
+		}
+	},
+	"query": {
+		"service": {
+		   "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+		   "urlParams": {
+			 "version": "1.1.0",
+			 "outputFormat": "application/json"
+		   }
+		 },
+		 "fields":[
+			{
+				"index": 1,
+				"attribute": "abitanti",
+				"label":"Abitanti",
+				"type":"number"
+			},
+			{
+				"index": 2,
+				"attribute": "valore_rappresentato",
+				"label":"Quantità Pro Capite",
+				"type":"number"
+			}
+		 ]
+	}
+}
