@@ -18,7 +18,7 @@
 	  <td>${feature.nome.value}</td>
 	  <td>${feature.desProvincia.value}</td>
 	  <td>${feature.nomeComune.value}</td>
-	  <td>${feature.nome.codiceSira}</td>
+	  <td>${feature.codiceSira.value}</td>
 	  <td>${feature.ragioneSocialeAzienda.value}</td>
 	  <td>${feature.classificazionePubblicaFognatura.value}</td>
 	  <td>${feature.desTipologiaTrattamento.value}</td>
