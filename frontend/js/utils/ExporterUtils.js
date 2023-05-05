@@ -84,7 +84,7 @@ const ExporterUtils = {
         }
         let ret;
         if (typeof value === 'number') {
-            ret = new Intl.NumberFormat(LocaleUtils.getSupportedLocales().it).format(value);
+            ret = new Intl.NumberFormat(LocaleUtils.getSupportedLocales().it, {maximumFractionDigits: 20}).format(value);
         } else {
             ret = value;
         }
