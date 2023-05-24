@@ -1,0 +1,54 @@
+<featureType>
+  <id>FeatureTypeInfoImpl-319448fd:18709af8434:-7ffb</id>
+  <name>decsira_geo_zoniz_prqa_vigente</name>
+  <nativeName>decsira_geo_zoniz_prqa_vigente</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl--20fbe88c:15aa342d254:-7ffd</id>
+  </namespace>
+  <title>decsira_geo_zoniz_prqa_vigente</title>
+  <keywords>
+    <string>features</string>
+    <string>decsira_geo_zoniz_prqa_vigente</string>
+  </keywords>
+  <srs>EPSG:404000</srs>
+  <nativeBoundingBox>
+    <minx>-1.0</minx>
+    <maxx>0.0</maxx>
+    <miny>-1.0</miny>
+    <maxy>0.0</maxy>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>-1.0</minx>
+    <maxx>0.0</maxx>
+    <miny>-1.0</miny>
+    <maxy>0.0</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="JDBC_VIRTUAL_TABLE">
+      <virtualTable>
+        <name>decsira_geo_zoniz_prqa_vigente</name>
+        <sql>SELECT id_geo_zoniz_prqa_storica, zone_code, zone_name, label_zone, zone_start_date, zone_end_date, zone_population, zone_population_year, zone_area_km2, zone_density, zone_type, zone_type_label, region_label, poll_targ, determina_regionale&#xd;
+FROM decsira_geo_zoniz_prqa_storica&#xd;
+where zone_end_date is NULL&#xd;
+order by zone_code
+</sql>
+        <escapeSql>false</escapeSql>
+      </virtualTable>
+    </entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl--20fbe88c:15aa342d254:-7ffc</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <simpleConversionEnabled>false</simpleConversionEnabled>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>
