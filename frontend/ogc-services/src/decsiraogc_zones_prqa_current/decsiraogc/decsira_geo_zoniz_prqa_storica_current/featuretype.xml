@@ -1,0 +1,81 @@
+<featureType>
+  <id>FeatureTypeInfoImpl--4a3fb180:185341085f0:-7fe1</id>
+  <name>decsira_geo_zoniz_prqa_storica_current</name>
+  <nativeName>decsira_geo_zoniz_prqa_storica_current</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl--4a3fb180:185341085f0:-7ff4</id>
+  </namespace>
+  <title>Zone qualita&apos; dell&apos;aria - Vigente</title>
+  <keywords>
+    <string>features</string>
+    <string>decsira_geo_zoniz_prqa_storica_current</string>
+  </keywords>
+  <nativeCRS class="projected">PROJCS[&quot;WGS 84 / UTM zone 32N&quot;, 
+  GEOGCS[&quot;WGS 84&quot;, 
+    DATUM[&quot;World Geodetic System 1984&quot;, 
+      SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], 
+      AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], 
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], 
+    UNIT[&quot;degree&quot;, 0.017453292519943295], 
+    AXIS[&quot;Geodetic longitude&quot;, EAST], 
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], 
+    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]], 
+  PROJECTION[&quot;Transverse_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9807&quot;]], 
+  PARAMETER[&quot;central_meridian&quot;, 9.0], 
+  PARAMETER[&quot;latitude_of_origin&quot;, 0.0], 
+  PARAMETER[&quot;scale_factor&quot;, 0.9996], 
+  PARAMETER[&quot;false_easting&quot;, 500000.0], 
+  PARAMETER[&quot;false_northing&quot;, 0.0], 
+  UNIT[&quot;m&quot;, 1.0], 
+  AXIS[&quot;Easting&quot;, EAST], 
+  AXIS[&quot;Northing&quot;, NORTH], 
+  AUTHORITY[&quot;EPSG&quot;,&quot;32632&quot;]]</nativeCRS>
+  <srs>EPSG:32632</srs>
+  <nativeBoundingBox>
+    <minx>313294.418686353</minx>
+    <maxx>516961.503953319</maxx>
+    <miny>4879334.85480411</miny>
+    <maxy>5145789.13056908</maxy>
+    <crs class="projected">EPSG:32632</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>6.569423477491917</minx>
+    <maxx>9.220909139368585</maxx>
+    <miny>44.043411005310666</miny>
+    <maxy>46.465460182649124</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <metadata>
+    <entry key="JDBC_VIRTUAL_TABLE">
+      <virtualTable>
+        <name>decsira_geo_zoniz_prqa_storica_current</name>
+        <sql>SELECT id_geo_zoniz_prqa_storica, zone_code, zone_name, label_zone, zone_start_date, zone_end_date, zone_population, zone_population_year, zone_area_km2, zone_density, zone_type, zone_type_label, region_label, poll_targ, determina_regionale, geometria&#xd;
+FROM decsira_geo_zoniz_prqa_storica&#xd;
+WHERE zone_end_date is null
+</sql>
+        <escapeSql>false</escapeSql>
+        <keyColumn>id_geo_zoniz_prqa_storica</keyColumn>
+        <geometry>
+          <name>geometria</name>
+          <type>MultiPolygon</type>
+          <srid>32632</srid>
+        </geometry>
+      </virtualTable>
+    </entry>
+    <entry key="cachingEnabled">false</entry>
+  </metadata>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl--4a3fb180:185341085f0:-7fe3</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <simpleConversionEnabled>false</simpleConversionEnabled>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>
