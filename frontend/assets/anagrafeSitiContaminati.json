@@ -1,6 +1,7 @@
 {
    "featureTypeName":"decsiraogc_siticontaminati:AnagrafeSitiContaminati",
    "featureTypeNameLabel":"ANAGRAFE SITI CONTAMINATI",
+   "profiles": ["PA_GEN_DECSIRA@REG_PMN"],
    "nameSpaces": {
      "decsiraogc_siticontaminati": "http://www.regione.piemonte.it/ambiente/decsiraogc_siticontaminati/1.0"
    },
@@ -411,7 +412,8 @@
           "valueService": {
             "urlParams": {
               "typeName": "decsiraogc_decodif:sipra_t_province",
-               "sortBy": "toponimo+A"
+              "propertyName": "id_provincia,sigla,toponimo",
+              "sortBy": "toponimo+A"
             }
           },
           "valueId":"toponimo",
@@ -433,7 +435,7 @@
           "valueId":"istat",
           "valueLabel":"toponimo",
           "dependson":{
-             "field": "decsiraogc_decodif:desProvincia",
+             "field": "decsiraogc_siticontaminati:provincia",
              "from": "sigla",
              "to": "sigla_provincia"
           }
