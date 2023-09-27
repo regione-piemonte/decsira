@@ -500,15 +500,6 @@
 	</Rule>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<!-- da 300 a 599 ruolo, workspace, tutti i layers -->
 	 <!--Rule>
             <priority>300</priority>
@@ -712,8 +703,6 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
-	
-	
 	
 	
 	
@@ -949,6 +938,8 @@
 		<workspace>decsiraogc_siticontaminati</workspace>
 		<layer>AnagrafeSitiContaminati</layer>
 		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
+		<!-- L'uso del filter e degli hidden attributes per il cittadino e' stato sostituito dalla creazione del layer decsiraogc_geo_siticontaminati:AnagrafeSitiContaminati
 		<filter>"decsiraogc_siticontaminati:pubb" = '1'</filter>
 		<hiddenAttributes>
 			  <attribute>decsiraogc_siticontaminati:idSito</attribute>
@@ -1188,6 +1179,7 @@
 			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:dataScadPolizza</attribute>
 			<attribute>decsiraogc_siticontaminati:garanzieFinanziarie/decsiraogc_siticontaminati:GaranzieFinanziarie/decsiraogc_siticontaminati:note</attribute>
 		</hiddenAttributes>	
+		-->
     </Rule>
 	<Rule>
 		<priority>608</priority>
@@ -2325,6 +2317,34 @@
 		<accessMode>READ</accessMode>
 		<filter>"decsiraogc_biodiversita_bdn_osservazioni_flora:bdnFloraProfili/decsiraogc_biodiversita_bdn_osservazioni_flora:BdnFloraProfili/decsiraogc_biodiversita_bdn_osservazioni_flora:codiceEnteGestore" = '334'</filter>
 	</Rule>
+	
+	<Rule>
+		<priority>681</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_decodif</workspace>
+		<layer>decsira_d_indica_app_ambiti_temporali</layer>
+		<accessMode>READ</accessMode>
+		<filter>"fk_ambito_temporale" IN (30) OR "dc_identifier" IN ('r_piemon:9aca4829-909d-402d-9f67-7a17d266caa5','r_piemon:8069a444-63f6-4834-b0a8-369aabfa1790','r_piemon:21b1155a-b294-47a9-9445-fef46e3fd0fd')
+		</filter>
+	</Rule>
+	
+	
+	<Rule>
+		<priority>682</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_irea</workspace>
+		<layer>EmissioniPuntualiIREA2010</layer>
+		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
+    </Rule>
+	<Rule>
+		<priority>683</priority>
+		<roles>ROLE_ANONYMOUS</roles>
+		<workspace>decsiraogc_irea</workspace>
+		<layer>EmissioniPuntualiIREA2015</layer>
+		<accessMode>READ</accessMode>
+		<filter>EXCLUDE</filter>
+    </Rule>
 
     </rules>
 

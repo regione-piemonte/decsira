@@ -69,7 +69,7 @@
            "suppressSorting": true,
            "xpath": ["decsiraogc_geo_siticontaminati:legenda/text()"],
            "type": 2,
-            "width" : 250
+            "width" : 500
          },
 		 {
            "hide": true,
@@ -94,7 +94,7 @@
      "fields":[
        {
           "index": 1,
-          "attribute": "decsiraogc_geo_siticontaminati:provincia",
+          "attribute": "provincia",
           "label":"Provincia",
           "type":"list",
           "valueService": {
@@ -109,7 +109,7 @@
        },
 	   {
           "index": 2,
-          "attribute": "decsiraogc_geo_siticontaminati:istat",
+          "attribute": "istat",
           "label":"Comune",
           "type":"list",
           "valueService": {
@@ -123,14 +123,14 @@
           "valueId":"istat",
           "valueLabel":"toponimo",
           "dependson":{
-             "field": "decsiraogc_geo_siticontaminati:provincia",
+             "field": "provincia",
              "from": "sigla",
              "to": "sigla_provincia"
           }
        },
        {
           "index": 4,
-          "attribute": "decsiraogc_geo_siticontaminati:codice",
+          "attribute": "codice",
           "label":"Codice regionale sito",
           "type":"string"
        }
