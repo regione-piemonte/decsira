@@ -58,7 +58,18 @@
     <entry key="JDBC_VIRTUAL_TABLE">
       <virtualTable>
         <name>asco_geo_anagrafica_tot_pub</name>
-        <sql>select id_sito, codice, provincia, comune, interventi, legenda, geometria &#xd;
+        <sql>select id_sito, codice, provincia, comune, istat, interventi, legenda, geometria,&#xd;
+CASE &#xd;
+      WHEN provincia = &apos;TORINO&apos;  THEN &apos;TO&apos;&#xd;
+      WHEN provincia = &apos;BIELLA&apos;  THEN &apos;BI&apos;&#xd;
+      WHEN provincia = &apos;ASTI&apos;  THEN &apos;AT&apos;&#xd;
+      WHEN provincia = &apos;CUNEO&apos;  THEN &apos;CN&apos;&#xd;
+      WHEN provincia = &apos;ALESSANDRIA&apos;  THEN &apos;AL&apos;&#xd;
+      WHEN provincia = &apos;NOVARA&apos;  THEN &apos;NO&apos;&#xd;
+      WHEN provincia = &apos;VERCELLI&apos;  THEN &apos;VC&apos;&#xd;
+      WHEN provincia = &apos;VERBANO-CUSIO-OSSOLA&apos;  THEN &apos;VB&apos;&#xd;
+      ELSE null&#xd;
+end as sigla_provincia&#xd;
 from asco_geo_anagrafica_tot&#xd;
 where pubb =&apos;1&apos;
 </sql>
@@ -66,7 +77,7 @@ where pubb =&apos;1&apos;
         <keyColumn>id_sito</keyColumn>
         <geometry>
           <name>geometria</name>
-          <type>Geometry</type>
+          <type>Point</type>
           <srid>32632</srid>
         </geometry>
       </virtualTable>
