@@ -87,36 +87,115 @@ class Home extends React.Component {
                 <Header />
                 <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.homepage")}</h1>
                 <div id="main-content"></div>
-                <div className="container-fluid" role="search">
-                    {this.props.profile.error === 'empty_roles' && this.renderProfileAlert()}
-                    <div className="row-fluid sb-sx">
-                        <div className="container search-home">
+
+                <div className="hero-home">
+                        <div className="container">
                             <div className="row">
-                                <div className="col-md-7 col-xs-12 testo-home">
-                                    <div>
-                                        <span dangerouslySetInnerHTML={{ __html: description }} />
-                                    </div>
+                                <div className="col-md-12 col-xs-12">
+                                    <h1>I dati ambientali e territoriali del Piemonte.</h1>
+                                    <p>Una piattaforma di fruizione delle conscenze alfanumeriche e geografiche prodotte nel contesto del <acoronim title="Sistema Informativo Regionale Ambientale">SIRA</acoronim> Piemonte.</p>
+                                    <div><a href="#" className='btn btn-outline-primary btn-lg'>SCOPRI DI PIÙ</a></div>
                                 </div>
-                                <SiraSearchBar
-                                    containerClasses="col-md-5 col-xs-12 ricerca-home catalog-search-container sira-ms2"
-                                    searchClasses="home-search"
-                                    addCategoriesSelector={false}
-                                    onSearch={({text}) => {
-                                        this.props.selectCategory(this.props.allCategory, 'objects');
-                                        this.props.loadMetadata({params: {text}});
-                                        if (this.props?.match?.params?.profile) {
-                                            this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);
-                                        } else {
-                                            this.context.router.history.push('/dataset/');
-                                        }
-                                    }}
-                                />
                             </div>
                         </div>
                     </div>
+
+                <div className="container">
+                    <div className="row cont-la-mappa">
+                        <div className="col-md-6 col-xs-12">
+                            <h2>La mappa</h2>
+                            <p>Consulta la mappa incorporata all’interno della piattaforma per georeferenziare e analizzare i dati messi a disposizione.</p>
+                            <p>Potrai visualizzare i dati raggruppati per <strong>categorie</strong> o  <strong>viste tematiche</strong> che aggregano al loro interno dataset per una chiara consultazione e un pi&ugrave; facile confronto.</p>
+                            <div><a href="#" className='btn btn-primary btn-lg'>CONSULTA LA MAPPA</a></div>
+                        </div>
+                        <div className="col-md-6 col-xs-12 la-mappa"></div>
+                    </div>
                 </div>
-                <Mosaic useLink={false} tileClick={this.selectCategory} />
-                <PlatformNumbers />
+
+                <div className='catalogo-home'>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h2>Il catalogo</h2>
+                                <h3>Consulta per categoria</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <Mosaic useLink={false} tileClick={this.selectCategory} />
+
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h2>Consulta per vista tematica</h2>
+                                <ul className='tematica'>
+                                    <li><a href="#">Valutazione impatto ambientale</a></li>
+                                    <li><a href="#">Impianti gestione rifiuti</a></li>
+                                    <li><a href="#">Siti contaminati (ASCO - Anagrafe siti contaminati)</a></li>
+                                    <li><a href="#">Ciclo dell'acqua:scarichi e impianti di depurazione acque reflue urbane</a></li>
+                                    <li><a href="#">Derivazioni</a></li>
+                                    <li><a href="#">Stabilimenti soggetti ad autorizzazioni ambientali</a></li>
+                                    <li><a href="#">BDN - Vista su specie fiora</a></li>
+                                    <li><a href="#">BDN - Vista</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <PlatformNumbers />
+
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h2>Video guida a SCA</h2>
+                                <p>Guarda i nostri tip per scoprire come accedere a tutti i darti disponibili sul Sistema Conoscenze Ambientali</p>
+                            </div>
+                        </div>
+
+                        <div className="row video">
+                            <div className="col-sm-12 col-md-6 col-lg-6">
+                             <img alt="anteprima video" src="assets/application/conoscenze_ambientali/css/images/anteprima-video.jpg" />
+                            </div>
+                            <div className="col-sm-12 col-md-6 col-lg-6">
+                                <div className="row  mb-24">
+                                    <div className="col-sm-12 col-md-6 col-lg-6">
+                                        <img alt="anteprima video" src="assets/application/conoscenze_ambientali/css/images/anteprima-video.jpg" />
+                                    </div>
+                                    <div className="col-sm-12 col-md-6 col-lg-6">
+                                    descrizione
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-12 col-md-6 col-lg-6">
+                                        <img alt="anteprima video" src="assets/application/conoscenze_ambientali/css/images/anteprima-video.jpg" />
+                                    </div>
+                                    <div className="col-sm-12 col-md-6 col-lg-6">
+                                        descrizione
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                               <a href="#" className='btn btn-primary btn-lg'>VEDI TUTTI</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
                 <Footer />
             </div>);
     }

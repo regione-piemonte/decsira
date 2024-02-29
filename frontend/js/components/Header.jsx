@@ -176,31 +176,34 @@ class Header extends React.Component {
 
     render() {
         return (
+
             <div className="navbar-header">
-                <header className="navbar">
-                    <div className="row-fluid">
+            <header className="navbar">
+                <div className="row-fluid">
 
-                        <div className="col-lg-8 col-md-8 col-sm-8 col-xs-7 testalino-sx">
-                            <div className="navbar-header-title"><a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")}><span><I18N.Message msgId={"Header.appAcronym"}/></span> <I18N.Message msgId={"Header.appName"}/></a></div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-4 col-sm-4 col-xs-5 testalino-dx">
-                            <div className="pull-right">
-                                <DownloadResultsComponent />
-                                {this.renderCart()}
-                                <LoginNav />
-                                <LangBar />
-                            </div>
-                            <RightMenu />
-                        </div>
-
+                    <div className="col-lg-8 col-md-8 col-sm-8 col-xs-7 testalino-sx">
+                        <div className="navbar-header-title"><a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")}><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a></div>
                     </div>
-                </header>
-                <SistemaConoscenzeAmbientaliBox />
-                <Credits />
-                <CartPanel />
-                <LoginPanel />
-            </div>
+
+                    <div className="col-lg-4 col-md-4 col-sm-4 col-xs-5 testalino-dx">
+                   
+                        <div className="pull-right">
+                             <RightMenu />
+                             <DownloadResultsComponent />
+                            {this.renderCart()}
+                            <LangBar />
+                            <LoginNav /> 
+                         </div>
+                     
+                    </div>
+
+                </div>
+            </header>
+            <SistemaConoscenzeAmbientaliBox />
+            <Credits />
+            <CartPanel />
+            <LoginPanel />
+        </div>
         );
     }
 }
