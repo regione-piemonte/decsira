@@ -79,7 +79,7 @@ const LoginNav = connect((state) => ({
     user: state.userprofile.user,
     nav: false,
     renderButtonText: false,
-    renderButtonContent: () => { return <div><Glyphicon glyph="user" /><span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>; },
+    renderButtonContent: () => { return <div>ACCEDI <span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>; },
     bsStyle: "primary",
     showAccountInfo: false,
     showPasswordChange: false,
@@ -186,15 +186,18 @@ class Header extends React.Component {
                     </div>
 
                     <div className="col-lg-4 col-md-4 col-sm-4 col-xs-5 testalino-dx">
-                   
-                        <div className="pull-right">
-                             <RightMenu />
-                             <DownloadResultsComponent />
+            
+                    <ul className="nav navbar-nav navbar-right">
+                        <li tabIndex="0" data-menuanchor="home" onClick={this.props.clickOnSistemaCA} onKeyPress={this.props.clickOnSistemaCA}><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></li>
+                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.props.clickOnCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
+                        <li tabIndex="0" data-menuanchor="pagamenti" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp} className='help'><span className='sr-only'><I18N.Message msgId={"RightMenu.HelpTitle"}/></span></li>
+                    </ul>   
+
+                            <DownloadResultsComponent />
                             {this.renderCart()}
                             <LangBar />
                             <LoginNav /> 
-                         </div>
-                     
+                
                     </div>
 
                 </div>
