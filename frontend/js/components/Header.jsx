@@ -86,7 +86,7 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     renderUnsavedMapChangesDialog: false,
     onCloseUnsavedDialog: () => {},
-    className: cs("btn btn-default btn-login dropdown-toggle sira-login", {'login-success': !isEmpty(state.userprofile.user?.name)})
+    className: cs("btn btn-default btn-login dropdown-toggle sira-login pull-right", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), (dispatch) => {
     return {
         onLogout: () => {
@@ -177,36 +177,50 @@ class Header extends React.Component {
     render() {
         return (
 
-            <div className="navbar-header">
-            <header className="navbar">
-                <div className="row-fluid">
+        <header>
+            <nav className="navbar">
+                <div className="container-fluid">
+                    <div className='row'>
 
-                    <div className="col-lg-8 col-md-8 col-sm-8 col-xs-7 testalino-sx">
-                        <div className="navbar-header-title"><a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")}><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a></div>
-                    </div>
+                        <div className='col-md-3'>
+                            <div className="navbar-header">
+                                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span className="sr-only">Menu</span>
+                                    <span className="icon-bar"></span>
+                                    <span className="icon-bar"></span>
+                                    <span className="icon-bar"></span>
+                                </button>
+                                <a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")} className='navbar-brand'><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a>
+                            </div>
+                        </div>
+                        <div className='col-md-5'>
+                            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul className="nav navbar-nav">
+                                    <li><a href='#'><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></a></li>
+                                    <li><a href='#'><I18N.Message msgId={"RightMenu.CreditsTitle"}/></a></li>
+                                    <li><a href='#'>Catalogo</a></li>
+                                </ul>             
+                            </div>
+                        </div>
 
-                    <div className="col-lg-4 col-md-4 col-sm-4 col-xs-5 testalino-dx">
-            
-                    <ul className="nav navbar-nav navbar-right">
-                        <li tabIndex="0" data-menuanchor="home" onClick={this.props.clickOnSistemaCA} onKeyPress={this.props.clickOnSistemaCA}><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></li>
-                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.props.clickOnCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
-                        <li tabIndex="0" data-menuanchor="pagamenti" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp} className='help'><span className='sr-only'><I18N.Message msgId={"RightMenu.HelpTitle"}/></span></li>
-                    </ul>   
-
-                            <DownloadResultsComponent />
-                            {this.renderCart()}
+                        <div className='col-md-4 text-right'>         
+                            <a href='#'><span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span className='sr-only'><I18N.Message msgId={"RightMenu.HelpTitle"}/></span></a> 
                             <LangBar />
-                            <LoginNav /> 
-                
+                            <LoginNav /><LoginPanel />           
+                        </div>
+
                     </div>
 
                 </div>
-            </header>
+            </nav>
+                        
+            <DownloadResultsComponent />
+            {this.renderCart()}
             <SistemaConoscenzeAmbientaliBox />
             <Credits />
             <CartPanel />
-            <LoginPanel />
-        </div>
+
+        </header>
         );
     }
 }
