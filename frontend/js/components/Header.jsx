@@ -86,7 +86,7 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     renderUnsavedMapChangesDialog: false,
     onCloseUnsavedDialog: () => {},
-    className: cs("btn btn-default btn-login dropdown-toggle sira-login pull-right", {'login-success': !isEmpty(state.userprofile.user?.name)})
+    className: cs("btn dropdown-toggle sira-login pull-right btn-sm", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), (dispatch) => {
     return {
         onLogout: () => {
@@ -184,7 +184,9 @@ class Header extends React.Component {
 
                         <div className='col-md-3'>
                             <div className="navbar-header">
-                                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+
+
+                                <button type="button" className="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                     <span className="sr-only">Menu</span>
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
@@ -206,7 +208,8 @@ class Header extends React.Component {
                         <div className='col-md-4 text-right'>         
                             <a href='#'><span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span className='sr-only'><I18N.Message msgId={"RightMenu.HelpTitle"}/></span></a> 
                             <LangBar />
-                            <LoginNav /><LoginPanel />           
+                            <LoginNav /><LoginPanel />   
+                            <RightMenu />        
                         </div>
 
                     </div>

@@ -106,7 +106,7 @@ class Home extends React.Component {
                             <h2>La mappa</h2>
                             <p>Consulta la mappa incorporata all’interno della piattaforma per georeferenziare e analizzare i dati messi a disposizione.</p>
                             <p>Potrai visualizzare i dati raggruppati per <strong>categorie</strong> o  <strong>viste tematiche</strong> che aggregano al loro interno dataset per una chiara consultazione e un pi&ugrave; facile confronto.</p>
-                            <div><a href="#" className='btn btn-primary btn-lg'>CONSULTA LA MAPPA</a></div>
+                            <div><button className='btn btn-primary btn-lg'>CONSULTA LA MAPPA</button></div>
                         </div>
                         <div className="col-md-6 col-xs-12 la-mappa"></div>
                     </div>
@@ -135,7 +135,7 @@ class Home extends React.Component {
                                     <li><a href="#">Derivazioni</a></li>
                                     <li><a href="#">Stabilimenti soggetti ad autorizzazioni ambientali</a></li>
                                     <li><a href="#">BDN - Vista su specie fiora</a></li>
-                                    <li><a href="#">BDN - Vista</a></li>
+                                    <li><a href="#">BDN - Vista tematica</a></li>
                                 </ul>
                             </div>
                         </div>
