@@ -151,57 +151,6 @@ class Home extends React.Component {
 
                     <PlatformNumbers />
 
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 col-xs-12">
-                                <h2>Video guida a SCA</h2>
-                                <p>Guarda i nostri tip per scoprire come accedere a tutti i darti disponibili sul Sistema Conoscenze Ambientali</p>
-                            </div>
-                        </div>
-
-                        <div className="row video">
-                            <div className="col-sm-12 col-md-6 col-lg-6">
-                             <img alt="anteprima video" src="assets/application/conoscenze_ambientali/css/images/anteprima-video.jpg" />
-                            </div>
-                            <div className="col-sm-12 col-md-6 col-lg-6">
-                                <div className="row  mb-24">
-                                    <div className="col-sm-12 col-md-6 col-lg-6">
-                                        <img alt="anteprima video" src="assets/application/conoscenze_ambientali/css/images/anteprima-video.jpg" />
-                                    </div>
-                                    <div className="col-sm-12 col-md-6 col-lg-6">
-                                    descrizione
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-sm-12 col-md-6 col-lg-6">
-                                        <img alt="anteprima video" src="assets/application/conoscenze_ambientali/css/images/anteprima-video.jpg" />
-                                    </div>
-                                    <div className="col-sm-12 col-md-6 col-lg-6">
-                                        descrizione
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="row">
-                            <div className="col-md-12 col-xs-12">
-                               <a href="#" className='btn btn-primary btn-lg'>VEDI TUTTI</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
 
                 <Footer />
