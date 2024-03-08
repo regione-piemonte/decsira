@@ -77,6 +77,10 @@ class Home extends React.Component {
         </Modal>);
     };
 
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
     render() {
         let description = LocaleUtils.getMessageById(this.context.messages, "Homepage.appDescription");
         return (
@@ -106,7 +110,11 @@ class Home extends React.Component {
                             <h2>La mappa</h2>
                             <p>Consulta la mappa incorporata all’interno della piattaforma per georeferenziare e analizzare i dati messi a disposizione.</p>
                             <p>Potrai visualizzare i dati raggruppati per <strong>categorie</strong> o  <strong>viste tematiche</strong> che aggregano al loro interno dataset per una chiara consultazione e un pi&ugrave; facile confronto.</p>
-                            <div><button className='btn btn-primary btn-lg'>CONSULTA LA MAPPA</button></div>
+                            <div>
+                                <Button onClick={() => {this.goMap(); }} className='btn btn-primary btn-lg'>
+                                <I18N.Message msgId={"cartpanel.goToMap"}/>
+                                </Button>
+                            </div>
                         </div>
                         <div className="col-md-6 col-xs-12 la-mappa"></div>
                     </div>
