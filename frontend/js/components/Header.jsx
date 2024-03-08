@@ -86,7 +86,7 @@ const LoginNav = connect((state) => ({
     showLogout: true,
     renderUnsavedMapChangesDialog: false,
     onCloseUnsavedDialog: () => {},
-    className: cs("btn dropdown-toggle sira-login pull-right btn-sm", {'login-success': !isEmpty(state.userprofile.user?.name)})
+    className: cs("btn dropdown-toggle sira-login btn-sm", {'login-success': !isEmpty(state.userprofile.user?.name)})
 }), (dispatch) => {
     return {
         onLogout: () => {
@@ -182,7 +182,7 @@ class Header extends React.Component {
                 <div className="container-fluid">
                     <div className='row'>
 
-                        <div className='col-md-3'>
+                        <div className='col-md-4 col-lg-4'>
                             <div className="navbar-header">
 
 
@@ -195,8 +195,8 @@ class Header extends React.Component {
                                 <a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")} className='navbar-brand'><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a>
                             </div>
                         </div>
-                        <div className='col-md-5'>
-                            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div className='col-md-5 col-lg-5'>
+                            <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                                 <ul className="nav navbar-nav">
                                     <li><a href='#'><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></a></li>
                                     <li><a href='#'><I18N.Message msgId={"RightMenu.CreditsTitle"}/></a></li>
@@ -205,11 +205,11 @@ class Header extends React.Component {
                             </div>
                         </div>
 
-                        <div className='col-md-4 text-right'>         
-                            <a href='#'><span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span><span className='sr-only'><I18N.Message msgId={"RightMenu.HelpTitle"}/></span></a> 
+                        <div className='col-md-3 col-lg-3 text-right'>
+                            <RightMenu />          
                             <LangBar />
-                            <LoginNav /><LoginPanel />   
-                            <RightMenu />        
+                            <LoginNav />
+                            <LoginPanel />             
                         </div>
 
                     </div>

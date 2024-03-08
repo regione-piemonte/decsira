@@ -3,24 +3,73 @@ body.body_dataset #container, body.body_dataset .fill, body.body_dataset {
     position: relative!important;
 }
 
+body {font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;	}
 
-body {
-	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+div.interna {
+    background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -moz-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -ms-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -o-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -webkit-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
 	}
-	.btn-primary {
-		background-color: #1976D2;
-	
+
+/*header*/
+header{
+	background:#1976D2;
+	color: #fff;
+}
+header .navbar-brand{ text-transform: uppercase; font-weight: 600 !important;}
+
+header a, header a:hover, header a:active, header a:visited,
+.navbar-nav>li>a, .navbar-nav>li>a:hover, .navbar-nav>li>a:active{
+		color: #fff !important;
+		background:#1976D2;
+}
+@media (max-width: 1100px){
+	.nav>li>a {
+		padding: 10px 8px;
 	}
-	.btn-default,
-	.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active{
-		background-color: #1976D2;
-		color: #ffffff;
-	}
-	
-	.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-		background-color: #1976D2;
-		color: #ffffff;
-	}
+}
+.navbar {margin-bottom: 0;}
+
+.navbar-toggle .icon-bar { background: #fff;}
+
+header .btn-link:focus, .btn-link:hover { color: #fff;}
+
+header .col-md-3.text-right .mapstore-langselector, header .col-md-3.text-right .btn-group,
+header .col-md-3.text-right .btn-group>.btn, header .col-md-3.text-right div {
+	display: inline;
+	float: none;
+	border: 0;
+}
+
+#mapstore-langselector button.btn.btn-default  {
+	background-color: transparent;
+    color: white;
+	border: none !important;
+}
+header .mapstore-langselector a, header .mapstore-langselector a:hover, header .mapstore-langselector a:active, header .mapstore-langselector a:visited{color: #000 !important;
+	background:#fff;}
+
+
+/*BUTTON LINK */
+
+.btn-primary {
+	background-color: #1976D2;
+
+}
+.btn-default,
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active{
+	background-color: #1976D2;
+	color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+	background-color: #1976D2;
+	color: #ffffff;
+}
+
 
 .btn-primary, .dropdown-toggle.btn-primary {
 	color: #fff;
@@ -38,37 +87,66 @@ body {
 .dropdown-toggle.btn-primary, .dropdown-toggle.btn-primary:hover, .dropdown-toggle.btn-primary:active, .dropdown-toggle.btn-primary:focus,
 .open .dropdown-toggle.btn-primary, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover{
 	background-color: #ffffff;
-	color: #1976D2;}
-
-
-div.interna {
-    background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -moz-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -ms-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -o-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-	}
-
-
- header{
-	background:#1976D2;
-	color: #fff;
-	}
-header a, header a:hover, header a:active,
-.navbar-nav>li>a, .navbar-nav>li>a:hover, .navbar-nav>li>a:active{
-		color: #fff;
-		background:#1976D2;
-		}
-
-.navbar {margin-bottom: 0;}
-
-.navbar-toggle .icon-bar {
-    background: #fff;
+	color: #1976D2;
 }
-header .btn-link:focus, .btn-link:hover {
+.btn-default[disabled]{
+	/* color: #007E4F;*/
+ }
+ header .glyphicon-question-sign{ font-size: 22px;}
+ .sira-login{padding:3px 8px 0 8px;}
+button#mapstore-langselector{
+	padding-left: 5px;
+    margin-right: 20px;
+}
+
+
+ /*DIALOG*/
+ .modal-dialog .btn-default {
+    background-color: #1976D2;
+    border: 0;
     color: #fff;
 }
+.modal-dialog .btn-default:hover {
+    background-color: #FFFFFF;
+    border: 0;
+    color: #1976D2;
+}
+
+.sira-ms2 .mapstore-langselector .dropdown .dropdown-toggle {
+    border: none !important;
+    padding: 0;
+    height: 35px;
+}
+
+.sira-ms2 .mapstore-langselector .dropdown .dropdown-toggle .btn {
+    height: 35px;
+}
+
+.sira-ms2 .mapstore-langselector .dropdown .dropdown-menu {
+	top: 35px;
+}
+
+.sira-ms2 .mapstore-langselector .dropdown .dropdown-menu > li > a {
+    padding: 4px !important;
+    color: white;
+}
+
+.sira-ms2 .mapstore-langselector {
+    height: 35px;
+    float: right;
+}
+
+
+.sira-ms2 .alert {
+    padding: 8px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    border-radius: 0;
+}
+
+
+
+
 /*
 div.interna
  .navbar-header h2 {
@@ -946,33 +1024,26 @@ div.interna
 		display:block;
 		position:absolute;
 		z-index:99;
-		width:400px;
-		right:0px;
-		top:0px;
-		min-height:1800px;
-		background-color: #007E4F !important;
-    	opacity: 0.93;
-    	top: -11px !important;
+		width:180px;
+		background-color: #fff !important;
+    	top: 50px !important;
 		padding-right:0;
+		border-radius: 8px;
 	}
 
 #offcanvas-sidebar .nav {
-    margin-top: 45px;
-	margin-bottom:0;
+	margin:15px 0 0 0;
 	padding-left:0;
     background: none;
 }
 
 #offcanvas-sidebar .nav > li:hover, #offcanvas-sidebar .nav > li:focus {
-    background-color: #000;
-    border-top: 1px solid #000;
-    color: #fff;
-    margin-top: -1px;
+text-decoration: underline;
 }
 
 #offcanvas-sidebar .nav > li > a {
     border-bottom: 1px solid #fff;
-    color: #fff;
+    color: #000;
     display: block;
     font-size: 20px;
     font-weight: 300;
@@ -1165,17 +1236,13 @@ div.interna
 	font-family:FontAwesome!important;
 }
 #offcanvas-sidebar .nav > li {
-    border-bottom: 1px solid #fff;
-    color: #fff;
+    color: #000;
     float: none;
-    font-size: 20px;
-    font-weight: 300;
-    margin-left: 32px;
-    margin-right: 16px;
-    padding: 10px;
-    text-align: right;
+    padding: 0 5px 10px 10px;
     line-height: 21px;
     cursor: pointer;
+	text-align: left;
+	font-size: 16px;
 }
 button.close {
     opacity: 1;

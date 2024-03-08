@@ -134,8 +134,8 @@ class Home extends React.Component {
                                     <li><a href="#">Ciclo dell'acqua:scarichi e impianti di depurazione acque reflue urbane</a></li>
                                     <li><a href="#">Derivazioni</a></li>
                                     <li><a href="#">Stabilimenti soggetti ad autorizzazioni ambientali</a></li>
-                                    <li><a href="#">BDN - Vista su specie fiora</a></li>
-                                    <li><a href="#">BDN - Vista tematica</a></li>
+                                    <li><a href="#">BDN - Vista su specie flora</a></li>
+                                    <li><a href="#">BDN - Vista tematica su specie fauna</a></li>
                                 </ul>
                             </div>
                         </div>
