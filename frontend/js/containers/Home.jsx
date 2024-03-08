@@ -129,22 +129,13 @@ class Home extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <Mosaic useLink={false} tileClick={this.selectCategory} />
+                    <Mosaic useLink={false} tileClick={this.selectCategory} type="categories"/>
 
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-xs-12">
                                 <h2>Consulta per vista tematica</h2>
-                                <ul className='tematica'>
-                                    <li><a href="#">Valutazione impatto ambientale</a></li>
-                                    <li><a href="#">Impianti gestione rifiuti</a></li>
-                                    <li><a href="#">Siti contaminati (ASCO - Anagrafe siti contaminati)</a></li>
-                                    <li><a href="#">Ciclo dell'acqua:scarichi e impianti di depurazione acque reflue urbane</a></li>
-                                    <li><a href="#">Derivazioni</a></li>
-                                    <li><a href="#">Stabilimenti soggetti ad autorizzazioni ambientali</a></li>
-                                    <li><a href="#">BDN - Vista su specie fiora</a></li>
-                                    <li><a href="#">BDN - Vista</a></li>
-                                </ul>
+                                <Mosaic useLink={false} tileClick={this.selectCategory} type="views"/>
                             </div>
                         </div>
                     </div>

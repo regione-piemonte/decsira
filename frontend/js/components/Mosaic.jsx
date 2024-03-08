@@ -11,18 +11,26 @@ const React = require('react');
 const Tile = require('./MosaicTile');
 const I18N = require('@mapstore/components/I18N/I18N');
 
+const {connect} = require('react-redux');
+const {createSelector} = require('reselect');
+const {tocSelector} = require('../selectors/sira');
+const datasetSelector = createSelector([tocSelector], (toc) => ({...toc}));
+
 class Mosaic extends React.Component {
     static propTypes = {
         tiles: PropTypes.array,
+        views: PropTypes.array,
         boxStyle: PropTypes.object,
         tileClick: PropTypes.func,
         useLink: PropTypes.bool,
         liClass: PropTypes.string,
-        className: PropTypes.string
+        className: PropTypes.string,
+        type: PropTypes.string
     };
 
     static defaultProps = {
         tiles: [],
+        views: [],
         className: "container blocchetti"
     };
 
@@ -38,7 +46,9 @@ class Mosaic extends React.Component {
         });
     };
 
-    render() {
+
+
+    renderCategories = () =>{
         return (
             <div className={this.props.className} role="contentinfo" aria-labelledby=" argomenti">
                 <div className="row">
@@ -50,6 +60,32 @@ class Mosaic extends React.Component {
             </div>
         );
     }
+
+    renderViewTile = () => {
+        const {views} = this.props;
+        return views.map((view) => {
+            return (<li><a onClick={() => this.props.onClick('views')}>{view.title}</a></li>);
+        });
+    }
+
+    renderViews = () =>{
+        return (
+            <ul className='tematica'>
+                {this.renderViewTile()}
+            </ul>
+        );
+    }
+
+    render() {
+        if(this.props.type == 'categories'){
+            return this.renderCategories();
+        } else {
+            return this.renderViews();
+        }
+    }
 }
 
-module.exports = Mosaic;
+//module.exports = Mosaic;
+
+module.exports = connect(datasetSelector, {
+})(Mosaic);
