@@ -9,6 +9,7 @@ const axios = require('@mapstore/libs/ajax');
 
 const TOGGLE_SIRA_NODE = 'TOGGLE_SIRA_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
+const SELECT_VIEW = 'SELECT_VIEW';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
 const THEMATIC_VIEW_CONFIG_LOADED = 'THEMATIC_VIEW_CONFIG_LOADED';
@@ -63,6 +64,12 @@ function selectSubCategory( subcat) {
     return {
         type: SELECT_SUB_CATEGORY,
         subcat
+    };
+}
+function selectView(view) {
+    return {
+        type: SELECT_VIEW,
+        view
     };
 }
 function resetObjectAndView() {
@@ -186,6 +193,7 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
 module.exports = {
     TOGGLE_SIRA_NODE,
     SELECT_CATEGORY,
+    SELECT_VIEW,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     THEMATIC_VIEW_CONFIG_LOADED,
@@ -196,6 +204,7 @@ module.exports = {
     SET_NODE_IN_USE,
     toggleNode,
     selectCategory,
+    selectView,
     getMetadataObjects,
     getThematicViewConfig,
     selectSubCategory,

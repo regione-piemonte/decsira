@@ -13,7 +13,7 @@ const Footer = require('../components/Footer');
 const Header = require('../components/Header');
 const { Modal, Button } = require("react-bootstrap");
 const I18N = require('@mapstore/components/I18N/I18N');
-const { getMetadataObjects, selectCategory, resetObjectAndView } = require('../actions/siracatalog');
+const { getMetadataObjects, selectCategory, selectView, resetObjectAndView } = require('../actions/siracatalog');
 const { resetUserIdentityError } = require('../actions/userprofile');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
@@ -112,7 +112,7 @@ class Home extends React.Component {
                             <p>Potrai visualizzare i dati raggruppati per <strong>categorie</strong> o  <strong>viste tematiche</strong> che aggregano al loro interno dataset per una chiara consultazione e un pi&ugrave; facile confronto.</p>
                             <div>
                                 <Button onClick={() => {this.goMap(); }} className='btn btn-primary btn-lg'>
-                                <I18N.Message msgId={"cartpanel.goToMap"}/>
+                                <I18N.Message msgId={"Homepage.goToMap"}/>
                                 </Button>
                             </div>
                         </div>
@@ -135,7 +135,7 @@ class Home extends React.Component {
                         <div className="row">
                             <div className="col-md-12 col-xs-12">
                                 <h2>Consulta per vista tematica</h2>
-                                <Mosaic useLink={false} tileClick={this.selectCategory} type="views"/>
+                                <Mosaic useLink={false} tileClick={this.selectView} type="views"/>
                             </div>
                         </div>
                     </div>
@@ -157,10 +157,16 @@ class Home extends React.Component {
             this.context.router.history.push('/dataset/');
         }
     };
+
+    selectView = (view) => {
+        this.props.resetObjectAndView();
+        this.props.selectView(view);
+        this.context.router.history.push('/dataset/');
+    };
 }
 
 module.exports = connect((state) => {
-    const {tiles} = categorySelector(state);
+    const {tiles, views} = categorySelector(state);
     return {
         allCategory: head(tiles.filter((t) => t.id === 999)),
         error: state.loadingError || (state.locale && state.locale.localeError) || null,
@@ -171,6 +177,7 @@ module.exports = connect((state) => {
 }, {
     loadMetadata: getMetadataObjects,
     selectCategory,
+    selectView,
     resetObjectAndView,
     resetUserIdentityError
 })(Home);

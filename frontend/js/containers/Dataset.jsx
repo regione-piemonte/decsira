@@ -264,6 +264,44 @@ class Dataset extends React.Component {
         );
     };
 
+    renderView = () => {
+        const {selectedView} = this.props;
+        return (    
+        <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+            <Tabs
+                className="dataset-tabs"
+                activeKey={this.props.subcat}
+                onSelect={this.props.selectSubCategory}>
+                    <Tab eventKey={'views'}
+                        title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
+                        <div id="dataset-results-view"> 
+                            <Vista key={selectedView.id}
+                            node={selectedView}
+                            onToggle={this.props.onToggle}
+                            addToMap={this.loadThematicView}
+                            showInfoBox={this.showInfoBox}/>
+                        </div>
+                    </Tab>
+            </Tabs>
+        </div>);
+    }
+
+    renderCategory = () => {
+        const {category} = this.props;
+        return (<div>
+            <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+            <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
+                <span>{category ? category.name : (<noscript/>)}</span>
+            </div>
+            {this.renderSerchBar()}
+            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                {category ? this.renderResults() : (<noscript/>)}
+                {this.props.notAuthorized && this.renderUnauthorized()}
+            </div>
+        </div>
+        );
+    }
+
     renderResults = () => {
         const {loading, objects, views} = this.props;
         const {showCategories} = this.state;
@@ -322,7 +360,7 @@ class Dataset extends React.Component {
     };
 
     render() {
-        const {category} = this.props;
+        const {category, selectedView} = this.props;
         return (
             <div className="interna">
                 <div style={{ minHeight: '100%', position: 'relative' }}>
@@ -331,15 +369,10 @@ class Dataset extends React.Component {
                     </div>
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
-                    <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-                    <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
-                        <span>{category ? category.name : (<noscript/>)}</span>
-                    </div>
-                    {this.renderSerchBar()}
-                    <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                        {category ? this.renderResults() : (<noscript/>)}
-                        {this.props.notAuthorized && this.renderUnauthorized()}
-                    </div>
+
+                    {selectedView ? this.renderView() : this.renderCategory()}
+
+                    
                     <div className="dataset-footer-container">
                         <Footer/>
                     </div>

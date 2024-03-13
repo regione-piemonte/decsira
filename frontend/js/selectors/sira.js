@@ -11,15 +11,17 @@ const gridSelector = createSelector([grid, featureGrid],
     }));
 
 const categorySelector = createSelector([
-    (state) => state.mosaic && state.mosaic.tiles || []
-], (servertiles) => {
+    (state) => state.mosaic && state.mosaic.tiles || [],
+    (state) => state.siracatalog
+], (servertiles, catalog) => {
     const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
         v.objectNumber += t.objectNumber;
         v.tematicViewNumber += t.tematicViewNumber;
         return v;
     }, {objectNumber: 0, tematicViewNumber: 0});
     return {
-        tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}]
+        tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}],
+        views: normalizeViews(catalog.views || [])
     };
 }
 );
@@ -70,6 +72,7 @@ const tocSelector = createSelector([
     (state) => state.siradec && state.siradec.activeFeatureType
 ], ( nodes, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
     views: normalizeViews(catalog.views || []),
+    selectedView: catalog.selectedView,
     nodes: normalizeCatalog(nodes),
     objects: normalizeObjects(nodes),
     nodesLoaded: catalog.nodes ? true : false,

@@ -7,7 +7,7 @@
  */
 const initialState = {};
 const { TOGGLE_SIRA_NODE,
-    SELECT_CATEGORY,
+    SELECT_CATEGORY,SELECT_VIEW,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     SELECT_SUB_CATEGORY,
@@ -77,11 +77,14 @@ function siracatalog(state = initialState, action) {
     case SELECT_SUB_CATEGORY: {
         return assign({}, state, {subcat: action.subcat});
     }
+    case SELECT_VIEW: {
+        return assign({}, state, {selectedView: action.view});
+    }
     case TILES_LOADED: {
         return assign({}, state, { category: [...(action.tiles || [])].shift()});
     }
     case RESET_OBJECT_AND_VIEW: {
-        return assign({}, state, {nodes: null, views: null});
+        return assign({}, state, {nodes: null, views: null, selectedView: null});
     }
     case SHOWCATEGORIES: {
         return assign({}, state, {showcategories: action.state});

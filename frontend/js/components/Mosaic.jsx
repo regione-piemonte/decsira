@@ -11,11 +11,6 @@ const React = require('react');
 const Tile = require('./MosaicTile');
 const I18N = require('@mapstore/components/I18N/I18N');
 
-const {connect} = require('react-redux');
-const {createSelector} = require('reselect');
-const {tocSelector} = require('../selectors/sira');
-const datasetSelector = createSelector([tocSelector], (toc) => ({...toc}));
-
 class Mosaic extends React.Component {
     static propTypes = {
         tiles: PropTypes.array,
@@ -46,8 +41,6 @@ class Mosaic extends React.Component {
         });
     };
 
-
-
     renderCategories = () =>{
         return (
             <div className={this.props.className} role="contentinfo" aria-labelledby=" argomenti">
@@ -64,7 +57,7 @@ class Mosaic extends React.Component {
     renderViewTile = () => {
         const {views} = this.props;
         return views.map((view) => {
-            return (<li><a onClick={() => this.props.onClick('views')}>{view.title}</a></li>);
+            return (<li><a onClick={() => this.props.tileClick(view)}>{view.title}</a></li>);
         });
     }
 
@@ -85,7 +78,4 @@ class Mosaic extends React.Component {
     }
 }
 
-//module.exports = Mosaic;
-
-module.exports = connect(datasetSelector, {
-})(Mosaic);
+module.exports = Mosaic;
