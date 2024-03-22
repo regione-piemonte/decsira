@@ -23,8 +23,11 @@ div.home-page {
 	font-weight: 200;
 }
 
-.hero-home a.btn.btn-outline-primary{
+.hero-home .btn.btn-default,
+.hero-home .btn.btn-default:hover,
+.hero-home .btn.btn-default:active{
 	border: 1px solid #fff;
+	background: transparent;
 	border-radius: 5px;
 	color: #fff;
 	font-size: 14px;
@@ -266,7 +269,8 @@ ul.categorie li, ul.tematica li  {
 	}
 ul.tematica  {padding: 0;}
 ul.categorie li	.list-group-item , ul.tematica li .list-group-item { border: none;}
-
+a.list-group-item, a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover,
+ul.tematica li a{cursor: pointer;}
 ul.tematica li a{
 	background:url("images/tematica.svg") no-repeat scroll center 35px;
 	display: block;

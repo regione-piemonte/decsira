@@ -206,17 +206,17 @@ class Header extends React.Component {
                             <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                                 <ul className="nav navbar-nav">
                                     <li>
-                                    <Button onClick={() => {this.goToSca(); }}>
+                                    <Button onClick={() => {this.goToSca(); }} className="btn-link">
                                     <I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/>
                                     </Button>
                                     </li>
                                     <li>
-                                    <Button onClick={() => {this.goToMap(); }}>
+                                    <Button onClick={() => {this.goToMap(); }} className="btn-link">
                                     Mappa
                                     </Button>
                                     </li>
                                     <li>
-                                    <Button onClick={() => {this.goToCatalog(); }}>
+                                    <Button onClick={() => {this.goToCatalog(); }} className="btn-link">
                                     Catalogo
                                     </Button>
                                     </li>

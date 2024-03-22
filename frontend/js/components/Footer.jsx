@@ -38,8 +38,6 @@ class Footer extends React.Component {
                                 <div className="col-md-8 footer-sx">
                                     <p className='small'>Questo servizio è parte di</p>
                                     <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>
-                                    <a href="#"><img alt="conoscenze ambientali" src="assets/application/conoscenze_ambientali/css/images/logo_footer.png" /></a>
-                                  
                                 </div>
                                 
                                 <div className="col-md-4 footer-dx">
@@ -48,17 +46,15 @@ class Footer extends React.Component {
                             </div>
                             
                             <div className="row">
-                                    <div className="col-sm-12 col-md-12 col-lg-12">
+                                    <div className="col-sm-12 col-md-7 col-lg-7 small">
                                         <ul>
                                         <li><a href="#" onClick={this.showAccessibilityModal} ><I18N.Message msgId={"Footer.accessibility"}/></a></li>
-                                        <li><a href="https://servizi.regione.piemonte.it/cookie-policy" target="_blank" title="Si apre in una nuova finestra">Cookie policy <i class="fas fa-external-link-alt"></i></a></li>
-                                        <li><a href="#" target="_blank" title="Si apre in una nuova finestra">Dichiarazione di accessibilità <i class="fas fa-external-link-alt"></i></a></li> 
-                                        <li><a href="https://www.regione.piemonte.it/web/note-legali-privacy" target="_blank" title="Si apre in una nuova finestra">Note legali e privacy <i class="fas fa-external-link-alt"></i></a></li>
-                                        <li><a href="https://www.regione.piemonte.it/web/redazione" target="_blank" title="Si apre in una nuova finestra">Meccanismo di feedback <i class="fas fa-external-link-alt"></i></a></li>
+                                        <li><a href="#" target="_blank" title="Si apre in una nuova finestra">Dichiarazione di accessibilità <i class="fa fa-external-link" aria-hidden="true"></i></a></li> 
+                                        <li><a href="https://www.regione.piemonte.it/web/redazione" target="_blank" title="Si apre in una nuova finestra">Meccanismo di feedback <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
-                                   <div className="col-sm-12 col-md-12 col-lg-12 text-right">
-                                    <p className='small'>Un servizio a cura della Regione Piemonte P.Iva 02843860012 - CF 80087670016 </p>
+                                   <div className="col-sm-12 col-md-5 col-lg-5 text-right">
+                                    <p className='small'>Un servizio a cura della Regione Piemonte<br/> P.Iva 02843860012 - CF 80087670016 </p>
                                 </div>
                             </div>
                         </div>

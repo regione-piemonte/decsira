@@ -23,7 +23,7 @@ class RightMenu extends React.Component {
 
     static defaultProps = {
         open: false,
-        iconStyleOpen: "fa fa-times fa-2x",
+        iconStyleOpen: "glyphicon  glyphicon-question-sign",
         iconStyleClose: "glyphicon  glyphicon-question-sign",
         clickOnIconButton: () => {},
         clickOnHelp: () => {},

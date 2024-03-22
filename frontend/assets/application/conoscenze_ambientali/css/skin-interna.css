@@ -22,10 +22,14 @@ header{
 header .navbar-brand{ text-transform: uppercase; font-weight: 600 !important;}
 
 header a, header a:hover, header a:active, header a:visited,
-.navbar-nav>li>a, .navbar-nav>li>a:hover, .navbar-nav>li>a:active{
+.navbar-nav>li>a, .navbar-nav>li>a:hover, .navbar-nav>li>a:active,
+header .btn-link, header .btn-link:hover, header .btn-link:active, header .btn-link:visited,
+.navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active{
 		color: #fff !important;
-		background:#1976D2;
+		background:#1976D2;	
 }
+header .btn-link, header .btn-link:hover, header .btn-link:active, header .btn-link:visited,
+.navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active{ margin-top: 8px;}
 @media (max-width: 1100px){
 	.nav>li>a {
 		padding: 10px 8px;
@@ -43,6 +47,12 @@ header .col-md-3.text-right .btn-group>.btn, header .col-md-3.text-right div {
 	float: none;
 	border: 0;
 }
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
 
 #mapstore-langselector button.btn.btn-default  {
 	background-color: transparent;
