@@ -112,7 +112,8 @@ function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?'
     return (dispatch) => {
         dispatch(catalogLoading(true));
         return axios.post(url).then((response) => {
-            getMetadataView({params}).then((result) => {
+            //getMetadataView({params}).then((result) => {
+            getMetadataView().then((result) => {
                 dispatch(catalogLoading(false));
                 if (typeof response.data !== "object" ) {
                     try {

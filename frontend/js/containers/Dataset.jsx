@@ -335,12 +335,7 @@ class Dataset extends React.Component {
                         addToMap={this.addToCart}
                     /> }
             </TOC>);
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
-            node={v}
-            onToggle={this.props.onToggle}
-            addToMap={this.loadThematicView}
-            showInfoBox={this.showInfoBox}
-        />)) : <div/>;
+
         const objEl = [searchSwitch, tocObjects];
         return (
             <Tabs
@@ -352,10 +347,7 @@ class Dataset extends React.Component {
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>
                     {loading ? this.renderSpinner() : objEl}
                 </Tab>
-                <Tab eventKey={'views'}
-                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText") + ` (${views ? views.length : 0})`}>
-                    {loading ? this.renderSpinner() : (<div id="dataset-results-view"> {viste}</div>)}
-                </Tab>
+                
             </Tabs>);
     };
 

@@ -81,6 +81,10 @@ class Home extends React.Component {
         this.context.router.history.replace("/map/");
     };
 
+    goToSca = () => {
+        this.context.router.history.replace("/sca/");
+    };
+
     render() {
         let description = LocaleUtils.getMessageById(this.context.messages, "Homepage.appDescription");
         return (
@@ -96,9 +100,13 @@ class Home extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12 col-xs-12">
-                                    <h1>I dati ambientali e territoriali del Piemonte.</h1>
-                                    <p>Una piattaforma di fruizione delle conscenze alfanumeriche e geografiche prodotte nel contesto del <acoronim title="Sistema Informativo Regionale Ambientale">SIRA</acoronim> Piemonte.</p>
-                                    <div><a href="#" className='btn btn-outline-primary btn-lg'>SCOPRI DI PIÙ</a></div>
+                                    <h1><I18N.Message msgId={"Homepage.titolo"}/></h1>
+                                    <I18N.Message msgId={"Homepage.descrizione"}/>
+                                    <div>
+                                        <Button onClick={() => {this.goToSca(); }}>
+                                        SCOPRI DI PIÙ
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

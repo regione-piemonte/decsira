@@ -9,7 +9,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {connect} = require('react-redux');
-const {Glyphicon} = require('react-bootstrap');
+const {Glyphicon, Button} = require('react-bootstrap');
 const cs = require('classnames');
 const isEmpty = require('lodash/isEmpty');
 const {
@@ -27,7 +27,7 @@ const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const DownloadResultsComponent = require('./download/DownloadResultsComponent').default;
 
-const SistemaConoscenzeAmbientaliBox = connect((state) => ({
+/*const SistemaConoscenzeAmbientaliBox = connect((state) => ({
     show: state.header?.showSistemaConoscenzeAmbientaliBox
 }), (dispatch) => {
     return {
@@ -35,9 +35,9 @@ const SistemaConoscenzeAmbientaliBox = connect((state) => ({
             dispatch(showHideRightConoscenzaAmbBox());
         }
     };
-})(require('./SistemaConoscenzeAmbientaliBox'));
+})(require('./SistemaConoscenzeAmbientaliBox'));*/
 
-const Credits = connect((state) => ({
+/*const Credits = connect((state) => ({
     show: state.header?.showCreditsBox
 }), (dispatch) => {
     return {
@@ -45,7 +45,7 @@ const Credits = connect((state) => ({
             dispatch(showHideCreditsBox());
         }
     };
-})(require('./Credits'));
+})(require('./Credits'));*/
 
 const RightMenu = connect((state) => ({
     open: state.header?.showRightMenu
@@ -58,12 +58,7 @@ const RightMenu = connect((state) => ({
             let helpUrl = ConfigUtils.getConfigProp('decsiraHelpUrl');
             window.open(helpUrl, '_blank');
         },
-        clickOnSistemaCA: () => {
-            dispatch(showHideRightConoscenzaAmbBox());
-            dispatch(showHideRightMenu());
-        },
         clickOnCredits: () => {
-            dispatch(showHideCreditsBox());
             dispatch(showHideRightMenu());
         }
     };
@@ -174,6 +169,18 @@ class Header extends React.Component {
         return this.props.showCart ? <Cart onListaClick={this.props.goToDataset} listaStyle={lStyle} mappaStyle={mStyle}/> : null;
     };
 
+    goToSca = () => {
+        this.context.router.history.replace("/sca/");
+    };
+
+    goToMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
+    goToCatalog = () => {
+        this.context.router.history.replace("/dataset/");
+    };
+
     render() {
         return (
 
@@ -198,9 +205,21 @@ class Header extends React.Component {
                         <div className='col-md-5 col-lg-5'>
                             <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                                 <ul className="nav navbar-nav">
-                                    <li><a href='#'><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></a></li>
-                                    <li><a href='#'><I18N.Message msgId={"RightMenu.CreditsTitle"}/></a></li>
-                                    <li><a href='#'>Catalogo</a></li>
+                                    <li>
+                                    <Button onClick={() => {this.goToSca(); }}>
+                                    <I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/>
+                                    </Button>
+                                    </li>
+                                    <li>
+                                    <Button onClick={() => {this.goToMap(); }}>
+                                    Mappa
+                                    </Button>
+                                    </li>
+                                    <li>
+                                    <Button onClick={() => {this.goToCatalog(); }}>
+                                    Catalogo
+                                    </Button>
+                                    </li>
                                 </ul>             
                             </div>
                         </div>
@@ -219,8 +238,7 @@ class Header extends React.Component {
                         
             <DownloadResultsComponent />
             {this.renderCart()}
-            <SistemaConoscenzeAmbientaliBox />
-            <Credits />
+           
             <CartPanel />
 
         </header>

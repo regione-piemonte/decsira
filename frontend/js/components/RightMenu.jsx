@@ -31,9 +31,19 @@ class RightMenu extends React.Component {
         clickOnSistemaCA: () => {}
     };
 
+    static contextTypes = {
+        messages: PropTypes.object,
+        router: PropTypes.object
+    };
+
     renderIconStyle = () => {
         let style = this.props.open ? this.props.iconStyleOpen : this.props.iconStyleClose;
         return style;
+    };
+
+    goToCredits = () => {
+        this.props.clickOnCredits();
+        this.context.router.history.push("/credits/");
     };
 
     renderMenu = () => {
@@ -41,8 +51,7 @@ class RightMenu extends React.Component {
             (
                 <div className="navbar-on" id="offcanvas-sidebar">
                     <ul id="menu" className="nav navbar-nav navbar-right">
-                        <li tabIndex="0" data-menuanchor="home" onClick={this.props.clickOnSistemaCA} onKeyPress={this.props.clickOnSistemaCA}><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></li>
-                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.props.clickOnCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
+                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.goToCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
                         <li tabIndex="0" data-menuanchor="pagamenti" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp}><I18N.Message msgId={"RightMenu.HelpTitle"}/></li>
                     </ul>
                 </div>

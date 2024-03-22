@@ -40,7 +40,9 @@ module.exports = {
         { path: "/nomap/", component: require('./containers/NoMap')},
         { path: "/nomap/:profile", component: require('./containers/NoMap')},
         { path: "/full/", component: require('./containers/FullScreenPanel')},
-        { path: "/full/:profile", component: require('./containers/FullScreenPanel') }
+        { path: "/full/:profile", component: require('./containers/FullScreenPanel') },
+        { path: "/credits", component: require('./containers/Credits') },
+        { path: "/sca", component: require('./containers/SistemaConoscenzeAmbientaliBox') }
     ],
     pluginsDef: require('./plugins'),
     initialState: {

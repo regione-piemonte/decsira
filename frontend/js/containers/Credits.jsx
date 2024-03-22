@@ -13,6 +13,8 @@ const Draggable = require('react-draggable');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {getWindowSize} = require('@mapstore/utils/AgentUtils');
+const Header = require('../components/Header');
+const { HashLink } = require('react-router-hash-link');
 
 class Credits extends React.Component {
     static propTypes = {
@@ -31,10 +33,9 @@ class Credits extends React.Component {
         closePanel: () => {}
     };
 
-    render() {
+    /*render() {
         const {maxWidth, maxHeight} = getWindowSize();
         return (
-            <Draggable bounds={{left: 0, top: 0, right: maxWidth - 100, bottom: maxHeight - 100}} start={{x: 300, y: 100}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
                 <div className="scheda-credits" style={{display: this.props.show}} role="contentinfo" arial-label="credits">
                     <Panel
                         className="info-header panel panel-primary"
@@ -50,7 +51,23 @@ class Credits extends React.Component {
                         </Panel>
                     </Panel>
                 </div>
-            </Draggable>
+            
+        );
+    }*/
+
+    render() {
+        return (
+            <div>
+                <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
+                    <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
+                </div>
+                <Header/>
+                <div id="main-content"></div>
+                <div id="credits-container" className="mappaSiraDecisionale">
+                <I18N.Message msgId={"RightMenu.CreditsTitle"}/>
+                <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "CreditsPanel.text") }} />
+                </div>
+            </div>
         );
     }
 }
