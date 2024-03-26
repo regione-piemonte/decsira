@@ -36,7 +36,7 @@ class Footer extends React.Component {
                             <div className="row hr">
  
                                 <div className="col-md-8 footer-sx">
-                                    <p className='small'>Questo servizio è parte di</p>
+                                    <p className='small'><I18N.Message msgId={"Footer.service"}/></p>
                                     <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>
                                 </div>
                                 
@@ -49,12 +49,12 @@ class Footer extends React.Component {
                                     <div className="col-sm-12 col-md-7 col-lg-7 small">
                                         <ul>
                                         <li><a href="#" onClick={this.showAccessibilityModal} ><I18N.Message msgId={"Footer.accessibility"}/></a></li>
-                                        <li><a href="#" target="_blank" title="Si apre in una nuova finestra">Dichiarazione di accessibilità <i class="fa fa-external-link" aria-hidden="true"></i></a></li> 
-                                        <li><a href="https://www.regione.piemonte.it/web/redazione" target="_blank" title="Si apre in una nuova finestra">Meccanismo di feedback <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                                        <li><a href="https://form.agid.gov.it/view/d3cc32bd-b55e-4ab5-a2fb-6e66d06803e3" target="_blank" title="Si apre in una nuova finestra"><I18N.Message msgId={"Footer.declaration"}/> <i class="fa fa-external-link" aria-hidden="true"></i></a></li> 
+                                        <li><a href="https://www.regione.piemonte.it/web/redazione" target="_blank" title="Si apre in una nuova finestra"><I18N.Message msgId={"Footer.feedback"}/> <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                    <div className="col-sm-12 col-md-5 col-lg-5 text-right">
-                                    <p className='small'>Un servizio a cura della Regione Piemonte<br/> P.Iva 02843860012 - CF 80087670016 </p>
+                                    <p className='small'><I18N.Message msgId={"Footer.service2"}/><br/> P.Iva 02843860012 - CF 80087670016 </p>
                                 </div>
                             </div>
                         </div>

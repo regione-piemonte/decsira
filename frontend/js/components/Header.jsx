@@ -74,7 +74,7 @@ const LoginNav = connect((state) => ({
     user: state.userprofile.user,
     nav: false,
     renderButtonText: false,
-    renderButtonContent: () => { return <div>ACCEDI <span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>; },
+    renderButtonContent: () => { return <div><I18N.Message msgId={"user.login"}/><span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>; },
     bsStyle: "primary",
     showAccountInfo: false,
     showPasswordChange: false,
@@ -181,19 +181,19 @@ class Header extends React.Component {
         this.context.router.history.replace("/dataset/");
     };
 
+    menuClicked = () => {
+        console.log("menu clicked");
+    }
+
     render() {
         return (
-
         <header>
             <nav className="navbar">
                 <div className="container-fluid">
                     <div className='row'>
-
                         <div className='col-md-4 col-lg-4'>
                             <div className="navbar-header">
-
-
-                                <button type="button" className="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                     <span className="sr-only">Menu</span>
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
@@ -205,19 +205,19 @@ class Header extends React.Component {
                         <div className='col-md-5 col-lg-5'>
                             <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                                 <ul className="nav navbar-nav">
-                                    <li>
+                                    <li className="nav-item">
                                     <Button onClick={() => {this.goToSca(); }} className="btn-link">
-                                    <I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/>
+                                    <I18N.Message msgId={"Header.info"}/>
                                     </Button>
                                     </li>
-                                    <li>
+                                    <li className="nav-item">
                                     <Button onClick={() => {this.goToMap(); }} className="btn-link">
-                                    Mappa
+                                    <I18N.Message msgId={"Header.mappa"}/>
                                     </Button>
                                     </li>
-                                    <li>
+                                    <li className="nav-item">
                                     <Button onClick={() => {this.goToCatalog(); }} className="btn-link">
-                                    Catalogo
+                                    <I18N.Message msgId={"Header.catalogo"}/>
                                     </Button>
                                     </li>
                                 </ul>             

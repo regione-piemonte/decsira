@@ -101,10 +101,10 @@ class Home extends React.Component {
                             <div className="row">
                                 <div className="col-md-12 col-xs-12">
                                     <h1><I18N.Message msgId={"Homepage.titolo"}/></h1>
-                                    <I18N.Message msgId={"Homepage.descrizione"}/>
+                                    <p><I18N.Message msgId={"Homepage.descrizione"}/></p>
                                     <div>
                                         <Button onClick={() => {this.goToSca(); }}>
-                                        SCOPRI DI PIÙ
+                                        <I18N.Message msgId={"Homepage.scopri"}/>
                                         </Button>
                                     </div>
                                 </div>
@@ -115,9 +115,7 @@ class Home extends React.Component {
                 <div className="container">
                     <div className="row cont-la-mappa">
                         <div className="col-md-6 col-xs-12">
-                            <h2>La mappa</h2>
-                            <p>Consulta la mappa incorporata all’interno della piattaforma per georeferenziare e analizzare i dati messi a disposizione.</p>
-                            <p>Potrai visualizzare i dati raggruppati per <strong>categorie</strong> o  <strong>viste tematiche</strong> che aggregano al loro interno dataset per una chiara consultazione e un pi&ugrave; facile confronto.</p>
+                        <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "Homepage.sezioneMappa") }} />
                             <div>
                                 <Button onClick={() => {this.goMap(); }} className='btn btn-primary btn-lg'>
                                 <I18N.Message msgId={"Homepage.goToMap"}/>
@@ -132,8 +130,8 @@ class Home extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-xs-12">
-                                <h2>Il catalogo</h2>
-                                <h3>Consulta per categoria</h3>
+                                <h2><I18N.Message msgId={"Homepage.catalogo"}/></h2>
+                                <h3><I18N.Message msgId={"Homepage.categorie"}/></h3>
                             </div>
                         </div>
                     </div>
@@ -142,7 +140,7 @@ class Home extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-xs-12">
-                                <h2>Consulta per vista tematica</h2>
+                                <h2><I18N.Message msgId={"Homepage.tematiche"}/></h2>
                                 <Mosaic useLink={false} tileClick={this.selectView} type="views"/>
                             </div>
                         </div>
