@@ -64,8 +64,8 @@ class SistemaConoscenzeAmbientaliBox extends React.Component {
                 </div>
                 <Header/>
                 <div id="main-content"></div>
-                <div id="credits-container" className="mappaSiraDecisionale">
-                <I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/>
+                <div id="credits-container" className="container">
+                <h1><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></h1>
                 <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "SistemaConoscenzeAmbientaliBox.text") }} />
                 </div>
             </div>

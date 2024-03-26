@@ -54,7 +54,7 @@ class Footer extends React.Component {
                                         </ul>
                                     </div>
                                    <div className="col-sm-12 col-md-5 col-lg-5 text-right">
-                                    <p className='small'><I18N.Message msgId={"Footer.service2"}/><br/> P.Iva 02843860012 - CF 80087670016 </p>
+                                    <p className='small'><I18N.Message msgId={"Footer.service2"}/><br/> P.Iva 02843860012 - CF 80087670016</p>
                                 </div>
                             </div>
                         </div>

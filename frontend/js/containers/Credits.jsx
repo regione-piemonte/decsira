@@ -63,8 +63,8 @@ class Credits extends React.Component {
                 </div>
                 <Header/>
                 <div id="main-content"></div>
-                <div id="credits-container" className="mappaSiraDecisionale">
-                <I18N.Message msgId={"RightMenu.CreditsTitle"}/>
+                <div id="credits-container" className="container">
+                <h1><I18N.Message msgId={"RightMenu.CreditsTitle"}/></h1>
                 <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "CreditsPanel.text") }} />
                 </div>
             </div>
