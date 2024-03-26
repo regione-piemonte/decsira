@@ -18,34 +18,13 @@ const {
     resetUserIdentity
 } = require('../actions/userprofile');
 
-// const SiraUtils = require('../utils/SiraUtils');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
-const {showHideRightMenu, showHideRightConoscenzaAmbBox, showHideCreditsBox} = require('../actions/header');
+const {showHideRightMenu} = require('../actions/header');
 const { loadLocale } = require('@mapstore/actions/locale');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const DownloadResultsComponent = require('./download/DownloadResultsComponent').default;
-
-/*const SistemaConoscenzeAmbientaliBox = connect((state) => ({
-    show: state.header?.showSistemaConoscenzeAmbientaliBox
-}), (dispatch) => {
-    return {
-        closePanel: () => {
-            dispatch(showHideRightConoscenzaAmbBox());
-        }
-    };
-})(require('./SistemaConoscenzeAmbientaliBox'));*/
-
-/*const Credits = connect((state) => ({
-    show: state.header?.showCreditsBox
-}), (dispatch) => {
-    return {
-        closePanel: () => {
-            dispatch(showHideCreditsBox());
-        }
-    };
-})(require('./Credits'));*/
 
 const RightMenu = connect((state) => ({
     open: state.header?.showRightMenu

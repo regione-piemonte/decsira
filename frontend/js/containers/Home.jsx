@@ -26,7 +26,6 @@ const PlatformNumbers = connect((state) => ({
     functionObjectView: state.platformnumbers.functionObjectView
 }))(require('../components/PlatformNumbers'));
 
-const SiraSearchBar = require('../components/SiraSearchBar');
 const { handleKeyFocus } = require('../utils/SiraUtils');
 const { HashLink } = require('react-router-hash-link');
 
@@ -172,7 +171,7 @@ class Home extends React.Component {
 }
 
 module.exports = connect((state) => {
-    const {tiles, views} = categorySelector(state);
+    const {tiles} = categorySelector(state);
     return {
         allCategory: head(tiles.filter((t) => t.id === 999)),
         error: state.loadingError || (state.locale && state.locale.localeError) || null,

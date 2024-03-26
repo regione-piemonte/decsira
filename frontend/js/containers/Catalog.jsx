@@ -18,7 +18,7 @@ const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
 const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({map, ...toc}));
-
+const SidePanel = require('./SidePanel');
 const {setProfile} = require('../actions/userprofile');
 const { toggleSiraControl } = require('../actions/controls');
 const { handleKeyFocus } = require('../utils/SiraUtils');
@@ -116,7 +116,7 @@ const authParams = {
     }
 };
 
-class Dataset extends React.Component {
+class Catalog extends React.Component {
     static propTypes = {
         category: PropTypes.shape({
             name: PropTypes.string.isRequired,
@@ -368,7 +368,6 @@ class Dataset extends React.Component {
 
                     {selectedView ? this.renderView() : this.renderCategory()}
 
-                    
                     <div className="dataset-footer-container">
                         <Footer/>
                     </div>
@@ -524,4 +523,6 @@ module.exports = connect(datasetSelector, {
     loadNodeMapRecords: loadNodeMapRecords,
     addLayersInCart: addFeatureTypeLayerInCart,
     setNodeInUse: setNodeInUse
-})(Dataset);
+})(Catalog);
+
+
