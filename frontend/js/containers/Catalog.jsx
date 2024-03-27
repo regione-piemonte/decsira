@@ -263,9 +263,9 @@ class Catalog extends React.Component {
         const {category} = this.props;
         return (<div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-            <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
+            <h1 role="contentinfo" aria-label="area di ricerca">
                 <span>{category ? category.name : (<noscript/>)}</span>
-            </div>
+            </h1>
            
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                 {category ? this.renderResults() : (<noscript/>)}
