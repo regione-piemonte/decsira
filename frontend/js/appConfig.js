@@ -24,8 +24,7 @@ const appReducers = {
     cart: require('./reducers/cart'),
     header: require('./reducers/header'),
     siraTree: require('./reducers/siraTree'),
-    treeData: require('./reducers/treeData'),
-    footer: require('./reducers/footer')
+    treeData: require('./reducers/treeData')
 };
 
 module.exports = {
@@ -42,7 +41,7 @@ module.exports = {
         { path: "/full/", component: require('./containers/FullScreenPanel')},
         { path: "/full/:profile", component: require('./containers/FullScreenPanel') },
         { path: "/credits", component: require('./containers/Credits') },
-        { path: "/sca", component: require('./containers/SistemaConoscenzeAmbientaliBox') }
+        { path: "/sca", component: require('./containers/SistemaConoscenzeAmbientali') }
     ],
     pluginsDef: require('./plugins'),
     initialState: {

@@ -14,7 +14,7 @@ const Header = require('../components/Header');
 const { HashLink } = require('react-router-hash-link');
 const Footer = require('../components/Footer');
 
-class Credits extends React.Component {
+class SistemaConoscenzeAmbientali extends React.Component {
     static propTypes = {
         title: PropTypes.string,
         show: PropTypes.string,
@@ -40,8 +40,8 @@ class Credits extends React.Component {
                 <Header/>
                 <div id="main-content"></div>
                 <div id="credits-container" className="container">
-                <h1><I18N.Message msgId={"RightMenu.CreditsTitle"}/></h1>
-                <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "CreditsPanel.text") }} />
+                <h1><I18N.Message msgId={"RightMenu.ConoscenzeAmbTitle"}/></h1>
+                <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "SistemaConoscenzeAmbientaliBox.text") }} />
                 </div>
                 <Footer />
             </div>
@@ -49,4 +49,4 @@ class Credits extends React.Component {
     }
 }
 
-module.exports = Credits;
+module.exports = SistemaConoscenzeAmbientali;

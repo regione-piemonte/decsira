@@ -8,10 +8,10 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {DropdownButton, MenuItem, NavDropdown, Glyphicon} = require('react-bootstrap');
+const {Button, DropdownButton, MenuItem, NavDropdown, Glyphicon} = require('react-bootstrap');
 const Message = require('@mapstore/components/I18N/Message');
 const ConfirmModal = require('@mapstore/components/misc/ResizableModal');
-
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 /**
  * A DropDown menu for user details:
@@ -38,7 +38,6 @@ class UserMenu extends React.Component {
         // CALLBACKS
         onShowAccountInfo: PropTypes.func,
         onShowChangePassword: PropTypes.func,
-        onShowLogin: PropTypes.func,
         onLogout: PropTypes.func,
         onCheckMapChanges: PropTypes.func,
         className: PropTypes.string,
@@ -96,11 +95,16 @@ class UserMenu extends React.Component {
         this.props.onLogout();
     }
 
+    login = () => {
+        window.location.href = ConfigUtils.getConfigProp('secureDecsirawebUrl');
+    }
+
     renderGuestTools = () => {
-        let DropDown = this.props.nav ? NavDropdown : DropdownButton;
-        return (<DropDown className={this.props.className} pullRight bsStyle={this.props.bsStyle} title={this.renderButtonText()} id="dropdown-basic-primary" {...this.props.menuProps}>
-            <MenuItem onClick={this.props.onShowLogin}><Glyphicon glyph="log-in" /><Message msgId="user.login"/></MenuItem>
-        </DropDown>);
+        return (
+            <Button onClick={() => {this.login(); }}>
+                {this.renderButtonText()}
+            </Button>
+        );
     };
 
     renderLoggedTools = () => {
@@ -165,7 +169,6 @@ class UserMenu extends React.Component {
     };
 
     renderButtonText = () => {
-
         return this.props.renderButtonContent ?
             this.props.renderButtonContent() :
             [<Glyphicon glyph="user" />, this.props.renderButtonText ? this.props.user && this.props.user[this.props.displayName] || "Guest" : null];
