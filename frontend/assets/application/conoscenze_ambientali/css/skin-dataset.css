@@ -2,7 +2,7 @@
     width: 100%;
 }
 .body_dataset .MapSearchBar .input-group .search-toolbar-options {
-    margin-top: 10px;
+    padding: 6px;
 }
 .dataset-container {
     overflow: scroll;
@@ -19,8 +19,7 @@
     background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
 }
 .dataset-search-container{
-    /*margin-top: 30px;*/
-	margin-top: 5px;
+	margin-top: 10px;
 }
 .dataset-results-container{
     clear: both;
@@ -49,14 +48,11 @@
     }
 
 .dataset-tabs .nav-tabs li{
-    margin-right:10px;
-    margin-top:14px;
     outline: none;
     }
 .dataset-tabs .nav-tabs li.active{
-        margin-top:0px;
-        background:none;
-        }
+    background:none;
+}
 
 .dataset-tabs .nav-tabs li a{
     border: 0;
@@ -218,13 +214,12 @@
     top: -6px;
 }
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object.flat{
-    padding: 15px 30px 15px 30px;
+    padding: 15px 10px;
 }
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object{
     background-color: transparent;
     padding-top: 15px;
     padding-bottom: 15px;
-    text-transform: uppercase;
     border-bottom: 1px solid gray;
     font-size: 16px;
     margin-bottom: 15px;
@@ -393,4 +388,35 @@ background-color: rgba(0, 0, 0, .73);
 }
 .cart-panel-sevices-list-element{
     width: 80%;
+}
+
+.ricerca-home #map-search-bar {
+    top: unset;
+    left: unset;
+    right: unset;
+}
+.sira-ms2 .MapSearchBar {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+@media (min-width: 1200px){
+
+    .sira-ms2 .MapSearchBar {
+        width: 400px !important;
+    }
+    
+}
+
+@media (min-width: 992px){
+    .sira-ms2 .MapSearchBar {
+        width: 90% !important;
+    }
+}
+.sira-ms2 .MapSearchBar .input-group,
+.sira-ms2 .MapSearchBar .input-group .no-border.btn-default  {
+    background: #1976D2;
+    color: #ffffff;
+}
+.sira-ms2 .MapSearchBar .input-group .searchInput {
+    min-height: 45px;
 }

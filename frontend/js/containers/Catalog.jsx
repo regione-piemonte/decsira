@@ -215,7 +215,7 @@ class Catalog extends React.Component {
     renderSerchBar = () => {
         return (
             <SiraSearchBar
-                containerClasses="col-lg-12 col-md-12 col-sm-12 col-xs-12 ricerca-home catalog-search-container dataset-search-container"
+                containerClasses="col-lg-12 col-md-12 col-sm-12 col-xs-12 ricerca-home dataset-search-container"
                 searchClasses="home-search"
                 overlayPlacement="bottom"
                 mosaicContainerClasses="dataset-mosaic-container"
@@ -356,7 +356,7 @@ class Catalog extends React.Component {
 
                             <div id="btn-menu">
                                 <button>
-                                    <span  className="sr-only">Menu</span> 
+                                    <span className="sr-only">Menu</span> 
                                 </button>  
                             </div>
 
@@ -371,7 +371,8 @@ class Catalog extends React.Component {
                
 
                         <div className='col container-dx'>
-                            <p className='small'>Tutte le categorie x</p>
+                            <p className='small tutte-categorie'>Tutte le categorie</p>
+                            <h1>Pinte</h1>
                             {selectedView ? this.renderView() : this.renderCategory()}
                         </div>
 
