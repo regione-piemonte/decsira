@@ -9,12 +9,10 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {connect} = require('react-redux');
-const {Glyphicon, Button} = require('react-bootstrap');
+const {Button} = require('react-bootstrap');
 const cs = require('classnames');
 const isEmpty = require('lodash/isEmpty');
 const {
-    showLoginPanel,
-    hideLoginPanel,
     resetUserIdentity
 } = require('../actions/userprofile');
 
@@ -71,9 +69,6 @@ const LoginNav = connect((state) => ({
                 window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
                 newWindow.close();
             }, 1500);
-        },
-        onShowLogin: () => {
-            dispatch(showLoginPanel());
         }
     };
 })(require('./UserMenu'));
@@ -109,16 +104,6 @@ const Cart = connect((state) => ({
         }
     };
 })(require('./Cart'));
-
-const LoginPanel = connect((state) => ({
-    showLoginPanel: state.userprofile.showLoginPanel
-}), {
-    onClosePanel: hideLoginPanel,
-    onConfirm: () => {
-        window.location.href = ConfigUtils.getConfigProp('secureDecsirawebUrl');
-    }
-})(require('./LoginPanel'));
-
 
 class Header extends React.Component {
     static propTypes = {
@@ -206,8 +191,7 @@ class Header extends React.Component {
                         <div className='col-md-3 col-lg-3 text-right'>
                             <RightMenu />          
                             <LangBar />
-                            <LoginNav />
-                            <LoginPanel />             
+                            <LoginNav />        
                         </div>
 
                     </div>

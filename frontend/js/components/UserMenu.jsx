@@ -38,7 +38,6 @@ class UserMenu extends React.Component {
         // CALLBACKS
         onShowAccountInfo: PropTypes.func,
         onShowChangePassword: PropTypes.func,
-        onShowLogin: PropTypes.func,
         onLogout: PropTypes.func,
         onCheckMapChanges: PropTypes.func,
         className: PropTypes.string,

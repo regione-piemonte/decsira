@@ -7,24 +7,9 @@
  */
 
 const React = require('react');
-
-const PropTypes = require('prop-types');
-const {bindActionCreators} = require('redux');
-const {connect} = require('react-redux');
-const { showHideAccessibilityBox } = require('../actions/footer');
 const I18N = require('@mapstore/components/I18N/I18N');
-const Accessibility = require('../components/Accessibility');
 
 class Footer extends React.Component {
-    static propTypes = {
-        show: PropTypes.bool,
-        showHideAccessibilityBox: PropTypes.func
-    };
-
-    static defaultProps = {
-        show: false,
-        showHideAccessibilityBox: () => {}
-    };
 
     render() {
         return (
@@ -60,26 +45,10 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Accessibility show={this.props.show} closePanel={ this.props.showHideAccessibilityBox}/>
+                
             </footer>
         );
     }
-
-    showAccessibilityModal = (e) => {
-        e.preventDefault();
-        this.props.showHideAccessibilityBox();
-    }
-
 }
 
 module.exports = Footer;
-
-module.exports = connect((state) => {
-    return {
-        show: state.footer.showAccessibilityBox
-    };
-}, dispatch => {
-    return bindActionCreators({
-        showHideAccessibilityBox
-    }, dispatch);
-})(Footer);

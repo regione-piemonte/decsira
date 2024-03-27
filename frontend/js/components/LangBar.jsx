@@ -9,8 +9,6 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const {DropdownButton, MenuItem, ButtonGroup} = require('react-bootstrap');
 const {head} = require('lodash');
-const LocaleUtils = require('@mapstore/utils/LocaleUtils');
-const FlagButton = require('@mapstore/components/I18N/FlagButton');
 
 class LangBar extends React.Component {
     static propTypes = {

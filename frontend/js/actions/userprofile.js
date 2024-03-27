@@ -14,22 +14,6 @@ const SET_USER_IDENTITY_ERROR = 'SET_USER_IDENTITY_ERROR';
 const RESET_USER_IDENTITY_ERROR = 'RESET_USER_IDENTITY_ERROR';
 const SET_USER_IDENTITY = 'LOADED_USER_IDENTITY';
 const RESET_USER_IDENTITY = 'RESET_USER_IDENTITY';
-const SHOW_LOGIN_PANEL = 'SHOW_LOGIN_PANEL';
-const HIDE_LOGIN_PANEL = 'HIDE_LOGIN_PANEL';
-
-function showLoginPanel() {
-    return {
-        type: SHOW_LOGIN_PANEL,
-        showLoginPanel: true
-    };
-}
-
-function hideLoginPanel() {
-    return {
-        type: HIDE_LOGIN_PANEL,
-        showLoginPanel: false
-    };
-}
 
 function setProfile(profile, authParams) {
     return {
@@ -135,10 +119,6 @@ module.exports = {
     RESET_USER_IDENTITY_ERROR,
     SET_USER_IDENTITY,
     RESET_USER_IDENTITY,
-    SHOW_LOGIN_PANEL,
-    HIDE_LOGIN_PANEL,
-    showLoginPanel,
-    hideLoginPanel,
     loadUserIdentity,
     userIdentityLoaded,
     resetUserIdentity,

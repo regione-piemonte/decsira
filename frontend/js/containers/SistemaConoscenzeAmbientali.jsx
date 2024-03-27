@@ -14,7 +14,7 @@ const Header = require('../components/Header');
 const { HashLink } = require('react-router-hash-link');
 const Footer = require('../components/Footer');
 
-class SistemaConoscenzeAmbientaliBox extends React.Component {
+class SistemaConoscenzeAmbientali extends React.Component {
     static propTypes = {
         title: PropTypes.string,
         show: PropTypes.string,
@@ -49,4 +49,4 @@ class SistemaConoscenzeAmbientaliBox extends React.Component {
     }
 }
 
-module.exports = SistemaConoscenzeAmbientaliBox;
+module.exports = SistemaConoscenzeAmbientali;

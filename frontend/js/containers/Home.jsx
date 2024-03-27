@@ -81,7 +81,6 @@ class Home extends React.Component {
     };
 
     render() {
-        let description = LocaleUtils.getMessageById(this.context.messages, "Homepage.appDescription");
         return (
             <div className="home-page">
                 <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
