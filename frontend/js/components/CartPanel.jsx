@@ -12,7 +12,8 @@ const I18N = require('@mapstore/components/I18N/I18N');
 const Dialog = require('@mapstore/components/misc/Dialog');
 const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
 const {Button} = require('react-bootstrap');
-const { Glyphicon } = require('react-bootstrap');
+const { Glyphicon , Panel} = require('react-bootstrap');
+const Draggable = require('react-draggable');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 class CartPanel extends React.Component {
@@ -67,7 +68,7 @@ class CartPanel extends React.Component {
     render() {
         return this.props.showPanel ?
             (
-                <Dialog tabIndex="0" style ={{position: "absolute", right: "100px", backgroundColor: "white", width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
+                <Dialog tabIndex="0" style ={{width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
                     <span role="header"><span className="cartpanel-panel-title" ><I18N.Message msgId={"cartpanel.title"}/></span><button className="print-panel-close close" onClick={this.props.onClosePanel}><span>×</span></button></span>
                     <div role="body">
                         {this.renderServicesList()}
@@ -80,6 +81,31 @@ class CartPanel extends React.Component {
                 </Dialog>
             ) : null;
     }
+
+    /*render() {
+        return (
+            <Draggable bounds="parent" start={{x: 0, y: 300}} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+                <div tabIndex="0" id="decsiraweb-cartpanel" className="cartpanel-panel" style={{display: this.props.showPanel}} role="contentinfo" aria-label="Oggetti da caricare in mappa">
+                    <Panel
+                        className="info-header panel panel-primary"
+                        header={
+                            <span>
+                                <span className="snapshot-panel-title">
+                                    <I18N.Message msgId={"cartpanel.title"}/>
+                                </span>
+                                <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
+                            </span>}>
+                        <Panel className="info-content infobox-content">
+                            {this.renderServicesList()}
+                            <Button onClick={() => {this.props.goToMap(); this.goMap(); }} className="cart button-goToMap" bsStyle="primary" >
+                                <I18N.Message msgId={"cartpanel.goToMap"}/>
+                            </Button>
+                        </Panel>
+                    </Panel>
+                </div>
+            </Draggable>
+        );
+    }*/
 }
 
 module.exports = CartPanel;

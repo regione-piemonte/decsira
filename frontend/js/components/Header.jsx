@@ -17,7 +17,6 @@ const {
 } = require('../actions/userprofile');
 
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
-const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const {showHideRightMenu} = require('../actions/header');
 const { loadLocale } = require('@mapstore/actions/locale');
 const I18N = require('@mapstore/components/I18N/I18N');
@@ -73,38 +72,6 @@ const LoginNav = connect((state) => ({
     };
 })(require('./UserMenu'));
 
-const CartPanel = connect((state) => ({
-    showPanel: state.cart.showPanel,
-    layers: state.cart.layers,
-    wmsservices: state.cart.wmsservices
-}), (dispatch) => {
-    return {
-        onClosePanel: () => {
-            dispatch(hidePanel());
-        },
-        removeService: (id) => {
-            dispatch(removeServiceFromCart(id));
-            dispatch(removeLayersFromCart(id));
-        },
-        goToMap: () => {
-            dispatch(prepareDataToMap());
-            dispatch(hidePanel());
-        }
-    };
-})(require('./CartPanel'));
-
-const Cart = connect((state) => ({
-    showCart: false,
-    servicesNumber: state.cart.servicesNumber
-}),
-(dispatch) => {
-    return {
-        showCartPanel: () => {
-            dispatch(showPanel());
-        }
-    };
-})(require('./Cart'));
-
 class Header extends React.Component {
     static propTypes = {
         showCart: PropTypes.bool,
@@ -125,12 +92,6 @@ class Header extends React.Component {
         showCart: false,
         goToDataset: () => {},
         goToHome: () => {}
-    };
-
-    renderCart = () => {
-        const lStyle = this.props.cartListaStyle;
-        const mStyle = this.props.cartMappaStyle;
-        return this.props.showCart ? <Cart onListaClick={this.props.goToDataset} listaStyle={lStyle} mappaStyle={mStyle}/> : null;
     };
 
     goToSca = () => {
@@ -200,9 +161,6 @@ class Header extends React.Component {
             </nav>
                         
             <DownloadResultsComponent />
-            {this.renderCart()}
-           
-            <CartPanel />
 
         </header>
         );

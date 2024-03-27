@@ -42,7 +42,7 @@ const Vista = require('../components/catalog/VistaDataset');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 const {toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
-
+const {showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap} = require('../actions/cart');
 const proj4 = require('proj4').default;
 const { register } = require('ol/proj/proj4.js');
 
@@ -92,6 +92,36 @@ const AddMapModal = connect(({addmap = {}}) => ({
     addLayers: addLayersInCart
 })(require('../components/addmap/AddMapModal'));
 
+const CartPanel = connect((state) => ({
+    showPanel: state.cart.showPanel,
+    layers: state.cart.layers,
+    wmsservices: state.cart.wmsservices
+}), (dispatch) => {
+    return {
+        onClosePanel: () => {
+            dispatch(hidePanel());
+        },
+        removeService: (id) => {
+            dispatch(removeServiceFromCart(id));
+            dispatch(removeLayersFromCart(id));
+        },
+        goToMap: () => {
+            dispatch(prepareDataToMap());
+            dispatch(hidePanel());
+        }
+    };
+})(require('../components/CartPanel'));
+
+const Cart = connect((state) => ({
+    servicesNumber: state.cart.servicesNumber
+}),
+(dispatch) => {
+    return {
+        showCartPanel: () => {
+            dispatch(showPanel());
+        }
+    };
+})(require('../components/Cart'));
 
 class Catalog extends React.Component {
     static propTypes = {
@@ -351,7 +381,7 @@ class Catalog extends React.Component {
                     <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
                         <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
                     </div>
-                    <Header showCart="true" goToHome={this.goToHome} />
+                    <Header goToHome={this.goToHome} />
                     <div id="main-content"></div>
                     
                     <div className="row d-flex">
@@ -374,7 +404,9 @@ class Catalog extends React.Component {
 
                         <div className='col container-dx'>
                             <p className='small'>Tutte le categorie x</p>
+                            <Cart/>
                             {selectedView ? this.renderView() : this.renderCategory()}
+                            <CartPanel />
                         </div>
 
                     </div>
