@@ -18,7 +18,6 @@ const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
 const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({map, ...toc}));
-const SidePanel = require('./SidePanel');
 const {setProfile} = require('../actions/userprofile');
 const { toggleSiraControl } = require('../actions/controls');
 const { handleKeyFocus } = require('../utils/SiraUtils');
@@ -93,28 +92,6 @@ const AddMapModal = connect(({addmap = {}}) => ({
     addLayers: addLayersInCart
 })(require('../components/addmap/AddMapModal'));
 
-const authParams = {
-    admin: {
-        userName: "admin",
-        authkey: "84279da9-f0b9-4e45-ac97-48413a48e33f"
-    },
-    A: {
-        userName: "profiloa",
-        authkey: "59ccadf2-963e-448c-bc9a-b3a5e8ed20d7"
-    },
-    B: {
-        userName: "profilob",
-        authkey: "d6e5f5a5-2d26-43aa-8af3-13f8dcc0d03c"
-    },
-    C: {
-        userName: "profiloc",
-        authkey: "0505bb64-21b6-436c-86f9-9c1280f15a6c"
-    },
-    D: {
-        userName: "profilod",
-        authkey: "4176ea85-9a9a-42a5-8913-8f6f85813dab"
-    }
-};
 
 class Catalog extends React.Component {
     static propTypes = {
@@ -126,7 +103,9 @@ class Catalog extends React.Component {
             tematicViewNumber: PropTypes.number
         }),
         nodes: PropTypes.array,
+        allNodes: PropTypes.array,
         views: PropTypes.array,
+        allViews: PropTypes.array,
         objects: PropTypes.array,
         loading: PropTypes.bool,
         notAuthorized: PropTypes.bool,
@@ -169,7 +148,6 @@ class Catalog extends React.Component {
     state = {
         params: {},
         searchText: "",
-        showCategories: false,
         onToggle: () => {},
         setProfile: () => {},
         waitingForConfig: {
@@ -269,23 +247,14 @@ class Catalog extends React.Component {
         return (    
         <div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-            
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                <Tabs
-                    className="dataset-tabs"
-                    activeKey={this.props.subcat}
-                    onSelect={this.props.selectSubCategory}>
-                        <Tab eventKey={'views'}
-                            title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
-                            <div id="dataset-results-view"> 
-                                <Vista key={selectedView.id}
-                                node={selectedView}
-                                onToggle={this.props.onToggle}
-                                addToMap={this.loadThematicView}
-                                showInfoBox={this.showInfoBox}/>
-                            </div>
-                        </Tab>
-                </Tabs>
+                <div id="dataset-results-view"> 
+                    <Vista key={selectedView.id}
+                        node={selectedView}
+                        onToggle={this.props.onToggle}
+                        addToMap={this.loadThematicView}
+                        showInfoBox={this.showInfoBox}/>
+                </div>    
             </div>
         </div>);
     }
@@ -297,7 +266,7 @@ class Catalog extends React.Component {
             <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
                 <span>{category ? category.name : (<noscript/>)}</span>
             </div>
-            {this.renderSerchBar()}
+           
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                 {category ? this.renderResults() : (<noscript/>)}
                 {this.props.notAuthorized && this.renderUnauthorized()}
@@ -308,39 +277,49 @@ class Catalog extends React.Component {
 
     renderResults = () => {
         const {loading, objects} = this.props;
-        const {showCategories} = this.state;
-        const searchSwitch = this.props.nodes.length > 0 ? (
-            <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
-                <button className="dataset-categories-switch" onClick={() => this.setState({showCategories: !showCategories})}>
-                    <span>{showCategories ? LocaleUtils.getMessageById(this.context.messages, "Dataset.hideCategories") : LocaleUtils.getMessageById(this.context.messages, "Dataset.showCategories")} </span>
-                </button>
-            </div>) : (<noscript key="categoriesSearch"/>);
-        const nodes = this.updateNodes(this.props.nodes);
+
         const tocObjects = (
-            <TOC id="dataset-toc" key="dataset-toc" nodes={showCategories ? nodes : this.props.objects}>
-                { showCategories ?
-                    <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
-                        <DefaultNode
-                            expandFilterPanel={this.openFilterPanel}
-                            configureIndicaLayer={this.openIndicaPanel}
-                            toggleSiraControl={this.searchAll}
-                            onToggle={this.props.onToggle}
-                            node={nodes}
-                            showInfoBox={this.showInfoBox}
-                            addToMap={this.addToCart}
-                        />
-                    </DefaultGroup> :
+            <TOC id="dataset-toc" key="dataset-toc" nodes={objects}>
+                <DefaultNode
+                    expandFilterPanel={this.openFilterPanel}
+                    configureIndicaLayer={this.openIndicaPanel}
+                    toggleSiraControl={this.searchAll}
+                    flat
+                    showInfoBox={this.showInfoBox}
+                    addToMap={this.addToCart}/> 
+            </TOC>);
+        
+        return (
+            <div>
+                {loading ? this.renderSpinner() : tocObjects}
+            </div>
+        );
+    };
+
+    renderMenu = () => {
+        const {loading} = this.props;
+        
+        const nodes = this.updateNodes(this.props.allNodes);
+        const tocObjects = (
+            <TOC id="dataset-toc" key="dataset-toc" nodes={nodes}>
+                <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                     <DefaultNode
                         expandFilterPanel={this.openFilterPanel}
                         configureIndicaLayer={this.openIndicaPanel}
                         toggleSiraControl={this.searchAll}
-                        flat
+                        onToggle={this.props.onToggle}
+                        node={nodes}
                         showInfoBox={this.showInfoBox}
-                        addToMap={this.addToCart}
-                    /> }
+                        addToMap={this.addToCart}/>
+                </DefaultGroup>
             </TOC>);
-
-        const objEl = [searchSwitch, tocObjects];
+        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+            node={v}
+            onToggle={this.props.onToggle}
+            addToMap={this.loadThematicView}
+            showInfoBox={this.showInfoBox}
+        />)) : <div/>;
+        
         return (
             <Tabs
                 className="dataset-tabs"
@@ -348,10 +327,13 @@ class Catalog extends React.Component {
                 onSelect={this.props.selectSubCategory}>
                 <Tab
                     eventKey={'objects'}
-                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>
-                    {loading ? this.renderSpinner() : objEl}
+                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
+                    {tocObjects}
                 </Tab>
-                
+                <Tab eventKey={'views'}
+                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
+                    <div id="dataset-results-view"> {viste}</div>
+                </Tab>
             </Tabs>);
     };
 
@@ -365,13 +347,24 @@ class Catalog extends React.Component {
                     </div>
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
+                    
+                    <div>
+                        {this.renderSerchBar()}
+                        <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                            {category ? this.renderMenu() : (<noscript/>)}
+                            {this.props.notAuthorized && this.renderUnauthorized()}
+                        </div>
+                    </div>
 
-                    {selectedView ? this.renderView() : this.renderCategory()}
+                    <div>
+                        {selectedView ? this.renderView() : this.renderCategory()}
+                    </div>
 
                     <div className="dataset-footer-container">
                         <Footer/>
                     </div>
                 </div>
+
                 <MetadataInfoBox panelStyle={{
                     height: "500px",
                     width: "650px",

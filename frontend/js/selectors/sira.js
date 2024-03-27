@@ -63,6 +63,8 @@ const normalizeObjects = function(nodes) {
 
 const tocSelector = createSelector([
     (state) => state.siracatalog.nodes || [],
+    (state) => state.siracatalog.allNodes || [],
+    (state) => state.siracatalog.allViews || [],
     (state) => state.siracatalog.category,
     (state) => state.siracatalog.subcat,
     (state) => state.siracatalog,
@@ -70,11 +72,13 @@ const tocSelector = createSelector([
     (state) => state.siradec && state.siradec.notAuthorized && state.siradec.notAuthorized.filter(f => f === state.siradec.activeFeatureType).length > 0,
     (state) => state.userprofile,
     (state) => state.siradec && state.siradec.activeFeatureType
-], ( nodes, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
+], ( nodes, allNodes, allViews, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
     views: normalizeViews(catalog.views || []),
     selectedView: catalog.selectedView,
     nodes: normalizeCatalog(nodes),
     objects: normalizeObjects(nodes),
+    allNodes: normalizeCatalog(allNodes),
+    allViews: normalizeCatalog(allViews),
     nodesLoaded: catalog.nodes ? true : false,
     category,
     loading: catalog.loading,

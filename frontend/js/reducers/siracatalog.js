@@ -19,7 +19,6 @@ const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('uuid');
 
-
 const normalizeCategories = function(categories, nodes) {
     return categories.reduce((cats, category) => {
         category.id = category.id ? category.id : uuid.v1();
@@ -66,7 +65,8 @@ function siracatalog(state = initialState, action) {
     switch (action.type) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
-        return assign({}, state, {nodes});
+        let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
+        return assign({}, state, {nodes, allNodes});
     }
     case CATALOG_LOADING: {
         return assign({}, state, {loading: action.status});
@@ -132,7 +132,11 @@ function siracatalog(state = initialState, action) {
                 }
             }
         });
-        return assign({}, state, {nodes: nodes, views: views});
+        if(action.isAllObjects) {
+            return assign({}, state, {nodes: nodes, views: views, allNodes: nodes, allViews:views});
+        } else {
+            return assign({}, state, {nodes: nodes, views: views});
+        }
     }
     default:
         return state;

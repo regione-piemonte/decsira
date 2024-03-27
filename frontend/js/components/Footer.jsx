@@ -48,7 +48,7 @@ class Footer extends React.Component {
                             <div className="row">
                                     <div className="col-sm-12 col-md-7 col-lg-7 small">
                                         <ul>
-                                        <li><a href="#" onClick={this.showAccessibilityModal} ><I18N.Message msgId={"Footer.accessibility"}/></a></li>
+                                        <li><a href="https://servizi.regione.piemonte.it/cookie-policy" target="_blank" title="Si apre in una nuova finestra"><I18N.Message msgId={"Footer.cookiePolicy"}/> <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                                         <li><a href="https://form.agid.gov.it/view/d3cc32bd-b55e-4ab5-a2fb-6e66d06803e3" target="_blank" title="Si apre in una nuova finestra"><I18N.Message msgId={"Footer.declaration"}/> <i class="fa fa-external-link" aria-hidden="true"></i></a></li> 
                                         <li><a href="https://www.regione.piemonte.it/web/redazione" target="_blank" title="Si apre in una nuova finestra"><I18N.Message msgId={"Footer.feedback"}/> <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                                         </ul>

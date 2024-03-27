@@ -77,11 +77,12 @@ function resetObjectAndView() {
         type: RESET_OBJECT_AND_VIEW
     };
 }
-function objectsLoaded(objects, views) {
+function objectsLoaded(objects, views, isAllObjects) {
     return {
         type: METADATA_OBJECTS_VIEWS_LOADED,
         objects,
-        views
+        views,
+        isAllObjects
     };
 }
 
@@ -117,12 +118,33 @@ function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?'
                 dispatch(catalogLoading(false));
                 if (typeof response.data !== "object" ) {
                     try {
-                        dispatch(objectsLoaded(JSON.parse(response.data), result));
+                        dispatch(objectsLoaded(JSON.parse(response.data), result, isAllObjects));
                     } catch (e) {
                     // dispatch(serchCategoriesLoaded(response.data));
                     }
                 } else {
-                    dispatch(objectsLoaded(response.data, result));
+                    dispatch(objectsLoaded(response.data, result, false));
+                }
+            });
+        }).catch(() => {
+        });
+    };
+}
+
+function getAllMetadata({serviceUrl = 'services/metadata/getMetadataObject?'} = {}) {
+    return (dispatch) => {
+        dispatch(catalogLoading(true));
+        return axios.post(serviceUrl).then((response) => {
+            getMetadataView().then((result) => {
+                dispatch(catalogLoading(false));
+                if (typeof response.data !== "object" ) {
+                    try {
+                        dispatch(objectsLoaded(JSON.parse(response.data), result, true));
+                    } catch (e) {
+                    // dispatch(serchCategoriesLoaded(response.data));
+                    }
+                } else {
+                    dispatch(objectsLoaded(response.data, result, true));
                 }
             });
         }).catch(() => {
@@ -207,6 +229,7 @@ module.exports = {
     selectCategory,
     selectView,
     getMetadataObjects,
+    getAllMetadata,
     getThematicViewConfig,
     selectSubCategory,
     resetObjectAndView,

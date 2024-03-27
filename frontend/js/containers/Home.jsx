@@ -13,7 +13,7 @@ const Footer = require('../components/Footer');
 const Header = require('../components/Header');
 const { Modal, Button } = require("react-bootstrap");
 const I18N = require('@mapstore/components/I18N/I18N');
-const { getMetadataObjects, selectCategory, selectView, resetObjectAndView } = require('../actions/siracatalog');
+const { selectCategory, selectView, resetObjectAndView } = require('../actions/siracatalog');
 const { resetUserIdentityError } = require('../actions/userprofile');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
@@ -32,10 +32,6 @@ const { HashLink } = require('react-router-hash-link');
 
 class Home extends React.Component {
     static propTypes = {
-        loadMetadata: PropTypes.func,
-        match: PropTypes.shape({
-            params: PropTypes.object
-        }),
         selectCategory: PropTypes.func,
         allCategory: PropTypes.object,
         resetObjectAndView: PropTypes.func,
@@ -180,7 +176,6 @@ module.exports = connect((state) => {
         profile: state.userprofile
     };
 }, {
-    loadMetadata: getMetadataObjects,
     selectCategory,
     selectView,
     resetObjectAndView,

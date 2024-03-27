@@ -154,7 +154,7 @@ class LayerTree extends React.Component {
                         addToMap={this.addToMap}
                         showInfoBox={this.showInfoBox}/>) }
             </TOC>);
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+        const viste = views ? views.map((v) => (<Vista key={v.id}
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
             node={v}
@@ -162,9 +162,6 @@ class LayerTree extends React.Component {
             showInfoBox={this.showInfoBox}/>)) : (<div/>);
         return (
             <div id="siracatalog">
-                <div className="toc-category-name">
-                    {this.props.category ? this.props.category.name : (<noscript/>)}
-                </div>
                 <SiraSearchBar
                     onSearch={this.loadMetadata}
                     onReset={this.loadMetadata}
@@ -175,8 +172,8 @@ class LayerTree extends React.Component {
                     </div>
                 </div>
                 <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
-                    <Tab eventKey={'objects'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
-                    <Tab eventKey={'views'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText") + ` (${views ? views.length : 0})`}>{viste}</Tab>
+                    <Tab eventKey={'objects'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>{tocObjects}</Tab>
+                    <Tab eventKey={'views'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>{viste}</Tab>
                 </Tabs>
                 {this.props.notAuthorized && this.renderUnauthorized()}
                 {this.props.loading ? (
