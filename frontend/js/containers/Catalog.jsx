@@ -153,7 +153,8 @@ class Catalog extends React.Component {
         waitingForConfig: {
             feature: null,
             redirect: null
-        }
+        },
+        menuOpened: true
     };
 
     componentWillMount() {
@@ -337,6 +338,11 @@ class Catalog extends React.Component {
             </Tabs>);
     };
 
+    toggleClass = () => {
+        const currentState = this.state.menuOpened;
+        this.setState({ menuOpened: !currentState });
+    };
+
     render() {
         const {category, selectedView} = this.props;
         return (
@@ -348,15 +354,12 @@ class Catalog extends React.Component {
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
                     
-
-
                     <div className="row d-flex">
 
-                        <nav className="col sideBar-lateral">  
-
+                        <nav className={this.state.menuOpened ? 'col sideBar-lateral': 'col sideBar-lateral small-col'}>  
                             <div id="btn-menu">
-                                <button>
-                                    <span className="sr-only">Menu</span> 
+                                <button onClick={this.toggleClass} >
+                                    <span  className="sr-only">Menu</span> 
                                 </button>  
                             </div>
 
@@ -368,7 +371,6 @@ class Catalog extends React.Component {
                                 </div>
                             </div>
                         </nav>
-               
 
                         <div className='col container-dx'>
                             <p className='small tutte-categorie'>Tutte le categorie</p>
@@ -377,8 +379,6 @@ class Catalog extends React.Component {
                         </div>
 
                     </div>
-
-
 
                     <div className="dataset-footer-container">
                         <Footer/>
