@@ -8,13 +8,11 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {Panel} = require('react-bootstrap');
-const Draggable = require('react-draggable');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
-const {getWindowSize} = require('@mapstore/utils/AgentUtils');
 const Header = require('../components/Header');
 const { HashLink } = require('react-router-hash-link');
+const Footer = require('../components/Footer');
 
 class Credits extends React.Component {
     static propTypes = {
@@ -33,28 +31,6 @@ class Credits extends React.Component {
         closePanel: () => {}
     };
 
-    /*render() {
-        const {maxWidth, maxHeight} = getWindowSize();
-        return (
-                <div className="scheda-credits" style={{display: this.props.show}} role="contentinfo" arial-label="credits">
-                    <Panel
-                        className="info-header panel panel-primary"
-                        header={
-                            <span>
-                                <span className="snapshot-panel-title">
-                                    <I18N.Message msgId={"RightMenu.CreditsTitle"}/>
-                                </span>
-                                <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
-                            </span>}>
-                        <Panel className="credits-content infobox-content">
-                            <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "CreditsPanel.text") }} />
-                        </Panel>
-                    </Panel>
-                </div>
-            
-        );
-    }*/
-
     render() {
         return (
             <div>
@@ -67,6 +43,7 @@ class Credits extends React.Component {
                 <h1><I18N.Message msgId={"RightMenu.CreditsTitle"}/></h1>
                 <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "CreditsPanel.text") }} />
                 </div>
+                <Footer />
             </div>
         );
     }

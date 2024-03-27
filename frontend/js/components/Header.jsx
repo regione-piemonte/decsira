@@ -47,7 +47,7 @@ const LangBar = connect((state) => ({
     currentLocale: state.locale && state.locale.current
 }), {
     onLanguageChange: loadLocale.bind(null, null)
-})(require('@mapstore/components/I18N/LangBar'));
+})(require('./LangBar'));
 
 const LoginNav = connect((state) => ({
     user: state.userprofile.user,
