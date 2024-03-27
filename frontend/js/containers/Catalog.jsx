@@ -348,17 +348,36 @@ class Catalog extends React.Component {
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
                     
-                    <div>
-                        {this.renderSerchBar()}
-                        <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                            {category ? this.renderMenu() : (<noscript/>)}
-                            {this.props.notAuthorized && this.renderUnauthorized()}
+
+
+                    <div className="row d-flex">
+
+                        <nav className="col sideBar-lateral">  
+
+                            <div id="btn-menu">
+                                <button>
+                                    <span  className="sr-only">Menu</span> 
+                                </button>  
+                            </div>
+
+                            <div className='menu'>
+                                {this.renderSerchBar()}
+                                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">                   
+                                    {category ? this.renderMenu() : (<noscript/>)}
+                                    {this.props.notAuthorized && this.renderUnauthorized()}
+                                </div>
+                            </div>
+                        </nav>
+               
+
+                        <div className='col container-dx'>
+                            <p className='small'>Tutte le categorie x</p>
+                            {selectedView ? this.renderView() : this.renderCategory()}
                         </div>
+
                     </div>
 
-                    <div>
-                        {selectedView ? this.renderView() : this.renderCategory()}
-                    </div>
+
 
                     <div className="dataset-footer-container">
                         <Footer/>

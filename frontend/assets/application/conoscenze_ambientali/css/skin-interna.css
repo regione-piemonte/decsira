@@ -310,7 +310,7 @@ div.interna
 
 
  .nav-tabs li.active a{
-	border:0;
+	/*border:0;
 	border-bottom:1px solid #007e4f;
 	background:#007e4f;
 	color:#fff;
@@ -318,9 +318,8 @@ div.interna
 	text-transform:uppercase;
 	border-radius:10px 10px 0 0;
 	padding:20px 100px 10px;
-	font-size:18px;
+	font-size:18px;*/
 	}
-	
 
  .nav-tabs li.disactive{
 	margin-top:14px;
@@ -345,7 +344,11 @@ div.interna
 	background:#e7e7e7;
 	}
 
-
+	.sira-ms2 .dataset-category-name{
+		background: none;
+		text-align: left;
+		font-size: 30px;
+	}
  .search-int .row-fluid{
     background:url("images/sfondo_bianco_sx.png") repeat-y scroll center top transparent;
 	}
@@ -743,8 +746,7 @@ div.interna
 div.interna
  .tab-pane{
 	background:#fff;
-	border-top:16px solid #007e4f;
-	border-radius:10px 10px 0 0;
+	border-top:1px solid #ccc;
 	padding-bottom:50px;
 	}
 
@@ -1149,10 +1151,10 @@ text-decoration: underline;
 	border:0;
 }
 .interna .catalog-search-container .MapSearchBar .input-group {
-    border: 1px solid #000;
+   /* border: 1px solid #000;
     box-shadow: none!important;
 	border-radius:0;
-	border-right:0;
+	border-right:0;*/
 }
 .interna #dataset-results-view .sira-view-content .sira-view-description {
 	font-weight:normal;
@@ -1311,3 +1313,122 @@ button.close {
 	padding-top:10px;
 	}
 
+
+	/*menu laterale*/
+	.col {
+		flex: 1 0 0%;
+	}
+	.d-flex{ display: flex;}
+
+
+	  /* side-bar */
+	  .sideBar-lateral {
+		max-width: 450px;
+		height: 100%;
+		transition: width 100ms ease-in; 
+		position: relative;
+		box-shadow: 1px 2px 8px #bab6b6;
+	  }
+	  
+	  .sideBar-lateral.small-col {
+		max-width: 40px;
+	  }
+	  
+	  .sideBar-lateral.small-col .menu {
+		margin-right: 80px;
+	  }
+	  .sideBar-lateral.small-col .menu {
+		padding: 24px 8px 8px 8px;
+	  }
+
+
+	.sira-ms2 #btn-menu{
+		position: absolute;
+		right: -16px;
+		top: 50px;
+		background:url("images/bk-btn-menu.png") 0 0 no-repeat;
+		height: 34px;
+		width: 33px;
+		text-align: right;
+	}
+
+	
+	.sira-ms2  #btn-menu button{
+		border: 0;
+		background: transparent;
+		position: relative;
+		padding: 7px;
+	}
+	.sira-ms2  .sideBar-lateral #btn-menu button:before{
+		content: "\f061";
+		display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+		font-weight: 900;
+		color: #000;
+		font-size: 18px !important;
+	}
+
+	.sira-ms2 .sideBar-lateral.small-col #btn-menu button:before{
+		content: "\f061";
+		display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+		font-weight: 900;
+		color: #000;
+		font-size: 18px !important;
+	}
+
+	.item-icon {
+		width: 2em;
+		height: 2em;  
+	  }
+	  
+	  .sira-ms2 .sideBar-lateral.small-col .dataset-tabs .nav-tabs,
+	  .sira-ms2 .sideBar-lateral.small-col #map-search-bar { display: none;}
+	.container-dx{ padding: 24px;}
+	/*.container-principal {
+		background-color: #e6ecff;
+		position: relative;
+	  }*/
+
+	  .sideBar-lateral.small .item-descricao {
+		opacity: 0;
+	  }
+	  
+	  .sideBar-lateral.small #btn img {
+		transform: rotate(180deg);
+	  }
+	  
+	  .menu-item {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+		padding: 1em 1.5em;
+	  }
+	  
+	  .menu-item:hover {
+		background-color: #668cff;
+	  }
+	  
+	  /* definindo o tamanho dos ícones */
+
+	  .item-active {
+		/* alinhando ícones com textos */
+		display: flex;
+		align-items: center;
+	  
+		text-decoration: none;
+		text-transform: uppercase;
+		color: #000;
+	  }
+	  
+	  /* label de descrição */
+	  .item-descricao {
+		cursor: pointer;
+		white-space: nowrap;
+	  }
