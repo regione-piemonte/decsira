@@ -72,11 +72,6 @@ class CartPanel extends React.Component {
                     <div role="body">
                         {this.renderServicesList()}
                     </div>
-                    <div role="footer" >
-                        <Button onClick={() => {this.props.goToMap(); this.goMap(); }} className="cart button-goToMap" bsStyle="primary" >
-                            <I18N.Message msgId={"cartpanel.goToMap"}/>
-                        </Button>
-                    </div>
                 </Dialog>
             ) : null;
     }

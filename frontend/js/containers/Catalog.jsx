@@ -9,7 +9,7 @@ const React = require('react');
 const {connect} = require('react-redux');
 const PropTypes = require('prop-types');
 const {createSelector} = require('reselect');
-const { Tabs, Tab, Modal} = require('react-bootstrap');
+const { Tabs, Tab, Modal, Button} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
@@ -392,8 +392,13 @@ class Catalog extends React.Component {
                         </nav>
 
                         <div className='col container-dx'>
-                            <h1>Catalogo degli oggetti e delle viste tematiche</h1>
-                            <Cart/>
+                            <div style={{display: "inline-block"}}>
+                                <h1>Catalogo degli oggetti e delle viste tematiche</h1>
+                                <Cart/>
+                                <Button onClick={() => {this.goMap(); }} className='btn btn-primary' style={{float:"right"}}>
+                                    <I18N.Message msgId={"catalog.goToMap"}/>
+                                </Button>
+                            </div>
                             <CartPanel />
                             {selectedView ? this.renderView() : this.renderCategory()}
                         </div>
@@ -525,6 +530,11 @@ class Catalog extends React.Component {
         this.context.router.history.push('/');
     };
 
+    goMap = () => {
+        this.props.prepareDataToMap();
+        this.context.router.history.replace("/map/");
+    };
+
     updateNodes = (nodes) => {
         return nodes.map(node=> {
             node.showComponent = true;
@@ -555,5 +565,6 @@ module.exports = connect(datasetSelector, {
     toggleAddMap: toggleAddMap,
     loadNodeMapRecords: loadNodeMapRecords,
     addLayersInCart: addFeatureTypeLayerInCart,
-    setNodeInUse: setNodeInUse
+    setNodeInUse: setNodeInUse,
+    prepareDataToMap
 })(Catalog);
