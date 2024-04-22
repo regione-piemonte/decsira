@@ -78,7 +78,7 @@ const tocSelector = createSelector([
     nodes: normalizeCatalog(nodes),
     objects: normalizeObjects(nodes),
     allNodes: normalizeCatalog(allNodes),
-    allViews: normalizeCatalog(allViews),
+    allViews: normalizeViews(allViews),
     nodesLoaded: catalog.nodes ? true : false,
     category,
     loading: catalog.loading,

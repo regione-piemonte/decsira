@@ -106,10 +106,6 @@ class Header extends React.Component {
         this.context.router.history.replace("/dataset/");
     };
 
-    menuClicked = () => {
-        console.log("menu clicked");
-    }
-
     render() {
         return (
         <header>

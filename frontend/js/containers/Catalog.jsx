@@ -36,9 +36,11 @@ const SiraSearchBar = require('../components/SiraSearchBar');
 const TOC = require('../components/toc/TOC');
 const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
+const DefaultNodeMenu = require('../components/catalog/DefaultNodeMenu');
 const Footer = require('../components/Footer');
 
 const Vista = require('../components/catalog/VistaDataset');
+const VistaMenu = require('../components/catalog/VistaMenu');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
 const {toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
@@ -294,9 +296,6 @@ class Catalog extends React.Component {
         const {category} = this.props;
         return (<div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-            <h1 role="contentinfo" aria-label="area di ricerca">
-                <span>{category ? category.name : (<noscript/>)}</span>
-            </h1>
            
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                 {category ? this.renderResults() : (<noscript/>)}
@@ -328,28 +327,18 @@ class Catalog extends React.Component {
     };
 
     renderMenu = () => {
-        const {loading} = this.props;
-        
         const nodes = this.updateNodes(this.props.allNodes);
         const tocObjects = (
             <TOC id="dataset-toc" key="dataset-toc" nodes={nodes}>
                 <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
-                    <DefaultNode
-                        expandFilterPanel={this.openFilterPanel}
-                        configureIndicaLayer={this.openIndicaPanel}
-                        toggleSiraControl={this.searchAll}
+                    <DefaultNodeMenu
                         onToggle={this.props.onToggle}
-                        node={nodes}
-                        showInfoBox={this.showInfoBox}
-                        addToMap={this.addToCart}/>
+                        node={nodes}/>
                 </DefaultGroup>
             </TOC>);
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
-            node={v}
-            onToggle={this.props.onToggle}
-            addToMap={this.loadThematicView}
-            showInfoBox={this.showInfoBox}
-        />)) : <div/>;
+        const viste = this.props.allViews ? this.props.allViews.map((v) => (
+            <VistaMenu node={v}/>
+            )) : <div/>;
         
         return (
             <Tabs
@@ -403,7 +392,6 @@ class Catalog extends React.Component {
                         </nav>
 
                         <div className='col container-dx'>
-                            <p className='small tutte-categorie'>Tutte le categorie</p>
                             <h1>Catalogo degli oggetti e delle viste tematiche</h1>
                             <Cart/>
                             <CartPanel />
@@ -569,5 +557,3 @@ module.exports = connect(datasetSelector, {
     addLayersInCart: addFeatureTypeLayerInCart,
     setNodeInUse: setNodeInUse
 })(Catalog);
-
-

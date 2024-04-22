@@ -7,6 +7,7 @@
  */
 const initialState = {};
 const { TOGGLE_SIRA_NODE,
+    SELECT_SIRA_NODE,
     SELECT_CATEGORY,SELECT_VIEW,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
@@ -66,7 +67,36 @@ function siracatalog(state = initialState, action) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
         let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
+       
+        /*let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
+        let metadata=[]
+        selectedNodes.forEach((n) => {
+            if (n.categories) {
+                n.categories.forEach(category => {
+                    metadata.push.apply(metadata, category.metadata);
+                });  
+            } else if (n.metadata) {
+                metadata.push.apply(metadata, n.metadata);
+            }
+        });*/
+
         return assign({}, state, {nodes, allNodes});
+        //return assign({}, state, {nodes: metadata, allNodes});
+        
+    }
+    case SELECT_SIRA_NODE: {
+        let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
+        let metadata=[]
+        selectedNodes.forEach((n) => {
+            if (n.categories) {
+                n.categories.forEach(category => {
+                    metadata.push.apply(metadata, category.metadata);
+                });  
+            } else if (n.metadata) {
+                metadata.push.apply(metadata, n.metadata);
+            }
+        });
+        return assign({}, state, {nodes: metadata});
     }
     case CATALOG_LOADING: {
         return assign({}, state, {loading: action.status});

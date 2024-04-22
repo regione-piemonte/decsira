@@ -8,6 +8,7 @@
 const axios = require('@mapstore/libs/ajax');
 
 const TOGGLE_SIRA_NODE = 'TOGGLE_SIRA_NODE';
+const SELECT_SIRA_NODE = 'SELECT_SIRA_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
 const SELECT_VIEW = 'SELECT_VIEW';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
@@ -39,6 +40,12 @@ function toggleNode(id, status) {
         type: TOGGLE_SIRA_NODE,
         id,
         status
+    };
+}
+function selectNode(id) {
+    return {
+        type: SELECT_SIRA_NODE,
+        id
     };
 }
 function setNodeInUse(node) {
@@ -215,6 +222,7 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
 }
 module.exports = {
     TOGGLE_SIRA_NODE,
+    SELECT_SIRA_NODE,
     SELECT_CATEGORY,
     SELECT_VIEW,
     METADATA_OBJECTS_VIEWS_LOADED,
@@ -226,6 +234,7 @@ module.exports = {
     SHOWCATEGORIES,
     SET_NODE_IN_USE,
     toggleNode,
+    selectNode,
     selectCategory,
     selectView,
     getMetadataObjects,
