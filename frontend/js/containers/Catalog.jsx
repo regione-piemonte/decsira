@@ -292,13 +292,43 @@ class Catalog extends React.Component {
         </div>);
     }
 
-    renderCategory = () => {
+    renderAllViews = () => {
+        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+            node={v}
+            onToggle={this.props.onToggle}
+            addToMap={this.loadThematicView}
+            showInfoBox={this.showInfoBox}
+        />)) : <div/>;
+        return (    
+        <div>
+            <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                <div id="dataset-results-view"> 
+                    {viste}
+                </div>    
+            </div>
+        </div>);
+    }
+
+    /*renderCategory = () => {
         const {category} = this.props;
         return (<div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
            
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                 {category ? this.renderResults() : (<noscript/>)}
+                {this.props.notAuthorized && this.renderUnauthorized()}
+            </div>
+        </div>
+        );
+    }*/
+
+    renderCategory = () => {
+        return (<div>
+            <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+           
+            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                {this.props.subcat=='views' ? this.renderAllViews() : this.renderResults()}
                 {this.props.notAuthorized && this.renderUnauthorized()}
             </div>
         </div>
@@ -336,6 +366,10 @@ class Catalog extends React.Component {
                         node={nodes}/>
                 </DefaultGroup>
             </TOC>);
+            let viewAll = {
+                id: 999,
+                title: <I18N.Message msgId={"catalog.allViews"}/>
+            }
         const viste = this.props.allViews ? this.props.allViews.map((v) => (
             <VistaMenu node={v}/>
             )) : <div/>;
@@ -352,7 +386,10 @@ class Catalog extends React.Component {
                 </Tab>
                 <Tab eventKey={'views'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
-                    <div id="dataset-results-view"> {viste}</div>
+                    <div id="dataset-results-view"> 
+                        <VistaMenu node={viewAll}/>
+                        {viste}
+                    </div>
                 </Tab>
             </Tabs>);
     };
@@ -393,7 +430,7 @@ class Catalog extends React.Component {
 
                         <div className='col container-dx'>
                             <div style={{display: "inline-block"}}>
-                                <h1>Catalogo degli oggetti e delle viste tematiche</h1>
+                                <h1><I18N.Message msgId={"catalog.header"}/></h1>
                                 <Cart/>
                                 <Button onClick={() => {this.goMap(); }} className='btn btn-primary' style={{float:"right"}}>
                                     <I18N.Message msgId={"catalog.goToMap"}/>
@@ -434,6 +471,7 @@ class Catalog extends React.Component {
         }
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
+            this.props.selectSubCategory('objects');
         }
     };
 

@@ -67,22 +67,7 @@ function siracatalog(state = initialState, action) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
         let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
-       
-        /*let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
-        let metadata=[]
-        selectedNodes.forEach((n) => {
-            if (n.categories) {
-                n.categories.forEach(category => {
-                    metadata.push.apply(metadata, category.metadata);
-                });  
-            } else if (n.metadata) {
-                metadata.push.apply(metadata, n.metadata);
-            }
-        });*/
-
-        return assign({}, state, {nodes, allNodes});
-        //return assign({}, state, {nodes: metadata, allNodes});
-        
+        return assign({}, state, {nodes, allNodes});  
     }
     case SELECT_SIRA_NODE: {
         let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
@@ -105,7 +90,11 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {category: action.category, subcat: action.subcat});
     }
     case SELECT_SUB_CATEGORY: {
-        return assign({}, state, {subcat: action.subcat});
+        let selectedView = state.selectedView;
+        if(action.subcat=='objects'){
+            selectedView = null;
+        }
+        return assign({}, state, {subcat: action.subcat, selectedView: selectedView});
     }
     case SELECT_VIEW: {
         return assign({}, state, {selectedView: action.view});
