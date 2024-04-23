@@ -10,6 +10,7 @@ const axios = require('@mapstore/libs/ajax');
 const TOGGLE_SIRA_NODE = 'TOGGLE_SIRA_NODE';
 const SELECT_SIRA_NODE = 'SELECT_SIRA_NODE';
 const SELECT_CATEGORY = 'SELECT_CATEGORY';
+const ALL_OBJECTS = 'ALL_OBJECTS';
 const SELECT_VIEW = 'SELECT_VIEW';
 const METADATA_OBJECTS_VIEWS_LOADED = 'METADATA_OBJECTS_VIEWS_LOADED';
 const CATALOG_LOADING = 'CATALOG_LOADING';
@@ -77,6 +78,11 @@ function selectView(view) {
     return {
         type: SELECT_VIEW,
         view
+    };
+}
+function selectAllObjects() {
+    return {
+        type: ALL_OBJECTS
     };
 }
 function resetObjectAndView() {
@@ -233,6 +239,7 @@ module.exports = {
     SEARCH_TEXT_CHANGE,
     SHOWCATEGORIES,
     SET_NODE_IN_USE,
+    ALL_OBJECTS,
     toggleNode,
     selectNode,
     selectCategory,
@@ -244,5 +251,6 @@ module.exports = {
     resetObjectAndView,
     searchTextChange,
     toggleCategories,
-    setNodeInUse
+    setNodeInUse,
+    selectAllObjects
 };

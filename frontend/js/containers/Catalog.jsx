@@ -13,7 +13,7 @@ const { Tabs, Tab, Modal, Button} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
-const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse, selectAllObjects} = require('../actions/siracatalog');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
 const {tocSelector} = require('../selectors/sira');
@@ -383,7 +383,7 @@ class Catalog extends React.Component {
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
                     <div><I18N.Message msgId={"catalog.selectedObjects"}/>{this.props.objects.length}</div>
-                    <div onClick={this.props.getMetadataObjects}><I18N.Message msgId={"catalog.allCategories"}/></div>
+                    <div onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"}/></div>
                     {tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
@@ -606,5 +606,6 @@ module.exports = connect(datasetSelector, {
     loadNodeMapRecords: loadNodeMapRecords,
     addLayersInCart: addFeatureTypeLayerInCart,
     setNodeInUse: setNodeInUse,
-    prepareDataToMap
+    prepareDataToMap,
+    selectAllObjects
 })(Catalog);
