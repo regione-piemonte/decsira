@@ -302,11 +302,8 @@ class SiraGrid extends React.Component {
             <div className="handle_featuregrid">
                 <Grid className="featuregrid-title" fluid>
                     <Row>
-                        <Col xs={11} sm={11} md={11} lg={11}>
-                            <span>{header}</span>
-                        </Col>
-                        <Col xs={1} sm={1} md={1} lg={1}>
-                            <button onClick={() => this.onGridClose(false)} className="close grid-close"><span>X</span></button>
+                        <Col>
+                            <button onClick={() => this.onGridClose(false)}><span>Indietro</span></button>
                         </Col>
                     </Row>
                 </Grid>
@@ -351,8 +348,8 @@ class SiraGrid extends React.Component {
         return (
             <div>
                 <div className="dhContainer">
-                    <label>{datasetHeader}</label>
                     <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+                    <label>DATI</label>
                 </div>
                 {indicaTitle}
             </div>

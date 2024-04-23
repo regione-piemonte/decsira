@@ -170,15 +170,15 @@ class FeatureGrid extends React.Component {
             tools.push(<Button key="zoom" onClick={this.zoomToFeatures}>&nbsp;<Glyphicon glyph="search"/></Button>);
         }
 
-        if (this.props.toolbar.exporter) {
-            tools.push(<Button key="exporter" onClick={() => this.props.exportAction(this.api)}>
-                <Glyphicon glyph="download"/>&nbsp;<I18N.Message msgId={"featuregrid.export"}/>
-            </Button>);
-        }
-
         if (this.props.toolbar.toolPanel) {
             tools.push(<Button key="toolPanel" onClick={() => { this.api.showToolPanel(!this.api.isToolPanelShowing()); }}>
                 <Glyphicon glyph="cog"/>&nbsp;<I18N.Message msgId={"featuregrid.tools"}/>
+            </Button>);
+        }
+
+        if (this.props.toolbar.exporter) {
+            tools.push(<Button key="exporter" onClick={() => this.props.exportAction(this.api)}>
+                <Glyphicon glyph="download"/>&nbsp;<I18N.Message msgId={"featuregrid.export"}/>
             </Button>);
         }
 
