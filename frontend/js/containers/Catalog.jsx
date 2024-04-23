@@ -383,7 +383,7 @@ class Catalog extends React.Component {
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
                     <div><I18N.Message msgId={"catalog.selectedObjects"}/>{this.props.objects.length}</div>
-                    <div onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"}/></div>
+                    <button onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"}/></button>
                     {tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
