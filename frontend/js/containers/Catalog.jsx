@@ -382,6 +382,8 @@ class Catalog extends React.Component {
                 <Tab
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
+                    <div><I18N.Message msgId={"catalog.selectedObjects"}/>{this.props.objects.length}</div>
+                    <div onClick={this.props.getMetadataObjects}><I18N.Message msgId={"catalog.allCategories"}/></div>
                     {tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
@@ -400,7 +402,7 @@ class Catalog extends React.Component {
     };
 
     render() {
-        const {category, selectedView} = this.props;
+        const {category, selectedView, objects, views, subcat} = this.props;
         return (
             <div className="interna">
                 <div style={{ minHeight: '100%', position: 'relative' }}>
