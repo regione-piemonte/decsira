@@ -5,7 +5,9 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const initialState = {};
+const initialState = {
+    subcat: 'objects'
+};
 const { TOGGLE_SIRA_NODE,
     SELECT_SIRA_NODE,
     SELECT_CATEGORY,SELECT_VIEW,
@@ -15,7 +17,8 @@ const { TOGGLE_SIRA_NODE,
     RESET_OBJECT_AND_VIEW,
     SEARCH_TEXT_CHANGE,
     SHOWCATEGORIES,
-    SET_NODE_IN_USE} = require('../actions/siracatalog');
+    SET_NODE_IN_USE,
+    ALL_OBJECTS} = require('../actions/siracatalog');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('uuid');
@@ -67,22 +70,7 @@ function siracatalog(state = initialState, action) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
         let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
-       
-        /*let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
-        let metadata=[]
-        selectedNodes.forEach((n) => {
-            if (n.categories) {
-                n.categories.forEach(category => {
-                    metadata.push.apply(metadata, category.metadata);
-                });  
-            } else if (n.metadata) {
-                metadata.push.apply(metadata, n.metadata);
-            }
-        });*/
-
-        return assign({}, state, {nodes, allNodes});
-        //return assign({}, state, {nodes: metadata, allNodes});
-        
+        return assign({}, state, {nodes, allNodes});  
     }
     case SELECT_SIRA_NODE: {
         let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
@@ -105,7 +93,11 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {category: action.category, subcat: action.subcat});
     }
     case SELECT_SUB_CATEGORY: {
-        return assign({}, state, {subcat: action.subcat});
+        let selectedView = state.selectedView;
+        if(action.subcat=='objects'){
+            selectedView = null;
+        }
+        return assign({}, state, {subcat: action.subcat, selectedView: selectedView});
     }
     case SELECT_VIEW: {
         return assign({}, state, {selectedView: action.view});
@@ -124,6 +116,9 @@ function siracatalog(state = initialState, action) {
     }
     case SET_NODE_IN_USE: {
         return assign({}, state, {nodeUsed: action.node});
+    }
+    case ALL_OBJECTS: {
+        return assign({}, state, {nodes: state.allNodes});
     }
     case METADATA_OBJECTS_VIEWS_LOADED: {
         // FILTRA LE categorie ed i nodi

@@ -28,7 +28,11 @@ class VistaMenu extends React.Component {
 
     selectView = () => {
         let view = this.props.node;
-        this.props.selectView(view);
+        if(view.id==999){
+            this.props.selectView(null);
+        } else {
+            this.props.selectView(view);
+        }
     };
 }
 
