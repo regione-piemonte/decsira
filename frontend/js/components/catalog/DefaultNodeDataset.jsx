@@ -1,4 +1,6 @@
 const PropTypes = require('prop-types');
+
+
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -10,10 +12,13 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
-const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
+const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 const DefaultGroup = require('../toc/DefaultGroup');
-const glyphStyle = {"float": "right", cursor: 'pointer'};
+const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
+const DefaultNodeFooter = require('./DefaultNodeFooter');
+
+
 
 class DefaultNode extends React.Component {
     static propTypes = {
@@ -39,81 +44,124 @@ class DefaultNode extends React.Component {
         flat: false,
         node: {},
         groups: [],
-        expandFilterPanel: () => {},
-        onToggle: () => {},
-        toggleSiraControl: () => {},
-        addToMap: () => {},
-        configureIndicaLayer: () => {}
+        expandFilterPanel: () => { },
+        onToggle: () => { },
+        toggleSiraControl: () => { },
+        addToMap: () => { },
+        configureIndicaLayer: () => { }
     };
 
+
     renderTools = () => {
-        let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"}/></Tooltip>;
-        let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"}/></Tooltip>;
-        let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"}/></Tooltip>;
-        let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"}/></Tooltip>;
+        let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"} /></Tooltip>;
+        let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"} /></Tooltip>;
+        let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"} /></Tooltip>;
+        let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"} /></Tooltip>;
         const tools = [];
+
+
         let indicaFunction = this.props.node.functions.filter(
-            (func) => {return func.type === "Tematizzatore";}
+            (func) => { return func.type === "Tematizzatore"; }
         );
+
         if (indicaFunction.length > 0) {
             tools.push((
                 <OverlayTrigger key={"indicatori-tp"} rootClose placement="left" overlay={tooltipIndica}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={() => this.configureIndicaLayer(this.props.node)}>
+                    <button
+                        className="btn btn-link"
+                        style={glyphStyle}
+                        onClick={() => this.configureIndicaLayer(this.props.node)}>
                         <Glyphicon
                             key="toggle-indicatori"
-                            glyph="signal"/>
+                            glyph="signal" />
                     </button>
                 </OverlayTrigger>));
         } else {
             tools.push((
+
                 <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={()=>this.props.addToMap(this.props.node)}>
+                    <button
+                        className="btn btn-link"
+                        style={glyphStyle}
+                        onClick={() => this.props.addToMap(this.props.node)}>
                         <Glyphicon
                             key="addToMap"
-                            glyph="plus-sign"/>
+                            glyph="plus-sign" />
                     </button>
                 </OverlayTrigger>
             ));
+
+
             if (this.props.node.featureType) {
+
                 tools.push((
                     <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
-                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.toggleSiraControl(this.props.node)}>
+                        <button
+                            className="btn btn-link"
+                            style={glyphStyle}
+                            onClick={() => this.props.toggleSiraControl(this.props.node)}>
                             <Glyphicon
                                 key="toggle-featuregrid"
-                                glyph="th"/>
+                                glyph="th" />
                         </button>
                     </OverlayTrigger>));
+
                 tools.push((
                     <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipSira}>
-                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
+                        <button
+                            className="btn btn-link"
+                            style={glyphStyle}
+                            onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
                             <Glyphicon
                                 key="toggle-query"
-                                glyph="search"/>
+                                glyph="search" />
                         </button>
                     </OverlayTrigger>));
+
             }
         }
         return tools;
     };
 
     render() {
-        let {children, onToggle, ...other } = this.props;
+        let { children, onToggle, ...other } = this.props;
+
+
         if (this.props.node.nodes) {
             return (
                 <div className="toc-subgroup">
-                    <DefaultGroup node={this.props.node} animateCollapse={false} onToggle={this.props.onToggle}>
-                        <DefaultNode {...this.props}/>
+                    <DefaultGroup
+                        node={this.props.node}
+                        animateCollapse={false}
+                        onToggle={this.props.onToggle}>
+                        <DefaultNode {...this.props} />
                     </DefaultGroup>
                 </div>
             );
         }
+
+
         return (
-            <Node animateCollapse={false} className={"toc-default-layer catalog-object flat"} style={this.props.style} type="layer" {...other}>
-                <Title/>
+            <Node
+                animateCollapse={false}
+                className={"toc-default-layer catalog-object flat cardCatalogo"}
+                style={this.props.style} type="layer" {...other}>
+
+                <Title />
+
                 <div className="layer-content">
-                    <span tabIndex="0" className="layer-description" onClick={this.showInfoBox} onKeyPress={this.showInfoBox}>{this.props.node.text}</span>
+                    <span
+                        tabIndex="0"
+                        className="layer-description"
+                        onClick={this.showInfoBox}
+                        /* onKeyPress={this.showInfoBox} */>
+                        {this.props.node.text}
+                    </span>
                     {this.renderTools()}
                 </div>
+
+                <DefaultNodeFooter />
+
             </Node>
         );
     }

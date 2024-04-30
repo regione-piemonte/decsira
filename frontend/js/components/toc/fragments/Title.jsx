@@ -19,12 +19,20 @@ class Title extends React.Component {
     static inheritedPropTypes = ['node'];
 
     static defaultProps = {
-        onClick: () => {}
+        onClick: () => { }
     };
 
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : true;
-        return (<span tabIndex="0" className="toc-title" onClick={() => this.props.onClick(this.props.node.id || this.props.node.name, expanded)} onKeyPress={() => this.props.onClick(this.props.node.id || this.props.node.name, expanded)}>{this.props.node.title || this.props.node.name}</span>);
+        return (
+            <span
+                tabIndex="0"
+                className="toc-title"
+                onClick={() => this.props.onClick(this.props.node.id || this.props.node.name, expanded)}
+                onKeyPress={() => this.props.onClick(this.props.node.id || this.props.node.name, expanded)}>
+                {this.props.node.title || this.props.node.name}
+            </span>
+        );
     }
 }
 

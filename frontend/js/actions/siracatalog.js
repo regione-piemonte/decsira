@@ -67,7 +67,7 @@ function selectCategory(category, subcat) {
         subcat
     };
 }
-function selectSubCategory( subcat) {
+function selectSubCategory(subcat) {
     return {
         type: SELECT_SUB_CATEGORY,
         subcat
@@ -93,16 +93,16 @@ function objectsLoaded(objects, views, isAllObjects) {
     };
 }
 
-function getMetadataView({serviceUrl = 'services/metadata/getMetadataView?', params = {}} = {}) {
+function getMetadataView({ serviceUrl = 'services/metadata/getMetadataView?', params = {} } = {}) {
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
     }, serviceUrl);
     return axios.post(url).then((response) => {
-        if (typeof response.data !== "object" ) {
+        if (typeof response.data !== "object") {
             try {
                 return JSON.parse(response.data);
             } catch (e) {
-                Promise.reject(`Configuration broken (${url}): ${ e.message}`);
+                Promise.reject(`Configuration broken (${url}): ${e.message}`);
             }
         } else {
             return response.data;
@@ -111,7 +111,7 @@ function getMetadataView({serviceUrl = 'services/metadata/getMetadataView?', par
     });
 }
 
-function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?', params = {}} = {}) {
+function getMetadataObjects({ serviceUrl = 'services/metadata/getMetadataObject?', params = {} } = {}) {
 
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
@@ -120,14 +120,17 @@ function getMetadataObjects({serviceUrl = 'services/metadata/getMetadataObject?'
     return (dispatch) => {
         dispatch(catalogLoading(true));
         return axios.post(url).then((response) => {
-            //getMetadataView({params}).then((result) => {
+            /* getMetadataView({params}).then((result) => {
+                non passo i params cosi facendo riesco a riavere
+                la Consulta per vista tematica sempre completa senza alcun filtro
+            */
             getMetadataView().then((result) => {
                 dispatch(catalogLoading(false));
-                if (typeof response.data !== "object" ) {
+                if (typeof response.data !== "object") {
                     try {
                         dispatch(objectsLoaded(JSON.parse(response.data), result, isAllObjects));
                     } catch (e) {
-                    // dispatch(serchCategoriesLoaded(response.data));
+                        // dispatch(serchCategoriesLoaded(response.data));
                     }
                 } else {
                     dispatch(objectsLoaded(response.data, result, false));
@@ -188,7 +191,7 @@ function thematicViewConfigMap(data) {
     };
 }
 
-function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObject?', params = {}, configureMap = false} = {}) {
+function getThematicViewConfig({ serviceUrl = 'services/metadata/getMetadataObject?', params = {}, configureMap = false } = {}) {
 
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
@@ -198,7 +201,7 @@ function getThematicViewConfig({serviceUrl = 'services/metadata/getMetadataObjec
         dispatch(catalogLoading(true));
         return axios.get(url).then((response) => {
             dispatch(catalogLoading(false));
-            if (typeof response.data !== "object" ) {
+            if (typeof response.data !== "object") {
                 try {
                     if (configureMap) {
                         dispatch(thematicViewConfigMap(JSON.parse(response.data)));
