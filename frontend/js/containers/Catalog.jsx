@@ -300,18 +300,22 @@ class Catalog extends React.Component {
             </div>);
     }
 
-
-    renderCategory = () => {
-        const {category} = this.props;
-        return (<div>
+    renderAllViews = () => {
+        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+            node={v}
+            onToggle={this.props.onToggle}
+            addToMap={this.loadThematicView}
+            showInfoBox={this.showInfoBox}
+        />)) : <div/>;
+        return (    
+        <div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                {category ? this.renderResults() : (<noscript />)}
-                {this.props.notAuthorized && this.renderUnauthorized()}
+                <div id="dataset-results-view"> 
+                    {viste}
+                </div>    
             </div>
-        </div>
-        );
+        </div>);
     }
 
     renderCategory = () => {
@@ -428,10 +432,6 @@ class Catalog extends React.Component {
                                 <Button onClick={() => {this.goMap(); }} className='btn btn-primary' style={{float:"right"}}>
                                     <I18N.Message msgId={"catalog.goToMap"}/>
                                 </Button>
-
-                                {/* oggetti caricati in mappa */}
-                                <Cart />
-
                             </div>
 
 
