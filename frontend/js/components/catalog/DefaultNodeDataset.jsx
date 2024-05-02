@@ -52,6 +52,53 @@ class DefaultNode extends React.Component {
     };
 
 
+
+    render() {
+        let { children, onToggle, showResource, ...other } = this.props;
+
+
+        /* if (this.props.node.nodes) {
+            return (
+                <div className="toc-subgroup">
+                    <DefaultGroup
+                        node={this.props.node}
+                        animateCollapse={false}
+                        onToggle={this.props.onToggle}>
+                        <DefaultNode {...this.props} />
+                    </DefaultGroup>
+                </div>
+            );
+        } */
+        
+
+        return (
+            <Node
+                animateCollapse={false}
+                className={"toc-default-layer catalog-object flat cardCatalogo"}
+                style={this.props.style} type="layer" {...other}>
+
+                <Title />
+
+                {/* <div className="layer-content">
+                    <span
+                        tabIndex="0"
+                        className="layer-description"
+                        onClick={this.showInfoBox}>
+                        {this.props.node.text}
+                    </span>
+
+                    <br />
+                    {this.renderTools()}
+                </div> */}
+
+
+                <DefaultNodeFooter />
+
+            </Node>
+        );
+    }
+
+
     renderTools = () => {
         let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"} /></Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"} /></Tooltip>;
@@ -122,49 +169,6 @@ class DefaultNode extends React.Component {
         }
         return tools;
     };
-
-    render() {
-        let { children, onToggle, ...other } = this.props;
-
-
-        if (this.props.node.nodes) {
-            return (
-                <div className="toc-subgroup">
-                    <DefaultGroup
-                        node={this.props.node}
-                        animateCollapse={false}
-                        onToggle={this.props.onToggle}>
-                        <DefaultNode {...this.props} />
-                    </DefaultGroup>
-                </div>
-            );
-        }
-
-
-        return (
-            <Node
-                animateCollapse={false}
-                className={"toc-default-layer catalog-object flat cardCatalogo"}
-                style={this.props.style} type="layer" {...other}>
-
-                <Title />
-
-                <div className="layer-content">
-                    <span
-                        tabIndex="0"
-                        className="layer-description"
-                        onClick={this.showInfoBox}
-                        /* onKeyPress={this.showInfoBox} */>
-                        {this.props.node.text}
-                    </span>
-                    {this.renderTools()}
-                </div>
-
-                <DefaultNodeFooter />
-
-            </Node>
-        );
-    }
 
     goMap = () => {
         this.context.router.history.replace("/map/");
