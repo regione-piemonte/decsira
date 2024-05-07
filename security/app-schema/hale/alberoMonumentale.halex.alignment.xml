@@ -1,0 +1,2584 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alignment xmlns="http://www.esdi-humboldt.eu/hale/alignment">
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Ce91dea7a-820e-4e5e-8211-95c3a46871d6" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C2c66fc55-f05a-44e7-831c-acaf6b555e72" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_geo_alb_monum"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_geo_alb_monum"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="Cac60a2b5-1e60-49f8-a55a-f5591612003d" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_geo_alb_monum"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_geo_alb_monum"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C5b079fbf-68b5-4767-94ae-d5aaa6cb3f23" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_geo_alb_monum"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_geo_alb_monum"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C596a7faf-9cc6-4c0d-badc-cb974af141aa" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_geo_alb_monum"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="fk_geo_alb_monum"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1df9286a-dfe6-4482-824a-51d4b0794549" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altezza_esempl_max"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altezzaEsemplMax" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb1ff7646-b278-463d-91db-07350a305631" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altezza_esempl_media"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altezzaEsemplMedia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2308c474-8526-45c5-8c81-0528bee014f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altezza_misurata_metri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altezzaMisurataMetri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc85142e0-cff2-4d37-8399-90e8d2909f5f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altezza_primo_palco_metri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altezzaPrimoPalcoMetri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd84cb4f0-743a-4265-a6ad-1a44d589ad77" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altezza_stimata_metri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altezzaStimataMetri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb1fd935a-dd07-43cc-b34e-73a2242e9dd7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altitudine_metri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altitudineMetri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4750c057-7a2d-4786-8b80-f936a0007d99" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altre_osservazioni"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altreOsservazioni" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce3cf021d-2275-44f3-a661-0e8f86a5b41e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="altri_vinc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="altriVinc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf94b9a5d-29d7-4820-b161-4a45d691f133" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="apparato_radicale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="apparatoRadicale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1a2222d7-a669-488a-80ca-c735f67f85c2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="bersaglio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="bersaglio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C111e7eb0-b51e-46a0-923a-c9c59ca60d77" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="branche"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="branche" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C594f43db-b02e-482d-84e4-569026f5a196" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="carta_igm_fg_100000"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="cartaIgmFg100000" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca25591ca-3220-4000-8152-aecda769cfe7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="carta_igm_tav_25000"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="cartaIgmTav25000" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd62a3772-0ab4-4478-8b4b-eb5e769a21a3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="chioma"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="chioma" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb543ba9f-761b-4191-a61f-59a5848944ce" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="circonferenza"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="circonferenza" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca89ab441-00b3-424d-95f5-220e78a40144" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="circonferenza_esempl_max"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="circonferenzaEsemplMax" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1f1240d2-4316-4c3e-9693-5025036a211c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="circonferenza_esempl_media"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="circonferenzaEsemplMedia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3a97b00e-b885-4805-9b93-d7f0f94ce774" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="colletto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="colletto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccf4b9b70-76bc-41a7-8408-f49b6a485f6f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="contesto_caratteristiche_suolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="contestoCaratteristicheSuolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfb87af02-7737-45ee-ba92-d4241db2b6f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="contesto_compattamento_suolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="contestoCompattamentoSuolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cad3612d5-9a55-4e9f-84b8-30ebab82a0fa" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="contesto_copertura_suolo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="contestoCoperturaSuolo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5a466375-d304-442f-b046-09601aa646f3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_inserimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="dataInserimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C118e44ca-e0b3-4c20-a467-29588cb4382f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_rilievo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="dataRilievo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C941aca47-b83a-4496-962a-8a6b4eb54f69" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="data_ult_agg"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="dataUltAgg" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cebeb7db2-e62f-4f7d-8535-5fc72517326e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="decolorazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="decolorazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3fc12637-acfa-4969-937d-658a10863fc8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="defoliazione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="defoliazione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc97eac19-91f6-41b7-8a01-edf58a6b6225" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_aspetto_monumentalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrAspettoMonumentalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C951221cf-7404-420a-9ae1-2de0cef1e630" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_comune"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrComune" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C230ef11e-d705-4d0a-a355-aa01e72b5e1b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_provincia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrProvincia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C66719bf5-5076-4235-bc55-d6cccd52ba18" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_regione"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrRegione" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5b17350f-40ca-4ecd-a9ab-24674d0d9af6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_sintomi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrSintomi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf4c0849f-533c-4238-b2e5-fd82a06c99d6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_sintomi_o_difetti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrSintomiODifetti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C3818a8f7-aa02-48d0-8d19-5f478c0c78fb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_stato"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrStato" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C82352661-15c3-4d9e-aabb-fc5d32d2986f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descrizione_albero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrizioneAlbero" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5e5d7416-925b-41a2-9bf3-d853cbb18ea7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descrizione_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrizioneSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9ee2a87d-3878-4914-bdac-22536fdcd389" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="determina_regionale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="determinaRegionale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfd5357a2-4a07-4331-9520-cc46c6c86217" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="determina_regionale_modifica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="determinaRegionaleModifica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9894346c-85f7-4a26-9d8b-4a6851d86441" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dettaglio_aree_protette"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="dettaglioAreeProtette" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd0a4f4d8-0bdf-412d-9a64-029c34dddaed" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dettaglio_particelle"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="dettaglioParticelle" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb011b5aa-1c7e-4dc0-8fa0-13128305c160" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="diametro_medio_chioma_metri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="diametroMedioChiomaMetri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C408e6eaa-d8a5-480d-b6ec-1c536eccc12d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dove_altri_danni"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="doveAltriDanni" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C347ea4ef-5a21-476a-ace6-a02549a9b8d0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dove_funghi_virus_batteri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="doveFunghiVirusBatteri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccb4e949d-29a5-4352-85ae-b86fee5a067a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="dove_infezione_parassiti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="doveInfezioneParassiti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbbd378a1-b095-41d9-bdd0-2a2bf116b256" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="eta_accertata"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="etaAccertata" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb89b329c-66bd-4cbb-9edc-55927cda21a4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="eta_presunta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="etaPresunta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1e770d26-5db2-4313-ba10-ad0360f2555c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="famiglia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="famiglia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C22342951-4c5a-4fbe-a160-5268de62b6d0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_altezza_dendrometrica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgAltezzaDendrometrica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2da417d7-0734-436c-ba51-1632ab73aa0c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_ampiezza_chioma"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgAmpiezzaChioma" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9b6bcfa4-cc33-408e-9ee6-78e781c303f9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_architettura_vegetale"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgArchitetturaVegetale" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc80c5d8a-5e81-4871-82aa-98e85ea6598f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_assenza_danni_fitosanit"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgAssenzaDanniFitosanit" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C075ea755-8f5d-4eda-a78d-f6f47cfa707e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_assenza_interv_necess"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgAssenzaIntervNecess" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Caa3f279a-717b-4e6d-b779-d1d29805de89" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_censito"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgCensito" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C08d0c4fa-b864-4f5b-a126-0b639a3d7c2f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_circonf_soprasoglia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgCirconfSoprasoglia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb5b5b1ef-7afc-4e0e-bb9a-009edfdbe2fd" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_circonf_sottosoglia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgCirconfSottosoglia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceda4fd29-b118-45f1-89f1-55c2a56986fe" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_contesto_ristagno_idrico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgContestoRistagnoIdrico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb607322d-c845-4426-8cbb-155c454642da" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_eta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgEta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf1c3f6da-5958-4ad6-9313-7f3ec3244c58" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_forma_o_portam"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgFormaOPortam" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceaa485ee-f9e0-49d1-a493-1c22ccd6b8d0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_interf_linee_elettr"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgInterfLineeElettr" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1cbe9b6f-63ea-4d29-9ee7-94e6e3ab1e44" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_interf_manufatti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgInterfManufatti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c2b1899-eb75-4678-81af-5ea5e285e655" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_interv_necess"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgIntervNecess" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2119fe33-28a8-4142-a37d-442581f65c8c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_presenza_allegati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgPresenzaAllegati" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfcb74238-86a1-45db-bad4-5b1bc7ad643b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_rarita_botanica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgRaritaBotanica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfd42a36f-2e2b-49f6-9da2-05da32e13f4d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_tutela_prop_dich_int_pubbl"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgTutelaPropDichIntPubbl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12849666-8ba1-41e2-8c40-fe8045247d45" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_tutela_vigente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgTutelaVigente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C94967ccd-cd5c-4167-a0eb-011247849ea1" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_valore_ecologico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgValoreEcologico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C70956cdb-91bd-4c66-915a-2c85b154cdb2" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_valore_paesaggistico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgValorePaesaggistico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C75e6adb5-b38b-4e17-8a33-65cd449a7ade" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_valore_storico"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgValoreStorico" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C61c19b8d-c03e-438a-a498-86a94fb2eab4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="flg_vinc_area_protetta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="flgVincAreaProtetta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6507bebf-a8af-40aa-a516-c82965168c39" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="forma_chioma"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="formaChioma" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C7b8dca62-1b27-476f-8c80-819ed662e346" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fusto"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fusto" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C52bec9a1-5e0b-4656-9da9-a84974654a25" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="genere"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="genere" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6d975b1d-2b35-49e1-b607-c98570ae9ebf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="geometria"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="geometria" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Cc5780f74-a002-48f7-a1e6-98fefbd7ed33" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_geo_alb_monum"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_geo_alb_monum.{id_geo_alb_monum}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4737a042-396c-41dd-9fac-a8e4327623f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_geo_alb_monum"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idGeoAlbMonum" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cab8d651b-a86e-4ab9-ad34-ca26382ff287" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_n_scheda_albero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idNSschedaAlbero" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5cc0ac90-3ebd-43d8-a9cc-c414970a8f54" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_altro_dove"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervAffettAltroDove" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C64d9ca6f-65d1-438a-82b3-dbf4ffb863db" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_altr_tipo_consolidam"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettAltrTipoConsolidam" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C028d0690-db96-4ca9-b0a9-9946ce5027b5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_altro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettAltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ceee1ab78-2a72-44bc-9de0-122ebaafbc35" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_ancoraggio_altro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettAncoraggioAltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9cc293c3-2be6-46a4-a15b-aa8e5b03ea48" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_ancoraggio_dove"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettAncoraggioDove" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6c1d229d-7a6d-4d1b-89f8-484a0c469834" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_dendro_altro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettDendroAltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C73ab4465-f671-4db1-9ed4-0790a6a826c8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_dendro_dove"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettDendroDove" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12ea2489-9458-4636-92f1-e2ae6181de86" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_potat_altro"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettPotatAltro" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf49f76d7-f12e-46c5-992d-eb4fd21e12b3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_potat_quando"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettPotatQuando" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C131f83ab-2188-48e9-9828-7338676955b8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_tipo_ancoraggio"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettTipoAncoraggio" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C164dbacc-deb5-4a21-a83a-0dd2ca2d554c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_tipo_consolidam"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettTipoConsolidam" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cb8a9823d-b7a0-45ea-a538-b6124c51b632" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_effett_tipo_potat"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervEffettTipoPotat" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C77dc074f-fe95-46fe-a2a8-6a5432f9b557" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="interv_necess"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="intervNecess" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9edf006f-a40a-4d67-b499-49aefca306c6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="itinerario_accesso"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="itinerarioAccesso" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cef592286-7be4-4c82-ae7e-3be3d03654db" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="localita_segnal"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="localitaSegnal" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C846c2340-36c1-4de2-9551-df46140d0c3b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="lunghezza_filare_viale_alb"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="lunghezzaFilareVialeAlb" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfdc0d857-38e1-43b1-89bd-a0e4d2774a7b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="microfillia"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="microfillia" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C29596ba2-bae6-4410-a53e-1dd3efae01e6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nome_volgare_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="nomeVolgareSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C75073033-1f01-4ffa-bcbb-37fc498831ac" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nomi_locali_albero"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="nomiLocaliAlbero" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C163646a9-4869-4b81-8d6b-4ce9dc70abdc" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nomi_locali_insieme"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="nomiLocaliInsieme" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C93779747-21cc-4a44-8e56-e5a0a9d1dc80" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="nomi_locali_specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="nomiLocaliSpecie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C615d4eed-3446-43b9-96ad-5868783b3b05" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="numero_allegati"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="numeroAllegati" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca237d688-8d25-40c4-82df-77682b274ac6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="numero_fusti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="numeroFusti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd440f581-ec42-40e4-b92b-987bf938f7d8" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="oggetto_di_identif"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="oggettoDiIdentif" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C704cfa08-27f9-4893-bae6-ba0d4cbcdffb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="ora_inserimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="oraInserimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C76adcff4-4457-4d85-ae6a-acfd7f241faf" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="pendenza_perc"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="pendenzaPerc" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C70c417a1-f948-49d5-ae45-e3d5d8ef9ca5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="richieste"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="richieste" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5b9de82d-9699-46a7-a815-e2f2128042f6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="riscoppi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="riscoppi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C218b71b7-5ea3-4cc7-8163-a5bdefef3919" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="scheda_segn_rif_censim_pass"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="schedaSegnRifCensimPass" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5f0b7c57-73c9-40c9-9f1a-45921f2c2dd4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="scheda_segn_rilevatori"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="schedaSegnRilevatori" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cee9475de-ed16-4e2d-bc77-16c86a68b973" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="seccume"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="seccume" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2ead18a9-c985-4555-8694-6e72be10d1ad" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="segnal_latitudine_y"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="segnalLatitudineY" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1ae464f1-e104-4abb-a5d6-262f8e5d25ae" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="segnal_latitudine_y_gradi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="segnalLatitudineYGradi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C62dca9fc-4422-41d5-b80c-e056e81c02fb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="segnal_longitudine_x"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="segnalLongitudineX" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C9fd706d5-7230-4398-b74b-3ba5b443f4f6" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="segnal_longitudine_x_gradi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="segnalLongitudineXGradi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf913c0da-eee0-40bf-a8d9-357ed8ba0945" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="specie"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="specie" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbf8dd0a0-d565-40fc-a1f7-8ee23a706dc4" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="superficie_gruppo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="superficieGruppo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C12f83273-b131-426d-905f-52fb9f826907" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_altri_danni"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="tipoAltriDanni" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C92fdea19-ab5e-4302-a754-b5a793a0901f" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_funghi_virus_batteri"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="tipoFunghiVirusBatteri" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd238b12e-2495-4bf6-a83f-988e040ba85e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_infezione_parassiti"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="tipoInfezioneParassiti" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C60c3e806-3f80-4ba1-8cd1-9189e5a86fc7" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tutela_rif_normativi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="tutelaRifNormativi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C950b3b71-75dc-442e-bd1a-e3a9bd73e514" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_alb_monum_bene_paesaggist"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="urlAlbMonumBenePaesaggist" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C4eb345c4-ca5a-4edc-b52f-f2c4b7b9d1b9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_decreto_minist_inserimento"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="urlDecretoMinistInserimento" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C78b5a026-e781-493d-adc5-20cf4c0a510e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_decreto_minist_modifica"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="urlDecretoMinistModifica" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca34ab159-fdad-46d9-bfd2-00877b7116f0" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_immagini"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="urlImmagini" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C32e55dc4-a9e5-4fa7-bc27-18413fda0e4b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="url_scheda_cartello"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="urlSchedaCartello" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cae3dca18-6ea7-46ad-a9df-976d8b33dc4c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="valutazione_sintomi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="valutazioneSintomi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfde55f9f-7d29-4c9c-a139-3b5041bbe26c" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="varieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="varieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce9b126cb-0bb9-4124-b814-7441b0c3e4ee" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_alb_monum" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="vigore_vegetativo"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AlberoMonumentaleType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="vigoreVegetativo" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C277dcb2b-95a9-41a9-aa79-ff4daebe42ac" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="AmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C77ac8e7c-78c4-4490-a209-aa01a9f81756" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="ambiente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2d383eee-9a24-4e54-90e1-9f003c064126" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_alb_monum_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkAlbMonumAmbiente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cbe8175c9-1aa9-4526-b03b-b9e0c42dde0e" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_geo_alb_monum"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkGeoAlbMonum" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Ca1fc1945-4066-4173-bb47-36141a7d4b16" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_t_alb_monum_ambiente.{id_t_alb_monum_ambiente}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C8f2858ab-03d3-45ff-83b3-90427f8d2966" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="AmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idAlbMonumAmbiente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cc5d50781-441a-4c21-94e1-2cb6e1c54373" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C5abab8e9-62d6-42d4-8154-d9601c2cb315" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="criterio_monumentalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="criterioMonumentalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cc215b2fe-1a66-464c-b1b7-f1edce733594" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="descr_aspetto_monumentalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="descrAspettoMonumentalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C6f01fdea-9fdd-4545-a337-f98ea1ddaf3b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_alb_monum_criterio_monumentalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkAlbMonumCriterioMonumentalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce795ba98-434f-4eb0-8995-c09d05a0c00d" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_geo_alb_monum"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkGeoAlbMonum" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Cde7deff9-eebf-4cf8-9f9f-066b55dff486" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_criterio_monumentalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_t_alb_monum_criterio_monumentalita.{id_t_alb_monum_criterio_monumentalita}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cfdeedf54-4b51-4f77-8634-3a8cca595198" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_criterio_monumentalita" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_criterio_monumentalita"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="CriterioMonumentalitaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idAlbMonumCriterioMonumentalita" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="C4f15dd42-afb3-44ba-b96d-c693c8268dbc" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TipoAmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ce54f0f3f-f0a3-4888-ae41-55a073680a0a" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_alb_monum_tipo_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoAmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkAlbMonumTipoAmbiente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca0fc27ac-6e7f-4808-ac24-bdb230090853" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_geo_alb_monum"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoAmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkGeoAlbMonum" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="Cd5b2b224-f7c2-446a-8bac-631e8e0bf23e" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_tipo_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoAmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="id" ns="http://www.opengis.net/gml/3.2"/>
+            </property>
+        </target>
+        <parameter value="id_t_alb_monum_tipo_ambiente.{id_t_alb_monum_tipo_ambiente}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cf0e38adb-667c-4d24-922f-2ac6695b83fb" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_tipo_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoAmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idAlbMonumTipoAmbiente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C94c193d7-88ee-4c42-ad75-b78bd563a4a9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_ambiente" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_ambiente"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoAmbienteType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="tipoAmbiente" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.retype" id="Cae2e78a2-2d04-4140-b663-c286a6d8ccba" priority="normal">
+        <source>
+            <class>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </class>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C37582dcf-f485-4ee2-a1f1-6a535bbba9c9" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_alb_monum_tipo_proprieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkAlbMonumTipoProprieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ccb4b81ad-1833-4aa6-8db6-cc66477cc973" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fk_geo_alb_monum"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="fkGeoAlbMonum" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.formattedstring" id="C09457675-0c97-4510-9eac-31671bdfa2a4" priority="normal">
+        <source name="var">
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_tipo_proprieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idAlbMonumTipoProprieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="id_t_alb_monum_tipo_proprieta.{id_t_alb_monum_tipo_proprieta}" name="pattern"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C48975eeb-5d2e-4623-b09f-f0ab8a86cbd3" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="id_t_alb_monum_tipo_proprieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="idAlbMonumTipoProprieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C2c133f84-c09f-48f8-92d2-056e8abc6142" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="tipo_proprieta"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="tipoProprieta" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C50df6bc9-8289-481c-9153-c38b80076d10" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="vinc_estremi_gestore"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="vincEstremiGestore" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C0f31e73f-125a-49f0-a457-992ec1f93446" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="vinc_propr_privata_estremi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="vincProprPrivataEstremi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C1d60a786-1e8f-4be8-b129-6a41ef34cbec" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_alb_monum_tipo_proprieta" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="vinc_propr_pubblica_estremi"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="TipoProprietaType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+                <child name="vincProprPubblicaEstremi" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+</alignment>
