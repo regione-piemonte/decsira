@@ -1,9 +1,10 @@
 const React = require('react');
+const {connect} = require('react-redux');
+const {bindActionCreators} = require('redux');
 const PropTypes = require('prop-types');
 const { Image, Panel } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
 const MetadataResource = require('./MetadataResource');
-const metadatoInfoBox = require('../../actions/metadatainfobox');
 
 class ShowInfoNode extends React.Component {
     static propTypes = {
@@ -114,8 +115,6 @@ class ShowInfoNode extends React.Component {
     render() {
         let { showAllText, children } = this.props;
         const showAllTextClass = !showAllText ? "layer-description" : "";
-        // console.log('Show-Info-Node', this.props);
-
 
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
@@ -155,14 +154,12 @@ class ShowInfoNode extends React.Component {
         }
 
 
-
-
         return (
             <div className='layer-content'>
                 <span
                     tabIndex="0"
                     className={showAllTextClass}>
-                    {this.props.node.text}
+                    { this.props.node.text }
                 </span>
 
                 {showAllText ? <MetadataResource /> : null}
@@ -178,4 +175,28 @@ class ShowInfoNode extends React.Component {
 
 
 
-module.exports = ShowInfoNode;
+module.exports = connect((state) => {
+    return {
+        show: state.metadatainfobox.show,
+        openLegendPanel: state.metadatainfobox.openLegendPanel,
+        title: state.metadatainfobox.title,
+        text: state.metadatainfobox.text,
+        numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
+        dataProvider: state.metadatainfobox.dataProvider,
+        urlMetadato: state.metadatainfobox.urlMetadato,
+        urlWMS: state.metadatainfobox.urlWMS,
+        urlWFS: state.metadatainfobox.urlWFS,
+        urlLegend: state.metadatainfobox.urlLegend,
+        error: state.metadatainfobox.error,
+        showButtonLegend: state.metadatainfobox.showButtonLegend
+    };
+}, dispatch => {
+    return bindActionCreators({
+        loadLegend: (u, actualUrl) => {
+            if (actualUrl && actualUrl.length === 0) {
+                dispatch(loadLegends(u));
+            }
+            dispatch(toggleLegendBox());
+        }
+    }, dispatch);
+})(ShowInfoNode);

@@ -18,8 +18,7 @@ const DefaultGroup = require('../toc/DefaultGroup');
 const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
 const ShowInfoNode = require('./ShowInfoNode');
-const metadatoInfoBox = require('../../actions/metadatainfobox');
-
+const loadMetadata = require('../../actions/metadatainfobox');
 
 class DefaultNode extends React.Component {
     constructor(props) {
@@ -64,6 +63,7 @@ class DefaultNode extends React.Component {
         this.setState((currState) => {
             return { showAllText: !currState.showAllText };
         });
+        loadMetadata.loadMetadata(this.props.node.id);
     }
 
     renderTools = () => {
@@ -188,7 +188,7 @@ class DefaultNode extends React.Component {
                     <span
                         tabIndex="0"
                         onClick={this.showInfoBox}>
-                        show info box
+                        TEST INFO BOXE
                     </span>
                 </div>
 
