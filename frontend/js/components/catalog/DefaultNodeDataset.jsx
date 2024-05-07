@@ -12,15 +12,23 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
+const ButtonDefaultNode = require('./ButtonDefaultNode');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 const DefaultGroup = require('../toc/DefaultGroup');
 const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
-const DefaultNodeFooter = require('./DefaultNodeFooter');
-
+const ShowInfoNode = require('./ShowInfoNode');
+const metadatoInfoBox = require('../../actions/metadatainfobox');
 
 
 class DefaultNode extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAllText: false
+        };
+    }
+
     static propTypes = {
         node: PropTypes.object,
         settings: PropTypes.object,
@@ -52,52 +60,11 @@ class DefaultNode extends React.Component {
     };
 
 
-
-    render() {
-        let { children, onToggle, showResource, ...other } = this.props;
-
-
-        /* if (this.props.node.nodes) {
-            return (
-                <div className="toc-subgroup">
-                    <DefaultGroup
-                        node={this.props.node}
-                        animateCollapse={false}
-                        onToggle={this.props.onToggle}>
-                        <DefaultNode {...this.props} />
-                    </DefaultGroup>
-                </div>
-            );
-        } */
-        
-
-        return (
-            <Node
-                animateCollapse={false}
-                className={"toc-default-layer catalog-object flat cardCatalogo"}
-                style={this.props.style} type="layer" {...other}>
-
-                <Title />
-
-                {/* <div className="layer-content">
-                    <span
-                        tabIndex="0"
-                        className="layer-description"
-                        onClick={this.showInfoBox}>
-                        {this.props.node.text}
-                    </span>
-
-                    <br />
-                    {this.renderTools()}
-                </div> */}
-
-
-                <DefaultNodeFooter />
-
-            </Node>
-        );
+    toogleShowMetadata() {
+        this.setState((currState) => {
+            return { showAllText: !currState.showAllText };
+        });
     }
-
 
     renderTools = () => {
         let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"} /></Tooltip>;
@@ -180,8 +147,75 @@ class DefaultNode extends React.Component {
     };
 
     showInfoBox = () => {
-        this.props.showInfoBox(this.props.node.id);
+        return this.props.showInfoBox(this.props.node.id);
     };
+
+
+    render() {
+        let { onToggle, ...other } = this.props;
+
+        /* if (this.props.node.nodes) {
+            return (
+                <div className="toc-subgroup">
+                    <DefaultGroup
+                        node={this.props.node}
+                        animateCollapse={false}
+                        onToggle={this.props.onToggle}>
+                        <DefaultNode {...this.props} />
+                    </DefaultGroup>
+                </div>
+            );
+        } */
+
+        return (
+            <Node
+                animateCollapse={false}
+                className={"toc-default-layer catalog-object flat cardCatalogo"}
+                style={this.props.style} type="layer" {...other}>
+
+                <Title />
+
+                <ShowInfoNode showAllText={this.state.showAllText} >
+                    {this.renderTools()}
+                </ShowInfoNode >
+
+                {/* bisogna trovare un modo per recuperare il metadato!!! e valorizzare
+                 i vari link con le url corrette !*/}
+
+
+
+                <div className="layer-content">
+                    <span
+                        tabIndex="0"
+                        onClick={this.showInfoBox}>
+                        show info box
+                    </span>
+                </div>
+
+                {/* prossimo step capire come raggiungere l'url del 
+                metadato per mostrarlo nel metadato resource */}
+
+
+
+                <hr />
+
+                <div className="containerDefaultNodeFooter">
+                    <div className="ContainerParagraph">
+                        <ButtonDefaultNode text="MOSTRA DATI" />
+                        <ButtonDefaultNode text="MOSTRA LEGGENDA" />
+                    </div>
+
+                    <div>
+                        <ButtonDefaultNode
+                            text="Leggi di piu"
+                            onClickEvent={this.toogleShowMetadata.bind(this)} />
+                    </div>
+                </div>
+
+            </Node>
+        );
+    }
+
 }
 
 module.exports = DefaultNode;

@@ -2,12 +2,15 @@ const React = require('react');
 
 
 class MetadataResource extends React.Component {
+
     render() {
+        const { urlMetadato } = this.props;
+
         return (<>
             <div className="containerDefaultNodeFooter handleMetadato">
-                    <p>Fonte metadato: <b>Regione Piemonte</b></p>
-                    <p>Metadato:  <b>Vai Al metadato</b> </p>
-                    <p>Servizio WMS: <b>Copia url del Servizio</b></p>
+                <p>Fonte metadato: <stron>*** </stron></p>
+                <p>Metadato:  <stron><a>*** </a></stron> </p>
+                <p>Servizio WMS: <stron>*** </stron></p>
             </div>
         </>);
     }

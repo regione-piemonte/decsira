@@ -1,18 +1,11 @@
-/**
- * Copyright 2016, GeoSolutions Sas.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 const React = require('react');
 const PropTypes = require('prop-types');
 const { Image, Panel } = require('react-bootstrap');
-const Draggable = require('react-draggable');
 const I18N = require('@mapstore/components/I18N/I18N');
+const MetadataResource = require('./MetadataResource');
+const metadatoInfoBox = require('../../actions/metadatainfobox');
 
-class MetadataInfoBox extends React.Component {
+class ShowInfoNode extends React.Component {
     static propTypes = {
         show: PropTypes.string,
         showButtonLegend: PropTypes.string,
@@ -65,6 +58,12 @@ class MetadataInfoBox extends React.Component {
         }
     };
 
+
+
+    showInfoBox = () => {
+        return this.props.showInfoBox(this.props.node.id);
+    };
+
     onOpenLegendPanel = () => {
         this.props.loadLegend(this.props.urlWMS, this.props.urlLegend);
     };
@@ -111,8 +110,13 @@ class MetadataInfoBox extends React.Component {
         }
         return ('');
     };
-    
+
     render() {
+        let { showAllText, children } = this.props;
+        const showAllTextClass = !showAllText ? "layer-description" : "";
+        // console.log('Show-Info-Node', this.props);
+
+
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
             renderWmsUrl.push(<h4><b><I18N.Message msgId={"metadataInfoBox.urlWMS"} /></b></h4>);
@@ -150,44 +154,28 @@ class MetadataInfoBox extends React.Component {
                 </Panel>);
         }
 
+
+
+
         return (
-            <Draggable bounds="parent" start={{ x: 0, y: 300 }} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div tabIndex="0" id="metadataInfoBox" className="scheda-info" style={{ display: this.props.show }} role="contentinfo" aria-label="Informazioni aggiuntive">
-                    <Panel
-                        className="info-header panel panel-primary"
-                        header={
-                            <span>
-                                <span className="snapshot-panel-title">
-                                    <I18N.Message msgId={"metadataInfoBox.panelTitle"} />
-                                </span>
-                                <button className="print-panel-close close" onClick={this.props.closePanel}><span>×</span></button>
-                            </span>}>
-                        <Panel className="info-content infobox-content">
-                            {this.renderError()}
-                            <h4><b>{this.props.title}</b></h4>
-                            <p>{this.props.text}</p>
-                            <h4><b><I18N.Message msgId={"metadataInfoBox.entePA"} /></b></h4>
-                            <p>{this.props.dataProvider}</p>
-                            <h4><b><I18N.Message msgId={"metadataInfoBox.urlMetadato"} /></b></h4>
-                            <a tabIndex="0" className="infobox-metadata-url"
-                                title="metadato"
-                                href={this.props.urlMetadato} target="_blank" >
-                                <I18N.Message msgId={"metadataInfoBox.link_to_metadata"} />
-                            </a>
-                            {renderWmsUrl}
-                            {renderWfsUrl}
-                            <button
-                                aria-expanded={this.props.showButtonLegend}
-                                style={{ display: this.props.showButtonLegend }}
-                                onClick={this.onOpenLegendPanel}>
-                                <I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
-                            {renderLegendPanel}
-                        </Panel>
-                    </Panel>
-                </div>
-            </Draggable>
+            <div className='layer-content'>
+                <span
+                    tabIndex="0"
+                    className={showAllTextClass}>
+                    {this.props.node.text}
+                </span>
+
+                {showAllText ? <MetadataResource /> : null}
+                {children}
+
+            </div>
         );
     }
+
+
 }
 
-module.exports = MetadataInfoBox;
+
+
+
+module.exports = ShowInfoNode;

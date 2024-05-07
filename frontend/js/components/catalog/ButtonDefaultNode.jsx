@@ -4,11 +4,15 @@ const classNameBtnLink = "btn btn-link linkStyle";
 
 class ButtonDefaultNode extends React.Component {
     render() {
-        let { text, onClick } = this.props;
+        const { text, onClickEvent } = this.props;
+
+        function handleOnClickEvent() {
+            onClickEvent();
+        }
 
         return (
             <p>
-                <button className={classNameBtnLink} onClick={onClick}>
+                <button className={classNameBtnLink} onClick={() => handleOnClickEvent()}>
                     <strong>
                         <p className="linkColorMetadata">{text}</p>
                     </strong>
