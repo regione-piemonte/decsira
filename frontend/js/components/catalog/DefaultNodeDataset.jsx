@@ -63,6 +63,7 @@ class DefaultNode extends React.Component {
         this.setState((currState) => {
             return { showAllText: !currState.showAllText };
         });
+
         loadMetadata.loadMetadata(this.props.node.id);
     }
 
