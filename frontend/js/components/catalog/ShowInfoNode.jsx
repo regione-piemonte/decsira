@@ -112,6 +112,18 @@ class ShowInfoNode extends React.Component {
         return ('');
     };
 
+    renderMetadata = () => {
+        return (
+            <div>
+                <div className="containerDefaultNodeFooter handleMetadato">
+                <p>Fonte metadato: <stron> {this.props.urlMetadato} </stron></p>
+                <p>Metadato:  <stron><a>*** </a></stron> </p>
+                <p>Servizio WMS: <stron>*** </stron></p>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         let { showAllText, children } = this.props;
         const showAllTextClass = !showAllText ? "layer-description" : "";
@@ -162,7 +174,7 @@ class ShowInfoNode extends React.Component {
                     { this.props.node.text }
                 </span>
 
-                {showAllText ? <MetadataResource /> : null}
+                {showAllText ? this.renderMetadata() : null}
                 {children}
 
             </div>

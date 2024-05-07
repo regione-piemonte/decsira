@@ -64,7 +64,8 @@ class DefaultNode extends React.Component {
             return { showAllText: !currState.showAllText };
         });
 
-        loadMetadata.loadMetadata(this.props.node.id);
+        //loadMetadata.loadMetadata(this.props.node.id);
+        this.props.showInfoBox(this.props.node.id);
     }
 
     renderTools = () => {

@@ -476,7 +476,7 @@ class Catalog extends React.Component {
 
     showInfoBox = (node) => {
         this.props.loadMetadata(node);
-        this.props.showInfoBox();
+        //this.props.showInfoBox();
     };
 
     addToCart = (node) => {
