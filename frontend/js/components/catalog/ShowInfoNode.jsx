@@ -1,10 +1,9 @@
 const React = require('react');
-const {connect} = require('react-redux');
-const {bindActionCreators} = require('redux');
+const { connect } = require('react-redux');
+const { bindActionCreators } = require('redux');
 const PropTypes = require('prop-types');
 const { Image, Panel } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
-const MetadataResource = require('./MetadataResource');
 
 class ShowInfoNode extends React.Component {
     static propTypes = {
@@ -115,10 +114,23 @@ class ShowInfoNode extends React.Component {
     renderMetadata = () => {
         return (
             <div>
-                <div className="containerDefaultNodeFooter handleMetadato">
-                <p>Fonte metadato: <stron> {this.props.urlMetadato} </stron></p>
-                <p>Metadato:  <stron><a>*** </a></stron> </p>
-                <p>Servizio WMS: <stron>*** </stron></p>
+                <div className="containerDefaultNodeFooter handleMetadato ">
+
+                    <p>
+                        Fonte metadato:
+                        <a className="btn btn-link metadatoButton"> Regione piemonte </a>
+                    </p>
+
+                    <p> Metadato:
+                        <a className="btn btn-link" target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
+                    </p>
+
+                    <p>Servizio WMS:
+                        <a className="btn btn-link">
+                            Copia url del servizio 
+                        </a>
+                    </p>
+
                 </div>
             </div>
         );
@@ -171,7 +183,7 @@ class ShowInfoNode extends React.Component {
                 <span
                     tabIndex="0"
                     className={showAllTextClass}>
-                    { this.props.node.text }
+                    {this.props.node.text}
                 </span>
 
                 {showAllText ? this.renderMetadata() : null}

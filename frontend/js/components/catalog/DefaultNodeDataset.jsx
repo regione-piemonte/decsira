@@ -1,6 +1,3 @@
-const PropTypes = require('prop-types');
-
-
 /**
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
@@ -10,15 +7,15 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
+const PropTypes = require('prop-types');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
-const ButtonDefaultNode = require('./ButtonDefaultNode');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 const DefaultGroup = require('../toc/DefaultGroup');
 const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
 const ShowInfoNode = require('./ShowInfoNode');
-const loadMetadata = require('../../actions/metadatainfobox');
+
 
 class DefaultNode extends React.Component {
     constructor(props) {
@@ -59,14 +56,27 @@ class DefaultNode extends React.Component {
     };
 
 
+
+    showInfoBox = () => {
+        return this.props.showInfoBox(this.props.node.id);
+    };
+
     toogleShowMetadata() {
         this.setState((currState) => {
             return { showAllText: !currState.showAllText };
         });
+        
+        this.showInfoBox();
 
-        //loadMetadata.loadMetadata(this.props.node.id);
-        this.props.showInfoBox(this.props.node.id);
+        /* if (this.state.showAllText) {
+            this.props.showInfoBox(this.props.node.id);
+        } */
     }
+
+    /* adesso che la chiamata funziona devo mostrare i dati in manierra corretta e poi 
+    capire perchè la lo stato la prima volta che viene chiamato non si aggiorna correttamente 
+    invece rimane invariato fino alla seconda chiamaata  */
+
 
     renderTools = () => {
         let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"} /></Tooltip>;
@@ -148,9 +158,7 @@ class DefaultNode extends React.Component {
         this.goMap();
     };
 
-    showInfoBox = () => {
-        return this.props.showInfoBox(this.props.node.id);
-    };
+
 
 
     render() {
@@ -181,36 +189,20 @@ class DefaultNode extends React.Component {
                     {this.renderTools()}
                 </ShowInfoNode >
 
-                {/* bisogna trovare un modo per recuperare il metadato!!! e valorizzare
-                 i vari link con le url corrette !*/}
-
-
-
-                <div className="layer-content">
-                    <span
-                        tabIndex="0"
-                        onClick={this.showInfoBox}>
-                        TEST INFO BOXE
-                    </span>
-                </div>
-
-                {/* prossimo step capire come raggiungere l'url del 
-                metadato per mostrarlo nel metadato resource */}
-
-
-
                 <hr />
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
-                        <ButtonDefaultNode text="MOSTRA DATI" />
-                        <ButtonDefaultNode text="MOSTRA LEGGENDA" />
+                        <button className="btn btn-link linkColorMetadata"> <b> MOSTRA DATI</b> </button>
+                        <button className="btn btn-link linkColorMetadata"> <b> MOSTRA LEGGENDA</b> </button>
                     </div>
 
-                    <div>
-                        <ButtonDefaultNode
-                            text="Leggi di piu"
-                            onClickEvent={this.toogleShowMetadata.bind(this)} />
+                    <div className="ContainerParagraph">
+                        <button
+                            className="btn btn-link linkColorMetadata"
+                            onClick={() => this.toogleShowMetadata()}>
+                            <b>{!this.state.showAllText ? " LEGGI DI PIÙ " : " LEGGI DI MENO "}</b>
+                        </button>
                     </div>
                 </div>
 
