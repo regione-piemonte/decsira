@@ -112,7 +112,7 @@ class Header extends React.Component {
             <nav className="navbar">
                 <div className="container-fluid">
                     <div className='row'>
-                        <div className='col-md-4 col-lg-4'>
+                        <div className='col-md-5 col-lg-4'>
                             <div className="navbar-header">
                                 <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                     <span className="sr-only">Menu</span>
@@ -123,7 +123,7 @@ class Header extends React.Component {
                                 <a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")} className='navbar-brand'><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a>
                             </div>
                         </div>
-                        <div className='col-md-5 col-lg-5'>
+                        <div className='col-md-4 col-lg-5'>
                             <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
                                 <ul className="nav navbar-nav">
                                     <li className="nav-item">

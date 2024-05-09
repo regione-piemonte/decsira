@@ -193,13 +193,13 @@ class DefaultNode extends React.Component {
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
-                        <button className="btn btn-link linkColorMetadata"> <b> MOSTRA DATI</b> </button>
-                        <button className="btn btn-link linkColorMetadata"> <b> MOSTRA LEGGENDA</b> </button>
+                        <button className="btn btn-link mostra-dati">MOSTRA DATI</button>
+                        <button className="btn btn-link mostra-legenda">MOSTRA LEGGENDA</button>
                     </div>
 
                     <div className="ContainerParagraph">
                         <button
-                            className="btn btn-link linkColorMetadata"
+                            className="btn btn-link"
                             onClick={() => this.toogleShowMetadata()}>
                             <b>{!this.state.showAllText ? " LEGGI DI PIÙ " : " LEGGI DI MENO "}</b>
                         </button>

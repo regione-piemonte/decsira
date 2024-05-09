@@ -6,19 +6,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-const { connect } = require('react-redux');
+const {connect} = require('react-redux');
 const PropTypes = require('prop-types');
-const { createSelector } = require('reselect');
-const { Tabs, Tab, Modal, Button } = require('react-bootstrap');
+const {createSelector} = require('reselect');
+const { Tabs, Tab, Modal} = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
-const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse, selectAllObjects} = require('../actions/siracatalog');
+const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse} = require('../actions/siracatalog');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
-const { mapSelector } = require('../../MapStore2/web/client/selectors/map');
-const { tocSelector } = require('../selectors/sira');
-const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({ map, ...toc }));
-const { setProfile } = require('../actions/userprofile');
+const {mapSelector} = require('../../MapStore2/web/client/selectors/map');
+const {tocSelector} = require('../selectors/sira');
+const datasetSelector = createSelector([mapSelector, tocSelector], (map, toc) => ({map, ...toc}));
+const {setProfile} = require('../actions/userprofile');
 const { toggleSiraControl } = require('../actions/controls');
 const { handleKeyFocus } = require('../utils/SiraUtils');
 const {
@@ -29,22 +29,20 @@ const {
     setActiveFeatureType,
     queryFormPreloaded
 } = require('../actions/siradec');
-const { setGridType } = require('../actions/grid');
+const {setGridType} = require('../actions/grid');
 
 const Header = require('../components/Header');
 const SiraSearchBar = require('../components/SiraSearchBar');
 const TOC = require('../components/toc/TOC');
 const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
-const DefaultNodeMenu = require('../components/catalog/DefaultNodeMenu');
 const Footer = require('../components/Footer');
 
 const Vista = require('../components/catalog/VistaDataset');
-const VistaMenu = require('../components/catalog/VistaMenu');
-const { loadMetadata, showBox } = require('../actions/metadatainfobox');
-const { hideBox, loadLegends, toggleLegendBox } = require('../actions/metadatainfobox');
-const { toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart } = require('../actions/addmap');
-const { showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap } = require('../actions/cart');
+const {loadMetadata, showBox} = require('../actions/metadatainfobox');
+const {hideBox, loadLegends, toggleLegendBox} = require('../actions/metadatainfobox');
+const {toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart} = require('../actions/addmap');
+
 const proj4 = require('proj4').default;
 const { register } = require('ol/proj/proj4.js');
 
@@ -83,7 +81,7 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
 
-const AddMapModal = connect(({ addmap = {} }) => ({
+const AddMapModal = connect(({addmap = {}}) => ({
     error: addmap.error,
     records: addmap.records,
     loading: addmap.loading,
@@ -94,36 +92,6 @@ const AddMapModal = connect(({ addmap = {} }) => ({
     addLayers: addLayersInCart
 })(require('../components/addmap/AddMapModal'));
 
-const CartPanel = connect((state) => ({
-    showPanel: state.cart.showPanel,
-    layers: state.cart.layers,
-    wmsservices: state.cart.wmsservices
-}), (dispatch) => {
-    return {
-        onClosePanel: () => {
-            dispatch(hidePanel());
-        },
-        removeService: (id) => {
-            dispatch(removeServiceFromCart(id));
-            dispatch(removeLayersFromCart(id));
-        },
-        goToMap: () => {
-            dispatch(prepareDataToMap());
-            dispatch(hidePanel());
-        }
-    };
-})(require('../components/CartPanel'));
-
-const Cart = connect((state) => ({
-    servicesNumber: state.cart.servicesNumber
-}),
-    (dispatch) => {
-        return {
-            showCartPanel: () => {
-                dispatch(showPanel());
-            }
-        };
-    })(require('../components/Cart'));
 
 class Catalog extends React.Component {
     static propTypes = {
@@ -180,8 +148,8 @@ class Catalog extends React.Component {
     state = {
         params: {},
         searchText: "",
-        onToggle: () => { },
-        setProfile: () => { },
+        onToggle: () => {},
+        setProfile: () => {},
         waitingForConfig: {
             feature: null,
             redirect: null
@@ -190,12 +158,12 @@ class Catalog extends React.Component {
     };
 
     componentWillMount() {
-        const { nodesLoaded, loading, category } = this.props;
+        const {nodesLoaded, loading, category} = this.props;
         if (this.props?.match?.params?.profile) {
             this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
         if (!nodesLoaded && !loading && category && category.id) {
-            this.loadMetadata({ category: category });
+            this.loadMetadata({category: category});
         }
     }
 
@@ -205,7 +173,7 @@ class Catalog extends React.Component {
         window.addEventListener('keyup', handleKeyFocus);
     }
 
-    componentWillReceiveProps({ loading, map, notAuthorized, configOggetti }) {
+    componentWillReceiveProps({loading, map, notAuthorized, configOggetti}) {
         if (!loading && this.props.map && this.props.map !== map) {
             if (this.props?.match?.params?.profile) {
                 this.context.router.history.push(`/map/${this.props.match.params.profile}/`);
@@ -219,8 +187,7 @@ class Catalog extends React.Component {
                 waitingForConfig: {
                     feature: null,
                     redirect: null
-                }
-            });
+                } });
         }
         if (this.state.waitingForConfig.feature && configOggetti[this.state.waitingForConfig.feature]) {
             if (this.state.waitingForConfig.type === 'grid') {
@@ -259,23 +226,16 @@ class Catalog extends React.Component {
     };
 
     renderSpinner = () => {
-        return (
-            <div className="loading-container">
-                <Spinner
-                    spinnerName={"three-bounce"}
-                    style={{ position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px" }}
-                    noFadeIn />
-            </div>
-        );
+        return (<div className="loading-container"><Spinner spinnerName={"three-bounce"} style={{position: "absolute", top: "calc(50%)", left: "calc(50% - 30px)", width: "60px"}} noFadeIn/></div>);
     };
 
     renderUnauthorized = () => {
         return (<Modal show bsSize="small" onHide={() => this.props.setActiveFeatureType(null)}>
             <Modal.Header className="dialog-error-header-side" closeButton>
-                <Modal.Title><I18N.Message msgId="Modal.InfoTitle" /></Modal.Title>
+                <Modal.Title><I18N.Message msgId="Modal.InfoTitle"/></Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="mapstore-error"><I18N.Message msgId="Modal.UnauthorizedMessage" /></div>
+                <div className="mapstore-error"><I18N.Message msgId="Modal.UnauthorizedMessage"/></div>
             </Modal.Body>
             <Modal.Footer>
             </Modal.Footer>
@@ -284,46 +244,32 @@ class Catalog extends React.Component {
     };
 
     renderView = () => {
-        const { selectedView } = this.props;
-        return (
-            <div>
-                <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                    <div id="dataset-results-view">
-                        <Vista key={selectedView.id}
-                            node={selectedView}
-                            onToggle={this.props.onToggle}
-                            addToMap={this.loadThematicView}
-                            showInfoBox={this.showInfoBox} />
-                    </div>
-                </div>
-            </div>);
-    }
-
-    renderAllViews = () => {
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
-            node={v}
-            onToggle={this.props.onToggle}
-            addToMap={this.loadThematicView}
-            showInfoBox={this.showInfoBox}
-        />)) : <div/>;
+        const {selectedView} = this.props;
         return (    
         <div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                 <div id="dataset-results-view"> 
-                    {viste}
+                    <Vista key={selectedView.id}
+                        node={selectedView}
+                        onToggle={this.props.onToggle}
+                        addToMap={this.loadThematicView}
+                        showInfoBox={this.showInfoBox}/>
                 </div>    
             </div>
         </div>);
     }
 
     renderCategory = () => {
+        const {category} = this.props;
         return (<div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+            <h1 role="contentinfo" aria-label="area di ricerca">
+                <span>{category ? category.name : (<noscript/>)}</span>
+            </h1>
            
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                {this.props.subcat=='views' ? this.renderAllViews() : this.renderResults()}
+                {category ? this.renderResults() : (<noscript/>)}
                 {this.props.notAuthorized && this.renderUnauthorized()}
             </div>
         </div>
@@ -331,7 +277,7 @@ class Catalog extends React.Component {
     }
 
     renderResults = () => {
-        const { loading, objects } = this.props;
+        const {loading, objects} = this.props;
 
         const tocObjects = (
             <TOC id="dataset-toc" key="dataset-toc" nodes={objects}>
@@ -341,9 +287,9 @@ class Catalog extends React.Component {
                     toggleSiraControl={this.searchAll}
                     flat
                     showInfoBox={this.showInfoBox}
-                    addToMap={this.addToCart} />
+                    addToMap={this.addToCart}/> 
             </TOC>);
-
+        
         return (
             <div>
                 {loading ? this.renderSpinner() : tocObjects}
@@ -352,23 +298,29 @@ class Catalog extends React.Component {
     };
 
     renderMenu = () => {
+        const {loading} = this.props;
+        
         const nodes = this.updateNodes(this.props.allNodes);
         const tocObjects = (
             <TOC id="dataset-toc" key="dataset-toc" nodes={nodes}>
                 <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
-                    <DefaultNodeMenu
+                    <DefaultNode
+                        expandFilterPanel={this.openFilterPanel}
+                        configureIndicaLayer={this.openIndicaPanel}
+                        toggleSiraControl={this.searchAll}
                         onToggle={this.props.onToggle}
-                        node={nodes} />
+                        node={nodes}
+                        showInfoBox={this.showInfoBox}
+                        addToMap={this.addToCart}/>
                 </DefaultGroup>
             </TOC>);
-            let viewAll = {
-                id: 999,
-                title: <I18N.Message msgId={"catalog.allViews"}/>
-            }
-        const viste = this.props.allViews ? this.props.allViews.map((v) => (
-            <VistaMenu node={v} />
-        )) : <div />;
-
+        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+            node={v}
+            onToggle={this.props.onToggle}
+            addToMap={this.loadThematicView}
+            showInfoBox={this.showInfoBox}
+        />)) : <div/>;
+        
         return (
             <Tabs
                 className="dataset-tabs"
@@ -377,16 +329,11 @@ class Catalog extends React.Component {
                 <Tab
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
-                    <div><I18N.Message msgId={"catalog.selectedObjects"}/>{this.props.objects.length}</div>
-                    <button onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"}/></button>
                     {tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
-                    <div id="dataset-results-view"> 
-                        <VistaMenu node={viewAll}/>
-                        {viste}
-                    </div>
+                    <div id="dataset-results-view"> {viste}</div>
                 </Tab>
             </Tabs>);
     };
@@ -404,45 +351,37 @@ class Catalog extends React.Component {
                     <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
                         <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
                     </div>
-                    <Header goToHome={this.goToHome} />
+                    <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
-
+                    
                     <div className="row d-flex">
 
-                        <nav className={this.state.menuOpened ? 'col sideBar-lateral' : 'col sideBar-lateral small-col'}>
+                        <nav className={this.state.menuOpened ? 'col sideBar-lateral': 'col sideBar-lateral small-col'}>  
                             <div id="btn-menu">
                                 <button onClick={this.toggleClass} >
-                                    <span className="sr-only">Menu</span>
-                                </button>
+                                    <span  className="sr-only">Menu</span> 
+                                </button>  
                             </div>
 
                             <div className='menu'>
                                 {this.renderSerchBar()}
-                                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                                    {category ? this.renderMenu() : (<noscript />)}
+                                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">                   
+                                    {category ? this.renderMenu() : (<noscript/>)}
                                     {this.props.notAuthorized && this.renderUnauthorized()}
                                 </div>
                             </div>
                         </nav>
 
                         <div className='col container-dx'>
-                            <div style={{display: "inline-block"}}>
-                                <h1>Catalogo degli oggetti e delle viste tematiche</h1>
-                                <Cart/>
-                                <Button onClick={() => {this.goMap(); }} className='btn btn-primary' style={{float:"right"}}>
-                                    <I18N.Message msgId={"catalog.goToMap"}/>
-                                </Button>
-                            </div>
-
-
-                            <CartPanel />
+                            <p className='small tutte-categorie'>Tutte le categorie</p>
+                            <h1>Pinte</h1>
                             {selectedView ? this.renderView() : this.renderCategory()}
                         </div>
 
                     </div>
 
                     <div className="dataset-footer-container">
-                        <Footer />
+                        <Footer/>
                     </div>
                 </div>
 
@@ -454,15 +393,14 @@ class Catalog extends React.Component {
                     top: -100,
                     position: "fixed",
                     marginBottom: "0px",
-                    boxShadow: "0 0 5px 1px rgba(94,94,94,1)"
-                }} />
+                    boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
                 <AddMapModal />
             </div>);
     }
 
-    loadMetadata = ({ text, category } = {}) => {
+    loadMetadata = ({text, category} = {}) => {
         let params = {};
-        const { id } = category || {};
+        const {id} = category || {};
         if (id !== 999) {
             params.category = id;
         }
@@ -476,17 +414,17 @@ class Catalog extends React.Component {
 
     showInfoBox = (node) => {
         this.props.loadMetadata(node);
-        // //this.props.showInfoBox();
+        this.props.showInfoBox();
     };
 
     addToCart = (node) => {
-        if (!node.featureType) {
+        if ( !node.featureType) {
             this.props.toggleAddMap(true);
             this.props.loadNodeMapRecords(node);
         } else if (node.featureType) {
             const featureType = node.featureType.replace('featuretype=', '').replace('.json', '');
             if (!this.props.configOggetti[featureType]) {
-                this.props.loadFeatureTypeConfig(null, { authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : '' }, featureType, true, false, node.id, true, node);
+                this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, node.id, true, node);
             } else {
                 let layers = [];
                 layers.push(this.props.configOggetti[featureType].layer);
@@ -505,7 +443,7 @@ class Catalog extends React.Component {
                     type: 'query'
                 }
             });
-            this.props.loadFeatureTypeConfig(null, { authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : '' }, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         } else {
             if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
@@ -523,7 +461,7 @@ class Catalog extends React.Component {
     openIndicaPanel = (ftType, siraId) => {
         const featureType = ftType.replace('featuretype=', '').replace('.json', '');
         if (!this.props.configOggetti[featureType]) {
-            this.props.loadFeatureTypeConfig(null, { authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : '' }, featureType, true, false, null, false, null);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true, false, null, false, null);
         } else if (this.props.activeFeatureType !== featureType) {
             this.props.setActiveFeatureType(featureType);
             this.props.queryFormPreloaded(false);
@@ -542,7 +480,7 @@ class Catalog extends React.Component {
                     node
                 }
             });
-            this.props.loadFeatureTypeConfig(null, { authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : '' }, featureType, true);
+            this.props.loadFeatureTypeConfig(null, {authkey: this.props.userprofile.authParams.authkey ? this.props.userprofile.authParams.authkey : ''}, featureType, true);
         } else {
             if (this.props.activeFeatureType !== featureType) {
                 this.props.setActiveFeatureType(featureType);
@@ -559,21 +497,16 @@ class Catalog extends React.Component {
         }
     };
 
-    loadThematicView = ({ serviceUrl, params } = {}) => {
-        this.props.getThematicViewConfig({ serviceUrl, params, configureMap: true });
+    loadThematicView = ({serviceUrl, params} = {}) => {
+        this.props.getThematicViewConfig({serviceUrl, params, configureMap: true});
     };
 
     goToHome = () => {
         this.context.router.history.push('/');
     };
 
-    goMap = () => {
-        this.props.prepareDataToMap();
-        this.context.router.history.replace("/map/");
-    };
-
     updateNodes = (nodes) => {
-        return nodes.map(node => {
+        return nodes.map(node=> {
             node.showComponent = true;
             node.hide = false;
             if (node.nodes) {
@@ -602,7 +535,7 @@ module.exports = connect(datasetSelector, {
     toggleAddMap: toggleAddMap,
     loadNodeMapRecords: loadNodeMapRecords,
     addLayersInCart: addFeatureTypeLayerInCart,
-    setNodeInUse: setNodeInUse,
-    prepareDataToMap,
-    selectAllObjects
+    setNodeInUse: setNodeInUse
 })(Catalog);
+
+

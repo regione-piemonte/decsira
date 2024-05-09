@@ -116,20 +116,20 @@ class ShowInfoNode extends React.Component {
             <div>
                 <div className="containerDefaultNodeFooter handleMetadato ">
 
-                    <p>
-                        Fonte metadato:
-                        <a className="btn btn-link metadatoButton"> Regione piemonte </a>
-                    </p>
+                    <span className='label'>Fonte metadato:
+                 
+                    <a className="btn btn-link metadatoButton"> Regione piemonte </a>
+                    </span>
 
-                    <p> Metadato:
+                    <span className='label'>Metadato:
                         <a className="btn btn-link" target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
-                    </p>
+                    </span>
 
-                    <p>Servizio WMS:
+                    <span className='label'>Servizio WMS:
                         <a className="btn btn-link">
                             Copia url del servizio 
                         </a>
-                    </p>
+                    </span>
 
                 </div>
             </div>

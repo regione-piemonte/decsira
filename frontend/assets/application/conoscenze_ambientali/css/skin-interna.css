@@ -56,27 +56,101 @@ h1 {
     font-size: 30px;
 	font-weight: bold;
 }
-
+.sira-ms2 h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
 #credits-container{ max-width: 900px;}
 #mapstore-langselector button.btn.btn-default  {
 	background-color: transparent;
     color: white;
 	border: none !important;
 }
-header .mapstore-langselector a, header .mapstore-langselector a:hover, header .mapstore-langselector a:active, header .mapstore-langselector a:visited{color: #000 !important;
-	background:#fff;}
+header .mapstore-langselector a, header .mapstore-langselector a:hover, header .mapstore-langselector a:active, header .mapstore-langselector a:visited{
+	color: #000 !important;
+	background:#fff;
+}
+
+header .row{  
+	display: flex;
+	flex-wrap: wrap;
+  }
 
 
-/*BUTTON LINK */
+.sira-ms2 .navbar-collapse.in {
+	overflow-y: auto;
+	z-index: 5000;
+}
+@media (max-width: 767px)	{
+	header .navbar-collapse {
+		position: absolute;
+        background: #1976D2;
+        right: 10px;
+        min-width: 180px;
+        z-index: 200;
+        top: 40px;
+        border: 1px solid #fff;
+        padding: 0;
+	}
+	header .navbar-collapse .navbar-nav {
+		margin: 0;
+	}
 
+	header .navbar-collapse .navbar-nav>li>.btn-link {
+		width: 100%;
+		text-align: left;
+		border-bottom: 1px solid #fff;
+		font-weight: bold;
+	}
+
+}
+/*BUTTON - LINK */
+
+.sira-ms2 .btn-link {
+	color: #1976D2;
+}
+.sira-ms2 .btn-link.mostra-dati {
+	background-image: url(images/mostra-dati.svg);
+	padding-left: 25px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+.sira-ms2 .btn-link.mostra-legenda {
+	background-image: url(images/mostra-legenda.svg);
+	padding-left: 25px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+
+
+.btn-outline-primary {
+    color: #1976D2;
+    background-color: transparent;
+    background-image: none;
+    border-color: #1976D2;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #1976D2;
+    background-image: none;
+    border-color: #1976D2;
+}
 .btn-primary {
 	background-color: #1976D2;
 
 }
 .btn-default,
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active{
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active,
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, 
+.btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover,
+.sira-ms2 .btn-default, .sira-ms2 .btn-default:hover {
 	background-color: #1976D2;
 	color: #ffffff;
+	border-color: #1976D2;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
@@ -106,8 +180,8 @@ header .mapstore-langselector a, header .mapstore-langselector a:hover, header .
 .btn-default[disabled]{
 	/* color: #007E4F;*/
  }
- header .glyphicon-question-sign{ font-size: 22px;}
- .sira-login{padding:3px 8px 0 8px;}
+header .glyphicon-question-sign{ font-size: 22px;}
+.sira-login{padding:3px 8px 0 8px;}
 button#mapstore-langselector{
 	padding-left: 5px;
     margin-right: 20px;
@@ -1279,6 +1353,7 @@ button.close {
 	}
 .footer a, .footer a:hover {
 		color: #fff;
+		text-decoration: underline;
 	}
 .footer ul {
 	padding: 0;
@@ -1314,82 +1389,85 @@ button.close {
 	}
 
 
-	/*menu laterale*/
-	.col {
-		flex: 1 0 0%;
+/*menu laterale*/
+.col {
+	flex: 1 0 0%;
+}
+.d-flex{ display: flex;}
+
+
+/* side-bar */
+.sideBar-lateral {
+max-width: 450px;
+height: 100%;
+transition: width 100ms ease-in; 
+position: relative;
+box-shadow: 1px 2px 8px #bab6b6;
+}
+
+.sideBar-lateral.small-col {
+max-width: 40px;
+}
+
+.sideBar-lateral.small-col .menu {
+margin-right: 80px;
+}
+.sideBar-lateral.small-col .menu {
+padding: 24px 8px 8px 8px;
+}
+
+
+.sideBar-lateral .menu .dataset-tabs{ margin-top: 30px;}
+
+.sira-ms2 #btn-menu{
+	position: absolute;
+	right: -16px;
+	top: 50px;
+	background:url("images/bk-btn-menu.png") 0 0 no-repeat;
+	height: 34px;
+	width: 33px;
+	text-align: right;
+}
+
+.sira-ms2  #btn-menu button{
+	border: 0;
+	background: transparent;
+	position: relative;
+	padding: 7px;
+}
+.sira-ms2  .sideBar-lateral #btn-menu button:before{
+	content: "\f060";
+	display: inline-block;
+font: normal normal normal 14px / 1 FontAwesome;
+font-size: inherit;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+	font-weight: 900;
+	color: #000;
+	font-size: 18px !important;
+}
+
+.sira-ms2 .sideBar-lateral.small-col #btn-menu button:before{
+	content: "\f061";
+	display: inline-block;
+font: normal normal normal 14px / 1 FontAwesome;
+font-size: inherit;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+	font-weight: 900;
+	color: #000;
+	font-size: 18px !important;
+}
+.sira-ms2 .square-button-md .glyphicon {
+	font-size: 23px;
+}
+.item-icon {
+	width: 2em;
+	height: 2em;  
 	}
-	.d-flex{ display: flex;}
-
-
-	  /* side-bar */
-	  .sideBar-lateral {
-		max-width: 450px;
-		height: 100%;
-		transition: width 100ms ease-in; 
-		position: relative;
-		box-shadow: 1px 2px 8px #bab6b6;
-	  }
-	  
-	  .sideBar-lateral.small-col {
-		max-width: 40px;
-	  }
-	  
-	  .sideBar-lateral.small-col .menu {
-		margin-right: 80px;
-	  }
-	  .sideBar-lateral.small-col .menu {
-		padding: 24px 8px 8px 8px;
-	  }
-
-
-	.sira-ms2 #btn-menu{
-		position: absolute;
-		right: -16px;
-		top: 50px;
-		background:url("images/bk-btn-menu.png") 0 0 no-repeat;
-		height: 34px;
-		width: 33px;
-		text-align: right;
-	}
-
 	
-	.sira-ms2  #btn-menu button{
-		border: 0;
-		background: transparent;
-		position: relative;
-		padding: 7px;
-	}
-	.sira-ms2  .sideBar-lateral #btn-menu button:before{
-		content: "\f060";
-		display: inline-block;
-    font: normal normal normal 14px / 1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-		font-weight: 900;
-		color: #000;
-		font-size: 18px !important;
-	}
-
-	.sira-ms2 .sideBar-lateral.small-col #btn-menu button:before{
-		content: "\f061";
-		display: inline-block;
-    font: normal normal normal 14px / 1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-		font-weight: 900;
-		color: #000;
-		font-size: 18px !important;
-	}
-
-	.item-icon {
-		width: 2em;
-		height: 2em;  
-	  }
-	  
 .sira-ms2 .sideBar-lateral.small-col .dataset-tabs .nav-tabs,
 .sira-ms2 .sideBar-lateral.small-col #map-search-bar { display: none;}
 
@@ -1406,3 +1484,7 @@ p.small.tutte-categorie{
 }
 
 
+.sira-ms2 .catalog-object {
+    border: 1px solid #f1eded;
+}
+.cardCatalogo{ box-shadow: none;}
