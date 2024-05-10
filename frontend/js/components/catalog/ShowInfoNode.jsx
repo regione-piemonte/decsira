@@ -85,19 +85,6 @@ class ShowInfoNode extends React.Component {
         return ('');
     };
 
-    renderSingleLegend = (legends) => {
-        if (legends) {
-            return (
-                legends.map((legend, index) =>
-                    <div className="infobox-legendpanel">
-                        <h4 className="infobox-legend-title" key={'legend_' + index}>{legend.title}</h4>
-                        <Image key={'im_legend_' + index} src={legend.url} />
-                    </div>
-                ));
-        }
-        return ('');
-    };
-
     renderLegends = () => {
         if (this.props.urlLegend) {
             return (
@@ -111,10 +98,23 @@ class ShowInfoNode extends React.Component {
         return ('');
     };
 
+    renderSingleLegend = (legends) => {
+        if (legends) {
+            return (
+                legends.map((legend, index) =>
+                    <div className="infobox-legendpanel">
+                        <h4 className="infobox-legend-title" key={'legend_' + index}>{legend.title}</h4>
+                        <Image key={'im_legend_' + index} src={legend.url} />
+                    </div>
+                ));
+        }
+        return ('');
+    };
+
     renderMetadata = () => {
         let renderWfsUrl = [];
         if (this.props.urlWFS && this.props.urlWFS.length > 0) {
-            renderWfsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWFS"} /></h4>);
+            renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
             this.props.urlWFS.map((val, index) =>
                 renderWfsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
@@ -127,7 +127,7 @@ class ShowInfoNode extends React.Component {
 
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
-            renderWmsUrl.push(<h4><b><I18N.Message msgId={"metadataInfoBox.urlWMS"} /></b></h4>);
+            renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             this.props.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
                     <p>
@@ -151,7 +151,10 @@ class ShowInfoNode extends React.Component {
                         <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
                     </p>
 
-                    <p>{renderWfsUrl} {renderWmsUrl}</p>
+                    <p>
+                        {renderWfsUrl}
+                        {renderWmsUrl}
+                    </p>
 
                 </div>
             </div>
@@ -172,13 +175,19 @@ class ShowInfoNode extends React.Component {
                 </Panel>);
         }
 
+        console.log('props>>>>>',this.props);
+
         return (
             <div className='layer-content'>
                 <span
                     tabIndex="0"
-                    className={showAllTextClass}>
+                    className={showAllTextClass}
+                    onclick={this.showInfoBox}>
                     {this.props.node.text}
                 </span>
+
+                {/* <button onClick={() => this.toggleLegendPanel()}>toggleLegendPanel</button>
+                {renderLegendPanel} */}
 
                 {showAllText ? this.renderMetadata() : null}
             </div>

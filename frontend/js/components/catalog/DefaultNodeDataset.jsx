@@ -100,7 +100,7 @@ class DefaultNode extends React.Component {
                         <Glyphicon
                             key="toggle-indicatori"
                             glyph="signal" />
-                            AGGIUNGI E GESTISCI DIMENSIONI SU MAPPA
+                        <I18N.Message msgId={"renderTools.handleSizeOnMap"} />
                     </button>
                 </OverlayTrigger>));
         } else {
@@ -114,7 +114,7 @@ class DefaultNode extends React.Component {
                         <Glyphicon
                             key="addToMap"
                             glyph="plus-sign" />
-                        CARICA SU MAPPA
+                        <I18N.Message msgId={"renderTools.loadInMap"} />
                     </button>
                 </OverlayTrigger>
             ));
@@ -128,7 +128,7 @@ class DefaultNode extends React.Component {
                             className="btn btn-link mostra-dati"
                             style={glyphStyle}
                             onClick={() => this.props.toggleSiraControl(this.props.node)}>
-                            MOSTRA DATI
+                            <I18N.Message msgId={"renderTools.showData"} />
                         </button>
                     </OverlayTrigger>));
 
