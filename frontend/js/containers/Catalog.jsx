@@ -13,7 +13,7 @@ const { Tabs, Tab, Modal, Button } = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
-const {toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse, selectAllObjects} = require('../actions/siracatalog');
+const { toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse, selectAllObjects } = require('../actions/siracatalog');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const { mapSelector } = require('../../MapStore2/web/client/selectors/map');
 const { tocSelector } = require('../selectors/sira');
@@ -306,24 +306,24 @@ class Catalog extends React.Component {
             onToggle={this.props.onToggle}
             addToMap={this.loadThematicView}
             showInfoBox={this.showInfoBox}
-        />)) : <div/>;
-        return (    
-        <div>
-            <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                <div id="dataset-results-view"> 
-                    {viste}
-                </div>    
-            </div>
-        </div>);
+        />)) : <div />;
+        return (
+            <div>
+                <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                    <div id="dataset-results-view">
+                        {viste}
+                    </div>
+                </div>
+            </div>);
     }
 
     renderCategory = () => {
         return (<div>
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-           
+
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                {this.props.subcat=='views' ? this.renderAllViews() : this.renderResults()}
+                {this.props.subcat == 'views' ? this.renderAllViews() : this.renderResults()}
                 {this.props.notAuthorized && this.renderUnauthorized()}
             </div>
         </div>
@@ -361,10 +361,10 @@ class Catalog extends React.Component {
                         node={nodes} />
                 </DefaultGroup>
             </TOC>);
-            let viewAll = {
-                id: 999,
-                title: <I18N.Message msgId={"catalog.allViews"}/>
-            }
+        let viewAll = {
+            id: 999,
+            title: <I18N.Message msgId={"catalog.allViews"} />
+        }
         const viste = this.props.allViews ? this.props.allViews.map((v) => (
             <VistaMenu node={v} />
         )) : <div />;
@@ -377,14 +377,14 @@ class Catalog extends React.Component {
                 <Tab
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
-                    <div><I18N.Message msgId={"catalog.selectedObjects"}/>{this.props.objects.length}</div>
-                    <button onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"}/></button>
+                    <div><I18N.Message msgId={"catalog.selectedObjects"} />{this.props.objects.length}</div>
+                    <button onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"} /></button>
                     {tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
-                    <div id="dataset-results-view"> 
-                        <VistaMenu node={viewAll}/>
+                    <div id="dataset-results-view">
+                        <VistaMenu node={viewAll} />
                         {viste}
                     </div>
                 </Tab>
@@ -397,67 +397,68 @@ class Catalog extends React.Component {
     };
 
     render() {
-        const {category, selectedView} = this.props;
-        return (
-            <div className="interna">
-                <div style={{ minHeight: '100%', position: 'relative' }}>
-                    <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
-                        <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
-                    </div>
-                    <Header goToHome={this.goToHome} />
-                    <div id="main-content"></div>
+        const { category, selectedView } = this.props;
 
-                    <div className="row d-flex">
+        
+        return (<div className="interna">
+            <div style={{ minHeight: '100%', position: 'relative' }}>
+                <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
+                    <HashLink to="/dataset/#main-content">Salta al contenuto principale</HashLink>
+                </div>
+                <Header goToHome={this.goToHome} />
+                <div id="main-content"></div>
 
-                        <nav className={this.state.menuOpened ? 'col sideBar-lateral' : 'col sideBar-lateral small-col'}>
-                            <div id="btn-menu">
-                                <button onClick={this.toggleClass} >
-                                    <span className="sr-only">Menu</span>
-                                </button>
-                            </div>
+                <div className="row d-flex">
 
-                            <div className='menu'>
-                                {this.renderSerchBar()}
-                                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                                    {category ? this.renderMenu() : (<noscript />)}
-                                    {this.props.notAuthorized && this.renderUnauthorized()}
-                                </div>
-                            </div>
-                        </nav>
-
-                        <div className='col container-dx'>
-                            <div style={{display: "inline-block"}}>
-                                <h1>Catalogo degli oggetti e delle viste tematiche</h1>
-                                <Cart/>
-                                <Button onClick={() => {this.goMap(); }} className='btn btn-primary' style={{float:"right"}}>
-                                    <I18N.Message msgId={"catalog.goToMap"}/>
-                                </Button>
-                            </div>
-
-
-                            <CartPanel />
-                            {selectedView ? this.renderView() : this.renderCategory()}
+                    <nav className={this.state.menuOpened ? 'col sideBar-lateral' : 'col sideBar-lateral small-col'}>
+                        <div id="btn-menu">
+                            <button onClick={this.toggleClass} >
+                                <span className="sr-only">Menu</span>
+                            </button>
                         </div>
 
+                        <div className='menu'>
+                            {this.renderSerchBar()}
+                            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                                {category ? this.renderMenu() : (<noscript />)}
+                                {this.props.notAuthorized && this.renderUnauthorized()}
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div className='col container-dx'>
+                        <div style={{ display: "inline-block" }}>
+                            <h1>Catalogo degli oggetti e delle viste tematiche</h1>
+                            <Cart />
+                            <Button onClick={() => { this.goMap(); }} className='btn btn-primary' style={{ float: "right" }}>
+                                <I18N.Message msgId={"catalog.goToMap"} />
+                            </Button>
+                        </div>
+
+
+                        <CartPanel />
+                        {selectedView ? this.renderView() : this.renderCategory()}
                     </div>
 
-                    <div className="dataset-footer-container">
-                        <Footer />
-                    </div>
                 </div>
 
-                <MetadataInfoBox panelStyle={{
-                    height: "500px",
-                    width: "650px",
-                    zIndex: 1000,
-                    left: "calc(50% - 250px)",
-                    top: -100,
-                    position: "fixed",
-                    marginBottom: "0px",
-                    boxShadow: "0 0 5px 1px rgba(94,94,94,1)"
-                }} />
-                <AddMapModal />
-            </div>);
+                <div className="dataset-footer-container">
+                    <Footer />
+                </div>
+            </div>
+
+            <MetadataInfoBox panelStyle={{
+                height: "500px",
+                width: "650px",
+                zIndex: 1000,
+                left: "calc(50% - 250px)",
+                top: -100,
+                position: "fixed",
+                marginBottom: "0px",
+                boxShadow: "0 0 5px 1px rgba(94,94,94,1)"
+            }} />
+            <AddMapModal />
+        </div>);
     }
 
     loadMetadata = ({ text, category } = {}) => {
@@ -470,13 +471,13 @@ class Catalog extends React.Component {
             params.text = text;
         }
         if (!this.props.loading) {
-            this.props.getMetadataObjects({params});
+            this.props.getMetadataObjects({ params });
         }
     };
 
     showInfoBox = (node) => {
         this.props.loadMetadata(node);
-        // //this.props.showInfoBox();
+        /* this.props.showInfoBox(); */
     };
 
     addToCart = (node) => {

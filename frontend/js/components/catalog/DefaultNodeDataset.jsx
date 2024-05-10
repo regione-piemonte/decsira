@@ -1,4 +1,5 @@
 /**
+import { show } from './../../../MapStore2/web/client/actions/mediaEditor';
  * Copyright 2017, GeoSolutions Sas.
  * All rights reserved.
  *
@@ -21,7 +22,7 @@ class DefaultNode extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAllText: false
+            showAllText: false,
         };
     }
 
@@ -61,21 +62,20 @@ class DefaultNode extends React.Component {
         return this.props.showInfoBox(this.props.node.id);
     };
 
+    /* Mostra il pannello sfondo grigio che permette di vedere fonte, link al metadato e servizio WMS*/
     toogleShowMetadata() {
-        this.setState((currState) => {
-            return { showAllText: !currState.showAllText };
+        this.setState((currentState) => {
+
+            if (!currentState.showAllText) {
+                this.showInfoBox();
+            }
+
+            return {
+                showAllText: !currentState.showAllText
+            };
+
         });
-        
-        this.showInfoBox();
-
-        /* if (this.state.showAllText) {
-            this.props.showInfoBox(this.props.node.id);
-        } */
     }
-
-    /* adesso che la chiamata funziona devo mostrare i dati in manierra corretta e poi 
-    capire perchè la lo stato la prima volta che viene chiamato non si aggiorna correttamente 
-    invece rimane invariato fino alla seconda chiamaata  */
 
 
     renderTools = () => {
@@ -100,6 +100,7 @@ class DefaultNode extends React.Component {
                         <Glyphicon
                             key="toggle-indicatori"
                             glyph="signal" />
+                            AGGIUNGI E GESTISCI DIMENSIONI SU MAPPA
                     </button>
                 </OverlayTrigger>));
         } else {
@@ -113,6 +114,7 @@ class DefaultNode extends React.Component {
                         <Glyphicon
                             key="addToMap"
                             glyph="plus-sign" />
+                        CARICA SU MAPPA
                     </button>
                 </OverlayTrigger>
             ));
@@ -123,16 +125,14 @@ class DefaultNode extends React.Component {
                 tools.push((
                     <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
                         <button
-                            className="btn btn-link"
+                            className="btn btn-link mostra-dati"
                             style={glyphStyle}
                             onClick={() => this.props.toggleSiraControl(this.props.node)}>
-                            <Glyphicon
-                                key="toggle-featuregrid"
-                                glyph="th" />
+                            MOSTRA DATI
                         </button>
                     </OverlayTrigger>));
 
-                tools.push((
+                /* tools.push((
                     <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipSira}>
                         <button
                             className="btn btn-link"
@@ -142,7 +142,7 @@ class DefaultNode extends React.Component {
                                 key="toggle-query"
                                 glyph="search" />
                         </button>
-                    </OverlayTrigger>));
+                    </OverlayTrigger>)); */
 
             }
         }
@@ -157,6 +157,13 @@ class DefaultNode extends React.Component {
         this.props.configureIndicaLayer(node.featureType, node.id, null);
         this.goMap();
     };
+
+
+
+    onOpenLegendPanel = () => {
+        this.props.loadLegend(this.props.urlWMS, this.props.urlLegend);
+    };
+
 
 
 
@@ -185,23 +192,37 @@ class DefaultNode extends React.Component {
 
                 <Title />
 
-                <ShowInfoNode showAllText={this.state.showAllText} >
-                    {this.renderTools()}
-                </ShowInfoNode >
+                <ShowInfoNode showAllText={this.state.showAllText} />
 
                 <hr />
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
-                        <button className="btn btn-link mostra-dati">MOSTRA DATI</button>
-                        <button className="btn btn-link mostra-legenda">MOSTRA LEGGENDA</button>
+
+                        {this.renderTools()}
+
+                        {/* <button className="btn btn-link linkColorMetadata">
+                            <b> <I18N.Message msgId={"metadataInfoBox.showDataButton"} />  </b> 
+                        </button>
+                        <button
+                            className="btn btn-link linkColorMetadata">
+                            <b> <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />  </b> 
+                        </button> */}
                     </div>
 
                     <div className="ContainerParagraph">
                         <button
                             className="btn btn-link"
                             onClick={() => this.toogleShowMetadata()}>
-                            <b>{!this.state.showAllText ? " LEGGI DI PIÙ " : " LEGGI DI MENO "}</b>
+                            <b>
+                                {
+                                    !this.state.showAllText ?
+                                        <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
+                                        <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
+                                }
+                                {/* mostra di piu */}
+                                {/* mostra di meno */}
+                            </b>
                         </button>
                     </div>
                 </div>

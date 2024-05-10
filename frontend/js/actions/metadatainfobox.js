@@ -195,7 +195,7 @@ function loadMetadata(idMetadato) {
                     response.data.showButtonLegend = 'none';
                 }
                 dispatch(metadataLoaded(response.data));
-                // dispatch(showBox());
+                /* dispatch(showBox()); */
             } else {
                 try {
                     JSON.parse(response.data);

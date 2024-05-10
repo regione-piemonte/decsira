@@ -1,9 +1,12 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const { connect } = require('react-redux');
 const { bindActionCreators } = require('redux');
-const PropTypes = require('prop-types');
 const { Image, Panel } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
+const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
+const glyphStyle = { "float": "right", cursor: 'pointer' };
+const LegendInfoBox = require('./LegendInfoBox');
 
 class ShowInfoNode extends React.Component {
     static propTypes = {
@@ -112,33 +115,18 @@ class ShowInfoNode extends React.Component {
     };
 
     renderMetadata = () => {
-        return (
-            <div>
-                <div className="containerDefaultNodeFooter handleMetadato ">
-
-                    <span className='label'>Fonte metadato:
-                 
-                    <a className="btn btn-link metadatoButton"> Regione piemonte </a>
-                    </span>
-
-                    <span className='label'>Metadato:
-                        <a className="btn btn-link" target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
-                    </span>
-
-                    <span className='label'>Servizio WMS:
-                        <a className="btn btn-link">
-                            Copia url del servizio 
-                        </a>
-                    </span>
-
-                </div>
-            </div>
-        );
-    }
-
-    render() {
-        let { showAllText, children } = this.props;
-        const showAllTextClass = !showAllText ? "layer-description" : "";
+        let renderWfsUrl = [];
+        if (this.props.urlWFS && this.props.urlWFS.length > 0) {
+            renderWfsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWFS"} /></h4>);
+            this.props.urlWFS.map((val, index) =>
+                renderWfsUrl.push(
+                    <a tabIndex="0" className="infobox-service-url"
+                        title="wfs" key={'wfs_' + index}
+                        href={val} target="_blank" >
+                        <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
+                    </a>
+                ));
+        }
 
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
@@ -155,18 +143,28 @@ class ShowInfoNode extends React.Component {
                 )
             );
         }
-        let renderWfsUrl = [];
-        if (this.props.urlWFS && this.props.urlWFS.length > 0) {
-            renderWfsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWFS"} /></h4>);
-            this.props.urlWFS.map((val, index) =>
-                renderWfsUrl.push(
-                    <a tabIndex="0" className="infobox-service-url"
-                        title="wfs" key={'wfs_' + index}
-                        href={val} target="_blank" >
-                        <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
-                    </a>
-                ));
-        }
+
+        return (
+            <div>
+                <div className="containerDefaultNodeFooter handleMetadato ">
+
+                    <p> Fonte metadato: {this.props.dataProvider} </p>
+
+                    <p> Metadato:
+                        <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
+                    </p>
+
+                    <p>{renderWfsUrl} {renderWmsUrl}</p>
+
+                </div>
+            </div>
+        );
+    }
+
+    render() {
+        let { showAllText } = this.props;
+        const showAllTextClass = !showAllText ? "layer-description" : "";
+
         let renderLegendPanel = null;
         if (this.props.openLegendPanel) {
             renderLegendPanel =
@@ -177,7 +175,6 @@ class ShowInfoNode extends React.Component {
                 </Panel>);
         }
 
-
         return (
             <div className='layer-content'>
                 <span
@@ -187,8 +184,6 @@ class ShowInfoNode extends React.Component {
                 </span>
 
                 {showAllText ? this.renderMetadata() : null}
-                {children}
-
             </div>
         );
     }
@@ -197,6 +192,8 @@ class ShowInfoNode extends React.Component {
 }
 
 
+
+/* module.exports = ShowInfoNode; */
 
 
 module.exports = connect((state) => {

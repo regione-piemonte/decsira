@@ -82,6 +82,11 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
 
+const ShowInfoNode = connect(
+    mapStateToPropsMIB,
+    mapDispatchToPropsMIB
+)(require('../components/catalog/ShowInfoNode'));
+
 const AddMapModal = connect(({addmap = {}}) => ({
     error: addmap.error,
     records: addmap.records,
@@ -382,6 +387,7 @@ class Dataset extends React.Component {
                     position: "fixed",
                     marginBottom: "0px",
                     boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
+                    
                 <AddMapModal />
             </div>);
     }

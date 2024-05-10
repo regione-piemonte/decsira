@@ -111,7 +111,6 @@ class MetadataInfoBox extends React.Component {
         }
         return ('');
     };
-    
     render() {
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
@@ -151,8 +150,16 @@ class MetadataInfoBox extends React.Component {
         }
 
         return (
-            <Draggable bounds="parent" start={{ x: 0, y: 300 }} handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div tabIndex="0" id="metadataInfoBox" className="scheda-info" style={{ display: this.props.show }} role="contentinfo" aria-label="Informazioni aggiuntive">
+            <Draggable
+                bounds="parent"
+                start={{ x: 0, y: 300 }}
+                handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
+                <div tabIndex="0"
+                    id="metadataInfoBox"
+                    className="scheda-info"
+                    style={{ display: this.props.show }}
+                    role="contentinfo"
+                    aria-label="Informazioni aggiuntive">
                     <Panel
                         className="info-header panel panel-primary"
                         header={
@@ -184,6 +191,7 @@ class MetadataInfoBox extends React.Component {
                             {renderLegendPanel}
                         </Panel>
                     </Panel>
+
                 </div>
             </Draggable>
         );
