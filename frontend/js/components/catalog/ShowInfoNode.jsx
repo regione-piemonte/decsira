@@ -4,9 +4,6 @@ const { connect } = require('react-redux');
 const { bindActionCreators } = require('redux');
 const { Image, Panel } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
-const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
-const glyphStyle = { "float": "right", cursor: 'pointer' };
-const LegendInfoBox = require('./LegendInfoBox');
 
 class ShowInfoNode extends React.Component {
     static propTypes = {
