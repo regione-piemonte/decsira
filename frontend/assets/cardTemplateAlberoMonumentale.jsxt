@@ -25,18 +25,20 @@
 			<LabeledField label="Descrizione stato" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrStato/text()")
             }/>
-			<LabeledField label="Richieste di segnalazione" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:richieste/text()")
-            }/>
-			<LabeledField label="Scheda censita in passato" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgCensito/text()")
-            }/>
-			<LabeledField label="Riferimento censimento passato" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:schedaSegnRifCensimPass/text()")
-            }/>
-			<LabeledField label="Rilevatore segnalazione" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:schedaSegnRilevatori/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label="Richieste di segnalazione" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:richieste/text()")
+				}/>
+				<LabeledField label="Scheda censita in passato" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgCensito/text()")
+				}/>
+				<LabeledField label="Riferimento censimento passato" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:schedaSegnRifCensimPass/text()")
+				}/>
+				<LabeledField label="Rilevatore segnalazione" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:schedaSegnRilevatori/text()")
+				}/>
+			</ProfileWrapper>
 			<LabeledField label="Tipo di oggetto" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:oggettoDiIdentif/text()")
             }/>
@@ -49,12 +51,14 @@
 			<LabeledField label="Specie" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:specie/text()")
             }/>
-			<LabeledField label="Descrizione specie" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrizioneSpecie/text()")
-            }/>
-			<LabeledField label="Descrizione albero" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrizioneAlbero/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label="Descrizione specie" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrizioneSpecie/text()")
+				}/>
+				<LabeledField label="Descrizione albero" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrizioneAlbero/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 		
 		<Section header='Localizzazione' eventKey='2' expanded={true}>
@@ -73,24 +77,28 @@
 			<LabeledField label="Latitudine Y segnalazione" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:segnalLatitudineY/text()")
             }/>
-			<LabeledField label="Longitudine X segnalaz. Gradi Sess" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:segnalLongitudineXGradi/text()")
-            }/>
-			<LabeledField label="Latitudine Y segnalaz. Gradi Sess" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:segnalLatitudineYGradi/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label="Longitudine X segnalaz. Gradi Sess" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:segnalLongitudineXGradi/text()")
+				}/>
+				<LabeledField label="Latitudine Y segnalaz. Gradi Sess" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:segnalLatitudineYGradi/text()")
+				}/>
+			</ProfileWrapper>
 			<LabeledField label="Itinerario di accesso" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:itinerarioAccesso/text()")
             }/>
-			<LabeledField label="Dettaglio particellee" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:dettaglioParticelle/text()")
-            }/>
-			<LabeledField label="Carta IGM   Tavola 1:25.000" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:cartaIgmTav25000/text()")
-            }/>
-			<LabeledField label="Carta IGM FG 1:100.000" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:cartaIgmFg100000/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label="Dettaglio particellee" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:dettaglioParticelle/text()")
+				}/>
+				<LabeledField label="Carta IGM   Tavola 1:25.000" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:cartaIgmTav25000/text()")
+				}/>
+				<LabeledField label="Carta IGM FG 1:100.000" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:cartaIgmFg100000/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 		
 		<Section header='Contesto del suolo' eventKey='3' expanded={true}>
@@ -100,18 +108,20 @@
 			<LabeledField label="Pendenza (%) suolo" value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:pendenzaPerc/text()")
             }/>
-			<LabeledField label="Contesto copertura suolo" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:contestoCoperturaSuolo/text()")
-            }/>
-			<LabeledField label="Contesto compattamento suolo" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:contestoCompattamentoSuolo/text()")
-            }/>
-			<LabeledField label="Contesto ristagno idrico" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgContestoRistagnoIdrico/text()")
-            }/>  
-			<LabeledField label="Contesto caratteristiche suolo" value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:contestoCaratteristicheSuolo/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label="Contesto copertura suolo" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:contestoCoperturaSuolo/text()")
+				}/>
+				<LabeledField label="Contesto compattamento suolo" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:contestoCompattamentoSuolo/text()")
+				}/>
+				<LabeledField label="Contesto ristagno idrico" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgContestoRistagnoIdrico/text()")
+				}/>  
+				<LabeledField label="Contesto caratteristiche suolo" value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:contestoCaratteristicheSuolo/text()")
+				}/>
+			</ProfileWrapper>
 			
 			<SiraTable
 			   id="TipoAmbiente"
@@ -124,11 +134,6 @@
 						   headerName: 'Contesto ambientale',
 						   width: 200,
 						   xpath:"decsiraogc_idf_alb_monum:TipoAmbiente/decsiraogc_idf_alb_monum:tipoAmbiente/text()"
-					   },
-					   {
-						   headerName: 'Prova',
-						   width: 200,
-						   xpath:"decsiraogc_idf_alb_monum:TipoAmbiente/decsiraogc_idf_alb_monum:fkAlbMonumTipoAmbiente/text()"
 					   }
 				   ]
 			   }
@@ -155,9 +160,11 @@
             <LabeledField label='Numero Fusti' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:numeroFusti/text()")
             }/>
-			<LabeledField label='Et&agrave; accertata (a)' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:etaAccertata/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label='Et&agrave; accertata (a)' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:etaAccertata/text()")
+				}/>
+			</ProfileWrapper>
 			<LabeledField label='Et&agrave; presunta (a)' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:etaPresunta/text()")
             }/>
@@ -179,9 +186,11 @@
 			<LabeledField label='Diametro medio chioma (m)' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:diametroMedioChiomaMetri/text()")
             }/>
-			<LabeledField label='Circonferenza sottosoglia' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgCirconfSottosoglia/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>
+				<LabeledField label='Circonferenza sottosoglia' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgCirconfSottosoglia/text()")
+				}/>
+			</ProfileWrapper>
 			<LabeledField label='Altezza dendrometrica' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgAltezzaDendrometrica/text()")
             }/>
@@ -232,38 +241,41 @@
 					   {
 						   headerName: 'Estremi propriet&agrave; vincolata privata',
 						   width: 220,
+						   profiles : ["FORESTE_SPEC@REG_PMN"],
 						   xpath:"decsiraogc_idf_alb_monum:TipoProprieta/decsiraogc_idf_alb_monum:vincProprPrivataEstremi/text()"
 					   },
 					   {
 						   headerName: 'Estremi gestore proprie&agrave; vincolata',
 						   width: 220,
+						   profiles : ["FORESTE_SPEC@REG_PMN"],
 						   xpath:"decsiraogc_idf_alb_monum:TipoProprieta/decsiraogc_idf_alb_monum:vincEstremiGestore/text()"
 					   }
 				   ]
 			   }
 			   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoProprieta")}/>
-			   
-            <LabeledField label='Propriet&agrave; vincolata in Area Protetta' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgVincAreaProtetta/text()")
-            }/>
-			<LabeledField label='Dettaglio aree protette' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:dettaglioAreeProtette/text()")
-            }/>
-			<LabeledField label='Altri vincoli' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:altriVinc/text()")
-            }/>
-			<LabeledField label='Tutela: riferimenti normativi' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tutelaRifNormativi/text()")
-            }/>
-			<LabeledField label='Tutela propriet&agrave; di interesse pubblico' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgTutelaPropDichIntPubbl/text()")
-            }/>
-			<LabeledField label='Tutela vigente' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgTutelaVigente/text()")
-            }/>
-			<LabeledField label='Tutela: altre osservazioni' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:altreOsservazioni/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>   
+				<LabeledField label='Propriet&agrave; vincolata in Area Protetta' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgVincAreaProtetta/text()")
+				}/>
+				<LabeledField label='Dettaglio aree protette' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:dettaglioAreeProtette/text()")
+				}/>
+				<LabeledField label='Altri vincoli' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:altriVinc/text()")
+				}/>
+				<LabeledField label='Tutela: riferimenti normativi' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tutelaRifNormativi/text()")
+				}/>
+				<LabeledField label='Tutela propriet&agrave; di interesse pubblico' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgTutelaPropDichIntPubbl/text()")
+				}/>
+				<LabeledField label='Tutela vigente' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgTutelaVigente/text()")
+				}/>
+				<LabeledField label='Tutela: altre osservazioni' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:altreOsservazioni/text()")
+				}/>
+			</ProfileWrapper>
         </Section>
 
 		<Section header='Criteri di monumentalit&agrave;: dettaglio' eventKey='7' expanded={true}>
@@ -296,128 +308,130 @@
             }/>
         </Section>
 
-		<Section header='Albero: Stato vegetativo' eventKey='8' expanded={true}>
-			<LabeledField label='Vigore vegetativo' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:vigoreVegetativo/text()")
-            }/>
-			<LabeledField label='Defoliazione' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:defoliazione/text()")
-            }/>
-			<LabeledField label='Decolorazione' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:decolorazione/text()")
-            }/>
-			<LabeledField label='Microfillia' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:microfillia/text()")
-            }/>
-			<LabeledField label='Seccume' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:seccume/text()")
-            }/>
-			<LabeledField label='Riscoppi' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:riscoppi/text()")
-            }/>
-			<LabeledField label='Descrizione sintomi o difetti' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrSintomiODifetti/text()")
-            }/>
-			<LabeledField label='Apparato radicale' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:apparatoRadicale/text()")
-            }/>
-			<LabeledField label='Colletto' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:colletto/text()")
-            }/>
-			<LabeledField label='Fusto' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:fusto/text()")
-            }/>
-			<LabeledField label='Chioma' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:chioma/text()")
-            }/>
-			<LabeledField label='Branche' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:branche/text()")
-            }/>
-			<LabeledField label='Interferenza con manufatti' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgInterfManufatti/text()")
-            }/>
-			<LabeledField label='Interferenza linee elettriche' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgInterfLineeElettr/text()")
-            }/>
-			<LabeledField label='Bersaglio' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:bersaglio/text()")
-            }/>
-			<LabeledField label='Tipo infezione parassiti' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoInfezioneParassiti/text()")
-            }/>
-			<LabeledField label='Luogo infezione parassiti' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:doveInfezioneParassiti/text()")
-            }/>
-			<LabeledField label='Tipo funghi, virus e batteri' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoFunghiVirusBatteri/text()")
-            }/>
-			<LabeledField label='Luogofunghi, virus e batteri' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:doveFunghiVirusBatteri/text()")
-            }/>
-			<LabeledField label='Tipologia altri danni' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoAltriDanni/text()")
-            }/>
-			<LabeledField label='Luogo altri danni' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:doveAltriDanni/text()")
-            }/>
-			<LabeledField label='Descrizione sintomi' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrSintomi/text()")
-            }/>
-			<LabeledField label='Valutazione sintomi' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:valutazioneSintomi/text()")
-            }/>
-			<LabeledField label='Assenza danni fitosanitari' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgAssenzaDanniFitosanit/text()")
-            }/>
-		</Section>
+		<ProfileWrapper condition={() => (model && model.profile) && (( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 ) || ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 ))}>   
+			<Section header='Albero: Stato vegetativo' eventKey='8' expanded={true}>
+				<LabeledField label='Vigore vegetativo' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:vigoreVegetativo/text()")
+				}/>
+				<LabeledField label='Defoliazione' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:defoliazione/text()")
+				}/>
+				<LabeledField label='Decolorazione' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:decolorazione/text()")
+				}/>
+				<LabeledField label='Microfillia' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:microfillia/text()")
+				}/>
+				<LabeledField label='Seccume' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:seccume/text()")
+				}/>
+				<LabeledField label='Riscoppi' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:riscoppi/text()")
+				}/>
+				<LabeledField label='Descrizione sintomi o difetti' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrSintomiODifetti/text()")
+				}/>
+				<LabeledField label='Apparato radicale' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:apparatoRadicale/text()")
+				}/>
+				<LabeledField label='Colletto' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:colletto/text()")
+				}/>
+				<LabeledField label='Fusto' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:fusto/text()")
+				}/>
+				<LabeledField label='Chioma' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:chioma/text()")
+				}/>
+				<LabeledField label='Branche' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:branche/text()")
+				}/>
+				<LabeledField label='Interferenza con manufatti' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgInterfManufatti/text()")
+				}/>
+				<LabeledField label='Interferenza linee elettriche' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgInterfLineeElettr/text()")
+				}/>
+				<LabeledField label='Bersaglio' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:bersaglio/text()")
+				}/>
+				<LabeledField label='Tipo infezione parassiti' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoInfezioneParassiti/text()")
+				}/>
+				<LabeledField label='Luogo infezione parassiti' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:doveInfezioneParassiti/text()")
+				}/>
+				<LabeledField label='Tipo funghi, virus e batteri' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoFunghiVirusBatteri/text()")
+				}/>
+				<LabeledField label='Luogofunghi, virus e batteri' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:doveFunghiVirusBatteri/text()")
+				}/>
+				<LabeledField label='Tipologia altri danni' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:tipoAltriDanni/text()")
+				}/>
+				<LabeledField label='Luogo altri danni' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:doveAltriDanni/text()")
+				}/>
+				<LabeledField label='Descrizione sintomi' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:descrSintomi/text()")
+				}/>
+				<LabeledField label='Valutazione sintomi' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:valutazioneSintomi/text()")
+				}/>
+				<LabeledField label='Assenza danni fitosanitari' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgAssenzaDanniFitosanit/text()")
+				}/>
+			</Section>
 		
-		<Section header='Interventi effettuati e da effettuare' eventKey='9' expanded={true}>
-			<LabeledField label='Tipo di potatura' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettTipoPotat/text()")
-            }/>
-			<LabeledField label='Data effettuazione potatura' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettPotatQuando/text()")
-            }/>
-			<LabeledField label='Tipo potatura: altro intervento' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettPotatAltro/text()")
-            }/>
-			<LabeledField label='Tipo di consolidamento' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettTipoConsolidam/text()")
-            }/>
-			<LabeledField label='Altri tipi di consolidamento' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAltrTipoConsolidam/text()")
-            }/>
-			<LabeledField label='Tipo di ancoraggio' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettTipoAncoraggio/text()")
-            }/>
-			<LabeledField label='Luogo Ancoraggio' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAncoraggioDove/text()")
-            }/>
-			<LabeledField label='Altri tipi di ancoraggio' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAncoraggioAltro/text()")
-            }/>
-			<LabeledField label='Luogo interventi dendrometrici' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettDendroDove/text()")
-            }/>
-			<LabeledField label='Altri interventi dendrometrici' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettDendroAltro/text()")
-            }/>
-			<LabeledField label='Altro tipo di intervento' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervAffettAltroDove/text()")
-            }/>
-			<LabeledField label='Luogo altro tipo di intervento' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAltro/text()")
-            }/>
-			<LabeledField label='Assenza di interventi necessari' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgAssenzaIntervNecess/text()")
-            }/>
-			<LabeledField label='Interventi necessari' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgIntervNecess/text()")
-            }/>
-			<LabeledField label='Tipo di interventi necessari' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervNecess/text()")
-            }/>
-		</Section>
+			<Section header='Interventi effettuati e da effettuare' eventKey='9' expanded={true}>
+				<LabeledField label='Tipo di potatura' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettTipoPotat/text()")
+				}/>
+				<LabeledField label='Data effettuazione potatura' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettPotatQuando/text()")
+				}/>
+				<LabeledField label='Tipo potatura: altro intervento' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettPotatAltro/text()")
+				}/>
+				<LabeledField label='Tipo di consolidamento' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettTipoConsolidam/text()")
+				}/>
+				<LabeledField label='Altri tipi di consolidamento' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAltrTipoConsolidam/text()")
+				}/>
+				<LabeledField label='Tipo di ancoraggio' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettTipoAncoraggio/text()")
+				}/>
+				<LabeledField label='Luogo Ancoraggio' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAncoraggioDove/text()")
+				}/>
+				<LabeledField label='Altri tipi di ancoraggio' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAncoraggioAltro/text()")
+				}/>
+				<LabeledField label='Luogo interventi dendrometrici' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettDendroDove/text()")
+				}/>
+				<LabeledField label='Altri interventi dendrometrici' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettDendroAltro/text()")
+				}/>
+				<LabeledField label='Altro tipo di intervento' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervAffettAltroDove/text()")
+				}/>
+				<LabeledField label='Luogo altro tipo di intervento' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervEffettAltro/text()")
+				}/>
+				<LabeledField label='Assenza di interventi necessari' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgAssenzaIntervNecess/text()")
+				}/>
+				<LabeledField label='Interventi necessari' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgIntervNecess/text()")
+				}/>
+				<LabeledField label='Tipo di interventi necessari' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:intervNecess/text()")
+				}/>
+			</Section>
+		</ProfileWrapper>
 		
 		<Section header='Normativa e allegati' eventKey='1' expanded={true}>
 			<LabeledField label='Decreto ministeriale inserimento' link='true' value={
@@ -432,12 +446,14 @@
 			<LabeledField label='Determina regionale: modifiche' link='true' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:determinaRegionaleAltro/text()")
             }/>
-			<LabeledField label='Presenza allegati' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgPresenzaAllegati/text()")
-            }/>
-			<LabeledField label='Numero di allegati' value={
-                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:numeroAllegati/text()")
-            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('FORESTE_SPEC@REG_PMN')) > -1 )}>   
+				<LabeledField label='Presenza allegati' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:flgPresenzaAllegati/text()")
+				}/>
+				<LabeledField label='Numero di allegati' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:numeroAllegati/text()")
+				}/>
+			</ProfileWrapper>
 			<LabeledField label='Immagini correlate' link='true' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:urlImmagini/text()")
             }/>
