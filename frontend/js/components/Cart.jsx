@@ -31,7 +31,7 @@ class Cart extends React.Component {
 
     render() {
         return (
-            <span><I18N.Message msgId={"catalog.mapObjects"}/><button onClick={this.props.showCartPanel}>{this.props.servicesNumber}</button></span>
+            <span><I18N.Message msgId={"catalog.mapObjects"}/><button onClick={this.props.showCartPanel} className='btn-link'>{this.props.servicesNumber}</button></span>
         );
     }
 }

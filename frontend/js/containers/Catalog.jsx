@@ -377,8 +377,10 @@ class Catalog extends React.Component {
                 <Tab
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
-                    <div><I18N.Message msgId={"catalog.selectedObjects"} />{this.props.objects.length}</div>
-                    <button onClick={this.props.selectAllObjects}><I18N.Message msgId={"catalog.allCategories"} /></button>
+                    <div className='tab-heading'>
+                        <p><I18N.Message msgId={"catalog.selectedObjects"} /><strong>{this.props.objects.length}</strong></p>
+                        <button onClick={this.props.selectAllObjects} className='btn-link black'><I18N.Message msgId={"catalog.allCategories"} /></button>
+                    </div>
                     {tocObjects}
                 </Tab>
                 <Tab eventKey={'views'}
@@ -426,15 +428,19 @@ class Catalog extends React.Component {
                         </div>
                     </nav>
 
-                    <div className='col container-dx'>
-                        <div style={{ display: "inline-block" }}>
-                            <h1>Catalogo degli oggetti e delle viste tematiche</h1>
+                    <div className='col container-dx'> 
+                        <h1>Catalogo degli oggetti e delle viste tematiche</h1>
+                        <div className="d-flex">
+
+                        <div className='col'>
                             <Cart />
-                            <Button onClick={() => { this.goMap(); }} className='btn btn-primary' style={{ float: "right" }}>
+                        </div>
+                        <div className='col text-right'>    
+                            <Button onClick={() => { this.goMap(); }} className='btn btn-mappa'>
                                 <I18N.Message msgId={"catalog.goToMap"} />
                             </Button>
                         </div>
-
+                        </div>
 
                         <CartPanel />
                         {selectedView ? this.renderView() : this.renderCategory()}

@@ -101,7 +101,7 @@ class UserMenu extends React.Component {
 
     renderGuestTools = () => {
         return (
-            <Button onClick={() => {this.login(); }}>
+            <Button onClick={() => {this.login(); }} className='btn-outline-primary'>
                 {this.renderButtonText()}
             </Button>
         );

@@ -212,9 +212,8 @@ class DefaultNode extends React.Component {
 
                     <div className="ContainerParagraph">
                         <button
-                            className="btn btn-link"
+                            className="btn btn-link arrow"
                             onClick={() => this.toogleShowMetadata()}>
-                            <b>
                                 {
                                     !this.state.showAllText ?
                                         <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
@@ -222,7 +221,6 @@ class DefaultNode extends React.Component {
                                 }
                                 {/* mostra di piu */}
                                 {/* mostra di meno */}
-                            </b>
                         </button>
                     </div>
                 </div>
