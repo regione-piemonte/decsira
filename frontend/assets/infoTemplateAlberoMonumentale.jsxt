@@ -13,12 +13,36 @@
             xpath: "@gml:id"
         }, {
              headerName: 'N. scheda',
-             width: 90,
+             width: 100,
              xpath: "decsiraogc_idf_alb_monum:idNSschedaAlbero/text()"
         }, {
-             headerName: 'Data rilievo',
-             width: 90,
-             xpath: "decsiraogc_idf_alb_monum:dataRilievo/text()"
+             headerName: 'Tipo di oggetto',
+             width: 120,
+             xpath: "decsiraogc_idf_alb_monum:oggettoDiIdentif/text()"
+        }, {
+             headerName: 'Specie',
+             width: 150,
+             xpath: "decsiraogc_idf_alb_monum:specie/text()"
+        }, {
+             headerName: 'Et&agrave; presunta del singolo albero',
+             width: 100,
+             xpath: "decsiraogc_idf_alb_monum:etaPresunta/text()"
+        }, {
+             headerName: 'Circonferenza (cm)',
+             width: 100,
+             xpath: "decsiraogc_idf_alb_monum:circonferenza/text()"
+        }, {
+             headerName: 'Altezza stimata (m)',
+             width: 100,
+             xpath: "decsiraogc_idf_alb_monum:altezzaStimataMetri/text()"
+        }, {
+             headerName: 'Diametro medio Chioma (m)',
+             width: 100,
+             xpath: "decsiraogc_idf_alb_monum:diametroMedioChiomaMetri/text()"
+        }, {
+             headerName: 'Decreto Ministeriale di monumentalit&agrave;',
+             width: 150,
+             xpath: "decsiraogc_idf_alb_monum:urlDecretoMinistInserimento/text()"
         }
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_idf_alb_monum:AlberoMonumentale")}/>
