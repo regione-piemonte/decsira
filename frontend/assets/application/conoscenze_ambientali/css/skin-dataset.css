@@ -2,10 +2,6 @@
     width: 100%;
 }
 
-.body_dataset .MapSearchBar .input-group .search-toolbar-options {
-    padding: 6px;
-}
-
 .dataset-container {
     overflow: scroll;
     position: absolute;
@@ -22,7 +18,7 @@
 }
 
 .dataset-search-container {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .dataset-results-container {
@@ -64,6 +60,12 @@
     border: 0;
     margin: 0;
     width: 50%;
+}
+
+@media (max-width: 992px)	{
+    .dataset-tabs .nav-tabs li {
+        width: 100%;
+    }
 }
 
 .dataset-tabs .nav-tabs li.active {
@@ -479,11 +481,15 @@
 @media (min-width: 1200px) {
 
     .sira-ms2 .MapSearchBar {
-        width: 400px !important;
+        width: 90% !important;
     }
 
 }
-
+@media (min-width: 768px) {
+    .sira-ms2 .MapSearchBar {
+        width: 90% !important;
+    }
+}
 @media (min-width: 992px) {
     .sira-ms2 .MapSearchBar {
         width: 90% !important;
@@ -499,9 +505,12 @@
 }
 
 .sira-ms2 .MapSearchBar .input-group .searchInput {
-    min-height: 45px;
+    min-height: 40px;
 }
 
+.body_dataset .MapSearchBar .input-group .search-toolbar-options {
+    padding: 4px;
+}
 
 
 
@@ -511,6 +520,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+.containerDefaultNodeFooter .glyphicon.glyphicon-plus-sign{margin-right: 5px;}
 
 .ContainerParagraph {
     display: flex;
@@ -529,16 +540,20 @@
     border-radius: 5px;
     width: 100%;
     align-items: center;
-    padding: 10px;
+    padding: 15px;
+    margin-top: 15px;
 }
 
-.sira-ms2 .handleMetadato .label{
-    font-size: 16px;
-    color: #000;
+.sira-ms2 .handleMetadato p{
+ margin-bottom: 0;
 }
-
-.linkColorMetadata {
+.sira-ms2 .handleMetadato span{
+   font-weight: bold;
+   }
+.linkColorMetadata,
+.sira-ms2 .handleMetadato a {
     color: #1976D2;
+    font-weight: bold;
 }
 .metadatoButton {
     font-weight: bold;

@@ -130,13 +130,13 @@ class ShowInfoNode extends React.Component {
             renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             this.props.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
-                    <p>
+                    
                         <a tabIndex="0" className="infobox-service-url"
                             title="wms" key={'wms_' + index}
                             href={val} target="_blank" >
                             <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                         </a>
-                    </p>
+                   
                 )
             );
         }
@@ -145,14 +145,14 @@ class ShowInfoNode extends React.Component {
             <div>
                 <div className="containerDefaultNodeFooter handleMetadato ">
 
-                    <p> Fonte metadato: {this.props.dataProvider} </p>
+                    <p> <strong>Fonte metadato:</strong> {this.props.dataProvider} </p>
 
-                    <p> Metadato:
+                    <p><strong> Metadato:</strong> 
                         <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
                     </p>
 
                     <p>
-                        {renderWfsUrl}
+                        {renderWfsUrl} 
                         {renderWmsUrl}
                     </p>
 
