@@ -6,8 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
 const PropTypes = require('prop-types');
+const img = require('../../images/localizza-su-mappa.svg');
 
 class ZoomToFeature extends React.Component {
     static propTypes = {
@@ -17,7 +17,7 @@ class ZoomToFeature extends React.Component {
     render() {
         const geometry = this.props.params && this.props.params.data && this.props.params.data.geometry;
         return geometry && geometry.coordinates ? (
-            <Glyphicon glyph="search" width={16}/>
+            <img src={img} width={16}/>
         ) : null;
     }
 }

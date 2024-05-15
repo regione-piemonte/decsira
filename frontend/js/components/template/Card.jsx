@@ -27,7 +27,7 @@ const {configureMultiLayerSelection, setCurrentFeatureRowData} = require('../../
 const CoordinatesUtils = require('@mapstore/utils/CoordinatesUtils');
 const {changeMapView} = require('@mapstore/actions/map');
 const Spinner = require('react-spinkit');
-
+const I18N = require('@mapstore/components/I18N/I18N');
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;
 const {Tooltip, OverlayTrigger} = require('react-bootstrap');
@@ -175,12 +175,12 @@ class Card extends React.Component {
                     </OverlayTrigger>
                     <OverlayTrigger key={"btn-pdf-print"} rootClose placement="left" overlay={tooltipPdf}>
                         <Button id="scheda2pdf" onClick={this.props.generatePDF}>
-                            <Glyphicon glyph="print"/>
+                            <Glyphicon glyph="print"/> <I18N.Message msgId={"detailCard.download"} />
                         </Button>
                     </OverlayTrigger>
                     <OverlayTrigger key={"btn-data-tree"} rootClose placement="right" overlay={tooltipTree}>
                         <Button id="treeButton" onClick={this.renderTree} style={{display: this.props.treeTemplate ? 'inline-block' : 'none'}} disabled={this.props.card.xml === undefined || this.props.card.xml === null}>
-                            <Glyphicon glyph="link"/>
+                            <Glyphicon glyph="link"/> <I18N.Message msgId={"detailCard.oggettiCollegati"} />
                         </Button>
                     </OverlayTrigger>
                 </div>
