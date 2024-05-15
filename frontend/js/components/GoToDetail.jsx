@@ -11,8 +11,7 @@ const img = require('./images/informazioni-dettaglio.svg');
 class GoToDetail extends React.Component {
     render() {
         return (
-            <img src={img} width={16}/>
-            
+            <img src={img} width={16}/>         
         );
     }
 }

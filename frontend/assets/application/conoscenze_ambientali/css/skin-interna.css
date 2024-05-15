@@ -110,8 +110,22 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     text-decoration: underline;
 }
 
+#decsiraweb-cartpanel .cart-panel-sevices-list-container:nth-child(odd) {background: #FFF;    padding: 10px 10px 5px 10px;}
+	
+#decsiraweb-cartpanel .cart-panel-sevices-list-container:nth-child(even) {background: #f2f2f275;     padding: 10px 10px 5px 10px;}
 
 
+
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger,
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:hover,
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:active {
+    color: #a84239;
+    background: transparent;
+    border: 0;
+}
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger .glyphicon.glyphicon-trash{
+	color: #a84239; font-size: 18px;
+}
 .sira-ms2 .btn-link {
 	color: #1976D2;
 	font-weight: bold;
@@ -1555,9 +1569,15 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default, .sira-ms2 #qgis-conta
 	font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
-	margin-bottom: 0 !important;
 }
-body.body_map.sira-ms2 #fullscreen-container h5{display: inline;}
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default{
+	 margin-left: 50px;
+	 background-image: url(images/filtri.svg);
+	 background-size: 16px;
+	 padding-left: 20px;
+	 background-repeat: no-repeat;
+	 background-position-y: 30%;
+	}
 .sira-ms2 .btn:active, .sira-ms2 .btn.active{
 	-webkit-box-shadow: none;
     box-shadow: none;
@@ -1590,6 +1610,14 @@ body.body_map.sira-ms2 .ag-scrolls .ag-row {
 }
 body.body_map.sira-ms2 .ag-fresh .ag-cell-no-focus{
     border-right: 1px solid #f1eded !important;
+}
+/*paginazione*/
+#south{padding-top: 10px;}
+.sira-ms2 .ag-fresh .ag-paging-panel span#current {
+    background: #1976D2;
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 5px;
 }
 body.body_map.sira-ms2 .featuregrid-container .ag-fresh .ag-paging-button{
 	border: 0 !important;
