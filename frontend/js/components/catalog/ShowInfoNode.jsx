@@ -1,114 +1,46 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const { connect } = require('react-redux');
-const { bindActionCreators } = require('redux');
-const { Image, Panel } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
+const { hideLegendBox } = require('../../actions/metadatainfobox');
+
+const LegendBox = connect(
+    (state) => {
+        return {
+            showLegend: state.metadatainfobox.showLegend,
+            urlLegend: state.metadatainfobox.urlLegend
+        };
+    },
+    (dispatch) => {
+        return {
+            closeLegend: () => {
+                dispatch(hideLegendBox());
+            }
+        };
+    }
+)(require('../LegendBox'));
 
 class ShowInfoNode extends React.Component {
-    static propTypes = {
-        show: PropTypes.string,
-        showButtonLegend: PropTypes.string,
-        openLegendPanel: PropTypes.bool,
-        panelTitle: PropTypes.string,
-        header: PropTypes.string,
-        panelStyle: PropTypes.object,
-        title: PropTypes.string,
-        text: PropTypes.string,
+    static propTypes = {  
         dataProvider: PropTypes.string,
         urlMetadato: PropTypes.string,
-        dataUrl: PropTypes.string,
-        numDatasetObjectCalc: PropTypes.number,
         urlWMS: PropTypes.array,
         urlWFS: PropTypes.array,
         urlLegend: PropTypes.array,
-        error: PropTypes.string,
-        closePanel: PropTypes.func,
-        toggleLegendPanel: PropTypes.func,
-        loadLegend: PropTypes.func,
-        loadMetadataInfo: PropTypes.func
+        loadLegend: PropTypes.func
     };
 
     static defaultProps = {
-        show: 'none',
-        showButtonLegend: 'none',
-        openLegendPanel: false,
-        panelTitle: "",
-        error: '',
-        title: '',
-        text: '',
-        dataUrl: '',
         urlWMS: [],
         urlWFS: [],
         urlLegend: [],
-        numDatasetObjectCalc: 0,
         dataProvider: '',
         urlMetadato: '',
-        header: "featuregrid.header",
-        closePanel: () => { },
-        loadMetadataInfo: () => { },
-        toggleLegendPanel: () => { },
-        loadLegend: () => { },
-        panelStyle: {
-            height: "500px",
-            width: "450px",
-            zIndex: 100,
-            position: "absolute",
-            overflow: "auto"
-        }
+        loadLegend: () => { }   
     };
-
-
 
     showInfoBox = () => {
         return this.props.showInfoBox(this.props.node.id);
-    };
-
-    onOpenLegendPanel = () => {
-        this.props.loadLegend(this.props.urlWMS, this.props.urlLegend);
-    };
-
-    renderLegend = () => {
-        return this.props.urlLegend.map((url) => {
-            return (<Image src={url} />);
-        });
-    };
-
-    renderError = () => {
-        if (this.props.error) {
-            return (
-                <p className="infobox-error">
-                    <I18N.Message msgId={"metadataInfoBox.errorLoadMetadata"} />
-                </p>
-            );
-        }
-        return ('');
-    };
-
-    renderLegends = () => {
-        if (this.props.urlLegend) {
-            return (
-                this.props.urlLegend.map((urlObject, index) =>
-                    <Panel className="infobox-legend-container" key={'lc_' + index}>
-                        <h4 className="infobox-legend-service-title" key={'h4_lc_' + index} >{urlObject.serviceTitle}</h4>
-                        {this.renderSingleLegend(urlObject.urls)}
-                    </Panel>
-                ));
-        }
-        return ('');
-    };
-
-    renderSingleLegend = (legends) => {
-        if (legends) {
-            return (
-                legends.map((legend, index) =>
-                    <div className="infobox-legendpanel">
-                        <h4 className="infobox-legend-title" key={'legend_' + index}>{legend.title}</h4>
-                        <Image key={'im_legend_' + index} src={legend.url} />
-                    </div>
-                ));
-        }
-        return ('');
     };
 
     renderMetadata = () => {
@@ -129,35 +61,42 @@ class ShowInfoNode extends React.Component {
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
             renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             this.props.urlWMS.map((val, index) =>
-                renderWmsUrl.push(
-                    
-                        <a tabIndex="0" className="infobox-service-url"
-                            title="wms" key={'wms_' + index}
-                            href={val} target="_blank" >
-                            <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
-                        </a>
-                   
+                renderWmsUrl.push( 
+                    <a tabIndex="0" className="infobox-service-url"
+                        title="wms" key={'wms_' + index}
+                        href={val} target="_blank" >
+                        <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
+                    </a>
                 )
             );
         }
 
         return (
-            <div>
+      
                 <div className="containerDefaultNodeFooter handleMetadato ">
-
-                    <p> <strong>Fonte metadato:</strong> {this.props.dataProvider} </p>
-
-                    <p><strong> Metadato:</strong> 
-                        <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
+                    <p>
+                        <strong><I18N.Message msgId={"metadataInfoBox.entePA"} /></strong> 
+                        {this.props.dataProvider}
                     </p>
-
+                    <p>
+                        <strong><I18N.Message msgId={"metadataInfoBox.urlMetadato"} /></strong> 
+                        <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> <I18N.Message msgId={"metadataInfoBox.goToMetadato"} /> </a>
+                    </p>
                     <p>
                         {renderWfsUrl} 
                         {renderWmsUrl}
                     </p>
+                    <p>
+                        <button
+                            className="btn btn-link"
+                            onClick={() => this.props.loadLegend(this.props.urlWMS, this.props.urlLegend)}>
+                           <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />
+                        </button>
+                    </p>
 
+                    <LegendBox />
                 </div>
-            </div>
+ 
         );
     }
 
@@ -165,65 +104,20 @@ class ShowInfoNode extends React.Component {
         let { showAllText } = this.props;
         const showAllTextClass = !showAllText ? "layer-description" : "";
 
-        let renderLegendPanel = null;
-        if (this.props.openLegendPanel) {
-            renderLegendPanel =
-                (<Panel
-                    className="toolbar-panel modal-dialog-container react-draggable"
-                    collapsible expanded={this.props.openLegendPanel}>
-                    {this.renderLegends()}
-                </Panel>);
-        }
-
-        console.log('props>>>>>',this.props);
-
         return (
             <div className='layer-content'>
                 <span
                     tabIndex="0"
                     className={showAllTextClass}
-                    onclick={this.showInfoBox}>
+                    onClick={this.showInfoBox}>
                     {this.props.node.text}
                 </span>
-
-                {/* <button onClick={() => this.toggleLegendPanel()}>toggleLegendPanel</button>
-                {renderLegendPanel} */}
 
                 {showAllText ? this.renderMetadata() : null}
             </div>
         );
     }
 
-
 }
 
-
-
-/* module.exports = ShowInfoNode; */
-
-
-module.exports = connect((state) => {
-    return {
-        show: state.metadatainfobox.show,
-        openLegendPanel: state.metadatainfobox.openLegendPanel,
-        title: state.metadatainfobox.title,
-        text: state.metadatainfobox.text,
-        numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
-        dataProvider: state.metadatainfobox.dataProvider,
-        urlMetadato: state.metadatainfobox.urlMetadato,
-        urlWMS: state.metadatainfobox.urlWMS,
-        urlWFS: state.metadatainfobox.urlWFS,
-        urlLegend: state.metadatainfobox.urlLegend,
-        error: state.metadatainfobox.error,
-        showButtonLegend: state.metadatainfobox.showButtonLegend
-    };
-}, dispatch => {
-    return bindActionCreators({
-        loadLegend: (u, actualUrl) => {
-            if (actualUrl && actualUrl.length === 0) {
-                dispatch(loadLegends(u));
-            }
-            dispatch(toggleLegendBox());
-        }
-    }, dispatch);
-})(ShowInfoNode);
+module.exports = ShowInfoNode;

@@ -38,56 +38,18 @@ const DefaultGroup = require('../components/toc/DefaultGroup');
 const DefaultNode = require('../components/catalog/DefaultNodeDataset');
 const DefaultNodeMenu = require('../components/catalog/DefaultNodeMenu');
 const Footer = require('../components/Footer');
-
 const Vista = require('../components/catalog/VistaDataset');
 const VistaMenu = require('../components/catalog/VistaMenu');
 const { loadMetadata, showBox } = require('../actions/metadatainfobox');
-const { hideBox, loadLegends, toggleLegendBox } = require('../actions/metadatainfobox');
 const { toggleAddMap, addLayersInCart, loadNodeMapRecords, addFeatureTypeLayerInCart } = require('../actions/addmap');
 const { showPanel, hidePanel, removeServiceFromCart, removeLayersFromCart, prepareDataToMap } = require('../actions/cart');
 const proj4 = require('proj4').default;
 const { register } = require('ol/proj/proj4.js');
 
-const mapStateToPropsMIB = (state) => {
-    return {
-        show: state.metadatainfobox.show,
-        openLegendPanel: state.metadatainfobox.openLegendPanel,
-        title: state.metadatainfobox.title,
-        text: state.metadatainfobox.text,
-        numDatasetObjectCalc: state.metadatainfobox.numDatasetObjectCalc,
-        dataProvider: state.metadatainfobox.dataProvider,
-        urlMetadato: state.metadatainfobox.urlMetadato,
-        urlWMS: state.metadatainfobox.urlWMS,
-        urlWFS: state.metadatainfobox.urlWFS,
-        urlLegend: state.metadatainfobox.urlLegend,
-        error: state.metadatainfobox.error,
-        showButtonLegend: state.metadatainfobox.showButtonLegend
-    };
-};
-
-const mapDispatchToPropsMIB = (dispatch) => {
-    return {
-        loadLegend: (u, actualUrl) => {
-            if (actualUrl && actualUrl.length === 0) {
-                dispatch(loadLegends(u));
-            }
-            dispatch(toggleLegendBox());
-        },
-        closePanel: () => {
-            dispatch(hideBox());
-        }
-    };
-};
-const MetadataInfoBox = connect(
-    mapStateToPropsMIB,
-    mapDispatchToPropsMIB
-)(require('../components/MetadataInfoBox'));
-
 const AddMapModal = connect(({ addmap = {} }) => ({
     error: addmap.error,
     records: addmap.records,
     loading: addmap.loading,
-    // node: demoNode,
     show: addmap.show
 }), {
     close: toggleAddMap.bind(null, false),
@@ -453,16 +415,6 @@ class Catalog extends React.Component {
                 </div>
             </div>
 
-            <MetadataInfoBox panelStyle={{
-                height: "500px",
-                width: "650px",
-                zIndex: 1000,
-                left: "calc(50% - 250px)",
-                top: -100,
-                position: "fixed",
-                marginBottom: "0px",
-                boxShadow: "0 0 5px 1px rgba(94,94,94,1)"
-            }} />
             <AddMapModal />
         </div>);
     }
@@ -483,7 +435,6 @@ class Catalog extends React.Component {
 
     showInfoBox = (node) => {
         this.props.loadMetadata(node);
-        /* this.props.showInfoBox(); */
     };
 
     addToCart = (node) => {
