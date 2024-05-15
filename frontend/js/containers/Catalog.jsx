@@ -391,7 +391,7 @@ class Catalog extends React.Component {
                     </nav>
 
                     <div className='col container-dx'> 
-                        <h1>Catalogo degli oggetti e delle viste tematiche</h1>
+                        <h1><I18N.Message msgId={"catalog.header"} /></h1>
                         <div className="d-flex">
 
                         <div className='col'>
