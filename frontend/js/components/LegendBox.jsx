@@ -8,7 +8,7 @@
 
 const React = require('react');
 const PropTypes = require('prop-types');
-const { Image, Panel } = require('react-bootstrap');
+const { Image, Panel, Modal } = require('react-bootstrap');
 const Draggable = require('react-draggable');
 const I18N = require('@mapstore/components/I18N/I18N');
 
@@ -56,8 +56,25 @@ class LegendBox extends React.Component {
         }
         return ('');
     };
-    
+
     render() {
+        return (
+            <Modal show={this.props.showLegend=='block'} bsSize="small" onHide={() => {
+                this.props.closeLegend();
+            }}>
+                <Modal.Header className="dialog-error-header-side" closeButton>
+                    <Modal.Title><I18N.Message msgId={"legendBox.panelTitle"} /></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                        <Panel className="info-content infobox-content">
+                            {this.renderLegends()}
+                        </Panel>
+                </Modal.Body>
+            </Modal>
+        )
+    }
+
+    /*render() {
         return (
             <Draggable
                 bounds="parent"
@@ -85,7 +102,7 @@ class LegendBox extends React.Component {
                 </div>
             </Draggable>
         );
-    }
+    }*/
 }
 
 module.exports = LegendBox;

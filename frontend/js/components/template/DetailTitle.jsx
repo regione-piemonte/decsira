@@ -37,7 +37,7 @@ class DetailTitle extends React.Component {
                         <h4>{this.props.title}<br/><small>{subtitle}</small></h4>
                     </Col>
                     <Col xs={1} sm={1} md={1} lg={1}>
-                        <button style={{paddingRight: "15px"}} onClick={this.props.toggleSiraControl} className="close card-close"><span>X</span></button>
+                        <button style={{paddingRight: "15px"}} onClick={this.props.toggleSiraControl} className="close card-close"></button>
                     </Col>
                 </Row>
             </Grid>

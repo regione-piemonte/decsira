@@ -61,9 +61,9 @@ function metadatainfobox(state = initialState, action) {
         return assign({}, state, {openLegendPanel: !state.openLegendPanel});
     }
     case ADD_URL_LEGEND: {
-        for (let i = 0; i < state.urlLegend.length; i++) {
+        /*for (let i = 0; i < state.urlLegend.length; i++) {
             action.infolegend.push(state.urlLegend[i]);
-        }
+        }*/
         return assign({}, state, {urlLegend: action.infolegend});
     }
     default:
