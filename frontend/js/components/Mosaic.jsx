@@ -57,7 +57,7 @@ class Mosaic extends React.Component {
     renderViewTile = () => {
         const {views} = this.props;
         return views.map((view) => {
-            return (<li><a onClick={() => this.props.tileClick(view)}>{view.title}</a></li>);
+            return (<li key={view.id}><a onClick={() => this.props.tileClick(view)}>{view.title}</a></li>);
         });
     }
 

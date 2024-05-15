@@ -9,6 +9,7 @@
 const assign = require('object-assign');
 const {
     HIDE_BOX, SHOW_BOX,
+    HIDE_LEGEND_BOX, SHOW_LEGEND_BOX,
     LOAD_METADATA,
     LOAD_METADATA_ERROR,
     TOGGLE_LEGEND_PANEL,
@@ -17,6 +18,7 @@ const {
 
 const initialState = {
     show: 'none',
+    showLegend: 'none',
     showButtonLegend: 'none',
     data: null,
     openLegendPanel: false,
@@ -31,6 +33,12 @@ function metadatainfobox(state = initialState, action) {
     }
     case SHOW_BOX: {
         return assign({}, state, {show: action.show});
+    }
+    case HIDE_LEGEND_BOX: {
+        return assign({}, state, {showLegend: action.showLegend});
+    }
+    case SHOW_LEGEND_BOX: {
+        return assign({}, state, {showLegend: action.showLegend});
     }
     case LOAD_METADATA: {
         return assign({}, state, {

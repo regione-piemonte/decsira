@@ -12,6 +12,8 @@ const assign = require('object-assign');
 
 const HIDE_BOX = 'HIDE_BOX';
 const SHOW_BOX = 'SHOW_BOX';
+const HIDE_LEGEND_BOX = 'HIDE_LEGEND_BOX';
+const SHOW_LEGEND_BOX = 'SHOW_LEGEND_BOX';
 const LOAD_METADATA = 'LOAD_METADATA';
 const LOAD_METADATA_ERROR = 'LOAD_METADATA_ERROR';
 const TOGGLE_LEGEND_PANEL = 'TOGGLE_LEGEND_PANEL';
@@ -86,6 +88,20 @@ function showBox() {
     return {
         type: SHOW_BOX,
         show: 'block'
+    };
+}
+
+function hideLegendBox() {
+    return {
+        type: HIDE_LEGEND_BOX,
+        showLegend: 'none'
+    };
+}
+
+function showLegendBox() {
+    return {
+        type: SHOW_LEGEND_BOX,
+        showLegend: 'block'
     };
 }
 
@@ -212,6 +228,8 @@ function loadMetadata(idMetadato) {
 module.exports = {
     HIDE_BOX,
     SHOW_BOX,
+    HIDE_LEGEND_BOX,
+    SHOW_LEGEND_BOX,
     LOAD_METADATA,
     LOAD_METADATA_ERROR,
     TOGGLE_LEGEND_PANEL,
@@ -219,6 +237,8 @@ module.exports = {
     ADD_URL_LEGEND,
     showBox,
     hideBox,
+    showLegendBox,
+    hideLegendBox,
     metadataLoaded,
     loadMetadataError,
     loadMetadata,

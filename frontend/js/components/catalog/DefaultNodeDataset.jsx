@@ -12,10 +12,34 @@ const PropTypes = require('prop-types');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
-const DefaultGroup = require('../toc/DefaultGroup');
 const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
-const ShowInfoNode = require('./ShowInfoNode');
+const { connect } = require('react-redux');
+const { loadLegends, showLegendBox } = require('../../actions/metadatainfobox');
+
+const mapStateToPropsMIB = (state) => {
+    return {
+        urlMetadato: state.metadatainfobox.urlMetadato,
+        urlWMS: state.metadatainfobox.urlWMS,
+        urlWFS: state.metadatainfobox.urlWFS,
+        error: state.metadatainfobox.error
+    };
+};
+
+const mapDispatchToPropsMIB = (dispatch) => {
+    return {
+        loadLegend: (u, actualUrl) => {
+            if (actualUrl && actualUrl.length === 0) {
+                dispatch(loadLegends(u));
+            }
+            dispatch(showLegendBox());
+        }
+    };
+};
+const ShowInfoNode = connect(
+    mapStateToPropsMIB,
+    mapDispatchToPropsMIB
+)(require('./ShowInfoNode'));
 
 
 class DefaultNode extends React.Component {
@@ -56,8 +80,6 @@ class DefaultNode extends React.Component {
         configureIndicaLayer: () => { }
     };
 
-
-
     showInfoBox = () => {
         return this.props.showInfoBox(this.props.node.id);
     };
@@ -65,26 +87,20 @@ class DefaultNode extends React.Component {
     /* Mostra il pannello sfondo grigio che permette di vedere fonte, link al metadato e servizio WMS*/
     toogleShowMetadata() {
         this.setState((currentState) => {
-
             if (!currentState.showAllText) {
                 this.showInfoBox();
             }
-
             return {
                 showAllText: !currentState.showAllText
             };
-
         });
     }
 
-
     renderTools = () => {
-        let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"} /></Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"} /></Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"} /></Tooltip>;
         let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"} /></Tooltip>;
         const tools = [];
-
 
         let indicaFunction = this.props.node.functions.filter(
             (func) => { return func.type === "Tematizzatore"; }
@@ -105,7 +121,6 @@ class DefaultNode extends React.Component {
                 </OverlayTrigger>));
         } else {
             tools.push((
-
                 <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
                     <button
                         className="btn btn-link"
@@ -119,9 +134,7 @@ class DefaultNode extends React.Component {
                 </OverlayTrigger>
             ));
 
-
             if (this.props.node.featureType) {
-
                 tools.push((
                     <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
                         <button
@@ -131,19 +144,6 @@ class DefaultNode extends React.Component {
                             <I18N.Message msgId={"renderTools.showData"} />
                         </button>
                     </OverlayTrigger>));
-
-                /* tools.push((
-                    <OverlayTrigger key={"list-tp"} rootClose placement="left" overlay={tooltipSira}>
-                        <button
-                            className="btn btn-link"
-                            style={glyphStyle}
-                            onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
-                            <Glyphicon
-                                key="toggle-query"
-                                glyph="search" />
-                        </button>
-                    </OverlayTrigger>)); */
-
             }
         }
         return tools;
@@ -158,31 +158,8 @@ class DefaultNode extends React.Component {
         this.goMap();
     };
 
-
-
-    onOpenLegendPanel = () => {
-        this.props.loadLegend(this.props.urlWMS, this.props.urlLegend);
-    };
-
-
-
-
-
     render() {
         let { onToggle, ...other } = this.props;
-
-        /* if (this.props.node.nodes) {
-            return (
-                <div className="toc-subgroup">
-                    <DefaultGroup
-                        node={this.props.node}
-                        animateCollapse={false}
-                        onToggle={this.props.onToggle}>
-                        <DefaultNode {...this.props} />
-                    </DefaultGroup>
-                </div>
-            );
-        } */
 
         return (
             <Node
@@ -191,23 +168,12 @@ class DefaultNode extends React.Component {
                 style={this.props.style} type="layer" {...other}>
 
                 <Title />
-
                 <ShowInfoNode showAllText={this.state.showAllText} />
-
                 <hr />
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
-
                         {this.renderTools()}
-
-                        {/* <button className="btn btn-link linkColorMetadata">
-                            <b> <I18N.Message msgId={"metadataInfoBox.showDataButton"} />  </b> 
-                        </button>
-                        <button
-                            className="btn btn-link linkColorMetadata">
-                            <b> <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />  </b> 
-                        </button> */}
                     </div>
 
                     <div className="ContainerParagraph">
@@ -224,7 +190,6 @@ class DefaultNode extends React.Component {
                         </button>
                     </div>
                 </div>
-
             </Node>
         );
     }
