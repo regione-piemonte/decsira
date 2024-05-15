@@ -5,6 +5,7 @@ const { bindActionCreators } = require('redux');
 const { Image, Panel } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
 
+
 class ShowInfoNode extends React.Component {
     static propTypes = {
         show: PropTypes.string,
@@ -59,7 +60,6 @@ class ShowInfoNode extends React.Component {
     };
 
 
-
     showInfoBox = () => {
         return this.props.showInfoBox(this.props.node.id);
     };
@@ -85,6 +85,22 @@ class ShowInfoNode extends React.Component {
         return ('');
     };
 
+    renderSingleLegend = (legends) => {
+
+        console.log('>>>>>>>legends>>>>>>>', legends);
+
+        if (legends) {
+            return (
+                legends.map((legend, index) =>
+                    <div className="infobox-legendpanel">
+                        <h4 className="infobox-legend-title" key={'legend_' + index}>{legend.title}</h4>
+                        <Image key={'im_legend_' + index} src={legend.url} />
+                    </div>
+                ));
+        }
+        return ('');
+    };
+
     renderLegends = () => {
         if (this.props.urlLegend) {
             return (
@@ -98,18 +114,7 @@ class ShowInfoNode extends React.Component {
         return ('');
     };
 
-    renderSingleLegend = (legends) => {
-        if (legends) {
-            return (
-                legends.map((legend, index) =>
-                    <div className="infobox-legendpanel">
-                        <h4 className="infobox-legend-title" key={'legend_' + index}>{legend.title}</h4>
-                        <Image key={'im_legend_' + index} src={legend.url} />
-                    </div>
-                ));
-        }
-        return ('');
-    };
+
 
     renderMetadata = () => {
         let renderWfsUrl = [];
@@ -130,13 +135,13 @@ class ShowInfoNode extends React.Component {
             renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             this.props.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
-                    
-                        <a tabIndex="0" className="infobox-service-url"
-                            title="wms" key={'wms_' + index}
-                            href={val} target="_blank" >
-                            <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
-                        </a>
-                   
+
+                    <a tabIndex="0" className="infobox-service-url"
+                        title="wms" key={'wms_' + index}
+                        href={val} target="_blank" > :
+                        <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
+                    </a>
+
                 )
             );
         }
@@ -145,15 +150,31 @@ class ShowInfoNode extends React.Component {
             <div>
                 <div className="containerDefaultNodeFooter handleMetadato ">
 
-                    <p> <strong>Fonte metadato:</strong> {this.props.dataProvider} </p>
+                    <p>
+                        <strong> <I18N.Message msgId={"metadataInfoBox.entePA"} />:</strong>
+                        {this.props.dataProvider}
+                    </p>
 
-                    <p><strong> Metadato:</strong> 
-                        <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> Vai al metadato </a>
+                    <p><strong> <I18N.Message msgId={"metadataInfoBox.link_to_metadata"} />:</strong>
+                        <a target="_blank" rel="noopener noreferrer" href={this.props.urlMetadato}> 
+                        Vai al metadato 
+                        </a>
                     </p>
 
                     <p>
-                        {renderWfsUrl} 
+                        {renderWfsUrl}
                         {renderWmsUrl}
+                    </p>
+
+                    <p> <strong> <I18N.Message msgId={"metadataInfoBox.showLegendButton"} /> : </strong>
+                        <button
+                            className="btn btn-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={this.onOpenLegendPanel}>
+                            <I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} />
+                        </button>
+
                     </p>
 
                 </div>
@@ -175,8 +196,6 @@ class ShowInfoNode extends React.Component {
                 </Panel>);
         }
 
-        console.log('props>>>>>',this.props);
-
         return (
             <div className='layer-content'>
                 <span
@@ -186,10 +205,8 @@ class ShowInfoNode extends React.Component {
                     {this.props.node.text}
                 </span>
 
-                {/* <button onClick={() => this.toggleLegendPanel()}>toggleLegendPanel</button>
-                {renderLegendPanel} */}
-
                 {showAllText ? this.renderMetadata() : null}
+
             </div>
         );
     }

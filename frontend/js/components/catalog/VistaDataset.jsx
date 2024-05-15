@@ -7,10 +7,19 @@
  */
 
 const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
+const { Glyphicon } = require('react-bootstrap');
 const PropTypes = require('prop-types');
+const I18N = require('@mapstore/components/I18N/I18N');
+
 
 class Viste extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAllText: false,
+        };
+    }
+
     static propTypes = {
         node: PropTypes.object,
         addToMap: PropTypes.func,
@@ -26,23 +35,37 @@ class Viste extends React.Component {
     };
 
     static defaultProps = {
-        addToMap: () => {},
-        expandObjects: () => {},
-        onToggle: () => {},
-        toggleSiraControl: () => {},
-        expandFilterPanel: () => {},
-        showInfoBox: () => {}
+        addToMap: () => { },
+        expandObjects: () => { },
+        onToggle: () => { },
+        toggleSiraControl: () => { },
+        expandFilterPanel: () => { },
+        showInfoBox: () => { }
     };
+
+    toogleShowMetadata() {
+        this.setState((currentState) => {
+
+            /*  if (!currentState.showAllText) {
+                 this.showInfoBox();
+             } */
+
+            return {
+                showAllText: !currentState.showAllText
+            };
+
+        });
+    }
 
     renderObjectTools = () => {
         return [(<Glyphicon
             key="toggle-featuregrid"
             glyph="th"
-            onClick={() => this.props.toggleSiraControl('grid', true)}/>),
+            onClick={() => this.props.toggleSiraControl('grid', true)} />),
         (<Glyphicon
             key="toggle-query"
             glyph="search"
-            onClick={() => this.props.expandFilterPanel(true)}/>)];
+            onClick={() => this.props.expandFilterPanel(true)} />)];
 
     };
 
@@ -51,23 +74,50 @@ class Viste extends React.Component {
             <Glyphicon
                 key="addToMap"
                 glyph="1-map"
-                onClick={this.loadConfig}/>
+                onClick={this.loadConfig} />
         )];
     };
 
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
+        let showAllText = !this.state.showAllText ? 'sira-view-description' : 'sira-view-description-text';
+
         return (
-            <div className="sira-view">
-                <div className="sira-view-title"><span>{this.props.node.title}</span>
+            <div className="sira-view cardCatalogo">
+                <div className="sira-view-title">
+                    <span>{this.props.node.title}</span>
                     <div className="sira-view-content">
-                        <span className="sira-view-description" onClick={this.showInfoBox}>{this.props.node.text}</span>
+                        <span
+                            className={showAllText}//qui
+                            /* onClick={this.showInfoBox} */>
+                            {this.props.node.text}
+                        </span>
+
                         <div className="sira-view-tool">
                             {this.renderVistaTools(expanded)}
                         </div>
                     </div>
                 </div>
-                {expanded && this.props.node.nodes ? this.props.node.nodes.map((o)=> (<div className="sira-view-object"><span>{o.title}</span>{this.renderObjectTools()}</div>)) : (<div/>)}
+                {/* {expanded && this.props.node.nodes ?
+                    this.props.node.nodes.map((o) => (
+                        <div className="sira-view-object">
+                            <span>{o.title}</span>
+                            {this.renderObjectTools()}
+                        </div>
+                    )) :
+                    (<div />)} */}
+
+                <div className="ContainerParagraph">
+                    <button
+                        className="btn btn-link arrow"
+                        onClick={() => this.toogleShowMetadata()}>
+                        {
+                            !this.state.showAllText ?
+                                <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
+                                <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
+                        }
+                    </button>
+                </div>
             </div>);
     }
 
@@ -79,7 +129,7 @@ class Viste extends React.Component {
             if (v.match(/(config=)(\w+)/)) {
                 view = v.match(/(config=)(\w+)/).pop();
             }
-            this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
+            this.props.addToMap({ serviceUrl: `./${view}.json`, params: {} });
         }
 
     };

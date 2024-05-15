@@ -158,8 +158,6 @@ class DefaultNode extends React.Component {
         this.goMap();
     };
 
-
-
     onOpenLegendPanel = () => {
         this.props.loadLegend(this.props.urlWMS, this.props.urlLegend);
     };
@@ -171,7 +169,7 @@ class DefaultNode extends React.Component {
     render() {
         let { onToggle, ...other } = this.props;
 
-        /* if (this.props.node.nodes) {
+        if (this.props.node.nodes) {
             return (
                 <div className="toc-subgroup">
                     <DefaultGroup
@@ -182,7 +180,7 @@ class DefaultNode extends React.Component {
                     </DefaultGroup>
                 </div>
             );
-        } */
+        }
 
         return (
             <Node
@@ -200,27 +198,18 @@ class DefaultNode extends React.Component {
                     <div className="ContainerParagraph">
 
                         {this.renderTools()}
-
-                        {/* <button className="btn btn-link linkColorMetadata">
-                            <b> <I18N.Message msgId={"metadataInfoBox.showDataButton"} />  </b> 
-                        </button>
-                        <button
-                            className="btn btn-link linkColorMetadata">
-                            <b> <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />  </b> 
-                        </button> */}
+                        
                     </div>
 
                     <div className="ContainerParagraph">
                         <button
                             className="btn btn-link arrow"
-                            onClick={() => this.toogleShowMetadata()}>
+                            onClick={ () => this.toogleShowMetadata() }>
                                 {
                                     !this.state.showAllText ?
                                         <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
                                         <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
                                 }
-                                {/* mostra di piu */}
-                                {/* mostra di meno */}
                         </button>
                     </div>
                 </div>
