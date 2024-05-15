@@ -429,12 +429,14 @@ class SiraGrid extends React.Component {
                     />
                     {this.renderDatasetHeader()}
                     <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
+
+                        <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
                         <Button
                             className="back-to-query"
                             style={{marginBottom: "12px"}}
                             onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
-                        </Button>
-                        <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
+                        </Button>   
+                        
                         <div style={{
                             display: "flex",
                             flexDirection: "column"
