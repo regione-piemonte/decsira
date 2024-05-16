@@ -114,8 +114,6 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 	
 #decsiraweb-cartpanel .cart-panel-sevices-list-container:nth-child(even) {background: #f2f2f275;     padding: 10px 10px 5px 10px;}
 
-
-
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger,
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:hover,
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:active {
@@ -132,6 +130,30 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 }
 .sira-ms2 .btn-link.mostra-dati {
 	background-image: url(images/mostra-dati.svg);
+	padding-left: 25px;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+.sira-ms2 .btn-link.carica-in-mappa {
+	background-image: url(images/carica-in-mappa.svg);
+	padding-left: 25px;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+.sira-ms2 .btn-link.elimina-da-mappa {
+	background-image: url(images/elimina-da-mappa.svg);
+	padding-left: 25px;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+.sira-ms2 .btn-link.indicatori {
+	background-image: url(images/imposta-parametri-indicatore.svg);
 	padding-left: 25px;
     background-repeat: no-repeat;
     background-size: 18px;
@@ -161,37 +183,30 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 	border-color: #1976D2;
 }
 
-.btn-primary {
-	background-color: #1976D2;
-}
 .btn-outline-primary.btn-default {
     color: #1976D2 !important;
     background-color: #fff !important;
     border-color: #1976D2  !important;
 	border-radius: 8px;
 }
+
 .btn-outline-primary.btn-default:hover, .btn-outline-primary.btn-default:active, .btn-outline-primary.btn-default:focus {
     color: #fff !important;
     background-color: #1976D2 !important;
     border-color: #1976D2 !important;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-	background-color: #1976D2;
-	color: #ffffff;
-}
+.btn-primary,
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,
 
-
-.btn-primary, .dropdown-toggle.btn-primary {
-	color: #fff;
-	background-color: #1976D2;
-	border-color: #1976D2;	border-radius:5px;	font-size: 14px;
-	font-weight: bold;
-}
-.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover {
-	color: #fff;
-	background-color: #1976D2;
-	border-color: #1976D2;	border-radius:5px;	font-size: 14px;
+body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-ms2 #qgis-container .btn-primary,
+ .btn-primary, .dropdown-toggle.btn-primary 
+.btn-primary.active.focus, .btn-primary.active:focus, 
+.btn-primary.active:hover, .btn-primary:active.focus,
+ .btn-primary:active:focus, .btn-primary:active:hover {
+	color: #fff !important;
+	background-color: #1976D2 !important;
+	border-color: #1976D2 !important;	border-radius:5px;	font-size: 14px;
 	font-weight: bold;
 }
 .btn-mappa.btn-default{
@@ -856,51 +871,42 @@ div.interna
 	opacity:.7;
 }
 
-div.interna
- .tab-pane{
+div.interna .tab-pane{
 	background:#fff;
 	border-top:1px solid #ccc;
 	padding-bottom:50px;
 	}
 
-
-div.interna
- .tab-pane a:hover{
+div.interna .tab-pane a:hover{
 	text-decoration:none;
 	}
 
-div.interna
- .tab-pane .filtri{
+div.interna .tab-pane .filtri{
 	margin-top:20px;
 	}
 
-div.interna
- .tab-pane h3, div.interna
- .tab-pane h4{
+div.interna .tab-pane h3,
+ div.interna .tab-pane h4{
 	padding:0;
 	margin:0 15px;
 	}
 
-div.interna
- .tab-pane h3{
+div.interna .tab-pane h3{
 	margin-top:30px;
 	}
 
-div.interna
- .tab-pane h5{
+div.interna .tab-pane h5{
 	padding:0;
 	margin:15px 30px;
 	}
 
-div.interna
- .tab-pane h6{
+div.interna .tab-pane h6{
 	padding:0;
 	margin:25px 95px;
 	font-size:16px;
 	}
 
-div.interna
- .tab-pane h6.titApp{
+div.interna .tab-pane h6.titApp{
 	padding:0 50px;
 	font-size:18px;
 	line-height:40px;
@@ -908,8 +914,7 @@ div.interna
 	text-transform:uppercase;
 	}
 
-div.interna
- .tab-pane h4 a, div.interna
+div.interna .tab-pane h4 a, div.interna
  .tab-pane h5 a,  div.interna
  .tab-pane h5.titApp{
 	padding:0 50px;
@@ -953,6 +958,8 @@ div.interna
 	color:#000;
 	display:block;
 	}
+
+div.interna .tab-content .tab-pane:nth-child(2) .sira-view-title span span{font-weight: bold;}
 
 div.interna
  .riquadro-interno .row {
@@ -1269,9 +1276,6 @@ text-decoration: underline;
 	border-radius:0;
 	border-right:0;*/
 }
-.interna #dataset-results-view .sira-view-content .sira-view-description {
-	font-weight:normal;
-}
 .interna .dataset-categories-switch-container {
     background: none;
     text-align: right;
@@ -1437,7 +1441,7 @@ button.close {
 
 /* side-bar */
 .sideBar-lateral {
-max-width: 450px;
+max-width: 380px;
 height: 100%;
 transition: width 100ms ease-in; 
 position: relative;
@@ -1621,4 +1625,11 @@ body.body_map.sira-ms2 .ag-fresh .ag-cell-no-focus{
 }
 body.body_map.sira-ms2 .featuregrid-container .ag-fresh .ag-paging-button{
 	border: 0 !important;
+}
+.sira-ms2 #fullscreen-container .featuregrid-container .panel-body div div button:nth-child(1) {
+    display: none;
+}
+
+body.body_map.sira-ms2 #fullscreen-container, .sira-ms2 #qgis-container .mapstore-switch-btn .m-slider:before {
+    background-color: transparent !important;
 }

@@ -35,11 +35,10 @@
 }
 
 #viewer .search-toolbar-options .btn-group button {
-    background-color: #ffffff;
-    color: #1976D2;
+    background: #1976D2; color: #fff;
     border: unset !important;
 }
-
+#viewer .search-toolbar-options .btn-group button.square-button-md .glyphicon{ background: #1976D2; color: #fff;}
 #viewer .modal-header{
     background-color: #1976D2;
     color: #ffffff;
@@ -685,7 +684,7 @@ header.navbar h1 a span {
     font-family: FontAwesome !important;
 }
 .side-querypanel .panel-body .dhContainer {
-    border: 1px solid #1976D2;
+  /*  border: 1px solid #1976D2;*/
 }
 .side-querypanel .panel-body .dhContainer .ftheader {
     color: #1976D2;
@@ -800,7 +799,7 @@ header.navbar h1 a span {
     padding: 0;
 }
 #query-form-panel .mapstore-switch-panel .panel-heading {
-    background-color: #1976D2;
+    background-color: #1976D2 !important;
 }
 #query-form-panel .logicHeader .btn-group{
     flex: 1;
@@ -940,3 +939,63 @@ header.navbar h1 a span {
 .rc-tree-center_docu + span > span.rc-tree-title {
     cursor: pointer;
 }
+
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default{
+    margin-left: 50px;
+    background-image: url(images/filtri.svg);
+    background-size: 16px;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-position-y: 30%;
+   }
+
+#mapstore-drawermenu .nav-tabs li.active {
+    background: none;
+}
+
+#mapstore-drawermenu .nav-tabs li a {
+    border: 0;
+    color: #000;
+    border-bottom: 2px solid #fff;
+    padding: 10px 15px;
+    outline: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+#mapstore-drawermenu .nav-tabs li a:hover {
+    background: #fff;
+}
+
+.sira-ms2 #mapstore-drawermenu .nav-tabs > li.active > a:focus ,
+#mapstore-drawermenunav-tabs li.active a,
+#mapstore-drawermenu.nav-tabs li.active a:hover,
+#mapstore-drawermenu.nav-tabs li.active a:visited {
+    border: 0;
+    border-bottom: 2px solid #1976D2;
+    color: #1976D2;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+.sira-ms2 #siracatalog .MapSearchBar .input-group .search-toolbar-options {
+    padding: 0px !important;
+}
+
+/*
+.sira-ms2 .MapSearchBar .input-group,
+.sira-ms2 .MapSearchBar .input-group .no-border.btn-default {
+    background: #1976D2;
+    color: #ffffff;
+    box-shadow: none !important;
+    border: 1px solid #f1eded;
+}
+
+.sira-ms2 .MapSearchBar .input-group .searchInput {
+    min-height: 40px;
+}
+
+.body_dataset .MapSearchBar .input-group .search-toolbar-options {
+    padding: 4px;
+}*/

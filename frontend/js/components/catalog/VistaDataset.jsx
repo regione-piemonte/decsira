@@ -71,10 +71,13 @@ class Viste extends React.Component {
 
     renderVistaTools = () => {
         return [(
-            <Glyphicon
-                key="addToMap"
-                glyph="1-map"
-                onClick={this.loadConfig} />
+
+            <button
+            className="btn btn-link carica-mappa"
+            onClick={this.loadConfig}>
+            <I18N.Message msgId={"renderTools.loadInMap"} />
+            </button>
+
         )];
     };
 
@@ -93,9 +96,7 @@ class Viste extends React.Component {
                             {this.props.node.text}
                         </span>
 
-                        <div className="sira-view-tool">
-                            {this.renderVistaTools(expanded)}
-                        </div>
+
                     </div>
                 </div>
                 {/* {expanded && this.props.node.nodes ?
@@ -106,17 +107,21 @@ class Viste extends React.Component {
                         </div>
                     )) :
                     (<div />)} */}
-
-                <div className="ContainerParagraph">
-                    <button
-                        className="btn btn-link arrow"
-                        onClick={() => this.toogleShowMetadata()}>
-                        {
-                            !this.state.showAllText ?
-                                <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
-                                <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
-                        }
-                    </button>
+                <div className="containerDefaultNodeFooter">
+                    <div className="sira-view-tool">
+                            {this.renderVistaTools(expanded)}
+                    </div>
+                    <div className="ContainerParagraph">
+                        <button
+                            className="btn btn-link arrow"
+                            onClick={() => this.toogleShowMetadata()}>
+                            {
+                                !this.state.showAllText ?
+                                    <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
+                                    <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
+                            }
+                        </button>
+                    </div>
                 </div>
             </div>);
     }

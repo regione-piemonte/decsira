@@ -110,12 +110,8 @@ class DefaultNode extends React.Component {
             tools.push((
                 <OverlayTrigger key={"indicatori-tp"} rootClose placement="left" overlay={tooltipIndica}>
                     <button
-                        className="btn btn-link"
-                        style={glyphStyle}
+                        className="btn btn-link indicatori"
                         onClick={() => this.configureIndicaLayer(this.props.node)}>
-                        <Glyphicon
-                            key="toggle-indicatori"
-                            glyph="signal" />
                         <I18N.Message msgId={"renderTools.handleSizeOnMap"} />
                     </button>
                 </OverlayTrigger>));
@@ -123,12 +119,8 @@ class DefaultNode extends React.Component {
             tools.push((
                 <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
                     <button
-                        className="btn btn-link"
-                        style={glyphStyle}
+                        className="btn btn-link carica-in-mappa"
                         onClick={() => this.props.addToMap(this.props.node)}>
-                        <Glyphicon
-                            key="addToMap"
-                            glyph="plus-sign" />
                         <I18N.Message msgId={"renderTools.loadInMap"} />
                     </button>
                 </OverlayTrigger>
@@ -169,8 +161,6 @@ class DefaultNode extends React.Component {
 
                 <Title />
                 <ShowInfoNode showAllText={this.state.showAllText} />
-                <hr />
-
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
                         {this.renderTools()}
