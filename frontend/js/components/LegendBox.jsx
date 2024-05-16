@@ -9,7 +9,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const { Image, Panel, Modal } = require('react-bootstrap');
-const Draggable = require('react-draggable');
 const I18N = require('@mapstore/components/I18N/I18N');
 
 class LegendBox extends React.Component {
@@ -74,35 +73,6 @@ class LegendBox extends React.Component {
         )
     }
 
-    /*render() {
-        return (
-            <Draggable
-                bounds="parent"
-                start={{ x: 0, y: 300 }}
-                handle=".panel-heading,.handle_featuregrid,.handle_featuregrid *">
-                <div tabIndex="0"
-                    id="legendBox"
-                    className="scheda-info"
-                    style={{ display: this.props.showLegend }}
-                    role="contentinfo"
-                    aria-label="Informazioni aggiuntive">
-                    <Panel
-                        className="info-header panel panel-primary"
-                        header={
-                            <span>
-                                <span className="snapshot-panel-title">
-                                    <I18N.Message msgId={"legendBox.panelTitle"} />
-                                </span>
-                                <button className="print-panel-close close" onClick={this.props.closeLegend}><span>×</span></button>
-                            </span>}>
-                        <Panel className="info-content infobox-content">
-                            {this.renderLegends()}
-                        </Panel>
-                    </Panel>
-                </div>
-            </Draggable>
-        );
-    }*/
 }
 
 module.exports = LegendBox;

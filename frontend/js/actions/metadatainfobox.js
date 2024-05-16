@@ -125,10 +125,11 @@ function legendLoadedError(error) {
 }
 
 
-function metadataLoaded(data) {
+function metadataLoaded(data, idMetadato) {
     return {
         type: LOAD_METADATA,
-        data: data
+        data: data,
+        idMetadato: idMetadato
     };
 }
 
@@ -210,7 +211,7 @@ function loadMetadata(idMetadato) {
                 } else {
                     response.data.showButtonLegend = 'none';
                 }
-                dispatch(metadataLoaded(response.data));
+                dispatch(metadataLoaded(response.data, idMetadato));
                 /* dispatch(showBox()); */
             } else {
                 try {
