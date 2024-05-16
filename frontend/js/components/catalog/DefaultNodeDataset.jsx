@@ -17,15 +17,6 @@ const I18N = require('@mapstore/components/I18N/I18N');
 const { connect } = require('react-redux');
 const { loadLegends, showLegendBox } = require('../../actions/metadatainfobox');
 
-const mapStateToPropsMIB = (state) => {
-    return {
-        urlMetadato: state.metadatainfobox.urlMetadato,
-        urlWMS: state.metadatainfobox.urlWMS,
-        urlWFS: state.metadatainfobox.urlWFS,
-        error: state.metadatainfobox.error
-    };
-};
-
 const mapDispatchToPropsMIB = (dispatch) => {
     return {
         loadLegend: (u, actualUrl) => {
@@ -37,7 +28,7 @@ const mapDispatchToPropsMIB = (dispatch) => {
     };
 };
 const ShowInfoNode = connect(
-    mapStateToPropsMIB,
+    null,
     mapDispatchToPropsMIB
 )(require('./ShowInfoNode'));
 
@@ -168,7 +159,7 @@ class DefaultNode extends React.Component {
                 style={this.props.style} type="layer" {...other}>
 
                 <Title />
-                <ShowInfoNode showAllText={this.state.showAllText} />
+                <ShowInfoNode showAllText={this.state.showAllText}/>
                 <hr />
 
                 <div className="containerDefaultNodeFooter">

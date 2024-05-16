@@ -19,6 +19,7 @@ const { TOGGLE_SIRA_NODE,
     SHOWCATEGORIES,
     SET_NODE_IN_USE,
     ALL_OBJECTS} = require('../actions/siracatalog');
+const {LOAD_METADATA} = require('../actions/metadatainfobox');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('uuid');
@@ -162,6 +163,23 @@ function siracatalog(state = initialState, action) {
         } else {
             return assign({}, state, {nodes: nodes, views: views});
         }
+    }
+    case LOAD_METADATA: {
+        let nodeId = action.idMetadato;
+        let metadato = {
+            title: action.data.title,
+            showButtonLegend: action.data.showButtonLegend ? action.data.showButtonLegend : 'none',
+            text: action.data.text,
+            dataProvider: action.data.dataProvider,
+            urlMetadato: action.data.urlMetadatoCalc,
+            numDatasetObjectCalc: action.data.numDatasetObjectCalc,
+            urlWMS: action.data.urlWMS,
+            urlLegend: [],
+            openLegendPanel: false,
+            error: ''
+        };
+        let nodes = state.nodes.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
+        return assign({}, state, {nodes: nodes});
     }
     default:
         return state;
