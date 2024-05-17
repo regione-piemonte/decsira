@@ -82,11 +82,6 @@ const MetadataInfoBox = connect(
     mapDispatchToPropsMIB
 )(require('../components/MetadataInfoBox'));
 
-const ShowInfoNode = connect(
-    mapStateToPropsMIB,
-    mapDispatchToPropsMIB
-)(require('../components/catalog/ShowInfoNode'));
-
 const AddMapModal = connect(({addmap = {}}) => ({
     error: addmap.error,
     records: addmap.records,
@@ -163,7 +158,8 @@ class Dataset extends React.Component {
         loadNodeMapRecords: PropTypes.func,
         addLayersInCart: PropTypes.func,
         setNodeInUse: PropTypes.func,
-        tematizzatore: PropTypes.object
+        tematizzatore: PropTypes.object,
+        selectedView: PropTypes.string
     };
 
     static contextTypes = {
@@ -271,28 +267,28 @@ class Dataset extends React.Component {
 
     renderView = () => {
         const {selectedView} = this.props;
-        return (    
-        <div>
-            <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-            
-            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                <Tabs
-                    className="dataset-tabs"
-                    activeKey={this.props.subcat}
-                    onSelect={this.props.selectSubCategory}>
+        return (
+            <div>
+                <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+
+                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                    <Tabs
+                        className="dataset-tabs"
+                        activeKey={this.props.subcat}
+                        onSelect={this.props.selectSubCategory}>
                         <Tab eventKey={'views'}
                             title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
-                            <div id="dataset-results-view"> 
+                            <div id="dataset-results-view">
                                 <Vista key={selectedView.id}
-                                node={selectedView}
-                                onToggle={this.props.onToggle}
-                                addToMap={this.loadThematicView}
-                                showInfoBox={this.showInfoBox}/>
+                                    node={selectedView}
+                                    onToggle={this.props.onToggle}
+                                    addToMap={this.loadThematicView}
+                                    showInfoBox={this.showInfoBox}/>
                             </div>
                         </Tab>
-                </Tabs>
-            </div>
-        </div>);
+                    </Tabs>
+                </div>
+            </div>);
     }
 
     renderCategory = () => {
@@ -356,12 +352,11 @@ class Dataset extends React.Component {
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>
                     {loading ? this.renderSpinner() : objEl}
                 </Tab>
-                
             </Tabs>);
     };
 
     render() {
-        const {category, selectedView} = this.props;
+        const {selectedView} = this.props;
         return (
             <div className="interna">
                 <div style={{ minHeight: '100%', position: 'relative' }}>
@@ -373,7 +368,6 @@ class Dataset extends React.Component {
 
                     {selectedView ? this.renderView() : this.renderCategory()}
 
-                    
                     <div className="dataset-footer-container">
                         <Footer/>
                     </div>
@@ -387,7 +381,7 @@ class Dataset extends React.Component {
                     position: "fixed",
                     marginBottom: "0px",
                     boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
-                    
+
                 <AddMapModal />
             </div>);
     }

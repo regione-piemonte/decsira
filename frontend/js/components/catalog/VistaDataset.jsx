@@ -13,12 +13,6 @@ const I18N = require('@mapstore/components/I18N/I18N');
 
 
 class Viste extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showAllText: false,
-        };
-    }
 
     static propTypes = {
         node: PropTypes.object,
@@ -43,18 +37,11 @@ class Viste extends React.Component {
         showInfoBox: () => { }
     };
 
-    toogleShowMetadata() {
-        this.setState((currentState) => {
-
-            /*  if (!currentState.showAllText) {
-                 this.showInfoBox();
-             } */
-
-            return {
-                showAllText: !currentState.showAllText
-            };
-
-        });
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAllText: false
+        };
     }
 
     renderObjectTools = () => {
@@ -71,13 +58,11 @@ class Viste extends React.Component {
 
     renderVistaTools = () => {
         return [(
-
             <button
-            className="btn btn-link carica-mappa"
-            onClick={this.loadConfig}>
-            <I18N.Message msgId={"renderTools.loadInMap"} />
+                className="btn btn-link carica-mappa"
+                onClick={this.loadConfig}>
+                <I18N.Message msgId={"renderTools.loadInMap"} />
             </button>
-
         )];
     };
 
@@ -90,13 +75,9 @@ class Viste extends React.Component {
                 <div className="sira-view-title">
                     <span>{this.props.node.title}</span>
                     <div className="sira-view-content">
-                        <span
-                            className={showAllText}//qui
-                            /* onClick={this.showInfoBox} */>
+                        <span className={showAllText}>
                             {this.props.node.text}
                         </span>
-
-
                     </div>
                 </div>
                 {/* {expanded && this.props.node.nodes ?
@@ -109,7 +90,7 @@ class Viste extends React.Component {
                     (<div />)} */}
                 <div className="containerDefaultNodeFooter">
                     <div className="sira-view-tool">
-                            {this.renderVistaTools(expanded)}
+                        {this.renderVistaTools(expanded)}
                     </div>
                     <div className="ContainerParagraph">
                         <button
@@ -124,6 +105,20 @@ class Viste extends React.Component {
                     </div>
                 </div>
             </div>);
+    }
+
+    toogleShowMetadata() {
+        this.setState((currentState) => {
+
+            /*  if (!currentState.showAllText) {
+                 this.showInfoBox();
+             } */
+
+            return {
+                showAllText: !currentState.showAllText
+            };
+
+        });
     }
 
     loadConfig = () => {

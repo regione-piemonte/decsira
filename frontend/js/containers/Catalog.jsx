@@ -79,13 +79,13 @@ const CartPanel = connect((state) => ({
 const Cart = connect((state) => ({
     servicesNumber: state.cart.servicesNumber
 }),
-    (dispatch) => {
-        return {
-            showCartPanel: () => {
-                dispatch(showPanel());
-            }
-        };
-    })(require('../components/Cart'));
+(dispatch) => {
+    return {
+        showCartPanel: () => {
+            dispatch(showPanel());
+        }
+    };
+})(require('../components/Cart'));
 
 class Catalog extends React.Component {
     static propTypes = {
@@ -131,7 +131,10 @@ class Catalog extends React.Component {
         loadNodeMapRecords: PropTypes.func,
         addLayersInCart: PropTypes.func,
         setNodeInUse: PropTypes.func,
-        tematizzatore: PropTypes.object
+        tematizzatore: PropTypes.object,
+        selectAllObjects: PropTypes.array,
+        selectedView: PropTypes.object,
+        prepareDataToMap: PropTypes.func
     };
 
     static contextTypes = {
@@ -152,7 +155,7 @@ class Catalog extends React.Component {
     };
 
     componentWillMount() {
-        const { nodesLoaded, loading, category } = this.props;
+        const { nodesLoaded, loading, category, authParams } = this.props;
         if (this.props?.match?.params?.profile) {
             this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
@@ -285,7 +288,7 @@ class Catalog extends React.Component {
             <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
 
             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                {this.props.subcat == 'views' ? this.renderAllViews() : this.renderResults()}
+                {this.props.subcat === 'views' ? this.renderAllViews() : this.renderResults()}
                 {this.props.notAuthorized && this.renderUnauthorized()}
             </div>
         </div>
@@ -326,7 +329,7 @@ class Catalog extends React.Component {
         let viewAll = {
             id: 999,
             title: <I18N.Message msgId={"catalog.allViews"} />
-        }
+        };
         const viste = this.props.allViews ? this.props.allViews.map((v) => (
             <VistaMenu node={v} />
         )) : <div />;
@@ -339,9 +342,9 @@ class Catalog extends React.Component {
                 <Tab
                     eventKey={'objects'}
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>
-                    <div className='tab-heading'>
+                    <div className="tab-heading">
                         <p><I18N.Message msgId={"catalog.selectedObjects"} /><strong>{this.props.objects.length}</strong></p>
-                        <button onClick={this.props.selectAllObjects} className='btn-link black'><I18N.Message msgId={"catalog.allCategories"} /></button>
+                        <button onClick={this.props.selectAllObjects} className="btn-link black"><I18N.Message msgId={"catalog.allCategories"} /></button>
                     </div>
                     {tocObjects}
                 </Tab>
@@ -355,15 +358,9 @@ class Catalog extends React.Component {
             </Tabs>);
     };
 
-    toggleClass = () => {
-        const currentState = this.state.menuOpened;
-        this.setState({ menuOpened: !currentState });
-    };
-
     render() {
         const { category, selectedView } = this.props;
 
-        
         return (<div className="interna">
             <div style={{ minHeight: '100%', position: 'relative' }}>
                 <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
@@ -381,7 +378,7 @@ class Catalog extends React.Component {
                             </button>
                         </div>
 
-                        <div className='menu'>
+                        <div className="menu">
                             {this.renderSerchBar()}
                             <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
                                 {category ? this.renderMenu() : (<noscript />)}
@@ -390,18 +387,17 @@ class Catalog extends React.Component {
                         </div>
                     </nav>
 
-                    <div className='col container-dx'> 
+                    <div className="col container-dx">
                         <h1><I18N.Message msgId={"catalog.header"} /></h1>
                         <div className="d-flex">
-
-                        <div className='col'>
-                            <Cart />
-                        </div>
-                        <div className='col text-right'>    
-                            <Button onClick={() => { this.goMap(); }} className='btn btn-mappa'>
-                                <I18N.Message msgId={"catalog.goToMap"} />
-                            </Button>
-                        </div>
+                            <div className="col">
+                                <Cart />
+                            </div>
+                            <div className="col text-right">
+                                <Button onClick={() => { this.goMap(); }} className="btn btn-mappa">
+                                    <I18N.Message msgId={"catalog.goToMap"} />
+                                </Button>
+                            </div>
                         </div>
 
                         <CartPanel />
@@ -418,6 +414,11 @@ class Catalog extends React.Component {
             <AddMapModal />
         </div>);
     }
+
+    toggleClass = () => {
+        const currentState = this.state.menuOpened;
+        this.setState({ menuOpened: !currentState });
+    };
 
     loadMetadata = ({ text, category } = {}) => {
         let params = {};

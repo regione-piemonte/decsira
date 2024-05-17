@@ -21,6 +21,11 @@ class RightMenu extends React.Component {
         clickOnSistemaCA: PropTypes.func
     };
 
+    static contextTypes = {
+        messages: PropTypes.object,
+        router: PropTypes.object
+    };
+
     static defaultProps = {
         open: false,
         iconStyleOpen: "glyphicon  glyphicon-question-sign",
@@ -31,19 +36,9 @@ class RightMenu extends React.Component {
         clickOnSistemaCA: () => {}
     };
 
-    static contextTypes = {
-        messages: PropTypes.object,
-        router: PropTypes.object
-    };
-
     renderIconStyle = () => {
         let style = this.props.open ? this.props.iconStyleOpen : this.props.iconStyleClose;
         return style;
-    };
-
-    goToCredits = () => {
-        this.props.clickOnCredits();
-        this.context.router.history.push("/credits/");
     };
 
     renderMenu = () => {
@@ -70,6 +65,11 @@ class RightMenu extends React.Component {
             </div>
         );
     }
+
+    goToCredits = () => {
+        this.props.clickOnCredits();
+        this.context.router.history.push("/credits/");
+    };
 }
 
 module.exports = RightMenu;

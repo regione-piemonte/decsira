@@ -134,7 +134,7 @@ function getMetadataObjects({ serviceUrl = 'services/metadata/getMetadataObject?
                 dispatch(catalogLoading(false));
                 if (typeof response.data !== "object") {
                     try {
-                        dispatch(objectsLoaded(JSON.parse(response.data), result, isAllObjects));
+                        dispatch(objectsLoaded(JSON.parse(response.data), result, false));
                     } catch (e) {
                         // dispatch(serchCategoriesLoaded(response.data));
                     }

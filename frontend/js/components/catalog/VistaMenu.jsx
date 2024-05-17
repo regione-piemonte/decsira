@@ -14,7 +14,8 @@ const {bindActionCreators} = require('redux');
 
 class VistaMenu extends React.Component {
     static propTypes = {
-        node: PropTypes.object
+        node: PropTypes.object,
+        selectView: PropTypes.func
     };
 
     render() {
@@ -28,7 +29,7 @@ class VistaMenu extends React.Component {
 
     selectView = () => {
         let view = this.props.node;
-        if(view.id==999){
+        if (view.id === 999) {
             this.props.selectView(null);
         } else {
             this.props.selectView(view);
@@ -36,7 +37,6 @@ class VistaMenu extends React.Component {
     };
 }
 
-//module.exports = VistaMenu;
 module.exports = connect(null, dispatch => {
     return bindActionCreators({selectView}, dispatch);
 })(VistaMenu);

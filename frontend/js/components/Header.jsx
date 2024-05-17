@@ -94,6 +94,62 @@ class Header extends React.Component {
         goToHome: () => {}
     };
 
+    render() {
+        return (
+            <header>
+                <nav className="navbar">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-md-5 col-lg-4">
+                                <div className="navbar-header">
+                                    <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span className="sr-only">Menu</span>
+                                        <span className="icon-bar"></span>
+                                        <span className="icon-bar"></span>
+                                        <span className="icon-bar"></span>
+                                    </button>
+                                    <a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")} className="navbar-brand"><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a>
+                                </div>
+                            </div>
+                            <div className="col-md-4 col-lg-5">
+                                <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+                                    <ul className="nav navbar-nav">
+                                        <li className="nav-item">
+                                            <Button onClick={() => {this.goToSca(); }} className="btn-link">
+                                                <I18N.Message msgId={"Header.info"}/>
+                                            </Button>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Button onClick={() => {this.goToMap(); }} className="btn-link">
+                                                <I18N.Message msgId={"Header.mappa"}/>
+                                            </Button>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Button onClick={() => {this.goToCatalog(); }} className="btn-link">
+                                                <I18N.Message msgId={"Header.catalogo"}/>
+                                            </Button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className="col-md-3 col-lg-3 text-right">
+                                <RightMenu />
+                                <LangBar />
+                                <LoginNav />
+                            </div>
+
+                        </div>
+
+                    </div>
+                </nav>
+
+                <DownloadResultsComponent />
+
+            </header>
+        );
+    }
+
     goToSca = () => {
         this.context.router.history.replace("/sca/");
     };
@@ -105,62 +161,6 @@ class Header extends React.Component {
     goToCatalog = () => {
         this.context.router.history.replace("/dataset/");
     };
-
-    render() {
-        return (
-        <header>
-            <nav className="navbar">
-                <div className="container-fluid">
-                    <div className='row'>
-                        <div className='col-md-5 col-lg-4'>
-                            <div className="navbar-header">
-                                <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                    <span className="sr-only">Menu</span>
-                                    <span className="icon-bar"></span>
-                                    <span className="icon-bar"></span>
-                                    <span className="icon-bar"></span>
-                                </button>
-                                <a onClick={this.props.goToHome} href="#" title={LocaleUtils.getMessageById(this.context.messages, "Header.linkTitle")} className='navbar-brand'><I18N.Message msgId={"Header.appAcronym"}/> <I18N.Message msgId={"Header.appName"}/></a>
-                            </div>
-                        </div>
-                        <div className='col-md-4 col-lg-5'>
-                            <div className="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-                                <ul className="nav navbar-nav">
-                                    <li className="nav-item">
-                                    <Button onClick={() => {this.goToSca(); }} className="btn-link">
-                                    <I18N.Message msgId={"Header.info"}/>
-                                    </Button>
-                                    </li>
-                                    <li className="nav-item">
-                                    <Button onClick={() => {this.goToMap(); }} className="btn-link">
-                                    <I18N.Message msgId={"Header.mappa"}/>
-                                    </Button>
-                                    </li>
-                                    <li className="nav-item">
-                                    <Button onClick={() => {this.goToCatalog(); }} className="btn-link">
-                                    <I18N.Message msgId={"Header.catalogo"}/>
-                                    </Button>
-                                    </li>
-                                </ul>             
-                            </div>
-                        </div>
-
-                        <div className='col-md-3 col-lg-3 text-right'>
-                            <RightMenu />          
-                            <LangBar />
-                            <LoginNav />        
-                        </div>
-
-                    </div>
-
-                </div>
-            </nav>
-                        
-            <DownloadResultsComponent />
-
-        </header>
-        );
-    }
 }
 
 module.exports = Header;

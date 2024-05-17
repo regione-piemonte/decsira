@@ -8,7 +8,7 @@
 const assign = require('object-assign');
 
 const {
-    SHOW_HIDE_RIGHT_MENU,
+    SHOW_HIDE_RIGHT_MENU
 } = require('../actions/header');
 
 const initialState = {

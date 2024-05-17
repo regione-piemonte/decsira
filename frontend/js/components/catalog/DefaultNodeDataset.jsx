@@ -11,7 +11,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
-const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
+const { Tooltip, OverlayTrigger } = require('react-bootstrap');
 const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
 const { connect } = require('react-redux');
@@ -34,12 +34,6 @@ const ShowInfoNode = connect(
 
 
 class DefaultNode extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showAllText: false,
-        };
-    }
 
     static propTypes = {
         node: PropTypes.object,
@@ -71,20 +65,11 @@ class DefaultNode extends React.Component {
         configureIndicaLayer: () => { }
     };
 
-    showInfoBox = () => {
-        return this.props.showInfoBox(this.props.node.id);
-    };
-
-    /* Mostra il pannello sfondo grigio che permette di vedere fonte, link al metadato e servizio WMS*/
-    toogleShowMetadata() {
-        this.setState((currentState) => {
-            if (!currentState.showAllText) {
-                this.showInfoBox();
-            }
-            return {
-                showAllText: !currentState.showAllText
-            };
-        });
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAllText: false
+        };
     }
 
     renderTools = () => {
@@ -132,15 +117,6 @@ class DefaultNode extends React.Component {
         return tools;
     };
 
-    goMap = () => {
-        this.context.router.history.replace("/map/");
-    };
-
-    configureIndicaLayer = (node) => {
-        this.props.configureIndicaLayer(node.featureType, node.id, null);
-        this.goMap();
-    };
-
     render() {
         let { onToggle, ...other } = this.props;
 
@@ -163,19 +139,44 @@ class DefaultNode extends React.Component {
                         <button
                             className="btn btn-link arrow"
                             onClick={() => this.toogleShowMetadata()}>
-                                {
-                                    !this.state.showAllText ?
-                                        <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
-                                        <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
-                                }
-                                {/* mostra di piu */}
-                                {/* mostra di meno */}
+                            {
+                                !this.state.showAllText ?
+                                    <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
+                                    <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
+                            }
+                            {/* mostra di piu */}
+                            {/* mostra di meno */}
                         </button>
                     </div>
                 </div>
             </Node>
         );
     }
+
+    configureIndicaLayer = (node) => {
+        this.props.configureIndicaLayer(node.featureType, node.id, null);
+        this.goMap();
+    };
+
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
+    /* Mostra il pannello sfondo grigio che permette di vedere fonte, link al metadato e servizio WMS*/
+    toogleShowMetadata() {
+        this.setState((currentState) => {
+            if (!currentState.showAllText) {
+                this.showInfoBox();
+            }
+            return {
+                showAllText: !currentState.showAllText
+            };
+        });
+    }
+
+    showInfoBox = () => {
+        return this.props.showInfoBox(this.props.node.id);
+    };
 
 }
 

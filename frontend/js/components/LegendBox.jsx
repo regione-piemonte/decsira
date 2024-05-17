@@ -58,19 +58,19 @@ class LegendBox extends React.Component {
 
     render() {
         return (
-            <Modal show={this.props.showLegend=='block'} bsSize="small" onHide={() => {
+            <Modal show={this.props.showLegend === 'block'} bsSize="small" onHide={() => {
                 this.props.closeLegend();
             }}>
                 <Modal.Header className="dialog-error-header-side" closeButton>
                     <Modal.Title><I18N.Message msgId={"legendBox.panelTitle"} /></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                        <Panel className="info-content infobox-content">
-                            {this.renderLegends()}
-                        </Panel>
+                    <Panel className="info-content infobox-content">
+                        {this.renderLegends()}
+                    </Panel>
                 </Modal.Body>
             </Modal>
-        )
+        );
     }
 
 }

@@ -62,7 +62,7 @@ class LangBar extends React.Component {
         ) : (
             <ButtonGroup id={this.props.id} type="select" bsSize="small">
                 {Object.keys(locales).map(lang => (
-                     <span>{locales[lang].label}</span>
+                    <span>{locales[lang].label}</span>
                 ))}
             </ButtonGroup>
         );

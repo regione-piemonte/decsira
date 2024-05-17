@@ -296,7 +296,7 @@ class SiraGrid extends React.Component {
     };
 
     renderHeader = () => {
-        const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
+        // const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
 
         return (
             <div className="handle_featuregrid">
@@ -339,7 +339,7 @@ class SiraGrid extends React.Component {
     };
 
     renderDatasetHeader = () => {
-        const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
+        // const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
         const indicaTitle = this.props.isIndicatore ? (
             <div className="dhContainer">
                 <b>Indicatore selezionato</b> <br /> {this.props.indicaTitle}
@@ -430,12 +430,12 @@ class SiraGrid extends React.Component {
                     {this.renderDatasetHeader()}
                     <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
 
-                       {LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")}: <strong>{this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</strong>
+                        {LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")}: <strong>{this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</strong>
                         <Button
                             className="back-to-query"
                             onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
-                        </Button>   
-                        
+                        </Button>
+
                         <div style={{
                             display: "flex",
                             flexDirection: "column"

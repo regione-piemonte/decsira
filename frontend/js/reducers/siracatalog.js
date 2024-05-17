@@ -10,7 +10,7 @@ const initialState = {
 };
 const { TOGGLE_SIRA_NODE,
     SELECT_SIRA_NODE,
-    SELECT_CATEGORY,SELECT_VIEW,
+    SELECT_CATEGORY, SELECT_VIEW,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     SELECT_SUB_CATEGORY,
@@ -71,16 +71,16 @@ function siracatalog(state = initialState, action) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
         let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
-        return assign({}, state, {nodes, allNodes});  
+        return assign({}, state, {nodes, allNodes});
     }
     case SELECT_SIRA_NODE: {
         let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
-        let metadata=[]
+        let metadata = [];
         selectedNodes.forEach((n) => {
             if (n.categories) {
                 n.categories.forEach(category => {
                     metadata.push.apply(metadata, category.metadata);
-                });  
+                });
             } else if (n.metadata) {
                 metadata.push.apply(metadata, n.metadata);
             }
@@ -95,7 +95,7 @@ function siracatalog(state = initialState, action) {
     }
     case SELECT_SUB_CATEGORY: {
         let selectedView = state.selectedView;
-        if(action.subcat=='objects'){
+        if (action.subcat === 'objects') {
             selectedView = null;
         }
         return assign({}, state, {subcat: action.subcat, selectedView: selectedView});
@@ -158,11 +158,10 @@ function siracatalog(state = initialState, action) {
                 }
             }
         });
-        if(action.isAllObjects) {
-            return assign({}, state, {nodes: nodes, views: views, allNodes: nodes, allViews:views});
-        } else {
-            return assign({}, state, {nodes: nodes, views: views});
+        if (action.isAllObjects) {
+            return assign({}, state, {nodes: nodes, views: views, allNodes: nodes, allViews: views});
         }
+        return assign({}, state, {nodes: nodes, views: views});
     }
     case LOAD_METADATA: {
         let nodeId = action.idMetadato;

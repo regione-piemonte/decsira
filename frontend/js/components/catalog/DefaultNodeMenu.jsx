@@ -15,7 +15,12 @@ const {bindActionCreators} = require('redux');
 
 class DefaultNodeMenu extends React.Component {
     static propTypes = {
-        onToggle: PropTypes.func
+        onToggle: PropTypes.func,
+        toggleNode: PropTypes.func,
+        selectView: PropTypes.func,
+        selectNode: PropTypes.func,
+        node: PropTypes.object,
+        nodes: PropTypes.array
     };
 
     static defaultProps = {
@@ -31,9 +36,8 @@ class DefaultNodeMenu extends React.Component {
                     </DefaultGroup>
                 </div>
             );
-        } else {
-            return (<noscript/>);
         }
+        return (<noscript/>);
     }
 
     nodeClick = (id, status) => {
@@ -44,7 +48,6 @@ class DefaultNodeMenu extends React.Component {
 
 }
 
-//module.exports = DefaultNodeMenu;
 module.exports = connect(null, dispatch => {
-    return bindActionCreators({selectNode,toggleNode,selectView}, dispatch);
+    return bindActionCreators({selectNode, toggleNode, selectView}, dispatch);
 })(DefaultNodeMenu);
