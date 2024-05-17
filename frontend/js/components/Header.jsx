@@ -22,6 +22,7 @@ const { loadLocale } = require('@mapstore/actions/locale');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const DownloadResultsComponent = require('./download/DownloadResultsComponent').default;
+const { Glyphicon } = require('react-bootstrap');
 
 const RightMenu = connect((state) => ({
     open: state.header?.showRightMenu
@@ -50,7 +51,14 @@ const LoginNav = connect((state) => ({
     user: state.userprofile.user,
     nav: false,
     renderButtonText: false,
-    renderButtonContent: () => { return <div><I18N.Message msgId={"user.login"}/><span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>; },
+    renderButtonContent: () => {
+        let user = state.userprofile.user;
+        let btnText = <I18N.Message msgId={"user.login"}/>;
+        if (user) {
+            btnText = <Glyphicon glyph="user" />;
+        }
+        return <div>{btnText}<span className="sr-only"><I18N.Message msgId="sr-only.userMenu" /></span></div>;
+    },
     bsStyle: "primary",
     showAccountInfo: false,
     showPasswordChange: false,
