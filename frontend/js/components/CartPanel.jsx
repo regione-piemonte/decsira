@@ -9,9 +9,8 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const I18N = require('@mapstore/components/I18N/I18N');
-const Dialog = require('@mapstore/components/misc/Dialog');
 const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
-const {Button} = require('react-bootstrap');
+const { Modal, Panel} = require('react-bootstrap');
 const { Glyphicon } = require('react-bootstrap');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
@@ -25,20 +24,16 @@ class CartPanel extends React.Component {
         goToMap: PropTypes.func
     };
 
-    static defaultProps = {
-        layers: [],
-        onClosePanel: () => {},
-        removeService: () => {},
-        goToMap: () => {}
-    };
-
     static contextTypes = {
         router: PropTypes.object,
         messages: PropTypes.object
     };
 
-    goMap = () => {
-        this.context.router.history.replace("/map/");
+    static defaultProps = {
+        layers: [],
+        onClosePanel: () => {},
+        removeService: () => {},
+        goToMap: () => {}
     };
 
     renderServicesList = () => {
@@ -65,16 +60,23 @@ class CartPanel extends React.Component {
     };
 
     render() {
-        return this.props.showPanel ?
-            (
-                <Dialog tabIndex="0" style ={{position: "absolute", right: "100px", backgroundColor: "white", width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
-                    <span role="header"><span className="cartpanel-panel-title" ><I18N.Message msgId={"cartpanel.title"}/></span><button className="print-panel-close close" onClick={this.props.onClosePanel}><span>×</span></button></span>
-                    <div role="body">
+        return (
+            <Modal show={this.props.showPanel} bsSize="small" onHide={() => {this.props.onClosePanel();}}>
+                <Modal.Header className="dialog-header-side" closeButton>
+                    <Modal.Title><I18N.Message msgId={"cartpanel.title"}/></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Panel className="info-content infobox-content">
                         {this.renderServicesList()}
-                    </div>
-                </Dialog>
-            ) : null;
+                    </Panel>
+                </Modal.Body>
+            </Modal>
+        );
     }
+
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
 }
 
 module.exports = CartPanel;

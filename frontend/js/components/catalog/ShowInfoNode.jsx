@@ -21,18 +21,19 @@ const LegendBox = connect(
 )(require('../LegendBox'));
 
 class ShowInfoNode extends React.Component {
-    static propTypes = {  
+    static propTypes = {
         urlLegend: PropTypes.array,
-        loadLegend: PropTypes.func
+        loadLegend: PropTypes.func,
+        node: PropTypes.object,
+        showAllText: PropTypes.string
     };
 
     static defaultProps = {
         urlLegend: [],
-        loadLegend: () => { }   
+        loadLegend: () => { }
     };
 
     renderMetadata = () => {
-        console.log(this.props.node.metadato);
         let metadato = this.props.node.metadato;
         let renderWfsUrl = [];
         if (metadato && metadato.urlWFS && metadato.urlWFS.length > 0) {
@@ -51,7 +52,7 @@ class ShowInfoNode extends React.Component {
         if (metadato && metadato.urlWMS && metadato.urlWMS.length > 0) {
             renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             metadato.urlWMS.map((val, index) =>
-                renderWmsUrl.push( 
+                renderWmsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wms" key={'wms_' + index}
                         href={val} target="_blank" >
@@ -62,31 +63,29 @@ class ShowInfoNode extends React.Component {
         }
 
         return (
-      
-                <div className="containerDefaultNodeFooter handleMetadato ">
-                    <p>
-                        <strong><I18N.Message msgId={"metadataInfoBox.entePA"} /></strong> 
-                        {metadato ? metadato.dataProvider : null}
-                    </p>
-                    <p>
-                        <strong><I18N.Message msgId={"metadataInfoBox.urlMetadato"} /></strong> 
-                        <a target="_blank" rel="noopener noreferrer" href={metadato ? metadato.urlMetadato : null}> <I18N.Message msgId={"metadataInfoBox.goToMetadato"} /> </a>
-                    </p>
-                    <p>
-                        {renderWfsUrl} 
-                        {renderWmsUrl}
-                    </p>
-                    <p>
-                        <button
-                            className="btn btn-link"
-                            onClick={() => this.props.loadLegend(metadato.urlWMS, metadato.urlLegend)}>
-                           <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />
-                        </button>
-                    </p>
+            <div className="containerDefaultNodeFooter handleMetadato ">
+                <p>
+                    <strong><I18N.Message msgId={"metadataInfoBox.entePA"} /></strong>
+                    {metadato ? metadato.dataProvider : null}
+                </p>
+                <p>
+                    <strong><I18N.Message msgId={"metadataInfoBox.urlMetadato"} /></strong>
+                    <a target="_blank" rel="noopener noreferrer" href={metadato ? metadato.urlMetadato : null}> <I18N.Message msgId={"metadataInfoBox.goToMetadato"} /> </a>
+                </p>
+                <p>
+                    {renderWfsUrl}
+                    {renderWmsUrl}
+                </p>
+                <p>
+                    <button
+                        className="btn btn-link"
+                        onClick={() => this.props.loadLegend(metadato.urlWMS, metadato.urlLegend)}>
+                        <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />
+                    </button>
+                </p>
 
-                    <LegendBox />
-                </div>
- 
+                <LegendBox />
+            </div>
         );
     }
 
@@ -94,7 +93,7 @@ class ShowInfoNode extends React.Component {
         let { showAllText } = this.props;
         const showAllTextClass = !showAllText ? "layer-description" : "";
         return (
-            <div className='layer-content'>
+            <div className="layer-content">
                 <span
                     tabIndex="0"
                     className={showAllTextClass}>

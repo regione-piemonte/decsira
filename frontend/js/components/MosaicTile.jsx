@@ -43,7 +43,7 @@ class MosaicTile extends React.Component {
         let bClass = `${this.props.liClass} ${this.props.icon}`;
         return (
             <li className={bClass} style={this.props.boxStyle} tabIndex="0">
-                {this.renderInfo()} 
+                {this.renderInfo()}
             </li>
         );
     }

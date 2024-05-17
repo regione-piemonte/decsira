@@ -10,21 +10,6 @@ const gridSelector = createSelector([grid, featureGrid],
         grid: assign({}, gridS, {featuregrid: featureGridS})
     }));
 
-const categorySelector = createSelector([
-    (state) => state.mosaic && state.mosaic.tiles || [],
-    (state) => state.siracatalog
-], (servertiles, catalog) => {
-    const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
-        v.objectNumber += t.objectNumber;
-        v.tematicViewNumber += t.tematicViewNumber;
-        return v;
-    }, {objectNumber: 0, tematicViewNumber: 0});
-    return {
-        tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}],
-        views: normalizeViews(catalog.views || [])
-    };
-}
-);
 const sortObjects = function(a, b) {
     if (a.title < b.title) {
         return -1;
@@ -60,6 +45,22 @@ const normalizeObjects = function(nodes) {
         return !isPresent(acc, o) ? acc.concat(o) : acc;
     }, []).sort(sortObjects);
 };
+
+const categorySelector = createSelector([
+    (state) => state.mosaic && state.mosaic.tiles || [],
+    (state) => state.siracatalog
+], (servertiles, catalog) => {
+    const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
+        v.objectNumber += t.objectNumber;
+        v.tematicViewNumber += t.tematicViewNumber;
+        return v;
+    }, {objectNumber: 0, tematicViewNumber: 0});
+    return {
+        tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}],
+        views: normalizeViews(catalog.views || [])
+    };
+}
+);
 
 const tocSelector = createSelector([
     (state) => state.siracatalog.nodes || [],

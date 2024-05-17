@@ -167,7 +167,7 @@ class LayerTree extends React.Component {
                     onSearch={this.loadMetadata}
                     onReset={this.loadMetadata}
                 />
-                
+
                 <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
                     <Tab eventKey={'objects'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>{tocObjects}</Tab>
                     <Tab eventKey={'views'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>{viste}</Tab>

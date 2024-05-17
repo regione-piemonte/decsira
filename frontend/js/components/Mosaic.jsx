@@ -63,18 +63,17 @@ class Mosaic extends React.Component {
 
     renderViews = () =>{
         return (
-            <ul className='tematica'>
+            <ul className="tematica">
                 {this.renderViewTile()}
             </ul>
         );
     }
 
     render() {
-        if(this.props.type == 'categories'){
+        if (this.props.type === 'categories') {
             return this.renderCategories();
-        } else {
-            return this.renderViews();
         }
+        return this.renderViews();
     }
 }
 

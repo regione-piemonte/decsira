@@ -36,7 +36,10 @@ class Home extends React.Component {
         allCategory: PropTypes.object,
         resetObjectAndView: PropTypes.func,
         profile: PropTypes.object,
-        resetUserIdentityError: PropTypes.func
+        resetUserIdentityError: PropTypes.func,
+        selectView: PropTypes.func,
+        match: PropTypes.object,
+        params: PropTypes.object
     };
 
     static contextTypes = {
@@ -72,14 +75,6 @@ class Home extends React.Component {
         </Modal>);
     };
 
-    goMap = () => {
-        this.context.router.history.replace("/map/");
-    };
-
-    goToSca = () => {
-        this.context.router.history.replace("/sca/");
-    };
-
     render() {
         return (
             <div className="home-page">
@@ -91,28 +86,28 @@ class Home extends React.Component {
                 <div id="main-content"></div>
 
                 <div className="hero-home">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-12 col-xs-12">
-                                    <h1><I18N.Message msgId={"Homepage.titolo"}/></h1>
-                                    <p><I18N.Message msgId={"Homepage.descrizione"}/></p>
-                                    <div>
-                                        <Button onClick={() => {this.goToSca(); }}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h1><I18N.Message msgId={"Homepage.titolo"}/></h1>
+                                <p><I18N.Message msgId={"Homepage.descrizione"}/></p>
+                                <div>
+                                    <Button onClick={() => {this.goToSca(); }}>
                                         <I18N.Message msgId={"Homepage.scopri"}/>
-                                        </Button>
-                                    </div>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
                 <div className="container">
                     <div className="row cont-la-mappa">
                         <div className="col-md-6 col-xs-12">
-                        <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "Homepage.sezioneMappa") }} />
+                            <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "Homepage.sezioneMappa") }} />
                             <div>
-                                <Button onClick={() => {this.goMap(); }} className='btn btn-primary btn-lg'>
-                                <I18N.Message msgId={"Homepage.goToMap"}/>
+                                <Button onClick={() => {this.goMap(); }} className="btn btn-primary btn-lg">
+                                    <I18N.Message msgId={"Homepage.goToMap"}/>
                                 </Button>
                             </div>
                         </div>
@@ -120,7 +115,7 @@ class Home extends React.Component {
                     </div>
                 </div>
 
-                <div className='catalogo-home'>
+                <div className="catalogo-home">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-xs-12">
@@ -147,6 +142,14 @@ class Home extends React.Component {
                 <Footer />
             </div>);
     }
+
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
+    goToSca = () => {
+        this.context.router.history.replace("/sca/");
+    };
 
     selectCategory = (category, subcat) => {
         this.props.resetObjectAndView();

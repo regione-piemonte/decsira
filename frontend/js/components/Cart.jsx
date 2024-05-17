@@ -8,7 +8,6 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const { Tooltip, OverlayTrigger } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
 
 class Cart extends React.Component {
@@ -17,7 +16,6 @@ class Cart extends React.Component {
         servicesNumber: PropTypes.number,
         showChooseLayersPanel: PropTypes.func,
         showCartPanel: PropTypes.func
-        
     };
 
     static contextTypes = {
@@ -31,7 +29,7 @@ class Cart extends React.Component {
 
     render() {
         return (
-            <span><I18N.Message msgId={"catalog.mapObjects"}/><button onClick={this.props.showCartPanel} className='btn-link'>{this.props.servicesNumber}</button></span>
+            <span><I18N.Message msgId={"catalog.mapObjects"}/><button onClick={this.props.showCartPanel} className="btn-link">{this.props.servicesNumber}</button></span>
         );
     }
 }
