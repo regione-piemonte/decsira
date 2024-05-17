@@ -22,7 +22,7 @@ class MetadataNavLink extends React.Component {
                     {wmsUrl}
                 </p>
 
-                { btnShowLegend }
+                { buttonLegend }
 
             </div>
         );
