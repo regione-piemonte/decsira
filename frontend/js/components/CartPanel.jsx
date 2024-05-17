@@ -11,7 +11,7 @@ const React = require('react');
 const I18N = require('@mapstore/components/I18N/I18N');
 const Dialog = require('@mapstore/components/misc/Dialog');
 const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
-const {Button} = require('react-bootstrap');
+const {Button, Modal, Panel} = require('react-bootstrap');
 const { Glyphicon } = require('react-bootstrap');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
@@ -64,7 +64,7 @@ class CartPanel extends React.Component {
         });
     };
 
-    render() {
+    /*render() {
         return this.props.showPanel ?
             (
                 <Dialog tabIndex="0" style ={{position: "absolute", right: "100px", backgroundColor: "white", width: "600px"}} className="cartpanel-panel" id="decsiraweb-cartpanel">
@@ -74,6 +74,21 @@ class CartPanel extends React.Component {
                     </div>
                 </Dialog>
             ) : null;
+    }*/
+
+    render() {
+        return (
+            <Modal show={this.props.showPanel} bsSize="small" onHide={() => {this.props.onClosePanel();}}>
+                <Modal.Header className="dialog-header-side" closeButton>
+                    <Modal.Title><I18N.Message msgId={"cartpanel.title"}/></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                        <Panel className="info-content infobox-content">
+                            {this.renderServicesList()}
+                        </Panel>
+                </Modal.Body>
+            </Modal>
+        );
     }
 }
 
