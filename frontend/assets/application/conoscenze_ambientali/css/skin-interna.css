@@ -27,6 +27,7 @@ header .btn-link, header .btn-link:hover, header .btn-link:active, header .btn-l
 .navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active{
 		color: #fff !important;
 		background:#1976D2;	
+		font-weight: normal;
 }
 header .btn-link, header .btn-link:hover, header .btn-link:active, header .btn-link:visited,
 .navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active{ margin-top: 8px;}
@@ -179,9 +180,9 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 .sira-ms2 .btn-default:active:hover, .sira-ms2 .btn-default.active:hover, .sira-ms2 .open > .dropdown-toggle.btn-default:hover,
  .sira-ms2 .btn-default:active:focus, .sira-ms2 .btn-default.active:focus, .sira-ms2 .open > .dropdown-toggle.btn-default:focus, 
 .sira-ms2 .btn-default:active.focus, .sira-ms2 .btn-default.active.focus, .sira-ms2 .open > .dropdown-toggle.btn-default.focus {
-	background-color: #1976D2 !important;
-	color: #fff !important;
-	border-color: #1976D2 !important;
+	background-color: #1976D2;
+	color: #fff;
+	border-color: #1976D2;
 }
 
 .btn-outline-primary.btn-default {
@@ -1543,7 +1544,18 @@ body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading, bo
     background-color: #fff !important;
     border-color: #fff !important;
 }
-body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading button{
+.sira-ms2 .close, .sira-ms2 .close:hover,
+.sira-ms2 .scheda-sira.react-draggable .card-close,
+.sira-ms2 .scheda-sira.react-draggable .card-close:hover {
+    color: #000;
+}
+.sira-ms2 button.close:first-child:before {
+    content: "\F107";
+    font-size: 21px;
+    color: #000;
+}
+/* DA CONTROLLARE*/
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button{
     background: #fff;
     border: 0;
     color: #1976D2;
@@ -1574,6 +1586,7 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default, .sira-ms2 #qgis-conta
 	font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default{
 	 margin-left: 50px;

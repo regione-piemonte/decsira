@@ -59,10 +59,7 @@ class DefaultNode extends React.Component {
         } else {
             tools.push((
                 <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={()=>this.props.addToMap(this.props.node)}>
-                        <Glyphicon
-                            key="addToMap"
-                            glyph="plus-sign"/>
+                    <button className="btn btn-link carica-in-mappa" onClick={()=>this.props.addToMap(this.props.node)}>
                     </button>
                 </OverlayTrigger>
             ));
