@@ -66,10 +66,7 @@ class DefaultNode extends React.Component {
             if ( this.props.node.featureType) {
                 tools.push((
                     <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
-                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.toggleSiraControl(this.props.node)}>
-                            <Glyphicon
-                                key="toggle-featuregrid"
-                                glyph="th"/>
+                        <button className="btn btn-link elenco" onClick={() => this.props.toggleSiraControl(this.props.node)}>
                         </button>
                     </OverlayTrigger>));
                 tools.push((

@@ -126,20 +126,20 @@ class UserMenu extends React.Component {
         let rolesArray = [];
         roles.forEach(role => {
             if (role) {
-                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "display": "inline-block" }}>{role.description ? role.description : role.code}</span>);
+                rolesArray.push(<span>{role.description ? role.description : role.code}</span>);
                 rolesArray.push(<MenuItem key="divider" divider />);
             }
         });
         if (roles === null || roles === undefined) {
-            rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "display": "inline-block" }}><Message msgId="user.freeAccess" /></span>);
+            rolesArray.push(<li><Message msgId="user.freeAccess" /></li>);
         }
 
-        let rolesTitle = (<div><span style={{ "fontWeight": "bold", "marginLeft": "20px"}}><Message msgId="user.profile" /></span><MenuItem key="divider" divider /></div>);
+        let rolesTitle = (<li><Message msgId="user.profile" /><MenuItem key="divider" divider /></li>);
 
         return (
             <React.Fragment>
                 <DropDown id="loginButton" className={this.props.className} pullRight bsStyle="success" title={this.renderButtonText()} {...this.props.menuProps} >
-                    <span key="logged-user"><MenuItem header style={{ "marginBottom": "10px"}}>{this.props.user.name}</MenuItem></span>
+                    <span key="logged-user"><MenuItem header>{this.props.user.name}</MenuItem></span>
                     {rolesTitle}
                     {rolesArray}
                     {itemArray}

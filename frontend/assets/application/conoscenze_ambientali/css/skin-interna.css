@@ -24,10 +24,11 @@ header .navbar-brand{ text-transform: uppercase; font-weight: 600 !important;}
 header a, header a:hover, header a:active, header a:visited,
 .navbar-nav>li>a, .navbar-nav>li>a:hover, .navbar-nav>li>a:active,
 header .btn-link, header .btn-link:hover, header .btn-link:active, header .btn-link:visited,
-.navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active{
+.navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active, .sira-ms2 .btn-link.btn-default:active:hover{
 		color: #fff !important;
 		background:#1976D2;	
 		font-weight: normal;
+		border: 0;
 }
 header .btn-link, header .btn-link:hover, header .btn-link:active, header .btn-link:visited,
 .navbar-nav>li>.btn-link, .navbar-nav>li>.btn-link:hover, .navbar-nav>li>.btn-link:active{ margin-top: 8px;}
@@ -77,7 +78,6 @@ header .col-md-3.text-right .mapstore-langselector, header .col-md-3.text-right 
 header .col-md-3.text-right .btn-group>.btn, header .col-md-3.text-right div {
 	display: inline;
 	float: none;
-	border: 0;
 }
 
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
@@ -163,46 +163,72 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 }
 .sira-ms2 .btn-link.mostra-dati {
 	background-image: url(images/mostra-dati.svg);
-	padding-left: 25px;
+	padding-left: 22px !important;
     background-repeat: no-repeat;
-    background-size: 18px;
+    background-size: 19px;
+	min-height: 19px;
     font-weight: bold;
-    background-position-y: 50%;
+    background-position-y: 35%;
 }
 .sira-ms2 .btn-link.carica-in-mappa {
 	background-image: url(images/carica-in-mappa.svg);
-	padding-left: 25px;
+	padding-left: 22px !important;
     background-repeat: no-repeat;
-    background-size: 18px;
+    background-size: 16px;
+	min-height: 16px;
     font-weight: bold;
-    background-position-y: 50%;
+    background-position-y: 45%;
 }
 .sira-ms2 .btn-link.elimina-da-mappa {
 	background-image: url(images/elimina-da-mappa.svg);
-	padding-left: 25px;
+	padding-left: 22px !important;
+    background-repeat: no-repeat;
+    background-size: 16px;
+	min-height: 16px;
+    font-weight: bold;
+    background-position-y: 45%;
+}
+.sira-ms2 .btn-link.elenco {
+	background-image: url(images/elenco.svg);
+	padding-left: 22px !important;
     background-repeat: no-repeat;
     background-size: 18px;
+	min-height: 18px;
     font-weight: bold;
     background-position-y: 50%;
 }
+
 .sira-ms2 .btn-link.indicatori {
 	background-image: url(images/imposta-parametri-indicatore.svg);
-	padding-left: 25px;
+	padding-left: 22px !important;
     background-repeat: no-repeat;
-    background-size: 18px;
+    background-size: 16px;
+	min-height: 16px;
     font-weight: bold;
     background-position-y: 50%;
 }
 .sira-ms2 .btn-link.mostra-legenda {
 	background-image: url(images/mostra-legenda.svg);
-	padding-left: 25px;
+	padding-left: 22px !important;
     background-repeat: no-repeat;
-    background-size: 18px;
+    background-size: 16px;
+	min-height: 16px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+
+.sira-ms2 .btn-link.info-generali {
+	background-image: url(images/info-generali.svg);
+	padding-left: 22px !important;
+    background-repeat: no-repeat;
+    background-size: 16px;
+	min-height: 16px;
     font-weight: bold;
     background-position-y: 50%;
 }
 
 
+/*
 .btn-default,
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active,
 .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, 
@@ -214,7 +240,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 	background-color: #1976D2;
 	color: #fff;
 	border-color: #1976D2;
-}
+}*/
 
 .btn-outline-primary.btn-default {
     color: #1976D2 !important;
@@ -226,7 +252,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 .btn-outline-primary.btn-default:hover, .btn-outline-primary.btn-default:active, .btn-outline-primary.btn-default:focus {
     color: #fff !important;
     background-color: #1976D2 !important;
-    border-color: #1976D2 !important;
+    border-color: #fff !important;
 }
 
 .btn-primary,
@@ -269,6 +295,9 @@ header .glyphicon-question-sign{ font-size: 22px;}
 button#mapstore-langselector{
 	padding-left: 5px;
     margin-right: 20px;
+	background: #1976D2;
+	color: #fff;
+	border: 0;
 }
 
 .sira-ms2 hr {
@@ -1031,12 +1060,12 @@ div.interna
 
 div.interna .tab-pane h4 a{
 	/*border:0;*/
-    background:#009e61 url("images/ico-meno-small.png") no-repeat scroll 5px center;
+    background:#1976D2 url("images/ico-meno-small.png") no-repeat scroll 5px center;
 	}
 
 div.interna .tab-pane h4 a.collapsed{
 	/*border:0;*/
-    background:#009e61 url("images/ico-piu-small.png") no-repeat scroll 5px center;
+    background:#1976D2 url("images/ico-piu-small.png") no-repeat scroll 5px center;
 	}
 
 div.interna .tab-pane h5 a{
