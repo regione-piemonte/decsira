@@ -432,7 +432,7 @@ class SiraGrid extends React.Component {
 
                         {LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")}: <strong>{this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</strong>
                         <Button
-                            className="back-to-query"
+                            className="btn btn-link back-to-query"
                             onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
                         </Button>
 

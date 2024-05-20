@@ -126,15 +126,15 @@ class UserMenu extends React.Component {
         let rolesArray = [];
         roles.forEach(role => {
             if (role) {
-                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}>{role.description ? role.description : role.code}</span>);
+                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "display": "inline-block" }}>{role.description ? role.description : role.code}</span>);
                 rolesArray.push(<MenuItem key="divider" divider />);
             }
         });
         if (roles === null || roles === undefined) {
-            rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}><Message msgId="user.freeAccess" /></span>);
+            rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "display": "inline-block" }}><Message msgId="user.freeAccess" /></span>);
         }
 
-        let rolesTitle = (<div><span style={{ "fontWeight": "bold", "marginLeft": "20px", "color": "white"}}><Message msgId="user.profile" /></span><MenuItem key="divider" divider /></div>);
+        let rolesTitle = (<div><span style={{ "fontWeight": "bold", "marginLeft": "20px"}}><Message msgId="user.profile" /></span><MenuItem key="divider" divider /></div>);
 
         return (
             <React.Fragment>
