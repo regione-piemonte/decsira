@@ -36,13 +36,14 @@ class ShowInfoNode extends React.Component {
     renderMetadata = () => {
         let metadato = this.props.node.metadato;
         let renderWfsUrl = [];
+        let showToast = false;
         if (metadato && metadato.urlWFS && metadato.urlWFS.length > 0) {
             renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
             metadato.urlWFS.map((val, index) =>
                 renderWfsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wfs" key={'wfs_' + index}
-                        href={val} target="_blank" >
+                        onClick={() => {navigator.clipboard.writeText(val);}} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 ));
@@ -55,7 +56,7 @@ class ShowInfoNode extends React.Component {
                 renderWmsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wms" key={'wms_' + index}
-                        href={val} target="_blank" >
+                        onClick={() => {navigator.clipboard.writeText(val);}} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 )

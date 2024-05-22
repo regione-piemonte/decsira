@@ -106,7 +106,8 @@ class Home extends React.Component {
                         <div className="col-md-6 col-xs-12">
                             <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "Homepage.sezioneMappa") }} />
                             <div>
-                                <Button onClick={() => {this.goMap(); }} className="btn btn-primary btn-lg">
+                                <br/>
+                                <Button onClick={() => {this.goMap(); }} className="btn btn-mappa btn-default">
                                     <I18N.Message msgId={"Homepage.goToMap"}/>
                                 </Button>
                             </div>

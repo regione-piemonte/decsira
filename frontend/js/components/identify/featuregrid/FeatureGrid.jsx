@@ -17,6 +17,7 @@ const ZoomToFeature = require("./ZoomToFeature");
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const { reactCellRendererFactory } = require('./CellRendererFactory');
+const img = require('../../images/localizza-su-mappa.svg');
 
 require("ag-grid/dist/styles/ag-grid.css");
 require("ag-grid/dist/styles/theme-fresh.css");
@@ -167,7 +168,8 @@ class FeatureGrid extends React.Component {
 
         let tools = [];
         if (this.props.toolbar.zoom) {
-            tools.push(<Button key="zoom" onClick={this.zoomToFeatures}>&nbsp;<Glyphicon glyph="search"/></Button>);
+            tools.push(<Button key="zoom" onClick={this.zoomToFeatures}>&nbsp;
+            <img src={img} width={16} title="localozzazione su mappa"/>&nbsp;<I18N.Message msgId={"featuregrid.localize"}/></Button>);
         }
 
         if (this.props.toolbar.toolPanel) {
