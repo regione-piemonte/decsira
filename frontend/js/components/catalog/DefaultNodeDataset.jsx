@@ -128,7 +128,6 @@ class DefaultNode extends React.Component {
 
                 <Title />
                 <ShowInfoNode showAllText={this.state.showAllText}/>
-                <hr />
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
