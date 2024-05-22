@@ -119,7 +119,10 @@ class DefaultNode extends React.Component {
 
     render() {
         let { onToggle, ...other } = this.props;
-
+        let expanded = this.props.node.expanded;
+        if(expanded){
+            console.log(this.props.node.title);
+        }
         return (
             <Node
                 animateCollapse={false}
@@ -128,7 +131,6 @@ class DefaultNode extends React.Component {
 
                 <Title />
                 <ShowInfoNode showAllText={this.state.showAllText}/>
-                <hr />
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">

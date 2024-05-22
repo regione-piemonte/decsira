@@ -69,14 +69,14 @@ class DefaultNode extends React.Component {
                         <button className="btn btn-link elenco" onClick={() => this.props.toggleSiraControl(this.props.node)}>
                         </button>
                     </OverlayTrigger>));
-                tools.push((
+                /* tools.push((
                     <OverlayTrigger key={"list-ltp"} rootClose placement="left" overlay={tooltipSira}>
                         <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
                             <Glyphicon
                                 key="toggle-query"
                                 glyph="search"/>
                         </button>
-                    </OverlayTrigger>));
+                    </OverlayTrigger>));*/
             }
         }
         return tools;
