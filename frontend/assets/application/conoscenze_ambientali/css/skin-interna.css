@@ -3,7 +3,7 @@ body.body_dataset #container, body.body_dataset .fill, body.body_dataset {
     position: relative!important;
 }
 
-body {font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;	}
+body {font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;}
 
 div.interna {
    /* background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
@@ -268,7 +268,15 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 	border-color: #1976D2 !important;	border-radius:5px;	font-size: 14px;
 	font-weight: bold;
 }
-.btn-mappa.btn-default{
+.featuregrid-tools.btn-toolbar.btn-toolbar-sm .btn-default,
+#scheda2pdf, #treeButton{
+	color: #fff !important;
+	background-color: #1976D2 !important;
+	border-color: #1976D2 !important;
+	border-radius:5px !important;
+}
+
+.btn-mappa.btn-default, .btn-mappa.btn-default:focus, .btn-mappa.btn-default:hover{
 	background:#487600 url("images/mappa.svg") 20px 50% no-repeat;
 	border-radius:5px;
 	color: #fff;
@@ -1614,8 +1622,16 @@ body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading, bo
     font-size: 21px;
     color: #000;
 }
-/* DA CONTROLLARE*/
-body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button{
+
+
+.sira-ms2 #sidepanel-container  .featuregrid-container .panel-heading{ background: #fff;}
+
+#sidepanel-container .featuregrid-container.sidepanel-featuregrid.panel-primary .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button,
+#sidepanel-container .featuregrid-container.sidepanel-featuregrid.panel-primary .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button:hover,
+#sidepanel-container .featuregrid-container.sidepanel-featuregrid.panel-primary .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button:active,
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button,
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button:hover,
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button:active{
     background: #fff;
     border: 0;
     color: #1976D2;
@@ -1627,6 +1643,7 @@ body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading
     background-repeat: no-repeat;
     background-position-y: 50%;
 }
+
 
 body.body_map.sira-ms2 .featuregrid-container .dhContainer {
     border: 0 !important;
@@ -1640,7 +1657,15 @@ body.body_map.sira-ms2 .featuregrid-container .dhContainer > label {
     font-weight: bold;    margin-top: 20px;
 }
 
-body.body_map.sira-ms2 #fullscreen-container .btn-default, .sira-ms2 #qgis-container .btn-default{
+body.body_map.sira-ms2 #fullscreen-container .btn-default{
+	border: 0;
+	font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.sira-ms2 #qgis-container .btn-default, .sira-ms2 #qgis-container .btn-default:hover,
+.sira-ms2 #qgis-container .btn-default:active{
 	color: #1976D2 !important;
 	border: 0;
 	font-size: 16px;
@@ -1648,14 +1673,17 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default, .sira-ms2 #qgis-conta
     text-transform: uppercase;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default{
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default,
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:hover,
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:active{
 	 margin-left: 50px;
 	 background-image: url(images/filtri.svg);
 	 background-size: 16px;
 	 padding-left: 20px;
 	 background-repeat: no-repeat;
 	 background-position-y: 30%;
-	}
+	 color: #1976D2 !important;
+}
 .sira-ms2 .btn:active, .sira-ms2 .btn.active{
 	-webkit-box-shadow: none;
     box-shadow: none;
@@ -1706,4 +1734,13 @@ body.body_map.sira-ms2 .featuregrid-container .ag-fresh .ag-paging-button{
 
 body.body_map.sira-ms2 #fullscreen-container, .sira-ms2 #qgis-container .mapstore-switch-btn .m-slider:before {
     background-color: transparent !important;
+}
+body.body_map.sira-ms2 #fullscreen-container .btn-default:hover, .sira-ms2 #qgis-container .btn-default:hover {
+    color: #1976D2 !important;
+}
+
+.mapstore-conditions-group .logicHeader.filter-logic-header .btn-default,
+.mapstore-conditions-group .logicHeader.filter-logic-header .btn-default:hover,
+.mapstore-conditions-group .logicHeader.filter-logic-header .btn-default:active{
+    color: #1976D2 !important;
 }
