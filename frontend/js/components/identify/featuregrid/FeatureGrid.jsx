@@ -169,7 +169,7 @@ class FeatureGrid extends React.Component {
         let tools = [];
         if (this.props.toolbar.zoom) {
             tools.push(<Button key="zoom" onClick={this.zoomToFeatures}>&nbsp;
-            <img src={img} width={16} title="localozzazione su mappa"/>&nbsp;<I18N.Message msgId={"featuregrid.localize"}/></Button>);
+                <img src={img} width={16} title="localozzazione su mappa"/>&nbsp;<I18N.Message msgId={"featuregrid.localize"}/></Button>);
         }
 
         if (this.props.toolbar.toolPanel) {
