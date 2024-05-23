@@ -13,7 +13,7 @@ const {Label, Glyphicon} = require('react-bootstrap');
 const WMSLegend = require('./WMSLegend');
 const assign = require('object-assign');
 const PropTypes = require('prop-types');
-const img = require('../../images/legenda.svg');
+// const img = require('../../images/legenda.svg');
 require('./css/SiraSettings.css');
 const glyphStyle = {"float": "right", marginTop: 12, cursor: 'pointer'};
 
@@ -81,6 +81,7 @@ class SiraSettings extends React.Component {
                 glyph={renderLeg ? "adjust" : "list"}
                 onClick={this.toggleLegend}
             />) : (<span/>)}
+
         </div>);
     }
 
