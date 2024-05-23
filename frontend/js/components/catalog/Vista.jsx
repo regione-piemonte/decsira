@@ -47,12 +47,10 @@ class Viste extends React.Component {
     };
 
     renderVistaTools = () => {
-        return [(<Glyphicon
-            key="addToMap"
-            glyph="1-map"
-            onClick={this.loadConfig}/>)
+        return [
+            (<button className="btn btn-link carica-in-mappa" onClick={this.loadConfig}></button>)
         ];
-    };
+    }
 
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
