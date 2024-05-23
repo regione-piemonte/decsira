@@ -19,6 +19,7 @@ const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const img = require('../images/legenda.svg');
 
 class DefaultLayer extends React.Component {
     static propTypes = {
@@ -116,16 +117,10 @@ class DefaultLayer extends React.Component {
                     }}/>
             );
             if (this.props.node.featureType || (this.props.node.params && this.props.node.params.featureType)) {
-                const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.search" /></Tooltip>;
-                const tool = (<Glyphicon
-                    style={{"float": "right", cursor: 'pointer'}}
-                    key="toggle-query"
-                    glyph="search"
-                    // onClick={() => this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType || this.props.node.params.featureType, this.props.node.id)}
-                    onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType || this.props.node.params.featureType, this.props.node.id)}
-                />);
+                const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.list" /></Tooltip>;
                 tools.push(<OverlayTrigger placement="bottom" overlay={tooltip}>
-                    {tool}
+                   <button className="btn btn-link elenco"
+                    onClick={() => this.props.searchAll(this.props.node.featureType || this.props.element.params.featureType)}/>
                 </OverlayTrigger>
                 );
             }

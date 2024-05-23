@@ -36,7 +36,6 @@ class ShowInfoNode extends React.Component {
     renderMetadata = () => {
         let metadato = this.props.node.metadato;
         let renderWfsUrl = [];
-        let showToast = false;
         if (metadato && metadato.urlWFS && metadato.urlWFS.length > 0) {
             renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
             metadato.urlWFS.map((val, index) =>
