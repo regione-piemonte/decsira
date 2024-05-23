@@ -119,10 +119,13 @@ class DefaultNode extends React.Component {
 
     render() {
         let { onToggle, ...other } = this.props;
+<<<<<<< HEAD
         let expanded = this.props.node.expanded;
         if (expanded){
             console.log(this.props.node.title);
         }
+=======
+>>>>>>> e94717eed43c8fafdce320fc72a45bb40083e5ef
         return (
             <Node
                 animateCollapse={false}
