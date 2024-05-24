@@ -132,7 +132,7 @@ class Catalog extends React.Component {
         addLayersInCart: PropTypes.func,
         setNodeInUse: PropTypes.func,
         tematizzatore: PropTypes.object,
-        selectAllObjects: PropTypes.array,
+        selectAllObjects: PropTypes.func,
         selectedView: PropTypes.object,
         prepareDataToMap: PropTypes.func,
         title: PropTypes.string
@@ -332,7 +332,7 @@ class Catalog extends React.Component {
             title: <I18N.Message msgId={"catalog.allViews"} />
         };
         const viste = this.props.allViews ? this.props.allViews.map((v) => (
-            <VistaMenu node={v} />
+            <VistaMenu node={v} key={v.id}/>
         )) : <div />;
 
         return (

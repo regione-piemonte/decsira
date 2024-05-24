@@ -93,7 +93,16 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {loading: action.status});
     }
     case SELECT_CATEGORY: {
-        return assign({}, state, {category: action.category, subcat: action.subcat});
+        let selectedNodes = state.allNodes.filter((n) => (n.title === action.category.name));
+        let allNodes = state.allNodes;
+        if (selectedNodes) {
+            allNodes = allNodes.map((n) => (n.title === action.category.name ? assign({}, n, {expanded: true, selected: true}) : assign({}, n, {expanded: false, selected: false})));
+        }
+        let title = "";
+        if (selectedNodes && selectedNodes[0]) {
+            title = selectedNodes[0].title;
+        }
+        return assign({}, state, {category: action.category, subcat: action.subcat, title: title, allNodes: allNodes});
     }
     case SELECT_SUB_CATEGORY: {
         let selectedView = state.selectedView;

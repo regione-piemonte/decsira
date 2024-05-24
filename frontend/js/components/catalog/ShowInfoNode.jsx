@@ -25,7 +25,7 @@ class ShowInfoNode extends React.Component {
         urlLegend: PropTypes.array,
         loadLegend: PropTypes.func,
         node: PropTypes.object,
-        showAllText: PropTypes.string
+        showAllText: PropTypes.bool
     };
 
     static defaultProps = {
