@@ -88,7 +88,8 @@ const tocSelector = createSelector([
     userprofile,
     activeFeatureType,
     subcat,
-    showcategories: catalog.showcategories
+    showcategories: catalog.showcategories,
+    title: catalog.title
 })
 );
 

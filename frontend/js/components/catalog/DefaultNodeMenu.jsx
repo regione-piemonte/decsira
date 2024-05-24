@@ -31,7 +31,7 @@ class DefaultNodeMenu extends React.Component {
         if (this.props.node.nodes) {
             return (
                 <div className="toc-subgroup">
-                    <DefaultGroup node={this.props.node} animateCollapse={false} onToggle={this.nodeClick}>
+                    <DefaultGroup node={this.props.node} animateCollapse={false} onToggle={this.nodeClick} page="catalog">
                         <DefaultNodeMenu {...this.props}/>
                     </DefaultGroup>
                 </div>

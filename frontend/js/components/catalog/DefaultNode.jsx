@@ -10,9 +10,8 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
-const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
+const {Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../toc/DefaultGroup');
-const glyphStyle = {"float": "right", cursor: 'pointer'};
 const I18N = require('@mapstore/components/I18N/I18N');
 
 class DefaultNode extends React.Component {
@@ -50,10 +49,8 @@ class DefaultNode extends React.Component {
         if (indicaFunction.length > 0) {
             tools.push((
                 <OverlayTrigger key={"indicatori"} rootClose placement="left" overlay={tooltipIndica}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id, null)}>
-                        <Glyphicon
-                            key="toggle-indicatori"
-                            glyph="signal"/>
+                    <button className="btn btn-link indicatori"
+                        onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id, null)}>
                     </button>
                 </OverlayTrigger>));
         } else {

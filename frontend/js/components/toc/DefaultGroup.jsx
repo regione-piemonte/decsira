@@ -23,10 +23,12 @@ class DefaultGroup extends React.Component {
         onSort: PropTypes.func,
         propertiesChangeHandler: PropTypes.func,
         groupVisibilityCheckbox: PropTypes.bool,
-        visibilityCheckType: PropTypes.string
+        visibilityCheckType: PropTypes.string,
+        page: PropTypes.string
     };
 
     static defaultProps = {
+        page: "",
         node: {},
         onToggle: () => {},
         style: {
@@ -49,7 +51,7 @@ class DefaultGroup extends React.Component {
                         key="visibility"
                         checkType={this.props.visibilityCheckType}
                         propertiesChangeHandler={this.props.propertiesChangeHandler}/>}
-                    <GroupTitle onClick={this.props.onToggle}/>
+                    <GroupTitle onClick={this.props.onToggle} page={this.props.page}/>
                     <GroupChildren onSort={this.props.onSort} position="collapsible">
                         {this.props.children}
                     </GroupChildren>

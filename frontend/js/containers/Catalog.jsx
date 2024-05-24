@@ -134,7 +134,8 @@ class Catalog extends React.Component {
         tematizzatore: PropTypes.object,
         selectAllObjects: PropTypes.array,
         selectedView: PropTypes.object,
-        prepareDataToMap: PropTypes.func
+        prepareDataToMap: PropTypes.func,
+        title: PropTypes.string
     };
 
     static contextTypes = {
@@ -320,7 +321,7 @@ class Catalog extends React.Component {
         const nodes = this.updateNodes(this.props.allNodes);
         const tocObjects = (
             <TOC id="dataset-toc" key="dataset-toc" nodes={nodes}>
-                <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
+                <DefaultGroup animateCollapse={false} onToggle={this.props.onToggle} page="catalog">
                     <DefaultNodeMenu
                         onToggle={this.props.onToggle}
                         node={nodes} />
@@ -399,7 +400,7 @@ class Catalog extends React.Component {
                                 </Button>
                             </div>
                         </div>
-
+                        {this.props.subcat === "objects" ? <span>{this.props.title === "allObjects" ? "Tutte le categorie" : this.props.title}</span> : <noscript></noscript>}
                         <CartPanel />
                         {selectedView ? this.renderView() : this.renderCategory()}
                     </div>

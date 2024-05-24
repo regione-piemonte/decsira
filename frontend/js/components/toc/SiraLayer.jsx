@@ -126,12 +126,8 @@ class DefaultLayer extends React.Component {
             }
             if (this.props.node.params && this.props.node.params.isIndicatore === true) {
                 const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.configureIndica"/></Tooltip>;
-                const tool = (<Glyphicon
-                    style={{"float": "right", cursor: 'pointer'}}
-                    key="edit-indicatori"
-                    glyph="signal"
+                const tool = (<button className="btn btn-link indicatori"
                     onClick={this.configuraIndicatore}
-                    overlay={tooltip}
                 />);
                 tools.push((<OverlayTrigger placement="bottom" overlay={tooltip}>
                     {tool}

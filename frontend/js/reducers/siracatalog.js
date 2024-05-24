@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 const initialState = {
-    subcat: 'objects'
+    subcat: 'objects',
+    title: 'allObjects'
 };
 const { TOGGLE_SIRA_NODE,
     SELECT_SIRA_NODE,
@@ -70,11 +71,12 @@ function siracatalog(state = initialState, action) {
     switch (action.type) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
-        let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
+        let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status, selected: true}) : assign({}, n, {selected: false})));
         return assign({}, state, {nodes, allNodes});
     }
     case SELECT_SIRA_NODE: {
         let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
+        let title = selectedNodes ? selectedNodes[0].title : "";
         let metadata = [];
         selectedNodes.forEach((n) => {
             if (n.categories) {
@@ -85,7 +87,7 @@ function siracatalog(state = initialState, action) {
                 metadata.push.apply(metadata, n.metadata);
             }
         });
-        return assign({}, state, {nodes: metadata});
+        return assign({}, state, {nodes: metadata, title: title});
     }
     case CATALOG_LOADING: {
         return assign({}, state, {loading: action.status});
@@ -101,7 +103,14 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {subcat: action.subcat, selectedView: selectedView});
     }
     case SELECT_VIEW: {
-        return assign({}, state, {selectedView: action.view});
+        let allViews = state.allViews;
+        if (action.view !== null) {
+            allViews = state.allViews.map((v) => (v.name === action.view.name || v.id === action.viewid ? assign({}, v, {selected: true}) : assign({}, v, {selected: false})));
+        } else {
+            // Significa che e' stato selezionato "Tutte le viste tematiche"
+            allViews = state.allViews.map((v) => (assign({}, v, {selected: false})));
+        }
+        return assign({}, state, {selectedView: action.view, allViews: allViews});
     }
     case TILES_LOADED: {
         return assign({}, state, { category: [...(action.tiles || [])].shift()});
@@ -119,7 +128,7 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {nodeUsed: action.node});
     }
     case ALL_OBJECTS: {
-        return assign({}, state, {nodes: state.allNodes});
+        return assign({}, state, {nodes: state.allNodes, title: "allObjects"});
     }
     case METADATA_OBJECTS_VIEWS_LOADED: {
         // FILTRA LE categorie ed i nodi
