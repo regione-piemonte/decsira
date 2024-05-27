@@ -161,6 +161,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 	font-weight: bold;
 	font-size: 16px;
 }
+.sira-ms2 .btn-link.arrow{font-size: 14px;}
 .sira-ms2 .btn-link.mostra-dati {
 	background-image: url(images/mostra-dati.svg);
 	padding-left: 22px !important;
@@ -168,6 +169,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-size: 19px;
 	min-height: 19px;
     font-weight: bold;
+	font-size: 14px;
     background-position-y: 35%;
 }
 .sira-ms2 .btn-link.carica-in-mappa {
@@ -176,7 +178,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-repeat: no-repeat;
     background-size: 16px;
 	min-height: 16px;
-    font-weight: bold;
+    font-weight: bold;	font-size: 14px;
     background-position-y: 45%;
 }
 .sira-ms2 .btn-link.elimina-da-mappa {
@@ -185,7 +187,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-repeat: no-repeat;
     background-size: 16px;
 	min-height: 16px;
-    font-weight: bold;
+    font-weight: bold;	font-size: 14px;
     background-position-y: 45%;
 }
 .sira-ms2 .btn-link.elenco {
@@ -194,7 +196,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-repeat: no-repeat;
     background-size: 18px;
 	min-height: 18px;
-    font-weight: bold;
+    font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
 
@@ -204,7 +206,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-repeat: no-repeat;
     background-size: 16px;
 	min-height: 16px;
-    font-weight: bold;
+    font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
 .sira-ms2 .btn-link.mostra-legenda {
@@ -213,7 +215,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-repeat: no-repeat;
     background-size: 16px;
 	min-height: 16px;
-    font-weight: bold;
+    font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
 
@@ -223,7 +225,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     background-repeat: no-repeat;
     background-size: 16px;
 	min-height: 16px;
-    font-weight: bold;
+    font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
 
@@ -268,14 +270,14 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 	border-color: #1976D2 !important;	border-radius:5px;	font-size: 14px;
 	font-weight: bold;
 }
-.featuregrid-tools.btn-toolbar.btn-toolbar-sm .btn-default,
-#scheda2pdf, #treeButton{
-	color: #fff !important;
-	background-color: #1976D2 !important;
-	border-color: #1976D2 !important;
-	border-radius:5px !important;
+#scheda2pdf, #treeButton,
+.featuregrid-tools.btn-toolbar.btn-toolbar-sm .btn-default{
+	color: #1976D2 !important;
+	background-color: transparent !important;
+	border: 0 !important;
+	font-weight: bold;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-
 .btn-mappa.btn-default, .btn-mappa.btn-default:focus, .btn-mappa.btn-default:hover{
 	background:#487600 url("images/mappa.svg") 20px 50% no-repeat;
 	border-radius:5px;
@@ -1048,13 +1050,13 @@ div.interna
 div.interna
  .tab-pane h3 a{
 	/*border:0;*/
-    background:url("images/ico-meno.png") no-repeat scroll 20px center #017f4f;
+    background:url("images/ico-meno.png") no-repeat scroll 20px center #1976D2;
 	}
 
 div.interna
  .tab-pane h3 a.collapsed{
 	/*border:0;*/
-    background:url("images/ico-piu.png") no-repeat scroll 20px center #017f4f;
+    background:url("images/ico-piu.png") no-repeat scroll 20px center #1976D2;
 	}
 
 div.interna
@@ -1351,7 +1353,7 @@ text-decoration: underline;
     text-align: right;
 }
 .interna .dataset-categories-switch {
-    background: #017f4f none repeat scroll 0 0;
+    background: #1976D2 none repeat scroll 0 0;
     border-radius: 10px;
     color: #fff;
     padding: 10px;
@@ -1369,7 +1371,7 @@ text-decoration: underline;
     margin-right: 10px;
 }
 .infobox-content .panel-heading {
-    background: #017f4f none repeat scroll 0 0;
+    background: #1976D2 none repeat scroll 0 0;
     border: 0 none;
     border-radius: 0;
     color: white;
@@ -1378,7 +1380,7 @@ text-decoration: underline;
 	display:block;
 }
 .infobox-content .panel-body > button {
-    background: #017f4f none repeat scroll 0 0;
+    background: 1976D2;
     border: 0 none;
     color: white;
     margin: 10px 0;
@@ -1612,15 +1614,23 @@ body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading, bo
     background-color: #fff !important;
     border-color: #fff !important;
 }
-.sira-ms2 .close, .sira-ms2 .close:hover,
-.sira-ms2 .scheda-sira.react-draggable .card-close,
-.sira-ms2 .scheda-sira.react-draggable .card-close:hover {
-    color: #000;
-}
-.sira-ms2 button.close:first-child:before {
+/*.sira-ms2 button.close:first-child:before {
     content: "\F107";
     font-size: 21px;
     color: #000;
+}*/
+
+.sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close,
+.sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close:hover{color: #1976D2;}
+.sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close .glyphicon-collapse-down:before {
+    content: "\F15D";
+}
+
+.sira-ms2 .scheda-sira.react-draggable .card-close,
+.sira-ms2 .scheda-sira.react-draggable .card-close:hover,
+.sira-ms2 .scheda-sira.react-draggable .card-close:first-child:before {
+    color: #fff;
+    margin-top: 8px;
 }
 
 

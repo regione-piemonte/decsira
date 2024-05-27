@@ -88,7 +88,7 @@ class Viste extends React.Component {
     renderVistaTools = () => {
         return [(
             <button
-                className="btn btn-link carica-mappa"
+                className="btn btn-link carica-in-mappa"
                 onClick={this.loadConfig}>
                 <I18N.Message msgId={"renderTools.loadInMap"} />
             </button>

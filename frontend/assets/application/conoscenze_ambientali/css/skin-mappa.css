@@ -91,7 +91,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     color: #1976D2 !important;
 }
 #mapstore-drawermenu .nav-menu .navHeader{
-    background: #1976D2;
+    background: #fff;
 }
 #mapstore-drawermenu .navHeader > .glyphicon{
     font-size: 22px;
@@ -115,8 +115,8 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 
 #mapstore-drawermenu .navButtons .btn-default:hover{
     color: #1976D2;
-    background-color: #e6e6e6;
-    border-color: #adadad;
+  /*  background-color: #e6e6e6;
+    border-color: #adadad;*/
 }
 
 #mapstore-drawermenu .navButtons .btn-primary {
@@ -347,9 +347,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 
 /*COLORI*/
 
-#mapstore-navbar-container .dropdown-toggle, #mapstore-navbar-container .square-button {
-    border-left: 1px solid #01603c;
-}
+
 #mapstore-drawermenu #mapstore-layers .toc-default-layer {
     padding: 10px 0;
     margin-top: 0;
@@ -366,7 +364,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     padding: 12px;
 }
 .sira-ms2 .toc-default-layer .toc-title {
-    max-width: 280px !important;
+    max-width: 65% !important;
 }
 
 #sira-layer-settings .noUi-handle {
@@ -389,15 +387,61 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     overflow: auto !important;
 }
 #mapstore-drawermenu .navButtons .btn.square-button{
-    height: 45px;
-    width: 45px;
     border-radius: 0;
     padding: 0;
     transition: all 100ms ease-in 0s;
 }
 
 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon {
-    font-size: 24px;
+    font-size: 14px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons{
+    margin-top: 10px;
+    margin-left: 10px;
+    float: none;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button { 
+    width: auto !important;
+    border-radius: 20px;
+    height: auto !important;
+    padding: 6px 15px;
+    line-height: 14px;
+    font-size: 14px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-default { background: #1976D2 !important; color: #fff !important;}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary { background: #fff !important; color: #1976D2 !important;}
+
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon.glyphicon-1-catalog:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "CATALOGO";
+    background: url(/assets/application/conoscenze_ambientali/css/images/catalogo-active.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary .glyphicon.glyphicon-1-catalog:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "CATALOGO";
+    background: url(/assets/application/conoscenze_ambientali/css/images/catalogo.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon.glyphicon-1-layer:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "OGGETTI CARICATI";
+    background: url(/assets/application/conoscenze_ambientali/css/images/share_location.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary .glyphicon.glyphicon-1-layer:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "OGGETTI CARICATI";
+    background: url(/assets/application/conoscenze_ambientali/css/images/share_location-active.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
 }
 .square-button .glyphicon {
     font-size: 30px;
@@ -427,7 +471,8 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 
 .scheda-sira .panel-default .panel-heading {
-	background:#eee;
+    background: #fff;
+    font-weight: bold;
 }
 
 .btn-toolbar.btn-toolbar-sm > button {
@@ -689,16 +734,31 @@ header.navbar h1 a span {
 	padding-bottom: 6px;
 }
 #mapstore-drawermenu #mapstore-layers .toc-group-children .btn.btn-link.carica-in-mappa,
-#mapstore-drawermenu #mapstore-layers .toc-group-children button{
+#mapstore-drawermenu #mapstore-layers .toc-group-children button,
+#siratoc-layers .toc-group-children button,
+#siracatalog button{
 float: right;
 }
+
+#siratoc-layers .toc-group-children button.btn-link.elenco {
+    background-image: url(images/elenco.svg);
+    padding-left: 15px !important;
+    background-repeat: no-repeat;
+    background-size: 19px;
+    margin-top: 2px;
+    min-height: 18px;
+    font-weight: bold;
+    font-size: 18px;
+    background-position-y: 50%;
+}
+#siratoc-layers .toc-group-children .toc-layer-tool.glyphicon.glyphicon-1-menu-manage{width: 20px;}
 #mapstore-drawermenu #mapstore-layers .toc-group-children .btn.btn-link.carica-in-mappa{
-    background-size: 14px;
+    background-size: 15px;
     min-height: 18px;
     font-weight: bold;
     background-position-y: 50%;
 }
-
+a:not([href]){cursor: pointer;}
 
 #siracatalog .glyphicon-plus-sign:before{
     content: "\F1E3";
@@ -982,6 +1042,7 @@ body.body_map.sira-ms2 #fullscreen-container .rw-i, .sira-ms2 #qgis-container .r
 
 #fullscreen-container, .side-querypanel .mapstore-switch-panel  .mapstore-switch-btn input:checked + .m-slider{
     background-color: #ffffff;
+    border: 1px solid #1976D2;
 }
 #fullscreen-container, .side-querypanel .mapstore-switch-panel .mapstore-switch-btn .m-slider:before {
     background-color: #1976D2;
@@ -1059,19 +1120,115 @@ body.body_map.sira-ms2 .mapbody .rw-list-option:hover {
     background-color: #1976D2 !important;
 }
 body.body_map.sira-ms2 .mapbody .rw-state-focus{color: #1976D2 !important;border: 1px solid #1976D2 !important;}
-/*
-.sira-ms2 .MapSearchBar .input-group,
-.sira-ms2 .MapSearchBar .input-group .no-border.btn-default {
-    background: #1976D2;
-    color: #ffffff;
-    box-shadow: none !important;
-    border: 1px solid #f1eded;
+
+body.body_map.sira-ms2 #siratoc-layers .toc-default-layer .glyphicon-1-close:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background:url("/assets/application/conoscenze_ambientali/css/images/elimina-da-mappa.svg") 0 0 no-repeat;
+    width: 18px;
+    display: block;
+    height: 20px;
+    background-size: 18px;
 }
 
-.sira-ms2 .MapSearchBar .input-group .searchInput {
-    min-height: 40px;
+body.body_map.sira-ms2 #siratoc-layers .toc-default-layer #sira-layer-settings .glyphicon-list:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url("/assets/application/conoscenze_ambientali/css/images/mostra-legenda.svg") 0 0 no-repeat;
+    width: 18px;
+    display: block;
+    height: 20px;
+    }
+.sira-ms2 #mapstore-navbar-container {
+    margin: 5px;
+}
+body.body_map.sira-ms2 #mapstore-navbar .search-toggle,  body.body_map.sira-ms2 #mapstore-navbar-container .square-button{
+    height: auto;
+    width: auto;
+}
+#mapstore-burger-menu-container{ border-radius: 0 5px 5px 0; border-left: 1px solid #fff !important;}
+body.body_map.sira-ms2 #mapstore-navbar-container .square-button .glyphicon {
+    font-size: 20px;
 }
 
-.body_dataset .MapSearchBar .input-group .search-toolbar-options {
-    padding: 4px;
+/*body.body_map.sira-ms2 #mapstore-navbar-container .dropdown-toggle, body.body_map.sira-ms2 #mapstore-navbar-container .square-button {
+    border-left: 1px solid #fff !important;
 }*/
+.sira-ms2 #mapstore-navbar .search-toggle{border-radius: 5px 0 0 5px;}
+.sira-ms2 #mapstore-navbar .search-toggle .glyphicon.glyphicon-search::before{
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background:url("/assets/application/conoscenze_ambientali/css/images/metro-location-city.svg") 0 0 no-repeat;
+    width: 18px;
+    display: block;
+    height: 20px;
+    background-size: 18px;
+}
+
+
+.sira-ms2 .mapToolbar,.sira-ms2 .navbar-dx.shadow {
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow: none;
+}
+body.body_map.sira-ms2 #navigationBar-container.btn-group-vertical > .square-button{
+        width: auto !important;
+        height: auto !important;
+    }
+
+body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button {
+    background: #fff !important;
+    height: 34px;
+    width: 33px;
+    border: 0;
+    text-align: right;
+    border-radius: 0 50% 50% 0;
+    top: 30px;
+    left: -5px;
+}
+body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button:before{ 
+    content: "\f061";
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 900;
+    color: #000;
+    font-size: 18px !important;
+}
+body.body_map.sira-ms2 #mapstore-drawermenu .navHeader > .glyphicon.glyphicon-1-close{ float: right;}
+body.body_map.sira-ms2 #mapstore-drawermenu .navHeader > .glyphicon.glyphicon-1-close:before{ 
+    content: "\f060";
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome !important;
+    font-size: inherit !important;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 900 !important;
+    color: #000;
+    font-size: 18px !important;
+}
+body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button .glyphicon.glyphicon-1-layer{ display: none;}
+
+body.body_map.sira-ms2 div#mapstore-globalspinner {
+    width: auto !important;
+    height: auto !important;
+}
+
+body.body_map.sira-ms2 #mapstore-globalspinner {
+    margin: 0 !important;
+    width: 20px !important;
+    position: static !important;
+    border-radius: 0 !important;
+}
+body.body_map.sira-ms2 .template {
+    margin-top: 50px !important;
+}
+body.body_map.sira-ms2 #sira-layer-settings .noUi-handle {background: #1976D2 !important;}
+
+body.body_map.sira-ms2 .querypanel-container .query-filter-container .no-border.btn-default {
+    background: #fff !important;color: #1976D2 !important;
+}

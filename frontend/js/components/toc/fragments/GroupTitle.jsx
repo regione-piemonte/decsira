@@ -32,7 +32,7 @@ class GroupTitle extends React.Component {
         let selected = (this.props.node.selected !== undefined) ? this.props.node.selected : false;
         let groupTitle = this.props.node && this.props.node.title || 'Default';
         return (
-            <div className={selected ? "toc-group-title btn-link" : "toc-group-title"} onClick={() => this.props.onClick(this.props.node.id, expanded)} style={this.props.style} onKeyPress={() => this.props.onClick(this.props.node.id, expanded)}>
+            <div className={selected ? "toc-group-title active" : "toc-group-title"} onClick={() => this.props.onClick(this.props.node.id, expanded)} style={this.props.style} onKeyPress={() => this.props.onClick(this.props.node.id, expanded)}>
                 <StatusIcon expanded={expanded} node={this.props.node} page={this.props.page}/>{groupTitle}
             </div>
         );
