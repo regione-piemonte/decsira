@@ -16,7 +16,6 @@ const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
 const { connect } = require('react-redux');
 const { loadLegends, showLegendBox } = require('../../actions/metadatainfobox');
-
 const mapDispatchToPropsMIB = (dispatch) => {
     return {
         loadLegend: (u, actualUrl) => {
@@ -126,7 +125,10 @@ class DefaultNode extends React.Component {
                 style={this.props.style} type="layer" {...other}>
 
                 <Title />
-                <ShowInfoNode showAllText={this.state.showAllText}/>
+                <ShowInfoNode
+                    isVistaDataset={false}
+                    showAllText={this.state.showAllText}
+                />
 
                 <div className="containerDefaultNodeFooter">
                     <div className="ContainerParagraph">
@@ -142,8 +144,6 @@ class DefaultNode extends React.Component {
                                     <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
                                     <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
                             }
-                            {/* mostra di piu */}
-                            {/* mostra di meno */}
                         </button>
                     </div>
                 </div>
@@ -163,9 +163,11 @@ class DefaultNode extends React.Component {
     /* Mostra il pannello sfondo grigio che permette di vedere fonte, link al metadato e servizio WMS*/
     toogleShowMetadata() {
         this.setState((currentState) => {
+
             if (!currentState.showAllText) {
                 this.showInfoBox();
             }
+
             return {
                 showAllText: !currentState.showAllText
             };

@@ -10,7 +10,22 @@ const React = require('react');
 const { Glyphicon } = require('react-bootstrap');
 const PropTypes = require('prop-types');
 const I18N = require('@mapstore/components/I18N/I18N');
-
+const { connect } = require('react-redux');
+const { loadLegends, showLegendBox } = require('../../actions/metadatainfobox');
+const mapDispatchToPropsMIB = (dispatch) => {
+    return {
+        loadLegend: (u, actualUrl) => {
+            if (actualUrl && actualUrl.length === 0) {
+                dispatch(loadLegends(u));
+            }
+            dispatch(showLegendBox());
+        }
+    };
+};
+const ShowInfoNode = connect(
+    null,
+    mapDispatchToPropsMIB
+)(require('./ShowInfoNode'));
 
 class Viste extends React.Component {
 
@@ -44,6 +59,20 @@ class Viste extends React.Component {
         };
     }
 
+    toogleShowMetadata() {
+        this.setState((currentState) => {
+
+            if (!currentState.showAllText) {
+                this.showInfoBox();
+            }
+
+            return {
+                showAllText: !currentState.showAllText
+            };
+
+        });
+    }
+
     renderObjectTools = () => {
         return [(<Glyphicon
             key="toggle-featuregrid"
@@ -66,18 +95,20 @@ class Viste extends React.Component {
         )];
     };
 
+
+
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
-        let showAllText = !this.state.showAllText ? 'sira-view-description' : 'sira-view-description-text';
-
+        
         return (
             <div className="sira-view cardCatalogo">
                 <div className="sira-view-title">
                     <span>{this.props.node.title}</span>
                     <div className="sira-view-content">
-                        <span className={showAllText}>
-                            {this.props.node.text}
-                        </span>
+                        <ShowInfoNode
+                            isVistaDataset
+                            showAllText={this.state.showAllText}
+                            nodeVista={this.props.node} />
                     </div>
                 </div>
                 {/* {expanded && this.props.node.nodes ?
@@ -104,21 +135,8 @@ class Viste extends React.Component {
                         </button>
                     </div>
                 </div>
-            </div>);
-    }
-
-    toogleShowMetadata() {
-        this.setState((currentState) => {
-
-            /*  if (!currentState.showAllText) {
-                 this.showInfoBox();
-             } */
-
-            return {
-                showAllText: !currentState.showAllText
-            };
-
-        });
+            </div>
+        );
     }
 
     loadConfig = () => {
