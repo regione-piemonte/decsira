@@ -25,7 +25,9 @@ class ShowInfoNode extends React.Component {
         urlLegend: PropTypes.array,
         loadLegend: PropTypes.func,
         node: PropTypes.object,
-        showAllText: PropTypes.bool
+        showAllText: PropTypes.bool,
+        isVistaDataset: PropTypes.bool,
+        nodeVista: PropTypes.object
     };
 
     static defaultProps = {
@@ -35,6 +37,10 @@ class ShowInfoNode extends React.Component {
 
     renderMetadata = () => {
         let metadato = this.props.node.metadato;
+        
+        console.log('>>>>METADATO>>>>>', metadato);
+
+        
         let renderWfsUrl = [];
         if (metadato && metadato.urlWFS && metadato.urlWFS.length > 0) {
             renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
@@ -42,7 +48,7 @@ class ShowInfoNode extends React.Component {
                 renderWfsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wfs" key={'wfs_' + index}
-                        onClick={() => {navigator.clipboard.writeText(val);}} >
+                        onClick={() => { navigator.clipboard.writeText(val); }} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 ));
@@ -55,7 +61,7 @@ class ShowInfoNode extends React.Component {
                 renderWmsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wms" key={'wms_' + index}
-                        onClick={() => {navigator.clipboard.writeText(val);}} >
+                        onClick={() => { navigator.clipboard.writeText(val); }} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 )
@@ -70,7 +76,9 @@ class ShowInfoNode extends React.Component {
                 </p>
                 <p>
                     <strong><I18N.Message msgId={"metadataInfoBox.urlMetadato"} /></strong>
-                    <a target="_blank" rel="noopener noreferrer" href={metadato ? metadato.urlMetadato : null}> <I18N.Message msgId={"metadataInfoBox.goToMetadato"} /> </a>
+                    <a target="_blank" rel="noopener noreferrer" href={metadato ? metadato.urlMetadato : null}>
+                        <I18N.Message msgId={"metadataInfoBox.goToMetadato"} />
+                    </a>
                 </p>
                 <p>
                     {renderWfsUrl}
@@ -90,14 +98,24 @@ class ShowInfoNode extends React.Component {
     }
 
     render() {
-        let { showAllText } = this.props;
-        const showAllTextClass = !showAllText ? "layer-description" : "";
+        let { isVistaDataset, showAllText, nodeVista } = this.props;
+        let whichClass = '';
+
+        if (!isVistaDataset) {
+            whichClass = !showAllText ? "layer-description" : "";
+        } else {
+            whichClass = !showAllText ? 'sira-view-description' : 'sira-view-description-text';
+        }
+
+        console.log('>>>>SHOW INFO NODE>>>>>', this.props);
+
+
         return (
             <div className="layer-content">
                 <span
                     tabIndex="0"
-                    className={showAllTextClass}>
-                    {this.props.node.text}
+                    className={whichClass}>
+                    {isVistaDataset ? nodeVista.text : this.props?.node?.text}
                 </span>
 
                 {showAllText ? this.renderMetadata() : null}
