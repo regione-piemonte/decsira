@@ -13,7 +13,7 @@ const { Tabs, Tab, Modal, Button } = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
-const { toggleNode, getThematicViewConfig, getMetadataObjects, selectSubCategory, setNodeInUse, selectAllObjects } = require('../actions/siracatalog');
+const { toggleNode, getThematicViewConfig, getMetadataObjects, getAllMetadata, selectSubCategory, setNodeInUse, selectAllObjects } = require('../actions/siracatalog');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const { mapSelector } = require('../../MapStore2/web/client/selectors/map');
 const { tocSelector } = require('../selectors/sira');
@@ -109,6 +109,7 @@ class Catalog extends React.Component {
         expandFilterPanel: PropTypes.func,
         configureIndicaLayer: PropTypes.func,
         getMetadataObjects: PropTypes.func,
+        getAllMetadata: PropTypes.func,
         selectSubCategory: PropTypes.func,
         subcat: PropTypes.string,
         configOggetti: PropTypes.object,
@@ -360,7 +361,18 @@ class Catalog extends React.Component {
     };
 
     render() {
-        const { category, selectedView } = this.props;
+        const { category, selectedView, subcat, title } = this.props;
+
+        let pageTitle= "";
+        if (subcat === "objects"){
+            if (title === "allObjects"){
+                pageTitle = <I18N.Message msgId={"catalog.allCategories"} />
+            } else if (title === "searchResults"){
+                pageTitle = <I18N.Message msgId={"catalog.searchResults"} />
+            } else {
+                pageTitle = title;
+            }
+        }
 
         return (<div className="interna">
             <div style={{ minHeight: '100%', position: 'relative' }}>
@@ -400,7 +412,7 @@ class Catalog extends React.Component {
                                 </Button>
                             </div>
                         </div>
-                        {this.props.subcat === "objects" ? <span>{this.props.title === "allObjects" ? "Tutte le categorie" : this.props.title}</span> : <noscript></noscript>}
+                        {this.props.subcat === "objects" ? <span>{pageTitle}</span> : <noscript></noscript>}
                         <CartPanel />
                         {selectedView ? this.renderView() : this.renderCategory()}
                     </div>
@@ -431,7 +443,11 @@ class Catalog extends React.Component {
             params.text = text;
         }
         if (!this.props.loading) {
-            this.props.getMetadataObjects({ params });
+            if(params.text){
+                this.props.getMetadataObjects({ params });
+            } else {
+                this.props.getAllMetadata();
+            }
         }
     };
 
@@ -546,6 +562,7 @@ class Catalog extends React.Component {
 
 module.exports = connect(datasetSelector, {
     getMetadataObjects,
+    getAllMetadata,
     onToggle: toggleNode,
     selectSubCategory,
     loadMetadata,

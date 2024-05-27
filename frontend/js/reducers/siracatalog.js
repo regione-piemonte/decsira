@@ -106,10 +106,11 @@ function siracatalog(state = initialState, action) {
     }
     case SELECT_SUB_CATEGORY: {
         let selectedView = state.selectedView;
+        let allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
         if (action.subcat === 'objects') {
             selectedView = null;
         }
-        return assign({}, state, {subcat: action.subcat, selectedView: selectedView});
+        return assign({}, state, {subcat: action.subcat, selectedView: selectedView, allViews: allViews});
     }
     case SELECT_VIEW: {
         let allViews = state.allViews;
@@ -137,7 +138,9 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {nodeUsed: action.node});
     }
     case ALL_OBJECTS: {
-        return assign({}, state, {nodes: state.allNodes, title: "allObjects"});
+        let allNodes = state.allNodes.map((n) => assign({}, n, {expanded: false, selected: false}));
+        let allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
+        return assign({}, state, {nodes: allNodes, allNodes: allNodes, allViews: allViews, title: "allObjects"});
     }
     case METADATA_OBJECTS_VIEWS_LOADED: {
         // FILTRA LE categorie ed i nodi
@@ -176,10 +179,20 @@ function siracatalog(state = initialState, action) {
                 }
             }
         });
-        if (action.isAllObjects) {
-            return assign({}, state, {nodes: nodes, views: views, allNodes: nodes, allViews: views});
+        let allNodes = [];
+        let allViews = [];
+        if(state.allNodes){
+            allNodes = state.allNodes.map((n) => assign({}, n, {expanded: false, selected: false}));
+            allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
+        } else {
+            allNodes = nodes.map((n) => assign({}, n, {expanded: false, selected: false}));
+            allViews = views.map((v) => assign({}, v, {expanded: false, selected: false}));
         }
-        return assign({}, state, {nodes: nodes, views: views});
+        let title = "searchResults";
+        if (action.isAllObjects) {
+           title= "allObjects";
+        }
+        return assign({}, state, {nodes: nodes, views: views, allNodes: allNodes, allViews: allViews, title: title, subcat: 'objects'});
     }
     case LOAD_METADATA: {
         let nodeId = action.idMetadato;
@@ -195,8 +208,15 @@ function siracatalog(state = initialState, action) {
             openLegendPanel: false,
             error: ''
         };
-        let nodes = state.nodes.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
-        return assign({}, state, {nodes: nodes});
+
+        let views = state.views;
+        let nodes = state.nodes;
+        if (state.subcat === 'views') {
+            views = state.views.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
+        } else if (state.subcat === 'objects') {
+            nodes = state.nodes.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
+        }
+        return assign({}, state, {nodes: nodes, views: views});
     }
     default:
         return state;
