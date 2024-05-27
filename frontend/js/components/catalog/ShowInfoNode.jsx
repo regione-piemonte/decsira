@@ -37,10 +37,7 @@ class ShowInfoNode extends React.Component {
 
     renderMetadata = () => {
         let metadato = this.props.node.metadato;
-        
-        console.log('>>>>METADATO>>>>>', metadato);
 
-        
         let renderWfsUrl = [];
         if (metadato && metadato.urlWFS && metadato.urlWFS.length > 0) {
             renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
@@ -106,9 +103,6 @@ class ShowInfoNode extends React.Component {
         } else {
             whichClass = !showAllText ? 'sira-view-description' : 'sira-view-description-text';
         }
-
-        console.log('>>>>SHOW INFO NODE>>>>>', this.props);
-
 
         return (
             <div className="layer-content">
