@@ -35,12 +35,9 @@ class ShowInfoNode extends React.Component {
         loadLegend: () => { }
     };
 
-    renderMetadata = () => {
-        let metadato = this.props.node.metadato;
-        
-        console.log('>>>>METADATO>>>>>', metadato);
+    renderMetadata = (isVistaDataset) => {
+        let metadato = this.props.node?.metadato;
 
-        
         let renderWfsUrl = [];
         if (metadato && metadato.urlWFS && metadato.urlWFS.length > 0) {
             renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
@@ -84,22 +81,30 @@ class ShowInfoNode extends React.Component {
                     {renderWfsUrl}
                     {renderWmsUrl}
                 </p>
-                <p>
-                    <button
-                        className="btn btn-link"
-                        onClick={() => this.props.loadLegend(metadato.urlWMS, metadato.urlLegend)}>
-                        <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />
-                    </button>
-                </p>
 
-                <LegendBox />
+                {!isVistaDataset ?
+                    <>
+                        <p>
+                            <button
+                                className="btn btn-link"
+                                onClick={() => this.props.loadLegend(metadato.urlWMS, metadato.urlLegend)}>
+                                <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />
+                            </button>
+                        </p>
+                        <LegendBox />
+                    </> : null
+                }
+
+
             </div>
         );
     }
 
     render() {
-        let { isVistaDataset, showAllText, nodeVista } = this.props;
+        let { isVistaDataset, showAllText, node } = this.props;
         let whichClass = '';
+
+        console.log('>>>>node>>>', node);
 
         if (!isVistaDataset) {
             whichClass = !showAllText ? "layer-description" : "";
@@ -107,18 +112,16 @@ class ShowInfoNode extends React.Component {
             whichClass = !showAllText ? 'sira-view-description' : 'sira-view-description-text';
         }
 
-        console.log('>>>>SHOW INFO NODE>>>>>', this.props);
-
 
         return (
             <div className="layer-content">
                 <span
                     tabIndex="0"
                     className={whichClass}>
-                    {isVistaDataset ? nodeVista.text : this.props?.node?.text}
+                    {isVistaDataset ? node?.text : this.props?.node?.text}
                 </span>
 
-                {showAllText ? this.renderMetadata() : null}
+                {showAllText ? this.renderMetadata(isVistaDataset) : null}
             </div>
         );
     }

@@ -108,7 +108,7 @@ class Viste extends React.Component {
                         <ShowInfoNode
                             isVistaDataset
                             showAllText={this.state.showAllText}
-                            nodeVista={this.props.node} />
+                            node={this.props.node} />
                     </div>
                 </div>
                 {/* {expanded && this.props.node.nodes ?
