@@ -108,7 +108,6 @@ class ShowInfoNode extends React.Component {
             whichClass = !showAllText ? 'sira-view-description' : 'sira-view-description-text';
         }
 
-
         return (
             <div className="layer-content">
                 <span

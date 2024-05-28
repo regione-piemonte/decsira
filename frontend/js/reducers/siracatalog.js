@@ -181,7 +181,6 @@ function siracatalog(state = initialState, action) {
         });
         let allNodes = [];
         let allViews = [];
-
         if (state.allNodes) {
             allNodes = state.allNodes.map((n) => assign({}, n, {expanded: false, selected: false}));
             allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
@@ -191,7 +190,7 @@ function siracatalog(state = initialState, action) {
         }
         let title = "searchResults";
         if (action.isAllObjects) {
-            title = "allObjects";
+            title  = "allObjects";
         }
         return assign({}, state, {nodes: nodes, views: views, allNodes: allNodes, allViews: allViews, title: title, subcat: 'objects'});
     }

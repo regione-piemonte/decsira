@@ -366,9 +366,9 @@ class Catalog extends React.Component {
         let pageTitle = "";
         if (subcat === "objects") {
             if (title === "allObjects") {
-                pageTitle = <I18N.Message msgId={"catalog.allCategories"} />
+                pageTitle = <I18N.Message msgId={"catalog.allCategories"} />;
             } else if (title === "searchResults") {
-                pageTitle = <I18N.Message msgId={"catalog.searchResults"} />
+                pageTitle = <I18N.Message msgId={"catalog.searchResults"} />;
             } else {
                 pageTitle = title;
             }

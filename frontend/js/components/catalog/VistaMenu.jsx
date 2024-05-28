@@ -22,7 +22,7 @@ class VistaMenu extends React.Component {
         let selected = (this.props.node.selected !== undefined) ? this.props.node.selected : false;
         return (
             <div className="sira-view">
-                <div className={selected ? "sira-view-title btn-link" : "sira-view-title"}>
+                <div className={selected ? "sira-view-title active" : "sira-view-title"}>
                     <span onClick={this.selectView}>{this.props.node.title}</span>
                 </div>
             </div>);
