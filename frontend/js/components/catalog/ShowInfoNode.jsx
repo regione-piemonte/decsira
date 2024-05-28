@@ -94,8 +94,6 @@ class ShowInfoNode extends React.Component {
                         <LegendBox />
                     </> : null
                 }
-
-
             </div>
         );
     }
@@ -103,8 +101,6 @@ class ShowInfoNode extends React.Component {
     render() {
         let { isVistaDataset, showAllText, node } = this.props;
         let whichClass = '';
-
-        console.log('>>>>node>>>', node);
 
         if (!isVistaDataset) {
             whichClass = !showAllText ? "layer-description" : "";

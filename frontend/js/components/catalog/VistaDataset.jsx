@@ -59,20 +59,6 @@ class Viste extends React.Component {
         };
     }
 
-    toogleShowMetadata() {
-        this.setState((currentState) => {
-
-            if (!currentState.showAllText) {
-                this.showInfoBox();
-            }
-
-            return {
-                showAllText: !currentState.showAllText
-            };
-
-        });
-    }
-
     renderObjectTools = () => {
         return [(<Glyphicon
             key="toggle-featuregrid"
@@ -95,11 +81,9 @@ class Viste extends React.Component {
         )];
     };
 
-
-
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
-        
+
         return (
             <div className="sira-view cardCatalogo">
                 <div className="sira-view-title">
@@ -137,6 +121,20 @@ class Viste extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    toogleShowMetadata() {
+        this.setState((currentState) => {
+
+            if (!currentState.showAllText) {
+                this.showInfoBox();
+            }
+
+            return {
+                showAllText: !currentState.showAllText
+            };
+
+        });
     }
 
     loadConfig = () => {

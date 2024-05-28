@@ -333,7 +333,7 @@ class Catalog extends React.Component {
             title: <I18N.Message msgId={"catalog.allViews"} />
         };
         const viste = this.props.allViews ? this.props.allViews.map((v) => (
-            <VistaMenu node={v} key={v.id}/>
+            <VistaMenu node={v} key={v.id} />
         )) : <div />;
 
         return (
@@ -363,11 +363,11 @@ class Catalog extends React.Component {
     render() {
         const { category, selectedView, subcat, title } = this.props;
 
-        let pageTitle= "";
-        if (subcat === "objects"){
-            if (title === "allObjects"){
+        let pageTitle = "";
+        if (subcat === "objects") {
+            if (title === "allObjects") {
                 pageTitle = <I18N.Message msgId={"catalog.allCategories"} />
-            } else if (title === "searchResults"){
+            } else if (title === "searchResults") {
                 pageTitle = <I18N.Message msgId={"catalog.searchResults"} />
             } else {
                 pageTitle = title;
@@ -443,7 +443,7 @@ class Catalog extends React.Component {
             params.text = text;
         }
         if (!this.props.loading) {
-            if(params.text){
+            if (params.text) {
                 this.props.getMetadataObjects({ params });
             } else {
                 this.props.getAllMetadata();
