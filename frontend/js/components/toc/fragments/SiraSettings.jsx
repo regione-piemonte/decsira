@@ -9,11 +9,11 @@
 const React = require('react');
 
 const Slider = require('react-nouislider');
-const {Label, Glyphicon} = require('react-bootstrap');
+const {Label, Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
+const I18N = require('@mapstore/components/I18N/I18N');
 const WMSLegend = require('./WMSLegend');
 const assign = require('object-assign');
 const PropTypes = require('prop-types');
-// const img = require('../../images/legenda.svg');
 require('./css/SiraSettings.css');
 const glyphStyle = {"float": "right", marginTop: 12, cursor: 'pointer'};
 
@@ -59,28 +59,21 @@ class SiraSettings extends React.Component {
         );
     };
 
-    /* renderSiraTool = () => {
-        return [ (<Glyphicon
-            style={glyphStyle}
-            key="toggle-featuregrid"
-            glyph="th"
-            onClick={() => this.props.searchAll(this.props.element.featureType || (this.props.element.params.featureType && this.props.element.params.featureType))}/>)
-        ];
-    };*/
-
     render() {
         const renderLeg = this.props.settings && this.props.settings.options && this.props.settings.options.showlegend && (this.props.element.type === "wms" || this.props.element.type === "wmspost");
-        // const renderSTool = !!this.props.element.featureType || !!(this.props.element.params && this.props.element.params.featureType);
         const renderLegendTool = this.props.element.type !== "vector";
+        const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.legend" /></Tooltip>;
         return (<div id="sira-layer-settings">
             {renderLeg ? this.renderLegend() : this.renderOpacity()}
-            {/* renderSTool ? this.renderSiraTool() : (<span/>) */}
-            {renderLegendTool ? (<Glyphicon
-                style={glyphStyle}
-                key="toggle-legned"
-                glyph={renderLeg ? "adjust" : "list"}
-                onClick={this.toggleLegend}
-            />) : (<span/>)}
+            {renderLegendTool ? (
+                <OverlayTrigger placement="bottom" overlay={tooltip}>
+                    <Glyphicon
+                        style={glyphStyle}
+                        key="toggle-legned"
+                        glyph={renderLeg ? "adjust" : "list"}
+                        onClick={this.toggleLegend}
+                    />
+                </OverlayTrigger>) : (<span/>)}
 
         </div>);
     }

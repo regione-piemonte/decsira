@@ -48,21 +48,21 @@ class DefaultNode extends React.Component {
         );
         if (indicaFunction.length > 0) {
             tools.push((
-                <OverlayTrigger key={"indicatori"} rootClose placement="left" overlay={tooltipIndica}>
+                <OverlayTrigger key={"indicatori"} rootClose placement="bottom" overlay={tooltipIndica}>
                     <button className="btn btn-link indicatori"
                         onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id, null)}>
                     </button>
                 </OverlayTrigger>));
         } else {
             tools.push((
-                <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
+                <OverlayTrigger key={"map-tp"} rootClose placement="bottom" overlay={tooltipMap}>
                     <button className="btn btn-link carica-in-mappa" onClick={()=>this.props.addToMap(this.props.node)}>
                     </button>
                 </OverlayTrigger>
             ));
             if ( this.props.node.featureType) {
                 tools.push((
-                    <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
+                    <OverlayTrigger key={"sira-mtp"} rootClose placement="bottom" overlay={tooltipList}>
                         <button className="btn btn-link elenco" onClick={() => this.props.toggleSiraControl(this.props.node)}>
                         </button>
                     </OverlayTrigger>));

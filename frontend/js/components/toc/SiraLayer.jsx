@@ -15,7 +15,7 @@ const PropTypes = require('prop-types');
 
 const LayersTool = require('./fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
-const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
+const ConfirmButton = require('./ConfirmButton');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
@@ -89,6 +89,7 @@ class DefaultLayer extends React.Component {
         tools.push(
             <ConfirmButton key="removelayer"
                 text={(<Glyphicon glyph="1-close"/>)}
+                tooltip="nodeIcons.remove"
                 style={{"float": "right", cursor: "pointer", borderColor: 'unset', backgroundColor: "transparent", marginRight: 3, padding: 0, outline: "none"}}
                 confirming={{text: LocaleUtils.getMessageById(this.context.messages, "layerProperties.confirmDelete"),
                     style: {"float": "right", cursor: "pointer", marginTop: -5}}}
@@ -107,6 +108,7 @@ class DefaultLayer extends React.Component {
                 <LayersTool key="toolsettings"
                     style={{ "float": "right", cursor: "pointer", marginRight: 0 }}
                     glyph="1-menu-manage"
+                    tooltip="nodeIcons.settings"
                     onClick={(node) => {
                         if (this.props.settings && this.props.settings.node === this.props.node.id) {
                             this.props.hideSettings();
@@ -126,12 +128,10 @@ class DefaultLayer extends React.Component {
             }
             if (this.props.node.params && this.props.node.params.isIndicatore === true) {
                 const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.configureIndica"/></Tooltip>;
-                const tool = (<button className="btn btn-link indicatori"
-                    onClick={this.configuraIndicatore}
-                />);
-                tools.push((<OverlayTrigger placement="bottom" overlay={tooltip}>
-                    {tool}
-                </OverlayTrigger>));
+                tools.push((
+                    <OverlayTrigger placement="bottom" overlay={tooltip}>
+                        <button className="btn btn-link indicatori" onClick={this.configuraIndicatore}/>
+                    </OverlayTrigger>));
             }
         }
         return tools;

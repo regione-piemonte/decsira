@@ -32,7 +32,7 @@ class LayersTool extends React.Component {
             glyph={this.props.glyph}
             onClick={(options) => this.props.onClick(this.props.node, options || {})}/>);
         return this.props.tooltip ? (
-            <OverlayTrigger placement="bottom" overlay={(<Tooltip id={"Tooltip-" + this.props.tooltip}><strong><Message msgId={this.props.tooltip}/></strong></Tooltip>)}>
+            <OverlayTrigger placement="bottom" overlay={(<Tooltip id={"Tooltip-" + this.props.tooltip}><Message msgId={this.props.tooltip}/></Tooltip>)}>
                 {tool}
             </OverlayTrigger>) : tool;
 
