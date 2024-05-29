@@ -21,6 +21,7 @@ const THEMATIC_VIEW_CONFIG_MAP = 'THEMATIC_VIEW_CONFIG_MAP';
 const SEARCH_TEXT_CHANGE = 'SEARCH_TEXT_CHANGE';
 const SHOWCATEGORIES = 'SHOWCATEGORIES';
 const SET_NODE_IN_USE = 'SET_NODE_IN_USE';
+const RESET_MENU = 'RESET_MENU';
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const {Promise} = require('es6-promise');
 
@@ -53,6 +54,12 @@ function setNodeInUse(node) {
     return {
         type: SET_NODE_IN_USE,
         node
+    };
+}
+function resetMenu(title) {
+    return {
+        type: RESET_MENU,
+        title
     };
 }
 function catalogLoading(status) {
@@ -243,6 +250,7 @@ module.exports = {
     SHOWCATEGORIES,
     SET_NODE_IN_USE,
     ALL_OBJECTS,
+    RESET_MENU,
     toggleNode,
     selectNode,
     selectCategory,
@@ -255,5 +263,6 @@ module.exports = {
     searchTextChange,
     toggleCategories,
     setNodeInUse,
-    selectAllObjects
+    selectAllObjects,
+    resetMenu
 };

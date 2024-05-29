@@ -13,7 +13,7 @@ const { Tabs, Tab, Modal, Button } = require('react-bootstrap');
 const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { HashLink } = require('react-router-hash-link');
-const { toggleNode, getThematicViewConfig, getMetadataObjects, getAllMetadata, selectSubCategory, setNodeInUse, selectAllObjects } = require('../actions/siracatalog');
+const { toggleNode, getThematicViewConfig, getMetadataObjects, getAllMetadata, selectSubCategory, setNodeInUse, selectAllObjects, resetMenu } = require('../actions/siracatalog');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const { mapSelector } = require('../../MapStore2/web/client/selectors/map');
 const { tocSelector } = require('../selectors/sira');
@@ -109,6 +109,7 @@ class Catalog extends React.Component {
         expandFilterPanel: PropTypes.func,
         configureIndicaLayer: PropTypes.func,
         getMetadataObjects: PropTypes.func,
+        resetMenu: PropTypes.func,
         getAllMetadata: PropTypes.func,
         selectSubCategory: PropTypes.func,
         subcat: PropTypes.string,
@@ -162,7 +163,7 @@ class Catalog extends React.Component {
             this.props.setProfile(this.props?.match?.params?.profile, authParams[this.props?.match?.params?.profile]);
         }
         if (!nodesLoaded && !loading && category && category.id) {
-            this.loadMetadata({ category: category });
+            this.loadMetadataByCategory({ category: category });
         }
     }
 
@@ -213,6 +214,10 @@ class Catalog extends React.Component {
         window.removeEventListener('keyup', handleKeyFocus);
     }
 
+    getAllObjects = () => {
+        this.props.getAllMetadata();
+    }
+
     renderSerchBar = () => {
         return (
             <SiraSearchBar
@@ -220,8 +225,8 @@ class Catalog extends React.Component {
                 searchClasses="home-search"
                 overlayPlacement="bottom"
                 mosaicContainerClasses="dataset-mosaic-container"
-                onSearch={this.loadMetadata}
-                onReset={this.loadMetadata}
+                onSearch={this.searchObjects}
+                onReset={this.getAllObjects}
             />);
     };
 
@@ -433,21 +438,25 @@ class Catalog extends React.Component {
         this.setState({ menuOpened: !currentState });
     };
 
-    loadMetadata = ({ text, category } = {}) => {
+    loadMetadataByCategory = ({ category } = {}) => {
         let params = {};
         const { id } = category || {};
         if (id !== 999) {
             params.category = id;
         }
+        if (!this.props.loading) {
+            this.props.getMetadataObjects({ params });
+        }
+    };
+
+    searchObjects = ({ text } = {}) => {
+        let params = {};
         if (text && text.length > 0) {
             params.text = text;
         }
         if (!this.props.loading) {
-            if (params.text) {
-                this.props.getMetadataObjects({ params });
-            } else {
-                this.props.getAllMetadata();
-            }
+            this.props.getMetadataObjects({ params });
+            this.props.resetMenu("searchResults");
         }
     };
 
@@ -581,5 +590,6 @@ module.exports = connect(datasetSelector, {
     addLayersInCart: addFeatureTypeLayerInCart,
     setNodeInUse: setNodeInUse,
     prepareDataToMap,
-    selectAllObjects
+    selectAllObjects,
+    resetMenu
 })(Catalog);
