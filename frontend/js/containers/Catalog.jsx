@@ -417,7 +417,7 @@ class Catalog extends React.Component {
                                 </Button>
                             </div>
                         </div>
-                        {this.props.subcat === "objects" ? <span>{pageTitle}</span> : <noscript></noscript>}
+                        {this.props.subcat === "objects" ? <h2>{pageTitle}</h2> : <noscript></noscript>}
                         <CartPanel />
                         {selectedView ? this.renderView() : this.renderCategory()}
                     </div>

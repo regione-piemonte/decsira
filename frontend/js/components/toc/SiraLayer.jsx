@@ -107,7 +107,7 @@ class DefaultLayer extends React.Component {
             tools.push(
                 <LayersTool key="toolsettings"
                     style={{ "float": "right", cursor: "pointer", marginRight: 0 }}
-                    glyph="1-menu-manage"
+                    glyph="cog"
                     tooltip="nodeIcons.settings"
                     onClick={(node) => {
                         if (this.props.settings && this.props.settings.node === this.props.node.id) {

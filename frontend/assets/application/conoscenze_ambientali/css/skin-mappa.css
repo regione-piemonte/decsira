@@ -52,6 +52,13 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     margin: 0 !important;
 }
 
+.sira-ms2 .querypanel-container .logicHeader .btn-default {
+    background-color: #1976D2 !important;
+    color: white !important;
+    border-color: #1976D2 !important;
+    text-transform: uppercase;
+}
+
 #viewer .btn-primary {
     background-color: #1976D2;
     color: white;
@@ -107,12 +114,13 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     margin-left: 8px;
     color: #000;
     font-weight: bold;
+    display: none;
 }
 
 #mapstore-drawermenu .drawer-menu-head-catalog.panel-title{
     margin-left: 8px;
+    display: none;
 }
-
 #mapstore-drawermenu .navButtons .btn-default:hover{
     color: #1976D2;
   /*  background-color: #e6e6e6;
@@ -364,7 +372,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     padding: 12px;
 }
 .sira-ms2 .toc-default-layer .toc-title {
-    max-width: 65% !important;
+    max-width: 60% !important;
 }
 
 #sira-layer-settings .noUi-handle {
@@ -410,6 +418,23 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 .sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-default { background: #1976D2 !important; color: #fff !important;}
 .sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary { background: #fff !important; color: #1976D2 !important;}
+
+.sira-ms2 .glyphicon-print:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url(/assets/application/conoscenze_ambientali/css/images/material-file-download.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 .glyphicon-link:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url(/assets/application/conoscenze_ambientali/css/images/link.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
 
 .sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon.glyphicon-1-catalog:before {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -745,7 +770,6 @@ float: right;
     padding-left: 15px !important;
     background-repeat: no-repeat;
     background-size: 19px;
-    margin-top: 2px;
     min-height: 18px;
     font-weight: bold;
     font-size: 18px;
@@ -1147,7 +1171,8 @@ body.body_map.sira-ms2 #mapstore-navbar .search-toggle,  body.body_map.sira-ms2 
     width: auto;
 }
 #mapstore-burger-menu-container{ border-radius: 0 5px 5px 0; border-left: 1px solid #fff !important;}
-body.body_map.sira-ms2 #mapstore-navbar-container .square-button .glyphicon {
+body.body_map.sira-ms2 #mapstore-navbar-container .square-button .glyphicon,
+body.body_map.sira-ms2 #navigationBar-container .glyphicon {
     font-size: 20px;
 }
 
@@ -1220,20 +1245,25 @@ body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button .glyphicon.glyph
 
 body.body_map.sira-ms2 div#mapstore-globalspinner {
     width: auto !important;
-    height: auto !important;
+    height:auto !important;
 }
-
+body.body_map.sira-ms2 .ms2-loading .sk-circle-wrapper {
+    width: 24px !important;
+    height: 24px !important;
+    margin: 7px 7px 7px 7px !important;
+}
 body.body_map.sira-ms2 #mapstore-globalspinner {
     margin: 0 !important;
     width: 20px !important;
     position: static !important;
     border-radius: 0 !important;
 }
-body.body_map.sira-ms2 .template {
-    margin-top: 50px !important;
-}
+
 body.body_map.sira-ms2 #sira-layer-settings .noUi-handle {background: #1976D2 !important;}
 
 body.body_map.sira-ms2 .querypanel-container .query-filter-container .no-border.btn-default {
     background: #fff !important;color: #1976D2 !important;
+}
+body.body_map.sira-ms2 .template {
+    margin-top: 0 !important;
 }

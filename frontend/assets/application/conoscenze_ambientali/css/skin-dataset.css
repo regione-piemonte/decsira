@@ -137,8 +137,9 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 
 #dataset-toc .group-expanded.toc-default-group {
-    padding-top: 5px;
     margin-left: 20px;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 #dataset-toc .toc-subgroup .group-expanded.toc-default-group {
@@ -146,9 +147,8 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 
 #dataset-toc .toc-subgroup .group-collapsed.toc-default-group {
-    border-bottom: 1px solid #f1eded;
+    margin-bottom: 8px !important;
 }
-
 #dataset-toc .toc-group-children .toc-default-group-head {
     background-color: white !important;
     color: black !important;
@@ -161,7 +161,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 
 #dataset-toc .toc-group-children {
-    margin: 8px 0 0 0;
+    margin:0 0 0 0;
 }
 
 #dataset-toc .toc-group-children .toc-subgroup {
@@ -289,27 +289,18 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
     top: -6px;
 }
 
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object.flat {
+#dataset-toc .toc-default-layer.catalog-object .cardCatalogo
+{
     padding: 15px;
 }
 
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object {
     background-color: transparent;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin: 10px;
+    padding: 10px;
     font-size: 16px;
     margin-bottom: 15px;
     cursor: default;
-}
-
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon-search:before {
-    /* font-family: "Glyphicons Halflings"; */
-    /*font-size: xx-large;*/
-}
-
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon-th:before {
-
-    /*font-size: xx-large;*/
 }
 
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon:before {
@@ -354,7 +345,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 .cardCatalogo {
     margin: 10px;
-    padding: 10px;
+    padding: 10px !important;
     border-radius: 10px;
 }
 
@@ -366,30 +357,36 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 .tab-content #dataset-results-view .sira-view,
 .sira-ms2 .cardCatalogo .sira-view-title span:first-child {
     font-weight: bold;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     padding-bottom: 0;
 }
 .interna #dataset-results-view .sira-view-content .sira-view-description,
 .interna #dataset-results-view .sira-view-content .sira-view-description-text {
 	font-weight:normal;
 	text-transform: none;
+    line-height: 1.5em;
 }
 #dataset-results-view .sira-view-title span {
     min-width: 100%
 }
-
+#dataset-results-view .sira-view-title .containerDefaultNodeFooter span{
+    min-width: auto; margin-right: 5px;
+}
 #dataset-results-view .sira-view-content .sira-view-description {
     min-width: 80%;
     padding: 0px;
-    /*float: left;*/
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     /* number of lines to show */
-    line-height: 1em;
+    line-height: 1.5em;
+    min-height: 3em;
     max-height: 2em;
     overflow: hidden;
-
+    text-overflow: ellipsis;
+    text-align: -webkit-auto;
+    text-transform: initial;
+    cursor: pointer;
 }
 
 #dataset-results-view .sira-view-tool {
@@ -510,8 +507,7 @@ header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sir
 }
 
 .sira-ms2 .MapSearchBar {
-    margin-left: 15px;
-    margin-top: 10px;
+    margin: 10px 15px;
 }
 
 @media (min-width: 1200px) {

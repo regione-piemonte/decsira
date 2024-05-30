@@ -5,15 +5,6 @@ body.body_dataset #container, body.body_dataset .fill, body.body_dataset {
 
 body {font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;}
 
-div.interna {
-   /* background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -moz-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -ms-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -o-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);*/
-	}
-
 /*header*/
 header{
 	background:#1976D2;
@@ -156,6 +147,7 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger .glyphicon.glyphicon-trash{
 	color: #a84239; font-size: 18px;
 }
+.sira-ms2 .info-content.infobox-content .panel-body button {background: #1976D2;}
 .sira-ms2 .btn-link {
 	color: #1976D2;
 	font-weight: bold;
@@ -204,10 +196,17 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 	background-image: url(images/imposta-parametri-indicatore.svg);
 	padding-left: 22px !important;
     background-repeat: no-repeat;
-    background-size: 16px;
-	min-height: 16px;
+    background-size: 18px;
+	min-height: 18px;
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
+}
+#siratoc-layers .toc-group-children button.btn-link.indicatori{
+	padding-left: 10px !important;
+}
+.sira-ms2 #siratoc-layers .toc-group-children .toc-layer-tool.glyphicon.glyphicon-cog {
+    width: auto;
+	margin: 0;
 }
 .sira-ms2 .btn-link.mostra-legenda {
 	background-image: url(images/mostra-legenda.svg);
@@ -230,20 +229,6 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 }
 
 
-/*
-.btn-default,
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active,
-.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, 
-.btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover,
-.sira-ms2 .btn-default, .sira-ms2 .btn-default:hover,
-.sira-ms2 .btn-default:active:hover, .sira-ms2 .btn-default.active:hover, .sira-ms2 .open > .dropdown-toggle.btn-default:hover,
- .sira-ms2 .btn-default:active:focus, .sira-ms2 .btn-default.active:focus, .sira-ms2 .open > .dropdown-toggle.btn-default:focus, 
-.sira-ms2 .btn-default:active.focus, .sira-ms2 .btn-default.active.focus, .sira-ms2 .open > .dropdown-toggle.btn-default.focus {
-	background-color: #1976D2;
-	color: #fff;
-	border-color: #1976D2;
-}*/
-
 .btn-outline-primary.btn-default {
     color: #1976D2 !important;
     background-color: #fff !important;
@@ -259,7 +244,6 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 
 .btn-primary,
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active,
-
 body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-ms2 #qgis-container .btn-primary,
  .btn-primary, .dropdown-toggle.btn-primary 
 .btn-primary.active.focus, .btn-primary.active:focus, 
@@ -1335,19 +1319,13 @@ text-decoration: underline;
 
 .interna .dataset-search-container {
     margin-bottom: 50px;
-    /*margin-top: 50px;*/
 }
 .interna .siracatalog-search-selector {
     background-color: #1976D2  !important;
 	box-shadow: none;
 	border:0;
 }
-.interna .catalog-search-container .MapSearchBar .input-group {
-   /* border: 1px solid #000;
-    box-shadow: none!important;
-	border-radius:0;
-	border-right:0;*/
-}
+
 .interna .dataset-categories-switch-container {
     background: none;
     text-align: right;
@@ -1576,7 +1554,7 @@ text-rendering: auto;
 	font-size: 18px !important;
 }
 .sira-ms2 .square-button-md .glyphicon {
-	font-size: 23px;
+	font-size: 20px;
 }
 .item-icon {
 	width: 2em;
@@ -1614,17 +1592,27 @@ body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading, bo
     background-color: #fff !important;
     border-color: #fff !important;
 }
-/*.sira-ms2 button.close:first-child:before {
-    content: "\F107";
-    font-size: 21px;
-    color: #000;
-}*/
+body.body_map.sira-ms2 #fullscreen-container .scheda-sira.react-draggable .panel-primary > .panel-heading,
+body.body_map.sira-ms2 #fullscreen-container .react-draggable .panel-primary > .panel-heading{
+	background: #1976D2 !important;
+    color: #fff;
+}
 
+body.body_map.sira-ms2 #card-btn-group {
+    position: relative !important;
+    top: auto !important;
+}
 .sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close,
 .sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close:hover{color: #1976D2;}
 .sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close .glyphicon-collapse-down:before {
     content: "\F15D";
+	font-size: 14px !important;
 }
+.sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close .glyphicon-expand:before {
+    content: "\F15A";
+	font-size: 14px !important;
+}
+.glyphicon-chevron-down, .glyphicon-chevron-down{font-size: 14px !important;}
 
 .sira-ms2 .scheda-sira.react-draggable .card-close,
 .sira-ms2 .scheda-sira.react-draggable .card-close:hover,
@@ -1753,4 +1741,7 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default:hover, .sira-ms2 #qgis
 .mapstore-conditions-group .logicHeader.filter-logic-header .btn-default:hover,
 .mapstore-conditions-group .logicHeader.filter-logic-header .btn-default:active{
     color: #1976D2 !important;
+}
+.sira-ms2 .sira-view-title span:first-child {
+    padding-left: 4px;
 }
