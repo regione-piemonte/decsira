@@ -30,7 +30,6 @@ const Spinner = require('react-spinkit');
 const I18N = require('@mapstore/components/I18N/I18N');
 const Draggable = require('react-draggable');
 const SiraTree = require('../tree/SiraTree').default;
-const {Tooltip, OverlayTrigger} = require('react-bootstrap');
 
 require("./card.css");
 
@@ -158,9 +157,6 @@ class Card extends React.Component {
         }
         // const showMLSButton = this.props.mlsShow && !this.props.card.loadingCardTemplate && !isEmpty(this.getGeometry()?.coordinates);
         const showMLSButton = this.props.mlsShow;
-        let tooltipTree = <Tooltip id="tooltip-data-tree">Oggetti collegati</Tooltip>;
-        let tooltipPdf = <Tooltip id="tooltip-pdf-print">Stampa</Tooltip>;
-        let tooltipMultilayer = <Tooltip id="tooltip-multilayer">Livelli di dettaglio</Tooltip>;
         let btnMargin = this.props.treeTemplate ? '40px' : '14px';
 
         const Template = (
@@ -168,21 +164,15 @@ class Card extends React.Component {
                 {this.props.card.loadingCardTemplate
                     ? this.renderCardLoadingTemplate() : <TemplateSira template={this.props.card.template} model={model}/>}
                 <div id="card-btn-group" style={{paddingTop: 4, display: this.props.card.loadingCardTemplate ? 'none' : 'block' }}>
-                    <OverlayTrigger key={"btn-multilayer"} rootClose placement="right" overlay={tooltipMultilayer} style={{ display: showMLSButton ? 'inline-block' : 'none' }}>
-                        <Button id="multiLayerSelect" style={{ marginLeft: btnMargin, display: showMLSButton ? 'inline-block' : 'none' }} onClick={this.onClickMLS}>
-                            <img src={img} width={16} alt=""/>
-                        </Button>
-                    </OverlayTrigger>
-                    <OverlayTrigger key={"btn-pdf-print"} rootClose placement="left" overlay={tooltipPdf}>
-                        <Button id="scheda2pdf" onClick={this.props.generatePDF}>
-                            <Glyphicon glyph="print"/> <I18N.Message msgId={"detailCard.download"} />
-                        </Button>
-                    </OverlayTrigger>
-                    <OverlayTrigger key={"btn-data-tree"} rootClose placement="right" overlay={tooltipTree}>
-                        <Button id="treeButton" onClick={this.renderTree} style={{display: this.props.treeTemplate ? 'inline-block' : 'none'}} disabled={this.props.card.xml === undefined || this.props.card.xml === null}>
-                            <Glyphicon glyph="link"/> <I18N.Message msgId={"detailCard.oggettiCollegati"} />
-                        </Button>
-                    </OverlayTrigger>
+                    <Button id="multiLayerSelect" style={{ marginLeft: btnMargin, display: showMLSButton ? 'inline-block' : 'none' }} onClick={this.onClickMLS}>
+                        <img src={img} width={16} alt=""/>
+                    </Button>
+                    <Button id="scheda2pdf" onClick={this.props.generatePDF}>
+                        <Glyphicon glyph="print"/> <I18N.Message msgId={"detailCard.download"} />
+                    </Button>
+                    <Button id="treeButton" onClick={this.renderTree} style={{display: this.props.treeTemplate ? 'inline-block' : 'none'}} disabled={this.props.card.xml === undefined || this.props.card.xml === null}>
+                        <Glyphicon glyph="link"/> <I18N.Message msgId={"detailCard.oggettiCollegati"} />
+                    </Button>
                 </div>
                 <SchedaToPDF profile={this.props.profile} authParam={authParam} withMap={this.props.withMap}/>
             </div>
