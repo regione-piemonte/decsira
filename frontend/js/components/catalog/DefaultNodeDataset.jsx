@@ -11,7 +11,6 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
-const { Tooltip, OverlayTrigger } = require('react-bootstrap');
 const glyphStyle = { "float": "right", cursor: 'pointer' };
 const I18N = require('@mapstore/components/I18N/I18N');
 const { connect } = require('react-redux');
@@ -72,9 +71,6 @@ class DefaultNode extends React.Component {
     }
 
     renderTools = () => {
-        let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"} /></Tooltip>;
-        let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"} /></Tooltip>;
-        let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"} /></Tooltip>;
         const tools = [];
 
         let indicaFunction = this.props.node.functions.filter(
@@ -83,34 +79,28 @@ class DefaultNode extends React.Component {
 
         if (indicaFunction.length > 0) {
             tools.push((
-                <OverlayTrigger key={"indicatori-tp"} rootClose placement="left" overlay={tooltipIndica}>
-                    <button
-                        className="btn btn-link indicatori"
-                        onClick={() => this.configureIndicaLayer(this.props.node)}>
-                        <I18N.Message msgId={"renderTools.handleSizeOnMap"} />
-                    </button>
-                </OverlayTrigger>));
+                <button
+                    className="btn btn-link indicatori"
+                    onClick={() => this.configureIndicaLayer(this.props.node)}>
+                    <I18N.Message msgId={"renderTools.handleSizeOnMap"} />
+                </button>));
         } else {
             tools.push((
-                <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
-                    <button
-                        className="btn btn-link carica-in-mappa"
-                        onClick={() => this.props.addToMap(this.props.node)}>
-                        <I18N.Message msgId={"renderTools.loadInMap"} />
-                    </button>
-                </OverlayTrigger>
+                <button
+                    className="btn btn-link carica-in-mappa"
+                    onClick={() => this.props.addToMap(this.props.node)}>
+                    <I18N.Message msgId={"renderTools.loadInMap"} />
+                </button>
             ));
 
             if (this.props.node.featureType) {
                 tools.push((
-                    <OverlayTrigger key={"sira-tp"} rootClose placement="left" overlay={tooltipList}>
-                        <button
-                            className="btn btn-link mostra-dati"
-                            style={glyphStyle}
-                            onClick={() => this.props.toggleSiraControl(this.props.node)}>
-                            <I18N.Message msgId={"renderTools.showData"} />
-                        </button>
-                    </OverlayTrigger>));
+                    <button
+                        className="btn btn-link mostra-dati"
+                        style={glyphStyle}
+                        onClick={() => this.props.toggleSiraControl(this.props.node)}>
+                        <I18N.Message msgId={"renderTools.showData"} />
+                    </button>));
             }
         }
         return tools;

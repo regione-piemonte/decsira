@@ -110,22 +110,22 @@ class ConfirmButton extends React.Component {
             className = confirming && confirming.className || 'btn btn-sm btn-warning';
             style = confirming && confirming.style || {};
         }
-        let button = <button
-                className={classnames('confirm-button', className)}
-                style={style}
-                onClick={this.handleClick}
-                onBlur={this.handleBlur}
-                disabled={isDisabled}
-                {...buttonProps}>
-                {children}
-                {children ? ' ' : ''}
-                {text}
-            </button>;
+        let button = (<button
+            className={classnames('confirm-button', className)}
+            style={style}
+            onClick={this.handleClick}
+            onBlur={this.handleBlur}
+            disabled={isDisabled}
+            {...buttonProps}>
+            {children}
+            {children ? ' ' : ''}
+            {text}
+        </button>);
         return (
             this.props.tooltip ? (
                 <OverlayTrigger placement="bottom" overlay={(<Tooltip id={"Tooltip-" + this.props.tooltip}><Message msgId={this.props.tooltip}/></Tooltip>)}>
                     {button}
-                </OverlayTrigger>) : button);     
+                </OverlayTrigger>) : button);
     }
 
     isDisabled = () => {

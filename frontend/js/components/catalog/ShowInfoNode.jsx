@@ -46,14 +46,6 @@ class ShowInfoNode extends React.Component {
         };
     }
 
-    displayIcon = (val) => {
-        this.setState(() => {
-            return {
-                displayIcon: val
-            };
-        });
-    }
-
     renderMetadata = (isVistaDataset) => {
         let metadato = this.props.node?.metadato;
 
@@ -64,7 +56,7 @@ class ShowInfoNode extends React.Component {
                 renderWfsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wfs" key={'wfs_' + index}
-                        onClick={() => { navigator.clipboard.writeText(val); this.displayIcon(true) }} >
+                        onClick={() => { navigator.clipboard.writeText(val); this.displayIcon(true); }} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 ));
@@ -77,9 +69,9 @@ class ShowInfoNode extends React.Component {
                 renderWmsUrl.push(
                     <a tabIndex="0" className="infobox-service-url"
                         title="wms" key={'wms_' + index}
-                        onClick={() => { navigator.clipboard.writeText(val); this.displayIcon(true) }} >
+                        onClick={() => { navigator.clipboard.writeText(val); this.displayIcon(true); }} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
-                    </a> 
+                    </a>
                 )
             );
         }
@@ -99,7 +91,7 @@ class ShowInfoNode extends React.Component {
                 <p>
                     {renderWfsUrl}
                     {renderWmsUrl}
-                    <Glyphicon glyph="ok" style={this.state.displayIcon ? {display: "inline"} : {display:"none"}}/>
+                    <Glyphicon glyph="ok" style={this.state.displayIcon ? {display: "inline"} : {display: "none"}}/>
                 </p>
 
                 {!isVistaDataset ?
@@ -139,6 +131,14 @@ class ShowInfoNode extends React.Component {
                 {showAllText ? this.renderMetadata(isVistaDataset) : null}
             </div>
         );
+    }
+
+    displayIcon = (val) => {
+        this.setState(() => {
+            return {
+                displayIcon: val
+            };
+        });
     }
 
 }
