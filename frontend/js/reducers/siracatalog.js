@@ -183,7 +183,7 @@ function siracatalog(state = initialState, action) {
         if (action.isAllObjects) {
             return assign({}, state, {nodes: nodes, views: views, allNodes: nodes, allViews: views, title: "allObjects"});
         }
-        return assign({}, state, {nodes: nodes, views: views, subcat: 'objects'});
+        return assign({}, state, {nodes: nodes, views: views});
     }
     case RESET_MENU: {
         let allNodes = state.allNodes.map((n) => assign({}, n, {expanded: false, selected: false}));

@@ -38,7 +38,6 @@ class DefaultNode extends React.Component {
     };
 
     renderTools = () => {
-        // let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"}/></Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"}/></Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"}/></Tooltip>;
         let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"}/></Tooltip>;
@@ -66,14 +65,6 @@ class DefaultNode extends React.Component {
                         <button className="btn btn-link elenco" onClick={() => this.props.toggleSiraControl(this.props.node)}>
                         </button>
                     </OverlayTrigger>));
-                /* tools.push((
-                    <OverlayTrigger key={"list-ltp"} rootClose placement="left" overlay={tooltipSira}>
-                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
-                            <Glyphicon
-                                key="toggle-query"
-                                glyph="search"/>
-                        </button>
-                    </OverlayTrigger>));*/
             }
         }
         return tools;
