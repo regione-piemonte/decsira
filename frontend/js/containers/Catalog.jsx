@@ -342,7 +342,7 @@ class Catalog extends React.Component {
         )) : <div />;
 
         return (
-            <Tabs
+            <Tabs id="dataset-tabs"
                 className="dataset-tabs"
                 activeKey={this.props.subcat}
                 onSelect={this.props.selectSubCategory}>
