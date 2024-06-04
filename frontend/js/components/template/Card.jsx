@@ -165,7 +165,7 @@ class Card extends React.Component {
                     ? this.renderCardLoadingTemplate() : <TemplateSira template={this.props.card.template} model={model}/>}
                 <div id="card-btn-group" style={{paddingTop: 4, display: this.props.card.loadingCardTemplate ? 'none' : 'block' }}>
                     <Button id="multiLayerSelect" style={{ marginLeft: btnMargin, display: showMLSButton ? 'inline-block' : 'none' }} onClick={this.onClickMLS}>
-                        <img src={img} width={16} alt=""/>
+                        <img src={img} width={16} alt=""/> <I18N.Message msgId={"detailCard.multilayer"} />
                     </Button>
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/> <I18N.Message msgId={"detailCard.download"} />
