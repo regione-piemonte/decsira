@@ -18,7 +18,7 @@ class MultiSelectLayer extends React.Component {
     render() {
         // const geometry = this.props.params?.data?.geometry;
         // return geometry && geometry.coordinates ? <img src={img} width={16} alt=""/> : null;
-        return <img src={img} width={16} alt=""/>;
+        return <img src={img} width={16} title="Seleziona oggetti collegati"/>;
     }
 }
 
