@@ -58,6 +58,16 @@ header .navbar-header .sira-login + ul > span > li.dropdown-header{
     color: #333 !important;
 
 }
+.sira-ms2 header #loginButton.login-success {
+    color: #1976D2;
+    background-color: #fff;
+    border-color: #fff;
+	border-radius: 50%;
+	padding: 2px 5px;
+	margin-top: 5px;
+}
+
+
 header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sira-login + .dropdown-menu a:hover, header .navbar-header .sira-login + .dropdown-menu a:active, header .navbar-header .sira-login + .dropdown-menu a:visited
 .navbar-header .sira-login + .dropdown-menu a{
     font-size: 14px;
@@ -320,7 +330,8 @@ header .glyphicon-question-sign{ font-size: 22px;}
 .sira-login{padding:3px 8px 0 8px;}
 button#mapstore-langselector{
 	padding-left: 5px;
-    margin-right: 20px;
+	margin-right: 10px;
+    margin-top: 5px;
 	background: #1976D2;
 	color: #fff;
 	border: 0;
@@ -920,7 +931,7 @@ div.interna
 div.interna .tab-pane{
 	background:#fff;
 	border-top:1px solid #ccc;
-	padding-bottom:50px;
+	padding-bottom:0px;
 	}
 
 div.interna .tab-pane a:hover{
@@ -1420,8 +1431,12 @@ text-decoration: underline;
 button.close {
     opacity: 1;
 }
-#dataset-toc, #dataset-results-view {
-    max-height: 400px;
+#dataset-toc {
+    max-height: 428px;
+    overflow-y: auto;
+}
+#dataset-results-view {
+    max-height: 490px;
     overflow-y: auto;
 }
 .body_map .querypanel.widthclass {
@@ -1569,7 +1584,8 @@ p.small.tutte-categorie{
 
 
 .sira-ms2 .catalog-object {
-    border: 1px solid #f1eded;
+    border: 1px solid #c8c7c7;
+	border-bottom: 1px solid #c8c7c7 !important;
 }
 .cardCatalogo{ box-shadow: none;}
 
@@ -1740,4 +1756,8 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default:hover, .sira-ms2 #qgis
 .dropdown.btn-group-success li{
     padding: 10px;
 	border-bottom: 1px solid #ddd;
+}
+
+body.body_map.sira-ms2 .panel-primary {
+    border-color: #fff !important;
 }
