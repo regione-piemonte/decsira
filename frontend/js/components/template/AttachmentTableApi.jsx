@@ -100,7 +100,7 @@ class AttachmentTableApi extends React.Component {
         }, this).filter((c) => c);
 
         let numRows = features.length;
-        let height = (50 * numRows > 200) ? 200 : 50 * numRows;
+        let height = (70 * numRows > 200) ? 200 : 70 * numRows;
         let style = {height: height, width: "100%"};
         return (
             <div fluid={false} style={style} className="ag-blue">
