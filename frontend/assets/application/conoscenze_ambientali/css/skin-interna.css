@@ -128,8 +128,19 @@ header .row{
 
 }
 /*BUTTON - LINK */
-sira-ms2 a:hover, .sira-ms2 a:focus {
-    color: #1976D2;
+/*.sira-ms2 .open > .dropdown-toggle.btn-default:hover, 
+.sira-ms2 .open > .dropdown-toggle.btn-default:focus,
+ .sira-ms2 .open > .dropdown-toggle.btn-default.focus*/
+
+.sira-ms2 .btn-default:active:hover, .sira-ms2 .btn-default.active:hover, 
+.sira-ms2 .btn-default:active:focus, .sira-ms2 .btn-default.active:focus, 
+.sira-ms2 .btn-default:active.focus, .sira-ms2 .btn-default.active.focus{
+    background: #D93830;
+	color: #fff;
+    text-decoration: underline;
+}
+.sira-ms2 .btn-link:hover, .sira-ms2 .btn-link:focus {
+    color: #D93830;
     text-decoration: underline;
 }
 
@@ -140,12 +151,12 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger,
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:hover,
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:active {
-    color: #a84239;
+    color: #1976D2;
     background: transparent;
     border: 0;
 }
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger .glyphicon.glyphicon-trash{
-	color: #a84239; font-size: 18px;
+	color: #1976D2; font-size: 18px;
 }
 .sira-ms2 .info-content.infobox-content .panel-body button {background: #1976D2;}
 .sira-ms2 .btn-link {
@@ -191,7 +202,9 @@ sira-ms2 a:hover, .sira-ms2 a:focus {
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
-
+.sira-ms2 .btn-link.elenco:hover {
+	background-image: url(images/elenco-hover.svg);
+}
 .sira-ms2 .btn-link.indicatori {
 	background-image: url(images/imposta-parametri-indicatore.svg);
 	padding-left: 22px !important;
@@ -262,7 +275,7 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 	font-weight: bold;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-.btn-mappa.btn-default, .btn-mappa.btn-default:focus, .btn-mappa.btn-default:hover{
+.btn-mappa.btn-default, .btn-mappa.btn-default:focus{
 	background:#487600 url("images/mappa.svg") 20px 50% no-repeat;
 	border-radius:5px;
 	color: #fff;
@@ -270,6 +283,20 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
     font-weight: bold;
 	padding: 8px 20px 8px 50px;
     text-transform: uppercase;
+}
+.btn-mappa.btn-default:hover{
+	background:#D93830 url("images/mappa.svg") 20px 50% no-repeat;
+}
+.sira-ms2 .btn-primary:hover {
+    color: #fff;
+    background-color: #D93830;
+    border-color: #D93830;
+}
+
+.sira-ms2 .btn-default:hover {
+    color: #fff;
+    background-color: #D93830;
+    border-color: #D93830;
 }
 .btn-link.black{color: #000;}
 /*.btn-link.arrow{
@@ -342,48 +369,6 @@ button#mapstore-langselector{
     border-radius: 0;
 }
 
-
-
-
-/*
-div.interna
- .navbar-header h2 {
-	margin:2px 0;
-	line-height:30px;
-	color:#0053A8;
-	margin-left:10px;
-	float:left;
-}
-
-div.interna
- .navbar-header h2 span{
-	font-weight:normal;
-}
-
-div.interna
- .navbar-header .titolo-interna{
-    background:#fff url("images/logo-interna.png") no-repeat scroll 20px center;
-	height:55px;
-	min-height:55px;
-	}
-
-div.interna
- .navbar-header .titolo-interna a{
-	height:55px;
-	min-height:55px;
-	display:block;
-	}
-
-
-div.interna
- .navbar-header .map-list{
-	background:#000;
-	border:2px solid #000;
-	color:#fff;
-	margin-top:3px;
-	float:left;
-}
-*/
 div.interna
  .navbar-header .map-list .btn.btn-primary{
 	background:none;
@@ -1600,7 +1585,6 @@ body.body_map.sira-ms2 #fullscreen-container .react-draggable .panel-primary > .
 
 body.body_map.sira-ms2 #card-btn-group {
     position: relative !important;
-    top: auto !important;
 }
 .sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close,
 .sira-ms2 .scheda-sira.react-draggable .sectionHader.panel-title .close:hover{color: #1976D2;}
@@ -1740,8 +1724,17 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default:hover, .sira-ms2 #qgis
 .mapstore-conditions-group .logicHeader.filter-logic-header .btn-default,
 .mapstore-conditions-group .logicHeader.filter-logic-header .btn-default:hover,
 .mapstore-conditions-group .logicHeader.filter-logic-header .btn-default:active{
-    color: #1976D2 !important;
+	padding: 8px 10px 10px 10px;
+    border: 1px solid #fff !important;
 }
 .sira-ms2 .sira-view-title span:first-child {
     padding-left: 4px;
+}
+.sira-ms2 .sira-view-title .btn-link {
+    margin-top: 11px;
+}
+
+.dropdown.btn-group-success li{
+    padding: 10px;
+	border-bottom: 1px solid #ddd;
 }
