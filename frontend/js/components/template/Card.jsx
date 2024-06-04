@@ -157,7 +157,6 @@ class Card extends React.Component {
         }
         // const showMLSButton = this.props.mlsShow && !this.props.card.loadingCardTemplate && !isEmpty(this.getGeometry()?.coordinates);
         const showMLSButton = this.props.mlsShow;
-        let btnMargin = this.props.treeTemplate ? '40px' : '14px';
 
         const Template = (
             <div className="scheda-sira">

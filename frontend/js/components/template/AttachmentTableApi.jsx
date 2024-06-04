@@ -99,7 +99,7 @@ class AttachmentTableApi extends React.Component {
             return null;
         }, this).filter((c) => c);
 
-        let numRows = features.length;
+        let numRows = this.props.attachments.length;
         let height = (70 * numRows > 200) ? 200 : 70 * numRows;
         let style = {height: height, width: "100%"};
         return (

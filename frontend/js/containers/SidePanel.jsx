@@ -85,7 +85,6 @@ class SidePanel extends React.Component {
     onResize = (e, direction, ref, d) => {
         let w = this.state.width + d.width;
         this.setState({boxwidth: w});
-       
     }
 
     onResizeStop = (e, direction, ref, d) => {
@@ -146,11 +145,11 @@ class SidePanel extends React.Component {
             <Resizable
                 className="box"
                 minWidth = {400}
-                enable = {{ top:false, right:true, bottom:false, left:false, topRight:false, bottomRight:false, bottomLeft:false, topLeft:false }}
-                size={{
+                enable = {{ top: false, right: true, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: false }}
+                size = {{
                     width: this.state.boxwidth,
                     height: '100%'
-                }} 
+                }}
                 onResize={this.onResize}
                 onResizeStop={this.onResizeStop}>
                 <div id="sidepanel-container" className="box" style={{width: `${this.state.boxwidth}px`, height: "100%"}}>
