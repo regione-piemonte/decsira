@@ -23,7 +23,7 @@ class GridCellDownload extends React.Component {
         // let tooltipDownload = <Tooltip id="tpm-download">Scarica il documento</Tooltip>;
         let glyphIcon = this.props.params.value === 'download' ? "download-alt" : "new-window";
         let tooltipDownload = this.props.params.value === 'download' ? <Tooltip id="tpm-download">Scarica</Tooltip> : <Tooltip id="tpm-download">Apri</Tooltip>;
-        return (<OverlayTrigger key={"download"} rootClose placement="right" overlay={tooltipDownload}>
+        return (<OverlayTrigger key={"download"} rootClose placement="bottom" overlay={tooltipDownload}>
             <Glyphicon
                 key="toggle-download"
                 glyph={glyphIcon} />

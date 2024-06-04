@@ -17,7 +17,7 @@ class ZoomToFeature extends React.Component {
     render() {
         const geometry = this.props.params && this.props.params.data && this.props.params.data.geometry;
         return geometry && geometry.coordinates ? (
-            <img src={img} width={16} title="localozzazione su mappa"/>
+            <img src={img} width={16} title="Localizzazione su mappa"/>
         ) : null;
     }
 }

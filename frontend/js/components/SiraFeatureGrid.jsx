@@ -15,7 +15,8 @@ const Draggable = require('react-draggable');
 
 const { Modal, Panel, Grid, Row, Col, Button } = require('react-bootstrap');
 
-const { Resizable } = require('react-resizable');
+// const { Resizable } = require('react-resizable');
+const { Resizable } = require('re-resizable');
 
 const { bindActionCreators } = require('redux');
 const { changeMapView } = require('@mapstore/actions/map');
