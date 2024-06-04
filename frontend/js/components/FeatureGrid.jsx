@@ -428,7 +428,7 @@ class SiraGrid extends React.Component {
                         maxFeatures={this.props.maxFeatures}
                     />
                     {this.renderDatasetHeader()}
-                    <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
+                    <div style={this.props.loadingGrid ? {display: "none"} : {width: this.state.width}}>
 
                         {LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")}: <strong>{this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</strong>
                         <Button
