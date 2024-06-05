@@ -9,6 +9,7 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {connect} = require('react-redux');
+const {bindActionCreators} = require('redux');
 const {Button} = require('react-bootstrap');
 const cs = require('classnames');
 const isEmpty = require('lodash/isEmpty');
@@ -23,6 +24,7 @@ const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const DownloadResultsComponent = require('./download/DownloadResultsComponent').default;
 const { Glyphicon } = require('react-bootstrap');
+const { selectAllObjects } = require('../actions/siracatalog');
 
 const RightMenu = connect((state) => ({
     open: state.header?.showRightMenu
@@ -86,7 +88,8 @@ class Header extends React.Component {
         cartMappaStyle: PropTypes.string,
         cartListaStyle: PropTypes.string,
         goToDataset: PropTypes.func,
-        goToHome: PropTypes.func
+        goToHome: PropTypes.func,
+        selectAllObjects: PropTypes.func
     };
 
     static contextTypes = {
@@ -163,12 +166,19 @@ class Header extends React.Component {
     };
 
     goToMap = () => {
+        this.props.selectAllObjects();
         this.context.router.history.replace("/map/");
     };
 
     goToCatalog = () => {
+        this.props.selectAllObjects();
         this.context.router.history.replace("/dataset/");
     };
 }
 
-module.exports = Header;
+// module.exports = Header;
+module.exports = connect(null, dispatch => {
+    return bindActionCreators({
+        selectAllObjects
+    }, dispatch);
+})(Header);
