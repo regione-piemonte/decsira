@@ -1,0 +1,26 @@
+const React = require('react');
+const I18N = require('@mapstore/components/I18N/I18N');
+
+class WmsCopyNotification extends React.Component {
+
+    /* componentDidMount() {
+        this.timeOutId = setTimeout(this.props.onTimeOut, 200);
+    };
+
+    componentWillUnmount() {
+        clearTimeout(this.timeOutId);
+    }; */
+
+    render() {
+        const content = (
+            <div className="alert alert-success" role="alert">{/* alert-dismissible */}
+                <I18N.Message msgId={"metadataInfoBox.wmsCopyLinkNotification"} />
+            </div>
+        );
+
+
+        return ( content );
+    }
+}
+
+module.exports = WmsCopyNotification;
