@@ -63,9 +63,15 @@ class ShowInfoNode extends React.Component {
             renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
             metadato.urlWFS.map((val, index) =>
                 renderWfsUrl.push(
-                    <a tabIndex="0" className="infobox-service-url"
-                        title="wfs" key={'wfs_' + index}
-                        onClick={() => { navigator.clipboard.writeText(val); this.toogleShowNotification(); }} >
+                    <a
+                        tabIndex="0"
+                        className="infobox-service-url"
+                        title="wfs"
+                        key={'wfs_' + index}
+                        onClick={() => {
+                            navigator.clipboard.writeText(val);
+                            this.toogleShowNotification();
+                        }} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 ));
@@ -76,9 +82,15 @@ class ShowInfoNode extends React.Component {
             renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             metadato.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
-                    <a tabIndex="0" className="infobox-service-url"
-                        title="wms" key={'wms_' + index}
-                        onClick={() => { navigator.clipboard.writeText(val); this.toogleShowNotification(); }} >
+                    <a
+                        tabIndex="0"
+                        className="infobox-service-url"
+                        title="wms"
+                        key={'wms_' + index}
+                        onClick={() => {
+                            navigator.clipboard.writeText(val);
+                            this.toogleShowNotification();
+                        }} >
                         <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                     </a>
                 )
@@ -120,7 +132,7 @@ class ShowInfoNode extends React.Component {
                 </div>
 
                 <p>
-                    {this.state.showNotifica ? <WmsCopyNotification onTimeOut={this.handleNotificationTimeout}  /> : null}
+                    {this.state.showNotifica ? <WmsCopyNotification onTimeOut={this.handleNotificationTimeout} /> : null}
                 </p>
 
             </>);

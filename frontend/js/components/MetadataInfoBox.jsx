@@ -11,6 +11,8 @@ const PropTypes = require('prop-types');
 const { Image, Panel } = require('react-bootstrap');
 const Draggable = require('react-draggable');
 const I18N = require('@mapstore/components/I18N/I18N');
+const WmsCopyNotification = require('./WmsCopyNotification');
+
 
 class MetadataInfoBox extends React.Component {
     static propTypes = {
@@ -65,6 +67,13 @@ class MetadataInfoBox extends React.Component {
         }
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            showNotifica: false
+        };
+    }
+
     onOpenLegendPanel = () => {
         this.props.loadLegend(this.props.urlWMS, this.props.urlLegend);
     };
@@ -111,34 +120,51 @@ class MetadataInfoBox extends React.Component {
         }
         return ('');
     };
+
     render() {
+        let renderWfsUrl = [];
+        if (this.props.urlWFS && this.props.urlWFS.length > 0) {
+            renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
+            this.props.urlWFS.map((val, index) =>
+                renderWfsUrl.push(
+                    <p>
+                        <a
+                            tabIndex="0"
+                            className="infobox-service-url"
+                            title="wfs"
+                            key={'wfs_' + index}
+                            onClick={() => {
+                                navigator.clipboard.writeText(val);
+                                this.toogleShowNotification();
+                            }} >
+                            <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
+                        </a>
+                    </p>
+                ));
+        }
+
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
-            renderWmsUrl.push(<h4><b><I18N.Message msgId={"metadataInfoBox.urlWMS"} /></b></h4>);
+            renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
             this.props.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
                     <p>
-                        <a tabIndex="0" className="infobox-service-url"
-                            title="wms" key={'wms_' + index}
-                            href={val} target="_blank" >
+                        <a
+                            tabIndex="0"
+                            className="infobox-service-url"
+                            title="wms"
+                            key={'wms_' + index}
+                            onClick={() => {
+                                navigator.clipboard.writeText(val);
+                                this.toogleShowNotification();
+                            }} >
                             <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
                         </a>
                     </p>
                 )
             );
         }
-        let renderWfsUrl = [];
-        if (this.props.urlWFS && this.props.urlWFS.length > 0) {
-            renderWfsUrl.push(<h4><I18N.Message msgId={"metadataInfoBox.urlWFS"} /></h4>);
-            this.props.urlWFS.map((val, index) =>
-                renderWfsUrl.push(
-                    <a tabIndex="0" className="infobox-service-url"
-                        title="wfs" key={'wfs_' + index}
-                        href={val} target="_blank" >
-                        <I18N.Message msgId={"metadataInfoBox.link_to_ogc_service"} />
-                    </a>
-                ));
-        }
+
         let renderLegendPanel = null;
         if (this.props.openLegendPanel) {
             renderLegendPanel =
@@ -183,11 +209,13 @@ class MetadataInfoBox extends React.Component {
                             </a>
                             {renderWmsUrl}
                             {renderWfsUrl}
+                            {this.state.showNotifica ? <WmsCopyNotification onTimeOut={this.toogleShowNotification} /> : null}
                             <button
                                 aria-expanded={this.props.showButtonLegend}
                                 style={{ display: this.props.showButtonLegend }}
                                 onClick={this.onOpenLegendPanel}>
-                                <I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} /></button>
+                                <I18N.Message msgId={"metadataInfoBox.legendPanelTitle"} />
+                            </button>
                             {renderLegendPanel}
                         </Panel>
                     </Panel>
@@ -195,6 +223,14 @@ class MetadataInfoBox extends React.Component {
                 </div>
             </Draggable>
         );
+    }
+
+    toogleShowNotification = () => {
+        this.setState((curreState) => {
+            return {
+                showNotifica: !curreState.showNotifica
+            };
+        });
     }
 }
 

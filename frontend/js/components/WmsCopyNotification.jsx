@@ -9,13 +9,11 @@ class WmsCopyNotification extends React.Component {
 
     componentDidMount() {
         this.timeOutId = setTimeout(this.props.onTimeOut, 2000);
-    };
+    }
 
     componentWillUnmount() {
         clearTimeout(this.timeOutId);
-    };
-
-
+    }
 
     render() {
         const content = (
