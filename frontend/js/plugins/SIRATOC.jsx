@@ -11,7 +11,7 @@ const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
 const {changeLayerProperties, changeGroupProperties, toggleNode,
     sortNode, showSettings, hideSettings, updateSettings, updateNode, removeNode} = require('@mapstore/actions/layers');
-const { configureIndicaLayer } = require('../actions/siradec');
+const { configureIndicaLayer, setActiveNode } = require('../actions/siradec');
 const { groupsSelector } = require('@mapstore/selectors/layers');
 const {loadMetadata, showBox} = require('../actions/metadatainfobox');
 const LayersUtils = require('@mapstore/utils/LayersUtils');
@@ -85,7 +85,8 @@ class LayerTree extends React.Component {
         setGridType: PropTypes.func,
         showInfoBox: PropTypes.func,
         loadMetadata: PropTypes.func,
-        configureIndicaLayer: PropTypes.func
+        configureIndicaLayer: PropTypes.func,
+        setActiveNode: PropTypes.func
     };
 
     static defaultProps = {
@@ -97,6 +98,7 @@ class LayerTree extends React.Component {
         updateNode: () => {},
         removeNode: () => { },
         configureIndicaLayer: () => { },
+        setActiveNode: () => { },
         activateLegendTool: true,
         activateSettingsTool: true,
         visibilityCheckType: "checkbox",
@@ -131,6 +133,7 @@ class LayerTree extends React.Component {
             updateNode={this.props.updateNode}
             removeNode={this.props.removeNode}
             configureIndicaLayer={this.openIndicaPanel}
+            setActiveNode={this.props.setActiveNode}
             visibilityCheckType={this.props.visibilityCheckType}
             activateLegendTool={this.props.activateLegendTool}
             activateSettingsTool={this.props.activateSettingsTool}
@@ -208,7 +211,8 @@ const TOCPlugin = connect(tocSelector, {
     setGridType,
     loadMetadata,
     showInfoBox: showBox,
-    configureIndicaLayer
+    configureIndicaLayer,
+    setActiveNode
 })(LayerTree);
 
 module.exports = {

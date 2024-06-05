@@ -19,7 +19,8 @@ const SideIndicaPanel = require('../components/indicatori/SideIndicaPanel').defa
 const SideFeatureGrid = require('../components/SideFeatureGrid');
 const {changeMapStyle} = require('../../MapStore2/web/client/actions/map');
 const {expandFilterPanel, closeIndicaConfiguration} = require('../actions/siradec');
-const Resizable = require('react-resizable').Resizable;
+// const Resizable = require('react-resizable').Resizable;
+const { Resizable } = require('re-resizable');
 const Spinner = require('react-spinkit');
 const {addLayer} = require('../../MapStore2/web/client/actions/layers');
 require('../../assets/css/sira.css');
@@ -81,17 +82,16 @@ class SidePanel extends React.Component {
         }
     }
 
-    onResize = (event, obj) => {
-        const {size} = obj;
-        this.setState({boxwidth: size.width});
-    };
+    onResize = (e, direction, ref, d) => {
+        let w = this.state.width + d.width;
+        this.setState({boxwidth: w});
+    }
 
-    onResizeStop = (event, obj) => {
-        const {size} = obj;
-        this.setState({width: size.width, boxwidth: size.width});
-        this.props.changeMapStyle({left: size.width, width: `calc(100% - ${size.width}px)`}, "sirasidepanel");
-
-    };
+    onResizeStop = (e, direction, ref, d) => {
+        let w = this.state.width + d.width;
+        this.setState({width: w, boxwidth: w});
+        this.props.changeMapStyle({left: w, width: `calc(100% - ${w}px)`}, "sirasidepanel");
+    }
 
     renderQueryPanel = () => {
         return (<SideQueryPanel
@@ -143,13 +143,15 @@ class SidePanel extends React.Component {
         }
         return (
             <Resizable
-                draggableOpts={{grid: [10, 0]}}
+                className="box"
+                minWidth = {400}
+                enable = {{ top: false, right: true, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: false }}
+                size = {{
+                    width: this.state.boxwidth,
+                    height: '100%'
+                }}
                 onResize={this.onResize}
-                width={this.state.boxwidth}
-                height={100}
-                onResizeStop={this.onResizeStop}
-                minConstraints={[400]}
-                className="box">
+                onResizeStop={this.onResizeStop}>
                 <div id="sidepanel-container" className="box" style={{width: `${this.state.boxwidth}px`, height: "100%"}}>
                     {comp}
                 </div>

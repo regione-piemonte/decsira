@@ -282,10 +282,8 @@ class Catalog extends React.Component {
         return (
             <div>
                 <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                    <div id="dataset-results-view">
-                        {viste}
-                    </div>
+                <div id="dataset-results-view">
+                    {viste}
                 </div>
             </div>);
     }
@@ -377,6 +375,8 @@ class Catalog extends React.Component {
             } else {
                 pageTitle = title;
             }
+        } else {
+            pageTitle = <I18N.Message msgId={"Dataset.thematicViewsText"} />;
         }
 
         return (<div className="interna">
@@ -417,7 +417,7 @@ class Catalog extends React.Component {
                                 </Button>
                             </div>
                         </div>
-                        {this.props.subcat === "objects" ? <h2>{pageTitle}</h2> : <noscript></noscript>}
+                        <h2>{pageTitle}</h2>
                         <CartPanel />
                         {selectedView ? this.renderView() : this.renderCategory()}
                     </div>

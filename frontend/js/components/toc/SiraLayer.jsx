@@ -34,6 +34,7 @@ class DefaultLayer extends React.Component {
         updateNode: PropTypes.func,
         removeNode: PropTypes.func,
         configureIndicaLayer: PropTypes.func,
+        setActiveNode: PropTypes.func,
         activateLegendTool: PropTypes.bool,
         activateSettingsTool: PropTypes.bool,
         settingsText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -122,7 +123,7 @@ class DefaultLayer extends React.Component {
                 const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.list" /></Tooltip>;
                 tools.push(
                     <OverlayTrigger placement="bottom" overlay={tooltip}>
-                        <button className="btn btn-link elenco" onClick={() => this.props.searchAll(this.props.node.featureType || this.props.element.params.featureType)}/>
+                        <button className="btn btn-link elenco" onClick={() => this.searchAll()}/>
                     </OverlayTrigger>
                 );
             }
@@ -147,6 +148,11 @@ class DefaultLayer extends React.Component {
                 <InlineSpinner loading={this.props.node.loading}/>
             </Node>
         );
+    }
+
+    searchAll= () => {
+        this.props.setActiveNode(this.props.node.id);
+        this.props.searchAll(this.props.node.featureType || this.props.node.params.featureType);
     }
 
     showInfoBox = () => {

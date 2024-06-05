@@ -157,15 +157,14 @@ class Card extends React.Component {
         }
         // const showMLSButton = this.props.mlsShow && !this.props.card.loadingCardTemplate && !isEmpty(this.getGeometry()?.coordinates);
         const showMLSButton = this.props.mlsShow;
-        let btnMargin = this.props.treeTemplate ? '40px' : '14px';
 
         const Template = (
             <div className="scheda-sira">
                 {this.props.card.loadingCardTemplate
                     ? this.renderCardLoadingTemplate() : <TemplateSira template={this.props.card.template} model={model}/>}
                 <div id="card-btn-group" style={{paddingTop: 4, display: this.props.card.loadingCardTemplate ? 'none' : 'block' }}>
-                    <Button id="multiLayerSelect" style={{ marginLeft: btnMargin, display: showMLSButton ? 'inline-block' : 'none' }} onClick={this.onClickMLS}>
-                        <img src={img} width={16} alt=""/>
+                    <Button id="multiLayerSelect" onClick={this.onClickMLS} style={{ display: showMLSButton ? 'inline-block' : 'none' }}>
+                        <img src={img} width={16} alt=""/> <I18N.Message msgId={"detailCard.multilayer"} />
                     </Button>
                     <Button id="scheda2pdf" onClick={this.props.generatePDF}>
                         <Glyphicon glyph="print"/> <I18N.Message msgId={"detailCard.download"} />

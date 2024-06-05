@@ -126,21 +126,17 @@ class UserMenu extends React.Component {
         let rolesArray = [];
         roles.forEach(role => {
             if (role) {
-                rolesArray.push(<span>{role.description ? role.description : role.code}</span>);
-                rolesArray.push(<MenuItem key="divider" divider />);
+                rolesArray.push(<li>{role.description ? role.description : role.code}</li>);
             }
         });
         if (roles === null || roles === undefined) {
             rolesArray.push(<li><Message msgId="user.freeAccess" /></li>);
         }
 
-        let rolesTitle = (<li><Message msgId="user.profile" /><MenuItem key="divider" divider /></li>);
-
         return (
             <React.Fragment>
                 <DropDown id="loginButton" className={this.props.className} pullRight bsStyle="success" title={this.renderButtonText()} {...this.props.menuProps} >
                     <span key="logged-user"><MenuItem header>{this.props.user.name}</MenuItem></span>
-                    {rolesTitle}
                     {rolesArray}
                     {itemArray}
                 </DropDown>
