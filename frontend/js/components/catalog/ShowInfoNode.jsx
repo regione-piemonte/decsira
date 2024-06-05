@@ -51,9 +51,9 @@ class ShowInfoNode extends React.Component {
         });
     }
 
-    /* handleTimeout = () => {
-        this.setState({showNotification: false});
-    }; */
+    handleNotificationTimeout = () => {
+        this.toogleShowNotification();
+    };
 
     renderMetadata = (isVistaDataset) => {
         let metadato = this.props.node?.metadato;
@@ -120,7 +120,7 @@ class ShowInfoNode extends React.Component {
                 </div>
 
                 <p>
-                    {this.state.showNotifica ? <WmsCopyNotification /> : null}
+                    {this.state.showNotifica ? <WmsCopyNotification onTimeOut={this.handleNotificationTimeout}  /> : null}
                 </p>
 
             </>);

@@ -1,15 +1,21 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const I18N = require('@mapstore/components/I18N/I18N');
 
 class WmsCopyNotification extends React.Component {
+    static propTypes = {
+        onTimeOut: PropTypes.func
+    };
 
-    /* componentDidMount() {
-        this.timeOutId = setTimeout(this.props.onTimeOut, 200);
+    componentDidMount() {
+        this.timeOutId = setTimeout(this.props.onTimeOut, 2000);
     };
 
     componentWillUnmount() {
         clearTimeout(this.timeOutId);
-    }; */
+    };
+
+
 
     render() {
         const content = (
@@ -19,7 +25,7 @@ class WmsCopyNotification extends React.Component {
         );
 
 
-        return ( content );
+        return (content);
     }
 }
 
