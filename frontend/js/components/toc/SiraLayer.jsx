@@ -85,11 +85,6 @@ class DefaultLayer extends React.Component {
         return [];
     };
 
-    searchAll= () => {
-        this.props.setActiveNode(this.props.node.id);
-        this.props.searchAll(this.props.node.featureType || this.props.node.params.featureType);
-    }
-
     renderTools = () => {
         const tools = [];
         tools.push(
@@ -153,6 +148,11 @@ class DefaultLayer extends React.Component {
                 <InlineSpinner loading={this.props.node.loading}/>
             </Node>
         );
+    }
+
+    searchAll= () => {
+        this.props.setActiveNode(this.props.node.id);
+        this.props.searchAll(this.props.node.featureType || this.props.node.params.featureType);
     }
 
     showInfoBox = () => {
