@@ -176,7 +176,7 @@ header .row{
 }
 .sira-ms2 .btn-link.arrow{font-size: 14px;}
 .sira-ms2 .btn-link.mostra-dati {
-	background-image: url(images/mostra-dati.svg);
+	background-image: url(images/elenco.svg);
 	padding-left: 22px !important;
     background-repeat: no-repeat;
     background-size: 19px;
@@ -184,6 +184,9 @@ header .row{
     font-weight: bold;
 	font-size: 14px;
     background-position-y: 35%;
+}
+.sira-ms2 .btn-link.mostra-dati:hover {
+	background-image: url(images/elenco-hover.svg);
 }
 .sira-ms2 .btn-link.carica-in-mappa {
 	background-image: url(images/carica-in-mappa.svg);
@@ -194,6 +197,9 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 45%;
 }
+.sira-ms2 .btn-link.carica-in-mappa:hover {
+	background-image: url(images/carica-in-mappa-hover.svg);
+}
 .sira-ms2 .btn-link.elimina-da-mappa {
 	background-image: url(images/elimina-da-mappa.svg);
 	padding-left: 22px !important;
@@ -202,6 +208,9 @@ header .row{
 	min-height: 16px;
     font-weight: bold;	font-size: 14px;
     background-position-y: 45%;
+}
+.sira-ms2 .btn-link.elimina-da-mappa {
+	background-image: url(images/elimina-da-mappa-hover.svg);
 }
 .sira-ms2 .btn-link.elenco {
 	background-image: url(images/elenco.svg);
@@ -224,6 +233,9 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
+.sira-ms2 .btn-link.indicatori:hover {
+	background-image: url(images/imposta-parametri-indicatore-hover.svg);
+}
 #siratoc-layers .toc-group-children button.btn-link.indicatori{
 	padding-left: 10px !important;
 }
@@ -240,6 +252,9 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
+.sira-ms2 .btn-link.mostra-legenda:hover {
+	background-image: url(images/mostra-legenda-hover.svg);
+}
 
 .sira-ms2 .btn-link.info-generali {
 	background-image: url(images/info-generali.svg);
@@ -250,8 +265,9 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
-
-
+.sira-ms2 .btn-link.info-generali-hover {
+	background-image: url(images/info-generali-hover.svg);
+}
 .btn-outline-primary.btn-default {
     color: #1976D2 !important;
     background-color: #fff !important;
@@ -288,7 +304,7 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 #treeButton{left: auto !important}
 #scheda2pdf:hover, #treeButton:hover,
 .featuregrid-tools.btn-toolbar.btn-toolbar-sm .btn-default:hover, #multiLayerSelect:hover{
-	color:#D93830;
+	color:#D93830 !important;
 }
 .btn-mappa.btn-default, .btn-mappa.btn-default:focus{
 	background:#487600 url("images/mappa.svg") 20px 50% no-repeat;
@@ -1674,9 +1690,7 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default{
     text-transform: uppercase;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default,
-body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:hover,
-body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:active{
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default{
 	 margin-left: 50px;
 	 background-image: url(images/filtri.svg);
 	 background-size: 16px;
@@ -1684,6 +1698,13 @@ body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:active{
 	 background-repeat: no-repeat;
 	 background-position-y: 30%;
 	 color: #1976D2 !important;
+}
+
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:hover,
+body.body_map.sira-ms2 #fullscreen-container .back-to-query.btn-default:active{
+	background-image: url(images/filtri-hover.svg);
+	color: #D93830 !important;
+	background-repeat: no-repeat;
 }
 .sira-ms2 .btn:active, .sira-ms2 .btn.active{
 	-webkit-box-shadow: none;
@@ -1760,4 +1781,9 @@ body.body_map.sira-ms2 #fullscreen-container .btn-default:hover, .sira-ms2 #qgis
 
 body.body_map.sira-ms2 .panel-primary {
     border-color: #fff !important;
+}
+
+body.body_map.sira-ms2 .ag-cell.ag-cell-value img:hover,
+body.body_map.sira-ms2 .btn-default:hover img{
+	filter: brightness(0) saturate(100%) invert(27%) sepia(75%) saturate(1634%) hue-rotate(337deg) brightness(96%) contrast(99%);
 }
