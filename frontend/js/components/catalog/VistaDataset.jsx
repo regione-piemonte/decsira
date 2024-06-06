@@ -7,7 +7,6 @@
  */
 
 const React = require('react');
-const { Glyphicon } = require('react-bootstrap');
 const PropTypes = require('prop-types');
 const I18N = require('@mapstore/components/I18N/I18N');
 const { connect } = require('react-redux');
@@ -59,18 +58,6 @@ class Viste extends React.Component {
         };
     }
 
-    renderObjectTools = () => {
-        return [(<Glyphicon
-            key="toggle-featuregrid"
-            glyph="th"
-            onClick={() => this.props.toggleSiraControl('grid', true)} />),
-        (<Glyphicon
-            key="toggle-query"
-            glyph="search"
-            onClick={() => this.props.expandFilterPanel(true)} />)];
-
-    };
-
     renderVistaTools = () => {
         return [(
             <button
@@ -82,8 +69,6 @@ class Viste extends React.Component {
     };
 
     render() {
-        let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
-
         return (
             <div className="sira-view cardCatalogo">
                 <div className="sira-view-title">
@@ -95,17 +80,9 @@ class Viste extends React.Component {
                             node={this.props.node} />
                     </div>
                 </div>
-                {/* {expanded && this.props.node.nodes ?
-                    this.props.node.nodes.map((o) => (
-                        <div className="sira-view-object">
-                            <span>{o.title}</span>
-                            {this.renderObjectTools()}
-                        </div>
-                    )) :
-                    (<div />)} */}
                 <div className="containerDefaultNodeFooter">
                     <div className="sira-view-tool">
-                        {this.renderVistaTools(expanded)}
+                        {this.renderVistaTools()}
                     </div>
                     <div className="ContainerParagraph">
                         <button
