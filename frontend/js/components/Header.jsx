@@ -90,7 +90,8 @@ class Header extends React.Component {
         goToDataset: PropTypes.func,
         goToHome: PropTypes.func,
         selectAllObjects: PropTypes.func,
-        toggleSiraControl: PropTypes.func
+        toggleSiraControl: PropTypes.func,
+        controls: PropTypes.array
     };
 
     static contextTypes = {
@@ -172,7 +173,7 @@ class Header extends React.Component {
     };
 
     goToCatalog = () => {
-        if(this.props.controls['grid'] === true){
+        if (this.props.controls.grid === true) {
             this.props.toggleSiraControl('grid');
         }
         this.props.selectAllObjects();
@@ -183,7 +184,8 @@ class Header extends React.Component {
 module.exports = connect((state) => {
     return {
         controls: state.siraControls
-    }}, dispatch => {
+    };
+}, dispatch => {
     return bindActionCreators({
         selectAllObjects,
         toggleSiraControl
