@@ -226,9 +226,9 @@ class SideQueryPanel extends React.Component {
         if (this.props.collapsible) {
             heading = this.props.filterPanelExpanded ? (
                 <span>
-                    <span style={{paddingLeft: "15px"}}>{header}</span>
+                   {header}
                     <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
-                        <Glyphicon glyph="glyphicon glyphicon-triangle-bottom collapsible"/>
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-bottom collapsible"/> 
                     </button>
                 </span>
             ) : (
@@ -236,17 +236,17 @@ class SideQueryPanel extends React.Component {
                     <span style={{paddingLeft: "15px"}}>{header}</span>
 
                     <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
-                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/> indietro
                     </button>
                 </span>
             );
         } else {
             heading = (
                 <span>
-                    <span style={{paddingLeft: "15px"}}>{header}</span>
+                    {header}
                     <OverlayTrigger key={"header_tp_over"} rootClose placement="left" overlay={tooltip}>
                         <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
-                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
+                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  indietro
                         </button>
                     </OverlayTrigger>
                 </span>

@@ -48,10 +48,10 @@ class SideIndicaPanel extends React.Component {
         return (
             <div className="handle_querypanel">
                 <span>
-                    <span style={{paddingLeft: "15px"}}>{header}</span>
+                    {header}
                     <OverlayTrigger key={"header_tp_over"} rootClose placement="left" overlay={tooltip}>
                         <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
-                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>
+                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  indietro
                         </button>
                     </OverlayTrigger>
                 </span>
