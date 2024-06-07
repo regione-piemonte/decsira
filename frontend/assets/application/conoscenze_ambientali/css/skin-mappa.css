@@ -754,6 +754,10 @@ header.navbar h1 a span {
 #siratoc-layers .glyphicon {
     color: #1976D2;
 }
+
+#siratoc-layers .btn:hover .glyphicon {
+    color: #D93830;
+}
 #siracatalog button {
     padding-left: 0px;
     padding-right: 0px;
@@ -775,6 +779,9 @@ float: right;
     font-weight: bold;
     font-size: 18px;
     background-position-y: 50%;
+}
+#siratoc-layers .toc-group-children button.btn-link.elenco {
+    background-image: url(images/elenco-hover.svg);
 }
 #siratoc-layers .toc-group-children .toc-layer-tool.glyphicon.glyphicon-1-menu-manage{width: 20px;}
 #mapstore-drawermenu #mapstore-layers .toc-group-children .btn.btn-link.carica-in-mappa{
@@ -1072,20 +1079,24 @@ body.body_map.sira-ms2 #fullscreen-container .rw-i, .sira-ms2 #qgis-container .r
     cursor: pointer;
 }
 
-body.body_map.sira-ms2 .back-to-query.btn-default,
-body.body_map.sira-ms2 .back-to-query.btn-default:hover,
-body.body_map.sira-ms2 .back-to-query.btn-default:active{
+body.body_map.sira-ms2 .back-to-query.btn-default{
     margin-left: 50px;
     background: transparent;
     background-image: url(images/filtri.svg);
-    background-size: 16px;
-    padding-left: 20px;
+    background-size: 20px;
+    padding-left: 22px;
     background-repeat: no-repeat;
     background-position-y: 30%;
     color: #1976D2;
     border: 0;
+    text-transform: uppercase;
    }
-
+body.body_map.sira-ms2 .back-to-query.btn-default:hover,
+body.body_map.sira-ms2 .back-to-query.btn-default:active{
+    background-image: url(images/filtri-hover.svg);
+    color: #D93830;
+    background-repeat: no-repeat;
+}
 #mapstore-drawermenu .nav-tabs li.active {
     background: none;
 }
