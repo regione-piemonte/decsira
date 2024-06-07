@@ -122,7 +122,7 @@ class ShowInfoNode extends React.Component {
                                 <button
                                     className="btn btn-link legenda"
                                     onClick={() => this.props.loadLegend(metadato.urlWMS, metadato.urlLegend)}>
-                                    <img src={img} width={16} title="Mostra legenda" />&nbsp;
+                                    <img src={img} title="Mostra legenda" />&nbsp;
                                     <I18N.Message msgId={"metadataInfoBox.showLegendButton"} />
                                 </button>
                             </p>
