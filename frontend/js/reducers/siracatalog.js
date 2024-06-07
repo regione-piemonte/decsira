@@ -207,12 +207,16 @@ function siracatalog(state = initialState, action) {
 
         let views = state.views;
         let nodes = state.nodes;
+        let selectedView = state.selectedView;
         if (state.subcat === 'views') {
             views = state.views.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
+            if (selectedView && selectedView.id === nodeId) {
+                selectedView = assign({}, selectedView, {metadato: metadato});
+            }
         } else if (state.subcat === 'objects') {
             nodes = state.nodes.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
         }
-        return assign({}, state, {nodes: nodes, views: views});
+        return assign({}, state, {nodes: nodes, views: views, selectedView: selectedView});
     }
     default:
         return state;

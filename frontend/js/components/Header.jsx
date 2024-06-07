@@ -25,7 +25,7 @@ const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 const DownloadResultsComponent = require('./download/DownloadResultsComponent').default;
 const { Glyphicon } = require('react-bootstrap');
 const { selectAllObjects } = require('../actions/siracatalog');
-
+const {toggleSiraControl} = require('../actions/controls');
 const RightMenu = connect((state) => ({
     open: state.header?.showRightMenu
 }), (dispatch) => {
@@ -89,7 +89,9 @@ class Header extends React.Component {
         cartListaStyle: PropTypes.string,
         goToDataset: PropTypes.func,
         goToHome: PropTypes.func,
-        selectAllObjects: PropTypes.func
+        selectAllObjects: PropTypes.func,
+        toggleSiraControl: PropTypes.func,
+        controls: PropTypes.array
     };
 
     static contextTypes = {
@@ -171,14 +173,21 @@ class Header extends React.Component {
     };
 
     goToCatalog = () => {
+        if (this.props.controls.grid === true) {
+            this.props.toggleSiraControl('grid');
+        }
         this.props.selectAllObjects();
         this.context.router.history.replace("/dataset/");
     };
 }
 
-// module.exports = Header;
-module.exports = connect(null, dispatch => {
+module.exports = connect((state) => {
+    return {
+        controls: state.siraControls
+    };
+}, dispatch => {
     return bindActionCreators({
-        selectAllObjects
+        selectAllObjects,
+        toggleSiraControl
     }, dispatch);
 })(Header);
