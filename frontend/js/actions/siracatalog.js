@@ -204,7 +204,7 @@ function thematicViewConfigMap(data) {
     };
 }
 
-function getThematicViewConfig({ serviceUrl = 'services/metadata/getMetadataObject?', params = {}, configureMap = false } = {}) {
+function getThematicViewConfig({ serviceUrl = 'services/metadata/getMetadataObject?', params = {}, configureMap = true } = {}) {
 
     const url = Object.keys(params).reduce((u, p) => {
         return `${u}&${p}=${params[p]}`;
