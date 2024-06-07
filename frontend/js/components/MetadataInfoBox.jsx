@@ -124,7 +124,7 @@ class MetadataInfoBox extends React.Component {
     render() {
         let renderWfsUrl = [];
         if (this.props.urlWFS && this.props.urlWFS.length > 0) {
-            renderWfsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWFS"} />);
+            renderWfsUrl.push(<h4><b><I18N.Message msgId={"metadataInfoBox.urlWFS"} /></b></h4>);
             this.props.urlWFS.map((val, index) =>
                 renderWfsUrl.push(
                     <p>
@@ -145,7 +145,7 @@ class MetadataInfoBox extends React.Component {
 
         let renderWmsUrl = [];
         if (this.props.urlWMS && this.props.urlWMS.length > 0) {
-            renderWmsUrl.push(<I18N.Message msgId={"metadataInfoBox.urlWMS"} />);
+            renderWmsUrl.push(<h4><b><I18N.Message msgId={"metadataInfoBox.urlWMS"} /></b></h4>);
             this.props.urlWMS.map((val, index) =>
                 renderWmsUrl.push(
                     <p>
