@@ -402,8 +402,8 @@ button#mapstore-langselector{
 .sira-ms2 .alert-success{
 	color: #000;
 	font-weight: bold;
-	padding: 20px 20px 20px 100px;
-	background:#DAEDC2 url("images/success.svg") 0 0 no-repeat;
+	padding: 20px 20px 20px 70px;
+	background:#DAEDC2 url("images/success.svg") 24px 12px no-repeat;
 	border-left: 8px solid #94C13E;
 }
 
@@ -1620,6 +1620,15 @@ body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading, bo
     background-color: #fff !important;
     border-color: #fff !important;
 }
+body.body_map.sira-ms2 #fullscreen-container .panel-primary > .panel-heading .mappaSiraDecisionale button.close .glyphicon-triangle-left{color: #1976D2;}
+
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-primary > .panel-heading .panel-title .close,
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-primary > .panel-heading .panel-title .glyphicon-triangle-left::before {color: #1976D2;}
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-primary > .panel-heading .panel-title .close:hover,
+body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-primary > .panel-heading .panel-title .close:hover .glyphicon-triangle-left::before {
+		color: #D93830;
+	}
+
 body.body_map.sira-ms2 #fullscreen-container .scheda-sira.react-draggable .panel-primary > .panel-heading,
 body.body_map.sira-ms2 #fullscreen-container .react-draggable .panel-primary > .panel-heading{
 	background: #1976D2 !important;
@@ -1646,7 +1655,6 @@ body.body_map.sira-ms2 #fullscreen-container .react-draggable .panel-primary > .
     margin-top: 8px;
 }
 
-
 .sira-ms2 #sidepanel-container  .featuregrid-container .panel-heading{ background: #fff;}
 
 #sidepanel-container .featuregrid-container.sidepanel-featuregrid.panel-primary .panel-heading .handle_featuregrid.panel-title .featuregrid-title.container-fluid button,
@@ -1667,6 +1675,35 @@ body.body_map.sira-ms2 #fullscreen-container.mappaSiraDecisionale .panel-heading
     background-position-y: 50%;
 }
 
+#viewer .search-toolbar-options .btn-group{
+    background: #1976D2;
+    color: #ffffff;
+    box-shadow: none !important;}
+.sira-ms2 .MapSearchBar .input-group{
+    background: #1976D2;
+    color: #ffffff;
+    box-shadow: none !important;
+    border: 1px solid #f1eded;
+}
+#viewer .search-toolbar-options .btn-group:hover,
+.sira-ms2 .MapSearchBar .input-group:hover{  color: #fff;
+    background-color: #D93830;
+}
+#viewer .search-toolbar-options .btn-group  {
+    background: transparent;}
+#viewer .search-toolbar-options .btn-group .btn-default,
+.sira-ms2 .MapSearchBar .input-group .no-border.btn-default {
+    background: transparent;
+    color: #ffffff;
+}
+#viewer .search-toolbar-options .btn-group .btn-default{
+	padding: 0;
+}
+#viewer .search-toolbar-options .btn-group .btn-default:hover,
+.sira-ms2 .MapSearchBar .input-group .no-border.btn-default:hover {
+    color: #fff;
+    background-color: transparent;
+}
 
 body.body_map.sira-ms2 .featuregrid-container .dhContainer {
     border: 0 !important;
@@ -1796,3 +1833,7 @@ body.sira-ms2 .btn-link.legenda:hover img{
 }
 body.sira-ms2 .cardCatalogo .handleMetadato .btn-link.legenda img{margin-top: -2px;}
 
+.sira-ms2 #fullscreen-container .btn-default, .sira-ms2 #qgis-container .btn-default {
+    color: #1976D2 !important;
+    background-color: #ffffff;
+}

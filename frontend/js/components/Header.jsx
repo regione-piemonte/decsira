@@ -26,6 +26,7 @@ const DownloadResultsComponent = require('./download/DownloadResultsComponent').
 const { Glyphicon } = require('react-bootstrap');
 const { selectAllObjects } = require('../actions/siracatalog');
 const {toggleSiraControl} = require('../actions/controls');
+
 const RightMenu = connect((state) => ({
     open: state.header?.showRightMenu
 }), (dispatch) => {
@@ -147,6 +148,7 @@ class Header extends React.Component {
                             </div>
 
                             <div className="col-md-3 col-lg-3 text-right">
+                                <DownloadResultsComponent />
                                 <RightMenu />
                                 <LangBar />
                                 <LoginNav />
@@ -156,8 +158,6 @@ class Header extends React.Component {
 
                     </div>
                 </nav>
-
-                <DownloadResultsComponent />
 
             </header>
         );

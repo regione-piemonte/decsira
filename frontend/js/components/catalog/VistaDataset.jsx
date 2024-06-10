@@ -116,7 +116,6 @@ class Viste extends React.Component {
 
     loadConfig = () => {
         const v = this.props.node.view;
-
         if (v) {
             let view = v;
             if (v.match(/(config=)(\w+)/)) {
@@ -124,7 +123,6 @@ class Viste extends React.Component {
             }
             this.props.addToMap({ serviceUrl: `./${view}.json`, params: {} });
         }
-
     };
 
     showInfoBox = () => {
