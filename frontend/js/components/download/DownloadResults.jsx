@@ -45,18 +45,18 @@ const ExportDataResults = ({
                     <div className="mapstore-exportdataresults-item-buttons">
                         {status === 'pending' && <Loader size={22} style={{marginLeft: '2px'}}/>}
                         {status === 'failed' && error ?
-                            <OverlayTrigger placement="top" overlay={<Tooltip id="exportresults-failure-tooltip">{error}</Tooltip>}>
+                            <OverlayTrigger placement="bottom" overlay={<Tooltip id="exportresults-failure-tooltip">{error}</Tooltip>}>
                                 {failButton}
                             </OverlayTrigger> : null}
                         {status === 'completed' &&
-                            <OverlayTrigger placement="top" overlay={<Tooltip id="exportresults-success-tooltip"><I18N.Message msgId="layerdownload.exportResultsMessages.download"/></Tooltip>}>
+                            <OverlayTrigger placement="bottom" overlay={<Tooltip id="exportresults-success-tooltip"><I18N.Message msgId="layerdownload.exportResultsMessages.download"/></Tooltip>}>
                                 <a href={resultLocation}>
                                     <Button bsStyle="default" bsSize="small">
                                         <Glyphicon glyph="floppy-disk"/>
                                     </Button>
                                 </a>
                             </OverlayTrigger>}
-                        <OverlayTrigger placement="top" overlay={<Tooltip id="exportresults-delete-tooltip"><I18N.Message msgId="layerdownload.exportResultsMessages.delete"/></Tooltip>}>
+                        <OverlayTrigger placement="bottom" overlay={<Tooltip id="exportresults-delete-tooltip"><I18N.Message msgId="layerdownload.exportResultsMessages.delete"/></Tooltip>}>
                             <Button
                                 bsStyle="default"
                                 bsSize="small"
