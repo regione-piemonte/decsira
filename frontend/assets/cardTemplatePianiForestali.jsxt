@@ -7,7 +7,7 @@
 			]} id={model.id}/>
     )}>
     <Panel className="template">
-        <Section header='Piani Forestali Aziendali: Dettaglio dati tecnici' eventKey='1' expanded={true}>
+        <Section header='Piani di gestione forestali: Dettaglio dati tecnici' eventKey='1' expanded={true}>
            <LabeledField label='Denominazione' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:denominazione/text()")
             }/>
@@ -87,7 +87,7 @@
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:note/text()")
             }/>
         </Section>
-		
+
 		<Section header='RICADENZA' eventKey='2' expanded={true}>
             <LabeledField label='Ricadenza in  Area Protetta' value={
                 model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pfa:PianiForestaliAziendali/decsiraogc_idf_pfa:nomeAreaProtetta/text()")
