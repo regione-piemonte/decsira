@@ -83,6 +83,7 @@ class Home extends React.Component {
                     <HashLink to="/#main-content">Salta al contenuto principale</HashLink>
                 </div>
                 <Header />
+                {this.props.profile.error === 'empty_roles' && this.renderProfileAlert()}
                 <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.homepage")}</h1>
                 <div id="main-content"></div>
 
