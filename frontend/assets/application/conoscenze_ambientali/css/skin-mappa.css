@@ -894,13 +894,13 @@ a:not([href]){cursor: pointer;}
     background-color: #1976D2;
 }
 .mapbody #map-search-bar li.active .glyphicon{
-    color: white;
-    background-color: #1976D2;
+    color: #1976D2;
+    background-color: #fff;
 }
 
-/*.sira-ms2 .mapbody .btn-default{
-    color: #000000;
-    border-color: #1976D2;
+/*..mapbody #map-searchbar.MapSearchBar li.active .glyphicon {
+    color: #1976D2;
+    background-color: #fff;
 }*/
 .mapbody .btn-default:hover{
     color: #1976D2;
@@ -1086,13 +1086,21 @@ body.body_map.sira-ms2 .back-to-query.btn-default{
     background-position-y: 30%;
     color: #1976D2;
     border: 0;
+    font-weight: bold;
     text-transform: uppercase;
    }
 body.body_map.sira-ms2 .back-to-query.btn-default:hover,
 body.body_map.sira-ms2 .back-to-query.btn-default:active{
+    margin-left: 50px;
+    background: transparent;
     background-image: url(images/filtri-hover.svg);
-    color: #D93830;
+    background-size: 20px;
+    padding-left: 22px;
     background-repeat: no-repeat;
+    background-position-y: 30%;
+    color: #D93830 !important;
+    border: 0;    font-weight: bold;
+    text-transform: uppercase;
 }
 #mapstore-drawermenu .nav-tabs li.active {
     background: none;
@@ -1161,6 +1169,7 @@ body.body_map.sira-ms2 #mapstore-navbar .search-toggle,  body.body_map.sira-ms2 
     height: auto;
     width: auto;
 }
+
 #mapstore-burger-menu-container{ border-radius: 0 5px 5px 0; border-left: 1px solid #fff !important;}
 body.body_map.sira-ms2 #mapstore-navbar-container .square-button .glyphicon,
 body.body_map.sira-ms2 #navigationBar-container .glyphicon {
@@ -1177,7 +1186,7 @@ body.body_map.sira-ms2 #navigationBar-container .glyphicon {
     height: 20px;
     background-size: 18px;
 }
-.sira-ms2 #mapstore-navbar .search-toggle.btn-default .glyphicon.glyphicon-search::before{
+/*.sira-ms2 #mapstore-navbar .search-toggle.btn-default:active .glyphicon.glyphicon-search::before{
     content: " ";
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     background:url("images/metro-location-city-active.svg") 0 0 no-repeat;
@@ -1185,7 +1194,7 @@ body.body_map.sira-ms2 #navigationBar-container .glyphicon {
     display: block;
     height: 20px;
     background-size: 18px;
-}
+}*/
 .sira-ms2 #navigationBar-container #locate-btn .glyphicon-1-position-1::before{
     content: " ";
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
@@ -1264,11 +1273,12 @@ body.body_map.sira-ms2 .querypanel-container .query-filter-container .no-border.
     background: #fff !important;color: #1976D2 !important;
 }
 
+#viewer #mapstore-navbar-container .btn-default,
 #viewer #mapstore-navbar-container .btn-default:hover,
 #viewer #mapstore-navbar-container .btn-default:active,
 #viewer #map-search-bar .search-toolbar-options .btn-group,
 #viewer #map-search-bar .search-toolbar-options .btn-group:hover {
     background: #1976D2 !important;
     color: #ffffff !important;
-    border-color: #1976D2;
+    border-color: #1976D2 !important;
 }
