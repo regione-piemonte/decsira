@@ -14,7 +14,7 @@ const Header = require('../components/Header');
 const { Modal, Button } = require("react-bootstrap");
 const I18N = require('@mapstore/components/I18N/I18N');
 const { selectCategory, selectView, resetObjectAndView, selectSubCategory } = require('../actions/siracatalog');
-const { resetUserIdentityError } = require('../actions/userprofile');
+const { resetUserIdentityError, resetUserIdentity } = require('../actions/userprofile');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
@@ -71,7 +71,7 @@ class Home extends React.Component {
                 <div className="mapstore-error"><I18N.Message msgId="Modal.NoRoleMessage"/></div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() => { this.props.resetUserIdentityError(); }}><I18N.Message msgId="Accessibility.button"/></Button>
+                <Button onClick={() => { this.resetUser(); }}><I18N.Message msgId="Accessibility.button"/></Button>
             </Modal.Footer>
         </Modal>);
     };
@@ -146,6 +146,12 @@ class Home extends React.Component {
             </div>);
     }
 
+    resetUser = () => {
+        this.props.resetUserIdentityError();
+        this.props.resetUserIdentity();
+        window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+    }
+
     goMap = () => {
         this.context.router.history.replace("/map/");
     };
@@ -186,5 +192,6 @@ module.exports = connect((state) => {
     selectSubCategory,
     selectView,
     resetObjectAndView,
-    resetUserIdentityError
+    resetUserIdentityError,
+    resetUserIdentity
 })(Home);
