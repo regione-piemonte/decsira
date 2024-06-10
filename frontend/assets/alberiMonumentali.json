@@ -12,45 +12,47 @@
     "name": "decsiraogc_idf_alb_monum:AlberoMonumentale",
     "infoFormat": "application/vnd.ogc.gml/3.1.1",
     "featureType": "alberiMonumentali",
-	"params": {
-		"featureType": "alberiMonumentali"
-	},
+    "params": {
+      "featureType": "alberiMonumentali"
+    },
     "group": "Oggetti",
     "format": "image/png"
   },
   "geometryName": "geometria",
   "geometryType": "Point",
   "card": {
-     "pdfname": "Scheda_AlberoMonumentale_{{/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:idGeoAlbMonum/text()}}.pdf",
-     "template": "assets/cardTemplateAlberoMonumentale.jsxt",
-     "service": {
-       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
-       "params": {
-         "typeName": "decsiraogc_idf_alb_monum:AlberoMonumentale",
-         "version": "2.0",
-         "srsName": "EPSG:4326"
-       }
-     }
+    "pdfname": "Scheda_AlberoMonumentale_{{/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale/decsiraogc_idf_alb_monum:idGeoAlbMonum/text()}}.pdf",
+    "template": "assets/cardTemplateAlberoMonumentale.jsxt",
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "params": {
+        "typeName": "decsiraogc_idf_alb_monum:AlberoMonumentale",
+        "version": "2.0",
+        "srsName": "EPSG:4326"
+      }
+    }
   },
   "featureinfo": {
     "templateURL": "assets/infoTemplateAlberoMonumentale.jsxt"
   },
   "exporter": {
-	"maxFeatures": 2000  
+    "maxFeatures": 2000
   },
   "featuregrid": {
     "grid": {
       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_alb_monum:AlberoMonumentale",
       "columns": [
-		{
-           "hide": true,
-           "id": true,
-           "headerName": "Id",
-           "xpath": ["@gml:id"],
-           "type": 2
+        {
+          "hide": true,
+          "id": true,
+          "headerName": "Id",
+          "xpath": [
+            "@gml:id"
+          ],
+          "type": 2
         },
         {
-          "hide":true,
+          "hide": true,
           "headerName": "Geometry",
           "xpath": [
             "decsiraogc_idf_alb_monum:geometria/gml:Point/gml:pos/text()"
@@ -59,7 +61,7 @@
         },
         {
           "headerName": "N. scheda",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:idNSschedaAlbero/text()"
           ],
@@ -68,454 +70,468 @@
         },
         {
           "headerName": "Data rilievo",
-          "width":100,
+          "width": 100,
           "xpath": [
             "decsiraogc_idf_alb_monum:dataRilievo/text()"
           ],
           "suppressSorting": true,
-		  "dateFormat": "DD/MM/YYYY",
+          "dateFormat": "DD/MM/YYYY",
           "type": 2
         },
-		{
+        {
           "headerName": "Descrizione stato",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:descrStato/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Tipo di oggetto",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:oggettoDiIdentif/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Famiglia",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:famiglia/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Genere",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:genere/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Specie",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:specie/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Provincia",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:descrProvincia/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Comune",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:descrComune/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Localit&agrave; segnalazione",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:localitaSegnal/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Longitudine X segnalazione",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:segnalLongitudineX/text()"
           ],
           "suppressSorting": true,
-          "type": 1
+          "type": 1,
+          "hide": true
         },
-		{
+        {
           "headerName": "Latitudine Y segnalazione",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:segnalLatitudineY/text()"
           ],
           "suppressSorting": true,
-          "type": 1
+          "type": 1,
+          "hide": true
         },
-		{
+        {
           "headerName": "Itinerario di accesso",
-          "width":300,
+          "width": 300,
           "xpath": [
             "decsiraogc_idf_alb_monum:itinerarioAccesso/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
+        {
           "headerName": "Altitudine (m) suolo",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:altitudineMetri/text()"
           ],
           "suppressSorting": true,
           "type": 1
         },
-		{
+        {
           "headerName": "Pendenza (%) suolo",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:pendenzaPerc/text()"
           ],
           "suppressSorting": true,
-          "type": 1
+          "type": 1,
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: et&agrave;",
-          "width":300,
+          "width": 300,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgEta/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: circonferenza soprasoglia",
-          "width":400,
+          "width": 400,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgCirconfSoprasoglia/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: forma o portamento",
-          "width":350,
+          "width": 350,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgFormaOPortam/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: valore ecologico",
-          "width":350,
+          "width": 350,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgValoreEcologico/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: rarita' botanica",
-          "width":350,
+          "width": 350,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgRaritaBotanica/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: architettura vegetale",
-          "width":320,
+          "width": 320,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgArchitetturaVegetale/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: valore paesaggistico",
-          "width":350,
+          "width": 350,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgValorePaesaggistico/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Criterio di monumentalit&agrave;: valore storico",
-          "width":320,
+          "width": 320,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgValoreStorico/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
-          "headerName": "Criterio di monumentalit&agrave;: descr aspetto monumentalit&agrave;",
-          "width":400,
+        {
+          "headerName": "Descrizione aspetto monumentalit&agrave",
+          "width": 400,
           "xpath": [
             "decsiraogc_idf_alb_monum:descrAspettoMonumentalita/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+          "hide": true
         },
-		{
+        {
           "headerName": "Numero di fusti",
-          "width":150,
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:numeroFusti/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Et&agrave; presunta",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:etaPresunta/text()"
           ],
           "suppressSorting": true,
           "type": 1
         },
-		{
+        {
           "headerName": "Circonferenza (cm ad 1,3 metri di altezza)",
-          "width":300,
+          "width": 300,
           "xpath": [
             "decsiraogc_idf_alb_monum:circonferenza/text()"
           ],
           "suppressSorting": true,
           "type": 1
         },
-		{
+        {
           "headerName": "Altitudine (m)",
-          "width":130,
+          "width": 130,
           "xpath": [
             "decsiraogc_idf_alb_monum:altitudineMetri/text()"
           ],
           "suppressSorting": true,
           "type": 1
         },
-		{
+        {
           "headerName": "Altezza stimata (m)",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:altezzaStimataMetri/text()"
           ],
           "suppressSorting": true,
-          "type": 1
+          "type": 1,
+          "hide": true
         },
-		{
+        {
+          "headerName": "Altezza Misurata (m)",
+          "width": 150,
+          "xpath": [
+            "decsiraogc_idf_alb_monum:altezzaMisurataMetri/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1,
+          "hide": true
+        },
+        {
           "headerName": "Altezza primo palco (m)",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:altezzaPrimoPalcoMetri/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Forma chioma",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:formaChioma/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Diametro Chioma (m)",
-          "width":180,
+          "width": 180,
           "xpath": [
             "decsiraogc_idf_alb_monum:diametroMedioChiomaMetri/text()"
           ],
           "suppressSorting": true,
           "type": 1
         },
-		{
+        {
           "headerName": "Altezza dendrometrica",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgAltezzaDendrometrica/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Ampiezza chioma",
-          "width":150,
+          "width": 150,
           "xpath": [
             "decsiraogc_idf_alb_monum:flgAmpiezzaChioma/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Lunghezza filare viale alberato",
-          "width":250,
+          "width": 250,
           "xpath": [
             "decsiraogc_idf_alb_monum:lunghezzaFilareVialeAlb/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Superficie gruppo",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:superficieGruppo/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Circonferenza media esemplare (cm ad 1,3 metri di altezza)",
-          "width":420,
+          "width": 420,
           "xpath": [
             "decsiraogc_idf_alb_monum:circonferenzaEsemplMedia/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Altezza media esemplare (m)",
-          "width":230,
+          "width": 230,
           "xpath": [
             "decsiraogc_idf_alb_monum:altezzaEsemplMedia/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Circonferenza max esemplare (m)",
-          "width":250,
+          "width": 250,
           "xpath": [
             "decsiraogc_idf_alb_monum:circonferenzaEsemplMax/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Altezza max esemplare (m)",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:altezzaEsemplMax/text()"
           ],
           "suppressSorting": true,
           "type": 1,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Decreto ministeriale inseririmento",
-          "width":250,
+          "width": 250,
           "xpath": [
             "decsiraogc_idf_alb_monum:urlDecretoMinistInserimento/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Decreto ministeriale modifica",
-          "width":250,
+          "width": 250,
           "xpath": [
             "decsiraogc_idf_alb_monum:urlDecretoMinistModifica/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
-          "headerName": "Determina regionale",
-          "width":200,
+        {
+          "headerName": "Atto regionale approvazione",
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:determinaRegionale/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
-		{
-          "headerName": "Determina regionale: modifiche",
-          "width":250,
+        {
+          "headerName": "Atto regionale: modifiche",
+          "width": 250,
           "xpath": [
             "decsiraogc_idf_alb_monum:determinaRegionaleModifica/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Immagini correlate",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:urlImmagini/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Scheda cartello",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:urlSchedaCartello/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Bene Paesaggistico art. 136 AM",
-          "width":230,
+          "width": 230,
           "xpath": [
             "decsiraogc_idf_alb_monum:urlAlbMonumBenePaesaggist/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "hide": true
+          "hide": true
         },
-		{
+        {
           "headerName": "Data ultimo aggiornamento",
-          "width":200,
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_alb_monum:dataUltAgg/text()"
           ],
           "suppressSorting": true,
           "type": 2,
-		  "dateFormat": "DD/MM/YYYY"
+          "dateFormat": "DD/MM/YYYY"
         }
       ]
     }
@@ -529,220 +545,235 @@
       }
     },
     "fields": [
-		{
-         "index": 1,
-         "attribute": "decsiraogc_idf_alb_monum:descrProvincia",
-         "label":"Provincia",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_provincia",
-			 "propertyName": "id_provincia,descr_provincia",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"descr_provincia",
-         "valueLabel":"descr_provincia"
-	   },
-	   {
-		   "index": 2,
-		   "attribute": "decsiraogc_idf_alb_monum:descrComune",
-		   "label":"Comune",
-		   "type":"list",
-		   "valueService": {
-			 "urlParams": {
-			   "typeName": "decsiraogc_decodif:decsira_d_alb_monum_comune",
-			   "propertyName": "fk_provincia,descr_comune",
-			   "sortBy": "ordinamento+A"
-			 }
-		   },
-		   "valueId":"descr_comune",
-		   "valueLabel":"descr_comune",
-		   "dependson":{
-				"field": "decsiraogc_idf_alb_monum:descrProvincia",
-				"from": "id_provincia",
-				"to": "fk_provincia"
-		   }
-       },
-	   {
-         "index": 3,
-         "attribute": "decsiraogc_idf_alb_monum:oggettoDiIdentif",
-         "label":"Tipo di oggetto",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_oggetto_di_identif",
-			 "propertyName": "oggetto_di_identif,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"label",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 4,
-         "attribute": "decsiraogc_idf_alb_monum:etaPresunta",
-         "label":"Età presunta del singolo albero",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_eta_presunta",
-			 "propertyName": "eta_presunta,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"label",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 5,
-         "attribute": "decsiraogc_idf_alb_monum:famiglia",
-         "label":"Famiglia",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_famiglia",
-			 "propertyName": "famiglia,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"famiglia",
-         "valueLabel":"famiglia"
-	   },
-	   {
-         "index": 6,
-         "attribute": "decsiraogc_idf_alb_monum:genere",
-         "label":"Genere",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_genere",
-			 "propertyName": "genere,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"genere",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 7,
-         "attribute": "decsiraogc_idf_alb_monum:specie",
-         "label":"Specie",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_specie",
-			 "propertyName": "specie,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"specie",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 8,
-         "attribute": "decsiraogc_idf_alb_monum:idNSschedaAlbero",
-         "label":"N. scheda",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_n_scheda",
-			 "propertyName": "id_n_scheda_albero,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"id_n_scheda_albero",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 9,
-         "attribute": "decsiraogc_idf_alb_monum:tipoProprieta/decsiraogc_idf_alb_monum:TipoProprieta/decsiraogc_idf_alb_monum:tipoProprieta",
-         "label":"Tipo di proprietà",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_tipo_proprieta",
-			 "propertyName": "tipo_proprieta,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"tipo_proprieta",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 10,
-         "attribute": "decsiraogc_idf_alb_monum:tipoAmbiente/decsiraogc_idf_alb_monum:TipoAmbiente/decsiraogc_idf_alb_monum:tipoAmbiente",
-         "label":"Contesto ambientale",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_tipo_ambiente",
-			 "propertyName": "id_alb_monum_tipo_ambiente,tipo_ambiente,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"tipo_ambiente",
-         "valueLabel":"label"
-	   },
-	   {
-         "index": 11,
-         "attribute": "decsiraogc_idf_alb_monum:ambiente/decsiraogc_idf_alb_monum:Ambiente/decsiraogc_idf_alb_monum:ambiente",
-         "label":"Sottotipo contesto ambientale",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_ambiente",
-			 "propertyName": "ambiente,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"ambiente",
-         "valueLabel":"label",
-		 "dependson":{
-				"field": "decsiraogc_idf_alb_monum:tipoAmbiente/decsiraogc_idf_alb_monum:TipoAmbiente/decsiraogc_idf_alb_monum:tipoAmbiente",
-				"from": "id_alb_monum_tipo_ambiente",
-				"to": "fk_alb_monum_tipo_ambiente"
-		   }
-	   },
-	   {
-		 "index": 12,
-		 "attribute": "decsiraogc_idf_alb_monum:altitudineMetri",
-		 "label":"Altitudine (m)",
-		 "type":"number"
-       },
-	   {
-		 "index": 13,
-		 "attribute": "decsiraogc_idf_alb_monum:circonferenza",
-		 "label":"Circonferenza (cm)",
-		 "type":"number"
-       },
-	   {
-		 "index": 14,
-		 "attribute": "decsiraogc_idf_alb_monum:altezzaStimataMetri",
-		 "label":"Altezza (m)",
-		 "type":"number"
-       },
-	   {
-		 "index": 15,
-		 "attribute": "decsiraogc_idf_alb_monum:diametroMedioChiomaMetri",
-		 "label":"Diametro Chioma (m)",
-		 "type":"number"
-       },
-	   {
-         "index": 16,
-         "attribute": "decsiraogc_idf_alb_monum:criterioMonumentalita/decsiraogc_idf_alb_monum:CriterioMonumentalita/decsiraogc_idf_alb_monum:criterioMonumentalita",
-         "label":"Criterio di monumentalità",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_d_alb_monum_criterio_monumentalita",
-			 "propertyName": "criterio_monumentalita,label",
-             "sortBy": "ordinamento+A"
-           }
-         },
-         "valueId":"criterio_monumentalita",
-         "valueLabel":"label"
-	   }
+      {
+        "index": 1,
+        "attribute": "decsiraogc_idf_alb_monum:descrProvincia",
+        "label": "Provincia",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_provincia",
+            "propertyName": "id_provincia,descr_provincia",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "descr_provincia",
+        "valueLabel": "descr_provincia"
+      },
+      {
+        "index": 2,
+        "attribute": "decsiraogc_idf_alb_monum:descrComune",
+        "label": "Comune",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_comune",
+            "propertyName": "fk_provincia,descr_comune",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "descr_comune",
+        "valueLabel": "descr_comune",
+        "dependson": {
+          "field": "decsiraogc_idf_alb_monum:descrProvincia",
+          "from": "id_provincia",
+          "to": "fk_provincia"
+        }
+      },
+      {
+        "index": 3,
+        "attribute": "decsiraogc_idf_alb_monum:oggettoDiIdentif",
+        "label": "Tipo di oggetto",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_oggetto_di_identif",
+            "propertyName": "oggetto_di_identif,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "label",
+        "valueLabel": "label"
+      },
+      {
+        "index": 4,
+        "attribute": "decsiraogc_idf_alb_monum:etaPresunta",
+        "label": "Età presunta del singolo albero",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_eta_presunta",
+            "propertyName": "eta_presunta,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "label",
+        "valueLabel": "label"
+      },
+      {
+        "index": 5,
+        "attribute": "decsiraogc_idf_alb_monum:famiglia",
+        "label": "Famiglia",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_famiglia",
+            "propertyName": "famiglia,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "famiglia",
+        "valueLabel": "famiglia"
+      },
+      {
+        "index": 6,
+        "attribute": "decsiraogc_idf_alb_monum:genere",
+        "label": "Genere",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_genere",
+            "propertyName": "genere,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "genere",
+        "valueLabel": "label"
+      },
+      {
+        "index": 7,
+        "attribute": "decsiraogc_idf_alb_monum:specie",
+        "label": "Specie",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_specie",
+            "propertyName": "specie,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "specie",
+        "valueLabel": "label"
+      },
+      {
+        "index": 8,
+        "attribute": "decsiraogc_idf_alb_monum:idNSschedaAlbero",
+        "label": "N. scheda",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_n_scheda",
+            "propertyName": "id_n_scheda_albero,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "id_n_scheda_albero",
+        "valueLabel": "label"
+      },
+      {
+        "index": 9,
+        "attribute": "decsiraogc_idf_alb_monum:descrStato",
+        "label": "Stato albero",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_stato",
+            "propertyName": "descr_stato,label,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "label",
+        "valueLabel": "label"
+      },
+      {
+        "index": 10,
+        "attribute": "decsiraogc_idf_alb_monum:tipoProprieta/decsiraogc_idf_alb_monum:TipoProprieta/decsiraogc_idf_alb_monum:tipoProprieta",
+        "label": "Tipo di proprietà",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_tipo_proprieta",
+            "propertyName": "tipo_proprieta,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "tipo_proprieta",
+        "valueLabel": "label"
+      },
+      {
+        "index": 11,
+        "attribute": "decsiraogc_idf_alb_monum:tipoAmbiente/decsiraogc_idf_alb_monum:TipoAmbiente/decsiraogc_idf_alb_monum:tipoAmbiente",
+        "label": "Contesto ambientale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_tipo_ambiente",
+            "propertyName": "id_alb_monum_tipo_ambiente,tipo_ambiente,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "tipo_ambiente",
+        "valueLabel": "label"
+      },
+      {
+        "index": 12,
+        "attribute": "decsiraogc_idf_alb_monum:ambiente/decsiraogc_idf_alb_monum:Ambiente/decsiraogc_idf_alb_monum:ambiente",
+        "label": "Sottotipo contesto ambientale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_ambiente",
+            "propertyName": "ambiente,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "ambiente",
+        "valueLabel": "label",
+        "dependson": {
+          "field": "decsiraogc_idf_alb_monum:tipoAmbiente/decsiraogc_idf_alb_monum:TipoAmbiente/decsiraogc_idf_alb_monum:tipoAmbiente",
+          "from": "id_alb_monum_tipo_ambiente",
+          "to": "fk_alb_monum_tipo_ambiente"
+        }
+      },
+      {
+        "index": 13,
+        "attribute": "decsiraogc_idf_alb_monum:altitudineMetri",
+        "label": "Altitudine (m)",
+        "type": "number"
+      },
+      {
+        "index": 14,
+        "attribute": "decsiraogc_idf_alb_monum:circonferenza",
+        "label": "Circonferenza (cm)",
+        "type": "number"
+      },
+      {
+        "index": 15,
+        "attribute": "decsiraogc_idf_alb_monum:altezzaStimataMetri",
+        "label": "Altezza (m)",
+        "type": "number"
+      },
+      {
+        "index": 16,
+        "attribute": "decsiraogc_idf_alb_monum:diametroMedioChiomaMetri",
+        "label": "Diametro Chioma (m)",
+        "type": "number"
+      },
+      {
+        "index": 17,
+        "attribute": "decsiraogc_idf_alb_monum:criterioMonumentalita/decsiraogc_idf_alb_monum:CriterioMonumentalita/decsiraogc_idf_alb_monum:criterioMonumentalita",
+        "label": "Criterio di monumentalità",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_alb_monum_criterio_monumentalita",
+            "propertyName": "criterio_monumentalita,label",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "criterio_monumentalita",
+        "valueLabel": "label"
+      }
     ]
   }
 }
