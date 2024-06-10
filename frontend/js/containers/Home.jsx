@@ -18,6 +18,7 @@ const { resetUserIdentityError, resetUserIdentity } = require('../actions/userpr
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const PlatformNumbers = connect((state) => ({
     siradecObject: state.platformnumbers.siradecObject,
@@ -38,6 +39,7 @@ class Home extends React.Component {
         resetObjectAndView: PropTypes.func,
         profile: PropTypes.object,
         resetUserIdentityError: PropTypes.func,
+        resetUserIdentity: PropTypes.func,
         selectView: PropTypes.func,
         match: PropTypes.object,
         params: PropTypes.object
