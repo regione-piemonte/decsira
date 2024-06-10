@@ -226,9 +226,9 @@ class SideQueryPanel extends React.Component {
         if (this.props.collapsible) {
             heading = this.props.filterPanelExpanded ? (
                 <span>
-                   {header}
+                    {header}
                     <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, false)} className="close">
-                        <Glyphicon glyph="glyphicon glyphicon-triangle-bottom collapsible"/> 
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-bottom collapsible"/>
                     </button>
                 </span>
             ) : (
