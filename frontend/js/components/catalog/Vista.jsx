@@ -51,8 +51,8 @@ class Viste extends React.Component {
     renderVistaTools = () => {
         let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"}/></Tooltip>;
         return [(<OverlayTrigger key={"map-tp"} rootClose placement="bottom" overlay={tooltipMap}>
-                <button className="btn btn-link carica-in-mappa" onClick={this.loadConfig}></button>
-            </OverlayTrigger>)];
+            <button className="btn btn-link carica-in-mappa" onClick={this.loadConfig}></button>
+        </OverlayTrigger>)];
     }
 
     render() {
