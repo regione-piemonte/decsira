@@ -303,7 +303,7 @@ class SiraGrid extends React.Component {
                 <Grid className="featuregrid-title" fluid>
                     <Row>
                         <Col>
-                            <button onClick={() => this.onGridClose(false)}><span>Indietro</span></button>
+                            <button onClick={() => this.onGridClose(false)}><span><I18N.Message msgId={"back"}/></span></button>
                         </Col>
                     </Row>
                 </Grid>
@@ -342,14 +342,14 @@ class SiraGrid extends React.Component {
         // const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
         const indicaTitle = this.props.isIndicatore ? (
             <div className="dhContainer">
-                <b>Indicatore selezionato</b> <br /> {this.props.indicaTitle}
+                <b><I18N.Message msgId={"IndicaBuilder.selectedIndica"}/></b><br/> {this.props.indicaTitle}
             </div>
         ) : "";
         return (
             <div>
                 <div className="dhContainer">
                     <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
-                    <label>DATI</label>
+                    <label><I18N.Message msgId={"featuregrid.dataTitle"}/></label>
                 </div>
                 {indicaTitle}
             </div>
@@ -446,7 +446,7 @@ class SiraGrid extends React.Component {
                                 ref={(r)=> {this.grid = r; }}
                                 map={this.props.map}
                                 columnDefs={columns}
-                                style={{height: this.state.height - 120, width: "100%"}}
+                                style={{height: this.state.height - 140, width: "100%"}}
                                 maxZoom={16}
                                 selectFeatures={this.selectFeatures}
                                 selectAll={this.props.selectAllToggle ? this.selectAll : undefined}

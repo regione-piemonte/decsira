@@ -236,7 +236,7 @@ class SideQueryPanel extends React.Component {
                     <span style={{paddingLeft: "15px"}}>{header}</span>
 
                     <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
-                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/> indietro
+                        <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/> <I18N.Message msgId={"back"}/>
                     </button>
                 </span>
             );
@@ -246,7 +246,7 @@ class SideQueryPanel extends React.Component {
                     {header}
                     <OverlayTrigger key={"header_tp_over"} rootClose placement="left" overlay={tooltip}>
                         <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
-                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  indietro
+                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  <I18N.Message msgId={"back"}/>
                         </button>
                     </OverlayTrigger>
                 </span>
@@ -264,7 +264,7 @@ class SideQueryPanel extends React.Component {
         const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
         const indicaTitle = this.props.isIndicatore ? (
             <div className="dhContainer">
-                <b>Indicatore selezionato</b> <br /> {this.props.indicaTitle}
+                <b><I18N.Message msgId={"IndicaBuilder.selectedIndica"}/></b> <br /> {this.props.indicaTitle}
             </div>
         ) : "";
         return (
