@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_idf_alb_monum="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_alb_monum/1.0" version="1.0">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_alb_monum id= id_geo_alb_monum-->
+	<element name="AlberoMonumentale" substitutionGroup="gml:AbstractFeature" type="decsiraogc_idf_alb_monum:AlberoMonumentaleType"/>
+	
+	<!-- decsira_t_alb_monum_tipo_ambiente  id= id_t_alb_monum_tipo_ambiente -->
+	<element name="TipoAmbiente" substitutionGroup="gml:AbstractObject" type="decsiraogc_idf_alb_monum:TipoAmbienteType"/>
+	
+	<!-- decsira_t_alb_monum_ambiente  id= id_t_alb_monum_ambiente -->
+	<element name="Ambiente" substitutionGroup="gml:AbstractObject" type="decsiraogc_idf_alb_monum:AmbienteType"/>
+	
+	<!-- decsira_t_alb_monum_tipo_proprieta  id= id_t_alb_monum_tipo_proprieta -->
+	<element name="TipoProprieta" substitutionGroup="gml:AbstractObject" type="decsiraogc_idf_alb_monum:TipoProprietaType"/>
+	
+	<!-- decsira_t_alb_monum_criterio_monumentalita  id= id_t_alb_monum_criterio_monumentalita -->
+	<element name="CriterioMonumentalita" substitutionGroup="gml:AbstractObject" type="decsiraogc_idf_alb_monum:CriterioMonumentalitaType"/>
+	
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	<complexType name="AlberoMonumentaleType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element minOccurs="1" name="idGeoAlbMonum" type="xs:integer"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="geometria" type="gml:GeometryPropertyType"/>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="idNSschedaAlbero">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataRilievo" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataInserimento" type="xs:date"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="oraInserimento">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="oggettoDiIdentif">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrStato">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="richieste">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgCensito">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="schedaSegnRifCensimPass">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="schedaSegnRilevatori">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrRegione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrProvincia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrComune">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="localitaSegnal">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="segnalLongitudineX" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="segnalLatitudineY" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="segnalLongitudineXGradi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="segnalLatitudineYGradi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+					<xs:element maxOccurs="1" minOccurs="0" name="itinerarioAccesso">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dettaglioParticelle">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="200"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="cartaIgmTav25000">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="cartaIgmFg100000">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altitudineMetri" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="pendenzaPerc" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="contestoCoperturaSuolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="contestoCompattamentoSuolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgContestoRistagnoIdrico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="contestoCaratteristicheSuolo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgVincAreaProtetta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dettaglioAreeProtette">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altriVinc">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgCirconfSottosoglia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgAltezzaDendrometrica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgAmpiezzaChioma">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgEta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgCirconfSoprasoglia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgFormaOPortam">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgValoreEcologico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgRaritaBotanica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgArchitetturaVegetale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgValorePaesaggistico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgValoreStorico">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrAspettoMonumentalita">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="famiglia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="genere">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="specie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="varieta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomeVolgareSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomiLocaliSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomiLocaliInsieme">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="nomiLocaliAlbero">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="numeroFusti" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="etaAccertata" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="etaPresunta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="circonferenza" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altezzaStimataMetri" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altezzaMisurataMetri" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altezzaPrimoPalcoMetri" type="xs:decimal"/>
+					
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="formaChioma">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="diametroMedioChiomaMetri" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="vigoreVegetativo">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="defoliazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="decolorazione">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="microfillia">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="seccume">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="riscoppi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrSintomiODifetti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="apparatoRadicale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="colletto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fusto">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="chioma">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="branche">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+	
+					<xs:element maxOccurs="1" minOccurs="0" name="flgInterfManufatti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgInterfLineeElettr">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="bersaglio">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoInfezioneParassiti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="doveInfezioneParassiti">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoFunghiVirusBatteri">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="doveFunghiVirusBatteri">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoAltriDanni">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="doveAltriDanni">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrSintomi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="valutazioneSintomi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgAssenzaDanniFitosanit">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettTipoPotat">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettPotatQuando">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettPotatAltro">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettTipoConsolidam">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettAltrTipoConsolidam">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettTipoAncoraggio">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettAncoraggioDove">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettAncoraggioAltro">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettDendroDove">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettDendroAltro">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervAffettAltroDove">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervEffettAltro">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgAssenzaIntervNecess">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgIntervNecess">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="intervNecess">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="lunghezzaFilareVialeAlb" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="superficieGruppo" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="circonferenzaEsemplMedia" type="xs:integer"/>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="altezzaEsemplMedia" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="circonferenzaEsemplMax" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altezzaEsemplMax" type="xs:decimal"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tutelaRifNormativi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgTutelaPropDichIntPubbl">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgTutelaVigente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="altreOsservazioni">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="numeroAllegati" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="flgPresenzaAllegati">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="urlDecretoMinistInserimento">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="urlDecretoMinistModifica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="determinaRegionale">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="determinaRegionaleModifica">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="urlImmagini">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="urlSchedaCartello">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="urlAlbMonumBenePaesaggist">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrizioneSpecie">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrizioneAlbero">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="4000"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="dataUltAgg" type="xs:date"/>
+					
+					
+					<!-- oggetti innestati -->
+
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="tipoAmbiente" type="decsiraogc_idf_alb_monum:TipoAmbientePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="ambiente" type="decsiraogc_idf_alb_monum:AmbientePropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="tipoProprieta" type="decsiraogc_idf_alb_monum:TipoProprietaPropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="criterioMonumentalita" type="decsiraogc_idf_alb_monum:CriterioMonumentalitaPropertyType"/>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="TipoAmbienteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+
+					<xs:element maxOccurs="1" name="idAlbMonumTipoAmbiente" type="xs:integer"/>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="fkGeoAlbMonum" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAlbMonumTipoAmbiente" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoAmbiente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="AmbienteType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+
+					<xs:element maxOccurs="1" name="idAlbMonumAmbiente" type="xs:integer"/>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="fkGeoAlbMonum" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAlbMonumAmbiente" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="ambiente">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TipoProprietaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+
+					<xs:element maxOccurs="1" name="idAlbMonumTipoProprieta" type="xs:integer"/>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="fkGeoAlbMonum" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAlbMonumTipoProprieta" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="tipoProprieta">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="vincProprPubblicaEstremi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					<xs:element maxOccurs="1" minOccurs="0" name="vincProprPrivataEstremi">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					 
+					<xs:element maxOccurs="1" minOccurs="0" name="vincEstremiGestore">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="CriterioMonumentalitaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+
+					<xs:element maxOccurs="1" name="idAlbMonumCriterioMonumentalita" type="xs:integer"/>
+				
+					<xs:element maxOccurs="1" minOccurs="0" name="fkGeoAlbMonum" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="descrAspettoMonumentalita">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="fkAlbMonumCriterioMonumentalita" type="xs:integer"/>
+					
+					<xs:element maxOccurs="1" minOccurs="0" name="criterioMonumentalita">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30"/>
+                            </xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<!-- property types -->
+	
+	<complexType name="TipoAmbientePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_alb_monum:TipoAmbiente"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="AmbientePropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_alb_monum:Ambiente"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="TipoProprietaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_alb_monum:TipoProprieta"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+	
+	<complexType name="CriterioMonumentalitaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_alb_monum:CriterioMonumentalita"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
+</schema>
