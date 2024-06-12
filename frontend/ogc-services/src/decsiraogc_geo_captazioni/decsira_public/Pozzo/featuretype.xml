@@ -5,7 +5,7 @@
   <namespace>
     <id>NamespaceInfoImpl--544eef5c:17f0be143ee:-7ffd</id>
   </namespace>
-  <title>Pozzo</title>
+  <title>Presa da pozzo</title>
   <keywords>
     <string>features</string>
     <string>Pozzo</string>
@@ -59,21 +59,20 @@
       <virtualTable>
         <name>Pozzo</name>
         <sql>select&#xd;
-	id_pozzo,&#xd;
-	codice_roc as codice_roc,&#xd;
-	des_tipo_falda as tipo_di_falda,&#xd;
+    id_ogg_tipo,&#xd;
 	codice_rilievo,&#xd;
+	codice_roc,&#xd;
 	denominazione,&#xd;
 	des_comune as comune,&#xd;
-	localita ,&#xd;
-	des_stato as stato_pozzo ,&#xd;
-	portata_max_deriv as portata_massima_derivabile ,&#xd;
-	portata_med_deriv as portata_media_annua_derivabile ,&#xd;
-	volume_max_concesso as volume_massimo_di_concessione ,&#xd;
+	sigla_provincia,&#xd;
+	des_provincia as provincia,&#xd;
+	localita,&#xd;
+	des_tipo_falda as tipo_di_falda,&#xd;
+	profondita,&#xd;
 	des_stato_esercizio as stato_di_esercizio,&#xd;
-	profondita ,&#xd;
-        uso_potabile,&#xd;
-        fk_stato,&#xd;
+	portata_max_deriv as portata_massima_derivabile,&#xd;
+	portata_med_deriv as portata_media_annua_derivabile,	&#xd;
+	volume_max_concesso as volume_massimo_di_concessione,&#xd;
 	geometria&#xd;
 from&#xd;
 	decsira_geo_pozzo&#xd;
@@ -82,7 +81,7 @@ where&#xd;
 	and uso_potabile = &apos;NO&apos;
 </sql>
         <escapeSql>false</escapeSql>
-        <keyColumn>id_pozzo</keyColumn>
+        <keyColumn>id_ogg_tipo</keyColumn>
         <geometry>
           <name>geometria</name>
           <type>Point</type>

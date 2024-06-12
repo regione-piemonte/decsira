@@ -23,7 +23,7 @@
           <Title> Presa</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>des_tipo_presa</ogc:PropertyName>
+              <ogc:PropertyName>tipo_di_presa</ogc:PropertyName>
               <ogc:Literal>Non definito</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -51,7 +51,7 @@
           <Title>da corpo idrico naturale</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>des_tipo_presa</ogc:PropertyName>
+              <ogc:PropertyName>tipo_di_presa</ogc:PropertyName>
               <ogc:Literal>da corpo idrico naturale</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -79,7 +79,7 @@
           <Title>da corpo idrico artificiale</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>des_tipo_presa</ogc:PropertyName>
+              <ogc:PropertyName>tipo_di_presa</ogc:PropertyName>
               <ogc:Literal>da corpo idrico artificiale</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>

@@ -5,7 +5,7 @@
   <namespace>
     <id>NamespaceInfoImpl--544eef5c:17f0be143ee:-7ffd</id>
   </namespace>
-  <title>Fontanile</title>
+  <title>Presa da fontanile</title>
   <keywords>
     <string>features</string>
     <string>Fontanile</string>
@@ -59,18 +59,17 @@
       <virtualTable>
         <name>Fontanile</name>
         <sql>select&#xd;
-	id_fontanile,&#xd;
-	codice_roc,&#xd;
+	id_ogg_tipo,&#xd;
 	codice_rilievo,&#xd;
+	codice_roc,&#xd;
 	denominazione,&#xd;
 	des_comune as comune,&#xd;
+	sigla_provincia,&#xd;
+	des_provincia as provincia,&#xd;
 	localita,&#xd;
-	des_stato as stato_di_esercizio,&#xd;
+	des_stato_esercizio as stato_di_esercizio,&#xd;
 	portata_max_deriv as portata_massima_derivabile,&#xd;
 	portata_med_deriv as portata_media_annua_derivabile,&#xd;
-	volume_max_concesso as volume_massimo_di_concessione,&#xd;
-	uso_potabile,&#xd;
-        fk_stato,&#xd;
 	geometria&#xd;
 from&#xd;
 	decsira_geo_fontanile&#xd;
@@ -79,7 +78,7 @@ where&#xd;
 	and uso_potabile = &apos;NO&apos;
 </sql>
         <escapeSql>false</escapeSql>
-        <keyColumn>id_fontanile</keyColumn>
+        <keyColumn>id_ogg_tipo</keyColumn>
         <geometry>
           <name>geometria</name>
           <type>Point</type>
