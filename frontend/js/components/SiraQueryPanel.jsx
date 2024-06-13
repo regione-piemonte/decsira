@@ -188,7 +188,7 @@ class SiraQueryPanel extends React.Component {
             <span>
                 {header}
                 <button style={{paddingRight: "10px"}} onClick={this.props.siraActions.onExpandFilterPanel.bind(null, true)} className="close">
-                    <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  indietro
+                    <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  <I18N.Message msgId={"back"}/>
                 </button>
             </span>
         );

@@ -151,7 +151,7 @@ class FullScreen extends React.Component {
                 params={{authkey: this.props?.profile?.authParams?.authkey || ''}}
                 profile={this.props.profile.profile}
                 zoomToFeatureAction={this.zoomToFeature}
-                backToDataset={this.toggleControl}
+                backToDataset={this.backToDataset}
                 fullScreen
                 selectAll={false}/>
         );
@@ -188,6 +188,16 @@ class FullScreen extends React.Component {
     };
 
     toggleControl = () => {
+        this.props.expandFilterPanel(false);
+        this.props.toggleSiraControl('grid');
+        /* if (this.props?.match?.params?.profile) {
+            this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);
+        } else {
+            this.context.router.history.push('/dataset/');
+        } */
+    };
+
+    backToDataset = () => {
         this.props.expandFilterPanel(false);
         if (this.props?.match?.params?.profile) {
             this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);

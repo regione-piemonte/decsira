@@ -51,7 +51,7 @@ class SideIndicaPanel extends React.Component {
                     {header}
                     <OverlayTrigger key={"header_tp_over"} rootClose placement="left" overlay={tooltip}>
                         <button style={{paddingRight: "10px"}} onClick={this.props.toggleControl} className="close">
-                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  indietro
+                            <Glyphicon glyph="glyphicon glyphicon-triangle-left collapsible"/>  <I18N.Message msgId={"back"}/>
                         </button>
                     </OverlayTrigger>
                 </span>
