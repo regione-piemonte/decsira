@@ -185,16 +185,35 @@ header .row{
 	
 #decsiraweb-cartpanel .cart-panel-sevices-list-container:nth-child(even) {background: #f2f2f275;     padding: 10px 10px 5px 10px;}
 
+.sira-ms2 .cart-panel-sevices-list-container{
+    padding: 4px 0 4px 8px;
+}
+.sira-ms2 .cart-panel-sevices-list-container:nth-child(even) {background: #f2f1f1;}
+.sira-ms2 .cart-panel-sevices-list-container:nth-child(odd) {background: #fff;}
+
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger,
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:hover,
 .sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger:active {
-    color: #1976D2;
-    background: transparent;
+    background: transparent !important;
     border: 0;
+	margin-top: -40px !important;
 }
-.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger .glyphicon.glyphicon-trash{
-	color: #1976D2; font-size: 18px;
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-danger .glyphicon.glyphicon-trash:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url("images/elimina.svg") 0 0 no-repeat;
+    width: 20px;
+    display: block;
+    height: 20px;
 }
+
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-warning:focus,
+.sira-ms2 .cart-panel-sevices-list-container .confirm-button.btn-warning:hover {
+	color: #ffffff;
+	background-color: #D93830;
+	border-color: #D93830;
+}
+
 .sira-ms2 .info-content.infobox-content .panel-body button {background: #1976D2;}
 .sira-ms2 .btn-link {
 	color: #1976D2;
@@ -212,7 +231,8 @@ header .row{
 	font-size: 14px;
     background-position-y: 35%;
 }
-.sira-ms2 .btn-link.mostra-dati:hover {
+.sira-ms2 .btn-link.mostra-dati:hover,
+.sira-ms2 .btn-link.mostra-dati:focus {
 	background-image: url(images/elenco-hover.svg);
 }
 .sira-ms2 .btn-link.carica-in-mappa {
@@ -224,7 +244,8 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 45%;
 }
-.sira-ms2 .btn-link.carica-in-mappa:hover {
+.sira-ms2 .btn-link.carica-in-mappa:hover,
+.sira-ms2 .btn-link.carica-in-mappa:focus {
 	background-image: url(images/carica-in-mappa-hover.svg);
 }
 .sira-ms2 .btn-link.elimina-da-mappa {
@@ -236,7 +257,8 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 45%;
 }
-.sira-ms2 .btn-link.elimina-da-mappa {
+.sira-ms2 .btn-link.elimina-da-mappa:hover,
+.sira-ms2 .btn-link.elimina-da-mappa:focus  {
 	background-image: url(images/elimina-da-mappa-hover.svg);
 }
 .sira-ms2 .btn-link.elenco {
@@ -248,7 +270,8 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
-.sira-ms2 .btn-link.elenco:hover {
+.sira-ms2 .btn-link.elenco:hover,
+.sira-ms2 .btn-link.elenco:focus {
 	background-image: url(images/elenco-hover.svg);
 }
 .sira-ms2 .btn-link.indicatori {
@@ -260,7 +283,8 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
-.sira-ms2 .btn-link.indicatori:hover {
+.sira-ms2 .btn-link.indicatori:hover,
+.sira-ms2 .btn-link.indicatori:focus {
 	background-image: url(images/imposta-parametri-indicatore-hover.svg);
 }
 #siratoc-layers .toc-group-children button.btn-link.indicatori{
@@ -279,7 +303,8 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
-.sira-ms2 .btn-link.mostra-legenda:hover {
+.sira-ms2 .btn-link.mostra-legenda:hover,
+.sira-ms2 .btn-link.mostra-legenda:focus {
 	background-image: url(images/mostra-legenda-hover.svg);
 }
 
@@ -292,7 +317,8 @@ header .row{
     font-weight: bold;	font-size: 14px;
     background-position-y: 50%;
 }
-.sira-ms2 .btn-link.info-generali-hover {
+.sira-ms2 .btn-link.info-generali:hover,
+.sira-ms2 .btn-link.info-generali:focus {
 	background-image: url(images/info-generali-hover.svg);
 }
 .btn-outline-primary.btn-default {
@@ -336,7 +362,7 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 .featuregrid-tools.btn-toolbar.btn-toolbar-sm .btn-default:hover, #multiLayerSelect:hover{
 	color:#D93830 !important;
 }
-.btn-mappa.btn-default, .btn-mappa.btn-default:focus{
+.btn-mappa.btn-default{
 	background:#487600 url("images/mappa.svg") 20px 50% no-repeat;
 	border-radius:5px;
 	color: #fff;
@@ -345,7 +371,7 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 	padding: 8px 20px 8px 50px;
     text-transform: uppercase;
 }
-.btn-mappa.btn-default:hover{
+.btn-mappa.btn-default:hover, .btn-mappa.btn-default:focus{
 	background:#D93830 url("images/mappa.svg") 20px 50% no-repeat;
 }
 .sira-ms2 .btn-primary:hover {
@@ -394,13 +420,18 @@ header .btn.btn-link.offcanvas-toggle:focus{
  /*DIALOG*/
  .modal-dialog .btn-default {
     background-color: #1976D2;
-    border: 0;
+    border: 1px solid #1976D2;
     color: #fff;
+	text-transform: uppercase;
+	border-radius: 5px;
 }
-.modal-dialog .btn-default:hover {
-    background-color: #FFFFFF;
-    border: 0;
-    color: #1976D2;
+.sira-ms2 .modal-dialog .btn-default:focus,
+.sira-ms2 .modal-dialog .btn-default:hover,
+.sira-ms2 .modal-dialog .btn-default:active {
+    background-color: #D93830;
+	border: 1px solid #D93830;
+    color: #fff;
+	text-decoration: none;
 }
 
 .sira-ms2 .mapstore-langselector .dropdown .dropdown-toggle {
@@ -531,44 +562,27 @@ div.interna
 	 line-height: 30px;
 }
 
-
  .navbar-header .pimenu-navbar-toggle:focus {
     background: #000;
 }
-
 
  .navbar-header .pimenu-navbar-toggle:focus .fa-bars{
 	color:#FFFFFF;
 }
 
-
- .nav-tabs{
+.nav-tabs{
 	padding-left:30px;
 	border-bottom:0;
-	}
+}
 
-
- .nav-tabs li{
+.nav-tabs li{
 	margin-right:10px;
-	}
+}
 
 
- .nav-tabs li.active a{
-	/*border:0;
-	border-bottom:1px solid #1976D2;
-	background:#1976D2;
-	color:#fff;
-	font-weight:bold;
-	text-transform:uppercase;
-	border-radius:10px 10px 0 0;
-	padding:20px 100px 10px;
-	font-size:18px;*/
-	}
-
- .nav-tabs li.disactive{
+.nav-tabs li.disactive{
 	margin-top:14px;
-	}
-
+}
 
  .nav-tabs li.disactive a{
 	border:0;
@@ -1839,3 +1853,4 @@ body.sira-ms2 .cardCatalogo .handleMetadato .btn-link.legenda img{margin-top: -2
     color: #1976D2 !important;
     background-color: #ffffff;
 }
+
