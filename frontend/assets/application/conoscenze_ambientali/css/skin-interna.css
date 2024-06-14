@@ -358,11 +358,40 @@ body.body_map .sira-ms2 #fullscreen-container .btn-primary, body.body_map .sira-
 
 .btn-primary:focus,
 .btn-primary:hover,
- .btn-primary:active {
+.btn-primary:active {
 	color: #fff !important;
 	background-color: #D93830 !important;
 	border-color: #D93830 !important;	border-radius:5px;	font-size: 14px !important;
 	font-weight: bold !important;
+}
+
+.sira-ms2 #measure-panel .btn-success.active:hover,
+.sira-ms2 #measure-panel .btn-primary:focus,
+.sira-ms2 #measure-panel .btn-primary:hover,
+.sira-ms2 #measure-panel .btn-primary:active,
+.sira-ms2 #measure-panel .btn-primary:active:hover,
+.sira-ms2 #measure-panel .btn-success.active:focus{
+	color: #fff !important;
+	background-color: #D93830 !important;
+	border-color: #D93830 !important;
+	font-size: 14px !important;
+	font-weight: bold !important;
+}
+
+.sira-ms2 #measure-panel .square-button-md{ border-radius: 0;}
+
+.square-button.ms-close.btn-primary,
+.square-button.ms-close.btn-primary:hover,
+.square-button.ms-close.btn-primary:active,
+.square-button.ms-close.btn-primary:focus{
+	color: #fff !important;
+	background-color: #1976D2 !important;
+	border-color: #1976D2 !important;	border-radius:0px;
+	font-weight: bold !important;
+	font-size: 22px;
+}
+.square-button.ms-close.btn-primary .glyphicon {
+    font-size: 20px;
 }
 
 #scheda2pdf, #treeButton, #multiLayerSelect,
@@ -470,9 +499,9 @@ header .btn.btn-link.offcanvas-toggle:focus{
 
 
 .sira-ms2 .alert {
-    padding: 20px 20px 20px 100px;
     border: 1px solid transparent;
     border-radius: 0;
+	margin: 10px 0;
 }
 
 .sira-ms2 .alert.alert-info{ padding: 20px 20px;}
@@ -484,8 +513,24 @@ header .btn.btn-link.offcanvas-toggle:focus{
 	border-left: 8px solid #94C13E;
 }
 
-div.interna
- .navbar-header .map-list .btn.btn-primary{
+.sira-ms2 .alert-warning{
+	color: #000;
+	font-weight: bold;
+	padding: 20px 20px 20px 70px;
+	background:#F8F4CF url("images/alert-warning.svg") 24px 12px no-repeat;
+	border-left: 8px solid #f4ce0b;
+}
+
+.sira-ms2 .alert-danger{
+	color: #000;
+	font-weight: bold;
+	padding: 20px 20px 20px 70px;
+	background:#F8C4C4 url("images/alert-danger.svg") 24px 12px no-repeat;
+	border-left: 8px solid #df1304;
+}
+
+
+div.interna .navbar-header .map-list .btn.btn-primary{
 	background:none;
 	border:0;
 	padding:2px 6px;
@@ -494,14 +539,12 @@ div.interna
 	text-transform:uppercase;
 }
 
-div.interna
- .navbar-header .map-list .btn.btn-primary.active{
+div.interna .navbar-header .map-list .btn.btn-primary.active{
 	background:#fff;
 	color:#000;
 }
 
-div.interna
- .navbar-header .map-list .btn.btn-primary span.badge{
+div.interna .navbar-header .map-list .btn.btn-primary span.badge{
 	padding:3px 5px;
 	background:#1976D2;
 	color:#fff;
