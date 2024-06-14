@@ -1166,6 +1166,7 @@ body.body_map.sira-ms2 #siratoc-layers .toc-default-layer #sira-layer-settings .
 body.body_map.sira-ms2 #mapstore-navbar .search-toggle,  body.body_map.sira-ms2 #mapstore-navbar-container .square-button{
     height: auto;
     width: auto;
+    padding: 4px 6px !important;
 }
 
 #mapstore-burger-menu-container{ border-radius: 0 5px 5px 0; border-left: 1px solid #fff !important;}
@@ -1175,11 +1176,12 @@ body.body_map.sira-ms2 #navigationBar-container .glyphicon {
 }
 
 .sira-ms2 #mapstore-navbar .search-toggle{border-radius: 5px 0 0 5px;}
+
 .sira-ms2 #mapstore-navbar .search-toggle .glyphicon.glyphicon-search::before{
     content: " ";
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    background:url("images/metro-location-city.svg") 0 0 no-repeat;
-    width: 18px;
+    background:url("images/metro-location-city.svg") 50% 50% no-repeat;
+    width: 20px;
     display: block;
     height: 20px;
     background-size: 18px;
@@ -1276,8 +1278,7 @@ body.body_map.sira-ms2 .querypanel-container .query-filter-container .no-border.
     height: auto !important;
 }
 
-#viewer #mapstore-navbar-container .btn-default,
-#viewer #map-search-bar .search-toolbar-options .btn-group {
+#viewer #mapstore-navbar-container .btn-default {
     background: #1976D2 !important;
     color: #ffffff !important;
     border-color: #1976D2 !important;
@@ -1286,12 +1287,17 @@ body.body_map.sira-ms2 .querypanel-container .query-filter-container .no-border.
 
 #viewer #mapstore-navbar-container .btn-default:hover,
 #viewer #mapstore-navbar-container .btn-default:focus,
-#viewer #mapstore-navbar-container .btn-default:active,
-#viewer #map-search-bar .search-toolbar-options .btn-group:hover,
-#viewer #map-search-bar .search-toolbar-options .btn-group:active,
-#viewer #map-search-bar .search-toolbar-options .btn-group:focus {
+#viewer #mapstore-navbar-container .btn-default:active {
     background: #D93830 !important;
     color: #ffffff !important;
     border-color: #D93830 !important;
     padding: 4px;
+}
+#viewer #map-search-bar .search-toolbar-options .btn-group,
+#viewer #map-search-bar .search-toolbar-options .btn-group:hover,
+#viewer #map-search-bar .search-toolbar-options .btn-group:active,
+#viewer #map-search-bar .search-toolbar-options .btn-group:focus {
+    background: #1976D2 !important;
+    color: #ffffff !important;
+    border-color: #1976D2 !important;
 }
