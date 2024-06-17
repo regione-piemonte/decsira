@@ -158,7 +158,8 @@ class Dataset extends React.Component {
         loadNodeMapRecords: PropTypes.func,
         addLayersInCart: PropTypes.func,
         setNodeInUse: PropTypes.func,
-        tematizzatore: PropTypes.object
+        tematizzatore: PropTypes.object,
+        selectedView: PropTypes.string
     };
 
     static contextTypes = {
@@ -264,8 +265,50 @@ class Dataset extends React.Component {
         );
     };
 
+    renderView = () => {
+        const {selectedView} = this.props;
+        return (
+            <div>
+                <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+
+                <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                    <Tabs
+                        className="dataset-tabs"
+                        activeKey={this.props.subcat}
+                        onSelect={this.props.selectSubCategory}>
+                        <Tab eventKey={'views'}
+                            title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>
+                            <div id="dataset-results-view">
+                                <Vista key={selectedView.id}
+                                    node={selectedView}
+                                    onToggle={this.props.onToggle}
+                                    addToMap={this.loadThematicView}
+                                    showInfoBox={this.showInfoBox}/>
+                            </div>
+                        </Tab>
+                    </Tabs>
+                </div>
+            </div>);
+    }
+
+    renderCategory = () => {
+        const {category} = this.props;
+        return (<div>
+            <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
+            <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
+                <span>{category ? category.name : (<noscript/>)}</span>
+            </div>
+            {this.renderSerchBar()}
+            <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
+                {category ? this.renderResults() : (<noscript/>)}
+                {this.props.notAuthorized && this.renderUnauthorized()}
+            </div>
+        </div>
+        );
+    }
+
     renderResults = () => {
-        const {loading, objects, views} = this.props;
+        const {loading, objects} = this.props;
         const {showCategories} = this.state;
         const searchSwitch = this.props.nodes.length > 0 ? (
             <div key="categoriesSearch" className="ricerca-home dataset-categories-switch-container">
@@ -297,12 +340,7 @@ class Dataset extends React.Component {
                         addToMap={this.addToCart}
                     /> }
             </TOC>);
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
-            node={v}
-            onToggle={this.props.onToggle}
-            addToMap={this.loadThematicView}
-            showInfoBox={this.showInfoBox}
-        />)) : <div/>;
+
         const objEl = [searchSwitch, tocObjects];
         return (
             <Tabs
@@ -314,15 +352,11 @@ class Dataset extends React.Component {
                     title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>
                     {loading ? this.renderSpinner() : objEl}
                 </Tab>
-                <Tab eventKey={'views'}
-                    title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText") + ` (${views ? views.length : 0})`}>
-                    {loading ? this.renderSpinner() : (<div id="dataset-results-view"> {viste}</div>)}
-                </Tab>
             </Tabs>);
     };
 
     render() {
-        const {category} = this.props;
+        const {selectedView} = this.props;
         return (
             <div className="interna">
                 <div style={{ minHeight: '100%', position: 'relative' }}>
@@ -331,15 +365,9 @@ class Dataset extends React.Component {
                     </div>
                     <Header showCart="true" goToHome={this.goToHome} />
                     <div id="main-content"></div>
-                    <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "Dataset.description")}</h1>
-                    <div className="dataset-category-name" role="contentinfo" aria-label="area di ricerca">
-                        <span>{category ? category.name : (<noscript/>)}</span>
-                    </div>
-                    {this.renderSerchBar()}
-                    <div className="dataset-results-container" role="contentinfo" aria-label="risultati della ricerca">
-                        {category ? this.renderResults() : (<noscript/>)}
-                        {this.props.notAuthorized && this.renderUnauthorized()}
-                    </div>
+
+                    {selectedView ? this.renderView() : this.renderCategory()}
+
                     <div className="dataset-footer-container">
                         <Footer/>
                     </div>
@@ -353,6 +381,7 @@ class Dataset extends React.Component {
                     position: "fixed",
                     marginBottom: "0px",
                     boxShadow: "0 0 5px 1px rgba(94,94,94,1)"}}/>
+
                 <AddMapModal />
             </div>);
     }

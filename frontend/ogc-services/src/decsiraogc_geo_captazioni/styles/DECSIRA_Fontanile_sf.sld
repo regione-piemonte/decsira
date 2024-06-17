@@ -16,7 +16,7 @@
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Title>Fontanile</Title>
+          <Title>Presa da fontanile</Title>
           <MaxScaleDenominator>1000000</MaxScaleDenominator>  
           <PointSymbolizer>
               <Graphic>

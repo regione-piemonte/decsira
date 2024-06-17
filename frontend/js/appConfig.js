@@ -24,8 +24,7 @@ const appReducers = {
     cart: require('./reducers/cart'),
     header: require('./reducers/header'),
     siraTree: require('./reducers/siraTree'),
-    treeData: require('./reducers/treeData'),
-    footer: require('./reducers/footer')
+    treeData: require('./reducers/treeData')
 };
 
 module.exports = {
@@ -33,14 +32,16 @@ module.exports = {
         { path: "/", component: require('./containers/Home') },
         { path: "/auth", component: require('./containers/Home')},
         { path: "/siradataset/:categoryName", component: require('./containers/SiraDataset')},
-        { path: "/dataset/", component: require('./containers/Dataset')},
-        { path: "/dataset/:profile", component: require('./containers/Dataset')},
+        { path: "/dataset/", component: require('./containers/Catalog')},
+        { path: "/dataset/:profile", component: require('./containers/Catalog')},
         { path: "/map/", component: require('./containers/Sira')},
         { path: "/map/:profile", component: require('./containers/Sira')},
         { path: "/nomap/", component: require('./containers/NoMap')},
         { path: "/nomap/:profile", component: require('./containers/NoMap')},
         { path: "/full/", component: require('./containers/FullScreenPanel')},
-        { path: "/full/:profile", component: require('./containers/FullScreenPanel') }
+        { path: "/full/:profile", component: require('./containers/FullScreenPanel') },
+        { path: "/credits", component: require('./containers/Credits') },
+        { path: "/sca", component: require('./containers/SistemaConoscenzeAmbientali') }
     ],
     pluginsDef: require('./plugins'),
     initialState: {

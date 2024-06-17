@@ -13,11 +13,12 @@ const Footer = require('../components/Footer');
 const Header = require('../components/Header');
 const { Modal, Button } = require("react-bootstrap");
 const I18N = require('@mapstore/components/I18N/I18N');
-const { getMetadataObjects, selectCategory, resetObjectAndView } = require('../actions/siracatalog');
-const { resetUserIdentityError } = require('../actions/userprofile');
+const { selectCategory, selectView, resetObjectAndView, selectSubCategory } = require('../actions/siracatalog');
+const { resetUserIdentityError, resetUserIdentity } = require('../actions/userprofile');
 const {categorySelector} = require('../selectors/sira');
 const Mosaic = connect(categorySelector)(require('../components/Mosaic'));
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 const PlatformNumbers = connect((state) => ({
     siradecObject: state.platformnumbers.siradecObject,
@@ -26,22 +27,22 @@ const PlatformNumbers = connect((state) => ({
     functionObjectView: state.platformnumbers.functionObjectView
 }))(require('../components/PlatformNumbers'));
 
-const SiraSearchBar = require('../components/SiraSearchBar');
 const { handleKeyFocus } = require('../utils/SiraUtils');
 const { HashLink } = require('react-router-hash-link');
 
 
 class Home extends React.Component {
     static propTypes = {
-        loadMetadata: PropTypes.func,
-        match: PropTypes.shape({
-            params: PropTypes.object
-        }),
         selectCategory: PropTypes.func,
+        selectSubCategory: PropTypes.func,
         allCategory: PropTypes.object,
         resetObjectAndView: PropTypes.func,
         profile: PropTypes.object,
-        resetUserIdentityError: PropTypes.func
+        resetUserIdentityError: PropTypes.func,
+        resetUserIdentity: PropTypes.func,
+        selectView: PropTypes.func,
+        match: PropTypes.object,
+        params: PropTypes.object
     };
 
     static contextTypes = {
@@ -72,54 +73,94 @@ class Home extends React.Component {
                 <div className="mapstore-error"><I18N.Message msgId="Modal.NoRoleMessage"/></div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() => { this.props.resetUserIdentityError(); }}><I18N.Message msgId="Accessibility.button"/></Button>
+                <Button onClick={() => { this.resetUser(); }}><I18N.Message msgId="Accessibility.button"/></Button>
             </Modal.Footer>
         </Modal>);
     };
 
     render() {
-        let description = LocaleUtils.getMessageById(this.context.messages, "Homepage.appDescription");
         return (
             <div className="home-page">
                 <div role="navigation" className="skip-navigation" aria-label="Navigazione veloce">
                     <HashLink to="/#main-content">Salta al contenuto principale</HashLink>
                 </div>
                 <Header />
+                {this.props.profile.error === 'empty_roles' && this.renderProfileAlert()}
                 <h1 className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.homepage")}</h1>
                 <div id="main-content"></div>
-                <div className="container-fluid" role="search">
-                    {this.props.profile.error === 'empty_roles' && this.renderProfileAlert()}
-                    <div className="row-fluid sb-sx">
-                        <div className="container search-home">
-                            <div className="row">
-                                <div className="col-md-7 col-xs-12 testo-home">
-                                    <div>
-                                        <span dangerouslySetInnerHTML={{ __html: description }} />
-                                    </div>
+
+                <div className="hero-home">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h1><I18N.Message msgId={"Homepage.titolo"}/></h1>
+                                <p><I18N.Message msgId={"Homepage.descrizione"}/></p>
+                                <div>
+                                    <Button onClick={() => {this.goToSca(); }}>
+                                        <I18N.Message msgId={"Homepage.scopri"}/>
+                                    </Button>
                                 </div>
-                                <SiraSearchBar
-                                    containerClasses="col-md-5 col-xs-12 ricerca-home catalog-search-container sira-ms2"
-                                    searchClasses="home-search"
-                                    addCategoriesSelector={false}
-                                    onSearch={({text}) => {
-                                        this.props.selectCategory(this.props.allCategory, 'objects');
-                                        this.props.loadMetadata({params: {text}});
-                                        if (this.props?.match?.params?.profile) {
-                                            this.context.router.history.push(`/dataset/${this.props.match.params.profile}/`);
-                                        } else {
-                                            this.context.router.history.push('/dataset/');
-                                        }
-                                    }}
-                                />
                             </div>
                         </div>
                     </div>
                 </div>
-                <Mosaic useLink={false} tileClick={this.selectCategory} />
-                <PlatformNumbers />
+
+                <div className="container">
+                    <div className="row cont-la-mappa">
+                        <div className="col-md-6 col-xs-12">
+                            <div dangerouslySetInnerHTML={{ __html: LocaleUtils.getMessageById(this.context.messages, "Homepage.sezioneMappa") }} />
+                            <div>
+                                <br/>
+                                <Button onClick={() => {this.goMap(); }} className="btn btn-mappa btn-default">
+                                    <I18N.Message msgId={"Homepage.goToMap"}/>
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-xs-12 la-mappa"></div>
+                    </div>
+                </div>
+
+                <div className="catalogo-home">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h2><I18N.Message msgId={"Homepage.catalogo"}/></h2>
+                                <h3><I18N.Message msgId={"Homepage.categorie"}/></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <Mosaic useLink={false} tileClick={this.selectCategory} type="categories"/>
+
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-xs-12">
+                                <h2><I18N.Message msgId={"Homepage.tematiche"}/></h2>
+                                <Mosaic useLink={false} tileClick={this.selectView} type="views"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <PlatformNumbers />
+
+                </div>
+
                 <Footer />
             </div>);
     }
+
+    resetUser = () => {
+        this.props.resetUserIdentityError();
+        this.props.resetUserIdentity();
+        window.location.href = ConfigUtils.getConfigProp('decsirawebUrl');
+    }
+
+    goMap = () => {
+        this.context.router.history.replace("/map/");
+    };
+
+    goToSca = () => {
+        this.context.router.history.replace("/sca/");
+    };
 
     selectCategory = (category, subcat) => {
         this.props.resetObjectAndView();
@@ -129,6 +170,13 @@ class Home extends React.Component {
         } else {
             this.context.router.history.push('/dataset/');
         }
+    };
+
+    selectView = (view) => {
+        this.props.resetObjectAndView();
+        this.props.selectSubCategory("views");
+        this.props.selectView(view);
+        this.context.router.history.push('/dataset/');
     };
 }
 
@@ -142,8 +190,10 @@ module.exports = connect((state) => {
         profile: state.userprofile
     };
 }, {
-    loadMetadata: getMetadataObjects,
     selectCategory,
+    selectSubCategory,
+    selectView,
     resetObjectAndView,
-    resetUserIdentityError
+    resetUserIdentityError,
+    resetUserIdentity
 })(Home);

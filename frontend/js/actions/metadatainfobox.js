@@ -12,6 +12,8 @@ const assign = require('object-assign');
 
 const HIDE_BOX = 'HIDE_BOX';
 const SHOW_BOX = 'SHOW_BOX';
+const HIDE_LEGEND_BOX = 'HIDE_LEGEND_BOX';
+const SHOW_LEGEND_BOX = 'SHOW_LEGEND_BOX';
 const LOAD_METADATA = 'LOAD_METADATA';
 const LOAD_METADATA_ERROR = 'LOAD_METADATA_ERROR';
 const TOGGLE_LEGEND_PANEL = 'TOGGLE_LEGEND_PANEL';
@@ -89,6 +91,20 @@ function showBox() {
     };
 }
 
+function hideLegendBox() {
+    return {
+        type: HIDE_LEGEND_BOX,
+        showLegend: 'none'
+    };
+}
+
+function showLegendBox() {
+    return {
+        type: SHOW_LEGEND_BOX,
+        showLegend: 'block'
+    };
+}
+
 function toggleLegendBox() {
     return {
         type: TOGGLE_LEGEND_PANEL
@@ -109,10 +125,11 @@ function legendLoadedError(error) {
 }
 
 
-function metadataLoaded(data) {
+function metadataLoaded(data, idMetadato) {
     return {
         type: LOAD_METADATA,
-        data: data
+        data: data,
+        idMetadato: idMetadato
     };
 }
 
@@ -194,8 +211,8 @@ function loadMetadata(idMetadato) {
                 } else {
                     response.data.showButtonLegend = 'none';
                 }
-                dispatch(metadataLoaded(response.data));
-                // dispatch(showBox());
+                dispatch(metadataLoaded(response.data, idMetadato));
+                /* dispatch(showBox()); */
             } else {
                 try {
                     JSON.parse(response.data);
@@ -212,6 +229,8 @@ function loadMetadata(idMetadato) {
 module.exports = {
     HIDE_BOX,
     SHOW_BOX,
+    HIDE_LEGEND_BOX,
+    SHOW_LEGEND_BOX,
     LOAD_METADATA,
     LOAD_METADATA_ERROR,
     TOGGLE_LEGEND_PANEL,
@@ -219,6 +238,8 @@ module.exports = {
     ADD_URL_LEGEND,
     showBox,
     hideBox,
+    showLegendBox,
+    hideLegendBox,
     metadataLoaded,
     loadMetadataError,
     loadMetadata,

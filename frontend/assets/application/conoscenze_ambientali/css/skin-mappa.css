@@ -1,11 +1,5 @@
-/*body.body_map #container, body.body_map .fill, body.body_map {*/
-/*    height: 100%!important;*/
-/*    position: absolute!important;*/
-/*}*/
-
 .body_map .navbar-header {
     padding-top: 2px;
-    float: none;
 }
 
 .mappaSiraDecisionale {
@@ -13,9 +7,39 @@
 }
 
 .nav.navbar-nav {
-    background: black none repeat scroll 0 0;
     width: 100%;
 	z-index:1000;
+}
+.sira-ms2 .dropdown-menu .dropdown-header{background-color: #1976D2; color: #fff;}
+.sira-login + ul{
+    border-radius: 0;
+    box-shadow: unset;
+    padding: 0;
+    color: #000;
+}
+.dropdown-menu .glyphicon.glyphicon-log-out{color: #000;}
+header .navbar-header .sira-login + ul > span > li.dropdown-header{
+   padding: 8px 20px !important;
+   font-size: 14px;
+   color: white;
+   background-color: #1976D2;
+}
+.sira-ms2 header .dropdown-menu > li > a{background: #fff;color: #000;}
+.sira-ms2 header .dropdown-menu>li>a:focus, .sira-ms2 header .dropdown-menu>li>a:hover {
+   color: #262626 !important;
+   text-decoration: none;
+   background-color: #f5f5f5 !important;
+}
+.dropdown-menu>li>a {
+   background: #fff !important;
+   color: #333 !important;
+
+}
+header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sira-login + .dropdown-menu a:hover, header .navbar-header .sira-login + .dropdown-menu a:active, header .navbar-header .sira-login + .dropdown-menu a:visited
+.navbar-header .sira-login + .dropdown-menu a{
+   font-size: 14px;
+   padding: 8px 20px;
+   color: #000 !important;
 }
 
 #mapstore-scalebox {
@@ -23,70 +47,82 @@
     margin: 0 !important;
 }
 
-#viewer .btn-primary {
-    background-color: #017f4f;
-    color: white;
+.sira-ms2 #fullscreen-container .querypanel-container .logicHeader .btn-default,
+.sira-ms2 #fullscreen-container .querypanel-container .logicHeader .btn-default:hover {
+    background-color: #1976D2 !important;
+    color: white !important;
+    border-color: #1976D2 !important;
+    text-transform: uppercase;
 }
 
-#navigationBar .btn-success.active{
-    background-color: #078aa3;
+#viewer .btn-primary {
+    background-color: #1976D2;
+    color: white;
+}
+.sira-ms2 .querypanel-container .logicHeader .btn-default:hover{ color: #000;}
+#navigationBar .btn-success.active,
+.sira-ms2 .btn-success:active, .sira-ms2 .btn-success.active,
+ .sira-ms2 .open > .dropdown-toggle.btn-success {
+    color: #ffffff;
+    background-color: #1976D2;
+    border-color: #1976D2;
 }
 
 #viewer .mapToolbar{
     right: 0 !important;
 }
 
-#viewer .search-toolbar-options .btn-group button {
-    background-color: #ffffff;
-    color: #017f4f;
-    border: unset !important;
-}
 
 #viewer .modal-header{
-    background-color: #007e4f;
+    background-color: #1976D2;
     color: #ffffff;
 }
 
 #viewer .ms2-loading {
-    background-color: #007e4f!important;
+    background-color: #1976D2!important;
 }
 
 #viewer .btn-default{
     background-color: #ffffff;
-    color: #017f4f;
+    color: #1976D2;
 }
 
 #viewer .rw-i {
-    color: #017f4f !important;
+    color: #1976D2 !important;
 }
-
+#mapstore-drawermenu .nav-menu .navHeader{
+    background: #fff;
+}
 #mapstore-drawermenu .navHeader > .glyphicon{
     font-size: 22px;
 }
 
 #mapstore-drawermenu .navButtons .btn-default {
-    color: #017f4f;
+    color: #1976D2;
     background-color: #ffffff;
     border: unset;
 }
 
 #mapstore-drawermenu .drawer-menu-head-toc.panel-title{
     margin-left: 8px;
+    color: #000;
+    font-weight: bold;
+    display: none;
 }
 
 #mapstore-drawermenu .drawer-menu-head-catalog.panel-title{
     margin-left: 8px;
+    display: none;
 }
-
 #mapstore-drawermenu .navButtons .btn-default:hover{
-    color: #017f4f;
-    background-color: #e6e6e6;
-    border-color: #adadad;
+    color: #1976D2;
+  /*  background-color: #e6e6e6;
+    border-color: #adadad;*/
 }
 
 #mapstore-drawermenu .navButtons .btn-primary {
     color: #ffffff;
-    background-color: #017f4f;
+    background-color: #1976D2;
 }
 
 #mapstore-drawermenu .navButtons .btn-primary:hover {
@@ -105,7 +141,7 @@
 	}
 
 .mappaSiraDecisionale #header-servizio{
-    background:url("/assets/application/conoscenze_ambientali/css/images/sfondo_azz_sx.png") repeat-y scroll center top transparent;
+    background:url("images/sfondo_azz_sx.png") repeat-y scroll center top transparent;
 	min-height:32px;
 	height:32px;
 	width:100%;
@@ -139,7 +175,7 @@
 }
 
 .mappaSiraDecisionale .navbar-header .titolo-interna{
-    background:#fff url("/assets/application/conoscenze_ambientali/css/images/logo-interna.png") no-repeat scroll 20px 1px;
+    background:#fff url("images/logo-interna.png") no-repeat scroll 20px 1px;
 	height:32px;
 	min-height:32px;
 	}
@@ -171,7 +207,7 @@
 
 .mappaSiraDecisionale .navbar-header .map-list .btn.btn-primary span.badge{
 	padding:3px 5px;
-	background:#007e4f;
+	background:#1976D2;
 	color:#fff;
 }
 
@@ -199,7 +235,7 @@
 .mappaSiraDecisionale .panel-heading {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-	background:#007e4f;
+	background:#1976D2;
 	border:0;
 }
 
@@ -222,7 +258,7 @@
 }
 
 .mappaSiraDecisionale .querypanel-container .dhContainer h4.ftheader {
-    color: #007e4f;
+    color: #1976D2;
 	text-transform:uppercase;
 }
 
@@ -234,7 +270,7 @@
 }
 
 .mappaSiraDecisionale .querypanel-container .querypanel .panel-heading {
-	background:#017f4f;
+	background:#1976D2;
 	border:0;
 /* 	margin-bottom:5px; */
 }
@@ -274,11 +310,11 @@
 }
 
 .queryFormToolbar button:first-child{
-	background:#007e4f none repeat scroll 0 0;
+	background:#1976D2 none repeat scroll 0 0;
 	color:#FFFFFF;
 }
 .queryFormToolbar button:first-child{
-	background:#007e4f none repeat scroll 0 0;
+	background:#1976D2 none repeat scroll 0 0;
 	color:#FFFFFF;
 }
 .queryFormToolbar button:hover{
@@ -311,16 +347,8 @@
 
 
 /*COLORI*/
-.btn-primary {
-    background-color: #007e4f;
 
-}
-.btn-default {
-    color: #333;
-}
-#mapstore-navbar-container .dropdown-toggle, #mapstore-navbar-container .square-button {
-    border-left: 1px solid #01603c;
-}
+
 #mapstore-drawermenu #mapstore-layers .toc-default-layer {
     padding: 10px 0;
     margin-top: 0;
@@ -333,23 +361,24 @@
     color: #333;
 }
 #mapstore-drawermenu #mapstore-layers .toc-group-title {
-    background: #eee none repeat scroll 0 0;
+    background: #fff;
     padding: 12px;
 }
-#sira-layer-settings .noUi-handle {
-    background: #007e4f none repeat scroll 0 0;
-}
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-    color: #01603c;
+.sira-ms2 #siratoc-layers .toc-default-layer .toc-title {
+    max-width: 60% !important;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-    background-color: #01603c;
-    color: #ffffff;
+#sira-layer-settings .noUi-handle {
+    background: #1976D2 none repeat scroll 0 0;
 }
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-    color: #01603c;
+
+#mapstore-layers .toc-default-group .glyphicon {
+    color: #878585;
+    margin: 0 0 0 8px;
+    float: right;
+    font-size: 12px;
 }
+
 .noUi-handle {
     background: #fff none repeat scroll 0 0;
     border: medium none;
@@ -359,15 +388,78 @@
     overflow: auto !important;
 }
 #mapstore-drawermenu .navButtons .btn.square-button{
-    height: 45px;
-    width: 45px;
     border-radius: 0;
     padding: 0;
     transition: all 100ms ease-in 0s;
 }
 
 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon {
-    font-size: 24px;
+    font-size: 14px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons{
+    margin-top: 10px;
+    margin-left: 10px;
+    float: none;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button { 
+    width: auto !important;
+    border-radius: 20px;
+    height: auto !important;
+    padding: 6px 15px;
+    line-height: 14px;
+    font-size: 14px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-default { background: #1976D2 !important; color: #fff !important;}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary { background: #fff !important; color: #1976D2 !important;}
+
+.sira-ms2 .glyphicon-print:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url(images/material-file-download.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 .glyphicon-link:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url(images/link.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon.glyphicon-1-catalog:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "CATALOGO";
+    background: url(images/catalogo-active.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary .glyphicon.glyphicon-1-catalog:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "CATALOGO";
+    background: url(images/catalogo.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button .glyphicon.glyphicon-1-layer:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "OGGETTI CARICATI";
+    background: url(images/share_location.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sira-ms2 #mapstore-drawermenu .navButtons .btn.square-button.btn-primary .glyphicon.glyphicon-1-layer:before {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    content: "OGGETTI CARICATI";
+    background: url(images/share_location-active.svg) 0 0 no-repeat;
+    background-size: 16px;
+    font-size: 16px;
+    padding-left: 20px;
 }
 .square-button .glyphicon {
     font-size: 30px;
@@ -378,7 +470,7 @@
     width: 45px;
 }
 .navbar-dx .dropdown-menu .dropdown-header, .navbar-home .dropdown-menu .dropdown-header {
-    background-color: #007e4f;
+    background-color: #1976D2;
 }
 .dropdown-menu .glyphicon {
     color: #333;
@@ -397,7 +489,8 @@
 }
 
 .scheda-sira .panel-default .panel-heading {
-	background:#eee;
+    background: #fff;
+    font-weight: bold;
 }
 
 .btn-toolbar.btn-toolbar-sm > button {
@@ -449,16 +542,17 @@
 .dhContainer > label {
     font-weight: 300;
 }
+.dhContainer > label:first-child {display: none;}
 
 .mapbody .siracatalog-search-selector {
-    background-color: #017f4f !important;
+    background-color: #1976D2 !important;
     border: 0 !important;
     box-shadow: none !important;
 }
-.mapbody .catalog-search-container .MapSearchBar .input-group {
-    border: 1px solid #017f4f;
+/*.mapbody .catalog-search-container .MapSearchBar .input-group {
+    border: 1px solid #1976D2;
     box-shadow: none;
-}
+}*/
 .siracatalog-search-selector div{
     background-size: contain;
     background-repeat: no-repeat;
@@ -530,9 +624,7 @@
 }
 
 /*TESTALINO*/
-.navbar-header {
-    float: none;
-}
+
 header.navbar {
     background: #fff none repeat scroll 0 0;
     margin: 0;
@@ -598,7 +690,7 @@ header.navbar h1 a span {
 
 .navbar-header .map-list .btn.btn-primary span.badge{
 	padding:3px 5px;
-	background:#007e4f;
+	background:#1976D2;
 	color:#fff;
 	position:relative;
 	left:3px;
@@ -611,14 +703,14 @@ header.navbar h1 a span {
 }
 }
 .mapbody {
-    top: 45px!important;
+    top: 52px!important;
     bottom: 0 !important;
 }
 /*.ol-custom-overviewmap button {*/
-/*    background-color: #017f4f !important;*/
+/*    background-color: #1976D2 !important;*/
 /*}*/
 /*.ol-scale-line.ol-unselectable {*/
-/*    background-color: #017f4f !important;*/
+/*    background-color: #1976D2 !important;*/
 /*}*/
 
 #siratoc-layers .group-expanded .toc-layer-tool.visibility-check {
@@ -639,56 +731,89 @@ header.navbar h1 a span {
     box-shadow: none;
 }
 #sira-layer-settings .label-default {
-    background-color: #007E4F;
+    background-color: #1976D2;
 }
 #sira-layer-settings .noUi-target {
-    background-color: #007E4F;
+    background-color: #1976D2;
 }
 #sira-layer-settings .noUi-handle.noUi-handle-lower::before {
-    background-color: #007E4F;
-    color: #007E4F;
+    background-color: #1976D2;
+    color: #1976D2;
 }
 #sira-layer-settings .noUi-handle.noUi-handle-lower::after {
-    background-color: #007E4F;
-    color: #007E4F;
+    background-color: #1976D2;
+    color: #1976D2;
 }
 #siratoc-layers .glyphicon {
-    color: #007E4F;
+    color: #1976D2;
+}
+
+#siratoc-layers .btn:hover .glyphicon {
+    color: #D93830;
 }
 #siracatalog button {
     padding-left: 0px;
     padding-right: 0px;
 	padding-bottom: 6px;
 }
+#mapstore-drawermenu #mapstore-layers .toc-group-children .btn.btn-link.carica-in-mappa,
+#mapstore-drawermenu #mapstore-layers .toc-group-children button,
+#siratoc-layers .toc-group-children button,
+#siracatalog button{
+float: right;
+}
+
+#siratoc-layers .toc-group-children button.btn-link.elenco {
+    background-image: url(images/elenco.svg);
+    padding-left: 15px !important;
+    background-repeat: no-repeat;
+    background-size: 19px;
+    min-height: 18px;
+    font-weight: bold;
+    font-size: 18px;
+    background-position-y: 50%;
+}
+#siratoc-layers .toc-group-children button.btn-link.elenco:hover {
+    background-image: url(images/elenco-hover.svg);
+}
+#siratoc-layers .toc-group-children .toc-layer-tool.glyphicon.glyphicon-1-menu-manage{width: 20px;}
+#mapstore-drawermenu #mapstore-layers .toc-group-children .btn.btn-link.carica-in-mappa{
+    background-size: 15px;
+    min-height: 18px;
+    font-weight: bold;
+    background-position-y: 50%;
+}
+a:not([href]){cursor: pointer;}
+
 #siracatalog .glyphicon-plus-sign:before{
     content: "\F1E3";
 }
 
 #viewer .siracatalog-search-selector {
-    background-color: #017f4f !important;
+    background-color: #1976D2 !important;
     height: 50px;
 }
 #viewer .navbar-dx .dropdown-menu .dropdown-header, .navbar-home .dropdown-menu .dropdown-header {
-    background-color: #017f4f!important;
+    background-color: #1976D2!important;
 }
 #viewer .dropdown-menu .glyphicon {
-    color: #017f4f;
+    color: #1976D2;
 }
 #mapstore-drawermenu #mapstore-layers .toc-group-title .glyphicon-folder-open, #mapstore-drawermenu #mapstore-layers .toc-group-title .glyphicon-folder-close {
-    color: #017f4f;
+    color: #1976D2;
 }
 #mapstore-drawermenu #mapstore-layers .toc-default-layer .glyphicon {
-    color: #017f4f;
+    color: #1976D2;
     margin: 0 5px;
 }
 #mapstore-drawermenu #mapstore-layers .visibility-check.glyphicon.visibility-check.checked {
-    color: #017f4f;
+    color: #1976D2;
 }
 #mapstore-drawermenu .panel-default > .panel-heading {
-    color: #017f4f;
+    color: #1976D2;
 }
 .side-querypanel .panel-heading {
-    background-color: #017f4f;
+    background-color: #1976D2;
     border-color: #078aa3;
     color: #ffffff;
 }
@@ -705,17 +830,18 @@ header.navbar h1 a span {
     font-family: FontAwesome !important;
 }
 .side-querypanel .panel-body .dhContainer {
-    border: 1px solid #017f4f;
+  border:0;
 }
 .side-querypanel .panel-body .dhContainer .ftheader {
-    color: #017f4f;
+    color: #000;
+    font-weight: bold;
 }
 .side-querypanel .panel-body .querypanel-container #reset, .side-querypanel .panel-body .querypanel-container #reset:hover {
     background-color: #ebebeb;
 	color:#000000;
 }
 .panel-primary > .panel-heading{
-    background-color: #017f4f;
+    background-color: #1976D2;
 	border:0;
 	border-radius:0;
     padding: 8px;
@@ -727,9 +853,9 @@ header.navbar h1 a span {
     padding: 4px;
 }
 .ag-fresh .ag-paging-button {
-    color:#017f4f;
+    color:#1976D2;
     background-color: #ffffff;
-    border: #017f4f 1px solid;
+    border: #1976D2 1px solid;
     padding: 5px;
 }
 .ag-fresh .ag-paging-page-summary-panel {
@@ -742,72 +868,72 @@ header.navbar h1 a span {
 	padding:0 4px;
 }
 #siracatalog .sira-view-title .glyphicon{
-	color:#017f4f;
+	color:#1976D2;
 }
 #siracatalog .glyphicon-1-map:before{
     content: "\F1E3";
 }
 #mapstore-getfeatureinfo .panel-heading{
-	background:#017f4f;
+	background:#1976D2;
 	color:#fff;
 	border-radius:0;
     padding: 8px;
 }
 #mapstore-getfeatureinfo .ag-blue .ag-header, #mapstore-getfeatureinfo .ag-blue .ag-no-scrolls .ag-header-container{
-	background:#009E61;
+	background:#1976D2;
 }
 #mapstore-getfeatureinfo .ag-blue .ag-cell-no-focus{
-	border-color:transparent #009E61 #009E61 transparent;
+	border-color:transparent #1976D2 #1976D2 transparent;
 }
 
 .mapbody #map-search-bar li.active a{
-    background-color: #017f4f;
+    background-color: #1976D2;
 }
 .mapbody #map-search-bar li.active .glyphicon{
-    color: white;
-    background-color: #017f4f;
+    color: #1976D2;
+    background-color: #fff;
 }
 
-.sira-ms2 .mapbody .btn-default{
-    color: #000000;
-    border-color: #017f4f;
-}
+/*..mapbody #map-searchbar.MapSearchBar li.active .glyphicon {
+    color: #1976D2;
+    background-color: #fff;
+}*/
 .mapbody .btn-default:hover{
-    color: #017f4f;
-    border-color: #017f4f;
+    color: #1976D2;
+    border-color: #1976D2;
 }
 .mapbody .featuregrid-container{
     width: 100%;
 }
 
 .mapbody .panel-primary > .panel-heading{
-    background-color: #017f4f;
-    border-color: #017f4f;
+    background-color: #1976D2;
+    border-color: #1976D2;
 }
 
 .mapbody .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-    border-top-color: #017f4f;
+    border-top-color: #1976D2;
 }
 
 #catalog-root .ms-side-panel .ms-header .row:first-child {
-    background-color: #017f4f;
+    background-color: #1976D2;
 }
 #catalog-root .bg-primary, #catalog-root .btn-primary:hover {
-    background-color: #017f4f;
+    background-color: #1976D2;
 }
 
 #catalog-root .pagination > li > a, #catalog-root .pagination > li > span {
-    color: #017f4f;
+    color: #1976D2;
 }
 
 #catalog-root .btn.input-group-addon:hover {
-    color: #017f4f;
+    color: #1976D2;
 }
 
 #catalog-root .pagination > .active > a, #catalog-root .pagination > .active > span {
     color: #ffffff;
-    background-color: #017f4f;
-    border-color: #017f4f;
+    background-color: #1976D2;
+    border-color: #1976D2;
 }
 .side-querypanel .mapstore-query-builder{
     position: relative;
@@ -820,7 +946,7 @@ header.navbar h1 a span {
     padding: 0;
 }
 #query-form-panel .mapstore-switch-panel .panel-heading {
-    background-color: #017f4f;
+    background-color: #fff !important;
 }
 #query-form-panel .logicHeader .btn-group{
     flex: 1;
@@ -836,21 +962,15 @@ header.navbar h1 a span {
 }
 
 .sira-ms2 .panel-primary > .panel-heading {
-    background-color: #017f4f;
+    background-color: #1976D2;
     color: #ffffff;
-    border-color: #017f4f;
+    border-color: #1976D2;
 }
 
 .sira-ms2 .no-border.btn-default{
-    color: #017f4f;
+    color: #1976D2;
     background-color: #ffffff;
-    border-color: #017f4f;
-}
-
-.sira-ms2 .featuregrid-container .btn-default, .btn-default {
-    background-color: #017f4f;
-    color: #ffffff;
-    border-color: #017f4f;
+    border-color: #1976D2;
 }
 
 #sidepanel-container .ag-fresh .ag-row-selected {
@@ -863,30 +983,18 @@ header.navbar h1 a span {
     background-color: #f2f2f2;
 }
 
-.sira-ms2 .btn-primary:hover {
-    color: #017f4f;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-}
-
-.sira-ms2 .btn-default:hover {
-    color: #017f4f;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-}
-
 .side-querypanel .mapstore-switch-panel .inline-form{
     width: 100%;
     padding: 10px;
 }
 .side-querypanel .btn-primary {
-    background-color: #017f4f;
+    background-color: #1976D2;
     color: #ffffff;
-    border-color: #017f4f;
+    border-color: #1976D2;
 }
 
 .side-querypanel .btn-primary:hover {
-    color: #017f4f;
+    color: #1976D2;
     background-color: #e6e6e6;
     border-color: #adadad;
 }
@@ -896,19 +1004,21 @@ header.navbar h1 a span {
 }
 .side-querypanel .rw-list-option:hover{
     color: #ffffff !important;
-    background-color: #017f4f !important;
+    background-color:  #1976D2 !important;
 }
 
 .side-querypanel .rw-widget{
-    color: #017f4f !important;
-    border: 1px solid #017f4f !important;
+    color: #000 !important;
 }
 .side-querypanel .rw-state-focus {
-    color: #017f4f !important;
-    border: 1px solid #017f4f !important;
+    color: #1976D2 !important;
+    border: 1px solid #1976D2 !important;
+}
+body.body_map.sira-ms2 #fullscreen-container .rw-i, .sira-ms2 #qgis-container .rw-i {
+    color: #1976D2 !important;
 }
 #fullscreen-container .ag-body .ag-row-selected{
-    background-color: #b0e0e6 !important;
+    background-color: #b0cee6 !important;
 }
 #fullscreen-container .ag-fresh .ag-cell-no-focus{
     color: #000000;
@@ -939,19 +1049,20 @@ header.navbar h1 a span {
 
 #fullscreen-container, .side-querypanel .mapstore-switch-panel  .mapstore-switch-btn input:checked + .m-slider{
     background-color: #ffffff;
+    border: 1px solid #1976D2;
 }
 #fullscreen-container, .side-querypanel .mapstore-switch-panel .mapstore-switch-btn .m-slider:before {
-    background-color: #017f4f;
+    background-color: #1976D2;
 }
 #fullscreen-container, .side-querypanel .mapstore-switch-panel.sira-ms2 .mapstore-switch-btn .m-slider{
     background-color: #ffffff;
 }
 #fullscreen-container, #qgis-container .featuregrid-container .dhContainer{
-    border: 1px solid #017f4f;
+    border: 1px solid #1976D2;
     border-radius: 0;
 }
 #fullscreen-container, #qgis-container .featuregrid-container .ftheader{
-    color: #017f4f;
+    color: #1976D2;
 }
 
 .rc-tree-bottom_docu + span > span.rc-tree-title {
@@ -959,4 +1070,248 @@ header.navbar h1 a span {
 }
 .rc-tree-center_docu + span > span.rc-tree-title {
     cursor: pointer;
+}
+
+body.body_map.sira-ms2 .back-to-query.btn-default{
+    margin-left: 50px;
+    background: transparent;
+    background-image: url(images/filtri.svg);
+    background-size: 16px;
+    padding-left: 18px;
+    background-repeat: no-repeat;
+    background-position-y: 30%;
+    color: #1976D2;
+    border: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+   }
+body.body_map.sira-ms2 .back-to-query.btn-default:hover,
+body.body_map.sira-ms2 .back-to-query.btn-default:active{
+    margin-left: 50px;
+    background: transparent;
+    background-image: url(images/filtri-hover.svg);
+    background-size: 16px;
+    padding-left: 18px;
+    background-repeat: no-repeat;
+    background-position-y: 30%;
+    color: #D93830 !important;
+    border: 0;    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+#mapstore-drawermenu .nav-tabs li.active {
+    background: none;
+}
+
+#mapstore-drawermenu .nav-tabs li a {
+    border: 0;
+    color: #000;
+    padding: 10px 15px;
+    outline: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    background: transparent;
+}
+.sira-ms2 #mapstore-drawermenu .nav-tabs > li.active > a,
+.sira-ms2 #mapstore-drawermenu .nav-tabs > li.active > a:focus,
+#mapstore-drawermenunav-tabs li.active a,
+#mapstore-drawermenu.nav-tabs li.active a:hover,
+#mapstore-drawermenu.nav-tabs li.active a:visited {
+    border: 0;
+    border-bottom: 2px solid #1976D2;
+    color: #1976D2;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+.sira-ms2 #siracatalog .MapSearchBar .input-group .search-toolbar-options {
+    padding: 0px !important;
+}
+body.body_map.sira-ms2 .mapbody .rw-widget {
+    color: #000 !important;
+    border: 1px solid rgb(222, 222, 222) !important;
+}
+body.body_map.sira-ms2 .rw-i {
+    color: #000 !important;
+}
+body.body_map.sira-ms2 .mapbody .rw-list-option:hover {
+    color: #ffffff !important;
+    background-color: #1976D2 !important;
+}
+body.body_map.sira-ms2 .mapbody .rw-state-focus{color: #1976D2 !important;border: 1px solid #1976D2 !important;}
+
+body.body_map.sira-ms2 #siratoc-layers .toc-default-layer .glyphicon-1-close:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background:url("images/elimina-da-mappa.svg") 0 0 no-repeat;
+    width: 18px;
+    display: block;
+    height: 20px;
+    background-size: 18px;
+}
+
+body.body_map.sira-ms2 #siratoc-layers .toc-default-layer #sira-layer-settings .glyphicon-list:before {
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background: url("images/mostra-legenda.svg") 0 0 no-repeat;
+    width: 18px;
+    display: block;
+    height: 20px;
+    }
+.sira-ms2 #mapstore-navbar-container {
+    margin: 5px;
+}
+body.body_map.sira-ms2 #mapstore-navbar .search-toggle,  body.body_map.sira-ms2 #mapstore-navbar-container .square-button{
+    height: auto;
+    width: auto;
+    padding: 4px 6px !important;
+}
+
+#mapstore-burger-menu-container{ border-radius: 0 5px 5px 0; border-left: 1px solid #fff !important;}
+body.body_map.sira-ms2 #mapstore-navbar-container .square-button .glyphicon,
+body.body_map.sira-ms2 #navigationBar-container .glyphicon {
+    font-size: 20px;
+}
+
+.sira-ms2 #mapstore-navbar .search-toggle{border-radius: 5px 0 0 5px;}
+
+.sira-ms2 #mapstore-navbar .search-toggle .glyphicon.glyphicon-search::before{
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background:url("images/metro-location-city.svg") 50% 50% no-repeat;
+    width: 20px;
+    display: block;
+    height: 20px;
+    background-size: 18px;
+}
+/*.sira-ms2 #mapstore-navbar .search-toggle.btn-default:active .glyphicon.glyphicon-search::before{
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background:url("images/metro-location-city-active.svg") 0 0 no-repeat;
+    width: 18px;
+    display: block;
+    height: 20px;
+    background-size: 18px;
+}*/
+.sira-ms2 #navigationBar-container #locate-btn .glyphicon-1-position-1::before{
+    content: " ";
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background:url("images/localizza-su-mappa-w.svg") 0 0 no-repeat;
+    width: 20px;
+    display: block;
+    height: 20px;
+    background-size: 20px;
+}
+.sira-ms2 .mapToolbar,.sira-ms2 .navbar-dx.shadow {
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow: none;
+}
+body.body_map.sira-ms2 #navigationBar-container.btn-group-vertical > .square-button{
+        width: auto !important;
+        height: auto !important;
+    }
+
+body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button {
+    background: #fff !important;
+    height: 34px;
+    width: 33px;
+    border: 0;
+    text-align: right;
+    border-radius: 0 50% 50% 0;
+    top: 30px;
+    left: -5px;
+}
+body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button:before{ 
+    content: "\f061";
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 900;
+    color: #000;
+    font-size: 18px !important;
+}
+body.body_map.sira-ms2 #mapstore-drawermenu .navHeader > .glyphicon.glyphicon-1-close{ float: right;}
+body.body_map.sira-ms2 #mapstore-drawermenu .navHeader > .glyphicon.glyphicon-1-close:before{ 
+    content: "\f060";
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome !important;
+    font-size: inherit !important;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 900 !important;
+    color: #000;
+    font-size: 18px !important;
+}
+body.body_map.sira-ms2 #mapstore-drawermenu #drawer-menu-button .glyphicon.glyphicon-1-layer{ display: none;}
+
+body.body_map.sira-ms2 div#mapstore-globalspinner {
+    width: auto !important;
+    height:auto !important;
+}
+body.body_map.sira-ms2 .ms2-loading .sk-circle-wrapper {
+    width: 24px !important;
+    height: 24px !important;
+    margin: 7px 7px 7px 7px !important;
+}
+body.body_map.sira-ms2 #mapstore-globalspinner {
+    margin: 0 !important;
+    width: 20px !important;
+    position: static !important;
+    border-radius: 0 !important;
+}
+
+body.body_map.sira-ms2 #sira-layer-settings .noUi-handle {background: #1976D2 !important;}
+
+body.body_map.sira-ms2 .querypanel-container .query-filter-container .no-border.btn-default {
+    background: #fff !important;color: #1976D2 !important;
+}
+
+
+.sira-ms2 .catalog-search-container{
+    height: auto !important;
+}
+
+#viewer #mapstore-navbar-container .btn-default {
+    background: #1976D2 !important;
+    color: #ffffff !important;
+    border-color: #1976D2 !important;
+    padding: 4px;
+}
+
+#viewer #mapstore-navbar-container .btn-default:hover,
+#viewer #mapstore-navbar-container .btn-default:focus,
+#viewer #mapstore-navbar-container .btn-default:active {
+    background: #D93830 !important;
+    color: #ffffff !important;
+    border-color: #D93830 !important;
+    padding: 4px;
+}
+#viewer #map-search-bar .search-toolbar-options .btn-group,
+#viewer #map-search-bar .search-toolbar-options .btn-group:hover,
+#viewer #map-search-bar .search-toolbar-options .btn-group:active,
+#viewer #map-search-bar .search-toolbar-options .btn-group:focus {
+    background: #1976D2 !important;
+    color: #ffffff !important;
+    border-color: #1976D2 !important;
+}
+#viewer #mapstore-drawermenu #map-search-bar .search-toolbar-options .btn-group{ 
+    background: #1976D2 !important;
+    color: #ffffff !important;
+    border-color: #1976D2 !important;
+    padding: 4px;
+}
+#viewer #mapstore-drawermenu #map-search-bar .search-toolbar-options .btn-group:hover,
+#viewer #mapstore-drawermenu #map-search-bar .search-toolbar-options .btn-group:active,
+#viewer #mapstore-drawermenu #map-search-bar .search-toolbar-options .btn-group:focus{
+    background: #D93830 !important;
+    color: #ffffff !important;
+    border-color: #D93830 !important;
+    padding: 4px;
 }

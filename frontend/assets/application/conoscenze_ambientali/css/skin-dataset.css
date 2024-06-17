@@ -1,10 +1,38 @@
 .nav.navbar-nav {
-    background: black none repeat scroll 0 0;
     width: 100%;
 }
-.body_dataset .MapSearchBar .input-group .search-toolbar-options {
-    margin-top: 10px;
+
+.sira-login + ul{
+    border-radius: 0;
+    box-shadow: unset;
+    padding: 0;
+    color: #000;
 }
+.dropdown-menu .glyphicon.glyphicon-log-out{color: #000;}
+header .navbar-header .sira-login + ul > span > li.dropdown-header{
+   padding: 8px 20px !important;
+   font-size: 14px;
+   color: white;
+   background-color: #1976D2;
+}
+.sira-ms2 header .dropdown-menu > li > a{background: #fff;color: #000;}
+.sira-ms2 header .dropdown-menu>li>a:focus, .sira-ms2 header .dropdown-menu>li>a:hover {
+   color: #262626 !important;
+   text-decoration: none;
+   background-color: #f5f5f5 !important;
+}
+.dropdown-menu>li>a {
+   background: #fff !important;
+   color: #333 !important;
+
+}
+header .navbar-header .sira-login + .dropdown-menu a, header .navbar-header .sira-login + .dropdown-menu a:hover, header .navbar-header .sira-login + .dropdown-menu a:active, header .navbar-header .sira-login + .dropdown-menu a:visited
+.navbar-header .sira-login + .dropdown-menu a{
+   font-size: 14px;
+   padding: 8px 20px;
+   color: #000 !important;
+}
+.sira-ms2 .dropdown-menu .dropdown-header{background-color: #1976D2; color: #fff;}
 .dataset-container {
     overflow: scroll;
     position: absolute;
@@ -12,277 +40,295 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -moz-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -ms-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -o-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-linear-gradient(top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
-    background-image: -webkit-gradient(linear, top , #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: linear-gradient(top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -moz-linear-gradient(top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -ms-linear-gradient(top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -o-linear-gradient(top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -webkit-linear-gradient(top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
+    background-image: -webkit-gradient(linear, top, #7d868f 600px, #d7d7d7 600px, #d7d7d7 100%, #ececec 0px);
 }
-.dataset-search-container{
-    /*margin-top: 30px;*/
-	margin-top: 5px;
+
+.dataset-search-container {
+    margin-top: 5px;
 }
-.dataset-results-container{
+
+.dataset-results-container {
     clear: both;
-    padding-bottom: 100px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 0px 0px 0px 0px;
+    border-top: 1px solid #f1eded;
+    margin-top: 20px;
 }
-.dataset-footer-container{
+
+.dataset-results-container .tab-heading{
+    padding: 15px;
+}
+.dataset-results-container .tab-heading p{
+    margin: 10px 0 20px 8px;
+}
+/*.dataset-footer-container {
     position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
     height: 100px;
-}
+}*/
+
 #decsiraweb-cartpanel .button-goToMap {
-    background-color: #007e4f;
+    background-color: #1976D2;
 }
+
 #decsiraweb-cartpanel .button-goToMap:hover {
     color: #ffffff;
 }
-.dataset-tabs .nav-tabs{
-    padding-left:30px;
-    border-bottom:0;
-    /*margin-bottom:1px;*/
-    }
 
-.dataset-tabs .nav-tabs li{
-    margin-right:10px;
-    margin-top:14px;
+.dataset-tabs .nav-tabs {
+    padding-left: 30px;
+    border-bottom: 0;
+}
+
+.dataset-tabs .nav-tabs li {
     outline: none;
+    border: 0;
+    margin: 0;
+    width: 50%;
+}
+
+@media (max-width: 992px)	{
+    .dataset-tabs .nav-tabs li {
+        width: 100%;
     }
-.dataset-tabs .nav-tabs li.active{
-        margin-top:0px;
-        background:none;
-        }
+}
 
-.dataset-tabs .nav-tabs li a{
-        border: 0;
-        background:#bdbdbd;
-        color:#000;
-        border-bottom: 1px solid #bdbdbd;
-        text-transform:uppercase;
-        padding:10px 65px;
-        outline: none;
-        }
-.dataset-tabs .nav-tabs li.active a{
-    border:0;
-    border-bottom:1px solid #007e4f;
-    background:#007e4f;
-    color:#fff;
-    text-decoration:none;
-    font-weight:bold;
-    text-transform:uppercase;
-    border-radius:10px 10px 0 0;
-    padding:20px 100px 10px;
-    font-size:18px;
-    }
+.dataset-tabs .nav-tabs li.active {
+    background: none;
+}
 
-.dataset-tabs .nav-tabs li a:hover{
-        background:#e7e7e7;
-        }
+.dataset-tabs .nav-tabs li a {
+    border: 0;
+    color: #000;
+    border-bottom: 2px solid #fff;
+    padding: 10px 15px;
+    outline: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
 
-.dataset-tabs .nav-tabs li.active a:hover{
-    text-decoration:none;
-    background:#007e4f;
-    }
+.dataset-tabs .nav-tabs li a:hover {
+    background: #fff;
+}
+
+.sira-ms2 .dataset-tabs .nav-tabs > li.active > a:focus ,
+.dataset-tabs .nav-tabs li.active a,
+.dataset-tabs .nav-tabs li.active a:hover,
+.dataset-tabs .nav-tabs li.active a:visited {
+    border: 0;
+    border-bottom: 2px solid #1976D2;
+    color: #1976D2;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
 
 
-#dataset-toc .group-collapsed.toc-default-group{
+#dataset-toc .group-collapsed.toc-default-group {
     border: none;
     margin-left: 20px;
-    margin-right: 20px;
 }
-#dataset-toc .group-expanded.toc-default-group{
-    padding-top: 5px;
+
+#dataset-toc .group-expanded.toc-default-group {
     margin-left: 20px;
-    margin-right: 20px;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
-#dataset-toc .toc-subgroup .group-expanded.toc-default-group{
+
+#dataset-toc .toc-subgroup .group-expanded.toc-default-group {
     border-bottom: 0px solid black;
 }
-#dataset-toc .toc-subgroup .group-collapsed.toc-default-group{
-    border-bottom: 1px solid black;
+
+#dataset-toc .toc-subgroup .group-collapsed.toc-default-group {
+    margin-bottom: 8px !important;
 }
 #dataset-toc .toc-group-children .toc-default-group-head {
     background-color: white !important;
     color: black !important;
 }
-#dataset-toc .toc-subgroup .toc-group-children{
+
+#dataset-toc .toc-subgroup .toc-group-children {
     border: 0px;
     padding-left: 20px;
-    padding-right: 20px;
     padding-bottom: 10px;
 }
-#dataset-toc .toc-group-children{
-    border: 1px solid #000000;
-    margin-left: 0;
-    border-top: 0;
-    margin-right: 0;
-    padding-bottom: 30px;
-    background-color: #ffffff;
+
+#dataset-toc .toc-group-children {
+    margin:0 0 0 0;
 }
+
 #dataset-toc .toc-group-children .toc-subgroup {
     background-color: #FFFFFF;
 }
+
 #dataset-toc .toc-group-1 .toc-default-group-head {
     display: flex;
-    font-size: x-large;
-    background-color: #7d868f;
-    color: white;
-    text-transform: uppercase;
     border-top: none;
     margin-top: 0;
     height: 100%;
     padding: 12px;
     padding-left: 0px;
 }
-#dataset-toc .toc-group-title{
-    font-size: x-large;
-    background-color: #7d868f;
-    color: white;
-    text-transform: uppercase;
+
+#dataset-toc .toc-group-title {
     margin: 0;
     overflow: unset;
+    background: #fff;
 }
+#dataset-toc .toc-group-title.active {
+   font-weight: bold;
+}
+
 .dataset-tabs .toc-status-icon.glyphicon {
-    color: #FFFFFF;
+    color: #000;
 }
+
 .dataset-tabs .toc-status-icon.glyphicon:hover {
-    color: #FFFFFF;
+    color: #000;
 }
+
 .toc-group-children .toc-default-group .glyphicon {
     color: #000000;
 }
-.toc-default-group .toc-default-group-head{
+
+.toc-default-group .toc-default-group-head {
     margin-top: 0;
     border-top: none;
     height: unset;
     padding: 8px 0;
 }
-#dataset-toc .toc-subgroup .toc-group-title{
-    font-size: large;
+
+#dataset-toc .toc-subgroup .toc-group-title {
     background-color: transparent;
     color: black;
 }
+#dataset-toc .toc-subgroup .toc-group-title.active,
+.sira-ms2 .sira-view-title.active {
+  font-weight: bold;
+}
 #dataset-toc .toc-default-group .glyphicon {
-    color: #FFFFFF;
-    margin-top: 8px;
+    color: #878585;
+    margin : 0 0 0 8px;
+    float: right;
+    font-size: 12px;
 }
-#dataset-toc .toc-group-children .toc-default-group .glyphicon {
-    color: #000000;
-}
+
 .dataset-results-container .toc-default-group .toc-grab {
     display: none;
 }
-.dataset-results-container .toc-default-group .toc-error{
+
+.dataset-results-container .toc-default-group .toc-error {
     display: none;
 }
-.toc-default-group-head > div {
+
+.toc-default-group-head>div {
     display: flex;
     flex-direction: row-reverse;
     padding: 4px;
 }
+
 #dataset-toc .layer-content button {
     padding: 0px;
 }
+
 #dataset-toc .layer-content .glyphicon {
     font-size: 19.2px;
     padding: 4px;
 }
+
 #dataset-toc .toc-subgroup .glyphicon-folder-close:before {
     font-size: small;
 }
+
 #dataset-toc .glyphicon-folder-close:before {
     content: "\e081";
     font-family: "Glyphicons Halflings" !important;
-   font-size: large;
+    font-size: large;
     /* background-color: white; */
 }
+
 #dataset-toc .toc-subgroup .glyphicon-folder-open:before {
     font-size: small;
 }
+
 #dataset-toc .glyphicon-folder-open:before {
-    content:"\e082";
+    content: "\e082";
     font-family: "Glyphicons Halflings" !important;
     font-size: large;
 }
-#dataset-toc .layer-content{
-    padding-left: 10px;
-    padding-right: 10px;
-    border-top: 1px solid black;
-    padding-top: 15px;
-    height: 4em;
-    cursor: pointer;
+
+#dataset-toc .toc-title {
+    max-width: 100%;
+    font-weight: bold;
+    margin: 0px;
 }
-#dataset-toc .layer-description{
-    max-width: 80%;
-    float: left;
+
+#dataset-toc .layer-description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    line-height: 1em;
-    max-height: 2em ;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-height: 1.5em;
+    min-height: 3em;
+    max-height: 2em;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: -webkit-auto;
     text-transform: initial;
     cursor: pointer;
+    font-size: 16px;
 }
-#dataset-toc .layer-description .glyphicon.glyphicon-plus-sign{
+
+#dataset-toc .layer-description .glyphicon.glyphicon-plus-sign {
     top: -6px;
 }
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object.flat{
-    padding: 15px 30px 15px 30px;
+
+#dataset-toc .toc-default-layer.catalog-object .cardCatalogo{
+    padding: 15px;
 }
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object{
+
+#dataset-toc .layer-expanded.toc-default-layer.catalog-object {
     background-color: transparent;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-transform: uppercase;
-    border-bottom: 1px solid gray;
+    margin: 10px;
+    padding: 20px 10px 10px 10px !important;
     font-size: 16px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     cursor: default;
 }
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon-search:before{
-    /* font-family: "Glyphicons Halflings"; */
-    /*font-size: xx-large;*/
-}
-#dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon-th:before {
 
-    /*font-size: xx-large;*/
-}
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon:before {
-    color: #000000;
+    color: #1976D2;
 }
+
 #dataset-toc .layer-expanded.toc-default-layer.catalog-object .glyphicon-plus-sign:before {
     content: "\F115";
-    color: #000000;
+    color: #1976D2;
 }
 
-#dataset-toc .toc-title{
-    max-width: 100%;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-.dataset-container .tab-content{
-    background:#fff;
-    border-top:16px solid #007e4f;
-    border-radius:10px 10px 0 0;
-    padding-bottom:50px;
+.dataset-container .tab-content {
+    background: #fff;
+    border-top: 16px solid #1976D2;
+    border-radius: 10px 10px 0 0;
+    padding-bottom: 50px;
     padding-top: 20px;
     min-height: 200px;
 }
-#dataset-toc, #dataset-results-view{
-    background:#fff;
-    padding-bottom:50px;
-    }
 
-.dataset-categories-switch-container{
-    background-color: #007e4f;
+#dataset-toc,
+#dataset-results-view {
+    background: #fff;
+    padding-bottom: 10px;
+}
+
+.dataset-categories-switch-container {
+    background-color: #1976D2;
     height: 50px;
     margin-top: 20px;
     margin-bottom: 15px;
@@ -291,123 +337,294 @@
     clear: both;
     text-align: center;
 }
+
 .dataset-categories-switch {
     padding: 10px;
-    font-size:20px;
+    font-size: 20px;
     cursor: pointer;
 }
-#dataset-results-view .sira-view{
-    padding: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-bottom: 1px solid gray;
+.cardCatalogo {
+    margin: 10px;
+    padding: 20px 10px 10px 10px !important;
+    border-radius: 10px;
 }
-#dataset-results-view .sira-view-title span{
+.sira-ms2 .cardCatalogo .sira-view-title span:first-child {
+padding-bottom: 0 !important;
+}
+#dataset-results-view .sira-view {
+    font-size: 16px;
+    border:1px solid #c8c7c7 !important;
+}
+
+.tab-content #dataset-results-view .sira-view,
+.sira-ms2 .cardCatalogo .sira-view-title span:first-child {
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    padding-bottom: 0;
+}
+.interna #dataset-results-view .sira-view-content .sira-view-description,
+.interna #dataset-results-view .sira-view-content .sira-view-description-text {
+	font-weight:normal;
+	text-transform: none;
+    line-height: 1.5em;
+}
+.sira-ms2 .cardCatalogo .sira-view-title span:first-child,
+.sira-ms2 .sira-view.cardCatalogo .sira-view-title{ padding: 0 !important;}
+
+#dataset-results-view .sira-view-title span {
     min-width: 100%
 }
-#dataset-results-view .sira-view-content .sira-view-description{
+#dataset-results-view .sira-view-title .containerDefaultNodeFooter span{
+    min-width: auto; margin-right: 5px;
+}
+#dataset-results-view .sira-view-content .sira-view-description {
     min-width: 80%;
     padding: 0px;
-    float: left;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    line-height: 1em;
-    max-height: 2em ;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-height: 1.5em;
+    min-height: 3em;
+    max-height: 2em;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: -webkit-auto;
-    text-transform: none;
+    text-transform: initial;
     cursor: pointer;
 }
-#dataset-results-view .sira-view-tool{
+
+#dataset-results-view .sira-view-tool {
     max-width: 20%;
     float: right;
     top: -6px;
 }
-#dataset-results-view .sira-view-tool span{
+
+#dataset-results-view .sira-view-tool span {
     top: -15px;
 }
+
 #dataset-results-view .sira-view-content {
-    border-top: 1px solid black;
-    padding-top: 30px;
-    height: 4em;
-}
-.sira-view-tool  span{
-    margin-top: 0px !important;
-}
-.sira-view-tool  .glyphicon-plus-sign:before {
-    content:"\6e";
-   /*font-size: xx-large;*/
-   color: black;
+    padding-top: 11px;
 }
 
-.dataset-mosaic-container{
-width: 750px;
-padding: 0px;
-background-color: rgba(0, 0, 0, .73);
+.sira-view-tool span {
+    margin-top: 0px !important;
+}
+
+
+.menu .dataset-tabs #dataset-results-view .sira-view {
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+.sira-view-tool .glyphicon-plus-sign:before {
+    content: "\6e";
+    /*font-size: xx-large;*/
+    color: black;
+}
+
+.dataset-mosaic-container {
+    width: 750px;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, .73);
 }
 
 .dataset-mosaic-container .row {
     margin: 0px;
 }
 
-.dataset-container .loading-container{
+.dataset-container .loading-container {
     width: 100%;
     height: 200px;
     position: relative;
     background-color: white;
 }
 
-.searchclear.glyphicon.glyphicon-remove:before{
+.searchclear.glyphicon.glyphicon-remove:before {
     font-size: x-large;
 }
 
 .dataset-container .panel-heading {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    background:#007e4f;
-    border:0;
+    background: #1976D2;
+    border: 0;
 }
+
 .dataset-container #portalHeader .header {
     background: url(images/paletta_sp_lunga.png) repeat-y scroll left top transparent;
     height: 50px;
 }
-.dataset-container #portalHeader .header h1{
+
+.dataset-container #portalHeader .header h1 {
     position: relative;
     top: 12px;
     font-size: 24px;
 }
+
 .dataset-container .titoloServizio {
     background-color: white;
 }
+
 .dataset-container .titoloServizio h2 {
     background: url(images/logo-interna.png) no-repeat scroll center transparent;
     margin: 0px;
     height: 50px;
     cursor: pointer;
 }
+
 .dataset-container .testalino {
-    width:100%;
+    width: 100%;
     padding-right: 0px;
     margin-right: 0px;
 }
+
 .dataset-container #header-servizio {
     padding-right: 0px;
     width: 100%;
 }
+
 .dataset-container .testalino .row {
     background-color: white;
     padding-right: 20px;
 }
+
 .dataset-container .menu-righe {
     position: relative;
     top: 8px;
 }
-.dataset-container .cartcontainer{
+
+.dataset-container .cartcontainer {
     padding-top: 20px;
 }
-.cart-panel-sevices-list-element{
+
+.cart-panel-sevices-list-element {
     width: 80%;
+}
+
+.ricerca-home #map-search-bar {
+    top: unset;
+    left: unset;
+    right: unset;
+}
+
+.sira-ms2 .MapSearchBar {
+    margin: 10px 15px;
+}
+
+@media (min-width: 1200px) {
+
+    .sira-ms2 .MapSearchBar {
+        width: 90% !important;
+    }
+
+}
+@media (min-width: 768px) {
+    .sira-ms2 .MapSearchBar {
+        width: 90% !important;
+    }
+}
+@media (min-width: 992px) {
+    .sira-ms2 .MapSearchBar {
+        width: 90% !important;
+    }
+}
+
+.sira-ms2 .MapSearchBar .input-group{
+    background: #1976D2;
+    color: #ffffff;
+    box-shadow: none !important;
+    border: 1px solid #f1eded;
+}
+.sira-ms2 .MapSearchBar .input-group:hover{  color: #fff;
+    background-color: #D93830;
+}
+
+.sira-ms2 .MapSearchBar .input-group .no-border.btn-default {
+    background: transparent;
+    color: #ffffff;
+}
+.sira-ms2 .MapSearchBar .input-group .no-border.btn-default:hover {
+    color: #fff;
+    background-color: transparent;
+}
+
+
+#viewer .btn-default:hover {
+    color: #fff;
+    background-color: #D93830;
+    border-color: #D93830;
+}
+.sira-ms2 .MapSearchBar .input-group .searchInput {
+    min-height: 40px !important;
+}
+
+.body_dataset .MapSearchBar .input-group .search-toolbar-options {
+    padding: 4px !important;
+}
+
+
+.containerDefaultNodeFooter {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #dddddd;
+    margin-top: 20px;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.containerDefaultNodeFooter .btn-link.legenda{
+    font-size: 14px;
+}
+
+.containerDefaultNodeFooter .glyphicon.glyphicon-plus-sign{margin-right: 5px;}
+
+.ContainerParagraph {
+    display: flex;
+    flex-direction: row;
+}
+
+.handleMetadato {
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    width: 100%;
+    align-items: center;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.sira-ms2 .handleMetadato p{
+ margin-bottom: 0;
+}
+.sira-ms2 .handleMetadato span{
+   font-weight: bold;
+   }
+.linkColorMetadata,
+.sira-ms2 .handleMetadato a {
+    color: #1976D2;
+    font-weight: bold;
+}
+.linkColorMetadata:hover,
+.sira-ms2 .handleMetadato a:hover {
+    color: #D93830;
+    font-weight: bold;
+}
+.metadatoButton {
+    font-weight: bold;
+}
+
+
+/*  NUOVE CLASSI AGGIUNTE */
+
+.sira-view-description-text{
+    min-width: 80%;
+    padding: 0px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1em;
+   /*  max-height: 2em;  questo mostra o nasconde il testo*/ 
+    overflow: hidden;
 }

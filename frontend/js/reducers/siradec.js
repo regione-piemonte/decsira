@@ -24,7 +24,8 @@ const {
     SET_ACTIVE_FEATURE_TYPE,
     SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
-    USER_NOT_AUTHORIZED
+    USER_NOT_AUTHORIZED,
+    SET_ACTIVE_NODE
 } = require('../actions/siradec');
 const { SET_FEATURE_ROW_DATA } = require('../actions/featuregrid');
 const { SHOW_SETTINGS } = require('@mapstore/actions/layers');
@@ -63,7 +64,7 @@ function siradec(state = initialState, action) {
         return assign({}, state, {inlineMapConfig: action.mapconfig});
     }
     case SET_ACTIVE_FEATURE_TYPE: {
-        return assign({}, state, {activeFeatureType: action.featureType});
+        return assign({}, state, {activeFeatureType: action.featureType, fTypeConfigLoading: false});
     }
     case SET_TREE_FEATURE_TYPE: {
         return assign({}, state, {treeFeatureType: action.featureType});
@@ -168,6 +169,11 @@ function siradec(state = initialState, action) {
         });
     }
     case SHOW_SETTINGS: {
+        return assign({}, state, {
+            currentNodeId: action.node ? action.node : state.currentNodeId
+        });
+    }
+    case SET_ACTIVE_NODE: {
         return assign({}, state, {
             currentNodeId: action.node ? action.node : state.currentNodeId
         });

@@ -10,14 +10,12 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const {connect} = require('react-redux');
 const {createSelector} = require('reselect');
-const {OverlayTrigger, Popover, Button} = require('react-bootstrap');
 
 const SearchBar = require('@mapstore/components/mapcontrols/search/SearchBar').default;
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
 
 const {categorySelector} = require('../selectors/sira');
 const {selectCategory, searchTextChange, selectSubCategory} = require('../actions/siracatalog');
-const SearchCategories = require('../components/Mosaic');
 
 class SiraSearchBar extends React.Component {
     static propTypes = {
@@ -68,37 +66,8 @@ class SiraSearchBar extends React.Component {
         }
     };
 
-    renderPopover = () => {
-        const {serchCatliClasses, mosaicContainerClasses, tiles = []} = this.props;
-        return (
-            <Popover id="search-categories">
-                <SearchCategories
-                    useLink={false}
-                    tiles={tiles}
-                    className={mosaicContainerClasses}
-                    liClass={serchCatliClasses}
-                    tileClick={this.changeCategory}
-                />
-            </Popover>);
-    };
-
-    renderSearchCategories = () => {
-        const { btnClasses, category, overlayPlacement } = this.props;
-        const sezioneAttivaLbl = LocaleUtils.getMessageById(this.context.messages, "sr-only.activeSection") + category.icon;
-        return (
-            <OverlayTrigger
-                trigger={["focus", "click"]}
-                placement={overlayPlacement}
-                overlay={this.renderPopover()}>
-                <Button className={btnClasses}>
-                    <div className={category && category.icon}><span className="sr-only">{sezioneAttivaLbl}</span></div>
-                    <span className="sr-only">{LocaleUtils.getMessageById(this.context.messages, "sr-only.startSearch")}</span>
-                </Button>
-            </OverlayTrigger>);
-    };
-
     render() {
-        const {containerClasses, searchClasses, addCategoriesSelector, onSearch, onReset, onTextChange, searchText, searchOptions} = this.props;
+        const {containerClasses, searchClasses, onSearch, onReset, onTextChange, searchText, searchOptions} = this.props;
         return (
             <div className={containerClasses}>
                 <SearchBar
@@ -116,21 +85,9 @@ class SiraSearchBar extends React.Component {
                         onReset({text: "", category: this.props.category});
                     }}
                 />
-                {addCategoriesSelector ? this.renderSearchCategories() : (<noscript/>)}
             </div>);
     }
 
-    changeCategory = (cat, subcat) => {
-        if (cat.id !== this.props.category.id) {
-            this.props.onSearch({text: "", category: cat});
-            this.props.onTextChange("");
-            this.props.tileClick(cat, subcat);
-        } else if (this.props.subcat !== subcat) {
-            this.props.selectSubCategory(subcat);
-        }
-
-
-    };
 }
 
 
@@ -146,3 +103,4 @@ module.exports = connect(createSelector([categorySelector, (state) => ({
     tileClick: selectCategory,
     selectSubCategory
 })(SiraSearchBar);
+

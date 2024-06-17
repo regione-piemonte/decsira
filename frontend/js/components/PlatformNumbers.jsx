@@ -28,16 +28,14 @@ class PlatformNumbers extends React.Component {
     render() {
         return (
             <div className="container-fluid piattaforma" role="contentinfo" aria-label="Approfondimento">
-                <div className="row-fluid">
-                    <div className="container">
-                        <div className="row">
-                            <h3><I18N.Message msgId={"PlatformNumbers.numbersTitle"}/></h3>
-                            <ul className="list-group numeri">
-                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectMap}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.mapNumbersTitle"}/></span></li>
-                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectSearch}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.searchNumbersTitle"}/></span></li>
-                                <li className="list-group-item col-md-4"><span className="cifra">{this.props.functionObjectView}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.ViewsNumbersTitle"}/></span></li>
-                            </ul>
-                        </div>
+                <div className="container">
+                    <div className="row">
+                        <h3><I18N.Message msgId={"PlatformNumbers.numbersTitle"}/></h3>
+                        <ul className="list-group numeri">
+                            <li className="list-group-item col-md-4 mappe"><span className="cifra">{this.props.functionObjectMap}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.mapNumbersTitle"}/></span></li>
+                            <li className="list-group-item col-md-4 viste"><span className="cifra">{this.props.functionObjectSearch}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.searchNumbersTitle"}/></span></li>
+                            <li className="list-group-item col-md-4 ricerche"><span className="cifra">{this.props.functionObjectView}</span> <span className="sotto_cifra"><I18N.Message msgId={"PlatformNumbers.ViewsNumbersTitle"}/></span></li>
+                        </ul>
                     </div>
                 </div>
             </div>

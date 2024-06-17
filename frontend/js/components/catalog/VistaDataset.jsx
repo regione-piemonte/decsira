@@ -7,10 +7,27 @@
  */
 
 const React = require('react');
-const {Glyphicon} = require('react-bootstrap');
 const PropTypes = require('prop-types');
+const I18N = require('@mapstore/components/I18N/I18N');
+const { connect } = require('react-redux');
+const { loadLegends, showLegendBox } = require('../../actions/metadatainfobox');
+const mapDispatchToPropsMIB = (dispatch) => {
+    return {
+        loadLegend: (u, actualUrl) => {
+            if (actualUrl && actualUrl.length === 0) {
+                dispatch(loadLegends(u));
+            }
+            dispatch(showLegendBox());
+        }
+    };
+};
+const ShowInfoNode = connect(
+    null,
+    mapDispatchToPropsMIB
+)(require('./ShowInfoNode'));
 
 class Viste extends React.Component {
+
     static propTypes = {
         node: PropTypes.object,
         addToMap: PropTypes.func,
@@ -26,62 +43,86 @@ class Viste extends React.Component {
     };
 
     static defaultProps = {
-        addToMap: () => {},
-        expandObjects: () => {},
-        onToggle: () => {},
-        toggleSiraControl: () => {},
-        expandFilterPanel: () => {},
-        showInfoBox: () => {}
+        addToMap: () => { },
+        expandObjects: () => { },
+        onToggle: () => { },
+        toggleSiraControl: () => { },
+        expandFilterPanel: () => { },
+        showInfoBox: () => { }
     };
 
-    renderObjectTools = () => {
-        return [(<Glyphicon
-            key="toggle-featuregrid"
-            glyph="th"
-            onClick={() => this.props.toggleSiraControl('grid', true)}/>),
-        (<Glyphicon
-            key="toggle-query"
-            glyph="search"
-            onClick={() => this.props.expandFilterPanel(true)}/>)];
-
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showAllText: false
+        };
+    }
 
     renderVistaTools = () => {
         return [(
-            <Glyphicon
-                key="addToMap"
-                glyph="1-map"
-                onClick={this.loadConfig}/>
+            <button
+                className="btn btn-link carica-in-mappa"
+                onClick={this.loadConfig}>
+                <I18N.Message msgId={"renderTools.loadInMap"} />
+            </button>
         )];
     };
 
     render() {
-        let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
         return (
-            <div className="sira-view">
-                <div className="sira-view-title"><span>{this.props.node.title}</span>
+            <div className="sira-view cardCatalogo">
+                <div className="sira-view-title">
+                    <span>{this.props.node.title}</span>
                     <div className="sira-view-content">
-                        <span className="sira-view-description" onClick={this.showInfoBox}>{this.props.node.text}</span>
-                        <div className="sira-view-tool">
-                            {this.renderVistaTools(expanded)}
-                        </div>
+                        <ShowInfoNode
+                            isVistaDataset
+                            showAllText={this.state.showAllText}
+                            node={this.props.node} />
                     </div>
                 </div>
-                {expanded && this.props.node.nodes ? this.props.node.nodes.map((o)=> (<div className="sira-view-object"><span>{o.title}</span>{this.renderObjectTools()}</div>)) : (<div/>)}
-            </div>);
+                <div className="containerDefaultNodeFooter">
+                    <div className="sira-view-tool">
+                        {this.renderVistaTools()}
+                    </div>
+                    <div className="ContainerParagraph">
+                        <button
+                            className="btn btn-link arrow"
+                            onClick={() => this.toogleShowMetadata()}>
+                            {
+                                !this.state.showAllText ?
+                                    <I18N.Message msgId={"metadataInfoBox.showTextNodebutton"} /> :
+                                    <I18N.Message msgId={"metadataInfoBox.hideTextNodebutton"} />
+                            }
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    toogleShowMetadata() {
+        this.setState((currentState) => {
+
+            if (!currentState.showAllText) {
+                this.showInfoBox();
+            }
+
+            return {
+                showAllText: !currentState.showAllText
+            };
+
+        });
     }
 
     loadConfig = () => {
         const v = this.props.node.view;
-
         if (v) {
             let view = v;
             if (v.match(/(config=)(\w+)/)) {
                 view = v.match(/(config=)(\w+)/).pop();
             }
-            this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
+            this.props.addToMap({ serviceUrl: `./${view}.json`, params: {} });
         }
-
     };
 
     showInfoBox = () => {

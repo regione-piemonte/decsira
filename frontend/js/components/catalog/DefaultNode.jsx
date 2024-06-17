@@ -10,9 +10,8 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const Node = require('../toc/Node');
 const Title = require('../toc/fragments/Title');
-const {Glyphicon, Tooltip, OverlayTrigger} = require('react-bootstrap');
+const {Tooltip, OverlayTrigger} = require('react-bootstrap');
 const DefaultGroup = require('../toc/DefaultGroup');
-const glyphStyle = {"float": "right", cursor: 'pointer'};
 const I18N = require('@mapstore/components/I18N/I18N');
 
 class DefaultNode extends React.Component {
@@ -39,7 +38,6 @@ class DefaultNode extends React.Component {
     };
 
     renderTools = () => {
-        let tooltipSira = <Tooltip id="tpm-search-details"><I18N.Message msgId={"nodeIcons.search"}/></Tooltip>;
         let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"}/></Tooltip>;
         let tooltipList = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.list"}/></Tooltip>;
         let tooltipIndica = <Tooltip id="tpm-list-obj"><I18N.Message msgId={"nodeIcons.indica"}/></Tooltip>;
@@ -49,38 +47,22 @@ class DefaultNode extends React.Component {
         );
         if (indicaFunction.length > 0) {
             tools.push((
-                <OverlayTrigger key={"indicatori"} rootClose placement="left" overlay={tooltipIndica}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id, null)}>
-                        <Glyphicon
-                            key="toggle-indicatori"
-                            glyph="signal"/>
+                <OverlayTrigger key={"indicatori"} rootClose placement="bottom" overlay={tooltipIndica}>
+                    <button className="btn btn-link indicatori"
+                        onClick={() => this.props.configureIndicaLayer(this.props.node.featureType, this.props.node.id, null)}>
                     </button>
                 </OverlayTrigger>));
         } else {
             tools.push((
-                <OverlayTrigger key={"map-tp"} rootClose placement="left" overlay={tooltipMap}>
-                    <button className="btn btn-link" style={glyphStyle} onClick={()=>this.props.addToMap(this.props.node)}>
-                        <Glyphicon
-                            key="addToMap"
-                            glyph="plus-sign"/>
+                <OverlayTrigger key={"map-tp"} rootClose placement="bottom" overlay={tooltipMap}>
+                    <button className="btn btn-link carica-in-mappa" onClick={()=>this.props.addToMap(this.props.node)}>
                     </button>
                 </OverlayTrigger>
             ));
             if ( this.props.node.featureType) {
                 tools.push((
-                    <OverlayTrigger key={"sira-mtp"} rootClose placement="left" overlay={tooltipList}>
-                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.toggleSiraControl(this.props.node)}>
-                            <Glyphicon
-                                key="toggle-featuregrid"
-                                glyph="th"/>
-                        </button>
-                    </OverlayTrigger>));
-                tools.push((
-                    <OverlayTrigger key={"list-ltp"} rootClose placement="left" overlay={tooltipSira}>
-                        <button className="btn btn-link" style={glyphStyle} onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType)}>
-                            <Glyphicon
-                                key="toggle-query"
-                                glyph="search"/>
+                    <OverlayTrigger key={"sira-mtp"} rootClose placement="bottom" overlay={tooltipList}>
+                        <button className="btn btn-link elenco" onClick={() => this.props.toggleSiraControl(this.props.node)}>
                         </button>
                     </OverlayTrigger>));
             }

@@ -99,8 +99,11 @@ class AttachmentTableApi extends React.Component {
             return null;
         }, this).filter((c) => c);
 
+        let numRows = this.props.attachments.length;
+        let height = ((25 * numRows) + 50 > 200) ? 200 : (25 * numRows) + 50;
+        let style = {height: height, width: "100%"};
         return (
-            <div fluid={false} style={this.props.style} className="ag-blue">
+            <div fluid={false} style={style} className="ag-blue">
                 <DataGrid
                     rowData={this.props.attachments}
                     onSelectionChanged={this.selectRows}

@@ -5,20 +5,26 @@
  * This source code is licensed under the BSD-style license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const initialState = {};
+const initialState = {
+    subcat: 'objects',
+    title: 'allObjects'
+};
 const { TOGGLE_SIRA_NODE,
-    SELECT_CATEGORY,
+    SELECT_SIRA_NODE,
+    SELECT_CATEGORY, SELECT_VIEW,
     METADATA_OBJECTS_VIEWS_LOADED,
     CATALOG_LOADING,
     SELECT_SUB_CATEGORY,
     RESET_OBJECT_AND_VIEW,
     SEARCH_TEXT_CHANGE,
     SHOWCATEGORIES,
-    SET_NODE_IN_USE} = require('../actions/siracatalog');
+    SET_NODE_IN_USE,
+    ALL_OBJECTS,
+    RESET_MENU} = require('../actions/siracatalog');
+const {LOAD_METADATA} = require('../actions/metadatainfobox');
 const {TILES_LOADED} = require('../actions/mosaictile');
 const assign = require('object-assign');
 const uuid = require('uuid');
-
 
 const normalizeCategories = function(categories, nodes) {
     return categories.reduce((cats, category) => {
@@ -66,22 +72,61 @@ function siracatalog(state = initialState, action) {
     switch (action.type) {
     case TOGGLE_SIRA_NODE: {
         let nodes = state.nodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status}) : n));
-        return assign({}, state, {nodes});
+        let allNodes = state.allNodes.map((n) => (n.name === action.id || n.id === action.id ? assign({}, n, {expanded: !action.status, selected: true}) : assign({}, n, {selected: false})));
+        return assign({}, state, {nodes, allNodes});
+    }
+    case SELECT_SIRA_NODE: {
+        let selectedNodes = state.allNodes.filter((n) => (n.name === action.id || n.id === action.id));
+        let title = selectedNodes ? selectedNodes[0].title : "";
+        let metadata = [];
+        selectedNodes.forEach((n) => {
+            if (n.categories) {
+                n.categories.forEach(category => {
+                    metadata.push.apply(metadata, category.metadata);
+                });
+            } else if (n.metadata) {
+                metadata.push.apply(metadata, n.metadata);
+            }
+        });
+        return assign({}, state, {nodes: metadata, title: title});
     }
     case CATALOG_LOADING: {
         return assign({}, state, {loading: action.status});
     }
     case SELECT_CATEGORY: {
-        return assign({}, state, {category: action.category, subcat: action.subcat});
+        let selectedNodes = state.allNodes.filter((n) => (n.title === action.category.name));
+        let allNodes = state.allNodes;
+        let title = "";
+        if (selectedNodes && selectedNodes && selectedNodes[0]) {
+            allNodes = allNodes.map((n) => (n.title === action.category.name ? assign({}, n, {expanded: true, selected: true}) : assign({}, n, {expanded: false, selected: false})));
+            title = selectedNodes[0].title;
+        }
+        return assign({}, state, {category: action.category, subcat: action.subcat, title: title, allNodes: allNodes});
     }
     case SELECT_SUB_CATEGORY: {
-        return assign({}, state, {subcat: action.subcat});
+        let selectedView = state.selectedView;
+        let allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
+        if (action.subcat === 'objects') {
+            selectedView = null;
+        }
+        return assign({}, state, {subcat: action.subcat, selectedView: selectedView, allViews: allViews});
+    }
+    case SELECT_VIEW: {
+        let allViews = state.allViews;
+        if (action.view !== null) {
+            allViews = state.allViews.map((v) => (v.name === action.view.name || v.id === action.viewid ? assign({}, v, {selected: true}) : assign({}, v, {selected: false})));
+        } else {
+            // Significa che e' stato selezionato "Tutte le viste tematiche"
+            allViews = state.allViews.map((v) => (assign({}, v, {selected: false})));
+        }
+        return assign({}, state, {selectedView: action.view, allViews: allViews});
     }
     case TILES_LOADED: {
-        return assign({}, state, { category: [...(action.tiles || [])].shift()});
+        let defaultCategory = [...(action.tiles || [])].shift();
+        return assign({}, state, { category: defaultCategory, defaultCategory: defaultCategory});
     }
     case RESET_OBJECT_AND_VIEW: {
-        return assign({}, state, {nodes: null, views: null});
+        return assign({}, state, {nodes: null, views: null, selectedView: null});
     }
     case SHOWCATEGORIES: {
         return assign({}, state, {showcategories: action.state});
@@ -91,6 +136,11 @@ function siracatalog(state = initialState, action) {
     }
     case SET_NODE_IN_USE: {
         return assign({}, state, {nodeUsed: action.node});
+    }
+    case ALL_OBJECTS: {
+        let allNodes = state.allNodes.map((n) => assign({}, n, {expanded: false, selected: false}));
+        let allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
+        return assign({}, state, {nodes: allNodes, allNodes: allNodes, allViews: allViews, title: "allObjects", category: state.defaultCategory});
     }
     case METADATA_OBJECTS_VIEWS_LOADED: {
         // FILTRA LE categorie ed i nodi
@@ -129,7 +179,44 @@ function siracatalog(state = initialState, action) {
                 }
             }
         });
+
+        if (action.isAllObjects) {
+            return assign({}, state, {nodes: nodes, views: views, allNodes: nodes, allViews: views, title: "allObjects"});
+        }
         return assign({}, state, {nodes: nodes, views: views});
+    }
+    case RESET_MENU: {
+        let allNodes = state.allNodes.map((n) => assign({}, n, {expanded: false, selected: false}));
+        let allViews = state.allViews.map((n) => assign({}, n, {expanded: false, selected: false}));
+        return assign({}, state, {allNodes: allNodes, allViews: allViews, title: (action.title ? action.title : "allObjects"), subcat: 'objects', category: state.defaultCategory});
+    }
+    case LOAD_METADATA: {
+        let nodeId = action.idMetadato;
+        let metadato = {
+            title: action.data.title,
+            showButtonLegend: action.data.showButtonLegend ? action.data.showButtonLegend : 'none',
+            text: action.data.text,
+            dataProvider: action.data.dataProvider,
+            urlMetadato: action.data.urlMetadatoCalc,
+            numDatasetObjectCalc: action.data.numDatasetObjectCalc,
+            urlWMS: action.data.urlWMS,
+            urlLegend: [],
+            openLegendPanel: false,
+            error: ''
+        };
+
+        let views = state.views;
+        let nodes = state.nodes;
+        let selectedView = state.selectedView;
+        if (state.subcat === 'views') {
+            views = state.views.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
+            if (selectedView && selectedView.id === nodeId) {
+                selectedView = assign({}, selectedView, {metadato: metadato});
+            }
+        } else if (state.subcat === 'objects') {
+            nodes = state.nodes.map((n) => (n.name === nodeId || n.id === nodeId ? assign({}, n, {metadato: metadato}) : n));
+        }
+        return assign({}, state, {nodes: nodes, views: views, selectedView: selectedView});
     }
     default:
         return state;

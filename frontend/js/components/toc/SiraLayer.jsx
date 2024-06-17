@@ -15,7 +15,7 @@ const PropTypes = require('prop-types');
 
 const LayersTool = require('./fragments/LayersTool');
 const SiraSettings = require('./fragments/SiraSettings');
-const ConfirmButton = require('@mapstore/components/buttons/ConfirmButton');
+const ConfirmButton = require('./ConfirmButton');
 const { Glyphicon, Tooltip, OverlayTrigger } = require('react-bootstrap');
 const I18N = require('@mapstore/components/I18N/I18N');
 const LocaleUtils = require('@mapstore/utils/LocaleUtils');
@@ -34,6 +34,7 @@ class DefaultLayer extends React.Component {
         updateNode: PropTypes.func,
         removeNode: PropTypes.func,
         configureIndicaLayer: PropTypes.func,
+        setActiveNode: PropTypes.func,
         activateLegendTool: PropTypes.bool,
         activateSettingsTool: PropTypes.bool,
         settingsText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -45,7 +46,8 @@ class DefaultLayer extends React.Component {
         visibilityCheckType: PropTypes.string,
         groups: PropTypes.array,
         expandFilterPanel: PropTypes.func,
-        searchAll: PropTypes.func
+        searchAll: PropTypes.func,
+        element: PropTypes.object
     };
 
     static contextTypes = {
@@ -88,6 +90,7 @@ class DefaultLayer extends React.Component {
         tools.push(
             <ConfirmButton key="removelayer"
                 text={(<Glyphicon glyph="1-close"/>)}
+                tooltip="nodeIcons.remove"
                 style={{"float": "right", cursor: "pointer", borderColor: 'unset', backgroundColor: "transparent", marginRight: 3, padding: 0, outline: "none"}}
                 confirming={{text: LocaleUtils.getMessageById(this.context.messages, "layerProperties.confirmDelete"),
                     style: {"float": "right", cursor: "pointer", marginTop: -5}}}
@@ -105,7 +108,8 @@ class DefaultLayer extends React.Component {
             tools.push(
                 <LayersTool key="toolsettings"
                     style={{ "float": "right", cursor: "pointer", marginRight: 0 }}
-                    glyph="1-menu-manage"
+                    glyph="cog"
+                    tooltip="nodeIcons.settings"
                     onClick={(node) => {
                         if (this.props.settings && this.props.settings.node === this.props.node.id) {
                             this.props.hideSettings();
@@ -116,31 +120,19 @@ class DefaultLayer extends React.Component {
                     }}/>
             );
             if (this.props.node.featureType || (this.props.node.params && this.props.node.params.featureType)) {
-                const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.search" /></Tooltip>;
-                const tool = (<Glyphicon
-                    style={{"float": "right", cursor: 'pointer'}}
-                    key="toggle-query"
-                    glyph="search"
-                    // onClick={() => this.props.node.mlsLayer ? null : this.props.expandFilterPanel(true, this.props.node.featureType || this.props.node.params.featureType, this.props.node.id)}
-                    onClick={() => this.props.expandFilterPanel(true, this.props.node.featureType || this.props.node.params.featureType, this.props.node.id)}
-                />);
-                tools.push(<OverlayTrigger placement="bottom" overlay={tooltip}>
-                    {tool}
-                </OverlayTrigger>
+                const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.list" /></Tooltip>;
+                tools.push(
+                    <OverlayTrigger placement="bottom" overlay={tooltip}>
+                        <button className="btn btn-link elenco" onClick={() => this.searchAll()}/>
+                    </OverlayTrigger>
                 );
             }
             if (this.props.node.params && this.props.node.params.isIndicatore === true) {
                 const tooltip = <Tooltip><I18N.Message msgId="nodeIcons.configureIndica"/></Tooltip>;
-                const tool = (<Glyphicon
-                    style={{"float": "right", cursor: 'pointer'}}
-                    key="edit-indicatori"
-                    glyph="signal"
-                    onClick={this.configuraIndicatore}
-                    overlay={tooltip}
-                />);
-                tools.push((<OverlayTrigger placement="bottom" overlay={tooltip}>
-                    {tool}
-                </OverlayTrigger>));
+                tools.push((
+                    <OverlayTrigger placement="bottom" overlay={tooltip}>
+                        <button className="btn btn-link indicatori" onClick={this.configuraIndicatore}/>
+                    </OverlayTrigger>));
             }
         }
         return tools;
@@ -156,6 +148,11 @@ class DefaultLayer extends React.Component {
                 <InlineSpinner loading={this.props.node.loading}/>
             </Node>
         );
+    }
+
+    searchAll= () => {
+        this.props.setActiveNode(this.props.node.id);
+        this.props.searchAll(this.props.node.featureType || this.props.node.params.featureType);
     }
 
     showInfoBox = () => {

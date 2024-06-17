@@ -9,9 +9,6 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 
-const {Link} = require('react-router');
-const I18N = require('@mapstore/components/I18N/I18N');
-
 class MosaicTile extends React.Component {
     static propTypes = {
         icon: PropTypes.string,
@@ -29,35 +26,15 @@ class MosaicTile extends React.Component {
         icon: "",
         useLink: true,
         boxStyle: { },
-        liClass: "list-group-item col-md-3 col-xs-4 tiles"
+        liClass: "list-group-item tiles"
     };
 
     renderInfo = () => {
-        return this.props.useLink ? (
+        return (
             <div className="ogg_appl">
-                <span>
-                    <Link to={'/dataset/' + this.props.objectNumber + '/0'} className="list-group-item">
-                        <I18N.Message msgId={"MosaicTile.objectsBtnText"}/> <span className="items-badge" > {this.props.objectNumber} </span>
-                    </Link>
-                </span>
-                <span>
-                    <Link to={'/dataset/0/' + this.props.tematicViewNumber} className="list-group-item" >
-                        <I18N.Message msgId={"MosaicTile.thematicViewsBtnText"}/> <span className="items-badge" > {this.props.tematicViewNumber} </span>
-                    </Link>
-                </span>
-            </div>
-        ) : (
-            <div className="ogg_appl">
-                <span>
-                    <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('objects')} onKeyPress={() => this.props.onClick('objects')}>
-                        <I18N.Message msgId={"MosaicTile.objectsBtnText"}/> <span className="items-badge" > {this.props.objectNumber} </span>
-                    </a>
-                </span>
-                <span>
-                    <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('views')} onKeyPress={() => this.props.onClick('views')}>
-                        <I18N.Message msgId={"MosaicTile.thematicViewsBtnText"}/> <span className="items-badge" > {this.props.tematicViewNumber} </span>
-                    </a>
-                </span>
+                <a tabIndex="0" className="list-group-item" onClick={() => this.props.onClick('objects')} onKeyPress={() => this.props.onClick('objects')}>
+                    <div className="ogg_title">{this.props.name} </div>
+                </a>
             </div>
         );
     };
@@ -66,10 +43,8 @@ class MosaicTile extends React.Component {
         let bClass = `${this.props.liClass} ${this.props.icon}`;
         return (
             <li className={bClass} style={this.props.boxStyle} tabIndex="0">
-                <div className="ogg_title">{this.props.name}</div>
                 {this.renderInfo()}
             </li>
-
         );
     }
 }

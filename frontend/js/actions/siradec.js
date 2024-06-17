@@ -28,11 +28,19 @@ const SET_ACTIVE_FEATURE_TYPE = 'SET_ACTIVE_FEATURE_TYPE';
 const SET_TREE_FEATURE_TYPE = 'SET_TREE_FEATURE_TYPE';
 const FEATURETYPE_CONFIG_LOADING = 'FEATURETYPE_CONFIG_LOADING';
 const USER_NOT_AUTHORIZED = 'USER_NOT_AUTHORIZED';
+const SET_ACTIVE_NODE = 'SET_ACTIVE_NODE';
 const assign = require('object-assign');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 const {addFeatureTypeLayerInCart} = require('../actions/addmap');
 const {verifyProfiles} = require('../utils/TemplateUtils');
 const { Promise } = require('es6-promise');
+
+function setActiveNode(node) {
+    return {
+        type: SET_ACTIVE_NODE,
+        node
+    };
+}
 
 function setWaitingForConfig(wfc) {
     return {
@@ -362,6 +370,7 @@ module.exports = {
     SET_ACTIVE_FEATURE_TYPE,
     SET_TREE_FEATURE_TYPE,
     FEATURETYPE_CONFIG_LOADING,
+    SET_ACTIVE_NODE,
     USER_NOT_AUTHORIZED,
     setWaitingForConfig,
     configureTopology,
@@ -379,5 +388,6 @@ module.exports = {
     configureInlineMap,
     setActiveFeatureType,
     setTreeFeatureType,
-    queryFormPreloaded
+    queryFormPreloaded,
+    setActiveNode
 };

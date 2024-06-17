@@ -9,6 +9,8 @@ const PropTypes = require('prop-types');
 
 const React = require('react');
 const {Glyphicon} = require('react-bootstrap');
+const {Tooltip, OverlayTrigger} = require('react-bootstrap');
+const I18N = require('@mapstore/components/I18N/I18N');
 
 class Viste extends React.Component {
     static propTypes = {
@@ -47,12 +49,11 @@ class Viste extends React.Component {
     };
 
     renderVistaTools = () => {
-        return [(<Glyphicon
-            key="addToMap"
-            glyph="1-map"
-            onClick={this.loadConfig}/>)
-        ];
-    };
+        let tooltipMap = <Tooltip id="tpm-add-map"><I18N.Message msgId={"nodeIcons.map"}/></Tooltip>;
+        return [(<OverlayTrigger key={"map-tp"} rootClose placement="bottom" overlay={tooltipMap}>
+            <button className="btn btn-link carica-in-mappa" onClick={this.loadConfig}></button>
+        </OverlayTrigger>)];
+    }
 
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : false;
@@ -70,7 +71,7 @@ class Viste extends React.Component {
             if (v.match(/(config=)(\w+)/)) {
                 view = v.match(/(config=)(\w+)/).pop();
             }
-            this.props.addToMap({serviceUrl: `./${view}.json`, params: {}});
+            this.props.addToMap({ serviceUrl: `./${view}.json`, params: {} });
         }
     };
 

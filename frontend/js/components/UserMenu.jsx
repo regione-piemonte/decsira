@@ -8,10 +8,10 @@ const PropTypes = require('prop-types');
  */
 
 const React = require('react');
-const {DropdownButton, MenuItem, NavDropdown, Glyphicon} = require('react-bootstrap');
+const {Button, DropdownButton, MenuItem, NavDropdown, Glyphicon} = require('react-bootstrap');
 const Message = require('@mapstore/components/I18N/Message');
 const ConfirmModal = require('@mapstore/components/misc/ResizableModal');
-
+const ConfigUtils = require('@mapstore/utils/ConfigUtils');
 
 /**
  * A DropDown menu for user details:
@@ -38,7 +38,6 @@ class UserMenu extends React.Component {
         // CALLBACKS
         onShowAccountInfo: PropTypes.func,
         onShowChangePassword: PropTypes.func,
-        onShowLogin: PropTypes.func,
         onLogout: PropTypes.func,
         onCheckMapChanges: PropTypes.func,
         className: PropTypes.string,
@@ -96,11 +95,16 @@ class UserMenu extends React.Component {
         this.props.onLogout();
     }
 
+    login = () => {
+        window.location.href = ConfigUtils.getConfigProp('secureDecsirawebUrl');
+    }
+
     renderGuestTools = () => {
-        let DropDown = this.props.nav ? NavDropdown : DropdownButton;
-        return (<DropDown className={this.props.className} pullRight bsStyle={this.props.bsStyle} title={this.renderButtonText()} id="dropdown-basic-primary" {...this.props.menuProps}>
-            <MenuItem onClick={this.props.onShowLogin}><Glyphicon glyph="log-in" /><Message msgId="user.login"/></MenuItem>
-        </DropDown>);
+        return (
+            <Button onClick={() => {this.login(); }} className="btn-outline-primary">
+                {this.renderButtonText()}
+            </Button>
+        );
     };
 
     renderLoggedTools = () => {
@@ -122,21 +126,17 @@ class UserMenu extends React.Component {
         let rolesArray = [];
         roles.forEach(role => {
             if (role) {
-                rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}>{role.description ? role.description : role.code}</span>);
-                rolesArray.push(<MenuItem key="divider" divider />);
+                rolesArray.push(<li>{role.description ? role.description : role.code}</li>);
             }
         });
         if (roles === null || roles === undefined) {
-            rolesArray.push(<span style={{ "marginLeft": "20px", "marginRight": "15px", "color": "white", "display": "inline-block" }}><Message msgId="user.freeAccess" /></span>);
+            rolesArray.push(<li><Message msgId="user.freeAccess" /></li>);
         }
-
-        let rolesTitle = (<div><span style={{ "fontWeight": "bold", "marginLeft": "20px", "color": "white"}}><Message msgId="user.profile" /></span><MenuItem key="divider" divider /></div>);
 
         return (
             <React.Fragment>
                 <DropDown id="loginButton" className={this.props.className} pullRight bsStyle="success" title={this.renderButtonText()} {...this.props.menuProps} >
-                    <span key="logged-user"><MenuItem header style={{ "marginBottom": "10px"}}>{this.props.user.name}</MenuItem></span>
-                    {rolesTitle}
+                    <span key="logged-user"><MenuItem header>{this.props.user.name}</MenuItem></span>
                     {rolesArray}
                     {itemArray}
                 </DropDown>
@@ -165,7 +165,6 @@ class UserMenu extends React.Component {
     };
 
     renderButtonText = () => {
-
         return this.props.renderButtonContent ?
             this.props.renderButtonContent() :
             [<Glyphicon glyph="user" />, this.props.renderButtonText ? this.props.user && this.props.user[this.props.displayName] || "Guest" : null];

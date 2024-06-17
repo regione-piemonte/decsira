@@ -23,6 +23,7 @@ require('./utils/ProjUtils')();
 const {loadMapConfig} = require('@mapstore/actions/config');
 const {configureQueryForm} = require('./actions/siradec');
 const {loadTiles} = require('./actions/mosaictile');
+const {getAllMetadata} = require('./actions/siracatalog');
 const {loadPlatformNumbers} = require('./actions/platformnumbers');
 const {configureExporter} = require('./actions/siraexporter');
 const {loadUserIdentity} = require('./actions/userprofile');
@@ -41,7 +42,8 @@ const initialActions = [
     () => loadMapConfig(configUrl, legacy),
     () => configureQueryForm(ConfigUtils.getConfigProp("query")),
     () => configureExporter(ConfigUtils.getConfigProp("exporter")),
-    () => loadVersion()
+    () => loadVersion(),
+    () => getAllMetadata()
 ];
 
 const React = require('react');

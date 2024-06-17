@@ -17,18 +17,19 @@
         "about_ul0_li0": "MapViewer is a simple viewer of preconfigured maps (optionally stored in a database using GeoStore)",
         "about_ul0_li1": "MapPublisher has been developed to create, save and share in a simple and intuitive way maps and mashups created selecting contents by server like OpenStreetMap, Google Maps, MapQuest or specific servers provided by your organization or third party. For more information check the",
         "background": "Background",
+		"back": "Back",
         "backgroundSwither": {
             "tooltip": "Select Background"
         },
         "toc": {
-          "toggleLayerVisibility": "Toggle layer visibility",
-          "displayLegendAndTools": "Display legend and tools",
-          "zoomToLayerExtent": "Zoom to  layer Extent",
-          "editLayerProperties": "Edit layer properties",
-          "searchFeatures": "Search on this layer...",
-          "removeLayer": "Remove layer",
-          "loadingerror": "Layer was not loaded correctly",
-          "tooltip": "Map contents"
+            "toggleLayerVisibility": "Toggle layer visibility",
+            "displayLegendAndTools": "Display legend and tools",
+            "zoomToLayerExtent": "Zoom to  layer Extent",
+            "editLayerProperties": "Edit layer properties",
+            "searchFeatures": "Search on this layer...",
+            "removeLayer": "Remove layer",
+            "loadingerror": "Layer was not loaded correctly",
+            "tooltip": "Map contents"
         },
         "bandselector": {
             "algorithm": {
@@ -52,6 +53,7 @@
         },
         "cancel": "Cancel",
         "catalog": {
+			"header": "Objects and thematic views catalog",
             "addToMap": "Add To Map",
             "catalogUrlPlaceholder": "Enter catalog URL...",
             "copied": "Copied!",
@@ -66,7 +68,14 @@
             "title": "Catalog",
             "tooltip": "Browse Catalog",
             "wfsGetCapLink": "WFS",
-            "wmsGetCapLink": "WMS"
+            "wmsGetCapLink": "WMS",
+            "goToMap": "Go to Map",
+            "header": "Catalog: Objects and Thematic views",
+            "mapObjects": "Objects to load in Map: ",
+            "selectedObjects": "Selected Objects: ",
+            "allViews": "All thematic views",
+            "allCategories": "ALL CATEGORIES",
+			"searchResults": "Search results"
         },
         "close": "Close",
         "colormapgrid": {
@@ -180,15 +189,15 @@
             "tooltip": "Expand / Collapse"
         },
         "featuregrid": {
-			"results": "Results",
+            "results": "Results",
             "deselectall": "Clear Selection",
             "export": "Export",
-			"exportAll": "All objects",
-			"exportPage": "Current page",
+            "exportAll": "All objects",
+            "exportPage": "Current page",
             "header": "Search results list",
             "header_all": "Objects list",
             "backtosearch": "Back to search",
-            "opensearch": "Open search panel",
+            "opensearch": "Set search filters",
             "pagination": {
                 "more": "more",
                 "of": "of",
@@ -196,14 +205,18 @@
                 "to": "to"
             },
             "selectall": "Select All",
-            "tools": "Tool Panel",
-			"popoverTitle": "Warning",
-			"popoverMessage": "The search has produced a large number of results and not all the data may be highlighted on the map. We recommend that you zoom in on your area of ​​interest."
+			"localize": "Localize All",
+            "tools": "Tools",
+            "popoverTitle": "Warning",
+			"localizeIcon": "Localize on map",
+			"detailIcon": "Details",
+			"dataTitle": "DATA",
+            "popoverMessage": "The search has produced a large number of results and not all the data may be highlighted on the map. We recommend that you zoom in on your area of ​​interest."
         },
-		"queryPanel": {
-			"closeSearchTooltip": "Close detail search",
-			"closeIndicaTooltip": "Close thematizer"
-		},
+        "queryPanel": {
+            "closeSearchTooltip": "Close detail search",
+            "closeIndicaTooltip": "Close thematizer"
+        },
         "getFeatureInfoError": {
             "text": "An error has occurred during this <b>GetFeatureInfo</b> request",
             "title": "Ooops! Something's wrong"
@@ -409,12 +422,12 @@
             "remove": "Remove Entry",
             "type": "Type"
         },
-		"indicaform": {
-			"form": {
+        "indicaform": {
+            "form": {
                 "dataset_header": "Dataset",
                 "header": "Filter dataset"
             }
-		},
+        },
         "queryform": {
             "attributefilter": {
                 "add_condition": " Add Condition",
@@ -556,7 +569,7 @@
         "user": {
             "changePwd": "Change Password",
             "info": " Account Info",
-            "login": "Login",
+            "login": "LOGIN",
             "loginFail": "Login Fail",
             "loginFailedStatusMessages": {
                 "usernamePwdIncorrect": "Username or password incorrect",
@@ -568,8 +581,8 @@
             "retypePwd": "Retype Password",
             "signIn": "Sign-in",
             "username": "Username",
-			"profile": "Profile:",
-			"freeAccess": "Free access"
+            "profile": "Profile:",
+            "freeAccess": "Free access"
         },
         "vectorstyler": {
             "addrulebtn": "Add Rule",
@@ -596,120 +609,146 @@
             "tooltip": "Query topology objects"
         },
         "metadataInfoBox": {
-            "entePA": "Government Institution",
-            "urlWMS": "Services WMS",
-            "urlWFS": "Services WFS",
-            "urlMetadato": "Metadata",
-            "legendPanelTitle": "Legende",
+            "entePA": "Government Institution: ",
+            "urlWMS": "Service WMS: ",
+            "urlWFS": "Service WFS: ",
+            "urlMetadato": "Metadata: ",
+			"goToMetadato": "Go to metadata",
+            "legendPanelTitle": "Legend",
             "errorLoadMetadata": "There was an error loading records from the metadata service.",
-            "panelTitle": "Infobox",
+            "panelTitle": "General informations",
             "link_to_metadata": "Open Metadata",
-            "link_to_ogc_service": "Go to service"
+            "link_to_ogc_service": "Copy service url",
+            "showTextNodebutton": "Read more",
+            "hideTextNodebutton": "Read less",
+            "showDataButton": "SHOW DATA",
+            "showLegendButton": "Show legend",
+            "wmsCopyLinkNotification": "Service url copied to clipboard"
+        },
+		"legendBox": {
+            "panelTitle": "LEGEND"
         },
         "loginpanel": {
-			"title": "Login",
+            "title": "Login",
             "okButton": "Go",
             "panelMsg": "If you are a Public Administration user, you can request your digital certificate to be enabled for the Environmental Knowledge System"
         },
         "cartpanel": {
-            "title": "Cart Layers",
+            "title": "Cart Objects",
             "goToMap": "Map"
         },
         "RightMenu": {
             "ConoscenzeAmbTitle": "Sistema Conoscenze Ambientali",
             "CreditsTitle": "Credits and Assistance",
-			"HelpTitle": "Help",
-			"language": "Language"
+            "HelpTitle": "Help",
+            "language": "Language"
         },
-		"Modal": {
-			"InfoTitle": "INFORMATION",
-			"ErrorTitle": "ERROR",
-			"UnauthorizedMessage": "The data is restricted access. For information on confidentiality restrictions, please refer to the published metadata.",
-			"NoRoleMessage": "User without a specialist profile, you are brought back to free access."
-		},
-		"Homepage": {
-			"appDescription" : "Access the <strong> environmental and territorial data </strong> of <strong> Piedmont </strong>. <br />Environmental data are collected and integrated in the Piedmont SIRA (Regional Environmental Information System), in cooperation between producers of environmental information (Region, Provinces and ARPA). <br />The service was created for <strong> government </strong> and <strong> protection of the territory </strong>, <strong> participatory planning </strong>, <strong> awareness</strong> and <strong>involvement of citizens </strong>."
-		},
-		"SiraSearchBar": {
-			"placeholder": "Search objects"
-		},
-		"MosaicTile": {
-			"objectsBtnText": "Objects",
-			"thematicViewsBtnText": "Thematic Views"
-		},
-		"PlatformNumbers": {
-			"numbersTitle": "Platform numbers",
-			"mapNumbersTitle": "Viewable maps",
-			"searchNumbersTitle": "Available detailed searches",
-			"ViewsNumbersTitle": "Available thematic views"
-		},
-		"Footer": {
-			"cookiePolicy": "Cookie policy",
-			"accessibility": "Accessibility"
-		},
-		"Dataset": {
-			"description": "Search for objects and thematic views",
-			"objectsText": "Objects",
-			"thematicViewsText": "Thematic Views",
-			"showCategories": "Show categories",
-			"hideCategories": "Hide categories"
-		},
-		"Cart": {
-			"mapText": "Map",
-			"listText": "List",
-			"mapTooltip": "Go to Map",
-			"listTooltip": "Go to List"
-		},
-		"nodeIcons": {
-			"search": "Detailed search",
-			"map": "Load to Map",
-			"list": "Objects list",
-			"indica": "Indicator",
-			"configureIndica": "Configure Indicator",
-			"settings": "Settings"
-		},
-		"IndicaBuilder": {
-			"configPanelTitle" : "Configure indicator",
-			"risoluzioneSpaziale": "Spatial resolution",
-			"dimensione": "Indicator dimension",
-			"periodicita": "Periodicity",
-			"dettaglioPeriod": "Periodicity detail",
-			"selectedIndica": "Selected indicator",
-			"temaPanelTitle": "Thematization",
-			"intervalsLabel": "Intervals",
-			"classificationLabel": "Statistical Classification Type",
-			"colorRampLabel": "Color ramp",
-			"applyBtn": "Apply"
-		},
-		"SistemaConoscenzeAmbientaliBox" : {
-			"text": "<h3> Presentation </h3><p> Sistema Conoscenze Ambientali is a platform for use of alphanumeric and geographical knowledge produced in the context of SIRA Piemonte (Environmental Information System of the Piedmont Region). It is configured as a cooperation network between producers and / or holders of informations of environmental interest (Region, Provinces and ARPA) and was created with the aim of supporting the development of environmental knowledge for the activities of: government and participatory planning; promotion of the competitiveness of the territory; awareness and involvement (empowerment); accessibility to public information. </p><p> The system is aimed at different public and private users: </p><ul> <li> Public Administration (Region, Provinces, ARPA, ...) </li><li> Citizens </li></ul><p> Data made available in the system are collected through multiple processes: Dematerialization of administrative procedures; Ambient status / pressure monitoring systems (manual or automatic); Data collection on specific matrices (eg. Waste Observatories / Waters ...), pressure / risk factors, ... <br/> The system allows access to data consultation through free search and / or through an access organized into thematic categories ( data catalogs such as INSPIRE Directive Catalog and Environmental Information Catalog; environmental thematic categories - Air, Remediation, Authorized companies in the environmental field, Waste, etc.). </p><p> For each data, the following is available: </p><ul> <li> the brief description of the single data / dataset and thematic view </li><li> the metadata sheet published on the Geoportale of data supplier and / or distributor (CSW service) </li></ul><p> with specific consultation functions such as: </p><ul> <li> simple consultation on the map of geographic data </li><li> consultation of detailed information on the datasets includes on alphanumeric and / or geographic searches on the data that return reports of the report type and single detail sheets on the objects (WFS services of complex feature type) </li><li> report view data - summary data - can be exported in csv format and / or ESRI shapefile </li><li> the details sheet is exportable in pdf format </li><li> all data available on the platform are exposed and / or use OGC (Open Spatial Consortium) standard interoperability services as required by the INSPIRE Directive. </li></ul>"
-		},
-		"CreditsPanel": {
-			"text": "<h3> Credits </h3><p> Sistema Conoscenze Ambientali, created by CSI Piemonte on behalf of the Piedmont Region, uses the following open source software <a href='https://mapstore.geo-solutions.it/mapstore' target='_blank'> Mapstore2 </a>. </p><h3> Copyright </h3><p> Except for materials specifically and expressly indicated as otherwise protected, the contents of the site are subject to the Creative license Commons Attribution CC BY 2.5, in compliance with the regional legislation on open data (<a href='http://arianna.consiglioregionale.piemonte.it/ariaint/TESTO?LAYOUT=PRESENTAZIONE&&TIPODOC=LEGGI&&LEGGE=24&&LEGGEANNO=2011' target='_blank'> lr 24/2011 </a> and <a href='http://www.regione.piemonte.it/governo/bollettino/abbonati/2012/45/attach/dgr_04687_815_08102012.pdf 'target='_blank'> DGR 22-4687 of 8 October 2012 </a>). Images, videos, trademarks, logos, banners, newspapers, domains, and any other distinctive signs that appear on this site are the property of Piedmont Region and/or third parties and are protected under the current legislation on copyright, on patents, and those relating to intellectual property. The databases, geoservices and maps are the property of their respective owners, indicated in the metadata, and are subject to the associated licenses. </p><h3> Use of the Site </h3><p> Piedmont Region cannot be held responsible for damages of any nature caused directly or indirectly by accessing the Environmental Knowledge System, by the use of interactive tools, by the inability or impossibility to access it, by the off-line use of the downloaded content. Regione Piemonte reserves the right to modify the contents of the site (texts, images, datasets, geoservices, ...) and of the legal notes at any time and without notice. Although great attention is paid to the accuracy of the information published on this site, fidelity, accuracy, topicality, reliability and completeness of the contents remain responsibility of the owners indicated in the metadata. The user undertakes not to abuse the service offered and to renounce its use for illegal practices. </p><h3> Assistance </h3><p> Any reports can be sent to <a href='mailto: assistance.sira@regione.piemonte.it'>assistenza.sira@regione.piemonte.it</a>. </p>"
-		},
-		"sr-only": {
-			"homepage": "Homepage",
-			"userMenu": "User menu",
-			"startSearch": "Start search",
-			"activeSection": "Active section ",
-			"navigationMenu": "Navigation menu",
-			"categories": "Categories",
-			"map": "Interactive map"
-		},
-		"Header": {
-			"linkTitle": "Home page Sistema Conoscenze Ambientali",
-			"appAcronym": "Environmental Knowledge",
-            "appName": "System"
-		},
-		"exportDataResults": {
+        "Modal": {
+            "InfoTitle": "INFORMATION",
+            "ErrorTitle": "ERROR",
+            "UnauthorizedMessage": "The data is restricted access. For information on confidentiality restrictions, please refer to the published metadata.",
+            "NoRoleMessage": "User without a specialist profile, you are brought back to free access."
+        },
+        "Homepage": {
+            "appDescription": "Access the <strong> environmental and territorial data </strong> of <strong> Piedmont </strong>. <br />Environmental data are collected and integrated in the Piedmont SIRA (Regional Environmental Information System), in cooperation between producers of environmental information (Region, Provinces and ARPA). <br />The service was created for <strong> government </strong> and <strong> protection of the territory </strong>, <strong> participatory planning </strong>, <strong> awareness</strong> and <strong>involvement of citizens </strong>.",
+            "goToMap": "CONSULT THE MAP",
+            "titolo": "Environmental and territorial data from Piedmont",
+            "descrizione": "A platform for the use of alphanumeric and geographical knowledge produced in the context of SIRA Piemonte",
+            "scopri": "DISCOVER MORE",
+            "sezioneMappa": "<h2>The map</h2><p>Consult the map incorporated within the platform to georeference and analyze the data made available.</p><p>You will be able to view the data grouped by <strong>categories</strong> or <strong>thematic views</strong> which aggregate datasets within them for clear consultation and greater visibility. easy comparison.</p>",
+            "catalogo": "The catalog",
+            "categorie": "Consult by category",
+            "tematiche": "Consult by thematic view"
+        },
+        "SiraSearchBar": {
+            "placeholder": "Search object"
+        },
+        "MosaicTile": {
+            "objectsBtnText": "Objects",
+            "thematicViewsBtnText": "Thematic Views"
+        },
+        "PlatformNumbers": {
+            "numbersTitle": "Platform numbers",
+            "mapNumbersTitle": "Viewable maps",
+            "searchNumbersTitle": "Available detailed searches",
+            "ViewsNumbersTitle": "Available thematic views"
+        },
+        "Footer": {
+            "cookiePolicy": "Cookie policy",
+            "accessibility": "Accessibility",
+            "declaration": "Accessibility declaration",
+            "feedback": "Feedback mechanism",
+            "service": "This service is part of",
+            "service2": "A service provided by Regione Piemonte"
+        },
+        "Dataset": {
+            "description": "Search for objects and thematic views",
+            "objectsText": "Categories",
+            "thematicViewsText": "Thematic Views",
+            "showCategories": "Show categories",
+            "hideCategories": "Hide categories"
+        },
+        "Cart": {
+            "mapText": "Map",
+            "listText": "List",
+            "mapTooltip": "Go to Map",
+            "listTooltip": "Go to List"
+        },
+        "nodeIcons": {
+            "search": "Detailed search",
+            "map": "Load to Map",
+            "list": "Objects list",
+            "indica": "Indicator",
+            "configureIndica": "Configure Indicator",
+            "settings": "Settings",
+			"legend": "Show legend",
+			"remove": "Remove from map"
+        },
+        "IndicaBuilder": {
+            "configPanelTitle": "Configure indicator",
+            "risoluzioneSpaziale": "Spatial resolution",
+            "dimensione": "Indicator dimension",
+            "periodicita": "Periodicity",
+            "dettaglioPeriod": "Periodicity detail",
+            "selectedIndica": "Selected indicator",
+            "temaPanelTitle": "Thematization",
+            "intervalsLabel": "Intervals",
+            "classificationLabel": "Statistical Classification Type",
+            "colorRampLabel": "Color ramp",
+            "applyBtn": "Apply"
+        },
+        "SistemaConoscenzeAmbientaliBox": {
+            "text": "<h3> Presentation </h3><p> Sistema Conoscenze Ambientali is a platform for use of alphanumeric and geographical knowledge produced in the context of SIRA Piemonte (Environmental Information System of the Piedmont Region). It is configured as a cooperation network between producers and / or holders of informations of environmental interest (Region, Provinces and ARPA) and was created with the aim of supporting the development of environmental knowledge for the activities of: government and participatory planning; promotion of the competitiveness of the territory; awareness and involvement (empowerment); accessibility to public information. </p><p> The system is aimed at different public and private users: </p><ul> <li> Public Administration (Region, Provinces, ARPA, ...) </li><li> Citizens </li></ul><p> Data made available in the system are collected through multiple processes: Dematerialization of administrative procedures; Ambient status / pressure monitoring systems (manual or automatic); Data collection on specific matrices (eg. Waste Observatories / Waters ...), pressure / risk factors, ... <br/> The system allows access to data consultation through free search and / or through an access organized into thematic categories ( data catalogs such as INSPIRE Directive Catalog and Environmental Information Catalog; environmental thematic categories - Air, Remediation, Authorized companies in the environmental field, Waste, etc.). </p><p> For each data, the following is available: </p><ul> <li> the brief description of the single data / dataset and thematic view </li><li> the metadata sheet published on the Geoportale of data supplier and / or distributor (CSW service) </li></ul><p> with specific consultation functions such as: </p><ul> <li> simple consultation on the map of geographic data </li><li> consultation of detailed information on the datasets includes on alphanumeric and / or geographic searches on the data that return reports of the report type and single detail sheets on the objects (WFS services of complex feature type) </li><li> report view data - summary data - can be exported in csv format and / or ESRI shapefile </li><li> the details sheet is exportable in pdf format </li><li> all data available on the platform are exposed and / or use OGC (Open Spatial Consortium) standard interoperability services as required by the INSPIRE Directive. </li></ul>"
+        },
+        "CreditsPanel": {
+            "text": "<h3> Credits </h3><p> Sistema Conoscenze Ambientali, created by CSI Piemonte on behalf of the Piedmont Region, uses the following open source software <a href='https://mapstore.geo-solutions.it/mapstore' target='_blank'> Mapstore2 </a>. </p><h3> Copyright </h3><p> Except for materials specifically and expressly indicated as otherwise protected, the contents of the site are subject to the Creative license Commons Attribution CC BY 2.5, in compliance with the regional legislation on open data (<a href='http://arianna.consiglioregionale.piemonte.it/ariaint/TESTO?LAYOUT=PRESENTAZIONE&&TIPODOC=LEGGI&&LEGGE=24&&LEGGEANNO=2011' target='_blank'> lr 24/2011 </a> and <a href='http://www.regione.piemonte.it/governo/bollettino/abbonati/2012/45/attach/dgr_04687_815_08102012.pdf 'target='_blank'> DGR 22-4687 of 8 October 2012 </a>). Images, videos, trademarks, logos, banners, newspapers, domains, and any other distinctive signs that appear on this site are the property of Piedmont Region and/or third parties and are protected under the current legislation on copyright, on patents, and those relating to intellectual property. The databases, geoservices and maps are the property of their respective owners, indicated in the metadata, and are subject to the associated licenses. </p><h3> Use of the Site </h3><p> Piedmont Region cannot be held responsible for damages of any nature caused directly or indirectly by accessing the Environmental Knowledge System, by the use of interactive tools, by the inability or impossibility to access it, by the off-line use of the downloaded content. Regione Piemonte reserves the right to modify the contents of the site (texts, images, datasets, geoservices, ...) and of the legal notes at any time and without notice. Although great attention is paid to the accuracy of the information published on this site, fidelity, accuracy, topicality, reliability and completeness of the contents remain responsibility of the owners indicated in the metadata. The user undertakes not to abuse the service offered and to renounce its use for illegal practices. </p><h3> Assistance </h3><p> Any reports can be sent to <a href='mailto: assistance.sira@regione.piemonte.it'>assistenza.sira@regione.piemonte.it</a>. </p>"
+        },
+        "sr-only": {
+            "homepage": "Homepage",
+            "userMenu": "User menu",
+            "startSearch": "Start search",
+            "activeSection": "Active section ",
+            "navigationMenu": "Navigation menu",
+            "categories": "Categories",
+            "map": "Interactive map"
+        },
+        "Header": {
+            "linkTitle": "Home page Sistema Conoscenze Ambientali",
+            "appAcronym": "Environmental Knowledge",
+            "appName": "System",
+            "mappa": "Map",
+            "catalogo": "Catalog",
+            "info": "What is"
+        },
+        "exportDataResults": {
             "title": "Export results",
             "emptyStateMessage": "Export list is empty",
-			"refresh": "Refresh"
+            "refresh": "Refresh"
         },
-		"layerdownload": {
+        "layerdownload": {
             "title": "Export Data",
             "format": "File Format",
-            "srs":  "Spatial Reference System",
+            "srs": "Spatial Reference System",
             "export": "Export",
             "downloadonlycurrentpage": "Download only current page",
             "cropDataSet": "Crop dataset to current viewport",
@@ -730,8 +769,8 @@
                 "exportFailure": "Export failed! Open export results dialog for more information.",
                 "exportSuccess": "Export finished successfully.",
                 "invalidHref": "The response from server did not contain a valid url address for exported files!",
-				"download": "Download data",
-				"delete": "Delete"
+                "download": "Download data",
+                "delete": "Delete"
             },
             "wpsExecuteError": {
                 "processFailed": "Download process failed! The server has returned the following exception report: \"{exceptionReport}\"",
@@ -742,33 +781,44 @@
             },
             "noSupportedServiceFound": "The server doesn't support WFS or WPS download for this layer!"
         },
-		"AddMapModal": {
-			"title": "Load to Map",
-			"checkTitle": "Titles instead of names",
-			"checkGroup": "Add as a group",
-			"addButton": "Add layers",
-			"closeButton": "Close"
-		},
-		"Accessibility": {
-			"title": "Accessibility",
-			"body": "<h3>Accessibility</h3> <p> Regione Piemonte pays great attention to the accessibility of information. </p> <p> See <a href = 'https://form.agid.gov.it/view/d3cc32bd-b55e-4ab5-a2fb-6e66d06803e3' target = '_ blank'> Declaration of accessibility issued by the Agency for Digital Italy (AgID) </a>. </p> <p> To report cases of non-compliance with accessibility requirements, to request information and contents that have been excluded from the scope of application of the EU Directive 2016/2102 write to <a href='mailto:sita@regione.piemonte.it'> sita@regione.piemonte.it </a> </ p > <p> Thank you, your contribution is invaluable. </p>",
-			"button": "Close"
-		},
-		"SiraExporter": {
-			"shpMsg": "Only elements with geometry will be exported",
-			"asynch": "Export in asynchronous mode, check the completion of the operation with the appropriate function",
-			"maxFeatures": "Maximum limit exceeded: {maxFeat} of {totalFeatures} objects will be exported",
-			"downloadEstimatorFailed": "Request failed, exported file exceeds configured limits. Try to add a filter to your search and export again."
-    },
-		"GridCellDownload": {
-			"tooltip-download": "Download",
-			"tooltip-link": "Open"
-		},
-		"DownloadConfirm": {
-			"title": "Download attachment",
-			"message": "The attachment will be downloaded on your local machine, do you want to proceed?",
-			"confirm": "Yes",
-			"close":"No"
+        "AddMapModal": {
+            "title": "Load to Map",
+            "checkTitle": "Titles instead of names",
+            "checkGroup": "Add as a group",
+            "addButton": "Add layers",
+            "closeButton": "Close"
+        },
+        "Accessibility": {
+            "title": "Accessibility",
+            "body": "<h3>Accessibility</h3> <p> Regione Piemonte pays great attention to the accessibility of information. </p> <p> See <a href = 'https://form.agid.gov.it/view/d3cc32bd-b55e-4ab5-a2fb-6e66d06803e3' target = '_ blank'> Declaration of accessibility issued by the Agency for Digital Italy (AgID) </a>. </p> <p> To report cases of non-compliance with accessibility requirements, to request information and contents that have been excluded from the scope of application of the EU Directive 2016/2102 write to <a href='mailto:sita@regione.piemonte.it'> sita@regione.piemonte.it </a> </ p > <p> Thank you, your contribution is invaluable. </p>",
+            "button": "Close"
+        },
+        "SiraExporter": {
+            "shpMsg": "Only elements with geometry will be exported",
+            "asynch": "Export in asynchronous mode, check the completion of the operation with the appropriate function",
+            "maxFeatures": "Maximum limit exceeded: {maxFeat} of {totalFeatures} objects will be exported",
+            "downloadEstimatorFailed": "Request failed, exported file exceeds configured limits. Try to add a filter to your search and export again."
+        },
+        "GridCellDownload": {
+            "tooltip-download": "Download",
+            "tooltip-link": "Open"
+        },
+        "DownloadConfirm": {
+            "title": "Download attachment",
+            "message": "The attachment will be downloaded on your local machine, do you want to proceed?",
+            "confirm": "Yes",
+            "close": "No"
+        },
+        "renderTools": {
+            "handleSizeOnMap": "ADD AND MANAGE DIMENSION ON THE MAP",
+            "loadInMap": "LOAD IN MAP",
+            "showData": "SHOW DATA"
+        },
+		"detailCard": {
+			"title": "Detail informations",
+			"oggettiCollegati": "SHOW LINKED OBJECTS",
+			"multilayer": "SELECT LINKED OBJECTS",
+			"download": "DOWNLOAD"
 		}
-  }
+    }
 }

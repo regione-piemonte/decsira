@@ -10,19 +10,6 @@ const gridSelector = createSelector([grid, featureGrid],
         grid: assign({}, gridS, {featuregrid: featureGridS})
     }));
 
-const categorySelector = createSelector([
-    (state) => state.mosaic && state.mosaic.tiles || []
-], (servertiles) => {
-    const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
-        v.objectNumber += t.objectNumber;
-        v.tematicViewNumber += t.tematicViewNumber;
-        return v;
-    }, {objectNumber: 0, tematicViewNumber: 0});
-    return {
-        tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}]
-    };
-}
-);
 const sortObjects = function(a, b) {
     if (a.title < b.title) {
         return -1;
@@ -59,8 +46,26 @@ const normalizeObjects = function(nodes) {
     }, []).sort(sortObjects);
 };
 
+const categorySelector = createSelector([
+    (state) => state.mosaic && state.mosaic.tiles || [],
+    (state) => state.siracatalog
+], (servertiles, catalog) => {
+    const {objectNumber = 0, tematicViewNumber = 0} = servertiles.reduce((v, t) => {
+        v.objectNumber += t.objectNumber;
+        v.tematicViewNumber += t.tematicViewNumber;
+        return v;
+    }, {objectNumber: 0, tematicViewNumber: 0});
+    return {
+        tiles: [...servertiles, {id: 999, name: "Tutte le Categorie", icon: "all", objectNumber, tematicViewNumber}],
+        views: normalizeViews(catalog.views || [])
+    };
+}
+);
+
 const tocSelector = createSelector([
     (state) => state.siracatalog.nodes || [],
+    (state) => state.siracatalog.allNodes || [],
+    (state) => state.siracatalog.allViews || [],
     (state) => state.siracatalog.category,
     (state) => state.siracatalog.subcat,
     (state) => state.siracatalog,
@@ -68,10 +73,13 @@ const tocSelector = createSelector([
     (state) => state.siradec && state.siradec.notAuthorized && state.siradec.notAuthorized.filter(f => f === state.siradec.activeFeatureType).length > 0,
     (state) => state.userprofile,
     (state) => state.siradec && state.siradec.activeFeatureType
-], ( nodes, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
+], ( nodes, allNodes, allViews, category, subcat, catalog, configOggetti, notAuthorized, userprofile, activeFeatureType) => ({
     views: normalizeViews(catalog.views || []),
+    selectedView: catalog.selectedView,
     nodes: normalizeCatalog(nodes),
     objects: normalizeObjects(nodes),
+    allNodes: normalizeCatalog(allNodes),
+    allViews: normalizeViews(allViews),
     nodesLoaded: catalog.nodes ? true : false,
     category,
     loading: catalog.loading,
@@ -80,7 +88,8 @@ const tocSelector = createSelector([
     userprofile,
     activeFeatureType,
     subcat,
-    showcategories: catalog.showcategories
+    showcategories: catalog.showcategories,
+    title: catalog.title
 })
 );
 

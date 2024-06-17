@@ -63,6 +63,7 @@ class LayerTree extends React.Component {
     static propTypes = {
         id: PropTypes.number,
         nodes: PropTypes.array,
+        allNodes: PropTypes.array,
         views: PropTypes.array,
         objects: PropTypes.array,
         loading: PropTypes.bool,
@@ -131,12 +132,12 @@ class LayerTree extends React.Component {
     };
 
     render() {
-        if (!this.props.nodes) {
+        if (!this.props.allNodes) {
             return <div></div>;
         }
-        const {views, objects, nodes, showcategories} = this.props;
+        const {views, objects, allNodes, showcategories} = this.props;
         const tocObjects = (
-            <TOC nodes={showcategories ? nodes : objects}>
+            <TOC nodes={showcategories ? allNodes : objects}>
                 { showcategories ?
                     (<DefaultGroup animateCollapse={false} onToggle={this.props.onToggle}>
                         <DefaultNode
@@ -144,7 +145,7 @@ class LayerTree extends React.Component {
                             configureIndicaLayer={this.openIndicaPanel}
                             toggleSiraControl={this.searchAll}
                             onToggle={this.props.onToggle}
-                            groups={nodes}
+                            groups={allNodes}
                             addToMap={this.addToMap}
                             showInfoBox={this.showInfoBox}/>
                     </DefaultGroup>) : (<DefaultNode
@@ -154,7 +155,7 @@ class LayerTree extends React.Component {
                         addToMap={this.addToMap}
                         showInfoBox={this.showInfoBox}/>) }
             </TOC>);
-        const viste = this.props.views ? this.props.views.map((v) => (<Vista key={v.id}
+        const viste = views ? views.map((v) => (<Vista key={v.id}
             expandFilterPanel={this.props.expandFilterPanel}
             toggleSiraControl={this.props.toggleSiraControl}
             node={v}
@@ -162,21 +163,14 @@ class LayerTree extends React.Component {
             showInfoBox={this.showInfoBox}/>)) : (<div/>);
         return (
             <div id="siracatalog">
-                <div className="toc-category-name">
-                    {this.props.category ? this.props.category.name : (<noscript/>)}
-                </div>
                 <SiraSearchBar
                     onSearch={this.loadMetadata}
                     onReset={this.loadMetadata}
                 />
-                <div className="catalog-categories-switch-container">
-                    <div className="catalog-categories-switch" onClick={() => this.props.toggleCategories(!showcategories)}>
-                        <span>{showcategories ? LocaleUtils.getMessageById(this.context.messages, "Dataset.hideCategories") : LocaleUtils.getMessageById(this.context.messages, "Dataset.showCategories")} </span>
-                    </div>
-                </div>
+
                 <Tabs className="catalog-tabs" activeKey={this.props.subcat} onSelect={this.props.selectSubCategory}>
-                    <Tab eventKey={'objects'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText") + ` (${objects ? objects.length : 0})`}>{tocObjects}</Tab>
-                    <Tab eventKey={'views'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText") + ` (${views ? views.length : 0})`}>{viste}</Tab>
+                    <Tab eventKey={'objects'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.objectsText")}>{tocObjects}</Tab>
+                    <Tab eventKey={'views'} title={LocaleUtils.getMessageById(this.context.messages, "Dataset.thematicViewsText")}>{viste}</Tab>
                 </Tabs>
                 {this.props.notAuthorized && this.renderUnauthorized()}
                 {this.props.loading ? (
@@ -193,9 +187,9 @@ class LayerTree extends React.Component {
         }
         if (text && text.length > 0) {
             params.text = text;
-            /* if (this.props.showcategories) {
-                this.props.toggleCategories(!this.props.showcategories);
-            }*/
+            if (!this.props.showcategories) {
+                this.props.toggleCategories(this.props.showcategories);
+            }
         } else {
             if (!this.props.showcategories) {
                 this.props.toggleCategories(!this.props.showcategories);
@@ -203,7 +197,11 @@ class LayerTree extends React.Component {
         }
         if (!this.props.loading) {
             this.props.getMetadataObjects({params});
+            if (this.props.showcategories) {
+                this.props.toggleCategories(!this.props.showcategories);
+            }
         }
+        this.props.selectSubCategory('objects');
     };
 
     openFilterPanel = (status, ftType) => {

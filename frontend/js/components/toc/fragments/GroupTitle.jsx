@@ -15,22 +15,25 @@ class GroupTitle extends React.Component {
     static propTypes = {
         node: PropTypes.object,
         onClick: PropTypes.func,
-        style: PropTypes.object
+        style: PropTypes.object,
+        page: PropTypes.string
     };
 
     static inheritedPropTypes = ['node'];
 
     static defaultProps = {
+        page: "",
         onClick: () => {},
         style: {}
     };
 
     render() {
         let expanded = (this.props.node.expanded !== undefined) ? this.props.node.expanded : true;
+        let selected = (this.props.node.selected !== undefined) ? this.props.node.selected : false;
         let groupTitle = this.props.node && this.props.node.title || 'Default';
         return (
-            <div className="toc-group-title" onClick={() => this.props.onClick(this.props.node.id, expanded)} style={this.props.style} onKeyPress={() => this.props.onClick(this.props.node.id, expanded)}>
-                <StatusIcon expanded={expanded} node={this.props.node}/>{groupTitle}
+            <div className={selected ? "toc-group-title active" : "toc-group-title"} onClick={() => this.props.onClick(this.props.node.id, expanded)} style={this.props.style} onKeyPress={() => this.props.onClick(this.props.node.id, expanded)}>
+                <StatusIcon expanded={expanded} node={this.props.node} page={this.props.page}/>{groupTitle}
             </div>
         );
     }

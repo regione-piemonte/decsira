@@ -14,15 +14,18 @@ const I18N = require('@mapstore/components/I18N/I18N');
 class Mosaic extends React.Component {
     static propTypes = {
         tiles: PropTypes.array,
+        views: PropTypes.array,
         boxStyle: PropTypes.object,
         tileClick: PropTypes.func,
         useLink: PropTypes.bool,
         liClass: PropTypes.string,
-        className: PropTypes.string
+        className: PropTypes.string,
+        type: PropTypes.string
     };
 
     static defaultProps = {
         tiles: [],
+        views: [],
         className: "container blocchetti"
     };
 
@@ -38,7 +41,7 @@ class Mosaic extends React.Component {
         });
     };
 
-    render() {
+    renderCategories = () =>{
         return (
             <div className={this.props.className} role="contentinfo" aria-labelledby=" argomenti">
                 <div className="row">
@@ -49,6 +52,28 @@ class Mosaic extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    renderViewTile = () => {
+        const {views} = this.props;
+        return views.map((view) => {
+            return (<li key={view.id}><a onClick={() => this.props.tileClick(view)}>{view.title}</a></li>);
+        });
+    }
+
+    renderViews = () =>{
+        return (
+            <ul className="tematica">
+                {this.renderViewTile()}
+            </ul>
+        );
+    }
+
+    render() {
+        if (this.props.type === 'categories') {
+            return this.renderCategories();
+        }
+        return this.renderViews();
     }
 }
 

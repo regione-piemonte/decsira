@@ -112,8 +112,11 @@ class AttachmentTable extends React.Component {
             }, this);
         }
 
+        let numRows = features.length;
+        let height = ((25 * numRows) + 50 > 200) ? 200 : (25 * numRows) + 50;
+        let style = {height: height, width: "100%"};
         return (
-            <div fluid={false} style={this.props.style} className="ag-blue">
+            <div fluid={false} style={style} className="ag-blue">
                 <DataGrid
                     rowData={features}
                     onSelectionChanged={this.selectRows}

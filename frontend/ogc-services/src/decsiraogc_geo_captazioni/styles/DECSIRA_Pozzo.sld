@@ -10,13 +10,13 @@
     <Name>default_point</Name>
     <UserStyle>
     <!-- Styles can have names, titles and abstracts -->
-      <Title> Pozzo</Title>
+      <Title>Pozzo</Title>
       <Abstract>A sample style that draws a point</Abstract>
       <!-- FeatureTypeStyles describe how to render different features -->
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Title> Pozzo</Title>
+          <Title>Presa da pozzo</Title>
           <Abstract>A 10 pixel square with a red fill and no stroke</Abstract>
           <MaxScaleDenominator>1000000</MaxScaleDenominator> 
           <PointSymbolizer>

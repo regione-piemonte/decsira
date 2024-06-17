@@ -10,7 +10,7 @@
       <Title>A red line style</Title>
       <FeatureTypeStyle>
        <Rule>
-        <Title> Trincea drenante</Title>
+        <Title>Presa da trincea drenante</Title>
    	    <MaxScaleDenominator>1000000</MaxScaleDenominator> 
         <LineSymbolizer>
          <Stroke>

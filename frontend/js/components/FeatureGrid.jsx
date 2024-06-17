@@ -296,17 +296,14 @@ class SiraGrid extends React.Component {
     };
 
     renderHeader = () => {
-        const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
+        // const header = LocaleUtils.getMessageById(this.context.messages, this.props.header);
 
         return (
             <div className="handle_featuregrid">
                 <Grid className="featuregrid-title" fluid>
                     <Row>
-                        <Col xs={11} sm={11} md={11} lg={11}>
-                            <span>{header}</span>
-                        </Col>
-                        <Col xs={1} sm={1} md={1} lg={1}>
-                            <button onClick={() => this.onGridClose(false)} className="close grid-close"><span>X</span></button>
+                        <Col>
+                            <button onClick={() => this.onGridClose(false)}><span><I18N.Message msgId={"back"}/></span></button>
                         </Col>
                     </Row>
                 </Grid>
@@ -342,17 +339,17 @@ class SiraGrid extends React.Component {
     };
 
     renderDatasetHeader = () => {
-        const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
+        // const datasetHeader = LocaleUtils.getMessageById(this.context.messages, this.props.datasetHeader);
         const indicaTitle = this.props.isIndicatore ? (
             <div className="dhContainer">
-                <b>Indicatore selezionato</b> <br /> {this.props.indicaTitle}
+                <b><I18N.Message msgId={"IndicaBuilder.selectedIndica"}/></b><br/> {this.props.indicaTitle}
             </div>
         ) : "";
         return (
             <div>
                 <div className="dhContainer">
-                    <label>{datasetHeader}</label>
                     <h4 className="ftheader">{this.props.featureTypeNameLabel}</h4>
+                    <label><I18N.Message msgId={"featuregrid.dataTitle"}/></label>
                 </div>
                 {indicaTitle}
             </div>
@@ -431,13 +428,14 @@ class SiraGrid extends React.Component {
                         maxFeatures={this.props.maxFeatures}
                     />
                     {this.renderDatasetHeader()}
-                    <div style={this.props.loadingGrid ? {display: "none"} : {height: this.state.height, width: this.state.width}}>
+                    <div style={this.props.loadingGrid ? {display: "none"} : {width: this.state.width}}>
+
+                        {LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")}: <strong>{this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</strong>
                         <Button
-                            className="back-to-query"
-                            style={{marginBottom: "12px"}}
+                            className="btn btn-link back-to-query"
                             onClick={() => this.onGridClose(true)}><span><Message msgId={this.props.backToSearch}/></span>
                         </Button>
-                        <h5>{LocaleUtils.getMessageById(this.context.messages, "featuregrid.results")} - {this.props.totalFeatures !== -1 ? this.props.totalFeatures : (<I18N.Message msgId={"sira.noQueryResult"}/>)}</h5>
+
                         <div style={{
                             display: "flex",
                             flexDirection: "column"
@@ -448,7 +446,7 @@ class SiraGrid extends React.Component {
                                 ref={(r)=> {this.grid = r; }}
                                 map={this.props.map}
                                 columnDefs={columns}
-                                style={{height: this.state.height - 120, width: "100%"}}
+                                style={{height: this.state.height - 140, width: "100%"}}
                                 maxZoom={16}
                                 selectFeatures={this.selectFeatures}
                                 selectAll={this.props.selectAllToggle ? this.selectAll : undefined}
