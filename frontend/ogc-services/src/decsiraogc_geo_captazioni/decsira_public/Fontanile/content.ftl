@@ -2,12 +2,11 @@
   <caption class="featureInfo">Presa da fontanile</caption>
   <#list features as feature>
     <tr>
-      <th>Codice rilievo</th>
-	  <th>Codice ROC</th>
-	  <th>Denominazione</th>
+		  <th>Codice rilievo</th>
+		  <th>Codice ROC</th>
+		  <th>Denominazione</th>
           <th>Comune di localizzazione</th>
           <th>Sigla provincia</th>
-          <th>Provincia di localizzazione</th>
           <th>Provincia di localizzazione</th>
           <th>Localita</th>
           <th>Stato di esercizio</th>
@@ -17,7 +16,7 @@
     </tr>
     <tr>
           <td>${feature.codice_rilievo.value}</td>
-	  <td>${feature.codice_roc.value}</td>
+		  <td>${feature.codice_roc.value}</td>
           <td>${feature.denominazione.value}</td>
           <td>${feature.comune.value}</td>
           <td>${feature.sigla_provincia.value}</td>
