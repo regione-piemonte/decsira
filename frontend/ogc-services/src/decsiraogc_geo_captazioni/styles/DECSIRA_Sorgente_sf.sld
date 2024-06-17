@@ -16,7 +16,7 @@
       <!-- A FeatureTypeStyle for rendering points -->
       <FeatureTypeStyle>
         <Rule>
-          <Title>Sorgente</Title>
+          <Title>Presa da sorgente</Title>
           <Abstract>Circle</Abstract>
             <MaxScaleDenominator>1000000</MaxScaleDenominator> 
             <PointSymbolizer>

@@ -20,7 +20,7 @@
 <!-- non definito     -->    	  
         <Rule>
           <Name>R1</Name>
-          <Title> Presa</Title>
+          <Title>Presa da corpo idrico superficiale (non definito)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>tipo_di_presa</ogc:PropertyName>
@@ -48,7 +48,7 @@
 <!-- da corpo idrico naturale     -->    	  
         <Rule>
           <Name>R2</Name>
-          <Title>da corpo idrico naturale</Title>
+          <Title>Presa da corpo idrico superficiale naturale</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>tipo_di_presa</ogc:PropertyName>
@@ -76,7 +76,7 @@
 <!-- da corpo idrico artificiale     -->    	  
         <Rule>
           <Name>R3</Name>
-          <Title>da corpo idrico artificiale</Title>
+          <Title>Presa da corpo idrico superficiale artificiale</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>tipo_di_presa</ogc:PropertyName>
