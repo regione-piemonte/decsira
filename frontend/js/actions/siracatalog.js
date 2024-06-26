@@ -155,7 +155,7 @@ function getMetadataObjects({ serviceUrl = 'services/metadata/getMetadataObject?
 }
 
 function getAllMetadata({serviceUrl = 'services/metadata/getMetadataObject?'} = {}) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(catalogLoading(true));
         return axios.post(serviceUrl).then((response) => {
             getMetadataView().then((result) => {
@@ -168,6 +168,12 @@ function getAllMetadata({serviceUrl = 'services/metadata/getMetadataObject?'} = 
                     }
                 } else {
                     dispatch(objectsLoaded(response.data, result, true));
+                    let category = getState().siracatalog.category;
+                    if (category.directLink) {
+                        dispatch(selectCategory(category, 'objects'));
+                        let params = {category: category.id};
+                        dispatch(getMetadataObjects({ params }));
+                    }
                 }
             });
         }).catch(() => {
