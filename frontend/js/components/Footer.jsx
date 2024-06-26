@@ -22,7 +22,7 @@ class Footer extends React.Component {
 
                                 <div className="col-md-8 footer-sx">
                                     <p className="small"><I18N.Message msgId={"Footer.service"}/></p>
-                                    <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="sistema piemonte" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>
+                                    <a href="https://servizi.regione.piemonte.it" target="_blank"><img alt="Servizi online" src="assets/application/conoscenze_ambientali/css/images/logo_servizi_rp.png" /></a>
                                 </div>
 
                                 <div className="col-md-4 footer-dx">
