@@ -9,7 +9,7 @@ const React = require('react');
 const {connect} = require('react-redux');
 const PropTypes = require('prop-types');
 const axios = require('@mapstore/libs/ajax');
-const { selectCategory, resetObjectAndView } = require('../actions/siracatalog');
+const { selectCategory, resetObjectAndView, getMetadataObjects } = require('../actions/siracatalog');
 
 class SiraDataset extends React.Component {
     static propTypes = {
@@ -23,9 +23,11 @@ class SiraDataset extends React.Component {
         match: PropTypes.shape({
             params: PropTypes.object
         }),
+        loading: PropTypes.bool,
         allCategory: PropTypes.array,
         selectCategory: PropTypes.func,
-        resetObjectAndView: PropTypes.func
+        resetObjectAndView: PropTypes.func,
+        getMetadataObjects: PropTypes.func
     };
 
     static contextTypes = {
@@ -45,19 +47,40 @@ class SiraDataset extends React.Component {
                 if (category === undefined) {
                     category = categories.find(cat => cat.icon === 'inspire');
                 }
+                if (this.props.loading) {
+                    category.directLink = true;
+                }
                 this.props.resetObjectAndView();
                 this.props.selectCategory(category, 'objects');
+                this.context.router.history.push('/dataset/');
             }
-            this.context.router.history.push('/dataset/');
         });
     }
 
     render() {
-        return null;
+        return (
+            <div className="home-page">
+                Caricamento dati in corso. Attendere...
+            </div>
+        );
     }
+
+    loadMetadataByCategory = (category) => {
+        let params = {};
+        const  id  = category;
+        if (id !== 999) {
+            params.category = id;
+        }
+        this.props.getMetadataObjects({ params });
+    };
 }
 
-module.exports = connect(null, {
+module.exports = connect((state) => {
+    return {
+        loading: state.siracatalog.loading
+    };
+}, {
     selectCategory,
-    resetObjectAndView
+    resetObjectAndView,
+    getMetadataObjects
 })(SiraDataset);

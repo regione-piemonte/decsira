@@ -1,7 +1,12 @@
 <Panel
     bsStyle="primary"
     header={(
-        <DetailTitle title='PRESE DA FONTANILI' subtitle={[]} id={model.id}/>
+        <DetailTitle title='PRESE DA FONTANILI' subtitle={[
+            'Codice ROC l.r. 22/99: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:codiceROCFontanile/text()"),
+            ' - codice rilievo: ',
+             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Fontanile/decsiraogc_operecaptazione:codiceRilievoFontanile/text()")
+            ]} id={model.id}/>
     )}>
     <Panel className="template">
         <Section header='DATI GENERALI - Fontanile' eventKey='1' expanded={true}>

@@ -242,6 +242,20 @@
   		},
 		{
   			"type": "wms",
+        "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimswms/bdtre_idro",
+        "visibility": false,
+  			"title": "Invaso - Invaso artificiale",
+  			"name": "invaso",
+  			"group": "BDTRE - Idrografia",
+  			"format": "image/png",
+			"infoFormat": "text/plain",
+        "legendParams": {
+          "sld_version": "1.1.0"
+        },
+        "tileSize": 512
+  		},
+		{
+  			"type": "wms",
         "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimswms/bdtre_amm",
         "visibility": false,
   			"title": "Toponomastica Comunale",
@@ -312,24 +326,10 @@
         "format": "image/png",
         "profiles": ["PA_GEN_DECSIRA@REG_PMN"]
       },
-       {
-  			"type": "wms",
-        "url": "{geoserverUrl}/wms",
-        "visibility": true,
-  			"title": "Impianti di depurazione",
-  			"name": "decsiraogc_stabilimenti:ImpiantoDiDepurazione",
-        "infoFormat": "application/vnd.ogc.gml/3.1.1",
-        "featureType": "impiantiDepurazione",
-		"params": {
-			"featureType": "impiantiDepurazione"
-		},
-        "group": "Depuratori",
-        "format": "image/png"
-	  },
 	   {
   			"type": "wms",
         "url": "{geoserverUrl}/wms?",
-        "visibility": true,
+        "visibility": false,
   			"title": "Tratti di condotta forzata",
   			"name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_cf",
   			"group": "Derivazioni",
@@ -342,7 +342,7 @@
 	    {
   			"type": "wms",
         "url": "{geoserverUrl}/wms?",
-        "visibility": true,
+        "visibility": false,
   			"title": "Tratti di condotta generica",
   			"name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_cond",
   			"group": "Derivazioni",
@@ -355,7 +355,7 @@
 		{
   			"type": "wms",
         "url": "{geoserverUrl}/wms?",
-        "visibility": true,
+        "visibility": false,
   			"title": "Tratti di galleria",
   			"name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_galleria",
   			"group": "Derivazioni",
@@ -368,7 +368,7 @@
 		{
   			"type": "wms",
         "url": "{geoserverUrl}/wms?",
-        "visibility": true,
+        "visibility": false,
   			"title": "Tratti di canale",
   			"name": "decsiraogc_geo_tratti_deriv:decsira_geo_tratto_canale",
   			"group": "Derivazioni",

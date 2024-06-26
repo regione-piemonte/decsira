@@ -43,7 +43,7 @@ class CartPanel extends React.Component {
                 <div className="cart-panel-sevices-list-container">
                     <h4 className="cart-panel-sevices-list-element">{service.title}</h4>
                     <ConfirmButton key="removelayer"
-                        text={(<Glyphicon glyph="trash"/>)}
+                        text={(<Glyphicon glyph="trash" title="Elimina"/>)}
                         style={{"float": "right", "cursor": "pointer", "marginTop": -45}}
                         confirming={{text: LocaleUtils.getMessageById(this.context.messages, "layerProperties.confirmDelete"),
                             style: {"float": "right", cursor: "pointer", marginTop: -35}}}
