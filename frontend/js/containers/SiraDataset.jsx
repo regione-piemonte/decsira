@@ -10,7 +10,6 @@ const {connect} = require('react-redux');
 const PropTypes = require('prop-types');
 const axios = require('@mapstore/libs/ajax');
 const { selectCategory, resetObjectAndView, getMetadataObjects } = require('../actions/siracatalog');
-const Spinner = require('react-spinkit');
 
 class SiraDataset extends React.Component {
     static propTypes = {
@@ -24,6 +23,7 @@ class SiraDataset extends React.Component {
         match: PropTypes.shape({
             params: PropTypes.object
         }),
+        loading: PropTypes.bool,
         allCategory: PropTypes.array,
         selectCategory: PropTypes.func,
         resetObjectAndView: PropTypes.func,
@@ -47,7 +47,7 @@ class SiraDataset extends React.Component {
                 if (category === undefined) {
                     category = categories.find(cat => cat.icon === 'inspire');
                 }
-                if(this.props.loading){
+                if (this.props.loading) {
                     category.directLink = true;
                 }
                 this.props.resetObjectAndView();
@@ -55,6 +55,14 @@ class SiraDataset extends React.Component {
                 this.context.router.history.push('/dataset/');
             }
         });
+    }
+
+    render() {
+        return (
+            <div className="home-page">
+                Caricamento dati in corso. Attendere...
+            </div>
+        );
     }
 
     loadMetadataByCategory = (category) => {
@@ -65,15 +73,6 @@ class SiraDataset extends React.Component {
         }
         this.props.getMetadataObjects({ params });
     };
-
-    render() {
-        return (
-            <div className="home-page">
-                Caricamento dati in corso. Attendere...
-                <Spinner spinnerName="three-bounce" noFadeIn/>  
-            </div>
-        );
-    }
 }
 
 module.exports = connect((state) => {

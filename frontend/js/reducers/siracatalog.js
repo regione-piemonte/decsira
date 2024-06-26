@@ -94,7 +94,7 @@ function siracatalog(state = initialState, action) {
         return assign({}, state, {loading: action.status});
     }
     case SELECT_CATEGORY: {
-        let selectedNodes = state.allNodes? state.allNodes.filter((n) => (n.title === action.category.name)) : [];
+        let selectedNodes = state.allNodes ? state.allNodes.filter((n) => (n.title === action.category.name)) : [];
         let allNodes = state.allNodes;
         let title = "";
         if (selectedNodes && selectedNodes && selectedNodes[0]) {
