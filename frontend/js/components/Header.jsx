@@ -117,7 +117,7 @@ class Header extends React.Component {
                             <div className="col-md-9 col-lg-9">
                                 <div className="navbar-header">
                                     <button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-                                        <span className="sr-only">Menu c</span>
+                                        <span className="sr-only">Menu</span>
                                         <span className="icon-bar"></span>
                                         <span className="icon-bar"></span>
                                         <span className="icon-bar"></span>
