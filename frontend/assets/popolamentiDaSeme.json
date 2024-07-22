@@ -1,0 +1,362 @@
+{
+  "featureTypeName": "decsiraogc_idf_pop_seme:PopSeme",
+  "featureTypeNameLabel": "Popolamenti da Seme",
+  "nameSpaces": {
+    "decsiraogc_idf_pop_seme": "http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"
+  },
+  "layer": {
+    "type": "wms",
+    "url": "{geoserverUrl}/wms",
+    "visibility": true,
+    "title": "Popolamenti da Seme",
+    "name": "decsiraogc_idf_pop_seme:PopSeme",
+    "infoFormat": "application/vnd.ogc.gml/3.1.1",
+    "featureType": "popolamentiDaSeme",
+    "params": {
+      "featureType": "popolamentiDaSeme"
+    },
+    "group": "Oggetti",
+    "format": "image/png"
+  },
+  "geometryName": "geometria",
+  "geometryType": "MultiPolygon",
+  "card": {
+    "pdfname": "Scheda_PopSeme_{{/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:idGeoPopSeme/text()}}.pdf",
+    "template": "assets/cardTemplatePopSeme.jsxt",
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "params": {
+        "typeName": "decsiraogc_idf_pop_seme:PopSeme",
+        "version": "2.0",
+        "srsName": "EPSG:4326"
+      }
+    }
+  },
+  "featureinfo": {
+    "templateURL": "assets/infoTemplatePopSeme.jsxt"
+  },
+  "exporter": {
+    "maxFeatures": 2000
+  },
+  "featuregrid": {
+    "grid": {
+      "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme",
+      "columns": [
+        {
+          "hide": true,
+          "id": true,
+          "headerName": "Id",
+          "xpath": [
+            "@gml:id"
+          ],
+          "type": 2
+        },
+        {
+          "headerName": "N. scheda",
+          "width": 150,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:scheda/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Denominazione",
+          "width": 150,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:nomep/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+        {
+          "headerName": "Tipo di materiale",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:tipoMaterDescr/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Tipo di popolamento",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:tipopoDescr/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Provincia",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:prov/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Localit&agrave",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:localita/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Comune",
+          "width": 200,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:comuni/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "referenti",
+          "width": 150,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:referenti/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Tipo di cenosi",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:tipocenoDescr/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Forma di governo principale",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:formagov1Descr/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Forma di governo secondaria",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:formagov2Descr/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Specie idonee alla raccolta",
+          "width": 180,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:specidol/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2
+        },
+		{
+          "headerName": "Totale superficie (ha)",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:totSup/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+		{
+          "headerName": "UTM Est",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:utmE/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+		{
+          "headerName": "UTM Nord",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:utmN/text()"
+          ],
+          "suppressSorting": true,
+          "type": 1
+        },
+		{
+          "headerName": "Data aggiornamento",
+          "width": 100,
+          "xpath": [
+            "decsiraogc_idf_pop_seme:dataAgg/text()"
+          ],
+          "suppressSorting": true,
+          "type": 2,
+          "dateFormat": "DD/MM/YYYY"
+        },
+        {
+          "hide": true,
+          "headerName": "Geometry",
+          "xpath": [
+            "decsiraogc_idf_pop_seme:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+          ],
+          "type": 6
+        }
+      ]
+    }
+  },
+  "query": {
+    "service": {
+      "url": "{geoserverUrl}/ows?service=WFS&request=GetFeature",
+      "urlParams": {
+        "version": "1.1.0",
+        "outputFormat": "application/json"
+      }
+    },
+    "fields": [
+      {
+        "index": 1,
+        "attribute": "decsiraogc_idf_pop_seme:scheda",
+        "label": "Scheda",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_scheda",
+            "propertyName": "label,scheda,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "scheda",
+        "valueLabel": "label"
+      },
+	  {
+        "index": 2,
+        "attribute": "decsiraogc_idf_pop_seme:nomep",
+        "label": "Denominazione",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_nomep",
+            "propertyName": "nomep,label,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "nomep",
+        "valueLabel": "label"
+      },
+	  {
+        "index": 3,
+        "attribute": "decsiraogc_idf_pop_seme:popSemeProvincia/decsiraogc_idf_pop_seme:PopSemeProvincia/decsiraogc_idf_pop_seme:codProvincia",
+        "label": "Provincia",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_provincia",
+            "propertyName": "id_provincia,cod_provincia,descr_provincia,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "cod_provincia",
+        "valueLabel": "descr_provincia"
+      },
+	  {
+        "index": 4,
+        "attribute": "decsiraogc_idf_pop_seme:popSemeComune/decsiraogc_idf_pop_seme:PopSemeComune/decsiraogc_idf_pop_seme:codComune",
+        "label": "Comune",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_comune",
+            "propertyName": "descr_comune,cod_comune,ordinamento,fk_provincia",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "cod_comune",
+        "valueLabel": "descr_comune",
+		"dependson": {
+          "field": "decsiraogc_idf_pop_seme:popSemeProvincia/decsiraogc_idf_pop_seme:PopSemeProvincia/decsiraogc_idf_pop_seme:codProvincia",
+          "from": "id_provincia",
+          "to": "fk_provincia"
+        }
+      },
+	  {
+        "index": 5,
+        "attribute": "decsiraogc_idf_pop_seme:tipoMater",
+        "label": "Tipo di materiale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_tipo_materiale",
+            "propertyName": "label,codice",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "codice",
+        "valueLabel": "label"
+      },
+      {
+        "index": 6,
+        "attribute": "decsiraogc_idf_pop_seme:popSemeSpecie/decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:codice",
+        "label": "Specie",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_specie",
+            "propertyName": "codice,specie,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "codice",
+        "valueLabel": "specie"
+      },
+      {
+        "index": 7,
+        "attribute": "decsiraogc_idf_pop_seme:popSemePro/decsiraogc_idf_pop_seme:PopSemePro/decsiraogc_idf_pop_seme:codice",
+        "label": "Tipo di proprietà",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_proprieta",
+            "propertyName": "codice,label,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "codice",
+        "valueLabel": "label"
+      },
+      {
+        "index": 8,
+        "attribute": "decsiraogc_idf_pop_seme:popSemeTipoMateriale/decsiraogc_idf_pop_seme:PopSemeTipoMateriale/decsiraogc_idf_pop_seme:codice",
+        "label": "Categoria materiale di base",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_tipo_materiale",
+            "propertyName": "codice,label,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "codice",
+        "valueLabel": "label"
+      },
+      {
+        "index": 9,
+        "attribute": "decsiraogc_idf_pop_seme:popSemeFinalita/decsiraogc_idf_pop_seme:PopSemeFinalita/decsiraogc_idf_pop_seme:codice",
+        "label": "Finalita",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_pop_seme_finalita",
+            "propertyName": "codice,label,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "codice",
+        "valueLabel": "label"
+      }
+	  
+    ]
+  }
+}
