@@ -1,0 +1,626 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='POPOLAMENTI DA SEME' subtitle={[
+            'Scheda di dettaglio',
+            "",
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+			<Section header='Scheda popolamento: Dati generali' eventKey='1' expanded={true}>
+            <LabeledField label='N. scheda' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:scheda/text()")
+            }/>
+			<LabeledField label='Denominazione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:nomep/text()")
+            }/>
+			<LabeledField label='Tipo di materiale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMaterDescr/text()")
+            }/>
+			<LabeledField label='Tipo di popolamento' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipopoDescr/text()")
+            }/>
+			<LabeledField label='Provincia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:prov/text()")
+            }/>
+			<LabeledField label='Località' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:localita/text()")
+            }/>
+			<LabeledField label='Comuni' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:comuni/text()")
+            }/>
+			<LabeledField label='Referenti' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:referenti/text()")
+            }/>
+			<LabeledField label='Confini' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:confini/text()")
+            }/>
+			<LabeledField label='Accesso' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:accesso/text()")
+            }/>
+			<LabeledField label='Agibilità' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:agibilità/text()")
+            }/>
+			<LabeledField label='Quota minima' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:quotaMin/text()")
+            }/>
+			<LabeledField label='Quota media' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:quotaMed/text()")
+            }/>
+			<LabeledField label='Quota massima' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:quotaMax/text()")
+            }/>
+			<LabeledField label='Esposizione principale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:esposisDescr/text()")
+            }/>
+			<LabeledField label='Esposizione secondaria' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:esposizDescr/text()")
+            }/>
+			<LabeledField label='Inclinazione in gradi minima' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:inclinazio/text()")
+            }/>
+			<LabeledField label='Inclinazione in gradi massima' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:inclinazi2/text()")
+            }/>
+			<LabeledField label='Precipitazioni medie estive (mm)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:clPestiv/text()")
+            }/>
+			<LabeledField label='Precipitazioni medie Annue (mm)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:clPmedie/text()")
+            }/>
+			<LabeledField label='ETP media annua (mm)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:clEtpm/text()")
+            }/>
+			<LabeledField label='Indice di Gams' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:iGams/text()")
+            }/>
+			<LabeledField label='Rivaz-Martinez' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:iRivaz/text()")
+            }/>
+			<LabeledField label='Regime di umidità' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:pedocliu/text()")
+            }/>
+			<LabeledField label='Regime di temperatura' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:pedoclit/text()")
+            }/>
+			<LabeledField label='Morfologia' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:morfologia/text()")
+            }/>
+			<LabeledField label='Substrato' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:substrato/text()")
+            }/>
+			<LabeledField label='Numero profilo e/o trivellata' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:georili/text()")
+            }/>
+			<LabeledField label='Descrizione suoli' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:suoli/text()")
+            }/>
+			<LabeledField label='Descrizione tipi forestali' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipifore/text()")
+            }/>
+			<LabeledField label='Tipo di cenosi' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipocenoDescr/text()")
+            }/>
+			<LabeledField label='Forma di governo principale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:formagov1Descr/text()")
+            }/>
+			<LabeledField label='Forma di governo secondaria' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:formagov2Descr/text()")
+            }/>
+			<LabeledField label='Numero piante ad ha – inizio range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendnumpi/text()")
+            }/>
+			<LabeledField label='Numero piante ad ha – fine range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendnump2/text()")
+            }/>
+			<LabeledField label='Altezza pianta dominante (m) – inizio range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendaltdom/text()")
+            }/>
+			<LabeledField label='Altezza pianta dominante (m) – fine range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendaltdo2/text()")
+            }/>
+			<LabeledField label='Altezza media (m) – inizio range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendaltmed/text()")
+            }/>
+			<LabeledField label='Altezza media (m) – fine range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendaltme2/text()")
+            }/>
+			<LabeledField label='Descrizione evoluzione colturale' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:evolucult/text()")
+            }/>
+			<LabeledField label='Descrizione motivi iscrizione' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:motiviscr/text()")
+            }/>
+			<LabeledField label='Specie idonee alla raccolta ' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:specidol/text()")
+            }/>
+			<LabeledField label='Notizie bibbliografiche' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:notizbib/text()")
+            }/>
+			<LabeledField label='Totale superficie (ha)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:totSup/text()")
+            }/>
+			<LabeledField label='Temperatura media annua (C)' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:clTempa/text()")
+            }/>
+			<LabeledField label='Area basimetrica media ad ha (mq/ha) – inizio range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendabas/text()")
+            }/>
+			<LabeledField label='Area basimetrica media ad ha (mq/ha) – fine range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendaba2/text()")
+            }/>
+			<LabeledField label='Volume medio ad ha (mc/ha) – inizio range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendavol/text()")
+            }/>
+			<LabeledField label='Volume medio ad ha (mc/ha) – fine range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendavo2/text()")
+            }/>
+			<LabeledField label='Diam. medio di area basim. media (cm) – inizio range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendadiam/text()")
+            }/>
+			<LabeledField label='Diam. medio di area basim. media (cm) – fine range' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendadia2/text()")
+            }/>
+			<LabeledField label='Identificativo informatico' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:id/text()")
+            }/>
+			<LabeledField label='Descrizione DGR/DD' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dgrDd/text()")
+            }/>
+			<LabeledField label='Note descrittive del popolamento ' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:notedes/text()")
+            }/>
+			<LabeledField label='Modalità raccolta' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:modaracc/text()")
+            }/>
+			<LabeledField label='Data aggiornamento' value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dataAgg/text()")
+            }/>
+        </Section>
+
+			<Section header='Arboreti da seme: Dettaglio' eventKey='2' expanded={true}>
+				<SiraTable
+					   id="PopSemeSpecie"
+					   selectedRow={model.PopSemeSpecie}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Arboreti da seme: Specie',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asSpec/text()"
+							   },
+							   {
+								   headerName: 'Arboreti da seme: Anno impianto',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asAnno/text()"
+							   },
+							   {
+								   headerName: 'Arboreti da seme: Sesto impianto',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asSesto/text()"
+							   },
+							   {
+								   headerName: 'Arboreti da seme: Obiettivi',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asObietti/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Isolamento',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asIsolDescr/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Adeguatezza e rappresentatività',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asAdegua/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Produzione quantitativa',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asProduzi/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Qualità del legno',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asQualita/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Valutazione finale idoneità',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asValidonDescr/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Fenotipo',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asFenotipDescr/text()"
+							   },
+							   {
+								   headerName: 'Arboreti seme: Categoria Materiale',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:asCategoDescr/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
+			</Section>
+
+			<Section header='Arboreti da seme: Provenienze' eventKey='3' expanded={true}>
+					<SiraTable
+						   id="PopSemeProvenienza"
+						   selectedRow={model.PopSemeProvenienza}
+						   wfsVersion="2.0"
+						   rowSelection={false}
+						   columns={
+							   [
+								   {
+									   headerName: 'Provenienza',
+									   width: 100,
+									   xpath:"decsiraogc_idf_pop_seme:PopSemeProvenienza/decsiraogc_idf_pop_seme:provenienza/text()"
+								   },
+								   {
+									   headerName: 'Descrizione',
+									   width: 100,
+									   xpath:"decsiraogc_idf_pop_seme:PopSemeProvenienza/decsiraogc_idf_pop_seme:descrProve/text()"
+								   }
+							   ]
+						   }
+						   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeProvenienza")}/>
+			</Section>
+
+			<Section header='Popolamenti: Dettaglio Specie' eventKey='4' expanded={true}>
+				<SiraTable
+					   id="DettaglioSpecie"
+					   selectedRow={model.DettaglioSpecie}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Nome specie',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:specie/text()"
+							   },
+							   {
+								   headerName: 'Indice Braun-Blanquet – inizio range',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:copertura/text()"
+							   },
+							   {
+								   headerName: 'Indice Braun-Blanquet – fine range',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:copertur2/text()"
+							   },
+							   {
+								   headerName: 'Distribuzione',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:distribuz/text()"
+							   },
+							   {
+								   headerName: 'Categoria materiale di base',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:categoria/text()"
+							   },
+							   {
+								   headerName: 'Finalità',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:finalitaDescr/text()"
+							   },
+							   {
+								   headerName: 'Origine',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:origineDescr/text()"
+							   },
+							   {
+								   headerName: 'Isolamento',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:isolamentoDescr/text()"
+							   },
+							   {
+								   headerName: 'Commenti sullisolamento',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:commisola/text()"
+							   },
+							   {
+								   headerName: 'Entità (numero piante portaseme ha)',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:portaseme/text()"
+							   },
+							   {
+								   headerName: 'Struttura genetica',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:struttugen/text()"
+							   },
+							   {
+								   headerName: 'Età (intervallo)',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:eta/text()"
+							   },
+							   {
+								   headerName: 'Fruttificazione',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:fruttificDescr/text()"
+							   },
+							   {
+								   headerName: 'Omogeneità',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:omogene/text()"
+							   },
+							   {
+								   headerName: 'Adeguatezza e rappresentatività',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:adeguarap/text()"
+							   },
+							   {
+								   headerName: 'Stato sanitario-presenza attacchi ',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:statosan1Descr/text()"
+							   },
+							   {
+								   headerName: 'Stato sanitario-vegetazione ',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:statosan2Descr/text()"
+							   },
+							   {
+								   headerName: 'Produzione quantitativa',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:produzione/text()"
+							   },
+							   {
+								   headerName: 'Qualità del legno',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:qualitlegn/text()"
+							   },
+							   {
+								   headerName: 'Fenotipo',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:fenotipoDescr/text()"
+							   },
+							   {
+								   headerName: 'Commenti sul fenotipo',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:fenotipoNote/text()"
+							   },
+							   {
+								   headerName: 'Valutazione finale idoneità',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:validoneeDescr/text()"
+							   },
+							   {
+								   headerName: 'Accessibilità',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:accessibDescr/text()"
+							   },
+							   {
+								   headerName: 'Sicurezza',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:sicurezzaDescr/text()"
+							   },
+							   {
+								   headerName: 'Presenza di proprietà pubblica',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:propipub/text()"
+							   },
+							   {
+								   headerName: 'Validità per la raccolta del seme',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:valiracsemDescr/text()"
+							   },
+							   {
+								   headerName: 'Commento alla validità del seme',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:valiracsemDescr/text()"
+							   },
+							   {
+								   headerName: 'Codice materiale di base',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:cdb/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
+			</Section>
+
+			<Section header='Coperture' eventKey='5' expanded={true}>
+				<SiraTable
+					   id="Coperture"
+					   selectedRow={model.Coperture}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Categoria catastale: codice',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeCopertura/decsiraogc_idf_pop_seme:codice/text()"
+							   },
+							   {
+								   headerName: 'Coperture',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeCopertura/decsiraogc_idf_pop_seme:coperture/text()"
+							   },
+							   {
+								   headerName: 'Superficie (ha)',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeCopertura/decsiraogc_idf_pop_seme:superficie/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:PopSemeCopertura")}/>
+			</Section>
+			
+			<Section header='Proprietà' eventKey='6' expanded={true}>
+				<SiraTable
+					   id="Proprietà"
+					   selectedRow={model.Proprieta}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Codice',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeProprieta/decsiraogc_idf_pop_seme:codice/text()"
+							   },
+							   {
+								   headerName: 'Proprietà',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeProprieta/decsiraogc_idf_pop_seme:proprieta/text()"
+							   },
+							   {
+								   headerName: 'Nome Ente',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeProprieta/decsiraogc_idf_pop_seme:nomeEnte/text()"
+							   },
+							   {
+								   headerName: 'Superfici (ha)',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeProprieta/decsiraogc_idf_pop_seme:superficie/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:PopSemeProprieta")}/>
+			</Section>
+			
+			<Section header='Registro eventi ed interventi' eventKey='7' expanded={true}>
+				<SiraTable
+					   id="RegistroEventiInverventi"
+					   selectedRow={model.RegistroEventiInverventi}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Anno',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeRegEvenInterv/decsiraogc_idf_pop_seme:anno/text()"
+							   },
+							   {
+								   headerName: 'Descrizione',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeRegEvenInterv/decsiraogc_idf_pop_seme:evento/text()"
+							   },
+							   {
+								   headerName: 'Riferimenti Istanza',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeRegEvenInterv/decsiraogc_idf_pop_seme:riferimento/text()"
+							   },
+							   {
+								   headerName: 'Note',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeRegEvenInterv/decsiraogc_idf_pop_seme:note/text()"
+							   },
+							   {
+								   headerName: 'Gestione pianificata',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeRegEvenInterv/decsiraogc_idf_pop_seme:piani/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:PopSemeRegEvenInterv")}/>
+			</Section>
+			
+			<Section header='Disciplinare di gestione' eventKey='8' expanded={true}>
+				<SiraTable
+					   id="DisciplinareDiGestione"
+					   selectedRow={model.DisciplinareDiGestione}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Strumenti',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeDisciplGest/decsiraogc_idf_pop_seme:strumenti/text()"
+							   },
+							   {
+								   headerName: 'Obiettivi',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeDisciplGest/decsiraogc_idf_pop_seme:obiettivi/text()"
+							   },
+							   {
+								   headerName: 'Sintesi',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemeDisciplGest/decsiraogc_idf_pop_seme:sintesi/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeDisciplGest")}/>
+			</Section>
+			
+			<Section header='Portaseme' eventKey='9' expanded={true}>
+				<SiraTable
+					   id="Portaseme"
+					   selectedRow={model.Portaseme}
+					   wfsVersion="2.0"
+					   rowSelection={false}
+					   columns={
+						   [
+							   {
+								   headerName: 'Localita',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemePortaseme/decsiraogc_idf_pop_seme:localita/text()"
+							   },
+							   {
+								   headerName: 'Codice Specie',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemePortaseme/decsiraogc_idf_pop_seme:codiceSpecie/text()"
+							   },
+							   {
+								   headerName: 'Nome Specie',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemePortaseme/decsiraogc_idf_pop_seme:sintesi/text()"
+							   },
+							   {
+								   headerName: 'Utm Est',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemePortaseme/decsiraogc_idf_pop_seme:utmEst/text()"
+							   },
+							   {
+								   headerName: 'Utm Nord',
+								   width: 100,
+								   xpath:"decsiraogc_idf_pop_seme:PopSemePortaseme/decsiraogc_idf_pop_seme:utmNord/text()"
+							   }
+						   ]
+					   }
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemePortaseme")}/>
+			</Section>
+			
+			<Section header='MAPPA SINTESI - Popolamenti da seme su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
+	      <MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          },
+	                      {
+	                          "type": "wms",
+	                          "url": "{geoserverUrl}/wms",
+	                          "visibility": true,
+	                          "title": "Anteprima popolamenti da seme",
+	                          "name": "decsiraogc_idf_pop_seme:PopSeme",
+	                          "group": "Overlays",
+	                          "format": "image/png"
+	                      }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+        </Section>
+
+    </Panel>
+</Panel>
