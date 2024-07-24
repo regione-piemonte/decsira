@@ -145,6 +145,8 @@ class SiraTable extends React.Component {
         let numRows = features.length;
         let height = ((25 * numRows) + 50 > 200) ? 200 : (25 * numRows) + 50;
         let style = {height: height, width: "100%"};
+        let noRowsTemplate ="<noscript/>";
+
         return (
             <div fluid={false} style={style} className="ag-blue">
                 <DataGrid
@@ -160,6 +162,7 @@ class SiraTable extends React.Component {
                     }
                     onGridReady={this.onGridReady}
                     {...this.props}
+                    overlayNoRowsTemplate={noRowsTemplate}
                 />
             </div>);
     }

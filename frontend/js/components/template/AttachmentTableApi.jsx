@@ -102,6 +102,7 @@ class AttachmentTableApi extends React.Component {
         let numRows = this.props.attachments.length;
         let height = ((25 * numRows) + 50 > 200) ? 200 : (25 * numRows) + 50;
         let style = {height: height, width: "100%"};
+        let noRowsTemplate ="<noscript/>";
         return (
             <div fluid={false} style={style} className="ag-blue">
                 <DataGrid
@@ -111,6 +112,7 @@ class AttachmentTableApi extends React.Component {
                     columnDefs={columns}
                     onGridReady={this.onGridReady}
                     {...this.props}
+                    overlayNoRowsTemplate={noRowsTemplate}
                 />
                 <DownloadConfirm
                     showConfirm={this.props.showModal}
