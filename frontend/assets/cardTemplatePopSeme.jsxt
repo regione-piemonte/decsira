@@ -2,8 +2,8 @@
     bsStyle="primary"
     header={(
         <DetailTitle title='POPOLAMENTI DA SEME' subtitle={[
-            'Scheda di dettaglio',
-            "",
+            'Scheda N° ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:scheda/text()")
             ]} id={model.id}/>
     )}>
     <Panel className="template">
@@ -178,7 +178,7 @@
 				}/>
         </Section>
 
-		<ProfileWrapper condition={() => model && ( (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") == 'AS') 
+		<ProfileWrapper condition={() => model && ( (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") == 'AS')
 											|| (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") == 'MC'))}>
 			<Section header='Arboreti da seme: Dettaglio' eventKey='2' expanded={true}>
 				<LabeledField label='Specie' value={
@@ -240,7 +240,7 @@
 			</Section>
 		</ProfileWrapper>
 
-		<ProfileWrapper condition={() => model && ( (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") != 'AS') 
+		<ProfileWrapper condition={() => model && ( (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") != 'AS')
 													&& (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") != 'MC'))}>
 			<Section header='Popolamenti: Dettaglio Specie' eventKey='4' expanded={true}>
 						<SiraTable
@@ -422,7 +422,7 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeCopertura")}/>
 			</Section>
-			
+
 			<Section header='Proprietà' eventKey='6' expanded={true}>
 				<SiraTable
 					   id="Proprietà"
@@ -455,7 +455,7 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemePro")}/>
 			</Section>
-			
+
 			<Section header='Registro eventi ed interventi' eventKey='7' expanded={true}>
 				<SiraTable
 					   id="RegistroEventiInverventi"
@@ -493,7 +493,7 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeRegEventiInterv")}/>
 			</Section>
-			
+
 			<Section header='Disciplinare di gestione' eventKey='8' expanded={true}>
 				<SiraTable
 					   id="DisciplinareDiGestione"
@@ -521,7 +521,7 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeDisciplGest")}/>
 			</Section>
-			
+
 			<Section header='Portaseme' eventKey='9' expanded={true}>
 				<SiraTable
 					   id="Portaseme"
@@ -559,7 +559,7 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemePortaseme")}/>
 			</Section>
-			
+
 			<Section header='MAPPA SINTESI - Popolamenti da seme su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
 	      <MappaScheda
 	              center={
