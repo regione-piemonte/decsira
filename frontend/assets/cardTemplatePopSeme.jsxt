@@ -180,7 +180,7 @@
 
 		<ProfileWrapper condition={() => model && ( (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") == 'AS')
 											|| (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") == 'MC'))}>
-			<Section header='Arboreti da seme: Dettaglio' eventKey='2' expanded={true}>
+			<Section header='Dettaglio Specie' eventKey='2' expanded={true}>
 				<LabeledField label='Specie' value={
 						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie/decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:specie/text()")
 				}/>
@@ -216,7 +216,7 @@
 				}/>
 			</Section>
 
-			<Section header='Arboreti da seme: Provenienze' eventKey='3' expanded={true}>
+			<Section header='Provenienze' eventKey='3' expanded={true}>
 				<SiraTable
 					   id="PopSemeProvenienza"
 					   selectedRow={model.PopSemeProvenienza}
@@ -242,7 +242,7 @@
 
 		<ProfileWrapper condition={() => model && ( (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") != 'AS')
 													&& (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") != 'MC'))}>
-			<Section header='Popolamenti: Dettaglio Specie' eventKey='4' expanded={true}>
+			<Section header='Dettaglio Specie' eventKey='4' expanded={true}>
 						<SiraTable
 							   id="DettaglioSpecie"
 							   selectedRow={model.DettaglioSpecie}
