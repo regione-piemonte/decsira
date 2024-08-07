@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_idf_tipo_fore="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_tipo_fore/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_tipo_fore/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- here extend  gml:AbstractObject o gml:AbstractFeature -->
+	
+	<element name="TipoFore" type="decsiraogc_idf_tipo_fore:TipoForeType" substitutionGroup="gml:AbstractFeature" />
+	
+	<element name="TipoForeSottotVar" type="decsiraogc_idf_tipo_fore:TipoForeSottotVarType" substitutionGroup="gml:AbstractObject" />
+	
+	<element name="TipoForePignatti" type="decsiraogc_idf_tipo_fore:TipoForePignattiType" substitutionGroup="gml:AbstractObject" />
+	
+	<element name="TipoForeGruppoEco" type="decsiraogc_idf_tipo_fore:TipoForeGruppoEcoType" substitutionGroup="gml:AbstractObject" />
+	
+	<element name="TipoForeSpecieDend" type="decsiraogc_idf_tipo_fore:TipoForeSpecieDendType" substitutionGroup="gml:AbstractObject" />
+	
+	<element name="TipoForeAmbClassif" type="decsiraogc_idf_tipo_fore:TipoForeAmbClassifType" substitutionGroup="gml:AbstractObject" />
+	
+	<element name="TipoForeTipoAmb" type="decsiraogc_idf_tipo_fore:TipoForeTipoAmbType" substitutionGroup="gml:AbstractObject" />
+
+	
+	<!-- types -->
+	<!-- here extend gml:AbstractGMLType o gml:AbstractFeatureType -->
+	<!-- Name= nome del campo tabella scritto in CamelCase - type controllo excel e tab su DB - 
+	se il campo è obbligatorio minOccurs = 1 altrimenti maxOccurs = 0 e minOccurs = 1 -->
+	
+	<complexType name="TipoForeType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+					<xs:element name="idGeoTipoFore"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codice" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="denominazione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="descrizioneSintetica" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="classFitosoc" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="distribuzione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="possibiliConfusioni" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="variabilita" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottobosco" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="rinnovazione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="posizione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="intervDaEvitare" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="raccomandazioni" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="struttura" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="indirizInterv" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="categoria" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="categoriaDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					
+					<xs:element name="numeroPianteEttaro"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="mqEttaro"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="volumeMedioEttaro"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="diametroMedio"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="altezzaAlberoDomin"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="altezzaMediaAlberi"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="noteSpecie"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="geometria"  type="xs:integer" minOccurs="1" />
+					
+					
+					<!-- oggetti innestati -->					
+					<xs:element name="tipoForeSottotVar" type="decsiraogc_idf_tipo_fore:TipoForeSottotVarPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="tipoForePignatti" type="decsiraogc_idf_tipo_fore:TipoForePignattiPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="tipoForeGruppoEco" type="decsiraogc_idf_tipo_fore:TipoForeGruppoEcoPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="tipoForeSpecieDend" type="decsiraogc_idf_tipo_fore:TipoForeSpecieDendPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="tipoForeAmbClassif" type="decsiraogc_idf_tipo_fore:TipoForeAmbClassifPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="tipoForeTipoAmb" type="decsiraogc_idf_tipo_fore:TipoForeTipoAmbPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+	<complexType name="TipoForeSottotVarType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+										
+					<xs:element name="idTTipoForeSottotVar"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkGeoTipoFore"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+										
+					<xs:element name="sottotipoCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nomeSottotVar" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TipoForePignattiType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idTTipoForePignatti"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkGeoTipoFore"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkTipoForePignatti"  type="xs:integer" minOccurs="0" maxOccurs="1" /> 
+										
+					<xs:element name="codice" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="descrizione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="indiceCoperturaBb" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="noteSpecie" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="strato" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="carattere" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nomeSottotVar" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TipoForeGruppoEcoType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idTTipoForeGruppoEco"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkGeoTipoFore"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkTTipoForeGruppoEco"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+									
+					<xs:element name="codice" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="descrizione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TipoForeSpecieDendType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idTTipoForeSpeciedend"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkGeoTipoFore"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkTipoForeSpecie"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+									
+					<xs:element name="codice" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="descrizione" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="percCompdend"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="percVolCompDend"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TipoForeAmbClassifType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idTTipoForeAmbClassif"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkGeoTipoFore"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkTipoForeTipoAmbClassif"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+									
+					<xs:element name="ambClassifCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="ambClassifDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="tipoAmbCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="tipoAmbCodDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nomeSottotVar" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="TipoForeTipoAmbType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+				
+					<xs:element name="idTTipoForeTipoAmb"  type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="fkGeoTipoFore"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="fkTipoForeTipoAmb"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+									
+					<xs:element name="ambClassifCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="ambClassifDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="tipoAmbCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="tipoAmbDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoCod" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="sottotipoDescr" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="nomeSottotVar" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	<!-- per ogni oggetto di secondo livello  -->
+	
+	<complexType name="TipoForeSottotVarPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_tipo_fore:TipoForeSottotVar" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="TipoForePignattiPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_tipo_fore:TipoForePignatti" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="TipoForeGruppoEcoPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_tipo_fore:TipoForeGruppoEco" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="TipoForeSpecieDendPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_tipo_fore:TipoForeSpecieDend" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="TipoForeAmbClassifPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_tipo_fore:TipoForeAmbClassif" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+    <complexType name="TipoForeTipoAmbPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_idf_tipo_fore:TipoForeTipoAmb" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+
+</schema>
