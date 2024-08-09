@@ -183,7 +183,7 @@
 					
 					<xs:element name="noteSpecie"  type="xs:integer" minOccurs="1" />
 					
-					<xs:element name="geometria"  type="xs:integer" minOccurs="1" />
+					<xs:element name="geometria" type="gml:GeometryPropertyType"  minOccurs="0" maxOccurs="1" />
 					
 					
 					<!-- oggetti innestati -->					
@@ -206,7 +206,7 @@
 
 	<complexType name="TipoForeSottotVarType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 										
 					<xs:element name="idTTipoForeSottotVar"  type="xs:integer" minOccurs="1" />
@@ -244,7 +244,7 @@
 	
 	<complexType name="TipoForePignattiType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 				
 					<xs:element name="idTTipoForePignatti"  type="xs:integer" minOccurs="1" />
@@ -332,7 +332,7 @@
 	
 	<complexType name="TipoForeGruppoEcoType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 				
 					<xs:element name="idTTipoForeGruppoEco"  type="xs:integer" minOccurs="1" />
@@ -364,7 +364,7 @@
 	
 	<complexType name="TipoForeSpecieDendType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 				
 					<xs:element name="idTTipoForeSpeciedend"  type="xs:integer" minOccurs="1" />
@@ -400,7 +400,7 @@
 	
 	<complexType name="TipoForeAmbClassifType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 				
 					<xs:element name="idTTipoForeAmbClassif"  type="xs:integer" minOccurs="1" />
@@ -472,7 +472,7 @@
 	
 	<complexType name="TipoForeTipoAmbType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 				
 					<xs:element name="idTTipoForeTipoAmb"  type="xs:integer" minOccurs="1" />
