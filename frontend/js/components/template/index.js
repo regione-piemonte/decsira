@@ -5,6 +5,7 @@ const React = require('react');
 const DetailTitle = require("./DetailTitle");
 const Section = require("./Section");
 const LabeledField = require("./LabeledField");
+const TextField = require("./TextField");
 const LinkToPage = require ('@mapstore/components/misc/LinkToPage');
 const {reactCellRendererFactory} = require('../identify/featuregrid/CellRendererFactory');
 const GoToDetail = require('../GoToDetail');

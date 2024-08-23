@@ -64,6 +64,25 @@ function transformLabelField(tableEl) {
     pdfHeight = doc.autoTableEndPosY();
     return doc;
 }
+function transformTextField(tableEl) {
+    let res = doc.autoTableHtmlToJson(tableEl);
+    doc.autoTable(res.columns, res.data, {
+        startY: pdfHeight,
+        theme: 'plain',
+        drawHeaderRow: function() {
+            // Don't draw header row
+            return false;
+        },
+        margin: {horizontal: sectionBodyHorMargin},
+        styles: {overflow: 'linebreak'},
+        bodyStyles: {valign: 'top'},
+        columnStyles: [
+            {columnWidth: (doc.internal.pageSize.width - (sectionBodyHorMargin * 2))}
+        ]
+    });
+    pdfHeight = doc.autoTableEndPosY();
+    return doc;
+}
 function parseSection(el) {
     // Map should remain in page
     pdfHeight += sectionBeforeSpace;
@@ -151,6 +170,10 @@ parseElement = function(children = []) {
         }
         case 'labeledfield': {
             transformLabelField(el, doc);
+            break;
+        }
+        case 'textfield': {
+            transformTextField(el, doc);
             break;
         }
         case 'pdf-title': {
