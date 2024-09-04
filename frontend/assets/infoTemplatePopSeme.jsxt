@@ -32,9 +32,35 @@
              width: 100,
              xpath: "decsiraogc_idf_pop_seme:tipoMaterDescr/text()"
         }, {
-             headerName: 'Specie',
-             width: 150,
-             xpath: "decsiraogc_idf_pop_seme:specie/text()"
+             headerName: 'Tipo popolamento',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:tipopoDescr/text()"
+        }, {
+             headerName: 'Referenti',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:referenti/text()"
+        }, {
+             headerName: 'Tipo di cenosi',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:tipoceno/text()"
+        }, {
+             headerName: 'Forma di Governo principale',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:formagov1Descr/text()"
+        }, {
+             headerName: 'Forma di Governo secondaria',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:formagov2Descr/text()"
+        }, {
+             headerName: 'Specie idonee alla raccolta',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:specidonee/text()"
+        }, {
+             headerName: 'Totale superficie (ha)',
+             width: 100,
+             xpath: "decsiraogc_idf_pop_seme:totSup/text()"
         }
+		
+		
     ]}
     features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_idf_pop_seme:PopSeme")}/>

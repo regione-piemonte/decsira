@@ -3841,4 +3841,20 @@
             </jp:join-parameter>
         </complexParameter>
     </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="C79af6806-08d1-4d50-97e4-5afe6a0ce01b" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_t_pop_seme_specie" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="fenonote"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PopSemeSpecieType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
+                <child name="fenotipoNote" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
 </alignment>
