@@ -113,7 +113,10 @@ class AttachmentTable extends React.Component {
         }
 
         let numRows = features.length;
-        let height = ((25 * numRows) + 50 > 200) ? 200 : (25 * numRows) + 50;
+        let height = 90;
+        if (numRows > 1) {
+            height = ((26 * numRows) + 55 > 200) ? 200 : (26 * numRows) + 55;
+        }
         let style = {height: height, width: "100%"};
         let noRowsTemplate = "<noscript/>";
         return (
