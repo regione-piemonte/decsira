@@ -19,11 +19,21 @@ class TextField extends React.Component {
     };
 
     render() {
+        let values = this.props.values;
+        let resultValues = [];
+        if (values) {
+            values.forEach((item, i) => {
+                resultValues.push(item);     
+                resultValues.push(<br />); 
+            });
+        }
+        resultValues = <p>{resultValues}</p>;
         return (
             <Grid className="labeled-field" fluid>
                 <Row>
                     <Col className="label-sira" xs={12} sm={12} md={12} lg={12}>
-                        {this.props.value}
+                        {this.props.value ? this.props.value : ''}
+                        {resultValues}
                     </Col>
                 </Row>
             </Grid>

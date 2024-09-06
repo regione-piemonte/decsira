@@ -253,7 +253,6 @@
 			
 			<TextField value='Informazioni generali' />
 
-
 				<SiraTable
 					   id="InformazioniGenerali"
 					   selectedRow={model.DettaglioSpecie}
@@ -300,11 +299,17 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
 					   
-
-					   
-					   <TextField value='Copertura e distribuzione' />
-					   
-					   
+					   <TextField value='Copertura e distribuzione'/>
+					   <TextField values={["(nota*)", 
+										   "5 - specie ricoprenti > 80% della superficie del rilievo",
+										   "4 - specie ricoprenti da 50% a 80% della superficie del rilievo",
+										   "3 - specie ricoprenti da 25% a 50% della superficie del rilievo",
+										   "2 - specie abbondante con ricoprimento < 25% ma > 5%",
+										   "1 - specie abbondanti con copertura < 5%" ,
+										   "+ - specie presente con ricoprimento molto scarso",
+										   "r - specie presente con 1 solo individuo o 2 con ricoprimento molto scarso"
+						]} />
+						   
 					   <SiraTable
 					   id="CoperturaDistribuzione"
 					   selectedRow={model.DettaglioSpecie}
@@ -318,13 +323,13 @@
 								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:specie/text()"
 							   },
 							   {
-								   headerName: 'Indice Braun-Blanquet – inizio range',
-								   width: 250,
+								   headerName: 'Indice Braun-Blanquet – inizio range (nota*)',
+								   width: 260,
 								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:copertura/text()"
 							   },
 						       {
-								   headerName: 'Indice Braun-Blanquet – fine range',
-								   width: 250,
+								   headerName: 'Indice Braun-Blanquet – fine range (nota*)',
+								   width: 260,
 								   xpath:"decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:copertur2/text()"
 							   },
 							   {
@@ -350,12 +355,8 @@
 						   ]
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
-					   
-					   
-					   
+						   
 					   <TextField value='Genotipo e fenotipo' />
-					   
-					   
 					   
 					   <SiraTable
 					   id="GenotipoFenotipo"
@@ -398,12 +399,7 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
 					   
-					   
-					   
 					   <TextField value='Stato fitosanitario e produttività' />
-					   
-					   
-					   
 					   
 					   <SiraTable
 					   id="StatoFitosanitarioProduttività"
@@ -444,14 +440,9 @@
 							   }
 						   ]
 					   }
-					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
+					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>		   
 					   
-					   
-					   
-					   <TextField value='Informazioni sulla raccolta' />
-					   
-					   
-					   
+					   <TextField value='Informazioni sulla raccolta' />			   
 					   
 					   <SiraTable
 					   id="InformazioniRaccolta"
@@ -663,7 +654,7 @@
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemePortaseme")}/>
 			</Section>
 
-			<Section header='MAPPA SINTESI - Popolamenti da seme su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
+			<Section header='MAPPA SINTESI - Risorse genetiche forestali su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
 	      <MappaScheda
 	              center={
 	                      model.getValue({

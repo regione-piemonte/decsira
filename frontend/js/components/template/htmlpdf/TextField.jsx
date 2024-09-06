@@ -18,6 +18,15 @@ class TextField extends React.Component {
     };
 
     render() {
+        let values = this.props.values;
+        let resultValues = [];
+        if (values) {
+            values.forEach((item, i) => {
+                resultValues.push(item);     
+                resultValues.push('\n'); 
+            });
+        }
+        resultValues = <p>{resultValues}</p>;
         return (
             <table className="textfield">
                 <thead>
@@ -30,7 +39,8 @@ class TextField extends React.Component {
                 <tbody>
                     <tr>
                         <td>
-                            {this.props.value}
+                        {this.props.value ? this.props.value : ''}
+                        {resultValues}
                         </td>
                     </tr>
                 </tbody>
