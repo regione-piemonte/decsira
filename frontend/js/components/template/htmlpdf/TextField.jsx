@@ -10,20 +10,22 @@ const PropTypes = require('prop-types');
 
 class TextField extends React.Component {
     static propTypes = {
-        value: PropTypes.any
+        value: PropTypes.any,
+        values: PropTypes.array
     };
 
     static defaultProps = {
-        value: null
+        value: null,
+        values: []
     };
 
     render() {
         let values = this.props.values;
         let resultValues = [];
         if (values) {
-            values.forEach((item, i) => {
-                resultValues.push(item);     
-                resultValues.push('\n'); 
+            values.forEach((item) => {
+                resultValues.push(item);
+                resultValues.push('\n');
             });
         }
         resultValues = <p>{resultValues}</p>;
@@ -39,8 +41,8 @@ class TextField extends React.Component {
                 <tbody>
                     <tr>
                         <td>
-                        {this.props.value ? this.props.value : ''}
-                        {resultValues}
+                            {this.props.value ? this.props.value : ''}
+                            {resultValues}
                         </td>
                     </tr>
                 </tbody>

@@ -74,7 +74,7 @@ function transformTextField(tableEl) {
             return false;
         },
         margin: {horizontal: sectionBodyHorMargin},
-        styles: {overflow: 'linebreak', whiteSpace:'pre'},
+        styles: {overflow: 'linebreak', whiteSpace: 'pre'},
         bodyStyles: {valign: 'top'},
         columnStyles: [
             {columnWidth: (doc.internal.pageSize.width - (sectionBodyHorMargin * 2))}

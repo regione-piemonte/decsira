@@ -11,20 +11,22 @@ const {Grid, Row, Col} = require('react-bootstrap');
 
 class TextField extends React.Component {
     static propTypes = {
-        value: PropTypes.any
+        value: PropTypes.any,
+        values: PropTypes.array
     };
 
     static defaultProps = {
-        value: null
+        value: null,
+        values: []
     };
 
     render() {
         let values = this.props.values;
         let resultValues = [];
         if (values) {
-            values.forEach((item, i) => {
-                resultValues.push(item);     
-                resultValues.push(<br />); 
+            values.forEach((item) => {
+                resultValues.push(item);
+                resultValues.push(<br />);
             });
         }
         resultValues = <p>{resultValues}</p>;
