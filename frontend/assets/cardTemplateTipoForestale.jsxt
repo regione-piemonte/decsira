@@ -73,8 +73,8 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:TipoForeTipoAmb")}/>
 
-
-                <TextField value='Gruppo ecologico' />
+				<TextField value='&nbsp;' />
+                <TextField value='Gruppo ecologico' bold italic/>
                 <SiraTable
                     id="GruppoEcologico"
                     selectedRow={model.GruppoEcologico}
@@ -96,8 +96,8 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeGruppoEco")}/>
 
-
-                <TextField value='Sottotipo e varianti' />
+				<TextField value='&nbsp;' />
+                <TextField value='Sottotipo e varianti' bold italic />
                 <SiraTable
                     id="SottotipoVarianti"
                     selectedRow={model.SottotipoVarianti}
@@ -124,8 +124,8 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeSottotVar")}/>
 
-
-                    <TextField value='Specie presenti, indicatrici e differenziali' />
+					<TextField value='&nbsp;' />
+                    <TextField value='Specie presenti, indicatrici e differenziali' bold italic />
                     <SiraTable
                         id="SpeciePresentiIndicatriciDifferenziali"
                         selectedRow={model.SpeciePresentiIndicatriciDifferenziali}
@@ -199,7 +199,7 @@
                         }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale")}/>
 
-
+					<TextField value='&nbsp;' />
                     <TextField values={["(nota*)",
                                         "5 - specie ricoprenti > 80% della superficie del rilievo",
                                         "4 - specie ricoprenti da 50% a 80% della superficie del rilievo",
@@ -208,7 +208,7 @@
                                         "1 - specie abbondanti con copertura < 5%" ,
                                         "+ - specie presente con ricoprimento molto scarso",
                                         "r - specie presente con 1 solo individuo o 2 con ricoprimento molto scarso"
-                    ]} />
+                    ]} italic smaller />
             </Section>
 
 

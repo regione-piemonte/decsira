@@ -288,12 +288,12 @@
             "sortBy": "ordinamento+A"
           }
         },
-        "valueId": "codice",
+        "valueId": "denominazione",
         "valueLabel": "denominazione"
       },
       {
         "index": 3,
-        "attribute": "decsiraogc_idf_tipo_fore:descrizione",
+        "attribute": "decsiraogc_idf_tipo_fore:categoria",
         "label": "Categoria",
         "type": "list",
         "valueService": {
@@ -308,7 +308,7 @@
       },
       {
         "index": 4,
-        "attribute": "decsiraogc_idf_tipo_fore:tipoForePignatti/decsiraogc_idf_tipo_fore:TipoForePignatti/decsiraogc_idf_tipo_fore:descrizione",
+        "attribute": "decsiraogc_idf_tipo_fore:tipoForePignatti/decsiraogc_idf_tipo_fore:TipoForePignatti/decsiraogc_idf_tipo_fore:codice",
         "label": "Specie Pignatti",
         "type": "list",
         "valueService": {
@@ -323,7 +323,7 @@
       },
       {
         "index": 5,
-        "attribute": "decsiraogc_idf_tipo_fore:tipoForeSpecieDend/decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:descrizione",
+        "attribute": "decsiraogc_idf_tipo_fore:tipoForeSpecieDend/decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:codice",
         "label": "Specie in composizione dendrometrica",
         "type": "list",
         "valueService": {
@@ -338,7 +338,7 @@
       },
       {
         "index": 6,
-        "attribute": "decsiraogc_idf_tipo_fore:tipoForeGruppoEco/decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:descrizione",
+        "attribute": "decsiraogc_idf_tipo_fore:tipoForeGruppoEco/decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:codice",
         "label": "Gruppo ecologico",
         "type": "list",
         "valueService": {
@@ -353,13 +353,13 @@
       },
       {
         "index": 7,
-        "attribute": "decsiraogc_idf_tipo_fore:tipoForeAmbClassif/decsiraogc_idf_tipo_fore:TipoForeAmbClassif/decsiraogc_idf_tipo_fore:descrizione",
+        "attribute": "decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifCod",
         "label": "Ambito di classificazione",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_tipo_fore_amb_classif",
-            "propertyName": "codice,descrizione,ordinamento",
+            "propertyName": "id_tipo_fore_amb_classif,codice,descrizione,ordinamento",
             "sortBy": "ordinamento+A"
           }
         },
@@ -368,18 +368,23 @@
       },
       {
         "index": 8,
-        "attribute": "decsiraogc_idf_tipo_fore:tipoForeTipoAmb /decsiraogc_idf_tipo_fore:TipoForeTipoAmb /decsiraogc_idf_tipo_fore:descrizione",
+        "attribute": "decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:tipoAmbCod",
         "label": "Tipo di ambiente",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_tipo_fore_tipo_amb",
-            "propertyName": "codice,descrizione",
+            "propertyName": "codice,descrizione,fk_tipo_fore_amb_classif,ordinamento",
             "sortBy": "ordinamento+A"
           }
         },
         "valueId": "codice",
-        "valueLabel": "descrizione"
+        "valueLabel": "descrizione",
+		"dependson": {
+          "field": "decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifCod",
+          "from": "id_tipo_fore_amb_classif",
+          "to": "fk_tipo_fore_amb_classif"
+        }
       }
     ]
   }
