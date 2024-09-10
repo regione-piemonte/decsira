@@ -64,8 +64,12 @@ function transformLabelField(tableEl) {
     pdfHeight = doc.autoTableEndPosY();
     return doc;
 }
-function transformTextField(tableEl) {
+function transformTextField(tableEl, fontStyle) {
     let res = doc.autoTableHtmlToJson(tableEl);
+    let columnStyles = {columnWidth: (doc.internal.pageSize.width - (sectionBodyHorMargin * 2))};
+    if (fontStyle !== undefined) {
+        columnStyles.fontStyle = fontStyle;
+    }
     doc.autoTable(res.columns, res.data, {
         startY: pdfHeight,
         theme: 'plain',
@@ -77,7 +81,7 @@ function transformTextField(tableEl) {
         styles: {overflow: 'linebreak', whiteSpace: 'pre'},
         bodyStyles: {valign: 'top'},
         columnStyles: [
-            {columnWidth: (doc.internal.pageSize.width - (sectionBodyHorMargin * 2))}
+            columnStyles
         ]
     });
     pdfHeight = doc.autoTableEndPosY();
@@ -173,7 +177,19 @@ parseElement = function(children = []) {
             break;
         }
         case 'textfield': {
-            transformTextField(el, doc);
+            transformTextField(el);
+            break;
+        }
+        case 'textfield-italic': {
+            transformTextField(el, 'italic');
+            break;
+        }
+        case 'textfield-bold': {
+            transformTextField(el, 'bold');
+            break;
+        }
+        case 'textfield-bolditalic': {
+            transformTextField(el, 'bolditalic');
             break;
         }
         case 'pdf-title': {

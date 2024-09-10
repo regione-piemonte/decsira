@@ -12,7 +12,10 @@ const {Grid, Row, Col} = require('react-bootstrap');
 class TextField extends React.Component {
     static propTypes = {
         value: PropTypes.any,
-        values: PropTypes.array
+        values: PropTypes.array,
+        bold: PropTypes.any,
+        italic: PropTypes.any,
+        smaller: PropTypes.any
     };
 
     static defaultProps = {
@@ -29,13 +32,26 @@ class TextField extends React.Component {
                 resultValues.push(<br />);
             });
         }
-        resultValues = <p>{resultValues}</p>;
+        // resultValues = {resultValues};
+
+        let style = {};
+        if (this.props.bold) {
+            style.fontWeight = "bold";
+        }
+        if (this.props.italic) {
+            style.fontStyle = "italic";
+        }
+        if (this.props.smaller) {
+            style.fontSize = "smaller";
+        }
         return (
-            <Grid className="labeled-field" fluid>
+            <Grid fluid>
                 <Row>
-                    <Col className="label-sira" xs={12} sm={12} md={12} lg={12}>
-                        {this.props.value ? this.props.value : ''}
-                        {resultValues}
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <span style={style}>
+                            {this.props.value ? this.props.value : ''}
+                            {resultValues}
+                        </span>
                     </Col>
                 </Row>
             </Grid>

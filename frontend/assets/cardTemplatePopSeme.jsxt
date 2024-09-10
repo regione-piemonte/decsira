@@ -167,9 +167,6 @@
 				<LabeledField label='Diam. medio di area basim. media (cm) – fine range' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dendadia2/text()")
 				}/>
-				<LabeledField label='Identificativo informatico' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:id/text()")
-				}/>
 				<LabeledField label='Descrizione DGR/DD' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:dgrDd/text()")
 				}/>
@@ -251,7 +248,8 @@
 													&& (model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMater/text()") != 'MC'))}>
 			<Section header='Dettaglio Specie ' eventKey='4' expanded={true}>
 			
-			<TextField value='Informazioni generali' />
+			<TextField value='&nbsp;' />
+			<TextField value='Informazioni generali' bold italic />
 
 				<SiraTable
 					   id="InformazioniGenerali"
@@ -299,7 +297,8 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
 					   
-					   <TextField value='Copertura e distribuzione'/>
+					   <TextField value='&nbsp;' />
+					   <TextField value='Copertura e distribuzione' bold italic />
 					   <TextField values={["(nota*)", 
 										   "5 - specie ricoprenti > 80% della superficie del rilievo",
 										   "4 - specie ricoprenti da 50% a 80% della superficie del rilievo",
@@ -308,7 +307,7 @@
 										   "1 - specie abbondanti con copertura < 5%" ,
 										   "+ - specie presente con ricoprimento molto scarso",
 										   "r - specie presente con 1 solo individuo o 2 con ricoprimento molto scarso"
-						]} />
+						]} italic smaller />
 						   
 					   <SiraTable
 					   id="CoperturaDistribuzione"
@@ -356,7 +355,8 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
 						   
-					   <TextField value='Genotipo e fenotipo' />
+					   <TextField value='&nbsp;' />
+					   <TextField value='Genotipo e fenotipo' bold italic />
 					   
 					   <SiraTable
 					   id="GenotipoFenotipo"
@@ -399,7 +399,8 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>
 					   
-					   <TextField value='Stato fitosanitario e produttività' />
+					   <TextField value='&nbsp;' />
+					   <TextField value='Stato fitosanitario e produttività' bold italic />
 					   
 					   <SiraTable
 					   id="StatoFitosanitarioProduttività"
@@ -442,7 +443,8 @@
 					   }
 					   features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:popSemeSpecie")}/>		   
 					   
-					   <TextField value='Informazioni sulla raccolta' />			   
+					   <TextField value='&nbsp;' />
+					   <TextField value='Informazioni sulla raccolta' bold italic />			   
 					   
 					   <SiraTable
 					   id="InformazioniRaccolta"
@@ -498,7 +500,7 @@
 					   columns={
 						   [
 							   {
-								   headerName: 'Categoria catastale: codice',
+								   headerName: 'Categoria forestale: codice',
 								   width: 150,
 								   xpath:"decsiraogc_idf_pop_seme:PopSemeCopertura/decsiraogc_idf_pop_seme:codice/text()"
 							   },
@@ -625,7 +627,7 @@
 					   columns={
 						   [
 							   {
-								   headerName: 'Localita',
+								   headerName: 'Località',
 								   width: 150,
 								   xpath:"decsiraogc_idf_pop_seme:PopSemePortaseme/decsiraogc_idf_pop_seme:localita/text()"
 							   },

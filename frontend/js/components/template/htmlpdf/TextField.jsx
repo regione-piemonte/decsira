@@ -11,7 +11,9 @@ const PropTypes = require('prop-types');
 class TextField extends React.Component {
     static propTypes = {
         value: PropTypes.any,
-        values: PropTypes.array
+        values: PropTypes.array,
+        bold: PropTypes.any,
+        italic: PropTypes.any
     };
 
     static defaultProps = {
@@ -29,8 +31,17 @@ class TextField extends React.Component {
             });
         }
         resultValues = <p>{resultValues}</p>;
+        let className = "textfield";
+        if (this.props.italic && this.props.bold) {
+            className = "textfield-bolditalic";
+        } else if (this.props.bold) {
+            className = "textfield-bold";
+        } else if (this.props.italic) {
+            className = "textfield-italic";
+        }
+
         return (
-            <table className="textfield">
+            <table className={className}>
                 <thead>
                     <tr>
                         <th>
