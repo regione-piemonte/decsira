@@ -1,0 +1,104 @@
+<SiraTable
+style={{width: "100%", height: "200px"}}
+id="infoTemplatePopSeme"
+rowSelection={false}
+onCellClicked={props.onCellClicked}
+profile={model.profile}
+columns={[
+    {
+        width: 30,
+        headerName: '',
+        cellRenderer: reactCellRendererFactory(GoToDetail),
+        id: true,
+        xpath: "@gml:id"
+    }, {
+            headerName: 'Codice identificativo ',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:codice/text()"
+    }, {
+            headerName: 'Denominazione',
+            width: 120,
+            xpath: "decsiraogc_idf_pop_seme:denominazione/text()"
+    }, {
+            headerName: 'Descrizione Sintetica',
+            width: 150,
+            xpath: "decsiraogc_idf_pop_seme:descrizioneSintetica/text()"
+    }, {
+            headerName: 'Classificazione fitosociologica',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:classFitosoc/text()"
+    }, {
+            headerName: 'Distribuzione a livello regionale',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:distribuzione/text()"
+    }, {
+            headerName: 'Possibili confusioni',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:possibiliConfusioni/text()"
+    }, {
+            headerName: 'Variabilità',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:variabilita/text()"
+    }, {
+            headerName: 'Aspetti fisionomici del sottobosco',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:sottobosco/text()"
+    }, {
+            headerName: 'Rinnovazione',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:rinnovazione/text()"
+    }, {
+            headerName: 'Posizione nel ciclo dinamico',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:posizione/text()"
+    }, {
+            headerName: 'Interventi da evitare',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:intervDaEvitare/text()"
+    }, {
+            headerName: 'Raccomandazioni in favore della tutela della biodiversità',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:raccomandazioni/text()"
+    }, {
+            headerName: 'Struttura e stadi di sviluppo',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:struttura/text()"
+    }, {
+            headerName: "indirizzi d'invervento selvicolturale",
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:indirizInterv/text()"
+    }, {
+            headerName: 'Categoria forestale',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:categoriaDescr/text()"
+    }, {
+            headerName: 'Numero piante ad ha',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:numeroPianteEttaro/text()"
+    }, {
+            headerName: 'Area basimetrica media ad ha (mg/ha)',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:mqEttaro/text()"
+    }, {
+            headerName: "Volume medio ad ha (mc/ha)",
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:volumeMedioEttaro/text()"
+    }, {
+            headerName: 'Diametro medio di area basim. media (cm)',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:diametroMedio/text()"
+    }, {
+            headerName: 'Altezza albero dominante (m)',
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:altezzaAlberoDomin/text()"
+    }, {
+            headerName: "Altezza media alberi (m)",
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:altezzaMediaAlberi/text()"
+    }, {
+            headerName: "Note specie indicatrici e differenziali ",
+            width: 100,
+            xpath: "decsiraogc_idf_pop_seme:noteSpecie/text()"
+    }
+]}
+features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_idf_tipo_fore:TipoForestale")}/>
