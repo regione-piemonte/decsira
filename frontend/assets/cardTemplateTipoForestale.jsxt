@@ -2,8 +2,8 @@
     bsStyle="primary"
     header={(
     <DetailTitle title='TIPO FORESTALE' subtitle={[
-        'Scheda N° ',
-        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:scheda/text()")
+        'Codice identificativo: ',
+        model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:codice/text()")
         ]} id={model.id}/>
     )}>
     <Panel className="template">
@@ -51,7 +51,7 @@
                             },
                             {
                                 headerName: 'Descrizione tipo ambiente',
-                                width: 150,
+                                width: 180,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifDescr/text()"
                             },
                             {
@@ -61,7 +61,7 @@
                             },
                             {
                                 headerName: 'Nome sottotipo',
-                                width: 150,
+                                width: 200,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:sottotipoDescr/text()"
                             },
                             {
@@ -84,12 +84,12 @@
                         [
                             {
                                 headerName: 'Ambito di classificazione',
-                                width: 100,
+                                width: 200,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:codice/text()"
                             },
                             {
                                 headerName: 'Codice tipo ambiente',
-                                width: 200,
+                                width: 400,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:descrizione/text()"
                             }
                         ]
@@ -112,12 +112,12 @@
                             },
                             {
                                 headerName: 'Sottotipo',
-                                width: 150,
+                                width: 200,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeSottotVar/decsiraogc_idf_tipo_fore:sottotipoDescr/text()"
                             },
                             {
                                 headerName: 'Variante',
-                                width: 100,
+                                width: 200,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeSottotVar/decsiraogc_idf_tipo_fore:nomeSottotVar/text()"
                             }
                         ]
@@ -126,6 +126,15 @@
 
 					<TextField value='&nbsp;' />
                     <TextField value='Specie presenti, indicatrici e differenziali' bold italic />
+                    <TextField values={["(nota*)",
+                                        "5 - specie ricoprenti > 80% della superficie del rilievo",
+                                        "4 - specie ricoprenti da 50% a 80% della superficie del rilievo",
+                                        "3 - specie ricoprenti da 25% a 50% della superficie del rilievo",
+                                        "2 - specie abbondante con ricoprimento < 25% ma > 5%",
+                                        "1 - specie abbondanti con copertura < 5%" ,
+                                        "+ - specie presente con ricoprimento molto scarso",
+                                        "r - specie presente con 1 solo individuo o 2 con ricoprimento molto scarso"
+                    ]} italic smaller />
                     <SiraTable
                         id="SpeciePresentiIndicatriciDifferenziali"
                         selectedRow={model.SpeciePresentiIndicatriciDifferenziali}
@@ -142,6 +151,11 @@
                                     headerName: 'Nome Latino',
                                     width: 150,
                                     xpath:"decsiraogc_idf_tipo_fore:TipoForePignatti/decsiraogc_idf_tipo_fore:descrizione/text()"
+                                },
+								{
+                                    headerName: 'Indice di copertura Braun-Blanquet (*nota)',
+                                    width: 300,
+                                    xpath:"decsiraogc_idf_tipo_fore:TipoForePignatti/decsiraogc_idf_tipo_fore:indiceCoperturaBb/text()"
                                 },
                                 {
                                     headerName: 'Stato vegetazionale',
@@ -167,102 +181,51 @@
                         }
                         features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForePignatti")}/>
 
+					<TextField value='&nbsp;' />                
+										
+					<LabeledField label='Aspetti fisionomici del sottobosco' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:sottobosco/text()")}/>
+					
+					<LabeledField label='Rinnovazioneo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:rinnovazione/text()")}/>
+					
+					<LabeledField label='Categoria forestale' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:categoriaDescr/text()")}/>
+					
+					<LabeledField label='Note specie indicatrici e differenziali' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:noteSpecie/text()")}/>
 
-                    <SiraTable
-                        id="SpeciePresentiIndicatriciDifferenziali"
-                        selectedRow={model.SpeciePresentiIndicatriciDifferenziali}
-                        wfsVersion="2.0"
-                        rowSelection={false}
-                        columns={
-                            [
-                                {
-                                    headerName: 'Aspetti fisionomici del sottobosco',
-                                    width: 100,
-                                    xpath:"decsiraogc_idf_tipo_fore:sottobosco/text()"
-                                },
-                                {
-                                    headerName: 'Rinnovazione',
-                                    width: 100,
-                                    xxpath:"decsiraogc_idf_tipo_fore:rinnovazione/text()"
-                                },
-                                {
-                                    headerName: 'Categoria forestale',
-                                    width: 100,
-                                    xpath:"decsiraogc_idf_tipo_fore:categoriaDescr/text()"
-                                },
-                                {
-                                    headerName: 'Note specie indicatrici e differenziali',
-                                    width: 100,
-                                    xpath:"decsiraogc_idf_tipo_fore:noteSpecie/text()"
-                                }
-                            ]
-                        }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale")}/>
-
-					<TextField value='&nbsp;' />
-                    <TextField values={["(nota*)",
-                                        "5 - specie ricoprenti > 80% della superficie del rilievo",
-                                        "4 - specie ricoprenti da 50% a 80% della superficie del rilievo",
-                                        "3 - specie ricoprenti da 25% a 50% della superficie del rilievo",
-                                        "2 - specie abbondante con ricoprimento < 25% ma > 5%",
-                                        "1 - specie abbondanti con copertura < 5%" ,
-                                        "+ - specie presente con ricoprimento molto scarso",
-                                        "r - specie presente con 1 solo individuo o 2 con ricoprimento molto scarso"
-                    ]} italic smaller />
             </Section>
 
 
             <Section header='Dati dendrometrici' eventKey='3' expanded={true}>
+			
+					<LabeledField label='Numero di piante ad ha' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:numeroPianteEttaro/text()")}/>
+					
+					<LabeledField label='Area basimetrica media ad ha (mq/ha)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:mqEttaro/text()")}/>
+					
+					<LabeledField label='Volume medio ad ha (mc/ha)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:volumeMedioEttaro/text()")}/>
+					
+					<LabeledField label='Diametro medio di area basim. media (cm)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:diametroMedio/text()")}/>
+					
+					<LabeledField label='Altezza albero dominante (m)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:altezzaAlberoDomin/text()")}/>
+					
+					<LabeledField label='Altezza media alberi (m)' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:altezzaMediaAlberi/text()")}/>
+					
+					<LabeledField label='Struttura e stadi di sviluppo' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:struttura/text()")}/>
 
+                    
+					<TextField value='&nbsp;' />
+                    <TextField value='Composizione dendrometrica' bold italic />
+                    
                     <SiraTable
-                        id="DatiDendrometrici"
-                        selectedRow={model.DatiDendrometrici}
-                        wfsVersion="2.0"
-                        rowSelection={false}
-                        columns={
-                            [
-                                {
-                                    headerName: 'Numero di piante ad ha',
-                                    width: 150,
-                                    xpath:"decsiraogc_idf_tipo_fore:numeroPianteEttaro/text()"
-                                },
-                                {
-                                    headerName: 'Area basimetrica media ad ha (mq/ha)',
-                                    width: 150,
-                                    xxpath:"decsiraogc_idf_tipo_fore:mqEttaro/text()"
-                                },
-                                {
-                                    headerName: 'Volume medio ad ha (mc/ha)',
-                                    width: 150,
-                                    xpath:"decsiraogc_idf_tipo_fore:volumeMedioEttaro/text()"
-                                },
-                                {
-                                    headerName: 'Diametro medio di area basim. media (cm)',
-                                    width: 150,
-                                    xpath:"decsiraogc_idf_tipo_fore:diametroMedio/text()"
-                                },
-                                {
-                                    headerName: 'Altezza albero dominante (m) ',
-                                    width: 150,
-                                    xpath:"decsiraogc_idf_tipo_fore:altezzaAlberoDomin/text()"
-                                },
-                                {
-                                    headerName: 'Altezza media alberi (m) ',
-                                    width: 150,
-                                    xpath:"decsiraogc_idf_tipo_fore:altezzaMediaAlberi/text()"
-                                },
-                                {
-                                    headerName: 'Struttura e stadi di sviluppo',
-                                    width: 150,
-                                    xpath:"decsiraogc_idf_tipo_fore:struttura/text()"
-                                }
-                            ]
-                        }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale")}/>
-
-
-                    <Section header='Composizione dendrometrica' eventKey='4' expanded={true}>
-                        <SiraTable
                         id="ComposizioneDendrometrica"
                         selectedRow={model.ComposizioneDendrometrica}
                         wfsVersion="2.0"
@@ -271,56 +234,67 @@
                             [
                                 {
                                     headerName: 'Specie',
-                                    width: 100,
+                                    width: 150,
                                     xpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:descrizione/text()"
                                 },
                                 {
                                     headerName: 'Presenze(%)',
-                                    width: 100,
+                                    width: 150,
                                     xxpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percCompdend/text()"
                                 },
                                 {
                                     headerName: 'Volumi(%)',
-                                    width: 100,
+                                    width: 150,
                                     xxpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percVolCompDend/text()"
                                 }
                             ]
                         }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeSpecieDend")}/>
-                    </Section>
+                   
+					
+					<TextField value='&nbsp;' />
+                    <TextField value='Dati selvicolturali' bold italic />
+					<TextField value='&nbsp;' />
+					
+					<LabeledField label='Posizione nel ciclo dinamico e tendenze evolutive' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:posizione/text()")}/>
+					
+					<LabeledField label='Interventi da evitare' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:intervDaEvitare/text()")}/>
+					
+					<LabeledField label='Raccomandazioni in favore della tutela della biodiversità' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:raccomandazioni/text()")}/>
+					
+					<LabeledField label="Indirizzi d'intervento selvicolturali" value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:indirizInterv/text()")}/>
 
-                    <Section header='Dati selvicolturali' eventKey='5' expanded={true}>
-                        <SiraTable
-                        id="DatiSelvicolturali"
-                        selectedRow={model.ComposizioneDendrometrica}
-                        wfsVersion="2.0"
-                        rowSelection={false}
-                        columns={
-                            [
-                                {
-                                    headerName: 'Posizione nel ciclo dinamico e tendenze evolutive',
-                                    width: 100,
-                                    xpath:"decsiraogc_idf_tipo_fore:posizione/text()"
-                                },
-                                {
-                                    headerName: 'Interventi da evitare',
-                                    width: 100,
-                                    xxpath:"decsiraogc_idf_tipo_fore:intervDaEvitare/text()"
-                                },
-                                {
-                                    headerName: 'Raccomandazioni in favore della tutela della biodiversità',
-                                    width: 100,
-                                    xxpath:"decsiraogc_idf_tipo_fore:raccomandazioni/text()"
-                                },
-                                {
-                                    headerName: "Indirizzi d'intervento selvicolturali",
-                                    width: 100,
-                                    xxpath:"decsiraogc_idf_tipo_fore:indirizInterv/text()"
-                                }
-                            ]
-                        }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale")}/>
-                    </Section>
+                    
             </Section>
+			
+			<Section header='MAPPA SINTESI - Tipo forestale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={false}>
+				<MappaScheda
+	              center={
+	                      model.getValue({
+	                          type: TemplateUtils.GEOMETRY_TYPE,
+	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
+	                      })
+	              }
+	              layers={[
+	                      {
+							  "type": "wms",
+							  "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+							  "name": "SfondoCartRif",
+							  "title": "Sfondo Cartografico",
+							  "group": "background",
+							  "visibility": true,
+							  "format": "image/png",
+							  "tiled": true,
+							  "tileSize": 512
+                          }
+	              ]}
+	              authParam={model.authParam}
+	              withMap={model.withMap}/>
+
+			</Section>
     </Panel>
 </Panel>
