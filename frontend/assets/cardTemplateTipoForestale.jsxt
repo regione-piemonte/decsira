@@ -72,9 +72,9 @@
                         ]
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:TipoForeTipoAmb")}/>
-
-				<TextField value='&nbsp;' />
-                <TextField value='Gruppo ecologico' bold italic/>
+			</Section>
+			
+			<Section header='Gruppo ecologico' eventKey='3' expanded={true}>
                 <SiraTable
                     id="GruppoEcologico"
                     selectedRow={model.GruppoEcologico}
@@ -95,9 +95,9 @@
                         ]
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeGruppoEco")}/>
-
-				<TextField value='&nbsp;' />
-                <TextField value='Sottotipo e varianti' bold italic />
+			</Section>
+			
+			<Section header='Sottotipo e varianti' eventKey='4' expanded={true}>
                 <SiraTable
                     id="SottotipoVarianti"
                     selectedRow={model.SottotipoVarianti}
@@ -123,9 +123,9 @@
                         ]
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeSottotVar")}/>
-
-					<TextField value='&nbsp;' />
-                    <TextField value='Specie presenti, indicatrici e differenziali' bold italic />
+			</Section>
+			
+			<Section header='Specie presenti, indicatrici e differenziali' eventKey='5' expanded={true}>					
                     <TextField values={["(nota*)",
                                         "5 - specie ricoprenti > 80% della superficie del rilievo",
                                         "4 - specie ricoprenti da 50% a 80% della superficie del rilievo",
@@ -135,6 +135,7 @@
                                         "+ - specie presente con ricoprimento molto scarso",
                                         "r - specie presente con 1 solo individuo o 2 con ricoprimento molto scarso"
                     ]} italic smaller />
+					
                     <SiraTable
                         id="SpeciePresentiIndicatriciDifferenziali"
                         selectedRow={model.SpeciePresentiIndicatriciDifferenziali}
@@ -186,7 +187,7 @@
 					<LabeledField label='Aspetti fisionomici del sottobosco' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:sottobosco/text()")}/>
 					
-					<LabeledField label='Rinnovazioneo' value={
+					<LabeledField label='Rinnovazione' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:rinnovazione/text()")}/>
 					
 					<LabeledField label='Categoria forestale' value={
@@ -198,7 +199,7 @@
             </Section>
 
 
-            <Section header='Dati dendrometrici' eventKey='3' expanded={true}>
+            <Section header='Dati dendrometrici' eventKey='6' expanded={true}>
 			
 					<LabeledField label='Numero di piante ad ha' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:numeroPianteEttaro/text()")}/>
@@ -240,12 +241,12 @@
                                 {
                                     headerName: 'Presenze(%)',
                                     width: 150,
-                                    xxpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percCompdend/text()"
+                                    xpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percCompDend/text()"
                                 },
                                 {
                                     headerName: 'Volumi(%)',
                                     width: 150,
-                                    xxpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percVolCompDend/text()"
+                                    xpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percVolCompDend/text()"
                                 }
                             ]
                         }
@@ -267,34 +268,9 @@
 					
 					<LabeledField label="Indirizzi d'intervento selvicolturali" value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:indirizInterv/text()")}/>
-
                     
             </Section>
 			
-			<Section header='MAPPA SINTESI - Tipo forestale su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={false}>
-				<MappaScheda
-	              center={
-	                      model.getValue({
-	                          type: TemplateUtils.GEOMETRY_TYPE,
-	                          xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()"
-	                      })
-	              }
-	              layers={[
-	                      {
-							  "type": "wms",
-							  "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
-							  "name": "SfondoCartRif",
-							  "title": "Sfondo Cartografico",
-							  "group": "background",
-							  "visibility": true,
-							  "format": "image/png",
-							  "tiled": true,
-							  "tileSize": 512
-                          }
-	              ]}
-	              authParam={model.authParam}
-	              withMap={model.withMap}/>
-
-			</Section>
+			
     </Panel>
 </Panel>
