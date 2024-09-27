@@ -1,31 +1,37 @@
 package it.csi.sira.backend.metadata.integration.servizi.csw.dto;
 
 public class CswURI {
-  private int tipo;
-  private String protocol;
-  private String url;
+	private int tipo;
+	private String protocol;
+	private String url;
 
-  public String getProtocol() {
-	return protocol;
-  }
+	public String getProtocol() {
+		return protocol;
+	}
 
-  public void setProtocol(String protocol) {
-	this.protocol = protocol;
-  }
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
 
-  public String getUrl() {
-	return url;
-  }
+	public String getUrl() {
+		return url;
+	}
 
-  public void setUrl(String url) {
-	this.url = url;
-  }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-  public int getTipo() {
-    return tipo;
-  }
+	public int getTipo() {
+		return tipo;
+	}
 
-  public void setTipo(int tipo) {
-    this.tipo = tipo;
-  }
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		return "CswURI [tipo=" + tipo + ", protocol=" + protocol + ", url=" + url + "]";
+	}
+
 }

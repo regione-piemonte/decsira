@@ -593,9 +593,13 @@ public class MetadataManager {
 		}
 	  }
 
-	  if (isValid) {
-		cswRecordsValid.add(recordCSW);
-	  }
+		if (isValid) {
+			cswRecordsValid.add(recordCSW);
+		} else {
+			logger.debug(LogFormatter.format(className, methodName,
+					"******************** SCARTO CSW RECORD ****************"));
+			logger.debug(LogFormatter.format(className, methodName, recordCSW.toString()));
+		}
 	}
 
 	logger.debug(LogFormatter.format(className, methodName, "END"));
