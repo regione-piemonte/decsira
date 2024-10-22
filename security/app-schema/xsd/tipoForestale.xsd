@@ -171,8 +171,23 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-
-
+					
+					<xs:element name="docDescrCategoriaUrl" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="docChiaveDeterminazioneUrl" minOccurs="0" maxOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
                     <xs:element name="numeroPianteEttaro" type="xs:integer" minOccurs="1" />
 
                     <xs:element name="mqEttaro" type="xs:integer" minOccurs="1" />

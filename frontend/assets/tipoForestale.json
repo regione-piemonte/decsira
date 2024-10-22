@@ -1,6 +1,6 @@
 {
   "featureTypeName": "decsiraogc_idf_tipo_fore:TipoForestale",
-  "featureTypeNameLabel": "Tipo Forestale",
+  "featureTypeNameLabel": "Tipi forestali del Piemonte: schede descrittive",
   "nameSpaces": {
     "decsiraogc_idf_tipo_fore": "http://www.regione.piemonte.it/ambiente/decsiraogc_idf_tipo_fore/1.0"
   },
@@ -8,7 +8,7 @@
     "type": "wms",
     "url": "{geoserverUrl}/wms",
     "visibility": true,
-    "title": "Tipo Forestale",
+    "title": "Tipi forestali del Piemonte: schede descrittive",
     "name": "decsiraogc_idf_tipo_fore:TipoForestale",
     "infoFormat": "application/vnd.ogc.gml/3.1.1",
     "featureType": "tipoForestale",
@@ -19,7 +19,7 @@
     "format": "image/png"
   },
   "geometryName": "geometria",
-  "geometryType": "MultiPolygon",
+  "geometryType": "Point",
   "card": {
     "pdfname": "Scheda_TipoForestale_{{/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:codice/text()}}.pdf",
     "template": "assets/cardTemplateTipoForestale.jsxt",
@@ -52,135 +52,9 @@
           ],
           "type": 2
         },
-        {
-          "headerName": "Codice identificativo",
-          "width": 170,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:codice/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Denominazione",
-          "width": 400,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:denominazione/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Descrizione sintetica",
-          "width": 180,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:descrizioneSintetica/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Classificazione fitosociologica",
-          "width": 230,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:classFitosoc/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Distribuzione a livello regionale",
-          "width": 230,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:distribuzione/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Possibili confusioni",
-          "width": 200,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:possibiliConfusioni/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Variabilità",
-          "width": 200,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:variabilita/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Aspetti fisionomici del sottobosco",
-          "width": 250,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:sottobosco/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Rinnovazione",
-          "width": 200,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:rinnovazione/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Posizione del ciclo dinamico",
-          "width": 220,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:posizione/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Inverventi da evitare",
-          "width": 200,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:intervDaEvitare/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Raccomandazioni in favore della tutela della biodeversità",
-          "width": 420,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:raccomandazioni/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Struttura e stadi di sviluppo",
-          "width": 220,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:struttura/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Indirizzi d'intervento selvicolturali",
-          "width": 280,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:indirizInterv/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
+		{
           "headerName": "Categoria forestale",
-          "width": 200,
+          "width": 300,
           "xpath": [
             "decsiraogc_idf_tipo_fore:categoriaDescr/text()"
           ],
@@ -188,64 +62,19 @@
           "type": 2
         },
         {
-          "headerName": "Numero piante ad ha",
-          "width": 180,
+          "headerName": "Tipo forestale: codice",
+          "width": 250,
           "xpath": [
-            "decsiraogc_idf_tipo_fore:numeroPianteEttaro/text()"
+            "decsiraogc_idf_tipo_fore:codice/text()"
           ],
           "suppressSorting": true,
           "type": 2
         },
         {
-          "headerName": "Area basimetrica merdia ad ha (mq/ha)",
-          "width": 300,
+          "headerName": "Tipo forestale: denominazione",
+          "width": 500,
           "xpath": [
-            "decsiraogc_idf_tipo_fore:mqEttaro/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Volume medio ad ha (mc/ha)",
-          "width": 220,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:volumeMedioEttaro/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Diametro medio di area basim. media (cm)",
-          "width": 320,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:diametroMedio/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Altezza albero dominante (m)",
-          "width": 220,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:altezzaAlberoDomin/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Altezza media alberi (m)",
-          "width": 200,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:altezzaMediaAlberi/text()"
-          ],
-          "suppressSorting": true,
-          "type": 2
-        },
-        {
-          "headerName": "Note specie indicatori e differenziali",
-          "width": 280,
-          "xpath": [
-            "decsiraogc_idf_tipo_fore:noteSpecie/text()"
+            "decsiraogc_idf_tipo_fore:denominazione/text()"
           ],
           "suppressSorting": true,
           "type": 2
@@ -262,10 +91,25 @@
       }
     },
     "fields": [
-      {
+	  {
         "index": 1,
+        "attribute": "decsiraogc_idf_tipo_fore:categoria",
+        "label": "Categoria forestale",
+        "type": "list",
+        "valueService": {
+          "urlParams": {
+            "typeName": "decsiraogc_decodif:decsira_d_tipo_fore_categoria",
+            "propertyName": "codice,label,ordinamento",
+            "sortBy": "ordinamento+A"
+          }
+        },
+        "valueId": "codice",
+        "valueLabel": "label"
+      },
+      {
+        "index": 2,
         "attribute": "decsiraogc_idf_tipo_fore:codice",
-        "label": "Codice",
+        "label": "Tipo forestale: codice",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -278,9 +122,9 @@
         "valueLabel": "codice"
       },
       {
-        "index": 2,
+        "index": 3,
         "attribute": "decsiraogc_idf_tipo_fore:denominazione",
-        "label": "Denominazione",
+        "label": "Tipo forestale: denominazione",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -293,24 +137,9 @@
         "valueLabel": "denominazione"
       },
       {
-        "index": 3,
-        "attribute": "decsiraogc_idf_tipo_fore:categoria",
-        "label": "Categoria",
-        "type": "list",
-        "valueService": {
-          "urlParams": {
-            "typeName": "decsiraogc_decodif:decsira_d_tipo_fore_categoria",
-            "propertyName": "codice,descrizione,ordinamento",
-            "sortBy": "ordinamento+A"
-          }
-        },
-        "valueId": "codice",
-        "valueLabel": "descrizione"
-      },
-      {
         "index": 4,
         "attribute": "decsiraogc_idf_tipo_fore:tipoForePignatti/decsiraogc_idf_tipo_fore:TipoForePignatti/decsiraogc_idf_tipo_fore:codice",
-        "label": "Specie Pignatti",
+        "label": "Specie presenti",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -324,21 +153,6 @@
       },
       {
         "index": 5,
-        "attribute": "decsiraogc_idf_tipo_fore:tipoForeSpecieDend/decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:codice",
-        "label": "Specie in composizione dendrometrica",
-        "type": "list",
-        "valueService": {
-          "urlParams": {
-            "typeName": "decsiraogc_decodif:decsira_d_tipo_fore_specie",
-            "propertyName": "codice,descrizione,ordinamento",
-            "sortBy": "ordinamento+A"
-          }
-        },
-        "valueId": "codice",
-        "valueLabel": "descrizione"
-      },
-      {
-        "index": 6,
         "attribute": "decsiraogc_idf_tipo_fore:tipoForeGruppoEco/decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:codice",
         "label": "Gruppo ecologico",
         "type": "list",
@@ -353,9 +167,9 @@
         "valueLabel": "descrizione"
       },
       {
-        "index": 7,
+        "index": 6,
         "attribute": "decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifCod",
-        "label": "Ambito di classificazione",
+        "label": "Ambito di classificazione degli ambienti",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -368,19 +182,19 @@
         "valueLabel": "descrizione"
       },
       {
-        "index": 8,
+        "index": 7,
         "attribute": "decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:tipoAmbCod",
-        "label": "Tipo di ambiente",
+        "label": "Descrizione tipo di ambiente",
         "type": "list",
         "valueService": {
           "urlParams": {
             "typeName": "decsiraogc_decodif:decsira_d_tipo_fore_tipo_amb",
-            "propertyName": "codice,descrizione,fk_tipo_fore_amb_classif,ordinamento",
+            "propertyName": "codice,label,fk_tipo_fore_amb_classif,ordinamento",
             "sortBy": "ordinamento+A"
           }
         },
         "valueId": "codice",
-        "valueLabel": "descrizione",
+        "valueLabel": "label",
 		"dependson": {
           "field": "decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifCod",
           "from": "id_tipo_fore_amb_classif",

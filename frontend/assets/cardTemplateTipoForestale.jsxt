@@ -8,10 +8,16 @@
     )}>
     <Panel className="template">
             <Section header='Tipo forestale: Dati generali' eventKey='1' expanded={true}>
-                <LabeledField label='Codice identificativo' value={
+				<LabeledField label='Categoria forestale' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:categoriaDescr/text()")
+                }/>
+                <LabeledField label='Categoria forestale: scheda dicotomica e chiave di determinazione' value={
+                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:docDescrCategoriaUrl/text()")
+                }/>
+                <LabeledField label='Tipo forestale: codice' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:codice/text()")
                 }/>
-                <LabeledField label='Denominazione' value={
+				<LabeledField label='Tipo forestale: denominazione' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:denominazione/text()")
                 }/>
                 <LabeledField label='Descrizione sintetica' value={
@@ -74,30 +80,7 @@
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:TipoForeTipoAmb")}/>
 			</Section>
 			
-			<Section header='Gruppo ecologico' eventKey='3' expanded={true}>
-                <SiraTable
-                    id="GruppoEcologico"
-                    selectedRow={model.GruppoEcologico}
-                    wfsVersion="2.0"
-                    rowSelection={false}
-                    columns={
-                        [
-                            {
-                                headerName: 'Ambito di classificazione',
-                                width: 200,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:codice/text()"
-                            },
-                            {
-                                headerName: 'Codice tipo ambiente',
-                                width: 400,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:descrizione/text()"
-                            }
-                        ]
-                    }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeGruppoEco")}/>
-			</Section>
-			
-			<Section header='Sottotipo e varianti' eventKey='4' expanded={true}>
+			<Section header='Sottotipo e varianti' eventKey='3' expanded={true}>
                 <SiraTable
                     id="SottotipoVarianti"
                     selectedRow={model.SottotipoVarianti}
@@ -124,6 +107,29 @@
                     }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeSottotVar")}/>
 			</Section>
+			
+			<Section header='Gruppo ecologico' eventKey='4' expanded={true}>
+                <SiraTable
+                    id="GruppoEcologico"
+                    selectedRow={model.GruppoEcologico}
+                    wfsVersion="2.0"
+                    rowSelection={false}
+                    columns={
+                        [
+                            {
+                                headerName: 'Ambito di classificazione',
+                                width: 200,
+                                xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:codice/text()"
+                            },
+                            {
+                                headerName: 'Codice tipo ambiente',
+                                width: 400,
+                                xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:descrizione/text()"
+                            }
+                        ]
+                    }
+                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeGruppoEco")}/>
+			</Section>			
 			
 			<Section header='Specie presenti, indicatrici e differenziali' eventKey='5' expanded={true}>					
                     <TextField values={["(nota*)",
@@ -190,27 +196,24 @@
 					<LabeledField label='Rinnovazione' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:rinnovazione/text()")}/>
 					
-					<LabeledField label='Categoria forestale' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:categoriaDescr/text()")}/>
-					
 					<LabeledField label='Note specie indicatrici e differenziali' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:noteSpecie/text()")}/>
 
             </Section>
 
 
-            <Section header='Dati dendrometrici' eventKey='6' expanded={true}>
+            <Section header='Dati dendrometrici (da Inventario forestale regionale 2000)' eventKey='6' expanded={true}>
 			
 					<LabeledField label='Numero di piante ad ha' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:numeroPianteEttaro/text()")}/>
 					
-					<LabeledField label='Area basimetrica media ad ha (mq/ha)' value={
+					<LabeledField label='Area basimetrica media (m2/ha)' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:mqEttaro/text()")}/>
 					
-					<LabeledField label='Volume medio ad ha (mc/ha)' value={
+					<LabeledField label='Volume medio (m3/ha)' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:volumeMedioEttaro/text()")}/>
 					
-					<LabeledField label='Diametro medio di area basim. media (cm)' value={
+					<LabeledField label='Diametro medio di area basimetrica media (cm) ' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:diametroMedio/text()")}/>
 					
 					<LabeledField label='Altezza albero dominante (m)' value={
@@ -271,6 +274,26 @@
                     
             </Section>
 			
+			
+				<Section header='MAPPA SINTESI' eventKey='7' expanded={false} hide={true}>
+					  <MappaScheda
+							  layers={[
+									  {
+										  "type": "wms",
+										  "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+										  "name": "SfondoCartRif",
+										  "title": "Sfondo Cartografico",
+										  "group": "background",
+										  "visibility": true,
+										  "format": "image/png",
+										  "tiled": true,
+										  "tileSize": 512
+									  }
+							  ]}
+							  authParam={model.authParam}
+					  withMap={model.withMap}/>
+
+				</Section>
 			
     </Panel>
 </Panel>

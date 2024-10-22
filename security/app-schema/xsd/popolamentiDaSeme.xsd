@@ -434,7 +434,13 @@
 					
 					<xs:element name="dendadia2"  type="xs:decimal" minOccurs="0" maxOccurs="1" />
 					
-					<xs:element name="id"  type="xs:integer" minOccurs="0" maxOccurs="1" />
+					<xs:element name="legendUrl" minOccurs="0" maxOccurs="1" >
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
 					
 					<xs:element name="dgrDd" minOccurs="0" maxOccurs="1" >
                         <xs:simpleType>

@@ -8,25 +8,28 @@
     )}>
     <Panel className="template">
 			<Section header='Risorse genetiche e forestali: Dati generali' eventKey='1' expanded={true}>
+				<LabeledField label='Glossario multingue e legenda - Multilingual glossary and legend' link='true' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:legendUrl/text()")
+				}/>
 				<LabeledField label='N. scheda' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:scheda/text()")
 				}/>
-				<LabeledField label='Denominazione' value={
+				<LabeledField label='Denominazione (Name)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:nomep/text()")
 				}/>
-				<LabeledField label='Tipo di materiale' value={
+				<LabeledField label='Tipo di materiale (Basic material)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipoMaterDescr/text()")
 				}/>
 				<LabeledField label='Tipo di popolamento' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipopoDescr/text()")
 				}/>
-				<LabeledField label='Provincia' value={
+				<LabeledField label='Provincia (Prov)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:prov/text()")
 				}/>
-				<LabeledField label='Località' value={
+				<LabeledField label='Località (Location)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:localita/text()")
 				}/>
-				<LabeledField label='Comuni' value={
+				<LabeledField label='Comuni (Municipalities)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:comuni/text()")
 				}/>
 				<LabeledField label='UTM Est' value={
@@ -35,7 +38,7 @@
 				<LabeledField label='UTM Nord' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:utmN/text()")
 				}/>		
-				<LabeledField label='Referenti' value={
+				<LabeledField label='Referenti (Contacts)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:referenti/text()")
 				}/>
 				<LabeledField label='Confini' value={
@@ -104,13 +107,13 @@
 				<LabeledField label='Descrizione tipi forestali' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipifore/text()")
 				}/>
-				<LabeledField label='Tipo di cenosi' value={
+				<LabeledField label='Tipo di cenosi (Type of formation)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:tipocenoDescr/text()")
 				}/>
-				<LabeledField label='Forma di governo principale' value={
+				<LabeledField label='Forma di governo principale (Silvicultural system primary)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:formagov1Descr/text()")
 				}/>
-				<LabeledField label='Forma di governo secondaria' value={
+				<LabeledField label='Forma di governo secondaria (Silvicultural system secondary)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:formagov2Descr/text()")
 				}/>
 				<LabeledField label='Numero piante ad ha – inizio range' value={
@@ -137,13 +140,13 @@
 				<LabeledField label='Descrizione motivi iscrizione' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:motiviscr/text()")
 				}/>
-				<LabeledField label='Specie idonee alla raccolta ' value={
+				<LabeledField label='Specie idonee alla raccolta (Forest reproductive material - Category)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:specidol/text()")
 				}/>
 				<LabeledField label='Notizie bibbliografiche' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:notizbib/text()")
 				}/>
-				<LabeledField label='Totale superficie (ha)' value={
+				<LabeledField label='Totale superficie - Area (ha)' value={
 					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_pop_seme:PopSeme/decsiraogc_idf_pop_seme:totSup/text()")
 				}/>
 				<LabeledField label='Temperatura media annua (C)' value={

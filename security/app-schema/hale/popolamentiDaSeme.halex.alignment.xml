@@ -302,22 +302,6 @@
         <parameter value="false" name="ignoreNamespaces"/>
         <parameter value="false" name="structuralRename"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.rename" id="Ca6456aa6-6897-4fcc-bd6b-11d859224eda" priority="normal">
-        <source>
-            <property>
-                <type name="decsira_geo_pop_seme" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                <child name="id"/>
-            </property>
-        </source>
-        <target>
-            <property>
-                <type name="PopSemeType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
-                <child name="id" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
-            </property>
-        </target>
-        <parameter value="false" name="ignoreNamespaces"/>
-        <parameter value="false" name="structuralRename"/>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.retype" id="C13fc328c-c001-4bf7-8f6f-ee2a43ebe2da" priority="normal">
         <source>
             <class>
@@ -3852,6 +3836,22 @@
             <property>
                 <type name="PopSemeSpecieType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
                 <child name="fenotipoNote" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
+            </property>
+        </target>
+        <parameter value="false" name="ignoreNamespaces"/>
+        <parameter value="false" name="structuralRename"/>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.rename" id="Cd136316f-e394-4f0f-96c6-cfb4cf1642d5" priority="normal">
+        <source>
+            <property>
+                <type name="decsira_geo_pop_seme" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                <child name="legend_url"/>
+            </property>
+        </source>
+        <target>
+            <property>
+                <type name="PopSemeType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
+                <child name="legendUrl" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"/>
             </property>
         </target>
         <parameter value="false" name="ignoreNamespaces"/>

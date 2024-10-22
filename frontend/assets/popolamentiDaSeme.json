@@ -1,6 +1,6 @@
 {
   "featureTypeName": "decsiraogc_idf_pop_seme:PopSeme",
-  "featureTypeNameLabel": "Risorse genetiche forestali",
+  "featureTypeNameLabel": "Risorse genetiche forestali - Forest genetic resources",
   "nameSpaces": {
     "decsiraogc_idf_pop_seme": "http://www.regione.piemonte.it/ambiente/decsiraogc_idf_pop_seme/1.0"
   },
@@ -8,7 +8,7 @@
     "type": "wms",
     "url": "{geoserverUrl}/wms",
     "visibility": true,
-    "title": "Risorse genetiche forestali",
+    "title": "Risorse genetiche forestali - Forest genetic resources",
     "name": "decsiraogc_idf_pop_seme:PopSeme",
     "infoFormat": "application/vnd.ogc.gml/3.1.1",
     "featureType": "popolamentiDaSeme",
@@ -61,8 +61,8 @@
           "type": 2
         },
         {
-          "headerName": "Denominazione",
-          "width": 180,
+          "headerName": "Denominazione (Name)",
+          "width": 230,
           "xpath": [
             "decsiraogc_idf_pop_seme:nomep/text()"
           ],
@@ -70,8 +70,8 @@
           "type": 2
         },
         {
-          "headerName": "Tipo di materiale",
-          "width": 150,
+          "headerName": "Tipo di materiale (Basic material)",
+          "width": 270,
           "xpath": [
             "decsiraogc_idf_pop_seme:tipoMaterDescr/text()"
           ],
@@ -85,11 +85,12 @@
             "decsiraogc_idf_pop_seme:tipopoDescr/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
-          "headerName": "Provincia",
-          "width": 90,
+          "headerName": "Provincia (Prov)",
+          "width": 130,
           "xpath": [
             "decsiraogc_idf_pop_seme:prov/text()"
           ],
@@ -97,8 +98,8 @@
           "type": 2
         },
         {
-          "headerName": "Localit&agrave",
-          "width": 180,
+          "headerName": "Localit&agrave (Location)",
+          "width": 250,
           "xpath": [
             "decsiraogc_idf_pop_seme:localita/text()"
           ],
@@ -106,7 +107,7 @@
           "type": 2
         },
         {
-          "headerName": "Comune",
+          "headerName": "Comune (Municipalities)",
           "width": 200,
           "xpath": [
             "decsiraogc_idf_pop_seme:comuni/text()"
@@ -115,8 +116,8 @@
           "type": 2
         },
         {
-          "headerName": "Referenti",
-          "width": 150,
+          "headerName": "Referenti (Contacts)",
+          "width": 200,
           "xpath": [
             "decsiraogc_idf_pop_seme:referenti/text()"
           ],
@@ -124,35 +125,38 @@
           "type": 2
         },
         {
-          "headerName": "Tipo di cenosi",
-          "width": 150,
+          "headerName": "Tipo di cenosi (Type of formation)",
+          "width": 270,
           "xpath": [
             "decsiraogc_idf_pop_seme:tipocenoDescr/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
-          "headerName": "Forma di governo principale",
-          "width": 200,
+          "headerName": "Forma di governo principale (Silvicultural system primary)",
+          "width": 430,
           "xpath": [
             "decsiraogc_idf_pop_seme:formagov1Descr/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
-          "headerName": "Forma di governo secondaria",
-          "width": 220,
+          "headerName": "Forma di governo secondaria (Silvicultural system secondary)",
+          "width": 440,
           "xpath": [
             "decsiraogc_idf_pop_seme:formagov2Descr/text()"
           ],
           "suppressSorting": true,
-          "type": 2
+          "type": 2,
+		  "hide": true
         },
         {
-          "headerName": "Specie idonee alla raccolta",
-          "width": 200,
+          "headerName": "Specie idonee alla raccolta (Forest reproductive material - Category)",
+          "width": 500,
           "xpath": [
             "decsiraogc_idf_pop_seme:specidol/text()"
           ],
@@ -160,8 +164,8 @@
           "type": 2
         },
         {
-          "headerName": "Totale superficie (ha)",
-          "width": 160,
+          "headerName": "Totale superficie - Area (ha)",
+          "width": 220,
           "xpath": [
             "decsiraogc_idf_pop_seme:totSup/text()"
           ],
@@ -234,7 +238,7 @@
       {
         "index": 2,
         "attribute": "decsiraogc_idf_pop_seme:nomep",
-        "label": "Denominazione",
+        "label": "Denominazione (Name)",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -249,7 +253,7 @@
       {
         "index": 3,
         "attribute": "decsiraogc_idf_pop_seme:popSemeProvincia/decsiraogc_idf_pop_seme:PopSemeProvincia/decsiraogc_idf_pop_seme:codProvincia",
-        "label": "Provincia",
+        "label": "Provincia (Prov)",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -264,7 +268,7 @@
       {
         "index": 4,
         "attribute": "decsiraogc_idf_pop_seme:popSemeComune/decsiraogc_idf_pop_seme:PopSemeComune/decsiraogc_idf_pop_seme:codComune",
-        "label": "Comune",
+        "label": "Comune (Municipalities)",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -284,7 +288,7 @@
       {
         "index": 5,
         "attribute": "decsiraogc_idf_pop_seme:popSemeTipoMateriale/decsiraogc_idf_pop_seme:PopSemeTipoMateriale/decsiraogc_idf_pop_seme:tipoMater",
-        "label": "Tipo di materiale",
+        "label": "Tipo di materiale (Basic material)",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -314,7 +318,7 @@
       {
         "index": 7,
         "attribute": "decsiraogc_idf_pop_seme:popSemePro/decsiraogc_idf_pop_seme:PopSemePro/decsiraogc_idf_pop_seme:proprieta",
-        "label": "Tipo di proprietà",
+        "label": "Tipo di proprietà (Type of property)",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -329,7 +333,7 @@
       {
         "index": 8,
         "attribute": "decsiraogc_idf_pop_seme:popSemeSpecie/decsiraogc_idf_pop_seme:PopSemeSpecie/decsiraogc_idf_pop_seme:categoria",
-        "label": "Categoria materiale di base",
+        "label": "Categoria materiale di base (Basic material category)",
         "type": "list",
         "valueService": {
           "urlParams": {
@@ -344,7 +348,7 @@
       {
         "index": 9,
         "attribute": "decsiraogc_idf_pop_seme:popSemeFinalita/decsiraogc_idf_pop_seme:PopSemeFinalita/decsiraogc_idf_pop_seme:finalita",
-        "label": "Finalità",
+        "label": "Finalità (Finality)",
         "type": "list",
         "valueService": {
           "urlParams": {
