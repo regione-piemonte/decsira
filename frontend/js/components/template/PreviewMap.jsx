@@ -13,8 +13,6 @@ const PMap = require('@mapstore/components/map/' + mapType + '/Map').default;
 const Layer = require('@mapstore/components/map/' + mapType + '/Layer').default;
 require('@mapstore/components/map/' + mapType + '/plugins/index');
 const {changeMapView} = require('@mapstore/actions/map');
-const {Button} = require("react-bootstrap");
-const img = require('../../../assets/img/magnifier.png');
 const assign = require('object-assign');
 const PropTypes = require('prop-types');
 const ConfigUtils = require('@mapstore/utils/ConfigUtils');
@@ -78,7 +76,9 @@ class PreviewMap extends React.Component {
     }
 
     render() {
-
+        if (this.props.layers.length === 0) {
+            return <noscript className="pdf-nomap"/>;
+        }
         const extent = this.props.center && this.getExtent();
         return this.props.map ?
             (
@@ -98,7 +98,6 @@ class PreviewMap extends React.Component {
                             pinchZoom: false
                         }, view: {resolutions: this.props.map.resolutions}}}
                         registerHooks={false}
-                        zoomControl={false}
                         {...(extent && {zoom: this.getZoom(extent), center: this.getCenter(extent)})}
                         id="scheda_pMap">
                         {
@@ -108,9 +107,6 @@ class PreviewMap extends React.Component {
                             )
                         }
                     </PMap>
-                    {extent && <Button onClick={this.changeMapView} style={{position: "relative", top: "-" + this.props.style.height, 'float': "right", margin: "2px"}}>
-                        <img alt="zoom-to" src={img} width={16}/>
-                    </Button>}
                 </div>
             ) : <span/>;
     }

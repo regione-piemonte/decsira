@@ -1,7 +1,7 @@
 <Panel
     bsStyle="primary"
     header={(
-    <DetailTitle title='TIPO FORESTALE' subtitle={[
+    <DetailTitle title='Tipi forestali del Piemonte: scheda descrittiva' subtitle={[
         'Codice identificativo: ',
         model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:codice/text()")
         ]} id={model.id}/>
@@ -238,62 +238,41 @@
                             [
                                 {
                                     headerName: 'Specie',
-                                    width: 150,
+                                    width: 250,
                                     xpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:descrizione/text()"
                                 },
                                 {
                                     headerName: 'Presenze(%)',
-                                    width: 150,
+                                    width: 250,
                                     xpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percCompDend/text()"
                                 },
                                 {
                                     headerName: 'Volumi(%)',
-                                    width: 150,
+                                    width: 250,
                                     xpath:"decsiraogc_idf_tipo_fore:TipoForeSpecieDend/decsiraogc_idf_tipo_fore:percVolCompDend/text()"
                                 }
                             ]
                         }
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeSpecieDend")}/>
-                   
 					
-					<TextField value='&nbsp;' />
-                    <TextField value='Dati selvicolturali' bold italic />
-					<TextField value='&nbsp;' />
-					
-					<LabeledField label='Posizione nel ciclo dinamico e tendenze evolutive' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:posizione/text()")}/>
-					
-					<LabeledField label='Interventi da evitare' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:intervDaEvitare/text()")}/>
-					
-					<LabeledField label='Raccomandazioni in favore della tutela della biodiversità' value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:raccomandazioni/text()")}/>
-					
-					<LabeledField label="Indirizzi d'intervento selvicolturali" value={
-                    model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:indirizInterv/text()")}/>
-                    
             </Section>
 			
+			<Section header='Dati selvicolturali' eventKey='7' expanded={true}>
+				<LabeledField label='Posizione nel ciclo dinamico e tendenze evolutive' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:posizione/text()")}/>
+				
+				<LabeledField label='Interventi da evitare' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:intervDaEvitare/text()")}/>
+				
+				<LabeledField label='Raccomandazioni in favore della tutela della biodiversità' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:raccomandazioni/text()")}/>
+				
+				<LabeledField label="Indirizzi d'intervento selvicolturali" value={
+                model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:indirizInterv/text()")}/>
+			</Section>
 			
-				<Section header='MAPPA SINTESI' eventKey='7' expanded={false} hide={true}>
-					  <MappaScheda
-							  layers={[
-									  {
-										  "type": "wms",
-										  "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
-										  "name": "SfondoCartRif",
-										  "title": "Sfondo Cartografico",
-										  "group": "background",
-										  "visibility": true,
-										  "format": "image/png",
-										  "tiled": true,
-										  "tileSize": 512
-									  }
-							  ]}
-							  authParam={model.authParam}
-					  withMap={model.withMap}/>
-
-				</Section>
+			
+			<MappaScheda />
 			
     </Panel>
 </Panel>
