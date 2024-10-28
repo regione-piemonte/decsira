@@ -1,0 +1,191 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='IMPIANTI SOGGETTI AD AUTORIZZAZIONE AMBIENTALE' subtitle={[
+            'Denominazione Impianto: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:nome/text()"),
+            ' Comune: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:nomeComune/text()")
+            ]} id={model.id}/>
+    )}>
+
+    <Panel className="template">
+	
+        <Section header='DATI GENERALI IMPIANTO' eventKey='1' expanded={true}>
+			<LabeledField label='Codice SIRA' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:codiceSira/text()")
+            }/>
+			<LabeledField label='Denominazione' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:nome/text()")
+			}/>
+			<LabeledField label='Stato sede operativa' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:desStatoImpianto/text()")
+			}/>
+			<LabeledField label='Provincia' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:desProvincia/text()")
+			}/>
+			<LabeledField label='Comune' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:desComune/text()")
+			}/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Indirizzo' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:indirizzo/text()")
+				}/>
+
+				<LabeledField label='Email-pec' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:emailPec/text()")
+				}/>
+			</ProfileWrapper>
+        </Section>
+
+        
+        <Section header='DATI AZIENDA' eventKey='2' expanded={true}>
+			<LabeledField label='Ragione sociale' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:denominAzienda/text()")
+			}/>
+			
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1  )}>
+				<LabeledField label='Codice fiscale Azienda' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:codFiscaleAzienda/text()")
+				}/>
+				<LabeledField label='Partita IVA Azienda' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:partitaIVAAzienda/text()")
+				}/>
+			</ProfileWrapper>
+			
+			<LabeledField label='Provincia' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:desProvinciaAzienda/text()")
+			}/>
+			<LabeledField label='Comune' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:desComuneAzienda/text()")
+			}/>
+			
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1  )}>
+				<LabeledField label='Indirizzo' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:indirizzoAzienda/text()")
+				}/>
+				<LabeledField label='Cognome Titolare' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:cognomeTitolareAzienda/text()")
+				}/>
+				<LabeledField label='Nome Titolare' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:nomeTitolareAzienda/text()")
+				}/>
+			</ProfileWrapper>
+        </Section>  
+
+             
+        <Section header='AUTORIZZAZIONI' eventKey='3' expanded={true}>
+		<SiraTable
+			id="Autorizzazioni"
+			selectedRow={model.Autorizzazioni}
+			wfsVersion="2.0"
+			rowSelection={false}
+			columns={
+				[
+					{
+						hide: true,
+						id: true,
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/@gml:id"
+					},
+					{
+						headerName: 'Identificativo',
+						width: 120,
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:idIstanza/text()"
+					},
+					{
+						headerName: 'Stato autorizzazione',
+						width: 150,
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:desStato/text()"
+					},
+					{
+						headerName: 'Tipo provvedimento',
+						width: 250,
+						xpath:"decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:tipoProvvedimento/text()"
+					},
+					{
+						headerName: 'Ambito tematico',
+						width: 250,
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:desTematica/text()"
+					},
+					{
+						headerName: 'Numero',
+						width: 100,
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:estremiProvvedimento/text()"
+					},
+					{
+						headerName: 'Data emissione',
+						width: 100,
+						dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:dataProvvedimento/text()"
+					},
+					{
+						headerName: 'Data scadenza',
+						width: 100,
+						dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:dataScadenza/text()"
+					},
+					{
+						headerName: 'Ente competente',
+						width: 150,
+						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:desEnteCompetente/text()"
+					}
+
+				]
+			}
+			features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:autorizzAmbientaleImpianto")}/>
+        </Section>
+                   
+
+		<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+			<Section header='IMPATTO ACUSTICO - Verifica sorgenti rumorose' eventKey='4' expanded={false}>
+				  <LabeledField label='Verifica sorgenti rumorose' value={
+						model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:verificaSorgentiRumorose/decsiraogc_impianti:VerificaSorgentiRumorose/decsiraogc_impianti:desRumorosita/text()")
+				  }/>
+			</Section>
+		</ProfileWrapper>
+
+
+
+		<Section header='MAPPA SINTESI - Impianto su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='5' expanded={true}>
+			<MappaScheda
+				center={
+					  model.getValue({
+						  type: TemplateUtils.GEOMETRY_TYPE,
+						  xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:geometria/gml:Point/gml:pos/text()"
+					  })
+				}
+				layers={[
+				{
+				  "type": "wms",
+				  "url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+				  "name": "SfondoCartRif",
+				  "title": "Sfondo Cartografico",
+				  "group": "background",
+				  "visibility": true,
+				  "format": "image/png",
+				  "tiled": true,
+				  "tileSize": 512
+				},
+				{
+				  "type": "wms",
+				  "url": "{geoserverUrl}/wms",
+				  "visibility": true,
+				  "title": "Stabilimenti Preview",
+				  "name": "decsiraogc_impianti:Impianto",
+				  "group": "Overlays",
+				  "format": "image/png"
+				}]}
+				authParam={model.authParam}
+				withMap={model.withMap}/>
+		</Section>
+
+
+		<Section header='METADATO' eventKey='6' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="https://www.geoportale.piemonte.it/geonetwork/srv/ita/catalog.search#/metadata/r_piemon:bed1392a-1e91-46eb-b2d6-8403797782d3"
+			/>
+		</Section>
+		
+    </Panel>
+</Panel>

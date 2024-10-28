@@ -11,7 +11,7 @@
 				<LabeledField label='Categoria forestale' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:categoriaDescr/text()")
                 }/>
-                <LabeledField label='Categoria forestale: scheda dicotomica e chiave di determinazione' value={
+                <LabeledField label='Categoria forestale: scheda dicotomica e chiave di determinazione' link='true' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:docDescrCategoriaUrl/text()")
                 }/>
                 <LabeledField label='Tipo forestale: codice' value={
@@ -51,14 +51,9 @@
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifDescr/text()"
                             },
                             {
-                                headerName: 'Codice tipo ambiente',
-                                width: 150,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:tipoAmbCod/text()"
-                            },
-                            {
-                                headerName: 'Descrizione tipo ambiente',
-                                width: 180,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifDescr/text()"
+                                headerName: 'Tipo ambiente',
+                                width: 250,
+                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:tipoAmbDescr/text()"
                             },
                             {
                                 headerName: 'Codice sottotipo',
@@ -80,34 +75,6 @@
                     features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:TipoForeTipoAmb")}/>
 			</Section>
 			
-			<Section header='Sottotipo e varianti' eventKey='3' expanded={true}>
-                <SiraTable
-                    id="SottotipoVarianti"
-                    selectedRow={model.SottotipoVarianti}
-                    wfsVersion="2.0"
-                    rowSelection={false}
-                    columns={
-                        [
-                            {
-                                headerName: 'Codice',
-                                width: 100,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeSottotVar/decsiraogc_idf_tipo_fore:sottotipoCod/text()"
-                            },
-                            {
-                                headerName: 'Sottotipo',
-                                width: 200,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeSottotVar/decsiraogc_idf_tipo_fore:sottotipoDescr/text()"
-                            },
-                            {
-                                headerName: 'Variante',
-                                width: 200,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeSottotVar/decsiraogc_idf_tipo_fore:nomeSottotVar/text()"
-                            }
-                        ]
-                    }
-                    features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:tipoForeSottotVar")}/>
-			</Section>
-			
 			<Section header='Gruppo ecologico' eventKey='4' expanded={true}>
                 <SiraTable
                     id="GruppoEcologico"
@@ -117,12 +84,12 @@
                     columns={
                         [
                             {
-                                headerName: 'Ambito di classificazione',
+                                headerName: 'Codice',
                                 width: 200,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:codice/text()"
                             },
                             {
-                                headerName: 'Codice tipo ambiente',
+                                headerName: 'Descrizione',
                                 width: 400,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeGruppoEco/decsiraogc_idf_tipo_fore:descrizione/text()"
                             }

@@ -1,0 +1,390 @@
+{
+   "featureTypeName":"decsiraogc_impianti:Impianto",
+   "featureTypeNameLabel":"Impianto",
+   "nameSpaces": {
+     "decsiraogc_impianti": "http://www.regione.piemonte.it/ambiente/decsiraogc_impianti/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Impianti soggetti ad autorizzazione ambientale",
+        "name": "decsiraogc_impianti:Impianto",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "impianto",
+		"params": {
+			"featureType": "impianto"
+		},
+        "group": "Oggetti",
+        "format": "image/png"
+        },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+        "pdfname": "Scheda_Impianto_{{/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:nome/text()}}.pdf",
+        "template": "assets/cardTemplateImpianto.jsxt",
+		"treeTemplate": "assets/treeTemplateImpianto.jsxt",
+        "service": {
+             "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+                "params": {
+                   "typeName": "decsiraogc_impianti:Impianto",
+                    "version": "2.0",
+                    "srsName": "EPSG:4326"
+                }
+          }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateImpianto.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice Sira Impianto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:codiceSira/text()"],
+           "type": 2,
+           "width" : 180
+         },
+		 {
+           "headerName": "Stato sede operativa",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:desStatoImpianto/text()"],
+           "type": 2,
+           "width" : 180
+         },
+         {
+           "headerName": "Denominazione Impianto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:nome/text()"],
+           "type": 2,
+           "width" : 400
+         },
+         {
+           "headerName": "Provincia Impianto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:desProvincia/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Comune Impianto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:desComune/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Indirizzo Impianto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:indirizzo/text()"],
+           "type": 2,
+           "width" : 250
+         },
+         {
+           "headerName": "Ragione sociale Azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:denominAzienda/text()"],
+           "type": 2,
+           "width" : 250
+         },
+         {
+           "headerName": "Codice fiscale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:codFiscaleAzienda/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Partita IVA Azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:partitaIVAAzienda/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Provincia Azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:desProvinciaAzienda/text()"],
+           "type": 2,
+		   "width" : 150
+         },
+         {
+           "headerName": "Comune Azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:desComuneAzienda/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Indirizzo Azienda",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:indirizzoAzienda/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+            "width" : 200
+         },
+		 {
+           "headerName": "Codice Istanza ultima autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:codiceIstanza/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+            "width" : 250
+         },
+		 {
+           "headerName": "Data ultima autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:dataUltimaAutoriz/text()"],
+           "type": 2,
+		   "dateFormat": "DD/MM/YYYY",
+           "width" : 220
+         },
+		 {
+           "headerName": "Data scadenza ultima autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:dataScadenzaUltimaAutoriz/text()"],
+           "type": 2,
+		   "dateFormat": "DD/MM/YYYY",
+           "width" : 300
+         },
+		 {
+           "headerName": "Data ultima proposta di autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:dataUltimaAutorizProposta/text()"],
+           "profiles": ["B", "PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+		   "dateFormat": "DD/MM/YYYY",
+           "width" : 250
+         },
+         {
+           "headerName": "Tipo provvedimento attivo",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:tipoProvvedimentoAttivo/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+            "width" : 250
+         },
+         {
+           "headerName": "Tipo provvedimento storico",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:tipoProvvedimentoStorico/text()"],
+           "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+            "width" : 250
+         },
+         {
+           "headerName": "Ambito tematico autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_impianti:desTematicaAttivita/text()"],
+           "type": 2,
+            "width" : 400
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_impianti:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+           "index": 1,
+           "attribute": "decsiraogc_impianti:desProvincia",
+           "label":"Provincia Impianto",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_province",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_impianti:desComune",
+           "label":"Comune Impianto",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+		    "dependson":{
+              "field": "decsiraogc_impianti:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 3,
+           "attribute": "decsiraogc_impianti:codiceSira",
+           "label":"Codice sira Impianto",
+           "type":"string"
+        },
+		{
+           "index": 4,
+           "attribute": "decsiraogc_impianti:nome",
+           "label":"Denominazione impianto",
+           "type":"string"
+        },
+        {
+           "index": 5,
+           "attribute": "decsiraogc_impianti:desStatoImpianto",
+           "label":"Stato sede operativa",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_d_stato",
+               "cql_filter": "id_stato=101%20OR%20id_stato=199",
+               "propertyName": "id_stato,des_stato"
+             }
+           },
+           "valueId":"des_stato",
+           "valueLabel":"des_stato"
+        },
+		{
+           "index": 6,
+           "attribute": "decsiraogc_impianti:codiceIstanza",
+           "label":"Codice Istanza ultima autorizzazione",
+		   "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+		{
+            "index": 7,
+            "attribute": "decsiraogc_impianti:dataUltimaAutoriz",
+            "label":"Data ultima autorizzazione",
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+        },
+		{
+            "index": 8,
+            "attribute": "decsiraogc_impianti:dataScadenzaUltimaAutoriz",
+            "label":"Data scadenza ultima autorizzazione",		
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+        },
+		{
+            "index": 9,
+            "attribute": "decsiraogc_impianti:dataUltimaAutorizProposta",
+            "label":"Data ultima proposta di autorizzazione",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "type":"date",
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+        },
+		{
+           "index": 10,
+           "attribute": "decsiraogc_impianti:denominAzienda",
+           "label":"Ragione sociale Azienda",
+           "type":"string"
+        },
+        {
+           "index": 11,
+           "attribute": "decsiraogc_impianti:codFiscaleAzienda",
+           "label":"Codice fiscale Azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+        {
+           "index": 12,
+           "attribute": "decsiraogc_impianti:partitaIVAAzienda",
+           "label":"Partita IVA Azienda",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+		{
+           "index": 13,
+           "attribute": "decsiraogc_impianti:autorizzAmbientaleImpianto/decsiraogc_impianti:autorizzAmbientaleImpianto/decsiraogc_impianti:tematicaAttivita/decsiraogc_impianti:TematicaAttivita/decsiraogc_impianti:desTematica",
+           "label":"Ambito tematico autorizzazione",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_tematica",
+               "propertyName": "id_tematica,des_tematica",
+                "sortBy": "des_tematica+A"
+             }
+           },
+
+           "valueId":"des_tematica",
+           "valueLabel":"des_tematica"
+        },
+		{
+           "index": 14,
+           "attribute": "decsiraogc_impianti:autorizzAmbientaleImpianto/decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:tipoProvvedimento",
+           "label":"Tipo provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+               "propertyName": "id_proc_attivita,provv",
+               "cql_filter": "id_proc_attivita=1%20OR%20id_proc_attivita=9%20OR%20id_proc_attivita=18%20OR%20id_proc_attivita=99%20OR%20id_proc_attivita=110%20OR%20id_proc_attivita=111",
+                "sortBy": "provv+A"
+             }
+           },
+
+           "valueId":"provv",
+           "valueLabel":"provv"
+        },
+		{
+           "index": 15,
+           "attribute": "decsiraogc_impianti:autorizzAmbientaleImpianto/decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:dataProvvedimento",
+           "label":"Data provvedimento",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        },
+        {
+           "index": 16,
+           "attribute": "decsiraogc_impianti:autorizzAmbientaleImpianto/decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:dataScadenza",
+           "label":"Data scadenza",
+           "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"date",
+           "fieldOptions": {
+             "dateFormat": "DD/MM/YYYY"
+           }
+        }
+     ]
+   }
+
+}
