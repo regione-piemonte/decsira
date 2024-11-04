@@ -11,7 +11,7 @@
 				<LabeledField label='Categoria forestale' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:categoriaDescr/text()")
                 }/>
-                <LabeledField label='Categoria forestale: scheda dicotomica e chiave di determinazione' link='true' value={
+                <LabeledField label='Categoria forestale: descrizione e chiavi di determinazione' link='true' value={
                     model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_idf_tipo_fore:TipoForestale/decsiraogc_idf_tipo_fore:docDescrCategoriaUrl/text()")
                 }/>
                 <LabeledField label='Tipo forestale: codice' value={
@@ -46,16 +46,6 @@
                     columns={
                         [
                             {
-                                headerName: 'Ambito di classificazione',
-                                width: 150,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifDescr/text()"
-                            },
-                            {
-                                headerName: 'Tipo ambiente',
-                                width: 250,
-                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:tipoAmbDescr/text()"
-                            },
-                            {
                                 headerName: 'Codice sottotipo',
                                 width: 150,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:sottotipoCod/text()"
@@ -69,6 +59,16 @@
                                 headerName: 'Nome variante',
                                 width: 150,
                                 xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:nomeSottotVar/text()"
+                            },
+							{
+                                headerName: 'Ambito di classificazione',
+                                width: 150,
+                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:ambClassifDescr/text()"
+                            },
+                            {
+                                headerName: 'Tipo ambiente',
+                                width: 250,
+                                xpath:"decsiraogc_idf_tipo_fore:TipoForeTipoAmb/decsiraogc_idf_tipo_fore:tipoAmbDescr/text()"
                             }
                         ]
                     }
