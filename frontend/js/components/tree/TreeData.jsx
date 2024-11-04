@@ -124,9 +124,11 @@ class TreeData extends React.Component {
                     value = this.formatDate(value);
                 }
             }
-            if (value === undefined) value = '-';
+            if (value === undefined) value = 'n.d.';
             
             title = title + label + value;
+
+            //title = title + label + TemplateUtils.getElement({xpath: group.groupElement.descriptionValues[index]}, object);
         });
         let featureType;
         let cqlFilter;

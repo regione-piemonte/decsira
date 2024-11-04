@@ -8,7 +8,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:desComune/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content">
 		<TreeData
 			featureType = 'impianto'
 			featureId = {'codice_sira.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:codiceSira/text()")}
@@ -42,6 +42,24 @@
 				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
 				groupId: {
 					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "4"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice scarico: ', ' - Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:codiceScarico/text()", "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string","string", "date", "date"] ,
+				linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
 					value: "1"
 				},
 				groupElement: {
@@ -49,6 +67,123 @@
 					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:codiceScarico/text()", "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
 					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
 					descriptionTypes: ["string","string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "5"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice sfioratore: ', ' - Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:codiceScarico/text()", "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string","string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "7"
+				},
+				groupElement: {
+					descriptionLabels: ['Sigla punto emissione: ', ' - Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:siglaPuntoEmiss/text()", "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string","string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "8"
+				},
+				groupElement: {
+					descriptionLabels: ['Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "9"
+				},
+				groupElement: {
+					descriptionLabels: ['Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "14"
+				},
+				groupElement: {
+					descriptionLabels: ['Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "15"
+				},
+				groupElement: {
+					descriptionLabels: ['Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:estremiAtto/text()","decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataRilascio/text()",
+					"decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:dataScadenza/text()"],
+					descriptionTypes: ["string", "date", "date"] ,
+					linkToDetail: {
+						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
+						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idTipoOggetto/text()",
+					value: "28"
+				},
+				groupElement: {
+					descriptionLabels: ['Codice rilievo: '],
+					descriptionValues: [, "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:codiceRilDerColl/text()"],
 					linkToDetail: {
 						nomeWFS: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:nomeWFS/text()",
 						xpath: "decsiraogc_impianti:OggettoAssociatoImpianto/decsiraogc_impianti:idOggetto/text()"

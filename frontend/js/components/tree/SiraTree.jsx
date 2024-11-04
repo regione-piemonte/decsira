@@ -56,7 +56,6 @@ class SiraTree extends React.Component {
                     renderDirections={this.props.show == 'block' ? ["se"] : []}
                     origin = {false}
                     hideDefaultLines = {true}
-                    edge = {this.props.show == 'block' ? ["w", "e"] : []}
                     onDrag= {e => {
                         e.target.style.transform = e.transform;
                     }}
