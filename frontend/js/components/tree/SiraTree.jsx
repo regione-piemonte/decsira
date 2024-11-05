@@ -63,6 +63,11 @@ class SiraTree extends React.Component {
                         e.target.style.width = `${e.width}px`;
                         e.target.style.height = `${e.height}px`;
                         e.target.style.transform = e.drag.transform;
+
+                        var titlePanel = document.getElementById("tree-title-panel");
+                        var contentPanel = document.getElementById("tree-content-panel");
+                        var titleHeigt = titlePanel.offsetHeight - contentPanel.offsetHeight;    
+                        contentPanel.style.height = `${e.height - titleHeigt}px`;
                     }}
                 />
             </>

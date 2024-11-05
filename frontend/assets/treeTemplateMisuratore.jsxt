@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
     bsStyle="primary"
     header={(
         <TreeTitle title='MISURATORI' subtitle={[
@@ -8,7 +8,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:matricolaMisuratore/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'misuratore'
 			featureId = {'id_misuratore.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Misuratore/decsiraogc_derivazioni:idMisuratore/text()")}

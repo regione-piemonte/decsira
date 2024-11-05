@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
 	bsStyle="primary"
     header={(
         <TreeTitle title='CONCESSIONI DI DERIVAZIONI DI ACQUA PUBBLICA' subtitle={[
@@ -8,7 +8,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:titolareDerivazione/decsiraogc_derivazioni:TitolareDerivazione/decsiraogc_derivazioni:denomTitDeriv/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'derivazione'
 			featureId = {'id_derivazione.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:Derivazione/decsiraogc_derivazioni:idDerivazione/text()")}

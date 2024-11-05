@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
 	bsStyle="primary"
     header={(
         <TreeTitle title='PRESE DA POZZI' subtitle={[
@@ -8,7 +8,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:codiceRilievoPozzo/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'pozzo'
 			featureId = {'id_pozzo.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_operecaptazione:Pozzo/decsiraogc_operecaptazione:idPozzo/text()")}

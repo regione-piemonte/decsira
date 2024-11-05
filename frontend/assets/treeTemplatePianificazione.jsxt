@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
 	bsStyle="primary"
     header={(
         <TreeTitle title='Aree protette e Siti Rete Natura 2000: piani e misure di conservazione' subtitle={[
@@ -6,7 +6,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:descTipoPiano/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'bdnPianificazione'
 			featureId = {model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_pianificazione:BdnPianificazione/decsiraogc_biodiversita_bdn_pianificazione:idBdnPianificazione/text()")+ '.id_bdn_pianificazione' }
