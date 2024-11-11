@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
 	bsStyle="primary"
     header={(
         <TreeTitle title='IMPIANTI GESTIONE RIFIUTI' subtitle={[
@@ -8,7 +8,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:stabilimentoSemplice/decsiraogc_rifiuti_generici:StabilimentoSemplice/decsiraogc_rifiuti_generici:nomeComune/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'impiantoRifiutiGenerico'
 			featureId = {'impianto_generico.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_generici:ImpiantoRifiutiGenerico/decsiraogc_rifiuti_generici:identificativoRifiutoGenerico/text()")}

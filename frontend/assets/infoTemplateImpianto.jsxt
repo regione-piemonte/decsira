@@ -1,0 +1,83 @@
+
+<SiraTable
+    style={{width: "100%", height: "200px"}}
+    id="infoTemplateImpianto"
+    rowSelection={false}
+    onCellClicked={props.onCellClicked}
+    profile={model.profile}
+    columns={[
+        {
+            width: 30,
+            headerName: '',
+            cellRenderer: reactCellRendererFactory(GoToDetail),
+            id: true,
+            xpath: "@gml:id"
+        }, {
+            headerName: 'Codice SIRA Impianto',
+            width: 90,
+            xpath: "decsiraogc_impianti:codiceSira/text()"
+        }, {
+           headerName: 'Stato sede operativa',
+           width: 90,
+           xpath: "decsiraogc_impianti:desStatoImpianto/text()"
+       },{
+            headerName: 'Denominazione Impianto',
+            width: 100,
+            xpath: "decsiraogc_impianti:nome/text()"
+        }, {
+            headerName: 'Provincia Impianto',
+            width: 100,
+            xpath : "decsiraogc_impianti:desProvincia/text()",
+        }, {
+            headerName: 'Comune Impianto',
+            width: 100,
+            xpath: "decsiraogc_impianti:desComune/text()"
+        }, {
+            headerName: 'Indirizzo Impianto',
+            width: 100,
+            xpath: "decsiraogc_impianti:indirizzo/text()"
+        }, {
+            headerName: 'Ragione sociale Azienda',
+            width: 100,
+            xpath: "decsiraogc_impianti:denominAzienda/text()"
+        }, {
+            headerName: 'Codice fiscale Azienda',
+            width: 100,
+            xpath: "decsiraogc_impianti:codFiscaleAzienda/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Partita IVA Azienda',
+            width: 100,
+            xpath: "decsiraogc_impianti:partitaIVAAzienda/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Provincia Azienda',
+            width: 100,
+            xpath: "decsiraogc_impianti:desProvinciaAzienda/text()"
+        }, {
+            headerName: 'Comune Azienda',
+            width: 100,
+            xpath: "decsiraogc_impianti:desComuneAzienda/text()"
+        }, {
+            headerName: 'Indirizzo Azienda',
+            width: 100,
+            xpath: "decsiraogc_impianti:indirizzoAzienda/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Tipo provvedimento attivo',
+            width: 100,
+            xpath: "decsiraogc_impianti:tipoProvvedimentoAttivo/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        }, {
+            headerName: 'Tipo provvedimento storico',
+            width: 100,
+            xpath: "decsiraogc_impianti:tipoProvvedimentoStorico/text()",
+            "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"]
+        },
+         {
+            headerName: 'Ambito tematico autorizzazione',
+            width: 100,
+            xpath: "decsiraogc_impianti:desTematicaAttivita/text()"
+        }
+    ]}
+    features={model.getValue("/wfs:FeatureCollection/gml:featureMembers/decsiraogc_impianti:Impianto")}/>

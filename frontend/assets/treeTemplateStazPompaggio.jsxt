@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
     bsStyle="primary"
     header={(
         <TreeTitle title='STAZIONI DI POMPAGGIO' subtitle={[
@@ -6,7 +6,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:codiceRilievoStazPomp/text()"),
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'stazPompaggio'
 			featureId = {'id_staz_pomp.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_derivazioni:StazPompaggio/decsiraogc_derivazioni:idStazPomp/text()")}

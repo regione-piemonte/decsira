@@ -108,7 +108,15 @@ class TreeData extends React.Component {
         let childCount = 0;
         let title = '';
         group.groupElement.descriptionLabels.forEach((label, index) => {
-            title = title + label + TemplateUtils.getElement({xpath: group.groupElement.descriptionValues[index]}, object);
+            let value = TemplateUtils.getElement({xpath: group.groupElement.descriptionValues[index]}, object);
+            if (group.groupElement.descriptionTypes) {
+                let type = group.groupElement.descriptionTypes[index];
+                if (type === 'date' && value !== undefined) {
+                    value = this.formatDate(value);
+                }
+            }
+            if (value === undefined) value = 'n.d.';
+            title = title + label + value;
         });
         let featureType;
         let cqlFilter;
@@ -152,6 +160,16 @@ class TreeData extends React.Component {
                 onSelect={this.onSelect}>
                 {treeNodes}
             </Tree>);
+    }
+
+    formatDate = (inputDate) => {
+        var dateOk = inputDate !== null && inputDate !== undefined && inputDate.indexOf('Z') !== -1 ? inputDate.replace('Z', '') : inputDate;
+        var date = new Date(dateOk);
+        if (!isNaN(date.getTime())) {
+            // Months use 0 index.
+            return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+        }
+        return inputDate;
     }
 
     loadDataForTree = (props) => {

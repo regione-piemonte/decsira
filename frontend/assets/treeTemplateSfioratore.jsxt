@@ -1,0 +1,55 @@
+<Panel id="tree-title-panel"
+	bsStyle="primary"
+    header={(
+        <TreeTitle title='SCARICATORE DI PIENA' subtitle={[
+             'Codice regionale: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceRegionaleSfioratore/text()")
+            ]} id={model.id}/>
+    )}>
+	<Panel className="tree-content" id="tree-content-panel">
+		<TreeData
+			featureType = 'sfioratore'
+			featureId = {'id_sfioratore.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:idPuntoScaricatore/text()")}
+			rootTitle = {
+				'Codice regionale scaricatore di piena: ' +
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceRegionaleSfioratore/text()") 	
+			}
+			objects = {model.getList("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:oggettoAssociatoSfioratore")}
+			groups = {[
+				{
+				groupName: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:idTipoOggetto/text()",
+					value: "95"
+				},
+				groupElement: {
+					descriptionLabels: ['Denominazione depuratore: ', ' - Num. provv.: ', ' - Data: ', ' - Data scadenza: '],
+					descriptionValues: ["decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:nomeDepuratore/text()", "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:estremiAtto/text()",
+					"decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:dataRilascio/text()",
+					"decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:dataScadenza/text()"],
+					descriptionTypes: ["string","string", "date", "date"],
+				linkToDetail: {
+						nomeWFS: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:nomeWFS/text()",
+						xpath: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:idOggetto/text()"
+					}
+				}
+			  },
+			  {
+				groupName: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:desTipoOggetto/text()",
+				groupId: {
+					xpath: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:idTipoOggetto/text()",
+					value: "94"
+				},
+				groupElement: {
+					descriptionLabels: ['Denominazione Impianto: ', ' - Comune: '],
+					descriptionValues: ["decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:nomeImpianto/text()", "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:comuneImpianto/text()"],
+				linkToDetail: {
+						nomeWFS: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:nomeWFS/text()",
+						xpath: "decsiraogc_scarichi:OggettoAssociatoSfioratore/decsiraogc_scarichi:idOggetto/text()"
+					}
+				}
+			  }
+			]}
+		/>
+	</Panel>
+</Panel>

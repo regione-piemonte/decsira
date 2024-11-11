@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
 	bsStyle="primary"
     header={(
         <TreeTitle title='RIFIUTI - MODELLO UNICO DICHIARAZIONE AMBIENTALE (MUD)' subtitle={[
@@ -12,7 +12,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:impiantoMUD/decsiraogc_rifiuti_mud:ImpiantoMUD/decsiraogc_rifiuti_mud:ragioneSociale/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'rifiutiMUD'
 			featureId = {'id_geo_mud_rifiuti.' + model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_rifiuti_mud:RifiutiMUD/decsiraogc_rifiuti_mud:idCerMud/text()")}

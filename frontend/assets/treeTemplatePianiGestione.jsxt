@@ -1,4 +1,4 @@
-<Panel
+<Panel id="tree-title-panel"
 	bsStyle="primary"
     header={(
         <TreeTitle title='Piani di gestione Rete Natura 2000: RICERCA AMBIENTI' subtitle={[
@@ -6,7 +6,7 @@
             model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:nomeSitoRn2000/text()")
             ]} id={model.id}/>
     )}>
-	<Panel className="tree-content infobox-content">
+	<Panel className="tree-content" id="tree-content-panel">
 		<TreeData
 			featureType = 'bdnPianiGestione'
 			featureId = {model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_biodiversita_bdn_piano_gest_uso:BdnPianiGestUso/decsiraogc_biodiversita_bdn_piano_gest_uso:idBdnPianoGestUso/text()")+ '.id_bdn_piano_gest_uso' }
