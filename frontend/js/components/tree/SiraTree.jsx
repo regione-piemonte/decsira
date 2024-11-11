@@ -8,7 +8,7 @@ import './SiraTree.less';
 import Moveable from "react-moveable";
 
 class SiraTree extends React.Component {
-    
+
     static propTypes = {
         card: PropTypes.shape({
             treeTemplate: PropTypes.oneOfType([
@@ -47,15 +47,15 @@ class SiraTree extends React.Component {
                     minWidth: "auto",
                     minHeight: "auto",
                     display: this.props.show}}>
-                        <TemplateSira template={this.props.card.treeTemplate} model={model} />
+                    <TemplateSira template={this.props.card.treeTemplate} model={model} />
                 </div>
                 <Moveable
                     target = {".scheda-tree"}
-                    draggable = {true}
-                    resizable = {true}
-                    renderDirections={this.props.show == 'block' ? ["se"] : []}
+                    draggable = {'true'}
+                    resizable = {'true'}
+                    renderDirections={this.props.show === 'block' ? ["se"] : []}
                     origin = {false}
-                    hideDefaultLines = {true}
+                    hideDefaultLines = {'true'}
                     onDrag= {e => {
                         e.target.style.transform = e.transform;
                     }}
@@ -64,14 +64,14 @@ class SiraTree extends React.Component {
                         e.target.style.height = `${e.height}px`;
                         e.target.style.transform = e.drag.transform;
 
-                        var titlePanel = document.getElementById("tree-title-panel");
-                        var contentPanel = document.getElementById("tree-content-panel");
-                        var titleHeigt = titlePanel.offsetHeight - contentPanel.offsetHeight;    
+                        let titlePanel = document.getElementById("tree-title-panel");
+                        let contentPanel = document.getElementById("tree-content-panel");
+                        let titleHeigt = titlePanel.offsetHeight - contentPanel.offsetHeight;
                         contentPanel.style.height = `${e.height - titleHeigt}px`;
                     }}
                 />
             </>
-            );
+        );
     }
 }
 

@@ -104,31 +104,19 @@ class TreeData extends React.Component {
         }
     };
 
-    formatDate = (inputDate) => {
-        var dateOk = inputDate !== null && inputDate !== undefined && inputDate.indexOf('Z') !== -1 ? inputDate.replace('Z', '') : inputDate;
-        var date = new Date(dateOk);
-        if (!isNaN(date.getTime())) {
-            // Months use 0 index.
-            return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
-        }
-    }
-
     getChildData = (group, object, keyCount) => {
         let childCount = 0;
         let title = '';
         group.groupElement.descriptionLabels.forEach((label, index) => {
             let value = TemplateUtils.getElement({xpath: group.groupElement.descriptionValues[index]}, object);
-            if(group.groupElement.descriptionTypes){
+            if (group.groupElement.descriptionTypes) {
                 let type = group.groupElement.descriptionTypes[index];
-                if(type === 'date' && value != undefined) {
+                if (type === 'date' && value !== undefined) {
                     value = this.formatDate(value);
                 }
             }
             if (value === undefined) value = 'n.d.';
-            
             title = title + label + value;
-
-            //title = title + label + TemplateUtils.getElement({xpath: group.groupElement.descriptionValues[index]}, object);
         });
         let featureType;
         let cqlFilter;
@@ -172,6 +160,16 @@ class TreeData extends React.Component {
                 onSelect={this.onSelect}>
                 {treeNodes}
             </Tree>);
+    }
+
+    formatDate = (inputDate) => {
+        var dateOk = inputDate !== null && inputDate !== undefined && inputDate.indexOf('Z') !== -1 ? inputDate.replace('Z', '') : inputDate;
+        var date = new Date(dateOk);
+        if (!isNaN(date.getTime())) {
+            // Months use 0 index.
+            return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+        }
+        return inputDate;
     }
 
     loadDataForTree = (props) => {
