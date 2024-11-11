@@ -1,0 +1,396 @@
+{
+   "featureTypeName":"decsiraogc_scarichi:Sfioratore",
+   "featureTypeNameLabel":"Sfioratore",
+   "nameSpaces": {
+     "decsiraogc_scarichi": "http://www.regione.piemonte.it/ambiente/decsiraogc_scarichi/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Scaricatore di piena",
+        "name": "decsiraogc_scarichi:Sfioratore",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "featureType": "sfioratore",
+		"params": {
+			"featureType": "sfioratore"
+		},
+        "group": "Oggetti",
+        "format": "image/png"
+        },
+   "geometryName": "geometria",
+   "geometryType": "Point",
+   "card": {
+        "pdfname": "Scheda_Sfioratore_{{/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceRegionaleSfioratore/text()}}.pdf",
+        "template": "assets/cardTemplateSfioratore.jsxt",
+		"treeTemplate": "assets/treeTemplateSfioratore.jsxt",
+        "service": {
+             "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+                "params": {
+                   "typeName": "decsiraogc_scarichi:Sfioratore",
+                    "version": "2.0",
+                    "srsName": "EPSG:4326"
+                }
+          }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateSfioratore.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Provincia",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desProvincia/text()"],
+           "type": 2,
+           "width" : 200
+         },
+		 {
+           "headerName": "Comune",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desComune/text()"],
+           "type": 2,
+           "width" : 200
+         },
+         {
+           "headerName": "Stato  scaricatore di piena",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desStato/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 200
+         },
+         {
+           "headerName": "Codice regionale scaricatore di piena",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:codiceRegionaleSfioratore/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Codice provinciale scaricatore di piena",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:codiceProvincialeSfioratore/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Codice europeo  scaricatore di piena",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:codiceEuropeoSfioratore/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 250
+         },
+         {
+           "headerName": "Tipo recettore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:desTipoRecettore/text()"],
+           "type": 2,
+           "width" : 200
+         },
+         {
+           "headerName": "Natura recettore su corso acqua naturale",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:flgCorsoNaturale/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Denominazione recettore",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:denominazioneRecettore/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Codice SIRA Impianto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:codiceSira/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+		   "width" : 150
+         },		 
+         {
+           "headerName": "Tipo autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:tipoProvvedimento/text()"],
+           "type": 2,
+           "width" : 150
+         },
+         {
+           "headerName": "Estremi autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()"],
+           "type": 2,
+            "width" : 200
+         },
+		 {
+           "headerName": "Data autorizzazione",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataProvvedimento/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+		   "dateFormat": "DD/MM/YYYY",
+           "width" : 250
+         },
+		 {
+           "headerName": "Data scadenza",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataScadenza/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+		   "dateFormat": "DD/MM/YYYY",
+           "width" : 250
+         },
+		 {
+           "headerName": "Codice Istanza(AUA)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:codiceIstanza/text()"],
+		   "profiles": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type": 2,
+           "width" : 220
+         },
+		 {
+           "headerName": "Numero a.e. rete fognaria a monte del punto di sfioro",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:numAEFogn/text()"],
+           "type": 2,
+		   
+           "width" : 300
+         },
+		 {
+           "headerName": "Portata di attivazione dello sfioro",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:portataAttivaz/text()"],
+           "type": 1,
+           "width" : 250
+         },
+         {
+           "headerName": "Portata media in tempo secco addotta (l/s)",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:portataMedia/text()"],
+           "type": 1,
+            "width" : 250
+         },
+         {
+           "headerName": "Portata Innesto",
+           "suppressSorting": true,
+           "xpath": ["decsiraogc_scarichi:portataInnesc/text()"],
+           "type": 1,
+            "width" : 250
+         },
+         {
+           "hide": true,
+           "headerName": "Geometry",
+           "xpath": ["decsiraogc_scarichi:geometria/gml:Point/gml:pos/text()"],
+           "type": 6
+         }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+        {
+           "index": 1,
+           "attribute": "decsiraogc_scarichi:desProvincia",
+           "label":"Provincia Sfioratore",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_province",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
+        },
+        {
+           "index": 2,
+           "attribute": "decsiraogc_scarichi:desComune",
+           "label":"Comune Sfioratore",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+		    "dependson":{
+              "field": "decsiraogc_scarichi:desProvincia",
+              "from": "sigla",
+              "to": "sigla_provincia"
+           }
+        },
+        {
+           "index": 3,
+           "attribute": "decsiraogc_scarichi:desStato",
+           "label":"Stato scaricatore di piena",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_stato",
+               "cql_filter": "id_stato=100%20OR%20id_stato=102%20OR%20id_stato=103",
+               "propertyName": "id_stato,des_stato,ordinamento",
+			   "sortBy": "ordinamento+A"
+             }
+           },
+           "valueId":"des_stato",
+           "valueLabel":"des_stato"
+        },
+		{
+           "index": 4,
+           "attribute": "decsiraogc_scarichi:codiceRegionaleSfioratore",
+           "label":"Codice regionale  scaricatore di piena",
+           "type":"string"
+        },
+		{
+           "index": 5,
+           "attribute": "decsiraogc_scarichi:codiceProvincialeSfioratore",
+           "label":"Codice provinciale scaricatore di piena",
+		   "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+		{
+           "index": 6,
+           "attribute": "decsiraogc_scarichi:codiceEuropeoSfioratore",
+           "label":"Codice europeo scaricatore di piena",
+		   "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+		{
+           "index": 7,
+           "attribute": "decsiraogc_scarichi:idTipoRecettore",
+           "label":"Tipo recettore",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_dt_d_tipo_recettore",
+               "cql_filter": "id_tipo_recettore=2%20OR%id_tipo_recettore=3",
+               "propertyName": "id_tipo_recettore,des_tipo_recettore"
+             }
+           },
+           "valueId":"id_tipo_recettore",
+           "valueLabel":"des_tipo_recettore"
+        },
+		{
+           "index": 8,
+           "attribute": "decsiraogc_scarichi:denominazioneRecettore",
+           "label":"Denominazione recettore",
+           "type":"string"
+        },
+		{
+           "index": 9,
+           "attribute": "decsiraogc_scarichi:flgCorsoAcquaNaturale",
+           "label":"Corso d'acqua naturale",
+           "type":"list",
+           "values": [
+              {"value":"SI","name":"SI"},
+              {"value":"NO","name":"NO"},
+			  {"value":"NO","name":"NO"}
+            ],
+           "valueId":"value",
+           "valueLabel":"des_tipo_recettore"
+        },
+		{
+           "index": 10,
+           "attribute": "decsiraogc_scarichi:codiceSira",
+           "label":"Codice SIRA Impianto",
+           "type":"string"
+        },
+		{
+           "index": 11,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:tipoProvvedimento",
+           "label":"Tipo autorizzazione",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_tipo_provvedimento",
+               "propertyName": "id_proc_attivita,provv",
+			   "cql_filter": "id_proc_attivita=9%20OR%20id_proc_attivita=99",
+               "sortBy": "provv+A"
+             }
+           },
+           "valueId":"des_tematica",
+           "valueLabel":"des_tematica"
+        },
+		{
+            "index": 12,
+            "attribute": "decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:dataProvvedimento",
+            "label":"Data emissione Provvedimento finale",
+            "type":"date",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+        },
+		{
+            "index": 13,
+            "attribute": "decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:dataScadenza",
+            "label":"Data SCADENZA Provvedimento finale",
+            "type":"date",
+			"profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+            "fieldOptions": {
+              "dateFormat": "DD/MM/YYYY"
+            }
+        },
+		{
+           "index": 13,
+           "attribute": "decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:codiceIstanza",
+           "label":"Codice Istanza",
+		   "profile": ["B","PA_GEN_DECSIRA@REG_PMN"],
+           "type":"string"
+        },
+		{
+           "index": 14,
+           "attribute": "decsiraogc_scarichi:numAEFogn",
+           "label":"Numero a.e. rete fognaria a monte del punto di sfioro",
+           "type":"number"
+        },
+		{
+           "index": 15,
+           "attribute": "decsiraogc_scarichi:portataAttivaz",
+           "label":"Portata di attivazione dello sfioro",
+           "type":"number"
+        },
+		{
+           "index": 16,
+           "attribute": "decsiraogc_scarichi:portataMedia",
+           "label":"Portata media in tempo secco addotta (l/s)",
+           "type":"number"
+        },
+		{
+           "index": 17,
+           "attribute": "decsiraogc_scarichi:portataInnesc",
+           "label":"Portata Innesto",
+           "type":"number"
+        }
+     ]
+   }
+
+}

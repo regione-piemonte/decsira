@@ -15,7 +15,7 @@
 	<!-- decsira_geo_sfioratore -->
 	<element name="Sfioratore" type="decsiraogc_scarichi:SfioratoreType" substitutionGroup="gml:AbstractFeature" />
 	
-	<!-- decsira_t_autorizzazione_univoca -->
+	<!-- decsira_t_istanza_autorizzativa -->
 	<element name="AutorizzAmbientaleSfioratore" type="decsiraogc_scarichi:AutorizzAmbientaleSfioratoreType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_oggetto_associato_derivazioni -->
@@ -175,10 +175,10 @@
             <extension base="gml:AbstractGMLType">
                 <sequence>
 
-					<xs:element name="idAutorizzazioneAmbientaleSede" minOccurs="1">
+					<xs:element name="idIstanzaAutorizzativa" minOccurs="1">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
-                                <xs:maxLength value="200" />
+                                <xs:maxLength value="1000" />
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>

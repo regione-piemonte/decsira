@@ -283,10 +283,10 @@
             <extension base="gml:AbstractGMLType">
                 <sequence>
 				
-					<xs:element name="idAutorizzAmbientaleSede" minOccurs="1">
+					<xs:element name="idIstanzaAutorizzativa" minOccurs="1">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
-                                <xs:maxLength value="200" />
+                                <xs:maxLength value="1000" />
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
@@ -300,8 +300,6 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					
-					<xs:element name="idAttivita" type="xs:integer" minOccurs="0" maxOccurs="1"/>
 					
 					<xs:element name="idTipoProvvedimento" type="xs:integer" minOccurs="0" maxOccurs="1"/>
 					
@@ -353,7 +351,7 @@
                                 <xs:maxLength value="100" />
                             </xs:restriction>
                         </xs:simpleType>
-                    </xs:element>
+                    </xs:element>	
 					
 					<!-- qui ci vuole un join -->
 					<xs:element name="tematicaAttivita" type="decsiraogc_impianti:TematicaAttivitaPropertyType" minOccurs="0" maxOccurs="unbounded" />

@@ -1,0 +1,157 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='SCARICATORE DI PIENA' subtitle={[
+            'Codice regionale: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceRegionaleSfioratore/text()")
+            ]} id={model.id}/>
+    )}>
+
+    <Panel className="template">
+
+        <Section header='DATI GENERALI Scaricatore di piena' eventKey='1' expanded={true}>
+			<LabeledField label='Codice regionale scaricatore di piena' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceRegionaleSfioratore/text()")
+            }/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Codice provinciale scaricatore di piena' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceProvincialeSfioratore/text()")
+				}/>
+				<LabeledField label='Codice europeo scaricatore di piena' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceEuropeoSfioratore/text()")
+				}/>
+			</ProfileWrapper>
+			<LabeledField label='Stato scaricatore di piena' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:desStato/text()")
+			}/>
+			<LabeledField label='Comune' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:desComune/text()")
+			}/>
+			<LabeledField label='Provincia' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:desProvincia/text()")
+			}/>
+			
+		
+
+		
+		
+		
+			<LabeledField label='Numero a.e. rete fognaria a monte del punto di sfioro' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:numAEFogn/text()")
+			}/>
+			<LabeledField label='Portata di attivazione dello sfioro' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:portataAttivaz/text()")
+			}/>
+			<LabeledField label='Portata media in tempo secco addotta (l/s)' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:portataMedia/text()")
+			}/>
+			<LabeledField label='Portata Innesto' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:portataInnesc/text()")
+			}/>
+
+        </Section>
+		
+		<Section header='AUTORIZZAZIONI' eventKey='3' expanded={true}>
+			<SiraTable
+				id="Autorizzazioni"
+				selectedRow={model.Autorizzazioni}
+				wfsVersion="2.0"
+				rowSelection={false}
+				columns={
+					[
+					{
+						headerName: 'Tipo autorizzazione',
+						width: 280,
+						xpath:"decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:tipoProvvedimento/text()"
+					},
+					{
+						headerName: 'Stato autorizzazione',
+						width: 250,
+						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desStato/text()",
+						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
+					},
+					{
+						headerName: 'Estremi autorizzazione',
+						width: 250,
+						xpath:"decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()"
+					},
+					{
+						headerName: 'Numero Provvedimento finale',
+						width: 200,
+						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()"
+					},
+					{
+						headerName: 'Data autorizzazione',
+						width: 230,
+						dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataProvvedimento/text()",
+						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
+					},
+					{
+						headerName: 'Data scadenza autorizzazione',
+						width: 230,
+						dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
+						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataScadenza/text()",
+						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
+					}
+				]
+			}
+			features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore")}/>
+        </Section>
+       
+        <Section header='DATI DI DETTAGLIO ' eventKey='2' expanded={true}>
+			<LabeledField label='Tipo recettore' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:desTipoRecettore/text()")
+			}/>
+			
+			<LabeledField label='Denominazione recettore' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:denominazioneRecettore/text()")
+			}/>
+			<LabeledField label='Natura recettore su corso acqua naturale' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:flgCorsoNaturale/text()")
+			}/>
+        </Section>  
+ 
+		<Section header='MAPPA SINTESI - Sfioratore su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='3' expanded={true}>
+			<MappaScheda
+				center={
+					  model.getValue({
+						  type: TemplateUtils.GEOMETRY_TYPE,
+						  xpath: "/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:geometria/gml:Point/gml:pos/text()"
+					  })
+				}
+				layers={[
+				{
+					"type": "wms",
+					"url": "https://geomap.reteunitaria.piemonte.it/mapproxy/service",
+					"name": "regp_sfondo_bdtre",
+					"title": "Sfondo Cartografico BDTRE a colori",
+					"group": "background",
+					"visibility": true,
+					"format": "image/png",
+					"tiled": false,
+					"tileSize": 512
+				},
+				{
+					"type": "wms",
+					"url": "{geoserverUrl}/wms",
+					"visibility": true,
+					"title": "Stabilimenti Preview",
+					"name": "decsiraogc_scarichi:Sfioratore",
+					"group": "Overlays",
+					"format": "image/png"
+				}]}
+				authParam={model.authParam}
+				withMap={model.withMap}/>
+		</Section>
+
+
+		<Section header='METADATO' eventKey='7' expanded={true}>
+			<LinkToPage
+				txt="Visualizza la scheda del metadato"
+				url="https://www.geoportale.piemonte.it/geonetwork/srv/ita/catalog.search#/metadata/r_piemon:bed1392a-1e91-46eb-b2d6-8403797782d3"
+			/>
+		</Section>
+		
+    </Panel>
+</Panel>
