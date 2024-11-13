@@ -175,8 +175,14 @@ class TreeData extends React.Component {
     loadDataForTree = (props) => {
         let keyCount = 0;
         // Definisco la radice del tree, il dato di partenza
+        let titleDesc = "";
+        if (props.rootTitle.indexOf('undefined')) {
+            titleDesc = props.rootTitle.replaceAll('undefined', 'n.d.');
+        } else {
+            titleDesc = props.rootTitle;
+        }
         let treeDataWithRoot = [{
-            title: props.rootTitle,
+            title: titleDesc,
             key: '' + keyCount++,
             linkToDetail: {
                 featureType: props.featureType,

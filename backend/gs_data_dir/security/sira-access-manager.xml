@@ -2505,7 +2505,16 @@
 		 <attribute>decsiraogc_idf_alb_monum:numeroAllegati</attribute>
    	    </hiddenAttributes>
     </Rule>
-
+	
+	<Rule>
+            <priority>686</priority>
+            <roles>ROLE_ANONYMOUS</roles>
+            <workspace>decsiraogc_impianti</workspace>
+            <layer>Impianto</layer>
+            <accessMode>READ</accessMode>
+			<filter>"decsiraogc_impianti:idStatoImpianto" = '101'</filter>
+	</Rule>
+	
     </rules>
 
 </Config>

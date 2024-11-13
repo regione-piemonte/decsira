@@ -30,11 +30,29 @@
 			<LabeledField label='Provincia' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:desProvincia/text()")
 			}/>
+			<LabeledField label='Tipo autorizzazione' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:tipoProvvedimento/text()")
+			}/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Stato autorizzazione' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desStato/text()")
+				}/>
+			</ProfileWrapper>
+			<LabeledField label='Estremi autorizzazione' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()")
+			}/>
+			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
+				<LabeledField label='Data autorizzazione' dateFormat='DD/MM/YYYY' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataProvvedimento/text()")
+				}/>
+				<LabeledField label='Data scadenza autorizzazione' dateFormat='DD/MM/YYYY' value={
+					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataScadenza/text()")
+				}/>
+			</ProfileWrapper>
+			<LabeledField label='Ente competente autorizzazione' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desEnteCompetente/text()")
+			}/>
 			
-		
-
-		
-		
 		
 			<LabeledField label='Numero a.e. rete fognaria a monte del punto di sfioro' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:numAEFogn/text()")
@@ -48,60 +66,6 @@
 			<LabeledField label='Portata Innesto' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:portataInnesc/text()")
 			}/>
-
-        </Section>
-		
-		<Section header='AUTORIZZAZIONI' eventKey='3' expanded={true}>
-			<SiraTable
-				id="Autorizzazioni"
-				selectedRow={model.Autorizzazioni}
-				wfsVersion="2.0"
-				rowSelection={false}
-				columns={
-					[
-					{
-						headerName: 'Tipo autorizzazione',
-						width: 280,
-						xpath:"decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:tipoProvvedimento/text()"
-					},
-					{
-						headerName: 'Stato autorizzazione',
-						width: 250,
-						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desStato/text()",
-						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
-					},
-					{
-						headerName: 'Estremi autorizzazione',
-						width: 250,
-						xpath:"decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()"
-					},
-					{
-						headerName: 'Numero Provvedimento finale',
-						width: 200,
-						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()"
-					},
-					{
-						headerName: 'Data autorizzazione',
-						width: 230,
-						dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
-						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataProvvedimento/text()",
-						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
-					},
-					{
-						headerName: 'Data scadenza autorizzazione',
-						width: 230,
-						dateFormat: {day:"2-digit",month:"2-digit",year:"numeric"},
-						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:dataScadenza/text()",
-						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
-					},
-					{
-						headerName: 'Ente competente autorizzazione',
-						width: 200,
-						xpath: "decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desEnteCompetente/text()"
-					}
-				]
-			}
-			features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore")}/>
         </Section>
        
         <Section header='DATI DI DETTAGLIO ' eventKey='2' expanded={true}>
