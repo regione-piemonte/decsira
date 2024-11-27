@@ -19,7 +19,7 @@
 	<element name="AutorizzAmbientaleSfioratore" type="decsiraogc_scarichi:AutorizzAmbientaleSfioratoreType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_oggetto_associato_derivazioni -->
-	<element name="OggettoAssociatoSfioratore" type="decsiraogc_scarichi:OggettoAssociatoSfioratoreType" substitutionGroup="gml:AbstractFeature" />
+	<element name="OggettoAssociatoSfioratore" type="decsiraogc_scarichi:OggettoAssociatoSfioratoreType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- types -->
 	<!-- qui estendono gml:AbstractGMLType o gml:AbstractFeatureType -->
@@ -253,7 +253,7 @@
 	
 	<complexType name="OggettoAssociatoSfioratoreType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 					<xs:element name="identificativo" minOccurs="1" >
                         <xs:simpleType>

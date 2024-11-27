@@ -26,7 +26,7 @@
 	<element name="TematicaAttivita" type="decsiraogc_impianti:TematicaAttivitaType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_oggetto_associato_derivazioni -->
-	<element name="OggettoAssociatoImpianto" type="decsiraogc_impianti:OggettoAssociatoImpiantoType" substitutionGroup="gml:AbstractFeature" />
+	<element name="OggettoAssociatoImpianto" type="decsiraogc_impianti:OggettoAssociatoImpiantoType" substitutionGroup="gml:AbstractObject" />
 	
 	
 	<!-- types -->
@@ -398,7 +398,7 @@
 	
 	<complexType name="OggettoAssociatoImpiantoType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 					<xs:element name="identificativo" minOccurs="1" >
                         <xs:simpleType>

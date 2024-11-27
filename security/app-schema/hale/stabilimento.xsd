@@ -41,7 +41,7 @@
 	<element name="CertificazioneAmbientale" type="decsiraogc_stabilimenti:CertificazioneAmbientaleType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_geo_oggetto_associato -->
-	<element name="OggettoAssociato" type="decsiraogc_stabilimenti:OggettoAssociatoType" substitutionGroup="gml:AbstractFeature" />
+	<element name="OggettoAssociato" type="decsiraogc_stabilimenti:OggettoAssociatoType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_sorgenti_rum -->
 	<element name="VerificaSorgentiRumorose" type="decsiraogc_stabilimenti:VerificaSorgentiRumoroseType" substitutionGroup="gml:AbstractObject" />
@@ -80,7 +80,7 @@
 	<element name="DestinazioneFanghi" type="decsiraogc_stabilimenti:DestinazioneFanghiType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_geo_oggetto_associato -->
-	<element name="OggettoAssociatoDepuratore" type="decsiraogc_stabilimenti:OggettoAssociatoDepuratoreType" substitutionGroup="gml:AbstractFeature" />
+	<element name="OggettoAssociatoDepuratore" type="decsiraogc_stabilimenti:OggettoAssociatoDepuratoreType" substitutionGroup="gml:AbstractObject" />
 	
 	<!-- decsira_t_autorizzazione_amb -->
 	<element name="AutorizzazioneAmbientaleDepuratore" type="decsiraogc_stabilimenti:AutorizzazioneAmbientaleDepuratoreType" substitutionGroup="gml:AbstractObject" />
@@ -601,7 +601,7 @@
 	
 	<complexType name="OggettoAssociatoType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 					<xs:element name="identificativo" minOccurs="1">
                         <xs:simpleType>
@@ -1428,7 +1428,7 @@
 	
 	<complexType name="OggettoAssociatoDepuratoreType">
         <complexContent>
-            <extension base="gml:AbstractFeatureType">
+            <extension base="gml:AbstractGMLType">
                 <sequence>
 					<xs:element name="identificativo" minOccurs="1">
                         <xs:simpleType>

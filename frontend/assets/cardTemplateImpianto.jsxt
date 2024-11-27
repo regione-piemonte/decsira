@@ -88,7 +88,7 @@
 						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/@gml:id"
 					},
 					{
-						headerName: 'Identificativo',
+						headerName: 'Progressivo',
 						width: 100,
 						xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:idIstanza/text()"
 					},
@@ -105,8 +105,8 @@
 					{
 						headerName: 'Codice Istanza',
 						width: 250,
-						xpath:"decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:codiceIstanza/text()",
-						profiles: ["B","PA_GEN_DECSIRA@REG_PMN"]
+						xpath:"decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:codiceIstanza/text()"
+						
 					},
 					{
 						headerName: 'Numero Provvedimento finale',
@@ -150,7 +150,7 @@
 						  tableId: "Autorizzazioni",
 						  parentFeatures: model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:autorizzAmbientaleImpianto"),
 						  xpath: "decsiraogc_impianti:AutorizzAmbientaleImpianto/@gml:id",
-						  pdfTitle: "Codice uso: {{decsiraogc_impianti:AutorizzAmbientaleImpianto/decsiraogc_impianti:idIstanza/text()}}"
+						  pdfTitle: ""
 					  }}
 				columns={
 					[
@@ -160,7 +160,7 @@
 						xpath:"../../decsiraogc_impianti:AutorizzAmbientaleImpianto/@gml:id"
 					},
 					{
-						headerName: 'Identificativo',
+						headerName: 'Progressivo',
 						width: 100,
 						xpath: "decsiraogc_impianti:TematicaAttivita/decsiraogc_impianti:idIstanza/text()"
 					},
