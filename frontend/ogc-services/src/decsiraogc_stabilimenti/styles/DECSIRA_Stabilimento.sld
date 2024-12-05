@@ -18,7 +18,7 @@
         <Rule>
           <Name>Single symbol</Name>
           <Title>Stabilimenti soggetti ad autorizzazione ambientale</Title>
-	      <MaxScaleDenominator>500000</MaxScaleDenominator>  
+	      <MaxScaleDenominator>1300000</MaxScaleDenominator>  
             <PointSymbolizer>
               <Graphic>
                 <Mark>
