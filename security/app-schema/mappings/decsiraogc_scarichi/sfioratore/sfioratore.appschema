@@ -23,7 +23,7 @@
                 </Parameter>
                 <Parameter>
                     <name>port</name>
-                    <value>5432</value>
+                    <value>${db.port}</value>
                 </Parameter>
                 <Parameter>
                     <name>passwd</name>
@@ -288,19 +288,19 @@
                     </sourceExpression>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>decsiraogc_scarichi:autorizzAmbientaleSfioratore</targetAttribute>
+                    <targetAttribute>decsiraogc_scarichi:oggettoAssociatoSfioratore</targetAttribute>
                     <sourceExpression>
-                        <OCQL>codice_sira</OCQL>
-                        <linkElement>decsiraogc_scarichi:AutorizzAmbientaleSfioratore</linkElement>
+                        <OCQL>id_ogg_tipo</OCQL>
+                        <linkElement>decsiraogc_scarichi:OggettoAssociatoSfioratore</linkElement>
                         <linkField>FEATURE_LINK[1]</linkField>
                     </sourceExpression>
                     <isMultiple>true</isMultiple>
                 </AttributeMapping>
                 <AttributeMapping>
-                    <targetAttribute>decsiraogc_scarichi:oggettoAssociatoSfioratore</targetAttribute>
+                    <targetAttribute>decsiraogc_scarichi:autorizzAmbientaleSfioratore</targetAttribute>
                     <sourceExpression>
-                        <OCQL>id_ogg_tipo</OCQL>
-                        <linkElement>decsiraogc_scarichi:OggettoAssociatoSfioratore</linkElement>
+                        <OCQL>id_istanza</OCQL>
+                        <linkElement>decsiraogc_scarichi:AutorizzAmbientaleSfioratore</linkElement>
                         <linkField>FEATURE_LINK[1]</linkField>
                     </sourceExpression>
                     <isMultiple>true</isMultiple>

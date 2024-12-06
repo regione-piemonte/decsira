@@ -30,14 +30,15 @@
 			<LabeledField label='Provincia' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:desProvincia/text()")
 			}/>
+			<LabeledField label='Codice SIRA Impianto' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:codiceSira/text()")
+			}/>
 			<LabeledField label='Tipo autorizzazione' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:tipoProvvedimento/text()")
 			}/>
-			<ProfileWrapper condition={() => (model && model.profile) && ( (model.profile.indexOf('PA_GEN_DECSIRA@REG_PMN')) > -1 )}>
-				<LabeledField label='Stato autorizzazione' value={
-					model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desStato/text()")
-				}/>
-			</ProfileWrapper>
+			<LabeledField label='Stato autorizzazione' value={
+				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:desStato/text()")
+			}/>
 			<LabeledField label='Estremi autorizzazione' value={
 				model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_scarichi:Sfioratore/decsiraogc_scarichi:autorizzAmbientaleSfioratore/decsiraogc_scarichi:AutorizzAmbientaleSfioratore/decsiraogc_scarichi:estremiProvvedimento/text()")
 			}/>

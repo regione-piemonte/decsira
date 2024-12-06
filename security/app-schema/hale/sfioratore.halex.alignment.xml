@@ -682,43 +682,6 @@
         </target>
         <parameter value="id_istanza_autorizzativa.{id_istanza_autorizzativa}" name="pattern"/>
     </cell>
-    <cell relation="eu.esdihumboldt.hale.align.join" id="C3480fe70-6e95-4fc6-8e6c-d29b15e9a106" priority="normal">
-        <source name="types">
-            <class>
-                <type name="decsira_geo_sfioratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <source name="types">
-            <class>
-                <type name="decsira_t_istanza_autorizzativa" ns="jdbc:postgresql:DBSIRA:decsira"/>
-            </class>
-        </source>
-        <target>
-            <class>
-                <type name="SfioratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_scarichi/1.0"/>
-            </class>
-        </target>
-        <complexParameter name="join">
-            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
-                <class>
-                    <type name="decsira_geo_sfioratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <class>
-                    <type name="decsira_t_istanza_autorizzativa" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                </class>
-                <jp:condition>
-                    <property>
-                        <type name="decsira_geo_sfioratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="codice_sira"/>
-                    </property>
-                    <property>
-                        <type name="decsira_t_istanza_autorizzativa" ns="jdbc:postgresql:DBSIRA:decsira"/>
-                        <child name="codice_sira"/>
-                    </property>
-                </jp:condition>
-            </jp:join-parameter>
-        </complexParameter>
-    </cell>
     <cell relation="eu.esdihumboldt.hale.align.retype" id="C720dac8f-47b2-4a4e-9762-ea4cb8676994" priority="normal">
         <source>
             <class>
@@ -1132,6 +1095,43 @@
                     <property>
                         <type name="decsira_t_oggetto_associato_derivazioni" ns="jdbc:postgresql:DBSIRA:decsira"/>
                         <child name="id_ogg_tipo_princ"/>
+                    </property>
+                </jp:condition>
+            </jp:join-parameter>
+        </complexParameter>
+    </cell>
+    <cell relation="eu.esdihumboldt.hale.align.join" id="C3480fe70-6e95-4fc6-8e6c-d29b15e9a106" priority="normal">
+        <source name="types">
+            <class>
+                <type name="decsira_geo_sfioratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <source name="types">
+            <class>
+                <type name="decsira_t_istanza_autorizzativa" ns="jdbc:postgresql:DBSIRA:decsira"/>
+            </class>
+        </source>
+        <target>
+            <class>
+                <type name="SfioratoreType" ns="http://www.regione.piemonte.it/ambiente/decsiraogc_scarichi/1.0"/>
+            </class>
+        </target>
+        <complexParameter name="join">
+            <jp:join-parameter xmlns:jp="http://www.esdi-humboldt.eu/hale/join">
+                <class>
+                    <type name="decsira_geo_sfioratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <class>
+                    <type name="decsira_t_istanza_autorizzativa" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                </class>
+                <jp:condition>
+                    <property>
+                        <type name="decsira_geo_sfioratore" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_istanza"/>
+                    </property>
+                    <property>
+                        <type name="decsira_t_istanza_autorizzativa" ns="jdbc:postgresql:DBSIRA:decsira"/>
+                        <child name="id_istanza"/>
                     </property>
                 </jp:condition>
             </jp:join-parameter>
