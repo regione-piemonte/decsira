@@ -50,6 +50,37 @@
             </Graphic>
           </PointSymbolizer>
         </Rule>
+		<!--etichetta-->
+		<Rule>
+          <MaxScaleDenominator>50000</MaxScaleDenominator>
+          <TextSymbolizer>
+            <Label>
+              <ogc:PropertyName>codice_rilievo</ogc:PropertyName>
+            </Label>
+           <Font>
+              <CssParameter name="font-family">Arial</CssParameter>
+              <CssParameter name="font-style">Italic</CssParameter>
+              <CssParameter name="font-size">12</CssParameter>
+              <CssParameter name="font-weight">bold</CssParameter>
+            </Font>
+            <LabelPlacement>
+              <PointPlacement>
+                <AnchorPoint>
+                  <AnchorPointX>0.5</AnchorPointX>
+                  <AnchorPointY>2</AnchorPointY>
+                </AnchorPoint>
+              
+              </PointPlacement>
+            </LabelPlacement>
+         
+              <Fill>
+                <CssParameter name="fill">#0077e6</CssParameter>
+                <CssParameter name="fill-opacity">1</CssParameter>
+              </Fill>
+            <VendorOption name="autoWrap">50</VendorOption>
+            <VendorOption name="graphic-resize">stretch</VendorOption>
+          </TextSymbolizer>
+        </Rule>
       </FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
