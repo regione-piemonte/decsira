@@ -18,6 +18,7 @@ class RightMenu extends React.Component {
         clickOnIconButton: PropTypes.func,
         clickOnHelp: PropTypes.func,
         clickOnCredits: PropTypes.func,
+        clickOnVideo: PropTypes.func,
         clickOnSistemaCA: PropTypes.func
     };
 
@@ -74,7 +75,7 @@ class RightMenu extends React.Component {
     };
 
     goToVideo = () => {
-        this.props.clickOnCredits();
+        this.props.clickOnVideo();
         this.context.router.history.push("/video/");
     };
 }

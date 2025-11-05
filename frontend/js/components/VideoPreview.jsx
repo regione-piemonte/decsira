@@ -14,46 +14,46 @@ class VideoPreview extends React.Component {
 
     render() {
         return (
-            <div className="container">  
+            <div className="container">
                 <div className="row">
                     <div className="col-md-12 col-xs-12">
                         <h2><I18N.Message msgId={"Homepage.videoTitle"}/></h2>
                         <p><I18N.Message msgId={"Homepage.videoDesc"}/></p>
-                    </div>      
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div className="row">
+                    <div className="col-md-6">
                         <iframe width="500" height="300"
-                            src='https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4'
-                            frameborder='0'
-                            allowFullScreen="true" 
-                            webkitallowfullscreen="true" 
+                            src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                            frameBorder="0"
+                            allowFullScreen="true"
+                            webkitallowfullscreen="true"
                             mozallowfullscreen="true"
-                            title='Videoguida SCA'
+                            title="Videoguida SCA"
                         />
                     </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col">
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col">
                                 <iframe width="250" height="150" style={{"textAlign": "left"}}
-                                    src='https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4'
-                                    frameborder='0'
-                                    allowFullScreen="true" 
-                                    webkitallowfullscreen="true" 
+                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                                    frameBorder="0"
+                                    allowFullScreen="true"
+                                    webkitallowfullscreen="true"
                                     mozallowfullscreen="true"
-                                    title='Videoguida SCA'
+                                    title="Videoguida SCA"
                                 />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
+                        <div className="row">
+                            <div className="col">
                                 <iframe width="250" height="150" style={{"textAlign": "left"}}
-                                    src='https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4'
-                                    frameborder='0'
-                                    allowFullScreen="true" 
-                                    webkitallowfullscreen="true" 
+                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                                    frameBorder="0"
+                                    allowFullScreen="true"
+                                    webkitallowfullscreen="true"
                                     mozallowfullscreen="true"
-                                    title='Videoguida SCA'
+                                    title="Videoguida SCA"
                                 />
                             </div>
                         </div>

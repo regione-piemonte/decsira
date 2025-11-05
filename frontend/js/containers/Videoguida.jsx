@@ -44,40 +44,40 @@ class Videoguida extends React.Component {
 
                     <h3><I18N.Message msgId={"Videoguida.video1Desc"}/></h3>
                     <div style={{"marginTop": "20px", "marginBottom": "20px"}}>
-                    <iframe width="500" height="300" 
-                        src='https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4'
-                        frameborder='0'
-                        allowFullScreen="true" 
-                        webkitallowfullscreen="true" 
-                        mozallowfullscreen="true"
-                        title='Videoguida SCA'
-                    />
+                        <iframe width="500" height="300"
+                            src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                            frameBorder="0"
+                            allowFullScreen="true"
+                            webkitallowfullscreen="true"
+                            mozallowfullscreen="true"
+                            title="Videoguida SCA"
+                        />
                     </div>
-                    
+
                     <h3><I18N.Message msgId={"Videoguida.video2Desc"}/></h3>
                     <div style={{"marginTop": "20px", "marginBottom": "20px"}}>
-                    <iframe width="500" height="300"
-                        src='https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/2_Catalogo_Sistema_Conoscenze_Ambientali.mp4'
-                        frameborder='0'
-                        allowFullScreen="true" 
-                        webkitallowfullscreen="true" 
-                        mozallowfullscreen="true"
-                        title='Videoguida SCA'
-                    />
+                        <iframe width="500" height="300"
+                            src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/2_Catalogo_Sistema_Conoscenze_Ambientali.mp4"
+                            frameBorder="0"
+                            allowFullScreen="true"
+                            webkitallowfullscreen="true"
+                            mozallowfullscreen="true"
+                            title="Videoguida SCA Catalogo"
+                        />
                     </div>
-                    
+
                     <h3><I18N.Message msgId={"Videoguida.video3Desc"}/></h3>
                     <div style={{"marginTop": "20px", "marginBottom": "20px"}}>
-                    <iframe width="500" height="300"
-                        src='https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/3_Funzioni_Specialistiche_Sistema_Conoscenze_Ambientali.mp4'
-                        frameborder='0'
-                        allowFullScreen="true" 
-                        webkitallowfullscreen="true" 
-                        mozallowfullscreen="true"
-                        title='Videoguida SCA'
-                    />
+                        <iframe width="500" height="300"
+                            src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/3_Funzioni_Specialistiche_Sistema_Conoscenze_Ambientali.mp4"
+                            frameBorder="0"
+                            allowFullScreen="true"
+                            webkitallowfullscreen="true"
+                            mozallowfullscreen="true"
+                            title="Videoguida SCA Funzioni specialistiche"
+                        />
                     </div>
-            
+
                 </div>
                 <Footer />
             </div>
