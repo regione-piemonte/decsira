@@ -33,6 +33,7 @@ class RightMenu extends React.Component {
         clickOnIconButton: () => {},
         clickOnHelp: () => {},
         clickOnCredits: () => {},
+        clickOnVideo: () => {},
         clickOnSistemaCA: () => {}
     };
 
@@ -46,8 +47,9 @@ class RightMenu extends React.Component {
             (
                 <div className="navbar-on" id="offcanvas-sidebar">
                     <ul id="menu" className="nav navbar-nav navbar-right">
-                        <li tabIndex="0" data-menuanchor="piemontepay" onClick={this.goToCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
-                        <li tabIndex="0" data-menuanchor="pagamenti" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp}><I18N.Message msgId={"RightMenu.HelpTitle"}/></li>
+                        <li tabIndex="0" data-menuanchor="credits" onClick={this.goToCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
+                        <li tabIndex="0" data-menuanchor="videoguide" onClick={this.goToVideo} onKeyPress={this.props.clickOnVideo}><I18N.Message msgId={"RightMenu.Videoguide"}/></li>
+                        <li tabIndex="0" data-menuanchor="help" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp}><I18N.Message msgId={"RightMenu.HelpTitle"}/></li>
                     </ul>
                 </div>
             ) : '';
@@ -69,6 +71,11 @@ class RightMenu extends React.Component {
     goToCredits = () => {
         this.props.clickOnCredits();
         this.context.router.history.push("/credits/");
+    };
+
+    goToVideo = () => {
+        this.props.clickOnCredits();
+        this.context.router.history.push("/video/");
     };
 }
 

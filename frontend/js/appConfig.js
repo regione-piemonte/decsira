@@ -41,7 +41,8 @@ module.exports = {
         { path: "/full/", component: require('./containers/FullScreenPanel')},
         { path: "/full/:profile", component: require('./containers/FullScreenPanel') },
         { path: "/credits", component: require('./containers/Credits') },
-        { path: "/sca", component: require('./containers/SistemaConoscenzeAmbientali') }
+        { path: "/sca", component: require('./containers/SistemaConoscenzeAmbientali') },
+        { path: "/video", component: require('./containers/Videoguida') }
     ],
     pluginsDef: require('./plugins'),
     initialState: {

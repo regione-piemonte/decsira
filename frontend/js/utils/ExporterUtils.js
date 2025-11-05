@@ -82,11 +82,11 @@ const ExporterUtils = {
         }).then((blob) => FileSaver.saveAs(blob, `${filename}.zip`));
     },
     formatNumber(value) {
-        if (value === null || value === undefined) {
-            return '';
-        }
         let ret;
         if (typeof value === 'number') {
+            if (value === null || value === undefined || isNaN(value)) {
+                return '';
+            }
             ret = new Intl.NumberFormat(LocaleUtils.getSupportedLocales().it, {maximumFractionDigits: 20}).format(value);
         } else {
             ret = value;

@@ -79,7 +79,7 @@ const TemplateUtils = {
     getElementValue(result, type, wfsVersion = "2.0") {
         switch (type) {
         case 1 /* NUMBER_TYPE*/: {
-            return parseFloat(result && result.nodeValue || '0');
+            return parseFloat(result && result.nodeValue || null);
         }
         case 2 /* STRING_TYPE*/: {
             return result && result.nodeValue || '';
