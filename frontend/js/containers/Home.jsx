@@ -140,34 +140,36 @@ class Home extends React.Component {
                         </div>
                     </div>
 
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 col-xs-12">
-                                <h2><I18N.Message msgId={"Homepage.videoTitle"}/></h2>
-                                <p><I18N.Message msgId={"Homepage.videoDesc"}/></p>
-                                <br/>
-                                <iframe width="500" height="300"
-                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
-                                    frameBorder="0"
-                                    allowFullScreen="true"
-                                    webkitallowfullscreen="true"
-                                    mozallowfullscreen="true"
-                                    title="Videoguida SCA"
-                                />
-                                <br/><br/>
-                                <Button onClick={() => {this.goToVideo(); }} className="btn btn-video btn-default">
-                                    <I18N.Message msgId={"Homepage.videoBtn"}/>
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-
                     <PlatformNumbers />
 
                 </div>
 
                 <Footer />
             </div>);
+
+        /** DA METTERE PRIMA DI <PlatformNumbers />
+         *  <div className="container">
+                <div className="row">
+                    <div className="col-md-12 col-xs-12">
+                        <h2><I18N.Message msgId={"Homepage.videoTitle"}/></h2>
+                        <p><I18N.Message msgId={"Homepage.videoDesc"}/></p>
+                        <br/>
+                        <iframe width="500" height="300"
+                            src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                            frameBorder="0"
+                            allowFullScreen="true"
+                            webkitallowfullscreen="true"
+                            mozallowfullscreen="true"
+                            title="Videoguida SCA"
+                        />
+                        <br/><br/>
+                        <Button onClick={() => {this.goToVideo(); }} className="btn btn-video btn-default">
+                            <I18N.Message msgId={"Homepage.videoBtn"}/>
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            */
     }
 
     resetUser = () => {
