@@ -49,13 +49,11 @@ class RightMenu extends React.Component {
                 <div className="navbar-on" id="offcanvas-sidebar">
                     <ul id="menu" className="nav navbar-nav navbar-right">
                         <li tabIndex="0" data-menuanchor="credits" onClick={this.goToCredits} onKeyPress={this.props.clickOnCredits}><I18N.Message msgId={"RightMenu.CreditsTitle"}/></li>
+                        <li tabIndex="0" data-menuanchor="videoguide" onClick={this.goToVideo} onKeyPress={this.props.clickOnVideo}><I18N.Message msgId={"RightMenu.Videoguide"}/></li>
                         <li tabIndex="0" data-menuanchor="help" onClick={this.props.clickOnHelp} onKeyPress={this.props.clickOnHelp}><I18N.Message msgId={"RightMenu.HelpTitle"}/></li>
                     </ul>
                 </div>
             ) : '';
-        /** DA AGGIUNGERE COME SECONDO ELEMENTO DEL MENU
-         * <li tabIndex="0" data-menuanchor="videoguide" onClick={this.goToVideo} onKeyPress={this.props.clickOnVideo}><I18N.Message msgId={"RightMenu.Videoguide"}/></li>
-         */
         return toReturn;
     };
 
