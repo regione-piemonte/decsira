@@ -23,7 +23,10 @@ class VideoPreview extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <iframe width="500" height="300"
+                        <video width="500"
+                            controls
+                            preload="metadata"
+                            poster="../../assets/img/video_sca.png"
                             src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
                             frameBorder="0"
                             allowFullScreen="true"
@@ -35,8 +38,12 @@ class VideoPreview extends React.Component {
                     <div className="col-md-6">
                         <div className="row">
                             <div className="col">
-                                <iframe width="250" height="150" style={{"textAlign": "left"}}
-                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                                <video width="500"
+                                    controls
+                                    preload="metadata"
+                                    poster="../../assets/img/video_catalogo.png"
+                                    style={{"textAlign": "left"}}
+                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/2_Catalogo_Sistema_Conoscenze_Ambientali.mp4"
                                     frameBorder="0"
                                     allowFullScreen="true"
                                     webkitallowfullscreen="true"
@@ -47,8 +54,12 @@ class VideoPreview extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col">
-                                <iframe width="250" height="150" style={{"textAlign": "left"}}
-                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
+                                <video width="500"
+                                    controls
+                                    preload="metadata"
+                                    poster="../../assets/img/video_funzioni.png"
+                                    style={{"textAlign": "left"}}
+                                    src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/3_Funzioni_Specialistiche_Sistema_Conoscenze_Ambientali.mp4"
                                     frameBorder="0"
                                     allowFullScreen="true"
                                     webkitallowfullscreen="true"
