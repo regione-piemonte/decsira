@@ -149,7 +149,7 @@ class Home extends React.Component {
                                 <video width="500"
                                     controls
                                     preload="metadata"
-                                    poster="../../assets/img/video_sca.png"
+                                    poster="assets/img/video_sca.png"
                                     src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
                                     frameBorder="0"
                                     allowFullScreen="true"

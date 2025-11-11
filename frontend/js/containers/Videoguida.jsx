@@ -47,7 +47,7 @@ class Videoguida extends React.Component {
                         <video width="500"
                             controls
                             preload="metadata"
-                            poster="../../assets/img/video_sca.png"
+                            poster="assets/img/video_sca.png"
                             src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/Video_Sistema_Conoscenze_Ambientali.mp4"
                             frameBorder="0"
                             allowFullScreen="true"
@@ -62,7 +62,7 @@ class Videoguida extends React.Component {
                         <video width="500"
                             controls
                             preload="metadata"
-                            poster="../../assets/img/video_catalogo.png"
+                            poster="assets/img/video_catalogo.png"
                             src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/2_Catalogo_Sistema_Conoscenze_Ambientali.mp4"
                             frameBorder="0"
                             allowFullScreen="true"
@@ -77,7 +77,7 @@ class Videoguida extends React.Component {
                         <video width="500"
                             controls
                             preload="metadata"
-                            poster="../../assets/img/video_funzioni.png"
+                            poster="assets/img/video_funzioni.png"
                             src="https://vm-podcast.csi.it/mlab/projects/2025/Video_Sistema_Conoscenze_Ambientali/out/3_Funzioni_Specialistiche_Sistema_Conoscenze_Ambientali.mp4"
                             frameBorder="0"
                             allowFullScreen="true"
