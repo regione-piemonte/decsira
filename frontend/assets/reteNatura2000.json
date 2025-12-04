@@ -245,36 +245,13 @@
          "index": 1,
          "attribute": "decsiraogc_rete_natura_2000:provincia",
          "label":"Provincia",
-         "type":"list",
-         "valueService": {
-           "urlParams": {
-             "typeName": "decsiraogc_decodif:decsira_geo_province",
-			 "propertyName": "prov_ist,prov_nom",
-             "sortBy": "prov_nom+A"
-           }
-         },
-         "valueId":"prov_nom",
-         "valueLabel":"prov_nom"
+         "type":"string"
 	   },
 	   {
-		   "index": 2,
-		   "attribute": "decsiraogc_rete_natura_2000:comuniInteressati",
-		   "label":"Comune",
-		   "type":"list",
-		   "valueService": {
-			 "urlParams": {
-			   "typeName": "decsiraogc_decodif:decsira_geo_comuni",
-			   "propertyName": "prov_ist,comune_nom",
-			   "sortBy": "comune_nom+A"
-			 }
-		   },
-		   "valueId":"comune_nom",
-		   "valueLabel":"comune_nom",
-		   "dependson":{
-				"field": "provincia",
-				"from": "prov_ist",
-				"to": "prov_ist"
-		   }
+		 "index": 2,
+		 "attribute": "decsiraogc_rete_natura_2000:comuniInteressati",
+		 "label":"Comune",
+		 "type":"string"
        }, 
 	   {
         "index": 3,
