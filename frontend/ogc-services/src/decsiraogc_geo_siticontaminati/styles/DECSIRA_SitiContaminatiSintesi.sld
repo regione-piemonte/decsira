@@ -78,7 +78,7 @@
           <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>legenda</ogc:PropertyName>
-              <ogc:Literal>INTERVENTO NON NECESSARIO</ogc:Literal>
+              <ogc:Literal> INTERVENTO NON NECESSARIO</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
 	 <!--	  <MaxScaleDenominator>1000000</MaxScaleDenominator> --> 

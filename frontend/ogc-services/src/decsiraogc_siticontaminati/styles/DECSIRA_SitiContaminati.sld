@@ -51,7 +51,7 @@
            <ogc:Filter>
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>decsiraogc_siticontaminati:legenda</ogc:PropertyName>
-              <ogc:Literal>BONIFICA E RIPRISTINO AMBIENTALE CON MISURE DI SICUREZZA</ogc:Literal>
+              <ogc:Literal> BONIFICA E RIPRISTINO AMBIENTALE CON MISURE DI SICUREZZA</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
 		  <MaxScaleDenominator>1000000</MaxScaleDenominator>
