@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:decsiraogc_impianti="http://www.regione.piemonte.it/ambiente/decsiraogc_impianti/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_impianti/1.0" version="1.0">
-    <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+    <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="0/gml.xsd"/>
 	
 	
 	<!-- elements -->
@@ -239,7 +239,7 @@
 					<!-- qui ci vuole un join -->
 					<xs:element maxOccurs="unbounded" minOccurs="0" name="oggettoAssociatoImpianto" type="decsiraogc_impianti:OggettoAssociatoImpiantoPropertyType"/>
 					
-					<xs:element name="attivitaProduttiva" type="decsiraogc_impianti:AttivitaProduttivaPropertyType"   minOccurs="0" maxOccurs="unbounded" />
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="attivitaProduttiva" type="decsiraogc_impianti:AttivitaProduttivaPropertyType"/>
 					
                 </sequence>
             </extension>
@@ -539,28 +539,28 @@
         <complexContent>
             <extension base="gml:AbstractGMLType">
                 <sequence>
-				<xs:element name="idStabilimentoAteco" minOccurs="1">
+				<xs:element minOccurs="1" name="idStabilimentoAteco">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
-                                <xs:maxLength value="50" />
+                                <xs:maxLength value="50"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element name="codAteco" minOccurs="1">
+					<xs:element minOccurs="1" name="codAteco">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
-                                <xs:maxLength value="20" />
+                                <xs:maxLength value="20"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element name="desAteco" minOccurs="1">
+					<xs:element minOccurs="1" name="desAteco">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
-                                <xs:maxLength value="500" />
+                                <xs:maxLength value="500"/>
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:element>
-					<xs:element name="codiceSira" type="xs:decimal" minOccurs="1" />
+					<xs:element minOccurs="1" name="codiceSira" type="xs:decimal"/>
                 </sequence>
             </extension>
         </complexContent>
@@ -603,9 +603,9 @@
 	
 	<complexType name="AttivitaProduttivaPropertyType">
         <sequence minOccurs="0">
-            <element ref="decsiraogc_impianti:AttivitaProduttiva" />
+            <element ref="decsiraogc_impianti:AttivitaProduttiva"/>
         </sequence>
-        <attributeGroup ref="gml:AssociationAttributeGroup" />
-        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
     </complexType>
 </schema>

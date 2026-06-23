@@ -20,6 +20,9 @@
 	<!-- decsira_t_oggetto_associato_derivazioni -->
 	<element name="OggettoAssociatoImpianto" substitutionGroup="gml:AbstractObject" type="decsiraogc_impianti:OggettoAssociatoImpiantoType"/>
 	
+	<!-- decsira_t_stabilimento_ateco id = id_stab_ateco -->
+	<element name="AttivitaProduttiva" substitutionGroup="gml:AbstractObject" type="decsiraogc_impianti:AttivitaProduttivaType"/>
+	
 	
 	<!-- types -->
 	<!-- qui estendono gml:AbstractGMLType o gml:AbstractFeatureType -->
@@ -235,6 +238,8 @@
 	
 					<!-- qui ci vuole un join -->
 					<xs:element maxOccurs="unbounded" minOccurs="0" name="oggettoAssociatoImpianto" type="decsiraogc_impianti:OggettoAssociatoImpiantoPropertyType"/>
+					
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="attivitaProduttiva" type="decsiraogc_impianti:AttivitaProduttivaPropertyType"/>
 					
                 </sequence>
             </extension>
@@ -530,6 +535,37 @@
         </complexContent>
     </complexType>
 	
+	<complexType name="AttivitaProduttivaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				<xs:element minOccurs="1" name="idStabilimentoAteco">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="codAteco">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="desAteco">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element minOccurs="1" name="codiceSira" type="xs:decimal"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
 	
 	<!-- property types -->
 	
@@ -565,4 +601,11 @@
         <attributeGroup ref="gml:OwnershipAttributeGroup"/>
     </complexType>
 	
+	<complexType name="AttivitaProduttivaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_impianti:AttivitaProduttiva"/>
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup"/>
+        <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+    </complexType>
 </schema>
