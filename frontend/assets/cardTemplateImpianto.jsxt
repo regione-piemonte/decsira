@@ -73,6 +73,28 @@
 			</ProfileWrapper>
         </Section>  
 
+        <Section header='TIPO ATTIVIT&Agrave; PRODUTTIVA (ISTAT 1991)' eventKey='2' expanded={true}>
+            <SiraTable
+                id="TipoAttivitaProduttiva"
+                selectedRow={model.TipoAttivitaProduttiva}
+                wfsVersion="2.0"
+                rowSelection={false}
+                columns={
+                    [
+                        {
+                            headerName: 'Codice ateco',
+                            width: 100,
+                            xpath:"decsiraogc_impianti:AttivitaProduttiva/decsiraogc_impianti:codAteco/text()"
+                        },
+                        {
+                            headerName: 'Descrizione attivita Ateco',
+                            width: 641,
+                            xpath: "decsiraogc_impianti:AttivitaProduttiva/decsiraogc_impianti:desAteco/text()"
+                        }
+                    ]
+                }
+                features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_impianti:Impianto/decsiraogc_impianti:attivitaProduttiva")}/>
+        </Section>
              
         <Section header='AUTORIZZAZIONI' eventKey='3' expanded={true}>
 			<SiraTable

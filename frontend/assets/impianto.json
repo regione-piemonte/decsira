@@ -383,6 +383,23 @@
            "fieldOptions": {
              "dateFormat": "DD/MM/YYYY"
            }
+        },
+		{
+           "index": 17,
+           "attribute": "decsiraogc_impianti:attivitaProduttiva/decsiraogc_impianti:AttivitaProduttiva/decsiraogc_impianti:codAteco",
+           "label":"Tipo attivita produttiva",
+           "type":"list",
+           "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_ateco",
+               "propertyName": "id_ateco,des_ateco",
+                "sortBy": "id_ateco+A"
+             }
+           },
+
+           "valueId":"id_ateco",
+           "valueLabel":"des_ateco"
         }
      ]
    }
