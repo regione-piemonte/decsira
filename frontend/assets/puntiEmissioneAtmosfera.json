@@ -260,35 +260,35 @@
 		  "attribute" : "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
 		  "label" : "Provincia",
 		  "type" : "list",
-		  "valueService" : {
-			"urlParams" : {
-			  "typeName" : "decsiraogc_decodif:decsira_geo_province",
-			  "propertyName" : "prov_nom,prov_ist",
-			  "sortBy" : "prov_nom+A"
-			}
-		  },
-		  "valueId" : "prov_nom",
-		  "valueLabel" : "prov_nom"
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_province",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo"
 		},
 		{
 		  "index" : 2,
 		  "attribute" : "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:nomeComune",
 		  "label" : "Comune",
-		  "type" : "list",
-		  "valueService" : {
-			"urlParams" : {
-			  "typeName" : "decsiraogc_decodif:decsira_geo_comuni_storico",
-			  "propertyName" : "comune_nom,prov_ist,label",
-			  "sortBy" : "label+A"
-			}
-		  },
-		  "dependson" : {
+		  "type" : "list",  
+		   "valueService": {
+
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:sipra_t_comuni",
+               "propertyName": "id_comune,sigla_provincia,toponimo",
+               "sortBy": "toponimo+A"
+             }
+           },
+           "valueId":"toponimo",
+           "valueLabel":"toponimo",
+		   "dependson" : {
 			"field" : "decsiraogc_emissioni:stabilimentoSemplice/decsiraogc_emissioni:StabilimentoSemplice/decsiraogc_emissioni:desProvincia",
-			"from" : "prov_ist",
-			"to" : "prov_ist"
-		  },
-		  "valueId" : "comune_nom",
-		  "valueLabel" : "label"
+			"from" : "sigla",
+			"to" : "sigla_provincia"
+		  }
 		}, 
         {
            "index": 3,
