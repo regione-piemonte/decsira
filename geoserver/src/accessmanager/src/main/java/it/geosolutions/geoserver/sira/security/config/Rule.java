@@ -30,9 +30,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.geoserver.catalog.ResourceInfo;
 import org.geoserver.security.AccessMode;
 import org.geoserver.security.CatalogMode;
+import org.geotools.api.filter.Filter;
 import org.geotools.filter.text.cql2.CQLException;
 import org.geotools.util.logging.Logging;
-import org.opengis.filter.Filter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 

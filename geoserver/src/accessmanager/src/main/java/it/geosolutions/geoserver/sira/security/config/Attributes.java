@@ -23,7 +23,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.opengis.feature.type.FeatureType;
+import org.geotools.api.feature.type.FeatureType;
 
 import com.google.common.collect.Lists;
 import com.thoughtworks.xstream.XStream;

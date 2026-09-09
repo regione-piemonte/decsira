@@ -47,9 +47,9 @@ import org.geoserver.security.LayerGroupAccessLimits;
 import org.geoserver.security.ResourceAccessManager;
 import org.geoserver.security.StyleAccessLimits;
 import org.geoserver.security.WorkspaceAccessLimits;
+import org.geotools.api.filter.Filter;
 import org.geotools.filter.text.cql2.CQLException;
 import org.geotools.util.logging.Logging;
-import org.opengis.filter.Filter;
 import org.springframework.security.core.Authentication;
 
 /**

@@ -25,10 +25,10 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.geotools.api.filter.FilterFactory;
+import org.geotools.api.filter.expression.PropertyName;
 import org.geotools.filter.FilterFactoryImpl;
 import org.geotools.util.logging.Logging;
-import org.opengis.filter.FilterFactory2;
-import org.opengis.filter.expression.PropertyName;
 import org.xml.sax.helpers.NamespaceSupport;
 
 import com.google.common.collect.ImmutableSortedSet;
@@ -142,7 +142,7 @@ public class SiraAccessManagerConfiguration implements ValidatableConfiguration 
     }
 
     /**
-     * Custom {@link FilterFactory2} implementation that supports injection of a namespace context,
+     * Custom {@link FilterFactory} implementation that supports injection of a namespace context,
      * in the form of a {@link NamespaceSupport} instance.
      *
      * <p>

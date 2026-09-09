@@ -22,8 +22,8 @@ import it.geosolutions.geoserver.sira.security.expression.ExpressionRuleEngine;
 import it.geosolutions.geoserver.sira.security.util.FeatureUtils;
 
 import org.geoserver.security.WrapperPolicy;
+import org.geotools.api.feature.Feature;
 import org.geotools.data.complex.IMappingFeatureIterator;
-import org.opengis.feature.Feature;
 
 /**
  * <code>CSI</code> <code>SIRA</code> <code>Access Manager</code> specialized {@link IMappingFeatureIterator},

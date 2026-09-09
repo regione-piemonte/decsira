@@ -33,7 +33,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.ConverterMatcher;
 import com.thoughtworks.xstream.converters.SingleValueConverter;
-import com.thoughtworks.xstream.io.xml.Xpp3Driver;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
 /**
  * <a href="http://x-stream.github.io/"><code>XStream</code></a> Factory, configured for <code>IRIDE</code> entities.
@@ -177,7 +177,9 @@ public class XStreamFactory extends AbstractFactory<XStream> {
     @Override
     protected final XStream newInstance() {
         // Initialize XStream
-        final XStream xs = new XStream(new Xpp3Driver());
+        // Xpp3Driver needs xpp3_min, dropped as an XStream dependency in 1.4.21;
+        // XppDriver uses the MXParser that XStream itself ships
+        final XStream xs = new XStream(new XppDriver());
         xs.setMode(XStream.NO_REFERENCES);
 
         // Aliases for IRIDE entities

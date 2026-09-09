@@ -27,8 +27,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.geoserver.security.CatalogMode;
 import org.geoserver.security.VectorAccessLimits;
-import org.opengis.filter.Filter;
-import org.opengis.filter.expression.PropertyName;
+import org.geotools.api.filter.Filter;
+import org.geotools.api.filter.expression.PropertyName;
 import org.springframework.security.core.Authentication;
 
 /**

@@ -32,16 +32,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.geoserver.security.WrapperPolicy;
+import org.geotools.api.feature.Feature;
+import org.geotools.api.feature.Property;
+import org.geotools.api.filter.Filter;
+import org.geotools.api.filter.expression.PropertyName;
 import org.geotools.data.complex.expression.FeaturePropertyAccessorFactory;
 import org.geotools.filter.expression.PropertyAccessor;
 import org.geotools.filter.expression.PropertyAccessorFactory;
 import org.geotools.filter.text.cql2.CQLException;
 import org.geotools.util.factory.Hints;
 import org.geotools.util.logging.Logging;
-import org.opengis.feature.Feature;
-import org.opengis.feature.Property;
-import org.opengis.filter.Filter;
-import org.opengis.filter.expression.PropertyName;
 import org.xml.sax.helpers.NamespaceSupport;
 
 import com.google.common.collect.Lists;
