@@ -424,6 +424,13 @@
 		<layer>*</layer>
 		<accessMode>READ</accessMode>
     </Rule>
+	<Rule>
+		<priority>61</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_via_vinca</workspace>
+		<layer>*</layer>
+		<accessMode>READ</accessMode>
+    </Rule>
 
 	
 	<!-- da 100 a 299 tutti i ruoli, workspace, layer -->
@@ -539,6 +546,14 @@
 		<workspace>decsiraogc_biodiversita_bdn_piano_gest_uso</workspace>
 		<layer>BdnPianiGestUso</layer>
 		<accessMode>READ</accessMode>
+	</Rule>
+	<Rule>
+		<priority>113</priority>
+		<roles>*</roles>
+		<workspace>decsiraogc_via_vinca</workspace>
+		<layer>ProgettoViaVinca</layer>
+		<accessMode>READ</accessMode>
+		<filter>"decsiraogc_via_vinca:codTipoAdempimento" = 'VINCA' OR "decsiraogc_via_vinca:codTipoAdempimento" = 'VINCA_SUAP'</filter>
 	</Rule>
 	
 	

@@ -1,0 +1,240 @@
+{
+   "featureTypeName":"decsiraogc_via_vinca:ProgettoViaVinca",
+   "featureTypeNameLabel":"Valutazione di Incidenza Ambientale (VIncA)",
+   "nameSpaces": {
+     "decsiraogc_via_vinca": "http://www.regione.piemonte.it/ambiente/decsiraogc_via_vinca/1.0"
+   },
+   "layer": {
+        "type": "wms",
+        "url": "{geoserverUrl}/wms",
+        "visibility": true,
+        "title": "Valutazione di Incidenza Ambientale (VIncA)",
+        "name": "decsiraogc_via_vinca:ProgettoViaVinca",
+        "infoFormat": "application/vnd.ogc.gml/3.1.1",
+        "topologyConfig": {
+           "wfsUrl": "",
+           "wfsVersion": "1.1.0",
+           "layerName": "",
+           "layerTitle": "",
+           "geomAttribute": "msGeometry",
+           "geometryType": "MultiPolygon"
+       },
+        "featureType": "vinca",
+		"params": {
+			"featureType": "vinca"
+		},
+        "group": "Valutazione Incidenza Ambientale",
+        "format": "image/png"
+    },
+   "geometryName": "geometria",
+   "geometryType": "MultiPolygon",
+   "card": {
+    "featurePath": "/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca",
+    "geometryPath": "decsiraogc_via_vinca:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()",
+    "pdfname": "Scheda_Vinca_{{/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:idProgetto/text()}}.pdf",
+     "template": "assets/cardTemplateVinca.jsxt",
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "params": {
+         "typeName": "decsiraogc_via_vinca:ProgettoViaVinca",
+         "version": "2.0",
+         "srsName": "EPSG:4326"
+       }
+     }
+   },
+   "featureinfo":{
+     "templateURL": "assets/infoTemplateVinca.jsxt"
+   },
+   "featuregrid": {
+     "grid": {
+       "root": "/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca",
+       "columns": [
+         {
+           "hide": true,
+           "id": true,
+           "headerName": "Id",
+           "xpath": ["@gml:id"],
+           "type": 2
+         },
+         {
+           "headerName": "Id Progetto",
+           "suppressSorting": true,
+           "width":120,
+           "xpath": ["decsiraogc_via_vinca:idProgetto/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Titolo Progetto",
+           "suppressSorting": true,
+           "width":300,
+           "xpath": ["decsiraogc_via_vinca:titoloProgetto/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Descrizione progetto",
+           "suppressSorting": true,
+           "width":150,
+           "xpath": ["decsiraogc_via_vinca:descrizioneProgetto/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Flg Oggetto Reale",
+           "suppressSorting": true,
+           "width":100,
+           "xpath": ["decsiraogc_via_vinca:flgOggettoReale/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice Scriva",
+           "suppressSorting": true,
+           "width":200,
+           "xpath": ["decsiraogc_via_vinca:codScriva/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice Tipo Adempimento",
+           "suppressSorting": true,
+           "width":130,
+           "xpath": ["decsiraogc_via_vinca:codTipoAdempimento/text()"],
+           "type": 2
+         },
+         {
+           "headerName": "Codice Adempimento",
+           "suppressSorting": true,
+           "width":150,
+           "xpath": ["decsiraogc_via_vinca:codAdempimento/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice Natura Oggetto",
+           "suppressSorting": true,
+           "width":150,
+           "xpath": ["decsiraogc_via_vinca:codNaturaOggetto/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Codice Istanza",
+           "suppressSorting": true,
+           "width":160,
+           "xpath": ["decsiraogc_via_vinca:codIstanza/text()"],
+           "type": 2
+         },
+		 {
+           "headerName": "Stato Istanza",
+           "suppressSorting": true,
+           "width":100,
+           "xpath": ["decsiraogc_via_vinca:desStatoIstanza/text()"],
+           "type": 2
+         },    
+         {
+          "hide" : true,
+          "suppressSorting" : true,
+          "headerName" : "Geometria",
+          "xpath" : [ "decsiraogc_via_vinca:geometria/gml:MultiSurface/gml:surfaceMember/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList/text()" ],
+          "type" : 6
+		 }
+       ],
+       "exporter":{
+         "addFile":""
+       }
+     }
+   },
+   "query": {
+     "service": {
+       "url":"{geoserverUrl}/ows?service=WFS&request=GetFeature",
+       "urlParams": {
+         "version": "1.1.0",
+         "outputFormat": "application/json"
+       }
+     },
+     "fields":[
+         {
+            "index": 1,
+            "attribute": "decsiraogc_via_vinca:titoloProgetto",
+            "label":"Titolo Progetto",
+            "type":"string"
+        },
+	    {
+         "index": 2,
+         "attribute": "decsiraogc_via_vinca:codScriva",
+         "label":"Codice Scriva",
+         "type":"string"
+	    },
+        {
+           "index": 3,
+           "attribute": "decsiraogc_via_vinca:codStatoIstanza",
+           "label":"Stato Istanza",
+           "type":"list",
+           "valueService": {
+             "urlParams": {
+               "typeName": "decsiraogc_decodif:decsira_d_via_vinca_stato_istanza",
+               "propertyName": "cod_stato_istanza,des_stato_istanza",
+                "sortBy": "cod_stato_istanza+A"
+             }
+           },
+           "valueId":"cod_stato_istanza",
+           "valueLabel":"decsira_d_via_vinca_stato_istanza"
+       },
+	   {
+          "index": 4,
+          "attribute": "decsiraogc_via_vinca:codAdempimento",
+          "label":"Codice adempimento",
+          "type":"list",
+          "valueService": {
+
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_via_vinca_adempimento",
+              "propertyName": "id_adempimento,cod_tipo_adempimento,cod_adempimento,des_adempimento",
+               "sortBy": "cod_tipo_adempimento+A"
+            }
+          },
+
+          "valueId":"cod_adempimento",
+          "valueLabel":"cod_adempimento"
+       },
+	   {
+          "index": 5,
+          "attribute": "decsiraogc_via_vinca:codTipoAdempimento",
+          "label":"Codice tipo adempimento",
+          "type":"list",
+          "valueService": {
+
+            "urlParams": {
+              "typeName": "decsiraogc_decodif:decsira_d_via_vinca_adempimento",
+              "propertyName": "id_adempimento,cod_tipo_adempimento,cod_adempimento,des_adempimento",
+               "sortBy": "cod_tipo_adempimento+A"
+            }
+          },
+
+          "valueId":"cod_tipo_adempimento",
+          "valueLabel":"cod_tipo_adempimento"
+       },
+       {
+          "index": 6,
+          "attribute": "decsiraogc_via_vinca:codNaturaOggetto",
+          "label":"Natura Oggetto",
+          "type":"list",
+          "values": [
+            {"value":"ATTIVITA","name":"ATTIVITA"},
+            {"value":"PROGETTO","name":"PROGETTO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       },
+       {
+          "index": 7,
+          "attribute": "decsiraogc_via_vinca:flgOggettoReale",
+          "label":"Flag Oggetto Reale",
+          "type":"list",
+          "values": [
+            {"value":"REALE","name":"REALE"},
+            {"value":"PROVVISORIO","name":"PROVVISORIO"}
+          ],
+          "valueId":"value",
+          "valueLabel":"name"
+       }
+     ]
+
+   }
+
+}

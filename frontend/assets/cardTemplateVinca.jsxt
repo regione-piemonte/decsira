@@ -1,0 +1,142 @@
+<Panel
+    bsStyle="primary"
+    header={(
+        <DetailTitle title='VALUTAZIONI DI INCIDENZA AMBIENTALE' subtitle={[
+            'Codice istanza: ',
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:codIstanza/text()")
+            ]} id={model.id}/>
+    )}>
+    <Panel className="template">
+    <Section header='PROGETTO' eventKey='1' expanded={true}>
+        <LabeledField label='Titolo Progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:titoloProgetto/text()")
+        }/>    
+        <LabeledField label='Descrizione Progetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:descrizioneProgetto/text()")
+        }/>
+        <LabeledField label='Codice Scriva' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:codScriva/text()")
+        }/>
+        <LabeledField label='Descrizione Adempimento' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:desAdempimento/text()")
+        }/>
+        <LabeledField label='Codice Natura Oggetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:codNaturaOggetto/text()")
+        }/>
+        <LabeledField label='Descrizione Categoria Oggetto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:desCategoriaOggetto/text()")
+        }/>
+        <LabeledField label='Codice Istanza' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:codIstanza/text()")
+        }/>
+		<LabeledField label='Stato Istanza' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:desStatoIstanza/text()")
+        }/>
+        <LabeledField label='Data Presentazione Istanza' dateFormat='DD/MM/YYYY' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:dataPresentazioneIstanza/text()")
+        }/>
+        <LabeledField label='Numero Protocollo Istanza' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:numProtocolloIstanza/text()")
+        }/>
+        <LabeledField label='Competenza Territorio Principale' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:desCompetenzaTerritorioPrinc/text()")
+        }/>
+    </Section>
+	
+	<Section header='DATI DETTAGLIO PROGETTO' eventKey='1' expanded={false}>
+        <LabeledField label='Risorse pubbliche' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:datiProgettoVinca/decsiraogc_via_vinca:DatiProgettoVinca/decsiraogc_via_vinca:desRisorsePubbliche/text()")
+        }/>    
+        <LabeledField label='Descrizione Altro contesto' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:datiProgettoVinca/decsiraogc_via_vinca:DatiProgettoVinca/decsiraogc_via_vinca:desAltroContesto/text()")
+        }/>
+		<LabeledField label='Atto con misure specifiche Rete Natura' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:datiProgettoVinca/decsiraogc_via_vinca:DatiProgettoVinca/decsiraogc_via_vinca:desAttoConsMisureSpecReteNatura/text()")
+        }/>
+		<LabeledField label='Note Trasformazione Suolo' value={
+            model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:datiProgettoVinca/decsiraogc_via_vinca:DatiProgettoVinca/decsiraogc_via_vinca:suoNoteTrasformazioneSuolo/text()")
+        }/>
+        
+    </Section>
+	
+	<Section header='CATEGORIA PROGETTUALE' eventKey='4' expanded={true}>
+        <SiraTable
+            id="CategoriaProgettualeViaVinca"
+            selectedRow={model.CategoriaProgettualeViaVinca}
+            wfsVersion="2.0"
+            rowSelection={false}
+            columns={
+                [
+                    {
+                        headerName: 'Codice Categoria Oggetto',
+                        width: 200,
+                        xpath:"decsiraogc_via_vinca:CategoriaProgettualeViaVinca/decsiraogc_via_vinca:codCategoriaOggetto/text()"
+                    },
+                    {
+                        headerName: 'Descrizione Categoria Oggetto',
+                        width: 200,
+                        xpath: "decsiraogc_via_vinca:CategoriaProgettualeViaVinca/decsiraogc_via_vinca:desCategoriaOggetto/text()"
+                    },
+                    {
+                        headerName: 'Descrizione Categoria Oggetto Estesa',
+                        width: 230,
+                        xpath: "decsiraogc_via_vinca:CategoriaProgettualeViaVinca/decsiraogc_via_vinca:desCategoriaOggettoEstesa/text()"
+                    },
+                    {
+                        headerName: 'Descrizione Altra Categoria Oggetto',
+                        width: 230,
+                        xpath: "decsiraogc_via_vinca:CategoriaProgettualeViaVinca/decsiraogc_via_vinca:desAltraCategoriaOggetto/text()"
+                    }
+                ]
+            }
+            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:categoriaProgettualeViaVinca")}/>
+    </Section>
+	
+	<Section header='AUTORIZZAZIONI' eventKey='4' expanded={true}>
+        <SiraTable
+            id="AutorizzazioniProgettoVinca"
+            selectedRow={model.AutorizzazioniProgettoVinca}
+            wfsVersion="2.0"
+            rowSelection={false}
+            columns={
+                [
+                    {
+                        headerName: 'Descrizione Altra Autorizzazione',
+                        width: 400,
+                        xpath:"decsiraogc_via_vinca:AutorizzazioniProgettoVinca/decsiraogc_via_vinca:desAltraAutorizzazione/text()"
+                    }
+                ]
+            }
+            features={model.getValue("/wfs:FeatureCollection/wfs:member/decsiraogc_via_vinca:ProgettoViaVinca/decsiraogc_via_vinca:autorizzazioniProgettoVinca")}/>
+    </Section>
+
+	<Section header='MAPPA SINTESI - VINCA procedimenti su sfondo BDTRE (Banca Dati Territoriale di Riferimento Enti)' eventKey='8' expanded={true}>
+		<MappaScheda
+			layers={[
+			{
+				"type": "wms",
+				"url": "https://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsbasewms/wms_sfondo_cart_rif",
+				"name": "SfondoCartRif",
+				"title": "Sfondo Cartografico",
+				"group": "background",
+				"visibility": true,
+				"format": "image/png",
+				"tiled": true,
+				"tileSize": 512
+			},
+			{
+				"type": "wms",
+				"url": "{geoserverUrl}/wms",
+				"visibility": true,
+				"title": "Valutazione di incidenza ambientale Preview",
+				"name": "decsiraogc_via_vinca:ProgettoViaVinca",
+				"group": "Overlays",
+				"format": "image/png"
+			}
+			]}
+			authParam={model.authParam}
+			withMap={model.withMap}/>
+	</Section>
+
+    </Panel>
+</Panel>

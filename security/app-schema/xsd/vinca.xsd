@@ -1,0 +1,1250 @@
+<?xml version="1.0"?>
+<schema version="1.0" 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:decsiraogc_via_vinca="http://www.regione.piemonte.it/ambiente/decsiraogc_via_vinca/1.0"
+    targetNamespace="http://www.regione.piemonte.it/ambiente/decsiraogc_via_vinca/1.0"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<import namespace="http://www.opengis.net/gml/3.2" 
+	schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd" /> 
+	
+	
+	<!-- elements -->
+	<!-- qui estendono gml:AbstractObject o gml:AbstractFeature -->
+	
+	<!-- decsira_geo_scriva_via_vinca id= id_progetto (pk????) -->
+	<element name="ProgettoViaVinca" type="decsiraogc_via_vinca:ProgettoViaVincaType" substitutionGroup="gml:AbstractFeature" />
+	
+	<!-- decsira_t_dati_progetto_vinca id= id_progetto (pk)  -->
+	<element name="DatiProgettoVinca" type="decsiraogc_via_vinca:DatiProgettoVincaType" substitutionGroup="gml:AbstractObject" />
+	
+    <!-- decsira_t_autorizzazioni_progetto_vinca id = id= id_autorizzazione_attivita (pk) -->
+	<element name="AutorizzazioniProgettoVinca" type="decsiraogc_via_vinca:AutorizzazioniProgettoVincaType" substitutionGroup="gml:AbstractObject" />
+	
+	<!-- decsira_t_categoria_progettuale_via_vinca id = id_categoria_progettuale (pk) -->
+	<element name="CategoriaProgettualeViaVinca" type="decsiraogc_via_vinca:CategoriaProgettualeViaVincaType" substitutionGroup="gml:AbstractObject" />
+	
+	
+	<!-- types -->
+	<!-- qui estendono gml:AbstractGMLType o gml:AbstractFeatureType -->
+	
+	
+	<complexType name="ProgettoViaVincaType">
+        <complexContent>
+            <extension base="gml:AbstractFeatureType">
+                <sequence>
+					<xs:element name="idOggettoIstanza" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="flgOggettoReale" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idIstanza" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idOggetto" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="idProgetto" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="titoloProgetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="descrizioneProgetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="indGeoStato" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="coordinataX" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="coordinataY" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="indLivello" type="xs:decimal" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="codScriva" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idAdempimento" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="desAdempimento" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="250" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="codTipoAdempimento" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="codAdempimento" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="30" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="codNaturaOggetto" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="40" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="codCategoriaOggetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="desCategoriaOggetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="2000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="codIstanza" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>					
+					
+					<xs:element name="idStatoIstanza" type="xs:integer" minOccurs="1" />
+					
+					<xs:element name="codStatoIstanza" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desStatoIstanza" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="indVisibile" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="labelStato" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="50" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataPresentazioneIstanza" type="xs:date" minOccurs="1" />
+					
+					<xs:element name="codPratica" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="70" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataPubblicazione" type="xs:date" minOccurs="1" />
+					
+					<xs:element name="numProtocolloIstanza" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataProtocolloIstanza" type="xs:date" minOccurs="0" />
+					
+					<xs:element name="dataAvvioProcedimento" type="xs:date" minOccurs="0" />
+					
+					<xs:element name="dataInizioOsservazioni" type="xs:date" minOccurs="0" />
+					
+					<xs:element name="dataFineOsservazioni" type="xs:date" minOccurs="0" />
+					
+					<xs:element name="dataConclusioneProcedimento" type="xs:date" minOccurs="0" />
+					
+					<xs:element name="idEsitoProcedimento" type="xs:integer" minOccurs="0" />
+	
+					<xs:element name="codEsitoProcedimento" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desEsitoProcedimento" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgPositivo" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="8" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="dataScadenzaProcedimento" type="xs:date" minOccurs="0" />
+
+					<xs:element name="idStatoProcedStatale" type="xs:integer" minOccurs="0" />
+					
+					<xs:element name="idEsitoProcedStatale" type="xs:integer" minOccurs="0" />
+	
+					<xs:element name="codEsitoProcedStatale" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desEsitoProcedStatale" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="flgPositivoProcedStatale" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="8" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idCompetenzaTerritorioPrinc" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="desCompetenzaTerritorioPrinc" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="idCompetenzaTerritorioSec" minOccurs="1">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="desCompetenzaTerritorioSec" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="10000" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					
+					<xs:element name="geometria" type="gml:GeometryPropertyType" minOccurs="0" maxOccurs="1" />
+					
+					<!-- innesti di primo livello-->
+					
+					<xs:element name="datiProgettoVinca" type="decsiraogc_via_vinca:DatiProgettoVincaPropertyType" minOccurs="0" maxOccurs="1" />
+					
+					<xs:element name="autorizzazioniProgettoVinca" type="decsiraogc_via_vinca:AutorizzazioniProgettoVincaPropertyType" minOccurs="0" maxOccurs="unbounded" />
+					
+					<xs:element name="categoriaProgettualeViaVinca" type="decsiraogc_via_vinca:CategoriaProgettualeViaVincaPropertyType" minOccurs="0" maxOccurs="unbounded" />
+			
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="DatiProgettoVincaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				  <xs:element name="idProgetto" type="xs:integer" minOccurs="1" />
+				  <xs:element name="flgRisorsePubbliche" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+						  <xs:maxLength value="2"/>
+						</xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="desRisorsePubbliche" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgOperaPubblica" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="zonaPeriurbana" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="areeAgricole" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="areeIndustriali" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="areeNaturali" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="altroContesto" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="desAltroContesto" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgProgettoCollegato" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="desProgettoCollegato" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgConformeMisureSpecReteNatura" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="desAttoConsMisureSpecReteNatura" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgConformeMisureSitoSpecPdg" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="desAttoConsMisureSitoSpecPdg" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgPianoForestale" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgVoloDrone" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgCondizObbligoRispettate" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="flgCondizObbligoNonRispettateAltriMotivi" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgNonPertinente" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgTrasformazioneSuolo" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesTrasformazioneSuolo" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoNoteTrasformazioneSuolo" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgMovimentiTerraSbancamentiScavi" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesMovimentiTerraSbancamentiScavi" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgLivellateSuperficiNaturaliSpietramento" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesLivellateSuperficiNaturaliSpietramento" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgPrevisteAreeCantiereStoccaggio" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesPrevisteAreeCantiereStoccaggio" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgAperturaSistemazionePiste" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesAperturaSistemazionePiste" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgRipristinoPisteAFineLavori" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesRipristinoPisteAFineLavori" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoFlgInterventiMiglioramentoAmbientale" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesInterventiMiglioramentoAmbientale" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="suoDesNote" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="spvFlgNonPertinente" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="spvFlgTaglioEsboscoRimozioneSpecieVegetali" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="spvDesTaglioEsboscoRimozioneSpecieVegetali" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="spvFlgPiantumazioneRinverdimentoSpecieVegetali" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="spvDesPiantumazioneRinverdimentoSpecieVegetali" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="spvFlgConforme" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="speFlgNonPertinente" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="speFlgControlloImmissioneRipopolAllev" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="speDesControlloImmissioneRipopolAllev" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="speFlgConforme" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgNonPertinente" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgEscavatore" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesEscavatore" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgRagno" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesRagno" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgPalaCaricatrice" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesPalaCaricatrice" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgTerna" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesTerna" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgSkidLoader" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesSkidLoader" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAltroMezziMovimentoTerra" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAltroMezziMovimentoTerra" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAutocarro" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAutocarro" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgDumper" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesDumper" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAutogru" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAutogru" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgGru" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesGru" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgBetoniera" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesBetoniera" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAsfaltatrice" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAsfaltatrice" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgRulloVibrante" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesRulloVibrante" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgCompressore" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesCompressore" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgGeneratore" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesGeneratore" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgPerforatore" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesPerforatore" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAltroMezziPesanti" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAltroMezziPesanti" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgElicottero" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesElicottero" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAereo" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAereo" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgDrone" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesDrone" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgTeleferica" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesTeleferica" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgBarca" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesBarca" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgChiatta" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesChiatta" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgPontone" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesPontone" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezFlgAltroMezziAereiImbarcazioni" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="mezDesAltroMezziAereiImbarcazioni" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="manFlgNonPertinente" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="manNumPartecipanti" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="manNumTipoVeicoliCoinvolti" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="manNumTipoVeicoliSupporto" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="manStruttureSupporto" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqFlgNonPertinente" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqFlgInquinamentoLuminoso" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqDesInquinamentoLuminoso" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqFlgInquinamentoSonoro" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqDesInquinamentoSonoro" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqFlgInquinamentoChimico" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqDesInquinamentoChimico" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqFlgInquinamentoRifiuti" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqDesInquinamentoRifiuti" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqFlgAltroInquinamentoRifiuti" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="inqDesAltroInquinamentoRifiuti" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intFlgNonPertinente" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intFlgRipetizioneIntervento" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intDesRipetizioneIntervento" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intMotivoRipetizioneIntervento" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intFlgProcedimentoPrecedenteVinca" minOccurs="1" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intDesProcedimentoPrecedenteVinca" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+				  <xs:element name="intDesNote" minOccurs="0" maxOccurs="1">
+					<xs:simpleType>
+					  <xs:restriction base="xs:string">
+						<xs:maxLength value="500"/>
+					  </xs:restriction>
+					</xs:simpleType>
+				  </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<complexType name="AutorizzazioniProgettoVincaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+				
+					<xs:element name="idAutorizzazioneAttivita" type="xs:integer" minOccurs="1" />
+					<xs:element name="idProgetto" type="xs:integer" minOccurs="1" />
+
+				    <xs:element name="desAltraAutorizzazione" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="100" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	<complexType name="CategoriaProgettualeViaVincaType">
+        <complexContent>
+            <extension base="gml:AbstractGMLType">
+                <sequence>
+					<xs:element name="idCategoriaProgettuale" type="xs:integer" minOccurs="1" />
+					<xs:element name="idProgetto" type="xs:integer" minOccurs="1" />		
+					<xs:element name="codCategoriaOggetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="20" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+				
+					<xs:element name="desAltraCategoriaOggetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="desCategoriaOggetto" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+					<xs:element name="desCategoriaOggettoEstesa" minOccurs="0">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="500" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+	
+	
+	<!-- property types -->
+	
+	<complexType name="DatiProgettoVincaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_via_vinca:DatiProgettoVinca" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="AutorizzazioniProgettoVincaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_via_vinca:AutorizzazioniProgettoVinca" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	<complexType name="CategoriaProgettualeViaVincaPropertyType">
+        <sequence minOccurs="0">
+            <element ref="decsiraogc_via_vinca:CategoriaProgettualeViaVinca" />
+        </sequence>
+        <attributeGroup ref="gml:AssociationAttributeGroup" />
+        <attributeGroup ref="gml:OwnershipAttributeGroup" />
+    </complexType>
+	
+	</schema>
