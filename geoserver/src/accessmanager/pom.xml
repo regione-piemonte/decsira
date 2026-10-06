@@ -23,7 +23,7 @@
 
     <groupId>it.geosolutions.csi.sira</groupId>
     <artifactId>gs-sira-accessmanager</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.28-C008-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>CSI SIRA - Access Manager Security Module</name>
@@ -84,23 +84,26 @@
     </contributors>
 
     <properties>
-        <!-- Java Version -->
-        <java.version>1.8</java.version>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependencies -->
-        <gs.version>2.17-SNAPSHOT</gs.version>
-        <gt.version>23-SNAPSHOT</gt.version>
-        <freeemarker.version>2.3.18</freeemarker.version>
-        <spring.version>5.1.13.RELEASE</spring.version>
-        <spring.security.version>5.1.8.RELEASE</spring.security.version>
+        <gs.version>2.28.5</gs.version>
+        <gt.version>34.5</gt.version>
+        <spring.version>5.3.39</spring.version>
+        <guava.version>33.4.8-jre</guava.version>
+        <commons-lang.version>2.6</commons-lang.version>
 
         <!-- Testing -->
+        <servlet-api.version>3.1.0</servlet-api.version>
+        <junit.version>4.13.2</junit.version>
+        <hamcrest.version>3.0</hamcrest.version>
+        <xmlunit.version>1.6</xmlunit.version>
+        <jsoup.version>1.18.3</jsoup.version>
         <test.exclude.pattern>none</test.exclude.pattern>
         <test.maxHeapSize>512M</test.maxHeapSize>
-        <test.maxPermSize>128M</test.maxPermSize>
         <jvm.opts />
         <java.awt.headless>true</java.awt.headless>
-        <remoteOwsTests>false</remoteOwsTests>
         <test.allow.failure.ignore>false</test.allow.failure.ignore>
 
         <!-- Build -->
@@ -110,26 +113,9 @@
 
     <repositories>
         <repository>
-   <!-- contains release (including third-party-dependences)               -->
-   <!-- Restlet maven Repository (http://maven.restlet.org)                             -->
-   <!-- ucar (https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases) -->
-   <id>osgeo-release</id>
-   <name>OSGeo Nexus Release Repository</name>
-   <url>https://repo.osgeo.org/repository/release/</url>
-  </repository>
-        <repository>
-   <!-- contains snapshot (including third-party-dependences)               -->
-   <!-- Restlet maven Repository (http://maven.restlet.org)                             -->
-   <!-- ucar (https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases) -->
-   <id>osgeo-snapshots</id>
-   <name>OSGeo Nexus Snapshot Repository</name>
-   <url>https://repo.osgeo.org/repository/snapshot/</url>
-  </repository>
-
-        <repository>
-            <id>osgeo</id>
-            <name>Open Source Geospatial Foundation Repository</name>
-            <url>http://download.osgeo.org/webdav/geotools/</url>
+            <id>osgeo-release</id>
+            <name>OSGeo Nexus Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -142,19 +128,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
+                <version>3.13.0</version>
             </plugin>
 
             <!-- versioning -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.2.2</version>
+                <version>3.1.1</version>
                 <configuration>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
@@ -164,17 +145,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
+                <version>3.3.1</version>
             </plugin>
 
             <!-- sources -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.3.1</version>
                 <configuration>
                     <attach>true</attach>
                 </configuration>
@@ -191,47 +169,27 @@
 
             <!-- unit testing -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
+                <version>3.5.2</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
                     <excludes>
                         <exclude>${test.exclude.pattern}</exclude>
                     </excludes>
-                    <forkMode>once</forkMode>
-                    <argLine>-Xmx${test.maxHeapSize} -XX:MaxPermSize=${test.maxPermSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -DremoteOwsTests=${remoteOwsTests} -Duser.language=EN</argLine>
+                    <argLine>-Xmx${test.maxHeapSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -Duser.language=EN -XX:+IgnoreUnrecognizedVMOptions --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED --add-opens=java.desktop/sun.awt.image=ALL-UNNAMED --add-opens=java.naming/com.sun.jndi.ldap=ALL-UNNAMED</argLine>
                     <printSummary>true</printSummary>
                     <testFailureIgnore>${test.allow.failure.ignore}</testFailureIgnore>
-                    <systemProperties>
-                        <property>
-                            <name>log4j.configuration</name>
-                            <value>conf/logging.properties</value>
-                        </property>
-                    </systemProperties>
-                </configuration>
-            </plugin>
-
-            <!-- eclipse ide integration -->
-            <plugin>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <downloadSources>false</downloadSources>
-                    <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                    </additionalProjectnatures>
                 </configuration>
             </plugin>
 
             <!-- initialize git revision info -->
             <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <version>2.2.1</version>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>9.0.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -239,7 +197,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <!-- https://github.com/ktoso/maven-git-commit-id-plugin -->
                 <configuration>
                     <dotGitDirectory>${project.basedir}/../../../.git</dotGitDirectory>
                     <prefix>build</prefix>
@@ -253,7 +210,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.4.2</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -269,11 +226,9 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                         <manifestEntries>
-                            <!-- GeoServerModule>extension</GeoServerModule -->
                             <Application-Name>${project.artifactId}-${project.version}</Application-Name>
                             <Project-Version>${project.version}</Project-Version>
                             <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
-                            <Built-By>seancrow</Built-By>
                             <Git-Revision>${build.commit.id}</Git-Revision>
                         </manifestEntries>
                     </archive>
@@ -284,7 +239,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>3.11.2</version>
                 <configuration>
                     <show>public</show>
                 </configuration>
@@ -305,32 +260,17 @@
         </testResources>
     </build>
 
-    <!-- reporting -->
-    <!-- t.b.a. -->
-
     <dependencies>
         <!-- SIRA modules -->
         <dependency>
             <groupId>org.geoserver.security</groupId>
             <artifactId>iride-commons</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.geoserver.security</groupId>
             <artifactId>iride-entities</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-            <version>${spring.version}</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <!-- GeoServer -->
@@ -340,16 +280,16 @@
             <version>${gs.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.geoserver</groupId>
-            <artifactId>gs-main</artifactId>
-            <version>${gs.version}</version>
-            <classifier>tests</classifier>
-        </dependency>
-        <dependency>
             <!-- wfs required to get applicationContext.xml. Without it, code will compile but will not run. -->
             <groupId>org.geoserver</groupId>
             <artifactId>gs-wfs</artifactId>
             <version>${gs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geoserver</groupId>
+            <artifactId>gs-rest</artifactId>
+            <version>${gs.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- GeoTools -->
@@ -357,102 +297,53 @@
             <groupId>org.geotools</groupId>
             <artifactId>gt-app-schema</artifactId>
             <version>${gt.version}</version>
+        </dependency>
+        <dependency>
+            <!-- FeaturePropertyAccessorFactory lives here, not in gt-app-schema -->
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-complex</artifactId>
+            <version>${gt.version}</version>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
         <!-- Utilities -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <version>${commons-lang.version}</version>
         </dependency>
-
-        <!-- Google Guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>27.0-jre</version>
+            <version>${guava.version}</version>
         </dependency>
-        <dependency>
-    <groupId>commons-collections</groupId>
-    <artifactId>commons-collections</artifactId>
-    <version>3.2.2</version>
-</dependency>
 
-        <!-- Test Dependencies (see https://tedvinke.wordpress.com/2013/12/17/mixing-junit-hamcrest-and-mockito-explaining-nosuchmethoderror/) -->
-
-        <!-- OpenCSV -->
+        <!-- Testing -->
         <dependency>
-            <groupId>net.sf.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>1.8</version>
+            <groupId>org.geoserver</groupId>
+            <artifactId>gs-main</artifactId>
+            <version>${gs.version}</version>
+            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-test</artifactId>
-    <version>${spring.version}</version>
-    <scope>test</scope>
-</dependency>
-
-<dependency>
-  <groupId>javax.servlet</groupId>
-  <artifactId>javax.servlet-api</artifactId>
-  <version>3.1.0</version>
-  <scope>test</scope>
-</dependency>
-
-
-        <!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>hamcrest-core</artifactId>
-                    <groupId>org.hamcrest</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.geoserver.extension</groupId>
+            <artifactId>gs-app-schema-test</artifactId>
+            <version>${gs.version}</version>
+            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
-
-        <!-- Hamcrest -->
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- MockRunner -->
-        <dependency>
-            <groupId>com.mockrunner</groupId>
-            <artifactId>mockrunner</artifactId>
-            <version>0.3.6</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- XMLUnit -->
-        <dependency>
-            <groupId>xmlunit</groupId>
-            <artifactId>xmlunit</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- GeoTools -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-app-schema</artifactId>
             <version>${gt.version}</version>
             <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools.schemas</groupId>
-            <artifactId>wfs-1.1</artifactId>
-            <version>1.1.2-2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -469,9 +360,73 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <!-- the test cases override getFilters(), returning javax.servlet.Filter -->
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Needed by the GeoServer test base classes rather than by our own test
+             code: GeoServerSystemTestSupport uses spring-test mocks, XMLUnit and
+             jsoup. GeoServer declares them test-scoped, so they are not inherited
+             along with the gs-main test-jar. -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+            <version>${xmlunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Schemas used by the app-schema test fixtures. Declared here because
+             gs-app-schema-test declares them test-scoped, so they do not arrive
+             transitively. -->
+        <dependency>
             <groupId>org.geotools.data</groupId>
             <artifactId>refdataset-1.0</artifactId>
             <version>1.0.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.schemas</groupId>
+            <artifactId>wfs-1.1</artifactId>
+            <version>1.1.2-2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.schemas</groupId>
+            <artifactId>wfs-2.0</artifactId>
+            <version>2.0.0-2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -488,22 +443,10 @@
         </dependency>
         <dependency>
             <groupId>org.geotools.schemas</groupId>
-            <artifactId>wfs-2.0</artifactId>
-            <version>2.0.0-2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools.schemas</groupId>
             <artifactId>samplingSpecimen-2.0</artifactId>
             <version>2.0.0-1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.geoserver.extension</groupId>
-            <artifactId>gs-app-schema-test</artifactId>
-            <version>${gs.version}</version>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
 </project>

@@ -79,7 +79,7 @@ public class MappingFeatureIteratorSecureFactory implements SecuredObjectFactory
      * @see org.geoserver.security.decorators.SecuredObjectFactory#canSecure(java.lang.Class)
      */
     @Override
-    public boolean canSecure(@SuppressWarnings("rawtypes") Class clazz) {
+    public boolean canSecure(Class<?> clazz) {
         return IMappingFeatureIterator.class.isAssignableFrom(clazz);
     }
 

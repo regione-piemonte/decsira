@@ -13,12 +13,8 @@
 
 	<properties>
         <ui.version>4.8.0</ui.version>
-		<db.port>5432</db.port>
-		<db.password>mypass</db.password>
+		<db.jndi>java:comp/env/jdbc/siradecDS</db.jndi>
 		<db.schema>decsira</db.schema>
-		<db.host>dbs-decsira-tst-002p.site03.nivolapiemonte.it</db.host>
-		<db.name>DBSIRA</db.name>
-		<db.user>decsira</db.user>
     </properties>
 
 	<build>
@@ -77,12 +73,8 @@
 			<id>produzione</id>
 			<properties>
 				 <ui.version>4.8.0</ui.version>
-				 <db.port>5432</db.port>
-				 <db.password>pippo</db.password>
+				 <db.jndi>java:comp/env/jdbc/siradecDS</db.jndi>
 				 <db.schema>decsira</db.schema>
-		         <db.host>dbs-decsira-prd-001p.site01.nivolapiemonte.it</db.host>
-		         <db.name>DBSIRA</db.name>
-		         <db.user>decsira</db.user>
 			</properties>
 		</profile>
 	</profiles>

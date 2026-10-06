@@ -36,7 +36,7 @@ import org.geoserver.security.CatalogMode;
 import org.geotools.filter.text.cql2.CQLException;
 import org.junit.Before;
 import org.junit.Test;
-import org.opengis.filter.Filter;
+import org.geotools.api.filter.Filter;
 
 import com.thoughtworks.xstream.XStream;
 

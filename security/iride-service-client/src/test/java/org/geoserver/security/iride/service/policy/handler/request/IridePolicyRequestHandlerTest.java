@@ -19,7 +19,7 @@
 package org.geoserver.security.iride.service.policy.handler.request;
 
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -42,6 +42,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.mockito.ArgumentMatchers;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,7 +190,7 @@ public final class IridePolicyRequestHandlerTest {
     private IridePolicyRequestHandler prepareHandler(IridePolicyRequestHandler handler) {
         final HttpPostBuilder spied = spy(handler.getHttpPostBuilder());
 
-        when(spied.build(eq(serverURL), anyString(), org.mockito.Matchers.any(Header[].class))).then(new Answer<PostMethod>() {
+        when(spied.build(eq(serverURL), anyString(), ArgumentMatchers.any(Header[].class))).then(new Answer<PostMethod>() {
 
             /*
              * (non-Javadoc)

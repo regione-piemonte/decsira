@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,7 +8,7 @@
     <groupId>it.geosolutions.csi.sira</groupId>
     <artifactId>sira-security</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
 
     <name>CSI SIRA - Security submodules</name>
 
@@ -18,5 +19,353 @@
         <module>iride-service-client</module>
         <module>sec-iride</module>
     </modules>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- GeoServer -->
+        <gs.version>2.28.5</gs.version>
+
+        <!-- Dependencies -->
+        <spring.version>5.3.39</spring.version>
+        <spring.security.version>5.8.16</spring.security.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <guava.version>33.4.8-jre</guava.version>
+        <xstream.version>1.4.21</xstream.version>
+        <freemarker.version>2.3.34</freemarker.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
+        <commons-io.version>2.18.0</commons-io.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-validator.version>1.4.0</commons-validator.version>
+        <commons-httpclient.version>3.1</commons-httpclient.version>
+
+        <!-- Testing -->
+        <junit.version>4.13.2</junit.version>
+        <hamcrest.version>3.0</hamcrest.version>
+        <mockito.version>5.15.2</mockito.version>
+        <xmlunit.version>2.10.0</xmlunit.version>
+        <test.exclude.pattern>none</test.exclude.pattern>
+        <test.maxHeapSize>512M</test.maxHeapSize>
+        <jvm.opts />
+        <java.awt.headless>true</java.awt.headless>
+        <test.allow.failure.ignore>false</test.allow.failure.ignore>
+
+        <!-- Build -->
+        <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
+        <build.timestamp>${maven.build.timestamp}</build.timestamp>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>osgeo-release</id>
+            <name>OSGeo Nexus Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- SIRA modules -->
+            <dependency>
+                <groupId>org.geoserver.security</groupId>
+                <artifactId>iride-commons</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geoserver.security</groupId>
+                <artifactId>iride-entities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geoserver.security</groupId>
+                <artifactId>iride-service-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- GeoServer -->
+            <dependency>
+                <groupId>org.geoserver</groupId>
+                <artifactId>gs-main</artifactId>
+                <version>${gs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geoserver</groupId>
+                <artifactId>gs-main</artifactId>
+                <version>${gs.version}</version>
+                <classifier>tests</classifier>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <!-- Utilities -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>${commons-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${commons-httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency>
+
+            <!-- Testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest</artifactId>
+                <version>${hamcrest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.xmlunit</groupId>
+                <artifactId>xmlunit-core</artifactId>
+                <version>${xmlunit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.xmlunit</groupId>
+                <artifactId>xmlunit-matchers</artifactId>
+                <version>${xmlunit.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.4.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.11.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>io.github.git-commit-id</groupId>
+                    <artifactId>git-commit-id-maven-plugin</artifactId>
+                    <version>9.0.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- versioning -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <!-- sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- unit testing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>${test.exclude.pattern}</exclude>
+                    </excludes>
+                    <!-- XStream reflects into JDK internals (e.g. Properties.defaults), denied by
+                         default since Java 17; same opens GeoServer uses for its own build -->
+                    <argLine>-Xmx${test.maxHeapSize} -enableassertions ${jvm.opts} -Djava.awt.headless=${java.awt.headless} -Duser.language=EN -XX:+IgnoreUnrecognizedVMOptions --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED</argLine>
+                    <printSummary>true</printSummary>
+                    <testFailureIgnore>${test.allow.failure.ignore}</testFailureIgnore>
+                </configuration>
+            </plugin>
+
+            <!-- initialize git revision info -->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/../../.git</dotGitDirectory>
+                    <prefix>build</prefix>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <skipPoms>false</skipPoms>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+
+            <!-- packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <GeoServerModule>extension</GeoServerModule>
+                            <Application-Name>${project.artifactId}-${project.version}</Application-Name>
+                            <Project-Version>${project.version}</Project-Version>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <Git-Revision>${build.commit.id}</Git-Revision>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <show>public</show>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
